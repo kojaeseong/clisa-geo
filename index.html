@@ -1192,7 +1192,7 @@ function renderGrand(){
     '<section class="sec"><h3>무엇이 대전략을 움직이나</h3><p class="note" style="margin-bottom:10px">지리가 주도하는 국가 ' + cnt("geo") + "곳, 체제·국내정치 " + cnt("regime") + "곳, 국력 " + cnt("power") + "곳, 역사적 기억 " + cnt("memory") + "곳입니다. 역사적 기억은 대부분의 국가에서 넘지 않을 선을 긋는 요인이지 전략 전체를 주도하는 요인은 아닙니다. " + esc(G.drivers_note) + "</p>" +
       drvLab({geo:"",power:"",regime:"",memory:""}, null).replace(/ <b><\/b>/g, "") +
       '<div style="display:grid;gap:2px;margin-top:8px">' + cs.map(c => '<button type="button" class="drv-row" data-iso="' + c.iso + '"><span class="n">' + esc(c.name_ko) + "</span>" + drvBar(c.drivers.w) + '<span class="t">' + DLAB[c.drivers.top] + " " + c.drivers.w[c.drivers.top] + "</span></button>").join("") + "</div></section>" +
-    '<section class="sec"><h3>역사와 구조가 어긋나는 관계</h3><p class="note" style="margin-bottom:8px">역사적 원한은 깊으나 힘의 구조가 협력을 요구하는 관계입니다. 어느 쪽이 우세한지가 역사가 대전략을 얼마나 움직이는지 보여 줍니다.</p><ul class="list">' +
+    '<section class="sec"><h3>역사와 구조가 어긋나는 관계</h3><p class="note" style="margin-bottom:8px">역사적 원한은 깊으나 힘의 구조가 협력을 요구하는 관계입니다. 기억과 구조 가운데 어느 쪽이 우세한지를 보면 역사가 대전략을 얼마나 움직이는지 알 수 있습니다.</p><ul class="list">' +
       G.tensions.map(t => '<li class="ten"><div class="hd"><b>' + esc(nm(t.a)) + " ↔ " + esc(nm(t.b)) + '</b><span class="st ' + (t.verdict === "구조 우위" ? "yes" : "open") + '">' + esc(t.verdict) + "</span></div><dl><dt>기억</dt><dd>" + esc(t.memory) + "</dd><dt>구조</dt><dd>" + esc(t.structure) + "</dd></dl><p class=\"note\">" + esc(t.note) + "</p></li>").join("") + "</ul></section>" +
     '<section class="sec"><h3>국가별 판단 점수와 지구본 보기 방식</h3><p class="note" style="margin-bottom:8px">지구본의 기본 화면은 분석 대상 지역입니다. 아래의 네 점수는 측정값이 아니라 판단값이며, 보조 자료로 제공합니다.</p><div id="scorebox">' + scoreBoxHtml() + "</div></section>" +
     '<section class="sec"><h3>국가별 대전략</h3><div class="chips" style="margin:0">' + Object.values(D.countries).filter(c => c.gs).map(c => chip(c.iso)).join("") + "</div></section>" +
@@ -1204,13 +1204,13 @@ function histBlock(c){
   return '<section class="sec hist"><h3>역사 속 지정학</h3><p class="hist-mean">' + esc(h.meaning) + "</p>" +
     '<ul class="tl">' + h.episodes.map(e => '<li><span class="d">' + esc(e.y) + "</span><span>" + esc(e.t) + "</span></li>").join("") + "</ul>" +
     '<div class="lesson"><b>그들이 역사에서 배운 것</b><p>' + esc(h.learned) + "</p></div>" +
-    '<div class="lesson"><b>역사가 우리에게 경고하는 것</b><p>' + esc(h.read) + "</p></div></section>";
+    '<div class="lesson"><b>역사의 경고</b><p>' + esc(h.read) + "</p></div></section>";
 }
 function analogHtml(a, compact){
   if (!a) return "";
   return '<article class="an">' + (compact ? "" : "<h4>" + esc(a.now) + "</h4>") +
     '<div class="tags">' + a.cases.map(x => '<span class="tag">' + esc(x) + "</span>").join("") + "</div>" +
-    "<dl><div><dt>그때 어떻게 흘렀나</dt><dd>" + esc(a.then) + '</dd></div><div><dt>지금에 대한 함의</dt><dd class="imp">' + esc(a.implies) + '</dd></div><div><dt class="brk">선례와 다른 점</dt><dd>' + esc(a.breaks) + "</dd></div></dl>" +
+    "<dl><div><dt>그때 어떻게 흘렀나</dt><dd>" + esc(a.then) + '</dd></div><div><dt>현재에 대한 함의</dt><dd class="imp">' + esc(a.implies) + '</dd></div><div><dt class="brk">선례와 다른 점</dt><dd>' + esc(a.breaks) + "</dd></div></dl>" +
     (compact ? "" : '<div class="chips" style="margin:0">' + a.countries.map(chip).join("") + "</div>") + "</article>";
 }
 
@@ -1275,7 +1275,7 @@ function decHtml(c, n){
       "<dt>결정권의 수단</dt><dd>" + esc(d.means) + "</dd>" +
       "<dt>목표의 순위</dt><dd><ol>" + d.goals.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></dd>" +
       "<dt>전략</dt><dd>" + esc(d.strategy) + "</dd>" +
-      "<dt>지금 쓰는 전술</dt><dd>" + ul(d.tactics) + "</dd>" +
+      "<dt>현재 쓰는 전술</dt><dd>" + ul(d.tactics) + "</dd>" +
       '<dt>넘지 않는 선</dt><dd class="red">' + ul(d.red) + "</dd>" +
       "<dt>바깥 변수에 대한 인식</dt><dd>" + esc(d.ext) + "</dd>" +
       "<dt>전략 주체에 원하는 것</dt><dd>" + esc(d.want) + "</dd>" +
@@ -1361,11 +1361,11 @@ function counterHtml(c){
     '<details class="src"><summary>' + esc(W.name.split(" ")[0]) + '의 목표 ' + W.goals.length + '개와 출처</summary><ul class="list goals">' + W.goals.map(g => '<li class="rv"><span><b class="mono" style="color:var(--conflict)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + '<br><span class="note">출처 · ' + esc(g.src) + "</span></p></li>").join("") + "</ul></details>" +
     '<div class="tbl-wrap"><table class="tbl evt" style="min-width:720px"><thead><tr><th>수</th>' + W.goals.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + "<th>실현 가능성</th></tr></thead><tbody>" +
     W.alts.map(a => '<tr><td><b class="mono">' + a.id + '</b><br><span class="note">' + esc(a.name) + "</span></td>" + a.ev.map(e => "<td>" + sc(e[0]) + '<span class="why">' + esc(e[1]) + "</span></td>").join("") + "<td>" + esc(a.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
-    '<div class="verdict">' + W.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + '</div><div class="lesson-box"><b>4단계 추정과의 대조</b>' + esc(W.read) + "</div></section>").join("");
+    '<div class="verdict">' + W.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + '</div><div class="lesson-box"><b>5단계(상대의 대응) 추정과의 대조</b>' + esc(W.read) + "</div></section>").join("");
 }
 function twowayHtml(c){
   const T = c.twoway; if (!T) return "";
-  return '<section class="stp twoway"><div class="stp-h"><i>⇆</i><b>양방향 검토 · 최선의 수가 만나는 지점</b></div><p class="note">양측이 각자의 목표에 따라 최선의 수를 둘 때 어디에서 균형이 형성되는지 검토합니다.</p>' +
+  return '<section class="stp twoway"><div class="stp-h"><i>⇆</i><b>양방향 검토 · 최선의 수가 만나는 지점</b></div><p class="note">전략 주체와 상대국이 각자의 목표에 따라 최선의 수를 둘 때 어디에서 균형이 이뤄지는지 검토합니다.</p>' +
     '<div class="tbl-wrap"><table class="tbl" style="min-width:420px"><thead><tr><th>전략 주체</th><th>최선의 수</th></tr></thead><tbody>' + T.pairs.map(p => "<tr><td><b>" + esc(p[0]) + "</b></td><td>" + esc(p[1]) + "</td></tr>").join("") + "</tbody></table></div>" +
     '<dl class="tw"><dt>균형점</dt><dd>' + esc(T.equilibrium) + "</dd><dt>거래의 공간</dt><dd>" + esc(T.zopa) + '</dd><dt>공동의 함정</dt><dd><ul>' + T.traps.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></dd>" +
     (T.changes && !PUB() ? '<dt></dt><dd><ul>' + T.changes.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></dd>" : "") + "</dl></section>";
@@ -1385,7 +1385,7 @@ function evalHtml(c){
   return '<div class="tbl-wrap"><table class="tbl evt" style="min-width:820px"><thead><tr><th>안</th>' + G.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + "<th>비용</th><th>가역성</th><th>확전 위험</th><th>실현 가능성</th></tr></thead><tbody>" +
     c.alts.map(a => '<tr><td><b class="mono">' + a.id + '</b><br><span class="note">' + esc(a.name) + "</span></td>" + G.map(g => { const e = a.ev[g.id]; return "<td>" + sc(e.s) + '<span class="why">' + esc(e.t) + "</span></td>"; }).join("") +
       "<td>" + esc(a.ev.cost) + "</td><td>" + esc(a.ev.rev2) + "</td><td>" + esc(a.ev.esc2) + "</td><td>" + esc(a.ev.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
-    '<p class="note">−2 크게 잃음 · −1 잃음 · 0 중립 · +1 얻음 · +2 크게 얻음. 목표별 값을 더하지 않습니다. 앞선 목표의 값이 순위를 먼저 가릅니다.</p>';
+    '<p class="note">−2 크게 잃음 · −1 잃음 · 0 중립 · +1 얻음 · +2 크게 얻음. 목표별 값을 더하지 않습니다. 우선순위가 앞선 목표의 값이 순위를 먼저 가릅니다.</p>';
 }
 function humanHtml(c, n9, n10){
   const W = c.wellbeing, I = D.indicator, H = c.human;
@@ -1434,7 +1434,7 @@ function precHtml(c){
   const vc = v => v === "지지" || v === "부합" ? "ok" : v === "반박" || v === "상충" ? "no" : "fix";
   return head + (X.status && !PUB() ? '<p class="note"><span class="vd fix">' + esc(X.status) + "</span> 조사일 " + esc(X.asof || "") + "</p>" : "") +
     '<div style="display:grid;gap:6px">' + X.items.map(p => '<details class="src prec"><summary><b>' + esc(p.name) + '</b> <span class="mono note">' + esc(p.period) + "</span></summary>" +
-      '<dl class="tw" style="margin-top:8px"><dt>형식</dt><dd>' + esc(p.format) + "</dd><dt>결과</dt><dd>" + esc(p.outcome) + "</dd><dt>원인</dt><dd>" + esc(p.why) + "</dd><dt>지금과 다른 점</dt><dd>" + esc(p.differs) + "</dd><dt>출처</dt><dd><ul>" + (p.sources || []).map(srcItem).join("") + "</ul></dd></dl></details>").join("") + "</div>" +
+      '<dl class="tw" style="margin-top:8px"><dt>형식</dt><dd>' + esc(p.format) + "</dd><dt>결과</dt><dd>" + esc(p.outcome) + "</dd><dt>원인</dt><dd>" + esc(p.why) + "</dd><dt>현재와 다른 점</dt><dd>" + esc(p.differs) + "</dd><dt>출처</dt><dd><ul>" + (p.sources || []).map(srcItem).join("") + "</ul></dd></dl></details>").join("") + "</div>" +
     '<h3 style="margin:10px 0 0">' + (PUB() ? "선례에 비춘 판단" : "기존 판단과의 대조") + '</h3><div class="divs">' +
       X.checks.map(k => '<article class="dv chk-' + vc(k.verdict) + '"><div class="hd"><span class="id">' + esc(k.claim) + '</span><span class="vd ' + vc(k.verdict) + '">' + esc(k.verdict) + '</span><span class="note mono">' + esc((k.precedents || []).join(", ")) + "</span></div><dl><dt>근거</dt><dd>" + esc(k.reason) + "</dd>" + (k.proposed ? '<dt>수정 제안</dt><dd class="cl">' + esc(k.proposed) + "</dd>" : "") + "</dl></article>").join("") + "</div>" +
     (X.insight ? '<div class="lesson-box"><b>선례가 드러낸 점</b>' + esc(X.insight) + "</div>" : "") +
@@ -1479,7 +1479,7 @@ function renderStrat(){
         (an ? '<details class="src"><summary>유사한 역사적 선례 · ' + esc(an.now) + "</summary>" + analogHtml(an, true) + "</details>" : "")) +
       decHtml(c, 3) + exitBlock(c) +
       step(4, "선택지 전수 검토", '<p class="note">전략 주체가 실제로 검토하는 선택지를 모두 포함합니다. 도덕적 이유로 제외하지 않습니다.' + (PUB() || c.id !== "korea" ? "" : "") + '</p><ul class="list">' + c.alts.map(a => '<li class="rv"><span><b style="font-family:var(--mono);color:var(--accent)">' + a.id + "</b> <b>" + esc(a.name) + "</b></span><p>" + esc(a.desc) + "</p></li>").join("") + "</ul>") +
-      step(5, "가장 영리한 상대의 대응", '<p class="note">' + esc(c.responses.note) + '</p><div class="tbl-wrap"><table class="tbl" style="min-width:640px"><thead><tr><th>안</th>' + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<th>" + esc(nm(k)) + "</th>").join("") + "</tr></thead><tbody>" + c.responses.rows.map(r => '<tr><td class="mono">' + esc(r.alt) + "</td>" + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<td>" + esc(r[k] || "") + "</td>").join("") + "</tr>").join("") + '</tbody></table></div><div class="lesson-box"><b>가장 영리한 상대를 가정하자 달라진 점</b>' + esc(c.responses.lesson) + "</div>") +
+      step(5, "가장 치밀한 상대의 대응", '<p class="note">' + esc(c.responses.note) + '</p><div class="tbl-wrap"><table class="tbl" style="min-width:640px"><thead><tr><th>안</th>' + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<th>" + esc(nm(k)) + "</th>").join("") + "</tr></thead><tbody>" + c.responses.rows.map(r => '<tr><td class="mono">' + esc(r.alt) + "</td>" + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<td>" + esc(r[k] || "") + "</td>").join("") + "</tr>").join("") + '</tbody></table></div><div class="lesson-box"><b>가장 치밀한 상대를 가정하자 달라진 점</b>' + esc(c.responses.lesson) + "</div>") +
       futHtml(c, 6) +
       layer("2", lq("2")) +
       step(7, "전략 주체와 목표", "<p><b>" + esc(cl.name) + '</b> · 목표의 순서 <span class="mono">' + esc(cl.order) + '</span></p><ul class="list goals">' + cl.goals.map(g => '<li class="rv"><span><b class="mono" style="color:var(--accent)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + '<br><span class="note">출처 · ' + esc(g.src) + "</span></p></li>").join("") + '</ul><p class="note">' + esc(cl.note) + "</p>") +
