@@ -555,6 +555,33 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   .tabs{padding:0 2px; gap:0}
   .tabs button{padding:12px 7px 10px; font-size:12.5px}
 }
+
+/* v3.13 사이트 검색 */
+.srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
+.srch-open:hover{border-color:var(--ink-2)}
+.srch-open svg{width:14px; height:14px}
+.srch-open kbd{font:11px var(--mono); color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:0 4px}
+.srch{position:fixed; inset:0; z-index:50; background:rgba(14,23,38,.38); display:flex; justify-content:center; align-items:flex-start; padding:calc(56px + env(safe-area-inset-top,0px)) 16px 16px}
+.srch-box{width:min(680px,100%); max-height:calc(100svh - 96px); display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:12px; box-shadow:0 18px 50px rgba(14,23,38,.22); overflow:hidden}
+.srch-in{display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid var(--line)}
+.srch-in svg{width:18px; height:18px; flex:none; color:var(--muted)}
+.srch-in input{flex:1; min-width:0; border:0; outline:0; background:transparent; font:500 16px var(--sans); color:var(--ink)}
+.srch-in input::-webkit-search-cancel-button{display:none}
+.srch-x{border:1px solid var(--line); background:var(--panel-2); border-radius:6px; padding:3px 9px; font-size:12px; color:var(--ink-2); cursor:pointer}
+.srch-res{overflow:auto; padding:6px 0 10px}
+.srch-g{padding:8px 14px 2px; font:600 12px var(--sans); color:var(--muted); letter-spacing:.02em; display:flex; justify-content:space-between}
+.srch-item{display:grid; gap:2px; width:100%; text-align:left; border:0; background:transparent; padding:8px 14px; cursor:pointer; border-left:3px solid transparent}
+.srch-item b{font:600 14px/1.45 var(--sans); color:var(--ink); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.srch-item .snip{font-size:13px; line-height:1.55; color:var(--ink-2); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden}
+.srch-item mark, .srch-hit mark{background:rgba(27,79,138,.16); color:inherit; border-radius:2px; padding:0 1px}
+.srch-item[aria-selected="true"], .srch-item:hover{background:var(--accent-soft); border-left-color:var(--accent)}
+.srch-more{margin:2px 14px 4px; border:0; background:transparent; color:var(--accent); font-size:12.5px; cursor:pointer; padding:2px 0}
+.srch-empty{padding:14px; font-size:13.5px; color:var(--ink-2); display:grid; gap:10px}
+.srch-empty .chips{margin:0}
+.srch-hint{margin:0; padding:8px 14px; border-top:1px solid var(--line); font-size:11.5px; color:var(--muted)}
+.srch-hit{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px; transition:outline-color 1.2s}
+.srch-hit.fade{outline-color:transparent}
+@media (max-width: 560px){ .srch-open span, .srch-open kbd{display:none} .srch-open{padding:6px 9px} .srch{padding:calc(12px + env(safe-area-inset-top,0px)) 8px 8px} .srch-box{max-height:calc(100svh - 24px)} .srch-hint{display:none} }
 </style>
 </head>
 <body>
@@ -567,6 +594,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
       <span class="asof">기준일 <b id="asof">2026-09-26</b> · <span id="ver">v0.1</span></span>
     </div>
     <div class="toggles">
+      <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>검색</span><kbd>/</kbd></button>
       <label class="tg"><input type="checkbox" id="tg-fp" checked><span>분쟁지</span></label>
       <label class="tg"><input type="checkbox" id="tg-edge" checked><span>연결망</span></label>
     </div>
@@ -615,6 +643,14 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   </main>
 </div>
 
+
+<div class="srch" id="srch" hidden>
+  <div class="srch-box" role="dialog" aria-modal="true" aria-label="사이트 검색">
+    <div class="srch-in"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><input id="srchq" type="search" placeholder="나라, 사안, 인물, 낱말로 찾기" autocomplete="off" spellcheck="false" aria-controls="srchres" aria-label="검색어"><button type="button" class="srch-x" id="srchx">닫기</button></div>
+    <div class="srch-res" id="srchres" role="listbox" aria-label="검색 결과"></div>
+    <p class="srch-hint">↑↓로 고르고 Enter로 엽니다 · Esc로 닫습니다</p>
+  </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script>
@@ -680,6 +716,129 @@ function srcItem(s){
   return '<li><a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(host) + "</a>" + (note ? " " + esc(note) : "") + "</li>";
 }
 
+/* ---------- v3.13 사이트 검색 ---------- */
+const SR = {idx:null, act:-1, items:[], more:{}};
+const SR_ALIAS = [["대만","타이완","taiwan"],["북한","북조선","dprk"],["한국","대한민국","남한"],["미국","미합중국"],["호르무즈","hormuz"],["우크라이나","우크라"],["유럽연합","eu"],["나토","nato"],["hbm","고대역폭메모리"],["희토류","rare earth"],["중일","중국·일본"],["미중","미·중"],["러우","러-우","러·우"]];
+const SR_SKIP = new Set(["sources","src","url","num","iso","id","fp","lat","lon","ids","countries","scores","phase","fc","steps","lens","lens_fp","lens_off","log","discuss","review","status","made","revised","due","date","asof","rng","rng_rec","inputs","score","p","p_rec","k","w","case","kind"]);
+const srNorm = t => String(t).toLowerCase().replace(/\s+/g, "");
+function srTexts(x, out){
+  if (typeof x === "string") { if (/[가-힣A-Za-z]/.test(x) && !/^https?:/.test(x)) out.push(x); }
+  else if (Array.isArray(x)) x.forEach(v => srTexts(v, out));
+  else if (x && typeof x === "object") for (const [k, v] of Object.entries(x)) { if (!SR_SKIP.has(k)) srTexts(v, out); }
+  return out;
+}
+function srBuild(){
+  const E = [], add = (g, t, body, go) => { const b = srTexts(body, []).join(" · "); E.push({g, t, b, tk:srNorm(t), bk:srNorm(b), go}); };
+  const toPane = (tab, cb) => () => { if (cb) cb(); switchTab(tab); return "pane-" + tab; };
+  for (const [iso, c] of Object.entries(D.countries)) add("나라", c.name_ko + (c.leader ? " · " + String(c.leader).split(/[,/(]/)[0].trim() : ""), c, () => { selectCountry(iso, true); return "pane-detail"; });
+  D.flashpoints.forEach(fp => add("분쟁 지점", fp.name_ko, fp, () => { selectFp(fp.id); return "pane-detail"; }));
+  (D.strategies || []).forEach(c => add("전략 분석 사안", c.title, c, toPane("strat", () => { S.scase = c.id; renderStrat(); })));
+  (D.insights || []).forEach(k => add("현재 정세", String(k.t).split(/(?<=다\.)\s/)[0], k.t, toPane("overview")));
+  (D.digest || []).forEach(g => add("현재 정세", g.t, g.d, toPane("overview")));
+  D.forecasts.forEach(f => add("전망", f.q, [f.q, f.basis, f.void || ""], toPane("forecast")));
+  const G = D.grand || {};
+  (G.trends || []).forEach(t => add("국제 질서", t.t, t, toPane("grand")));
+  (G.scenarios || []).forEach(t => add("국제 질서", "시나리오 · " + t.name, t, toPane("grand")));
+  (G.dyads || []).forEach(t => add("국제 질서", ((D.countries[t.a] || {}).name_ko || t.a) + "·" + ((D.countries[t.b] || {}).name_ko || t.b) + " 관계", t, toPane("grand")));
+  (G.tensions || []).forEach(t => add("국제 질서", ((D.countries[t.a] || {}).name_ko || t.a) + "·" + ((D.countries[t.b] || {}).name_ko || t.b) + " · 역사와 구조", t, toPane("grand")));
+  ((D.history || {}).analogies || []).forEach(a => add("역사·사상가·철학", "역사적 선례 · " + a.now + (a.cases ? " ↔ " + [].concat(a.cases).join(", ") : ""), a, toPane("grand")));
+  ((D.history || {}).laws || []).forEach(l => add("역사·사상가·철학", l.t, l, toPane("grand")));
+  (D.thinkers || []).forEach(t => add("역사·사상가·철학", t.name, t, toPane("grand")));
+  (((D.philosophy || {}).questions) || []).forEach(q => add("역사·사상가·철학", q.id + ". " + q.title, q, toPane("grand")));
+  (((D.methodology || {}).terms) || []).forEach(t => add("분석 방법", Array.isArray(t) ? t[0] : t.t, t, toPane("method")));
+  SR.idx = E;
+}
+function srVariants(tok){
+  const n = srNorm(tok), g = SR_ALIAS.find(a => a.some(v => srNorm(v) === n));
+  return g ? g.map(srNorm) : [n];
+}
+function srSearch(q){
+  const toks = q.trim().split(/\s+/).filter(Boolean).map(srVariants);
+  if (!toks.length) return [];
+  const R = [];
+  for (const e of SR.idx) {
+    let sc = 0, ok = true;
+    for (const vs of toks) {
+      const inT = vs.some(v => e.tk.includes(v)), inB = vs.some(v => e.bk.includes(v));
+      if (!inT && !inB) { ok = false; break; }
+      sc += (inT ? 20 : 0) + (e.tk === vs[0] ? 30 : 0) + Math.min(10, vs.reduce((s, v) => s + (e.bk.split(v).length - 1), 0));
+    }
+    if (ok) R.push({e, sc, vs:toks.flat()});
+  }
+  return R.sort((a, b) => b.sc - a.sc);
+}
+function srSnip(text, vs){
+  const low = text.toLowerCase(); let at = -1, len = 0;
+  for (const v of vs) { const re = new RegExp(v.split("").map(ch => ch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s*"), "i"); const m = re.exec(text); if (m && (at < 0 || m.index < at)) { at = m.index; len = m[0].length; } }
+  if (at < 0) return esc(text.slice(0, 90)) + (text.length > 90 ? "…" : "");
+  const a = Math.max(0, at - 36), b = Math.min(text.length, at + len + 60);
+  return (a > 0 ? "…" : "") + esc(text.slice(a, at)) + "<mark>" + esc(text.slice(at, at + len)) + "</mark>" + esc(text.slice(at + len, b)) + (b < text.length ? "…" : "");
+}
+const SR_ORDER = ["나라","전략 분석 사안","분쟁 지점","현재 정세","전망","국제 질서","역사·사상가·철학","분석 방법"];
+const SR_EX = ["대만","호르무즈","희토류","HBM","청해부대","이산가족","민스크"];
+function srRender(){
+  const q = $("#srchq").value, box = $("#srchres");
+  SR.items = []; SR.act = -1;
+  if (!q.trim()) { box.innerHTML = '<div class="srch-empty"><span>찾아볼 만한 말</span><div class="chips">' + SR_EX.map(x => '<button type="button" class="chip" data-srq="' + esc(x) + '">' + esc(x) + "</button>").join("") + "</div></div>"; return; }
+  const R = srSearch(q);
+  if (!R.length) { box.innerHTML = '<div class="srch-empty">‘' + esc(q) + '’에 맞는 내용이 없습니다. 더 짧은 낱말이나 다른 이름으로 찾아 보십시오.</div>'; return; }
+  let h = "";
+  for (const g of SR_ORDER) {
+    const rs = R.filter(r => r.e.g === g); if (!rs.length) continue;
+    const lim = SR.more[g] ? rs.length : 5;
+    h += '<div class="srch-g"><span>' + g + "</span><span>" + rs.length + "건</span></div>";
+    rs.slice(0, lim).forEach(r => { const i = SR.items.push(r) - 1; h += '<button type="button" class="srch-item" role="option" aria-selected="false" data-sri="' + i + '"><b>' + srSnip(r.e.t, r.vs) + '</b><span class="snip">' + srSnip(r.e.b, r.vs) + "</span></button>"; });
+    if (rs.length > lim) h += '<button type="button" class="srch-more" data-srmore="' + esc(g) + '">' + (rs.length - lim) + "건 더 보기</button>";
+  }
+  box.innerHTML = h;
+}
+function srMove(d){
+  const els = [...document.querySelectorAll("#srchres .srch-item")]; if (!els.length) return;
+  SR.act = (SR.act + d + els.length) % els.length;
+  els.forEach((el, i) => el.setAttribute("aria-selected", i === SR.act));
+  els[SR.act].scrollIntoView({block:"nearest"});
+}
+function srLand(paneId, vs){
+  const pane = document.getElementById(paneId); if (!pane) return;
+  const w = document.createTreeWalker(pane, NodeFilter.SHOW_TEXT); let n, hit = null;
+  while ((n = w.nextNode())) { const t = srNorm(n.nodeValue); if (vs.some(v => t.includes(v))) { hit = n.parentElement; break; } }
+  if (!hit) return;
+  for (let p = hit; p && p !== pane; p = p.parentElement) if (p.tagName === "DETAILS") p.open = true;
+  const blk = hit.closest("li, article, section, details, p, dd, div") || hit;
+  blk.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"center"});
+  blk.classList.add("srch-hit"); setTimeout(() => blk.classList.add("fade"), 1600); setTimeout(() => blk.classList.remove("srch-hit", "fade"), 3000);
+}
+function srOpen(){ if (!SR.idx) srBuild(); $("#srch").hidden = false; const i = $("#srchq"); i.focus(); i.select(); srRender(); }
+function srClose(){ $("#srch").hidden = true; $("#srchopen").focus({preventScroll:true}); }
+function srGo(i){
+  const r = SR.items[i]; if (!r) return;
+  srClose();
+  const pane = r.e.go();
+  if (narrow()) $("#panel").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"start"});
+  setTimeout(() => srLand(pane, r.vs), 60);
+}
+function setupSearch(){
+  let tm = null;
+  $("#srchopen").onclick = srOpen;
+  $("#srchx").onclick = srClose;
+  $("#srch").addEventListener("click", e => { if (e.target.id === "srch") srClose(); });
+  $("#srchq").addEventListener("input", () => { clearTimeout(tm); SR.more = {}; tm = setTimeout(srRender, 110); });
+  $("#srchres").addEventListener("click", e => {
+    const it = e.target.closest("[data-sri]"); if (it) return srGo(+it.dataset.sri);
+    const mo = e.target.closest("[data-srmore]"); if (mo) { SR.more[mo.dataset.srmore] = true; srRender(); return; }
+    const ex = e.target.closest("[data-srq]"); if (ex) { $("#srchq").value = ex.dataset.srq; srRender(); $("#srchq").focus(); }
+  });
+  document.addEventListener("keydown", e => {
+    const open = !$("#srch").hidden;
+    if (!open && e.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) { e.preventDefault(); srOpen(); return; }
+    if (!open) return;
+    if (e.key === "Escape") { e.preventDefault(); srClose(); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); srMove(1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); srMove(-1); }
+    else if (e.key === "Enter" && document.activeElement.id === "srchq") { e.preventDefault(); srGo(SR.act >= 0 ? SR.act : 0); }
+  });
+}
+
 /* ---------- load ---------- */
 Promise.all([
   fetch("data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
@@ -719,6 +878,7 @@ function init(d, w){
   renderOverview(); renderDetail(); renderGrand(); renderDiscuss(); renderForecasts(); renderStrat(); renderMethod();
   const t = store.get("ep.tab"); if (t && t !== "detail") switchTab(t);
   applyHash(); HASH_READY = true;
+  setupSearch();
   loop();
 }
 
