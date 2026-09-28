@@ -1,0 +1,1627 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%231B4F8A'/%3E%3Cpath d='M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28' stroke='%23fff' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
+<meta property="og:title" content="클리사 지오폴리틱스">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} html,body{height:100%} body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif} img{max-width:100%} [hidden]{display:none!important}</style>
+<title>클리사 지오폴리틱스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --focus-0:#E8EEF5; --focus-1:#1B4F8A;
+  --bg:#EBEEF2; --panel:#FFFFFF; --panel-2:#F3F5F8; --ink:#0E1726; --ink-2:#344054; --muted:#667085; --line:#D3DAE3;
+  --ocean:#D9E3EE; --ocean-2:#C4D3E3; --grat:rgba(20,50,90,.11); --land-out:#E3E7EC; --border:rgba(14,23,38,.34);
+  --accent:#1B4F8A; --accent-soft:rgba(27,79,138,.08); --l1:#3E5C76; --l2:#1B4F8A; --l3:#7A4E9E; --coop:#11796B; --conflict:#B42318; --halo:#FFFFFF;
+  --d-geo:#2a78d6; --d-power:#eb6834; --d-regime:#1baf7a; --d-memory:#eda100; --d-deal:#8a63d2; --risk-0:#F6E6E1; --risk-1:#9C2217; --mil-0:#DDE5ED; --mil-1:#1C4A77; --pol-0:#E1EBDD; --pol-1:#2B6535; --econ-0:#F1E7CF; --econ-1:#81530F;
+  --serif:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:light;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg); color:var(--ink); font:14px/1.6 var(--sans); -webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button{font:inherit; color:inherit}
+button:focus-visible,input:focus-visible+span,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+a{color:var(--accent)}
+
+.app{height:100%; display:grid; grid-template-rows:auto 1fr; padding-inline:16px; padding-block:0 16px; gap:12px}
+.top{display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; padding-top:14px}
+.brand{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-right:auto}
+.brand h1{margin:0; font:700 22px/1.1 var(--serif); letter-spacing:-.02em}
+.edtag{font:600 11px var(--sans); color:var(--conflict); border:1px solid var(--conflict); border-radius:4px; padding:1px 6px}
+.brand .en{font:500 11px var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+.asof{font:12px var(--mono); color:var(--muted)}
+.asof b{color:var(--ink-2); font-weight:500}
+.seg{display:inline-flex; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:3px; gap:2px}
+.seg button{border:0; background:transparent; padding:6px 12px; border-radius:6px; cursor:pointer; color:var(--ink-2); font-size:13px; white-space:nowrap}
+.seg button[aria-checked="true"]{background:var(--ink); color:var(--panel); font-weight:600}
+.toggles{display:flex; gap:8px}
+.tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
+.tg input{position:absolute; opacity:0; width:1px; height:1px}
+.tg span{display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border:1px solid var(--line); border-radius:999px; background:var(--panel)}
+.tg span::before{content:""; width:8px; height:8px; border-radius:50%; border:1.5px solid var(--muted)}
+.tg input:checked+span::before{background:var(--accent); border-color:var(--accent)}
+
+.stage{display:grid; grid-template-columns:minmax(0,1fr) 420px; gap:12px; min-height:0}
+.globe-wrap{position:relative; min-height:0; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:
+  radial-gradient(120% 90% at 50% 45%, var(--panel-2), var(--bg))}
+.globe-wrap canvas{position:absolute; inset:0; width:100%; height:100%}
+#over{cursor:grab; touch-action:none}
+#over:active{cursor:grabbing}
+.loading{position:absolute; inset:0; display:grid; place-items:center; color:var(--muted); font-size:13px}
+.readout{position:absolute; top:12px; right:12px; font:11px/1 var(--mono); color:var(--muted); background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font-variant-numeric:tabular-nums}
+.ctl{position:absolute; top:12px; left:12px; display:flex; flex-direction:column; gap:4px}
+.ctl button{width:32px; height:32px; border-radius:6px; border:1px solid var(--line); background:var(--panel); cursor:pointer; font:500 16px/1 var(--mono); color:var(--ink-2)}
+.ctl button:hover{border-color:var(--ink-2)}
+.legend{position:absolute; left:12px; bottom:12px; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 12px; width:236px; display:grid; gap:8px}
+.legend .lt{font-weight:600; font-size:12px}
+.legend .ld{font-size:11px; color:var(--muted); line-height:1.4}
+.ramp{height:8px; border-radius:2px}
+.ticks{display:flex; justify-content:space-between; font:10px var(--mono); color:var(--muted); margin-top:-4px}
+.keys{display:grid; gap:4px; font-size:11px; color:var(--ink-2); border-top:1px solid var(--line); padding-top:8px}
+.keys div{display:flex; align-items:center; gap:8px}
+.keys svg{flex:none}
+.offmap{position:absolute; right:12px; bottom:12px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; justify-content:flex-end; max-width:calc(100% - 270px)}
+.offmap .lbl{font-size:11px; color:var(--muted)}
+.lensbar{position:absolute; top:12px; left:56px; right:auto; display:flex; align-items:center; gap:10px; background:var(--ink); color:var(--panel); border-radius:6px; padding:6px 8px 6px 12px; font-size:12px; max-width:calc(100% - 200px)}
+.lensbar button{border:0; background:transparent; color:inherit; text-decoration:underline; cursor:pointer; font-size:12px}
+.tip{position:absolute; pointer-events:none; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:12px; line-height:1.45; max-width:240px; box-shadow:0 6px 18px rgba(0,0,0,.14); z-index:5}
+.tip b{font-size:13px}
+.tip .m{color:var(--muted)}
+.tip .num{font-family:var(--mono)}
+
+.panel{min-height:0; display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden}
+.tabs{display:flex; border-bottom:1px solid var(--line); padding:0 8px; gap:2px; overflow-x:auto; flex:none}
+.tabs button{border:0; background:transparent; padding:12px 10px 10px; cursor:pointer; color:var(--muted); font-size:13px; border-bottom:2px solid transparent; white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--accent); font-weight:600}
+.pane{overflow-y:auto; padding:18px 18px 28px; display:grid; gap:24px; align-content:start; min-height:0; flex:1}
+.pane h2{margin:0; font:700 21px/1.3 var(--serif); letter-spacing:-.015em; text-wrap:balance}
+.pane h3{margin:0 0 10px; font-size:12px; font-weight:600; color:var(--muted); letter-spacing:.04em}
+.pane p{margin:0}
+.eyebrow{font-size:12px; color:var(--accent); font-weight:600; letter-spacing:.03em}
+.lead{color:var(--ink-2)}
+.sec{display:grid; gap:0}
+.list{display:grid; gap:0; margin:0; padding:0; list-style:none}
+.list>li{border-top:1px solid var(--line); padding:12px 0}
+.list>li:first-child{border-top:0; padding-top:0}
+.row-btn{display:grid; width:100%; text-align:left; border:0; background:transparent; padding:0; cursor:pointer; gap:4px}
+.row-btn:hover .nm{text-decoration:underline; text-decoration-color:var(--accent)}
+.nm{font-weight:600}
+.meta{font-size:12px; color:var(--muted)}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+.chip{border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:3px 10px; font-size:12px; cursor:pointer; color:var(--ink-2)}
+.chip:hover{border-color:var(--ink-2); color:var(--ink)}
+.chip.t1{font-weight:600; color:var(--ink)}
+.chip.on{border-color:var(--accent); background:var(--accent-soft); color:var(--ink)}
+.pips{display:inline-flex; gap:2px; vertical-align:middle}
+.pips i{width:8px; height:8px; border-radius:1px; background:var(--line)}
+.pips i.on{background:var(--conflict)}
+.fp-head{display:flex; align-items:center; gap:8px; justify-content:space-between}
+.bars{display:grid; gap:6px}
+.bar{display:grid; grid-template-columns:96px 1fr 30px; align-items:center; gap:10px; font-size:13px; cursor:pointer; border:0; background:transparent; padding:2px 0; text-align:left}
+.bar:hover span:first-child{text-decoration:underline; text-decoration-color:var(--accent)}
+.bar .track{height:8px; background:var(--panel-2); border-radius:2px; overflow:hidden}
+.bar .fill{height:100%; border-radius:0 4px 4px 0}
+.bar .v{font:12px var(--mono); text-align:right; color:var(--ink-2)}
+.digest{display:grid; gap:16px; counter-reset:none}
+.digest article{display:grid; gap:4px}
+.digest .h{font-weight:600; font-size:14px; line-height:1.45}
+.digest p{color:var(--ink-2); font-size:13px}
+.lead-q{font:600 15px/1.6 var(--serif); color:var(--ink-2)}
+
+.scores{display:grid; gap:8px}
+.score{display:grid; grid-template-columns:76px 1fr 30px; gap:10px; align-items:center; font-size:13px}
+.figs{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden}
+.figs div{background:var(--panel); padding:10px 12px; display:grid; gap:2px}
+.figs dt{font-size:11px; color:var(--muted)}
+.figs dd{margin:0; font:500 15px var(--mono); font-variant-numeric:tabular-nums}
+.figs dd small{font:11px var(--sans); color:var(--muted); margin-left:4px}
+.note{font-size:12px; color:var(--muted); line-height:1.5}
+.kv{display:grid; grid-template-columns:84px 1fr; gap:6px 12px; font-size:13px; margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0}
+.tl{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.tl li{display:grid; grid-template-columns:78px 1fr; gap:10px; font-size:13px}
+.tl .d{font:11px/1.9 var(--mono); color:var(--muted)}
+.watch{margin:0; padding-left:18px; display:grid; gap:4px; font-size:13px}
+details.src summary{cursor:pointer; font-size:12px; color:var(--muted)}
+details.src ul{margin:8px 0 0; padding-left:18px; font-size:12px; display:grid; gap:4px; word-break:break-all}
+
+.fc{display:grid; grid-template-columns:1fr auto; gap:6px 14px; align-items:start}
+.fc .q{font-weight:600; line-height:1.5}
+.fc .p{font:500 22px/1 var(--mono); text-align:right; font-variant-numeric:tabular-nums}
+.fc .p small{font-size:12px; color:var(--muted)}
+.fc .b{grid-column:1/-1; font-size:12px; color:var(--ink-2)}
+.fc .foot{grid-column:1/-1; display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; font-size:12px; color:var(--muted)}
+.st{display:inline-block; padding:1px 8px; border-radius:999px; font-size:11px; font-weight:600; border:1px solid var(--line)}
+.st.open{color:var(--ink-2)}
+.st.yes{color:var(--coop); border-color:var(--coop)}
+.st.no{color:var(--conflict); border-color:var(--conflict)}
+/* v3.0 */ .st.void{color:var(--ink-3,#888); border-color:var(--l3); text-decoration:line-through}
+.fc .vr{font-size:12px; color:var(--ink-2); margin-top:4px}
+.aiprec{display:grid; gap:6px} .aiprec .dv dl{margin-top:4px}
+.trend .pn{font-size:12.5px; color:var(--ink-2); margin-top:6px}
+.prob{height:4px; background:var(--panel-2); border-radius:2px; grid-column:1/-1; overflow:hidden}
+.prob i{display:block; height:100%; background:var(--accent)}
+.score-card{display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); border-radius:8px; overflow:hidden}
+.score-card div{padding:10px 12px; display:grid; gap:2px; border-left:1px solid var(--line)}
+.score-card div:first-child{border-left:0}
+.score-card b{font:500 18px var(--mono)}
+.score-card span{font-size:11px; color:var(--muted)}
+
+.thinker{display:grid; gap:10px; padding-bottom:4px}
+.thinker .who{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.thinker .who h4{margin:0; font:700 18px var(--serif)}
+.thinker .works{font-size:12px; color:var(--muted)}
+.thinker dl{margin:0; display:grid; gap:8px}
+.thinker dt{font-size:11px; font-weight:600; color:var(--accent); letter-spacing:.03em}
+.thinker dd{margin:0; font-size:13px; color:var(--ink-2)}
+.lens-btn{justify-self:start; border:1px solid var(--ink-2); background:transparent; border-radius:6px; padding:5px 12px; font-size:12px; cursor:pointer}
+.lens-btn[aria-pressed="true"]{background:var(--ink); color:var(--panel); border-color:var(--ink)}
+.empty{display:grid; gap:14px}
+.region h4{margin:0 0 6px; font-size:12px; color:var(--muted); font-weight:600}
+.method li{margin-bottom:4px}
+.method ul{margin:0; padding-left:18px; font-size:13px; color:var(--ink-2)}
+
+.gs{display:grid; gap:12px}
+.gs-core{font:600 15px/1.65 var(--serif); color:var(--ink); border-left:3px solid var(--accent); padding-left:12px}
+.gs-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+.gs-box{border:1px solid var(--line); border-radius:8px; padding:10px 12px; display:grid; gap:6px; align-content:start}
+.gs-box.wide{grid-column:1/-1}
+.gs-box h5{margin:0; font-size:12px; font-weight:600; display:flex; align-items:center; gap:6px}
+.gs-box h5 i{width:8px; height:8px; border-radius:50%; background:var(--muted)}
+.gs-box.give h5 i{background:var(--coop)}
+.gs-box.never h5 i{background:var(--conflict)}
+.gs-box.goal h5 i{background:var(--accent)}
+.gs-box ul{margin:0; padding-left:16px; font-size:13px; display:grid; gap:3px; color:var(--ink-2)}
+.gs p{font-size:13px; color:var(--ink-2)}
+.mx-wrap{overflow-x:auto}
+.mx{border-collapse:separate; border-spacing:2px; font-size:11px; margin:0 auto}
+.mx th{font-weight:500; color:var(--muted); padding:2px; white-space:nowrap}
+.mx thead th{text-align:center; font-weight:600; color:var(--ink-2)}
+.mx tbody th{text-align:right; padding-right:6px}
+.mx td{width:30px; height:28px; padding:0}
+.mx td button{width:100%; height:100%; border:0; border-radius:3px; cursor:pointer; font:500 11px var(--mono); font-variant-numeric:tabular-nums}
+.mx td button.sel{outline:2px solid var(--accent); outline-offset:1px}
+.mx td.diag{background:transparent}
+.mx-key{display:flex; flex-wrap:wrap; gap:6px 12px; font-size:11px; color:var(--muted); justify-content:center; margin-top:8px}
+.mx-key span{display:inline-flex; align-items:center; gap:4px}
+.mx-key i{width:12px; height:12px; border-radius:2px; display:inline-block}
+.dyad{border:1px solid var(--line); border-radius:8px; padding:12px; display:grid; gap:8px; background:var(--panel)}
+.dyad .pair{font:700 16px var(--serif)}
+.dyad .cols{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px}
+.dyad h5{margin:0 0 4px; font-size:11px; font-weight:600}
+.dyad h5.c{color:var(--coop)} .dyad h5.x{color:var(--conflict)}
+.dyad ul{margin:0; padding-left:16px; font-size:12px; color:var(--ink-2); display:grid; gap:2px}
+.dyad p{font-size:13px; color:var(--ink-2)}
+details.dy{border-top:1px solid var(--line); padding:10px 0}
+details.dy summary{cursor:pointer; font-weight:600; font-size:13px; list-style-position:outside}
+details.dy .dyad{margin-top:8px; border:0; padding:0}
+.scn{display:grid; gap:8px}
+.scn-h{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
+.scn-h b{font:700 17px var(--serif)}
+.scn-h .p{font:500 22px var(--mono)}
+.scn ul{margin:0; padding-left:16px; font-size:12px; color:var(--ink-2); display:grid; gap:2px}
+.scn .kr{font-size:12px; color:var(--ink); background:var(--accent-soft); border-radius:6px; padding:8px 10px}
+.trend b{display:block; font-size:14px; margin-bottom:2px}
+.trend p{font-size:13px; color:var(--ink-2)}
+.hist{display:grid; gap:10px}
+.hist-mean{font:600 15px/1.65 var(--serif); color:var(--ink)}
+.hist .tl .d{font-size:11px}
+.lesson{display:grid; gap:4px; border-left:3px solid var(--line); padding-left:12px}
+.lesson b{font-size:12px; color:var(--accent)}
+.lesson p{font-size:13px; color:var(--ink-2)}
+.an{display:grid; gap:10px}
+.an h4{margin:0; font:700 17px/1.35 var(--serif)}
+.an .tags{display:flex; flex-wrap:wrap; gap:6px}
+.an .tag{font-size:11px; border:1px solid var(--accent); color:var(--accent); border-radius:4px; padding:1px 8px}
+.an dl{margin:0; display:grid; gap:8px}
+.an dt{font-size:11px; font-weight:600; color:var(--muted); letter-spacing:.03em}
+.an dd{margin:0; font-size:13px; color:var(--ink-2)}
+.an dd.imp{color:var(--ink)}
+.an dt.brk{color:var(--conflict)}
+.law{display:grid; gap:4px}
+.law b{font:700 15px var(--serif)}
+.law p{font-size:13px; color:var(--ink-2)}
+.drv{display:flex; height:12px; gap:2px; border-radius:3px; overflow:hidden}
+.drv i{display:block; height:100%}
+.drv i:first-child{border-radius:3px 0 0 3px}
+.drv i:last-child{border-radius:0 3px 3px 0}
+.drv-lab{display:flex; flex-wrap:wrap; gap:4px 12px; font-size:12px; color:var(--ink-2)}
+.drv-lab span{display:inline-flex; align-items:center; gap:5px}
+.drv-lab span::before{content:""; width:8px; height:8px; border-radius:2px; background:var(--c)}
+.drv-lab b{font-family:var(--mono); font-weight:500}
+.drv-lab .top{font-weight:600; color:var(--ink)}
+.drv-row{display:grid; grid-template-columns:88px 1fr 92px; gap:10px; align-items:center; font-size:13px; border:0; background:transparent; padding:3px 0; cursor:pointer; text-align:left; width:100%}
+.drv-row:hover .n{text-decoration:underline; text-decoration-color:var(--accent)}
+.drv-row .t{font-size:11px; color:var(--muted)}
+.ten{display:grid; gap:6px}
+.ten .hd{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+.ten .hd b{font:700 15px var(--serif)}
+.ten dl{margin:0; display:grid; grid-template-columns:52px 1fr; gap:4px 10px; font-size:13px}
+.ten dt{color:var(--muted); font-size:12px}
+.ten dd{margin:0; color:var(--ink-2)}
+.qs{margin:0; padding-left:20px; font-size:13px; color:var(--ink-2); display:grid; gap:3px}
+details.exc{border-top:1px solid var(--line); padding:14px 0}
+details.exc>summary{cursor:pointer; list-style-position:outside}
+details.exc>summary b{font:700 18px var(--serif)}
+.exc-body{display:grid; gap:16px; margin-top:12px}
+.eye{border:1px solid var(--line); border-radius:8px; padding:12px; display:grid; gap:8px}
+.eye .hd{display:flex; justify-content:space-between; align-items:center; gap:8px}
+.eye .hd b{font:700 15px var(--serif)}
+.aim{font-size:11px; font-weight:600; border-radius:999px; padding:1px 8px; border:1px solid var(--line); color:var(--ink-2); white-space:nowrap}
+.eye dl{margin:0; display:grid; gap:6px}
+.eye dt{font-size:11px; font-weight:600; color:var(--muted)}
+.eye dd{margin:0; font-size:13px; color:var(--ink-2)}
+.eye dd.say{font:700 14px/1.5 var(--serif); color:var(--ink)}
+.misread{border-left:3px solid var(--conflict); padding:8px 12px; background:var(--panel-2); border-radius:0 6px 6px 0; font-size:13px}
+.misread b{display:block; font-size:11px; color:var(--conflict); margin-bottom:2px}
+.exit{display:grid; gap:6px; padding:10px 0; border-top:1px dashed var(--line)}
+.exit:first-of-type{border-top:0}
+.exit h5{margin:0; font-size:14px}
+.exit ul{margin:0; padding-left:16px; font-size:13px; display:grid; gap:2px}
+.exit .pre, .exit .obs{font-size:12px; color:var(--ink-2)}
+.exit .pre b{color:var(--accent)} .exit .obs b{color:var(--conflict)}
+.claim{margin:0; padding:12px 12px 12px 32px; border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0; display:grid; gap:6px}
+.claim li{font:700 14px/1.6 var(--serif); color:var(--ink)}
+.claim-by{font-size:12px; color:var(--muted); margin-top:6px}
+.hpoints{margin:0; padding-left:18px; display:grid; gap:6px; font-size:13px; color:var(--ink-2)}
+.lesson-box{border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; background:var(--panel-2)}
+.lesson-box b{display:block; font-size:11px; color:var(--accent); margin-bottom:2px}
+.rv{display:grid; gap:6px}
+.rv .hd{display:flex; justify-content:space-between; gap:10px; align-items:baseline}
+.rv .hd span:first-child{font-weight:600; line-height:1.5}
+.vd{font-size:11px; font-weight:600; border-radius:999px; padding:1px 8px; border:1px solid var(--line); white-space:nowrap}
+.vd.ok{color:var(--coop); border-color:var(--coop)}
+.vd.fix{color:var(--accent); border-color:var(--accent)}
+.vd.no{color:var(--conflict); border-color:var(--conflict)}
+.rv p{font-size:13px; color:var(--ink-2)}
+.path{border:1px solid var(--line); border-radius:8px; padding:12px; display:grid; gap:6px}
+.path .hd{display:flex; justify-content:space-between; gap:8px; align-items:baseline}
+.path .hd b{font:700 15px var(--serif)}
+.path dl{margin:0; display:grid; grid-template-columns:44px 1fr; gap:4px 10px; font-size:13px}
+.path dt{color:var(--muted); font-size:12px}
+.path dd{margin:0; color:var(--ink-2)}
+.fw{margin:0; padding-left:22px; display:grid; gap:10px}
+.fw li{font-size:13px}
+.fw-h{display:flex; gap:8px; align-items:baseline}
+.fw-h b{font:700 15px var(--serif)}
+.fw-h span{font-size:12px; color:var(--muted)}
+.fw p{margin:2px 0 0; color:var(--ink-2)}
+.fw .ok, .fw .gap{font-size:11px; font-weight:600; margin-right:4px}
+.fw .ok{color:var(--coop)} .fw .gap{color:var(--conflict)}
+.charter{display:grid; gap:0; border:1px solid var(--line); border-radius:8px; overflow:hidden}
+.charter div{display:grid; grid-template-columns:52px 1fr; gap:10px; padding:12px; border-top:1px solid var(--line)}
+.charter div:first-child{border-top:0}
+.charter b{font:700 15px var(--serif); color:var(--accent)}
+.charter p{font:700 14px/1.65 var(--serif); color:var(--ink)}
+.charter small{display:block; margin-top:4px; font:600 11px var(--sans); color:var(--muted)}
+.tree{display:grid; gap:10px}
+.tree .root{border:2px solid var(--accent); border-radius:8px; padding:10px 12px; text-align:center; font:700 15px var(--serif)}
+.tree .arrow{justify-self:center; width:2px; height:14px; background:var(--line)}
+.gates{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px}
+.gate{border:1px solid var(--conflict); border-radius:8px; padding:8px; font-size:12px; display:grid; gap:4px; align-content:start}
+.gate b{font-size:11px; color:var(--conflict)}
+.gate span{color:var(--muted); font-size:11px}
+.steps{margin:0; padding:0; list-style:none; counter-reset:st; display:grid; gap:0}
+.steps li{counter-increment:st; display:grid; grid-template-columns:28px 1fr; gap:10px; padding:10px 0; border-top:1px solid var(--line)}
+.steps li::before{content:counter(st); width:24px; height:24px; border-radius:50%; background:var(--ink); color:var(--panel); font:600 12px/24px var(--mono); text-align:center}
+.steps b{font-size:14px}
+.steps p{font-size:13px; color:var(--ink-2); margin:2px 0 4px}
+.rchip{display:inline-block; font:600 11px var(--mono); border:1px solid var(--accent); color:var(--accent); border-radius:4px; padding:0 6px; margin-right:4px; cursor:pointer; background:transparent}
+.lay{font-size:11px; color:var(--muted); margin-left:6px}
+details.pq{border-top:1px solid var(--line); padding:12px 0}
+details.pq>summary{cursor:pointer}
+details.pq>summary b{font:700 16px var(--serif)}
+.pq-body{display:grid; gap:12px; margin-top:10px}
+.pq-body h5{margin:0 0 4px; font-size:11px; font-weight:600; color:var(--muted); letter-spacing:.03em}
+.pq-body p{font-size:13px; color:var(--ink-2)}
+.pq-body ul{margin:0; padding-left:16px; font-size:13px; color:var(--ink-2); display:grid; gap:4px}
+.pq-body .ans{border-left:3px solid var(--accent); padding:8px 12px; background:var(--accent-soft); border-radius:0 6px 6px 0; color:var(--ink)}
+.pq-body .obj{border-left:3px solid var(--conflict); padding:8px 12px; background:var(--panel-2); border-radius:0 6px 6px 0}
+.pq-body .rule{font-size:13px; border:1px dashed var(--accent); border-radius:6px; padding:8px 10px}
+.stp{display:grid; gap:10px}
+.stp-h{display:flex; gap:10px; align-items:center}
+.stp-h i{flex:none; width:24px; height:24px; border-radius:50%; background:var(--ink); color:var(--panel); font:600 12px/24px var(--mono); text-align:center; font-style:normal}
+.stp-h b{font:700 16px var(--serif)}
+.facts{margin:0; padding-left:18px; display:grid; gap:6px; font-size:13px; color:var(--ink-2)}
+.dec{border:1px solid var(--line); border-radius:8px}
+.dec summary{cursor:pointer; list-style:none; padding:10px 12px; display:grid; grid-template-columns:auto auto 1fr; gap:4px 10px; align-items:baseline}
+.dec summary::-webkit-details-marker{display:none}
+.dec summary .nm{font-weight:800; font-size:15px}
+.dec summary .pw{font:600 11px var(--mono); color:var(--accent)}
+.dec summary .fr{grid-column:1/-1; font-size:13px; color:var(--ink-2); line-height:1.55}
+.dec[open] summary{border-bottom:1px solid var(--line)}
+.dec dl{margin:0; padding:10px 12px; display:grid; grid-template-columns:104px 1fr; gap:8px 12px; font-size:12.5px}
+.dec dt{color:var(--muted); font-weight:600} .dec dd{margin:0; color:var(--ink-2); line-height:1.55}
+.dec dd ul,.dec dd ol{margin:0; padding-left:16px; display:grid; gap:3px}
+.dec dd.red{color:var(--conflict)} .dec dd.lev{color:var(--ink)}
+@media (max-width:560px){.dec dl{grid-template-columns:1fr} .dec dt{margin-top:4px}}
+.decs,.exts{display:grid; gap:8px}
+.pref td{vertical-align:top}
+.lv{display:inline-block; font:600 11px var(--mono); border-radius:4px; padding:1px 6px; margin-bottom:3px}
+.lv-a{background:var(--coop); color:var(--panel)} .lv-b{border:1px solid var(--muted); color:var(--ink-2)}
+.lv-c{border:1px solid var(--accent); color:var(--accent)} .lv-d{background:var(--conflict); color:var(--panel)}
+.pref .why{display:block; font-size:11px; color:var(--muted); line-height:1.4}
+.synth{margin:0; padding-left:18px; display:grid; gap:8px; font-size:13px}
+.synth b{display:block; color:var(--ink)} .synth span{color:var(--ink-2)}
+.ext th{min-width:54px} .ext th:first-child{min-width:150px}
+.ext .dd{display:block; font-size:10px; color:var(--muted)} .ext tr.base td{color:var(--muted); background:var(--panel-2)}
+.fut .hd .pp small{display:block; font-size:10px; color:var(--muted); text-align:right}
+.tmpl .kind{display:inline-block; font:600 10px var(--mono); color:var(--muted); border:1px solid var(--line); border-radius:3px; padding:0 4px; margin-bottom:4px}
+.tmpl .chk{border-color:var(--accent)} .tmpl .chk .kind{color:var(--accent); border-color:var(--accent)}
+.ltag{display:inline-block; font:600 10px var(--mono); border-radius:3px; padding:1px 5px; margin-right:6px; vertical-align:2px; color:var(--panel)}
+.ltag.l1,.lyr.l1 b,.layer.l1 .lh b,.mflow .l1 b{background:var(--l1)} .ltag.l2,.lyr.l2 b,.layer.l2 .lh b,.mflow .l2 b{background:var(--l2)}
+.ltag.l3,.lyr.l3 b,.layer.l3 .lh b,.mflow .l3 b{background:var(--l3)} .ltag.lV,.lyr.lV b,.layer.lV .lh b,.mflow .lV b{background:var(--muted)}
+.lyr{display:flex; align-items:center; gap:10px; border-top:2px solid var(--line); padding-top:12px; margin-top:6px}
+.lyr b{color:var(--panel); font:700 12px var(--sans); padding:3px 10px; border-radius:4px; letter-spacing:.02em}
+.lyr span{font-size:13px; color:var(--ink-2)}
+.mflow .l1 b,.mflow .l2 b,.mflow .l3 b,.mflow .lV b{color:var(--panel); border-radius:3px; padding:0 5px; justify-self:start}
+.layers{display:grid; gap:10px}
+.layer{border:1px solid var(--line); border-radius:8px; padding:12px; display:grid; gap:6px; background:var(--panel)}
+.layer .lh{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.layer .lh b{color:var(--panel); font-size:12px; padding:2px 8px; border-radius:4px}
+.layer .lh span{font-weight:600; font-size:13px}
+.rules2{display:grid; gap:8px; margin-top:10px}
+.rl-h{margin:12px 0 6px; font:700 13px var(--sans); color:var(--ink-2)}
+.mstep summary i.l1{background:var(--l1)} .mstep summary i.l2{background:var(--l2)} .mstep summary i.l3{background:var(--l3)} .mstep summary i.lV{background:var(--muted)}
+.evt td{vertical-align:top; min-width:70px} .evt .why{display:block; font-size:11px; color:var(--muted); line-height:1.4; margin-top:2px}
+.sc{display:inline-block; min-width:26px; text-align:center; font:600 11px var(--mono); border-radius:3px; padding:1px 4px}
+.sc.sp{color:var(--coop); border:1px solid var(--coop)} .sc.sp2{background:var(--coop); color:var(--panel)}
+.sc.sn{color:var(--conflict); border:1px solid var(--conflict)} .sc.sn2{background:var(--conflict); color:var(--panel)}
+.sc.sz{color:var(--muted); border:1px solid var(--line)}
+.divs{display:grid; gap:10px}
+.dv{border:1px solid var(--line); border-left:3px solid var(--l3); border-radius:6px; padding:12px; display:grid; gap:8px}
+.dv .hd{display:flex; gap:8px; align-items:baseline} .dv .hd .id{font:600 12px var(--mono); color:var(--l3)} .dv .hd b{font-size:14px}
+.dv dl{margin:0; display:grid; grid-template-columns:118px 1fr; gap:6px 10px; font-size:12.5px}
+.dv dt{color:var(--muted); font-weight:600} .dv dd{margin:0; color:var(--ink-2)} .dv dd.cl{color:var(--ink); font-weight:600}
+@media (max-width:560px){.dv dl{grid-template-columns:1fr}}
+.rng{font-size:11px; color:var(--muted)}
+.conf.val{color:var(--l3)}
+.intent{margin:0 12px 12px; border-top:1px dashed var(--line); padding-top:10px; display:grid; gap:8px}
+.intent .ih{display:flex; gap:10px; align-items:center; flex-wrap:wrap} .intent .ih b{font-size:13px}
+.intent td{font-size:12px} .intent td:nth-child(2),.intent td:nth-child(3){white-space:nowrap} .intent .ir{margin:0; font-size:12.5px; color:var(--ink)}
+.sw{display:inline-block; font:600 10px var(--sans); border-radius:3px; padding:1px 6px; white-space:nowrap}
+.sw.said{border:1px solid var(--muted); color:var(--ink-2)} .sw.did{background:var(--ink); color:var(--panel)}
+.fit{display:inline-block; font:600 11px var(--sans); border-radius:4px; padding:1px 7px; white-space:nowrap}
+.fit.ok{background:var(--coop); color:var(--panel)} .fit.part{border:1px solid var(--accent); color:var(--accent)} .fit.no{background:var(--conflict); color:var(--panel)}
+.case-sw{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 4px}
+.case-sw button{border:1px solid var(--line); background:var(--panel); border-radius:6px; padding:6px 12px; font:600 13px var(--sans); cursor:pointer; color:var(--ink-2)}
+.case-sw button[aria-selected="true"]{background:var(--ink); color:var(--panel); border-color:var(--ink)}
+.cases{display:grid; gap:10px}
+.case{border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:6px; padding:12px; display:grid; gap:8px; background:var(--panel)}
+.case b{font-size:14px} .case ol{margin:0; padding-left:18px; display:grid; gap:4px; font-size:12.5px; color:var(--ink-2)}
+.case .chip{justify-self:start}
+.intent-c td{font-size:12px} .intent-c td:nth-child(2),.intent-c td:nth-child(3){white-space:nowrap}
+.swap{border:1px dashed var(--accent); border-radius:8px; padding:12px}
+.counter{border:1px dashed var(--conflict); border-radius:8px; padding:12px}
+/* v2.7 */
+.insights{margin:0; padding-left:22px; display:grid; gap:14px}
+.insights li{font:600 15px/1.6 var(--sans); color:var(--ink)} .insights li::marker{color:var(--accent); font-family:var(--mono)}
+.insights li p{margin:0}
+.brief{border:1px solid var(--accent); border-radius:10px; padding:14px; background:var(--accent-soft)}
+.brief .tw{grid-template-columns:118px 1fr} .brief dd.ba{color:var(--ink); font-weight:600}
+details.full{border-top:2px solid var(--line); padding-top:12px}
+details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)}
+.full-body{display:grid; gap:22px; margin-top:16px}
+.layer-sw{display:flex; flex-wrap:wrap; gap:6px}
+.back{justify-self:start}
+@media (max-width:560px){.brief .tw{grid-template-columns:1fr}}
+.dv.chk-ok{border-left-color:var(--coop)} .dv.chk-fix{border-left-color:var(--accent)} .dv.chk-no{border-left-color:var(--conflict)} .dv.chk-ok .id,.dv.chk-fix .id,.dv.chk-no .id{color:var(--ink)}
+.aibox{border:1px solid var(--l3); border-radius:8px; padding:12px; display:grid; gap:10px; margin-top:6px}
+.aih{display:flex; gap:8px; align-items:center; flex-wrap:wrap} .aih b{font-size:15px}
+.aitag{font:600 11px var(--mono); color:var(--panel); background:var(--l3); border-radius:4px; padding:1px 7px}
+.twoway{border:2px solid var(--ink); border-radius:8px; padding:12px; background:var(--panel)}
+.tw{margin:0; display:grid; grid-template-columns:96px 1fr; gap:8px 12px; font-size:13px}
+.tw dt{font-weight:700; color:var(--ink)} .tw dd{margin:0; color:var(--ink-2); line-height:1.6} .tw dd ul{margin:0; padding-left:16px; display:grid; gap:4px}
+@media (max-width:560px){.tw{grid-template-columns:1fr}}
+.concl{display:grid; gap:10px; border:1px solid var(--accent); border-radius:10px; padding:14px; background:var(--accent-soft)}
+.concl h3{margin:0}
+.concl ol{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.concl li{display:grid; grid-template-columns:34px 1fr; gap:8px; align-items:start}
+.concl .cid{font:600 12px var(--mono); color:var(--accent)}
+.concl .ct{font-weight:700; line-height:1.5; color:var(--ink)}
+.concl .cm{display:grid; gap:3px; font-size:12px; color:var(--ink-2); margin-top:4px}
+.concl .cm span b{color:var(--muted); font-weight:600; margin-right:4px}
+.conf{display:inline-block; font:600 11px var(--mono); border-radius:4px; padding:0 6px; margin-left:6px; border:1px solid currentColor; vertical-align:1px}
+.conf.hi{color:var(--coop)} .conf.mid{color:var(--accent)} .conf.lo{color:var(--conflict)}
+.wbt{display:grid; gap:0; font-size:12px; overflow-x:auto}
+.wbt table{border-collapse:collapse; width:100%; min-width:520px; font-size:12px}
+.wbt th,.wbt td{border-bottom:1px solid var(--line); padding:7px 6px; text-align:left; vertical-align:middle}
+.wbt th{color:var(--muted); font-weight:600}
+.wbt td.g b{display:block; font-size:13px} .wbt td.g span{color:var(--muted)}
+.bar{display:grid; grid-template-columns:34px 1fr; gap:6px; align-items:center; min-width:96px}
+.bar b{font:500 12px var(--mono); text-align:right; font-variant-numeric:tabular-nums}
+.bar i{display:block; height:8px; border-radius:4px; background:var(--line); position:relative; overflow:hidden}
+.bar i::after{content:""; position:absolute; inset:0 auto 0 0; width:var(--w); background:var(--accent); border-radius:4px}
+.bar.na b{color:var(--muted); font-family:inherit; font-size:11px; text-align:left; grid-column:1/-1}
+.bar.na i{display:none}
+.est{font-size:10px; color:var(--muted); border:1px dashed var(--muted); border-radius:3px; padding:0 3px; margin-left:4px}
+.pstack{display:grid; gap:6px}
+.prow{display:grid; grid-template-columns:78px 1fr; gap:8px; align-items:center; font-size:12px; color:var(--ink-2)}
+.pbar{display:flex; height:22px; gap:2px}
+.pbar i{display:flex; align-items:center; justify-content:center; font:600 11px var(--mono); color:#fff; font-style:normal; border-radius:3px; min-width:0; overflow:hidden; white-space:nowrap}
+.futs{display:grid; gap:12px}
+.fut{border:1px solid var(--line); border-left:4px solid var(--c); border-radius:8px; padding:12px; display:grid; gap:8px}
+.fut .hd{display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+.fut .hd .id{font:600 12px var(--mono); color:var(--c)}
+.fut .hd b{font-size:15px}
+.fut .hd .pp{margin-left:auto; font:500 13px var(--mono); color:var(--ink-2)}
+.fut p{margin:0; font-size:13px; color:var(--ink-2); line-height:1.6}
+.fut .tst{font-size:12px; border-left:2px solid var(--line); padding-left:8px}
+.dl{font:500 11px var(--mono); margin-left:4px} .dl.up{color:var(--coop)} .dl.dn{color:var(--conflict)} .dl.eq{color:var(--muted)}
+.mflow{display:grid; grid-template-columns:repeat(4,1fr); gap:6px}
+.mflow div{border:1px solid var(--line); border-radius:8px; padding:10px; display:grid; gap:2px; position:relative}
+.mflow b{font-size:11px; color:var(--accent); font-family:var(--mono)} .mflow span{font-weight:700; font-size:13px} .mflow small{font-size:11px; color:var(--muted)}
+@media (max-width:640px){.mflow{grid-template-columns:1fr 1fr}}
+.mstep{border:1px solid var(--line); border-radius:8px; margin:0}
+.mstep summary{cursor:pointer; padding:10px 12px; display:flex; gap:10px; align-items:center; list-style:none}
+.mstep summary::-webkit-details-marker{display:none}
+.mstep summary i{flex:none; width:22px; height:22px; border-radius:50%; background:var(--ink); color:var(--panel); font:600 11px/22px var(--mono); text-align:center; font-style:normal}
+.mstep summary b{font-size:14px}
+.mstep summary em{margin-left:auto; font-style:normal; font-size:11px; color:var(--muted)}
+.mstep dl{margin:0; padding:0 12px 12px 44px; display:grid; grid-template-columns:72px 1fr; gap:6px 10px; font-size:12.5px}
+.mstep dt{color:var(--muted); font-weight:600} .mstep dd{margin:0; color:var(--ink-2)} .mstep dd ul{margin:0; padding-left:16px}
+.mstep dd.bad{color:var(--conflict)}
+@media (max-width:560px){.mstep dl{padding-left:12px; grid-template-columns:1fr} .mstep dt{margin-top:4px}}
+.tmpl{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.tmpl>div{border:1px solid var(--line); border-radius:8px; padding:12px; font-size:12.5px}
+.tmpl b{display:block; font-size:14px; margin-bottom:4px} .tmpl p{margin:0 0 6px; color:var(--ink-2)} .tmpl ol{margin:0; padding-left:18px; display:grid; gap:4px; color:var(--ink-2)}
+.idim{display:grid; gap:10px}
+.idim>div{border-top:1px solid var(--line); padding-top:10px; display:grid; gap:4px; font-size:12.5px}
+.idim b{font-size:14px} .idim code{font:500 12px var(--mono); color:var(--accent); background:var(--panel-2); padding:2px 6px; border-radius:4px; white-space:normal}
+.idim ul{margin:2px 0 0; padding-left:18px; color:var(--ink-2)} .idim small{color:var(--muted)}
+.altc{border:1px solid var(--line); border-radius:8px; padding:12px; display:grid; gap:8px}
+.altc .hd{display:flex; gap:8px; align-items:baseline}
+.altc .hd b{font-size:14px}
+.altc .id{font:600 11px var(--mono); color:var(--accent); border:1px solid var(--accent); border-radius:4px; padding:0 6px}
+.altc dl{margin:0; display:grid; grid-template-columns:78px 1fr; gap:4px 10px; font-size:12px}
+.altc dt{color:var(--muted)}
+.altc dd{margin:0; color:var(--ink-2)}
+.altc .lose{font-size:12px; color:var(--conflict)}
+.tbl-wrap{overflow-x:auto}
+.tbl{border-collapse:collapse; font-size:12px; width:100%; min-width:360px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line); padding:6px 6px; text-align:left; vertical-align:top}
+.tbl th{color:var(--muted); font-weight:600}
+.pass{color:var(--coop); font-weight:600} .fail{color:var(--conflict); font-weight:600} .cond{color:var(--accent); font-weight:600}
+.verdict{display:grid; gap:8px}
+.verdict .rk{display:grid; grid-template-columns:78px 1fr; gap:8px; font-size:13px; align-items:start}
+.verdict .rk b{font:600 12px var(--mono); color:var(--accent)}
+@media (max-width: 960px){
+  .app{height:auto; grid-template-rows:auto auto}
+  .stage{grid-template-columns:1fr}
+  .globe-wrap{height:min(60svh,560px); min-height:360px}
+  .panel{max-height:none}
+  .pane{overflow:visible}
+  .offmap{max-width:none; left:12px; right:12px; bottom:auto; top:auto; justify-content:flex-start; position:absolute; bottom:12px}
+  .legend{display:none}
+  .readout{display:none}
+  .lensbar{left:56px; max-width:calc(100% - 68px)}
+}
+@media (max-width: 480px){
+  .seg button{padding:6px 8px}
+  .brand h1{font-size:21px}
+}
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
+/* v3.3 */
+.panel{position:relative}
+.tabs .wide-btn{margin-left:auto; color:var(--muted); font-size:12px; border-bottom-color:transparent!important}
+.tabs .wide-btn[aria-pressed="true"]{color:var(--accent); font-weight:600}
+.app.wide .stage{grid-template-columns:minmax(0,1fr) min(780px,58vw)}
+.site-foot{border-top:1px solid var(--line); padding-top:16px; display:grid; gap:10px; font-size:12.5px; line-height:1.65; color:var(--muted)}
+.site-foot p{margin:0}
+.site-foot .fb{color:var(--ink-2)}
+.mailrow{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px}
+.mail{font:600 13px var(--mono); color:var(--ink); user-select:all; -webkit-user-select:all; word-break:break-all}
+.mail a{color:inherit; text-decoration:none; border-bottom:1px solid var(--line)}
+.copy-btn{border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:2px 10px; font-size:11.5px; cursor:pointer; color:var(--ink-2)}
+.copy-btn:hover{border-color:var(--ink-2)}
+.copy-btn:focus-visible,.tabs button:focus-visible,.totop:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.case-fb{border:1px dashed var(--line); border-radius:8px; padding:12px 14px; display:grid; gap:6px; font-size:13px; color:var(--ink-2)}
+.case-fb b{color:var(--ink); font-size:13px}
+.totop{position:absolute; right:14px; bottom:14px; z-index:6; border:1px solid var(--line); background:var(--panel); color:var(--ink-2); border-radius:999px; padding:7px 13px; font-size:12px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.insights li{font:400 15px/1.75 var(--sans)!important; color:var(--ink-2)}
+.insights li p b{color:var(--ink); font-weight:700}
+@media (max-width: 960px){
+  .tabs .wide-btn{display:none}
+  .globe-wrap{height:min(48svh,440px)!important; min-height:300px!important}
+  .panel{overflow:visible}
+  .tabs{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--panel); border-radius:10px 10px 0 0}
+  .totop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px))}
+}
+@media (max-width: 480px){
+  .tabs{padding:0 2px; gap:0}
+  .tabs button{padding:12px 7px 10px; font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <h1>클리사 지오폴리틱스</h1><span class="en">Clisa Geopolitics</span>
+      <span class="asof">기준일 <b id="asof">2026-09-26</b> · <span id="ver">v0.1</span></span>
+    </div>
+    <div class="toggles">
+      <label class="tg"><input type="checkbox" id="tg-fp" checked><span>분쟁지</span></label>
+      <label class="tg"><input type="checkbox" id="tg-edge" checked><span>연결망</span></label>
+    </div>
+  </header>
+
+  <main class="stage">
+    <section class="globe-wrap" id="wrap" aria-label="세계 지구본. 끌어서 자유롭게 회전, 스크롤이나 두 손가락으로 확대">
+      <canvas id="base" aria-hidden="true"></canvas>
+      <canvas id="over" role="img" aria-label="세계 지구본"></canvas>
+      <div class="loading" id="loading">지구본을 불러오는 중</div>
+      <div class="ctl">
+        <button type="button" id="zin" aria-label="확대">+</button>
+        <button type="button" id="zout" aria-label="축소">−</button>
+        <button type="button" id="zreset" aria-label="처음 시점으로">⌂</button>
+      </div>
+      <div class="lensbar" id="lensbar" hidden><span id="lensname"></span><button type="button" id="lensoff">관점 해제</button></div>
+      <div class="readout" id="readout"></div>
+      <div class="legend" id="legend"></div>
+      <div class="offmap" id="offmap">
+        <span class="lbl">국가 밖 행위자</span>
+        <button type="button" class="chip t1" data-iso="EUR">EU·NATO</button>
+      </div>
+      <div class="tip" id="tip" hidden></div>
+    </section>
+
+    <aside class="panel" id="panel">
+      <nav class="tabs" role="tablist" aria-label="패널">
+        <button type="button" role="tab" id="tab-overview" data-tab="overview" aria-selected="true">현재 정세</button>
+        <button type="button" role="tab" id="tab-discuss" data-tab="discuss" aria-selected="false">논의</button>
+        <button type="button" role="tab" id="tab-strat" data-tab="strat" aria-selected="false">전략 분석</button>
+        <button type="button" role="tab" id="tab-grand" data-tab="grand" aria-selected="false">국제 질서</button>
+        <button type="button" role="tab" id="tab-forecast" data-tab="forecast" aria-selected="false">전망과 검증</button>
+        <button type="button" role="tab" id="tab-method" data-tab="method" aria-selected="false">분석 방법</button>
+        <button type="button" class="wide-btn" id="widebtn" aria-pressed="false" title="오른쪽 읽기 영역을 넓힌다">넓게 읽기</button>
+      </nav>
+      <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
+      <div class="pane" id="pane-overview" role="tabpanel"></div>
+      <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-detail" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-grand" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-strat" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-forecast" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-method" role="tabpanel" hidden></div>
+    </aside>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const narrow = () => matchMedia("(max-width: 960px)").matches;
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+
+const LAYERS = {
+  focus:{label:"분석 대상 지역", desc:"짙을수록 해당 국가가 관련된 전략 분석과 전망이 많다."},
+  risk:{label:"위험도", desc:"판단 점수. 높을수록 무력 충돌이나 체제 불안의 위험이 크다."},
+  mil:{label:"군사력", desc:"판단 점수. 세계 기준(미국 = 100)의 상대적 군사 능력."},
+  pol:{label:"정치 안정", desc:"판단 점수. 높을수록 정권과 정책 방향이 안정적이다."},
+  econ:{label:"경제 비중", desc:"판단 점수. 경제 규모와 충격에 대한 회복력."}
+};
+const JLAYERS = ["risk", "mil", "pol", "econ"];
+const TAB_ALIAS = {philo:"method", shelf:"method", history:"method", exit:"strat"};
+let FOCUS = {}, FCN = {};
+const LENS_NAME = {mackinder:"매킨더의 심장지대", spykman:"스파이크먼의 림랜드", mao:"마오의 지구전", kissinger:"키신저의 삼각외교", lky:"리콴유의 균형론", brzezinski:"브레진스키의 반패권 연합", allison:"앨리슨의 투키디데스 함정"};
+const LABEL_AT = {USA:[-98,39], CAN:[-100,58], FRA:[2.5,46.6], NOR:[9,61.5], ESP:[-3.7,40.3], NLD:[5.5,52.2], DNK:[9.3,56], CHL:[-71,-33], RUS:[98,62], AUS:[134,-25], CHN:[103,34], IND:[79,22], KAZ:[67,48], MNG:[103,46.5], IRN:[54,32.5], SAU:[45,24], TUR:[35,39], PAK:[69,29.5], IDN:[114,-1.5], PHL:[122.5,12], VNM:[106.3,15.5], TWN:[121,23.7], JPN:[138.5,36.8], KOR:[127.9,36.3], PRK:[126.8,40.3], UKR:[31.5,49], BLR:[28,53.5], ISR:[34.9,31.2]};
+const HOME = [-95, -28, 0], HOME_K = 1;
+const REGIONS = ["동아시아","동남아시아","남아시아","중앙아시아·내륙","러시아·동유럽","캅카스·아나톨리아","중동·북아프리카","유럽","북미","중남미","아프리카","오세아니아"];
+
+const S = { layer: store.get("ep.layer2") || "focus", prevTab: "overview", showFp:true, showEdge:true, sel:null, selFp:null, lens:null, hover:null, hoverFp:null, rot:HOME.slice(), k:HOME_K, tab:"overview", scase: null };
+if (!LAYERS[S.layer]) S.layer = "focus";
+let D = null, features = [], byIso = {}, borders = null, C = {}, labelPos = {};
+const grat = d3.geoGraticule10();
+const wrap = $("#wrap"), base = $("#base"), over = $("#over");
+const bctx = base.getContext("2d"), octx = over.getContext("2d");
+const projection = d3.geoOrthographic().clipAngle(90).precision(0.4);
+const pathB = d3.geoPath(projection, bctx), pathO = d3.geoPath(projection, octx);
+let W = 0, H = 0, R0 = 1, dpr = 1, dragging = false;
+
+/* ---------- colours ---------- */
+function readColors(){
+  const cs = getComputedStyle(document.documentElement);
+  const g = n => cs.getPropertyValue("--" + n).trim();
+  C = { ocean:g("ocean"), ocean2:g("ocean-2"), grat:g("grat"), landOut:g("land-out"), border:g("border"), ink:g("ink"), muted:g("muted"),
+        line:g("line"), accent:g("accent"), coop:g("coop"), conflict:g("conflict"), halo:g("halo"), panel2:g("panel-2") };
+  for (const k of Object.keys(LAYERS)) C[k] = d3.interpolateLab(g(k + "-0"), g(k + "-1"));
+}
+const ramp = (layer, v) => C[layer](Math.max(0, Math.min(100, v)) / 100);
+
+/* ---------- formatting ---------- */
+function fmtUsdBn(bn){
+  if (bn == null) return "—";
+  const eok = Math.round(bn * 10);
+  if (eok >= 10000) { const jo = Math.floor(eok / 10000), r = eok % 10000; return jo + "조" + (r ? " " + r.toLocaleString("ko-KR") + "억" : "") + " 달러"; }
+  return Math.max(1, eok).toLocaleString("ko-KR") + "억 달러";
+}
+const fmtPeople = n => n == null ? "—" : (n >= 10000 ? (Math.round(n / 1000) / 10).toLocaleString("ko-KR") + "만 명" : n.toLocaleString("ko-KR") + "명");
+const fmtPct = v => v == null ? "—" : (v > 0 ? "+" : "") + v.toFixed(1) + "%";
+const fmtDeg = (v, pos, neg) => Math.abs(v).toFixed(1) + "°" + (v >= 0 ? pos : neg);
+const pips = n => '<span class="pips" aria-label="심각도 ' + n + '/5">' + [1,2,3,4,5].map(i => '<i class="' + (i <= n ? "on" : "") + '"></i>').join("") + "</span>";
+const shortLeader = s => String(s || "").split(" (")[0].split(", ")[0];
+const chip = iso => { const c = D.countries[iso]; return c ? '<button type="button" class="chip' + (c.tier === 1 ? " t1" : "") + '" data-iso="' + iso + '">' + esc(c.name_ko) + "</button>" : ""; };
+function srcItem(s){
+  const url = String(s).split(" ")[0], note = String(s).slice(url.length).trim();
+  let host = url; try { host = new URL(url).hostname.replace(/^www\./, ""); } catch(e){}
+  return '<li><a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(host) + "</a>" + (note ? " " + esc(note) : "") + "</li>";
+}
+
+/* ---------- load ---------- */
+Promise.all([
+  fetch("data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+  fetch("data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+]).then(([d, w]) => init(d, w)).catch(err => {
+  console.error(err);
+  $("#loading").textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
+});
+
+const PUB = () => !!(D && D.meta && D.meta.edition === "public");
+function init(d, w){
+  D = d;
+  $("#asof").textContent = D.meta.asof; $("#ver").textContent = PUB() ? "" : D.meta.version;
+  if (PUB()) { const tb = $("#tab-discuss"); if (tb) tb.remove(); const v = $("#ver"); if (v && v.previousSibling) v.previousSibling.textContent = v.previousSibling.textContent.replace(" · ", ""); }
+  else { const b = document.createElement("span"); b.className = "edtag"; b.textContent = ""; $(".brand").appendChild(b); }
+  const numToIso = {};
+  for (const [iso, c] of Object.entries(D.countries)) if (c.num) numToIso[c.num] = iso;
+  features = topojson.feature(w, w.objects.countries).features;
+  for (const f of features) { f.iso = numToIso[+f.id] || null; if (f.iso) byIso[f.iso] = f; }
+  features.sort((a, b) => (a.iso ? 1 : 0) - (b.iso ? 1 : 0));
+  borders = topojson.mesh(w, w.objects.countries, (a, b) => a !== b);
+  for (const iso of Object.keys(byIso)) labelPos[iso] = LABEL_AT[iso] || d3.geoCentroid(byIso[iso]);
+  D.flashpoints.forEach((fp, i) => fp.phase = (i * 0.137) % 1);
+  const addF = (iso, v) => { FOCUS[iso] = (FOCUS[iso] || 0) + v; };
+  D.forecasts.forEach(f => f.countries.forEach(i => { addF(i, 1); FCN[i] = (FCN[i] || 0) + 1; }));
+  D.flashpoints.forEach(fp => fp.countries.forEach(i => addF(i, 1)));
+  (D.strategies || []).forEach(c => { (c.deciders ? c.deciders.items : []).forEach(d => addF(d.iso, 3)); const r = String(c.recipient || ""); addF(r.includes("우크라이나") ? "UKR" : r.includes("대만") ? "TWN" : "KOR", 3); });
+  const fmx = Math.max(1, ...Object.values(FOCUS)); for (const k of Object.keys(FOCUS)) FOCUS[k] = Math.round(100 * Math.sqrt(FOCUS[k] / fmx));
+  $("#loading").remove();
+  readColors(); setupInteraction(); resize();
+  new ResizeObserver(resize).observe(wrap);
+  const mq = matchMedia("(prefers-color-scheme: dark)");
+  const retheme = () => { readColors(); renderLegend(); requestDraw(true); renderOverview(); renderGrand(); if (S.tab === "detail") renderDetail(); };
+  mq.addEventListener ? mq.addEventListener("change", retheme) : mq.addListener(retheme);
+  new MutationObserver(retheme).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+  setLayer(S.layer);
+  renderOverview(); renderDetail(); renderGrand(); renderDiscuss(); renderForecasts(); renderStrat(); renderMethod();
+  const t = store.get("ep.tab"); if (t && t !== "detail") switchTab(t);
+  applyHash(); HASH_READY = true;
+  loop();
+}
+
+/* ---------- drawing ---------- */
+function resize(){
+  const r = wrap.getBoundingClientRect();
+  W = r.width; H = r.height; dpr = Math.min(2, window.devicePixelRatio || 1);
+  for (const [c, ctx] of [[base, bctx], [over, octx]]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  R0 = Math.min(W, H) * (narrow() ? 0.47 : 0.45);
+  requestDraw(true);
+}
+function proj(){ projection.translate([W / 2, H / 2]).scale(R0 * S.k).rotate(S.rot); }
+const center = () => { proj(); const c = projection.invert([W / 2, H / 2]); return (c && isFinite(c[0])) ? c : [-S.rot[0], -S.rot[1]]; };
+/* versor: quaternion trackball rotation (after Mike Bostock's versor) */
+const versor = (function(){
+  const acos = Math.acos, asin = Math.asin, atan2 = Math.atan2, cos = Math.cos, sin = Math.sin, sqrt = Math.sqrt, max = Math.max, min = Math.min, rad = Math.PI / 180, deg = 180 / Math.PI;
+  function v(e){ const l = e[0] / 2 * rad, sl = sin(l), cl = cos(l), p = e[1] / 2 * rad, sp = sin(p), cp = cos(p), g = (e[2] || 0) / 2 * rad, sg = sin(g), cg = cos(g);
+    return [cl * cp * cg + sl * sp * sg, sl * cp * cg - cl * sp * sg, cl * sp * cg + sl * cp * sg, cl * cp * sg - sl * sp * cg]; }
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  v.cartesian = e => { const l = e[0] * rad, p = e[1] * rad, cp = cos(p); return [cp * cos(l), cp * sin(l), sin(p)]; };
+  v.rotation = q => [atan2(2 * (q[0] * q[1] + q[2] * q[3]), 1 - 2 * (q[1] * q[1] + q[2] * q[2])) * deg,
+                     asin(max(-1, min(1, 2 * (q[0] * q[2] - q[3] * q[1])))) * deg,
+                     atan2(2 * (q[0] * q[3] + q[1] * q[2]), 1 - 2 * (q[2] * q[2] + q[3] * q[3])) * deg];
+  v.delta = (v0, v1) => { const w = cross(v0, v1), l = sqrt(dot(w, w)); if (!l) return [1, 0, 0, 0];
+    const t = acos(max(-1, min(1, dot(v0, v1)))) / 2, s = sin(t); return [cos(t), w[2] / l * s, -w[1] / l * s, w[0] / l * s]; };
+  v.multiply = (a, b) => [a[0] * b[0] - a[1] * b[1] - a[2] * b[2] - a[3] * b[3], a[0] * b[1] + a[1] * b[0] + a[2] * b[3] - a[3] * b[2],
+                          a[0] * b[2] - a[1] * b[3] + a[2] * b[0] + a[3] * b[1], a[0] * b[3] + a[1] * b[2] - a[2] * b[1] + a[3] * b[0]];
+  return v;
+})();
+
+function fillFor(f){
+  const c = f.iso && D.countries[f.iso];
+  if (!c) return C.landOut;
+  const col = ramp(S.layer, S.layer === "focus" ? (FOCUS[f.iso] || 0) : (c.scores ? c.scores[S.layer] : 50));
+  if (S.lens && !S.lens.set.has(f.iso)) return d3.interpolateLab(col, C.landOut)(0.78);
+  return col;
+}
+function drawBase(){
+  proj();
+  bctx.clearRect(0, 0, W, H);
+  const r = R0 * S.k, cx = W / 2, cy = H / 2;
+  const g = bctx.createRadialGradient(cx - r * 0.3, cy - r * 0.35, r * 0.05, cx, cy, r);
+  g.addColorStop(0, C.ocean); g.addColorStop(1, C.ocean2);
+  bctx.beginPath(); pathB({type:"Sphere"}); bctx.fillStyle = g; bctx.fill();
+  bctx.beginPath(); pathB(grat); bctx.strokeStyle = C.grat; bctx.lineWidth = 0.6; bctx.stroke();
+  for (const f of features) { bctx.beginPath(); pathB(f); bctx.fillStyle = fillFor(f); bctx.fill(); }
+  bctx.beginPath(); pathB(borders); bctx.strokeStyle = C.border; bctx.lineWidth = 0.5; bctx.stroke();
+  if (S.hover && byIso[S.hover] && S.hover !== S.sel) { bctx.beginPath(); pathB(byIso[S.hover]); bctx.strokeStyle = C.ink; bctx.lineWidth = 1.2; bctx.stroke(); }
+  if (S.sel && byIso[S.sel]) { bctx.beginPath(); pathB(byIso[S.sel]); bctx.strokeStyle = C.accent; bctx.lineWidth = 2.4; bctx.stroke(); }
+  bctx.beginPath(); pathB({type:"Sphere"}); bctx.strokeStyle = C.line; bctx.lineWidth = 1; bctx.stroke();
+  const cc = center(); $("#readout").textContent = "중심 " + fmtDeg(cc[0], "E", "W") + " " + fmtDeg(cc[1], "N", "S") + " · " + S.k.toFixed(1) + "×";
+}
+function edgeRelevant(e){
+  if (!S.lens) return true;
+  const capIso = k => (D.capitals[k] || [])[3];
+  return S.lens.set.has(capIso(e.a)) && S.lens.set.has(capIso(e.b));
+}
+function drawOver(t){
+  proj();
+  octx.clearRect(0, 0, W, H);
+  const ctr = center();
+  if (S.showEdge) {
+    for (const e of D.edges) {
+      const a = D.capitals[e.a], b = D.capitals[e.b];
+      const ls = {type:"LineString", coordinates:[[a[0], a[1]], [b[0], b[1]]]};
+      const alpha = edgeRelevant(e) ? 1 : 0.2;
+      octx.setLineDash([]); octx.globalAlpha = 0.75 * alpha; octx.strokeStyle = C.halo; octx.lineWidth = 3.6;
+      octx.beginPath(); pathO(ls); octx.stroke();
+      octx.globalAlpha = alpha; octx.lineWidth = 1.7;
+      octx.setLineDash(e.kind === "conflict" ? [5, 4] : []);
+      octx.strokeStyle = e.kind === "conflict" ? C.conflict : C.coop;
+      octx.beginPath(); pathO(ls); octx.stroke();
+    }
+    octx.setLineDash([]); octx.globalAlpha = 1;
+  }
+  octx.font = '500 11px "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif';
+  octx.textAlign = "center"; octx.textBaseline = "middle"; octx.lineJoin = "round";
+  for (const iso of Object.keys(labelPos)) {
+    const c = D.countries[iso];
+    if (!c || (c.tier !== 1 && S.k < 1.7)) continue;
+    const ll = labelPos[iso];
+    if (d3.geoDistance(ll, ctr) > 1.38) continue;
+    const p = projection(ll); if (!p) continue;
+    const dim = S.lens && !S.lens.set.has(iso);
+    octx.globalAlpha = dim ? 0.45 : 1;
+    octx.lineWidth = 3; octx.strokeStyle = C.halo; octx.strokeText(c.name_ko, p[0], p[1]);
+    octx.fillStyle = C.ink; octx.fillText(c.name_ko, p[0], p[1]);
+  }
+  octx.globalAlpha = 1;
+  if (S.showFp) {
+    for (const fp of D.flashpoints) {
+      fp._p = null;
+      const ll = [fp.lon, fp.lat];
+      if (d3.geoDistance(ll, ctr) > 1.52) continue;
+      const p = projection(ll); if (!p) continue;
+      fp._p = p;
+      const rad = 2.6 + fp.severity * 1.15;
+      const dim = S.lens && !S.lens.fpAll && !fp.countries.some(c => S.lens.set.has(c));
+      octx.globalAlpha = dim ? 0.3 : 1;
+      if (!reduceMotion && fp.severity >= 4 && !dim) {
+        const ph = ((t || 0) / 1800 + fp.phase) % 1;
+        octx.beginPath(); octx.arc(p[0], p[1], rad + ph * rad * 2.4, 0, Math.PI * 2);
+        octx.strokeStyle = C.conflict; octx.globalAlpha = (1 - ph) * 0.55; octx.lineWidth = 1.2; octx.stroke();
+        octx.globalAlpha = 1;
+      }
+      octx.beginPath(); octx.arc(p[0], p[1], rad, 0, Math.PI * 2);
+      octx.fillStyle = C.conflict; octx.fill(); octx.lineWidth = 1.6; octx.strokeStyle = C.halo; octx.stroke();
+      if (fp.id === S.selFp || fp.id === S.hoverFp) {
+        octx.beginPath(); octx.arc(p[0], p[1], rad + 4.5, 0, Math.PI * 2);
+        octx.strokeStyle = C.accent; octx.lineWidth = 2; octx.stroke();
+      }
+      octx.globalAlpha = 1;
+    }
+  }
+}
+let needBase = true, scheduled = false, lastOver = 0;
+function requestDraw(all){
+  if (all !== false) needBase = true;
+  if (scheduled) return; scheduled = true;
+  requestAnimationFrame(t => { scheduled = false; if (!D) return; if (needBase) { drawBase(); needBase = false; } drawOver(t); lastOver = t; });
+}
+function loop(){
+  if (reduceMotion) return;
+  const tick = t => { if (D && S.showFp && !scheduled && t - lastOver > 33) { drawOver(t); lastOver = t; } requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+
+/* ---------- interaction ---------- */
+function hitTest(x, y){
+  if (S.showFp) {
+    let best = null, bd = 1e9;
+    for (const fp of D.flashpoints) { if (!fp._p) continue; const dd = Math.hypot(fp._p[0] - x, fp._p[1] - y); if (dd < 4 + fp.severity * 1.15 + 6 && dd < bd) { bd = dd; best = fp; } }
+    if (best) return {fp:best};
+  }
+  proj();
+  const ll = projection.invert([x, y]);
+  if (!ll || !isFinite(ll[0]) || !isFinite(ll[1]) || d3.geoDistance(ll, center()) > Math.PI / 2 - 0.01) return {};
+  for (let i = features.length - 1; i >= 0; i--) { const f = features[i]; if (d3.geoContains(f, ll)) return {iso:f.iso, f}; }
+  return {};
+}
+function setupInteraction(){
+  const sel = d3.select(over);
+  // wheel / pinch zoom only; one-finger or mouse drag rotates the globe freely (trackball)
+  const zoom = d3.zoom().scaleExtent([0.7, 10])
+    .filter(ev => ev.type === "wheel" || (ev.touches && ev.touches.length > 1))
+    .on("zoom", ev => { S.k = ev.transform.k; requestDraw(); });
+  sel.call(zoom).on("dblclick.zoom", null);
+  sel.call(zoom.transform, d3.zoomIdentity.scale(HOME_K));
+  let v0 = null, r0 = null, q0 = null;
+  const drag = d3.drag().clickDistance(4)
+    .filter(ev => (!ev.touches || ev.touches.length === 1) && !ev.button && !ev.ctrlKey)
+    .on("start", ev => {
+      proj();
+      const p = projection.invert([ev.x, ev.y]);
+      if (!p || !isFinite(p[0]) || d3.geoDistance(p, center()) > Math.PI / 2) { v0 = null; return; }
+      v0 = versor.cartesian(p); r0 = projection.rotate(); q0 = versor(r0);
+      dragging = true; hideTip();
+    })
+    .on("drag", ev => {
+      if (!v0) return;
+      const p = projection.rotate(r0).invert([ev.x, ev.y]);
+      if (!p || !isFinite(p[0]) || !isFinite(p[1])) return;
+      const q1 = versor.multiply(q0, versor.delta(v0, versor.cartesian(p)));
+      S.rot = versor.rotation(q1); requestDraw();
+    })
+    .on("end", () => { v0 = null; dragging = false; });
+  sel.call(drag);
+  $("#zin").onclick = () => sel.transition().duration(reduceMotion ? 0 : 250).call(zoom.scaleBy, 1.5);
+  $("#zout").onclick = () => sel.transition().duration(reduceMotion ? 0 : 250).call(zoom.scaleBy, 1 / 1.5);
+  $("#zreset").onclick = () => { flyTo(-HOME[0], -HOME[1], true); sel.transition().duration(reduceMotion ? 0 : 400).call(zoom.transform, d3.zoomIdentity.scale(HOME_K)); };
+
+  let hoverRaf = 0;
+  over.addEventListener("pointermove", ev => {
+    if (dragging || ev.pointerType === "touch") return;
+    const r = over.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top;
+    cancelAnimationFrame(hoverRaf);
+    hoverRaf = requestAnimationFrame(() => {
+      const h = hitTest(x, y);
+      const hv = h.fp ? null : (h.iso || null), hf = h.fp ? h.fp.id : null;
+      if (hv !== S.hover || hf !== S.hoverFp) { const baseChanged = hv !== S.hover; S.hover = hv; S.hoverFp = hf; requestDraw(baseChanged); }
+      showTip(h, x, y);
+    });
+  });
+  over.addEventListener("pointerleave", () => { S.hover = null; S.hoverFp = null; hideTip(); requestDraw(); });
+  over.addEventListener("click", ev => {
+    const r = over.getBoundingClientRect(); const h = hitTest(ev.clientX - r.left, ev.clientY - r.top);
+    if (h.fp) selectFp(h.fp.id, true);
+    else if (h.iso && D.countries[h.iso]) selectCountry(h.iso, true, true);
+  });
+
+  $("#tg-fp").onchange = e => { S.showFp = e.target.checked; renderLegend(); requestDraw(false); };
+  $("#tg-edge").onchange = e => { S.showEdge = e.target.checked; renderLegend(); requestDraw(false); };
+  $("#lensoff").onclick = () => setLens(null);
+  document.querySelectorAll(".tabs [data-tab]").forEach(b => b.onclick = () => switchTab(b.dataset.tab));
+  document.addEventListener("click", ev => {
+    const ly = ev.target.closest("[data-layer]");
+    if (ly) { setLayer(ly.dataset.layer); return; }
+    const m = ev.target.closest("[data-mx]");
+    if (m) { mxSel = m.dataset.mx.split("|"); document.querySelectorAll(".mx button.sel").forEach(x => x.classList.remove("sel")); m.classList.add("sel"); $("#dyad-box").innerHTML = dyadHtml(mxSel[0], mxSel[1]); return; }
+    const qb = ev.target.closest("[data-q]");
+    if (qb) { switchTab("grand"); const d = document.getElementById("pq-" + qb.dataset.q); if (d) { d.open = true; d.scrollIntoView({block:"start"}); } return; }
+    const cs = ev.target.closest("[data-case]");
+    if (cs) { S.scase = cs.dataset.case; renderStrat(); switchTab("strat"); return; }
+    const x = ev.target.closest("[data-exit]");
+    if (x) { const k = (D.strategies || []).find(c => c.fp === x.dataset.exit); if (k) { S.scase = k.id; renderStrat(); } switchTab("strat"); const fu = document.querySelector("#pane-strat details.full"); if (fu) fu.open = true; const d = document.getElementById("exc-" + x.dataset.exit); if (d) { d.open = true; d.scrollIntoView({block:"start"}); } return; }
+    const a = ev.target.closest("[data-iso],[data-fp],[data-lens],[data-go]");
+    if (!a) return;
+    if (a.dataset.iso) { const inMap = !!a.closest("#wrap"); selectCountry(a.dataset.iso, !inMap, inMap); }
+    else if (a.dataset.fp) selectFp(a.dataset.fp, false);
+    else if (a.dataset.lens) setLens(a.dataset.lens);
+    else if (a.dataset.go) switchTab(a.dataset.go);
+  });
+}
+function showTip(h, x, y){
+  const tip = $("#tip");
+  let html = "";
+  if (h.fp) html = "<b>" + esc(h.fp.name_ko) + "</b><br>" + pips(h.fp.severity) + ' <span class="m">심각도 ' + h.fp.severity + "/5</span><br><span class=\"m num\">" + esc(h.fp.last_major_event ? h.fp.last_major_event.date : "") + "</span> " + esc(h.fp.last_major_event ? h.fp.last_major_event.text : "");
+  else if (h.iso && D.countries[h.iso]) { const c = D.countries[h.iso]; html = "<b>" + esc(c.name_ko) + '</b> <span class="m">' + esc(c.region) + "</span><br>" + (S.layer === "focus" ? '관련 전망 <span class="num">' + (FCN[c.iso] || 0) + "</span>건" : LAYERS[S.layer].label + ' <span class="num">' + (c.scores ? c.scores[S.layer] : "—") + "</span>") + '<br><span class="m">' + esc(shortLeader(c.leader)) + "</span>"; }
+  else if (h.f) html = "<b>" + esc(h.f.properties.name) + '</b><br><span class="m">분석 범위 밖</span>';
+  if (!html) return hideTip();
+  tip.innerHTML = html; tip.hidden = false;
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  tip.style.left = Math.min(W - tw - 8, x + 14) + "px";
+  tip.style.top = Math.min(H - th - 8, y + 14) + "px";
+}
+function hideTip(){ $("#tip").hidden = true; }
+
+function flyTo(lon, lat, exact){
+  const c0 = center(), g0 = S.rot[2] || 0;
+  const c1 = [lon, Math.max(-80, Math.min(80, exact ? lat : lat * 0.85))];
+  if (reduceMotion) { S.rot = [-c1[0], -c1[1], 0]; requestDraw(); return; }
+  const gi = d3.geoInterpolate(c0, c1), t0 = performance.now();
+  const step = now => { const k = Math.min(1, (now - t0) / 900), e = d3.easeCubicInOut(k), c = gi(e); S.rot = [-c[0], -c[1], g0 * (1 - e)]; requestDraw(); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+function setLayer(l){
+  if (!LAYERS[l]) return;
+  S.layer = l; store.set("ep.layer2", l);
+  document.querySelectorAll("[data-layer]").forEach(b => { const on = b.dataset.layer === l; b.setAttribute("aria-checked", on); b.classList.toggle("on", on); });
+  renderLegend(); requestDraw(true);
+  const sb = document.getElementById("scorebox"); if (sb && D) sb.innerHTML = scoreBoxHtml();
+}
+function setLens(id){
+  if (!id || (S.lens && S.lens.id === id)) S.lens = null;
+  else { const t = D.thinkers.find(x => x.id === id); S.lens = {id, set:new Set(t.lens), fpAll:t.lens_fp === "all", off:t.lens_off || []}; }
+  $("#lensbar").hidden = !S.lens;
+  if (S.lens) $("#lensname").textContent = "관점 · " + LENS_NAME[S.lens.id];
+  document.querySelectorAll("#offmap [data-iso]").forEach(b => b.classList.toggle("on", !!(S.lens && S.lens.off.includes(b.dataset.iso))));
+  document.querySelectorAll(".lens-btn[data-lens]").forEach(b => { const on = !!(S.lens && S.lens.id === b.dataset.lens); b.setAttribute("aria-pressed", on); if (b.dataset.kind === "shelf") b.textContent = on ? "관점 끄기" : "지구본에서 보기 · " + LENS_NAME[b.dataset.lens]; });
+  requestDraw(true);
+}
+function selectCountry(iso, fly, fromMap){
+  if (!D.countries[iso]) return;
+  if (S.tab !== "detail") S.prevTab = S.tab;
+  S.sel = iso; S.selFp = null;
+  renderDetail(); switchTab("detail");
+  if (fly && byIso[iso]) { const p = labelPos[iso]; flyTo(p[0], p[1]); }
+  requestDraw(true);
+  if (narrow() && fromMap) $("#panel").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"start"});
+}
+function selectFp(id, fromMap){
+  const fp = D.flashpoints.find(f => f.id === id); if (!fp) return;
+  if (S.tab !== "detail") S.prevTab = S.tab;
+  S.selFp = id; S.sel = null;
+  renderDetail(); switchTab("detail");
+  flyTo(fp.lon, fp.lat); requestDraw(true);
+  if (narrow() && fromMap) $("#panel").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"start"});
+}
+function switchTab(t){
+  t = TAB_ALIAS[t] || t;
+  if (!document.getElementById("pane-" + t)) t = "overview";
+  S.tab = t; if (t !== "detail") store.set("ep.tab", t);
+  document.querySelectorAll(".tabs [data-tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
+  document.querySelectorAll(".pane").forEach(p => p.hidden = p.id !== "pane-" + t);
+  document.getElementById("pane-" + t).scrollTop = 0;
+}
+function renderLegend(){
+  if (!C.risk) return;
+  const L = LAYERS[S.layer], stops = [0, .25, .5, .75, 1].map(v => C[S.layer](v)).join(",");
+  const line = (col, dash) => '<svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>";
+  const tk = S.layer === "focus" ? "<span>적음</span><span></span><span>많음</span>" : "<span>0</span><span>50</span><span>100</span>";
+  $("#legend").innerHTML =
+    '<div><div class="lt">' + L.label + (S.layer === "focus" ? "" : ' <span class="mono" style="font-weight:400;color:var(--muted)">0–100</span>') + '</div><div class="ld">' + L.desc + "</div></div>" +
+    '<div class="ramp" style="background:linear-gradient(90deg,' + stops + ')"></div><div class="ticks">' + tk + "</div>" +
+    '<div class="keys">' +
+      (S.showEdge ? "<div>" + line(C.coop) + "협력·동맹</div><div>" + line(C.conflict, true) + "대립·교전</div>" : "") +
+      (S.showFp ? '<div><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.conflict + '" stroke="' + C.halo + '" stroke-width="1.5"/></svg>분쟁지 (크기 = 심각도)</div>' : "") +
+      '<div><svg width="26" height="10" aria-hidden="true"><rect x="3" y="1" width="20" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>분석 범위 밖</div>' +
+    "</div>";
+}
+function renderOverview(){
+  if (!D) return;
+  const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
+  const cs = D.strategies || [];
+  const up = D.forecasts.filter(f => f.status === "open").slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p).slice(0, 3);
+  $("#pane-overview").innerHTML =
+    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">주요 판단</h2><p class="meta" style="margin-top:4px">기준일 <span class="mono">' + esc(D.meta.asof) + '</span></p><p class="lead" style="margin-top:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시한다. 각 판단의 근거는 전략 분석에서, 그 검증은 전망과 검증에서 확인할 수 있다.</p></div>' +
+    ((D.insights || []).length ? '<ol class="insights">' + D.insights.map(k => { const c = cs.find(x => x.id === k.case); return "<li><p>" + leadBold(k.t) + '</p><div class="chips" style="margin-top:6px;align-items:center">' + (k.review ? '<span class="vd ok" title="분석 맥락을 공유하지 않는 검토자가 반대 선례와 가장 강한 반론을 찾는 절차">독립 반론 검토 · ' + esc(k.review) + "</span>" : "") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">근거 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + (k.fc || []).map(id => '<span class="mono note">' + esc(id) + "</span>").join(" ") + "</div></li>"; }).join("") + "</ol>" : "") +
+    (up.length ? '<section class="sec"><h3>다가오는 검증</h3><ul class="list">' + up.map(f => forecastRow(f, true)).join("") + '</ul><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기</button></p></section>' : "") +
+    '<section class="sec"><h3>정세 요약</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+    (cs.length ? '<section class="sec"><h3>전략 분석 사안</h3><div class="chips" style="margin:0">' + cs.map(c => '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(c.title.split(":")[0]) + "</button>").join("") + "</div></section>" : "") +
+    ((!PUB() && D.discuss && D.discuss.threads.length) ? '<section class="sec"><h3>진행 중인 논의</h3>' + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + esc(t.opened) + " 개설 · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
+    '<section class="sec"><h3>분쟁지 · 심각도 순</h3><ul class="list">' + fps.map(fp =>
+      '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(fp.last_major_event?.date || "") + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>" +
+    (PUB() ? "" : '<section class="sec"><h3></h3><ul class="tl">' + D.log.slice().reverse().map(l => '<li><span class="d">' + esc(l.date) + "</span><span><b>" + esc(l.ver) + "</b> " + esc(l.text) + ((l.details || []).length ? '<details class="src" style="margin-top:4px"><summary>수정 전후 ' + l.details.length + '건</summary><ul>' + l.details.map(x => '<li><span class="note">' + esc(x.where) + "</span><br>" + esc(x.before) + "<br>→ " + esc(x.after) + "</li>").join("") + "</ul></details>" : "") /* v3.2 */ + "</span></li>").join("") + "</ul></section>") +
+    '<p class="note">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토한다.</p>';
+}
+function forecastRow(f, compact){
+  const st = {open:["open","검증 전"], yes:["yes","실현"], no:["no","불발"], void:["void","무효"]}[f.status] || ["open","검증 전"];
+  return '<li><div class="fc"><div class="q">' + esc(f.q) + '</div><div class="p">' + f.p + '<small>%</small></div><div class="prob"><i style="width:' + f.p + '%"></i></div>' +
+    (compact ? "" : '<div class="b">' + esc(f.basis) + "</div>") + (f.void && !compact ? '<div class="vr">무효 처리 · ' + esc(f.void) + "</div>" : "") +
+    '<div class="foot"><span class="st ' + st[0] + '">' + st[1] + '</span><span>검증 시점 <span class="mono">' + esc(f.due) + "</span></span>" + (compact ? "" : '<span class="chips" style="margin:0">' + f.countries.map(chip).join("") + "</span>") + "</div></div></li>";
+}
+function renderDetail(){
+  const el = $("#pane-detail");
+  const back = '<button type="button" class="chip back" data-go="' + esc(S.prevTab || "overview") + '">← 이전 화면</button>';
+  if (S.selFp) {
+    const fp = D.flashpoints.find(f => f.id === S.selFp);
+    const fcs = D.forecasts.filter(f => f.fp === fp.id);
+    el.innerHTML =
+      back + '<div class="sec"><p class="eyebrow">분쟁지</p><h2 style="margin-top:4px">' + esc(fp.name_ko) + '</h2><p class="meta" style="margin-top:6px">' + pips(fp.severity) + " 심각도 " + fp.severity + '/5 · <span class="mono">' + fp.lat.toFixed(2) + "°, " + fp.lon.toFixed(2) + "°</span></p></div>" +
+      '<p class="lead">' + esc(fp.status_ko) + "</p>" +
+      (fp.last_major_event ? '<section class="sec"><h3>최근 주요 사건</h3><ul class="tl"><li><span class="d">' + esc(fp.last_major_event.date) + "</span><span>" + esc(fp.last_major_event.text) + "</span></li></ul></section>" : "") +
+      '<section class="sec"><h3>관련국</h3><div class="chips" style="margin:0">' + fp.countries.map(chip).join("") + "</div></section>" +
+      (fcs.length ? '<section class="sec"><h3>관련 전망</h3><ul class="list">' + fcs.map(f => forecastRow(f, true)).join("") + "</ul></section>" : "") +
+      ((D.strategies || []).some(c => c.fp === fp.id) ? '<section class="sec"><h3>전략 분석</h3>' + D.strategies.filter(c => c.fp === fp.id).map(c => '<p style="margin-bottom:6px">' + esc(c.title) + '</p><button type="button" class="chip" data-case="' + esc(c.id) + '">전략 분석 보기</button>').join("") + "</section>" : "") +
+      (exitCase(fp.id) ? '<section class="sec"><h3>각자의 눈과 출구</h3><div class="misread"><b>가장 위험한 오독</b>' + esc(exitCase(fp.id).misread) + '</div><p style="margin-top:8px"><button type="button" class="chip" data-exit="' + esc(fp.id) + '">당사자별 인식과 출구 보기</button></p></section>' : "") +
+      (FP_AN[fp.id] ? '<section class="sec"><h3>유사한 역사적 선례</h3>' + analogHtml(D.history.analogies.find(x => x.id === FP_AN[fp.id]), true) + "</section>" : "") +
+      '<details class="src"><summary>출처 ' + (fp.sources || []).length + "건</summary><ul>" + (fp.sources || []).map(srcItem).join("") + "</ul></details>";
+    return;
+  }
+  if (!S.sel) {
+    const groups = REGIONS.map(r => {
+      const cs = Object.values(D.countries).filter(c => c.region === r).sort((a, b) => a.tier - b.tier || a.name_ko.localeCompare(b.name_ko, "ko"));
+      return '<div class="region"><h4>' + r + '</h4><div class="chips" style="margin:0">' + cs.map(c => chip(c.iso)).join("") + "</div></div>";
+    }).join("");
+    el.innerHTML = '<div class="empty">' + back + '<h2>국가 선택</h2><p class="lead">지구본에서 국가나 분쟁지 표시를 선택하거나 아래 목록에서 선택하면 정세, 능력, 최근 동향과 출처를 볼 수 있다. 굵은 이름은 상세 프로필이 있는 국가다.</p>' + groups +
+      '<div class="region"><h4>국가 밖 행위자</h4><div class="chips" style="margin:0">' + chip("EUR") + "</div></div></div>";
+    return;
+  }
+  const c = D.countries[S.sel], m = c.mil || {}, e = c.econ || {}, p = c.pol || {};
+  const fps = D.flashpoints.filter(f => f.countries.includes(c.iso));
+  const fcs = D.forecasts.filter(f => f.countries.includes(c.iso));
+  const recent = (c.recent || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const fig = (label, val, sub) => "<div><dt>" + label + "</dt><dd>" + val + (sub ? "<small>" + sub + "</small>" : "") + "</dd></div>";
+  el.innerHTML =
+    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p></div>" +
+    '<p class="lead">' + esc(c.situation) + "</p>" + gsBlock(c) + countryIntentHtml(c) + histBlock(c) +
+    '<section class="sec"><h3>판단 점수 <span style="font-weight:400">(0–100)</span></h3><div class="scores">' + JLAYERS.map(k =>
+      '<div class="score"><span' + (k === S.layer ? ' style="font-weight:600"' : "") + ">" + LAYERS[k].label + '</span><span class="track" style="height:8px;background:var(--panel-2);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:' + c.scores[k] + "%;background:" + ramp(k, c.scores[k]) + ';border-radius:0 4px 4px 0"></span></span><span class="mono" style="text-align:right;font-size:12px">' + c.scores[k] + "</span></div>").join("") + "</div></section>" +
+    '<section class="sec"><h3>능력 지표</h3><dl class="figs">' +
+      fig("국방비", fmtUsdBn(m.spend_usd_bn), m.spend_year ? m.spend_year + "년" : "") +
+      fig("현역 병력", fmtPeople(m.active_personnel)) +
+      fig("핵탄두", m.nukes ? m.nukes.toLocaleString("ko-KR") + "기" : "—") +
+      fig("명목 GDP", fmtUsdBn(e.gdp_usd_bn), e.gdp_usd_bn ? "2025년" : "") +
+      fig("2026 성장 전망", fmtPct(e.growth_2026_pct)) +
+      fig("다음 선거", p.next_election ? '<span style="font:13px var(--sans)">' + esc(p.next_election) + "</span>" : "—") +
+    "</dl>" + (m.note ? '<p class="note" style="margin-top:8px">군사 · ' + esc(m.note) + "</p>" : "") + (e.note ? '<p class="note" style="margin-top:4px">경제 · ' + esc(e.note) + "</p>" : "") + "</section>" +
+    (p.regime ? '<section class="sec"><h3>정치</h3><dl class="kv"><dt>체제</dt><dd>' + esc(p.regime) + "</dd>" + (p.stability ? "<dt>안정성</dt><dd>" + esc(p.stability) + "</dd>" : "") + "</dl></section>" : "") +
+    (recent.length ? '<section class="sec"><h3>최근 동향</h3><ul class="tl">' + recent.map(r => '<li><span class="d">' + esc(r.date) + "</span><span>" + esc(r.text) + "</span></li>").join("") + "</ul></section>" : "") +
+    (c.watch && c.watch.length ? '<section class="sec"><h3>주시할 변수</h3><ul class="watch">' + c.watch.map(w => "<li>" + esc(w) + "</li>").join("") + "</ul></section>" : "") +
+    (fps.length ? '<section class="sec"><h3>관련 분쟁지</h3><div class="chips" style="margin:0">' + fps.map(f => '<button type="button" class="chip" data-fp="' + esc(f.id) + '">' + esc(f.name_ko) + "</button>").join("") + "</div></section>" : "") +
+    (fcs.length ? '<section class="sec"><h3>관련 전망</h3><ul class="list">' + fcs.map(f => forecastRow(f, true)).join("") + '</ul><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기</button></p></section>' : "") +
+    ((c.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + c.uncertain.length + "건</summary><ul>" + c.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
+    '<details class="src"><summary>출처 ' + (c.sources || []).length + "건</summary><ul>" + (c.sources || []).map(srcItem).join("") + "</ul></details>";
+}
+function countryIntentHtml(c){
+  const v = c.intent; const cases = (D.strategies || []).filter(k => k.deciders && k.deciders.items.some(d => d.iso === c.iso));
+  if (!v && !cases.length) return "";
+  const row = x => '<tr><td><span class="sw ' + x.w + '">' + (x.w === "said" ? "말" : "행동") + '</span></td><td class="mono">' + esc(x.date) + "</td><td>" + esc(x.k) + "</td><td>" + esc(x.t) + "</td></tr>";
+  const sig = v ? v.signals.slice().sort((a, b) => a.w === b.w ? String(b.date).localeCompare(String(a.date)) : (a.w === "said" ? -1 : 1)) : [];
+  return '<section class="sec"><h3>의지 지표 · 말과 행동</h3>' + (v ? '<p><span class="fit ' + fitCls(v.fit) + '">' + esc(v.fit) + '</span></p><div class="tbl-wrap intent-c"><table class="tbl" style="min-width:480px"><tbody>' + sig.map(row).join("") + '</tbody></table></div><p style="font-size:13px;color:var(--ink)">' + esc(v.read) + "</p>" : "") +
+    (cases.length ? '<p class="note" style="margin-top:6px">이 국가가 결정권자로 등장하는 전략 분석 · ' + cases.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join(" ") + "</p>" : "") + "</section>";
+}
+function gsBlock(c){
+  const g = c.gs; if (!g) return "";
+  const ul = xs => "<ul>" + xs.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>";
+  return '<section class="sec gs"><h3>대전략</h3>' +
+    '<p class="gs-core">' + esc(g.core) + "</p>" +
+    '<div class="gs-grid">' +
+      '<div class="gs-box goal wide"><h5><i></i>반드시 이루려는 것</h5>' + ul(g.goals) + "</div>" +
+      '<div class="gs-box give"><h5><i></i>양보할 수 있는 것</h5>' + ul(g.give) + "</div>" +
+      '<div class="gs-box never"><h5><i></i>절대 양보 못할 것</h5>' + ul(g.never) + "</div>" +
+    "</div>" +
+    "<p>" + esc(g.summary) + "</p>" +
+    '<p class="note"><b style="color:var(--ink-2)">내적 모순</b> · ' + esc(g.contra) + "</p>" + drvBlock(c) + "</section>";
+}
+const nm = iso => (D.countries[iso] || {}).name_ko || iso;
+const DLAB = {geo:"지리", power:"국력", regime:"체제·국내정치", memory:"역사적 기억"};
+const drvBar = w => '<div class="drv" role="img" aria-label="' + Object.keys(DLAB).map(k => DLAB[k] + " " + w[k]).join(", ") + '">' + Object.keys(DLAB).map(k => '<i style="flex:' + w[k] + " 0 0;background:var(--d-" + k + ')"></i>').join("") + "</div>";
+const drvLab = (w, top) => '<div class="drv-lab">' + Object.keys(DLAB).map(k => '<span style="--c:var(--d-' + k + ')"' + (k === top ? ' class="top"' : "") + ">" + DLAB[k] + " <b>" + w[k] + "</b></span>").join("") + "</div>";
+function drvBlock(c){
+  const d = c.drivers; if (!d) return "";
+  return '<div style="display:grid;gap:6px;margin-top:4px"><h3 style="margin:0">무엇이 이 대전략을 움직이나 <span style="font-weight:400">(상대 비중, 합계 100)</span></h3>' + drvBar(d.w) + drvLab(d.w, d.top) + '<p class="note">주도하는 힘은 <b style="color:var(--ink)">' + DLAB[d.top] + "</b>이다. " + esc(d.why) + "</p></div>";
+}
+function cellColor(sv){
+  const t = Math.abs(sv) === 2 ? 0.9 : Math.abs(sv) === 1 ? 0.42 : 0;
+  return sv === 0 ? C.panel2 : d3.interpolateLab(C.panel2, sv > 0 ? C.coop : C.conflict)(t);
+}
+function dyadHtml(a, b){
+  const G = D.grand;
+  const d = G.dyads.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
+  const cell = G.cells.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
+  const li = xs => "<ul>" + xs.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>";
+  let h = '<div class="dyad"><div class="pair">' + esc(nm(a)) + " ↔ " + esc(nm(b)) + "</div>";
+  if (cell) h += '<p class="meta">관계 점수 <span class="mono">' + (cell.s > 0 ? "+" : cell.s < 0 ? "−" : "") + Math.abs(cell.s) + "</span> · " + esc(cell.t) + "</p>";
+  if (d) h += '<div class="cols"><div><h5 class="c">협력할 수 있는 것</h5>' + li(d.coop) + '</div><div><h5 class="x">충돌하는 것</h5>' + li(d.conflict) + "</div></div><p><b>전망</b> · " + esc(d.outlook) + "</p>";
+  return h + '<div class="chips" style="margin:0">' + chip(a) + chip(b) + "</div></div>";
+}
+let mxSel = ["USA", "CHN"];
+const ABBR = {USA:"미", CHN:"중", RUS:"러", EUR:"EU", JPN:"일", KOR:"한", PRK:"북", IND:"인", IRN:"이", TUR:"튀"};
+function scoreBoxHtml(){
+  const L = S.layer === "focus" ? "risk" : S.layer;
+  const top = Object.values(D.countries).filter(c => !c.offmap && c.scores).sort((a, b) => b.scores[L] - a.scores[L]).slice(0, 10);
+  return '<div class="layer-sw" role="radiogroup" aria-label="지구본 보기 방식">' + Object.keys(LAYERS).map(k => '<button type="button" role="radio" class="chip' + (k === S.layer ? " on" : "") + '" aria-checked="' + (k === S.layer) + '" data-layer="' + k + '">' + LAYERS[k].label + "</button>").join("") + "</div>" +
+    '<p class="note" style="margin:8px 0">' + LAYERS[L].label + " 상위 10개국 · " + esc(LAYERS[L].desc) + '</p><div class="bars">' + top.map(c =>
+      '<button type="button" class="bar" data-iso="' + c.iso + '"><span>' + esc(c.name_ko) + '</span><span class="track"><span class="fill" style="display:block;width:' + c.scores[L] + "%;background:" + ramp(L, c.scores[L]) + '"></span></span><span class="v">' + c.scores[L] + "</span></button>").join("") + "</div>";
+}
+function renderGrand(){
+  const G = D.grand, M = G.matrix_order;
+  const score = (a, b) => { const c = G.cells.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a)); return c ? c.s : null; };
+  const hasDy = (a, b) => G.dyads.some(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
+  const sign = v => v > 0 ? "+" + v : v < 0 ? "−" + Math.abs(v) : "0";
+  let mx = '<div class="mx-wrap"><table class="mx" aria-label="주요 행위자 협력·충돌 행렬"><thead><tr><th></th>' + M.map(i => "<th scope=\"col\" title=\"" + esc(nm(i)) + "\">" + esc(ABBR[i] || nm(i)) + "</th>").join("") + "</tr></thead><tbody>";
+  for (const a of M) {
+    mx += '<tr><th scope="row">' + esc(nm(a)) + "</th>";
+    for (const b of M) {
+      if (a === b) { mx += '<td class="diag"></td>'; continue; }
+      const v = score(a, b), sel = (mxSel[0] === a && mxSel[1] === b) || (mxSel[0] === b && mxSel[1] === a);
+      mx += '<td><button type="button" class="' + (sel ? "sel" : "") + '" data-mx="' + a + "|" + b + '" title="' + esc(nm(a) + " ↔ " + nm(b)) + '" style="background:' + cellColor(v) + ";color:" + (Math.abs(v) === 2 ? "var(--panel)" : "var(--ink)") + (hasDy(a, b) ? ";font-weight:600" : ";font-weight:400") + '">' + sign(v) + (hasDy(a, b) ? "•" : "") + "</button></td>";
+    }
+    mx += "</tr>";
+  }
+  mx += "</tbody></table></div>";
+  const key = '<div class="mx-key">' + [[-2,"구조적 충돌"],[-1,"경합 우위"],[0,"혼합"],[1,"협력 우위"],[2,"동맹급"]].map(([v,l]) => '<span><i style="background:' + cellColor(v) + '"></i>' + sign(v) + " " + l + "</span>").join("") + "<span>• 상세 분석 있음</span></div>";
+  const others = G.dyads.filter(d => !(M.includes(d.a) && M.includes(d.b)));
+  const order = ["geo","power","regime","memory"];
+  const cs = Object.values(D.countries).filter(c => c.drivers).sort((a, b) => order.indexOf(a.drivers.top) - order.indexOf(b.drivers.top) || b.drivers.w[b.drivers.top] - a.drivers.w[a.drivers.top]);
+  const cnt = k => cs.filter(c => c.drivers.top === k).length;
+  $("#pane-grand").innerHTML =
+    '<div class="sec"><h2>국제 질서</h2><p class="lead" style="margin-top:8px">개별 사안을 넘어 국제 질서 전반을 움직이는 구조를 분석한다. 2030년까지의 세계 시나리오와 구조적 흐름, 주요 행위자의 대전략과 상호 관계를 다루고, 각 시나리오가 개별 사안의 전개에 미치는 영향을 함께 제시한다.</p></div>' +
+    '<section class="sec"><h3>2030년까지의 세계 시나리오 · 확률 합계 100%</h3><ul class="list">' + G.scenarios.map(sc => {
+      const th = D.thinkers.find(t => t.id === sc.thinker);
+      return '<li class="scn"><div class="scn-h"><b>' + esc(sc.id + ". " + sc.name) + '</b><span class="p">' + sc.p + '<small style="font-size:12px;color:var(--muted)">%</small></span></div><div class="prob"><i style="width:' + sc.p + '%"></i></div><p style="font-size:13px;color:var(--ink-2)">' + esc(sc.d) + '</p><div><h3 style="margin:4px 0 4px">선행 신호</h3><ul>' + sc.signals.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></div><div class="kr"><b>한국에는</b> · ' + esc(sc.korea) + "</div>" + (sc.case_fut || sc.korea_fut ? '<div class="note" style="margin:0;display:grid;gap:3px"><b style="color:var(--ink-2)">이 시나리오에서 각 사안의 2030년 전개</b>' + Object.entries(Object.assign({korea: sc.korea_fut}, sc.case_fut || {})).filter(([, m]) => m).map(([cid, m]) => { const k = (D.strategies || []).find(x => x.id === cid); return '<span><button type="button" class="chip" data-case="' + cid + '">' + esc(k ? k.title.split(":")[0] : cid) + "</button> " + Object.entries(m).map(([f, v]) => '<span class="mono" style="color:' + fcol(f) + '">' + f + " " + v + "%</span>").join(" · ") + "</span>"; }).join("") + "</div>" : "") + (th ? '<button type="button" class="lens-btn" data-lens="' + th.id + '">관련 사상가 관점 · ' + esc(th.name) + "</button>" : "") + "</li>";
+    }).join("") + '</ul><p class="note" style="margin-top:8px">시나리오 확률은 판단값이며, 선행 신호가 나타나면 확률을 조정한다.</p></section>' +
+    '<section class="sec"><h3>구조적 흐름</h3><ul class="list">' + G.trends.map(t => '<li class="trend"><b>' + esc(t.t) + "</b><p>" + esc(t.d) + "</p>" + (t.prec_note ? '<p class="pn">선례 대조 · ' + esc(t.prec_note) + "</p>" : "") + (t.review ? '<p class="pn">독립 반론 검토 · ' + esc(t.review) + "</p>" : "") + aiPrecHtml(t.prec, "") + "</li>").join("") + "</ul></section>" +
+    '<section class="sec"><h3>협력·충돌 행렬 · 칸을 선택하면 양국 관계를 볼 수 있다</h3><p class="note" style="margin-bottom:8px">각국이 가장 중시하는 것과 양보할 수 없는 것이 부딪히는 곳에서 분쟁이 생기고, 한쪽의 양보 가능 목록이 다른 쪽의 필수 목록과 겹치는 곳에서 거래가 성립한다.</p>' + mx + key + '<div id="dyad-box" style="margin-top:12px">' + dyadHtml(mxSel[0], mxSel[1]) + "</div></section>" +
+    (others.length ? '<section class="sec"><h3>행렬 밖의 핵심 관계</h3>' + others.map(d => '<details class="dy"><summary>' + esc(nm(d.a)) + " ↔ " + esc(nm(d.b)) + "</summary>" + dyadHtml(d.a, d.b) + "</details>").join("") + "</section>" : "") +
+    '<section class="sec"><h3>무엇이 대전략을 움직이나</h3><p class="note" style="margin-bottom:10px">지리가 주도하는 국가 ' + cnt("geo") + "곳, 체제·국내정치 " + cnt("regime") + "곳, 국력 " + cnt("power") + "곳, 역사적 기억 " + cnt("memory") + "곳이다. 역사적 기억은 대부분의 국가에서 넘지 않을 선을 긋는 요인이지 전략 전체를 주도하는 요인은 아니다. " + esc(G.drivers_note) + "</p>" +
+      drvLab({geo:"",power:"",regime:"",memory:""}, null).replace(/ <b><\/b>/g, "") +
+      '<div style="display:grid;gap:2px;margin-top:8px">' + cs.map(c => '<button type="button" class="drv-row" data-iso="' + c.iso + '"><span class="n">' + esc(c.name_ko) + "</span>" + drvBar(c.drivers.w) + '<span class="t">' + DLAB[c.drivers.top] + " " + c.drivers.w[c.drivers.top] + "</span></button>").join("") + "</div></section>" +
+    '<section class="sec"><h3>역사와 구조가 어긋나는 관계</h3><p class="note" style="margin-bottom:8px">역사적 원한은 깊으나 힘의 구조가 협력을 요구하는 관계다. 어느 쪽이 우세한지가 역사가 대전략을 얼마나 움직이는지 보여 준다.</p><ul class="list">' +
+      G.tensions.map(t => '<li class="ten"><div class="hd"><b>' + esc(nm(t.a)) + " ↔ " + esc(nm(t.b)) + '</b><span class="st ' + (t.verdict === "구조 우위" ? "yes" : "open") + '">' + esc(t.verdict) + "</span></div><dl><dt>기억</dt><dd>" + esc(t.memory) + "</dd><dt>구조</dt><dd>" + esc(t.structure) + "</dd></dl><p class=\"note\">" + esc(t.note) + "</p></li>").join("") + "</ul></section>" +
+    '<section class="sec"><h3>국가별 판단 점수와 지구본 보기 방식</h3><p class="note" style="margin-bottom:8px">지구본의 기본 화면은 분석 대상 지역이다. 아래의 네 점수는 측정값이 아니라 판단값이며, 보조 자료로 제공한다.</p><div id="scorebox">' + scoreBoxHtml() + "</div></section>" +
+    '<section class="sec"><h3>국가별 대전략</h3><div class="chips" style="margin:0">' + Object.values(D.countries).filter(c => c.gs).map(c => chip(c.iso)).join("") + "</div></section>" +
+    readingHtml();
+}
+const FP_AN = {"rus-ukr":"rus-ukr", "iran-war":"iran-war", "taiwan-strait":"taiwan", "korea":"korea-deal"};
+function histBlock(c){
+  const h = c.hist; if (!h) return "";
+  return '<section class="sec hist"><h3>역사 속 지정학</h3><p class="hist-mean">' + esc(h.meaning) + "</p>" +
+    '<ul class="tl">' + h.episodes.map(e => '<li><span class="d">' + esc(e.y) + "</span><span>" + esc(e.t) + "</span></li>").join("") + "</ul>" +
+    '<div class="lesson"><b>그들이 역사에서 배운 것</b><p>' + esc(h.learned) + "</p></div>" +
+    '<div class="lesson"><b>역사가 우리에게 경고하는 것</b><p>' + esc(h.read) + "</p></div></section>";
+}
+function analogHtml(a, compact){
+  if (!a) return "";
+  return '<article class="an">' + (compact ? "" : "<h4>" + esc(a.now) + "</h4>") +
+    '<div class="tags">' + a.cases.map(x => '<span class="tag">' + esc(x) + "</span>").join("") + "</div>" +
+    "<dl><div><dt>그때 어떻게 흘렀나</dt><dd>" + esc(a.then) + '</dd></div><div><dt>지금에 대한 함의</dt><dd class="imp">' + esc(a.implies) + '</dd></div><div><dt class="brk">선례와 다른 점</dt><dd>' + esc(a.breaks) + "</dd></div></dl>" +
+    (compact ? "" : '<div class="chips" style="margin:0">' + a.countries.map(chip).join("") + "</div>") + "</article>";
+}
+
+const exitCase = id => (D.exits && D.exits.cases.find(c => c.fp === id)) || null;
+
+function renderDiscuss(){
+  const th = (D.discuss && D.discuss.threads) || [];
+  const vcls = v => v.startsWith("지지") ? "ok" : v.startsWith("보정") ? "fix" : "no";
+  $("#pane-discuss").innerHTML =
+    '<div class="sec"><p class="eyebrow"></p><h2 style="margin-top:4px"></h2></div>' +
+    th.map((t, i) =>
+      '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">논의 ' + String(i + 1).padStart(2, "0") + " · " + esc(t.opened) + " 개설 · " + esc(t.status) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(t.title) + "</h2></div>" +
+      '<section class="sec"><h3>' + esc(t.claim_by) + '의 명제</h3><ol class="claim">' + t.claim.map(c => "<li>" + esc(c) + "</li>").join("") + "</ol></section>" +
+      '<section class="sec"><h3>역사가 확인하는 것 · ' + esc(t.history.title) + '</h3><ul class="hpoints">' + t.history.points.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><div class="lesson-box" style="margin-top:10px"><b>그래서</b>' + esc(t.history.lesson) + "</div></section>" +
+      '<section class="sec"><h3>명제 검토</h3><ul class="list">' + t.review.map(r => '<li class="rv"><div class="hd"><span>' + esc(r.step) + '</span><span class="vd ' + vcls(r.verdict) + '">' + esc(r.verdict) + "</span></div><p>" + esc(r.text) + "</p></li>").join("") + "</ul></section>" +
+      '<section class="sec"><h3>빠진 항</h3><ul class="list">' + t.missing.map(m => '<li class="rv"><b>' + esc(m.t) + '</b><p>' + esc(m.d) + "</p></li>").join("") + "</ul></section>" +
+      '<section class="sec"><h3>통일의 경로 후보</h3><div style="display:grid;gap:10px">' + t.paths.map(p => '<div class="path"><div class="hd"><b>' + esc(p.name) + '</b><span class="aim">' + esc(p.odds) + '</span></div><p class="meta">' + esc(p.who) + "</p><dl><dt>모습</dt><dd>" + esc(p.how) + "</dd><dt>선례</dt><dd>" + esc(p.precedent) + "</dd><dt>조건</dt><dd>" + esc(p.cond) + "</dd></dl></div>").join("") + '</div>' + (PUB() ? "" : '<p class="note" style="margin-top:8px"></p>') + '</section>' +
+      (t.closing ? '<section class="sec"><h3>' + esc(t.closing.by) + "의 결론 · " + esc(t.closing.date) + '</h3><ol class="claim">' + t.closing.points.map(c => "<li>" + esc(c) + "</li>").join("") + '</ol><div class="lesson-box" style="margin-top:10px"><b>논의가 옮겨 가는 곳</b>' + esc(t.closing.note) + "</div></section>" : "") +
+      '<section class="sec"><h3>열린 질문</h3><ul class="watch">' + t.open.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>" +
+      '<section class="sec"><h3>지켜볼 신호</h3><ul class="watch">' + t.signals.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>" +
+      '<details class="src"><summary>출처 ' + t.sources.length + "건</summary><ul>" + t.sources.map(srcItem).join("") + "</ul></details></article>"
+    ).join('<hr style="border:0;border-top:1px solid var(--line);margin:0">');
+}
+const WDIM = [["safety","생명·안전"],["living","생계"],["freedom","자유"],["bond","관계·공동체"]];
+const FCOL = {F1:"var(--d-geo)", F5:"var(--d-deal)", F2:"var(--d-regime)", F3:"var(--d-memory)", F4:"var(--d-power)", U6:"var(--d-deal)", I6:"var(--d-deal)"};
+const FSLOT = ["var(--d-geo)","var(--d-memory)","var(--d-power)","var(--conflict)","var(--d-regime)"];
+const fcol = k => FCOL[k] || FSLOT[(parseInt(String(k).replace(/\D/g, ""), 10) - 1) % 5] || "var(--muted)";
+const LNAME = {"1":"Ⅰ. 정세 판단","2":"Ⅱ. 전략 평가","3":"Ⅲ. 개인에게 미치는 영향","V":"Ⅳ. 검증"};
+const wbar = v => v == null ? '<span class="bar na"><b>측정 전</b><i></i></span>' : '<span class="bar"><b>' + (Math.round(v * 10) / 10) + '</b><i style="--w:' + Math.max(0, Math.min(100, v)) + '%"></i></span>';
+const wdl = (v, b) => { if (v == null || b == null) return ""; const d = Math.round((v - b) * 10) / 10; return '<span class="dl ' + (d > 0.05 ? "up" : d < -0.05 ? "dn" : "eq") + '">' + (d > 0.05 ? "▲" + d : d < -0.05 ? "▼" + Math.abs(d) : "±0") + "</span>"; };
+const fmt = v => v == null ? "—" : String(Math.round(v * 10) / 10);
+const stpH = (n, t) => '<div class="stp-h"><i>' + n + "</i><b>" + esc(t) + "</b></div>";
+const ltag = L => '<span class="ltag l' + L + '">' + ({"1":"Ⅰ","2":"Ⅱ","3":"Ⅲ","V":"Ⅳ"}[L] || L) + "</span>";
+function concHtml(c){
+  if (!c.conclusions) return "";
+  const cls = t => t === "높음" ? "hi" : t === "중간" ? "mid" : t === "가치 판단" ? "val" : "lo";
+  return '<section class="concl"><h3>핵심 판단</h3><ol>' + c.conclusions.map(k =>
+    '<li><span class="cid">' + k.id + '</span><div><div class="ct">' + (k.L ? ltag(k.L) : "") + esc(k.t) + '<span class="conf ' + cls(k.conf) + '">' + (k.conf === "가치 판단" ? "가치 판단" : "확신 " + esc(k.conf) + (k.confp ? " " + k.confp + "%" : "")) + '</span></div><div class="cm">' +
+    "<span><b>근거</b>" + esc(k.why) + " (" + k.steps.map(n => n + "단계").join(", ") + ")</span>" +
+    "<span><b>판단이 바뀌는 조건</b>" + esc(k.flip) + "</span>" +
+    (k.fc.length ? "<span><b>검증할 전망</b>" + k.fc.map(f => '<span class="mono">' + f + "</span>").join(", ") + "</span>" : "") +
+    "</div></div></li>").join("") + '</ol><p class="note">확신도는 해당 판단이 5년 안에 뒤집히지 않을 가능성을 구간으로 나타낸 것이다. ‘개인에게 미치는 영향’의 가치 판단에는 확률을 부여하지 않는다.' + (PUB() ? "" : "") + '</p></section>';
+}
+const fitCls = f => f === "일치" ? "ok" : f === "불일치" ? "no" : "part";
+function intentHtml(d, caseId){
+  const cv = (D.countries[d.iso] || {}).intent, dv = d.intent || {};
+  if (!cv && !dv.read) return "";
+  const v = {said: (cv ? cv.signals : []).filter(x => x.w === "said" && (!x.case || x.case === caseId)), did: (cv ? cv.signals : []).filter(x => x.w === "did" && (!x.case || x.case === caseId)),
+             fit: dv.fit || (cv || {}).fit, read: dv.read || (cv || {}).read, watch: dv.watch || (cv || {}).watch || []};
+  const row = (x, w) => '<tr><td><span class="sw ' + w + '">' + (w === "said" ? "말" : "행동") + '</span></td><td class="mono">' + esc(x.date) + "</td><td>" + esc(x.k) + "</td><td>" + esc(x.t) + "</td></tr>";
+  return '<div class="intent"><div class="ih"><b>의지 지표</b><span class="fit ' + fitCls(v.fit) + '">말과 행동 · ' + esc(v.fit) + '</span></div><div class="tbl-wrap"><table class="tbl" style="min-width:480px"><tbody>' +
+    v.said.map(x => row(x, "said")).join("") + v.did.map(x => row(x, "did")).join("") + '</tbody></table></div><p class="ir">' + esc(v.read) + '</p><p class="note"><b>주시할 신호</b> · ' + v.watch.map(w => esc(w.t) + " (" + esc(w.when) + ")").join(" · ") + '</p><p class="note">전체 신호는 <button type="button" class="chip" data-iso="' + esc(d.iso) + '">국가 프로필</button>에서 볼 수 있다.</p></div>';
+}
+function decHtml(c, n){
+  const X = c.deciders; if (!X) return "";
+  const O = c.external ? c.external.order : c.futures.items.map(f => f.id);
+  const fn = {}; c.futures.items.forEach(f => fn[f.id] = f.name);
+  const lvc = {"선호":"lv-a","수용":"lv-b","불편":"lv-c","거부":"lv-d"};
+  const ul = a => "<ul>" + a.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>";
+  return '<section class="stp">' + stpH(n, "결정권자 분석") + '<p class="note">결정권을 가진 각국이 문제를 어떻게 정의하는지, 무엇을 이루려 하며 어떤 수단을 쓰는지, 전략 주체의 선택지에 어떻게 대응할지를 해당국의 관점에서 정리하고, 각국이 선호하는 전개를 한 표로 비교한다. 의지는 말과 비용이 수반된 행동으로 나누어 해석한다.</p>' +
+    '<div class="decs">' + X.items.map((d, i) => '<details class="dec"' + (i === 0 ? " open" : "") + '><summary><span class="nm">' + esc(nm(d.iso)) + '</span><span class="pw">결정권 ' + esc(d.power) + '</span><span class="fr">' + esc(d.frame) + "</span></summary><dl>" +
+      "<dt>결정권의 수단</dt><dd>" + esc(d.means) + "</dd>" +
+      "<dt>목표의 순위</dt><dd><ol>" + d.goals.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></dd>" +
+      "<dt>전략</dt><dd>" + esc(d.strategy) + "</dd>" +
+      "<dt>지금 쓰는 전술</dt><dd>" + ul(d.tactics) + "</dd>" +
+      '<dt>넘지 않는 선</dt><dd class="red">' + ul(d.red) + "</dd>" +
+      "<dt>바깥 변수에 대한 인식</dt><dd>" + esc(d.ext) + "</dd>" +
+      "<dt>전략 주체에 원하는 것</dt><dd>" + esc(d.want) + "</dd>" +
+      "<dt>전략 주체의 선택지에 대한 대응</dt><dd>" + esc(d.onrec) + "</dd>" +
+      '<dt>전략 주체가 쥔 지렛대</dt><dd class="lev">' + esc(d.lever) + "</dd>" +
+      "</dl>" + intentHtml(d, c.id) + '<div class="chips" style="margin:0 12px 12px"><button type="button" class="chip" data-iso="' + d.iso + '">' + esc(nm(d.iso)) + " 프로필과 대전략</button></div></details>").join("") + "</div>" +
+    (X.intent ? '<h3 style="margin:6px 0 0">말과 행동의 일치</h3><p class="note">' + esc(X.intent.note) + '</p><div class="tbl-wrap"><table class="tbl" style="min-width:520px"><thead><tr><th>국가</th><th>일치도</th><th>해석</th></tr></thead><tbody>' +
+      X.items.filter(d => d.intent).map(d => "<tr><td><b>" + esc(nm(d.iso)) + '</b></td><td><span class="fit ' + fitCls(d.intent.fit) + '">' + esc(d.intent.fit) + "</span></td><td>" + esc(d.intent.read) + "</td></tr>").join("") + '</tbody></table></div><div class="lesson-box"><b>말과 행동의 함의</b>' + esc(X.intent.read) + "</div>" : "") +
+    '<h3 style="margin:6px 0 0">각국이 선호하는 전개</h3><div class="tbl-wrap"><table class="tbl pref" style="min-width:560px"><thead><tr><th>국가</th>' + O.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span> " + esc(fn[k]) + "</th>").join("") + "</tr></thead><tbody>" +
+      X.items.map(d => "<tr><td><b>" + esc(nm(d.iso)) + '</b><br><span class="note">' + esc(d.power) + "</span></td>" + O.map(k => { const v = d.pref[k]; return '<td><span class="lv ' + lvc[v[0]] + '">' + esc(v[0]) + '</span><span class="why">' + esc(v[1]) + "</span></td>"; }).join("") + "</tr>").join("") +
+    '</tbody></table></div><p class="note">' + esc(X.syn.note) + '</p><ol class="synth">' + X.syn.reads.map(r => "<li><b>" + esc(r.t) + "</b><span>" + esc(r.d) + "</span></li>").join("") + "</ol></section>";
+}
+function futHtml(c, n){
+  const F = c.futures; if (!F) return "";
+  const base = {}; c.wellbeing.groups.forEach(g => base[g.k] = g.score);
+  const gname = {}; c.wellbeing.groups.forEach(g => gname[g.k] = g.name);
+  const pb = key => '<div class="pbar" role="img" aria-label="' + F.items.map(f => f.id + " " + f[key] + "%").join(", ") + '">' + F.items.map(f => '<i style="flex:' + f[key] + ' 0 0;background:' + fcol(f.id) + '">' + f.id + " " + f[key] + "%</i>").join("") + "</div>";
+  const cell = (f, g, k) => {
+    if (f.score) return fmt(f.score[g][k]) + wdl(f.score[g][k], base[g][k]);
+    const a = f.score_bad[g][k], b = f.score_good[g][k];
+    return a == null ? "—" : fmt(a) + " ~ " + fmt(b);
+  };
+  const rg = r => r ? ' <span class="rng">(' + r[0] + "~" + r[1] + ")</span>" : "";
+  const ftab = f => '<div class="tbl-wrap"><table class="tbl" style="min-width:440px"><thead><tr><th>2030년</th>' + WDIM.map(([k, l]) => "<th>" + l + "</th>").join("") + "</tr></thead><tbody>" +
+    Object.keys(base).map(g => "<tr><td>" + esc(gname[g]) + "</td>" + WDIM.map(([k]) => '<td class="mono">' + cell(f, g, k) + "</td>").join("") + "</tr>").join("") + "</tbody></table></div>";
+  return '<section class="stp">' + stpH(n, "전개 시나리오와 바깥 변수") + '<p class="note">' + esc(F.note) + "</p>" +
+    '<div class="pstack"><div class="prow"><span>' + (F.rec_same ? "확률" : "현 추세") + "</span>" + pb("p") + "</div>" + (F.rec_same ? "" : '<div class="prow"><span>권고 이행 시</span>' + pb("p_rec") + "</div>") + "</div>" +
+    '<div class="futs">' + F.items.map(f => '<article class="fut" style="--c:' + fcol(f.id) + '"><div class="hd"><span class="id">' + f.id + "</span><b>" + esc(f.name) + '</b><span class="pp">' + (F.rec_same ? f.p + "%" + rg(f.rng) : "현 추세 " + f.p + "%" + rg(f.rng) + " · 권고 이행 시 " + f.p_rec + "%" + rg(f.rng_rec)) + (f.prev2w ? '<small>' + f.prev2w[0] + (F.rec_same ? "" : " · " + f.prev2w[1]) + "</small>" : f.prev ? '<small>' + f.prev[0] + " · " + f.prev[1] + "</small>" : f.id === "F5" ? "<small></small>" : "") + "</span></div>" +
+      "<p>" + esc(f.story) + '</p><p class="tst"><b>성립 조건</b> · ' + esc(f.test) + (f.fc ? ' <span class="mono">(' + f.fc + ")</span>" : "") + "</p>" +
+      '<p style="font-size:12px"><b>선행 징후</b> · ' + f.signs.map(esc).join(" · ") + "</p>" +
+      '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>").join("") + "</div>" +
+    extHtml(c) + worldHtml(c) + aiHtml(c) + "</section>";
+}
+function aiHtml(c){
+  const A = c.ai; if (!A) return "";
+  return '<div class="aibox"><div class="aih"><span class="aitag">AI 변수</span><b>' + esc(A.t) + '</b></div><dl class="tw"><dt>쟁점</dt><dd>' + esc(A.stake) + "</dd><dt>영향</dt><dd>" + esc(A.moves) + "</dd><dt>전략 주체가 쥔 것</dt><dd>" + esc(A.lever) + '</dd><dt>선행 신호</dt><dd><ul>' + A.signs.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></dd></dl>' + (A.review ? '<p class="note"><span class="vd ' + (A.review === "통과" ? "ok" : "fix") + '">독립 반론 검토</span> ' + esc(A.review) + '</p>' : '') /* v3.0b */ + aiPrecHtml(A.prec, A.prec_insight) + '<p class="note">AI가 지정학에 미치는 영향 전반은 <button type="button" class="chip" data-go="grand">국제 질서 탭의 구조적 흐름</button>에서 볼 수 있다.</p></div>';
+}
+function aiPrecHtml(L, ins){
+  if (!L || !L.length) return "";
+  const vc = v => v === "지지" ? "ok" : v === "반박" ? "no" : "fix";
+  return '<details class="src"><summary>선례 대조 · 판단 ' + L.length + '건</summary><div class="aiprec" style="margin-top:8px">' +
+    L.map(k => '<article class="dv chk-' + vc(k.verdict) + '"><div class="hd"><span class="id">' + esc(k.claim) + '</span><span class="vd ' + vc(k.verdict) + '">' + esc(k.verdict) + "</span></div><dl><dt>근거</dt><dd>" + esc(k.reason) + "</dd><dt>대조한 선례</dt><dd><ul>" +
+      k.precedents.map(p => "<li><b>" + esc(p.name) + '</b> <span class="mono note">' + esc(p.period) + "</span><br>" + esc(p.what) + '<br><span class="note">' + esc(p.relevance) + "</span>" + (p.sources && p.sources.length ? '<ul>' + p.sources.map(srcItem).join("") + "</ul>" : "") + "</li>").join("") + "</ul></dd></dl></article>").join("") +
+    (ins ? '<div class="lesson-box"><b>선례가 드러낸 점</b>' + esc(ins) + "</div>" : "") + "</div></details>";
+}
+function worldHtml(c){
+  const W = c.world; if (!W) return "";
+  const fn = {}; c.futures.items.forEach(f => fn[f.id] = f.name);
+  return '<h3 style="margin:8px 0 0">세계 시나리오별 전개</h3><p class="note">' + esc(W.note) + ' 세계 시나리오는 <button type="button" class="chip" data-go="grand">국제 질서 탭</button>에서 볼 수 있다.</p><div class="tbl-wrap"><table class="tbl ext" style="min-width:560px"><thead><tr><th>세계 시나리오</th><th>확률</th>' + W.order.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span><br>" + esc(fn[k]) + "</th>").join("") + "</tr></thead><tbody>" +
+    W.rows.map(r => "<tr><td><b>" + esc(r.id + ". " + r.name) + '</b><br><span class="note">' + esc(r.why) + '</span></td><td class="mono">' + r.p + "%</td>" + r.cond.map(v => '<td class="mono">' + v + "</td>").join("") + "</tr>").join("") +
+    '<tr class="base"><td>가중 합 (검사)</td><td class="mono">100%</td>' + W.mix.map((v, i) => '<td class="mono">' + v + '<span class="dd">기준 ' + W.base[i] + "</span></td>").join("") + "</tr></tbody></table></div>";
+}
+function extHtml(c){
+  const X = c.external; if (!X) return "";
+  const fn = {}; c.futures.items.forEach(f => fn[f.id] = f.name);
+  const dv = (v, b) => { const d = v - b; return '<span class="dd">' + (d > 0 ? "▲" + d : d < 0 ? "▼" + (-d) : "±0") + "</span>"; };
+  return '<h3 style="margin:8px 0 0">바깥 변수와 조건부 전개</h3><p class="note">' + esc(X.note) + "</p>" +
+    '<div class="tbl-wrap"><table class="tbl ext" style="min-width:600px"><thead><tr><th>바깥 변수 (2030년까지)</th><th>발생 가능성</th>' + X.order.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span><br>" + esc(fn[k]) + "</th>").join("") + "<th>영향받는 판단</th></tr></thead><tbody>" +
+    '<tr class="base"><td>기준 · 현 추세</td><td class="mono">—</td>' + X.base.map(v => '<td class="mono">' + v + "</td>").join("") + "<td></td></tr>" +
+    X.items.map(x => "<tr><td><b>" + esc(x.t) + '</b><br><span class="note">' + esc(x.def) + '</span></td><td class="mono">' + x.p + "%</td>" + x.cond.map((v, i) => '<td class="mono">' + v + dv(v, X.base[i]) + "</td>").join("") + '<td class="note">' + esc(x.flips) + "</td></tr>").join("") +
+    '</tbody></table></div><p class="note">가운데 칸은 해당 변수가 발생했을 때의 전개별 확률(%)이며, ▲▼는 기준 대비 변화다. 판단값이므로 ±5 안팎의 차이에는 의미를 두지 않는다.</p><div class="exts">' + X.items.map(x => '<details class="dec"><summary><span class="nm">' + esc(x.id + " " + x.t) + '</span><span class="pw">' + x.p + '%</span><span class="fr">' + esc(x.why) + '</span></summary><dl><dt>가장 크게 반응하는 국가</dt><dd>' + x.who.map(chip).join(" ") + "</dd><dt>선행 신호</dt><dd>" + esc(x.sign) + "</dd></dl></details>").join("") + "</div>" +
+    '<div class="lesson-box"><b>바깥 변수의 함의</b><ul class="facts" style="margin-top:6px">' + X.reads.map(r => "<li>" + esc(r) + "</li>").join("") + "</ul></div>";
+}
+function counterHtml(c){
+  const L = c.counter; if (!L || !L.length) return "";
+  const sc = s => '<span class="sc s' + (s > 0 ? "p" : s < 0 ? "n" : "z") + (Math.abs(s) === 2 ? "2" : "") + '">' + (s > 0 ? "+" + s : s < 0 ? "−" + (-s) : "0") + "</span>";
+  return L.map(W => '<section class="stp counter"><div class="stp-h"><i>⇄</i><b>상대편에서 본 최선의 수 · ' + esc(W.name) + '</b></div><p class="note">' + esc(W.note) + ' 목표의 순서 <span class="mono">' + esc(W.order) + "</span></p>" +
+    '<details class="src"><summary>' + esc(W.name.split(" ")[0]) + '의 목표 ' + W.goals.length + '개와 출처</summary><ul class="list goals">' + W.goals.map(g => '<li class="rv"><span><b class="mono" style="color:var(--conflict)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + '<br><span class="note">출처 · ' + esc(g.src) + "</span></p></li>").join("") + "</ul></details>" +
+    '<div class="tbl-wrap"><table class="tbl evt" style="min-width:720px"><thead><tr><th>수</th>' + W.goals.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + "<th>실현 가능성</th></tr></thead><tbody>" +
+    W.alts.map(a => '<tr><td><b class="mono">' + a.id + '</b><br><span class="note">' + esc(a.name) + "</span></td>" + a.ev.map(e => "<td>" + sc(e[0]) + '<span class="why">' + esc(e[1]) + "</span></td>").join("") + "<td>" + esc(a.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
+    '<div class="verdict">' + W.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + '</div><div class="lesson-box"><b>4단계 추정과의 대조</b>' + esc(W.read) + "</div></section>").join("");
+}
+function twowayHtml(c){
+  const T = c.twoway; if (!T) return "";
+  return '<section class="stp twoway"><div class="stp-h"><i>⇆</i><b>양방향 검토 · 최선의 수가 만나는 지점</b></div><p class="note">양측이 각자의 목표에 따라 최선의 수를 둘 때 어디에서 균형이 형성되는지 검토한다.</p>' +
+    '<div class="tbl-wrap"><table class="tbl" style="min-width:420px"><thead><tr><th>전략 주체</th><th>최선의 수</th></tr></thead><tbody>' + T.pairs.map(p => "<tr><td><b>" + esc(p[0]) + "</b></td><td>" + esc(p[1]) + "</td></tr>").join("") + "</tbody></table></div>" +
+    '<dl class="tw"><dt>균형점</dt><dd>' + esc(T.equilibrium) + "</dd><dt>거래의 공간</dt><dd>" + esc(T.zopa) + '</dd><dt>공동의 함정</dt><dd><ul>' + T.traps.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></dd>" +
+    (T.changes && !PUB() ? '<dt></dt><dd><ul>' + T.changes.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></dd>" : "") + "</dl></section>";
+}
+function swapHtml(c){
+  const W = c.swap; if (!W) return "";
+  const sc = s => '<span class="sc s' + (s > 0 ? "p" : s < 0 ? "n" : "z") + (Math.abs(s) === 2 ? "2" : "") + '">' + (s > 0 ? "+" + s : s < 0 ? "−" + (-s) : "0") + "</span>";
+  return '<section class="stp swap"><div class="stp-h"><i>↔</i><b>전략 주체를 바꿔 보면 · ' + esc(W.name) + '</b></div><p class="note">' + esc(W.note) + ' 목표의 순서 <span class="mono">' + esc(W.order) + '</span></p><ul class="list goals">' +
+    W.goals.map(g => '<li class="rv"><span><b class="mono" style="color:var(--accent)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + '<br><span class="note">출처 · ' + esc(g.src) + "</span></p></li>").join("") + "</ul>" +
+    '<div class="tbl-wrap"><table class="tbl evt" style="min-width:720px"><thead><tr><th>안</th>' + W.goals.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + "<th>실현 가능성</th></tr></thead><tbody>" +
+    W.alts.map(a => '<tr><td><b class="mono">' + a.id + '</b><br><span class="note">' + esc(a.name) + "</span></td>" + a.ev.map(e => "<td>" + sc(e[0]) + '<span class="why">' + esc(e[1]) + "</span></td>").join("") + "<td>" + esc(a.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
+    '<div class="verdict">' + W.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "순위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + '</div><div class="lesson-box"><b>주체 교체로 드러난 점</b>' + esc(W.lesson) + "</div></section>";
+}
+function evalHtml(c){
+  const G = c.client.goals;
+  const sc = s => '<span class="sc s' + (s > 0 ? "p" : s < 0 ? "n" : "z") + (Math.abs(s) === 2 ? "2" : "") + '">' + (s > 0 ? "+" + s : s < 0 ? "−" + (-s) : "0") + "</span>";
+  return '<div class="tbl-wrap"><table class="tbl evt" style="min-width:820px"><thead><tr><th>안</th>' + G.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + "<th>비용</th><th>가역성</th><th>확전 위험</th><th>실현 가능성</th></tr></thead><tbody>" +
+    c.alts.map(a => '<tr><td><b class="mono">' + a.id + '</b><br><span class="note">' + esc(a.name) + "</span></td>" + G.map(g => { const e = a.ev[g.id]; return "<td>" + sc(e.s) + '<span class="why">' + esc(e.t) + "</span></td>"; }).join("") +
+      "<td>" + esc(a.ev.cost) + "</td><td>" + esc(a.ev.rev2) + "</td><td>" + esc(a.ev.esc2) + "</td><td>" + esc(a.ev.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
+    '<p class="note">−2 크게 잃음 · −1 잃음 · 0 중립 · +1 얻음 · +2 크게 얻음. 목표별 값을 더하지 않는다. 앞선 목표의 값이 순위를 먼저 가른다.</p>';
+}
+function humanHtml(c, n9, n10){
+  const W = c.wellbeing, I = D.indicator, H = c.human;
+  const base = {}; W.groups.forEach(g => base[g.k] = g.score);
+  const gname = {}; W.groups.forEach(g => gname[g.k] = g.name);
+  const E = c.futures.expect;
+  const erows = []; Object.keys(base).forEach(g => WDIM.forEach(([k, l]) => { if (E.now[g][k] != null) erows.push("<tr><td>" + esc(gname[g]) + "</td><td>" + l + '</td><td class="mono">' + fmt(base[g][k]) + '</td><td class="mono">' + fmt(E.now[g][k]) + wdl(E.now[g][k], base[g][k]) + '</td>' + (c.futures.rec_same ? "" : '<td class="mono"><b>' + fmt(E.rec[g][k]) + "</b>" + wdl(E.rec[g][k], E.now[g][k]) + "</td>") + '<td class="mono" style="color:var(--conflict)">' + fmt(E.worst[g][k]) + "</td></tr>"); }));
+  return '<section class="stp">' + stpH(n9, "영향받는 사람과 네 차원의 효과") +
+    '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>누구</th><th>무엇이 걸려 있나</th></tr></thead><tbody>' + c.people.map(p => "<tr><td>" + esc(p.who) + "</td><td>" + esc(p.how) + "</td></tr>").join("") + "</tbody></table></div>" +
+    '<h3 style="margin:6px 0 0">개인 행복 지표 · 2026년 기준</h3><p class="note">' + esc(I.unit) + " 네 차원은 합치지 않는다. " + esc(W.status) + '. 공식과 출처는 <button type="button" class="chip" data-go="method">방법론 탭</button>에 있다.</p>' +
+    '<div class="wbt"><table><thead><tr><th>집단</th>' + WDIM.map(([k, l]) => "<th>" + l + (k === "safety" ? '<span class="est">판단값 포함</span>' : "") + "</th>").join("") + "</tr></thead><tbody>" +
+    W.groups.map(g => '<tr><td class="g"><b>' + esc(g.name) + "</b><span>" + esc(g.size) + "</span></td>" + WDIM.map(([k]) => "<td>" + wbar(g.score[k]) + "</td>").join("") + "</tr>").join("") + "</tbody></table></div>" +
+    '<details class="src"><summary>판단값의 근거와 원자료</summary><ul>' + W.groups.map(g => Object.values(g.why).map(t => "<li><b>" + esc(g.name) + "</b> · " + esc(t) + "</li>").join("")).join("") + "</ul>" +
+    '<div class="tbl-wrap" style="margin-top:8px"><table class="tbl"><thead><tr><th>항목</th><th>' + esc((W.cols || ["남한"])[0]) + "</th>" + ((W.cols || ["", "북한"])[1] ? "<th>" + esc((W.cols || ["", "북한"])[1]) + "</th>" : "") + '<th>출처</th></tr></thead><tbody>' + W.facts.map(f => "<tr><td>" + esc(f.k) + "</td><td>" + esc(f.ROK) + "</td>" + ((W.cols || ["", "북한"])[1] ? "<td>" + esc(f.PRK) + "</td>" : "") + '<td class="note">' + esc(f.src) + "</td></tr>").join("") + "</tbody></table></div></details>" +
+    '<h3 style="margin:6px 0 0">선택지가 개인의 삶에 미치는 영향</h3><details class="src"><summary>선택지별 네 차원 효과 펼치기</summary><div style="display:grid;gap:10px;margin-top:8px">' + c.alts.map(a => '<div class="altc"><div class="hd"><span class="id">' + a.id + "</span><b>" + esc(a.name) + "</b></div><dl>" + WDIM.map(([k, l]) => "<dt>" + l + "</dt><dd>" + esc(a.eff[k]) + "</dd>").join("") + '</dl><p class="lose">가장 크게 잃는 사람 · ' + esc(a.loser) + "</p></div>").join("") + "</div></details>" +
+    '<h3 style="margin:6px 0 0">2030년 기대치' + (c.futures.rec_same ? "" : "로 본 권고의 효과") + '</h3><div class="tbl-wrap"><table class="tbl" style="min-width:520px"><thead><tr><th>집단</th><th>차원</th><th>2026년</th><th>' + (c.futures.rec_same ? "기대치" : "현 추세") + "</th>" + (c.futures.rec_same ? "" : "<th>권고 이행 시</th>") + '<th>가장 나쁜 미래</th></tr></thead><tbody>' + erows.join("") + "</tbody></table></div>" +
+    '<p class="note">' + esc(E.note) + (c.futures.rec_same ? " ▲▼는 2026년 대비 변화다." : " 현 추세 열의 ▲▼는 2026년 대비, 권고 이행 시 열의 ▲▼는 현 추세 대비 변화다.") + '</p><div class="lesson-box"><b>해석</b>' + esc(E.read) + "</div></section>" +
+    '<section class="stp">' + stpH(n10, "클리사의 판단과 전략 주체 순위의 차이") + '<p class="note">' + esc(H.note) + '</p><div class="divs">' +
+    H.items.map(x => '<article class="dv"><div class="hd"><span class="id">' + esc(x.alt) + "</span><b>" + esc((c.alts.find(a => a.id === x.alt) || {}).name || "") + '</b></div><dl><dt>전략 주체 기준</dt><dd>' + esc(x.client) + '</dd><dt>클리사의 판단</dt><dd class="cl">' + esc(x.clisa) + '</dd><dt>전략 주체가 치르는 것</dt><dd>' + esc(x.cost) + '</dd><dt>사람에게 돌아오는 것</dt><dd>' + esc(x.gain) + "</dd></dl></article>").join("") + "</div></section>";
+}
+function prevHtml(c){
+  const P = c.prev; if (!P || PUB()) return "";
+  return '<details class="src"><summary>' + esc(P.label) + '</summary><div style="display:grid;gap:10px;margin-top:8px"><p class="note"></p><ol class="synth">' +
+    P.conclusions.map(k => "<li><b>" + esc(k.id + " · " + k.t) + "</b><span>" + esc(k.why) + "</span></li>").join("") + '</ol><div class="verdict">' +
+    P.verdict.excluded.map(x => '<div class="misread"><b>제시하지 않음</b>' + esc(x) + "</div>").join("") + P.verdict.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "순위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + "</div></div></details>";
+}
+function briefHtml(c){
+  const B = c.brief || {};
+  const top = c.futures.items.slice().sort((a, b) => b.p - a.p)[0];
+  const W = (c.counter || [])[0];
+  const fcs = D.forecasts.filter(f => f.fp === c.fp && f.status === "open").sort((a, b) => a.due.localeCompare(b.due)).slice(0, 3);
+  return '<section class="brief"><dl class="tw">' +
+    (B.q ? "<dt>핵심 질문</dt><dd>" + esc(B.q) + "</dd>" : "") +
+    (B.a ? '<dt>판단</dt><dd class="ba">' + esc(B.a) + "</dd>" : "") +
+    '<dt>가장 유력한 전개</dt><dd><span class="mono" style="color:' + fcol(top.id) + '">' + top.id + "</span> " + esc(top.name) + ' <span class="mono">' + top.p + "%</span>" + (top.rng ? ' <span class="rng">(' + top.rng[0] + "~" + top.rng[1] + ")</span>" : "") + "</dd>" +
+    (W ? "<dt>상대편에서 본 최선의 수</dt><dd><b>" + esc(W.name.split(" ")[0]) + "</b> · " + esc(W.ranked[0].t) + "</dd>" : "") +
+    (B.eq ? "<dt>균형점</dt><dd>" + esc(B.eq) + "</dd>" : "") +
+    (B.human ? "<dt>개인에게 미치는 영향</dt><dd>" + esc(B.human) + "</dd>" : "") +
+    (fcs.length ? "<dt>주시할 신호와 검증 시점</dt><dd><ul>" + fcs.map(f => "<li>" + esc(f.q) + ' <span class="mono">' + f.p + "% · " + esc(f.due) + "</span></li>").join("") + "</ul></dd>" : "") +
+    "</dl></section>";
+}
+function precHtml(c){
+  const X = c.precedents;
+  const head = '<section class="stp">' + stpH(1, "선행 이력 조사") + '<p class="note">과거에 시도된 해법, 곧 협상의 형식·의제·순서와 합의의 이행·붕괴 경과, 성패의 원인을 먼저 파악하고, 이후의 판단을 이 선례와 대조한다.</p>';
+  if (!X) return head + '<p class="note">이 사안의 선행 이력 조사는 진행 중이다.</p></section>';
+  const vc = v => v === "지지" ? "ok" : v === "반박" ? "no" : "fix";
+  return head + (X.status && !PUB() ? '<p class="note"><span class="vd fix">' + esc(X.status) + "</span> 조사일 " + esc(X.asof || "") + "</p>" : "") +
+    '<div style="display:grid;gap:6px">' + X.items.map(p => '<details class="src prec"><summary><b>' + esc(p.name) + '</b> <span class="mono note">' + esc(p.period) + "</span></summary>" +
+      '<dl class="tw" style="margin-top:8px"><dt>형식</dt><dd>' + esc(p.format) + "</dd><dt>결과</dt><dd>" + esc(p.outcome) + "</dd><dt>원인</dt><dd>" + esc(p.why) + "</dd><dt>지금과 다른 점</dt><dd>" + esc(p.differs) + "</dd><dt>출처</dt><dd><ul>" + (p.sources || []).map(srcItem).join("") + "</ul></dd></dl></details>").join("") + "</div>" +
+    '<h3 style="margin:10px 0 0">기존 판단과의 대조</h3><div class="divs">' +
+      X.checks.map(k => '<article class="dv chk-' + vc(k.verdict) + '"><div class="hd"><span class="id">' + esc(k.claim) + '</span><span class="vd ' + vc(k.verdict) + '">' + esc(k.verdict) + '</span><span class="note mono">' + esc((k.precedents || []).join(", ")) + "</span></div><dl><dt>근거</dt><dd>" + esc(k.reason) + "</dd>" + (k.proposed ? '<dt>수정 제안</dt><dd class="cl">' + esc(k.proposed) + "</dd>" : "") + "</dl></article>").join("") + "</div>" +
+    (X.insight ? '<div class="lesson-box"><b>선례가 드러낸 점</b>' + esc(X.insight) + "</div>" : "") +
+    ((X.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + X.uncertain.length + "건</summary><ul>" + X.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</section>";
+}
+function exitBlock(c){
+  const x = exitCase(c.fp), E = D.exits; if (!x) return "";
+  return '<details class="src" id="exc-' + esc(c.fp) + '"><summary>각자의 눈과 출구 · 당사자별 인식과 체면을 지키는 출구</summary><div class="exc-body">' +
+    '<ol class="qs">' + E.questions.map(q => "<li>" + esc(q) + "</li>").join("") + "</ol>" +
+    '<div style="display:grid;gap:10px">' + x.parties.map(p =>
+      '<div class="eye"><div class="hd"><b>' + esc(nm(p.iso)) + '</b><span class="aim" title="목표 판별">' + esc(p.aim) + "</span></div><dl>" +
+      "<div><dt>상대에 대한 인식</dt><dd>" + esc(p.reads) + "</dd></div>" +
+      "<div><dt>가장 우려하는 것</dt><dd>" + esc(p.fear) + "</dd></div>" +
+      '<div><dt>물러서기 위해 국내에 제시해야 할 명분</dt><dd class="say">“' + esc(p.say) + "”</dd></div>" +
+      '</dl><p class="note">목표 판별 · ' + esc(p.aim_note) + "</p></div>").join("") + "</div>" +
+    '<div class="misread"><b>가장 위험한 오독</b>' + esc(x.misread) + "</div>" +
+    '<section class="sec"><h3>체면을 지키는 출구</h3>' + x.exits.map(e =>
+      '<div class="exit"><h5>' + esc(e.title) + "</h5><ul>" + Object.entries(e.claims).map(([k, v]) => "<li><b>" + esc(nm(k)) + "</b> “" + esc(v) + "”</li>").join("") + '</ul><p class="pre"><b>선례</b> · ' + esc(e.precedent) + '</p><p class="obs"><b>장애</b> · ' + esc(e.obstacle) + "</p></div>").join("") + "</section>" +
+    '<section class="sec"><h3>주시할 신호</h3><ul class="watch">' + x.signals.map(v => "<li>" + esc(v) + "</li>").join("") + "</ul></section>" +
+    '<p class="note">당사자의 인식과 출구는 분석 판단이며, 해당국의 공식 입장이 아니다.</p></div></details>';
+}
+function renderStrat(){
+  const ss = D.strategies || [];
+  const cur = ss.find(c => c.id === S.scase) || ss[0]; if (!cur) return;
+  const step = (n, t, body) => '<section class="stp">' + stpH(n, t) + body + "</section>";
+  const layer = (L, q) => '<div class="lyr l' + L + '"><b>' + LNAME[L] + "</b><span>" + esc(q) + "</span></div>";
+  const T = D.philosophy.tree.layers || [];
+  const lq = id => (T.find(x => x.id === id) || {}).q || "";
+  const c = cur, i = ss.indexOf(c), cl = c.client;
+  const an = FP_AN[c.fp] ? D.history.analogies.find(x => x.id === FP_AN[c.fp]) : null;
+  const pf = D.forecasts.filter(f => f.fp === c.fp).map(f => f.id);
+  $("#pane-strat").innerHTML =
+    '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석한다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 네 부분으로 구성된다.</p></div>' +
+    (ss.length > 1 ? '<div class="case-sw" role="tablist">' + ss.map(k => '<button type="button" role="tab" data-case="' + esc(k.id) + '" aria-selected="' + (k.id === c.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>" : "") +
+    '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + "</div>" +
+    briefHtml(c) +
+    '<details class="full"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body">' + concHtml(c) +
+      layer("1", lq("1")) +
+      precHtml(c) +
+      step(2, "사실 확인", '<ul class="facts">' + c.facts.map(f => "<li>" + esc(f) + "</li>").join("") + "</ul>" +
+        (c.law ? '<div class="lesson-box"><b>' + esc(c.law.title) + '</b><ul class="facts" style="margin-top:6px">' + c.law.points.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><p style="margin-top:8px;color:var(--ink)">' + esc(c.law.result) + "</p></div>" : "") +
+        (an ? '<details class="src"><summary>유사한 역사적 선례 · ' + esc(an.now) + "</summary>" + analogHtml(an, true) + "</details>" : "")) +
+      decHtml(c, 3) + exitBlock(c) +
+      step(4, "선택지 전수 검토", '<p class="note">전략 주체가 실제로 검토하는 선택지를 모두 포함한다. 도덕적 이유로 제외하지 않는다.' + (PUB() || c.id !== "korea" ? "" : "") + '</p><ul class="list">' + c.alts.map(a => '<li class="rv"><span><b style="font-family:var(--mono);color:var(--accent)">' + a.id + "</b> <b>" + esc(a.name) + "</b></span><p>" + esc(a.desc) + "</p></li>").join("") + "</ul>") +
+      step(5, "가장 영리한 상대의 대응", '<p class="note">' + esc(c.responses.note) + '</p><div class="tbl-wrap"><table class="tbl" style="min-width:640px"><thead><tr><th>안</th>' + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<th>" + esc(nm(k)) + "</th>").join("") + "</tr></thead><tbody>" + c.responses.rows.map(r => '<tr><td class="mono">' + esc(r.alt) + "</td>" + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<td>" + esc(r[k] || "") + "</td>").join("") + "</tr>").join("") + '</tbody></table></div><div class="lesson-box"><b>가장 영리한 상대를 가정하자 달라진 점</b>' + esc(c.responses.lesson) + "</div>") +
+      futHtml(c, 6) +
+      layer("2", lq("2")) +
+      step(7, "전략 주체와 목표", "<p><b>" + esc(cl.name) + '</b> · 목표의 순서 <span class="mono">' + esc(cl.order) + '</span></p><ul class="list goals">' + cl.goals.map(g => '<li class="rv"><span><b class="mono" style="color:var(--accent)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + '<br><span class="note">출처 · ' + esc(g.src) + "</span></p></li>").join("") + '</ul><p class="note">' + esc(cl.note) + "</p>") +
+      step(8, "목표별 선택지 평가", evalHtml(c)) +
+      step(9, "전략 주체 기준의 순위", '<div class="verdict">' + c.rank2.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "순위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") +
+        '<div class="lesson-box"><b>조합 안의 긴장</b>' + esc(c.rank2.tension) + '</div><div class="lesson-box"><b>전략 주체의 몫으로 남긴 것</b>' + esc(c.rank2.undecided) + "</div></div>") + swapHtml(c) + counterHtml(c) + twowayHtml(c) +
+      layer("3", lq("3")) +
+      humanHtml(c, 10, 11) +
+      layer("V", lq("V")) +
+      step(12, "전망과 반증 신호", '<ul class="list">' + c.predictions.map(p => '<li><div class="fc"><div class="q">' + esc(p.q) + '</div><div class="p">' + p.p + '<small>%</small></div><div class="foot"><span>검증 시점 <span class="mono">' + esc(p.due) + "</span></span><span>" + esc(p.note) + "</span></div></div></li>").join("") + '</ul><p class="note" style="margin-top:6px">이 사안의 관련 전망(' + pf.join(", ") + ')은 전망과 검증 탭에서 모두 확인할 수 있다. <button type="button" class="chip" data-go="forecast">전망과 검증 보기</button></p><h3 style="margin:10px 0 6px">판단을 재검토할 조건</h3><ul class="watch">' + c.falsify.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>") +
+      (PUB() || !c.changed ? "" : '<section class="sec"><h3></h3><ul class="list">' + c.changed.map(x => '<li class="rv"><p style="color:var(--ink)">' + esc(x) + "</p></li>").join("") + "</ul></section>") +
+      prevHtml(c) +
+      '<details class="src"><summary>출처 ' + c.sources.length + "건</summary><ul>" + c.sources.map(srcItem).join("") + "</ul></details>" +
+    "</div></details>" +
+    '<div class="chips" style="margin:0"><button type="button" class="chip" data-go="method">분석 방법 보기</button><button type="button" class="chip" data-fp="' + esc(c.fp) + '">지도에서 보기</button></div></article>';
+}
+function renderForecasts(){
+  const fs = D.forecasts.slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
+  const done = fs.filter(f => f.status === "yes" || f.status === "no");
+  const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
+  const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
+  $("#pane-forecast").innerHTML =
+    '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시한다. 검증 시점이 지나면 결과와 정확도를 공개하며, 빗나간 전망도 삭제하지 않고 보존한다.</p></div>' +
+    '<div class="score-card"><div><b class="mono">' + fs.length + '</b><span>전체 전망</span></div><div><b class="mono">' + done.length + '</b><span>검증 완료</span></div><div><b class="mono">' + brier + '</b><span>정확도(브라이어 점수)</span></div></div>' +
+    '<p class="note">정확도는 브라이어 점수, 곧 (확률 − 실제 결과)²의 평균으로 나타낸다. 0이 가장 정확하며, 모든 전망에 50%를 부여하면 0.25가 된다.' + (PUB() ? "" : "") + "</p>" +
+    '<section class="sec"><h3>빗나간 전망</h3><p class="note" style="margin-bottom:8px">50% 이상으로 본 전망이 불발되거나 50% 미만으로 본 전망이 실현된 경우다.</p>' + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : '<p class="note">검증이 끝난 전망이 아직 없다.</p>') + "</section>" +
+    ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + "</span></li>").join("") + "</ul></section>" : "") +
+    '<section class="sec"><h3>전체 전망 · 검증 시점 순</h3><ul class="list">' + fs.map(f => forecastRow(f, false)).join("") + "</ul></section>";
+}
+
+function frameworkHtml(){
+  const F = D.meta.framework; if (!F) return "";
+  return '<section class="sec method"><h3>분석 대상의 영역</h3><p class="note" style="margin-bottom:10px">사실에서 검증까지, 모든 판단은 앞 영역의 근거로 거슬러 올라가고 뒤 영역에서 검증되도록 구성했다. 영역마다 현재 갖춘 것과 보강이 필요한 것을 함께 밝힌다.</p><ol class="fw">' +
+    F.layers.map(l => '<li><div class="fw-h"><b>' + esc(l.n) + "</b><span>" + esc(l.q) + '</span></div><p><span class="ok">갖춤</span> ' + esc(l.have) + '</p><p><span class="gap">보강 필요</span> ' + esc(l.gap) + "</p></li>").join("") + "</ol></section>" +
+    '<section class="sec method"><h3>보강이 필요한 요소</h3><ul class="list">' + F.missing.map(m => '<li class="rv"><b>' + esc(m.t) + (m.status ? ' <span class="fit ' + (m.status === "일부" ? "part" : "no") + '">' + esc(m.status) + "</span>" : "") + "</b><p>" + esc(m.d) + (m.now ? '<br><span class="note">현재 · ' + esc(m.now) + "</span>" : "") + "</p></li>").join("") + "</ul></section>";
+}
+
+
+function readingHtml(){ /* v3.1 */
+  const F = D.philosophy, H = D.history;
+  return '<section class="sec"><h3>참고 자료 · 역사적 선례</h3><p class="note" style="margin-bottom:8px">현재 상황과 구조가 유사한 과거 사례와 그 전개, 현재에 대한 함의, 선례와 다른 점을 정리했다.</p><ul class="list">' + H.analogies.map(a => "<li>" + analogHtml(a, false) + "</li>").join("") + "</ul></section>" +
+    '<section class="sec"><h3>참고 자료 · 역사적 반복 유형</h3><ul class="list">' + H.laws.map(l => '<li class="law"><b>' + esc(l.t) + "</b><p>" + esc(l.d) + '</p><div class="chips" style="margin-top:4px">' + l.cases.map(chip).join("") + "</div></li>").join("") + "</ul></section>" +
+    '<section class="sec"><h3>참고 자료 · 참고 사상가</h3><p class="note" style="margin-bottom:8px">각 사상가의 핵심 명제와 현재 정세에 대한 적용, 역사에서 적중한 것과 빗나간 것을 정리했다. 관점을 켜면 해당 사상가가 주목한 지역이 지구본에서 강조된다.</p><ul class="list">' + D.thinkers.map(t => {
+      const on = S.lens && S.lens.id === t.id;
+      return '<li><article class="thinker"><div class="who"><h4>' + esc(t.name) + '</h4><span class="meta">' + esc(t.life) + " · " + esc(t.role) + '</span></div><div class="works">' + esc(t.works) + "</div>" +
+        "<dl><div><dt>핵심 명제</dt><dd>" + esc(t.idea) + "</dd></div><div><dt>현재 정세에 대한 적용</dt><dd>" + esc(t.now) + "</dd></div><div><dt>적중한 것과 빗나간 것</dt><dd>" + esc(t.record) + "</dd></div></dl>" +
+        '<button type="button" class="lens-btn" data-kind="shelf" data-lens="' + t.id + '" aria-pressed="' + !!on + '">' + (on ? "관점 끄기" : "지구본에서 보기 · " + LENS_NAME[t.id]) + "</button></article></li>";
+    }).join("") + "</ul></section>" +
+    '<section class="sec"><h3>목적에 제기되는 질문</h3><p class="note" style="margin-bottom:8px">개별 인간의 행복이라는 목적에 제기되는 철학적 질문과 주요 입장, 가장 강한 반론, 잠정적 답, 남는 문제, 그 답이 분석에 반영되는 방식을 정리했다.</p>' + F.questions.map(q =>
+      '<details class="pq" id="pq-' + q.id + '"><summary><b>' + esc(q.id + ". " + q.title) + '</b> <span class="aim">' + (q.prev_answer && !PUB() ? "" : "잠정적 답") + '</span></summary><div class="pq-body">' +
+      "<div><h5>지정학에서 부딪히는 장면</h5><p>" + esc(q.scene) + "</p></div>" +
+      "<div><h5>주요 입장</h5><ul>" + q.positions.map(p => "<li><b>" + esc(p.who) + "</b> · " + esc(p.view) + "</li>").join("") + "</ul></div>" +
+      '<div class="obj"><h5>가장 강한 반론</h5><p>' + esc(q.objection) + "</p></div>" +
+      '<div class="ans"><h5>잠정적 답</h5><p style="color:var(--ink)">' + esc(q.answer) + "</p></div>" +
+      (q.prev_answer && !PUB() ? '<div><h5></h5><p class="note">' + esc(q.prev_answer) + "</p></div>" : "") +
+      "<div><h5>남는 문제</h5><p>" + esc(q.remains) + "</p></div>" +
+      '<div class="rule"><h5>분석에 반영하는 방식</h5><p>' + (PUB() ? "" : "<b>" + esc(q.rule.id) + "</b> · ") + esc(q.rule.text) + "</p></div>" +
+      "</div></details>").join("") + '<p class="note" style="margin-top:8px">' + esc(F.note) + "</p></section>";
+}
+function renderMethod(){
+  const F = D.philosophy, M = D.methodology, I = D.indicator;
+  const R = F.rules || [];
+  const qByRule = {}; R.forEach(r => qByRule[r.id] = r.q);
+  const rc = r => '<button type="button" class="rchip" data-q="' + esc(qByRule[r] || "") + '">' + esc(r) + "</button>";
+  const T = F.tree, LY = T.layers || [];
+  const stepsOf = L => T.steps.filter(s => s.L === L);
+  const P = F.prev, pub = PUB();
+  const inner = !pub; /* 작업 설명서는 내부판에만 */
+  $("#pane-method").innerHTML =
+    '<div class="sec"><h2>분석 방법</h2><p class="lead" style="margin-top:8px">클리사 지오폴리틱스의 목적과 판단의 구성, 검증 방식, 자료와 한계를 밝힌다. 궁극적 목적은 개별 인간의 행복이며, 이는 계산의 변수가 아니라 모든 분석의 방향을 정하는 기준이다.</p>' + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
+    '<section class="sec"><h3>헌장' + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" +
+    '<section class="sec"><h3>판단의 구성</h3><div class="tree"><div class="root">' + esc(T.root) + '</div><div class="arrow"></div>' +
+      '<div class="layers">' + LY.map(l => '<div class="layer l' + l.id + '"><div class="lh"><b>' + esc(LNAME[l.id]) + "</b><span>" + esc(l.q) + '</span></div><p class="note">' + esc(l.d) + "</p>" +
+        (inner ? '<ol class="steps" style="counter-reset:st ' + ((stepsOf(l.id)[0] || {n: 1}).n - 1) + '">' + stepsOf(l.id).map(st => "<li><div><b>" + esc(st.t) + "</b><p>" + esc(st.d) + "</p>" + st.rules.map(rc).join("") + "</div></li>").join("") + "</ol>" : "") + "</div>").join("") + "</div>" +
+      '<div class="rules2"><div class="lesson-box"><b>편집 원칙 · 권고하지 않는 것의 유일한 기준</b>' + esc(T.editorial) + '</div><div class="lesson-box"><b>품질 기준</b>' + esc(T.quality) + "</div></div></div></section>" +
+    (inner ? '<section class="sec method"><h3>단계별 명세</h3><p class="note" style="margin-bottom:8px">단계마다 목적, 입력, 핵심 질문, 산출물, 규칙, 흔한 실패를 명시한다. 단계를 선택하면 펼쳐진다.</p><div style="display:grid;gap:6px">' +
+      M.steps.map(st => '<details class="mstep"><summary><i class="l' + st.L + '">' + st.n + "</i><b>" + esc(st.t) + "</b><em>" + esc(LNAME[st.L]) + (st.rules.length ? " · " + st.rules.join(" · ") : "") + "</em></summary><dl>" +
+        "<dt>목적</dt><dd>" + esc(st.aim) + "</dd><dt>입력</dt><dd>" + esc(st.in) + "</dd><dt>핵심 질문</dt><dd><ul>" + st.ask.map(q => "<li>" + esc(q) + "</li>").join("") + "</ul></dd>" +
+        "<dt>산출물</dt><dd>" + esc(st.out) + "</dd>" + (st.rules.length ? "<dt>규칙</dt><dd>" + st.rules.map(rc).join(" ") + "</dd>" : "") +
+        '<dt>흔한 실패</dt><dd class="bad">' + esc(st.fail) + "</dd></dl></details>").join("") + "</div></section>" +
+    '<section class="sec"><h3>규칙 · 부분별</h3>' + LY.map(l => { const rs = R.filter(r => r.L === l.id); return rs.length ? '<h4 class="rl-h">' + esc(LNAME[l.id]) + '</h4><ul class="list">' + rs.map(r => '<li style="display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:13px;align-items:start">' + rc(r.id) + "<span>" + esc(r.text) + (r.from ? '<br><span class="note">' + esc(r.from) + "</span>" : "") + (r.prev ? '<details class="src" style="margin-top:4px"><summary></summary><p class="note">' + esc(r.prev) + "</p></details>" : "") + "</span></li>").join("") + "</ul>" : ""; }).join("") + "</section>" : "") +
+    (M.changes && inner ? '<section class="sec method"><h3></h3><div class="tbl-wrap"><table class="tbl" style="min-width:560px"><thead><tr><th></th><th></th><th></th></tr></thead><tbody>' + M.changes.map(x => "<tr><td><b>" + esc(x.t) + "</b></td><td>" + esc(x.was) + "</td><td>" + esc(x.now) + "</td></tr>").join("") + "</tbody></table></div></section>" : "") +
+    (M.intent_types && inner ? '<section class="sec method"><h3>의지 지표 · 신호의 신뢰도</h3><p class="note" style="margin-bottom:8px">의지는 말보다 비용이 수반된 행동에서 먼저 확인한다. 보내는 데 비용이 들고 되돌리기 어려운 신호일수록 신뢰도가 높다. 신뢰도가 높은 순서로 배열했다.</p><div class="tbl-wrap"><table class="tbl" style="min-width:600px"><thead><tr><th>신호</th><th>신뢰할 수 있는 이유</th><th>함정</th><th>예</th></tr></thead><tbody>' +
+      M.intent_types.map(t => "<tr><td><b>" + esc(t.k) + "</b></td><td>" + esc(t.why) + '</td><td class="note">' + esc(t.trap) + "</td><td>" + esc(t.ex) + "</td></tr>").join("") + "</tbody></table></div></section>" : "") +
+    (inner ? '<section class="sec method"><h3>산출 양식</h3><div class="tmpl">' + M.outputs.map(o => '<div class="' + (o.kind === "산출" ? "" : "chk") + '"><span class="kind">' + esc(o.kind) + "</span><b>" + esc(o.k) + "</b><p>" + esc(o.t) + "</p><ol>" + o.fields.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></div>").join("") + "</div></section>" : "") +
+    (inner ? '<section class="sec method"><h3>' + esc(I.title) + ' · 공식과 출처</h3><p>' + esc(I.unit) + '</p><div class="idim" style="margin-top:8px">' + I.dims.map(d => "<div><b>" + esc(d.name) + "</b><code>" + esc(d.formula) + "</code><ul>" + d.parts.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul><small>출처 · " + esc(d.src) + "</small></div>").join("") + "</div>" +
+      '<h3 style="margin-top:14px">지표의 규칙</h3><ul>' + I.rules.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>"
+     : '<section class="sec method"><h3>' + esc(I.title) + '</h3><p>' + esc(I.unit) + ' 지표는 ' + I.dims.map(d => esc(d.name)).join(", ") + '의 네 차원으로 이루어지며, 차원들을 하나의 점수로 합치지 않는다.</p><ul style="margin-top:6px">' + I.dims.map(d => "<li><b>" + esc(d.name) + "</b> · 출처 " + esc(d.src) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>") +
+    '<section class="sec method"><h3>검증과 갱신</h3><ul>' + M.update.map(x => "<li>" + esc(x) + "</li>").join("") + "<li>국가 프로필, 분쟁지, 전망은 하나의 자료 파일에 담겨 있어, 새로 조사한 자료로 파일을 교체하면 사이트 전체가 갱신된다.</li><li>" + (pub ? "이미 공개한 판단을 바꿀 때는 전망과 검증 탭의 판단 변경 공지에 날짜와 변경 내용, 그 이유를 밝힌다." : "") + "</li><li>전망은 삭제하지 않는다. 검증 시점이 지나면 실현·불발을 밝히고 정확도에 반영한다. 질문이 만들어진 시점에 이미 답이 정해져 있었던 전망은 무효로 표시하고 정확도에서 뺀다.</li></ul></section>" +
+    (inner ? frameworkHtml() : "") +
+    '<section class="sec method"><h3>분석 범위</h3><p>' + esc(D.meta.scope) + ". 지도에 색이 있는 국가가 분석 대상이며, 회색은 아직 분석 범위 밖의 국가다. EU·NATO는 국가가 아니므로 별도 프로필로 다룬다.</p></section>" +
+    '<section class="sec method"><h3>수치와 점수</h3><ul>' + D.meta.method.map(m => "<li>" + esc(m) + "</li>").join("") + "</ul></section>" +
+    (P && inner ? '<section class="sec"><details class="src"><summary>' + esc(P.label) + '</summary><div style="display:grid;gap:8px;margin-top:8px"><div class="charter">' + P.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + "<small>" + esc(it.by) + "</small></p></div>").join("") + '</div><ul class="facts">' + P.gates.map(g => "<li><b>" + esc(g.label) + "</b> · " + esc(g.t) + " → " + esc(g.fail) + "</li>").join("") + "</ul></div></details></section>" : "") +
+    '<p class="note" style="margin:4px 0 12px">철학적 질문과 참고 자료(역사적 선례, 반복 유형, 참고 사상가)는 <button type="button" class="chip" data-go="grand">국제 질서 탭</button>에서 볼 수 있다. 국가별로 확인하지 못한 사항은 각 국가 화면에 있다.</p>' +
+    ((D.meta.uncertain || []).length ? '<section class="sec method"><h3>자료 전반의 미확인 사항</h3><details class="src"><summary>특정 국가에 속하지 않는 항목 ' + D.meta.uncertain.length + "건</summary><ul>" + D.meta.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details></section>" : "") +
+    '<section class="sec method"><h3>용어 해설</h3><div class="tbl-wrap"><table class="tbl"><tbody>' + M.terms.map(t => '<tr><td style="white-space:nowrap"><b>' + esc(t[0]) + "</b></td><td>" + esc(t[1]) + "</td></tr>").join("") + "</tbody></table></div></section>" +
+    '<section class="sec method"><h3>자료 출처</h3><p class="note" style="margin-bottom:6px">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토한다.</p><ul><li>국경선: Natural Earth 1:50m (world-atlas). 국경 표기는 정치적 입장을 나타내지 않는다.</li><li>국방비: SIPRI Military Expenditure Database · 핵탄두: SIPRI Yearbook 2026 · 병력: IISS Military Balance · 경제: IMF WEO</li></ul></section>';
+}
+
+/* v3.3 */
+const MAIL = "clisageo@clisa.ai";
+let HASH_READY = false;
+function leadBold(t){
+  const m = String(t).match(/^(.+?\.)\s(.+)$/s);
+  return m ? "<b>" + esc(m[1]) + "</b> " + esc(m[2]) : esc(t);
+}
+function mailRow(subject){
+  const href = "mailto:" + MAIL + "?subject=" + encodeURIComponent(subject);
+  return '<span class="mailrow"><span class="mail"><a href="' + esc(href) + '">' + MAIL + '</a></span><button type="button" class="copy-btn" data-copy="' + MAIL + '">주소 복사</button></span>';
+}
+function footHtml(noMail){
+  return '<footer class="site-foot">' + (noMail ? "" : '<p class="fb">사실의 오류나 판단에 대한 반대 근거는 아래 주소로 알려 주십시오. 확인된 오류는 바로잡고 그 내역을 밝힙니다.</p>' +
+    mailRow("[클리사 지오폴리틱스] 의견")) +
+    "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>" +
+    "<p>© 2026 고재성(도구컨설팅). 클리사 지오폴리틱스의 화면·문안·점수 산식·방법론과 자료 편집물의 권리는 고재성에게 있으며, 출처(클리사 지오폴리틱스)를 밝히면 인용·공유할 수 있습니다.</p></footer>";
+}
+function caseFbHtml(c){
+  const name = String(c.title || "").split(":")[0];
+  return '<div class="case-fb"><b>이 분석에 대한 의견</b><span>' + esc(name) + " 분석의 사실 오류나 반대 근거, 빠진 선례가 있으면 알려 주십시오. 제목에 사안 이름을 적어 주시면 확인이 빠릅니다.</span>" + mailRow("[클리사 지오폴리틱스] " + name + " 분석 의견") + "</div>";
+}
+function withFoot(fn, pane, extra){
+  return function(){
+    const r = fn.apply(this, arguments);
+    const el = document.getElementById(pane);
+    if (el && !el.querySelector(":scope > .site-foot")) {
+      const x = extra ? extra() : ""; if (x) el.insertAdjacentHTML("beforeend", x);
+      el.insertAdjacentHTML("beforeend", footHtml(!!x));
+    }
+    return r;
+  };
+}
+renderOverview = withFoot(renderOverview, "pane-overview");
+renderDetail = withFoot(renderDetail, "pane-detail");
+renderGrand = withFoot(renderGrand, "pane-grand");
+renderForecasts = withFoot(renderForecasts, "pane-forecast");
+renderMethod = withFoot(renderMethod, "pane-method");
+renderStrat = withFoot(renderStrat, "pane-strat", () => { const ss = D.strategies || []; const c = ss.find(x => x.id === S.scase) || ss[0]; return c ? caseFbHtml(c) : ""; });
+
+/* 탭·사안 주소: #strat, #korea 같은 짧은 표식만 쓴다 */
+function applyHash(){
+  let h = ""; try { h = decodeURIComponent(location.hash.slice(1)); } catch(e){}
+  if (!h) return;
+  const ss = D.strategies || [];
+  if (ss.some(c => c.id === h)) { S.scase = h; renderStrat(); switchTab("strat"); return; }
+  if (h !== "detail" && document.getElementById("pane-" + (TAB_ALIAS[h] || h))) switchTab(h);
+}
+const _switchTab = switchTab;
+switchTab = function(t){
+  _switchTab(t);
+  if (HASH_READY && S.tab !== "detail") {
+    const tok = S.tab === "strat" ? (S.scase || "strat") : S.tab;
+    try { history.replaceState(null, "", "#" + tok); } catch(e){}
+  }
+  if (narrow()) {
+    const pr = document.getElementById("panel").getBoundingClientRect();
+    if (pr.top < 0 || (S.tab === "detail" && pr.top > innerHeight * 0.55)) document.getElementById("panel").scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"});
+  }
+  updTop();
+};
+addEventListener("hashchange", () => { if (D) applyHash(); });
+
+/* 넓게 읽기 */
+(function(){
+  const b = document.getElementById("widebtn"), app = document.querySelector(".app");
+  const set = on => { app.classList.toggle("wide", on); b.setAttribute("aria-pressed", on); b.textContent = on ? "기본 폭" : "넓게 읽기"; store.set("ep.wide", on ? "1" : "0"); };
+  set(store.get("ep.wide") === "1");
+  b.onclick = () => set(!app.classList.contains("wide"));
+})();
+
+/* 위로 가기 */
+const topBtn = document.getElementById("totop");
+function updTop(){
+  if (!topBtn) return;
+  if (narrow()) { const p = document.getElementById("panel"); topBtn.hidden = !(scrollY > p.offsetTop + 900); }
+  else { const a = document.getElementById("pane-" + S.tab); topBtn.hidden = !(a && a.scrollTop > 900); }
+}
+document.getElementById("panel").addEventListener("scroll", updTop, true);
+addEventListener("scroll", updTop, {passive:true});
+topBtn.onclick = () => {
+  if (narrow()) document.getElementById("panel").scrollIntoView({block:"start"});
+  else { const a = document.getElementById("pane-" + S.tab); if (a) a.scrollTop = 0; }
+  updTop();
+};
+
+/* 주소 복사 */
+document.addEventListener("click", ev => {
+  const b = ev.target.closest("[data-copy]"); if (!b) return;
+  const v = b.dataset.copy, old = b.textContent;
+  const done = ok => { b.textContent = ok ? "복사했습니다" : "주소를 선택했습니다"; setTimeout(() => b.textContent = old, 1600); };
+  const sel = () => { const m = b.parentElement.querySelector(".mail"); if (m) { const r = document.createRange(); r.selectNodeContents(m); const w = getSelection(); w.removeAllRanges(); w.addRange(r); } done(false); };
+  try { navigator.clipboard.writeText(v).then(() => done(true), sel); } catch(e){ sel(); }
+});
+})();
+</script>
+
+</body>
+</html>
