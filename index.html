@@ -4,7 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%231B4F8A'/%3E%3Cpath d='M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28' stroke='%23fff' stroke-width='1.6' fill='none'/%3E%3C/svg%3E">
-<meta property="og:title" content="클리사 지오폴리틱스">
+<meta name="description" content="한국의 관점에서 동북아 안보와 강대국 경쟁, 유럽·중동의 분쟁을 분석하는 지정학 대시보드입니다. 사안마다 정세 판단, 전략 평가, 개인에게 미치는 영향과 확률 전망을 제공합니다.">
+<link rel="canonical" href="https://geo.clisa.ai/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="클리사 지오폴리틱스">
+<meta property="og:title" content="클리사 지오폴리틱스 | 지정학 분석과 전망">
+<meta property="og:description" content="한국의 관점에서 동북아 안보와 강대국 경쟁, 유럽·중동의 분쟁을 분석하는 지정학 대시보드입니다. 사안마다 정세 판단, 전략 평가, 개인에게 미치는 영향과 확률 전망을 제공합니다.">
+<meta property="og:url" content="https://geo.clisa.ai/">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "클리사 지오폴리틱스", "alternateName": "Clisa Geopolitics", "url": "https://geo.clisa.ai/", "description": "한국의 관점에서 동북아 안보와 강대국 경쟁, 유럽·중동의 분쟁을 분석하는 지정학 대시보드입니다. 사안마다 정세 판단, 전략 평가, 개인에게 미치는 영향과 확률 전망을 제공합니다.", "inLanguage": "ko-KR"}</script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} html,body{height:100%} body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif} img{max-width:100%} [hidden]{display:none!important}</style>
 <title>클리사 지오폴리틱스</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,7 +155,9 @@ details.src ul{margin:8px 0 0; padding-left:18px; font-size:12px; display:grid; 
 .st.no{color:var(--conflict); border-color:var(--conflict)}
 /* v3.0 */ .st.void{color:var(--ink-3,#888); border-color:var(--l3); text-decoration:line-through}
 .fc .vr{font-size:12px; color:var(--ink-2); margin-top:4px}
-.aiprec{display:grid; gap:6px} .aiprec .dv dl{margin-top:4px}
+.aiprec{display:grid; gap:6px}
+/* v3.7 */ .dv dd,.dv dt{overflow-wrap:anywhere} .divs > *, .futs > *, .fut > *, .stp > *, .full-body > *, .pane > *, article.sec > *{min-width:0}
+/* v3.5 */ .theo .tl-w{font-size:12.5px; color:var(--ink-2)} .theo .kd{font:600 10.5px var(--mono); color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:0 5px; margin-right:6px} .aiprec .dv dl{margin-top:4px}
 .trend .pn{font-size:12.5px; color:var(--ink-2); margin-top:6px}
 .prob{height:4px; background:var(--panel-2); border-radius:2px; grid-column:1/-1; overflow:hidden}
 .prob i{display:block; height:100%; background:var(--accent)}
@@ -589,7 +600,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
         <button type="button" class="wide-btn" id="widebtn" aria-pressed="false" title="읽기 영역 넓히기" aria-label="읽기 영역 넓히기">⇔</button>
       </nav>
       <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
-      <div class="pane" id="pane-overview" role="tabpanel"></div>
+      <div class="pane" id="pane-overview" role="tabpanel"><div class="sec"><p class="lead">클리사 지오폴리틱스는 국제 정세를 한국의 관점에서 분석하는 사이트입니다. 동북아 안보, 강대국 경쟁, 유럽과 중동의 분쟁 등 주요 사안마다 사실 확인에서 출발해 정세 판단, 선택지별 전략 평가, 개인과 기업에 미치는 영향, 확률로 표시한 전망을 제시합니다. 국가별 현황과 국제 질서의 흐름은 지구본에서 함께 볼 수 있습니다.</p></div></div>
       <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
       <div class="pane" id="pane-detail" role="tabpanel" hidden></div>
       <div class="pane" id="pane-grand" role="tabpanel" hidden></div>
@@ -1277,9 +1288,24 @@ function aiHtml(c){
   const A = c.ai; if (!A) return "";
   return '<div class="aibox"><div class="aih"><span class="aitag">AI 변수</span><b>' + esc(A.t) + '</b></div><dl class="tw"><dt>쟁점</dt><dd>' + esc(A.stake) + "</dd><dt>영향</dt><dd>" + esc(A.moves) + "</dd><dt>전략 주체가 쥔 것</dt><dd>" + esc(A.lever) + '</dd><dt>선행 신호</dt><dd><ul>' + A.signs.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></dd></dl>' + (A.review ? '<p class="note"><span class="vd ' + (A.review === "통과" ? "ok" : "fix") + '">독립 반론 검토</span> ' + esc(A.review) + '</p>' : '') /* v3.0b */ + aiPrecHtml(A.prec, A.prec_insight) + '<p class="note">AI가 지정학에 미치는 영향 전반은 <button type="button" class="chip" data-go="grand">국제 질서 탭의 구조적 흐름</button>에서 볼 수 있다.</p></div>';
 }
+function theoryHtml(c){
+  const X = c.theory; if (!X || !(X.links || []).length) return "";
+  const vc = v => v === "지지" || v === "부합" ? "ok" : v === "반박" || v === "상충" ? "no" : "fix";
+  const byC = {}; X.links.forEach(l => (byC[l.claim] = byC[l.claim] || []).push(l));
+  const ct = id => { const k = (c.conclusions || []).find(x => x.id === id); return k ? k.t : ""; };
+  return '<details class="src theo"><summary>이론과 고전으로 본 판단 · 대조 ' + X.links.length + '건</summary>' +
+    (X.status && !PUB() ? '<p class="note" style="margin-top:6px"><span class="vd fix">' + esc(X.status) + "</span></p>" : "") +
+    '<p class="note" style="margin:6px 0 8px">주요 결론을 같은 구조를 다룬 고전과 연구에 대조했다. 고전과 이론도 검증 대상으로 보아, 판단을 지지하는지·조건을 붙이는지·반박하는지와 그 이론이 틀렸던 경우를 함께 밝힌다.</p><div class="aiprec">' +
+    Object.keys(byC).map(id => '<article class="dv"><div class="hd"><span class="id">' + esc(id) + '</span><span class="note">' + esc(ct(id)) + "</span></div><ul class=\"list\" style=\"margin-top:6px\">" +
+      byC[id].map(l => '<li><span class="kd">' + esc(l.kind) + '</span><b>' + esc(l.work) + '</b> <span class="vd ' + vc(l.verdict) + '">' + esc(l.verdict) + "</span><p>" + esc(l.idea) + '</p><p class="tl-w">맞닿는 곳 · ' + esc(l.fit) + '</p><p class="tl-w">한계 · ' + esc(l.limit) + "</p>" +
+        ((l.sources || []).length ? '<details class="src"><summary>출처</summary><ul>' + l.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</li>").join("") + "</ul></article>").join("") +
+    (X.insight ? '<div class="lesson-box"><b>대조가 드러낸 점</b>' + esc(X.insight) + "</div>" : "") +
+    ((X.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + X.uncertain.length + "건</summary><ul>" + X.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
+    "</div></details>";
+}
 function aiPrecHtml(L, ins){
   if (!L || !L.length) return "";
-  const vc = v => v === "지지" ? "ok" : v === "반박" ? "no" : "fix";
+  const vc = v => v === "지지" || v === "부합" ? "ok" : v === "반박" || v === "상충" ? "no" : "fix";
   return '<details class="src"><summary>선례 대조 · 판단 ' + L.length + '건</summary><div class="aiprec" style="margin-top:8px">' +
     L.map(k => '<article class="dv chk-' + vc(k.verdict) + '"><div class="hd"><span class="id">' + esc(k.claim) + '</span><span class="vd ' + vc(k.verdict) + '">' + esc(k.verdict) + "</span></div><dl><dt>근거</dt><dd>" + esc(k.reason) + "</dd><dt>대조한 선례</dt><dd><ul>" +
       k.precedents.map(p => "<li><b>" + esc(p.name) + '</b> <span class="mono note">' + esc(p.period) + "</span><br>" + esc(p.what) + '<br><span class="note">' + esc(p.relevance) + "</span>" + (p.sources && p.sources.length ? '<ul>' + p.sources.map(srcItem).join("") + "</ul>" : "") + "</li>").join("") + "</ul></dd></dl></article>").join("") +
@@ -1380,11 +1406,11 @@ function precHtml(c){
   const X = c.precedents;
   const head = '<section class="stp">' + stpH(1, "선행 이력 조사") + '<p class="note">과거에 시도된 해법, 곧 협상의 형식·의제·순서와 합의의 이행·붕괴 경과, 성패의 원인을 먼저 파악하고, 이후의 판단을 이 선례와 대조한다.</p>';
   if (!X) return head + '<p class="note">이 사안의 선행 이력 조사는 진행 중이다.</p></section>';
-  const vc = v => v === "지지" ? "ok" : v === "반박" ? "no" : "fix";
+  const vc = v => v === "지지" || v === "부합" ? "ok" : v === "반박" || v === "상충" ? "no" : "fix";
   return head + (X.status && !PUB() ? '<p class="note"><span class="vd fix">' + esc(X.status) + "</span> 조사일 " + esc(X.asof || "") + "</p>" : "") +
     '<div style="display:grid;gap:6px">' + X.items.map(p => '<details class="src prec"><summary><b>' + esc(p.name) + '</b> <span class="mono note">' + esc(p.period) + "</span></summary>" +
       '<dl class="tw" style="margin-top:8px"><dt>형식</dt><dd>' + esc(p.format) + "</dd><dt>결과</dt><dd>" + esc(p.outcome) + "</dd><dt>원인</dt><dd>" + esc(p.why) + "</dd><dt>지금과 다른 점</dt><dd>" + esc(p.differs) + "</dd><dt>출처</dt><dd><ul>" + (p.sources || []).map(srcItem).join("") + "</ul></dd></dl></details>").join("") + "</div>" +
-    '<h3 style="margin:10px 0 0">기존 판단과의 대조</h3><div class="divs">' +
+    '<h3 style="margin:10px 0 0">' + (PUB() ? "선례에 비춘 판단" : "기존 판단과의 대조") + '</h3><div class="divs">' +
       X.checks.map(k => '<article class="dv chk-' + vc(k.verdict) + '"><div class="hd"><span class="id">' + esc(k.claim) + '</span><span class="vd ' + vc(k.verdict) + '">' + esc(k.verdict) + '</span><span class="note mono">' + esc((k.precedents || []).join(", ")) + "</span></div><dl><dt>근거</dt><dd>" + esc(k.reason) + "</dd>" + (k.proposed ? '<dt>수정 제안</dt><dd class="cl">' + esc(k.proposed) + "</dd>" : "") + "</dl></article>").join("") + "</div>" +
     (X.insight ? '<div class="lesson-box"><b>선례가 드러낸 점</b>' + esc(X.insight) + "</div>" : "") +
     ((X.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + X.uncertain.length + "건</summary><ul>" + X.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</section>";
@@ -1419,7 +1445,7 @@ function renderStrat(){
     '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석한다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 네 부분으로 구성된다.</p></div>' +
     (ss.length > 1 ? '<div class="case-sw" role="tablist">' + ss.map(k => '<button type="button" role="tab" data-case="' + esc(k.id) + '" aria-selected="' + (k.id === c.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>" : "") +
     '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + "</div>" +
-    briefHtml(c) +
+    briefHtml(c) + theoryHtml(c) +
     '<details class="full"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body">' + concHtml(c) +
       layer("1", lq("1")) +
       precHtml(c) +
@@ -1451,7 +1477,7 @@ function renderForecasts(){
   const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
   const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
   $("#pane-forecast").innerHTML =
-    '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시한다. 검증 시점이 지나면 결과와 정확도를 공개하며, 빗나간 전망도 삭제하지 않고 보존한다.</p></div>' +
+    '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시한다. 검증 시점이 지나면 실현 여부와 정확도를 밝히고, 빗나간 전망도 삭제하지 않는다.</p></div>' +
     '<div class="score-card"><div><b class="mono">' + fs.length + '</b><span>전체 전망</span></div><div><b class="mono">' + done.length + '</b><span>검증 완료</span></div><div><b class="mono">' + brier + '</b><span>정확도(브라이어 점수)</span></div></div>' +
     '<p class="note">정확도는 브라이어 점수, 곧 (확률 − 실제 결과)²의 평균으로 나타낸다. 0이 가장 정확하며, 모든 전망에 50%를 부여하면 0.25가 된다.' + (PUB() ? "" : "") + "</p>" +
     '<section class="sec"><h3>빗나간 전망</h3><p class="note" style="margin-bottom:8px">50% 이상으로 본 전망이 불발되거나 50% 미만으로 본 전망이 실현된 경우다.</p>' + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : '<p class="note">검증이 끝난 전망이 아직 없다.</p>') + "</section>" +
@@ -1543,6 +1569,8 @@ function footHtml(noMail){
   return '<footer class="site-foot">' + (noMail ? "" : '<p class="fb">사실의 오류나 판단에 대한 반대 근거는 아래 주소로 알려 주십시오. 확인된 오류는 바로잡고 그 내역을 밝힙니다.</p>' +
     mailRow("[클리사 지오폴리틱스] 의견")) +
     "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>" +
+    "<p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p>" +
+    "<p>이 사이트는 회원 가입이 없고 방문자 추적 도구를 쓰지 않습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
     "<p>© 2026 고재성(도구컨설팅). 클리사 지오폴리틱스의 화면·문안·점수 산식·방법론과 자료 편집물의 권리는 고재성에게 있으며, 출처(클리사 지오폴리틱스)를 밝히면 인용·공유할 수 있습니다.</p></footer>";
 }
 function caseFbHtml(c){
