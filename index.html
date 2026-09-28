@@ -556,6 +556,13 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   .tabs button{padding:12px 7px 10px; font-size:12.5px}
 }
 
+/* v3.15 고전 인용·국내 여론 */
+.ins-q{margin:8px 0 0; padding:8px 12px; border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 6px 6px 0}
+.insights li .ins-q p{margin:0; font:500 14px/1.7 var(--sans); color:var(--ink)}
+.ins-q cite{display:block; margin-top:3px; font:400 12px/1.5 var(--sans); font-style:normal; color:var(--muted)}
+.ins-q .note{display:block; margin-top:5px; font-size:12.5px; line-height:1.65}
+.pub .pub-s{margin-top:4px; font-size:12.5px; color:var(--ink); overflow-wrap:anywhere}
+.pub .hd .id{white-space:normal}
 /* v3.13 사이트 검색 */
 .srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
 .srch-open:hover{border-color:var(--ink-2)}
@@ -733,7 +740,7 @@ function srBuild(){
   for (const [iso, c] of Object.entries(D.countries)) add("나라", c.name_ko + (c.leader ? " · " + String(c.leader).split(/[,/(]/)[0].trim() : ""), c, () => { selectCountry(iso, true); return "pane-detail"; });
   D.flashpoints.forEach(fp => add("분쟁 지점", fp.name_ko, fp, () => { selectFp(fp.id); return "pane-detail"; }));
   (D.strategies || []).forEach(c => add("전략 분석 사안", c.title, c, toPane("strat", () => { S.scase = c.id; renderStrat(); })));
-  (D.insights || []).forEach(k => add("현재 정세", String(k.t).split(/(?<=다\.)\s/)[0], k.t, toPane("overview")));
+  (D.insights || []).forEach(k => add("현재 정세", String(k.t).split(/(?<=다\.)\s/)[0], [k.t, k.classic || ""], toPane("overview")));
   (D.digest || []).forEach(g => add("현재 정세", g.t, g.d, toPane("overview")));
   D.forecasts.forEach(f => add("전망", f.q, [f.q, f.basis, f.void || ""], toPane("forecast")));
   const G = D.grand || {};
@@ -1198,7 +1205,7 @@ function renderOverview(){
   const up = D.forecasts.filter(f => f.status === "open").slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p).slice(0, 3);
   $("#pane-overview").innerHTML =
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">주요 판단</h2><p class="meta" style="margin-top:4px">기준일 <span class="mono">' + esc(D.meta.asof) + '</span></p><p class="lead" style="margin-top:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 각 판단의 근거는 전략 분석에서, 그 검증은 전망과 검증에서 확인할 수 있습니다.</p></div>' +
-    ((D.insights || []).length ? '<ol class="insights">' + D.insights.map(k => { const c = cs.find(x => x.id === k.case); return "<li><p>" + leadBold(k.t) + '</p><div class="chips" style="margin-top:6px;align-items:center">' + (k.review ? '<span class="vd ok" title="분석 맥락을 공유하지 않는 검토자가 반대 선례와 가장 강한 반론을 찾는 절차">독립 반론 검토 · ' + esc(k.review) + "</span>" : "") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">근거 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + (k.fc || []).map(id => '<span class="mono note">' + esc(id) + "</span>").join(" ") + "</div></li>"; }).join("") + "</ol>" : "") +
+    ((D.insights || []).length ? '<ol class="insights">' + D.insights.map(k => { const c = cs.find(x => x.id === k.case); return "<li><p>" + leadBold(k.t) + "</p>" + (k.classic ? '<blockquote class="ins-q"><p>“' + esc(k.classic.q) + '”</p><cite>' + esc(k.classic.src) + '</cite><span class="note">' + esc(k.classic.note) + "</span></blockquote>" : "") + '<div class="chips" style="margin-top:6px;align-items:center">' + (k.review ? '<span class="vd ok" title="분석 맥락을 공유하지 않는 검토자가 반대 선례와 가장 강한 반론을 찾는 절차">독립 반론 검토 · ' + esc(k.review) + "</span>" : "") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">근거 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + (k.fc || []).map(id => '<span class="mono note">' + esc(id) + "</span>").join(" ") + "</div></li>"; }).join("") + "</ol>" : "") +
     (up.length ? '<section class="sec"><h3>다가오는 검증</h3><ul class="list">' + up.map(f => forecastRow(f, true)).join("") + '</ul><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기</button></p></section>' : "") +
     '<section class="sec"><h3>정세 요약</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     (cs.length ? '<section class="sec"><h3>전략 분석 사안</h3><div class="chips" style="margin:0">' + cs.map(c => '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(c.title.split(":")[0]) + "</button>").join("") + "</div></section>" : "") +
@@ -1488,6 +1495,14 @@ function theoryHtml(c){
     ((X.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + X.uncertain.length + "건</summary><ul>" + X.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
     "</div></details>";
 }
+function publicsHtml(c){
+  const X = c.publics; if (!X || !(X.items || []).length) return "";
+  return '<details class="src theo pub"><summary>국내 여론과 협상의 폭 · 조사 ' + X.items.length + '건</summary>' +
+    '<p class="note" style="margin:6px 0 8px">전략 평가는 정부의 목표를 기준으로 하지만, 정부가 실제로 고를 수 있는 선택지의 폭은 국내 여론이 정합니다. 결정권을 가진 나라의 여론 조사를 조사기관의 원문으로 확인해, 판단과 어긋나는 곳과 판단을 바꿀 신호를 밝힙니다. 기관마다 문항이 달라 서로 다른 조사를 한 시계열로 잇지 않았습니다.</p><div class="aiprec">' +
+    X.items.map(p => '<article class="dv"><div class="hd"><span class="id">' + esc(p.who) + '</span></div><p style="margin-top:4px"><b>' + esc(p.q) + '</b></p><p class="mono pub-s">' + esc(p.series) + ' <span class="note">(' + esc(p.unit) + ')</span></p><p class="note">최근 조사 · ' + esc(p.latest) + "</p><p>" + esc(p.read) + '</p><p class="tl-w">주의 · ' + esc(p.caveat) + "</p>" +
+      ((p.sources || []).length ? '<details class="src"><summary>출처</summary><ul>' + p.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</article>").join("") +
+    '<div class="lesson-box"><b>여론이 정하는 협상의 폭</b>' + esc(X.read) + (X.watch ? '<p class="tl-w" style="margin-top:6px">판단을 바꿀 신호 · ' + esc(X.watch) + "</p>" : "") + "</div></div></details>";
+}
 function aiPrecHtml(L, ins){
   if (!L || !L.length) return "";
   const vc = v => v === "지지" || v === "부합" ? "ok" : v === "반박" || v === "상충" ? "no" : "fix";
@@ -1630,7 +1645,7 @@ function renderStrat(){
     '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석합니다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 네 부분으로 구성됩니다.</p></div>' +
     (ss.length > 1 ? '<div class="case-sw" role="tablist">' + ss.map(k => '<button type="button" role="tab" data-case="' + esc(k.id) + '" aria-selected="' + (k.id === c.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>" : "") +
     '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + "</div>" +
-    briefHtml(c) + theoryHtml(c) +
+    briefHtml(c) + theoryHtml(c) + publicsHtml(c) +
     '<details class="full"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body">' + concHtml(c) +
       layer("1", lq("1")) +
       precHtml(c) +
