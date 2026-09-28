@@ -644,6 +644,10 @@ const REGIONS = ["동아시아","동남아시아","남아시아","중앙아시�
 const S = { layer: store.get("ep.layer2") || "focus", prevTab: "overview", showFp:true, showEdge:true, sel:null, selFp:null, lens:null, hover:null, hoverFp:null, rot:HOME.slice(), k:HOME_K, tab:"overview", scase: null };
 if (!LAYERS[S.layer]) S.layer = "focus";
 let D = null, features = [], byIso = {}, borders = null, C = {}, labelPos = {};
+/* v3.9 움직이는 동안(자전·끌기·확대·이동)과 좁은 화면에서는 단순화한 경계(점 약 12%)로 그린다. 멈추면 넓은 화면은 정밀 경계로 다시 그린다 */
+let LITE = null, motionUntil = 0, drewLite = false, wrapVisible = true;
+const moving = () => performance.now() < motionUntil;
+const markMotion = () => { motionUntil = performance.now() + 300; };
 const grat = d3.geoGraticule10();
 const wrap = $("#wrap"), base = $("#base"), over = $("#over");
 const bctx = base.getContext("2d"), octx = over.getContext("2d");
@@ -683,14 +687,15 @@ function srcItem(s){
 /* ---------- load ---------- */
 Promise.all([
   fetch("data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-  fetch("data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-]).then(([d, w]) => init(d, w)).catch(err => {
+  fetch("data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
+  fetch("data/world-lite.json").then(r => r.ok ? r.json() : null).catch(() => null)
+]).then(([d, w, lw]) => init(d, w, lw)).catch(err => {
   console.error(err);
   $("#loading").textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
 });
 
 const PUB = () => !!(D && D.meta && D.meta.edition === "public");
-function init(d, w){
+function init(d, w, lw){
   D = d;
   $("#asof").textContent = D.meta.asof; $("#ver").textContent = PUB() ? "" : D.meta.version;
   if (PUB()) { const tb = $("#tab-discuss"); if (tb) tb.remove(); const v = $("#ver"); if (v && v.previousSibling) v.previousSibling.textContent = v.previousSibling.textContent.replace(" · ", ""); }
@@ -701,6 +706,14 @@ function init(d, w){
   for (const f of features) { f.iso = numToIso[+f.id] || null; if (f.iso) byIso[f.iso] = f; }
   features.sort((a, b) => (a.iso ? 1 : 0) - (b.iso ? 1 : 0));
   borders = topojson.mesh(w, w.objects.countries, (a, b) => a !== b);
+  if (lw) {
+    const lf = topojson.feature(lw, lw.objects.countries).features, lb = {};
+    for (const f of lf) { f.iso = numToIso[+f.id] || null; if (f.iso) lb[f.iso] = f; }
+    lf.sort((a, b) => (a.iso ? 1 : 0) - (b.iso ? 1 : 0));
+    LITE = { features: lf, byIso: lb, borders: topojson.mesh(lw, lw.objects.countries, (a, b) => a !== b) };
+  }
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => { wrapVisible = es[0].isIntersecting; }).observe(wrap);
+  addEventListener("scroll", () => { if (narrow()) spinHold(1500); }, {passive:true});
   for (const iso of Object.keys(byIso)) labelPos[iso] = LABEL_AT[iso] || d3.geoCentroid(byIso[iso]);
   D.flashpoints.forEach((fp, i) => fp.phase = (i * 0.137) % 1);
   const addF = (iso, v) => { FOCUS[iso] = (FOCUS[iso] || 0) + v; };
@@ -765,10 +778,12 @@ function drawBase(){
   g.addColorStop(0, C.ocean); g.addColorStop(1, C.ocean2);
   bctx.beginPath(); pathB({type:"Sphere"}); bctx.fillStyle = g; bctx.fill();
   bctx.beginPath(); pathB(grat); bctx.strokeStyle = C.grat; bctx.lineWidth = 0.6; bctx.stroke();
-  for (const f of features) { bctx.beginPath(); pathB(f); bctx.fillStyle = fillFor(f); bctx.fill(); }
-  bctx.beginPath(); pathB(borders); bctx.strokeStyle = C.border; bctx.lineWidth = 0.5; bctx.stroke();
-  if (S.hover && byIso[S.hover] && S.hover !== S.sel) { bctx.beginPath(); pathB(byIso[S.hover]); bctx.strokeStyle = C.ink; bctx.lineWidth = 1.2; bctx.stroke(); }
-  if (S.sel && byIso[S.sel]) { bctx.beginPath(); pathB(byIso[S.sel]); bctx.strokeStyle = C.accent; bctx.lineWidth = 2.4; bctx.stroke(); }
+  const lite = !!LITE && (narrow() || moving()); drewLite = lite && !narrow();
+  const FS = lite ? LITE.features : features, BI = lite ? LITE.byIso : byIso;
+  for (const f of FS) { bctx.beginPath(); pathB(f); bctx.fillStyle = fillFor(f); bctx.fill(); }
+  bctx.beginPath(); pathB(lite ? LITE.borders : borders); bctx.strokeStyle = C.border; bctx.lineWidth = 0.5; bctx.stroke();
+  if (S.hover && BI[S.hover] && S.hover !== S.sel) { bctx.beginPath(); pathB(BI[S.hover]); bctx.strokeStyle = C.ink; bctx.lineWidth = 1.2; bctx.stroke(); }
+  if (S.sel && BI[S.sel]) { bctx.beginPath(); pathB(BI[S.sel]); bctx.strokeStyle = C.accent; bctx.lineWidth = 2.4; bctx.stroke(); }
   bctx.beginPath(); pathB({type:"Sphere"}); bctx.strokeStyle = C.line; bctx.lineWidth = 1; bctx.stroke();
   const cc = center(); $("#readout").textContent = "중심 " + fmtDeg(cc[0], "E", "W") + " " + fmtDeg(cc[1], "N", "S") + " · " + S.k.toFixed(1) + "×";
 }
@@ -844,16 +859,17 @@ function requestDraw(all){
 /* v3.9 자전: 360°/480초. 지구본을 만지거나 국가를 고르면 멈추고, 20초 뒤 다시 돈다. 움직임 줄이기 설정이면 돌지 않는다 */
 const SPIN = { on: store.get("ep.spin") !== "0", until: 0, last: 0, dps: 360 / 480 };
 function spinHold(ms){ SPIN.until = performance.now() + (ms || 20000); }
-function spinActive(now){ return SPIN.on && !reduceMotion && !dragging && S.tab !== "detail" && now > SPIN.until && document.visibilityState === "visible"; }
+function spinActive(now){ return SPIN.on && !reduceMotion && !dragging && wrapVisible && S.tab !== "detail" && now > SPIN.until && document.visibilityState === "visible"; }
 function loop(){
   if (reduceMotion) return;
   const tick = t => {
     if (D && spinActive(t)) {
       const dt = SPIN.last ? Math.min(0.2, (t - SPIN.last) / 1000) : 0;
-      if (t - (SPIN.drawn || 0) > 66) { S.rot = [S.rot[0] + SPIN.dps * (t - (SPIN.drawn || t)) / 1000, S.rot[1], S.rot[2] || 0]; SPIN.drawn = t; requestDraw(true); }
+      if (t - (SPIN.drawn || 0) > 66) { S.rot = [S.rot[0] + SPIN.dps * (t - (SPIN.drawn || t)) / 1000, S.rot[1], S.rot[2] || 0]; SPIN.drawn = t; markMotion(); requestDraw(true); }
       SPIN.last = t;
     } else { SPIN.last = 0; SPIN.drawn = 0; }
-    if (D && S.showFp && !scheduled && t - lastOver > 33) { drawOver(t); lastOver = t; }
+    if (D && drewLite && !moving() && !scheduled) requestDraw(true);
+    if (D && wrapVisible && S.showFp && !scheduled && t - lastOver > (narrow() ? 66 : 33)) { drawOver(t); lastOver = t; }
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
@@ -877,7 +893,7 @@ function setupInteraction(){
   // wheel / pinch zoom only; one-finger or mouse drag rotates the globe freely (trackball)
   const zoom = d3.zoom().scaleExtent([0.7, 10])
     .filter(ev => ev.type === "wheel" || (ev.touches && ev.touches.length > 1))
-    .on("zoom", ev => { S.k = ev.transform.k; requestDraw(); });
+    .on("zoom", ev => { S.k = ev.transform.k; markMotion(); requestDraw(); });
   sel.call(zoom).on("dblclick.zoom", null);
   sel.call(zoom.transform, d3.zoomIdentity.scale(HOME_K));
   let v0 = null, r0 = null, q0 = null;
@@ -895,7 +911,7 @@ function setupInteraction(){
       const p = projection.rotate(r0).invert([ev.x, ev.y]);
       if (!p || !isFinite(p[0]) || !isFinite(p[1])) return;
       const q1 = versor.multiply(q0, versor.delta(v0, versor.cartesian(p)));
-      S.rot = versor.rotation(q1); requestDraw();
+      S.rot = versor.rotation(q1); markMotion(); requestDraw();
     })
     .on("end", () => { v0 = null; dragging = false; });
   sel.call(drag);
@@ -973,7 +989,7 @@ function flyTo(lon, lat, exact){
   const c1 = [lon, Math.max(-80, Math.min(80, exact ? lat : lat * 0.85))];
   if (reduceMotion) { S.rot = [-c1[0], -c1[1], 0]; requestDraw(); return; }
   const gi = d3.geoInterpolate(c0, c1), t0 = performance.now();
-  const step = now => { const k = Math.min(1, (now - t0) / 900), e = d3.easeCubicInOut(k), c = gi(e); S.rot = [-c[0], -c[1], g0 * (1 - e)]; requestDraw(); if (k < 1) requestAnimationFrame(step); };
+  const step = now => { const k = Math.min(1, (now - t0) / 900), e = d3.easeCubicInOut(k), c = gi(e); S.rot = [-c[0], -c[1], g0 * (1 - e)]; markMotion(); requestDraw(); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }
 function setLayer(l){
