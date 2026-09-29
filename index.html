@@ -659,6 +659,9 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .bstrip .bs-d{font:500 12px var(--mono); color:var(--muted); white-space:nowrap}
 .bstrip .bs-t{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .bstrip .bs-go{color:var(--accent); font-weight:700}
+.bstrip .bs-t{transition:opacity .35s ease} .bstrip .bs-t.fade{opacity:0}
+.bstrip .bs-n{font:500 11.5px var(--mono); color:var(--muted); white-space:nowrap}
+.brief .bi.hl{background:var(--hl, rgba(27,79,138,.08)); border-radius:6px; transition:background 1.2s}
 @media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
 .brief{display:grid; gap:12px; border-left:3px solid var(--accent); padding-left:14px}
 .brief .bh{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap} .brief .bh h2{margin:0} .brief .bd{font:600 14px var(--mono); color:var(--accent)}
@@ -701,7 +704,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
     <div class="toggles">
       <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></button>
     </div>
-    <button type="button" class="bstrip" id="bstrip" hidden><span class="bs-k">정세 브리핑</span><span class="bs-d" id="bsd"></span><span class="bs-t" id="bst"></span><span class="bs-go" aria-hidden="true">›</span></button>
+    <button type="button" class="bstrip" id="bstrip" hidden><span class="bs-k">정세 브리핑</span><span class="bs-d" id="bsd"></span><span class="bs-t" id="bst" aria-live="off"></span><span class="bs-n" id="bsn"></span><span class="bs-go" aria-hidden="true">›</span></button>
   </header>
 
   <main class="stage">
@@ -1333,7 +1336,7 @@ function dailyIssue(x){
   const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
     return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + esc(f.id) + (F ? " " + F.p + "%" : "") + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
-  return x.items.map(i => '<article class="bi"><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + '</p><p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" +
+  return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + '</p><p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" +
       '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +
       ((i.src || []).length ? '<details class="src"><summary>출처 ' + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
     ((x.more || []).length ? '<div class="bm"><b>그 밖의 동향</b><ul>' + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + '" target="_blank" rel="noopener" class="note">출처</a>' : "") + "</li>").join("") + "</ul></div>" : "");
@@ -1351,8 +1354,20 @@ function loadBrief(){
   fetch("data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(b => {
     if (!b || !(b.issues || []).length) return;
     BR = b; const cur = b.issues[0];
-    $("#bsd").textContent = fmtKD(cur.date); $("#bst").textContent = (cur.items[0] || {}).h || ""; $("#bstrip").hidden = false;
-    $("#bstrip").onclick = () => { switchTab("overview"); const a = document.getElementById("brief"); if (a) a.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); };
+    const H = cur.items.map(i => i.h), N = H.length, st = $("#bstrip"), bt = $("#bst"), bn = $("#bsn");
+    let k = 0, hold = false;
+    const show = () => { bt.textContent = H[k] || ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; };
+    $("#bsd").textContent = fmtKD(cur.date); show(); st.hidden = false;
+    /* v3.20b 제목을 4초마다 한 건씩 바꿔 보인다. 마우스를 올리거나 누르고 있으면 멈추고, 움직임 줄이기 설정이면 돌지 않는다 */
+    if (N > 1 && !reduceMotion) setInterval(() => {
+      if (hold || document.visibilityState !== "visible") return;
+      bt.classList.add("fade"); setTimeout(() => { k = (k + 1) % N; show(); bt.classList.remove("fade"); }, 350);
+    }, 4000);
+    st.addEventListener("mouseenter", () => hold = true); st.addEventListener("mouseleave", () => hold = false);
+    st.addEventListener("focus", () => hold = true); st.addEventListener("blur", () => hold = false);
+    st.addEventListener("pointerdown", () => hold = true); st.addEventListener("pointercancel", () => hold = false);
+    st.onclick = () => { hold = false; switchTab("overview"); const a = document.getElementById("bi-" + k) || document.getElementById("brief");
+      if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } } };
     renderOverview(); SR.idx = null;
     if (!HASH0 && store.get("ep.brief") !== cur.date && S.tab !== "overview") switchTab("overview");
     store.set("ep.brief", cur.date);
