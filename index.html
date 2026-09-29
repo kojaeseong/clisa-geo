@@ -1367,7 +1367,7 @@ const ttsBtn = key => '<button type="button" class="tts" data-tts="' + esc(key) 
 function ttsVoice(){ try { return (speechSynthesis.getVoices() || []).find(v => /^ko/i.test(v.lang)) || null; } catch(e){ return null; } }
 function ttsText(key){
   const [k, id] = String(key).split(":");
-  if (k === "brief" && BR) { const x = BR.issues[0]; return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact).join(" ") + (x.week && (x.week.items || []).length ? " 주간 전망 점검. " + x.week.items.map(w => { const F = D.forecasts.find(z => z.id === w.id); return (F ? F.q : w.id) + ". " + (w.from === w.to ? w.to + "퍼센트 유지. " : w.from + "퍼센트에서 " + w.to + "퍼센트로. ") + w.why; }).join(" ") : ""); }
+  if (k === "brief" && BR) { const x = BR.issues[0]; return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact + (i.link ? " " + ttsNoParen(i.link) : "")).join(" ") + ((x.more || []).length ? " 그 밖의 동향. " + x.more.map(m => m.t).join(" ") : "") + (x.week && (x.week.items || []).length ? " 주간 전망 점검. " + x.week.items.map(w => { const F = D.forecasts.find(z => z.id === w.id); return (F ? F.q : w.id) + ". " + (w.from === w.to ? w.to + "퍼센트 유지. " : w.from + "퍼센트에서 " + w.to + "퍼센트로. ") + w.why; }).join(" ") : ""); }
   if (k === "digest") return "세계 정세 요약. " + D.digest.map(g => g.t + ". " + g.d).join(" ");
   if (k === "ins") return "주요 판단. " + (D.insights || []).map(g => { const a = String(g.t).split(/(?<=다\.)\s/); return a[0] + (a.length > 1 ? " 근거. " + a.slice(1).join(" ") : ""); }).join(" ");
   const cn = i => (D.countries[i] || {}).name_ko || i;
@@ -1385,6 +1385,8 @@ function ttsText(key){
   if (k === "country") { const c = D.countries[id]; if (!c) return ""; return c.name_ko + ". " + (c.situation || "") + " " + (c.recent || []).slice(-3).map(r => r.text).join(" "); }
   return "";
 }
+/* v3.23 브리핑 듣기: 판단과의 연결은 괄호 속 설명(사안 이름·결론 번호 등)을 빼고 읽는다 */
+const ttsNoParen = t => String(t).replace(/\s*\([^()]*\)/g, "");
 /* 멈춘 문장 위치를 기억했다가 같은 단추를 다시 누르면 거기서 이어 읽는다. 끝까지 들으면 처음으로 돌아간다 */
 /* 듣는 동안 화면이 절전으로 꺼지지 않게 한다(Screen Wake Lock, 지원 기기만) */
 async function ttsWake(on){
@@ -1453,7 +1455,7 @@ function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
   $("#pane-overview").innerHTML = dailyHtml() +
-    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">기준일 <span class="mono">' + esc(D.meta.asof) + "</span> · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
+    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? '<section class="sec"><h3>진행 중인 논의</h3>' + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + esc(t.opened) + " 개설 · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
