@@ -664,18 +664,24 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .bstrip .bs-go{color:var(--accent); font-weight:700}
 .bstrip .bs-t{transition:opacity .35s ease} .bstrip .bs-t.fade{opacity:0}
 .bstrip .bs-n{font:500 11.5px var(--mono); color:var(--muted); white-space:nowrap}
-.brief .bi.hl{background:var(--hl, rgba(27,79,138,.08)); border-radius:6px; transition:background 1.2s}
+.dbrief .bi.hl{background:var(--hl, rgba(27,79,138,.08)); border-radius:6px; transition:background 1.2s}
 @media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
-.brief{display:grid; gap:12px; border-left:3px solid var(--accent); padding-left:14px}
-.brief .bh{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap} .brief .bh h2{margin:0} .brief .bd{font:600 14px var(--mono); color:var(--accent)}
-.brief .bi{display:grid; gap:6px; padding-top:10px; border-top:1px solid var(--line)}
-.brief .bi h4{margin:0; font-size:15px; line-height:1.5}
-.brief .bi p{margin:0}
-.brief .bl{color:var(--ink-2); font-size:13.5px} .brief .bl-k{font-weight:700; color:var(--accent); margin-right:4px}
-.brief .bfc b{margin-left:2px} .brief .bfc-up b{color:var(--conflict)} .brief .bfc-down b{color:var(--accent)} .brief .bfc-none b{color:var(--muted)}
-.brief .bm{padding-top:10px; border-top:1px solid var(--line)} .brief .bm ul{margin:6px 0 0; padding-left:18px; display:grid; gap:4px; font-size:13.5px}
-.brief .bold > summary, .brief .bo > summary{cursor:pointer; font-weight:600; font-size:13.5px}
-.brief .bo{margin:8px 0 0 10px} .brief .bo > summary{font-weight:500}
+.dbrief{display:grid; gap:12px; border-left:3px solid var(--accent); padding-left:14px}
+.dbrief .bh{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap} .dbrief .bh h2{margin:0} .dbrief .bd{font:600 14px var(--mono); color:var(--accent)}
+.dbrief .bi{display:grid; gap:6px; padding-top:10px; border-top:1px solid var(--line)}
+.dbrief .bi h4{margin:0; font-size:15px; line-height:1.5}
+.dbrief .bi p{margin:0}
+.dbrief .bl{color:var(--ink-2); font-size:13.5px} .dbrief .bl-k{font-weight:700; color:var(--accent); margin-right:4px}
+.dbrief .bfc b{margin-left:2px} .dbrief .bfc-up b{color:var(--conflict)} .dbrief .bfc-down b{color:var(--accent)} .dbrief .bfc-none b{color:var(--muted)}
+.dbrief .bm{padding-top:10px; border-top:1px solid var(--line)} .dbrief .bm ul{margin:6px 0 0; padding-left:18px; display:grid; gap:4px; font-size:13.5px}
+.dbrief .bold > summary, .dbrief .bo > summary{cursor:pointer; font-weight:600; font-size:13.5px}
+.dbrief .bo{margin:8px 0 0 10px} .dbrief .bo > summary{font-weight:500}
+.tts{display:none; align-items:center; gap:4px; border:1px solid var(--line); background:var(--panel); color:var(--accent); border-radius:999px; padding:2px 11px; font:600 12px var(--sans); cursor:pointer; vertical-align:middle; white-space:nowrap}
+.tts-ok .tts{display:inline-flex} .tts[aria-pressed="true"]{background:var(--accent); color:var(--panel); border-color:var(--accent)}
+.dbrief .bh .tts{margin-left:auto}
+.dbrief .bw{padding-top:10px; border-top:1px solid var(--line); display:grid; gap:6px}
+.dbrief .bw h4{margin:0; font-size:15px} .dbrief .bw ul{margin:0; padding-left:18px; display:grid; gap:6px; font-size:13.5px}
+.dbrief .bw .pp{font:600 12.5px var(--mono); color:var(--accent); white-space:nowrap}
 .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
 
 /* v3.17 여섯 탭 */
@@ -1005,6 +1011,7 @@ function init(d, w){
   const t = store.get("ep.tab"); if (t && t !== "detail") switchTab(t);
   applyHash(); HASH_READY = true;
   setupSearch();
+  ttsSetup();
   loadBrief();
   loop();
 }
@@ -1328,7 +1335,7 @@ function renderLegend(){
 }
 function insightsHtml(){
   const cs = D.strategies || [];
-  return (D.insights || []).length ? '<section class="sec" id="s-ins"><h3>주요 판단</h3><p class="note" style="margin-bottom:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 번호를 누르면 그 판단을 가릴 전망으로, 아래 단추를 누르면 사안 분석으로 이동합니다.</p><ol class="ic-list">' + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = String(k.t).match(/^(.+?다\.)\s(.+)$/s); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
+  return (D.insights || []).length ? '<section class="sec" id="s-ins"><h3>주요 판단 ' + ttsBtn("ins") + '</h3><p class="note" style="margin-bottom:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 번호를 누르면 그 판단을 가릴 전망으로, 아래 단추를 누르면 사안 분석으로 이동합니다.</p><ol class="ic-list">' + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = String(k.t).match(/^(.+?다\.)\s(.+)$/s); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
       return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="이 판단을 가릴 전망으로 이동">' + esc(id) + "</button>").join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
         (rest ? '<details class="ic-more"><summary>근거 보기</summary><p>' + esc(rest) + "</p></details>" : "") + (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
 }
@@ -1343,12 +1350,49 @@ function dailyIssue(x){
   return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + '</p><p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" +
       '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +
       ((i.src || []).length ? '<details class="src"><summary>출처 ' + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
+    (x.week ? weekHtml(x.week) : "") +
     ((x.more || []).length ? '<div class="bm"><b>그 밖의 동향</b><ul>' + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + '" target="_blank" rel="noopener" class="note">출처</a>' : "") + "</li>").join("") + "</ul></div>" : "");
+}
+/* v3.22 주간 전망 점검: 월요일 호에 싣는다. week = {items:[{id, from, to, why}], note} */
+function weekHtml(w){
+  const li = it => { const F = D.forecasts.find(z => z.id === it.id);
+    return '<li><button type="button" class="fcchip" data-fc="' + esc(it.id) + '">' + esc(it.id) + '</button> ' + esc(F ? F.q : "") + ' <span class="pp">' + (it.from === it.to ? it.to + "% 유지" : it.from + "% → " + it.to + "%") + "</span><br>" + esc(it.why) + "</li>"; };
+  return '<div class="bw"><h4>주간 전망 점검</h4>' + (w.note ? '<p class="note" style="margin:0">' + esc(w.note) + "</p>" : "") + ((w.items || []).length ? "<ul>" + w.items.map(li).join("") + "</ul>" : "") + "</div>";
+}
+/* v3.22 듣기: 기기에 내장된 한국어 음성으로 읽는다(파일·서버 없음). 한국어 음성이 없는 기기에서는 단추가 보이지 않는다(.tts-ok) */
+const TTS = {btn:null};
+const ttsBtn = key => '<button type="button" class="tts" data-tts="' + esc(key) + '" aria-pressed="false">▶ 듣기</button>';
+function ttsVoice(){ try { return (speechSynthesis.getVoices() || []).find(v => /^ko/i.test(v.lang)) || null; } catch(e){ return null; } }
+function ttsText(key){
+  const [k, id] = String(key).split(":");
+  if (k === "brief" && BR) { const x = BR.issues[0]; return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact).join(" ") + (x.week && (x.week.items || []).length ? " 주간 전망 점검. " + x.week.items.map(w => { const F = D.forecasts.find(z => z.id === w.id); return (F ? F.q : w.id) + ". " + (w.from === w.to ? w.to + "퍼센트 유지. " : w.from + "퍼센트에서 " + w.to + "퍼센트로. ") + w.why; }).join(" ") : ""); }
+  if (k === "digest") return "세계 정세 요약. " + D.digest.map(g => g.t + ". " + g.d).join(" ");
+  if (k === "ins") return "주요 판단. " + (D.insights || []).map(g => String(g.t).split(/(?<=다\.)\s/)[0]).join(" ");
+  if (k === "case") { const c = (D.strategies || []).find(z => z.id === id); if (!c) return ""; const B = c.brief || {}; return c.title + ". " + (B.q ? "핵심 질문. " + B.q + " " : "") + (B.a ? "판단. " + B.a + " " : "") + (B.eq ? "균형점. " + B.eq + " " : "") + (B.human ? "개인에게 미치는 영향. " + B.human : ""); }
+  if (k === "country") { const c = D.countries[id]; if (!c) return ""; return c.name_ko + ". " + (c.situation || "") + " " + (c.recent || []).slice(-3).map(r => r.text).join(" "); }
+  return "";
+}
+function ttsStop(){ try { speechSynthesis.cancel(); } catch(e){} if (TTS.btn) { TTS.btn.setAttribute("aria-pressed", "false"); TTS.btn.textContent = "▶ 듣기"; } TTS.btn = null; }
+function ttsToggle(b){
+  if (TTS.btn === b) { ttsStop(); return; }
+  ttsStop(); const v = ttsVoice(), t = ttsText(b.dataset.tts); if (!v || !t) return;
+  const parts = t.replace(/\s+/g, " ").trim().split(/(?<=[.?!])\s+/).filter(Boolean);
+  TTS.btn = b; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤";
+  parts.forEach((x, n) => { const u = new SpeechSynthesisUtterance(x.trim()); u.voice = v; u.lang = v.lang; u.rate = 1.05;
+    if (n === parts.length - 1) u.onend = () => { if (TTS.btn === b) ttsStop(); };
+    speechSynthesis.speak(u); });
+}
+function ttsSetup(){
+  if (!("speechSynthesis" in window)) return;
+  const upd = () => document.documentElement.classList.toggle("tts-ok", !!ttsVoice());
+  upd(); try { speechSynthesis.addEventListener("voiceschanged", upd); } catch(e){}
+  document.addEventListener("click", e => { const b = e.target.closest("[data-tts]"); if (b) { e.preventDefault(); ttsToggle(b); } });
+  addEventListener("pagehide", ttsStop);
 }
 function dailyHtml(){
   if (!BR || !(BR.issues || []).length) return "";
   const cur = BR.issues[0], old = BR.issues.slice(1);
-  return '<section class="sec brief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + '</span></div>' +
+  return '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + '</span>' + ttsBtn("brief") + '</div>' +
     '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
     dailyIssue(cur) +
     (old.length ? '<details class="bold"><summary>지난 브리핑 ' + old.length + "건</summary>" + old.map(o => '<details class="bo"><summary>' + fmtKD(o.date) + " · " + esc((o.items[0] || {}).h || "") + "</summary>" + dailyIssue(o) + "</details>").join("") + "</details>" : "") +
@@ -1383,7 +1427,7 @@ function renderOverview(){
   $("#pane-overview").innerHTML = dailyHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">기준일 <span class="mono">' + esc(D.meta.asof) + "</span> · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
-    '<section class="sec"><h3>정세 요약</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+    '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? '<section class="sec"><h3>진행 중인 논의</h3>' + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + esc(t.opened) + " 개설 · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
     '<section class="sec"><h3>분쟁지 · 심각도 순</h3><ul class="list">' + fps.map(fp =>
       '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(fp.last_major_event?.date || "") + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>" +
@@ -1429,7 +1473,7 @@ function renderDetail(){
   const recent = (c.recent || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
   const fig = (label, val, sub) => "<div><dt>" + label + "</dt><dd>" + val + (sub ? "<small>" + sub + "</small>" : "") + "</dd></div>";
   el.innerHTML =
-    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p></div>" +
+    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + " " + (c.situation ? ttsBtn("country:" + c.iso) : "") + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p></div>" +
     '<p class="lead">' + esc(c.situation) + "</p>" + gsBlock(c) + countryIntentHtml(c) + countryPublicsHtml(c) + histBlock(c) +
     '<section class="sec"><h3>판단 점수 <span style="font-weight:400">(0–100)</span></h3><div class="scores">' + JLAYERS.map(k =>
       '<div class="score"><span' + (k === S.layer ? ' style="font-weight:600"' : "") + ">" + LAYERS[k].label + '</span><span class="track" style="height:8px;background:var(--panel-2);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:' + c.scores[k] + "%;background:" + ramp(k, c.scores[k]) + ';border-radius:0 4px 4px 0"></span></span><span class="mono" style="text-align:right;font-size:12px">' + c.scores[k] + "</span></div>").join("") + "</div></section>" +
@@ -1842,7 +1886,7 @@ function renderStrat(){
     insightsHtml() + upcomingHtml() +
     '<h3 id="s-case" style="margin:6px 0 0">사안별 분석 <span class="note" style="font-weight:400">· 사안 ' + ss.length + "건</span></h3>" +
     (ss.length > 1 ? '<div class="case-sw" role="tablist">' + ss.map(k => '<button type="button" role="tab" data-case="' + esc(k.id) + '" aria-selected="' + (k.id === c.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>" : "") +
-    '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + "</div>" +
+    '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + "</div>" +
     briefHtml(c) + theoryHtml(c) + publicsHtml(c) +
     '<details class="full"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body">' + concHtml(c) +
       layer("1", lq("1")) +
