@@ -1418,7 +1418,7 @@ function dyadHtml(a, b){
   return h + '<div class="chips" style="margin:0">' + chip(a) + chip(b) + "</div></div>";
 }
 let mxSel = ["USA", "CHN"];
-const ABBR = {USA:"미", CHN:"중", RUS:"러", EUR:"EU", JPN:"일", KOR:"한", PRK:"북", IND:"인", IRN:"이", TUR:"튀"};
+const ABBR = {USA:"미", CHN:"중", RUS:"러", EUR:"EU", JPN:"일", KOR:"한", PRK:"북", IND:"인", IRN:"이란", ISR:"이스", TUR:"튀"};
 function scoreBoxHtml(){
   const L = S.layer === "focus" ? "risk" : S.layer;
   const top = Object.values(D.countries).filter(c => !c.offmap && c.scores).sort((a, b) => b.scores[L] - a.scores[L]).slice(0, 10);
