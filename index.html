@@ -652,6 +652,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   .brand .edtag{order:3}
   .brand .asof{order:4; flex:none; white-space:nowrap; font-size:11px}
   .toggles{order:5; flex:1; width:auto; min-width:0}
+  .top:not(:has(.asof)) .toggles{flex:1 1 100%} /* v3.20d 공개판은 기준일이 없으므로 검색창이 한 줄을 다 쓴다 */
 }
 
 /* v3.20 정세 브리핑 */
@@ -975,7 +976,8 @@ Promise.all([
 const PUB = () => !!(D && D.meta && D.meta.edition === "public");
 function init(d, w){
   D = d;
-  $("#asof").textContent = D.meta.asof; $("#ver").textContent = PUB() ? "" : " · " + D.meta.version;
+  /* v3.20d 공개판 머리글에서 기준일을 뺀다(기준일은 세계 정세·사안·전망에 둠). 내부판은 기준일과 판 표시 유지 */
+  if (PUB()) { const as = document.querySelector(".top .asof"); if (as) as.remove(); } else { $("#asof").textContent = D.meta.asof; $("#ver").textContent = " · " + D.meta.version; }
   if (PUB()) { const tb = $("#tab-discuss"); if (tb) tb.remove(); }
   else { const b = document.createElement("span"); b.className = "edtag"; b.textContent = ""; $(".brand").appendChild(b); }
   const numToIso = {};
