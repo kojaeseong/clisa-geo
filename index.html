@@ -399,7 +399,7 @@ details.pq>summary b{font:700 16px var(--serif)}
 .sc.sz{color:var(--muted); border:1px solid var(--line)}
 .divs{display:grid; gap:10px}
 .dv{border:1px solid var(--line); border-left:3px solid var(--l3); border-radius:6px; padding:12px; display:grid; gap:8px}
-.dv .hd{display:flex; gap:8px; align-items:baseline} .dv .hd .id{font:600 12px var(--mono); color:var(--l3)} .dv .hd b{font-size:14px}
+.dv .hd{display:flex; flex-wrap:wrap; gap:8px; align-items:baseline} #c-pub{display:grid; gap:10px} #c-pub h3{margin:0} .dv .hd .id{font:600 12px var(--mono); color:var(--l3)} .dv .hd b{font-size:14px}
 .dv dl{margin:0; display:grid; grid-template-columns:118px 1fr; gap:6px 10px; font-size:12.5px}
 .dv dt{color:var(--muted); font-weight:600} .dv dd{margin:0; color:var(--ink-2)} .dv dd.cl{color:var(--ink); font-weight:600}
 @media (max-width:560px){.dv dl{grid-template-columns:1fr}}
@@ -663,10 +663,10 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .toc::-webkit-scrollbar{display:none}
 .toc button{flex:none; border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:3px 11px; font-size:12.5px; color:var(--ink-2); cursor:pointer; white-space:nowrap}
 .toc button:hover{border-color:var(--accent); color:var(--accent)}
-#pane-grand section[id], #pane-ideas section[id], #s-case, #s-ins, #f-all{scroll-margin-top:52px}
+#pane-grand section[id], #pane-ideas section[id], #s-case, #s-ins, #f-all, .dec, .dv, #c-intent{scroll-margin-top:52px}
 .fcf .chip.on{background:var(--ink); color:var(--panel); border-color:var(--ink)}
 .tabs.more{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent); mask-image:linear-gradient(90deg,#000 85%,transparent)}
-@media (max-width: 960px){ .toc{top:44px} #pane-grand section[id], #pane-ideas section[id], #s-case, #s-ins, #f-all{scroll-margin-top:100px} }
+@media (max-width: 960px){ .toc{top:44px} #pane-grand section[id], #pane-ideas section[id], #s-case, #s-ins, #f-all, .dec, .dv, #c-intent{scroll-margin-top:100px} }
 </style>
 </head>
 <body>
@@ -819,6 +819,13 @@ function srBuild(){
   for (const [iso, c] of Object.entries(D.countries)) add("나라", c.name_ko + (c.leader ? " · " + String(c.leader).split(/[,/(]/)[0].trim() : ""), c, () => { selectCountry(iso, true); return "pane-detail"; });
   D.flashpoints.forEach(fp => add("분쟁 지점", fp.name_ko, fp, () => { selectFp(fp.id); return "pane-detail"; }));
   (D.strategies || []).forEach(c => add("전략 분석 사안", c.title, c, toPane("strat", () => { S.scase = c.id; renderStrat(); })));
+  /* v3.19 여론·의지 항목을 따로 색인 */
+  const toCase = (id, tgt) => () => { S.scase = id; renderStrat(); switchTab("strat"); return tgt; }, cshort = c => String(c.title).split(":")[0];
+  (D.strategies || []).forEach(c => {
+    ((c.publics || {}).items || []).forEach((p, i) => add("전략 분석 사안", cshort(c) + " · 국내 여론 · " + p.who, [p, "여론"], toCase(c.id, "pub-" + c.id + "-" + i)));
+    ((c.deciders || {}).items || []).forEach(d => add("전략 분석 사안", cshort(c) + " · 결정권자 분석 · " + nm(d.iso), [d, "의지"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
+  });
+  for (const [iso, c] of Object.entries(D.countries)) if (c.intent) add("나라", c.name_ko + " · 의지 지표 · 말과 행동", [c.intent, "의지"], () => { selectCountry(iso, true); return "c-intent"; });
   (D.insights || []).forEach(k => add("주요 판단", String(k.t).split(/(?<=다\.)\s/)[0], [k.t, k.classic || ""], toPane("strat")));
   (D.digest || []).forEach(g => add("세계 정세", g.t, g.d, toPane("overview")));
   D.forecasts.forEach(f => add("전망", f.q, [f.q, f.basis, f.void || ""], toPane("forecast")));
@@ -869,7 +876,10 @@ function srRender(){
   const R = srSearch(q);
   if (!R.length) { box.innerHTML = '<div class="srch-empty">‘' + esc(q) + '’에 맞는 내용이 없습니다. 더 짧은 낱말이나 다른 이름으로 찾아 보십시오.</div>'; return; }
   let h = "";
-  for (const g of SR_ORDER) {
+  /* v3.19 제목이 맞은 묶음을 먼저 보인다. 점수가 같으면 SR_ORDER 순서 */
+  const best = {}; R.forEach(r => { if (!(r.e.g in best)) best[r.e.g] = r.sc; });
+  const GO = SR_ORDER.filter(g => g in best).sort((a, b) => best[b] - best[a] || SR_ORDER.indexOf(a) - SR_ORDER.indexOf(b));
+  for (const g of GO) {
     const rs = R.filter(r => r.e.g === g); if (!rs.length) continue;
     const lim = SR.more[g] ? rs.length : 5;
     h += '<div class="srch-g"><span>' + g + "</span><span>" + rs.length + "건</span></div>";
@@ -888,10 +898,11 @@ function srLand(paneId, vs){
   const pane = document.getElementById(paneId); if (!pane) return;
   const w = document.createTreeWalker(pane, NodeFilter.SHOW_TEXT); let n, hit = null;
   while ((n = w.nextNode())) { const t = srNorm(n.nodeValue); if (vs.some(v => t.includes(v))) { hit = n.parentElement; break; } }
-  if (!hit) return;
-  for (let p = hit; p && p !== pane; p = p.parentElement) if (p.tagName === "DETAILS") p.open = true;
-  const blk = hit.closest("li, article, section, details, p, dd, div") || hit;
-  blk.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"center"});
+  const scoped = !/^pane-/.test(paneId);
+  if (!hit) { if (!scoped) return; hit = pane; }
+  for (let p = hit; p && p !== (scoped ? document.body : pane); p = p.parentElement) if (p.tagName === "DETAILS") p.open = true;
+  const blk = hit === pane ? pane : (hit.closest("li, article, section, details, p, dd, div") || hit);
+  blk.scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block: blk.getBoundingClientRect().height > innerHeight * 0.7 ? "start" : "center"});
   blk.classList.add("srch-hit"); setTimeout(() => blk.classList.add("fade"), 1600); setTimeout(() => blk.classList.remove("srch-hit", "fade"), 3000);
 }
 function srOpen(){ if (!SR.idx) srBuild(); $("#srch").hidden = false; const i = $("#srchq"); i.focus(); i.select(); srRender(); }
@@ -1344,7 +1355,7 @@ function renderDetail(){
   const fig = (label, val, sub) => "<div><dt>" + label + "</dt><dd>" + val + (sub ? "<small>" + sub + "</small>" : "") + "</dd></div>";
   el.innerHTML =
     back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p></div>" +
-    '<p class="lead">' + esc(c.situation) + "</p>" + gsBlock(c) + countryIntentHtml(c) + histBlock(c) +
+    '<p class="lead">' + esc(c.situation) + "</p>" + gsBlock(c) + countryIntentHtml(c) + countryPublicsHtml(c) + histBlock(c) +
     '<section class="sec"><h3>판단 점수 <span style="font-weight:400">(0–100)</span></h3><div class="scores">' + JLAYERS.map(k =>
       '<div class="score"><span' + (k === S.layer ? ' style="font-weight:600"' : "") + ">" + LAYERS[k].label + '</span><span class="track" style="height:8px;background:var(--panel-2);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:' + c.scores[k] + "%;background:" + ramp(k, c.scores[k]) + ';border-radius:0 4px 4px 0"></span></span><span class="mono" style="text-align:right;font-size:12px">' + c.scores[k] + "</span></div>").join("") + "</div></section>" +
     '<section class="sec"><h3>능력 지표</h3><dl class="figs">' +
@@ -1368,7 +1379,7 @@ function countryIntentHtml(c){
   if (!v && !cases.length) return "";
   const row = x => '<tr><td><span class="sw ' + x.w + '">' + (x.w === "said" ? "말" : "행동") + '</span></td><td class="mono">' + esc(x.date) + "</td><td>" + esc(x.k) + "</td><td>" + esc(x.t) + "</td></tr>";
   const sig = v ? v.signals.slice().sort((a, b) => a.w === b.w ? String(b.date).localeCompare(String(a.date)) : (a.w === "said" ? -1 : 1)) : [];
-  return '<section class="sec"><h3>의지 지표 · 말과 행동</h3>' + (v ? '<p><span class="fit ' + fitCls(v.fit) + '">' + esc(v.fit) + '</span></p><div class="tbl-wrap intent-c"><table class="tbl" style="min-width:480px"><tbody>' + sig.map(row).join("") + '</tbody></table></div><p style="font-size:13px;color:var(--ink)">' + esc(v.read) + "</p>" : "") +
+  return '<section class="sec" id="c-intent"><h3>의지 지표 · 말과 행동</h3>' + (v ? '<p><span class="fit ' + fitCls(v.fit) + '">' + esc(v.fit) + '</span></p><div class="tbl-wrap intent-c"><table class="tbl" style="min-width:480px"><tbody>' + sig.map(row).join("") + '</tbody></table></div><p style="font-size:13px;color:var(--ink)">' + esc(v.read) + "</p>" : "") +
     (cases.length ? '<p class="note" style="margin-top:6px">이 국가가 결정권자로 등장하는 전략 분석 · ' + cases.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join(" ") + "</p>" : "") + "</section>";
 }
 function gsBlock(c){
@@ -1528,7 +1539,7 @@ function decHtml(c, n){
   const lvc = {"선호":"lv-a","수용":"lv-b","불편":"lv-c","거부":"lv-d"};
   const ul = a => "<ul>" + a.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>";
   return '<section class="stp">' + stpH(n, "결정권자 분석") + '<p class="note">결정권을 가진 각국이 문제를 어떻게 정의하는지, 무엇을 이루려 하며 어떤 수단을 쓰는지, 전략 주체의 선택지에 어떻게 대응할지를 해당국의 관점에서 정리하고, 각국이 선호하는 전개를 한 표로 비교합니다. 의지는 말과 비용이 수반된 행동으로 나누어 해석합니다.</p>' +
-    '<div class="decs">' + X.items.map((d, i) => '<details class="dec"' + (i === 0 ? " open" : "") + '><summary><span class="nm">' + esc(nm(d.iso)) + '</span><span class="pw">결정권 ' + esc(d.power) + '</span><span class="fr">' + esc(d.frame) + "</span></summary><dl>" +
+    '<div class="decs">' + X.items.map((d, i) => '<details class="dec" id="dec-' + esc(c.id) + '-' + d.iso + '"' + (i === 0 ? " open" : "") + '><summary><span class="nm">' + esc(nm(d.iso)) + '</span><span class="pw">결정권 ' + esc(d.power) + '</span><span class="fr">' + esc(d.frame) + "</span></summary><dl>" +
       "<dt>결정권의 수단</dt><dd>" + esc(d.means) + "</dd>" +
       "<dt>목표의 순위</dt><dd><ol>" + d.goals.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></dd>" +
       "<dt>전략</dt><dd>" + esc(d.strategy) + "</dd>" +
@@ -1585,12 +1596,28 @@ function theoryHtml(c){
     ((X.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + X.uncertain.length + "건</summary><ul>" + X.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
     "</div></details>";
 }
+/* v3.19 여론 조사 한 건. 사안과 나라 프로필이 함께 쓴다 */
+function pubArticle(p, id, hd){
+  return '<article class="dv"' + (id ? ' id="' + esc(id) + '"' : "") + '><div class="hd"><span class="id">' + esc(p.who) + '</span>' + (hd || "") + '</div><p style="margin-top:4px"><b>' + esc(p.q) + '</b></p><p class="mono pub-s">' + esc(p.series) + ' <span class="note">(' + esc(p.unit) + ')</span></p><p class="note">최근 조사 · ' + esc(p.latest) + "</p><p>" + esc(p.read) + '</p><p class="tl-w">주의 · ' + esc(p.caveat) + "</p>" +
+      ((p.sources || []).length ? '<details class="src"><summary>출처</summary><ul>' + p.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</article>";
+}
+/* v3.19 나라 프로필: 이 나라 국민을 대상으로 한 여론 조사를 사안에서 모아 보인다 */
+function countryPublicsHtml(c){
+  const alias = {"한국": "KOR"}, isoOf = n => alias[n] || (Object.values(D.countries).find(x => x.name_ko === n) || {}).iso;
+  const L = [];
+  (D.strategies || []).forEach(k => ((k.publics || {}).items || []).forEach((p, i) => {
+    const who = String(p.who).split(" · ")[0].split("·").map(x => isoOf(x.trim()));
+    if (who.includes(c.iso)) L.push({p, k, i});
+  }));
+  if (!L.length) return "";
+  return '<section class="sec" id="c-pub"><h3>국내 여론 · 조사 ' + L.length + "건</h3>" +
+    L.map(x => pubArticle(x.p, "", '<button type="button" class="chip" data-case="' + esc(x.k.id) + '" style="margin-left:auto">' + esc(String(x.k.title).split(":")[0]) + "</button>")).join("") + "</section>";
+}
 function publicsHtml(c){
   const X = c.publics; if (!X || !(X.items || []).length) return "";
-  return '<details class="src theo pub"><summary>국내 여론과 협상의 폭 · 조사 ' + X.items.length + '건</summary>' +
+  return '<details class="src theo pub" id="pub-' + esc(c.id) + '"><summary>국내 여론과 협상의 폭 · 조사 ' + X.items.length + '건</summary>' +
     '<p class="note" style="margin:6px 0 8px">전략 평가는 정부의 목표를 기준으로 하지만, 정부가 실제로 고를 수 있는 선택지의 폭은 국내 여론이 정합니다. 결정권을 가진 나라의 여론 조사를 조사기관의 원문으로 확인해, 판단과 어긋나는 곳과 판단을 바꿀 신호를 밝힙니다. 기관마다 문항이 달라 서로 다른 조사를 한 시계열로 잇지 않았습니다.</p><div class="aiprec">' +
-    X.items.map(p => '<article class="dv"><div class="hd"><span class="id">' + esc(p.who) + '</span></div><p style="margin-top:4px"><b>' + esc(p.q) + '</b></p><p class="mono pub-s">' + esc(p.series) + ' <span class="note">(' + esc(p.unit) + ')</span></p><p class="note">최근 조사 · ' + esc(p.latest) + "</p><p>" + esc(p.read) + '</p><p class="tl-w">주의 · ' + esc(p.caveat) + "</p>" +
-      ((p.sources || []).length ? '<details class="src"><summary>출처</summary><ul>' + p.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</article>").join("") +
+    X.items.map((p, i) => pubArticle(p, "pub-" + c.id + "-" + i)).join("") +
     '<div class="lesson-box"><b>여론이 정하는 협상의 폭</b>' + esc(X.read) + (X.watch ? '<p class="tl-w" style="margin-top:6px">판단을 바꿀 신호 · ' + esc(X.watch) + "</p>" : "") + "</div></div></details>";
 }
 function aiPrecHtml(L, ins){
