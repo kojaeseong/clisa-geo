@@ -626,6 +626,8 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .legend .mt[aria-pressed="false"] .kk{opacity:.45}
 .legend .mt span.kk{display:flex; align-items:center; gap:6px}
 .legend .mt{flex-wrap:wrap}
+.legend .mt .kk2{display:flex; flex-wrap:nowrap; gap:4px 12px; align-items:center} /* v3.20c 협력·동맹과 대립·교전을 한 줄에 */
+.legend .mt .kk2 .kk{white-space:nowrap}
 .legend .kk{display:flex; align-items:center; gap:6px; font-size:12px}
 .refs .ref{border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-top:8px; background:var(--panel)}
 .refs .ref > summary{cursor:pointer; font:600 14px var(--sans); color:var(--ink)}
@@ -1310,14 +1312,14 @@ function switchTab(t){
 function renderLegend(){
   if (!C.risk) return;
   const L = LAYERS[S.layer], stops = [0, .25, .5, .75, 1].map(v => C[S.layer](v)).join(",");
-  const line = (col, dash) => '<svg width="26" height="8" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>";
+  const line = (col, dash, w) => { w = w || 26; return '<svg width="' + w + '" height="8" aria-hidden="true"><line x1="1" y1="4" x2="' + (w - 1) + '" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>"; };
   const tk = S.layer === "focus" ? "<span>적음</span><span></span><span>많음</span>" : "<span>0</span><span>50</span><span>100</span>";
   const sw = (k, on, body) => '<button type="button" class="mt" data-mt="' + k + '" aria-pressed="' + on + '"><span class="sw" aria-hidden="true"></span>' + body + "</button>";
   $("#legend").innerHTML =
     '<div><label class="lt" for="lysel">지구본 색 기준</label><select id="lysel">' + Object.keys(LAYERS).map(k => '<option value="' + k + '"' + (k === S.layer ? " selected" : "") + ">" + LAYERS[k].label + "</option>").join("") + '</select><div class="ld">' + L.desc + "</div></div>" +
     '<div class="ramp" style="background:linear-gradient(90deg,' + stops + ')"></div><div class="ticks">' + tk + "</div>" +
     '<div class="keys"><div class="lt">표시 켜고 끄기</div>' +
-      sw("edge", S.showEdge, '<span class="kk">' + line(C.coop) + "협력·동맹</span><span class=\"kk\">" + line(C.conflict, true) + "대립·교전</span>") +
+      sw("edge", S.showEdge, '<span class="kk2"><span class="kk">' + line(C.coop, false, 18) + "협력·동맹</span><span class=\"kk\">" + line(C.conflict, true, 18) + "대립·교전</span></span>") +
       sw("fp", S.showFp, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.conflict + '" stroke="' + C.halo + '" stroke-width="1.5"/></svg>분쟁지 (크기 = 심각도)</span>') +
       '<div class="kk" style="padding-left:30px"><svg width="26" height="10" aria-hidden="true"><rect x="3" y="1" width="20" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>분석 범위 밖</div>' +
     "</div>";
