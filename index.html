@@ -1386,7 +1386,14 @@ function ttsText(key){
   return "";
 }
 /* 멈춘 문장 위치를 기억했다가 같은 단추를 다시 누르면 거기서 이어 읽는다. 끝까지 들으면 처음으로 돌아간다 */
+/* 듣는 동안 화면이 절전으로 꺼지지 않게 한다(Screen Wake Lock, 지원 기기만) */
+async function ttsWake(on){
+  try { if (on) { if (!TTS.wl && navigator.wakeLock) { TTS.wl = await navigator.wakeLock.request("screen"); TTS.wl.addEventListener("release", () => { TTS.wl = null; }); } }
+        else if (TTS.wl) { await TTS.wl.release(); TTS.wl = null; } } catch(e){}
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && TTS.btn) ttsWake(true); });
 function ttsStop(done){
+  ttsWake(false);
   if (TTS.key) TTS.pos[TTS.key] = done ? 0 : TTS.cur;
   try { speechSynthesis.cancel(); } catch(e){}
   if (TTS.btn) { TTS.btn.setAttribute("aria-pressed", "false"); TTS.btn.textContent = ttsLab(TTS.key); }
@@ -1397,7 +1404,7 @@ function ttsToggle(b){
   ttsStop(); const key = b.dataset.tts, v = ttsVoice(), t = ttsText(key); if (!v || !t) return;
   const parts = t.replace(/\s+/g, " ").trim().split(/(?<=[.?!])\s+/).filter(Boolean);
   let from = TTS.pos[key] || 0; if (from >= parts.length) from = 0;
-  TTS.btn = b; TTS.key = key; TTS.cur = from; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤";
+  TTS.btn = b; TTS.key = key; TTS.cur = from; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤"; ttsWake(true);
   parts.slice(from).forEach((x, i) => { const n = from + i, u = new SpeechSynthesisUtterance(x.trim()); u.voice = v; u.lang = v.lang; u.rate = 1.05;
     u.onstart = () => { if (TTS.btn === b) TTS.cur = n; };
     if (n === parts.length - 1) u.onend = () => { if (TTS.btn === b) ttsStop(true); };
