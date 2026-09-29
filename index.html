@@ -609,6 +609,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .ic-more summary::-webkit-details-marker{display:none}
 .ic-more summary::before{content:"▸"; font-size:11px} .ic-more[open] summary::before{content:"▾"}
 .ic-more p{margin:6px 0 8px; font-size:14px; line-height:1.75; color:var(--ink-2)}
+.ic-why{margin:6px 0 8px; font-size:14px; line-height:1.75; color:var(--ink-2)} .ic-why b{color:var(--accent); margin-right:4px}
 .srch-open{min-width:260px; height:36px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
 .srch-open span{flex:1; text-align:left}
 .srch-open svg{width:15px; height:15px; color:var(--ink-2)}
@@ -1337,7 +1338,7 @@ function insightsHtml(){
   const cs = D.strategies || [];
   return (D.insights || []).length ? '<section class="sec" id="s-ins"><h3>주요 판단 ' + ttsBtn("ins") + '</h3><p class="note" style="margin-bottom:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 번호를 누르면 그 판단을 가릴 전망으로, 아래 단추를 누르면 사안 분석으로 이동합니다.</p><ol class="ic-list">' + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = String(k.t).match(/^(.+?다\.)\s(.+)$/s); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
       return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="이 판단을 가릴 전망으로 이동">' + esc(id) + "</button>").join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
-        (rest ? '<details class="ic-more"><summary>근거 보기</summary><p>' + esc(rest) + "</p></details>" : "") + (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
+        (rest ? '<p class="ic-why"><b>근거</b> ' + esc(rest) + "</p>" : "") + (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
 }
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
 let BR = null; const HASH0 = location.hash;
@@ -1360,26 +1361,46 @@ function weekHtml(w){
   return '<div class="bw"><h4>주간 전망 점검</h4>' + (w.note ? '<p class="note" style="margin:0">' + esc(w.note) + "</p>" : "") + ((w.items || []).length ? "<ul>" + w.items.map(li).join("") + "</ul>" : "") + "</div>";
 }
 /* v3.22 듣기: 기기에 내장된 한국어 음성으로 읽는다(파일·서버 없음). 한국어 음성이 없는 기기에서는 단추가 보이지 않는다(.tts-ok) */
-const TTS = {btn:null};
-const ttsBtn = key => '<button type="button" class="tts" data-tts="' + esc(key) + '" aria-pressed="false">▶ 듣기</button>';
+const TTS = {btn:null, key:null, cur:0, pos:{}};
+const ttsLab = key => (TTS.pos[key] ? "▶ 이어 듣기" : "▶ 듣기");
+const ttsBtn = key => '<button type="button" class="tts" data-tts="' + esc(key) + '" aria-pressed="false">' + ttsLab(key) + "</button>";
 function ttsVoice(){ try { return (speechSynthesis.getVoices() || []).find(v => /^ko/i.test(v.lang)) || null; } catch(e){ return null; } }
 function ttsText(key){
   const [k, id] = String(key).split(":");
   if (k === "brief" && BR) { const x = BR.issues[0]; return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact).join(" ") + (x.week && (x.week.items || []).length ? " 주간 전망 점검. " + x.week.items.map(w => { const F = D.forecasts.find(z => z.id === w.id); return (F ? F.q : w.id) + ". " + (w.from === w.to ? w.to + "퍼센트 유지. " : w.from + "퍼센트에서 " + w.to + "퍼센트로. ") + w.why; }).join(" ") : ""); }
   if (k === "digest") return "세계 정세 요약. " + D.digest.map(g => g.t + ". " + g.d).join(" ");
-  if (k === "ins") return "주요 판단. " + (D.insights || []).map(g => String(g.t).split(/(?<=다\.)\s/)[0]).join(" ");
+  if (k === "ins") return "주요 판단. " + (D.insights || []).map(g => { const a = String(g.t).split(/(?<=다\.)\s/); return a[0] + (a.length > 1 ? " 근거. " + a.slice(1).join(" ") : ""); }).join(" ");
+  const cn = i => (D.countries[i] || {}).name_ko || i;
+  const jw = w => { const c = String(w).charCodeAt(String(w).length - 1); return w + (c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 ? "과" : "와"); };
+  if (k === "scn") return "2030년까지의 세계 시나리오. " + D.grand.scenarios.map(x => x.name + ", " + x.p + "퍼센트. " + x.d + " " + (x.korea || "")).join(" ");
+  if (k === "trend") return "구조적 흐름. " + D.grand.trends.map(x => x.t + ". " + x.d).join(" ");
+  if (k === "ten") return "역사와 구조가 어긋나는 관계. " + D.grand.tensions.map(x => jw(cn(x.a)) + " " + cn(x.b) + ". " + (x.memory || "") + " " + (x.structure || "") + " " + (x.note || "")).join(" ");
+  if (k === "dyad") { const [a, b] = id.split("|"), G = D.grand, d = G.dyads.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a)), c = G.cells.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
+    return jw(cn(a)) + " " + cn(b) + "의 관계. " + (c ? c.t + ". " : "") + (d ? "협력할 수 있는 것. " + d.coop.join(", ") + ". 충돌하는 것. " + d.conflict.join(", ") + ". 전망. " + d.outlook : ""); }
+  const H = D.history || {};
+  if (k === "an") return "역사적 선례. " + (H.analogies || []).map(x => x.now + ". " + [].concat(x.cases || []).join(", ") + ". " + (x.then || "") + " " + (x.implies || "") + " " + (x.breaks || "")).join(" ");
+  if (k === "law") return "역사적 반복 유형. " + (H.laws || []).map(x => x.t + ". " + x.d).join(" ");
+  if (k === "th") return "참고 사상가. " + (D.thinkers || []).map(x => x.name + ". " + (x.idea || "") + " " + (x.now || "") + " " + (x.record || "")).join(" ");
   if (k === "case") { const c = (D.strategies || []).find(z => z.id === id); if (!c) return ""; const B = c.brief || {}; return c.title + ". " + (B.q ? "핵심 질문. " + B.q + " " : "") + (B.a ? "판단. " + B.a + " " : "") + (B.eq ? "균형점. " + B.eq + " " : "") + (B.human ? "개인에게 미치는 영향. " + B.human : ""); }
   if (k === "country") { const c = D.countries[id]; if (!c) return ""; return c.name_ko + ". " + (c.situation || "") + " " + (c.recent || []).slice(-3).map(r => r.text).join(" "); }
   return "";
 }
-function ttsStop(){ try { speechSynthesis.cancel(); } catch(e){} if (TTS.btn) { TTS.btn.setAttribute("aria-pressed", "false"); TTS.btn.textContent = "▶ 듣기"; } TTS.btn = null; }
+/* 멈춘 문장 위치를 기억했다가 같은 단추를 다시 누르면 거기서 이어 읽는다. 끝까지 들으면 처음으로 돌아간다 */
+function ttsStop(done){
+  if (TTS.key) TTS.pos[TTS.key] = done ? 0 : TTS.cur;
+  try { speechSynthesis.cancel(); } catch(e){}
+  if (TTS.btn) { TTS.btn.setAttribute("aria-pressed", "false"); TTS.btn.textContent = ttsLab(TTS.key); }
+  TTS.btn = null; TTS.key = null;
+}
 function ttsToggle(b){
   if (TTS.btn === b) { ttsStop(); return; }
-  ttsStop(); const v = ttsVoice(), t = ttsText(b.dataset.tts); if (!v || !t) return;
+  ttsStop(); const key = b.dataset.tts, v = ttsVoice(), t = ttsText(key); if (!v || !t) return;
   const parts = t.replace(/\s+/g, " ").trim().split(/(?<=[.?!])\s+/).filter(Boolean);
-  TTS.btn = b; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤";
-  parts.forEach((x, n) => { const u = new SpeechSynthesisUtterance(x.trim()); u.voice = v; u.lang = v.lang; u.rate = 1.05;
-    if (n === parts.length - 1) u.onend = () => { if (TTS.btn === b) ttsStop(); };
+  let from = TTS.pos[key] || 0; if (from >= parts.length) from = 0;
+  TTS.btn = b; TTS.key = key; TTS.cur = from; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤";
+  parts.slice(from).forEach((x, i) => { const n = from + i, u = new SpeechSynthesisUtterance(x.trim()); u.voice = v; u.lang = v.lang; u.rate = 1.05;
+    u.onstart = () => { if (TTS.btn === b) TTS.cur = n; };
+    if (n === parts.length - 1) u.onend = () => { if (TTS.btn === b) ttsStop(true); };
     speechSynthesis.speak(u); });
 }
 function ttsSetup(){
@@ -1387,7 +1408,7 @@ function ttsSetup(){
   const upd = () => document.documentElement.classList.toggle("tts-ok", !!ttsVoice());
   upd(); try { speechSynthesis.addEventListener("voiceschanged", upd); } catch(e){}
   document.addEventListener("click", e => { const b = e.target.closest("[data-tts]"); if (b) { e.preventDefault(); ttsToggle(b); } });
-  addEventListener("pagehide", ttsStop);
+  addEventListener("pagehide", () => ttsStop());
 }
 function dailyHtml(){
   if (!BR || !(BR.issues || []).length) return "";
@@ -1531,7 +1552,7 @@ function dyadHtml(a, b){
   const d = G.dyads.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
   const cell = G.cells.find(x => (x.a === a && x.b === b) || (x.a === b && x.b === a));
   const li = xs => "<ul>" + xs.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>";
-  let h = '<div class="dyad"><div class="pair">' + esc(nm(a)) + " ↔ " + esc(nm(b)) + "</div>";
+  let h = '<div class="dyad"><div class="pair">' + esc(nm(a)) + " ↔ " + esc(nm(b)) + " " + ttsBtn("dyad:" + a + "|" + b) + "</div>";
   if (cell) h += '<p class="meta">관계 점수 <span class="mono">' + (cell.s > 0 ? "+" : cell.s < 0 ? "−" : "") + Math.abs(cell.s) + "</span> · " + esc(cell.t) + "</p>";
   if (d) h += '<div class="cols"><div><h5 class="c">협력할 수 있는 것</h5>' + li(d.coop) + '</div><div><h5 class="x">충돌하는 것</h5>' + li(d.conflict) + "</div></div><p><b>전망</b> · " + esc(d.outlook) + "</p>";
   return h + '<div class="chips" style="margin:0">' + chip(a) + chip(b) + "</div></div>";
@@ -1569,17 +1590,17 @@ function renderGrand(){
   $("#pane-grand").innerHTML =
     '<div class="sec"><h2>국제 질서</h2><p class="meta" style="margin-top:4px">세계 시나리오 ' + G.scenarios.length + "건 · 구조적 흐름 " + G.trends.length + "건 · 관계 분석 " + G.dyads.length + '건</p><p class="lead" style="margin-top:8px">개별 사안을 넘어 국제 질서 전반을 움직이는 구조를 분석합니다. 2030년까지의 세계 시나리오와 구조적 흐름, 주요 행위자의 대전략과 상호 관계를 다루고, 각 시나리오가 개별 사안의 전개에 미치는 영향을 함께 제시합니다.</p></div>' +
     tocHtml([["g-scn","시나리오"],["g-trend","구조적 흐름"],["g-mx","관계 행렬"],["g-drv","대전략의 동인"],["g-ten","역사와 구조"],["g-score","국가별 점수"]]) +
-    '<section class="sec" id="g-scn"><h3>2030년까지의 세계 시나리오 · 확률 합계 100%</h3><ul class="list">' + G.scenarios.map(sc => {
+    '<section class="sec" id="g-scn"><h3>2030년까지의 세계 시나리오 · 확률 합계 100% ' + ttsBtn("scn") + '</h3><ul class="list">' + G.scenarios.map(sc => {
       const th = D.thinkers.find(t => t.id === sc.thinker);
       return '<li class="scn"><div class="scn-h"><b>' + esc(sc.id + ". " + sc.name) + '</b><span class="p">' + sc.p + '<small style="font-size:12px;color:var(--muted)">%</small></span></div><div class="prob"><i style="width:' + sc.p + '%"></i></div><p style="font-size:13px;color:var(--ink-2)">' + esc(sc.d) + '</p><div><h3 style="margin:4px 0 4px">선행 신호</h3><ul>' + sc.signals.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></div><div class="kr"><b>한국에는</b> · ' + esc(sc.korea) + "</div>" + (sc.case_fut || sc.korea_fut ? '<div class="note" style="margin:0;display:grid;gap:3px"><b style="color:var(--ink-2)">이 시나리오에서 각 사안의 2030년 전개</b>' + Object.entries(Object.assign({korea: sc.korea_fut}, sc.case_fut || {})).filter(([, m]) => m).map(([cid, m]) => { const k = (D.strategies || []).find(x => x.id === cid); return '<span><button type="button" class="chip" data-case="' + cid + '">' + esc(k ? k.title.split(":")[0] : cid) + "</button> " + Object.entries(m).map(([f, v]) => '<span class="mono" style="color:' + fcol(f) + '">' + f + " " + v + "%</span>").join(" · ") + "</span>"; }).join("") + "</div>" : "") + (th ? '<button type="button" class="lens-btn" data-lens="' + th.id + '">관련 사상가 관점 · ' + esc(th.name) + "</button>" : "") + "</li>";
     }).join("") + '</ul><p class="note" style="margin-top:8px">시나리오 확률은 판단값이며, 선행 신호가 나타나면 확률을 조정합니다.</p></section>' +
-    '<section class="sec" id="g-trend"><h3>구조적 흐름</h3><ul class="list">' + G.trends.map(t => '<li class="trend"><b>' + esc(t.t) + "</b><p>" + esc(t.d) + "</p>" + (t.prec_note ? '<p class="pn">선례 대조 · ' + esc(t.prec_note) + "</p>" : "") + (t.review ? '<p class="pn">독립 반론 검토 · ' + esc(t.review) + "</p>" : "") + aiPrecHtml(t.prec, "") + "</li>").join("") + "</ul></section>" +
+    '<section class="sec" id="g-trend"><h3>구조적 흐름 ' + ttsBtn("trend") + '</h3><ul class="list">' + G.trends.map(t => '<li class="trend"><b>' + esc(t.t) + "</b><p>" + esc(t.d) + "</p>" + (t.prec_note ? '<p class="pn">선례 대조 · ' + esc(t.prec_note) + "</p>" : "") + (t.review ? '<p class="pn">독립 반론 검토 · ' + esc(t.review) + "</p>" : "") + aiPrecHtml(t.prec, "") + "</li>").join("") + "</ul></section>" +
     '<section class="sec" id="g-mx"><h3>협력·충돌 행렬 · 칸을 선택하면 양국 관계를 볼 수 있다</h3><p class="note" style="margin-bottom:8px">각국이 가장 중시하는 것과 양보할 수 없는 것이 부딪히는 곳에서 분쟁이 생기고, 한쪽의 양보 가능 목록이 다른 쪽의 필수 목록과 겹치는 곳에서 거래가 성립합니다.</p>' + mx + key + '<div id="dyad-box" style="margin-top:12px">' + dyadHtml(mxSel[0], mxSel[1]) + "</div></section>" +
     (others.length ? '<section class="sec"><h3>행렬 밖의 핵심 관계</h3>' + others.map(d => '<details class="dy"><summary>' + esc(nm(d.a)) + " ↔ " + esc(nm(d.b)) + "</summary>" + dyadHtml(d.a, d.b) + "</details>").join("") + "</section>" : "") +
     '<section class="sec" id="g-drv"><h3>무엇이 대전략을 움직이나</h3><p class="note" style="margin-bottom:10px">지리가 주도하는 국가 ' + cnt("geo") + "곳, 체제·국내정치 " + cnt("regime") + "곳, 국력 " + cnt("power") + "곳, 역사적 기억 " + cnt("memory") + "곳입니다. 역사적 기억은 대부분의 국가에서 넘지 않을 선을 긋는 요인이지 전략 전체를 주도하는 요인은 아닙니다. " + esc(G.drivers_note) + "</p>" +
       drvLab({geo:"",power:"",regime:"",memory:""}, null).replace(/ <b><\/b>/g, "") +
       '<div style="display:grid;gap:2px;margin-top:8px">' + cs.map(c => '<button type="button" class="drv-row" data-iso="' + c.iso + '"><span class="n">' + esc(c.name_ko) + "</span>" + drvBar(c.drivers.w) + '<span class="t">' + DLAB[c.drivers.top] + " " + c.drivers.w[c.drivers.top] + "</span></button>").join("") + "</div></section>" +
-    '<section class="sec" id="g-ten"><h3>역사와 구조가 어긋나는 관계</h3><p class="note" style="margin-bottom:8px">역사적 원한은 깊으나 힘의 구조가 협력을 요구하는 관계입니다. 기억과 구조 가운데 어느 쪽이 우세한지를 보면 역사가 대전략을 얼마나 움직이는지 알 수 있습니다.</p><ul class="list">' +
+    '<section class="sec" id="g-ten"><h3>역사와 구조가 어긋나는 관계 ' + ttsBtn("ten") + '</h3><p class="note" style="margin-bottom:8px">역사적 원한은 깊으나 힘의 구조가 협력을 요구하는 관계입니다. 기억과 구조 가운데 어느 쪽이 우세한지를 보면 역사가 대전략을 얼마나 움직이는지 알 수 있습니다.</p><ul class="list">' +
       G.tensions.map(t => '<li class="ten"><div class="hd"><b>' + esc(nm(t.a)) + " ↔ " + esc(nm(t.b)) + '</b><span class="st ' + (t.verdict === "구조 우위" ? "yes" : "open") + '">' + esc(t.verdict) + "</span></div><dl><dt>기억</dt><dd>" + esc(t.memory) + "</dd><dt>구조</dt><dd>" + esc(t.structure) + "</dd></dl><p class=\"note\">" + esc(t.note) + "</p></li>").join("") + "</ul></section>" +
     '<section class="sec" id="g-score"><h3>국가별 판단 점수와 지구본 보기 방식</h3><p class="note" style="margin-bottom:8px">지구본의 기본 화면은 분석 대상 지역입니다. 아래의 네 점수는 측정값이 아니라 판단값이며, 보조 자료로 제공합니다.</p><div id="scorebox">' + scoreBoxHtml() + "</div></section>" +
     '<section class="sec"><h3>국가별 대전략</h3><div class="chips" style="margin:0">' + Object.values(D.countries).filter(c => c.gs).map(c => chip(c.iso)).join("") + "</div></section>" +
@@ -1959,9 +1980,9 @@ function renderIdeas(){
   $("#pane-ideas").innerHTML =
     '<div class="sec"><h2>역사와 사상</h2><p class="meta" style="margin-top:4px">역사적 선례 ' + H.analogies.length + "건 · 반복 유형 " + H.laws.length + "건 · 참고 사상가 " + D.thinkers.length + '명</p><p class="lead" style="margin-top:8px">분석의 배경이 되는 역사적 선례, 역사에서 되풀이되는 유형, 지정학 사상가의 관점을 모았습니다. 사상가의 관점을 켜면 그가 주목한 지역이 지구본에서 강조됩니다.</p></div>' +
     tocHtml([["i-an","역사적 선례"],["i-law","반복 유형"],["i-th","참고 사상가"]]) +
-    '<section class="sec" id="i-an"><h3>역사적 선례</h3><p class="note" style="margin-bottom:8px">현재 상황과 구조가 유사한 과거 사례와 그 전개, 현재에 대한 함의, 선례와 다른 점을 정리했습니다.</p><ul class="list">' + H.analogies.map(a => "<li>" + analogHtml(a, false) + "</li>").join("") + "</ul></section>" +
-    '<section class="sec" id="i-law"><h3>역사적 반복 유형</h3><ul class="list">' + H.laws.map(l => '<li class="law"><b>' + esc(l.t) + "</b><p>" + esc(l.d) + '</p><div class="chips" style="margin-top:4px">' + l.cases.map(chip).join("") + "</div></li>").join("") + "</ul></section>" +
-    '<section class="sec" id="i-th"><h3>참고 사상가</h3><p class="note" style="margin-bottom:8px">각 사상가의 핵심 명제와 현재 정세에 대한 적용, 역사에서 적중한 것과 빗나간 것을 정리했습니다.</p><ul class="list">' + D.thinkers.map(t => {
+    '<section class="sec" id="i-an"><h3>역사적 선례 ' + ttsBtn("an") + '</h3><p class="note" style="margin-bottom:8px">현재 상황과 구조가 유사한 과거 사례와 그 전개, 현재에 대한 함의, 선례와 다른 점을 정리했습니다.</p><ul class="list">' + H.analogies.map(a => "<li>" + analogHtml(a, false) + "</li>").join("") + "</ul></section>" +
+    '<section class="sec" id="i-law"><h3>역사적 반복 유형 ' + ttsBtn("law") + '</h3><ul class="list">' + H.laws.map(l => '<li class="law"><b>' + esc(l.t) + "</b><p>" + esc(l.d) + '</p><div class="chips" style="margin-top:4px">' + l.cases.map(chip).join("") + "</div></li>").join("") + "</ul></section>" +
+    '<section class="sec" id="i-th"><h3>참고 사상가 ' + ttsBtn("th") + '</h3><p class="note" style="margin-bottom:8px">각 사상가의 핵심 명제와 현재 정세에 대한 적용, 역사에서 적중한 것과 빗나간 것을 정리했습니다.</p><ul class="list">' + D.thinkers.map(t => {
       const on = S.lens && S.lens.id === t.id;
       return '<li><article class="thinker"><div class="who"><h4>' + esc(t.name) + '</h4><span class="meta">' + esc(t.life) + " · " + esc(t.role) + '</span></div><div class="works">' + esc(t.works) + "</div>" +
         "<dl><div><dt>핵심 명제</dt><dd>" + esc(t.idea) + "</dd></div><div><dt>현재 정세에 대한 적용</dt><dd>" + esc(t.now) + "</dd></div><div><dt>적중한 것과 빗나간 것</dt><dd>" + esc(t.record) + "</dd></div></dl>" +
