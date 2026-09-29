@@ -1,6 +1,109 @@
 {
  "issues": [
   {
+   "date": "2026-09-30",
+   "items": [
+    {
+     "case": "korea",
+     "h": "김여정 부부장은 비무장지대 지뢰 폭발을 한국의 자작극이라고 주장했다",
+     "fact": "합동참모본부는 2026년 9월 29일 권대원 차장 명의로 9월 21일 폭발 현장의 잔해에서 북한 지뢰와 같은 성분이 나왔다며 책임은 전적으로 북한에 있고 상응하는 조치를 하겠다고 밝혔습니다. 김여정 노동당 부부장은 9월 30일 조선중앙통신을 통해 이를 '명백한 자작극'이라고 주장하며 '도발의 주모자들은 대가를 치를 각오를 해야 한다'고 말했습니다.",
+     "link": "남북 사이에 사건을 함께 확인할 통로가 없어 책임 공방이 곧바로 위협으로 이어지는 모습이며, 남북 군사 통신선이 복원되지 않는다는 전망을 올릴 요인입니다. 관리된 공존으로 가는 조건(한반도 C1의 통신선 복원과 이산가족 상봉)과는 반대 방향입니다.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.koreaherald.com/article/10887051",
+      "https://theprint.in/world/north-korea-says-south-korea-to-pay-a-price-for-shifting-blame-for-mine-blast-kcna-says/3057474/"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아의 드론 공습이 키이우의 국립과학아카데미를 불태웠다",
+     "fact": "9월 29일 러시아의 드론 공습으로 키이우의 우크라이나 국립과학아카데미 건물에 불이 나 최소 2명이 숨졌고, 젤렌스키 대통령은 이날 전국에서 9명이 숨졌다고 밝혔습니다. 같은 날 우크라이나 매체 리가넷은 미국 애틀랜틱지를 인용해 미국이 10월 아부다비에서 미·러·우 3자 협의를 추진하며 에너지 시설 상호 타격 중단을 합의 후보로 본다고 전했습니다.",
+     "link": "3자 협의가 10월에 열리면 미·러·우 3자 기술급 협의 전망이 성립하므로 이 보도는 그 전망을 올릴 요인입니다. 다만 협의 의제가 전면 휴전이 아니라 에너지 시설 타격 중단 같은 부분 합의여서, 소모전이 이어진다는 판단(러-우 C1)은 그대로입니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "up"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2",
+      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "미국은 협상 재개를 말하면서 이란의 무기 조달망을 새로 제재했다",
+     "fact": "트럼프 대통령은 9월 28일 이번 주 안에 이란과의 협상이 재개될 것으로 본다고 말했고, 아락치 이란 외무장관은 '외교할 준비가 돼 있으며 선택은 트럼프 대통령에게 달렸다'고 밝혔습니다. 미 재무부는 9월 29일 중국·홍콩·파키스탄·사우디아라비아·튀르키예·이란에 걸친 이란 군수 조달망 10건을 제재했습니다.",
+     "link": "양측이 모두 대화를 말하지만 미국은 제재를 늦추지 않고 있어, 해협 재개방과 봉쇄 해제를 먼저 주고받는 단계별 합의(이란 C7)가 가까워졌다고 볼 근거는 아직 없습니다.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/",
+      "https://home.treasury.gov/news/press-releases/sb0637"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "호르무즈 통항은 늘었지만 브렌트유는 배럴당 105달러를 넘었다",
+     "fact": "크리스 라이트 미 에너지장관은 9월 28일 하루 약 1,300만 배럴의 원유가 해협을 지난다고 밝혔습니다. 그러나 브렌트유는 9월 29일 배럴당 105.91달러로 이틀 연속 올랐습니다. 이란 최고지도자 모즈타바 하메네이는 미군이 타격을 받아 더 전진하지 못하고 있다고 주장했습니다.",
+     "link": "공식 종전 없이 해협이 부분적으로 열리는 불완전한 재개방(이란 C1)에 가까운 모습입니다. 유가가 100달러 위에 머물러 연말 브렌트유가 90달러 아래로 내려간다는 전망에는 불리한 요인입니다.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/28/iran-touts-hormuz-attacks-as-oil-flows-increase-despite-tensions",
+      "https://sharjah24.ae/en/Articles/2026/09/29/Ma2"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "9월 29일 러시아의 공습으로 드니프로에서 3명이 숨지고 자포리자에서 32명이 다쳤으며, 시비하 우크라이나 외무장관은 동맹국에 방공 지원 확대를 요청했습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2"
+     ]
+    },
+    {
+     "t": "호르무즈가 막힌 가운데 9월 28일부터 이라크 연료가 시리아 항구를 거쳐 수출되기 시작했습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
+     ]
+    },
+    {
+     "t": "이란 리알화는 9월 29일 달러당 약 250만 리알로 사상 최저를 기록했고, 같은 날 튀르키예는 미납 채무를 이유로 이란 항공기를 압류했습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
+     ]
+    },
+    {
+     "t": "중국 해경은 9월 29일 주자젠호 편대가 9월부터 대만섬 동쪽 수역의 통제를 강화해 왔다고 밝혔으며, 선박 승선 검색은 확인되지 않았습니다.",
+     "src": [
+      "https://english.news.cn/20260929/62256176f6ba4297ab7e16b18c30f56b/c.html"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-09-29",
    "items": [
     {
