@@ -652,6 +652,26 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   .toggles{order:5; flex:1; width:auto; min-width:0}
 }
 
+/* v3.20 정세 브리핑 */
+.bstrip{order:9; flex:1 1 100%; display:flex; align-items:center; gap:10px; min-width:0; text-align:left; cursor:pointer; background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px; padding:7px 12px; color:var(--ink); font:500 13px var(--sans)}
+.bstrip:hover{border-color:var(--accent)}
+.bstrip .bs-k{font-weight:700; color:var(--accent); white-space:nowrap}
+.bstrip .bs-d{font:500 12px var(--mono); color:var(--muted); white-space:nowrap}
+.bstrip .bs-t{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bstrip .bs-go{color:var(--accent); font-weight:700}
+@media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
+.brief{display:grid; gap:12px; border-left:3px solid var(--accent); padding-left:14px}
+.brief .bh{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap} .brief .bh h2{margin:0} .brief .bd{font:600 14px var(--mono); color:var(--accent)}
+.brief .bi{display:grid; gap:6px; padding-top:10px; border-top:1px solid var(--line)}
+.brief .bi h4{margin:0; font-size:15px; line-height:1.5}
+.brief .bi p{margin:0}
+.brief .bl{color:var(--ink-2); font-size:13.5px} .brief .bl-k{font-weight:700; color:var(--accent); margin-right:4px}
+.brief .bfc b{margin-left:2px} .brief .bfc-up b{color:var(--conflict)} .brief .bfc-down b{color:var(--accent)} .brief .bfc-none b{color:var(--muted)}
+.brief .bm{padding-top:10px; border-top:1px solid var(--line)} .brief .bm ul{margin:6px 0 0; padding-left:18px; display:grid; gap:4px; font-size:13.5px}
+.brief .bold > summary, .brief .bo > summary{cursor:pointer; font-weight:600; font-size:13.5px}
+.brief .bo{margin:8px 0 0 10px} .brief .bo > summary{font-weight:500}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
 /* v3.17 여섯 탭 */
 .app > *, .stage > *{min-width:0}
 .entry{display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; margin-top:10px; padding:10px 14px; border:1px solid var(--accent); border-radius:8px; background:var(--accent-soft); color:var(--accent); font:600 14px var(--sans); cursor:pointer; text-align:left}
@@ -681,6 +701,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
     <div class="toggles">
       <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></button>
     </div>
+    <button type="button" class="bstrip" id="bstrip" hidden><span class="bs-k">정세 브리핑</span><span class="bs-d" id="bsd"></span><span class="bs-t" id="bst"></span><span class="bs-go" aria-hidden="true">›</span></button>
   </header>
 
   <main class="stage">
@@ -828,6 +849,7 @@ function srBuild(){
   for (const [iso, c] of Object.entries(D.countries)) if (c.intent) add("나라", c.name_ko + " · 의지 지표 · 말과 행동", [c.intent, "의지"], () => { selectCountry(iso, true); return "c-intent"; });
   (D.insights || []).forEach(k => add("주요 판단", String(k.t).split(/(?<=다\.)\s/)[0], [k.t, k.classic || ""], toPane("strat")));
   (D.digest || []).forEach(g => add("세계 정세", g.t, g.d, toPane("overview")));
+  if (BR) BR.issues.forEach(x => x.items.forEach(i => add("세계 정세", "정세 브리핑 " + fmtKD(x.date) + " · " + i.h, [i.fact, i.link], toPane("overview"))));
   D.forecasts.forEach(f => add("전망", f.q, [f.q, f.basis, f.void || ""], toPane("forecast")));
   const G = D.grand || {};
   (G.trends || []).forEach(t => add("국제 질서", t.t, t, toPane("grand")));
@@ -976,6 +998,7 @@ function init(d, w){
   const t = store.get("ep.tab"); if (t && t !== "detail") switchTab(t);
   applyHash(); HASH_READY = true;
   setupSearch();
+  loadBrief();
   loop();
 }
 
@@ -1302,10 +1325,43 @@ function insightsHtml(){
       return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="이 판단을 가릴 전망으로 이동">' + esc(id) + "</button>").join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
         (rest ? '<details class="ic-more"><summary>근거 보기</summary><p>' + esc(rest) + "</p></details>" : "") + (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
 }
+/* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
+let BR = null; const HASH0 = location.hash;
+const FCE = {up:["↑","확률을 올릴 요인"], down:["↓","확률을 내릴 요인"], none:["–","변화 없음"]};
+const fmtKD = s => { const a = String(s).split("-").map(Number); return a[1] + "월 " + a[2] + "일"; };
+function dailyIssue(x){
+  const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
+    return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + esc(f.id) + (F ? " " + F.p + "%" : "") + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
+  const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
+  return x.items.map(i => '<article class="bi"><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + '</p><p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" +
+      '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +
+      ((i.src || []).length ? '<details class="src"><summary>출처 ' + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
+    ((x.more || []).length ? '<div class="bm"><b>그 밖의 동향</b><ul>' + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + '" target="_blank" rel="noopener" class="note">출처</a>' : "") + "</li>").join("") + "</ul></div>" : "");
+}
+function dailyHtml(){
+  if (!BR || !(BR.issues || []).length) return "";
+  const cur = BR.issues[0], old = BR.issues.slice(1);
+  return '<section class="sec brief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + '</span></div>' +
+    '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
+    dailyIssue(cur) +
+    (old.length ? '<details class="bold"><summary>지난 브리핑 ' + old.length + "건</summary>" + old.map(o => '<details class="bo"><summary>' + fmtKD(o.date) + " · " + esc((o.items[0] || {}).h || "") + "</summary>" + dailyIssue(o) + "</details>").join("") + "</details>" : "") +
+    "</section>";
+}
+function loadBrief(){
+  fetch("data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(b => {
+    if (!b || !(b.issues || []).length) return;
+    BR = b; const cur = b.issues[0];
+    $("#bsd").textContent = fmtKD(cur.date); $("#bst").textContent = (cur.items[0] || {}).h || ""; $("#bstrip").hidden = false;
+    $("#bstrip").onclick = () => { switchTab("overview"); const a = document.getElementById("brief"); if (a) a.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); };
+    renderOverview(); SR.idx = null;
+    if (!HASH0 && store.get("ep.brief") !== cur.date && S.tab !== "overview") switchTab("overview");
+    store.set("ep.brief", cur.date);
+  }).catch(() => {});
+}
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  $("#pane-overview").innerHTML =
+  $("#pane-overview").innerHTML = dailyHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">기준일 <span class="mono">' + esc(D.meta.asof) + "</span> · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     '<section class="sec"><h3>정세 요약</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
