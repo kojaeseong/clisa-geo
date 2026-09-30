@@ -751,7 +751,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
         <button type="button" class="wide-btn" id="widebtn" aria-pressed="false" title="읽기 영역 넓히기" aria-label="읽기 영역 넓히기">⇔</button>
       </nav>
       <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
-      <div class="pane" id="pane-overview" role="tabpanel"><div class="sec"><p class="lead">클리사 지오폴리틱스는 국제 정세를 한국의 관점에서 분석하는 사이트입니다. 동북아 안보, 강대국 경쟁, 유럽과 중동의 분쟁 등 주요 사안마다 사실 확인에서 출발해 정세 판단, 선택지별 전략 평가, 개인과 기업에 미치는 영향, 확률로 표시한 전망을 제시합니다. 국가별 현황과 국제 질서의 흐름은 지구본에서 함께 볼 수 있습니다.</p></div></div>
+      <div class="pane" id="pane-overview" role="tabpanel"><div class="sec"><p class="lead">클리사 지오폴리틱스는 국제 정세를 한국의 관점에서 분석하는 사이트입니다. 동북아 안보, 강대국 경쟁, 유럽과 중동의 분쟁 등 주요 사안마다 사실 확인에서 출발해 정세 판단, 선택지별 전략 평가, 개인과 기업에 미치는 영향, 확률로 표시한 전망을 제시합니다. 국가별 현황과 국제 질서의 흐름은 지구본에서 함께 볼 수 있습니다.</p><p class="note"><a href="/brief/">정세 브리핑</a> · <a href="/forecast/">전망과 검증</a></p><p><a href="/case/korea/">한반도</a> · <a href="/case/taiwan/">대만해협</a> · <a href="/case/ukraine/">러-우 전쟁</a> · <a href="/case/iran/">이란 전쟁과 호르무즈</a> · <a href="/case/chips/">AI·반도체 미중 경쟁</a></p><p><a href="/country/RUS/">러시아</a> · <a href="/country/UKR/">우크라이나</a> · <a href="/country/BLR/">벨라루스</a> · <a href="/country/KAZ/">카자흐스탄</a> · <a href="/country/TUR/">튀르키예</a> · <a href="/country/IRN/">이란</a> · <a href="/country/ISR/">이스라엘</a> · <a href="/country/SAU/">사우디아라비아</a> · <a href="/country/CHN/">중국</a> · <a href="/country/TWN/">대만</a> · <a href="/country/JPN/">일본</a> · <a href="/country/KOR/">대한민국</a> · <a href="/country/PRK/">북한</a> · <a href="/country/MNG/">몽골</a> · <a href="/country/USA/">미국</a> · <a href="/country/EUR/">EU·NATO</a> · <a href="/country/IND/">인도</a> · <a href="/country/PAK/">파키스탄</a> · <a href="/country/IDN/">인도네시아</a> · <a href="/country/VNM/">베트남</a> · <a href="/country/PHL/">필리핀</a> · <a href="/country/AUS/">호주</a> · <a href="/country/GBR/">영국</a> · <a href="/country/FRA/">프랑스</a> · <a href="/country/DEU/">독일</a> · <a href="/country/POL/">폴란드</a> · <a href="/country/CAN/">캐나다</a> · <a href="/country/MEX/">멕시코</a> · <a href="/country/BRA/">브라질</a> · <a href="/country/VEN/">베네수엘라</a> · <a href="/country/EGY/">이집트</a> · <a href="/country/NGA/">나이지리아</a> · <a href="/country/ZAF/">남아프리카공화국</a> · <a href="/country/ETH/">에티오피아</a></p></div></div>
       <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
       <div class="pane" id="pane-detail" role="tabpanel" hidden></div>
       <div class="pane" id="pane-grand" role="tabpanel" hidden></div>
@@ -2054,7 +2054,7 @@ function footHtml(noMail){
     mailRow("[클리사 지오폴리틱스] 의견")) +
     "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>" +
     "<p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p>" +
-    "<p>이 사이트는 회원 가입이 없고 방문자 추적 도구를 쓰지 않습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
+    "<p>이 사이트는 회원 가입이 없습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
     "<p>© 2026 고재성(도구컨설팅). 클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 출처를 밝힌 부분 인용과 링크 공유는 자유롭게 할 수 있으나, 전부 또는 상당 부분을 복제·재배포하는 것은 허락 없이 할 수 없습니다.</p></footer>";
 }
 function caseFbHtml(c){
@@ -2086,6 +2086,7 @@ function applyHash(){
   if (!h) return;
   const ss = D.strategies || [];
   if (ss.some(c => c.id === h)) { S.scase = h; renderStrat(); switchTab("strat"); return; }
+  if (/^[A-Z]{3}$/.test(h) && D.countries[h]) { selectCountry(h, true); return; }  /* v3.24 나라 페이지에서 오는 주소(#RUS) */
   if (h !== "detail" && document.getElementById("pane-" + (TAB_ALIAS[h] || h))) switchTab(h);
 }
 const _switchTab = switchTab;
