@@ -20,6 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://geo.clisa.ai/og.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="클리사 지오폴리틱스" href="https://geo.clisa.ai/rss.xml">
 <link rel="alternate" type="application/rss+xml" title="정세 브리핑" href="https://geo.clisa.ai/brief/rss.xml">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "클리사 지오폴리틱스", "alternateName": "Clisa Geopolitics", "url": "https://geo.clisa.ai/", "description": "한국의 관점에서 동북아 안보와 강대국 경쟁, 유럽·중동의 분쟁을 분석하는 지정학 대시보드입니다. 사안마다 정세 판단, 전략 평가, 개인에게 미치는 영향과 확률 전망을 제공합니다.", "inLanguage": "ko-KR"}</script>
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} html,body{height:100%} body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif} img{max-width:100%} [hidden]{display:none!important} .js .seo-intro{display:none}</style>
@@ -297,6 +298,18 @@ details.exc>summary b{font:700 18px var(--serif)}
 .claim-by{font-size:12px; color:var(--muted); margin-top:6px}
 .hpoints{margin:0; padding-left:18px; display:grid; gap:6px; font-size:13px; color:var(--ink-2)}
 .lesson-box{border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; background:var(--panel-2)}
+/* v3.26 사안 outlook 단락(한반도 안보 공백기) */
+.olk{border-top:1px solid var(--line); padding-top:16px}
+.olk-t{margin:0; font:700 17px/1.4 var(--serif); letter-spacing:-.01em; text-wrap:balance}
+.olk h3{margin:6px 0 0; font-size:14px}
+.olk p{margin:0}
+.olk .fl li{padding:6px 0; border-top:1px solid var(--line); font-size:13px}
+.olk .fl li:first-child{border-top:0}
+.olk .fl b{color:var(--ink)}
+.olk .tl li{grid-template-columns:96px 1fr}
+.olk .tl .d{font:600 12px/1.9 var(--sans); color:var(--accent)}
+.olk .lesson-box p + p{margin-top:8px}
+.olk .fcchip{margin:0 1px}
 .lesson-box b{display:block; font-size:11px; color:var(--accent); margin-bottom:2px}
 .rv{display:grid; gap:6px}
 .rv .hd{display:flex; justify-content:space-between; gap:10px; align-items:baseline}
@@ -848,7 +861,7 @@ const SR_ALIAS = [["대만","타이완","taiwan"],["북한","북조선","dprk"],
 const SR_SKIP = new Set(["sources","src","url","num","iso","id","fp","lat","lon","ids","countries","scores","phase","fc","steps","lens","lens_fp","lens_off","log","discuss","review","status","made","revised","due","date","asof","rng","rng_rec","inputs","score","p","p_rec","k","w","case","kind"]);
 const srNorm = t => String(t).toLowerCase().replace(/\s+/g, "");
 function srTexts(x, out){
-  if (typeof x === "string") { if (/[가-힣A-Za-z]/.test(x) && !/^https?:/.test(x)) out.push(x); }
+  if (typeof x === "string") { if (/[가-힣A-Za-z]/.test(x) && !/^https?:/.test(x)) out.push(x.replace(/\{\{[^}]*\}\}/g, "")); }
   else if (Array.isArray(x)) x.forEach(v => srTexts(v, out));
   else if (x && typeof x === "object") for (const [k, v] of Object.entries(x)) { if (!SR_SKIP.has(k)) srTexts(v, out); }
   return out;
@@ -864,6 +877,7 @@ function srBuild(){
   (D.strategies || []).forEach(c => {
     ((c.publics || {}).items || []).forEach((p, i) => add("전략 분석 사안", cshort(c) + " · 국내 여론 · " + p.who, [p, "여론"], toCase(c.id, "pub-" + c.id + "-" + i)));
     ((c.deciders || {}).items || []).forEach(d => add("전략 분석 사안", cshort(c) + " · 결정권자 분석 · " + nm(d.iso), [d, "의지"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
+    if (c.outlook) add("전략 분석 사안", cshort(c) + " · " + c.outlook.title, [c.outlook, "전망"], toCase(c.id, "outlook-" + c.id));
   });
   for (const [iso, c] of Object.entries(D.countries)) if (c.intent) add("나라", c.name_ko + " · 의지 지표 · 말과 행동", [c.intent, "의지"], () => { selectCountry(iso, true); return "c-intent"; });
   (D.insights || []).forEach(k => add("주요 판단", String(k.t).split(/(?<=다\.)\s/)[0], [k.t, k.classic || ""], toPane("strat")));
@@ -1748,6 +1762,21 @@ function futHtml(c, n){
       '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>").join("") + "</div>" +
     extHtml(c) + worldHtml(c) + aiHtml(c) + "</section>";
 }
+/* v3.26 사안 outlook: 흐름·창·사건·경로·반증 신호. 본문의 {{fc:fNN}}은 그날 확률을 보이는 전망 칩, {{case:id}}는 사안 칩 */
+function olkT(t){
+  return esc(t).replace(/\{\{fc:(f\d+)\}\}/g, (m, id) => { const F = D.forecasts.find(f => f.id === id); return F ? ' <button type="button" class="fcchip" data-fc="' + id + '" title="' + esc(F.q) + '">' + id + " " + F.p + "%</button>" : ""; })
+    .replace(/\{\{case:([\w-]+)\}\}/g, (m, id) => { const k = (D.strategies || []).find(x => x.id === id); return k ? ' <button type="button" class="chip" data-case="' + esc(id) + '">' + esc(k.title.split(":")[0]) + "</button>" : ""; });
+}
+function outlookHtml(c){
+  const O = c.outlook; if (!O) return "";
+  return '<section class="stp olk" id="outlook-' + esc(c.id) + '"><h2 class="olk-t">' + esc(O.title) + "</h2>" + (O.asof ? '<p class="note">기준일 ' + esc(O.asof) + "</p>" : "") + "<p>" + olkT(O.lead) + "</p>" +
+    "<h3>" + esc(O.flows_h) + '</h3><ul class="list fl">' + O.flows.map(x => "<li><b>" + esc(x.k) + "</b> · " + olkT(x.t) + "</li>").join("") + "</ul>" +
+    '<div class="lesson-box"><b>' + esc(O.window_h) + "</b>" + O.window.map(x => "<p>" + olkT(x) + "</p>").join("") + "</div>" +
+    "<h3>" + esc(O.events_h) + '</h3><ul class="tl">' + O.events.map(x => '<li><span class="d">' + esc(x.when) + "</span><span>" + olkT(x.t) + "</span></li>").join("") + "</ul>" +
+    "<h3>" + esc(O.paths_h) + '</h3><p class="note">' + olkT(O.paths_lead) + '</p><ul class="list fl">' + O.paths.map(x => "<li><b>" + esc(x.k) + "</b> · " + olkT(x.t) + "</li>").join("") + "</ul>" +
+    "<h3>" + esc(O.falsify_h) + '</h3><p class="note">' + olkT(O.falsify_lead) + '</p><ul class="watch">' + O.falsify.map(x => "<li>" + olkT(x) + "</li>").join("") + "</ul>" +
+    ((O.sources || []).length ? '<details class="src"><summary>출처 ' + O.sources.length + "건</summary><ul>" + O.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") + "</section>";
+}
 function aiHtml(c){
   const A = c.ai; if (!A) return "";
   return '<div class="aibox"><div class="aih"><span class="aitag">AI 변수</span><b>' + esc(A.t) + '</b></div><dl class="tw"><dt>쟁점</dt><dd>' + esc(A.stake) + "</dd><dt>영향</dt><dd>" + esc(A.moves) + "</dd><dt>전략 주체가 쥔 것</dt><dd>" + esc(A.lever) + '</dd><dt>선행 신호</dt><dd><ul>' + A.signs.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></dd></dl>' + (A.review ? '<p class="note"><span class="vd ' + (A.review === "통과" ? "ok" : "fix") + '">독립 반론 검토</span> ' + esc(A.review) + '</p>' : '') /* v3.0b */ + aiPrecHtml(A.prec, A.prec_insight) + '<p class="note">AI가 지정학에 미치는 영향 전반은 <button type="button" class="chip" data-go="grand">국제 질서 탭의 구조적 흐름</button>에서 볼 수 있습니다.</p></div>';
@@ -1949,7 +1978,7 @@ function renderStrat(){
       decHtml(c, 3) + exitBlock(c) +
       step(4, "선택지 전수 검토", '<p class="note">전략 주체가 실제로 검토하는 선택지를 모두 포함합니다. 도덕적 이유로 제외하지 않습니다.' + (PUB() || c.id !== "korea" ? "" : "") + '</p><ul class="list">' + c.alts.map(a => '<li class="rv"><span><b style="font-family:var(--mono);color:var(--accent)">' + a.id + "</b> <b>" + esc(a.name) + "</b></span><p>" + esc(a.desc) + "</p></li>").join("") + "</ul>") +
       step(5, "가장 치밀한 상대의 대응", '<p class="note">' + esc(c.responses.note) + '</p><div class="tbl-wrap"><table class="tbl" style="min-width:640px"><thead><tr><th>안</th>' + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<th>" + esc(nm(k)) + "</th>").join("") + "</tr></thead><tbody>" + c.responses.rows.map(r => '<tr><td class="mono">' + esc(r.alt) + "</td>" + (c.responses.cols || ["CHN","PRK","JPN","RUS","USA"]).map(k => "<td>" + esc(r[k] || "") + "</td>").join("") + "</tr>").join("") + '</tbody></table></div><div class="lesson-box"><b>가장 치밀한 상대를 가정하자 달라진 점</b>' + esc(c.responses.lesson) + "</div>") +
-      futHtml(c, 6) +
+      futHtml(c, 6) + outlookHtml(c) +
       layer("2", lq("2")) +
       step(7, "전략 주체와 목표", "<p><b>" + esc(cl.name) + '</b> · 목표의 순서 <span class="mono">' + esc(cl.order) + '</span></p><ul class="list goals">' + cl.goals.map(g => '<li class="rv"><span><b class="mono" style="color:var(--accent)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + '<br><span class="note">출처 · ' + esc(g.src) + "</span></p></li>").join("") + '</ul><p class="note">' + esc(cl.note) + "</p>") +
       step(8, "목표별 선택지 평가", evalHtml(c)) +
@@ -1975,7 +2004,7 @@ function renderForecasts(){
     '<div class="score-card"><div><b class="mono">' + fs.length + '</b><span>전체 전망</span></div><div><b class="mono">' + done.length + '</b><span>검증 완료</span></div><div><b class="mono">' + brier + '</b><span>정확도(브라이어 점수)</span></div></div>' +
     '<p class="note">정확도는 브라이어 점수, 곧 (확률 − 실제 결과)²의 평균으로 나타냅니다. 0이 가장 정확하며, 모든 전망에 50%를 부여하면 0.25가 됩니다.' + (PUB() ? "" : "") + "</p>" +
     '<section class="sec"><h3>빗나간 전망</h3><p class="note" style="margin-bottom:8px">50% 이상으로 본 전망이 불발되거나 50% 미만으로 본 전망이 실현된 경우입니다.</p>' + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : '<p class="note">검증이 끝난 전망이 아직 없습니다.</p>') + "</section>" +
-    ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + "</span></li>").join("") + "</ul></section>" : "") +
+    ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]); return '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + '">사안 분석 보기 · ' + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
     (() => { const cs = D.strategies || [], cf = f => { const c = cs.find(x => x.fp === f.fp); return c ? c.id : "etc"; };
       const opts = [["all", "전체", fs.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], fs.filter(f => cf(f) === c.id).length]), [["etc", "그 밖의 분쟁", fs.filter(f => cf(f) === "etc").length]]);
       const sel = S.fcf || "all", shown = sel === "all" ? fs : fs.filter(f => cf(f) === sel);
