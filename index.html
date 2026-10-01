@@ -72,6 +72,8 @@ a{color:var(--accent)}
 .toggles{flex:0 1 auto; min-width:0}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
 @media (min-width: 1360px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
+/* v3.39d 폭이 모자랄 때 1단계: 머리글의 한글 부제를 숨기고 검색창·시각을 더 줄인다. 2단계(tight): 시각을 숨긴다 */
+.top.snug .brand .ko{display:none} .top.snug .srch-open{flex-basis:260px; width:260px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 .tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
 .tg input{position:absolute; opacity:0; width:1px; height:1px}
@@ -2380,13 +2382,16 @@ const CLOCKS = [["서울·도쿄", "Asia/Seoul"], ["베이징·타이베이", "A
   try { tick(); el.hidden = false; setInterval(() => { if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
   /* 검색창이 둘째 줄로 밀리면(글꼴·배율 때문에 폭이 모자랄 때) 시각을 숨겨 머리글을 한 줄로 지킨다 */
   const sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand h1");
-  let lastW = 0;
-  const fit = () => { if (!sb || !h1) return; if (innerWidth !== lastW) { lastW = innerWidth; el.classList.remove("tight"); }
+  let lastW = 0; const top = document.querySelector(".top");
+  const wrapped = () => sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4;
+  const fit = () => { if (!sb || !h1) return; if (innerWidth !== lastW) { lastW = innerWidth; el.classList.remove("tight"); top.classList.remove("snug"); }
     if (el.classList.contains("tight") || getComputedStyle(el).display === "none") return;
-    if (sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4) el.classList.add("tight"); };
+    if (!wrapped()) return;
+    if (!top.classList.contains("snug")) { top.classList.add("snug"); if (!wrapped()) return; }
+    el.classList.add("tight"); top.classList.remove("snug"); };
   fit(); addEventListener("resize", fit);
   if (document.fonts) { document.fonts.addEventListener("loadingdone", fit); if (document.fonts.ready) document.fonts.ready.then(fit); }
-  new ResizeObserver(fit).observe(document.querySelector(".top"));
+  new ResizeObserver(fit).observe(top);
 })();
 
 /* 위로 가기 */
