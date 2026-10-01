@@ -67,6 +67,11 @@ a{color:var(--accent)}
 .seg button{border:0; background:transparent; padding:6px 12px; border-radius:6px; cursor:pointer; color:var(--ink-2); font-size:13px; white-space:nowrap}
 .seg button[aria-checked="true"]{background:var(--ink); color:var(--panel); font-weight:600}
 .toggles{display:flex; gap:8px}
+/* v3.39 세계 시각(2026-10-01): 데스크톱 머리글의 로고와 검색창 사이. 모바일에는 두지 않는다 */
+.clocks{display:none; grid-template-columns:repeat(4, auto); grid-template-rows:repeat(2, auto); grid-auto-flow:column; gap:2px 18px; margin:0 18px 0 auto; align-self:center}
+.clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
+@media (min-width: 1280px){ .clocks:not([hidden]){display:grid} }
+.clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted); min-width:58px} .clk .t{font:500 15px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 .tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
 .tg input{position:absolute; opacity:0; width:1px; height:1px}
 .tg span{display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border:1px solid var(--line); border-radius:999px; background:var(--panel)}
@@ -649,7 +654,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .ic-more summary::before{content:"▸"; font-size:11px} .ic-more[open] summary::before{content:"▾"}
 .ic-more p{margin:6px 0 8px; font-size:14px; line-height:1.75; color:var(--ink-2)}
 .ic-why{margin:6px 0 8px; font-size:14px; line-height:1.75; color:var(--ink-2)} .ic-why b{color:var(--accent); margin-right:4px}
-.srch-open{min-width:260px; height:36px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+.srch-open{min-width:380px; height:40px; font-size:14px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
 .srch-open span{flex:1; text-align:left}
 .srch-open svg{width:15px; height:15px; color:var(--ink-2)}
 .legbtn{display:none; position:absolute; top:12px; right:12px; align-items:center; gap:6px; border:1px solid var(--ink-2); background:var(--panel); color:var(--ink); border-radius:8px; padding:6px 10px; font:600 12.5px var(--sans); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.1)}
@@ -763,6 +768,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
       <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#1B4F8A"/><path d="M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M4.5 9.5h23M4.5 22.5h23" stroke="#fff" stroke-width="1.1" fill="none" opacity=".7"/></svg><h1>Clisa Geopolitics</h1><span class="ko" lang="ko">클리사 지오폴리틱스</span>
       <span class="asof">기준일 <b id="asof"></b><span id="ver"></span></span>
     </div>
+    <div class="clocks" id="clocks" hidden aria-label="세계 시각"></div>
     <div class="toggles">
       <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></button>
     </div>
@@ -2359,6 +2365,19 @@ function fcPop(chip){
 document.addEventListener("click", ev => { if (FCP && !ev.target.closest("#fcpop,[data-fc]")) fcPopClose(); }, true);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape") fcPopClose(); });
 addEventListener("scroll", fcPopClose, true); addEventListener("resize", fcPopClose);
+
+/* v3.39 세계 시각: 1초마다 갱신(콜론 깜빡임, 움직임 줄이기 설정이면 깜빡이지 않음). 서울과 날짜가 다르면 −1일·+1일을 붙인다 */
+/* 배치(2026-10-01): 서울 칸이 맨 왼쪽, 서울과 가까운 순으로 두 칸씩 오른쪽으로. 각 칸은 위가 서울에 더 가까운 도시. 세로로 먼저 채우는 그리드 */
+const CLOCKS = [["서울·도쿄", "Asia/Seoul"], ["베이징·타이베이", "Asia/Shanghai"], ["테헤란", "Asia/Tehran"], ["모스크바", "Europe/Moscow"], ["키이우", "Europe/Kyiv"], ["브뤼셀", "Europe/Brussels"], ["런던", "Europe/London"], ["워싱턴·뉴욕", "America/New_York"]];
+(function(){
+  const el = document.getElementById("clocks"); if (!el || !window.Intl) return;
+  const fm = {}; const F = tz => fm[tz] || (fm[tz] = new Intl.DateTimeFormat("en-GB", {timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false}));
+  const D_ = {}; const Fd = tz => D_[tz] || (D_[tz] = new Intl.DateTimeFormat("en-CA", {timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit"}));
+  el.innerHTML = CLOCKS.map(([c, tz]) => '<span class="clk" data-tz="' + tz + '"><span class="c">' + c + '</span><span class="t"></span><span class="d"></span></span>').join("");
+  const tick = () => { const now = new Date(), seoul = Fd("Asia/Seoul").format(now);
+    el.querySelectorAll(".clk").forEach(x => { const tz = x.dataset.tz; const tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); const d = Fd(tz).format(now); x.querySelector(".d").textContent = d === seoul ? "" : d < seoul ? "−1일" : "+1일"; }); };
+  try { tick(); el.hidden = false; setInterval(() => { if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
+})();
 
 /* 위로 가기 */
 const topBtn = document.getElementById("totop");
