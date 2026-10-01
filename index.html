@@ -26,6 +26,9 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} html,body{height:100%} body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif} img{max-width:100%} [hidden]{display:none!important} .js .seo-intro{display:none}</style>
 <script>document.documentElement.classList.add("js")</script>
 <title>클리사 지오폴리틱스</title>
+<link rel="preload" href="data/eurasia.json" as="fetch" crossorigin>
+<link rel="preload" href="data/daily.json" as="fetch" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -105,6 +108,8 @@ a{color:var(--accent)}
 .pane{overflow-y:auto; padding:18px 18px 28px; display:grid; gap:24px; align-content:start; min-height:0; flex:1}
 .pane h2{margin:0; font:700 21px/1.3 var(--serif); letter-spacing:-.015em; text-wrap:balance}
 .pane h3{margin:0 0 10px; font-size:12px; font-weight:600; color:var(--muted); letter-spacing:.04em}
+/* v3.35b 문단 사이 여백(2026-10-01): 글줄 간격은 그대로 두고 문단·소제목 사이만 넓힌다 */
+.pane p + p{margin-top:.55em} .pane .sec > h3:not(:first-child){margin-top:14px} .stp{gap:14px} .digest article{gap:6px} .dbrief{gap:16px} .dbrief .bi{gap:9px; padding-top:14px} .dbrief .bi h4{margin-bottom:2px} .ic{gap:8px} .duel{margin-top:10px}
 .pane p{margin:0}
 .eyebrow{font-size:12px; color:var(--accent); font-weight:600; letter-spacing:.03em}
 .lead{color:var(--ink-2)}
@@ -567,6 +572,9 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .case-fb b{color:var(--ink); font-size:13px}
 /* v3.32 데스크톱 읽기 칸 글씨 약 14% 확대(2026-10-01) */
 @media (min-width: 961px){ .pane{zoom:1.14} .bstrip{font-size:14.5px} }
+/* v3.36b 띠 둘(2026-10-01): 데스크톱은 브리핑 띠와 일정 띠를 나란히, 모바일은 하나로 합침 */
+@media (max-width: 960px){ #astrip{display:none !important} }
+
 /* v3.32 칩·카드로 넘어온 화면에는 늘 '이전 화면' 단추 */
 .navback{position:absolute; left:14px; bottom:14px; z-index:6; border:1px solid var(--line); background:var(--panel); color:var(--ink-2); border-radius:999px; padding:7px 13px; font-size:12px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.12)}
 .navback:hover{border-color:var(--accent); color:var(--accent)}
@@ -696,6 +704,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .bstrip .bs-n{font:500 11.5px var(--mono); color:var(--muted); white-space:nowrap}
 .dbrief .bi.hl{background:var(--hl, rgba(27,79,138,.08)); border-radius:6px; transition:background 1.2s}
 @media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
+.strips{order:9; flex:1 1 100%; display:flex; gap:12px; min-width:0} .strips .bstrip{order:0; flex:1 1 0; min-width:0} .astrip{border-left-color:var(--conflict)} .astrip .bs-k{color:var(--conflict)}
 .dbrief{display:grid; gap:12px; border-left:3px solid var(--accent); padding-left:14px}
 .dbrief .bh{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap} .dbrief .bh h2{margin:0} .dbrief .bd{font:600 14px var(--mono); color:var(--accent)}
 .dbrief .bi{display:grid; gap:6px; padding-top:10px; border-top:1px solid var(--line)}
@@ -720,6 +729,13 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .entry:hover{background:var(--panel)}
 .fcchip{border:1px solid var(--line); background:var(--panel); border-radius:4px; padding:0 6px; font:500 11px var(--mono); color:var(--ink-2); cursor:pointer}
 .fcchip:hover{border-color:var(--accent); color:var(--accent)}
+.evk{font:600 11px var(--mono); color:var(--muted); margin-right:6px}
+.mo{display:grid; grid-template-columns:44px 1fr; gap:4px 12px; margin-top:8px; font-size:14px} .mo .m{font:700 13px var(--mono); color:var(--accent); padding-top:4px} .mo ul{margin:0; padding:0; list-style:none}
+.mo li{display:flex; gap:10px; align-items:baseline; padding:4px 0; border-bottom:1px solid var(--line)} .mo li:last-child{border-bottom:0}
+.mo .d{font:500 12px var(--mono); color:var(--muted); width:54px; flex:none} .mo .t{flex:1; min-width:0} .mo .sep{color:var(--muted); margin:0 4px}
+.mo .n{font:600 12px var(--sans); color:var(--accent); flex:none} .mo .n.hot{color:var(--conflict)}
+.fcl{border:0; background:none; padding:0; font:inherit; color:var(--ink); cursor:pointer; text-align:left} .fcl:hover{color:var(--accent); text-decoration:underline} .fcl .fcn{font:500 11px var(--mono); color:var(--muted); margin-right:3px} .fcl .fcs{font:500 14px var(--sans)}
+@media (max-width: 560px){ .mo{grid-template-columns:34px 1fr; gap:4px 6px; font-size:13.5px} .mo .d{width:52px; font-size:11px; white-space:nowrap} .mo li{flex-wrap:wrap; gap:2px 8px} .mo .n{margin-left:auto} .mo .sep{display:none} .mo .fcl[data-fc], .mo .fcl.more{display:block} .mo .evk{display:block; margin:0} }
 .fcchip .fcn{font-size:10px; color:var(--muted)} .fcchip .fcs{font:500 12px var(--sans)}
 .fc .foot .fid{color:var(--muted); font-size:11px}
 .toc{position:sticky; top:0; z-index:3; display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding:8px 0; margin:-4px 0 4px; background:var(--panel); border-bottom:1px solid var(--line)}
@@ -748,7 +764,10 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
     <div class="toggles">
       <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></button>
     </div>
+    <div class="strips">
     <button type="button" class="bstrip" id="bstrip"><span class="bs-k">정세 브리핑</span><span class="bs-d" id="bsd"></span><span class="bs-t" id="bst" aria-live="off"></span><span class="bs-n" id="bsn"></span><span class="bs-go" aria-hidden="true">›</span></button>
+    <button type="button" class="bstrip astrip" id="astrip" hidden><span class="bs-k">다가오는 일정</span><span class="bs-d"></span><span class="bs-t" aria-live="off"></span><span class="bs-n"></span><span class="bs-go" aria-hidden="true">›</span></button>
+    </div>
   </header>
 
   <main class="stage">
@@ -814,7 +833,8 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 (function(){
 "use strict";
 const $ = s => document.querySelector(s);
-const fcLab = (F, id, p) => '<span class="fcn">' + esc(id) + '</span>' + (F && F.s ? ' <span class="fcs">' + esc(F.s) + '</span>' : '') + (p != null ? ' ' + p + '%' : '');
+/* v3.37(2026-10-01): 칩에는 번호를 보이지 않고 짧은 이름만 보인다(이름이 없는 전망만 번호). 번호는 설명 창과 전망과 검증에 남는다 */
+const fcLab = (F, id, p) => (F && F.s ? '<span class="fcs">' + esc(F.s) + '</span>' : '<span class="fcn">' + esc(id) + '</span>') + (p != null ? ' ' + p + '%' : '');
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 960px)").matches;
@@ -1011,21 +1031,22 @@ function setupSearch(){
 }
 
 /* ---------- load ---------- */
-Promise.all([
-  fetch("data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }),
-  fetch("data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-]).then(([d, w]) => init(d, w)).catch(err => {
+/* v3.34 속도: 자료·브리핑·지도를 함께 받되, 글은 자료가 오는 즉시 그리고 지구본은 지도가 온 뒤에 그린다. 탭 내용은 처음 열 때 그린다 */
+const BRIEF_P = fetch("data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
+fetch("data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => { init(d); return fetch("data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
   console.error(err);
-  $("#loading").textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
+  const l = $("#loading"); if (l) l.textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
 });
+const RENDERED = {};
+for (const [t, fn] of [["strat", "renderStrat"], ["forecast", "renderForecasts"], ["grand", "renderGrand"], ["ideas", "renderIdeas"], ["method", "renderMethod"], ["feature", "renderFeature"], ["discuss", "renderDiscuss"]]) {
+  const o = window[fn]; window[fn] = function(){ RENDERED[t] = true; return o.apply(this, arguments); };
+}
+const TAB_RENDER = {strat: () => renderStrat(), forecast: () => renderForecasts(), grand: () => renderGrand(), ideas: () => renderIdeas(), method: () => renderMethod(), feature: () => renderFeature(), discuss: () => renderDiscuss()};
+function ensureRendered(t){ if (D && TAB_RENDER[t] && !RENDERED[t]) TAB_RENDER[t](); }
 
 const PUB = () => !!(D && D.meta && D.meta.edition === "public");
-function init(d, w){
-  D = d;
-  /* v3.20d 공개판 머리글에서 기준일을 뺀다(기준일은 세계 정세·사안·전망에 둠). 내부판은 기준일과 판 표시 유지 */
-  if (PUB()) { const as = document.querySelector(".top .asof"); if (as) as.remove(); } else { $("#asof").textContent = D.meta.asof; $("#ver").textContent = " · " + D.meta.version; }
-  if (PUB()) { const tb = $("#tab-discuss"); if (tb) tb.remove(); }
-  else { const b = document.createElement("span"); b.className = "edtag"; b.textContent = ""; $(".brand").appendChild(b); }
+function initGlobe(w){
+  if (!D) return;
   const numToIso = {};
   for (const [iso, c] of Object.entries(D.countries)) if (c.num) numToIso[c.num] = iso;
   features = topojson.feature(w, w.objects.countries).features;
@@ -1033,6 +1054,14 @@ function init(d, w){
   features.sort((a, b) => (a.iso ? 1 : 0) - (b.iso ? 1 : 0));
   borders = topojson.mesh(w, w.objects.countries, (a, b) => a !== b);
   for (const iso of Object.keys(byIso)) labelPos[iso] = LABEL_AT[iso] || d3.geoCentroid(byIso[iso]);
+  requestDraw(true);
+}
+function init(d){
+  D = d;
+  /* v3.20d 공개판 머리글에서 기준일을 뺀다(기준일은 세계 정세·사안·전망에 둠). 내부판은 기준일과 판 표시 유지 */
+  if (PUB()) { const as = document.querySelector(".top .asof"); if (as) as.remove(); } else { $("#asof").textContent = D.meta.asof; $("#ver").textContent = " · " + D.meta.version; }
+  if (PUB()) { const tb = $("#tab-discuss"); if (tb) tb.remove(); }
+  else { const b = document.createElement("span"); b.className = "edtag"; b.textContent = ""; $(".brand").appendChild(b); }
   D.flashpoints.forEach((fp, i) => fp.phase = (i * 0.137) % 1);
   const addF = (iso, v) => { FOCUS[iso] = (FOCUS[iso] || 0) + v; };
   D.forecasts.forEach(f => f.countries.forEach(i => { addF(i, 1); FCN[i] = (FCN[i] || 0) + 1; }));
@@ -1047,12 +1076,13 @@ function init(d, w){
   mq.addEventListener ? mq.addEventListener("change", retheme) : mq.addListener(retheme);
   new MutationObserver(retheme).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
   setLayer(S.layer);
-  renderOverview(); renderDetail(); renderGrand(); renderIdeas(); renderDiscuss(); renderForecasts(); renderStrat(); renderMethod(); renderFeature();
+  renderOverview(); renderDetail();
   const t = store.get("ep.tab"); if (t && t !== "detail") switchTab(t);
   applyHash(); HASH_READY = true;
   setupSearch();
   ttsSetup();
   loadBrief();
+  runStrip($("#astrip"), () => narrow() ? [] : agendaItems());
   loop();
 }
 
@@ -1100,7 +1130,7 @@ function drawBase(){
   bctx.beginPath(); pathB({type:"Sphere"}); bctx.fillStyle = g; bctx.fill();
   bctx.beginPath(); pathB(grat); bctx.strokeStyle = C.grat; bctx.lineWidth = 0.6; bctx.stroke();
   for (const f of features) { bctx.beginPath(); pathB(f); bctx.fillStyle = fillFor(f); bctx.fill(); }
-  bctx.beginPath(); pathB(borders); bctx.strokeStyle = C.border; bctx.lineWidth = 0.5; bctx.stroke();
+  if (borders) { bctx.beginPath(); pathB(borders); bctx.strokeStyle = C.border; bctx.lineWidth = 0.5; bctx.stroke(); }
   if (S.hover && byIso[S.hover] && S.hover !== S.sel) { bctx.beginPath(); pathB(byIso[S.hover]); bctx.strokeStyle = C.ink; bctx.lineWidth = 1.2; bctx.stroke(); }
   if (S.sel && byIso[S.sel]) { bctx.beginPath(); pathB(byIso[S.sel]); bctx.strokeStyle = C.accent; bctx.lineWidth = 2.4; bctx.stroke(); }
   bctx.beginPath(); pathB({type:"Sphere"}); bctx.strokeStyle = C.line; bctx.lineWidth = 1; bctx.stroke();
@@ -1373,6 +1403,7 @@ function switchTab(t){
   t = TAB_ALIAS[t] || t;
   if (!document.getElementById("pane-" + t)) t = "overview";
   S.tab = t; if (t !== "detail") store.set("ep.tab", t);
+  ensureRendered(t);
   document.querySelectorAll(".tabs [data-tab]").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
   document.querySelectorAll(".pane").forEach(p => p.hidden = p.id !== "pane-" + t);
   document.getElementById("pane-" + t).scrollTop = 0;
@@ -1491,37 +1522,49 @@ function dailyHtml(){
     (old.length ? '<details class="bold"><summary>지난 브리핑 ' + old.length + "건</summary>" + old.map(o => '<details class="bo"><summary>' + fmtKD(o.date) + " · " + esc((o.items[0] || {}).h || "") + "</summary>" + dailyIssue(o) + "</details>").join("") + "</details>" : "") +
     "</section>";
 }
+/* v3.36b 돌아가는 띠. 항목 {k 머리말, d 날짜, t 제목, 그리고 n(공지)·j(브리핑 번호)·f(전망)·e(사건) 가운데 하나}. 4초마다 한 건씩 바꾸고, 마우스를 올리거나 누르고 있으면 멈춘다 */
+function agendaItems(){
+  return agenda(90).map(x => x.f ? {k: "검증 예정", d: x.f.due, t: (x.f.s || x.f.id + " " + x.f.q) + " · " + daysText(daysLeft(x.f.due)), f: x.f, soon: daysLeft(x.f.due) <= 30}
+    : {k: "예정", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), e: x.e, soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30});
+}
+function stripGo(x){
+  const fm = x.n && /^feature\/([\w-]+)\/$/.exec(x.n.link || ""); if (fm) { goFeat(fm[1]); return; }
+  if (x.e) { const cid = (x.e.cases || [])[0]; if (cid) { S.scase = cid; renderStrat(); switchTab("strat"); } else { switchTab("overview"); const d = document.getElementById("due"); if (d) d.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); } return; }
+  if (x.f) { S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + x.f.id + '"]'); if (li) { li.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 2400); } return; }
+  if (x.n) { const m = /^case\/([\w-]+)\/$/.exec(x.n.link || ""), c = m && (D.strategies || []).find(z => z.id === m[1]);
+    if (c) { S.scase = c.id; renderStrat(); switchTab("strat"); const o = document.getElementById("outlook-" + c.id);
+      if (o) { const f = o.closest("details"); if (f) f.open = true; o.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }
+      else { const a = document.getElementById("s-case"); if (a) a.scrollIntoView({block: "start"}); } }
+    else switchTab("forecast");
+    return; }
+  switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
+  if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } }
+}
+function runStrip(st, list){
+  const bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d");
+  let k = 0, hold = false;
+  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.hidden = false; };
+  show();
+  if (!reduceMotion) setInterval(() => {
+    if (hold || document.visibilityState !== "visible" || list().length < 2) return;
+    bt.classList.add("fade"); setTimeout(() => { k = (k + 1) % Math.max(1, list().length); show(); bt.classList.remove("fade"); }, 350);
+  }, 4000);
+  addEventListener("resize", show);
+  st.addEventListener("mouseenter", () => hold = true); st.addEventListener("mouseleave", () => hold = false);
+  st.addEventListener("focus", () => hold = true); st.addEventListener("blur", () => hold = false);
+  st.addEventListener("pointerdown", () => hold = true); st.addEventListener("pointercancel", () => hold = false);
+  st.onclick = () => { hold = false; const L = list(); if (L.length) stripGo(L[k % L.length]); };
+}
 function loadBrief(){
-  fetch("data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(b => {
+  BRIEF_P.then(b => {
     if (!b || !(b.issues || []).length) { $("#bstrip").hidden = true; return; }
     BR = b; const cur = b.issues[0];
     /* v3.27 판단 변경 공지(머리말 n.k, 없으면 "분석 갱신")는 공지 날짜로부터 7일 동안 띠 첫머리에 두고, 그 뒤로 브리핑 제목을 돌린다(2026-10-01) */
     const d7 = new Date(Date.now() - 7 * 864e5), ymd = x => x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"), lim = ymd(d7);
     const NS = (D.notices || []).filter(n => n.date >= lim).slice().sort((a, b) => b.date.localeCompare(a.date))
       .map(n => ({k: n.k || "분석 갱신", d: n.date, t: n.h || String(n.text).split(/(?<=다\.)\s/)[0], n}));
-    const SL = NS.concat(cur.items.map((i, j) => ({k: "정세 브리핑", d: cur.date, t: i.h, j})));
-    const N = SL.length, st = $("#bstrip"), bt = $("#bst"), bn = $("#bsn"), bk = st.querySelector(".bs-k");
-    let k = 0, hold = false;
-    const show = () => { const x = SL[k] || {}; bt.textContent = x.t || ""; bk.textContent = x.k || "정세 브리핑"; $("#bsd").textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; };
-    show(); st.hidden = false;
-    /* v3.20b 제목을 4초마다 한 건씩 바꿔 보인다. 마우스를 올리거나 누르고 있으면 멈추고, 움직임 줄이기 설정이면 돌지 않는다 */
-    if (N > 1 && !reduceMotion) setInterval(() => {
-      if (hold || document.visibilityState !== "visible") return;
-      bt.classList.add("fade"); setTimeout(() => { k = (k + 1) % N; show(); bt.classList.remove("fade"); }, 350);
-    }, 4000);
-    st.addEventListener("mouseenter", () => hold = true); st.addEventListener("mouseleave", () => hold = false);
-    st.addEventListener("focus", () => hold = true); st.addEventListener("blur", () => hold = false);
-    st.addEventListener("pointerdown", () => hold = true); st.addEventListener("pointercancel", () => hold = false);
-    st.onclick = () => { hold = false; const x = SL[k] || {};
-      const fm = x.n && /^feature\/([\w-]+)\/$/.exec(x.n.link || ""); if (fm) { goFeat(fm[1]); return; }
-      if (x.n) { const m = /^case\/([\w-]+)\/$/.exec(x.n.link || ""), c = m && (D.strategies || []).find(z => z.id === m[1]);
-        if (c) { S.scase = c.id; renderStrat(); switchTab("strat"); const o = document.getElementById("outlook-" + c.id);
-          if (o) { const f = o.closest("details"); if (f) f.open = true; o.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }
-          else { const a = document.getElementById("s-case"); if (a) a.scrollIntoView({block: "start"}); } }
-        else switchTab("forecast");
-        return; }
-      switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
-      if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } } };
+    const MAIN = NS.concat(cur.items.map((i, j) => ({k: "정세 브리핑", d: cur.date, t: i.h, j})));
+    runStrip($("#bstrip"), () => narrow() ? MAIN.concat(agendaItems().filter(x => x.soon)) : MAIN);
     renderOverview(); SR.idx = null;
     if (!HASH0 && store.get("ep.brief") !== cur.date && S.tab !== "overview") switchTab("overview");
     store.set("ep.brief", cur.date);
@@ -1530,7 +1573,7 @@ function loadBrief(){
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  $("#pane-overview").innerHTML = dailyHtml() +
+  $("#pane-overview").innerHTML = dailyHtml() + dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
@@ -2005,6 +2048,35 @@ function exitBlock(c){
       '<div class="exit"><h5>' + esc(e.title) + "</h5><ul>" + Object.entries(e.claims).map(([k, v]) => "<li><b>" + esc(nm(k)) + "</b> “" + esc(v) + "”</li>").join("") + '</ul><p class="pre"><b>선례</b> · ' + esc(e.precedent) + '</p><p class="obs"><b>장애</b> · ' + esc(e.obstacle) + "</p></div>").join("") + "</section>" +
     '<section class="sec"><h3>주시할 신호</h3><ul class="watch">' + x.signals.map(v => "<li>" + esc(v) + "</li>").join("") + "</ul></section>" +
     '<p class="note">당사자의 인식과 출구는 분석 판단이며, 해당국의 공식 입장이 아닙니다.</p></div></details>';
+}
+/* v3.35 다가오는 검증 시점(2026-10-01): 첫 화면에 검증 시점이 가까운 열린 전망을 남은 날수와 함께 보이고, 30일 안의 것은 맨 위 띠에도 돌린다 */
+function daysLeft(due){ const t = new Date(); const a = Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()), m = /^(\d{4})-(\d{2})-(\d{2})/.exec(due || ""); if (!m) return null; return Math.round((Date.UTC(+m[1], +m[2] - 1, +m[3]) - a) / 864e5); }
+function daysText(n){ return n == null ? "" : n > 0 ? n + "일 남음" : n === 0 ? "오늘 검증" : "검증 대기"; }
+function dueSoon(days){ return D.forecasts.filter(f => f.status === "open" && daysLeft(f.due) != null && daysLeft(f.due) <= days).sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p); }
+/* v3.36 다가오는 일정(2026-10-01): 전망의 검증 시점과 예정된 사건(D.events)을 날짜순으로 섞는다. 달만 정해진 사건(YYYY-MM)은 '11월 중'으로 적고 남은 날수는 적지 않는다 */
+function evKey(e){ return e.date.length === 7 ? e.date + "-32" : e.date; }
+function evDays(e){ if (e.date.length === 7) return ""; const n0 = daysLeft(e.date), n1 = daysLeft(e.end || e.date); return n0 > 0 ? n0 + "일 남음" : n1 >= 0 ? (n0 === 0 ? "오늘" : "진행 중") : ""; }
+function evDate(e){ if (e.date.length === 7) return (+e.date.slice(5, 7)) + "월 중"; const a = fmtKD(e.date); if (!e.end) return a; const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(e.end); return m && e.end.slice(0, 7) === e.date.slice(0, 7) ? a + "~" + (+m[3]) + "일" : a + "~" + fmtKD(e.end); }
+function evSoon(days){ return (D.events || []).filter(e => { const k = evKey(e); const n = daysLeft(e.date.length === 7 ? e.date + "-01" : e.date); return n != null && n <= days && (e.date.length === 7 ? daysLeft(e.date + "-28") >= 0 : (e.end ? daysLeft(e.end) : n) >= 0); }); }
+function agenda(days){
+  const L = dueSoon(days).map(f => ({k: f.due, f})).concat(evSoon(days).map(e => ({k: evKey(e), e})));
+  return L.sort((a, b) => a.k.localeCompare(b.k));
+}
+function dueHtml(){
+  /* 나안(2026-10-01 결재): 달별로 묶고 한 줄에 날짜·제목·남은 날수만 둔다. 같은 날의 전망은 한 줄에 모은다 */
+  const L = agenda(120); if (!L.length) return "";
+  const dayOf = x => x.e ? (x.e.date.length === 7 ? "중" : (+x.e.date.slice(8, 10)) + (x.e.end && x.e.end.slice(0, 7) === x.e.date.slice(0, 7) ? "~" + (+x.e.end.slice(8, 10)) : "") + "일") : (+x.f.due.slice(8, 10)) + "일";
+  const months = [];
+  for (const x of L) {
+    const mk = x.k.slice(0, 7); let M = months.find(m => m.mk === mk); if (!M) { M = {mk, rows: []}; months.push(M); }
+    if (x.f) { const key = "f" + x.f.due; let R = M.rows.find(r => r.key === key); if (!R) { R = {key, k: x.k, day: dayOf(x), fs: [], n: daysLeft(x.f.due)}; M.rows.push(R); } R.fs.push(x.f); }
+    else M.rows.push({key: x.e.id, k: x.k, day: dayOf(x), e: x.e, n: x.e.date.length === 7 ? null : daysLeft(x.e.date), dt: evDays(x.e)});
+  }
+  const row = r => '<li><span class="d">' + esc(r.day) + '</span><span class="t">' + (r.fs ? '<span class="evk">전망</span>' + r.fs.slice(0, 3).map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep">·</span>') + (r.fs.length > 3 ? '<span class="sep">·</span><button type="button" class="fcl more" data-go="forecast">외 ' + (r.fs.length - 3) + "건</button>" : "")
+    : (r.e.cases || []).length ? '<button type="button" class="fcl" data-case="' + esc(r.e.cases[0]) + '" title="' + esc((D.strategies || []).filter(c => r.e.cases.includes(c.id)).map(c => c.title.split(":")[0]).join(" · ")) + ' 사안 분석">' + esc(r.e.t) + "</button>" : esc(r.e.t)) + "</span>" +
+    (r.fs ? '<span class="n' + (r.n <= 7 ? " hot" : "") + '">' + daysText(r.n) + "</span>" : r.dt ? '<span class="n' + (r.n != null && r.n <= 7 ? " hot" : "") + '">' + r.dt + "</span>" : "") + "</li>";
+  return '<section class="sec due" id="due"><h3>다가오는 일정</h3><div class="mo">' + months.map(M => '<div class="m">' + (+M.mk.slice(5, 7)) + "월</div><ul>" + M.rows.map(row).join("") + "</ul>").join("") +
+    '</div><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기 →</button></p></section>';
 }
 function upcomingHtml(){
   const up = D.forecasts.filter(f => f.status === "open").slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p).slice(0, 3);
