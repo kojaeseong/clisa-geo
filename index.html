@@ -565,6 +565,16 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .copy-btn:focus-visible,.tabs button:focus-visible,.totop:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
 .case-fb{border:1px dashed var(--line); border-radius:8px; padding:12px 14px; display:grid; gap:6px; font-size:13px; color:var(--ink-2)}
 .case-fb b{color:var(--ink); font-size:13px}
+/* v3.32 데스크톱 읽기 칸 글씨 약 14% 확대(2026-10-01) */
+@media (min-width: 961px){ .pane{zoom:1.14} .bstrip{font-size:14.5px} }
+/* v3.32 칩·카드로 넘어온 화면에는 늘 '이전 화면' 단추 */
+.navback{position:absolute; left:14px; bottom:14px; z-index:6; border:1px solid var(--line); background:var(--panel); color:var(--ink-2); border-radius:999px; padding:7px 13px; font-size:12px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.12)}
+.navback:hover{border-color:var(--accent); color:var(--accent)}
+#fcpop{position:fixed; z-index:40; background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,.18); padding:10px 12px; font-size:14px; line-height:1.6}
+#fcpop .fcp-h{display:flex; align-items:center; gap:6px; font-weight:600; color:var(--accent); font-size:13px}
+#fcpop .fcp-x{margin-left:auto; border:0; background:none; font-size:18px; line-height:1; color:var(--muted); cursor:pointer; padding:0 2px}
+#fcpop p{margin:6px 0 0} #fcpop .fcp-e,#fcpop .fcp-d{font-size:13px; color:var(--ink-2)} #fcpop .fe-up{color:var(--conflict)} #fcpop .fe-down{color:var(--accent)}
+#fcpop .chip{margin-top:8px}
 .totop{position:absolute; right:14px; bottom:14px; z-index:6; border:1px solid var(--line); background:var(--panel); color:var(--ink-2); border-radius:999px; padding:7px 13px; font-size:12px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.12)}
 .insights li{font:400 15px/1.75 var(--sans)!important; color:var(--ink-2)}
 .insights li p b{color:var(--ink); font-weight:700}
@@ -574,6 +584,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   .panel{overflow:visible}
   .tabs{position:sticky; top:env(safe-area-inset-top, 0px); z-index:5; background:var(--panel); border-radius:10px 10px 0 0}
   .totop{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px))}
+  .navback{position:fixed; left:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px))}
 }
 @media (max-width: 480px){
   .tabs{padding:0 2px; gap:0}
@@ -709,6 +720,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .entry:hover{background:var(--panel)}
 .fcchip{border:1px solid var(--line); background:var(--panel); border-radius:4px; padding:0 6px; font:500 11px var(--mono); color:var(--ink-2); cursor:pointer}
 .fcchip:hover{border-color:var(--accent); color:var(--accent)}
+.fcchip .fcn{font-size:10px; color:var(--muted)} .fcchip .fcs{font:500 12px var(--sans)}
 .fc .foot .fid{color:var(--muted); font-size:11px}
 .toc{position:sticky; top:0; z-index:3; display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; padding:8px 0; margin:-4px 0 4px; background:var(--panel); border-bottom:1px solid var(--line)}
 .toc::-webkit-scrollbar{display:none}
@@ -774,6 +786,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
         <button type="button" class="wide-btn" id="widebtn" aria-pressed="false" title="읽기 영역 넓히기" aria-label="읽기 영역 넓히기">⇔</button>
       </nav>
       <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
+      <button type="button" class="navback" id="navback" hidden>← 이전 화면</button>
       <div class="pane" id="pane-overview" role="tabpanel"><div class="sec seo-intro"><p class="lead">클리사 지오폴리틱스는 국제 정세를 한국의 관점에서 분석하는 사이트입니다. 동북아 안보, 강대국 경쟁, 유럽과 중동의 분쟁 등 주요 사안마다 사실 확인에서 출발해 정세 판단, 선택지별 전략 평가, 개인과 기업에 미치는 영향, 확률로 표시한 전망을 제시합니다. 국가별 현황과 국제 질서의 흐름은 지구본에서 함께 볼 수 있습니다.</p><p class="note"><a href="/brief/">정세 브리핑</a> · <a href="/feature/">특집</a> · <a href="/forecast/">전망과 검증</a></p><p><a href="/case/korea/">한반도</a> · <a href="/case/taiwan/">대만해협</a> · <a href="/case/ukraine/">러-우 전쟁</a> · <a href="/case/iran/">이란 전쟁과 호르무즈</a> · <a href="/case/chips/">AI·반도체 미중 경쟁</a></p><p><a href="/country/RUS/">러시아</a> · <a href="/country/UKR/">우크라이나</a> · <a href="/country/BLR/">벨라루스</a> · <a href="/country/KAZ/">카자흐스탄</a> · <a href="/country/TUR/">튀르키예</a> · <a href="/country/IRN/">이란</a> · <a href="/country/ISR/">이스라엘</a> · <a href="/country/SAU/">사우디아라비아</a> · <a href="/country/CHN/">중국</a> · <a href="/country/TWN/">대만</a> · <a href="/country/JPN/">일본</a> · <a href="/country/KOR/">대한민국</a> · <a href="/country/PRK/">북한</a> · <a href="/country/MNG/">몽골</a> · <a href="/country/USA/">미국</a> · <a href="/country/EUR/">EU·NATO</a> · <a href="/country/IND/">인도</a> · <a href="/country/PAK/">파키스탄</a> · <a href="/country/IDN/">인도네시아</a> · <a href="/country/VNM/">베트남</a> · <a href="/country/PHL/">필리핀</a> · <a href="/country/AUS/">호주</a> · <a href="/country/GBR/">영국</a> · <a href="/country/FRA/">프랑스</a> · <a href="/country/DEU/">독일</a> · <a href="/country/POL/">폴란드</a> · <a href="/country/CAN/">캐나다</a> · <a href="/country/MEX/">멕시코</a> · <a href="/country/BRA/">브라질</a> · <a href="/country/VEN/">베네수엘라</a> · <a href="/country/EGY/">이집트</a> · <a href="/country/NGA/">나이지리아</a> · <a href="/country/ZAF/">남아프리카공화국</a> · <a href="/country/ETH/">에티오피아</a></p></div></div>
       <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
       <div class="pane" id="pane-feature" role="tabpanel" hidden></div>
@@ -801,6 +814,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 (function(){
 "use strict";
 const $ = s => document.querySelector(s);
+const fcLab = (F, id, p) => '<span class="fcn">' + esc(id) + '</span>' + (F && F.s ? ' <span class="fcs">' + esc(F.s) + '</span>' : '') + (p != null ? ' ' + p + '%' : '');
 const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 960px)").matches;
@@ -1279,8 +1293,10 @@ function setupInteraction(){
     if (fb) { goFeat(fb.dataset.feat); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { S.scase = cs.dataset.case; renderStrat(); switchTab("strat"); const a = document.getElementById("s-case"); if (a) a.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); return; }
-    const fcb = ev.target.closest("[data-fc]");
-    if (fcb) { S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + fcb.dataset.fc + '"]'); if (li) { li.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 3000); } return; }
+    const fcp = ev.target.closest("[data-fc]");
+    if (fcp && !fcp.closest("#fcpop")) { fcPop(fcp); return; }
+    const fcb = ev.target.closest("[data-fcgo]");
+    if (fcb) { fcPopClose(); fcb.dataset.fc = fcb.dataset.fcgo; S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + fcb.dataset.fc + '"]'); if (li) { li.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 3000); } return; }
     const ff = ev.target.closest("[data-fcf]");
     if (ff) { S.fcf = ff.dataset.fcf; renderForecasts(); const a = document.getElementById("f-all"); if (a) a.scrollIntoView({block:"start"}); return; }
     const jb = ev.target.closest("[data-jump]");
@@ -1336,6 +1352,7 @@ function setLens(id){
 }
 function selectCountry(iso, fly, fromMap){
   if (!D.countries[iso]) return;
+  navPush();
   if (S.tab !== "detail") S.prevTab = S.tab;
   S.sel = iso; S.selFp = null;
   renderDetail(); switchTab("detail");
@@ -1345,6 +1362,7 @@ function selectCountry(iso, fly, fromMap){
 }
 function selectFp(id, fromMap){
   const fp = D.flashpoints.find(f => f.id === id); if (!fp) return;
+  navPush();
   if (S.tab !== "detail") S.prevTab = S.tab;
   S.selFp = id; S.sel = null;
   renderDetail(); switchTab("detail");
@@ -1376,8 +1394,8 @@ function renderLegend(){
 }
 function insightsHtml(){
   const cs = D.strategies || [];
-  return (D.insights || []).length ? '<section class="sec" id="s-ins"><h3>주요 판단 ' + ttsBtn("ins") + '</h3><p class="note" style="margin-bottom:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 번호를 누르면 그 판단을 가릴 전망으로, 아래 단추를 누르면 사안 분석으로 이동합니다.</p><ol class="ic-list">' + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = String(k.t).match(/^(.+?다\.)\s(.+)$/s); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
-      return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="이 판단을 가릴 전망으로 이동">' + esc(id) + "</button>").join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
+  return (D.insights || []).length ? '<section class="sec" id="s-ins"><h3>주요 판단 ' + ttsBtn("ins") + '</h3><p class="note" style="margin-bottom:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 칩을 누르면 그 판단과 관련한 전망이 뜨고, 아래 단추를 누르면 해당 사안의 분석으로 이동합니다.</p><ol class="ic-list">' + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = String(k.t).match(/^(.+?다\.)\s(.+)$/s); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
+      return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => { const F = D.forecasts.find(f => f.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }).join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
         (rest ? '<p class="ic-why"><b>근거</b> ' + esc(rest) + "</p>" : "") + (c || k.feature ? '<div class="chips" style="margin:0">' + (k.feature ? FEATS().filter(F => F.id === k.feature).map(featBtn).join("") : "") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + "</div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
 }
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
@@ -1386,7 +1404,7 @@ const FCE = {up:["↑","확률을 올릴 요인"], down:["↓","확률을 내릴
 const fmtKD = s => { const a = String(s).split("-").map(Number); return a[1] + "월 " + a[2] + "일"; };
 function dailyIssue(x){
   const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
-    return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + esc(f.id) + (F ? " " + F.p + "%" : "") + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
+    return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
   return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + '</p><p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" +
       '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +
@@ -1530,7 +1548,7 @@ function forecastRow(f, compact){
 }
 function renderDetail(){
   const el = $("#pane-detail");
-  const back = '<button type="button" class="chip back" data-go="' + esc(S.prevTab || "overview") + '">← 이전 화면</button>';
+  const back = '<button type="button" class="chip back" data-navback="1" data-prev="' + esc(S.prevTab || "overview") + '">← 이전 화면</button>';
   if (S.selFp) {
     const fp = D.flashpoints.find(f => f.id === S.selFp);
     const fcs = D.forecasts.filter(f => f.fp === fp.id);
@@ -1786,7 +1804,7 @@ function futHtml(c, n){
 }
 /* v3.26 사안 outlook: 흐름·창·사건·경로·반증 신호. 본문의 {{fc:fNN}}은 그날 확률을 보이는 전망 칩, {{case:id}}는 사안 칩 */
 function olkT(t, fid){
-  return esc(t).replace(/\{\{n:([\d,]+)\}\}/g, (m, ns) => '<sup class="fn">' + ns.split(",").map(n => '<button type="button" data-jump="fn-' + esc(fid || "") + "-" + n + '" id="fnr-' + esc(fid || "") + "-" + n + '" aria-label="용어 풀이 ' + n + '">' + n + "</button>").join("·") + "</sup>")  /* v3.29 용어 풀이 번호 */.replace(/\{\{fc:(f\d+)\}\}/g, (m, id) => { const F = D.forecasts.find(f => f.id === id); return F ? ' <button type="button" class="fcchip" data-fc="' + id + '" title="' + esc(F.q) + '">' + id + " " + F.p + "%</button>" : ""; })
+  return esc(t).replace(/\{\{n:([\d,]+)\}\}/g, (m, ns) => '<sup class="fn">' + ns.split(",").map(n => '<button type="button" data-jump="fn-' + esc(fid || "") + "-" + n + '" id="fnr-' + esc(fid || "") + "-" + n + '" aria-label="용어 풀이 ' + n + '">' + n + "</button>").join("·") + "</sup>")  /* v3.29 용어 풀이 번호 */.replace(/\{\{fc:(f\d+)\}\}/g, (m, id) => { const F = D.forecasts.find(f => f.id === id); return F ? ' <button type="button" class="fcchip" data-fc="' + id + '" title="' + esc(F.q) + '">' + fcLab(F, id, F.p) + "</button>" : ""; })
     .replace(/\{\{case:([\w-]+)\}\}/g, (m, id) => { const k = (D.strategies || []).find(x => x.id === id); return k ? ' <button type="button" class="chip" data-case="' + esc(id) + '">' + esc(k.title.split(":")[0]) + "</button>" : ""; });
 }
 /* v3.28 특집: 글마다 제목·날짜·사안. 특집 탭에 최신 글은 펼치고 지난 글은 접어 둔다. 사안 화면·주요 판단 카드에는 제목을 단 단추만 둔다 */
@@ -2204,6 +2222,69 @@ addEventListener("hashchange", () => { if (D) applyHash(); });
   const tb = document.querySelector(".tabs"), more = () => tb.classList.toggle("more", tb.scrollLeft + tb.clientWidth < tb.scrollWidth - 4);
   tb.addEventListener("scroll", more, {passive:true}); addEventListener("resize", more); setTimeout(more, 0);
 })();
+
+/* v3.32 이전 화면: 칩·카드·띠·검색 결과로 화면을 옮길 때마다 직전 화면(탭, 사안, 선택한 나라·분쟁지, 스크롤 위치)을 쌓아 두고 되돌린다 */
+const NAV = []; let NAV_BUSY = false;
+const navBtn = document.getElementById("navback");
+function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
+function navUpd(){ if (navBtn) navBtn.hidden = !NAV.length; }
+function navPush(){
+  if (NAV_BUSY || !D) return;
+  const s = navSnap(), t = NAV[NAV.length - 1];
+  if (t && t.tab === s.tab && t.scase === s.scase && t.sel === s.sel && t.selFp === s.selFp && Math.abs(t.y - s.y) < 40) return;
+  NAV.push(s); if (NAV.length > 30) NAV.shift(); navUpd();
+}
+function navBack(){
+  const s = NAV.pop(); navUpd(); if (!s) return false;
+  NAV_BUSY = true;
+  try {
+    if (s.tab === "detail" && (s.sel || s.selFp)) { if (s.sel) selectCountry(s.sel, true); else selectFp(s.selFp); }
+    else {
+      if (s.tab === "strat" && s.scase) { S.scase = s.scase; renderStrat(); }
+      if (s.tab === "forecast" && s.fcf) { S.fcf = s.fcf; renderForecasts(); }
+      switchTab(s.tab);
+    }
+  } finally { NAV_BUSY = false; }
+  const pn = document.getElementById("pane-" + s.tab);
+  if (pn) { pn.classList.add("cv-off"); clearTimeout(pn._cv); pn._cv = setTimeout(() => pn.classList.remove("cv-off"), 2500); }
+  requestAnimationFrame(() => { if (narrow()) scrollTo(0, s.y); else if (pn) pn.scrollTop = s.y; updTop(); });
+  return true;
+}
+document.addEventListener("click", ev => {
+  if (ev.target.closest("#navback,[data-navback]")) return;
+  if (ev.target.closest(".tabs")) return;
+  if (ev.target.closest("[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],#bstrip,#srchres [data-sri]")) navPush();
+}, true);
+document.addEventListener("click", ev => {
+  const b = ev.target.closest("#navback,[data-navback]"); if (!b) return;
+  ev.preventDefault(); ev.stopPropagation();
+  if (!navBack() && b.dataset.prev) switchTab(b.dataset.prev);
+}, true);
+
+/* v3.33 전망 칩을 누르면 다른 탭으로 넘어가지 않고 칩 아래에 전망 문장·현재 확률·검증 시점을 펼친다. '전망과 검증에서 보기'로 넘어간다 */
+let FCP = null;
+function fcPopClose(){ if (FCP) { FCP.remove(); FCP = null; } }
+function fcPop(chip){
+  const id = chip.dataset.fc, F = D.forecasts.find(f => f.id === id); if (!F) return;
+  if (FCP && FCP.dataset.for === id && FCP._chip === chip) { fcPopClose(); return; }
+  fcPopClose();
+  const st = {yes: "실현", no: "불발", void: "무효"}[F.status];
+  const ef = chip.classList.contains("bfc-up") ? "up" : chip.classList.contains("bfc-down") ? "down" : chip.classList.contains("bfc-none") ? "none" : null;
+  const EF = {up: ["↑", "확률을 올릴 요인"], down: ["↓", "확률을 내릴 요인"], none: ["–", "변화 없음"]};
+  const el = document.createElement("div"); el.id = "fcpop"; el.dataset.for = id; el._chip = chip; el.setAttribute("role", "dialog");
+  el.innerHTML = '<div class="fcp-h"><span class="mono">' + esc(id) + "</span> 전망 · " + (st ? esc(st) : "현재 " + F.p + "%") + '<button type="button" class="fcp-x" aria-label="닫기">×</button></div><p>' + esc(F.q) + "</p>" +
+    (ef ? '<p class="fcp-e">이 사건 · <b class="fe-' + ef + '">' + EF[ef][0] + "</b> " + EF[ef][1] + "</p>" : "") +
+    '<p class="fcp-d">검증 시점 <span class="mono">' + esc(F.due) + '</span></p><button type="button" class="chip" data-fcgo="' + esc(id) + '">전망과 검증에서 보기 →</button>';
+  document.body.appendChild(el); FCP = el;
+  const r = chip.getBoundingClientRect(), w = Math.min(340, innerWidth - 24), h = el.offsetHeight;
+  el.style.width = w + "px";
+  el.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + "px";
+  el.style.top = (r.bottom + 8 + h > innerHeight && r.top - 8 - h > 0 ? r.top - 8 - el.offsetHeight : r.bottom + 8) + "px";
+  el.querySelector(".fcp-x").onclick = fcPopClose;
+}
+document.addEventListener("click", ev => { if (FCP && !ev.target.closest("#fcpop,[data-fc]")) fcPopClose(); }, true);
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") fcPopClose(); });
+addEventListener("scroll", fcPopClose, true); addEventListener("resize", fcPopClose);
 
 /* 위로 가기 */
 const topBtn = document.getElementById("totop");
