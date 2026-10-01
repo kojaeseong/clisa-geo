@@ -574,6 +574,8 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 @media (min-width: 961px){ .pane{zoom:1.14} .bstrip{font-size:14.5px} }
 /* v3.36b 띠 둘(2026-10-01): 데스크톱은 브리핑 띠와 일정 띠를 나란히, 모바일은 하나로 합침 */
 @media (max-width: 960px){ #astrip{display:none !important} }
+/* v3.38 모바일 본문 글씨(2026-10-01): 읽기 칸을 1.1배(본문 14→약 15.5px). 데스크톱의 1.14배와 같은 방식 */
+@media (max-width: 960px){ .pane{zoom:1.1} }
 
 /* v3.32 칩·카드로 넘어온 화면에는 늘 '이전 화면' 단추 */
 .navback{position:absolute; left:14px; bottom:14px; z-index:6; border:1px solid var(--line); background:var(--panel); color:var(--ink-2); border-radius:999px; padding:7px 13px; font-size:12px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.12)}
@@ -1038,9 +1040,8 @@ fetch("data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); ret
   const l = $("#loading"); if (l) l.textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
 });
 const RENDERED = {};
-for (const [t, fn] of [["strat", "renderStrat"], ["forecast", "renderForecasts"], ["grand", "renderGrand"], ["ideas", "renderIdeas"], ["method", "renderMethod"], ["feature", "renderFeature"], ["discuss", "renderDiscuss"]]) {
-  const o = window[fn]; window[fn] = function(){ RENDERED[t] = true; return o.apply(this, arguments); };
-}
+const markR = (t, f) => function(){ RENDERED[t] = true; return f.apply(this, arguments); };
+renderStrat = markR("strat", renderStrat); renderForecasts = markR("forecast", renderForecasts); renderGrand = markR("grand", renderGrand); renderIdeas = markR("ideas", renderIdeas); renderMethod = markR("method", renderMethod); renderFeature = markR("feature", renderFeature); renderDiscuss = markR("discuss", renderDiscuss);
 const TAB_RENDER = {strat: () => renderStrat(), forecast: () => renderForecasts(), grand: () => renderGrand(), ideas: () => renderIdeas(), method: () => renderMethod(), feature: () => renderFeature(), discuss: () => renderDiscuss()};
 function ensureRendered(t){ if (D && TAB_RENDER[t] && !RENDERED[t]) TAB_RENDER[t](); }
 
@@ -1529,8 +1530,9 @@ function agendaItems(){
 }
 function stripGo(x){
   const fm = x.n && /^feature\/([\w-]+)\/$/.exec(x.n.link || ""); if (fm) { goFeat(fm[1]); return; }
-  if (x.e) { const cid = (x.e.cases || [])[0]; if (cid) { S.scase = cid; renderStrat(); switchTab("strat"); } else { switchTab("overview"); const d = document.getElementById("due"); if (d) d.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); } return; }
-  if (x.f) { S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + x.f.id + '"]'); if (li) { li.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 2400); } return; }
+  /* v3.37b(2026-10-01): 일정 띠의 항목은 전망이든 사건이든 첫 화면의 '다가오는 일정' 표에서 그 줄로 간다. 전망의 설명 창과 사안 분석은 표의 줄에서 이어진다 */
+  if (x.e || x.f) { switchTab("overview"); const li = document.getElementById("due-" + (x.f ? "f" + x.f.due : x.e.id)) || document.getElementById("due");
+    if (li) { li.scrollIntoView({block: "center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 2400); } return; }
   if (x.n) { const m = /^case\/([\w-]+)\/$/.exec(x.n.link || ""), c = m && (D.strategies || []).find(z => z.id === m[1]);
     if (c) { S.scase = c.id; renderStrat(); switchTab("strat"); const o = document.getElementById("outlook-" + c.id);
       if (o) { const f = o.closest("details"); if (f) f.open = true; o.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }
@@ -1564,7 +1566,7 @@ function loadBrief(){
     const NS = (D.notices || []).filter(n => n.date >= lim).slice().sort((a, b) => b.date.localeCompare(a.date))
       .map(n => ({k: n.k || "분석 갱신", d: n.date, t: n.h || String(n.text).split(/(?<=다\.)\s/)[0], n}));
     const MAIN = NS.concat(cur.items.map((i, j) => ({k: "정세 브리핑", d: cur.date, t: i.h, j})));
-    runStrip($("#bstrip"), () => narrow() ? MAIN.concat(agendaItems().filter(x => x.soon)) : MAIN);
+    runStrip($("#bstrip"), () => narrow() ? MAIN.concat(agendaItems().filter(x => x.soon)) : MAIN);  /* 모바일: 띠가 하나이므로 30일 안의 일정을 섞는다(2026-10-01) */
     renderOverview(); SR.idx = null;
     if (!HASH0 && store.get("ep.brief") !== cur.date && S.tab !== "overview") switchTab("overview");
     store.set("ep.brief", cur.date);
@@ -2072,7 +2074,7 @@ function dueHtml(){
     if (x.f) { const key = "f" + x.f.due; let R = M.rows.find(r => r.key === key); if (!R) { R = {key, k: x.k, day: dayOf(x), fs: [], n: daysLeft(x.f.due)}; M.rows.push(R); } R.fs.push(x.f); }
     else M.rows.push({key: x.e.id, k: x.k, day: dayOf(x), e: x.e, n: x.e.date.length === 7 ? null : daysLeft(x.e.date), dt: evDays(x.e)});
   }
-  const row = r => '<li><span class="d">' + esc(r.day) + '</span><span class="t">' + (r.fs ? '<span class="evk">전망</span>' + r.fs.slice(0, 3).map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep">·</span>') + (r.fs.length > 3 ? '<span class="sep">·</span><button type="button" class="fcl more" data-go="forecast">외 ' + (r.fs.length - 3) + "건</button>" : "")
+  const row = r => '<li id="due-' + esc(r.key) + '"><span class="d">' + esc(r.day) + '</span><span class="t">' + (r.fs ? '<span class="evk">전망</span>' + r.fs.slice(0, 3).map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep">·</span>') + (r.fs.length > 3 ? '<span class="sep">·</span><button type="button" class="fcl more" data-go="forecast">외 ' + (r.fs.length - 3) + "건</button>" : "")
     : (r.e.cases || []).length ? '<button type="button" class="fcl" data-case="' + esc(r.e.cases[0]) + '" title="' + esc((D.strategies || []).filter(c => r.e.cases.includes(c.id)).map(c => c.title.split(":")[0]).join(" · ")) + ' 사안 분석">' + esc(r.e.t) + "</button>" : esc(r.e.t)) + "</span>" +
     (r.fs ? '<span class="n' + (r.n <= 7 ? " hot" : "") + '">' + daysText(r.n) + "</span>" : r.dt ? '<span class="n' + (r.n != null && r.n <= 7 ? " hot" : "") + '">' + r.dt + "</span>" : "") + "</li>";
   return '<section class="sec due" id="due"><h3>다가오는 일정</h3><div class="mo">' + months.map(M => '<div class="m">' + (+M.mk.slice(5, 7)) + "월</div><ul>" + M.rows.map(row).join("") + "</ul>").join("") +
