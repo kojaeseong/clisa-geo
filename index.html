@@ -68,10 +68,11 @@ a{color:var(--accent)}
 .seg button[aria-checked="true"]{background:var(--ink); color:var(--panel); font-weight:600}
 .toggles{display:flex; gap:8px}
 /* v3.39 세계 시각(2026-10-01): 데스크톱 머리글의 로고와 검색창 사이. 모바일에는 두지 않는다 */
-.clocks{display:none; grid-template-columns:repeat(4, auto); grid-template-rows:repeat(2, auto); grid-auto-flow:column; gap:2px 18px; margin:0 18px 0 auto; align-self:center}
+.clocks{display:none; grid-template-columns:repeat(4, auto); grid-template-rows:repeat(2, auto); grid-auto-flow:column; gap:2px 14px; margin:0 8px 0 auto; align-self:center; flex:none}
+.toggles{flex:0 1 auto; min-width:0}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
-@media (min-width: 1280px){ .clocks:not([hidden]){display:grid} }
-.clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted); min-width:58px} .clk .t{font:500 15px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
+@media (min-width: 1360px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
+.clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 .tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
 .tg input{position:absolute; opacity:0; width:1px; height:1px}
 .tg span{display:inline-flex; align-items:center; gap:6px; padding:5px 10px; border:1px solid var(--line); border-radius:999px; background:var(--panel)}
@@ -654,7 +655,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .ic-more summary::before{content:"▸"; font-size:11px} .ic-more[open] summary::before{content:"▾"}
 .ic-more p{margin:6px 0 8px; font-size:14px; line-height:1.75; color:var(--ink-2)}
 .ic-why{margin:6px 0 8px; font-size:14px; line-height:1.75; color:var(--ink-2)} .ic-why b{color:var(--accent); margin-right:4px}
-.srch-open{min-width:380px; height:40px; font-size:14px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+.srch-open{width:380px; min-width:240px; flex:0 1 380px; height:40px; font-size:14px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
 .srch-open span{flex:1; text-align:left}
 .srch-open svg{width:15px; height:15px; color:var(--ink-2)}
 .legbtn{display:none; position:absolute; top:12px; right:12px; align-items:center; gap:6px; border:1px solid var(--ink-2); background:var(--panel); color:var(--ink); border-radius:8px; padding:6px 10px; font:600 12.5px var(--sans); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.1)}
@@ -2377,6 +2378,10 @@ const CLOCKS = [["서울·도쿄", "Asia/Seoul"], ["베이징·타이베이", "A
   const tick = () => { const now = new Date(), seoul = Fd("Asia/Seoul").format(now);
     el.querySelectorAll(".clk").forEach(x => { const tz = x.dataset.tz; const tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); const d = Fd(tz).format(now); x.querySelector(".d").textContent = d === seoul ? "" : d < seoul ? "−1일" : "+1일"; }); };
   try { tick(); el.hidden = false; setInterval(() => { if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
+  /* 검색창이 둘째 줄로 밀리면(글꼴·배율 때문에 폭이 모자랄 때) 시각을 숨겨 머리글을 한 줄로 지킨다 */
+  const sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand h1");
+  const fit = () => { if (!sb || !h1) return; el.classList.remove("tight"); if (getComputedStyle(el).display === "none") return; if (sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4) el.classList.add("tight"); };
+  fit(); addEventListener("resize", fit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 })();
 
 /* 위로 가기 */
