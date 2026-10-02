@@ -1,6 +1,124 @@
 {
  "issues": [
   {
+   "date": "2026-10-02",
+   "items": [
+    {
+     "case": "iran",
+     "h": "트럼프, 중간선거 뒤 이란 공습 확대 \"가능\"",
+     "fact": "2026년 10월 1일 공개된 시사주간지 타임 인터뷰에서 트럼프 대통령은 11월 중간선거 뒤 이란 폭격을 늘릴 수 있느냐는 질문에 \"가능하다\"고 답했습니다. 같은 날 미국 관리는 악시오스에 루비오 국무장관이 뉴욕에 머물던 아락치 이란 외무장관 일행에게 출국을 명령했다고 밝혔으나, 이란 측은 미리 정한 일정에 따른 출국이었다며 부인했습니다.",
+     "link": "이란이 미국의 답신을 받은 직후 미국이 대표단을 내보내고 공습 확대를 거론한 것으로, 이란 사안 결론 7의 단계별 교환이 곧 서명으로 이어지기 어렵다는 신호입니다. '미국의 이란 본토 공습 재개' 전망을 높이고 '미-이란 단계별 합의 서명' 전망을 낮출 요인입니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      },
+      {
+       "id": "f38",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.axios.com/2026/10/01/trump-time-interview-iran-democrats-ai-netanyahu",
+      "https://www.axios.com/2026/10/01/rubio-iran-unga-delegation-kicked-out",
+      "https://www.foxnews.com/politics/iranian-negotiators-kicked-out-us-talks-stall-trump-lays-possible-timeline-more-strikes"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "이 대통령, 국군의날 기념사에서 북측에 대화 복원 촉구",
+     "fact": "2026년 10월 1일 이재명 대통령은 국군의날 기념식에서 \"남북 간 군사적 긴장을 낮추기 위한 실질적인 조치를 일관되게 이어 나가겠다\"며 \"신뢰를 회복하고 단절된 대화를 복원하는 길에 북측도 이제는 함께하기를 기대하고 촉구한다\"고 말했습니다. 비무장지대 폭발로 다친 장병에 대해서는 불의의 사고라고만 표현했고, 전시작전통제권 환수를 다짐했습니다.",
+     "link": "국방부 장관이 북한의 정전협정 위반을 단정한 뒤에도 정부가 대화 복원 기조를 유지한 것으로, 한반도 사안 결론 1의 뒤집히는 조건(군사 통신선 복원과 이산가족 상봉)을 향해 손을 내민 셈입니다. 북한이 응한 행동은 없어 '남북 군사 통신선 미복원' 전망은 움직이지 않습니다.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "http://inews24.com/view/2010880",
+      "https://www.seoul.co.kr/news/politics/president/2026/10/02/20261002005004"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 칼리닌그라드 봉쇄 시 \"핵무기를 포함한 모든 무기\" 경고",
+     "fact": "러시아는 2026년 9월 30일 NATO 회원국들에 보낸 외교 문서에서 NATO가 칼리닌그라드의 공중·해상 봉쇄를 준비하고 있다는 정보가 있다고 주장하고, 봉쇄가 실행되면 \"핵무기를 포함한 모든 무기\"를 쓸 준비가 돼 있다고 경고했습니다. 푸틴 대통령은 10월 1일 모스크바 발다이 토론클럽 회의에서 이 경고가 위협이 아니라 러시아를 위협하려는 시도에 대한 대응이라고 말했고, 뤼터 NATO 사무총장은 러시아가 핵 위협을 멈춰야 한다고 반박했습니다.",
+     "link": "9월 들어 이어진 NATO 동부전선 도발에 이어 핵 사용을 문서로 거론한 것으로, 러-우 사안 결론 5대로 러시아가 미국과의 거래는 이어 가면서 유럽에는 압박을 높이는 흐름입니다. '미·러·우 3자 기술급 협의 개최' 전망에는 직접 닿지 않습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/30/russia-warns-nato-of-possible-nuclear-response-if-kaliningrad-is-cut-off",
+      "https://abcnews.com/International/wireStory/putin-warns-weapons-arsenal-russia-territory-attacked-136930888"
+     ]
+    },
+    {
+     "case": "taiwan",
+     "h": "미 당국, 중국의 2028년 이전 대만 침공 가능성 낮게 평가",
+     "fact": "로이터는 2026년 10월 1일 미국 전·현직 관리 등 4명을 인용해, 미국 정부가 시진핑 주석의 2027년 전쟁 준비 지시에도 2028년 이전 중국의 대만 침공 가능성은 갈수록 낮다고 본다고 보도했습니다. 군 수뇌부 숙청으로 중앙군사위원회 위원 7명 가운데 현직이 2명만 남은 점과, 중국이 2028년 대만 총통 선거 결과를 기다릴 수 있다는 점이 이유로 꼽혔습니다.",
+     "link": "대만해협 사안 결론 6(중국이 2028년 1월 총통 선거까지 무력 사용을 피하며 선거에 영향을 주는 두 갈래 전략)과 같은 방향의 평가입니다. 다만 보도는 봉쇄나 해경 검문을 다루지 않아 '대만 항구 봉쇄 없음'과 '중국의 대만 선박 검문·억류' 전망은 움직이지 않습니다.",
+     "fc": [
+      {
+       "id": "f36",
+       "e": "none"
+      },
+      {
+       "id": "f24",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/01/exclusive-us-sees-chinese-invasion-of-taiwan-unlikely-next-year-despite-2027-timeline-sources-say"
+     ]
+    },
+    {
+     "case": null,
+     "h": "파키스탄, 아프간 쿠나르·헬만드 공습",
+     "fact": "2026년 9월 30일 밤 파키스탄이 아프가니스탄 쿠나르주와 헬만드주를 공습했습니다. 탈레반 정권의 자비훌라 무자히드 대변인은 9명이 숨졌다며 침략이라고 비난했고, 파키스탄 정보방송부는 무장대원 22명을 사살했다고 주장했으며, 유엔 아프가니스탄 지원단은 어린이가 대부분인 민간인 최소 10명이 숨졌다고 밝혔습니다.",
+     "link": "9월 24일 칸다하르 등 10곳 공습에 이은 공격으로, 중재나 휴전 논의는 보이지 않습니다. '파키스탄-탈레반 공식 휴전' 전망을 낮출 요인입니다.",
+     "fc": [
+      {
+       "id": "f10",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/1/afghanistan-says-nine-killed-in-pakistani-air-raids-on-kunar-helmand"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "영국 해사무역기구(UKMTO)는 9월 29일 호르무즈 해협에서 선박 세 척이 정체불명의 발사체에 맞았다고 밝혔고, 확인된 두 척은 라이베리아 선적 유조선이며 한국 선박은 없었습니다.",
+     "src": [
+      "https://maritime-executive.com/article/three-vessels-struck-in-strait-of-hormuz-as-iran-s-grip-loosens"
+     ]
+    },
+    {
+     "t": "페제시키안 이란 대통령은 10월 1일 미국이 이란을 굴복시키겠다는 생각을 버려야 한다고 말했습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-negotiations-strait-of-hormuz-oil/"
+     ]
+    },
+    {
+     "t": "젤렌스키 우크라이나 대통령은 9월 30일 리만 방면 지휘소를 찾았고, 우크라이나 측은 이 방면 반격으로 125㎢ 이상을 되찾았다고 주장했습니다.",
+     "src": [
+      "https://kyivindependent.com/zelensky-visits-lyman-sector-says-operation-vivaldi-reclaimed-125-square-kilometers/"
+     ]
+    },
+    {
+     "t": "국가정보원은 9월 30일 국회 정보위원회에서 김여정의 '자작극' 담화를 절제된 기조로 보며 북한과의 연관성을 끊으려는 의도라고 보고했습니다.",
+     "src": [
+      "https://www.ytn.co.kr/_ln/0101_202609301210265265"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-01",
    "items": [
     {

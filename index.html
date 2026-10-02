@@ -1633,7 +1633,7 @@ function renderDetail(){
   const recent = (c.recent || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
   const fig = (label, val, sub) => "<div><dt>" + label + "</dt><dd>" + val + (sub ? "<small>" + sub + "</small>" : "") + "</dd></div>";
   el.innerHTML =
-    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + " " + (c.situation ? ttsBtn("country:" + c.iso) : "") + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p></div>" +
+    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + " " + (c.situation ? ttsBtn("country:" + c.iso) : "") + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p>" + leaderLink(c.iso, "결정권자 분석 · ") + "</div>" +
     '<p class="lead">' + esc(c.situation) + "</p>" + gsBlock(c) + countryIntentHtml(c) + countryPublicsHtml(c) + histBlock(c) +
     '<section class="sec"><h3>판단 점수 <span style="font-weight:400">(0–100)</span></h3><div class="scores">' + JLAYERS.map(k =>
       '<div class="score"><span' + (k === S.layer ? ' style="font-weight:600"' : "") + ">" + LAYERS[k].label + '</span><span class="track" style="height:8px;background:var(--panel-2);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:' + c.scores[k] + "%;background:" + ramp(k, c.scores[k]) + ';border-radius:0 4px 4px 0"></span></span><span class="mono" style="text-align:right;font-size:12px">' + c.scores[k] + "</span></div>").join("") + "</div></section>" +
@@ -1811,6 +1811,14 @@ function intentHtml(d, caseId){
   return '<div class="intent"><div class="ih"><b>의지 지표</b><span class="fit ' + fitCls(v.fit) + '">말과 행동 · ' + esc(v.fit) + '</span></div><div class="tbl-wrap"><table class="tbl" style="min-width:480px"><tbody>' +
     v.said.map(x => row(x, "said")).join("") + v.did.map(x => row(x, "did")).join("") + '</tbody></table></div><p class="ir">' + esc(v.read) + '</p><p class="note"><b>주시할 신호</b> · ' + v.watch.map(w => esc(w.t) + " (" + esc(w.when) + ")").join(" · ") + '</p><p class="note">전체 신호는 <button type="button" class="chip" data-iso="' + esc(d.iso) + '">' + esc(nm(d.iso)) + ' 국가 프로필</button>에서 볼 수 있습니다.</p></div>';
 }
+/* v3.40 결정권자 쪽(/leader/<slug>/) 연결 */
+function LLK(){ return D.leader_links || {}; }
+function leadersRow(){
+  const L = LLK(), order = ["USA", "CHN", "PRK", "RUS", "KOR", "UKR"].filter(i => L[i]);
+  return order.length ? '<section class="sec"><h3>결정권자</h3><p class="note" style="margin:4px 0 8px">사안마다 최종 결정을 내리는 사람의 세계관, 결정 방식, 말과 결정의 일치를 분석합니다.</p><div style="display:flex;flex-wrap:wrap;gap:6px">' +
+    order.map(i => '<a class="chip" href="/leader/' + esc(L[i].slug) + '/">' + esc(L[i].name) + (i === "KOR" || i === "UKR" ? " · 전략 주체" : "") + "</a>").join("") + '<a class="chip" href="/leader/">전체 보기 →</a></div></section>' : "";
+}
+function leaderLink(iso, pre){ const L = LLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="/leader/' + esc(L.slug) + '/">' + esc(pre) + esc(L.name) + ' · 세계관과 결정 방식 →</a>' : ""; }
 function decHtml(c, n){
   const X = c.deciders; if (!X) return "";
   const O = c.external ? c.external.order : c.futures.items.map(f => f.id);
@@ -1819,6 +1827,7 @@ function decHtml(c, n){
   const ul = a => "<ul>" + a.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>";
   return '<section class="stp">' + stpH(n, "결정권자 분석") + '<p class="note">결정권을 가진 각국이 문제를 어떻게 정의하는지, 무엇을 이루려 하며 어떤 수단을 쓰는지, 전략 주체의 선택지에 어떻게 대응할지를 해당국의 관점에서 정리하고, 각국이 선호하는 전개를 한 표로 비교합니다. 의지는 말과 비용이 수반된 행동으로 나누어 해석합니다.</p>' +
     '<div class="decs">' + X.items.map((d, i) => '<details class="dec" id="dec-' + esc(c.id) + '-' + d.iso + '"' + (i === 0 ? " open" : "") + '><summary><span class="nm">' + esc(nm(d.iso)) + '</span><span class="pw">결정권 ' + esc(d.power) + '</span><span class="fr">' + esc(d.frame) + "</span></summary><dl>" +
+      (LLK()[d.iso] ? "<dt>결정권자</dt><dd>" + leaderLink(d.iso, "") + "</dd>" : "") +
       "<dt>결정권의 수단</dt><dd>" + esc(d.means) + "</dd>" +
       "<dt>목표의 순위</dt><dd><ol>" + d.goals.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></dd>" +
       "<dt>전략</dt><dd>" + esc(d.strategy) + "</dd>" +
@@ -1852,7 +1861,7 @@ function futHtml(c, n){
     '<div class="pstack"><div class="prow"><span>' + (F.rec_same ? "확률" : "현 추세") + "</span>" + pb("p") + "</div>" + (F.rec_same ? "" : '<div class="prow"><span>권고 이행 시</span>' + pb("p_rec") + "</div>") + "</div>" +
     '<div class="futs">' + F.items.map(f => '<article class="fut" style="--c:' + fcol(f.id) + '"><div class="hd"><span class="id">' + f.id + "</span><b>" + esc(f.name) + '</b><span class="pp">' + (F.rec_same ? f.p + "%" + rg(f.rng) : "현 추세 " + f.p + "%" + rg(f.rng) + " · 권고 이행 시 " + f.p_rec + "%" + rg(f.rng_rec)) + (f.prev2w ? '<small>' + f.prev2w[0] + (F.rec_same ? "" : " · " + f.prev2w[1]) + "</small>" : f.prev ? '<small>' + f.prev[0] + " · " + f.prev[1] + "</small>" : f.id === "F5" ? "<small></small>" : "") + "</span></div>" +
       "<p>" + esc(f.story) + '</p><p class="tst"><b>성립 조건</b> · ' + esc(f.test) + (f.fc ? ' <span class="mono">(' + f.fc + ")</span>" : "") + "</p>" +
-      '<p style="font-size:12px"><b>선행 징후</b> · ' + f.signs.map(esc).join(" · ") + "</p>" +
+      '<p style="font-size:12px"><b>선행 징후</b> · ' + f.signs.map(esc).join(" · ") + "</p>" + sigHtml(f) +
       '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>").join("") + "</div>" +
     extHtml(c) + worldHtml(c) + aiHtml(c) + "</section>";
 }
@@ -2105,10 +2114,10 @@ function renderStrat(){
   const pf = D.forecasts.filter(f => f.fp === c.fp).map(f => f.id);
   $("#pane-strat").innerHTML =
     '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석합니다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 네 부분으로 구성됩니다.</p></div>' +
-    insightsHtml() + upcomingHtml() +
+    insightsHtml() + upcomingHtml() + leadersRow() +
     '<h3 id="s-case" style="margin:6px 0 0">사안별 분석 <span class="note" style="font-weight:400">· 사안 ' + ss.length + "건</span></h3>" +
     (ss.length > 1 ? '<div class="case-sw" role="tablist">' + ss.map(k => '<button type="button" role="tab" data-case="' + esc(k.id) + '" aria-selected="' + (k.id === c.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>" : "") +
-    '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + (FEATS().some(F => F.case === c.id) ? '<div class="chips" style="margin:8px 0 0">' + FEATS().filter(F => F.case === c.id).map(featBtn).join("") + "</div>" : "") + "</div>" +
+    '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + leaderLink(c.id === "ukraine" ? "UKR" : "KOR", "전략 주체의 결정권자 · ") + (FEATS().some(F => F.case === c.id) ? '<div class="chips" style="margin:8px 0 0">' + FEATS().filter(F => F.case === c.id).map(featBtn).join("") + "</div>" : "") + "</div>" +
     briefHtml(c) + theoryHtml(c) + publicsHtml(c) +
     '<details class="full"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body">' + concHtml(c) +
       layer("1", lq("1")) +
@@ -2135,6 +2144,25 @@ function renderStrat(){
     "</div></details>" +
     '<div class="chips" style="margin:0"><button type="button" class="chip" data-go="method">분석 방법 보기</button><button type="button" class="chip" data-fp="' + esc(c.fp) + '">지도에서 보기 · ' + esc((D.flashpoints.find(f => f.id === c.fp) || {}).name_ko || "") + '</button></div></article>';
 }
+/* v3.41 신호 전망: 갈래 쪽(+)이나 반대쪽(-)으로 기울게 하는 기존 전망 */
+function fcBtn(id){ const F = D.forecasts.find(x => x.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }
+function sigHtml(f){
+  const sg = f.sig || [], up = sg.filter(g => g.dir === "+"), dn = sg.filter(g => g.dir === "-");
+  if (!sg.length) return "";
+  return '<p style="font-size:12px"><b>신호 전망</b> · ' + (up.length ? "이 전개 쪽으로 " + up.map(g => fcBtn(g.id)).join(" ") : "") + (dn.length ? (up.length ? " · " : "") + "반대쪽으로 " + dn.map(g => fcBtn(g.id)).join(" ") : "") + "</p>";
+}
+function fcByBranch(c, fs){
+  const byId = id => fs.find(f => f.id === id), used = new Set(), sub = (t, ids) => { const xs = ids.map(byId).filter(Boolean); xs.forEach(f => used.add(f.id)); return xs.length ? '<p class="note" style="margin:10px 0 4px">' + t + '</p><ul class="list">' + xs.map(f => forecastRow(f, false)).join("") + "</ul>" : ""; };
+  const its = c.futures.items.slice().sort((a, b) => b.p - a.p);
+  let h = its.map(it => '<div class="fbr" style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0"><span class="mono" style="color:' + fcol(it.id) + '">' + esc(it.id) + "</span> " + esc(it.name) + ' <span class="mono">' + it.p + "%</span>" + (it.rng ? ' <span class="rng">(' + it.rng[0] + "~" + it.rng[1] + ")</span>" : "") + '</h4><p class="note" style="margin:2px 0 0">성립 조건 · ' + esc(it.test) + "</p>" +
+    sub("성립 조건과 이어진 전망", it.fc ? [it.fc] : []) + sub("이 전개 쪽으로 기울게 하는 전망", (it.sig || []).filter(g => g.dir === "+").map(g => g.id)) + sub("반대쪽으로 기울게 하는 전망", (it.sig || []).filter(g => g.dir === "-").map(g => g.id)) +
+    (!it.fc && !(it.sig || []).length ? '<p class="note" style="margin:6px 0 0">이 전개에 이어진 전망은 아직 없습니다. 2030년 말 성립 조건으로 판정합니다.</p>' : "") + "</div>").join("");
+  const cf = f => f.fp === c.fp, expo = (D.fc_expo || []).map(byId).filter(f => f && cf(f) && !used.has(f.id));
+  h += expo.length ? '<div style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0">한국의 노출과 권고</h4><p class="note" style="margin:2px 0 0">어느 전개가 오는지가 아니라, 한국이 치르는 대가와 권고의 실행을 묻는 전망입니다.</p><ul class="list">' + expo.map(f => { used.add(f.id); return forecastRow(f, false); }).join("") + "</ul></div>" : "";
+  const rest = fs.filter(f => cf(f) && !used.has(f.id));
+  h += rest.length ? '<div style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0">그 밖의 이 사안 전망</h4><ul class="list">' + rest.map(f => forecastRow(f, false)).join("") + "</ul></div>" : "";
+  return h;
+}
 function renderForecasts(){
   const fs = D.forecasts.slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
   const done = fs.filter(f => f.status === "yes" || f.status === "no");
@@ -2149,7 +2177,8 @@ function renderForecasts(){
     (() => { const cs = D.strategies || [], cf = f => { const c = cs.find(x => x.fp === f.fp); return c ? c.id : "etc"; };
       const opts = [["all", "전체", fs.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], fs.filter(f => cf(f) === c.id).length]), [["etc", "그 밖의 분쟁", fs.filter(f => cf(f) === "etc").length]]);
       const sel = S.fcf || "all", shown = sel === "all" ? fs : fs.filter(f => cf(f) === sel);
-      return '<section class="sec" id="f-all"><h3>전체 전망 · 검증 시점 순</h3><div class="chips fcf" role="group" aria-label="사안별 전망 거르기" style="margin:0 0 8px">' + opts.filter(o => o[2]).map(o => '<button type="button" class="chip' + (o[0] === sel ? " on" : "") + '" data-fcf="' + o[0] + '" aria-pressed="' + (o[0] === sel) + '">' + esc(o[1]) + ' <span class="mono">' + o[2] + "</span></button>").join("") + '</div><ul class="list">' + shown.map(f => forecastRow(f, false)).join("") + "</ul></section>"; })();
+      const cc = cs.find(c => c.id === sel);
+      return '<section class="sec" id="f-all"><h3>' + (cc ? esc(cc.title.split(":")[0]) + " · 전개별 전망" : "전체 전망 · 검증 시점 순") + '</h3><div class="chips fcf" role="group" aria-label="사안별 전망 거르기" style="margin:0 0 8px">' + opts.filter(o => o[2]).map(o => '<button type="button" class="chip' + (o[0] === sel ? " on" : "") + '" data-fcf="' + o[0] + '" aria-pressed="' + (o[0] === sel) + '">' + esc(o[1]) + ' <span class="mono">' + o[2] + "</span></button>").join("") + '</div>' + (cc ? '<p class="note" style="margin:0 0 4px">사안의 가능한 전개마다, 성립 조건과 이어진 전망과 그 전개 쪽(또는 반대쪽)으로 기울게 하는 신호 전망을 묶었습니다. 전개의 확률은 사안 분석의 값이며, 같은 전망이 여러 전개에 나올 수 있습니다.</p>' + fcByBranch(cc, fs) : '<ul class="list">' + shown.map(f => forecastRow(f, false)).join("") + "</ul>") + "</section>"; })();
 }
 
 function frameworkHtml(){
