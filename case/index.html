@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/app.css?v=0b47bacf67">
+<link rel="stylesheet" href="/app.css?v=907e40cf82">
 </head>
 <body>
 
@@ -54,19 +54,19 @@
     <button type="button" class="bstrip astrip" id="astrip" hidden><span class="bs-k">다가오는 일정</span><span class="bs-d"></span><span class="bs-t" aria-live="off"></span><span class="bs-n"></span><span class="bs-go" aria-hidden="true">›</span></button>
     </div>
     <nav class="gnav" aria-label="사이트 메뉴">
-      <a href="/brief/" data-nav="brief">정세 브리핑</a>
-      <a href="/feature/" data-nav="feature">특집</a>
+      <a href="/brief/" data-tab="brief" id="tab-brief">정세 브리핑</a>
+      <a href="/feature/" data-tab="feature" id="tab-feature">특집</a>
       <a href="/" data-tab="overview" id="tab-overview">세계 정세</a>
       <a href="/case/" data-tab="strat" id="tab-strat" aria-current="page">전략 분석</a>
       <a href="/grand/" data-tab="grand" id="tab-grand">국제 질서</a>
-      <a href="/forecast/" data-nav="forecast" class="gx">전망과 검증</a>
+      <a href="/forecast/" data-tab="forecast" class="gx">전망과 검증</a>
       <a href="/leader/" data-nav="leader" class="gx">결정권자</a>
       <a href="/ideas/" data-tab="ideas" class="gx">역사와 사상</a>
       <a href="/method/" data-tab="method" class="gx">분석 방법</a>
       <a href="/guide/" data-nav="guide" class="gx">사이트 안내</a>
       <a href="#discuss" data-tab="discuss" id="tab-discuss">논의</a>
       <details class="gmore"><summary>더 보기</summary><div class="gmore-m">
-        <a href="/forecast/" data-nav="forecast">전망과 검증</a>
+        <a href="/forecast/" data-tab="forecast" id="tab-forecast">전망과 검증</a>
         <a href="/leader/" data-nav="leader">결정권자</a>
         <a href="/ideas/" data-tab="ideas" id="tab-ideas">역사와 사상</a>
         <a href="/method/" data-tab="method" id="tab-method">분석 방법</a>
@@ -102,6 +102,8 @@
       <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
       <button type="button" class="navback" id="navback" hidden>← 이전 화면</button>
       <div class="pane" id="pane-overview" role="tabpanel"><div class="sec seo-intro"><!--seo--><p class="eyebrow">클리사 지오폴리틱스</p><h1>전략 분석</h1><ul class="idx"><li><a href="/case/korea/">한반도: 한국은 북한 문제에서 무엇을 해야 하는가</a><br>재래식 억제를 강화하고, 핵확산금지조약 안에서 농축·재처리 능력을 갖추는 핵 잠재력을 보험으로 확보하되 그 속도는 북한의 동결 여부에 연동한다.</li><li><a href="/case/taiwan/">대만해협: 한국은 대만 유사시에 무엇을 준비하고 무엇을 약속해야 하는가</a><br>주한미군의 대만 투입을 한미 사전 협의와 한반도 억제 공백의 보전을 조건으로만 받아들이는 후방 지원 절차를 비공개로 마련하고, 희토류처럼 중국에 기대는 품목의 대체와 비축을 포함한 경제·민간 대비를 갖춘다.</li><li><a href="/case/ukraine/">러-우 전쟁: 우크라이나는 어떻게 전쟁을 끝내야 하는가</a><br>드론과 탄약의 국내 생산을 늘리는 방산 자립으로 교착 상태를 버틸 능력을 갖추고, 점령지를 법적으로 넘기지 않는 정전을 목표로 하되 강대국 병력의 보증을 조건으로 건다.</li><li><a href="/case/iran/">이란 전쟁과 호르무즈: 한국은 무엇을 지키고 무엇을 내줄 것인가</a><br>원유 수입선 다변화와 비축 확대 같은 에너지 구조 전환을 축으로 삼아 이란과의 별도 외교 채널을 유지하고, 청해부대의 임무 확장은 작전 구역을 호르무즈 해협과 걸프 밖으로 한정할 때에만 함께 추진한다.</li><li><a href="/case/chips/">AI·반도체 미중 경쟁: 한국의 지렛대는 언제까지, 어디에 쓸 것인가</a><br>HBM 공급 부족이 이어지는 2027년까지 대미 투자를 인정받는 대가로 미국의 반도체 관세 면제 조건을 확정하고, 메모리 전공정은 국내에 둔다.</li></ul><!--/seo--></div></div>
+      <div class="pane" id="pane-brief" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-page" role="tabpanel" hidden></div>
       <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
       <div class="pane" id="pane-feature" role="tabpanel" hidden></div>
       <div class="pane" id="pane-detail" role="tabpanel" hidden></div>
@@ -124,7 +126,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script src="/app.js?v=ddccec4c05"></script>
+<script src="/app.js?v=fabd1f0117"></script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "330cb9e687e34385b83747a235d16c63"}'></script>
 </body>

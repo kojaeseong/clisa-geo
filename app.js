@@ -79,9 +79,9 @@ function srBuild(){
   const toPane = (tab, cb) => () => { if (cb) cb(); switchTab(tab); return "pane-" + tab; };
   for (const [iso, c] of Object.entries(D.countries)) add("나라", c.name_ko + (c.leader ? " · " + String(c.leader).split(/[,/(]/)[0].trim() : ""), c, () => { selectCountry(iso, true); return "pane-detail"; });
   D.flashpoints.forEach(fp => add("분쟁 지점", fp.name_ko, fp, () => { selectFp(fp.id); return "pane-detail"; }));
-  (D.strategies || []).forEach(c => add("전략 분석 사안", c.title, c, toPane("strat", () => { S.scase = c.id; renderStrat(); })));
+  (D.strategies || []).forEach(c => add("전략 분석 사안", c.title, c, () => { goCase(c.id); caseFill(c.id); return "case-" + c.id; }));
   /* v3.19 여론·의지 항목을 따로 색인 */
-  const toCase = (id, tgt) => () => { S.scase = id; renderStrat(); switchTab("strat"); return tgt; }, cshort = c => String(c.title).split(":")[0];
+  const toCase = (id, tgt) => () => { goCase(id); caseFill(id); return tgt; }, cshort = c => String(c.title).split(":")[0];
   (D.strategies || []).forEach(c => {
     ((c.publics || {}).items || []).forEach((p, i) => add("전략 분석 사안", cshort(c) + " · 국내 여론 · " + p.who, [p, "여론"], toCase(c.id, "pub-" + c.id + "-" + i)));
     ((c.deciders || {}).items || []).forEach(d => add("전략 분석 사안", cshort(c) + " · 결정권자 분석 · " + nm(d.iso), [d, "의지"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
@@ -90,7 +90,7 @@ function srBuild(){
   FEATS().forEach(F => add("특집", F.title, F, () => { goFeat(F.id); return "feat-" + F.id; }));
   (D.insights || []).forEach(k => add("주요 판단", String(k.t).split(/(?<=다\.)\s/)[0], [k.t, k.classic || ""], toPane("strat")));
   (D.digest || []).forEach(g => add("세계 정세", g.t, g.d, toPane("overview")));
-  if (BR) BR.issues.forEach(x => x.items.forEach(i => add("세계 정세", "정세 브리핑 " + fmtKD(x.date) + " · " + i.h, [i.fact, i.link], toPane("overview"))));
+  if (BR) BR.issues.forEach(x => x.items.forEach(i => add("정세 브리핑", fmtKD(x.date) + " · " + i.h, [i.fact, i.link], () => { goBrief(x.date); return "pane-brief"; })));
   D.forecasts.forEach(f => add("전망", f.q, [f.q, f.basis, f.void || ""], toPane("forecast")));
   const G = D.grand || {};
   (G.trends || []).forEach(t => add("국제 질서", t.t, t, toPane("grand")));
@@ -209,7 +209,7 @@ fetch("/data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); re
 const RENDERED = {};
 const markR = (t, f) => function(){ RENDERED[t] = true; return f.apply(this, arguments); };
 renderStrat = markR("strat", renderStrat); renderForecasts = markR("forecast", renderForecasts); renderGrand = markR("grand", renderGrand); renderIdeas = markR("ideas", renderIdeas); renderMethod = markR("method", renderMethod); renderFeature = markR("feature", renderFeature); renderDiscuss = markR("discuss", renderDiscuss);
-const TAB_RENDER = {strat: () => renderStrat(), forecast: () => renderForecasts(), grand: () => renderGrand(), ideas: () => renderIdeas(), method: () => renderMethod(), feature: () => renderFeature(), discuss: () => renderDiscuss()};
+const TAB_RENDER = {brief: () => renderBrief(), strat: () => renderStrat(), forecast: () => renderForecasts(), grand: () => renderGrand(), ideas: () => renderIdeas(), method: () => renderMethod(), feature: () => renderFeature(), discuss: () => renderDiscuss()};
 function ensureRendered(t){ if (D && TAB_RENDER[t] && !RENDERED[t]) TAB_RENDER[t](); }
 
 const PUB = () => !!(D && D.meta && D.meta.edition === "public");
@@ -245,9 +245,10 @@ function init(d){
   new MutationObserver(retheme).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
   setLayer(S.layer);
   renderOverview(); renderDetail();
-  const t = store.get("ep.tab"); if (t && t !== "detail") switchTab(t);
+  /* v3.43 첫 화면은 언제나 정세 브리핑(최신 호 전문). 특정 주소·#표식으로 들어오면 그 화면 */
+  if (!HASH0) switchTab("brief");
   const Q0 = ROUTES && /[?&]q(=|&|$)/.test(location.search) ? (new URLSearchParams(location.search).get("q") || "") : null;
-  if (!applyRoute()) applyHash(); HASH_READY = true; routeSync(true);
+  if (!applyRoute()) applyHash(); HASH_READY = true; ROUTE_FIRST = false; routeSync(true);
   if (Q0 !== null) { srOpen(); if (Q0) { $("#srchq").value = Q0; srRender(); } }
   setupSearch();
   ttsSetup();
@@ -481,7 +482,7 @@ function setupInteraction(){
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
   $("#legbtn").onclick = () => { const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
   $("#lensoff").onclick = () => setLens(null);
-  document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; switchTab(b.dataset.tab); });
+  document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; if (b.dataset.tab === "strat") { S.scase = null; caseMark(); } if (b.dataset.tab === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(b.dataset.tab); });
   document.addEventListener("click", ev => {
     const ly = ev.target.closest("[data-layer]");
     if (ly) { setLayer(ly.dataset.layer); return; }
@@ -490,9 +491,11 @@ function setupInteraction(){
     const qb = ev.target.closest("[data-q]");
     if (qb) { switchTab("method"); const d = document.getElementById("pq-" + qb.dataset.q); if (d) { d.open = true; d.scrollIntoView({block:"start"}); } return; }
     const fb = ev.target.closest("[data-feat]");
-    if (fb) { goFeat(fb.dataset.feat); return; }
+    if (fb) { ev.preventDefault(); goFeat(fb.dataset.feat); return; }
+    const bb = ev.target.closest("[data-brief]");
+    if (bb) { ev.preventDefault(); goBrief(bb.dataset.brief); return; }
     const cs = ev.target.closest("[data-case]");
-    if (cs) { S.scase = cs.dataset.case; renderStrat(); switchTab("strat"); const a = document.getElementById("s-case"); if (a) a.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); return; }
+    if (cs) { goCase(cs.dataset.case, true); return; }
     const fcp = ev.target.closest("[data-fc]");
     if (fcp && !fcp.closest("#fcpop")) { fcPop(fcp); return; }
     const fcb = ev.target.closest("[data-fcgo]");
@@ -502,7 +505,7 @@ function setupInteraction(){
     const jb = ev.target.closest("[data-jump]");
     if (jb) { const t = document.getElementById(jb.dataset.jump); if (t) t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); return; }
     const x = ev.target.closest("[data-exit]");
-    if (x) { const k = (D.strategies || []).find(c => c.fp === x.dataset.exit); if (k) { S.scase = k.id; renderStrat(); } switchTab("strat"); const fu = document.querySelector("#pane-strat details.full"); if (fu) fu.open = true; const d = document.getElementById("exc-" + x.dataset.exit); if (d) { d.open = true; d.scrollIntoView({block:"start"}); } return; }
+    if (x) { const k = (D.strategies || []).find(c => c.fp === x.dataset.exit); if (k) { goCase(k.id); const fu = caseFill(k.id); if (fu) fu.open = true; } else switchTab("strat"); const d = document.getElementById("exc-" + x.dataset.exit); if (d) { d.open = true; d.scrollIntoView({block:"start"}); } return; }
     const a = ev.target.closest("[data-iso],[data-fp],[data-lens],[data-go]");
     if (!a) return;
     if (a.dataset.iso) { const inMap = !!a.closest("#wrap"); selectCountry(a.dataset.iso, !inMap, inMap); }
@@ -571,7 +574,7 @@ function selectFp(id, fromMap){
 }
 /* v3.42 사이트 메뉴의 현재 위치 표시(사안 화면·나라 화면은 '세계 정세'·'전략 분석' 아래로 본다) */
 function navMark(t){
-  const k = t === "detail" ? "overview" : t;
+  const k = t === "detail" ? "overview" : t === "page" ? ((location.pathname.match(/^\/(leader|guide|brief)/) || [])[1] || "") : t;
   document.querySelectorAll(".gnav [data-tab],.gnav [data-nav]").forEach(a => { if ((a.dataset.tab || a.dataset.nav) === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   const g = document.querySelector(".gmore"); if (g) g.classList.toggle("cur", !!g.querySelector("[aria-current]"));
 }
@@ -633,7 +636,7 @@ const ttsBtn = key => '<button type="button" class="tts" data-tts="' + esc(key) 
 function ttsVoice(){ try { return (speechSynthesis.getVoices() || []).find(v => /^ko/i.test(v.lang)) || null; } catch(e){ return null; } }
 function ttsText(key){
   const [k, id] = String(key).split(":");
-  if (k === "brief" && BR) { const x = BR.issues[0]; return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact).join(" ")  /* v3.38b(2026-10-01): 듣기에서는 '판단과의 연결'을 읽지 않는다. 결론 번호·전망 번호 같은 화면용 표현이 귀로는 어색하기 때문 */ + ((x.more || []).length ? " 그 밖의 동향. " + x.more.map(m => m.t).join(" ") : "") + (x.week && (x.week.items || []).length ? " 주간 전망 점검. " + x.week.items.map(w => { const F = D.forecasts.find(z => z.id === w.id); return (F ? F.q : w.id) + ". " + (w.from === w.to ? w.to + "퍼센트 유지. " : w.from + "퍼센트에서 " + w.to + "퍼센트로. ") + w.why; }).join(" ") : ""); }
+  if (k === "brief" && BR) { const x = briefCur(); return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact).join(" ")  /* v3.38b(2026-10-01): 듣기에서는 '판단과의 연결'을 읽지 않는다. 결론 번호·전망 번호 같은 화면용 표현이 귀로는 어색하기 때문 */ + ((x.more || []).length ? " 그 밖의 동향. " + x.more.map(m => m.t).join(" ") : "") + (x.week && (x.week.items || []).length ? " 주간 전망 점검. " + x.week.items.map(w => { const F = D.forecasts.find(z => z.id === w.id); return (F ? F.q : w.id) + ". " + (w.from === w.to ? w.to + "퍼센트 유지. " : w.from + "퍼센트에서 " + w.to + "퍼센트로. ") + w.why; }).join(" ") : ""); }
   if (k === "digest") return "세계 정세 요약. " + D.digest.map(g => g.t + ". " + g.d).join(" ");
   if (k === "ins") return "주요 판단. " + (D.insights || []).map(g => { const a = String(g.t).split(/(?<=다\.)\s/); return a[0] + (a.length > 1 ? " 근거. " + a.slice(1).join(" ") : ""); }).join(" ");
   const cn = i => (D.countries[i] || {}).name_ko || i;
@@ -690,6 +693,18 @@ function ttsSetup(){
   document.addEventListener("click", e => { const b = e.target.closest("[data-tts]"); if (b) { e.preventDefault(); ttsToggle(b); } });
   addEventListener("pagehide", () => ttsStop());
 }
+function briefCur(){ return BR && ((BR.issues || []).find(x => x.date === S.bdate) || BR.issues[0]); }
+function renderBrief(){
+  const el = $("#pane-brief"); if (!el) return;
+  if (!BR || !(BR.issues || []).length) { el.innerHTML = '<div class="sec"><h2>정세 브리핑</h2><p class="note">정세 브리핑을 불러오는 중입니다.</p></div>'; return; }
+  const cur = briefCur(), others = BR.issues.filter(x => x !== cur);
+  el.innerHTML = '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
+    '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
+    dailyIssue(cur) + "</section>" +
+    (others.length ? '<section class="sec"><h3>지난 정세 브리핑</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
+  el.scrollTop = 0;
+}
+function goBrief(date){ S.bdate = date || null; renderBrief(); switchTab("brief"); }
 function dailyHtml(){
   if (!BR || !(BR.issues || []).length) return "";
   const cur = BR.issues[0], old = BR.issues.slice(1);
@@ -710,12 +725,12 @@ function stripGo(x){
   if (x.e || x.f) { switchTab("overview"); const li = document.getElementById("due-" + (x.f ? "f" + x.f.due : x.e.id)) || document.getElementById("due");
     if (li) { li.scrollIntoView({block: "center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 2400); } return; }
   if (x.n) { const m = /^case\/([\w-]+)\/$/.exec(x.n.link || ""), c = m && (D.strategies || []).find(z => z.id === m[1]);
-    if (c) { S.scase = c.id; renderStrat(); switchTab("strat"); const o = document.getElementById("outlook-" + c.id);
+    if (c) { goCase(c.id); caseFill(c.id); const o = document.getElementById("outlook-" + c.id);
       if (o) { const f = o.closest("details"); if (f) f.open = true; o.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }
-      else { const a = document.getElementById("s-case"); if (a) a.scrollIntoView({block: "start"}); } }
+      } 
     else switchTab("forecast");
     return; }
-  switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
+  S.bdate = null; renderBrief(); switchTab("brief"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
   if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } }
 }
 function runStrip(st, list){
@@ -743,15 +758,13 @@ function loadBrief(){
       .map(n => ({k: n.k || "분석 갱신", d: n.date, t: n.h || String(n.text).split(/(?<=다\.)\s/)[0], n}));
     const MAIN = NS.concat(cur.items.map((i, j) => ({k: "정세 브리핑", d: cur.date, t: i.h, j})));
     runStrip($("#bstrip"), () => narrow() ? MAIN.concat(agendaItems().filter(x => x.soon)) : MAIN);  /* 모바일: 띠가 하나이므로 30일 안의 일정을 섞는다(2026-10-01) */
-    renderOverview(); SR.idx = null;
-    if (!HASH0 && (!ROUTES || location.pathname === "/") && store.get("ep.brief") !== cur.date && S.tab !== "overview") switchTab("overview");
-    store.set("ep.brief", cur.date);
+    renderOverview(); renderBrief(); SR.idx = null; if (S.tab === "brief" && ROUTES) applyRoute();
   }).catch(() => { const st = $("#bstrip"); if (st && !BR) st.hidden = true; });
 }
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  $("#pane-overview").innerHTML = dailyHtml() + dueHtml() +
+  $("#pane-overview").innerHTML = dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
@@ -1057,13 +1070,19 @@ function featArticle(F){
     (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</article>";
 }
 function renderFeature(){
+  const L0 = FEATS(); if (!$("#pane-feature")) return;
+  const cur = L0.find(F => F.id === S.feat) || L0[0];
+  $("#pane-feature").innerHTML = '<div class="sec"><h2>특집</h2></div>' + (cur ? featArticle(cur) : "") +
+    (L0.length > 1 ? '<section class="sec"><h3>다른 특집</h3><ul class="list blist">' + L0.filter(F => F !== cur).map(F => '<li><a class="row-btn" href="/feature/' + esc(F.id) + '/" data-feat="' + esc(F.id) + '"><span class="mono">' + fmtKD(F.date) + '</span> <span class="nm">' + esc(F.title) + "</span></a></li>").join("") + "</ul></section>" : "");
+  $("#pane-feature").scrollTop = 0;
+}
+function renderFeatureOld(){
   const L = FEATS(); if (!$("#pane-feature")) return;
   $("#pane-feature").innerHTML = '<div class="sec"><h2>특집</h2></div>' + (L.length ? featArticle(L[0]) : "") +
     (L.length > 1 ? '<section class="sec"><h3>지난 특집 ' + (L.length - 1) + "건</h3>" + L.slice(1).map(F => '<details class="fold" id="featd-' + esc(F.id) + '"><summary>' + fmtKD(F.date) + " · " + esc(F.title) + "</summary>" + featArticle(F) + "</details>").join("") + "</section>" : "");
 }
 function goFeat(id){
-  switchTab("feature"); const d = document.getElementById("featd-" + id); if (d) d.open = true;
-  const a = document.getElementById("feat-" + id); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"});
+  S.feat = id || null; renderFeature(); switchTab("feature");
 }
 function aiHtml(c){
   const A = c.ai; if (!A) return "";
@@ -1269,24 +1288,18 @@ function upcomingHtml(){
   const up = D.forecasts.filter(f => f.status === "open").slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p).slice(0, 3);
   return up.length ? '<section class="sec"><h3>다가오는 검증</h3><ul class="list">' + up.map(f => forecastRow(f, true)).join("") + '</ul><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기</button></p></section>' : "";
 }
-function renderStrat(){
-  const ss = D.strategies || [];
-  const cur = ss.find(c => c.id === S.scase) || ss[0]; if (!cur) return;
+/* v3.43 사안별 분석: 사안 전부를 한 화면에 차례로 펼친다. 사안 단추는 해당 사안으로 스크롤하고, 읽는 위치에 따라 단추 강조와 주소(/case/사안/)가 바뀐다.
+   분석 전문(details.full)은 처음 펼칠 때 그린다. 전문이 사안 분량의 약 9할이어서, 다섯 사안을 펼쳐도 처음 그리는 양은 예전 한 사안보다 적다 */
+let STRAT_D = null;
+function caseFullHtml(c){
   const step = (n, t, body) => '<section class="stp">' + stpH(n, t) + body + "</section>";
   const layer = (L, q) => '<div class="lyr l' + L + '"><b>' + LNAME[L] + "</b><span>" + esc(q) + "</span></div>";
   const T = D.philosophy.tree.layers || [];
   const lq = id => (T.find(x => x.id === id) || {}).q || "";
-  const c = cur, i = ss.indexOf(c), cl = c.client;
+  const cl = c.client;
   const an = FP_AN[c.fp] ? D.history.analogies.find(x => x.id === FP_AN[c.fp]) : null;
   const pf = D.forecasts.filter(f => f.fp === c.fp).map(f => f.id);
-  $("#pane-strat").innerHTML =
-    '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석합니다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 네 부분으로 구성됩니다.</p></div>' +
-    insightsHtml() + upcomingHtml() + leadersRow() +
-    '<h3 id="s-case" style="margin:6px 0 0">사안별 분석 <span class="note" style="font-weight:400">· 사안 ' + ss.length + "건</span></h3>" +
-    (ss.length > 1 ? '<div class="case-sw" role="tablist">' + ss.map(k => '<button type="button" role="tab" data-case="' + esc(k.id) + '" aria-selected="' + (k.id === c.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>" : "") +
-    '<article class="sec" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + leaderLink(c.id === "ukraine" ? "UKR" : "KOR", "전략 주체의 결정권자 · ") + (FEATS().some(F => F.case === c.id) ? '<div class="chips" style="margin:8px 0 0">' + FEATS().filter(F => F.case === c.id).map(featBtn).join("") + "</div>" : "") + "</div>" +
-    briefHtml(c) + theoryHtml(c) + publicsHtml(c) +
-    '<details class="full"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body">' + concHtml(c) +
+  return concHtml(c) +
       layer("1", lq("1")) +
       precHtml(c) +
       step(2, "사실 확인", '<ul class="facts">' + c.facts.map(f => "<li>" + esc(f) + "</li>").join("") + "</ul>" +
@@ -1307,10 +1320,57 @@ function renderStrat(){
       step(12, "전망과 반증 신호", '<ul class="list">' + c.predictions.map(p => '<li><div class="fc"><div class="q">' + esc(p.q) + '</div><div class="p">' + p.p + '<small>%</small></div><div class="foot"><span>검증 시점 <span class="mono">' + esc(p.due) + "</span></span><span>" + esc(p.note) + "</span></div></div></li>").join("") + '</ul><p class="note" style="margin-top:6px">이 사안의 관련 전망(' + pf.join(", ") + ')은 전망과 검증 탭에서 모두 확인할 수 있습니다. <button type="button" class="chip" data-go="forecast">전망과 검증 보기</button></p><h3 style="margin:10px 0 6px">판단을 재검토할 조건</h3><ul class="watch">' + c.falsify.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>") +
       (PUB() || !c.changed ? "" : '<section class="sec"><h3></h3><ul class="list">' + c.changed.map(x => '<li class="rv"><p style="color:var(--ink)">' + esc(x) + "</p></li>").join("") + "</ul></section>") +
       prevHtml(c) +
-      '<details class="src"><summary>출처 ' + c.sources.length + "건</summary><ul>" + c.sources.map(srcItem).join("") + "</ul></details>" +
-    "</div></details>" +
-    '<div class="chips" style="margin:0"><button type="button" class="chip" data-go="method">분석 방법 보기</button><button type="button" class="chip" data-fp="' + esc(c.fp) + '">지도에서 보기 · ' + esc((D.flashpoints.find(f => f.id === c.fp) || {}).name_ko || "") + '</button></div></article>';
+      '<details class="src"><summary>출처 ' + c.sources.length + "건</summary><ul>" + c.sources.map(srcItem).join("") + "</ul></details>";
 }
+function caseArt(c, i){
+  const cl = c.client;
+  return '<article class="sec case-a" id="case-' + esc(c.id) + '" data-cid="' + esc(c.id) + '" style="display:grid;gap:22px"><div><p class="eyebrow">사안 ' + (i + 1) + " · 전략 주체: " + esc(cl ? cl.name : c.recipient) + " · 기준일 " + esc(c.asof) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + leaderLink(c.id === "ukraine" ? "UKR" : "KOR", "전략 주체의 결정권자 · ") + (FEATS().some(F => F.case === c.id) ? '<div class="chips" style="margin:8px 0 0">' + FEATS().filter(F => F.case === c.id).map(featBtn).join("") + "</div>" : "") + "</div>" +
+    briefHtml(c) + theoryHtml(c) + publicsHtml(c) +
+    '<details class="full" data-cid="' + esc(c.id) + '"><summary>분석 전문 · 정세 판단에서 검증까지</summary><div class="full-body"></div></details>' +
+    '<div class="chips" style="margin:0"><button type="button" class="chip" data-go="method">분석 방법 보기</button><button type="button" class="chip" data-fp="' + esc(c.fp) + '">지도에서 보기 · ' + esc((D.flashpoints.find(f => f.id === c.fp) || {}).name_ko || "") + "</button></div>" + caseFbHtml(c) + "</article>";
+}
+/* 사안의 분석 전문을 채운다(이미 채웠으면 그대로). 검색·띠·출구 단추가 전문 속 위치로 갈 때 먼저 부른다 */
+function caseFill(id){
+  const d = document.querySelector('#pane-strat details.full[data-cid="' + id + '"]'), c = (D.strategies || []).find(x => x.id === id);
+  if (d && c && !d.dataset.on) { d.dataset.on = "1"; d.querySelector(".full-body").innerHTML = caseFullHtml(c); }
+  return d;
+}
+document.addEventListener("toggle", e => { const d = e.target; if (d.open && d.matches && d.matches("details.full[data-cid]")) caseFill(d.dataset.cid); }, true);
+function caseMark(){ document.querySelectorAll("#pane-strat .case-sw [data-case]").forEach(b => { if (b.dataset.case === S.scase) { b.setAttribute("aria-current", "true"); const nv = b.parentElement; if (nv.scrollWidth > nv.clientWidth) { const br = b.getBoundingClientRect(), nr = nv.getBoundingClientRect(); nv.scrollLeft += br.left - nr.left - (nr.width - br.width) / 2; } } else b.removeAttribute("aria-current"); }); }
+function renderStrat(){
+  const ss = D.strategies || []; if (!ss.length) return;
+  const pn = $("#pane-strat");
+  if (STRAT_D === D && pn.querySelector(".case-a")) { caseMark(); return; }
+  STRAT_D = D;
+  pn.innerHTML =
+    '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석합니다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 네 부분으로 구성됩니다.</p></div>' +
+    insightsHtml() + upcomingHtml() + leadersRow() +
+    '<h3 id="s-case" style="margin:6px 0 0">사안별 분석 <span class="note" style="font-weight:400">· 사안 ' + ss.length + "건</span></h3>" +
+    (ss.length > 1 ? '<nav class="case-sw" aria-label="사안 바로 가기">' + ss.map(k => '<button type="button" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</nav>" : "") +
+    ss.map(caseArt).join("");
+  caseMark();
+}
+/* 사안으로 이동: 사안 단추, 주소(/case/사안/), 이전 화면에서 쓴다 */
+function goCase(id, smooth){
+  S.scase = id; renderStrat(); if (S.tab !== "strat") switchTab("strat");
+  else if (!ROUTES && HASH_READY) { try { history.replaceState(null, "", "#" + id); } catch(e){} }
+  const a = document.getElementById("case-" + id); if (!a) return;
+  const pn = document.getElementById("pane-strat"); pn.classList.add("cv-off"); clearTimeout(pn._cv); pn._cv = setTimeout(() => pn.classList.remove("cv-off"), 2500);
+  a.scrollIntoView({block: "start", behavior: smooth && !reduceMotion ? "smooth" : "auto"});
+  caseMark();
+}
+/* 읽는 위치 따라가기: 스크롤이 멎으면 화면 위쪽에 걸린 사안을 현재 사안으로 삼고, 단추를 강조하고, 주소를 바꾼다(기록은 쌓지 않음) */
+function caseSpy(){
+  if (S.tab !== "strat" || !D) return;
+  const arts = document.querySelectorAll("#pane-strat .case-a"); if (!arts.length) return;
+  const r = document.getElementById("pane-strat").getBoundingClientRect(), lim = narrow() ? innerHeight * 0.45 : r.top + Math.min(r.height, innerHeight) * 0.45;
+  let cur = null; arts.forEach(a => { if (a.getBoundingClientRect().top <= lim) cur = a.dataset.cid; });
+  if (cur === S.scase) return;
+  S.scase = cur; caseMark();
+  if (ROUTES) routeSync(true); else if (HASH_READY) { try { history.replaceState(null, "", "#" + (cur || "strat")); } catch(e){} }
+}
+(function(){ let tm = null; const on = () => { clearTimeout(tm); tm = setTimeout(caseSpy, 120); };
+  addEventListener("scroll", on, {passive: true}); document.getElementById("pane-strat").addEventListener("scroll", on, {passive: true}); })();
 /* v3.41 신호 전망: 갈래 쪽(+)이나 반대쪽(-)으로 기울게 하는 기존 전망 */
 function fcBtn(id){ const F = D.forecasts.find(x => x.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }
 function sigHtml(f){
@@ -1466,25 +1526,28 @@ renderGrand = withFoot(renderGrand, "pane-grand");
 renderIdeas = withFoot(renderIdeas, "pane-ideas");
 renderForecasts = withFoot(renderForecasts, "pane-forecast");
 renderMethod = withFoot(renderMethod, "pane-method");
-renderStrat = withFoot(renderStrat, "pane-strat", () => { const ss = D.strategies || []; const c = ss.find(x => x.id === S.scase) || ss[0]; return c ? caseFbHtml(c) : ""; });
+renderStrat = withFoot(renderStrat, "pane-strat", () => " ");  /* v3.43 사안별 의견 상자는 각 사안 끝에 있으므로, 꼬리말에는 메일 줄을 다시 넣지 않는다 */
 
 /* 탭·사안 주소: #strat, #korea 같은 짧은 표식만 쓴다 */
 function applyHash(){
   let h = ""; try { h = decodeURIComponent(location.hash.slice(1)); } catch(e){}
   if (!h) return;
   const ss = D.strategies || [];
-  if (ss.some(c => c.id === h)) { S.scase = h; renderStrat(); switchTab("strat"); return; }
+  if (ss.some(c => c.id === h)) { goCase(h); return; }
   if (/^[A-Z]{3}$/.test(h) && D.countries[h]) { selectCountry(h, true); return; }  /* v3.24 나라 페이지에서 오는 주소(#RUS) */
   if (h !== "detail" && document.getElementById("pane-" + (TAB_ALIAS[h] || h))) switchTab(h);
 }
 /* v3.42 경로 주소: 배포본(meta app-routes)에서는 화면마다 /case/korea/, /grand/ 같은 실제 주소를 쓴다. 내부판은 예전처럼 #표식 */
-const ROUTES = !!document.querySelector('meta[name="app-routes"]');
+const ROUTES = !!document.querySelector('meta[name="app-routes"]'); let ROUTE_FIRST = true;
 const hasPage = iso => { const c = D && D.countries[iso]; return !!(c && c.tier === 1 && c.situation); };
 function routeOf(){
   const t = S.tab;
   if (t === "overview") return "/";
   if (t === "strat") return "/case/" + (S.scase ? S.scase + "/" : "");
-  if (/^(grand|ideas|method|feature|forecast)$/.test(t)) return "/" + t + "/";
+  if (t === "brief") { if (!BR) return location.pathname.indexOf("/brief/") === 0 ? location.pathname : "/brief/"; const c = briefCur(); return "/brief/" + (c && BR && c !== BR.issues[0] ? c.date + "/" : ""); }
+  if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return "/feature/" + (c && c !== L[0] ? c.id + "/" : ""); }
+  if (t === "page") return location.pathname;
+  if (/^(grand|ideas|method|forecast)$/.test(t)) return "/" + t + "/";
   if (t === "detail") return S.sel && hasPage(S.sel) ? "/country/" + S.sel + "/" : "/";
   return null;
 }
@@ -1492,21 +1555,90 @@ function routeSync(rep){
   if (!ROUTES || !HASH_READY || !D) return;
   const r = routeOf(); if (!r || (r === location.pathname && !location.hash && !location.search)) return;
   try { history[rep ? "replaceState" : "pushState"](null, "", r); } catch(e){}
+  document.title = titleOf();
 }
 function applyRoute(){
   if (!ROUTES) return false;
   const p = location.pathname, ss = D.strategies || []; let m;
-  if ((m = p.match(/^\/case\/([a-z0-9-]+)\/?$/)) && ss.some(c => c.id === m[1])) { S.scase = m[1]; renderStrat(); switchTab("strat"); return true; }
-  if (/^\/case\/?$/.test(p)) { switchTab("strat"); return true; }
+  if ((m = p.match(/^\/case\/([a-z0-9-]+)\/?$/)) && ss.some(c => c.id === m[1])) { goCase(m[1]); return true; }
+  if (/^\/case\/?$/.test(p)) { S.scase = null; switchTab("strat"); return true; }
   if ((m = p.match(/^\/country\/([A-Z]{3})\/?$/)) && D.countries[m[1]]) { selectCountry(m[1], true); return true; }
-  if ((m = p.match(/^\/(grand|ideas|method|feature|forecast)\/?$/))) { switchTab(m[1]); return true; }
-  if (p === "/" && !location.hash) { switchTab("overview"); return true; }
+  if ((m = p.match(/^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/))) {
+    if (BR && !BR.issues.some(x => x.date === m[1])) { pageGo(p); return true; }
+    S.bdate = m[1]; renderBrief(); switchTab("brief"); return true; }
+  if (/^\/brief\/?$/.test(p)) { S.bdate = null; renderBrief(); switchTab("brief"); return true; }
+  if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
+  if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
+  if (/^\/(leader|guide)(\/|$)/.test(p)) { pageGo(p); return true; }
+  if ((m = p.match(/^\/(grand|ideas|method|forecast)\/?$/))) { switchTab(m[1]); return true; }
+  if (p === "/" && !location.hash) { switchTab(ROUTE_FIRST && !location.search ? "brief" : "overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
   return false;
 }
-addEventListener("popstate", () => { if (D && ROUTES) { HASH_READY = false; applyRoute(); HASH_READY = true; } });
+addEventListener("popstate", () => { if (D && ROUTES) { HASH_READY = false; applyRoute(); HASH_READY = true; if (S.tab !== "page") document.title = titleOf(); } });
+/* v3.43 새로 불러오지 않는 이동: 결정권자·사이트 안내·지난 브리핑 쪽은 내용이 자료 파일에 없고 그 쪽의 HTML에만 있다.
+   링크를 누르면 그 HTML을 뒤에서 받아 글 칸(.page-pre)만 지금 화면의 pane-page에 끼우고 주소와 제목을 바꾼다. 받은 쪽은 기억해 두고 다시 받지 않는다.
+   받기에 실패하거나 글 칸이 없으면 예전처럼 그 주소로 새로 연다. 쪽 안의 링크(사이트 안내의 /grand/ 등)도 같은 길로 화면 안에서 옮긴다 */
+const SITE_T = document.title.split(" | ").pop();
+const PAGE_C = {}; let PAGE_CUR = null, PAGE_SEQ = 0;
+(function(){ const pp = document.querySelector("#pane-page .page-pre"); if (pp) { PAGE_CUR = location.pathname; PAGE_C[PAGE_CUR] = {h: pp.outerHTML, t: document.title}; } })();
+function titleOf(){
+  const t = S.tab, sx = " | " + SITE_T, gl = k => { const a = document.querySelector('.gnav > a[data-tab="' + k + '"]'); return a ? a.textContent.trim() : ""; };
+  if (t === "page") return (PAGE_C[PAGE_CUR] || {}).t || document.title;
+  if (t === "overview" || !D) return SITE_T;
+  if (t === "strat") { const c = S.scase && (D.strategies || []).find(x => x.id === S.scase); return (c ? c.title : gl("strat")) + sx; }
+  if (t === "brief") { const c = BR && briefCur(), m = c && c !== BR.issues[0] && /^(\d{4})-(\d{2})-(\d{2})/.exec(c.date); return gl("brief") + (m ? " " + (+m[1]) + "년 " + (+m[2]) + "월 " + (+m[3]) + "일" : "") + sx; }
+  if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return (c && c !== L[0] ? c.title : gl("feature")) + sx; }
+  if (t === "detail") return S.sel && hasPage(S.sel) ? D.countries[S.sel].name_ko + " 정세와 대전략" + sx : SITE_T;
+  return (gl(t) || SITE_T) + (gl(t) ? sx : "");
+}
+const isPagePath = p => { if (/^\/(leader|guide)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
+function pageShow(p, x){
+  ttsStop(); try { speechSynthesis.cancel(); } catch(e){}
+  const pn = document.getElementById("pane-page"); pn.innerHTML = x.h;
+  /* 쪽에 딸린 스크립트(결정권자 쪽의 듣기)는 innerHTML로는 돌지 않으므로 새로 만들어 붙인다. 자료용 JSON은 그대로 둔다 */
+  pn.querySelectorAll("script").forEach(o => { if (o.type && !/javascript/.test(o.type)) return; const n = document.createElement("script"); n.textContent = o.textContent; o.replaceWith(n); });
+  PAGE_CUR = p; switchTab("page"); document.title = x.t;
+}
+/* p의 쪽을 글 칸에 보인다. push: 주소 기록을 새로 쌓는다(링크), 아니면 지금 주소 그대로(뒤로 가기·첫 진입). after: 보인 뒤 할 일(스크롤 복원 등) */
+function pageGo(url, push, after){
+  const u = new URL(url, location.href), p = u.pathname, seq = ++PAGE_SEQ;
+  const same = p === PAGE_CUR && !!document.querySelector("#pane-page .page-pre");
+  const done = x => { if (seq !== PAGE_SEQ) return;
+    if (push) { try { history.pushState(null, "", p + u.hash); } catch(e){} }
+    const hr = HASH_READY; HASH_READY = false;
+    if (same) { switchTab("page"); document.title = x.t; } else pageShow(p, x);  /* 이미 글 칸에 있는 쪽이면 다시 그리지 않는다 */
+    HASH_READY = hr;
+    const t = u.hash && document.getElementById(decodeURIComponent(u.hash.slice(1)));
+    requestAnimationFrame(() => { if (t) t.scrollIntoView({block: "start"}); if (after) after(); updTop(); }); };
+  if (PAGE_C[p]) { done(PAGE_C[p]); return; }
+  document.documentElement.classList.add("pg-wait");
+  fetch(p, {credentials: "same-origin"}).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
+    const d = new DOMParser().parseFromString(t, "text/html"), pp = d.querySelector("#pane-page .page-pre"); if (!pp) throw 0;
+    const x = PAGE_C[p] = {h: pp.outerHTML, t: d.title}; done(x);
+  }).catch(() => { if (seq === PAGE_SEQ) location.href = u.href; }).finally(() => document.documentElement.classList.remove("pg-wait"));
+}
+/* 사이트 안의 링크(a href)를 화면 안에서 옮긴다. 새 창·수정 키·다른 사이트·파일은 브라우저에 맡긴다 */
+const SOFT_RE = /^\/(?:$|(?:case|country|brief|feature|leader|guide|grand|ideas|method|forecast)(?:\/|$))/;
+document.addEventListener("click", ev => {
+  if (!ROUTES || !D || ev.defaultPrevented || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
+  const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
+  let u; try { u = new URL(a.getAttribute("href"), location.href); } catch(e){ return; }
+  if (u.origin !== location.origin || !SOFT_RE.test(u.pathname) || /\.[a-z0-9]+$/i.test(u.pathname)) return;
+  if (u.pathname === location.pathname && u.hash) return;
+  ev.preventDefault();
+  const g = a.closest("details.gmore"); if (g) g.open = false;
+  if (!a.closest(".gnav")) navPush();
+  if (isPagePath(u.pathname)) { pageGo(u.href, true); return; }
+  try { history.pushState(null, "", u.pathname + u.search + u.hash); } catch(e){ location.href = u.href; return; }
+  HASH_READY = false; const ok = applyRoute(); HASH_READY = true;
+  if (!ok) { location.href = u.href; return; }
+  document.title = titleOf();
+});
 document.addEventListener("click", () => setTimeout(() => routeSync(false), 0));
 const _switchTab = switchTab;
 switchTab = function(t){
+  /* v3.43 결정권자 쪽의 듣기는 예전에 쪽을 떠나면(새로 불러오면) 멈췄다. 화면 안 이동에서도 쪽을 떠날 때 멈춘다 */
+  const lb = document.getElementById("ltts"); if (lb && t !== "page" && lb.getAttribute("aria-pressed") === "true") lb.click();
   _switchTab(t);
   if (HASH_READY && ROUTES) routeSync(false);
   else if (HASH_READY && S.tab !== "detail") {
@@ -1532,21 +1664,23 @@ addEventListener("hashchange", () => { if (D) applyHash(); });
 /* v3.32 이전 화면: 칩·카드·띠·검색 결과로 화면을 옮길 때마다 직전 화면(탭, 사안, 선택한 나라·분쟁지, 스크롤 위치)을 쌓아 두고 되돌린다 */
 const NAV = []; let NAV_BUSY = false;
 const navBtn = document.getElementById("navback");
-function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
+function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, path: S.tab === "page" ? PAGE_CUR : null, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
 function navUpd(){ if (navBtn) navBtn.hidden = !NAV.length; }
 function navPush(){
   if (NAV_BUSY || !D) return;
   const s = navSnap(), t = NAV[NAV.length - 1];
-  if (t && t.tab === s.tab && t.scase === s.scase && t.sel === s.sel && t.selFp === s.selFp && Math.abs(t.y - s.y) < 40) return;
+  if (t && t.tab === s.tab && t.path === s.path && t.scase === s.scase && t.sel === s.sel && t.selFp === s.selFp && Math.abs(t.y - s.y) < 40) return;
   NAV.push(s); if (NAV.length > 30) NAV.shift(); navUpd();
 }
 function navBack(){
   const s = NAV.pop(); navUpd(); if (!s) return false;
+  const pnY = () => { const pn = document.getElementById("pane-" + s.tab); if (narrow()) scrollTo(0, s.y); else if (pn) pn.scrollTop = s.y; updTop(); };
+  if (s.tab === "page" && s.path && (s.path !== PAGE_CUR || S.tab !== "page")) { pageGo(s.path, ROUTES, pnY); return true; }
   NAV_BUSY = true;
   try {
     if (s.tab === "detail" && (s.sel || s.selFp)) { if (s.sel) selectCountry(s.sel, true); else selectFp(s.selFp); }
     else {
-      if (s.tab === "strat" && s.scase) { S.scase = s.scase; renderStrat(); }
+      if (s.tab === "strat") { S.scase = s.scase; renderStrat(); }
       if (s.tab === "forecast" && s.fcf) { S.fcf = s.fcf; renderForecasts(); }
       switchTab(s.tab);
     }

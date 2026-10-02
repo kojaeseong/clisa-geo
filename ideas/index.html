@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/app.css?v=0b47bacf67">
+<link rel="stylesheet" href="/app.css?v=907e40cf82">
 </head>
 <body>
 
@@ -54,19 +54,19 @@
     <button type="button" class="bstrip astrip" id="astrip" hidden><span class="bs-k">다가오는 일정</span><span class="bs-d"></span><span class="bs-t" aria-live="off"></span><span class="bs-n"></span><span class="bs-go" aria-hidden="true">›</span></button>
     </div>
     <nav class="gnav" aria-label="사이트 메뉴">
-      <a href="/brief/" data-nav="brief">정세 브리핑</a>
-      <a href="/feature/" data-nav="feature">특집</a>
+      <a href="/brief/" data-tab="brief" id="tab-brief">정세 브리핑</a>
+      <a href="/feature/" data-tab="feature" id="tab-feature">특집</a>
       <a href="/" data-tab="overview" id="tab-overview">세계 정세</a>
       <a href="/case/" data-tab="strat" id="tab-strat">전략 분석</a>
       <a href="/grand/" data-tab="grand" id="tab-grand">국제 질서</a>
-      <a href="/forecast/" data-nav="forecast" class="gx">전망과 검증</a>
+      <a href="/forecast/" data-tab="forecast" class="gx">전망과 검증</a>
       <a href="/leader/" data-nav="leader" class="gx">결정권자</a>
       <a href="/ideas/" data-tab="ideas" class="gx" aria-current="page">역사와 사상</a>
       <a href="/method/" data-tab="method" class="gx">분석 방법</a>
       <a href="/guide/" data-nav="guide" class="gx">사이트 안내</a>
       <a href="#discuss" data-tab="discuss" id="tab-discuss">논의</a>
       <details class="gmore"><summary>더 보기</summary><div class="gmore-m">
-        <a href="/forecast/" data-nav="forecast">전망과 검증</a>
+        <a href="/forecast/" data-tab="forecast" id="tab-forecast">전망과 검증</a>
         <a href="/leader/" data-nav="leader">결정권자</a>
         <a href="/ideas/" data-tab="ideas" id="tab-ideas" aria-current="page">역사와 사상</a>
         <a href="/method/" data-tab="method" id="tab-method">분석 방법</a>
@@ -102,6 +102,8 @@
       <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
       <button type="button" class="navback" id="navback" hidden>← 이전 화면</button>
       <div class="pane" id="pane-overview" role="tabpanel"><div class="sec seo-intro"><!--seo--><p class="eyebrow">클리사 지오폴리틱스</p><h1>역사와 사상</h1><h2>역사적 선례</h2><ul><li>러-우 소모전과 휴전 협상</li><li>이란 전쟁과 호르무즈 봉쇄</li><li>미중의 관리된 경쟁</li><li>대만해협의 압박</li><li>북미 직거래와 한국</li><li>미국의 부담 전가와 동맹의 자강</li><li>러시아·중국·북한·이란의 연결</li></ul><h2>참고 사상가</h2><ul><li><b>해퍼드 매킨더</b> · 유라시아 내륙의 거대한 평원을 바다 세력이 닿지 않는 &#x27;심장지대&#x27;로 봤습니다.</li><li><b>니컬러스 스파이크먼</b> · 매킨더를 뒤집어, 심장지대를 둘러싼 연안 지대 &#x27;림랜드&#x27;가 결정적이라고 봤습니다.</li><li><b>마오쩌둥</b> · 약한 쪽은 공간을 내주고 시간을 벌며 강한 쪽이 소모되기를 기다린다는 지구전 사고가 핵심입니다.</li><li><b>헨리 키신저</b> · 안정된 질서에는 두 기둥이 필요하다고 봤습니다. 하나는 힘의 균형이고, 다른 하나는 참가국들이 받아들이는 규칙, 곧 정통성입니다. 1971~72년 미중 화해는 미국이 중국·소련과 각각 맺는 관계가 두 나라 사이의 관계보다 가깝도록 만든 삼각 외교였습니다.</li><li><b>리콴유</b> · 중국은 서구의 명예 회원이 아니라 중국 그 자체로 인정받기를 원하며, 아시아 최강을 넘어 세계 최강을 지향할 것이라고 봤습니다.</li><li><b>즈비그뉴 브레진스키</b> · 우크라이나가 없는 러시아는 유라시아 제국이 될 수 없다고 봤습니다.</li><li><b>그레이엄 앨리슨</b> · 지난 500년간 신흥 강국이 기존 패권국을 위협한 16개 사례 가운데 12개가 전쟁으로 끝났다는 &#x27;투키디데스의 함정&#x27;을 제시했습니다.</li><li><b>새뮤얼 헌팅턴</b> · 냉전 뒤 세계 정치의 주된 갈등은 이념이 아니라 종교와 역사로 묶인 문명 사이에서 일어나며, 가장 위험한 갈등은 문명이 맞닿는 단층선과 서로 다른 문명이 한 나라에 섞인 &#x27;분열국&#x27;에서 일어난다고 봤습니다.</li><li><b>존 미어샤이머</b> · 강대국은 늘 경쟁국보다 더 큰 힘을 얻을 기회를 찾으며, 최선의 목표는 자기 지역의 패권이고 지역 패권국은 다른 지역에 대등한 경쟁자가 생기는 것을 막으려 한다는 &#x27;공격적 현실주의&#x27;를 폈습니다.</li></ul><!--/seo--></div></div>
+      <div class="pane" id="pane-brief" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-page" role="tabpanel" hidden></div>
       <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
       <div class="pane" id="pane-feature" role="tabpanel" hidden></div>
       <div class="pane" id="pane-detail" role="tabpanel" hidden></div>
@@ -124,7 +126,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script src="/app.js?v=ddccec4c05"></script>
+<script src="/app.js?v=fabd1f0117"></script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "330cb9e687e34385b83747a235d16c63"}'></script>
 </body>
