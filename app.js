@@ -8,6 +8,7 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 960px)").matches;
 const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+if (store.get("ep.legoff") === "1") document.documentElement.classList.add("legoff");
 
 const LAYERS = {
   focus:{label:"분석 대상 지역", desc:"짙을수록 해당 국가가 관련된 전략 분석과 전망이 많습니다."},
@@ -480,7 +481,11 @@ function setupInteraction(){
 
   $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
-  $("#legbtn").onclick = () => { const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
+  /* v3.43f 데스크탑: '지구본 색 기준' 상자를 접으면 왼쪽 아래 작은 '지도 표시' 단추로 바뀐다(처음엔 펼침, 접은 상태는 브라우저에 기억). 모바일: 예전처럼 단추로 열고 닫는다 */
+  const legOff = off => { document.documentElement.classList.toggle("legoff", off); store.set("ep.legoff", off ? "1" : "0"); $("#legbtn").setAttribute("aria-expanded", !off); };
+  if (!narrow()) $("#legbtn").setAttribute("aria-expanded", !document.documentElement.classList.contains("legoff"));
+  $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
+  $("#legend").addEventListener("click", e => { if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
   $("#lensoff").onclick = () => setLens(null);
   document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; if (b.dataset.tab === "strat") { S.scase = null; caseMark(); } if (b.dataset.tab === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(b.dataset.tab); });
   document.addEventListener("click", ev => {
@@ -579,6 +584,19 @@ function navMark(t){
   const g = document.querySelector(".gmore"); if (g) g.classList.toggle("cur", !!g.querySelector("[aria-current]"));
 }
 document.addEventListener("click", e => { const g = document.querySelector(".gmore[open]"); if (g && !g.contains(e.target)) g.open = false; });
+/* v3.43e 메뉴 한 줄 맞추기와 '더 보기' 목록 화면 안에 두기 */
+function gnavFit(){
+  const n = document.querySelector(".gnav"); if (!n) return;
+  n.classList.remove("t1", "t2"); if (innerWidth > 960) return;
+  const wrapped = () => { const it = [...n.children].filter(e => e.offsetParent && !e.classList.contains("wide-btn")); return it.length && it.some(e => Math.abs(e.offsetTop - it[0].offsetTop) > 4); };
+  if (wrapped()) { n.classList.add("t1"); if (wrapped()) n.classList.add("t2"); }
+}
+gnavFit(); addEventListener("resize", gnavFit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(gnavFit);
+(function(){ const g = document.querySelector(".gmore"); if (!g) return;
+  g.addEventListener("toggle", () => { const m = g.querySelector(".gmore-m"); if (!m) return; m.style.transform = ""; if (!g.open) return;
+    const r = m.getBoundingClientRect(), pad = 8; let dx = 0;
+    if (r.right > innerWidth - pad) dx = innerWidth - pad - r.right; if (r.left + dx < pad) dx = pad - r.left;
+    if (dx) m.style.transform = "translateX(" + Math.round(dx) + "px)"; }); })();
 function switchTab(t){
   t = TAB_ALIAS[t] || t;
   if (!document.getElementById("pane-" + t)) t = "overview";
@@ -594,7 +612,7 @@ function renderLegend(){
   const line = (col, dash, w) => { w = w || 26; return '<svg width="' + w + '" height="8" aria-hidden="true"><line x1="1" y1="4" x2="' + (w - 1) + '" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>"; };
   const tk = S.layer === "focus" ? "<span>적음</span><span></span><span>많음</span>" : "<span>0</span><span>50</span><span>100</span>";
   const sw = (k, on, body) => '<button type="button" class="mt" data-mt="' + k + '" aria-pressed="' + on + '"><span class="sw" aria-hidden="true"></span>' + body + "</button>";
-  $("#legend").innerHTML =
+  $("#legend").innerHTML = '<button type="button" class="legx" data-legx aria-label="접기" title="접기">×</button>' +
     '<div><label class="lt" for="lysel">지구본 색 기준</label><select id="lysel">' + Object.keys(LAYERS).map(k => '<option value="' + k + '"' + (k === S.layer ? " selected" : "") + ">" + LAYERS[k].label + "</option>").join("") + '</select><div class="ld">' + L.desc + "</div></div>" +
     '<div class="ramp" style="background:linear-gradient(90deg,' + stops + ')"></div><div class="ticks">' + tk + "</div>" +
     '<div class="keys"><div class="lt">표시 켜고 끄기</div>' +

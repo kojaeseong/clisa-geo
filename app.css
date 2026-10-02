@@ -634,6 +634,9 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .srch-open svg{width:15px; height:15px; color:var(--ink-2)}
 .legbtn{display:none; position:absolute; top:12px; right:12px; align-items:center; gap:6px; border:1px solid var(--ink-2); background:var(--panel); color:var(--ink); border-radius:8px; padding:6px 10px; font:600 12.5px var(--sans); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.1)}
 .legbtn svg{width:16px; height:16px}
+.legx{position:absolute; top:4px; right:4px; border:0; background:none; color:var(--muted); font:400 18px/1 var(--sans); padding:4px 7px; border-radius:6px; cursor:pointer}
+.legx:hover{color:var(--ink); background:var(--panel-2)}
+@media (min-width: 961px){ html.legoff .legend{display:none} html.legoff .legbtn{display:inline-flex; top:auto; right:auto; left:12px; bottom:12px} }
 .legbtn[aria-expanded="true"]{background:var(--ink); color:var(--panel)}
 .legend select{display:block; width:100%; margin:4px 0 2px; font:13px var(--sans); padding:4px 6px; border:1px solid var(--line); border-radius:6px; background:var(--panel); color:var(--ink)}
 .legend .keys{display:grid; gap:4px}
@@ -747,7 +750,11 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .gnav .wide-btn[aria-pressed="true"]{color:var(--accent); font-weight:600}
 @media (max-width:960px){ .gnav .wide-btn{display:none} .gnav>.gx{display:none} }
 @media (min-width:961px){ .gmore{display:none} }
-@media (max-width:600px){ .gnav{margin-top:-4px} .gnav>a,.gmore>summary{padding:8px 6px 7px; font-size:13px} .gmore-m{left:auto; right:0} }
+@media (max-width:600px){ .gnav{margin-top:-4px} .gnav>a,.gmore>summary{padding:8px 6px 7px; font-size:13px} .gmore-m{left:auto; right:0} .gmore{margin-left:auto} }
+/* v3.43e 좁은 화면(폭 375px 이하, 글자 크기를 키운 휴대전화): 메뉴가 한 줄을 넘으면 간격부터, 그다음 글자를 줄인다(gnavFit). 그래도 넘치면 '더 보기'는 오른쪽 끝에 두어 펼친 목록이 화면 안에 들어오게 한다 */
+.gnav.t1>a,.gnav.t1 .gmore>summary{padding-left:4px; padding-right:4px}
+.gnav.t2>a,.gnav.t2 .gmore>summary{padding-left:3px; padding-right:3px; font-size:12px; letter-spacing:-.2px}
+.gnav.t2 .gmore>summary::after{margin-left:2px}
 /* 머리글 윗줄(세계 시각·검색창·띠): 아래는 위쪽 규칙을 그대로 옮겨 둔 사본. 글 쪽도 같은 모양을 쓰도록(고칠 때는 양쪽을 함께) */
 .toggles{display:flex; gap:8px}
 .clocks{display:none; grid-template-columns:repeat(4, auto); grid-template-rows:repeat(2, auto); grid-auto-flow:column; gap:2px 10px; margin:0 6px 0 auto; align-self:center; flex:none}
