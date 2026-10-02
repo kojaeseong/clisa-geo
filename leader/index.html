@@ -19,14 +19,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "결정권자", "url": "https://geo.clisa.ai/leader/", "inLanguage": "ko-KR", "isPartOf": {"@type": "WebSite", "name": "클리사 지오폴리틱스", "url": "https://geo.clisa.ai/"}}</script>
 <style>:root{--bg:#EBEEF2;--panel:#fff;--panel-2:#F3F5F8;--ink:#0E1726;--ink-2:#344054;--muted:#667085;--line:#D3DAE3;--accent:#1B4F8A;--accent-soft:rgba(27,79,138,.08);--coop:#11796B;--conflict:#B42318;
---sans:"IBM Plex Sans KR","Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:light}
+--sans:"Pretendard Variable",Pretendard,"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:light}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 var(--sans);word-break:keep-all;overflow-wrap:break-word}
-a{color:var(--accent)}.top{background:var(--panel);border-bottom:1px solid var(--line)}.top .in,.wrap{max-width:760px;margin:0 auto;padding:0 16px}
-.top .in{display:flex;align-items:center;gap:10px;min-height:56px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
-.brand svg{width:26px;height:26px;flex:none}.brand b{font:800 19px/1 "Archivo",var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}@media(max-width:480px){.brand span{display:none}.brand b{font-size:17px}}.brand span{font:500 12px var(--sans);color:var(--muted)}
-.top nav{margin-left:auto;display:flex;gap:12px;font-size:14px}.top nav a{text-decoration:none}
+a{color:var(--accent)}.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:14px 16px 0}.brand{display:flex;align-items:center;gap:10px 12px;text-decoration:none;color:var(--ink);margin-right:auto;min-height:36px}
+.brand svg{width:28px;height:28px;flex:none}.brand b{font:800 21px/1 "Archivo",var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}.brand span{font:500 12px var(--sans);color:var(--muted)}
+@media(max-width:600px){.brand b{font-size:18px}.brand svg{width:24px;height:24px}.brand span{display:none}}
+@media(max-width:560px){.brand svg{order:1}.brand b{order:2;flex:1 1 calc(100% - 44px);min-width:0;font-size:min(18px,4.6vw)}}
+.top>nav:not(.gnav){display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;padding-bottom:10px}.top>nav:not(.gnav) a{text-decoration:none}
 main.wrap{background:var(--panel);margin:16px auto;border:1px solid var(--line);border-radius:6px;padding:20px 16px 8px}
 @media(min-width:600px){main.wrap{padding:28px 32px 12px}}
 .eyebrow{margin:0;font:500 13px var(--sans);color:var(--accent)}h1{font-size:25px;line-height:1.4;margin:4px 0 8px}h2{font-size:19px;line-height:1.45;margin:28px 0 8px}
@@ -44,14 +47,75 @@ ul.tl{list-style:none;padding:0}ul.tl li{display:grid;grid-template-columns:92px
 .pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
 ul.idx{padding-left:0;list-style:none}ul.idx li{padding:8px 0;border-top:1px solid var(--line)}ul.idx .d{font:13px var(--mono);color:var(--muted);display:block}
 .bw{background:var(--panel-2);border-radius:4px;padding:8px 14px;margin:14px 0}.bw h2{margin-top:6px}
-footer{max-width:760px;margin:0 auto 32px;padding:0 16px;font-size:13px;color:var(--muted)}footer p{margin:6px 0}</style>
+footer{max-width:760px;margin:0 auto 32px;padding:0 16px;font-size:13px;color:var(--muted)}footer p{margin:6px 0}
+.gnav{order:10; flex:1 1 100%; display:flex; flex-wrap:wrap; align-items:flex-end; gap:0 2px; border-bottom:1px solid var(--line); margin-top:-6px}
+.gnav>a,.gmore>summary{display:block; padding:8px 10px 7px; font:500 14px/1.4 var(--sans); color:var(--ink-2); text-decoration:none; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap; cursor:pointer; list-style:none}
+.gmore>summary::-webkit-details-marker{display:none} .gmore>summary::after{content:"\25BE"; font-size:10px; margin-left:4px; color:var(--muted)}
+.gnav>a:hover,.gmore>summary:hover{color:var(--accent)}
+.gnav>a[aria-current="page"],.gmore.cur>summary{color:var(--ink); border-bottom-color:var(--accent); font-weight:600}
+.gmore{position:relative}
+.gmore-m{position:absolute; left:0; top:calc(100% + 2px); z-index:60; background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:0 8px 24px rgba(14,23,38,.12); padding:6px; min-width:168px; display:flex; flex-direction:column}
+.gmore-m a{padding:8px 10px; border-radius:6px; color:var(--ink-2); text-decoration:none; font-size:14px; white-space:nowrap}
+.gmore-m a:hover{background:var(--panel-2)} .gmore-m a[aria-current="page"]{color:var(--accent); font-weight:600}
+.gnav .wide-btn{margin-left:auto; border:0; background:none; color:var(--muted); cursor:pointer; padding:8px 6px; font-size:15px; line-height:1}
+.gnav .wide-btn[aria-pressed="true"]{color:var(--accent); font-weight:600}
+@media (max-width:960px){ .gnav .wide-btn{display:none} .gnav>.gx{display:none} }
+@media (min-width:961px){ .gmore{display:none} }
+@media (max-width:600px){ .gnav{margin-top:-4px} .gnav>a,.gmore>summary{padding:8px 6px 7px; font-size:13px} .gmore-m{left:auto; right:0} }
+/* 머리글 윗줄(세계 시각·검색창·띠): 아래는 위쪽 규칙을 그대로 옮겨 둔 사본. 글 쪽도 같은 모양을 쓰도록(고칠 때는 양쪽을 함께) */
+.toggles{display:flex; gap:8px}
+.clocks{display:none; grid-template-columns:repeat(4, auto); grid-template-rows:repeat(2, auto); grid-auto-flow:column; gap:2px 10px; margin:0 6px 0 auto; align-self:center; flex:none}
+.toggles{flex:0 1 auto; min-width:0}
+.clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
+@media (min-width: 1200px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
+.top.snug .brand .ko{display:none} .top.snug .srch-open{flex-basis:260px; width:260px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
+@media (max-width: 960px){ #astrip{display:none !important} }
+.srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
+.srch-open:hover{border-color:var(--ink-2)}
+.srch-open svg{width:14px; height:14px}
+.srch-open kbd{font:11px var(--mono); color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:0 4px}
+@media (max-width: 560px){ .srch-open span, .srch-open kbd{display:none} .srch-open{padding:6px 9px} .srch{padding:calc(12px + env(safe-area-inset-top,0px)) 8px 8px} .srch-box{max-height:calc(100svh - 24px)} .srch-hint{display:none} }
+.srch-open{width:320px; min-width:240px; flex:0 1 320px; height:40px; font-size:14px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+.srch-open span{flex:1; text-align:left}
+.srch-open svg{width:15px; height:15px; color:var(--ink-2)}
+@media (max-width: 560px){
+  .toggles{width:100%}
+  .srch-open{flex:1; min-width:0; height:40px; padding:0 12px}
+  .srch-open span{display:inline!important}
+  .srch-open kbd{display:none}
+}
+@media (max-width: 560px){
+  .top{gap:8px 10px}
+  .brand{display:contents}
+  .brand .logo{order:1}
+  .brand h1{order:2; flex:1 1 calc(100% - 44px); min-width:0; font-size:min(18px, 4.6vw); white-space:nowrap}
+  .brand .edtag{order:3}
+  .brand .asof{order:4; flex:none; white-space:nowrap; font-size:11px}
+  .toggles{order:5; flex:1; width:auto; min-width:0}
+  .top:not(:has(.asof)) .toggles{flex:1 1 100%} /* v3.20d 공개판은 기준일이 없으므로 검색창이 한 줄을 다 쓴다 */
+}
+.bstrip{order:9; flex:1 1 100%; display:flex; align-items:center; gap:10px; min-width:0; text-align:left; cursor:pointer; background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px; padding:7px 12px; color:var(--ink); font:500 13px var(--sans)}
+.bstrip:hover{border-color:var(--accent)}
+.bstrip .bs-k{font-weight:700; color:var(--accent); white-space:nowrap}
+.bstrip .bs-d{font:500 12px var(--mono); color:var(--muted); white-space:nowrap}
+.bstrip .bs-t{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bstrip .bs-go{color:var(--accent); font-weight:700}
+.bstrip .bs-t{transition:opacity .35s ease} .bstrip .bs-t.fade{opacity:0}
+.bstrip .bs-n{font:500 11.5px var(--mono); color:var(--muted); white-space:nowrap}
+@media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
+.strips{order:9; flex:1 1 100%; display:flex; gap:12px; min-width:0} .strips .bstrip{order:0; flex:1 1 0; min-width:0} .astrip{border-left-color:var(--conflict)} .astrip .bs-k{color:var(--conflict)}
+@media (min-width: 961px){ .bstrip{font-size:14.5px} }
+a.bstrip,a.srch-open{text-decoration:none}
+</style>
 </head>
 <body>
-<header class="top"><div class="in"><a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#1B4F8A"/><path d="M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M4.5 9.5h23M4.5 22.5h23" stroke="#fff" stroke-width="1.1" fill="none" opacity=".7"/></svg><b>Clisa Geopolitics</b><span>클리사 지오폴리틱스</span></a><nav><a href="/brief/">정세 브리핑</a><a href="/feature/">특집</a><a href="/leader/">결정권자</a><a href="/forecast/">전망과 검증</a><a href="/guide/">사이트 안내</a></nav></div></header>
+<header class="top"><a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#1B4F8A"/><path d="M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M4.5 9.5h23M4.5 22.5h23" stroke="#fff" stroke-width="1.1" fill="none" opacity=".7"/></svg><b>Clisa Geopolitics</b><span class="ko">클리사 지오폴리틱스</span></a><div class="clocks" id="clocks" hidden aria-label="세계 시각"></div><div class="toggles"><a class="srch-open" id="srchopen" href="/?q=" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></a></div><div class="strips"><a class="bstrip" id="bstrip" href="/brief/" hidden><span class="bs-k">정세 브리핑</span><span class="bs-d"></span><span class="bs-t" aria-live="off"></span><span class="bs-n"></span><span class="bs-go" aria-hidden="true">›</span></a><a class="bstrip astrip" id="astrip" href="/" hidden><span class="bs-k">다가오는 일정</span><span class="bs-d"></span><span class="bs-t" aria-live="off"></span><span class="bs-n"></span><span class="bs-go" aria-hidden="true">›</span></a></div><nav class="gnav" aria-label="사이트 메뉴"><a href="/brief/" data-nav="brief">정세 브리핑</a><a href="/feature/" data-nav="feature">특집</a><a href="/" data-tab="overview" id="tab-overview">세계 정세</a><a href="/case/" data-tab="strat" id="tab-strat">전략 분석</a><a href="/grand/" data-tab="grand" id="tab-grand">국제 질서</a><a href="/forecast/" data-nav="forecast" class="gx">전망과 검증</a><a href="/leader/" data-nav="leader" class="gx" aria-current="page">결정권자</a><a href="/ideas/" data-tab="ideas" class="gx">역사와 사상</a><a href="/method/" data-tab="method" class="gx">분석 방법</a><a href="/guide/" data-nav="guide" class="gx">사이트 안내</a><details class="gmore cur"><summary>더 보기</summary><div class="gmore-m"><a href="/forecast/" data-nav="forecast">전망과 검증</a><a href="/leader/" data-nav="leader" aria-current="page">결정권자</a><a href="/ideas/" data-tab="ideas" id="tab-ideas">역사와 사상</a><a href="/method/" data-tab="method" id="tab-method">분석 방법</a><a href="/guide/" data-nav="guide">사이트 안내</a></div></details></nav></header>
 <main class="wrap">
 <p class="eyebrow">클리사 지오폴리틱스</p><h1>결정권자</h1><p class="note">사안마다 최종 결정을 내리는 사람의 세계관, 결정 방식, 말과 결정의 일치를 분석합니다.</p><ul class="idx"><li><a href="/leader/xi-jinping/"><span class="d">중국</span>시진핑(習近平)</a> · 시진핑에게 국제 정치는 미국이 이끄는 서방의 억제와 포위가 상수인 투쟁의 장이고, 대만 통일과 당의 영도는 시간이 걸려도 물러설 수 없는 과제입니다.</li><li><a href="/leader/donald-trump/"><span class="d">미국</span>도널드 트럼프</a> · 트럼프에게 국제 정치는 부유한 동맹과 경쟁국이 함께 미국을 이용해 온 거래의 장이고, 그가 이루려는 것은 그 비용을 상대에게 넘기고 &#x27;이긴 거래&#x27;와 &#x27;끝낸 전쟁…</li><li><a href="/leader/kim-jong-un/"><span class="d">북한</span>김정은</a> · 김정은에게 국제 정치는 핵을 내려놓은 정권이 무너지는 힘의 세계이고, 핵보유국 지위를 되돌릴 수 없는 전제로 굳힌 뒤 그 위에서 미국과 마주 서는 것이 그의 목…</li><li><a href="/leader/vladimir-putin/"><span class="d">러시아</span>블라디미르 푸틴</a> · 푸틴에게 국제 정치는 NATO 확장으로 대표되는 서방의 압박이 러시아 국경으로 다가오는 과정이고, 우크라이나는 외국이 아니라 소련 해체 때 &#x27;내준&#x27; 역사적 러시…</li><li><a href="/leader/lee-jae-myung/"><span class="d">전략 주체의 결정권자 · 대한민국</span>이재명</a> · 이재명 대통령은 한국을 미중 경쟁과 동맹의 요구 사이에서 안보와 경제의 취약성을 함께 관리해야 하는 나라로 말해 왔고, 대외 목표로 북한과의 평화공존, 원치 않…</li><li><a href="/leader/volodymyr-zelensky/"><span class="d">전략 주체의 결정권자 · 우크라이나</span>볼로디미르 젤렌스키</a> · 젤렌스키에게 러시아는 서명한 약속을 지키지 않는 상대이고 미국은 없어서는 안 되지만 조건이 붙는 동반자여서, 안보는 법적 구속력이 있는 보장이나 동맹으로만 얻을…</li></ul>
 </main>
 <footer><p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p><p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p><p>© 2026 고재성(도구컨설팅). 클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 출처를 밝힌 부분 인용과 링크 공유는 자유롭게 할 수 있으나, 전부 또는 상당 부분을 복제·재배포하는 것은 허락 없이 할 수 없습니다.</p><p><a href="mailto:clisageo@clisa.ai">clisageo@clisa.ai</a></p></footer>
+<script defer src="/shell.js?v=fa306d8dbf"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "330cb9e687e34385b83747a235d16c63"}'></script>
 </body>
 </html>
