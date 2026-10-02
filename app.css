@@ -684,6 +684,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .bstrip .bs-go{color:var(--accent); font-weight:700}
 .bstrip .bs-t{transition:opacity .35s ease} .bstrip .bs-t.fade{opacity:0}
 .bstrip .bs-n{font:500 11.5px var(--mono); color:var(--muted); white-space:nowrap}
+.tts-on{background:var(--accent-soft); background:color-mix(in srgb, var(--accent) 13%, transparent); box-shadow:0 0 0 5px color-mix(in srgb, var(--accent) 13%, transparent); border-radius:4px; transition:background .3s, box-shadow .3s}  /* v3.43d 지금 읽는 문단 */
 .dbrief .bi.hl{background:var(--hl, rgba(27,79,138,.08)); border-radius:6px; transition:background 1.2s}
 @media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
 .strips{order:9; flex:1 1 100%; display:flex; gap:12px; min-width:0} .strips .bstrip{order:0; flex:1 1 0; min-width:0} .astrip{border-left-color:var(--conflict)} .astrip .bs-k{color:var(--conflict)}

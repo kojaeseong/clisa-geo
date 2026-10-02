@@ -670,7 +670,7 @@ function ttsStop(done){
   if (TTS.key) TTS.pos[TTS.key] = done ? 0 : TTS.cur;
   try { speechSynthesis.cancel(); } catch(e){}
   if (TTS.btn) { TTS.btn.setAttribute("aria-pressed", "false"); TTS.btn.textContent = ttsLab(TTS.key); }
-  TTS.btn = null; TTS.key = null;
+  TTS.btn = null; TTS.key = null; tfEnd();
 }
 function ttsToggle(b){
   if (TTS.btn === b) { ttsStop(); return; }
@@ -678,10 +678,11 @@ function ttsToggle(b){
   const parts = t.replace(/\s+/g, " ").trim().split(/(?<=[.?!])\s+/).filter(Boolean);
   let from = TTS.pos[key] || 0; if (from >= parts.length) from = 0;
   TTS.btn = b; TTS.key = key; TTS.cur = from; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤";
+  tfStart(b.closest(".pane") || document.body, b); TF.hold = 0;
   /* v3.25 단추 모양을 먼저 바꿔 보이고, 음성 준비(문장 넣기·화면 꺼짐 방지)는 그다음 틀에서 한다 */
   requestAnimationFrame(() => setTimeout(() => { if (TTS.btn !== b) return; ttsWake(true);
   parts.slice(from).forEach((x, i) => { const n = from + i, u = new SpeechSynthesisUtterance(x.trim()); u.voice = v; u.lang = v.lang; u.rate = 1.05;
-    u.onstart = () => { if (TTS.btn === b) TTS.cur = n; };
+    u.onstart = () => { if (TTS.btn === b) { TTS.cur = n; tfShow(tfFind(x)); } };
     if (n === parts.length - 1) u.onend = () => { if (TTS.btn === b) ttsStop(true); };
     speechSynthesis.speak(u); });
   }, 0));
@@ -693,6 +694,51 @@ function ttsSetup(){
   document.addEventListener("click", e => { const b = e.target.closest("[data-tts]"); if (b) { e.preventDefault(); ttsToggle(b); } });
   addEventListener("pagehide", () => ttsStop());
 }
+/* v3.43d 듣기 따라가기: 문장을 읽기 시작할 때마다 그 문장이 든 문단을 찾아 옅은 바탕색으로 표시하고 화면 가운데로 스크롤한다.
+   듣기용 글은 화면 글과 조금 다르므로(퍼센트·괄호 생략 등) 문장 앞·가운데·끝 조각으로 찾고, 찾지 못하면 직전 위치에 머문다.
+   접힌 곳(details) 안이면 펼친다. 손으로 스크롤하면 10초 동안 따라가기를 멈춘다(표시는 계속). 결정권자 쪽 듣기도 window.ttsFollow로 같이 쓴다 */
+const TF = {scope: null, blocks: [], last: -1, el: null, hold: 0};
+const tfNorm = t => String(t).replace(/퍼센트/g, "").replace(/[^0-9A-Za-z가-힣]/g, "");
+const TF_SEL = "p,li,dd,dt,h1,h2,h3,h4,h5,td,th,summary,blockquote", TF_LEAF = TF_SEL + ",div";
+/* 범위: 단추가 든 탭(또는 결정권자 쪽 글 칸) 전체의 맨 안쪽 글 칸들. 찾기는 단추 바로 뒤의 칸에서 시작한다 */
+function tfStart(scope, btn){
+  tfEnd(); if (!scope) return;
+  TF.scope = scope;
+  /* 맨 안쪽 칸은 글 전체, 안에 칸을 품은 칸(<li><b>제목</b><p>설명</p>)은 제 몫의 글(제목)만 */
+  const own = e => [...e.childNodes].filter(n => n.nodeType === 3 || (n.nodeType === 1 && !n.matches(TF_LEAF) && !n.querySelector(TF_LEAF))).map(n => n.textContent).join(" ");
+  TF.blocks = [...scope.querySelectorAll(TF_LEAF)].filter(e => !e.closest("button")).map(e => ({e, t: tfNorm(e.querySelector(TF_LEAF) ? own(e) : e.textContent)})).filter(x => x.t.length > 1);
+  const i = btn ? TF.blocks.findIndex(x => btn.compareDocumentPosition(x.e) & Node.DOCUMENT_POSITION_FOLLOWING) : 0;
+  TF.last = Math.max(0, i) - 1; TF.start = Math.max(0, i);
+}
+function tfEnd(){ if (TF.el) TF.el.classList.remove("tts-on"); TF.el = null; TF.scope = null; TF.blocks = []; TF.last = -1; }
+function tfFind(s){
+  const k = tfNorm(s), B = TF.blocks; if (k.length < 2 || !B.length) return -1;
+  const from = Math.max(TF.start || 0, TF.last);
+  if (k.length >= 8) {
+    const keys = [k.slice(0, 14)]; if (k.length > 30) keys.push(k.slice(14, 28)); if (k.length > 18) keys.push(k.slice(-14));
+    for (const st of [from, 0]) for (const key of keys) for (let i = st; i < B.length; i++) if (B[i].t.includes(key)) return i;
+  }
+  /* 짧은 문장('판단.', '관리된 경쟁, 35퍼센트.')과 못 찾은 문장: 머리 6자로 바로 뒤쪽 몇 칸에서만 찾는다(엉뚱한 곳으로 튀지 않게) */
+  const h = k.slice(0, 6);
+  for (let i = Math.max(0, TF.last); i < Math.min(B.length, Math.max(0, TF.last) + 15); i++) if (B[i].t.includes(h)) return i;
+  return -1;
+}
+function tfShow(i){
+  if (window.__tfLog) window.__tfLog.push(i);
+  if (i < 0 || !TF.scope || !TF.scope.isConnected) return;
+  TF.last = i; const el = TF.blocks[i].e; if (el === TF.el) return;
+  if (TF.el) TF.el.classList.remove("tts-on"); TF.el = el; el.classList.add("tts-on");
+  for (let d = el.closest("details"); d && TF.scope.contains(d); d = d.parentElement && d.parentElement.closest("details")) d.open = true;
+  if (Date.now() < TF.hold || !el.offsetParent) return;
+  const big = el.getBoundingClientRect().height > innerHeight * 0.6;
+  el.scrollIntoView({block: big ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"});
+}
+window.ttsFollow = (btn, sent) => { const sc = btn.closest(".page-pre") || btn.closest("main") || document.body; if (TF.scope !== sc) tfStart(sc, btn); tfShow(tfFind(sent)); };
+window.ttsFollowEnd = () => tfEnd();
+(function(){ const hold = () => { if (TF.scope) TF.hold = Date.now() + 10000; };
+  addEventListener("wheel", hold, {passive: true}); addEventListener("touchmove", hold, {passive: true});
+  addEventListener("keydown", e => { if (/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End| )$/.test(e.key)) hold(); });
+  addEventListener("mousedown", e => { if (e.target.classList && e.target.classList.contains("pane")) hold(); }); })();  /* 스크롤 막대 끌기 */
 function briefCur(){ return BR && ((BR.issues || []).find(x => x.date === S.bdate) || BR.issues[0]); }
 function renderBrief(){
   const el = $("#pane-brief"); if (!el) return;
