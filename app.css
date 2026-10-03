@@ -279,7 +279,7 @@ details.exc>summary b{font:700 18px var(--serif)}
 .lesson-box{border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:13px; background:var(--panel-2)}
 /* v3.26 사안 outlook 단락 → v3.28 특집 글 */
 .olk{border-top:1px solid var(--line); padding-top:16px}
-.olk-t{margin:0; font:700 17px/1.4 var(--serif); letter-spacing:-.01em; text-wrap:balance}
+.olk-t{margin:0; font:700 17px/1.4 var(--serif); letter-spacing:-.01em; text-wrap:balance; word-break:keep-all}
 .olk h3{margin:6px 0 0; font-size:14px}
 .olk p{margin:0}
 .olk .fl li{padding:6px 0; border-top:1px solid var(--line); font-size:13px}
@@ -287,6 +287,13 @@ details.exc>summary b{font:700 18px var(--serif)}
 .olk .fl b{color:var(--ink)}
 .olk .tl li{grid-template-columns:96px 1fr}
 .olk .tl .d{font:600 12px/1.9 var(--sans); color:var(--accent)}
+.olk .ess-p{margin:8px 0 0; font-size:14px; line-height:1.75}
+.olk .ess-sum ul,.olk .ess-sum ol{margin:6px 0 0; padding-left:20px}.olk .ess-sum li{margin:4px 0; line-height:1.65}
+.olk .ess-tw{overflow-x:auto; margin:10px 0 2px; -webkit-overflow-scrolling:touch}
+.olk .ess-t{border-collapse:collapse; font-size:12.5px; min-width:100%; white-space:nowrap}
+.olk .ess-t th,.olk .ess-t td{border-bottom:1px solid var(--line); padding:5px 8px; text-align:right; font-variant-numeric:tabular-nums}
+.olk .ess-t thead th{font-weight:600; color:var(--ink-2); white-space:normal; vertical-align:bottom; text-align:right}
+.olk .ess-t th[scope=row],.olk .ess-t thead th:first-child{text-align:left; font-weight:600}
 .olk .lesson-box p + p{margin-top:8px}
 .olk .fcchip{margin:0 1px}
 .fn{font-size:.72em; line-height:0; margin-left:1px} .fn button{border:0; background:none; padding:6px 2px; margin:-6px 0; color:var(--accent); font:600 1em var(--mono); cursor:pointer}
@@ -806,3 +813,8 @@ a.bstrip,a.srch-open{text-decoration:none}
 .blist{list-style:none; padding:0; margin:6px 0 0} .blist li{border-top:1px solid var(--line)} .blist a.row-btn{display:flex; gap:10px; align-items:baseline; padding:9px 2px; text-decoration:none; color:var(--ink)} .blist a.row-btn:hover .nm{color:var(--accent)} .blist .mono{flex:none; font:500 12.5px var(--mono); color:var(--muted)}
 #pane-page .page-pre{padding:4px 2px}
 html.pg-wait, html.pg-wait a{cursor:progress}
+/* v3.45 본문 글자 크기·줄 간격 통일(2026-10-04): 탭마다 12~13px로 작고 촘촘하던 읽는 글을 특집 본문과 같은 14px·1.7로 맞추고, 보조 글은 한 단계 작게 둔다 */
+.pane :is(p, li, dd, .lesson-box):not(.meta, .note, .eyebrow, .mono, .kd, .d, .tl-w, .pub-s):not(.toc *, .chips *, .figs *, .insights > li, .fnotes *, .src > ul *){font-size:14px; line-height:1.7}
+.pane :is(.tl-w, .fc .b){font-size:13px; line-height:1.65}
+.pane .note:not(.ic-top .note){font-size:12.5px; line-height:1.6}
+.pane .row-btn .meta{font-size:13px; line-height:1.6}

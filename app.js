@@ -670,7 +670,9 @@ function ttsText(key){
   if (k === "th") return "참고 사상가. " + (D.thinkers || []).map(x => x.name + ". " + (x.idea || "") + " " + (x.now || "") + " " + (x.record || "")).join(" ");
   if (k === "case") { const c = (D.strategies || []).find(z => z.id === id); if (!c) return ""; const B = c.brief || {}; return c.title + ". " + (B.q ? "핵심 질문. " + B.q + " " : "") + (B.a ? "판단. " + B.a + " " : "") + (B.eq ? "균형점. " + B.eq + " " : "") + (B.human ? "개인에게 미치는 영향. " + B.human : ""); }
   if (k === "feat") { const F = FEATS().find(z => z.id === id); if (!F) return ""; const t = x => ttsNoParen(String(x || "").replace(/\{\{[^}]*\}\}/g, ""));  /* v3.28 특집 듣기: 칩 표기는 읽지 않는다 */
-    return "특집. " + F.title + ". " + t(F.lead) + " " + F.flows_h + ". " + F.flows.map(x => t(x.k) + ". " + t(x.t)).join(" ") + " " + F.window_h + ". " + F.window.map(t).join(" ") + " " + F.events_h + ". " + F.events.map(x => x.when + ". " + t(x.t)).join(" ") + " " + F.paths_h + ". " + t(F.paths_lead) + " " + F.paths.map(x => x.k + ". " + t(x.t)).join(" ") + " " + F.falsify_h + ". " + t(F.falsify_lead) + " " + F.falsify.map(t).join(" "); }
+    if (F.kind === "essay") return "특집. " + F.title + ". " + (F.summary_h || "요약") + ". " + (F.summary || []).map(t).join(" ") + " " + (F.sections || []).map(S => S.h + ". " + S.blocks.filter(b => b.p).map(b => t(b.p)).join(" ")).join(" ") +
+      ((F.events || []).length ? " " + F.events_h + ". " + F.events.map(x => x.when + ". " + t(x.t)).join(" ") : "") + ((F.paths || []).length ? " " + F.paths_h + ". " + t(F.paths_lead) + " " + F.paths.map(x => x.k + ". " + t(x.t)).join(" ") : "") + ((F.falsify || []).length ? " " + F.falsify_h + ". " + t(F.falsify_lead) + " " + F.falsify.map(t).join(" ") : "");  /* v3.44 서술형 특집 듣기: 표는 읽지 않는다 */
+    return "특집. " + F.title + ". " + ((F.summary || []).length ? (F.summary_h || "요약") + ". " + F.summary.map(t).join(" ") + " " : "") + t(F.lead) + " " + F.flows_h + ". " + F.flows.map(x => t(x.k) + ". " + t(x.t)).join(" ") + " " + F.window_h + ". " + F.window.map(t).join(" ") + " " + F.events_h + ". " + F.events.map(x => x.when + ". " + t(x.t)).join(" ") + " " + F.paths_h + ". " + t(F.paths_lead) + " " + F.paths.map(x => x.k + ". " + t(x.t)).join(" ") + " " + F.falsify_h + ". " + t(F.falsify_lead) + " " + F.falsify.map(t).join(" "); }
   if (k === "country") { const c = D.countries[id]; if (!c) return ""; return c.name_ko + ". " + (c.situation || "") + " " + (c.recent || []).slice(-3).map(r => r.text).join(" "); }
   return "";
 }
@@ -817,8 +819,9 @@ function loadBrief(){
     if (!b || !(b.issues || []).length) { $("#bstrip").hidden = true; return; }
     BR = b; const cur = b.issues[0];
     /* v3.27 판단 변경 공지(머리말 n.k, 없으면 "분석 갱신")는 공지 날짜로부터 7일 동안 띠 첫머리에 두고, 그 뒤로 브리핑 제목을 돌린다(2026-10-01) */
-    const d7 = new Date(Date.now() - 7 * 864e5), ymd = x => x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"), lim = ymd(d7);
-    const NS = (D.notices || []).filter(n => n.date >= lim).slice().sort((a, b) => b.date.localeCompare(a.date))
+    /* v3.44b 특집 공지는 11일 동안 둔다(2026-10-04) */
+    const ymd = x => x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"), lim = ymd(new Date(Date.now() - 7 * 864e5)), limF = ymd(new Date(Date.now() - 11 * 864e5));
+    const NS = (D.notices || []).filter(n => n.date >= (n.k === "특집" ? limF : lim)).slice().sort((a, b) => b.date.localeCompare(a.date))
       .map(n => ({k: n.k || "분석 갱신", d: n.date, t: n.h || String(n.text).split(/(?<=다\.)\s/)[0], n}));
     const MAIN = NS.concat(cur.items.map((i, j) => ({k: "정세 브리핑", d: cur.date, t: i.h, j})));
     runStrip($("#bstrip"), () => narrow() ? MAIN.concat(agendaItems().filter(x => x.soon)) : MAIN);  /* 모바일: 띠가 하나이므로 30일 안의 일정을 섞는다(2026-10-01) */
@@ -1119,7 +1122,19 @@ const FEATS = () => D.features || [];
 const featBtn = F => '<button type="button" class="chip feat-btn" data-feat="' + esc(F.id) + '">특집 · ' + esc(F.title) + ' <span aria-hidden="true">→</span></button>';
 function featBody(O){
   const T = x => olkT(x, O.id);
-  return "<p>" + T(O.lead) + "</p>" +
+  if (O.kind === "essay") {  /* v3.44 서술형 특집: 요약 · 절(문단과 표) · 산출 방법 · 출처 */
+    const tbl = b => '<div class="ess-tw"><table class="ess-t"><thead><tr>' + b.table.head.map(h => "<th>" + esc(h) + "</th>").join("") + "</tr></thead><tbody>" + b.table.rows.map(r => "<tr>" + r.map((c, i) => (i ? "<td>" : '<th scope="row">') + esc(c) + (i ? "</td>" : "</th>")).join("") + "</tr>").join("") + "</tbody></table></div>";
+    return '<div class="lesson-box ess-sum"><b>' + esc(O.summary_h || "요약") + "</b><" + (O.summary_ol ? "ol" : "ul") + ">" + (O.summary || []).map(x => "<li>" + T(x) + "</li>").join("") + "</" + (O.summary_ol ? "ol" : "ul") + "></div>" +
+      (O.sections || []).map(S => "<h3>" + esc(S.h) + "</h3>" + S.blocks.map(b => b.table ? tbl(b) : '<p class="ess-p">' + T(b.p) + "</p>").join("")).join("") +
+      ((O.events || []).length ? "<h3>" + esc(O.events_h) + '</h3><ul class="tl">' + O.events.map(x => '<li><span class="d">' + esc(x.when) + "</span><span>" + T(x.t) + "</span></li>").join("") + "</ul>" : "") +
+      ((O.paths || []).length ? "<h3>" + esc(O.paths_h) + "</h3>" + (O.paths_lead ? '<p class="note">' + T(O.paths_lead) + "</p>" : "") + '<ul class="list fl">' + O.paths.map(x => "<li><b>" + T(x.k) + "</b> · " + T(x.t) + "</li>").join("") + "</ul>" : "") +
+      ((O.falsify || []).length ? "<h3>" + esc(O.falsify_h) + "</h3>" + (O.falsify_lead ? '<p class="note">' + T(O.falsify_lead) + "</p>" : "") + '<ul class="watch">' + O.falsify.map(x => "<li>" + T(x) + "</li>").join("") + "</ul>" : "") +
+      ((O.method || []).length ? "<h3>" + esc(O.method_h || "산출 방법") + '</h3><ul class="list fl">' + O.method.map(x => "<li><b>" + esc(x.k) + "</b> · " + T(x.t) + "</li>").join("") + "</ul>" : "") +
+      ((O.notes || []).length ? '<section class="fnotes"><h3>' + esc(O.notes_h || "용어 풀이") + "</h3><ol>" + O.notes.map((n, i) => '<li id="fn-' + esc(O.id) + "-" + (i + 1) + '"><b>' + esc(n.k) + "</b> · " + esc(n.t) + ' <button type="button" class="fnback" data-jump="fnr-' + esc(O.id) + "-" + (i + 1) + '" aria-label="본문으로 돌아가기">↩</button></li>').join("") + "</ol></section>" : "") +
+      ((O.sources || []).length ? '<details class="src"><summary>출처 ' + O.sources.length + "건</summary><ul>" + O.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "");
+  }
+  return ((O.summary || []).length ? '<div class="lesson-box ess-sum"><b>' + esc(O.summary_h || "요약") + "</b><ul>" + O.summary.map(x => "<li>" + T(x) + "</li>").join("") + "</ul></div>" : "") +
+    "<p>" + T(O.lead) + "</p>" +
     "<h3>" + esc(O.flows_h) + '</h3><ul class="list fl">' + O.flows.map(x => "<li><b>" + T(x.k) + "</b> · " + T(x.t) + "</li>").join("") + "</ul>" +
     '<div class="lesson-box"><b>' + esc(O.window_h) + "</b>" + O.window.map(x => "<p>" + T(x) + "</p>").join("") + "</div>" +
     "<h3>" + esc(O.events_h) + '</h3><ul class="tl">' + O.events.map(x => '<li><span class="d">' + esc(x.when) + "</span><span>" + T(x.t) + "</span></li>").join("") + "</ul>" +
@@ -1130,7 +1145,7 @@ function featBody(O){
 }
 function featArticle(F){
   const c = (D.strategies || []).find(x => x.id === F.case);
-  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">특집' + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title) + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
+  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">특집' + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
     (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</article>";
 }
 function renderFeature(){
