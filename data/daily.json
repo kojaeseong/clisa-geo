@@ -1,6 +1,98 @@
 {
  "issues": [
   {
+   "date": "2026-10-03",
+   "items": [
+    {
+     "case": "iran",
+     "h": "미국, 항모전단·해병대 중동 증파…트럼프 \"선거 직후 끝날 것\"",
+     "fact": "미국 관리는 2026년 10월 1일 시어도어 루스벨트 항모전단과 해병대 약 2,200명을 태운 마킨아일랜드 상륙전단이 중동으로 출발했다고 확인했습니다. 이들이 도착하면 11월 말까지 이란 주변에 항공모함 3척과 상륙전단 2개가 모이게 됩니다. 트럼프 대통령은 10월 2일 텍사스주 덴턴 연설에서 이란이 \"접을 준비가 됐다\"며 전쟁이 \"선거 직후, 어쩌면 선거 전에\" 끝날 것이라고 말했습니다.",
+     "link": "전날 중간선거 뒤 공습 확대를 거론한 데 이어 비용이 드는 전력 이동이 뒤따른 것으로, 말보다 무거운 신호입니다. 증원 전력이 다 모이는 시점은 트럼프 대통령이 말한 11월 3일 중간선거 뒤와 맞물립니다. '미국의 이란 본토 공습 재개' 전망을 높일 요인입니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.al-monitor.com/originals/2026/10/pentagon-deploys-thousands-more-marines-another-aircraft-carrier-mideast",
+      "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
+      "https://www.cbsnews.com/live-updates/trump-iran-war-us-midterm-elections-troops-deployment/"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "김여정, 지뢰 책임 거듭 부인…\"한국과 엮일 여지 허용 않는다\"",
+     "fact": "김여정은 2026년 10월 2일 담화에서 비무장지대 지뢰 폭발이 북한과 무관하다고 거듭 주장하고, 사과를 요구한 한국 정부를 두고 \"한심하기 짝이 없는 것들\"이라고 했습니다. 이어 \"어떤 형식으로든 한국과 엮이거나 상종할 수 있는 사소한 공간이나 여지도 허용하지 않는다\"고 밝혔습니다. 청와대는 같은 날 진상을 투명하게 밝히겠다며 북한이 소모적인 비판을 멈추고 대화에 나서야 한다고 반응했습니다.",
+     "link": "이재명 대통령이 국군의날 기념사에서 대화 복원을 촉구한 다음 날 나온 담화로, 한반도 사안의 반증 신호 가운데 '북한이 한국을 협상 상대로 받아들이지 않는다고 공식화'하는 쪽에 가깝습니다. 같은 신호의 다른 조건인 미사일 발사 빈도 증가는 보이지 않습니다. '남북 군사 통신선 미복원' 전망을 높일 요인입니다.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.newspim.com/news/view/20261002001241",
+      "https://www.seoul.co.kr/news/politics/2026/10/02/20261002500298",
+      "https://www.upi.com/Top_News/World-News/2026/10/02/Kim-Yo-Jong-rejects-blame-DMZ-blast-mocks-Seoul/2221790940855/"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 겨울 앞두고 우크라이나 에너지 시설 대규모 공습",
+     "fact": "러시아는 2026년 9월 30일 밤부터 10월 1일까지 드론과 탄도미사일 약 190기로 우크라이나 에너지 시설을 공격했습니다. 7명이 숨졌고, 키이우와 주변 3개 주에는 봄 이후 처음으로 비상 정전이 시행됐습니다. 우크라이나 총리는 이 정도 규모의 복합 공격은 지난 난방철이 끝난 뒤 처음이라고 말했습니다.",
+     "link": "미국이 10월 중 아부다비에서 에너지 시설 공격 중단 같은 제한적 합의를 다루는 협의를 추진한다는 보도(9월 29일) 직후의 공격입니다. 미국과의 거래를 이어 가면서 군사적으로 더 얻으려 한다는 러-우 사안 결론 5와 같은 방향입니다. 협의가 열리느냐를 묻는 '미·러·우 3자 기술급 협의 개최' 전망은 움직이지 않습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.abc.net.au/news/2026-10-01/russia-hits-ukrainian-energy-grid/107214710",
+      "https://eaworldview.com/2026/10/ukraine-war-energy-kyiv-russia-attacks/",
+      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "G7, 비축유 1억 배럴 방출 합의",
+     "fact": "2026년 10월 2일 프랑스 대통령실이 공개한 G7 정상 공동성명에 따르면, G7은 국제에너지기구를 통해 넉 달 동안 비축유 1억 배럴을 방출하고 처음 20일 안에 경유를 집중적으로 풀기로 했습니다. 정상들은 에너지 제품의 수출 제한을 삼가겠다고도 밝혔습니다. 발표 뒤 브렌트유는 배럴당 100.8달러로 내렸습니다.",
+     "link": "이란 전쟁이 시작된 2월 28일 이후 유럽 경유 가격이 리터당 1.59유로에서 2.24유로로 오른 데 대한 대응입니다. 넉 달에 1억 배럴은 하루 80만 배럴 남짓이어서, 해협 통항이 회복되지 않는 한 가격을 크게 끌어내리기는 어렵습니다. '브렌트유 연말 90달러 아래' 전망을 조금 높일 요인입니다.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.thenationalnews.com/business/energy/2026/10/02/g7-members-agree-to-release-100-million-barrels-of-diesel-and-other-reserves/",
+      "https://www.washingtonpost.com/business/2026/10/02/g-7-agrees-release-oil-reserves-counter-fuel-prices-after-us-pressure/"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "영국 해사무역기구(UKMTO)는 10월 2일 호르무즈 해협을 빠져나가던 유조선 한 척이 정체불명의 발사체에 맞아 작은 불이 났다가 꺼졌고 인명 피해는 없었다고 밝혔습니다.",
+     "src": [
+      "https://www.arabnews.com/middle-east/tanker-struck-in-the-strait-of-hormuz-3004312"
+     ]
+    },
+    {
+     "t": "트럼프 대통령은 10월 1일, 9월 30일 이스라엘행 플라이두바이 여객기에서 부기장이 기장을 흉기로 공격한 사건에 이란이 연루됐다면 \"아주 세게 맞을 것\"이라고 말했고, 아랍에미리트 검찰은 테러 연관성을 수사하고 있습니다.",
+     "src": [
+      "https://www.al-monitor.com/originals/2026/10/trump-vows-hit-iran-very-hard-if-linked-flydubai-attack-0"
+     ]
+    },
+    {
+     "t": "대만은 10월 2일 타이둥 즈항 기지에서 F-16V 블록 70 전투기 66대 가운데 첫 2대를 인수했습니다. 생산라인 이전과 공급망 차질로 인도가 늦어졌습니다.",
+     "src": [
+      "https://focustaiwan.tw/politics/202610020008"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-02",
    "items": [
     {
