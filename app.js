@@ -1143,7 +1143,7 @@ const featBtn = F => '<button type="button" class="chip feat-btn" data-feat="' +
 function featBody(O){
   const T = x => olkT(x, O.id);
   if (O.kind === "essay") {  /* v3.44 서술형 특집: 요약 · 절(문단과 표) · 산출 방법 · 출처 */
-    const tbl = b => '<div class="ess-tw"><table class="ess-t"><thead><tr>' + b.table.head.map(h => "<th>" + esc(h) + "</th>").join("") + "</tr></thead><tbody>" + b.table.rows.map(r => "<tr>" + r.map((c, i) => (i ? "<td>" : '<th scope="row">') + esc(c) + (i ? "</td>" : "</th>")).join("") + "</tr>").join("") + "</tbody></table></div>";
+    const tbl = b => '<div class="ess-tw"><table class="ess-t"><thead><tr>' + b.table.head.map(h => "<th>" + esc(h) + "</th>").join("") + "</tr></thead><tbody>" + b.table.rows.map(r => "<tr>" + r.map((c, i) => (i ? "<td>" : '<th scope="row">') + (!i && String(c).includes("\n") ? esc(String(c).split("\n")[0]) + '<small class="ess-rd">' + esc(String(c).split("\n").slice(1).join(" ")) + "</small>" : esc(c)) + (i ? "</td>" : "</th>")).join("") + "</tr>").join("") + "</tbody></table></div>";
     return '<div class="lesson-box ess-sum"><b>' + esc(O.summary_h || "요약") + "</b><" + (O.summary_ol ? "ol" : "ul") + ">" + (O.summary || []).map(x => "<li>" + T(x) + "</li>").join("") + "</" + (O.summary_ol ? "ol" : "ul") + "></div>" +
       (O.sections || []).map(S => "<h3>" + esc(S.h) + "</h3>" + S.blocks.map(b => b.svg ? '<figure class="ess-fig"><figcaption>' + esc(b.h || "") + "</figcaption>" + b.svg + (b.note ? '<p class="note">' + esc(b.note) + "</p>" : "") + "</figure>"
         : b.table ? (b.fold ? '<details class="src ess-fold"><summary>' + esc(b.fold) + "</summary>" + tbl(b) + "</details>" : tbl(b)) : '<p class="ess-p">' + T(b.p) + "</p>").join("")).join("") +

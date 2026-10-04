@@ -292,8 +292,9 @@ details.exc>summary b{font:700 18px var(--serif)}
 .olk .ess-tw{overflow-x:auto; margin:10px 0 2px; -webkit-overflow-scrolling:touch}
 .olk .ess-t{border-collapse:collapse; font-size:12.5px; min-width:100%; white-space:nowrap}
 .olk .ess-t th,.olk .ess-t td{border-bottom:1px solid var(--line); padding:5px 8px; text-align:right; font-variant-numeric:tabular-nums}
-.olk .ess-t thead th{font-weight:600; color:var(--ink-2); white-space:normal; vertical-align:bottom; text-align:right}
+.olk .ess-t thead th{font-weight:600; color:var(--ink-2); white-space:normal; word-break:keep-all; vertical-align:bottom; text-align:right}
 .olk .ess-t th[scope=row],.olk .ess-t thead th:first-child{text-align:left; font-weight:600}
+.olk .ess-t th[scope=row] .ess-rd{display:block; white-space:normal; word-break:keep-all; font-weight:400; font-size:11.5px; line-height:1.45; color:var(--ink-2); min-width:12em; max-width:17em; margin-top:2px}  /* v3.49b 표 행 이름 아래 짧은 뜻 */
 .olk .lesson-box p + p{margin-top:8px}
 .olk .fcchip{margin:0 1px}
 .fn{font-size:.72em; line-height:0; margin-left:1px} .fn button{border:0; background:none; padding:6px 2px; margin:-6px 0; color:var(--accent); font:600 1em var(--mono); cursor:pointer}
