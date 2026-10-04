@@ -818,3 +818,5 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .pane :is(.tl-w, .fc .b){font-size:13px; line-height:1.65}
 .pane .note:not(.ic-top .note){font-size:12.5px; line-height:1.6}
 .pane .row-btn .meta{font-size:13px; line-height:1.6}
+/* v3.46c 듣는 동안(멈춘 때 포함) 문단을 누르면 그곳부터 읽는다는 표시 */
+.tts-live :is(p,li,dd,dt,td,h3,h4,h5,blockquote){cursor:pointer}

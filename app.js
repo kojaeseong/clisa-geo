@@ -688,6 +688,7 @@ document.addEventListener("visibilitychange", () => { if (document.visibilitySta
 function ttsStop(done){
   ttsWake(false);
   if (TTS.key) TTS.pos[TTS.key] = done ? 0 : TTS.cur;
+  if (done && TTS.sc) { TTS.sc.classList.remove("tts-live"); TTS.sc = null; TTS.last = null; }
   try { speechSynthesis.cancel(); } catch(e){}
   if (TTS.btn) { TTS.btn.setAttribute("aria-pressed", "false"); TTS.btn.textContent = ttsLab(TTS.key); }
   TTS.btn = null; TTS.key = null; tfEnd();
@@ -695,7 +696,8 @@ function ttsStop(done){
 function ttsToggle(b){
   if (TTS.btn === b) { ttsStop(); return; }
   ttsStop(); const key = b.dataset.tts, v = ttsVoice(), t = ttsText(key); if (!v || !t) return;
-  const parts = t.replace(/\s+/g, " ").trim().split(/(?<=[.?!])\s+/).filter(Boolean);
+  const parts = ttsSplit(t);
+  if (TTS.sc) TTS.sc.classList.remove("tts-live"); TTS.sc = b.closest(".pane") || document.body; TTS.sc.classList.add("tts-live"); TTS.last = b;
   let from = TTS.pos[key] || 0; if (from >= parts.length) from = 0;
   TTS.btn = b; TTS.key = key; TTS.cur = from; b.setAttribute("aria-pressed", "true"); b.textContent = "■ 멈춤";
   tfStart(b.closest(".pane") || document.body, b); TF.hold = 0;
@@ -707,11 +709,29 @@ function ttsToggle(b){
     speechSynthesis.speak(u); });
   }, 0));
 }
+/* v3.46c 원하는 곳부터 듣기(2026-10-04): 듣는 중이거나 멈춘 상태에서 문단을 누르면 그 문단의 첫 문장부터 읽는다.
+   누른 문단의 글에 듣기용 문장의 앞(또는 끝) 조각이 들어 있는 첫 문장을 찾는다. 연결·단추·칩을 누를 때와 글을 고를 때는 움직이지 않는다 */
+const ttsSplit = t => String(t).replace(/\s+/g, " ").trim().split(/(?<=[.?!])\s+/).filter(Boolean);
+window.ttsPick = (target, parts) => {
+  const blk = target && target.closest && target.closest(TF_SEL); if (!blk) return -1;
+  const bt = tfNorm(blk.textContent); if (bt.length < 4) return -1;
+  const K = parts.map(tfNorm);
+  for (let i = 0; i < K.length; i++) if (K[i].length >= 6 && bt.startsWith(K[i].slice(0, 12))) return i;  /* 문단의 첫 문장 */
+  for (let i = 0; i < K.length; i++) if (K[i].length >= 14 && (bt.includes(K[i].slice(0, 14)) || bt.includes(K[i].slice(-14)))) return i;
+  return -1;
+};
+const TTS_SKIP = "a,button,summary,input,select,textarea,label,[data-tts],.chip,.fcchip";
 function ttsSetup(){
   if (!("speechSynthesis" in window)) return;
   const upd = () => document.documentElement.classList.toggle("tts-ok", !!ttsVoice());
   upd(); try { speechSynthesis.addEventListener("voiceschanged", upd); } catch(e){}
   document.addEventListener("click", e => { const b = e.target.closest("[data-tts]"); if (b) { e.preventDefault(); ttsToggle(b); } });
+  document.addEventListener("click", e => {
+    const b = TTS.btn || (TTS.last && TTS.last.isConnected ? TTS.last : null); if (!b || e.target.closest(TTS_SKIP)) return;
+    if (!TTS.sc || !TTS.sc.contains(e.target) || String(getSelection ? getSelection() : "").length) return;
+    const key = b.dataset.tts, n = window.ttsPick(e.target, ttsSplit(ttsText(key))); if (n < 0) return;
+    ttsStop(); TTS.pos[key] = n; ttsToggle(b);
+  });
   addEventListener("pagehide", () => ttsStop());
 }
 /* v3.43d 듣기 따라가기: 문장을 읽기 시작할 때마다 그 문장이 든 문단을 찾아 옅은 바탕색으로 표시하고 화면 가운데로 스크롤한다.
