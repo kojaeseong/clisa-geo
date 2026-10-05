@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%231F4FD8'/%3E%3Cpath d='M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28' stroke='%23fff' stroke-width='1.6' fill='none'/%3E%3Cpath d='M4.5 9.5h23M4.5 22.5h23' stroke='%23fff' stroke-width='1.1' fill='none' opacity='.7'/%3E%3C/svg%3E">
+<meta name="app-routes" content="1">
+<meta name="naver-site-verification" content="66a8a1e29a3875338b8730e7e4ecc71de5ff0d4c">
+<meta name="description" content="나라마다 누가 결정하고 누가 막을 수 있는지, 결정권자의 세계관과 결정 방식, 의회의 구성과 쟁점별 발언을 한곳에 모았습니다.">
+<link rel="canonical" href="https://geo.clisa.ai/power/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="클리사 지오폴리틱스">
+<meta property="og:title" content="결정 구조">
+<meta property="og:description" content="나라마다 누가 결정하고 누가 막을 수 있는지, 결정권자의 세계관과 결정 방식, 의회의 구성과 쟁점별 발언을 한곳에 모았습니다.">
+<meta property="og:url" content="https://geo.clisa.ai/power/">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://geo.clisa.ai/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="클리사 지오폴리틱스">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://geo.clisa.ai/og.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="클리사 지오폴리틱스" href="https://geo.clisa.ai/rss.xml">
+<link rel="alternate" type="application/rss+xml" title="정세 브리핑" href="https://geo.clisa.ai/brief/rss.xml">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "결정 구조", "url": "https://geo.clisa.ai/power/", "inLanguage": "ko-KR", "isPartOf": {"@type": "WebSite", "name": "클리사 지오폴리틱스", "url": "https://geo.clisa.ai/"}}</script>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} html,body{height:100%} body{margin:0;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif} img{max-width:100%} [hidden]{display:none!important} .js .seo-intro{display:none}</style>
+<script>document.documentElement.classList.add("js")</script>
+<title>결정 구조 | 클리사 지오폴리틱스</title>
+<link rel="preload" href="/data/eurasia.json" as="fetch" crossorigin>
+<link rel="preload" href="/data/daily.json" as="fetch" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/app.css?v=7a0d2e98c1">
+</head>
+<body>
+
+
+<div class="app wide"><script>try{if(localStorage.getItem("ep.wide")==="0")document.currentScript.parentNode.classList.remove("wide")}catch(e){}</script>
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#1F4FD8"/><path d="M2 16h28M16 2c5 4 5 24 0 28M16 2c-5 4-5 24 0 28" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M4.5 9.5h23M4.5 22.5h23" stroke="#fff" stroke-width="1.1" fill="none" opacity=".7"/></svg><h1>Clisa Geopolitics</h1><span class="ko" lang="ko">클리사 지오폴리틱스</span>
+      <span class="asof">기준일 <b id="asof"></b><span id="ver"></span></span>
+    </div>
+    <div class="clocks" id="clocks" hidden aria-label="세계 시각"></div>
+    <div class="toggles">
+      <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></button>
+    </div>
+    <div class="strips">
+    <button type="button" class="bstrip" id="bstrip"><span class="bs-k">정세 브리핑</span><span class="bs-d" id="bsd"></span><span class="bs-t" id="bst" aria-live="off"></span><span class="bs-n" id="bsn"></span><span class="bs-go" aria-hidden="true">›</span></button>
+    <button type="button" class="bstrip astrip" id="astrip" hidden><span class="bs-k">다가오는 일정</span><span class="bs-d"></span><span class="bs-t" aria-live="off"></span><span class="bs-n"></span><span class="bs-go" aria-hidden="true">›</span></button>
+    </div>
+    <nav class="gnav" aria-label="사이트 메뉴">
+      <a href="/brief/" data-tab="brief" id="tab-brief">정세 브리핑</a>
+      <a href="/feature/" data-tab="feature" id="tab-feature">특집</a>
+      <a href="/" data-tab="overview" id="tab-overview">세계 정세</a>
+      <a href="/case/" data-tab="strat" id="tab-strat">전략 분석</a>
+      <a href="/grand/" data-tab="grand" id="tab-grand">국제 질서</a>
+      <a href="/forecast/" data-tab="forecast" class="gx">전망과 검증</a>
+      <a href="/power/" data-nav="power" class="gx" aria-current="page">결정 구조</a>
+      <a href="/ideas/" data-tab="ideas" class="gx">역사와 사상</a>
+      <a href="/method/" data-tab="method" class="gx">분석 방법</a>
+      <a href="/guide/" data-nav="guide" class="gx">사이트 안내</a>
+      <a href="/about/" data-nav="about" class="gx">운영자 인사말</a>
+      <a href="#discuss" data-tab="discuss" id="tab-discuss">논의</a>
+      <details class="gmore"><summary>더 보기</summary><div class="gmore-m">
+        <a href="/forecast/" data-tab="forecast" id="tab-forecast">전망과 검증</a>
+        <a href="/power/" data-nav="power" aria-current="page">결정 구조</a>
+        <a href="/ideas/" data-tab="ideas" id="tab-ideas">역사와 사상</a>
+        <a href="/method/" data-tab="method" id="tab-method">분석 방법</a>
+        <a href="/guide/" data-nav="guide">사이트 안내</a>
+        <a href="/about/" data-nav="about">운영자 인사말</a>
+      </div></details>
+      <button type="button" class="wide-btn" id="widebtn" aria-pressed="false" title="읽기 영역 넓히기" aria-label="읽기 영역 넓히기">⇔</button>
+    </nav>
+  </header>
+
+  <main class="stage">
+    <section class="globe-wrap" id="wrap" aria-label="세계 지구본. 끌어서 자유롭게 회전, 스크롤이나 두 손가락으로 확대">
+      <canvas id="base" aria-hidden="true"></canvas>
+      <canvas id="over" role="img" aria-label="세계 지구본"></canvas>
+      <div class="loading" id="loading">지구본을 불러오는 중</div>
+      <div class="ctl">
+        <button type="button" id="zin" aria-label="확대">+</button>
+        <button type="button" id="zout" aria-label="축소">−</button>
+        <button type="button" id="zreset" aria-label="처음 시점으로">⌂</button>
+        <button type="button" id="spin" aria-label="지구본 회전 멈춤" title="지구본 회전 멈춤" aria-pressed="true">⏸</button>
+      </div>
+      <div class="lensbar" id="lensbar" hidden><span id="lensname"></span><button type="button" id="lensoff">관점 해제</button></div>
+      <div class="readout" id="readout"></div>
+      <button type="button" class="legbtn" id="legbtn" aria-expanded="false" aria-controls="legend"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 2.5 7 10 11l7.5-4L10 3Z"/><path d="m2.5 10.5 7.5 4 7.5-4"/><path d="m2.5 14 7.5 4 7.5-4"/></svg>지도 표시</button>
+      <div class="legend" id="legend" role="group" aria-label="지도 표시와 범례"></div>
+      <div class="offmap" id="offmap">
+        <span class="lbl">국가 밖 행위자</span>
+        <button type="button" class="chip t1" data-iso="EUR">EU·NATO</button>
+      </div>
+      <div class="tip" id="tip" hidden></div>
+    </section>
+
+    <aside class="panel" id="panel">
+      <button type="button" class="totop" id="totop" hidden>↑ 위로</button>
+      <button type="button" class="navback" id="navback" hidden>← 이전 화면</button>
+      <div class="pane" id="pane-overview" role="tabpanel"><div class="sec seo-intro"><!--seo--><!--/seo--></div></div>
+      <div class="pane" id="pane-brief" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-page" role="tabpanel"><div class="page-pre"><style>#pane-page .page-pre *{box-sizing:border-box}#pane-page .page-pre a{color:var(--accent)}#pane-page .page-pre @media(max-width:600px){.brand b{font-size:18px}#pane-page .page-pre }
+@media(max-width:560px){.brand svg{order:1}#pane-page .page-pre }
+.top>nav:not(.gnav){display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;padding-bottom:10px}#pane-page .page-pre @media(min-width:600px){main.wrap{padding:28px 32px 12px}#pane-page .page-pre }
+.eyebrow{margin:0;font:500 13px var(--sans);color:var(--accent)}#pane-page .page-pre h1{font-size:25px;line-height:1.4;margin:4px 0 8px}#pane-page .page-pre h2{font-size:19px;line-height:1.45;margin:28px 0 8px}#pane-page .page-pre h3{font-size:16px;margin:20px 0 6px;color:var(--ink-2)}#pane-page .page-pre .meta,#pane-page .page-pre .note{color:var(--muted);font-size:14px}#pane-page .page-pre .lead{font-size:17px}#pane-page .page-pre .go{display:inline-block;margin:6px 0 14px;padding:8px 14px;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-size:15px;background:var(--accent-soft)}#pane-page .page-pre article.bi{border-top:1px solid var(--line);padding:6px 0 10px}#pane-page .page-pre article.bi:first-of-type{border-top:0}#pane-page .page-pre .bl{background:var(--panel-2);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 4px 4px 0}#pane-page .page-pre .bl b{display:block;font-size:13px;color:var(--accent)}#pane-page .page-pre dl.tw dt{font-weight:600;color:var(--ink-2);margin-top:14px}#pane-page .page-pre dl.tw dd{margin:2px 0 0}#pane-page .page-pre ul.fcs{list-style:none;padding:0;margin:6px 0}#pane-page .page-pre ul.fcs li{border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin:8px 0}#pane-page .page-pre .fq{font-weight:500}#pane-page .page-pre .fp{font:500 15px var(--mono);color:var(--accent);white-space:nowrap}#pane-page .page-pre .fm{font-size:13px;color:var(--muted)}#pane-page .page-pre .fe-up{color:var(--conflict)}#pane-page .page-pre .fe-down{color:var(--coop)}#pane-page .page-pre .fb{font-size:15px;color:var(--ink-2);margin-top:4px}#pane-page .page-pre .chips a{display:inline-block;margin:2px 6px 2px 0;padding:2px 10px;border:1px solid var(--line);border-radius:14px;font-size:14px;text-decoration:none}#pane-page .page-pre details.src{font-size:14px;color:var(--muted);margin:6px 0}#pane-page .page-pre details.src ul{margin:4px 0;padding-left:20px}#pane-page .page-pre .gs3{display:grid;gap:10px}@media(min-width:600px){#pane-page .page-pre .gs3{grid-template-columns:1fr 1fr}#pane-page .page-pre .gs3 .wide{grid-column:1/-1}}#pane-page .page-pre .gs3 div{background:var(--panel-2);border-radius:4px;padding:8px 12px}#pane-page .page-pre .gs3 h4{margin:0;font-size:14px}#pane-page .page-pre .gs3 ul{margin:4px 0;padding-left:18px}#pane-page .page-pre ul.tl{list-style:none;padding:0}#pane-page .page-pre ul.tl li{display:grid;grid-template-columns:92px 1fr;gap:8px;padding:5px 0;border-top:1px solid var(--line)}#pane-page .page-pre ul.tl .d{font:13px var(--mono);color:var(--muted)}#pane-page .page-pre .pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}#pane-page .page-pre ul.idx{padding-left:0;list-style:none}#pane-page .page-pre ul.idx li{padding:8px 0;border-top:1px solid var(--line)}#pane-page .page-pre ul.idx .d{font:13px var(--mono);color:var(--muted);display:block}#pane-page .page-pre .bw{background:var(--panel-2);border-radius:4px;padding:8px 14px;margin:14px 0}#pane-page .page-pre .bw h2{margin-top:6px}#pane-page .page-pre .bw1{border-top:1px solid var(--line);padding-top:10px;margin-top:14px}#pane-page .page-pre .fch{color:var(--muted)}#pane-page .page-pre .fw{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:8px 0}#pane-page .page-pre .fw summary{cursor:pointer}#pane-page .page-pre .fw ul{list-style:none;padding:0}#pane-page .page-pre .fw li{margin:8px 0}#pane-page .page-pre .fw .pp{font:600 13px var(--mono);color:var(--accent)}#pane-page .page-pre{font-size:15px;line-height:1.75}#pane-page .page-pre h1+p.lead{font-size:14px;line-height:1.6;color:var(--ink-2)}#pane-page .page-pre .lv{display:block;font:inherit;padding:0;margin:8px 0;border-radius:0}#pane-page .page-pre dl.tw{display:block;font-size:inherit;margin:8px 0}#pane-page .page-pre ul.tl{display:block;gap:0}#pane-page .page-pre ul.tl li{font-size:inherit}#pane-page .pfoot{margin-top:28px;border-top:1px solid var(--line);padding-top:10px;font-size:12.5px;color:var(--muted)}#pane-page .pfoot p{margin:4px 0}</style><style>.pw-s{border-top:1px solid var(--line);padding-top:6px;margin-top:22px}.pw-s h2{margin-top:10px}.pw-s h3{font-size:15px;color:var(--accent);margin:16px 0 4px}.pw-seat{margin:16px 0 10px}.pw-hd{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}.pw-hd b{font-size:15px}.pw-bar{position:relative;display:flex;height:20px;border-radius:4px;background:var(--panel-2)}.pw-bar>i{display:block;height:100%}.pw-bar>i:first-child{border-radius:4px 0 0 4px}.pw-bar>i:last-of-type{border-radius:0 4px 4px 0}.pw-mk{position:absolute;top:-3px;height:26px;width:0;border-left:1.5px dashed var(--ink)}.pw-mk.l1{height:40px}.pw-mk.l2{height:54px}.pw-mk span{position:absolute;bottom:-17px;left:3px;font:11px/1 var(--mono);color:var(--ink-2);white-space:nowrap}.pw-lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;margin-top:30px;}.pw-lg.m2{margin-top:44px}.pw-lg.m3{margin-top:58px}.pw-lg{color:var(--ink-2)}.pw-lg span{display:inline-flex;align-items:center;gap:5px}.pw-lg i{display:inline-block;width:10px;height:10px;border-radius:2px}.pw-src{font-size:12.5px;color:var(--muted);margin:4px 0 0}table.pw-t{width:100%;border-collapse:collapse;font-size:14px}table.pw-t td,table.pw-t th{text-align:left;vertical-align:top;padding:7px 5px;border-top:1px solid var(--line);font-weight:400}table.pw-t th{font-size:13px;color:var(--muted);font-weight:500}table.pw-t td.d{font:13px var(--mono);color:var(--muted);white-space:nowrap}table.pw-t td.k{font-weight:600;white-space:nowrap}@media(max-width:600px){table.pw-t td.k{white-space:normal;width:42%}}@media(max-width:600px){table.pw-t.pw-st thead{display:none}table.pw-t.pw-st tr{display:block;border-top:1px solid var(--line);padding:6px 0}table.pw-t.pw-st td{display:block;border:0;padding:2px 0}table.pw-t.pw-st td.k{padding-top:4px;width:auto}table.pw-t.pw-st td[data-l]:before{content:attr(data-l) " · ";color:var(--muted);font-size:13px}}dl.pw-c dt{font-weight:600;margin-top:10px}dl.pw-c dt a{text-decoration:none}dl.pw-c dd{margin:2px 0 0}#pane-page .page-pre{font-size:14px}#pane-page .page-pre h1{font-size:22px}#pane-page .page-pre h2{font-size:18px}#pane-page .page-pre h3{font-size:15px}#pane-page .page-pre p.lead{font-size:15px;line-height:1.75;color:var(--ink)}.pw-ld{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:10px 0}.pw-ld .nm{font-size:17px;font-weight:700}.pw-ld .tt{font-size:13px;color:var(--muted)}.pw-ld p{margin:6px 0}.pw-ld .lst{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.pw-ld .lst div{background:var(--panel-2);border-radius:6px;padding:6px 8px}.pw-ld .lst b{display:block;font:500 16px var(--mono)}.pw-ld .lst span{font-size:12px;color:var(--muted)}@media(max-width:600px){.pw-ld .lst{grid-template-columns:1fr 1fr}}.pw-go{display:inline-block;margin-top:4px;font-weight:600;text-decoration:none}.cgi{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:12px 0}#pane-page .page-pre .cgi h3{margin:2px 0 4px;color:var(--ink)}#pane-page .page-pre .cgi h4{margin:14px 0 6px}.cgi h3 a{font-size:12.5px;font-weight:500;margin-left:6px}.cgi dl{margin:6px 0;display:grid;grid-template-columns:110px 1fr;gap:4px 12px;font-size:14px}.cgi dt{color:var(--muted)}.cgi dd{margin:0}@media(max-width:600px){.cgi dl{grid-template-columns:1fr}.cgi dt{margin-top:6px}}.cgi h4{font-size:14px;margin:12px 0 6px}.cgq{list-style:none;margin:0;padding:0;display:grid;gap:10px}.cgq li{border-left:3px solid var(--line);padding:2px 0 2px 10px}.cgq .qh{font-size:12.5px;color:var(--muted)}.cgq .qh a{color:var(--muted)}.cgq .qt{margin:3px 0 0;font-size:14px}.cgq details summary{font-size:12.5px;color:var(--accent);cursor:pointer}.cgq details p{font-size:13.5px;color:var(--ink-2);white-space:pre-line}.cgs{display:grid;gap:8px}.cgm{border:1px solid var(--line);border-radius:6px;padding:8px 12px}.cgmh{font-size:14px;margin-bottom:8px}.cgs .mono{font:12px var(--mono);color:var(--muted);margin-left:4px}.cgs .cgx{display:block;font-size:12.5px;color:var(--muted)}#pane-page .page-pre .cgr{font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.7}.cgr a{color:var(--muted)}.cgd{margin:0;padding-left:18px;font-size:14px}.pw-sig td{font-size:14px}.pw-sig .w{display:inline-block;font-size:12px;border:1px solid var(--line);border-radius:4px;padding:0 6px}.pw-sig .w.did{background:var(--ink);color:var(--panel);border-color:var(--ink)}</style><p class="eyebrow">클리사 지오폴리틱스</p><h1>결정 구조</h1><p class="lead">결정권자와 권력 구조 · 누가 결정하고, 누가 그 결정을 막거나 늦출 수 있으며, 그 구도가 언제 바뀔 수 있는지를 나라별로 정리합니다. 결정권자의 세계관과 결정 방식, 헌법과 실제 권력 구조, 의회의 구성과 쟁점별 발언, 정부의 말과 행동을 한 쪽에 모았습니다.</p><ul class="idx"><li><a href="/power/USA/"><span class="d">대통령제 · 결정권자 도널드 트럼프</span>미국</a> · 미국은 대통령과 의회를 따로 뽑아 서로 견제하게 한 대통령제입니다.</li><li><a href="/power/CHN/"><span class="d">공산당 영도 체제(당이 국가와 군을 이끄는 일당제) · 결정권자 시진핑(習近平)</span>중국</a> · 중국은 헌법 제1조가 &#x27;중국공산당의 영도&#x27;를 중국 특색 사회주의의 가장 본질적인 특징으로 규정한 일당 체제입니다.</li><li><a href="/power/RUS/"><span class="d">대통령제(대통령에게 권한이 집중된 권위주의 체제) · 결정권자 블라디미르 푸틴</span>러시아</a> · 러시아는 대통령이 대내외 정책의 기본 방향을 정하고 군을 지휘하는 대통령제 국가입니다.</li><li><a href="/power/PRK/"><span class="d">조선노동당 일당 영도 체제(총비서 겸 국무위원장 1인 지배) · 결정권자 김정은</span>북한</a> · 북한은 국가가 조선노동당의 영도 밑에서 활동한다고 헌법에 규정한 일당 체제이며, 김정은이 당 총비서, 당 중앙군사위원회 위원장, 국무위원장을 겸하고 있습니다.</li><li><a href="/power/ISR/"><span class="d">의원내각제(성문 헌법 없이 기본법 체계)</span>이스라엘</a> · 이스라엘은 성문 헌법 없이 기본법들이 헌법 역할을 하는 의원내각제입니다.</li><li><a href="/power/KOR/"><span class="d">대통령제(의원내각제적 요소 포함) · 결정권자 이재명</span>대한민국</a> · 대한민국은 대통령이 국가원수이자 행정부 수반인 대통령제에, 국무총리 임명 동의와 정부의 법률안 제출권 같은 의원내각제적 요소가 섞인 구조입니다.</li><li><a href="/power/UKR/"><span class="d">의회·대통령 혼합제(이원집정부제) · 결정권자 볼로디미르 젤렌스키</span>우크라이나</a> · 우크라이나는 대통령이 군 최고사령관이자 외교의 책임자이고, 최고라다(의회, 450석)가 총리와 내각을 임명하는 혼합 구조입니다.</li></ul><div class="pfoot"><p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p><p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p><p>© 2026 고재성 · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 알림</a></p><p>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 출처를 밝힌 부분 인용과 링크 공유는 자유롭게 할 수 있으나, 전부 또는 상당 부분을 복제·재배포하는 것은 허락 없이 할 수 없습니다.</p><p><a href="mailto:clisageo@clisa.ai">clisageo@clisa.ai</a></p></div></div></div>
+      <div class="pane" id="pane-discuss" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-feature" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-detail" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-grand" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-ideas" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-strat" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-forecast" role="tabpanel" hidden></div>
+      <div class="pane" id="pane-method" role="tabpanel" hidden></div>
+    </aside>
+  </main>
+</div>
+
+
+<div class="srch" id="srch" hidden>
+  <div class="srch-box" role="dialog" aria-modal="true" aria-label="사이트 검색">
+    <div class="srch-in"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><input id="srchq" type="search" placeholder="나라, 사안, 인물, 낱말로 찾기" autocomplete="off" spellcheck="false" aria-controls="srchres" aria-label="검색어"><button type="button" class="srch-x" id="srchx">닫기</button></div>
+    <div class="srch-res" id="srchres" role="listbox" aria-label="검색 결과"></div>
+    <p class="srch-hint">↑↓로 고르고 Enter로 엽니다 · Esc로 닫습니다</p>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="/app.js?v=a2322b64d6"></script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "330cb9e687e34385b83747a235d16c63"}'></script>
+</body>
+</html>
