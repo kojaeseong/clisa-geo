@@ -41,7 +41,7 @@ function readColors(){
   const g = n => cs.getPropertyValue("--" + n).trim();
   C = { ocean:g("ocean"), ocean2:g("ocean-2"), grat:g("grat"), landOut:g("land-out"), border:g("border"), ink:g("ink"), muted:g("muted"),
         line:g("line"), accent:g("accent"), coop:g("coop"), conflict:g("conflict"), halo:g("halo"), panel2:g("panel-2") };
-  for (const k of Object.keys(LAYERS)) C[k] = d3.interpolateLab(g(k + "-0"), g(k + "-1"));
+  for (const k of Object.keys(LAYERS)) C[k] = (k === "focus" ? d3.interpolateHcl : d3.interpolateLab)(g(k + "-0"), g(k + "-1"));  /* v3.51 농도 색은 색상을 고정한 채(HCL) 섞어 연보라 기를 없앤다 */
 }
 const ramp = (layer, v) => C[layer](Math.max(0, Math.min(100, v)) / 100);
 

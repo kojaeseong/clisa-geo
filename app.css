@@ -1,9 +1,9 @@
 
 :root{
-  --focus-0:#E8EEF5; --focus-1:#1B4F8A;
-  --bg:#EBEEF2; --panel:#FFFFFF; --panel-2:#F3F5F8; --ink:#0E1726; --ink-2:#344054; --muted:#667085; --line:#D3DAE3;
-  --ocean:#D9E3EE; --ocean-2:#C4D3E3; --grat:rgba(20,50,90,.11); --land-out:#E3E7EC; --border:rgba(14,23,38,.34);
-  --accent:#1B4F8A; --accent-soft:rgba(27,79,138,.08); --l1:#3E5C76; --l2:#1B4F8A; --l3:#7A4E9E; --coop:#11796B; --conflict:#B42318; --halo:#FFFFFF;
+  --focus-0:#DDE7F7; --focus-1:#1A3FB8;
+  --bg:#E9ECEF; --panel:#FFFFFF; --panel-2:#F2F4F6; --ink:#101418; --ink-2:#2F3842; --muted:#6B7580; --line:#D2D8DE;
+  --ocean:#D7DEE5; --ocean-2:#BFC9D3; --grat:rgba(20,40,70,.12); --land-out:#E6EAEE; --border:rgba(16,20,24,.36);
+  --accent:#1F4FD8; --accent-soft:rgba(31,79,216,.09); --l1:#4A5D75; --l2:#1F4FD8; --l3:#7A3FB8; --coop:#0E8A6C; --conflict:#D63A1F; --halo:#FFFFFF;
   --d-geo:#2a78d6; --d-power:#eb6834; --d-regime:#1baf7a; --d-memory:#eda100; --d-deal:#8a63d2; --risk-0:#F6E6E1; --risk-1:#9C2217; --mil-0:#DDE5ED; --mil-1:#1C4A77; --pol-0:#E1EBDD; --pol-1:#2B6535; --econ-0:#F1E7CF; --econ-1:#81530F;
   --serif:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
@@ -23,7 +23,7 @@ a{color:var(--accent)}
 .brand{display:flex; align-items:center; gap:10px 12px; flex-wrap:wrap; margin-right:auto}
 .brand h1{margin:0; font:800 21px/1 "Archivo",var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink)}
 .brand .logo{width:28px; height:28px; flex:none}
-.brand .ko{font:500 12px var(--sans); color:var(--muted)}
+.brand .ko{font:800 12.5px var(--sans); color:var(--ink); letter-spacing:.18em; margin-left:2px}  /* v3.51 한글 제호: 영문 제호와 같은 무게·넓은 자간(결재 2026-10-05) */
 .edtag{font:600 11px var(--sans); color:var(--conflict); border:1px solid var(--conflict); border-radius:4px; padding:1px 6px}
 .brand .en{font:500 11px var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
 .asof{font:12px var(--mono); color:var(--muted)}
@@ -39,7 +39,7 @@ a{color:var(--accent)}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
 @media (min-width: 1200px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
 /* v3.39d 폭이 모자랄 때 1단계: 머리글의 한글 부제를 숨기고 검색창·시각을 더 줄인다. 2단계(tight): 시각을 숨긴다 */
-.top.snug .brand .ko{display:none} .top.snug .srch-open{flex-basis:260px; width:260px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.top.snug .brand .ko{letter-spacing:.1em; font-size:12px} .top.snug .srch-open{flex-basis:240px; width:240px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 .tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
 .tg input{position:absolute; opacity:0; width:1px; height:1px}
@@ -771,7 +771,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .toggles{flex:0 1 auto; min-width:0}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
 @media (min-width: 1200px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
-.top.snug .brand .ko{display:none} .top.snug .srch-open{flex-basis:260px; width:260px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.top.snug .brand .ko{letter-spacing:.1em; font-size:12px} .top.snug .srch-open{flex-basis:240px; width:240px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 @media (max-width: 960px){ #astrip{display:none !important} }
 .srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
@@ -814,6 +814,10 @@ a.bstrip,a.srch-open{text-decoration:none}
 .blist{list-style:none; padding:0; margin:6px 0 0} .blist li{border-top:1px solid var(--line)} .blist a.row-btn{display:flex; gap:10px; align-items:baseline; padding:9px 2px; text-decoration:none; color:var(--ink)} .blist a.row-btn:hover .nm{color:var(--accent)} .blist .mono{flex:none; font:500 12.5px var(--mono); color:var(--muted)}
 #pane-page .page-pre{padding:4px 2px}
 html.pg-wait, html.pg-wait a{cursor:progress}
+/* v3.51 색 개편 「강철과 코발트」(결재 2026-10-05): 바탕은 푸른 기를 뺀 차가운 회색, 강조는 코발트, 경보·분쟁은 주홍. 테두리는 옅게·그림자는 얇게, 선택된 탭·메뉴 밑줄 3px, 글 칸 제목 800. 색 변수는 :root 한 곳 */
+.panel,.globe-wrap{border-color:rgba(16,20,24,.09); box-shadow:0 1px 2px rgba(16,20,24,.04), 0 8px 24px rgba(16,20,24,.05)}
+.tabs button[aria-selected="true"],.gnav>a[aria-current="page"],.gmore.cur>summary{border-bottom-width:3px}
+#pane-page .page-pre h1{font-weight:800; letter-spacing:-.01em}
 /* v3.45 본문 글자 크기·줄 간격 통일(2026-10-04): 탭마다 12~13px로 작고 촘촘하던 읽는 글을 특집 본문과 같은 14px·1.7로 맞추고, 보조 글은 한 단계 작게 둔다 */
 .pane :is(p, li, dd, .lesson-box):not(.meta, .note, .eyebrow, .mono, .kd, .d, .tl-w, .pub-s):not(.toc *, .chips *, .figs *, .insights > li, .fnotes *, .src > ul *){font-size:14px; line-height:1.7}
 .pane :is(.tl-w, .fc .b){font-size:13px; line-height:1.65}
