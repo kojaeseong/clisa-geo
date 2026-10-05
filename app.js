@@ -642,9 +642,9 @@ function dailyIssue(x){
     ((x.more || []).length ? '<div class="bm"><b>그 밖의 동향</b><ul>' + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + '" target="_blank" rel="noopener" class="note">출처</a>' : "") + "</li>").join("") + "</ul></div>" : "");
 }
 /* v3.22 주간 전망 점검: 월요일 호에 싣는다. week = {items:[{id, from, to, why}], note} */
-function weekHtml(w){
+function weekHtml(w){  /* v3.50 주간 점검에서도 전망 번호 대신 짧은 이름(교본 9장) */
   const li = it => { const F = D.forecasts.find(z => z.id === it.id);
-    return '<li><button type="button" class="fcchip" data-fc="' + esc(it.id) + '">' + esc(it.id) + '</button> ' + esc(F ? F.q : "") + ' <span class="pp">' + (it.from === it.to ? it.to + "% 유지" : it.from + "% → " + it.to + "%") + "</span><br>" + esc(it.why) + "</li>"; };
+    return '<li><button type="button" class="fcchip" data-fc="' + esc(it.id) + '">' + esc(F && F.s ? F.s : it.id) + '</button> <span class="pp">'  + (it.from === it.to ? it.to + "% 유지" : it.from + "% → " + it.to + "%") + "</span><br>" + esc(it.why) + "</li>"; };
   return '<div class="bw"><h4>주간 전망 점검</h4>' + (w.note ? '<p class="note" style="margin:0">' + esc(w.note) + "</p>" : "") + ((w.items || []).length ? "<ul>" + w.items.map(li).join("") + "</ul>" : "") + "</div>";
 }
 /* v3.22 듣기: 기기에 내장된 한국어 음성으로 읽는다(파일·서버 없음). 한국어 음성이 없는 기기에서는 단추가 보이지 않는다(.tts-ok) */
