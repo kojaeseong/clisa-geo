@@ -128,19 +128,18 @@ function srBuild(){
    ["전략 분석", "전략 분석 사안 한반도 대만해협 러-우 전쟁 이란 호르무즈 반도체 판단 시나리오", toPane("strat")],
    ["국제 질서", "국제 질서 세계 시나리오 강대국 관계 흐름", toPane("grand")],
    ["전망과 검증", "전망 검증 확률 예측 적중 브라이어 점수 결과", toPane("forecast")],
-   ["결정권자", "결정권자 지도자 대통령 주석 위원장 총리 세계관 결정 방식", page("/leader/")],
-   ["권력 구조", "권력 구조 헌법 의회 국회 상원 하원 의석 여당 야당 거부권 선거 탄핵 동의", page("/power/")],
+   ["결정 구조", "결정 구조 결정권자 지도자 대통령 주석 위원장 총리 세계관 결정 방식 권력 구조 헌법 의회 국회 상원 하원 의석 여당 야당 거부권 선거 탄핵 동의 의원 발언", page("/power/")],
    ["역사와 사상", "역사 선례 사상가 고전 반복 유형", toPane("ideas")],
    ["분석 방법", "분석 방법 절차 규칙 행복 지표 판단값 방법론", toPane("method")],
    ["사이트 안내", "사이트 안내 이용 방법 화면 설명 도움말 바로가기", page("/guide/")],
    ["운영자 인사말", "운영자 인사말 만든 사람 고재성 소개 연락 이메일 문의", page("/about/")],
    ["새 글 알림 받기", "새 글 알림 구독 RSS 피드 받아 보기 구독 앱", page("/subscribe/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
   D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("전략 분석 사안", cshort(c) + " · 의회의 쟁점 · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "의회 국회 상원 하원 동의 표결"], toCase(c.id, "cg-" + c.id + "-" + i))));
-  Object.values(PLK()).forEach(L => add("권력 구조", L.name + "의 권력 구조", [L.name, L.system, "권력 구조 헌법 의회 국회 의석 여당 야당 거부권 선거 탄핵 동의 파병 조약 예산"], page("/power/" + L.slug + "/")));
-  Object.values(LLK()).forEach(L => add("결정권자", L.name + " · 세계관과 결정 방식", [L.name, nm(L.iso), "결정권자 지도자 세계관 결정 방식 말과 행동"], page("/leader/" + L.slug + "/")));
+  Object.entries(PLK()).forEach(([i, L]) => add("결정 구조", L.name + "의 결정 구조", [L.name, L.system || "", "결정 구조 권력 구조 헌법 의회 국회 의석 여당 야당 거부권 선거 탄핵 동의 파병 조약 예산 의원 발언"], page("/power/" + i + "/")));
+  Object.entries(LLK()).forEach(([i, L]) => add("결정권자", L.name + " · 세계관과 결정 방식", [L.name, nm(i), "결정권자 지도자 세계관 결정 방식 말과 행동"], page(lurl(i))));
   /* v3.52b 결정권자 쪽의 절별 본문(data/search_leaders.json, 검색 창을 처음 열 때 받아 온다). 이름은 본문에만 넣어, 이름만 찾을 때는 결정권자 쪽 자체가 먼저 나오게 한다 */
   (SR.LD || []).forEach(L => (L.sections || []).forEach((s, si) => add("결정권자 분석", L.name + " · " + s.h, [L.name, nm(L.iso), s.t], vs => {
-    pageGo("/leader/" + L.slug + "/", true, () => { const h2 = document.querySelectorAll("#pane-page .page-pre h2")[si];
+    pageGo(lurl(L.iso), true, () => { const h2 = document.querySelectorAll("#pane-page .page-pre h2")[si];
       const nmk = srNorm(L.name + nm(L.iso)), key = vs.filter(v => !nmk.includes(v)); srLand("pane-page", key.length ? key : vs, h2); });
     return null; }, s.h)));
   FEATS().forEach(F => (F.sections || []).forEach(S => add("특집", F.title + " · " + S.h, S.blocks ? S.blocks.filter(b => b.p || b.table).map(b => b.p || b.table) : S, () => { goFeat(F.id); return "feat-" + F.id; })));
@@ -185,7 +184,7 @@ function srSnip(text, vs){
   for (const [s0, e0] of marks) { if (s0 < c) continue; h += esc(seg.slice(c, s0)) + "<mark>" + esc(seg.slice(s0, e0)) + "</mark>"; c = e0; }
   return (a > 0 ? "…" : "") + h + esc(seg.slice(c)) + (b < text.length ? "…" : "");
 }
-const SR_ORDER = ["사이트 메뉴","결정권자","결정권자 분석","권력 구조","나라","특집","주요 판단","전략 분석 사안","분쟁 지점","세계 정세","전망","정세 브리핑","국제 질서","역사와 사상","분석 방법"];
+const SR_ORDER = ["사이트 메뉴","결정 구조","결정권자","결정권자 분석","나라","특집","주요 판단","전략 분석 사안","분쟁 지점","세계 정세","전망","정세 브리핑","국제 질서","역사와 사상","분석 방법"];
 const SR_EX = ["한반도 전쟁 가능성","김정은","러우 휴전 가능성","행복 지표","인구","호르무즈","반도체 관세","주한미군"];  /* v3.52 */
 function srRender(){
   const q = $("#srchq").value, box = $("#srchres");
@@ -1161,15 +1160,16 @@ function intentHtml(d, caseId){
 }
 /* v3.40 결정권자 쪽(/leader/<slug>/) 연결 */
 function LLK(){ return D.leader_links || {}; }
+const lurl = i => "/power/" + i + "/" + (LLK()[i] || {}).slug + "/";  /* v3.60 결정권자 쪽은 결정 구조 아래(시안) */
 function leadersRow(){
   const L = LLK(), order = ["USA", "CHN", "PRK", "RUS", "KOR", "UKR"].filter(i => L[i]);
   return order.length ? '<section class="sec"><h3>결정권자</h3><p class="note" style="margin:4px 0 8px">사안마다 최종 결정을 내리는 사람의 세계관, 결정 방식, 말과 결정의 일치를 분석합니다.</p><div style="display:flex;flex-wrap:wrap;gap:6px">' +
-    order.map(i => '<a class="chip" href="/leader/' + esc(L[i].slug) + '/">' + esc(L[i].name) + (i === "KOR" || i === "UKR" ? " · 전략 주체" : "") + "</a>").join("") + '<a class="chip" href="/leader/">전체 보기 →</a></div></section>' : "";
+    order.map(i => '<a class="chip" href="' + lurl(i) + '">' + esc(L[i].name) + (i === "KOR" || i === "UKR" ? " · 전략 주체" : "") + "</a>").join("") + '<a class="chip" href="/power/">결정 구조 전체 보기 →</a></div></section>' : "";
 }
 /* v3.53 권력 구조 쪽(/power/<ISO>/) 연결 */
 function PLK(){ return D.power_links || {}; }
-function powerLink(iso, pre){ const L = PLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="/power/' + esc(L.slug) + '/">' + esc(pre) + esc(L.name) + ' · 누가 결정하고 누가 막을 수 있나 →</a>' : ""; }
-function leaderLink(iso, pre){ const L = LLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="/leader/' + esc(L.slug) + '/">' + esc(pre) + esc(L.name) + ' · 세계관과 결정 방식 →</a>' : ""; }
+function powerLink(iso, pre, hash){ const L = PLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="/power/' + iso + '/' + (hash || "") + '">' + esc(pre) + esc(L.name) + ' · 누가 결정하고 누가 막을 수 있나 →</a>' : ""; }
+function leaderLink(iso, pre){ const L = LLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="' + lurl(iso) + '">' + esc(pre) + esc(L.name) + ' · 세계관과 결정 방식 →</a>' : ""; }
 function decHtml(c, n){
   const X = c.deciders; if (!X) return "";
   const O = c.external ? c.external.order : c.futures.items.map(f => f.id);
@@ -1179,7 +1179,7 @@ function decHtml(c, n){
   return '<section class="stp">' + stpH(n, "결정권자 분석") + '<p class="note">결정권을 가진 각국이 문제를 어떻게 정의하는지, 무엇을 이루려 하며 어떤 수단을 쓰는지, 전략 주체의 선택지에 어떻게 대응할지를 해당국의 관점에서 정리하고, 각국이 선호하는 전개를 한 표로 비교합니다. 의지는 말과 비용이 수반된 행동으로 나누어 해석합니다.</p>' +
     '<div class="decs">' + X.items.map((d, i) => '<details class="dec" id="dec-' + esc(c.id) + '-' + d.iso + '"' + (i === 0 ? " open" : "") + '><summary><span class="nm">' + esc(nm(d.iso)) + '</span><span class="pw">결정권 ' + esc(d.power) + '</span><span class="fr">' + esc(d.frame) + "</span></summary><dl>" +
       (LLK()[d.iso] ? "<dt>결정권자</dt><dd>" + leaderLink(d.iso, "") + "</dd>" : "") +
-      (PLK()[d.iso] ? "<dt>권력 구조</dt><dd>" + powerLink(d.iso, "") + "</dd>" : "") +
+      (PLK()[d.iso] ? "<dt>결정 구조</dt><dd>" + powerLink(d.iso, "") + "</dd>" : "") +
       "<dt>결정권의 수단</dt><dd>" + esc(d.means) + "</dd>" +
       "<dt>목표의 순위</dt><dd><ol>" + d.goals.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></dd>" +
       "<dt>전략</dt><dd>" + esc(d.strategy) + "</dd>" +
@@ -1205,18 +1205,13 @@ function congHtml(c){
   const X = c.congress; if (!X || !X.length) return "";
   const row = (k, v) => v ? "<dt>" + k + "</dt><dd>" + esc(v) + "</dd>" : "";
   const qd = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? (+m[1]) + "년 " + (+m[2]) + "월 " + (+m[3]) + "일" : (d || ""); };
-  return '<h3 style="margin:14px 0 0">의회의 쟁점</h3><p class="note" style="margin:4px 0 8px">결정권자의 결정에 의회가 조건을 붙이거나 동의·거부로 들어오는 쟁점입니다. 각국 의회의 구성과 권한은 권력 구조 쪽에 있습니다.</p><div class="decs">' +
+  return '<h3 style="margin:14px 0 0">의회의 쟁점</h3><p class="note" style="margin:4px 0 8px">결정권자의 결정에 의회가 조건을 붙이거나 동의·거부로 들어오는 쟁점입니다. 각국 의회의 구성과 권한, 쟁점별 발언은 결정 구조 쪽에 있습니다.</p><div class="decs">' +
     X.map((x, i) => '<details class="dec" id="cg-' + esc(c.id) + '-' + i + '"><summary><span class="nm">' + esc(nm(x.iso)) + '</span><span class="fr">' + esc(x.t) + "</span></summary><dl>" +
       row("현재 단계", x.stage) + row("의회의 권한", x.power) + row("표 계산", x.votes) + row("입장", x.sides) + row("다음 절차와 시한", x.next) +
-      ((x.quotes || []).length ? '<dt>주요 발언</dt><dd><ul class="cgq">' + x.quotes.map(q => '<li><div class="qh"><b>' + esc(q.who) + "</b> " + esc([q.party, q.role].filter(Boolean).join(" · ")) + ' · <a href="' + esc(q.url) + '" target="_blank" rel="noopener">' + esc(q.body) + " · " + esc(qd(q.date)) + "</a>" + (q.lang === "en" ? " · 번역" : "") + '</div><p class="qt">“' + esc(q.ex) + '”</p><details><summary>' + (q.lang === "en" ? "원문(영어) 전체 보기" : "발언 전체 보기") + "</summary><p>" + esc(q.full) + "</p></details></li>").join("") + '</ul><p class="note" style="margin:6px 0 0">발언은 회의록과 의사록 원문입니다. 회의 이름을 누르면 원문으로 갑니다.</p></dd>' : "") +
-      (x.govnote ? '<dt>정부의 입장</dt><dd>정부 관계자의 의회 답변과 증언은 의회의 발언이 아니라 정부의 의지를 보여 주는 말이므로 <button type="button" class="chip" data-iso="' + esc(x.iso) + '" data-sec="c-intent">' + esc(nm(x.iso)) + ' 국가 프로필 · 의지 지표</button>에 말과 행동으로 나누어 실었습니다.</dd>' : "") +
+      (x.govnote ? '<dt>정부의 입장</dt><dd>정부 관계자의 의회 답변과 증언은 의회의 발언이 아니라 정부의 의지를 보여 주는 말이므로 <a class="chip" href="/power/' + esc(x.iso) + '/#intent">' + esc(nm(x.iso)) + ' 결정 구조 · 정부의 말과 행동</a>에 말과 행동으로 나누어 실었습니다.</dd>' : "") +
       ((x.fc || []).length ? '<dt>관련 전망</dt><dd><div class="chips" style="margin:0">' + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
-      (x.speakers ? "<dt>" + esc(x.speakers.h || "많이 발언한 의원") + '</dt><dd><p class="note" style="margin:0 0 6px">' + esc(qd(x.speakers.period[0]) + "~" + qd(x.speakers.period[1])) + " " + esc(x.speakers.note || "") + "</p>" +
-        (x.speakers.list.length ? '<div class="cgs">' + x.speakers.list.map(s => '<details><summary><b>' + esc(s.name) + "</b> " + esc([s.party, s.ch].filter(Boolean).join(" · ")) + ' <span class="mono">' + (x.speakers.unit ? "발언 " : "질의 ") + s.turns + "차례 · " + (x.speakers.unit || "회의") + " " + s.meetings + (x.speakers.unit ? "건" : "곳") + " · 약 " + s.chars.toLocaleString("ko-KR") + "자" + (s.items[0] && s.items[0].lang === "en" ? "(영문)" : "") + "</span>" +
-          ((s.roles || []).length || s.spon || s.mgr ? '<span class="cgx">' + [(s.roles || []).join(", "), s.spon ? "대표발의 " + s.spon + "건" + ((s.spon_of || []).length ? "(" + s.spon_of.join(", ") + ")" : "") : "", s.mgr ? "토론 관리 " + s.mgr + "차례" : ""].filter(Boolean).map(esc).join(" · ") + "</span>" : "") + "</summary><ul class=\"cgq\">" +
-          s.items.map(it => '<li><div class="qh"><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.body) + " · " + esc(qd(it.date)) + "</a>" + (it.lang === "en" ? " · 번역" : "") + '</div><p class="qt">' + esc(it.pv) + '</p><details class="cgf" data-fk="' + esc(it.fk) + '"><summary>' + (it.lang === "en" ? "이 의원의 발언 전체 보기(원문 영어)" : "이 의원의 질의 전체 보기(답변 제외)") + "</summary><p>불러오는 중…</p></details></li>").join("") + "</ul></details>").join("") + "</div>" : "") + "</dd>" : "") +
-      ((x.devvotes || []).length ? '<dt>당론과 다른 표</dt><dd><ul class="cgd">' + x.devvotes.map(v => "<li><b>" + esc(v.label) + "</b> · " + esc(qd(v.date)) + " · " + esc(v.t) + "</li>").join("") + '</ul><p class="note" style="margin:4px 0 0">무소속은 함께 회의하는 당(민주당)과 같이 보았습니다.</p></dd>' : "") +
-      (PLK()[x.iso] ? "<dt>권력 구조</dt><dd>" + powerLink(x.iso, "") + "</dd>" : "") + "</dl></details>").join("") + "</div>";
+      ((x.quotes || []).length || (x.speakers && x.speakers.list.length) || (x.devvotes || []).length ? '<dt>의회 발언</dt><dd>' + [(x.quotes || []).length ? "주요 발언 " + x.quotes.length + "건" : "", x.speakers && x.speakers.list.length ? esc(x.speakers.h || "많이 발언한 의원") + " " + x.speakers.list.length + "명" : "", (x.devvotes || []).length ? "당론과 다른 표 " + x.devvotes.length + "건" : ""].filter(Boolean).join(" · ") + "은 결정 구조 쪽에 원문과 함께 모았습니다.<br>" + powerLink(x.iso, "의회의 쟁점과 발언 · ", "#cg-" + c.id + "-" + i) + "</dd>" : "") +
+      "</dl></details>").join("") + "</div>";
 }
 function futHtml(c, n){
   const F = c.futures; if (!F) return "";
@@ -1399,14 +1394,14 @@ function humanHtml(c, n9, n10){
   const gname = {}; W.groups.forEach(g => gname[g.k] = g.name);
   const E = c.futures.expect;
   const erows = []; Object.keys(base).forEach(g => WDIM.forEach(([k, l]) => { if (E.now[g][k] != null) erows.push("<tr><td>" + esc(gname[g]) + "</td><td>" + l + '</td><td class="mono">' + fmt(base[g][k]) + '</td><td class="mono">' + fmt(E.now[g][k]) + wdl(E.now[g][k], base[g][k]) + '</td>' + (c.futures.rec_same ? "" : '<td class="mono"><b>' + fmt(E.rec[g][k]) + "</b>" + wdl(E.rec[g][k], E.now[g][k]) + "</td>") + '<td class="mono" style="color:var(--conflict)">' + fmt(E.worst[g][k]) + "</td></tr>"); }));
-  return '<section class="stp">' + stpH(n9, "영향받는 사람과 네 차원의 효과") +
+  return '<section class="stp">' + stpH(n9, "영향받는 사람과 4개 차원의 효과") +
     '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>누구</th><th>무엇이 걸려 있나</th></tr></thead><tbody>' + c.people.map(p => "<tr><td>" + esc(p.who) + "</td><td>" + esc(p.how) + "</td></tr>").join("") + "</tbody></table></div>" +
-    '<h3 style="margin:6px 0 0">개인 행복 지표 · 2026년 기준</h3><p class="note">' + esc(I.unit) + " 네 차원은 합치지 않습니다. " + esc(W.status) + '. 공식과 출처는 <button type="button" class="chip" data-go="method">방법론 탭</button>에 있습니다.</p>' +
+    '<h3 style="margin:6px 0 0">개인 행복 지표 · 2026년 기준</h3><p class="note">' + esc(I.unit) + " 4개 차원은 합치지 않습니다. " + esc(W.status) + '. 공식과 출처는 <button type="button" class="chip" data-go="method">방법론 탭</button>에 있습니다.</p>' +
     '<div class="wbt"><table><thead><tr><th>집단</th>' + WDIM.map(([k, l]) => "<th>" + l + (k === "safety" ? '<span class="est">판단값 포함</span>' : "") + "</th>").join("") + "</tr></thead><tbody>" +
     W.groups.map(g => '<tr><td class="g"><b>' + esc(g.name) + "</b><span>" + esc(g.size) + "</span></td>" + WDIM.map(([k]) => "<td>" + wbar(g.score[k]) + "</td>").join("") + "</tr>").join("") + "</tbody></table></div>" +
     '<details class="src"><summary>판단값의 근거와 원자료</summary><ul>' + W.groups.map(g => Object.values(g.why).map(t => "<li><b>" + esc(g.name) + "</b> · " + esc(t) + "</li>").join("")).join("") + "</ul>" +
-    '<div class="tbl-wrap" style="margin-top:8px"><table class="tbl"><thead><tr><th>항목</th><th>' + esc((W.cols || ["남한"])[0]) + "</th>" + ((W.cols || ["", "북한"])[1] ? "<th>" + esc((W.cols || ["", "북한"])[1]) + "</th>" : "") + '<th>출처</th></tr></thead><tbody>' + W.facts.map(f => "<tr><td>" + esc(f.k) + "</td><td>" + esc(f.ROK) + "</td>" + ((W.cols || ["", "북한"])[1] ? "<td>" + esc(f.PRK) + "</td>" : "") + '<td class="note">' + esc(f.src) + "</td></tr>").join("") + "</tbody></table></div></details>" +
-    '<h3 style="margin:6px 0 0">선택지가 개인의 삶에 미치는 영향</h3><details class="src"><summary>선택지별 네 차원 효과 펼치기</summary><div style="display:grid;gap:10px;margin-top:8px">' + c.alts.map(a => '<div class="altc"><div class="hd"><span class="id">' + a.id + "</span><b>" + esc(a.name) + "</b></div><dl>" + WDIM.map(([k, l]) => "<dt>" + l + "</dt><dd>" + esc(a.eff[k]) + "</dd>").join("") + '</dl><p class="lose">가장 크게 잃는 사람 · ' + esc(a.loser) + "</p></div>").join("") + "</div></details>" +
+    '<div class="tbl-wrap" style="margin-top:8px"><table class="tbl"><thead><tr><th>항목</th><th>' + esc((W.cols || ["한국"])[0]) + "</th>" + ((W.cols || ["", "북한"])[1] ? "<th>" + esc((W.cols || ["", "북한"])[1]) + "</th>" : "") + '<th>출처</th></tr></thead><tbody>' + W.facts.map(f => "<tr><td>" + esc(f.k) + "</td><td>" + esc(f.ROK) + "</td>" + ((W.cols || ["", "북한"])[1] ? "<td>" + esc(f.PRK) + "</td>" : "") + '<td class="note">' + esc(f.src) + "</td></tr>").join("") + "</tbody></table></div></details>" +
+    '<h3 style="margin:6px 0 0">선택지가 개인의 삶에 미치는 영향</h3><details class="src"><summary>선택지별 4개 차원 효과 펼치기</summary><div style="display:grid;gap:10px;margin-top:8px">' + c.alts.map(a => '<div class="altc"><div class="hd"><span class="id">' + a.id + "</span><b>" + esc(a.name) + "</b></div><dl>" + WDIM.map(([k, l]) => "<dt>" + l + "</dt><dd>" + esc(a.eff[k]) + "</dd>").join("") + '</dl><p class="lose">가장 크게 잃는 사람 · ' + esc(a.loser) + "</p></div>").join("") + "</div></details>" +
     '<h3 style="margin:6px 0 0">2030년 기대치' + (c.futures.rec_same ? "" : "로 본 권고의 효과") + '</h3><div class="tbl-wrap"><table class="tbl" style="min-width:520px"><thead><tr><th>집단</th><th>차원</th><th>2026년</th><th>' + (c.futures.rec_same ? "기대치" : "현 추세") + "</th>" + (c.futures.rec_same ? "" : "<th>권고 이행 시</th>") + '<th>가장 나쁜 미래</th></tr></thead><tbody>' + erows.join("") + "</tbody></table></div>" +
     '<p class="note">' + esc(E.note) + (c.futures.rec_same ? " ▲▼는 2026년 대비 변화입니다." : " 현 추세 열의 ▲▼는 2026년 대비, 권고 이행 시 열의 ▲▼는 현 추세 대비 변화입니다.") + '</p><div class="lesson-box"><b>해석</b>' + esc(E.read) + "</div></section>" +
     '<section class="stp">' + stpH(n10, "클리사의 판단과 전략 주체 순위의 차이") + '<p class="note">' + esc(H.note) + '</p><div class="divs">' +
@@ -1535,13 +1530,13 @@ function caseFullHtml(c){
 function caseLeaders(c){
   const L = LLK(), me = c.id === "ukraine" ? "UKR" : "KOR";
   const xs = [...new Set([me].concat(((c.deciders || {}).items || []).map(d => d.iso)))].filter(i => L[i]);
-  return xs.length ? '<div class="chips cl-ld" style="margin:8px 0 0"><span class="note">결정권자</span>' + xs.map(i => '<a class="chip" href="/leader/' + esc(L[i].slug) + '/">' + esc(L[i].name) + (i === me ? ' <span class="note">전략 주체</span>' : "") + "</a>").join("") + "</div>" + casePower(c) : casePower(c);
+  return xs.length ? '<div class="chips cl-ld" style="margin:8px 0 0"><span class="note">결정권자</span>' + xs.map(i => '<a class="chip" href="' + lurl(i) + '">' + esc(L[i].name) + (i === me ? ' <span class="note">전략 주체</span>' : "") + "</a>").join("") + "</div>" + casePower(c) : casePower(c);
 }
 /* v3.53 사안 머리의 권력 구조 칩: 전략 주체와 결정권을 가진 나라 가운데 권력 구조 쪽이 있는 나라 */
 function casePower(c){
   const P = PLK(), me = c.id === "ukraine" ? "UKR" : "KOR";
   const xs = [...new Set([me].concat(((c.deciders || {}).items || []).map(d => d.iso)))].filter(i => P[i]);
-  return xs.length ? '<div class="chips cl-ld" style="margin:6px 0 0"><span class="note">권력 구조</span>' + xs.map(i => '<a class="chip" href="/power/' + esc(P[i].slug) + '/">' + esc(P[i].name) + "</a>").join("") + "</div>" : "";
+  return xs.length ? '<div class="chips cl-ld" style="margin:6px 0 0"><span class="note">결정 구조</span>' + xs.map(i => '<a class="chip" href="/power/' + i + '/">' + esc(P[i].name) + "</a>").join("") + "</div>" : "";
 }
 function caseArt(c, i){
   const cl = c.client;
@@ -1696,7 +1691,7 @@ function renderMethod(){
     (inner ? '<section class="sec method"><h3>산출 양식</h3><div class="tmpl">' + M.outputs.map(o => '<div class="' + (o.kind === "산출" ? "" : "chk") + '"><span class="kind">' + esc(o.kind) + "</span><b>" + esc(o.k) + "</b><p>" + esc(o.t) + "</p><ol>" + o.fields.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></div>").join("") + "</div></section>" : "") +
     (inner ? '<section class="sec method"><h3>' + esc(I.title) + ' · 공식과 출처</h3><p>' + esc(I.unit) + '</p><div class="idim" style="margin-top:8px">' + I.dims.map(d => "<div><b>" + esc(d.name) + "</b><code>" + esc(d.formula) + "</code><ul>" + d.parts.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul><small>출처 · " + esc(d.src) + "</small></div>").join("") + "</div>" +
       '<h3 style="margin-top:14px">지표의 규칙</h3><ul>' + I.rules.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>"
-     : '<section class="sec method"><h3>' + esc(I.title) + '</h3><p>' + esc(I.unit) + ' 지표는 ' + I.dims.map(d => esc(d.name)).join(", ") + '의 네 차원으로 이루어지며, 차원들을 하나의 점수로 합치지 않습니다.</p><ul style="margin-top:6px">' + I.dims.map(d => "<li><b>" + esc(d.name) + "</b> · 출처 " + esc(d.src) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>") +
+     : '<section class="sec method"><h3>' + esc(I.title) + '</h3><p>' + esc(I.unit) + ' 지표는 ' + I.dims.map(d => esc(d.name)).join(", ") + '의 4개 차원으로 이루어지며, 차원들을 하나의 점수로 합치지 않습니다.</p><ul style="margin-top:6px">' + I.dims.map(d => "<li><b>" + esc(d.name) + "</b> · 출처 " + esc(d.src) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>") +
     '<section class="sec method"><h3>검증과 갱신</h3><ul>' + M.update.map(x => "<li>" + esc(x) + "</li>").join("") + "<li>국가 프로필, 분쟁지, 전망은 하나의 자료 파일에 담겨 있어, 새로 조사한 자료로 파일을 교체하면 사이트 전체가 갱신됩니다.</li><li>" + (pub ? "이미 공개한 판단을 바꿀 때는 전망과 검증 탭의 판단 변경 공지에 날짜와 변경 내용, 그 이유를 밝힙니다." : "") + "</li><li>전망은 삭제하지 않습니다. 검증 시점이 지나면 실현·불발을 밝히고 정확도에 반영합니다. 질문이 만들어진 시점에 이미 답이 정해져 있었던 전망은 무효로 표시하고 정확도에서 뺍니다.</li></ul></section>" +
     (inner ? frameworkHtml() : "") +
     '<section class="sec method"><h3>분석 범위</h3><p>' + esc(D.meta.scope) + ". 지도에 색이 있는 국가가 분석 대상이며, 회색은 아직 분석 범위 밖의 국가입니다. EU·NATO는 국가가 아니므로 별도 프로필로 다룹니다.</p></section>" +
@@ -1832,7 +1827,7 @@ function pageGo(url, push, after){
     if (same) { switchTab("page"); document.title = x.t; } else pageShow(p, x);  /* 이미 글 칸에 있는 쪽이면 다시 그리지 않는다 */
     HASH_READY = hr;
     const t = u.hash && document.getElementById(decodeURIComponent(u.hash.slice(1)));
-    requestAnimationFrame(() => { if (t) t.scrollIntoView({block: "start"}); if (after) after(); updTop(); }); };
+    requestAnimationFrame(() => { if (t) { if (t.tagName === "DETAILS") t.open = true; t.scrollIntoView({block: "start"}); } if (after) after(); updTop(); }); };
   if (PAGE_C[p]) { done(PAGE_C[p]); return; }
   document.documentElement.classList.add("pg-wait");
   fetch(p, {credentials: "same-origin"}).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
