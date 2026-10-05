@@ -66,9 +66,10 @@
       : {k: "예정", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), go: "/", soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30}; }); };
     var MAIN = [];
     if (b && (b.issues || []).length) {
-      var cur = b.issues[0], d7 = new Date(Date.now() - 7 * 864e5), lim = d7.getFullYear() + "-" + String(d7.getMonth() + 1).padStart(2, "0") + "-" + String(d7.getDate()).padStart(2, "0");
+      var cur = b.issues[0], d7 = new Date(Date.now() - 7 * 864e5), lim = d7.getFullYear() + "-" + String(d7.getMonth() + 1).padStart(2, "0") + "-" + String(d7.getDate()).padStart(2, "0"); var d3 = new Date(Date.now() - 2 * 864e5), lim3 = d3.getFullYear() + "-" + String(d3.getMonth() + 1).padStart(2, "0") + "-" + String(d3.getDate()).padStart(2, "0");
       MAIN = (s.notices || []).filter(function(n){ return n.date >= lim; }).sort(function(a, c){ return c.date.localeCompare(a.date); })
         .map(function(n){ return {k: n.k || "분석 갱신", d: n.date, t: n.h, go: n.link ? "/" + n.link : "/"}; })
+        .concat((s.fcr || []).filter(function(r){ return r.date >= lim3; }).map(function(r){ return {k: "전망 조정", d: r.date, t: r.s + " " + r.from + "% → " + r.to + "%", go: "/forecast/#fw-" + r.date}; }))
         .concat(cur.items.map(function(i){ return {k: "정세 브리핑", d: cur.date, t: i.h, go: "/brief/" + cur.date + "/"}; }));
     }
     runStrip(bs, function(){ return narrow() ? MAIN.concat(agendaItems().filter(function(x){ return x.soon; })) : MAIN; });
