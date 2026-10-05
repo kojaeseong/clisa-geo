@@ -135,7 +135,8 @@ function srBuild(){
    ["운영자 인사말", "운영자 인사말 만든 사람 고재성 소개 연락 이메일 문의", page("/about/")],
    ["새 글 알림 받기", "새 글 알림 구독 RSS 피드 받아 보기 구독 앱", page("/subscribe/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
   D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("전략 분석 사안", cshort(c) + " · 의회의 쟁점 · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "의회 국회 상원 하원 동의 표결"], toCase(c.id, "cg-" + c.id + "-" + i))));
-  Object.entries(PLK()).forEach(([i, L]) => add("결정 구조", L.name + "의 결정 구조", [L.name, L.system || "", "결정 구조 권력 구조 헌법 의회 국회 의석 여당 야당 거부권 선거 탄핵 동의 파병 조약 예산 의원 발언"], page("/power/" + i + "/")));
+  Object.entries(PLK()).forEach(([i, L]) => { add("결정 구조", L.name + "의 결정 구조", [L.name, L.system || "", "결정 구조 권력 구조 헌법 거부권 선거 탄핵 동의 파병 조약 예산"], page("/power/#" + i));
+    if (L.pb) add("결정 구조", L.pb, [L.pb, L.name, "권력기관 의회 국회 의석 여당 야당 의결 정당 위원회 의원 발언 쟁점"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
   Object.entries(LLK()).forEach(([i, L]) => add("결정권자", L.name + " · 세계관과 결정 방식", [L.name, nm(i), "결정권자 지도자 세계관 결정 방식 말과 행동"], page(lurl(i))));
   /* v3.52b 결정권자 쪽의 절별 본문(data/search_leaders.json, 검색 창을 처음 열 때 받아 온다). 이름은 본문에만 넣어, 이름만 찾을 때는 결정권자 쪽 자체가 먼저 나오게 한다 */
   (SR.LD || []).forEach(L => (L.sections || []).forEach((s, si) => add("결정권자 분석", L.name + " · " + s.h, [L.name, nm(L.iso), s.t], vs => {
@@ -1168,7 +1169,7 @@ function leadersRow(){
 }
 /* v3.53 권력 구조 쪽(/power/<ISO>/) 연결 */
 function PLK(){ return D.power_links || {}; }
-function powerLink(iso, pre, hash){ const L = PLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="/power/' + iso + '/' + (hash || "") + '">' + esc(pre) + esc(L.name) + ' · 누가 결정하고 누가 막을 수 있나 →</a>' : ""; }
+function powerLink(iso, pre, hash){ const L = PLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="' + (hash ? "/power/" + iso + "/" + hash : "/power/#" + iso) + '">' + esc(pre) + esc(L.name) + ' · 누가 결정하고 누가 막을 수 있나 →</a>' : ""; }
 function leaderLink(iso, pre){ const L = LLK()[iso]; return L ? '<a class="chip" style="display:inline-block;margin-top:6px" href="' + lurl(iso) + '">' + esc(pre) + esc(L.name) + ' · 세계관과 결정 방식 →</a>' : ""; }
 function decHtml(c, n){
   const X = c.deciders; if (!X) return "";
@@ -1208,7 +1209,7 @@ function congHtml(c){
   return '<h3 style="margin:14px 0 0">의회의 쟁점</h3><p class="note" style="margin:4px 0 8px">결정권자의 결정에 의회가 조건을 붙이거나 동의·거부로 들어오는 쟁점입니다. 각국 의회의 구성과 권한, 쟁점별 발언은 결정 구조 쪽에 있습니다.</p><div class="decs">' +
     X.map((x, i) => '<details class="dec" id="cg-' + esc(c.id) + '-' + i + '"><summary><span class="nm">' + esc(nm(x.iso)) + '</span><span class="fr">' + esc(x.t) + "</span></summary><dl>" +
       row("현재 단계", x.stage) + row("의회의 권한", x.power) + row("표 계산", x.votes) + row("입장", x.sides) + row("다음 절차와 시한", x.next) +
-      (x.govnote ? '<dt>정부의 입장</dt><dd>정부 관계자의 의회 답변과 증언은 의회의 발언이 아니라 정부의 의지를 보여 주는 말이므로 <a class="chip" href="/power/' + esc(x.iso) + '/#intent">' + esc(nm(x.iso)) + ' 결정 구조 · 정부의 말과 행동</a>에 말과 행동으로 나누어 실었습니다.</dd>' : "") +
+      (x.govnote ? '<dt>정부의 입장</dt><dd>정부 관계자의 의회 답변과 증언은 의회의 발언이 아니라 정부의 의지를 보여 주는 말이므로 <a class="chip" href="' + (LLK()[x.iso] ? lurl(x.iso) + "#intent" : "/power/#" + esc(x.iso)) + '">' + esc((LLK()[x.iso] || {}).name || nm(x.iso)) + ' · 정부의 말과 행동</a>에 말과 행동으로 나누어 실었습니다.</dd>' : "") +
       ((x.fc || []).length ? '<dt>관련 전망</dt><dd><div class="chips" style="margin:0">' + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
       ((x.quotes || []).length || (x.speakers && x.speakers.list.length) || (x.devvotes || []).length ? '<dt>의회 발언</dt><dd>' + [(x.quotes || []).length ? "주요 발언 " + x.quotes.length + "건" : "", x.speakers && x.speakers.list.length ? esc(x.speakers.h || "많이 발언한 의원") + " " + x.speakers.list.length + "명" : "", (x.devvotes || []).length ? "당론과 다른 표 " + x.devvotes.length + "건" : ""].filter(Boolean).join(" · ") + "은 결정 구조 쪽에 원문과 함께 모았습니다.<br>" + powerLink(x.iso, "의회의 쟁점과 발언 · ", "#cg-" + c.id + "-" + i) + "</dd>" : "") +
       "</dl></details>").join("") + "</div>";
@@ -1536,7 +1537,7 @@ function caseLeaders(c){
 function casePower(c){
   const P = PLK(), me = c.id === "ukraine" ? "UKR" : "KOR";
   const xs = [...new Set([me].concat(((c.deciders || {}).items || []).map(d => d.iso)))].filter(i => P[i]);
-  return xs.length ? '<div class="chips cl-ld" style="margin:6px 0 0"><span class="note">결정 구조</span>' + xs.map(i => '<a class="chip" href="/power/' + i + '/">' + esc(P[i].name) + "</a>").join("") + "</div>" : "";
+  return xs.length ? '<div class="chips cl-ld" style="margin:6px 0 0"><span class="note">결정 구조</span>' + xs.map(i => '<a class="chip" href="/power/#' + i + '">' + esc(P[i].name) + "</a>").join("") + "</div>" : "";
 }
 function caseArt(c, i){
   const cl = c.client;
