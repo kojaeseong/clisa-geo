@@ -1996,3 +1996,7 @@ document.addEventListener("click", ev => {
   try { navigator.clipboard.writeText(v).then(() => done(true), sel); } catch(e){ sel(); }
 });
 })();
+
+/*langsw-ko*/(function(){ const upd = () => { const a = document.getElementById("langsw"); if (a) a.setAttribute("href", "/en" + location.pathname + location.search + location.hash); };
+  ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
+  addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/

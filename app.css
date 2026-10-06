@@ -845,3 +845,6 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 @media (max-width:600px){ .ess-fig{padding:10px 6px 8px; margin-left:-4px; margin-right:-4px} }
 .ess-fig .note{margin:6px 0 0}
 .ess-fold{margin:4px 0 12px}
+
+.lang-sw{display:inline-flex; align-items:center; flex:none; height:40px; padding:0 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink-2); font-size:14px; text-decoration:none; white-space:nowrap; box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+.lang-sw:hover{border-color:var(--ink-2); color:var(--ink)}

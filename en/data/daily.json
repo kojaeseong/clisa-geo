@@ -1,0 +1,857 @@
+{
+ "issues": [
+  {
+   "date": "2026-10-06",
+   "items": [
+    {
+     "case": "korea",
+     "h": "Joint Chiefs conclude North Korean troops planted DMZ mine, blow up mines in first removal",
+     "fact": "Kwon Dae-won, vice chairman of the Joint Chiefs of Staff, told a Ministry of National Defense briefing on October 5, 2026, that the military had reached a final conclusion that the September 21 blast in the demilitarized zone (DMZ), which seriously injured two soldiers and lightly injured a third, was caused by a resin antipersonnel mine North Korean troops had planted about 10 meters south of the Military Demarcation Line (MDL). The United Nations Command assessed that the mine had been deliberately planted within the previous 12 months. At 12:51 p.m. the same day, the military blew up and removed North Korean mines south of the MDL. The Joint Chiefs called on the North to offer a sincere apology and to remove the remaining mines immediately.",
+     "link": "The finding squarely rebuts the \"farce\" claim in Kim Yo Jong's September 30 statement. With the two Koreas now at odds over the basic facts, the situation points in the same direction as the armed stalemate described in Conclusion 1 of the Korean Peninsula analysis. That the military moved to clear the mines itself, with no channel for dialogue, raises the forecast that inter-Korean military hotlines will remain unrestored.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up",
+       "p": 90
+      }
+     ],
+     "src": [
+      "https://news.tf.co.kr/read/ptoday/2373009.htm",
+      "https://mt.co.kr/politics/2026/10/05/2026100518182310932",
+      "https://www.fnnews.com/news/202610051644570465"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Turkish-owned grain ship sinks after drone attack in Romania's exclusive economic zone",
+     "fact": "The Royad Mammadov, a Turkish-owned grain ship flying the flag of Saint Kitts and Nevis, sank on October 5 after a drone attack in Romania's exclusive economic zone, about 20 nautical miles off the Romanian coast. The ship had left Ukraine's port of Izmail bound for Ravenna, Italy. Two people were killed and one is missing; Romanian authorities rescued 11. Ukrainian President Volodymyr Zelensky blamed Moscow, saying, \"Russia consistently chooses terror and sinking civilian ships instead of normal navigation.\" No Russian response has been confirmed.",
+     "link": "With the attack reaching into a NATO member's exclusive economic zone, the risk to Black Sea shipping has grown alongside the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. Because Washington has been raising a Black Sea grain corridor as an agenda item for the trilateral talks, the attack lowers the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down",
+       "p": 10
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/russian-drones-strike-cargo-ship-in-black-sea-kill-captain-zelensky-says/",
+      "https://www.euronews.com/2026/10/05/drone-reportedly-hits-ship-in-black-sea-killing-two-and-injuring-11"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian glide bombs kill six, wound 59 in Kharkiv",
+     "fact": "Three Russian glide bombs struck industrial facilities and residential areas in Kharkiv's Slobidskyi district on October 5, killing six people and wounding 59, said Oleh Syniehubov, head of the Kharkiv Regional Military Administration. Ukraine's Air Force said Russia launched 205 drones overnight, 172 of which were shot down or neutralized. Russia's Defense Ministry claimed it had shot down 199 Ukrainian drones between 8 p.m. on October 4 and 8 a.m. on October 5, Moscow time.",
+     "link": "Both sides keep targeting each other's cities and energy facilities, in line with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. The strike lowers the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down",
+       "p": 10
+      }
+     ],
+     "src": [
+      "https://www.kyivpost.com/post/86168",
+      "https://ua.news/en/war-vs-rf/protiagom-nochi-5-zhovtnia-rosiia-zapustila-po-ukrayini-ponad-200-droniv-povitriani-sili",
+      "https://tass.com/emergencies/2197521"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Saudi Arabia, Turkey and Pakistan activate \"collective deterrence measures\" over Houthi attacks, deploy forces to Saudi Arabia",
+     "fact": "The Mecca defense alliance of Saudi Arabia, Turkey and Pakistan held an emergency meeting in Riyadh on October 5 and decided to rapidly deploy agreed military forces and capabilities to Saudi Arabia. Saudi Defense Minister Khalid bin Salman said that, in response to Houthi missile and drone attacks, the alliance's committee had \"agreed to activate collective deterrence measures, within the framework of the Alliance.\" The joint statement did not mention Iran.",
+     "link": "Conclusion 2 of the Iran and Hormuz analysis holds that the future in which South Korea loses most is an escalation that spreads to all of the Gulf oil producers. Large-scale destruction of Gulf producers' facilities, the disconfirming signal, has not yet been confirmed, but with forces from countries outside the Gulf moving into Saudi Arabia, the Yemen front now has room to grow into a wider military standoff. The move lowers the forecast that Brent will end the year below $90.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down",
+       "p": 30
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/5/mecca-alliance-agrees-to-activate-collective-deterrence-measures",
+      "https://www.tribuneindia.com/news/collective-defence/mecca-pact-invoked-amid-houthi-attacks-turkiye-pakistan-agree-to-swiftly-deploy-forces-military-capabilities-in-saudi-arabia"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Yemeni government forces claim to retake Mocha, launch \"strategic offensive\" toward Sanaa",
+     "fact": "Yemeni government forces claimed on October 5, through the government's Saba news agency, that they had retaken Mocha, the Red Sea port city they lost to the Houthis in September, and had seized key positions and supply routes around Dhubab, the area leading to the Bab el-Mandeb Strait. They also said they had launched a \"strategic offensive\" toward the capital, Sanaa. Al Jazeera said it could not independently verify the battlefield claims, and no Houthi response has been confirmed.",
+     "link": "As ground fighting around the Bab el-Mandeb Strait widens, shipping through a second maritime chokepoint, after Hormuz, faces greater risk. The fighting is one of the paths to escalation that Conclusion 2 of the Iran and Hormuz analysis warns of, but it does not move the probability of any specific forecast.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/5/yemen-forces-claim-to-seize-dhubab-sites-near-bab-al-mandeb-from-houthis",
+      "https://www.dawn.com/news/2034961/yemeni-forces-recapture-mokha-from-houthis-state-media"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "U.S. Secretary of State Marco Rubio said on October 5 that Washington has no plans to withdraw its diplomats from Kyiv despite Russian threats, and that it will change its posture if a threat arises that needs to be addressed.",
+     "src": [
+      "https://kyivindependent.com/us-not-removing-diplomats-from-kyiv-amid-russian-threats-rubio-says/"
+     ]
+    },
+    {
+     "t": "Iran's presidential office said on October 4 that President Masoud Pezeshkian had accepted the resignation of Oil Minister Mohsen Paknejad; Hamid Bovard, head of the National Iranian Oil Company, has taken over as acting minister.",
+     "src": [
+      "https://www.al-monitor.com/originals/2026/10/irans-oil-minister-resigns-personal-reasons-state-media-reports"
+     ]
+    },
+    {
+     "t": "The FBI on October 4 arrested Wanying Zhang, a California resident, at Los Angeles International Airport on charges of surveilling the family of Taiwanese President Lai Ching-te's son at the direction of Chinese authorities while acting as an unregistered agent of a foreign government.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/5/fbi-arrests-chinese-foreign-agent-for-spying-on-taiwan-presidents-son"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "items": [
+    {
+     "case": "korea",
+     "h": "North Korea fires hypersonic intermediate-range missile 13 days after last launch",
+     "fact": "North Korea fired a hypersonic intermediate-range missile from the Wonsan area into the East Sea before dawn on October 3, 2026, with Workers' Party General Secretary Kim Jong Un watching. Pyongyang claimed the missile flew about 1,000 km and hit its target; South Korea's Joint Chiefs of Staff tracked it at more than 700 km, and Japan's Defense Ministry at about 680 km, with an altitude of about 90 km. In a statement, Kim Yo Jong claimed the missile changes its flight path at low altitude and incorporates artificial intelligence. South Korea's Ministry of National Defense said on October 4 that South Korean and U.S. defense assets are fully capable of detecting and intercepting it.",
+     "link": "The launch came 13 days after the September 20 test and one day after Kim Yo Jong's October 2 statement ruling out any room for ties with South Korea. The two conditions of one disconfirming signal in the Korean Peninsula analysis, North Korea formally shutting out South Korea and launching missiles more often, have now begun to appear together, so the interval between launches remains under watch. Because the AI claim concerns missile guidance, it does not meet the condition for the forecast that North Korea will explicitly state it has applied AI to its nuclear command system.",
+     "fc": [
+      {
+       "id": "f42",
+       "e": "none",
+       "p": 13
+      },
+      {
+       "id": "f15",
+       "e": "up",
+       "p": 85
+      }
+     ],
+     "src": [
+      "https://www.nknews.org/2026/10/north-korea-says-hypersonic-missile-flew-1000km-exceeding-seoul-tokyo-reports/",
+      "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003272544",
+      "https://www.kmib.co.kr/article/view.asp?arcid=9000019712",
+      "https://www.asiatoday.co.kr/kn/view.php?key=20261004010000901"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says U.S. has proposed trilateral technical-level talks by end of October",
+     "fact": "Ukrainian President Volodymyr Zelensky said at a joint news conference in Kyiv with German Chancellor Friedrich Merz on October 4, 2026, that Washington is proposing a trilateral, technical-level meeting with Ukraine and Russia by the end of October. The United Arab Emirates has been floated as the venue, and Ukraine is ready to take part, he said. At the same news conference, Merz announced €1.46 billion in aid, including interceptor drones and air defense missiles.",
+     "link": "The announcement comes from Kyiv; no Russian response has been confirmed. The Abu Dhabi talks reported since late September have now taken shape as a formal U.S. proposal, which raises the forecast that U.S.-Russia-Ukraine technical-level talks will take place, with a resolution date of October 31.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "up",
+       "p": 50
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/us-proposes-trilateral-talks-with-russia-ukraine-by-end-of-october-zelensky-says/",
+      "https://www.pravda.com.ua/eng/news/2026/10/04/8056421/"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia strikes Kyiv bridges for fourth straight day",
+     "fact": "Russia struck Kyiv's Southern Bridge and Northern Bridge on four consecutive days from October 1 to 4, 2026; a drone attack on October 4 damaged the Northern Bridge's roadway and injured two people. On October 3, Russia's Foreign Ministry renewed its warning to foreigners, including diplomatic staff, not to remain in Ukraine. Russia's Defense Ministry claimed it shot down 559 Ukrainian drones between the night of October 3 and the morning of October 4, and Zelensky said Ukraine would step up strikes on Russian oil refineries.",
+     "link": "In the same week that Washington proposed trilateral talks, both sides are escalating attacks on each other's infrastructure. That is in line with Conclusion 5 of the Russia-Ukraine War analysis, under which Moscow keeps dealing with Washington without easing military pressure, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down",
+       "p": 10
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/russia-targets-kyiv-bridges-for-fourth-consecutive-day-hits-northern-bridge/",
+      "https://tass.com/politics/2197123",
+      "https://www.933thedrive.com/2026/10/04/russia-says-it-hit-kyiv-bridge-two-vessels-in-black-sea/"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Iran holds to seven conditions for reopening the strait; Trump: \"the easy way or the hard way\"",
+     "fact": "President Donald Trump told reporters at the White House on October 3, 2026, that with a decision on Iran ahead, the only remaining question was whether it would be \"the easy way or the hard way.\" Iranian parliament speaker Mohammad Bagher Ghalibaf said on October 4 that the era of imposing one-sided demands was over and that the Strait of Hormuz would not reopen until Iran's seven conditions, based on the Islamabad Memorandum of Understanding, were met. The same day, Foreign Minister Abbas Araghchi warned diplomats in Tehran that if the United States turned to a military solution again, Iran was better prepared than before.",
+     "link": "Iran says it is reviewing the U.S. reply, yet it has again tied reopening the strait to lifting sanctions and the blockade as a single package. That runs against Conclusion 7 of the Iran and Hormuz analysis, which saw room for a deal in a phased agreement, and it lowers the forecast that the U.S. and Iran will sign a phased agreement while raising the forecast that the U.S. will resume airstrikes on Iran's mainland.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "down",
+       "p": 30
+      },
+      {
+       "id": "f04",
+       "e": "up",
+       "p": 45
+      }
+     ],
+     "src": [
+      "https://www.arabnews.com/middle-east/iran-says-strait-of-hormuz-will-not-reopen-until-conditions-are-met-3004533",
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008782420",
+      "https://www.iranintl.com/en/202610047470"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Houthis claim strike on Saudi Aramco sites; Saudi-led coalition calls claim \"misleading\"",
+     "fact": "Yahya Saree, spokesman for Yemen's Houthi rebels, claimed on October 4, 2026, that ballistic missiles and drones had struck Saudi Aramco facilities in Riyadh and Khurais and set them on fire. A spokesman for the Saudi-led coalition called the claim of targeting Riyadh \"misleading\" and did not confirm any damage. The coalition said the same day that it had carried out 97 strikes on Houthi reinforcements on the Tor al-Baha front and the Taiz axis.",
+     "link": "The claim is the Houthis' own, and no damage has been confirmed. The incident comes close to a disconfirming signal in the Iran and Hormuz analysis, which treats large-scale destruction of Gulf oil producers' facilities as a sign of all-out escalation in the Gulf, but it has not yet met that threshold.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/4/houthis-claim-strike-on-saudi-energy-facility-as-yemen-fighting-intensifies",
+      "https://www.dawn.com/news/2034733/yemens-houthis-say-they-struck-saudi-aramco-sites-in-riyadh-khurais"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "The UK Maritime Trade Operations (UKMTO) said a tanker in the Strait of Hormuz was hit in the engine room by an unidentified projectile on October 4 and that its crew was unharmed. It was the second such strike, after one on October 2.",
+     "src": [
+      "https://arabnews.com/middle-east/tanker-damaged-after-attack-in-hormuz-maritime-agency-3004546"
+     ]
+    },
+    {
+     "t": "In an address marking the 19th anniversary of the October 4 inter-Korean summit declaration, read on his behalf by the vice minister of unification on October 4, President Lee Jae-myung said, \"Only by breaking the vicious cycle of hostility and confrontation can we create a virtuous cycle of peace and prosperity.\"",
+     "src": [
+      "https://www.newspim.com/news/view/20261004000089"
+     ]
+    },
+    {
+     "t": "Taiwan's Coast Guard Administration confirmed on October 3 that it had sent three patrol vessels to monitor three Chinese ships in waters where its exclusive economic zone overlaps with that of the Philippines.",
+     "src": [
+      "https://focustaiwan.tw/politics/202610030015"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "items": [
+    {
+     "case": "iran",
+     "h": "U.S. sends carrier group and Marines to Middle East; Trump says war will end \"right after the election\"",
+     "fact": "A U.S. official confirmed on October 1, 2026, that the Theodore Roosevelt carrier strike group and the Makin Island amphibious ready group, carrying about 2,200 Marines, had set out for the Middle East. Once they arrive, three aircraft carriers and two amphibious groups will be massed around Iran by the end of November. In a speech in Denton, Texas, on October 2, Trump said Iran was \"ready to fold up\" and that the war would end \"right after the election\" or \"maybe before the election.\"",
+     "link": "A day after Trump raised the prospect of wider strikes after the midterms, a costly movement of forces has followed, a heavier signal than words. The reinforcements will be fully assembled just after the November 3 midterm elections, the timing Trump pointed to. The move raises the forecast that the U.S. will resume airstrikes on Iran's mainland.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up",
+       "p": 45
+      }
+     ],
+     "src": [
+      "https://www.al-monitor.com/originals/2026/10/pentagon-deploys-thousands-more-marines-another-aircraft-carrier-mideast",
+      "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
+      "https://www.cbsnews.com/live-updates/trump-iran-war-us-midterm-elections-troops-deployment/"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "Kim Yo Jong again denies blame for mine blast, rules out \"the slightest space or room\" for ties with Seoul",
+     "fact": "In a statement on October 2, 2026, Kim Yo Jong again insisted that North Korea had nothing to do with the mine explosion in the Demilitarized Zone (DMZ), and called the South Korean government's demand for an apology \"really despicable.\" She added, \"We do not allow the slightest space or room for us to go with the ROK.\" The presidential office in Seoul responded the same day that it would establish the facts transparently and that the North should stop its pointless criticism and engage in dialogue.",
+     "link": "The statement came a day after President Lee Jae-myung called for restoring dialogue in his Armed Forces Day address. Among the disconfirming signals in the Korean Peninsula analysis, it comes close to North Korea formally declaring that it will not accept South Korea as a negotiating partner. The signal's other condition, more frequent missile launches, has not appeared. The statement raises the forecast that inter-Korean military hotlines will remain unrestored.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up",
+       "p": 85
+      }
+     ],
+     "src": [
+      "https://www.newspim.com/news/view/20261002001241",
+      "https://www.seoul.co.kr/news/politics/2026/10/02/20261002500298",
+      "https://www.upi.com/Top_News/World-News/2026/10/02/Kim-Yo-Jong-rejects-blame-DMZ-blast-mocks-Seoul/2221790940855/"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia launches massive strike on Ukraine's energy facilities ahead of winter",
+     "fact": "Russia attacked Ukraine's energy facilities with about 190 drones and ballistic missiles from the night of September 30 into October 1, 2026. Seven people were killed, and Kyiv and three surrounding regions imposed emergency power outages for the first time since spring. Ukraine's prime minister said it was the first combined attack on this scale since the end of the last heating season.",
+     "link": "The strike came right after a September 29 report that Washington was pushing for talks in Abu Dhabi in October on limited deals such as a halt to attacks on energy facilities. It is in line with Conclusion 5 of the Russia-Ukraine War analysis: Moscow keeps dealing with Washington while seeking further military gains. The forecast that U.S.-Russia-Ukraine technical-level talks will take place, which asks only whether talks are held, does not move.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none",
+       "p": 50
+      }
+     ],
+     "src": [
+      "https://www.abc.net.au/news/2026-10-01/russia-hits-ukrainian-energy-grid/107214710",
+      "https://eaworldview.com/2026/10/ukraine-war-energy-kyiv-russia-attacks/",
+      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "G7 agrees to release 100 million barrels of oil reserves",
+     "fact": "According to a G7 leaders' joint statement released by the French presidency on October 2, 2026, the G7 agreed to release 100 million barrels of emergency oil reserves through the International Energy Agency over four months, concentrating diesel releases in the first 20 days. The leaders also pledged to refrain from restricting exports of energy products. Brent crude fell to $100.80 a barrel after the announcement.",
+     "link": "The move responds to a rise in European diesel prices from €1.59 to €2.24 a liter since the Iran war began on February 28. One hundred million barrels over four months comes to just over 800,000 barrels a day, so it is unlikely to bring prices down much unless traffic through the strait recovers. It slightly raises the forecast that Brent will end the year below $90.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "up",
+       "p": 30
+      }
+     ],
+     "src": [
+      "https://www.thenationalnews.com/business/energy/2026/10/02/g7-members-agree-to-release-100-million-barrels-of-diesel-and-other-reserves/",
+      "https://www.washingtonpost.com/business/2026/10/02/g-7-agrees-release-oil-reserves-counter-fuel-prices-after-us-pressure/"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "The UKMTO said on October 2 that a tanker leaving the Strait of Hormuz had been hit by an unidentified projectile, starting a small fire that was put out, with no casualties.",
+     "src": [
+      "https://www.arabnews.com/middle-east/tanker-struck-in-the-strait-of-hormuz-3004312"
+     ]
+    },
+    {
+     "t": "On October 1, Trump said that if Iran was involved in the September 30 incident in which the co-pilot of an Israel-bound flydubai airliner stabbed the captain, \"they'll be hit very hard.\" Prosecutors in the United Arab Emirates are investigating possible links to terrorism.",
+     "src": [
+      "https://www.al-monitor.com/originals/2026/10/trump-vows-hit-iran-very-hard-if-linked-flydubai-attack-0"
+     ]
+    },
+    {
+     "t": "Taiwan took delivery of the first two of 66 F-16V Block 70 fighters at Chihhang Air Base in Taitung on October 2. Delivery had been delayed by the relocation of the production line and supply chain disruptions.",
+     "src": [
+      "https://focustaiwan.tw/politics/202610020008"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-02",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Trump says stepping up Iran strikes after midterms is \"possible\"",
+     "fact": "In a Time magazine interview published on October 1, 2026, Trump said it was \"possible\" when asked whether he could increase the bombing of Iran after the November midterm elections. The same day, a U.S. official told Axios that Secretary of State Marco Rubio had ordered Iranian Foreign Minister Abbas Araghchi's delegation, then in New York, to leave the country; Iran denied this, saying the delegation had left on a prearranged schedule.",
+     "link": "Right after Iran received the U.S. reply, Washington sent its delegation home and raised the prospect of wider strikes, a sign that the phased exchange described in Conclusion 7 of the Iran and Hormuz analysis is unlikely to lead to a signing soon. It raises the forecast that the U.S. will resume airstrikes on Iran's mainland and lowers the forecast that the U.S. and Iran will sign a phased agreement.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up",
+       "p": 45
+      },
+      {
+       "id": "f38",
+       "e": "down",
+       "p": 30
+      }
+     ],
+     "src": [
+      "https://www.axios.com/2026/10/01/trump-time-interview-iran-democrats-ai-netanyahu",
+      "https://www.axios.com/2026/10/01/rubio-iran-unga-delegation-kicked-out",
+      "https://www.foxnews.com/politics/iranian-negotiators-kicked-out-us-talks-stall-trump-lays-possible-timeline-more-strikes"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "Lee urges North Korea to restore dialogue in Armed Forces Day speech",
+     "fact": "At the Armed Forces Day ceremony on October 1, 2026, President Lee Jae-myung said, \"We will consistently pursue practical measures to lower military tensions between the South and the North,\" adding, \"I hope and urge that the North will now join us on the path to restoring trust and reviving severed dialogue.\" He referred to the soldiers injured in the DMZ explosion only as victims of an unforeseen accident, and pledged to regain wartime operational control (OPCON).",
+     "link": "The government has held to its line of restoring dialogue even after the defense minister flatly declared that the North had violated the Armistice Agreement, in effect reaching for the conditions that would change Conclusion 1 of the Korean Peninsula analysis (restored military hotlines and reunions of separated families). With no answering move from the North, the forecast that inter-Korean military hotlines will remain unrestored does not move.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "none",
+       "p": 85
+      }
+     ],
+     "src": [
+      "http://inews24.com/view/2010880",
+      "https://www.seoul.co.kr/news/politics/president/2026/10/02/20261002005004"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia warns it would use \"all its arsenal, including nuclear weapons\" if Kaliningrad is blockaded",
+     "fact": "In a diplomatic note sent to NATO member states on September 30, 2026, Russia claimed to have information that NATO was preparing an air and naval blockade of Kaliningrad and warned that, if a blockade were imposed, it was ready to use \"the entire arsenal of forces and capabilities at its disposal, including nuclear weapons.\" At a Valdai Discussion Club meeting in Moscow on October 1, President Vladimir Putin said the warning was not a threat but a response to attempts to intimidate Russia; NATO Secretary-General Mark Rutte countered that Russia must stop its nuclear threats.",
+     "link": "After a string of provocations along NATO's eastern flank through September, Moscow has now raised nuclear use in writing. That fits Conclusion 5 of the Russia-Ukraine War analysis, under which Russia keeps dealing with Washington while increasing pressure on Europe. It has no direct bearing on the forecast that U.S.-Russia-Ukraine technical-level talks will take place.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none",
+       "p": 50
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/30/russia-warns-nato-of-possible-nuclear-response-if-kaliningrad-is-cut-off",
+      "https://abcnews.com/International/wireStory/putin-warns-weapons-arsenal-russia-territory-attacked-136930888"
+     ]
+    },
+    {
+     "case": "taiwan",
+     "h": "U.S. officials see Chinese invasion of Taiwan before 2028 as unlikely",
+     "fact": "Reuters reported on October 1, 2026, citing four people including current and former U.S. officials, that Washington sees a Chinese invasion of Taiwan before 2028 as increasingly unlikely despite President Xi Jinping's order to be ready for war by 2027. The reasons cited were purges of the military leadership that have left only two of the seven members of the Central Military Commission in office, and the possibility that Beijing will wait for the outcome of Taiwan's 2028 presidential election.",
+     "link": "The assessment points in the same direction as Conclusion 6 of the Taiwan Strait analysis: a two-track strategy in which China avoids the use of force through the January 2028 presidential election while trying to influence its outcome. The report did not address blockades or coast guard inspections, however, so the forecasts of no blockade of Taiwan's ports and of China inspecting or detaining Taiwanese vessels do not move.",
+     "fc": [
+      {
+       "id": "f36",
+       "e": "none",
+       "p": 92
+      },
+      {
+       "id": "f24",
+       "e": "none",
+       "p": 25
+      }
+     ],
+     "src": [
+      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/01/exclusive-us-sees-chinese-invasion-of-taiwan-unlikely-next-year-despite-2027-timeline-sources-say"
+     ]
+    },
+    {
+     "case": null,
+     "h": "Pakistan launches airstrikes on Afghanistan's Kunar and Helmand provinces",
+     "fact": "Pakistan carried out airstrikes on Afghanistan's Kunar and Helmand provinces on the night of September 30, 2026. Zabihullah Mujahid, spokesman for the Taliban government, said nine people were killed and condemned the strikes as aggression; Pakistan's Ministry of Information and Broadcasting claimed 22 militants were killed; and the U.N. Assistance Mission in Afghanistan said at least 10 civilians, most of them children, were killed.",
+     "link": "The strikes follow the September 24 raids on 10 sites including Kandahar, and there is no sign of mediation or ceasefire talks. They lower the forecast of a formal ceasefire between Pakistan and the Taliban.",
+     "fc": [
+      {
+       "id": "f10",
+       "e": "down",
+       "p": 20
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/1/afghanistan-says-nine-killed-in-pakistani-air-raids-on-kunar-helmand"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "The UKMTO said three vessels were hit by unidentified projectiles in the Strait of Hormuz on September 29; the two identified were Liberian-flagged tankers, and no South Korean ships were involved.",
+     "src": [
+      "https://maritime-executive.com/article/three-vessels-struck-in-strait-of-hormuz-as-iran-s-grip-loosens"
+     ]
+    },
+    {
+     "t": "Iranian President Masoud Pezeshkian said on October 1 that the United States must abandon the idea of forcing Iran to submit.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-negotiations-strait-of-hormuz-oil/"
+     ]
+    },
+    {
+     "t": "Zelensky visited a command post on the Lyman front on September 30, and Ukraine claimed its counteroffensive in that sector had retaken more than 125 square kilometers.",
+     "src": [
+      "https://kyivindependent.com/zelensky-visits-lyman-sector-says-operation-vivaldi-reclaimed-125-square-kilometers/"
+     ]
+    },
+    {
+     "t": "The National Intelligence Service told the National Assembly's Intelligence Committee on September 30 that it viewed Kim Yo Jong's \"farce\" statement as restrained in tone and intended to sever any link between the incident and North Korea.",
+     "src": [
+      "https://www.ytn.co.kr/_ln/0101_202609301210265265"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "items": [
+    {
+     "case": "korea",
+     "h": "Defense minister says he believes North Korean troops crossed the MDL to lay mines",
+     "fact": "Defense Minister Kang Shin-chul told the National Assembly's National Defense Committee on September 29, 2026, that the DMZ explosion had indeed been caused by a North Korean mine and was indeed a violation of the Armistice Agreement. The same day, the military said it had found another mine about 1 meter from the blast site, indicating that at least four mines had been buried 1 to 2 meters apart, and Kang said it appeared that North Korean troops had crossed the Military Demarcation Line to bury them. Kang believes the mines were laid around the time of North Korea's border fortification work in 2024.",
+     "link": "The incident cuts against the conditions that would change Conclusion 1 of the Korean Peninsula analysis (restored military hotlines and reunions of separated families) and raises f15, the forecast that the hotlines will not be restored. The next thing to watch is whether loudspeaker broadcasts toward the North resume, which the government has said it will not rule out.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up",
+       "p": 85
+      }
+     ],
+     "src": [
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008775696",
+      "https://www.hankyung.com/article/2026093040787",
+      "https://www.dailian.co.kr/news/view/1695916/"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "Cabinet approves special bill on nuclear-powered submarines",
+     "fact": "A Cabinet meeting chaired by President Lee Jae-myung on September 29, 2026, approved a special bill governing the acquisition, operation and safety management of nuclear-powered submarines. The government said it would set military nuclear safety standards separate from the existing Defense Acquisition Program Act and Nuclear Safety Act in order to keep the confidence of the United States and the International Atomic Energy Agency, and it will submit the bill to the National Assembly with the aim of enacting it this year. The same day, North Korea's Foreign Ministry accused South Korea of pursuing nuclear proliferation.",
+     "link": "The step bears on the conditional nuclear latency (A3b) in Conclusion 3 of the Korean Peninsula analysis. Forecast f17, that China will not impose THAAD-style large-scale economic retaliation over South Korea's pursuit of enrichment, reprocessing and nuclear-powered submarines, will not be moved in either direction until Beijing responds officially.",
+     "fc": [
+      {
+       "id": "f17",
+       "e": "none",
+       "p": 80
+      }
+     ],
+     "src": [
+      "https://www.ajunews.com/view/20260929164529297",
+      "https://www.newspim.com/news/view/20260929001084",
+      "https://www.aei.org/commentary/korean-peninsula-update-september-30-2026/"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Iran says it has received U.S. reply to its proposal to end the war",
+     "fact": "At a Cabinet meeting on September 30, 2026, Iranian Foreign Minister Abbas Araghchi briefed President Masoud Pezeshkian on the U.S. reply to Iran's proposal to end the war. Pezeshkian said, \"We will make every effort to bring the agreement to fruition,\" and added that any agreement must benefit both sides, but the content of the reply was not disclosed. Trump had rejected as unacceptable Iran's September 23 proposal to reopen the strait within a week if the United States lifted its port blockade, returned frozen assets and waived oil sanctions.",
+     "link": "The phased exchange described in Conclusion 7 of the Iran and Hormuz analysis, reopening the strait in return for lifting the blockade and sanctions, is now being traded on paper. Because it is unclear whether the U.S. reply also demands action on the nuclear issue, no direction is set for f38, the phased-agreement forecast, or f03, the ceasefire-and-reopening forecast.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "none",
+       "p": 30
+      },
+      {
+       "id": "f03",
+       "e": "none",
+       "p": 25
+      }
+     ],
+     "src": [
+      "https://www.bostonglobe.com/2026/09/30/nation/iran-receives-us-response-end-war/",
+      "https://fortune.com/2026/09/30/trump-iran-hormuz-strait-talks/"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "U.S. completes troop withdrawal from Iraq",
+     "fact": "The Pentagon announced on September 30, 2026, that the withdrawal of U.S. troops from Iraq, which had numbered about 2,500, was complete. Pentagon spokesman Sean Parnell called it the success of a 12-year campaign that defeated the Islamic State (ISIS) as an organized military threat, and Trump called the U.S. presence in Iraq a \"quagmire.\" The withdrawal comes as the Iran war enters its seventh month.",
+     "link": "Amid the prolonged blockade standoff described in Conclusion 1 of the Iran and Hormuz analysis, the United States has pulled its ground forces out of a country bordering Iran. It does not directly move the forecast that the U.S. will resume airstrikes on Iran's mainland in either direction.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none",
+       "p": 45
+      }
+     ],
+     "src": [
+      "https://www.cp24.com/news/world/2026/09/30/the-us-military-says-its-withdrawal-of-troops-from-iraq-is-complete/",
+      "https://abcnews.com/International/us-troops-expected-leave-iraq-wednesday-12-year/story?id=136871869"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia hits power grid around Kyiv ahead of winter",
+     "fact": "Russian missile and drone attacks overnight on September 30, 2026, killed three people in the city of Kyiv and a child in the surrounding Kyiv region. Zelensky said the attacks targeted energy facilities and damaged the power grid; energy facilities in the Zhytomyr, Mykolaiv, Kirovohrad and Rivne regions and the port of Izmail were also hit. Russia's Defense Ministry confirmed the strikes.",
+     "link": "The attacks uphold the assessment in Conclusion 1 of the Russia-Ukraine War analysis that the war of attrition will continue. Russia has not been confirmed to accept the U.S.-backed halt to mutual strikes on energy facilities, and no date has been announced for the trilateral technical-level talks in forecast f02, which resolves on October 31.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none",
+       "p": 50
+      },
+      {
+       "id": "f01",
+       "e": "none",
+       "p": 10
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/30/russian-attacks-on-ukraines-kyiv-region-kill-four-target-power-grid"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "A vessel transiting the Strait of Hormuz on September 29 was hit by an unidentified projectile, starting a fire that was later put out; the UKMTO said no crew members were injured.",
+     "src": [
+      "https://www.dawn.com/news/2033522/unknown-projectile-hits-vessel-in-strait-of-hormuz-ukmto"
+     ]
+    },
+    {
+     "t": "Brig. Gen. Akraminia, a spokesman for Iran's army, claimed on September 29 that an Iranian order had been established in the Strait of Hormuz and that this order could not be reversed.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
+     ]
+    },
+    {
+     "t": "British Prime Minister Andy Burnham said on September 30 that there were strong indications Iran had played a part in an incident near RAF Fairford, an air base used by the U.S. military, in which five people were arrested on September 27; the Iranian Embassy in London denied it as baseless speculation.",
+     "src": [
+      "https://www.cbsnews.com/news/uk-fairford-air-base-iran-played-part-incident-pm-burnham-says/"
+     ]
+    },
+    {
+     "t": "The National Assembly's National Defense Committee failed on September 29 to adopt a resolution condemning North Korea over the DMZ mine explosion.",
+     "src": [
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008775767"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "items": [
+    {
+     "case": "korea",
+     "h": "Kim Yo Jong claims DMZ mine blast was staged by Seoul",
+     "fact": "On September 29, 2026, the Joint Chiefs of Staff said in a statement issued in the name of its vice chairman, Kwon Dae-won, that debris from the September 21 blast site contained the same components as North Korean mines, that responsibility lay entirely with the North, and that the military would take corresponding measures. On September 30, Kim Yo Jong, department director of the Workers' Party Central Committee, called this \"a clear farce\" in a statement carried by the Korean Central News Agency (KCNA), warning that \"ringleaders of provocation should be prepared for paying price.\"",
+     "link": "With no channel through which the two Koreas could jointly verify the incident, the dispute over responsibility is turning directly into threats. That raises the forecast that inter-Korean military hotlines will remain unrestored, and it runs opposite to the conditions for managed coexistence (restored hotlines and reunions of separated families under Korean Peninsula C1).",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up",
+       "p": 85
+      }
+     ],
+     "src": [
+      "https://www.koreaherald.com/article/10887051",
+      "https://theprint.in/world/north-korea-says-south-korea-to-pay-a-price-for-shifting-blame-for-mine-blast-kcna-says/3057474/"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian drone strike sets Kyiv's Academy of Sciences ablaze",
+     "fact": "A Russian drone attack on September 29 set fire to the building of the National Academy of Sciences of Ukraine in Kyiv, killing at least two people; Zelensky said nine people were killed nationwide that day. The same day, the Ukrainian outlet LIGA.net, citing The Atlantic, reported that Washington was pushing for U.S.-Russia-Ukraine talks in Abu Dhabi in October and saw a halt to mutual strikes on energy facilities as a possible point of agreement.",
+     "link": "If trilateral talks take place in October, the forecast that U.S.-Russia-Ukraine technical-level talks will be held resolves yes, so the report raises that forecast. But because the agenda is a partial deal such as a halt to strikes on energy facilities rather than a full ceasefire, the assessment that the war of attrition will continue (Russia-Ukraine C1) stands.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "up",
+       "p": 50
+      },
+      {
+       "id": "f01",
+       "e": "none",
+       "p": 10
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2",
+      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "U.S. sanctions Iran's arms procurement network even as it talks of renewed negotiations",
+     "fact": "Trump said on September 28 that he expected negotiations with Iran to resume this week, and Iranian Foreign Minister Abbas Araghchi said, \"We stand ready for diplomacy. It is up to President Trump to choose.\" On September 29, the U.S. Treasury Department sanctioned 10 targets in Iran's military procurement network spanning China, Hong Kong, Pakistan, Saudi Arabia, Turkey and Iran.",
+     "link": "Both sides speak of dialogue, but Washington is not easing sanctions, so there is still no basis to conclude that a phased agreement that first trades the reopening of the strait for the lifting of the blockade (Iran C7) is getting closer.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "none",
+       "p": 30
+      },
+      {
+       "id": "f03",
+       "e": "none",
+       "p": 25
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/",
+      "https://home.treasury.gov/news/press-releases/sb0637"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Hormuz traffic rises, but Brent tops $105 a barrel",
+     "fact": "U.S. Energy Secretary Chris Wright said on September 28 that about 13 million barrels of crude a day were passing through the strait. Yet Brent rose for a second straight day on September 29, to $105.91 a barrel. Iran's supreme leader, Mojtaba Khamenei, claimed that U.S. forces had taken hits and could advance no further.",
+     "link": "The picture resembles the incomplete reopening described in Iran C1, in which the strait partly reopens without a formal end to the war. With oil holding above $100, it weighs against the forecast that Brent will end the year below $90.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down",
+       "p": 30
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/28/iran-touts-hormuz-attacks-as-oil-flows-increase-despite-tensions",
+      "https://sharjah24.ae/en/Articles/2026/09/29/Ma2"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "Russian strikes on September 29 killed three people in Dnipro and injured 32 in Zaporizhzhia, and Ukrainian Foreign Minister Andrii Sybiha asked allies to expand air defense support.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2"
+     ]
+    },
+    {
+     "t": "With the Strait of Hormuz closed, Iraq has begun importing gasoline through Syria's port of Baniyas, where Iraqi fuel trucks loaded gasoline on September 29.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
+     ]
+    },
+    {
+     "t": "Iran's rial hit a record low of about 2.5 million to the dollar on September 29, and the same day Turkey seized an Iranian aircraft over unpaid debts.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
+     ]
+    },
+    {
+     "t": "The China Coast Guard said on September 29 that a formation led by the Zhujiajian had been tightening control over waters east of Taiwan island since September; no boarding inspections of vessels have been confirmed.",
+     "src": [
+      "https://english.news.cn/20260929/62256176f6ba4297ab7e16b18c30f56b/c.html"
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "items": [
+    {
+     "case": "korea",
+     "h": "Investigation finds DMZ blast very likely caused by North Korean mine",
+     "fact": "The Joint Chiefs of Staff announced on September 28 that an explosion on September 21 south of the Military Demarcation Line in the DMZ on the western front, which injured three soldiers, was very likely caused by a North Korean mine. A final determination will follow a further investigation with the United Nations Command; it is the first incident of its kind since the wooden-box mine incident of August 2015.",
+     "link": "The incident supports the forecast that inter-Korean military hotlines will remain unrestored. In 2015, the resumption of loudspeaker broadcasts toward the North and an exchange of artillery fire were followed by high-level inter-Korean talks that produced the August 25 agreement; with the North now rejecting inter-Korean dialogue altogether, the same path is unlikely to open.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up",
+       "p": 85
+      }
+     ],
+     "src": [
+      "https://www.koreaherald.com/article/10886756",
+      "https://www.stripes.com/theaters/asia_pacific/2026-09-29/north-korea-dmz-landmines-23000457.html"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "North Korea declares at the U.N. that its nuclear status is irreversible",
+     "fact": "Speaking in the U.N. General Assembly's general debate on September 28 (New York time), North Korean Vice Foreign Minister Kim Son Gyong said the country's status as a nuclear weapons state could not be reversed under any circumstances. The speech denounced South Korea-U.S. cooperation on nuclear-powered submarines but made no mention of talks with Trump, and the next day North Korea's Foreign Ministry issued a memorandum condemning the approval of nuclear-powered submarines for South Korea.",
+     "link": "The speech fits the assessment that the North's best move is a direct deal with Washington that secures de facto recognition of its nuclear status (Korean Peninsula C7). The absence of any reference to talks is not, on its own, treated as a signal to change the forecast of a Trump-Kim summit.",
+     "fc": [
+      {
+       "id": "f05",
+       "e": "none",
+       "p": 25
+      },
+      {
+       "id": "f22",
+       "e": "none",
+       "p": 35
+      }
+     ],
+     "src": [
+      "https://www.koreatimes.co.kr/world/20260929/senior-nk-diplomat-says-nuclear-status-can-never-be-reversed-in-any-circumstances",
+      "https://www.hankyung.com/article/2026092909407"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "U.S. demands that nuclear issue be addressed in indirect talks with Iran",
+     "fact": "The United States and Iran continued indirect talks in New York, each meeting separately with Qatari mediators. A U.S. official said any agreement must address the nuclear issue, adding that Iran had signaled flexibility but the two sides differed over timing. Iran's chief negotiator, parliament speaker Mohammad Bagher Ghalibaf, warned that if Iran cannot sell its oil, no one will.",
+     "link": "That weighs against the forecast of a phased agreement that reopens the strait and lifts the blockade first and defers the nuclear issue to a later stage. Ghalibaf's warning raises the risk of escalation across the entire Gulf (Iran C2), the outcome that would cost South Korea the most.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "down",
+       "p": 30
+      },
+      {
+       "id": "f43",
+       "e": "down",
+       "p": 15
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks",
+      "https://www.omanobserver.om/article/1196952/world/region/iran-threatens-to-hit-regional-infrastructure-if-its-security-not-ensured"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia sets its biggest defense spending increase since the invasion for 2027",
+     "fact": "According to Russian government budget documents obtained by Reuters, defense spending in 2027 will total 17.1 trillion rubles, about 27 percent more than planned last year. Putin signed a decree on September 28 increasing the military's authorized strength by 15,500, the fourth increase this year. Zelensky claimed North Korea was preparing to send about 10,000 more troops.",
+     "link": "This supports the assessment that a war of attrition lasting through 2030 is the most likely outcome (Russia-Ukraine C1) and weighs against the forecasts of a full ceasefire taking effect and of a ceasefire holding. The additional North Korean deployment is a Ukrainian claim and has not been independently confirmed.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down",
+       "p": 10
+      },
+      {
+       "id": "f28",
+       "e": "down",
+       "p": 30
+      }
+     ],
+     "src": [
+      "https://www.defensenews.com/global/europe/2026/09/28/russia-raises-2027-military-spending-by-27-budget-documents-show/",
+      "https://www.themoscowtimes.com/2026/09/28/russia-raises-2027-military-spending-by-27-budget-documents-show-a93810",
+      "https://meduza.io/en/news/2026/09/28/reuters-russia-plans-record-defense-spending-of-17-trillion-rubles-in-2027-27-more-than-previously-budgeted",
+      "https://www.rferl.org/a/zelenskyy-ukraine-drone-russian-mobilization-north-korea/33865993.html",
+      "https://www.ukrinform.net/rubric-ato/4168983-zelensky-russia-has-already-begun-additional-mobilization.html"
+     ]
+    },
+    {
+     "case": "taiwan",
+     "h": "China Coast Guard announces \"routine law-enforcement patrols\" east of Taiwan",
+     "fact": "The China Coast Guard announced on September 29 that a formation of its ships was conducting routine law-enforcement patrols in waters east of Taiwan, and said it had also been patrolling waters near Kinmen since early September. Taiwan's Coast Guard Administration called the patrols \"fake law enforcement, real intrusion\" and sent vessels to monitor them.",
+     "link": "The move extends China's gray-zone pressure, asserting jurisdiction without the use of force. But boarding inspections of vessels and controls on passage have not yet been confirmed, so it is not yet enough to change the related forecasts and is treated only as an upward factor.",
+     "fc": [
+      {
+       "id": "f24",
+       "e": "up",
+       "p": 25
+      },
+      {
+       "id": "f44",
+       "e": "up",
+       "p": 30
+      }
+     ],
+     "src": [
+      "https://www.chinanews.com.cn/gn/2026/09-29/10705536.shtml",
+      "https://www.chinanews.com.cn/gn/2026/09-29/10705460.shtml",
+      "https://www.chinatimes.com/realtimenews/20260929003877-260402",
+      "https://udn.com/news/story/7331/9783599"
+     ]
+    },
+    {
+     "case": "chips",
+     "h": "U.S. and China agree to keep discussing further extension of tariff truce",
+     "fact": "Briefing on the outcome of the eighth round of U.S.-China economic and trade consultations on September 28, China's Ministry of Commerce said that after extending the tariff truce to January 10, 2027, the two sides had agreed to keep discussing a further extension. Each country published a list of goods worth about $30 billion slated for tariff cuts.",
+     "link": "This favors the forecast that by January 10, 2027, the truce will be extended again or replaced with a longer agreement.",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "up",
+       "p": 70
+      }
+     ],
+     "src": [
+      "https://www.chinanews.com.cn/cj/2026/09-28/10704683.shtml",
+      "https://www.news.cn/world/20260928/511ca84fb64c4e2b98a88ecba5c277ec/c.html",
+      "https://www.aljazeera.com/economy/2026/9/28/us-china-list-goods-recommended-for-tariff-cuts-following-trump-xi-summit",
+      "https://www.abc.net.au/news/2026-09-29/us-china-agree-to-tariff-cuts-on-60-billion-of-goods/107206860"
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "Lebanese Prime Minister Nawaf Salam met U.S. Secretary of State Marco Rubio on September 29 and asked for a timetable and verification mechanism for the withdrawal of Israeli forces.",
+     "src": [
+      "https://www.timesofisrael.com/lebanese-pm-meets-rubio-stresses-need-for-idf-withdrawal-hezbollah-disarmament/"
+     ]
+    },
+    {
+     "t": "Polls ahead of Israel's October 27 election show a deadlock, with neither bloc reaching a majority of 61 seats.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks"
+     ]
+    },
+    {
+     "t": "Saudi Arabia resumed export shipments through its East-West Pipeline, halted by a drone attack on September 10, and Brent fluctuated above $100 a barrel.",
+     "src": [
+      "https://www.zawya.com/en/business/oil-gas/saudi-arabia-resumes-oil-exports-via-east-west-pipeline-after-repairs-1368286"
+     ]
+    },
+    {
+     "t": "Chinese Foreign Minister Wang Yi met former Japanese Foreign Minister Takeshi Iwaya on September 28 and demanded that Prime Minister Sanae Takaichi's remarks on Taiwan be corrected.",
+     "src": [
+      "https://www.mfa.gov.cn/zyxw/202609/t20260928_12032785.shtml"
+     ]
+    },
+    {
+     "t": "Seoul demanded an official apology and an explanation after Ukraine disclosed that two North Korean prisoners of war had been transferred to South Korea.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/9/28/why-south-korea-is-demanding-an-apology-from-ukraine-over-north-korean-pows"
+     ]
+    },
+    {
+     "t": "Estonia formally named Russian intelligence as being behind an August arson attack on a defense company's building, and the Kremlin denied it.",
+     "src": [
+      "https://www.wsls.com/news/world/2026/09/29/estonia-blames-russia-for-arson-attack-on-defense-company-that-provides-vehicles-to-ukraine/"
+     ]
+    }
+   ]
+  }
+ ]
+}
