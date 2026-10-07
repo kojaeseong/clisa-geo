@@ -352,6 +352,7 @@ function fillFor(f){
   return col;
 }
 function drawBase(){
+  if (!(W > 0 && H > 0)) return;  /* v3.79 사이트 안내 탭처럼 지구본을 감춘 동안에는 그리지 않는다 */
   proj();
   bctx.clearRect(0, 0, W, H);
   const r = R0 * S.k, cx = W / 2, cy = H / 2;
@@ -363,6 +364,7 @@ function drawBase(){
   if (borders) { bctx.beginPath(); pathB(borders); bctx.strokeStyle = C.border; bctx.lineWidth = 0.5; bctx.stroke(); }
   if (S.hover && byIso[S.hover] && S.hover !== S.sel) { bctx.beginPath(); pathB(byIso[S.hover]); bctx.strokeStyle = C.ink; bctx.lineWidth = 1.2; bctx.stroke(); }
   if (S.sel && byIso[S.sel]) { bctx.beginPath(); pathB(byIso[S.sel]); bctx.strokeStyle = C.accent; bctx.lineWidth = 2.4; bctx.stroke(); }
+  if (S.mark && S.mark.isos) for (const i of S.mark.isos) if (byIso[i]) { bctx.beginPath(); pathB(byIso[i]); bctx.strokeStyle = C.accent; bctx.lineWidth = 2.2; bctx.stroke(); }  /* v3.79 일정·나라 표시 */
   bctx.beginPath(); pathB({type:"Sphere"}); bctx.strokeStyle = C.line; bctx.lineWidth = 1; bctx.stroke();
   const cc = center(); $("#readout").textContent = "중심 " + fmtDeg(cc[0], "E", "W") + " " + fmtDeg(cc[1], "N", "S") + " · " + S.k.toFixed(1) + "×";
 }
@@ -372,6 +374,7 @@ function edgeRelevant(e){
   return S.lens.set.has(capIso(e.a)) && S.lens.set.has(capIso(e.b));
 }
 function drawOver(t){
+  if (!(W > 0 && H > 0)) return;
   proj();
   octx.clearRect(0, 0, W, H);
   const ctr = center();
@@ -416,7 +419,7 @@ function drawOver(t){
     /* v3.76 '군사력' 보기에서 나라 이름 아래에 현역 병력과 핵탄두 추정치를 적는다(IISS·SIPRI, 나라 자료의 mil) */
     if (S.layer === "mil" && c.mil && iso !== "EUR") {
       const ap = c.mil.active_personnel, nk = c.mil.nukes;
-      const man = n => n >= 10000 ? (n >= 1e5 ? Math.round(n / 1e4) : (Math.round(n / 1e3) / 10)) + "만" : (Math.round(n / 1e3) || 1) + "천";
+      const man = n => n >= 10000 ? (n >= 1e5 ? Math.round(n / 1e4) : (Math.round(n / 1e3) / 10)) + "만" : n >= 1000 ? (Math.round(n / 100) / 10) + "천" : n + "명";  /* v3.79 9,700명이 '10천'으로 나오던 오류 */
       const parts = []; if (ap) parts.push(man(ap)); if (nk) parts.push("핵 " + nk.toLocaleString("ko-KR"));
       if (parts.length) {
         const s2 = parts.join(" · "); octx.font = '600 10px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif';
@@ -456,6 +459,13 @@ function drawOver(t){
   }
   if (MIL || USF) drawLabels();
   for (const f of usfOps) f();
+  if (S.mark && S.mark.lon != null) {  /* v3.79 일정 장소(도시)의 점과 이름 */
+    const ll = [S.mark.lon, S.mark.lat];
+    if (d3.geoDistance(ll, ctr) < 1.5) { const p = projection(ll);
+      if (p) { octx.beginPath(); octx.arc(p[0], p[1], 6.5, 0, Math.PI * 2); octx.fillStyle = C.accent; octx.fill(); octx.lineWidth = 2.5; octx.strokeStyle = C.halo; octx.stroke();
+        if (S.mark.place) { octx.font = '700 12px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif'; octx.textAlign = "center"; octx.textBaseline = "middle"; octx.lineJoin = "round";
+          octx.lineWidth = 3.5; octx.strokeStyle = C.halo; octx.strokeText(S.mark.place, p[0], p[1] - 16); octx.fillStyle = C.accent; octx.fillText(S.mark.place, p[0], p[1] - 16); } } }
+  }
 }
 /* v3.77 미군 해외 배치: 상주(원, DMDC 분기 통계)와 전개(함정 기호·증파▲·감축▼·법◆·계획◇와 번호). 설명과 출처는 세계 정세 탭 맨 위 카드. 부대 단위 실시간 위치는 싣지 않는다(R24) */
 const manK = n => n >= 10000 ? (Math.round(n / 1e3) / 10) + "만" : n >= 1000 ? (Math.round(n / 100) / 10) + "천" : String(n);
@@ -554,6 +564,8 @@ function hitTest(x, y){
   for (let i = features.length - 1; i >= 0; i--) { const f = features[i]; if (d3.geoContains(f, ll)) return {iso:f.iso, f}; }
   return {};
 }
+let zoomTo = () => {};
+document.addEventListener("click", e => { if (e.target.closest("#markoff")) viewRestore(); });  /* v3.79 사안·일정·나라로 지구본을 옮길 때 배율도 맞춘다(setupInteraction에서 채움) */
 function setupInteraction(){
   const sel = d3.select(over);
   // wheel / pinch zoom only; one-finger or mouse drag rotates the globe freely (trackball)
@@ -583,7 +595,8 @@ function setupInteraction(){
   sel.call(drag);
   $("#zin").onclick = () => sel.transition().duration(reduceMotion ? 0 : 250).call(zoom.scaleBy, 1.5);
   $("#zout").onclick = () => sel.transition().duration(reduceMotion ? 0 : 250).call(zoom.scaleBy, 1 / 1.5);
-  $("#zreset").onclick = () => { flyTo(-HOME[0], -HOME[1], true); sel.transition().duration(reduceMotion ? 0 : 400).call(zoom.transform, d3.zoomIdentity.scale(HOME_K)); };
+  $("#zreset").onclick = () => { markSet(null); flyTo(-HOME[0], -HOME[1], true); sel.transition().duration(reduceMotion ? 0 : 400).call(zoom.transform, d3.zoomIdentity.scale(HOME_K)); };
+  zoomTo = k => sel.transition().duration(reduceMotion ? 0 : 700).call(zoom.transform, d3.zoomIdentity.scale(k));
 
   let hoverRaf = 0;
   over.addEventListener("pointerdown", () => spinHold(20000));
@@ -634,6 +647,8 @@ function setupInteraction(){
     if (bb) { ev.preventDefault(); goBrief(bb.dataset.brief); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
+    const evb = ev.target.closest("[data-ev]");
+    if (evb) { evGo(evb.dataset.ev, evb); return; }
     const fcp = ev.target.closest("[data-fc]");
     if (fcp && !fcp.closest("#fcpop")) { fcPop(fcp); return; }
     const fcb = ev.target.closest("[data-fcgo]");
@@ -687,9 +702,69 @@ function flyTo(lon, lat, exact){
   const step = now => { const k = Math.min(1, (now - t0) / 900), e = d3.easeCubicInOut(k), c = gi(e); S.rot = [-c[0], -c[1], g0 * (1 - e)]; requestDraw(); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }
-function setLayer(l){
+/* v3.79 지도 연계(2026-10-07 결재): 사안·일정·권력 구조의 나라를 고르면 지구본이 그곳으로 간다.
+   옮기기 전의 지구본(방향·배율·색 기준)을 VIEW0에 두었다가, 그 화면(탭)을 떠나면 되돌린다. 방문자가 그사이 색 기준을 직접 고르면 색 기준은 되돌리지 않는다 */
+let VIEW0 = null, VIEW_CASE = null;
+const viewKey = () => S.tab + (S.tab === "page" ? "|" + PAGE_CUR : "");
+function viewSave(){ if (!VIEW0) VIEW0 = {rot: S.rot.slice(), k: S.k, layer: S.layer, key: viewKey()}; else VIEW0.key = viewKey(); }
+function viewGo(lon, lat, k){ viewSave(); flyTo(lon, lat, true); zoomTo(k); spinHold(36e5); }
+function viewRestore(){
+  const v = VIEW0; VIEW0 = null; VIEW_CASE = null; markSet(null); if (!v) return;
+  if (v.layer && v.layer !== S.layer) setLayer(v.layer, true);
+  flyTo(-v.rot[0], -v.rot[1], true); zoomTo(v.k); spinHold(20000);
+}
+/* 나라(들)를 한눈에 보는 중심과 배율: 한 나라는 넓이로, 여러 나라는 서로 떨어진 거리로 */
+function isoView(isos){
+  isos = isos.filter(i => byIso[i] && labelPos[i]); if (!isos.length) return null;
+  if (isos.length === 1) { const p = labelPos[isos[0]]; return [p[0], p[1], Math.max(1.3, Math.min(3.6, 0.9 / Math.sqrt(d3.geoArea(byIso[isos[0]]))))]; }
+  const c = d3.geoCentroid({type: "MultiPoint", coordinates: isos.map(i => labelPos[i])}); let dm = 0;
+  for (const a of isos) for (const b of isos) dm = Math.max(dm, d3.geoDistance(labelPos[a], labelPos[b]));
+  const lat = dm > 1.2 ? isos.reduce((a, i) => a + labelPos[i][1], 0) / isos.length : c[1];  /* 멀리 떨어진 나라들(미국·중국)은 극지방 위가 아니라 두 나라 위도의 평균에서 본다 */
+  return [c[0], lat, Math.max(1, Math.min(3, 1.6 / Math.max(dm, 0.01)))];
+}
+/* 사안을 고르면(읽는 위치가 그 사안으로 옮겨 가도) 그 사안의 지도(D.strategies[].map)로 */
+function caseView(id){
+  if (S.tab !== "strat" || !id || id === VIEW_CASE) return;
+  const c = (D.strategies || []).find(x => x.id === id), m = c && c.map; if (!m) return;
+  VIEW_CASE = id; markSet(null);
+  if (m.home) viewGo(-HOME[0], -HOME[1], HOME_K); else viewGo(m.lon, m.lat, m.k);
+  if (m.layer && m.layer !== S.layer) setLayer(m.layer, true);
+}
+/* 지구본에 표시하는 장소·나라(일정, 권력 구조의 나라). label이 있으면 지구본 위 띠에 이름과 '표시 해제'를 보인다 */
+function markSet(m){
+  S.mark = m || null; const b = document.getElementById("markbar");
+  if (b) { b.hidden = !(m && m.label); if (m && m.label) document.getElementById("markname").textContent = m.label; }
+  requestDraw(true);
+}
+function evGo(id, chip){
+  const e = (D.events || []).find(x => x.id === id); if (!e) return;
+  const L = e.loc || {}, isos = L.isos || [];
+  evPop(chip, e);
+  const v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(isos); if (!v) return;
+  if (narrow()) navPush();
+  viewGo(v[0], v[1], v[2]);
+  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label: "일정 · " + e.t});
+  if (narrow()) document.getElementById("wrap").scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"});
+}
+function evPop(chip, e){
+  if (FCP && FCP.dataset.for === "ev:" + e.id) { fcPopClose(); return; }
+  fcPopClose();
+  const L = e.loc || {}, cs = (D.strategies || []).filter(c => (e.cases || []).includes(c.id)).map(c => c.title.split(":")[0]);
+  const where = L.place || (L.isos || []).map(i => (D.countries[i] || {}).name_ko).filter(Boolean).join(" · ");
+  const el = document.createElement("div"); el.id = "fcpop"; el.dataset.for = "ev:" + e.id; el.setAttribute("role", "dialog");
+  el.innerHTML = '<div class="fcp-h">일정 · ' + esc(evDate(e)) + '<button type="button" class="fcp-x" aria-label="닫기">×</button></div><p>' + esc(e.t) + "</p>" +
+    (where ? '<p class="fcp-d">' + (L.place ? "장소 " : "관련국 ") + esc(where) + "</p>" : "") + (cs.length ? '<p class="fcp-d">관련 사안 · ' + esc(cs.join(" · ")) + "</p>" : "");
+  document.body.appendChild(el); FCP = el;
+  const r = chip.getBoundingClientRect(), w = Math.min(340, innerWidth - 24), h = el.offsetHeight;
+  el.style.width = w + "px"; el.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + "px";
+  el.style.top = (r.bottom + 8 + h > innerHeight && r.top - 8 - h > 0 ? r.top - 8 - el.offsetHeight : r.bottom + 8) + "px";
+  el.querySelector(".fcp-x").onclick = fcPopClose;
+}
+/* 권력 구조의 나라 단추: 그 나라 글로 내려가며 지구본도 그 나라를 확대한다 */
+function countryView(iso){ const v = isoView([iso]); if (!v) return; viewGo(v[0], v[1], v[2]); markSet({isos: [iso]}); }
+function setLayer(l, temp){
   if (!LAYERS[l]) return;
-  S.layer = l; store.set("ep.layer2", l);
+  S.layer = l; if (!temp) { store.set("ep.layer2", l); if (VIEW0) VIEW0.layer = null; }  /* 방문자가 직접 고르면 사안 화면을 떠날 때도 그 선택을 둔다 */
   document.querySelectorAll("[data-layer]").forEach(b => { const on = b.dataset.layer === l; b.setAttribute("aria-checked", on); b.classList.toggle("on", on); });
   renderLegend(); requestDraw(true);
   const sb = document.getElementById("scorebox"); if (sb && D) sb.innerHTML = scoreBoxHtml();
@@ -744,6 +819,7 @@ gnavFit(); addEventListener("resize", gnavFit); if (document.fonts && document.f
     if (dx) m.style.transform = "translateX(" + Math.round(dx) + "px)"; }); })();
 function switchTab(t){
   t = TAB_ALIAS[t] || t;
+  if (t === "method" && typeof infoLoad === "function") { if (!S.info) S.info = "method"; setTimeout(() => { infoLoad("guide"); infoLoad("about"); }, 0); }
   if (!document.getElementById("pane-" + t)) t = "overview";
   S.tab = t; if (t !== "detail") store.set("ep.tab", t);
   ensureRendered(t);
@@ -1594,7 +1670,7 @@ function dueHtml(){
     else M.rows.push({key: x.e.id, k: x.k, day: dayOf(x), e: x.e, n: x.e.date.length === 7 ? null : daysLeft(x.e.date), dt: evDays(x.e)});
   }
   const row = r => '<li id="due-' + esc(r.key) + '"><span class="d">' + esc(r.day) + '</span><span class="t">' + (r.fs ? '<span class="evk">전망</span>' + r.fs.slice(0, 3).map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep">·</span>') + (r.fs.length > 3 ? '<span class="sep">·</span><button type="button" class="fcl more" data-go="forecast">외 ' + (r.fs.length - 3) + "건</button>" : "")
-    : (r.e.cases || []).length ? '<button type="button" class="fcl" data-case="' + esc(r.e.cases[0]) + '" title="' + esc((D.strategies || []).filter(c => r.e.cases.includes(c.id)).map(c => c.title.split(":")[0]).join(" · ")) + ' 사안 분석">' + esc(r.e.t) + "</button>" : esc(r.e.t)) + "</span>" +
+    : '<button type="button" class="fcl" data-ev="' + esc(r.e.id) + '">' + esc(r.e.t) + "</button>") + "</span>" +  /* v3.79 일정을 누르면 설명과 지구본의 장소(사안 화면으로 넘어가지 않음) */
     (r.fs ? '<span class="n' + (r.n <= 7 ? " hot" : "") + '">' + daysText(r.n) + "</span>" : r.dt ? '<span class="n' + (r.n != null && r.n <= 7 ? " hot" : "") + '">' + r.dt + "</span>" : "") + "</li>";
   return '<section class="sec due" id="due"><h3>다가오는 일정</h3><div class="mo">' + months.map(M => '<div class="m">' + (+M.mk.slice(5, 7)) + "월</div><ul>" + M.rows.map(row).join("") + "</ul>").join("") +
     '</div><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기 →</button></p></section>';
@@ -1663,7 +1739,8 @@ function caseFill(id){
   return d;
 }
 document.addEventListener("toggle", e => { const d = e.target; if (d.open && d.matches && d.matches("details.full[data-cid]")) caseFill(d.dataset.cid); }, true);
-function caseMark(){ document.querySelectorAll("#pane-strat .case-sw [data-case]").forEach(b => { if (b.dataset.case === S.scase) { b.setAttribute("aria-current", "true"); const nv = b.parentElement; if (nv.scrollWidth > nv.clientWidth) { const br = b.getBoundingClientRect(), nr = nv.getBoundingClientRect(); nv.scrollLeft += br.left - nr.left - (nr.width - br.width) / 2; } } else b.removeAttribute("aria-current"); }); }
+function caseMark(){ caseMark0(); if (S.scase) caseView(S.scase); }
+function caseMark0(){ document.querySelectorAll("#pane-strat .case-sw [data-case]").forEach(b => { if (b.dataset.case === S.scase) { b.setAttribute("aria-current", "true"); const nv = b.parentElement; if (nv.scrollWidth > nv.clientWidth) { const br = b.getBoundingClientRect(), nr = nv.getBoundingClientRect(); nv.scrollLeft += br.left - nr.left - (nr.width - br.width) / 2; } } else b.removeAttribute("aria-current"); }); }
 function renderStrat(){
   const ss = D.strategies || []; if (!ss.length) return;
   const pn = $("#pane-strat");
@@ -1866,6 +1943,30 @@ renderGrand = withFoot(renderGrand, "pane-grand");
 renderIdeas = withFoot(renderIdeas, "pane-ideas");
 renderForecasts = withFoot(renderForecasts, "pane-forecast");
 renderMethod = withFoot(renderMethod, "pane-method");
+/* v3.79 사이트 안내 탭(2026-10-07 결재): 분석 방법(이 탭이 그림) 아래에 이용 안내·운영자 인사말(각 쪽의 글 칸을 받아 옴)을 잇고, 맨 위 단추 3개로 해당 부분에 내려간다 */
+const INFO = [["method", "분석 방법"], ["guide", "이용 안내"], ["about", "운영자 인사말"]];
+const infoUrl = k => "/" + k + "/";
+renderMethod = (f => function(){ f(); infoWrap(); })(renderMethod);
+function infoWrap(){
+  const pn = $("#pane-method"); if (pn.querySelector(".info-nav")) return;
+  const top = document.createElement("div"); top.className = "sec info-top";
+  top.innerHTML = '<h2>사이트 안내</h2><div class="chips info-nav">' + INFO.map(([k, t]) => '<a class="chip" href="' + infoUrl(k) + '" data-info="' + k + '">' + t + "</a>").join("") + "</div>";
+  const first = pn.firstElementChild; pn.insertBefore(top, first); if (first) first.id = "i-method";
+  const foot = pn.querySelector("footer.site-foot");
+  INFO.slice(1).forEach(([k]) => { const x = document.createElement("section"); x.id = "i-" + k; x.className = "info-sec"; pn.insertBefore(x, foot); });
+}
+function infoLoad(k){
+  const x = document.getElementById("i-" + k); if (!x || x.dataset.ok) return Promise.resolve();
+  const put = h => { x.innerHTML = h.replace(/#pane-page \.page-pre/g, "#pane-method .page-pre"); x.dataset.ok = "1"; };
+  const u = infoUrl(k), pp = Object.keys(PAGE_C).find(q => q === u || q.endsWith(u));
+  if (pp) { put(PAGE_C[pp].h); return Promise.resolve(); }
+  return fetch(u, {credentials: "same-origin"}).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
+    const d = new DOMParser().parseFromString(t, "text/html"), q = d.querySelector("#pane-page .page-pre"); if (q) put(q.outerHTML); }).catch(() => {});
+}
+function infoGo(k){
+  S.info = k; ensureRendered("method"); switchTab("method");
+  Promise.all(["guide", "about"].map(infoLoad)).then(() => { const t = document.getElementById("i-" + k); if (t && k !== "method") t.scrollIntoView({block: "start"}); });
+}
 renderStrat = withFoot(renderStrat, "pane-strat", () => " ");  /* v3.43 사안별 의견 상자는 각 사안 끝에 있으므로, 꼬리말에는 메일 줄을 다시 넣지 않는다 */
 
 /* 탭·사안 주소: #strat, #korea 같은 짧은 표식만 쓴다 */
@@ -1887,7 +1988,8 @@ function routeOf(){
   if (t === "brief") { if (!BR) return location.pathname.indexOf("/brief/") === 0 ? location.pathname : "/brief/"; const c = briefCur(); return "/brief/" + (c && BR && c !== BR.issues[0] ? c.date + "/" : ""); }
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return "/feature/" + (c && c !== L[0] ? c.id + "/" : ""); }
   if (t === "page") return location.pathname;
-  if (/^(grand|ideas|method|forecast)$/.test(t)) return "/" + t + "/";
+  if (t === "method") return "/" + (S.info || "method") + "/";
+  if (/^(grand|ideas|forecast)$/.test(t)) return "/" + t + "/";
   if (t === "detail") return S.sel && hasPage(S.sel) ? "/country/" + S.sel + "/" : "/";
   return null;
 }
@@ -1909,8 +2011,9 @@ function applyRoute(){
   if (/^\/brief\/?$/.test(p)) { S.bdate = null; renderBrief(); switchTab("brief"); return true; }
   if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
-  if (/^\/(leader|power|guide|about|subscribe)(\/|$)/.test(p)) { pageGo(p); return true; }
-  if ((m = p.match(/^\/(grand|ideas|method|forecast)\/?$/))) { switchTab(m[1]); return true; }
+  if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
+  if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) { pageGo(p); return true; }
+  if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { switchTab(m[1]); return true; }
   if (p === "/" && !location.hash) { switchTab(ROUTE_FIRST && !location.search ? "brief" : "overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
   return false;
 }
@@ -1931,7 +2034,7 @@ function titleOf(){
   if (t === "detail") return S.sel && hasPage(S.sel) ? D.countries[S.sel].name_ko + " 정세와 대전략" + sx : SITE_T;
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
-const isPagePath = p => { if (/^\/(leader|power|guide|about|subscribe)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
+const isPagePath = p => { if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
 function pageShow(p, x){
   ttsStop(); try { speechSynthesis.cancel(); } catch(e){}
   const pn = document.getElementById("pane-page"); pn.innerHTML = x.h;
@@ -1964,7 +2067,11 @@ document.addEventListener("click", ev => {
   const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
   let u; try { u = new URL(a.getAttribute("href"), location.href); } catch(e){ return; }
   if (u.origin !== location.origin || !SOFT_RE.test(u.pathname) || /\.[a-z0-9]+$/i.test(u.pathname)) return;
-  if (u.pathname === location.pathname && u.hash) return;
+  if (u.pathname === location.pathname && u.hash) {  /* v3.79 쪽 안의 바로가기(권력 구조의 나라 단추): 이전 화면으로 돌아올 수 있게 기록하고, 나라면 지구본도 옮긴다 */
+    const id = decodeURIComponent(u.hash.slice(1)), t = a.closest("#pane-page") && document.getElementById(id);
+    if (t) { ev.preventDefault(); navPush(); t.scrollIntoView({block: "start"}); if (/^[A-Z]{3}$/.test(id)) countryView(id); }
+    return;
+  }
   ev.preventDefault();
   const g = a.closest("details.gmore"); if (g) g.open = false;
   if (!a.closest(".gnav")) navPush();
@@ -1980,6 +2087,9 @@ switchTab = function(t){
   /* v3.43 결정권자 쪽의 듣기는 예전에 쪽을 떠나면(새로 불러오면) 멈췄다. 화면 안 이동에서도 쪽을 떠날 때 멈춘다 */
   const lb = document.getElementById("ltts"); if (lb && t !== "page" && lb.getAttribute("aria-pressed") === "true") lb.click();
   _switchTab(t);
+  if (VIEW0 && VIEW0.key !== viewKey()) viewRestore();  /* v3.79 사안·일정·나라로 옮긴 지구본을 그 화면을 떠나면 되돌린다 */
+  if (S.mark && !VIEW0) markSet(null);
+  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method");  /* v3.79 사이트 안내(분석 방법·이용 안내·운영자 인사말)는 지구본 없이 글만 */
   if (HASH_READY && ROUTES) routeSync(false);
   else if (HASH_READY && S.tab !== "detail") {
     const tok = S.tab === "strat" ? (S.scase || "strat") : S.tab;
@@ -2004,7 +2114,7 @@ addEventListener("hashchange", () => { if (D) applyHash(); });
 /* v3.32 이전 화면: 칩·카드·띠·검색 결과로 화면을 옮길 때마다 직전 화면(탭, 사안, 선택한 나라·분쟁지, 스크롤 위치)을 쌓아 두고 되돌린다 */
 const NAV = []; let NAV_BUSY = false;
 const navBtn = document.getElementById("navback");
-function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, path: S.tab === "page" ? PAGE_CUR : null, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
+function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, path: S.tab === "page" ? PAGE_CUR : null, info: S.info, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
 function navUpd(){ if (navBtn) navBtn.hidden = !NAV.length; }
 function navPush(){
   if (NAV_BUSY || !D) return;
@@ -2021,6 +2131,7 @@ function navBack(){
     if (s.tab === "detail" && (s.sel || s.selFp)) { if (s.sel) selectCountry(s.sel, true); else selectFp(s.selFp); }
     else {
       if (s.tab === "strat") { S.scase = s.scase; renderStrat(); }
+      if (s.tab === "method") S.info = s.info;
       if (s.tab === "forecast" && s.fcf) { S.fcf = s.fcf; renderForecasts(); }
       switchTab(s.tab);
     }
@@ -2062,7 +2173,7 @@ function fcPop(chip){
   el.style.top = (r.bottom + 8 + h > innerHeight && r.top - 8 - h > 0 ? r.top - 8 - el.offsetHeight : r.bottom + 8) + "px";
   el.querySelector(".fcp-x").onclick = fcPopClose;
 }
-document.addEventListener("click", ev => { if (FCP && !ev.target.closest("#fcpop,[data-fc]")) fcPopClose(); }, true);
+document.addEventListener("click", ev => { if (FCP && !ev.target.closest("#fcpop,[data-fc],[data-ev]")) fcPopClose(); }, true);
 document.addEventListener("keydown", ev => { if (ev.key === "Escape") fcPopClose(); });
 addEventListener("scroll", fcPopClose, true); addEventListener("resize", fcPopClose);
 

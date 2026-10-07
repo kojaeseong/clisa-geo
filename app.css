@@ -70,6 +70,12 @@ a{color:var(--accent)}
 .offmap .lbl{font-size:11px; color:var(--muted)}
 .lensbar{position:absolute; top:12px; left:56px; right:auto; display:flex; align-items:center; gap:10px; background:var(--ink); color:var(--panel); border-radius:6px; padding:6px 8px 6px 12px; font-size:12px; max-width:calc(100% - 200px)}
 .lensbar button{border:0; background:transparent; color:inherit; text-decoration:underline; cursor:pointer; font-size:12px}
+.markbar{top:52px; max-width:calc(100% - 68px)} .lensbar:not([hidden]) ~ .markbar{top:92px} #markname{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+/* v3.79 사이트 안내 탭: 지구본 없이 글만, 읽기 좋은 폭으로 가운데 */
+.app.noglobe .stage{grid-template-columns:minmax(0,1fr)!important} .app.noglobe #wrap{display:none}
+.app.noglobe #pane-method > *{width:100%; max-width:860px; margin-inline:auto}
+.info-top .info-nav{margin-top:10px} .info-nav a.chip{text-decoration:none}
+@media (max-width: 960px){ .markbar{top:auto; bottom:56px; left:12px; max-width:calc(100% - 24px)} .lensbar:not([hidden]) ~ .markbar{top:auto} } .info-sec{scroll-margin-top:8px} .info-sec .page-pre{border-top:1px solid var(--line); padding-top:22px}
 .tip{position:absolute; pointer-events:none; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:12px; line-height:1.45; max-width:240px; box-shadow:0 6px 18px rgba(0,0,0,.14); z-index:5}
 .tip b{font-size:13px}
 .tip .m{color:var(--muted)}
@@ -843,12 +849,12 @@ details.fw ul{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px
 a.bstrip,a.srch-open{text-decoration:none}
 /*/shell*/
 .blist{list-style:none; padding:0; margin:6px 0 0} .blist li{border-top:1px solid var(--line)} .blist a.row-btn{display:flex; gap:10px; align-items:baseline; padding:9px 2px; text-decoration:none; color:var(--ink)} .blist a.row-btn:hover .nm{color:var(--accent)} .blist .mono{flex:none; font:500 12.5px var(--mono); color:var(--muted)}
-#pane-page .page-pre{padding:4px 2px}
+#pane-page .page-pre,#pane-method .page-pre{padding:4px 2px}
 html.pg-wait, html.pg-wait a{cursor:progress}
 /* v3.51 색 개편 「강철과 코발트」(결재 2026-10-05): 바탕은 푸른 기를 뺀 차가운 회색, 강조는 코발트, 경보·분쟁은 주홍. 테두리는 옅게·그림자는 얇게, 선택된 탭·메뉴 밑줄 3px, 글 칸 제목 800. 색 변수는 :root 한 곳 */
 .panel,.globe-wrap{border-color:rgba(16,20,24,.09); box-shadow:0 1px 2px rgba(16,20,24,.04), 0 8px 24px rgba(16,20,24,.05)}
 .tabs button[aria-selected="true"],.gnav>a[aria-current="page"],.gmore.cur>summary{border-bottom-width:3px}
-#pane-page .page-pre h1{font-weight:800; letter-spacing:-.01em}
+#pane-page .page-pre h1,#pane-method .page-pre h1{font-weight:800; letter-spacing:-.01em}
 /* v3.45 본문 글자 크기·줄 간격 통일(2026-10-04): 탭마다 12~13px로 작고 촘촘하던 읽는 글을 특집 본문과 같은 14px·1.7로 맞추고, 보조 글은 한 단계 작게 둔다 */
 .pane :is(p, li, dd, .lesson-box):not(.meta, .note, .eyebrow, .mono, .kd, .d, .tl-w, .pub-s):not(.toc *, .chips *, .figs *, .insights > li, .fnotes *, .src > ul *){font-size:14px; line-height:1.7}
 .pane :is(.tl-w, .fc .b){font-size:13px; line-height:1.65}

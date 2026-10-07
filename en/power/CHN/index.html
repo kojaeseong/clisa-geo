@@ -38,8 +38,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="/app.css?v=8434c64407">
-<style>.lang-sw{display:inline-flex; align-items:center; flex:none; height:40px; padding:0 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink-2); font-size:14px; text-decoration:none; white-space:nowrap; box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}.lang-sw:hover{border-color:var(--ink-2); color:var(--ink)}.tl li{grid-template-columns:112px 1fr} .tl .d{font:12px/1.7 var(--sans)} .olk .tl li{grid-template-columns:112px 1fr}.mo{grid-template-columns:76px 1fr} .mo .m{font:700 13px var(--sans)}@media (max-width:560px){.tl li{grid-template-columns:96px 1fr} .olk .tl li{grid-template-columns:96px 1fr} .mo{grid-template-columns:1fr} .mo .m{padding-top:6px}}.srch-open span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}.gmore-m a.gm-n{display:none}@media (min-width:961px) and (max-width:1199px){.gnav>a.gx{display:none} .gmore{display:block}}@media (min-width:1200px) and (max-width:1439px){.gnav>a.gx[data-tab=method],.gnav>a.gx[data-nav=guide],.gnav>a.gx[data-nav=about]{display:none} .gmore{display:block} .gmore-m a[data-tab=forecast],.gmore-m a[data-nav=power],.gmore-m a[data-tab=ideas]{display:none} .gmore.cur>summary{color:var(--ink-2); border-bottom-color:transparent; font-weight:500} .gmore:has(a[data-tab=method][aria-current],a[data-nav=guide][aria-current],a[data-nav=about][aria-current])>summary{color:var(--ink); border-bottom-color:var(--accent); font-weight:600}}@media (max-width:520px){.gnav>#tab-feature,.gnav>#tab-grand{display:none} .gmore-m a.gm-n{display:block}}</style>
+<link rel="stylesheet" href="/app.css?v=9c5ce520ea">
+<style>.lang-sw{display:inline-flex; align-items:center; flex:none; height:40px; padding:0 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink-2); font-size:14px; text-decoration:none; white-space:nowrap; box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}.lang-sw:hover{border-color:var(--ink-2); color:var(--ink)}.tl li{grid-template-columns:112px 1fr} .tl .d{font:12px/1.7 var(--sans)} .olk .tl li{grid-template-columns:112px 1fr}.mo{grid-template-columns:76px 1fr} .mo .m{font:700 13px var(--sans)}@media (max-width:560px){.tl li{grid-template-columns:96px 1fr} .olk .tl li{grid-template-columns:96px 1fr} .mo{grid-template-columns:1fr} .mo .m{padding-top:6px}}.srch-open span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}.gmore-m a.gm-n{display:none}@media (min-width:961px) and (max-width:1199px){.gnav>a.gx{display:none} .gmore{display:block}}@media (max-width:520px){.gnav>#tab-feature,.gnav>#tab-grand{display:none} .gmore-m a.gm-n{display:block}}</style>
 </head>
 <body>
 
@@ -68,17 +68,13 @@
       <a href="/en/forecast/" data-tab="forecast" class="gx">Forecasts and Track Record</a>
       <a href="/en/power/" data-nav="power" class="gx" aria-current="page">Power Structures</a>
       <a href="/en/ideas/" data-tab="ideas" class="gx">History and Ideas</a>
-      <a href="/en/method/" data-tab="method" class="gx">Methodology</a>
-      <a href="/en/guide/" data-nav="guide" class="gx">Site Guide</a>
-      <a href="/en/about/" data-nav="about" class="gx">A Note from the Founder</a>
+      <a href="/en/method/" data-tab="method" class="gx">Site Guide</a>
       <a href="#discuss" data-tab="discuss" id="tab-discuss">Discussions</a>
       <details class="gmore"><summary>More</summary><div class="gmore-m"><a href="/en/feature/" data-tab="feature" class="gm-n">Features</a><a href="/en/grand/" data-tab="grand" class="gm-n">World Order</a>
         <a href="/en/forecast/" data-tab="forecast" id="tab-forecast">Forecasts and Track Record</a>
         <a href="/en/power/" data-nav="power" aria-current="page">Power Structures</a>
         <a href="/en/ideas/" data-tab="ideas" id="tab-ideas">History and Ideas</a>
-        <a href="/en/method/" data-tab="method" id="tab-method">Methodology</a>
-        <a href="/en/guide/" data-nav="guide">Site Guide</a>
-        <a href="/en/about/" data-nav="about">A Note from the Founder</a>
+        <a href="/en/method/" data-tab="method" id="tab-method">Site Guide</a>
       </div></details>
       <button type="button" class="wide-btn" id="widebtn" aria-pressed="false" title="Widen reading pane" aria-label="Widen reading pane">⇔</button>
     </nav>
@@ -96,6 +92,7 @@
         <button type="button" id="spin" aria-label="Stop globe rotation" title="Stop globe rotation" aria-pressed="true">⏸</button>
       </div>
       <div class="lensbar" id="lensbar" hidden><span id="lensname"></span><button type="button" id="lensoff">Turn off lens</button></div>
+      <div class="lensbar markbar" id="markbar" hidden><span id="markname"></span><button type="button" id="markoff">Clear</button></div>
       <div class="readout" id="readout"></div>
       <button type="button" class="legbtn" id="legbtn" aria-expanded="false" aria-controls="legend"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 2.5 7 10 11l7.5-4L10 3Z"/><path d="m2.5 10.5 7.5 4 7.5-4"/><path d="m2.5 14 7.5 4 7.5-4"/></svg>Map layers</button>
       <div class="legend" id="legend" role="group" aria-label="Map layers and legend"></div>
@@ -137,7 +134,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script src="/en/app.js?v=ed10797180"></script>
+<script src="/en/app.js?v=74a6477ea7"></script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "330cb9e687e34385b83747a235d16c63"}'></script>
 </body>
