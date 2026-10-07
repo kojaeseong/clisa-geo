@@ -1968,7 +1968,7 @@ function infoWrap(){
 }
 function infoLoad(k){
   const x = document.getElementById("i-" + k); if (!x || x.dataset.ok) return Promise.resolve();
-  const put = h => { x.innerHTML = h.replace(/#pane-page \.page-pre/g, "#pane-method .page-pre"); x.dataset.ok = "1"; };
+  const put = h => { x.innerHTML = h.replace(/#pane-page \.page-pre/g, "#pane-method .page-pre"); x.querySelectorAll(".pfoot").forEach(f => f.remove()); x.dataset.ok = "1"; };  /* 각 쪽에 딸린 바닥글(.pfoot)은 빼고, 탭 맨 아래 바닥글 하나만 둔다 */
   const u = infoUrl(k), pp = Object.keys(PAGE_C).find(q => q === u || q.endsWith(u));
   if (pp) { put(PAGE_C[pp].h); return Promise.resolve(); }
   return fetch(u, {credentials: "same-origin"}).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
