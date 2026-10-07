@@ -667,7 +667,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .legend .mt[aria-pressed="false"] .kk{opacity:.45}
 .legend .mt span.kk{display:flex; align-items:center; gap:6px}
 .legend .mt{flex-wrap:wrap}
-.legend .mt .kk2{display:flex; flex-wrap:nowrap; gap:4px 12px; align-items:center} /* v3.20c 협력·동맹과 대립·교전을 한 줄에 */
+.legend .mt .kk2{display:flex; flex-wrap:wrap; gap:4px 12px; align-items:center} /* v3.20c 협력·동맹과 대립·교전을 한 줄에. v3.76 영문판처럼 글이 길면 줄을 바꿔 범례 상자를 넘지 않게 */
 .legend .mt .kk2 .kk{white-space:nowrap}
 .legend .kk{display:flex; align-items:center; gap:6px; font-size:12px}
 .refs .ref{border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-top:8px; background:var(--panel)}

@@ -13,7 +13,7 @@ if (store.get("ep.legoff") === "1") document.documentElement.classList.add("lego
 const LAYERS = {
   focus:{label:"분석 대상 지역", desc:"짙을수록 해당 국가가 관련된 전략 분석과 전망이 많습니다."},
   risk:{label:"위험도", desc:"판단 점수. 높을수록 무력 충돌이나 체제 불안의 위험이 큽니다."},
-  mil:{label:"군사력", desc:"판단 점수. 세계 기준(미국 = 100)의 상대적 군사 능력."},
+  mil:{label:"군사력", desc:"판단 점수. 세계 기준(미국 = 100)의 상대적 군사 능력. 나라 이름 아래 숫자는 현역 병력(IISS)과 핵탄두 추정치(SIPRI)입니다."},
   pol:{label:"정치 안정", desc:"판단 점수. 높을수록 정권과 정책 방향이 안정적입니다."},
   econ:{label:"경제 비중", desc:"판단 점수. 경제 규모와 충격에 대한 회복력."}
 };
@@ -379,7 +379,7 @@ function drawOver(t){
     for (const e of D.edges) {
       const a = D.capitals[e.a], b = D.capitals[e.b];
       const ls = {type:"LineString", coordinates:[[a[0], a[1]], [b[0], b[1]]]};
-      const alpha = edgeRelevant(e) ? 1 : 0.2;
+      const alpha = (edgeRelevant(e) ? 1 : 0.2) * (S.layer === "mil" ? 0.3 : 1);
       octx.setLineDash([]); octx.globalAlpha = 0.75 * alpha; octx.strokeStyle = C.halo; octx.lineWidth = 3.6;
       octx.beginPath(); pathO(ls); octx.stroke();
       octx.globalAlpha = alpha; octx.lineWidth = 1.7;
@@ -389,19 +389,43 @@ function drawOver(t){
     }
     octx.setLineDash([]); octx.globalAlpha = 1;
   }
+  const MIL = S.layer === "mil";  /* v3.76 군사력 보기에서는 관계선·분쟁지를 옅게 하고 이름·숫자를 맨 위에 그린다 */
+  const drawLabels = () => {
   octx.font = '500 11px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif';
   octx.textAlign = "center"; octx.textBaseline = "middle"; octx.lineJoin = "round";
-  for (const iso of Object.keys(labelPos)) {
+  /* 군사력 보기: 병력이 큰 나라부터 놓고, 이미 놓은 이름·숫자와 겹치면 그 나라는 건너뛴다(확대하면 나타남) */
+  const mw = i => { const m = (D.countries[i] || {}).mil || {}; return ({KOR: 3e12, PRK: 2e12, JPN: 1e12}[i] || 0) + (m.nukes ? 1e9 + m.nukes : 0) + (m.active_personnel || 0); };  /* 한국·북한·일본 먼저, 다음 핵보유국, 다음 병력 순 */
+  const keys = MIL ? Object.keys(labelPos).sort((x, y) => mw(y) - mw(x)) : Object.keys(labelPos);
+  const boxes = [], hit = (x0, y0, x1, y1) => boxes.some(b => x0 < b[2] && x1 > b[0] && y0 < b[3] && y1 > b[1]);
+  for (const iso of keys) {
     const c = D.countries[iso];
     if (!c || (c.tier !== 1 && S.k < 1.7)) continue;
     const ll = labelPos[iso];
     if (d3.geoDistance(ll, ctr) > 1.38) continue;
-    const p = projection(ll); if (!p) continue;
+    const p0 = projection(ll); if (!p0) continue; let p = p0;
     const dim = S.lens && !S.lens.set.has(iso);
+    if (MIL) { const m = c.mil || {}, sw = (m.active_personnel || m.nukes) ? (String(m.active_personnel || "").length + (m.nukes ? 7 + String(m.nukes).length : 0)) * 5.6 : 0;
+      const hw = Math.max(octx.measureText(c.name_ko).width, sw) / 2 + 2, h1 = sw ? 19 : 8;  /* 겹치면 위·아래·옆으로 비켜 본다 */
+      const off = [[0, 0], [0, -26], [0, 26], [-hw - 6, 0], [hw + 6, 0], [0, -48], [0, 48]].find(([dx, d]) => !hit(p0[0] + dx - hw, p0[1] + d - 8, p0[0] + dx + hw, p0[1] + d + h1)); if (!off) continue;
+      p = [p0[0] + off[0], p0[1] + off[1]]; boxes.push([p[0] - hw, p[1] - 8, p[0] + hw, p[1] + h1]); }
     octx.globalAlpha = dim ? 0.45 : 1;
     octx.lineWidth = 3; octx.strokeStyle = C.halo; octx.strokeText(c.name_ko, p[0], p[1]);
     octx.fillStyle = C.ink; octx.fillText(c.name_ko, p[0], p[1]);
+    /* v3.76 '군사력' 보기에서 나라 이름 아래에 현역 병력과 핵탄두 추정치를 적는다(IISS·SIPRI, 나라 자료의 mil) */
+    if (S.layer === "mil" && c.mil && iso !== "EUR") {
+      const ap = c.mil.active_personnel, nk = c.mil.nukes;
+      const man = n => n >= 10000 ? (n >= 1e5 ? Math.round(n / 1e4) : (Math.round(n / 1e3) / 10)) + "만" : (Math.round(n / 1e3) || 1) + "천";
+      const parts = []; if (ap) parts.push(man(ap)); if (nk) parts.push("핵 " + nk.toLocaleString("ko-KR"));
+      if (parts.length) {
+        const s2 = parts.join(" · "); octx.font = '600 10px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif';
+        octx.lineWidth = 3; octx.strokeStyle = C.halo; octx.strokeText(s2, p[0], p[1] + 12);
+        octx.fillStyle = nk ? C.conflict : C.ink; octx.fillText(s2, p[0], p[1] + 12);
+        octx.font = '500 11px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif';
+      }
+    }
   }
+  octx.globalAlpha = 1; };
+  if (!MIL) drawLabels();
   octx.globalAlpha = 1;
   if (S.showFp) {
     for (const fp of D.flashpoints) {
@@ -412,8 +436,8 @@ function drawOver(t){
       fp._p = p;
       const rad = 2.6 + fp.severity * 1.15;
       const dim = S.lens && !S.lens.fpAll && !fp.countries.some(c => S.lens.set.has(c));
-      octx.globalAlpha = dim ? 0.3 : 1;
-      if (!reduceMotion && fp.severity >= 4 && !dim) {
+      const fa = MIL ? 0.3 : 1; octx.globalAlpha = (dim ? 0.3 : 1) * fa;
+      if (!reduceMotion && fp.severity >= 4 && !dim && !MIL) {
         const ph = ((t || 0) / 1800 + fp.phase) % 1;
         octx.beginPath(); octx.arc(p[0], p[1], rad + ph * rad * 2.4, 0, Math.PI * 2);
         octx.strokeStyle = C.conflict; octx.globalAlpha = (1 - ph) * 0.55; octx.lineWidth = 1.2; octx.stroke();
@@ -428,6 +452,7 @@ function drawOver(t){
       octx.globalAlpha = 1;
     }
   }
+  if (MIL) drawLabels();
 }
 let needBase = true, scheduled = false, lastOver = 0, spinOnly = false;
 let GLOBE_VIS = true, QUIET = 0;  /* v3.25 아래 자전 설명 참조 */
