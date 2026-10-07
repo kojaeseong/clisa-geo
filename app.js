@@ -650,7 +650,7 @@ function setupInteraction(){
     const evb = ev.target.closest("[data-ev]");
     if (evb) { evGo(evb.dataset.ev, evb); return; }
     const fcp = ev.target.closest("[data-fc]");
-    if (fcp && !fcp.closest("#fcpop")) { fcPop(fcp); return; }
+    if (fcp && !fcp.closest("#fcpop")) { fcPop(fcp); if (fcp.closest("#due")) fcGo(fcp.dataset.fc); return; }
     const fcb = ev.target.closest("[data-fcgo]");
     if (fcb) { fcPopClose(); fcb.dataset.fc = fcb.dataset.fcgo; S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + fcb.dataset.fc + '"]'); if (li) { li.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 3000); } return; }
     const ff = ev.target.closest("[data-fcf]");
@@ -741,13 +741,21 @@ function markSet(m){
 }
 function evGo(id, chip){
   const e = (D.events || []).find(x => x.id === id); if (!e) return;
-  const L = e.loc || {}, isos = L.isos || [];
-  evPop(chip, e);
-  const v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(isos); if (!v) return;
+  evPop(chip, e); placeGo(e.loc || {}, "일정 · " + e.t);
+}
+/* 장소(도시·분쟁지의 점)가 있으면 그곳을, 없으면 관련국을 보인다. 스마트폰에서는 지도 쪽으로 올라가고 '이전 화면'으로 돌아온다 */
+function placeGo(L, label){
+  const isos = L.isos || [], v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(isos); if (!v) return;
   if (narrow()) navPush();
   viewGo(v[0], v[1], v[2]);
-  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label: "일정 · " + e.t});
+  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label});
   if (narrow()) document.getElementById("wrap").scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"});
+}
+/* v3.79c '다가오는 일정'의 전망: 전망에 연결된 분쟁지의 위치(경제·외교 전망은 결정하는 나라) */
+function fcGo(id){
+  const F = D.forecasts.find(f => f.id === id); if (!F) return;
+  const fp = !F.loc && F.fp && D.flashpoints.find(x => x.id === F.fp);
+  placeGo(F.loc || (fp ? {lon: fp.lon, lat: fp.lat, place: fp.name_ko, isos: F.countries || []} : {isos: F.countries || []}), "전망 · " + (F.s || F.q));
 }
 function evPop(chip, e){
   if (FCP && FCP.dataset.for === "ev:" + e.id) { fcPopClose(); return; }
