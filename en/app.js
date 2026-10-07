@@ -462,7 +462,7 @@ function drawOver(t){
   octx.globalAlpha = 1;
   if (S.showFp) {
     for (const fp of D.flashpoints) {
-      fp._p = null; if (USF) continue;
+      fp._p = null; if (USF && !MIL) continue;  /* 군사력 보기(분쟁 사안)에서는 미군 배치와 함께 분쟁지를 옅게 남긴다 */
       const ll = [fp.lon, fp.lat];
       if (d3.geoDistance(ll, ctr) > 1.52) continue;
       const p = projection(ll); if (!p) continue;
@@ -653,13 +653,13 @@ function setupInteraction(){
     else if (h.iso && D.countries[h.iso]) selectCountry(h.iso, true, true);
   });
 
-  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { S.showUsf = !S.showUsf; renderOverview(); if (S.showUsf) flyTo(68, 32); } else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
+  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { S.showUsf = !S.showUsf; if (VIEW0) VIEW0.usf = null; renderOverview(); if (S.showUsf && !VIEW_CASE) flyTo(68, 32); } else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
   /* v3.43f 데스크탑: '지구본 색 기준' 상자를 접으면 왼쪽 아래 작은 '지도 표시' 단추로 바뀐다(처음엔 펼침, 접은 상태는 브라우저에 기억). 모바일: 예전처럼 단추로 열고 닫는다 */
   const legOff = off => { document.documentElement.classList.toggle("legoff", off); store.set("ep.legoff", off ? "1" : "0"); $("#legbtn").setAttribute("aria-expanded", !off); };
   if (!narrow()) $("#legbtn").setAttribute("aria-expanded", !document.documentElement.classList.contains("legoff"));
   $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
-  $("#legend").addEventListener("click", e => { if (e.target.closest("[data-usfgo]")) { switchTab("overview"); const el = document.getElementById("s-usf"); if (el) el.scrollIntoView({block: "start"}); return; } if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
+  $("#legend").addEventListener("click", e => { if (e.target.closest("[data-usfgo]")) { if (VIEW0) VIEW0.usf = null; switchTab("overview"); renderOverview(); const el = document.getElementById("s-usf"); if (el) el.scrollIntoView({block: "start"}); return; } if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
   $("#lensoff").onclick = () => setLens(null);
   document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; const t = b.dataset.tab; navMark(TAB_ALIAS[t] || t); /* v3.74 누르기 반응(웹 분석 INP 최대 672ms): 메뉴 표시를 먼저 그리고, 무거운 화면 그리기는 다음 차례로 미룬다 */ requestAnimationFrame(() => setTimeout(() => { if (t === "strat") { S.scase = null; caseMark(); } if (t === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(t); }, 0)); });
   document.addEventListener("click", ev => {
@@ -734,11 +734,12 @@ function flyTo(lon, lat, exact){
    옮기기 전의 지구본(방향·배율·색 기준)을 VIEW0에 두었다가, 그 화면(탭)을 떠나면 되돌린다. 방문자가 그사이 색 기준을 직접 고르면 색 기준은 되돌리지 않는다 */
 let VIEW0 = null, VIEW_CASE = null;
 const viewKey = () => S.tab + (S.tab === "page" ? "|" + PAGE_CUR : "");
-function viewSave(){ if (!VIEW0) VIEW0 = {rot: S.rot.slice(), k: S.k, layer: S.layer, key: viewKey()}; else VIEW0.key = viewKey(); }
+function viewSave(){ if (!VIEW0) VIEW0 = {rot: S.rot.slice(), k: S.k, layer: S.layer, usf: S.showUsf, key: viewKey()}; else VIEW0.key = viewKey(); }
 function viewGo(lon, lat, k){ viewSave(); flyTo(lon, lat, true); zoomTo(k); spinHold(36e5); }
 function viewRestore(){
   const v = VIEW0; VIEW0 = null; VIEW_CASE = null; markSet(null); if (!v) return;
   if (v.layer && v.layer !== S.layer) setLayer(v.layer, true);
+  if (v.usf != null && v.usf !== S.showUsf) { S.showUsf = v.usf; renderLegend(); renderOverview(); }  /* 사안 화면에서 저절로 켠 미군 배치는 끈다(방문자가 직접 켜고 끈 것은 그대로) */
   flyTo(-v.rot[0], -v.rot[1], true); zoomTo(v.k); spinHold(20000);
 }
 /* 나라(들)를 한눈에 보는 중심과 배율: 한 나라는 넓이로, 여러 나라는 서로 떨어진 거리로 */
@@ -757,6 +758,8 @@ function caseView(id){
   VIEW_CASE = id; markSet(null);
   if (m.home) viewGo(-HOME[0], -HOME[1], HOME_K); else viewGo(m.lon, m.lat, m.k);
   if (m.layer && m.layer !== S.layer) setLayer(m.layer, true);
+  const usf = m.layer === "mil" && !!D.posture;  /* v3.79b(2026-10-08 결재): 분쟁 사안은 해외 주둔 미군도 함께 보인다 */
+  if (VIEW0 && VIEW0.usf != null && usf !== S.showUsf) { S.showUsf = usf; renderLegend(); requestDraw(true); }
 }
 /* 지구본에 표시하는 장소·나라(일정, 권력 구조의 나라). label이 있으면 지구본 위 띠에 이름과 '표시 해제'를 보인다 */
 function markSet(m){
