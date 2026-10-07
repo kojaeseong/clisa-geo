@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://geo.clisa.ai/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://geo.clisa.ai/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://geo.clisa.ai/brief/2026-10-07/</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>https://geo.clisa.ai/brief/2026-10-06/</loc><lastmod>2026-10-06</lastmod></url>
   <url><loc>https://geo.clisa.ai/brief/2026-10-05/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/brief/2026-10-03/</loc><lastmod>2026-10-03</lastmod></url>
@@ -8,7 +9,7 @@
   <url><loc>https://geo.clisa.ai/brief/2026-10-01/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://geo.clisa.ai/brief/2026-09-30/</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://geo.clisa.ai/brief/2026-09-29/</loc><lastmod>2026-09-29</lastmod></url>
-  <url><loc>https://geo.clisa.ai/brief/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://geo.clisa.ai/brief/</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>https://geo.clisa.ai/case/korea/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/case/taiwan/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/case/ukraine/</loc><lastmod>2026-10-05</lastmod></url>
@@ -56,6 +57,7 @@
   <url><loc>https://geo.clisa.ai/feature/2026-10-03-population/</loc><lastmod>2026-10-03</lastmod></url>
   <url><loc>https://geo.clisa.ai/feature/2026-10-01-korea/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://geo.clisa.ai/feature/</loc><lastmod>2026-10-03</lastmod></url>
+  <url><loc>https://geo.clisa.ai/guide/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/CHN/xi-jinping/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/USA/donald-trump/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/PRK/kim-jong-un/</loc><lastmod>2026-10-02</lastmod></url>
@@ -70,7 +72,6 @@
   <url><loc>https://geo.clisa.ai/power/KOR/</loc><lastmod>2026-10-06</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/UKR/</loc><lastmod>2026-10-06</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/</loc><lastmod>2026-10-06</lastmod></url>
-  <url><loc>https://geo.clisa.ai/guide/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/about/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://geo.clisa.ai/subscribe/</loc><lastmod>2026-10-04</lastmod></url>
 </urlset>
