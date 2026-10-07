@@ -1522,7 +1522,7 @@ function upcomingHtml(){
   return up.length ? "<section class=\"sec\"><h3>Upcoming resolutions</h3><ul class=\"list\">" + up.map(f => forecastRow(f, true)).join("") + "</ul><p class=\"note\" style=\"margin-top:8px\"><button type=\"button\" class=\"chip\" data-go=\"forecast\">All forecasts</button></p></section>" : "";
 }
 /* v3.43 사안별 분석: 사안 전부를 한 화면에 차례로 펼친다. 사안 단추는 해당 사안으로 스크롤하고, 읽는 위치에 따라 단추 강조와 주소(/case/사안/)가 바뀐다.
-   분석 전문(details.full)은 처음 펼칠 때 그린다. 전문이 사안 분량의 약 9할이어서, 다섯 사안을 펼쳐도 처음 그리는 양은 예전 한 사안보다 적다 */
+   분석 전문(details.full)은 처음 펼칠 때 그린다. 전문이 사안 분량의 약 9할이어서, 모든 사안을 펼쳐도 처음 그리는 양은 예전 한 사안보다 적다 */
 let STRAT_D = null;
 function caseFullHtml(c){
   const step = (n, t, body) => '<section class="stp">' + stpH(n, t) + body + "</section>";
