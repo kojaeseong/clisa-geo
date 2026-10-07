@@ -667,9 +667,27 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .legend .mt[aria-pressed="false"] .kk{opacity:.45}
 .legend .mt span.kk{display:flex; align-items:center; gap:6px}
 .legend .mt{flex-wrap:wrap}
+.legend .mt > span:not(.sw){flex:1 1 0; min-width:0}  /* v3.77 영문판처럼 글이 길어도 스위치 옆에 두고 글만 줄을 바꾼다 */
 .legend .mt .kk2{display:flex; flex-wrap:wrap; gap:4px 12px; align-items:center} /* v3.20c 협력·동맹과 대립·교전을 한 줄에. v3.76 영문판처럼 글이 길면 줄을 바꿔 범례 상자를 넘지 않게 */
 .legend .mt .kk2 .kk{white-space:nowrap}
 .legend .kk{display:flex; align-items:center; gap:6px; font-size:12px}
+.legend.usfon > div:first-of-type, .legend.usfon .ramp, .legend.usfon .ticks{display:none}  /* v3.77 미군 배치를 켜면 색 기준을 접는다 */
+.legend .usf{display:flex; flex-wrap:wrap; gap:2px 10px; border-top:1px solid var(--line); padding-top:8px}
+.legend .usf .chip{margin-top:4px}
+.usf-card .usf-h{display:flex; align-items:center; justify-content:space-between; gap:8px}
+.usf-card h4{margin:14px 0 4px; font-size:14px}
+.usf-card .m{color:var(--muted); font-size:12.5px}
+.usf-t{border-collapse:collapse; width:100%; font-size:13px; margin:4px 0}
+.usf-t th{text-align:left; font-weight:600; white-space:nowrap; padding:3px 8px 3px 0}
+.usf-t{table-layout:fixed} .usf-t th{width:96px} .usf-t td{padding:3px 4px} .usf-t td.num{width:58px; text-align:right} .usf-t td.num.m{width:130px}
+.usf-t td.bar{background:linear-gradient(var(--accent), var(--accent)) no-repeat left center}
+.usf-t td.sp{color:var(--accent); width:74px; text-align:right}
+.usf-top{margin:0; padding-left:18px; display:grid; gap:2px; font-size:13.5px}
+.usf-ev{list-style:none; margin:0; padding:0; display:grid; gap:6px; font-size:13.5px}
+.usf-ev li{padding-left:34px; text-indent:-34px}
+.usf-g{display:inline-block; width:30px; text-indent:0; font-weight:800} .usf-up{color:var(--conflict)} .usf-down{color:var(--accent)}
+.usf-ev .grade{font-size:11px; border:1px solid var(--line); border-radius:4px; padding:0 4px; color:var(--ink-2)}
+@media (max-width:560px){ .usf-t td.sp{display:none} .usf-t td.num.m{width:104px; font-size:11.5px} .usf-t th{width:78px} }
 .refs .ref{border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-top:8px; background:var(--panel)}
 .refs .ref > summary{cursor:pointer; font:600 14px var(--sans); color:var(--ink)}
 @media (max-width: 960px){

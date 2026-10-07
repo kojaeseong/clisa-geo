@@ -25,7 +25,7 @@ const LABEL_AT = {USA:[-98,39], CAN:[-100,58], FRA:[2.5,46.6], NOR:[9,61.5], ESP
 const HOME = [-95, -28, 0], HOME_K = 1;
 const REGIONS = ["동아시아","동남아시아","남아시아","중앙아시아·내륙","러시아·동유럽","캅카스·아나톨리아","중동·북아프리카","유럽","북미","중남미","아프리카","오세아니아"];
 
-const S = { layer: store.get("ep.layer2") || "focus", prevTab: "overview", showFp:true, showEdge:true, sel:null, selFp:null, lens:null, hover:null, hoverFp:null, rot:HOME.slice(), k:HOME_K, tab:"overview", scase: null };
+const S = { layer: store.get("ep.layer2") || "focus", prevTab: "overview", showFp:true, showEdge:true, showUsf:false, sel:null, selFp:null, lens:null, hover:null, hoverFp:null, rot:HOME.slice(), k:HOME_K, tab:"overview", scase: null };
 if (!LAYERS[S.layer]) S.layer = "focus";
 let D = null, features = [], byIso = {}, borders = null, C = {}, labelPos = {};
 const grat = d3.geoGraticule10();
@@ -375,7 +375,7 @@ function drawOver(t){
   proj();
   octx.clearRect(0, 0, W, H);
   const ctr = center();
-  if (S.showEdge) {
+  if (S.showEdge && !(S.showUsf && D.posture)) {
     for (const e of D.edges) {
       const a = D.capitals[e.a], b = D.capitals[e.b];
       const ls = {type:"LineString", coordinates:[[a[0], a[1]], [b[0], b[1]]]};
@@ -389,6 +389,7 @@ function drawOver(t){
     }
     octx.setLineDash([]); octx.globalAlpha = 1;
   }
+  const USF = S.showUsf && D.posture, lboxes = [], usfOps = USF ? layoutUsf(ctr, lboxes) : [];  /* v3.77 미군 배치를 켜면 관계선·분쟁지를 감추고, 나라 이름은 미군 기호를 피해 놓는다 */
   const MIL = S.layer === "mil";  /* v3.76 군사력 보기에서는 관계선·분쟁지를 옅게 하고 이름·숫자를 맨 위에 그린다 */
   const drawLabels = () => {
   octx.font = '500 11px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif';
@@ -396,7 +397,7 @@ function drawOver(t){
   /* 군사력 보기: 병력이 큰 나라부터 놓고, 이미 놓은 이름·숫자와 겹치면 그 나라는 건너뛴다(확대하면 나타남) */
   const mw = i => { const m = (D.countries[i] || {}).mil || {}; return ({KOR: 3e12, PRK: 2e12, JPN: 1e12}[i] || 0) + (m.nukes ? 1e9 + m.nukes : 0) + (m.active_personnel || 0); };  /* 한국·북한·일본 먼저, 다음 핵보유국, 다음 병력 순 */
   const keys = MIL ? Object.keys(labelPos).sort((x, y) => mw(y) - mw(x)) : Object.keys(labelPos);
-  const boxes = [], hit = (x0, y0, x1, y1) => boxes.some(b => x0 < b[2] && x1 > b[0] && y0 < b[3] && y1 > b[1]);
+  const boxes = lboxes, hit = (x0, y0, x1, y1) => boxes.some(b => x0 < b[2] && x1 > b[0] && y0 < b[3] && y1 > b[1]);
   for (const iso of keys) {
     const c = D.countries[iso];
     if (!c || (c.tier !== 1 && S.k < 1.7)) continue;
@@ -404,6 +405,7 @@ function drawOver(t){
     if (d3.geoDistance(ll, ctr) > 1.38) continue;
     const p0 = projection(ll); if (!p0) continue; let p = p0;
     const dim = S.lens && !S.lens.set.has(iso);
+    if (USF && !MIL) { const hw = octx.measureText(c.name_ko).width / 2 + 2; if (hit(p0[0] - hw, p0[1] - 7, p0[0] + hw, p0[1] + 7)) continue; boxes.push([p0[0] - hw, p0[1] - 7, p0[0] + hw, p0[1] + 7]); }
     if (MIL) { const m = c.mil || {}, sw = (m.active_personnel || m.nukes) ? (String(m.active_personnel || "").length + (m.nukes ? 7 + String(m.nukes).length : 0)) * 5.6 : 0;
       const hw = Math.max(octx.measureText(c.name_ko).width, sw) / 2 + 2, h1 = sw ? 19 : 8;  /* 겹치면 위·아래·옆으로 비켜 본다 */
       const off = [[0, 0], [0, -26], [0, 26], [-hw - 6, 0], [hw + 6, 0], [0, -48], [0, 48]].find(([dx, d]) => !hit(p0[0] + dx - hw, p0[1] + d - 8, p0[0] + dx + hw, p0[1] + d + h1)); if (!off) continue;
@@ -425,11 +427,11 @@ function drawOver(t){
     }
   }
   octx.globalAlpha = 1; };
-  if (!MIL) drawLabels();
+  if (!MIL && !USF) drawLabels();
   octx.globalAlpha = 1;
   if (S.showFp) {
     for (const fp of D.flashpoints) {
-      fp._p = null;
+      fp._p = null; if (USF) continue;
       const ll = [fp.lon, fp.lat];
       if (d3.geoDistance(ll, ctr) > 1.52) continue;
       const p = projection(ll); if (!p) continue;
@@ -452,7 +454,48 @@ function drawOver(t){
       octx.globalAlpha = 1;
     }
   }
-  if (MIL) drawLabels();
+  if (MIL || USF) drawLabels();
+  for (const f of usfOps) f();
+}
+/* v3.77 미군 해외 배치: 상주(원, DMDC 분기 통계)와 전개(함정 기호·증파▲·감축▼·법◆·계획◇와 번호). 설명과 출처는 세계 정세 탭 맨 위 카드. 부대 단위 실시간 위치는 싣지 않는다(R24) */
+const manK = n => n >= 10000 ? (Math.round(n / 1e3) / 10) + "만" : n >= 1000 ? (Math.round(n / 100) / 10) + "천" : String(n);
+const USF_GL = {up: "▲", down: "▼", law: "◆", plan: "◇"};
+const usfEvents = () => D.posture.events.map((e, n) => Object.assign(e, {no: n + 1}));
+function usfFleet(){  /* 같은 해역의 함정은 기호 하나로 묶는다 */
+  const g = {}; for (const v of D.posture.fleet.items) (g[v.g] = g[v.g] || []).push(v);
+  return Object.entries(g).map(([name, vs]) => ({name, vs, lat: vs.reduce((a, v) => a + v.lat, 0) / vs.length, lon: vs.reduce((a, v) => a + v.lon, 0) / vs.length,
+    cv: vs.filter(v => v.type === "cv").length, ar: vs.filter(v => v.type !== "cv").length}));
+}
+function layoutUsf(ctr, boxes){  /* 그릴 일과 차지할 자리를 먼저 정한다. 나라 이름은 그 자리를 피해 놓는다 */
+  const P = D.posture, F = '"Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif', z = Math.sqrt(S.k), ops = [];
+  const hit = (x0, y0, x1, y1) => boxes.some(b => x0 < b[2] && x1 > b[0] && y0 < b[3] && y1 > b[1]);
+  const txt = (t, x, y, col, font) => ops.push(() => { octx.font = font; octx.lineWidth = 3; octx.strokeStyle = C.halo; octx.strokeText(t, x, y); octx.fillStyle = col; octx.fillText(t, x, y); });
+  const place = (t, x, y, font, dys) => { octx.font = font; const w = octx.measureText(t).width / 2 + 2;
+    for (const d of dys) { const yy = y + d; if (!hit(x - w, yy - 7, x + w, yy + 7)) { boxes.push([x - w, yy - 7, x + w, yy + 7]); return yy; } } return null; };
+  const at = (o, lon, lat) => { o._p = null; const ll = [lon, lat]; if (d3.geoDistance(ll, ctr) > 1.45) return null; const p = projection(ll); if (p) o._p = p; return p; };
+  const res = P.res.items.filter(r => at(r, r.lon, r.lat));
+  for (const r of res) { const p = r._p; r._r = (2 + Math.sqrt(r.n) / 10) * z;  /* 원 넓이 ∝ 인원 */
+    ops.push(() => { octx.beginPath(); octx.arc(p[0], p[1], r._r, 0, Math.PI * 2); octx.globalAlpha = 0.18; octx.fillStyle = C.accent; octx.fill(); octx.globalAlpha = 0.9; octx.lineWidth = 1.4; octx.strokeStyle = C.accent; octx.stroke(); octx.globalAlpha = 1; }); }
+  const FL = usfFleet(); D.posture._fl = FL;
+  for (const g of FL) { const p = at(g, g.lon, g.lat); if (!p) continue; boxes.push([p[0] - 10, p[1] - 7, p[0] + 10, p[1] + 6]);
+    ops.push(() => { octx.beginPath(); octx.moveTo(p[0] - 9, p[1] - 2); octx.lineTo(p[0] + 9, p[1] - 2); octx.lineTo(p[0] + 5.5, p[1] + 4); octx.lineTo(p[0] - 5.5, p[1] + 4); octx.closePath();
+      octx.fillStyle = C.ink; octx.fill(); octx.lineWidth = 1.5; octx.strokeStyle = C.halo; octx.stroke(); octx.fillRect(p[0] + 1, p[1] - 6, 3, 4); }); }
+  const EV = usfEvents();
+  for (const e of EV) { const p = at(e, e.lon, e.lat); if (!p) continue; boxes.push([p[0] - 7, p[1] - 8, p[0] + 7, p[1] + 8]); }
+  for (const e of EV) { if (!e._p) continue; const p = e._p, col = e.kind === "up" ? C.conflict : e.kind === "down" ? C.accent : C.ink;
+    txt(USF_GL[e.kind], p[0], p[1], col, "700 15px " + F);
+    const f = "800 10px " + F, t = String(e.no), w = 5; let q = null;
+    for (const [dx, dy] of [[13, -7], [-13, -7], [13, 7], [-13, 7]]) if (!hit(p[0] + dx - w, p[1] + dy - 6, p[0] + dx + w, p[1] + dy + 6)) { q = [p[0] + dx, p[1] + dy]; boxes.push([q[0] - w, q[1] - 6, q[0] + w, q[1] + 6]); break; }
+    if (q) txt(t, q[0], q[1], col, f); }
+  for (const g of FL) { if (!g._p) continue;  /* 해역 이름 대신 항모·상륙전단 수 */
+    const t = [g.cv ? "항모 " + g.cv : "", g.ar ? "상륙전단 " + g.ar : ""].filter(Boolean).join(" · "), f = "700 10px " + F, y = place(t, g._p[0], g._p[1], f, [13, -13, 25]); if (y != null) txt(t, g._p[0], y, C.ink, f); }
+  for (const r of res) {  /* 큰 곳부터 이름·인원(확대하면 작은 곳도), 직전 분기보다 5% 넘게 늘거나 줄면 ▲▼ */
+    if (r.n < (S.k >= 2.2 ? 500 : S.k >= 1.5 ? 3000 : 10000)) continue;
+    const ch = r.prev ? (r.n - r.prev) / r.prev : 0, mk = ch >= 0.05 ? " ▲" : ch <= -0.05 ? " ▼" : "";
+    const t = r.name + " " + manK(r.n) + mk, f = "700 10.5px " + F, y = place(t, r._p[0], r._p[1], f, r._r > 14 ? [0, -r._r - 7, r._r + 7] : [r._r + 7, -r._r - 7]);
+    if (y != null) txt(t, r._p[0], y, C.accent, f);
+  }
+  return ops;
 }
 let needBase = true, scheduled = false, lastOver = 0, spinOnly = false;
 let GLOBE_VIS = true, QUIET = 0;  /* v3.25 아래 자전 설명 참조 */
@@ -495,6 +538,11 @@ function loop(){
 
 /* ---------- interaction ---------- */
 function hitTest(x, y){
+  if (S.showUsf && D.posture) {  /* v3.77 미군 배치 표시가 켜져 있으면 그 기호를 먼저 본다 */
+    const P = D.posture, cand = [...P.events.map(o => [o, 9]), ...(P._fl || []).map(o => [o, 11]), ...P.res.items.map(o => [o, Math.max(6, o._r || 0)])];
+    let best = null, bd = 1e9; for (const [o, rr] of cand) { if (!o._p) continue; const dd = Math.hypot(o._p[0] - x, o._p[1] - y); if (dd < rr && dd < bd) { bd = dd; best = o; } }
+    if (best) return {usf: best};
+  }
   if (S.showFp) {
     let best = null, bd = 1e9;
     for (const fp of D.flashpoints) { if (!fp._p) continue; const dd = Math.hypot(fp._p[0] - x, fp._p[1] - y); if (dd < 4 + fp.severity * 1.15 + 6 && dd < bd) { bd = dd; best = fp; } }
@@ -552,7 +600,7 @@ function setupInteraction(){
     cancelAnimationFrame(hoverRaf);
     hoverRaf = requestAnimationFrame(() => {
       const h = hitTest(x, y);
-      const hv = h.fp ? null : (h.iso || null), hf = h.fp ? h.fp.id : null;
+      const hv = h.fp || h.usf ? null : (h.iso || null), hf = h.fp ? h.fp.id : null;
       if (hv !== S.hover || hf !== S.hoverFp) { const baseChanged = hv !== S.hover; S.hover = hv; S.hoverFp = hf; requestDraw(baseChanged); }
       showTip(h, x, y);
     });
@@ -564,13 +612,13 @@ function setupInteraction(){
     else if (h.iso && D.countries[h.iso]) selectCountry(h.iso, true, true);
   });
 
-  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
+  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { S.showUsf = !S.showUsf; renderOverview(); if (S.showUsf) flyTo(68, 32); } else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
   /* v3.43f 데스크탑: '지구본 색 기준' 상자를 접으면 왼쪽 아래 작은 '지도 표시' 단추로 바뀐다(처음엔 펼침, 접은 상태는 브라우저에 기억). 모바일: 예전처럼 단추로 열고 닫는다 */
   const legOff = off => { document.documentElement.classList.toggle("legoff", off); store.set("ep.legoff", off ? "1" : "0"); $("#legbtn").setAttribute("aria-expanded", !off); };
   if (!narrow()) $("#legbtn").setAttribute("aria-expanded", !document.documentElement.classList.contains("legoff"));
   $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
-  $("#legend").addEventListener("click", e => { if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
+  $("#legend").addEventListener("click", e => { if (e.target.closest("[data-usfgo]")) { switchTab("overview"); const el = document.getElementById("s-usf"); if (el) el.scrollIntoView({block: "start"}); return; } if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
   $("#lensoff").onclick = () => setLens(null);
   document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; const t = b.dataset.tab; navMark(TAB_ALIAS[t] || t); /* v3.74 누르기 반응(웹 분석 INP 최대 672ms): 메뉴 표시를 먼저 그리고, 무거운 화면 그리기는 다음 차례로 미룬다 */ requestAnimationFrame(() => setTimeout(() => { if (t === "strat") { S.scase = null; caseMark(); } if (t === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(t); }, 0)); });
   document.addEventListener("click", ev => {
@@ -599,6 +647,7 @@ function setupInteraction(){
     const fub = ev.target.closest("[data-fut]");
     if (fub) { const [cid, fid] = fub.dataset.fut.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("fut-" + cid + "-" + fid);
       if (t) { t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
+    if (ev.target.closest("[data-mt-off]")) { S.showUsf = false; renderOverview(); renderLegend(); requestDraw(false); return; }  /* v3.77 미군 배치 카드의 끄기 */
     const fwb = ev.target.closest("[data-fw]");
     if (fwb) { switchTab("forecast"); const d = document.getElementById("fw-" + fwb.dataset.fw); if (d) { d.open = true; const sc = d.previousElementSibling && d.previousElementSibling.tagName === "P" ? d.parentElement : d; requestAnimationFrame(() => sc.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"})); } return; }
     const a = ev.target.closest("[data-iso],[data-fp],[data-lens],[data-go]");
@@ -613,7 +662,12 @@ function setupInteraction(){
 function showTip(h, x, y){
   const tip = $("#tip");
   let html = "";
-  if (h.fp) html = "<b>" + esc(h.fp.name_ko) + "</b><br>" + pips(h.fp.severity) + ' <span class="m">심각도 ' + h.fp.severity + "/5</span><br><span class=\"m num\">" + esc(h.fp.last_major_event ? h.fp.last_major_event.date : "") + "</span> " + esc(h.fp.last_major_event ? h.fp.last_major_event.text : "");
+  if (h.usf) { const o = h.usf, P = D.posture, ymd = ymdK;
+    if (o.kind) html = '<span class="m num">' + o.no + " · " + ymd(o.date) + "</span> <b>" + esc(o.t) + '</b><br><span class="m">' + esc(o.grade) + " · " + esc(o.src) + "</span>";
+    else if (o.vs) html = "<b>" + esc(o.name) + "</b>" + o.vs.map(v => "<br>" + esc(v.name) + ' <span class="m">' + (v.type === "cv" ? "항모" : "상륙전단") + " · 모항 " + esc(v.home) + "</span>" + (v.note ? '<br><span class="m">' + esc(v.note) + "</span>" : "")).join("") + '<br><span class="m">미 해군연구소 함대 추적 · ' + ymd(P.fleet.asof) + "</span>";
+    else html = "<b>" + esc(o.name) + '</b> 상주 미군 <span class="num">' + o.n.toLocaleString("ko-KR") + "</span>명" + (o.prev ? '<br><span class="m">직전 분기 ' + o.prev.toLocaleString("ko-KR") + "명 · " + ((o.n - o.prev) >= 0 ? "+" : "") + (o.n - o.prev).toLocaleString("ko-KR") + "</span>" : "") + '<br><span class="m">미 국방부 인력데이터센터 · ' + ymd(P.res.asof) + " 기준</span>";
+  }
+  else if (h.fp) html = "<b>" + esc(h.fp.name_ko) + "</b><br>" + pips(h.fp.severity) + ' <span class="m">심각도 ' + h.fp.severity + "/5</span><br><span class=\"m num\">" + esc(h.fp.last_major_event ? h.fp.last_major_event.date : "") + "</span> " + esc(h.fp.last_major_event ? h.fp.last_major_event.text : "");
   else if (h.iso && D.countries[h.iso]) { const c = D.countries[h.iso]; html = "<b>" + esc(c.name_ko) + '</b> <span class="m">' + esc(c.region) + "</span><br>" + (S.layer === "focus" ? '관련 전망 <span class="num">' + (FCN[c.iso] || 0) + "</span>건" : LAYERS[S.layer].label + ' <span class="num">' + (c.scores ? c.scores[S.layer] : "—") + "</span>") + '<br><span class="m">' + esc(shortLeader(c.leader)) + "</span>"; }
   else if (h.f) html = "<b>" + esc(h.f.properties.name) + '</b><br><span class="m">분석 범위 밖</span>';
   if (!html) return hideTip();
@@ -703,14 +757,41 @@ function renderLegend(){
   const line = (col, dash, w) => { w = w || 26; return '<svg width="' + w + '" height="8" aria-hidden="true"><line x1="1" y1="4" x2="' + (w - 1) + '" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>"; };
   const tk = S.layer === "focus" ? "<span>적음</span><span></span><span>많음</span>" : "<span>0</span><span>50</span><span>100</span>";
   const sw = (k, on, body) => '<button type="button" class="mt" data-mt="' + k + '" aria-pressed="' + on + '"><span class="sw" aria-hidden="true"></span>' + body + "</button>";
+  $("#legend").classList.toggle("usfon", !!(S.showUsf && D && D.posture));
   $("#legend").innerHTML = '<button type="button" class="legx" data-legx aria-label="접기" title="접기">×</button>' +
     '<div><label class="lt" for="lysel">지구본 색 기준</label><select id="lysel">' + Object.keys(LAYERS).map(k => '<option value="' + k + '"' + (k === S.layer ? " selected" : "") + ">" + LAYERS[k].label + "</option>").join("") + '</select><div class="ld">' + L.desc + "</div></div>" +
     '<div class="ramp" style="background:linear-gradient(90deg,' + stops + ')"></div><div class="ticks">' + tk + "</div>" +
     '<div class="keys"><div class="lt">표시 켜고 끄기</div>' +
       sw("edge", S.showEdge, '<span class="kk2"><span class="kk">' + line(C.coop, false, 18) + "협력·동맹</span><span class=\"kk\">" + line(C.conflict, true, 18) + "대립·교전</span></span>") +
       sw("fp", S.showFp, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.conflict + '" stroke="' + C.halo + '" stroke-width="1.5"/></svg>분쟁지 (크기 = 심각도)</span>') +
+      (D && D.posture ? sw("usf", S.showUsf, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.accent + '" fill-opacity=".2" stroke="' + C.accent + '" stroke-width="1.4"/></svg>미군 해외 배치</span>') : "") +
       '<div class="kk" style="padding-left:30px"><svg width="26" height="10" aria-hidden="true"><rect x="3" y="1" width="20" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>분석 범위 밖</div>' +
-    "</div>";
+    "</div>" + (S.showUsf && D && D.posture ? usfLegend() : "");
+}
+/* v3.77 미군 해외 배치: 범례에는 기호 설명만, 자료와 출처는 세계 정세 탭 맨 위 카드(usfCard) */
+const SHIP_SVG = c => '<svg width="16" height="10" aria-hidden="true" style="vertical-align:-1px"><path d="M1 3H15L12 9H4Z" fill="' + c + '"/><rect x="8" y="0" width="3" height="3" fill="' + c + '"/></svg>';
+function usfLegend(){
+  return '<div class="usf ld"><span><b style="color:' + C.accent + '">○</b> 상주 인원</span><span>' + SHIP_SVG(C.ink) + ' 항모·상륙전단</span><span><b style="color:' + C.conflict + '">▲</b> 증파</span><span><b style="color:' + C.accent + '">▼</b> 감축</span><span>◆ 법</span><span>◇ 계획</span>' +
+    '<button type="button" class="chip" data-usfgo>자료와 출처 보기 →</button></div>';
+}
+const ymdK = s => { const a = s.split("-"); return a[0] + "년 " + (+a[1]) + "월" + (a[2] ? " " + (+a[2]) + "일" : ""); };
+function usfCard(){
+  const P = D.posture, R = P.res, sh = R.shares, a = sh[0], z = sh[sh.length - 1], q = ymdK;
+  const spark = k => { const v = sh.map(x => x[k]), mn = Math.min(...v), mx = Math.max(...v), r = (mx - mn) || 1;
+    return '<svg width="64" height="18" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="1.5" points="' + v.map((y, n) => (2 + n * 12) + "," + (16 - (y - mn) / r * 14).toFixed(1)).join(" ") + '"/></svg>'; };
+  const row = (k, lab) => '<tr><th>' + lab + '</th><td class="bar" style="background-size:' + z[k] + '% 8px"></td><td class="num">' + z[k].toFixed(1) + '%</td><td class="sp">' + spark(k) + '</td><td class="num m">' + a[k].toFixed(1) + "% → " + z[k].toFixed(1) + "%</td></tr>";
+  const top = R.items.slice(0, 8).map(r => { const d = r.prev ? r.n - r.prev : 0; return "<li><b>" + esc(r.name) + '</b> <span class="num">' + r.n.toLocaleString("ko-KR") + '명</span> <span class="m num">' + (d >= 0 ? "+" : "") + d.toLocaleString("ko-KR") + "</span></li>"; }).join("");
+  const ev = usfEvents().slice().reverse().map(e => '<li><span class="usf-g usf-' + e.kind + '">' + USF_GL[e.kind] + e.no + '</span><span class="m num">' + ymdK(e.date) + "</span> " + esc(e.t) + ' <span class="grade">' + esc(e.grade) + "</span> " + (e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener" class="m">' + esc(e.src) + "</a>" : '<span class="m">' + esc(e.src) + "</span>") + "</li>").join("");
+  const fl = usfFleet().map(g => "<li><b>" + esc(g.name) + "</b> " + g.vs.map(v => esc(v.name) + (v.fwd ? '<span class="m">(모항 ' + esc(v.home) + ")</span>" : "")).join(", ") + "</li>").join("");
+  return '<section class="sec usf-card" id="s-usf"><div class="usf-h"><h3>미군 해외 배치</h3><button type="button" class="chip" data-mt-off="usf">지구본에서 끄기</button></div>' +
+    '<p class="note">미군은 한쪽을 늘리면 다른 쪽을 줄여야 합니다. 그래서 어디에 얼마를 두는지는 미국이 실제로 어느 지역을 앞세우는지 보여 줍니다. 지구본의 원은 상주 인원, 기호는 최근의 증파·감축·법·계획입니다.</p>' +
+    '<h4>상주 인원의 지역별 비중</h4><p class="m">해외 상주 미군 ' + R.total.toLocaleString("ko-KR") + "명(" + ymdK(R.asof) + " 기준), " + q(a.q) + "부터 " + q(z.q) + "까지 6개 분기</p>" +
+    '<table class="usf-t">' + row("ip", "인도·태평양") + row("eu", "유럽") + row("me", "중동") + "</table>" +
+    '<p class="m">' + esc(R.note) + "</p>" +
+    '<h4>상주 인원이 많은 곳</h4><ul class="usf-top">' + top + '</ul><p class="m">숫자 옆은 직전 분기(' + q(sh[sh.length - 2].q) + ")보다 늘거나 준 인원</p>" +
+    '<h4>최근의 움직임</h4><ul class="usf-ev">' + ev + '</ul><p class="m">등급: 공식(정부 발표), 법(법 조문), 2차(분석 기관이 전한 정부 확인), 보도(익명 당국자 등 언론 보도). 지구본의 번호와 같습니다.</p>' +
+    '<h4>항모·상륙전단</h4><ul class="usf-top">' + fl + '</ul>' +
+    '<p class="m">출처: <a href="' + esc(R.url) + '" target="_blank" rel="noopener">미 국방부 인력데이터센터(DMDC)</a> 분기 통계 · <a href="' + esc(P.fleet.url) + '" target="_blank" rel="noopener">미 해군연구소(USNI) 함대 추적</a> ' + ymdK(P.fleet.asof) + " · 함정 위치는 공개 자료 기준의 대략적 해역입니다.</p></section>";
 }
 function insightsHtml(){
   const cs = D.strategies || [];
@@ -961,7 +1042,7 @@ function loadBrief(){
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  $("#pane-overview").innerHTML = dueHtml() +
+  $("#pane-overview").innerHTML = (S.showUsf && D.posture ? usfCard() : "") + dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
@@ -1744,6 +1825,17 @@ function mailRow(subject){
   const href = "mailto:" + MAIL + "?subject=" + encodeURIComponent(subject);
   return '<span class="mailrow"><span class="mail"><a href="' + esc(href) + '">' + MAIL + '</a></span><button type="button" class="copy-btn" data-copy="' + MAIL + '">주소 복사</button></span>';
 }
+/* v3.78 복사할 때 출처를 덧붙인다(2026-10-07 결재). 본문을 40자 이상 골라 복사하면 붙여 넣은 글 끝에 사이트 이름과 그 화면의 주소가 따라간다. 짧은 낱말과 검색창·입력칸 복사는 그대로 둔다 */
+document.addEventListener("copy", e => {
+  const sel = window.getSelection && getSelection(); if (!sel || sel.isCollapsed || !e.clipboardData) return;
+  const a = document.activeElement; if (a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA" || a.isContentEditable)) return;
+  const t = sel.toString(); if (t.replace(/\s+/g, "").length < 40) return;
+  const url = location.origin + location.pathname + location.hash, box = document.createElement("div");
+  for (let i = 0; i < sel.rangeCount; i++) box.appendChild(sel.getRangeAt(i).cloneContents());
+  e.clipboardData.setData("text/plain", t.replace(/\s+$/, "") + "\n\n출처: 클리사 지오폴리틱스(" + url + ")");
+  e.clipboardData.setData("text/html", box.innerHTML + '<p>출처: <a href="' + esc(url) + '">클리사 지오폴리틱스</a>(' + esc(url) + ")</p>");
+  e.preventDefault();
+});
 function footHtml(noMail){
   return '<footer class="site-foot">' + (noMail ? "" : '<p class="fb">사실의 오류나 판단에 대한 반대 근거는 아래 주소로 알려 주십시오. 확인된 오류는 바로잡고 그 내역을 밝힙니다.</p>' +
     mailRow("[클리사 지오폴리틱스] 의견")) +
@@ -1751,7 +1843,7 @@ function footHtml(noMail){
     "<p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p>" +
     "<p>이 사이트는 회원 가입이 없습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
     '<p>© 2026 고재성 · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 알림</a></p>' +
-    "<p>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 출처를 밝힌 부분 인용과 링크 공유는 자유롭게 할 수 있으나, 전부 또는 상당 부분을 복제·재배포하는 것은 허락 없이 할 수 없습니다.</p></footer>";
+    "<p>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 '클리사 지오폴리틱스'와 해당 페이지 주소를 출처로 밝혀 주십시오(본문을 40자 이상 복사하면 출처가 자동으로 붙습니다). 전부 또는 상당 부분을 복제·재배포하려면 <a href='mailto:clisageo@clisa.ai'>clisageo@clisa.ai</a>로 먼저 허락을 받아 주십시오.</p></footer>";
 }
 function caseFbHtml(c){
   const name = String(c.title || "").split(":")[0];
