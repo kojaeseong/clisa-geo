@@ -4,39 +4,10 @@
    "date": "2026-10-07",
    "items": [
     {
-     "case": "korea",
-     "h": "North Korea's Foreign Ministry dismisses Joint Chiefs' mine finding as a staged farce",
-     "fact": "In a statement carried by the Korean Central News Agency on October 6, 2026, North Korea's Foreign Ministry claimed that the October 5 final conclusion by South Korea's Joint Chiefs of Staff, which blamed a mine planted by North Korean troops for the September 21 blast in the demilitarized zone, was a farce planned and staged by Seoul. The ministry said the mines the South Korean military had removed had nothing to do with the North, and warned that if South Korean military boots, or even their sparks, crossed even one millimeter into North Korean territory, its border forces would respond immediately and forcefully.",
-     "link": "Following Kim Yo Jong's September 30 statement, North Korea has again denied responsibility, this time through its Foreign Ministry, hardening a standoff in which the two Koreas dispute even the basic facts. That points in the same direction as the armed stalemate described in Conclusion 1 of the Korean Peninsula analysis, and with warnings flying and no channel for dialogue, it is a factor that makes it more likely that inter-Korean military hotlines will not be restored.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.mt.co.kr/politics/2026/10/06/2026100619232942313",
-      "https://weekly.khan.co.kr/article/202610062030001/",
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008785634"
-     ]
-    },
-    {
-     "case": "korea",
-     "h": "Foreign Minister Cho Hyun says Ukraine's apology falls short, weighs recalling ambassador",
-     "fact": "Testifying before the National Assembly's Foreign Affairs and Unification Committee during its annual audit on October 6, Foreign Minister Cho Hyun said he had received a message containing an apology from Ukraine's foreign minister over President Volodymyr Zelensky's disclosure, in his September 23 speech to the U.N. General Assembly, that two North Korean prisoners of war had been sent to South Korea. \"It falls somewhat short of the level we had in mind, so we intend to take firm measures,\" Cho said, adding that recalling South Korea's ambassador to Ukraine is among the options \"under review.\" Seoul views the disclosure as a breach of a confidentiality agreement; Ukraine's presidential office has maintained that no such agreement existed.",
-     "link": "Conclusion 6 of the Korean Peninsula analysis, which takes individual lives as its yardstick, puts humanitarian issues such as the return of detainees first. Here, a humanitarian matter, the transfer of North Korean prisoners of war to the South, has turned into a diplomatic dispute with a third country. It does not move the probability of any specific forecast.",
-     "fc": [],
-     "src": [
-      "https://www.segye.com/newsView/20261006509872",
-      "https://www.pressian.com/pages/articles/2026100616051479916",
-      "https://kyivindependent.com/south-korea-says-it-received-insufficient-apology-from-ukraine-over-north-korean-pows-mulls-envoy-recall/"
-     ]
-    },
-    {
      "case": "ukraine",
-     "h": "Ukraine launches mass drone attack on Moscow area, killing two in Moscow region",
-     "fact": "Moscow Mayor Sergei Sobyanin said 650 drones headed toward Moscow and the surrounding region between 8:30 p.m. on October 5 and 5 a.m. on October 6, Moscow time, and that most were shot down. Moscow region Governor Andrei Vorobyov said two people were killed. TASS, tallying Russian Defense Ministry reports, counted 868 drones downed overnight. Reports said a fire broke out at the Moscow region's largest fuel storage facility, but the Ukrainian military has not officially confirmed it. Over the same night, Ukraine's Air Force said Russia launched 137 drones, of which 114 were shot down or neutralized.",
-     "link": "With each side increasingly targeting the other's capital region and energy infrastructure, the exchange fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. Zelensky warned the same day that Russia is preparing a massive strike. That weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "h": "Russia hits Kyiv with missiles before dawn on October 7, killing two",
+     "fact": "Explosions were heard in Kyiv at about 3:15 a.m. and again at about 5:15 a.m. local time on October 7, after Ukraine's Air Force warned that several Russian Tu-95 bombers were approaching the border. Kyiv Mayor Vitali Klitschko reported strikes on nonresidential areas in the Obolon and Shevchenkivskyi districts and damage to a warehouse in the Podil district, and the Kyiv City Military Administration said two people were killed in a fire at a garage cooperative in the Darnytskyi district. As of publication, Ukraine's Air Force had not released a full tally, and Russia's Defense Ministry had not issued a statement.",
+     "link": "The strike came hours after President Volodymyr Zelensky warned on the night of October 6 that Russia was preparing a massive attack, and it follows Ukraine's drone barrage on the Moscow area, as the two sides trade strikes on each other's capitals. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
@@ -44,17 +15,33 @@
       }
      ],
      "src": [
-      "https://tass.com/emergencies/2197897",
-      "https://tass.com/politics/2197959",
-      "https://www.aljazeera.com/news/2026/10/6/ukraine-launches-major-drone-attack-on-russias-moscow-region-killing-two",
-      "https://kyivindependent.com/russian-strikes-kill-13-injure-104-across-ukraine-damage-kryvyi-rih-hospital/"
+      "https://kyivindependent.com/russia-slams-kyiv-in-mass-missile-drone-attack-on-putins-74th-birthday/",
+      "https://kyivindependent.com/zelensky-warns-russia-preparing-mass-strike/",
+      "https://interfax.com.ua/news/general/1215492.html",
+      "https://censor.net/ua/news/4027060/rf-atakuvala-kyyiv-balistykoyu-7-jovtnya-scho-vidomo"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "North Korea's Foreign Ministry calls Seoul's mine findings a farce, rules out talks with the South on military sovereignty",
+     "fact": "In a statement carried by the Korean Central News Agency on October 6, North Korea's Foreign Ministry claimed that the October 5 final findings of South Korea's Joint Chiefs of Staff had exposed the purpose of what it called a farce planned and staged by Seoul. It warned that if South Korean troops, or even a spark from them, crossed even one millimeter into North Korean territory, its border forces would respond immediately and forcefully. The ministry said Pyongyang would under no circumstances discuss the exercise of military sovereignty on its own territory with a hostile state and would defend that territory through force rather than negotiation, reaffirming this as the government's official position.",
+     "link": "By restating as official policy that it will not treat South Korea as a negotiating partner on military matters, Pyongyang has moved closer to the formalization condition in the first disconfirming signal of the Korean Peninsula analysis. (The missile-launch-frequency condition is tracked separately in the weekly review.) That is a factor raising the odds of the forecast that inter-Korean military hotlines will not be restored.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://koreanewsservice.com/politics-military/18957/",
+      "https://www.mt.co.kr/politics/2026/10/06/2026100619232942313"
      ]
     },
     {
      "case": "ukraine",
-     "h": "Drones hit two merchant ships in Bulgaria's exclusive economic zone, one sinks",
-     "fact": "According to Bulgarian broadcaster Nova, the Togo-flagged Alfa Watan and the Palau-flagged Able were struck by drones on October 6 in Bulgaria's exclusive economic zone, about 70 nautical miles (roughly 130 kilometers) off the Bulgarian coast. The Alfa Watan sank, and its crew were still being searched for at the time of reporting. All 18 crew members of the Able were rescued, and it is not known who launched the drones. The same day, Odesa Oblast Governor Oleh Kiper said one person was killed aboard a Marshall Islands-flagged ship in a Russian attack.",
-     "link": "A day after an attack off Romania on October 5, merchant ships came under attack in another NATO member's exclusive economic zone, widening the danger to Black Sea shipping. That is consistent with the war of attrition in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "h": "Drones hit two merchant ships in Bulgaria's exclusive economic zone, sinking one",
+     "fact": "According to Bulgarian broadcaster Nova, the Togo-flagged Alfa Watan and the Palau-flagged Able were struck by drones on October 6 in Bulgaria's exclusive economic zone. The Alfa Watan sank, and all 18 crew members of the Able were rescued. It was not clear who launched the drones. The same day, Odesa Oblast Governor Oleh Kiper said one person was killed aboard a Marshall Islands-flagged ship in a Russian attack.",
+     "link": "A day after an attack off Romania on October 5, merchant ships came under attack in the exclusive economic zone of Bulgaria, another NATO member, widening the danger to Black Sea shipping. That is consistent with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
@@ -66,10 +53,38 @@
      ]
     },
     {
+     "case": "ukraine",
+     "h": "Ukraine launches mass drone attack on Moscow area, killing two in the Moscow region",
+     "fact": "Moscow Mayor Sergei Sobyanin said 650 drones headed toward Moscow and the surrounding region between 8:30 p.m. on October 5 and 5 a.m. on October 6, Moscow time, and that most were shot down. Moscow region Governor Andrei Vorobyov said two people were killed. TASS, tallying Russian Defense Ministry reports, counted 868 drones downed overnight. Over the same night, Ukraine's Air Force said Russia launched 137 drones, of which 114 were shot down or neutralized.",
+     "link": "Ukraine is stepping up attacks on Russia's capital region, which fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. That weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://tass.com/emergencies/2197897",
+      "https://tass.com/politics/2197959",
+      "https://kyivindependent.com/russian-strikes-kill-13-injure-104-across-ukraine-damage-kryvyi-rih-hospital/"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "Foreign Minister Cho Hyun says Ukraine's apology falls somewhat short, weighs recalling ambassador",
+     "fact": "Testifying before the National Assembly's Foreign Affairs and Unification Committee during its annual audit on October 6, Foreign Minister Cho Hyun said he had received a message containing an apology from Ukraine's foreign minister over Zelensky's disclosure, in his September 23 speech to the U.N. General Assembly, that two North Korean prisoners of war had been sent to South Korea. \"It falls somewhat short of the level we had in mind, so we intend to take firm measures,\" Cho said, adding that recalling South Korea's ambassador to Ukraine is among the options \"under review.\"",
+     "link": "Conclusion 6 of the Korean Peninsula analysis, which takes individual lives as its yardstick, puts humanitarian issues such as the return of detainees first. Here, a humanitarian matter, the transfer of North Korean prisoners of war to the South, has turned into a diplomatic dispute with a third country. It does not move the probability of any specific forecast.",
+     "fc": [],
+     "src": [
+      "https://www.segye.com/newsView/20261006509872",
+      "https://kyivindependent.com/south-korea-says-it-received-insufficient-apology-from-ukraine-over-north-korean-pows-mulls-envoy-recall/"
+     ]
+    },
+    {
      "case": "iran",
      "h": "Houthis claim strikes on Riyadh airport and Rabigh refinery; Saudi Arabia has not confirmed hits",
-     "fact": "Houthi spokesman Yahya Saree claimed on October 5 that the group had used missiles and drones to strike King Khalid International Airport in Riyadh, an Aramco refinery in Rabigh on the Red Sea coast, and military sites in southern Saudi Arabia. Loud explosions were reported in Riyadh that evening, but Saudi authorities have not officially confirmed that those facilities were hit; Saudi civil aviation authorities said attacks on Jazan and Najran airports near the Yemeni border injured at least three people. Brent crude fell below $100 a barrel on October 6.",
-     "link": "There is still no confirmed large-scale destruction of Gulf oil facilities, the disconfirming signal for Conclusion 2 of the Iran and Hormuz analysis. Claimed attacks on the Saudi mainland raise the risk of escalation, yet oil prices fell, so the factors bearing on the forecast that Brent will end the year below $90 a barrel point in both directions.",
+     "fact": "Houthi spokesman Yahya Saree claimed on October 5 that the group had used missiles and drones to strike targets including King Khalid International Airport in Riyadh and an Aramco refinery in Rabigh on the Red Sea coast. Saudi authorities have not officially confirmed that those facilities were hit; Saudi civil aviation authorities said attacks on Jazan and Najran airports near the border left three people with minor injuries. On October 6, Turki al-Maliki, spokesman for the Saudi-led coalition, said on X that a ballistic missile aimed at Khamis Mushait had been intercepted.",
+     "link": "There is still no confirmed large-scale destruction of Gulf oil facilities, the disconfirming signal for Conclusion 2 of the Iran and Hormuz analysis. Continued attacks aimed at the Saudi mainland have raised the risk of escalation, yet Brent crude dipped below $100 a barrel in trading on October 6, so the factors bearing on the forecast that Brent will end the year below $90 a barrel point in both directions.",
      "fc": [
       {
        "id": "f13",
@@ -85,21 +100,21 @@
    ],
    "more": [
     {
+     "t": "In a birthday message to Russian President Vladimir Putin on October 7, North Korean leader Kim Jong Un said valuing the comprehensive strategic partnership and alliance with Russia is the firm policy of his government, and reaffirmed his unwavering support, saying he is confident Russia will win its war.",
+     "src": [
+      "https://koreanewsservice.com/revolutionary-activities/18959/"
+     ]
+    },
+    {
      "t": "Sixty-two percent of Ukrainians surveyed said they could endure the war for as long as necessary, and 69 percent supported an immediate, complete ceasefire along the current front line on conditions including no legal recognition of the occupied territories, according to a Kyiv International Institute of Sociology (KIIS) survey of 1,002 people conducted September 12–21 and released October 6.",
      "src": [
       "https://kiis.com.ua/?lang=eng&cat=reports&id=1639&page=1"
      ]
     },
     {
-     "t": "Lithuania's parliament voted 106–18, with six abstentions, on October 6 to approve in a first reading a constitutional amendment repealing Article 137, which bans weapons of mass destruction and foreign military bases on Lithuanian soil. The final vote can take place no sooner than three months later.",
+     "t": "Lithuania's parliament voted 106–18, with six abstentions, on October 6 to approve in a first reading a constitutional amendment repealing Article 137, which bans weapons of mass destruction and foreign military bases on Lithuanian soil. The final vote cannot be held for at least three months.",
      "src": [
       "https://kyivindependent.com/lithuania-takes-1st-step-to-lift-nuclear-weapons-ban-amid-russian-threat/"
-     ]
-    },
-    {
-     "t": "Latvian Interior Minister Janis Dombrava said on October 6 that armed individuals on the Belarusian side had threatened Latvian soldiers while driving a group of about 20 migrants toward the border, and that hours later a masked group crossed into Latvia, damaged border infrastructure, stole cameras and returned to Belarus.",
-     "src": [
-      "https://kyivindependent.com/armed-individuals-from-belarus-threaten-latvian-soldiers-at-border-followed-by-another-breach/"
      ]
     }
    ]
