@@ -442,10 +442,12 @@ function requestDraw(all, spin){
 /* v3.9 자전: 360°/480초, v3.25부터 250ms마다 그림. 지구본을 만지거나 국가를 고르면 멈추고, 20초 뒤 다시 돈다. 움직임 줄이기 설정이면 돌지 않는다 */
 const SPIN = { on: store.get("ep.spin") !== "0", until: 0, last: 0, dps: 360 / 480 };
 function spinHold(ms){ SPIN.until = performance.now() + (ms || 20000); }
+/* v3.74 화면 밀림 방지(웹 분석 CLS 0.34~0.39): 이동 뒤 2.5초에 단락 건너뛰기를 되돌리면, 되살아난 단락이 한 프레임 비었다가 다시 그려지며 읽던 글이 밀린 것으로 잡혔다. 한 번 모두 배치한 화면은 그대로 둔다(되돌리지 않음) */
+function cvRestore(pn){ }
 /* v3.25 단락 건너뛰기(content-visibility)를 쓰는 동안에도 칩·검색 이동이 정확한 자리에 닿도록, 이동 직전에 그 탭의 단락을 모두 배치한다(한 번 배치한 크기는 기억됨) */
 (() => { const orig = Element.prototype.scrollIntoView;
   Element.prototype.scrollIntoView = function(o){ const pn = this.closest && this.closest(".pane");
-    if (pn && !pn.classList.contains("cv-off")) { pn.classList.add("cv-off"); void pn.offsetHeight; clearTimeout(pn._cv); pn._cv = setTimeout(() => pn.classList.remove("cv-off"), 2500); }
+    if (pn && !pn.classList.contains("cv-off")) { pn.classList.add("cv-off"); void pn.offsetHeight; clearTimeout(pn._cv); pn._cv = setTimeout(() => cvRestore(pn), 2500); }
     return orig.call(this, o); }; })();
 /* v3.25 반응 속도: 지구본이 화면 밖에 있거나 내용 영역을 누른 직후(12초)에는 자전과 분쟁지 깜박임을 그리지 않는다. 지구본 그리기가 누르기 반응을 늦추던 문제 */
 try { new IntersectionObserver(es => { GLOBE_VIS = es[es.length - 1].isIntersecting; }, {threshold: 0.05}).observe(document.getElementById("wrap")); } catch(e){}
@@ -545,7 +547,7 @@ function setupInteraction(){
   $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
   $("#legend").addEventListener("click", e => { if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
   $("#lensoff").onclick = () => setLens(null);
-  document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; if (b.dataset.tab === "strat") { S.scase = null; caseMark(); } if (b.dataset.tab === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(b.dataset.tab); });
+  document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; const t = b.dataset.tab; navMark(TAB_ALIAS[t] || t); /* v3.74 누르기 반응(웹 분석 INP 최대 672ms): 메뉴 표시를 먼저 그리고, 무거운 화면 그리기는 다음 차례로 미룬다 */ requestAnimationFrame(() => setTimeout(() => { if (t === "strat") { S.scase = null; caseMark(); } if (t === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(t); }, 0)); });
   document.addEventListener("click", ev => {
     const ly = ev.target.closest("[data-layer]");
     if (ly) { setLayer(ly.dataset.layer); return; }
@@ -1572,7 +1574,7 @@ function goCase(id, smooth){
   S.scase = id; renderStrat(); if (S.tab !== "strat") switchTab("strat");
   else if (!ROUTES && HASH_READY) { try { history.replaceState(null, "", "#" + id); } catch(e){} }
   const a = document.getElementById("case-" + id); if (!a) return;
-  const pn = document.getElementById("pane-strat"); pn.classList.add("cv-off"); clearTimeout(pn._cv); pn._cv = setTimeout(() => pn.classList.remove("cv-off"), 2500);
+  const pn = document.getElementById("pane-strat"); pn.classList.add("cv-off"); clearTimeout(pn._cv); pn._cv = setTimeout(() => cvRestore(pn), 2500);
   a.scrollIntoView({block: "start", behavior: smooth && !reduceMotion ? "smooth" : "auto"});
   caseMark();
 }
@@ -1905,7 +1907,7 @@ function navBack(){
     }
   } finally { NAV_BUSY = false; }
   const pn = document.getElementById("pane-" + s.tab);
-  if (pn) { pn.classList.add("cv-off"); clearTimeout(pn._cv); pn._cv = setTimeout(() => pn.classList.remove("cv-off"), 2500); }
+  if (pn) { pn.classList.add("cv-off"); clearTimeout(pn._cv); pn._cv = setTimeout(() => cvRestore(pn), 2500); }
   requestAnimationFrame(() => { if (narrow()) scrollTo(0, s.y); else if (pn) pn.scrollTop = s.y; updTop(); });
   return true;
 }
