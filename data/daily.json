@@ -19,7 +19,16 @@
       "https://kyivindependent.com/zelensky-warns-russia-preparing-mass-strike/",
       "https://interfax.com.ua/news/general/1215492.html",
       "https://censor.net/ua/news/4027060/rf-atakuvala-kyyiv-balistykoyu-7-jovtnya-scho-vidomo"
-     ]
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "korea",
@@ -35,7 +44,13 @@
      "src": [
       "https://koreanewsservice.com/politics-military/18957/",
       "https://www.mt.co.kr/politics/2026/10/06/2026100619232942313"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -50,7 +65,16 @@
      ],
      "src": [
       "https://kyivindependent.com/drones-strike-merchant-vessels-in-black-sea-off-bulgaria-and-ukraine-killing-at-least-one/"
-     ]
+     ],
+     "loc": {
+      "lat": 42.8,
+      "lon": 28.7,
+      "place": "흑해(불가리아 배타적경제수역)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -67,7 +91,16 @@
       "https://tass.com/emergencies/2197897",
       "https://tass.com/politics/2197959",
       "https://kyivindependent.com/russian-strikes-kill-13-injure-104-across-ukraine-damage-kryvyi-rih-hospital/"
-     ]
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
     },
     {
      "case": "korea",
@@ -78,7 +111,13 @@
      "src": [
       "https://www.segye.com/newsView/20261006509872",
       "https://kyivindependent.com/south-korea-says-it-received-insufficient-apology-from-ukraine-over-north-korean-pows-mulls-envoy-recall/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "UKR"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -94,7 +133,16 @@
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-prices-yemen-red-sea-houthis-bab-el-mandeb/",
       "https://www.brecorder.com/news/40442853/oil-prices-slip-as-traders-weigh-strong-mideast-exports-against-gulf-tensions"
-     ]
+     ],
+     "loc": {
+      "lat": 18.3,
+      "lon": 42.73,
+      "place": "카미스무샤이트(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
     }
    ],
    "more": [
@@ -136,7 +184,13 @@
       "https://news.tf.co.kr/read/ptoday/2373009.htm",
       "https://mt.co.kr/politics/2026/10/05/2026100518182310932",
       "https://www.fnnews.com/news/202610051644570465"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -152,7 +206,17 @@
      "src": [
       "https://kyivindependent.com/russian-drones-strike-cargo-ship-in-black-sea-kill-captain-zelensky-says/",
       "https://www.euronews.com/2026/10/05/drone-reportedly-hits-ship-in-black-sea-killing-two-and-injuring-11"
-     ]
+     ],
+     "loc": {
+      "lat": 44.4,
+      "lon": 29.3,
+      "place": "흑해(루마니아 배타적경제수역)",
+      "isos": [
+       "ROU",
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -169,7 +233,16 @@
       "https://www.kyivpost.com/post/86168",
       "https://ua.news/en/war-vs-rf/protiagom-nochi-5-zhovtnia-rosiia-zapustila-po-ukrayini-ponad-200-droniv-povitriani-sili",
       "https://tass.com/emergencies/2197521"
-     ]
+     ],
+     "loc": {
+      "lat": 49.99,
+      "lon": 36.23,
+      "place": "하르키우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -185,7 +258,14 @@
      "src": [
       "https://www.aljazeera.com/news/2026/10/5/mecca-alliance-agrees-to-activate-collective-deterrence-measures",
       "https://www.tribuneindia.com/news/collective-defence/mecca-pact-invoked-amid-houthi-attacks-turkiye-pakistan-agree-to-swiftly-deploy-forces-military-capabilities-in-saudi-arabia"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "SAU",
+       "TUR",
+       "PAK"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -196,7 +276,15 @@
      "src": [
       "https://www.aljazeera.com/news/2026/10/5/yemen-forces-claim-to-seize-dhubab-sites-near-bab-al-mandeb-from-houthis",
       "https://www.dawn.com/news/2034961/yemeni-forces-recapture-mokha-from-houthis-state-media"
-     ]
+     ],
+     "loc": {
+      "lat": 13.32,
+      "lon": 43.25,
+      "place": "모카(예멘)",
+      "isos": [
+       "YEM"
+      ]
+     }
     }
    ],
    "more": [
@@ -243,7 +331,15 @@
       "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003272544",
       "https://www.kmib.co.kr/article/view.asp?arcid=9000019712",
       "https://www.asiatoday.co.kr/kn/view.php?key=20261004010000901"
-     ]
+     ],
+     "loc": {
+      "lat": 39.15,
+      "lon": 127.44,
+      "place": "원산(북한)",
+      "isos": [
+       "PRK"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -259,7 +355,14 @@
      "src": [
       "https://kyivindependent.com/us-proposes-trilateral-talks-with-russia-ukraine-by-end-of-october-zelensky-says/",
       "https://www.pravda.com.ua/eng/news/2026/10/04/8056421/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -276,7 +379,16 @@
       "https://kyivindependent.com/russia-targets-kyiv-bridges-for-fourth-consecutive-day-hits-northern-bridge/",
       "https://tass.com/politics/2197123",
       "https://www.933thedrive.com/2026/10/04/russia-says-it-hit-kyiv-bridge-two-vessels-in-black-sea/"
-     ]
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -297,7 +409,16 @@
       "https://www.arabnews.com/middle-east/iran-says-strait-of-hormuz-will-not-reopen-until-conditions-are-met-3004533",
       "https://news.sbs.co.kr/english/article.do?news_id=N1008782420",
       "https://www.iranintl.com/en/202610047470"
-     ]
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -308,7 +429,13 @@
      "src": [
       "https://www.aljazeera.com/news/2026/10/4/houthis-claim-strike-on-saudi-energy-facility-as-yemen-fighting-intensifies",
       "https://www.dawn.com/news/2034733/yemens-houthis-say-they-struck-saudi-aramco-sites-in-riyadh-khurais"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
     }
    ],
    "more": [
@@ -350,7 +477,13 @@
       "https://www.al-monitor.com/originals/2026/10/pentagon-deploys-thousands-more-marines-another-aircraft-carrier-mideast",
       "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
       "https://www.cbsnews.com/live-updates/trump-iran-war-us-midterm-elections-troops-deployment/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
     },
     {
      "case": "korea",
@@ -367,7 +500,13 @@
       "https://www.newspim.com/news/view/20261002001241",
       "https://www.seoul.co.kr/news/politics/2026/10/02/20261002500298",
       "https://www.upi.com/Top_News/World-News/2026/10/02/Kim-Yo-Jong-rejects-blame-DMZ-blast-mocks-Seoul/2221790940855/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -384,7 +523,13 @@
       "https://www.abc.net.au/news/2026-10-01/russia-hits-ukrainian-energy-grid/107214710",
       "https://eaworldview.com/2026/10/ukraine-war-energy-kyiv-russia-attacks/",
       "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -446,7 +591,13 @@
       "https://www.axios.com/2026/10/01/trump-time-interview-iran-democrats-ai-netanyahu",
       "https://www.axios.com/2026/10/01/rubio-iran-unga-delegation-kicked-out",
       "https://www.foxnews.com/politics/iranian-negotiators-kicked-out-us-talks-stall-trump-lays-possible-timeline-more-strikes"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
     },
     {
      "case": "korea",
@@ -462,7 +613,13 @@
      "src": [
       "http://inews24.com/view/2010880",
       "https://www.seoul.co.kr/news/politics/president/2026/10/02/20261002005004"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -478,7 +635,15 @@
      "src": [
       "https://www.aljazeera.com/news/2026/9/30/russia-warns-nato-of-possible-nuclear-response-if-kaliningrad-is-cut-off",
       "https://abcnews.com/International/wireStory/putin-warns-weapons-arsenal-russia-territory-attacked-136930888"
-     ]
+     ],
+     "loc": {
+      "lat": 54.71,
+      "lon": 20.51,
+      "place": "칼리닌그라드(러시아)",
+      "isos": [
+       "RUS"
+      ]
+     }
     },
     {
      "case": "taiwan",
@@ -497,7 +662,13 @@
      ],
      "src": [
       "https://www.internazionale.it/ultime-notizie-reuters/2026/10/01/exclusive-us-sees-chinese-invasion-of-taiwan-unlikely-next-year-despite-2027-timeline-sources-say"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
     },
     {
      "case": null,
@@ -512,7 +683,13 @@
      ],
      "src": [
       "https://www.aljazeera.com/news/2026/10/1/afghanistan-says-nine-killed-in-pakistani-air-raids-on-kunar-helmand"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "PAK",
+       "AFG"
+      ]
+     }
     }
    ],
    "more": [
@@ -560,7 +737,13 @@
       "https://news.sbs.co.kr/news/endPage.do?news_id=N1008775696",
       "https://www.hankyung.com/article/2026093040787",
       "https://www.dailian.co.kr/news/view/1695916/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK"
+      ]
+     }
     },
     {
      "case": "korea",
@@ -577,7 +760,12 @@
       "https://www.ajunews.com/view/20260929164529297",
       "https://www.newspim.com/news/view/20260929001084",
       "https://www.aei.org/commentary/korean-peninsula-update-september-30-2026/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "KOR"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -597,7 +785,13 @@
      "src": [
       "https://www.bostonglobe.com/2026/09/30/nation/iran-receives-us-response-end-war/",
       "https://fortune.com/2026/09/30/trump-iran-hormuz-strait-talks/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -613,7 +807,13 @@
      "src": [
       "https://www.cp24.com/news/world/2026/09/30/the-us-military-says-its-withdrawal-of-troops-from-iraq-is-complete/",
       "https://abcnews.com/International/us-troops-expected-leave-iraq-wednesday-12-year/story?id=136871869"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "IRQ",
+       "USA"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -632,7 +832,16 @@
      ],
      "src": [
       "https://www.aljazeera.com/news/2026/9/30/russian-attacks-on-ukraines-kyiv-region-kill-four-target-power-grid"
-     ]
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     }
    ],
    "more": [
@@ -679,7 +888,13 @@
      "src": [
       "https://www.koreaherald.com/article/10887051",
       "https://theprint.in/world/north-korea-says-south-korea-to-pay-a-price-for-shifting-blame-for-mine-blast-kcna-says/3057474/"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -699,7 +914,16 @@
      "src": [
       "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2",
       "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
-     ]
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -719,7 +943,13 @@
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/",
       "https://home.treasury.gov/news/press-releases/sb0637"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -735,7 +965,15 @@
      "src": [
       "https://www.aljazeera.com/news/2026/9/28/iran-touts-hormuz-attacks-as-oil-flows-increase-despite-tensions",
       "https://sharjah24.ae/en/Articles/2026/09/29/Ma2"
-     ]
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN"
+      ]
+     }
     }
    ],
    "more": [
@@ -782,7 +1020,13 @@
      "src": [
       "https://www.koreaherald.com/article/10886756",
       "https://www.stripes.com/theaters/asia_pacific/2026-09-29/north-korea-dmz-landmines-23000457.html"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK"
+      ]
+     }
     },
     {
      "case": "korea",
@@ -802,7 +1046,12 @@
      "src": [
       "https://www.koreatimes.co.kr/world/20260929/senior-nk-diplomat-says-nuclear-status-can-never-be-reversed-in-any-circumstances",
       "https://www.hankyung.com/article/2026092909407"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "PRK"
+      ]
+     }
     },
     {
      "case": "iran",
@@ -822,7 +1071,13 @@
      "src": [
       "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks",
       "https://www.omanobserver.om/article/1196952/world/region/iran-threatens-to-hit-regional-infrastructure-if-its-security-not-ensured"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
     },
     {
      "case": "ukraine",
@@ -845,7 +1100,12 @@
       "https://meduza.io/en/news/2026/09/28/reuters-russia-plans-record-defense-spending-of-17-trillion-rubles-in-2027-27-more-than-previously-budgeted",
       "https://www.rferl.org/a/zelenskyy-ukraine-drone-russian-mobilization-north-korea/33865993.html",
       "https://www.ukrinform.net/rubric-ato/4168983-zelensky-russia-has-already-begun-additional-mobilization.html"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "RUS"
+      ]
+     }
     },
     {
      "case": "taiwan",
@@ -867,7 +1127,16 @@
       "https://www.chinanews.com.cn/gn/2026/09-29/10705460.shtml",
       "https://www.chinatimes.com/realtimenews/20260929003877-260402",
       "https://udn.com/news/story/7331/9783599"
-     ]
+     ],
+     "loc": {
+      "lat": 23.5,
+      "lon": 122.3,
+      "place": "대만 동쪽 해역",
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
     },
     {
      "case": "chips",
@@ -885,7 +1154,13 @@
       "https://www.news.cn/world/20260928/511ca84fb64c4e2b98a88ecba5c277ec/c.html",
       "https://www.aljazeera.com/economy/2026/9/28/us-china-list-goods-recommended-for-tariff-cuts-following-trump-xi-summit",
       "https://www.abc.net.au/news/2026-09-29/us-china-agree-to-tariff-cuts-on-60-billion-of-goods/107206860"
-     ]
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "CHN"
+      ]
+     }
     }
    ],
    "more": [

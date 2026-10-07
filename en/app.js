@@ -675,6 +675,8 @@ function setupInteraction(){
     if (bb) { ev.preventDefault(); goBrief(bb.dataset.brief); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
+    const blb = ev.target.closest("[data-bloc]");
+    if (blb && BR) { const [d, n] = blb.dataset.bloc.split("|"), x = BR.issues.find(z => z.date === d), it = x && x.items[+n]; if (it && it.loc) placeGo(it.loc, "Briefing · " + it.h); return; }
     const evb = ev.target.closest("[data-ev]");
     if (evb) { evGo(evb.dataset.ev, evb); return; }
     const fcp = ev.target.closest("[data-fc]");
@@ -735,7 +737,15 @@ function flyTo(lon, lat, exact){
 let VIEW0 = null, VIEW_CASE = null;
 const viewKey = () => S.tab + (S.tab === "page" ? "|" + PAGE_CUR : "");
 function viewSave(){ if (!VIEW0) VIEW0 = {rot: S.rot.slice(), k: S.k, layer: S.layer, usf: S.showUsf, key: viewKey()}; else VIEW0.key = viewKey(); }
-function viewGo(lon, lat, k){ viewSave(); flyTo(lon, lat, true); zoomTo(k); spinHold(36e5); }
+function viewGo(lon, lat, k, shift){
+  viewSave();
+  /* 데스크톱에서 범례가 펼쳐져 있으면 지구본 가운데가 범례에 가리므로, 표시할 곳이 범례 오른쪽 위에 오도록 중심을 옮긴다(사안 지도는 이미 그렇게 맞춘 중심을 씀) */
+  if (shift && !narrow() && W > 0 && !document.documentElement.classList.contains("legoff")) {
+    const t = d3.geoOrthographic().translate([W / 2, H / 2]).scale(R0 * k).rotate([-lon, -lat, 0]).clipAngle(90), c = t.invert([W / 2 - W * 0.16, H / 2 + H * 0.08]);
+    if (c && isFinite(c[0]) && isFinite(c[1])) { lon = c[0]; lat = c[1]; }
+  }
+  flyTo(lon, lat, true); zoomTo(k); spinHold(36e5);
+}
 function viewRestore(){
   const v = VIEW0; VIEW0 = null; VIEW_CASE = null; markSet(null); if (!v) return;
   if (v.layer && v.layer !== S.layer) setLayer(v.layer, true);
@@ -775,7 +785,7 @@ function evGo(id, chip){
 function placeGo(L, label){
   const isos = L.isos || [], v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(isos); if (!v) return;
   if (narrow()) navPush();
-  viewGo(v[0], v[1], v[2]);
+  viewGo(v[0], v[1], v[2], true);
   markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label});
   if (narrow()) document.getElementById("wrap").scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"});
 }
@@ -800,7 +810,7 @@ function evPop(chip, e){
   el.querySelector(".fcp-x").onclick = fcPopClose;
 }
 /* 권력 구조의 나라 단추: 그 나라 글로 내려가며 지구본도 그 나라를 확대한다 */
-function countryView(iso){ const v = isoView([iso]); if (!v) return; viewGo(v[0], v[1], v[2]); markSet({isos: [iso]}); }
+function countryView(iso){ const v = isoView([iso]); if (!v) return; viewGo(v[0], v[1], v[2], true); markSet({isos: [iso]}); }
 function setLayer(l, temp){
   if (!LAYERS[l]) return;
   S.layer = l; if (!temp) { store.set("ep.layer2", l); if (VIEW0) VIEW0.layer = null; }  /* 방문자가 직접 고르면 사안 화면을 떠날 때도 그 선택을 둔다 */
@@ -923,7 +933,7 @@ function dailyIssue(x){
     return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
   return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + "</p><p class=\"bl\"><span class=\"bl-k\">Bearing on the assessments</span>" + esc(i.link) + "</p>" +
-      '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +
+      '<div class="chips" style="margin:0">' + (i.loc ? '<button type="button" class="chip bloc" data-bloc="' + esc(x.date) + "|" + n + "\"><svg width=\"10\" height=\"12\" viewBox=\"0 0 10 12\" aria-hidden=\"true\"><path d=\"M5 0a5 5 0 0 0-5 5c0 3.6 5 7 5 7s5-3.4 5-7a5 5 0 0 0-5-5Zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z\" fill=\"currentColor\"/></svg>Show on map</button>" : "") + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +  /* v3.80 꼭지의 장소를 지구본에(2026-10-08 결재) */
       ((i.src || []).length ? "<details class=\"src\"><summary>Sources · " + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
     weekLine(x.date) +
     ((x.more || []).length ? "<div class=\"bm\"><b>Other developments</b><ul>" + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + "\" target=\"_blank\" rel=\"noopener\" class=\"note\">Source</a>" : "") + "</li>").join("") + "</ul></div>" : "");

@@ -74,6 +74,7 @@ a{color:var(--accent)}
 /* v3.79 사이트 안내 탭: 지구본 없이 글만, 읽기 좋은 폭으로 가운데 */
 .app.noglobe .stage{grid-template-columns:minmax(0,1fr)!important} .app.noglobe #wrap{display:none}
 .app.noglobe #pane-method > *{width:100%; max-width:860px; margin-inline:auto}
+.chip.bloc{display:inline-flex; align-items:center; gap:5px} .chip.bloc svg{color:var(--accent)}
 .info-top .info-nav{margin-top:10px} .info-nav a.chip{text-decoration:none}
 @media (max-width: 960px){ .markbar{top:auto; bottom:56px; left:12px; max-width:calc(100% - 24px)} .lensbar:not([hidden]) ~ .markbar{top:auto} } .info-sec{scroll-margin-top:8px} .info-sec .page-pre{border-top:1px solid var(--line); padding-top:22px}
 .tip{position:absolute; pointer-events:none; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:8px 10px; font-size:12px; line-height:1.45; max-width:240px; box-shadow:0 6px 18px rgba(0,0,0,.14); z-index:5}
