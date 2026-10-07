@@ -661,6 +661,9 @@ function setupInteraction(){
     if (jb) { const t = document.getElementById(jb.dataset.jump); if (t) t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); return; }
     const x = ev.target.closest("[data-exit]");
     if (x) { const k = (D.strategies || []).find(c => c.fp === x.dataset.exit); if (k) { goCase(k.id); const fu = caseFill(k.id); if (fu) fu.open = true; } else switchTab("strat"); const d = document.getElementById("exc-" + x.dataset.exit); if (d) { d.open = true; d.scrollIntoView({block:"start"}); } return; }
+    const cgb = ev.target.closest("[data-cg]");  /* v3.81 핵심 판단의 의회 변수 → 그 사안의 '의회의 쟁점' */
+    if (cgb) { const [cid, i] = cgb.dataset.cg.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("cg-" + cid + "-" + i);
+      if (t) { t.open = true; t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
     const fub = ev.target.closest("[data-fut]");
     if (fub) { const [cid, fid] = fub.dataset.fut.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("fut-" + cid + "-" + fid);
       if (t) { t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
@@ -1349,11 +1352,14 @@ const ltag = L => '<span class="ltag l' + L + '">' + ({"1":"Ⅰ","2":"Ⅱ","3":"
 function concHtml(c){
   if (!c.conclusions) return "";
   const cls = t => t === "높음" ? "hi" : t === "중간" ? "mid" : t === "가치 판단" ? "val" : "lo";
+  /* v3.81 의회 변수: 이 판단에 영향을 주는 '의회의 쟁점'(congress[].affects). 누르면 그 쟁점을 펼친다 */
+  const cgv = id => { const L = (c.congress || []).map((x, i) => [x, i]).filter(([x]) => (x.affects || []).includes(id));
+    return L.length ? '<span><b>의회 변수</b>' + L.map(([x, i]) => '<button type="button" class="chip" data-cg="' + esc(c.id) + ":" + i + '">' + esc(nm(x.iso)) + " · " + esc(x.t) + "</button>").join(" ") + "</span>" : ""; };
   return '<section class="concl"><h3>핵심 판단</h3><ol>' + c.conclusions.map(k =>
     '<li><span class="cid">' + k.id + '</span><div><div class="ct">' + (k.L ? ltag(k.L) : "") + esc(k.t) + '<span class="conf ' + cls(k.conf) + '">' + (k.conf === "가치 판단" ? "가치 판단" : "확신 " + esc(k.conf) + (k.confp ? " " + k.confp + "%" : "")) + '</span></div><div class="cm">' +
     "<span><b>근거</b>" + esc(k.why) + " (" + k.steps.map(n => n + "단계").join(", ") + ")</span>" +
     "<span><b>판단이 바뀌는 조건</b>" + esc(k.flip) + "</span>" +
-    (k.fc.length ? "<span><b>검증할 전망</b>" + k.fc.map(f => '<span class="mono">' + f + "</span>").join(", ") + "</span>" : "") +
+    (k.fc.length ? "<span><b>검증할 전망</b>" + k.fc.map(f => '<span class="mono">' + f + "</span>").join(", ") + "</span>" : "") + cgv(k.id) +
     "</div></div></li>").join("") + '</ol><p class="note">확신도는 해당 판단이 5년 안에 뒤집히지 않을 가능성을 구간으로 나타낸 것입니다. ‘개인에게 미치는 영향’의 가치 판단에는 확률을 부여하지 않습니다.' + (PUB() ? "" : "") + '</p></section>';
 }
 const fitCls = f => f === "일치" ? "ok" : f === "불일치" ? "no" : "part";
