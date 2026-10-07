@@ -54,8 +54,8 @@
     },
     {
      "case": "ukraine",
-     "h": "Ukraine launches mass drone attack on Moscow area, killing two in the Moscow region",
-     "fact": "Moscow Mayor Sergei Sobyanin said 650 drones headed toward Moscow and the surrounding region between 8:30 p.m. on October 5 and 5 a.m. on October 6, Moscow time, and that most were shot down. Moscow region Governor Andrei Vorobyov said two people were killed. TASS, tallying Russian Defense Ministry reports, counted 868 drones downed overnight. Over the same night, Ukraine's Air Force said Russia launched 137 drones, of which 114 were shot down or neutralized.",
+     "h": "Ukraine launches mass drone attack on Moscow area; two killed in surrounding region",
+     "fact": "Moscow Mayor Sergei Sobyanin said 650 drones headed toward Moscow and the surrounding region from 8:30 p.m. on October 5 to 5 a.m. on October 6, Moscow time, and that most were shot down. Moscow region authorities said two people were killed. TASS, tallying Russian Defense Ministry reports, counted 868 drones downed overnight. The same night, Ukraine's Air Force said Russia had launched 137 drones and that 114 were shot down or neutralized.",
      "link": "Ukraine is stepping up attacks on Russia's capital region, which fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. That weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
@@ -82,9 +82,9 @@
     },
     {
      "case": "iran",
-     "h": "Houthis claim strikes on Riyadh airport and Rabigh refinery; Saudi Arabia has not confirmed hits",
-     "fact": "Houthi spokesman Yahya Saree claimed on October 5 that the group had used missiles and drones to strike targets including King Khalid International Airport in Riyadh and an Aramco refinery in Rabigh on the Red Sea coast. Saudi authorities have not officially confirmed that those facilities were hit; Saudi civil aviation authorities said attacks on Jazan and Najran airports near the border left three people with minor injuries. On October 6, Turki al-Maliki, spokesman for the Saudi-led coalition, said on X that a ballistic missile aimed at Khamis Mushait had been intercepted.",
-     "link": "There is still no confirmed large-scale destruction of Gulf oil facilities, the disconfirming signal for Conclusion 2 of the Iran and Hormuz analysis. Continued attacks aimed at the Saudi mainland have raised the risk of escalation, yet Brent crude dipped below $100 a barrel in trading on October 6, so the factors bearing on the forecast that Brent will end the year below $90 a barrel point in both directions.",
+     "h": "Saudi-led coalition says it intercepted a ballistic missile aimed at Khamis Mushait",
+     "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on X on October 6 that coalition forces had intercepted and destroyed a ballistic missile aimed at Khamis Mushait, a city in southern Saudi Arabia that hosts an air base. The announcement came a day after the Houthis claimed attacks on airports and oil refining facilities on the Saudi mainland. Brent crude dipped below $100 a barrel in trading the same day.",
+     "link": "There is still no confirmed large-scale destruction of Gulf oil facilities, the disconfirming signal for Conclusion 2 of the Iran and Hormuz analysis. Continued attacks aimed at the Saudi mainland have raised the risk of escalation, yet oil prices fell, so the factors bearing on the forecast that Brent will end the year below $90 a barrel point in both directions.",
      "fc": [
       {
        "id": "f13",
@@ -92,9 +92,8 @@
       }
      ],
      "src": [
-      "https://www.courthousenews.com/yemens-houthis-claim-attack-on-riyadh-airport-deny-losing-territory/",
-      "https://www.gulftoday.ae/news/2026/10/06/yemens-houthis-say-struck-riyadh-airport-other-saudi-sites",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-prices-yemen-red-sea-houthis-bab-el-mandeb/"
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-prices-yemen-red-sea-houthis-bab-el-mandeb/",
+      "https://www.brecorder.com/news/40442853/oil-prices-slip-as-traders-weigh-strong-mideast-exports-against-gulf-tensions"
      ]
     }
    ],
