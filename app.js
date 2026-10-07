@@ -710,7 +710,13 @@ function flyTo(lon, lat, exact){
 /* v3.79 지도 연계(2026-10-07 결재): 사안·일정·권력 구조의 나라를 고르면 지구본이 그곳으로 간다.
    옮기기 전의 지구본(방향·배율·색 기준)을 VIEW0에 두었다가, 그 화면(탭)을 떠나면 되돌린다. 방문자가 그사이 색 기준을 직접 고르면 색 기준은 되돌리지 않는다 */
 let VIEW0 = null, VIEW_CASE = null;
-const viewKey = () => S.tab + (S.tab === "page" ? "|" + PAGE_CUR : "");
+/* v3.82 권력 구조의 쪽들(전체·나라·결정권자)은 한 화면으로 본다. 나라 쪽과 결정권자 쪽 사이를 오가도 지구본은 그 나라에 머문다 */
+const pwPath = p => /^(?:\/en)?\/power\//.test(p || ""), pwIso = p => { const m = /^(?:\/en)?\/power\/([A-Z]{3})\//.exec(p || ""); return m ? m[1] : null; };
+function pwView(iso, n){  /* 처음 들어온 쪽이면 세계 지도 자료가 아직 없을 수 있으므로, 준비될 때까지 잠시 기다린다(그사이 다른 화면으로 옮기면 그만둔다) */
+  if (S.tab !== "page" || !pwPath(PAGE_CUR)) return;
+  if (byIso[iso] && labelPos[iso]) countryView(iso); else if (n < 40) setTimeout(() => pwView(iso, n + 1), 250);
+}
+const viewKey = () => S.tab + (S.tab === "page" ? "|" + (pwPath(PAGE_CUR) ? "power" : PAGE_CUR) : "");
 function viewSave(){ if (!VIEW0) VIEW0 = {rot: S.rot.slice(), k: S.k, layer: S.layer, usf: S.showUsf, key: viewKey()}; else VIEW0.key = viewKey(); }
 function viewGo(lon, lat, k, shift){
   viewSave();
@@ -2079,7 +2085,8 @@ function pageGo(url, push, after){
     if (same) { switchTab("page"); document.title = x.t; } else pageShow(p, x);  /* 이미 글 칸에 있는 쪽이면 다시 그리지 않는다 */
     HASH_READY = hr;
     const t = u.hash && document.getElementById(decodeURIComponent(u.hash.slice(1)));
-    requestAnimationFrame(() => { if (t) { if (t.tagName === "DETAILS") t.open = true; t.scrollIntoView({block: "start"}); } if (after) after(); updTop(); }); };
+    const pi = pwIso(p) || (pwPath(p) && /^#[A-Z]{3}$/.test(u.hash) ? u.hash.slice(1) : null);  /* v3.82 권력 구조의 나라·결정권자 쪽이면 지구본이 그 나라를 보인다 */
+    requestAnimationFrame(() => { if (t) { if (t.tagName === "DETAILS") t.open = true; t.scrollIntoView({block: "start"}); } if (pi && D.countries[pi]) pwView(pi, 0); if (after) after(); updTop(); }); };
   if (PAGE_C[p]) { done(PAGE_C[p]); return; }
   document.documentElement.classList.add("pg-wait");
   fetch(p, {credentials: "same-origin"}).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
