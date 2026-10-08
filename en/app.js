@@ -745,7 +745,7 @@ let VIEW0 = null, VIEW_CASE = null;
 const pwPath = p => /^(?:\/en)?\/power\//.test(p || ""), pwIso = p => { const m = /^(?:\/en)?\/power\/([A-Z]{3})\//.exec(p || ""); return m ? m[1] : null; };
 function pwView(iso, n){  /* 처음 들어온 쪽이면 세계 지도 자료가 아직 없을 수 있으므로, 준비될 때까지 잠시 기다린다(그사이 다른 화면으로 옮기면 그만둔다) */
   if (S.tab !== "page" || !pwPath(PAGE_CUR)) return;
-  if (/\/military\/$/.test(PAGE_CUR) && iso === "USA") { if (D.posture && !S.showUsf) { viewSave(); setUsf(true); renderLegend(); requestDraw(true); } return; }  /* v3.86 미국의 군 쪽을 여는 동안 지구본은 미국의 해외 배치를 보인다(떠나면 되돌린다) */
+  if (/\/military\/$/.test(PAGE_CUR) && iso === "USA") { if (D.posture && !S.showUsf) { viewSave(); setUsf(true); renderLegend(); requestDraw(true); } return; }  /* v3.86 미국의 군 쪽을 여는 동안 지구본은 미군 해외 배치를 보인다(떠나면 되돌린다) */
   if (byIso[iso] && labelPos[iso]) countryView(iso); else if (n < 40) setTimeout(() => pwView(iso, n + 1), 250);
 }
 const viewKey = () => S.tab + (S.tab === "page" ? "|" + (pwPath(PAGE_CUR) ? "power" + (/\/military\/$/.test(PAGE_CUR) ? "-mil" : "") : PAGE_CUR) : "");

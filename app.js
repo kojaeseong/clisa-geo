@@ -717,7 +717,7 @@ let VIEW0 = null, VIEW_CASE = null;
 const pwPath = p => /^(?:\/en)?\/power\//.test(p || ""), pwIso = p => { const m = /^(?:\/en)?\/power\/([A-Z]{3})\//.exec(p || ""); return m ? m[1] : null; };
 function pwView(iso, n){  /* 처음 들어온 쪽이면 세계 지도 자료가 아직 없을 수 있으므로, 준비될 때까지 잠시 기다린다(그사이 다른 화면으로 옮기면 그만둔다) */
   if (S.tab !== "page" || !pwPath(PAGE_CUR)) return;
-  if (/\/military\/$/.test(PAGE_CUR) && iso === "USA") { if (D.posture && !S.showUsf) { viewSave(); setUsf(true); renderLegend(); requestDraw(true); } return; }  /* v3.86 미국의 군 쪽을 여는 동안 지구본은 미국의 해외 배치를 보인다(떠나면 되돌린다) */
+  if (/\/military\/$/.test(PAGE_CUR) && iso === "USA") { if (D.posture && !S.showUsf) { viewSave(); setUsf(true); renderLegend(); requestDraw(true); } return; }  /* v3.86 미국의 군 쪽을 여는 동안 지구본은 미군 해외 배치를 보인다(떠나면 되돌린다) */
   if (byIso[iso] && labelPos[iso]) countryView(iso); else if (n < 40) setTimeout(() => pwView(iso, n + 1), 250);
 }
 const viewKey = () => S.tab + (S.tab === "page" ? "|" + (pwPath(PAGE_CUR) ? "power" + (/\/military\/$/.test(PAGE_CUR) ? "-mil" : "") : PAGE_CUR) : "");
@@ -883,7 +883,7 @@ function renderLegend(){
       sw("edge", S.showEdge, '<span class="kk2"><span class="kk">' + line(C.coop, false, 18) + "협력·동맹</span><span class=\"kk\">" + line(C.conflict, true, 18) + "대립·교전</span></span>") +
       sw("fp", S.showFp, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.conflict + '" stroke="' + C.halo + '" stroke-width="1.5"/></svg>분쟁지 (크기 = 심각도)</span>') +
       '<div class="kk" style="padding-left:30px"><svg width="26" height="10" aria-hidden="true"><rect x="3" y="1" width="20" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>분석 범위 밖</div>' +
-    "</div>" + (D && D.posture ? '<div class="actv"><div class="lt">군사 배치 보기</div><button type="button" class="av" data-mt="usf" aria-pressed="' + S.showUsf + '"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.4" fill="currentColor"/></svg><span>미국의 해외 배치</span><span class="avs">' + (S.showUsf ? "보는 중 · 끄기" : "켜기") + '</span></button>' +
+    "</div>" + (D && D.posture ? '<div class="actv"><div class="lt">군사 배치 보기</div><button type="button" class="av" data-mt="usf" aria-pressed="' + S.showUsf + '"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.4" fill="currentColor"/></svg><span>미군 해외 배치</span><span class="avs">' + (S.showUsf ? "보는 중 · 끄기" : "켜기") + '</span></button>' +
       '<div class="ld">켜면 관계선과 분쟁지 표시가 꺼집니다.</div>' + (S.showUsf ? usfLegend() : "") + "</div>" : "");
 }
 /* v3.77 미군 해외 배치: 범례에는 기호 설명만. v3.86부터 자료와 출처는 권력 구조 > 미국 > 군 쪽(usfParts) */
@@ -908,7 +908,7 @@ function usfParts(){
   const ev = usfEvents().slice().reverse().map(e => '<li><span class="usf-g usf-' + e.kind + '">' + USF_GL[e.kind] + e.no + '</span><span class="m num">' + ymdK(e.date) + "</span> " + esc(e.t) + ' <span class="grade">' + esc(e.grade) + "</span> " + (e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener" class="m">' + esc(e.src) + "</a>" : '<span class="m">' + esc(e.src) + "</span>") + lk(e) + "</li>").join("");
   const fl = usfFleet().map(g => "<li><b>" + esc(g.name) + "</b> " + g.vs.map(v => esc(v.name) + (v.fwd ? '<span class="m">(모항 ' + esc(v.home) + ")</span>" : "")).join(", ") + "</li>").join("");
   return {
-    deploy: '<div class="usf-card"><p class="note">이 쪽을 여는 동안 지구본에 미국의 해외 배치가 보입니다. 원은 상주 인원, 배 모양은 항모·상륙전단, 번호를 붙인 기호는 아래 태세 변화의 증파·감축·법·계획입니다.</p>' +
+    deploy: '<div class="usf-card"><p class="note">이 쪽을 여는 동안 지구본에 미군 해외 배치가 보입니다. 원은 상주 인원, 배 모양은 항모·상륙전단, 번호를 붙인 기호는 아래 태세 변화의 증파·감축·법·계획입니다.</p>' +
       '<h4>상주 인원의 지역별 비중</h4><p class="m">해외 상주 미군 ' + R.total.toLocaleString("ko-KR") + "명(" + ymdK(R.asof) + " 기준), " + q(a.q) + "부터 " + q(z.q) + "까지 6개 분기</p>" +
       '<table class="usf-t">' + row("ip", "인도·태평양") + row("eu", "유럽") + row("me", "중동") + "</table>" +
       '<p class="m">' + esc(R.note) + "</p>" +
