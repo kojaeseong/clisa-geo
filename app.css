@@ -738,6 +738,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .dbrief .bh{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap} .dbrief .bh h2{margin:0} .dbrief .bd{font:600 14px var(--mono); color:var(--accent)}
 .dbrief .bi{display:grid; gap:6px; padding-top:10px; border-top:1px solid var(--line)}
 .dbrief .bi h4{margin:0; font-size:15px; line-height:1.5}
+.cgsides{display:grid; grid-template-columns:1fr 1fr; gap:14px} @media(max-width:640px){.cgsides{grid-template-columns:1fr}} .cgk{display:block; font-size:12px; color:var(--accent); margin-bottom:4px} .cgql,.cgdv,.dec dl ul.cgql,.dec dl ul.cgdv,.pane .dec dd ul.cgql,.pane .dec dd ul.cgdv{list-style:none; margin:0; padding:0 !important; display:grid; gap:10px} .cgq2 p{margin:0; font-size:14px; line-height:1.6} .cgq2 span{display:block; margin-top:2px; font-size:12px; color:var(--muted)} .cgdv li{font-size:13.5px}
 .dbrief .bi p{margin:0}
 .dbrief .bl{color:var(--ink-2); font-size:13.5px} .dbrief .bl-k{font-weight:700; color:var(--accent); margin-right:4px}
 .dbrief .bfc b{margin-left:2px} .dbrief .bfc-up b{color:var(--conflict)} .dbrief .bfc-down b{color:var(--accent)} .dbrief .bfc-none b{color:var(--muted)}

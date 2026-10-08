@@ -1456,12 +1456,26 @@ function congHtml(c){
   const X = c.congress; if (!X || !X.length) return "";
   const row = (k, v) => v ? "<dt>" + k + "</dt><dd>" + esc(v) + "</dd>" : "";
   const qd = d => enDate(d || "");
+  if (D.cgv2) return cgV2(c, X, row, qd);  /* v3.84(2026-10-08 결재): 확정·본회의 표결이 있는 쟁점에만 찬반 발언(각 2건)과 당론과 다른 표. 발언 많은 의원 목록은 내림(교본 4.8) */
   return "<h3 style=\"margin:14px 0 0\">Issues before the legislature</h3><p class=\"note\" style=\"margin:4px 0 8px\">These are issues on which the legislature can attach conditions to the decision-maker’s choices or exercise powers of consent or veto. Each legislature’s composition and powers, and statements on each issue, are on the Power Structures page.</p><div class=\"decs\">" +
     X.map((x, i) => '<details class="dec" id="cg-' + esc(c.id) + '-' + i + '"><summary><span class="nm">' + esc(nm(x.iso)) + '</span><span class="fr">' + esc(x.t) + "</span></summary><dl>" +
       row("Current stage", x.stage) + row("Legislative powers", x.power) + row("Vote count", x.votes) + row("Positions", x.sides) + row("Next steps and deadlines", x.next) +
       (x.govnote ? "<dt>Government position</dt><dd>Testimony and answers to lawmakers by government officials signal the government’s intent rather than the legislature’s, so they appear under <a class=\"chip\" href=\"" + (LLK()[x.iso] ? lurl(x.iso) + "#intent" : "/en/power/#" + esc(x.iso)) + '">' + esc((LLK()[x.iso] || {}).name || nm(x.iso)) + " · What the government says and does</a>, sorted into words and deeds.</dd>" : "") +
       ((x.fc || []).length ? "<dt>Related forecasts</dt><dd><div class=\"chips\" style=\"margin:0\">" + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
       ((x.quotes || []).length || (x.speakers && x.speakers.list.length) || (x.devvotes || []).length ? "<dt>Statements in the legislature</dt><dd>" + [(x.quotes || []).length ? "Key statements: " + x.quotes.length + "" : "", x.speakers && x.speakers.list.length ? esc(x.speakers.h || "Most frequent speakers:") + " " + pl(x.speakers.list.length, "person", "people") : "", (x.devvotes || []).length ? "Votes against the party line: " + x.devvotes.length + "" : ""].filter(Boolean).join(" · ") + " — all collected with the original text on the Power Structures page.<br>" + powerLink(x.iso, "Issues before the legislature · ", "#cg-" + c.id + "-" + i) + "</dd>" : "") +
+      "</dl></details>").join("") + "</div>";
+}
+function cgV2(c, X, row, qd){
+  const q1 = q => '<li class="cgq2"><p>“' + esc(q.ex) + '”</p><span>' + esc(q.who) + " · " + esc([q.party, q.role].filter(Boolean).join(" · ")) + " · " + qd(q.date) + (q.devnote ? " · <b>" + esc(q.devnote) + "</b>" : "") + ' · <a href="' + esc(q.url) + "\" target=\"_blank\" rel=\"noopener\">Original" + ({en: "", zh: " (Chinese)", uk: " (Ukrainian)", ja: " (Japanese)", he: " (Hebrew)"}[q.lang] || "") + "</a></span></li>";
+  const Q = x => x.quotes || [], side = (x, k) => Q(x).filter(q => q.side === k && !q.dev);
+  return "<h3 style=\"margin:14px 0 0\">Issues before the legislature</h3><p class=\"note\" style=\"margin:4px 0 8px\">These are issues on which the legislature can attach conditions to the decision-maker’s choices or exercise powers of consent or veto. Members’ statements appear only for issues where a law, budget or consent motion has been enacted or a floor vote has been held, two from each side.</p><div class=\"decs\">" +
+    X.map((x, i) => '<details class="dec" id="cg-' + esc(c.id) + '-' + i + '"><summary><span class="nm">' + esc(nm(x.iso)) + '</span><span class="fr">' + esc(x.t) + "</span></summary><dl>" +
+      row("Current stage", x.stage) + row("Legislative powers", x.power) + row("Vote count", x.votes) +
+      ((x.devvotes || []).length ? "<dt>Votes against the party line</dt><dd><ul class=\"cgdv\">" + x.devvotes.map(v => "<li><b>" + esc(v.label) + "</b> · " + qd(v.date) + " · " + esc(v.t) + "</li>").join("") + "</ul></dd>" : "") +
+      (Q(x).length ? "<dt>Floor statements for and against</dt><dd><div class=\"cgsides\">" + [["yes", "For"], ["no", "Against"]].map(([k, t]) => '<div><b class="cgk">' + t + "</b>" + (side(x, k).length ? '<ul class="cgql">' + side(x, k).map(q1).join("") + "</ul>" : '<p class="note" style="margin:0">' + esc((x.qnone || {})[k] || "") + "</p>") + "</div>").join("") + "</div></dd>" : x.decided && x.qnote ? "<dt>Floor statements for and against</dt><dd class=\"note\">" + esc(x.qnote) + "</dd>" : row("Positions", x.sides)) +
+      (Q(x).some(q => q.dev) ? "<dt>Statements by members who broke with their party</dt><dd><ul class=\"cgql\">" + Q(x).filter(q => q.dev).map(q1).join("") + "</ul></dd>" : "") +
+      row("Next steps and deadlines", x.next) +
+      ((x.fc || []).length ? "<dt>Related forecasts</dt><dd><div class=\"chips\" style=\"margin:0\">" + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
       "</dl></details>").join("") + "</div>";
 }
 function futHtml(c, n){

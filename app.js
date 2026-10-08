@@ -1428,12 +1428,26 @@ function congHtml(c){
   const X = c.congress; if (!X || !X.length) return "";
   const row = (k, v) => v ? "<dt>" + k + "</dt><dd>" + esc(v) + "</dd>" : "";
   const qd = d => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ""); return m ? (+m[1]) + "년 " + (+m[2]) + "월 " + (+m[3]) + "일" : (d || ""); };
+  if (D.cgv2) return cgV2(c, X, row, qd);  /* v3.84(2026-10-08 결재): 확정·본회의 표결이 있는 쟁점에만 찬반 발언(각 2건)과 당론과 다른 표. 발언 많은 의원 목록은 내림(교본 4.8) */
   return '<h3 style="margin:14px 0 0">의회의 쟁점</h3><p class="note" style="margin:4px 0 8px">결정권자의 결정에 의회가 조건을 붙이거나 동의·거부권을 행사하는 쟁점입니다. 각국 의회의 구성과 권한, 쟁점별 발언은 권력 구조 쪽에 있습니다.</p><div class="decs">' +
     X.map((x, i) => '<details class="dec" id="cg-' + esc(c.id) + '-' + i + '"><summary><span class="nm">' + esc(nm(x.iso)) + '</span><span class="fr">' + esc(x.t) + "</span></summary><dl>" +
       row("현재 단계", x.stage) + row("의회의 권한", x.power) + row("표 계산", x.votes) + row("입장", x.sides) + row("다음 절차와 시한", x.next) +
       (x.govnote ? '<dt>정부의 입장</dt><dd>정부 관계자의 의회 답변과 증언은 의회의 발언이 아니라 정부의 의지를 보여 주는 말이므로 <a class="chip" href="' + (LLK()[x.iso] ? lurl(x.iso) + "#intent" : "/power/#" + esc(x.iso)) + '">' + esc((LLK()[x.iso] || {}).name || nm(x.iso)) + ' · 정부의 말과 행동</a>에 말과 행동으로 나누어 실었습니다.</dd>' : "") +
       ((x.fc || []).length ? '<dt>관련 전망</dt><dd><div class="chips" style="margin:0">' + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
       ((x.quotes || []).length || (x.speakers && x.speakers.list.length) || (x.devvotes || []).length ? '<dt>의회 발언</dt><dd>' + [(x.quotes || []).length ? "주요 발언 " + x.quotes.length + "건" : "", x.speakers && x.speakers.list.length ? esc(x.speakers.h || "많이 발언한 의원") + " " + x.speakers.list.length + "명" : "", (x.devvotes || []).length ? "당론과 다른 표 " + x.devvotes.length + "건" : ""].filter(Boolean).join(" · ") + "은 권력 구조 쪽에 원문과 함께 모았습니다.<br>" + powerLink(x.iso, "의회의 쟁점과 발언 · ", "#cg-" + c.id + "-" + i) + "</dd>" : "") +
+      "</dl></details>").join("") + "</div>";
+}
+function cgV2(c, X, row, qd){
+  const q1 = q => '<li class="cgq2"><p>“' + esc(q.ex) + '”</p><span>' + esc(q.who) + " · " + esc([q.party, q.role].filter(Boolean).join(" · ")) + " · " + qd(q.date) + (q.devnote ? " · <b>" + esc(q.devnote) + "</b>" : "") + ' · <a href="' + esc(q.url) + '" target="_blank" rel="noopener">원문' + ({en: "(영어)", zh: "(중국어)", uk: "(우크라이나어)", ja: "(일본어)", he: "(히브리어)"}[q.lang] || "") + "</a></span></li>";
+  const Q = x => x.quotes || [], side = (x, k) => Q(x).filter(q => q.side === k && !q.dev);
+  return '<h3 style="margin:14px 0 0">의회의 쟁점</h3><p class="note" style="margin:4px 0 8px">결정권자의 결정에 의회가 조건을 붙이거나 동의·거부권을 행사하는 쟁점입니다. 의원 발언은 법·예산·동의안이 확정되었거나 본회의 표결이 있었던 쟁점에만, 찬반 양쪽에서 2건씩 싣습니다.</p><div class="decs">' +
+    X.map((x, i) => '<details class="dec" id="cg-' + esc(c.id) + '-' + i + '"><summary><span class="nm">' + esc(nm(x.iso)) + '</span><span class="fr">' + esc(x.t) + "</span></summary><dl>" +
+      row("현재 단계", x.stage) + row("의회의 권한", x.power) + row("표 계산", x.votes) +
+      ((x.devvotes || []).length ? '<dt>당론과 다른 표</dt><dd><ul class="cgdv">' + x.devvotes.map(v => "<li><b>" + esc(v.label) + "</b> · " + qd(v.date) + " · " + esc(v.t) + "</li>").join("") + "</ul></dd>" : "") +
+      (Q(x).length ? '<dt>찬반 발언</dt><dd><div class="cgsides">' + [["yes", "찬성"], ["no", "반대"]].map(([k, t]) => '<div><b class="cgk">' + t + "</b>" + (side(x, k).length ? '<ul class="cgql">' + side(x, k).map(q1).join("") + "</ul>" : '<p class="note" style="margin:0">' + esc((x.qnone || {})[k] || "") + "</p>") + "</div>").join("") + "</div></dd>" : x.decided && x.qnote ? '<dt>찬반 발언</dt><dd class="note">' + esc(x.qnote) + "</dd>" : row("입장", x.sides)) +
+      (Q(x).some(q => q.dev) ? '<dt>당론과 다른 표를 던진 의원의 발언</dt><dd><ul class="cgql">' + Q(x).filter(q => q.dev).map(q1).join("") + "</ul></dd>" : "") +
+      row("다음 절차와 시한", x.next) +
+      ((x.fc || []).length ? '<dt>관련 전망</dt><dd><div class="chips" style="margin:0">' + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
       "</dl></details>").join("") + "</div>";
 }
 function futHtml(c, n){
