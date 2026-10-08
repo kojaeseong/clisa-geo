@@ -406,7 +406,7 @@ function drawOver(t){
   proj();
   octx.clearRect(0, 0, W, H);
   const ctr = center();
-  if (S.showEdge && !(S.showUsf && D.posture)) {
+  if (S.showEdge) {
     for (const e of D.edges) {
       const a = D.capitals[e.a], b = D.capitals[e.b];
       const ls = {type:"LineString", coordinates:[[a[0], a[1]], [b[0], b[1]]]};
@@ -462,7 +462,7 @@ function drawOver(t){
   octx.globalAlpha = 1;
   if (S.showFp) {
     for (const fp of D.flashpoints) {
-      fp._p = null; if (USF && !MIL) continue;  /* 군사력 보기(분쟁 사안)에서는 미군 배치와 함께 분쟁지를 옅게 남긴다 */
+      fp._p = null;  /* v3.85: 미군 배치와 함께 그릴지는 분쟁지 스위치가 정한다 */
       const ll = [fp.lon, fp.lat];
       if (d3.geoDistance(ll, ctr) > 1.52) continue;
       const p = projection(ll); if (!p) continue;
@@ -653,7 +653,7 @@ function setupInteraction(){
     else if (h.iso && D.countries[h.iso]) selectCountry(h.iso, true, true);
   });
 
-  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { S.showUsf = !S.showUsf; if (VIEW0) VIEW0.usf = null; renderOverview(); if (S.showUsf && !VIEW_CASE) flyTo(68, 32); } else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
+  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { setUsf(!S.showUsf); if (VIEW0) VIEW0.usf = null; renderOverview(); }  /* v3.85(2026-10-08 결재): 켜도 지구본을 옮기거나 회전을 멈추지 않는다 */ else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
   /* v3.43f 데스크탑: '지구본 색 기준' 상자를 접으면 왼쪽 아래 작은 '지도 표시' 단추로 바뀐다(처음엔 펼침, 접은 상태는 브라우저에 기억). 모바일: 예전처럼 단추로 열고 닫는다 */
   const legOff = off => { document.documentElement.classList.toggle("legoff", off); store.set("ep.legoff", off ? "1" : "0"); $("#legbtn").setAttribute("aria-expanded", !off); };
@@ -697,7 +697,7 @@ function setupInteraction(){
     const fub = ev.target.closest("[data-fut]");
     if (fub) { const [cid, fid] = fub.dataset.fut.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("fut-" + cid + "-" + fid);
       if (t) { t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
-    if (ev.target.closest("[data-mt-off]")) { S.showUsf = false; renderOverview(); renderLegend(); requestDraw(false); return; }  /* v3.77 미군 배치 카드의 끄기 */
+    if (ev.target.closest("[data-mt-off]")) { setUsf(false); renderOverview(); renderLegend(); requestDraw(false); return; }  /* v3.77 미군 배치 카드의 끄기 */
     const fwb = ev.target.closest("[data-fw]");
     if (fwb) { switchTab("forecast"); const d = document.getElementById("fw-" + fwb.dataset.fw); if (d) { d.open = true; const sc = d.previousElementSibling && d.previousElementSibling.tagName === "P" ? d.parentElement : d; requestAnimationFrame(() => sc.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"})); } return; }
     const a = ev.target.closest("[data-iso],[data-fp],[data-lens],[data-go]");
@@ -747,6 +747,13 @@ function pwView(iso, n){  /* 처음 들어온 쪽이면 세계 지도 자료가 
   if (byIso[iso] && labelPos[iso]) countryView(iso); else if (n < 40) setTimeout(() => pwView(iso, n + 1), 250);
 }
 const viewKey = () => S.tab + (S.tab === "page" ? "|" + (pwPath(PAGE_CUR) ? "power" : PAGE_CUR) : "");
+/* v3.85(2026-10-08 결재): 미군 배치를 켜면 관계선·분쟁지 스위치를 실제로 끈다(군사력 보기에서는 분쟁지를 남긴다). 방문자가 다시 켜면 함께 그린다. 미군 배치를 끄면 켜기 전 상태로 되돌린다 */
+function setUsf(on){
+  if (!!on === S.showUsf) return;
+  S.showUsf = !!on;
+  if (on) { S._preUsf = {edge: S.showEdge, fp: S.showFp}; S.showEdge = false; if (S.layer !== "mil") S.showFp = false; }
+  else if (S._preUsf) { S.showEdge = S._preUsf.edge; S.showFp = S._preUsf.fp; S._preUsf = null; }
+}
 function viewSave(){ if (!VIEW0) VIEW0 = {rot: S.rot.slice(), k: S.k, layer: S.layer, usf: S.showUsf, key: viewKey()}; else VIEW0.key = viewKey(); }
 function viewGo(lon, lat, k, shift){
   viewSave();
@@ -760,7 +767,7 @@ function viewGo(lon, lat, k, shift){
 function viewRestore(){
   const v = VIEW0; VIEW0 = null; VIEW_CASE = null; markSet(null); if (!v) return;
   if (v.layer && v.layer !== S.layer) setLayer(v.layer, true);
-  if (v.usf != null && v.usf !== S.showUsf) { S.showUsf = v.usf; renderLegend(); renderOverview(); }  /* 사안 화면에서 저절로 켠 미군 배치는 끈다(방문자가 직접 켜고 끈 것은 그대로) */
+  if (v.usf != null && v.usf !== S.showUsf) { setUsf(v.usf); renderLegend(); renderOverview(); }  /* 사안 화면에서 저절로 켠 미군 배치는 끈다(방문자가 직접 켜고 끈 것은 그대로) */
   flyTo(-v.rot[0], -v.rot[1], true); zoomTo(v.k); spinHold(20000);
 }
 /* 나라(들)를 한눈에 보는 중심과 배율: 한 나라는 넓이로, 여러 나라는 서로 떨어진 거리로 */
@@ -780,7 +787,7 @@ function caseView(id){
   if (m.home) viewGo(-HOME[0], -HOME[1], HOME_K); else viewGo(m.lon, m.lat, m.k);
   if (m.layer && m.layer !== S.layer) setLayer(m.layer, true);
   const usf = m.layer === "mil" && !!D.posture;  /* v3.79b(2026-10-08 결재): 분쟁 사안은 해외 주둔 미군도 함께 보인다 */
-  if (VIEW0 && VIEW0.usf != null && usf !== S.showUsf) { S.showUsf = usf; renderLegend(); requestDraw(true); }
+  if (VIEW0 && VIEW0.usf != null && usf !== S.showUsf) { setUsf(usf); renderLegend(); requestDraw(true); }
 }
 /* 지구본에 표시하는 장소·나라(일정, 권력 구조의 나라). label이 있으면 지구본 위 띠에 이름과 '표시 해제'를 보인다 */
 function markSet(m){
