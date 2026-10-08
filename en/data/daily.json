@@ -1,6 +1,134 @@
 {
  "issues": [
   {
+   "date": "2026-10-08",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Russia pounds Ukraine in nationwide missile and drone strike, killing at least 28",
+     "fact": "Russian missiles and drones struck across Ukraine before dawn Kyiv time on October 7, killing at least 28 people, according to Interior Minister Ivan Vyhivskyi. Twenty of the dead, including five children, were in Pryluky, said Chernihiv Oblast Governor Viacheslav Chaus. Ukraine's Air Force said it shot down or neutralized 39 of 48 cruise missiles, 117 of 130 drones and five ballistic missiles, without saying how many ballistic missiles were fired. Russia's Defense Ministry claimed a massive strike on military-industrial sites in Kyiv and six regions, including Chernihiv and Poltava, among them facilities that produce and store Flamingo cruise missiles.",
+     "link": "The predawn attack on Kyiv was part of a nationwide barrage, and it follows Ukraine's drone assault on the Moscow area that ran from the night of October 5 into the early hours of October 6, Moscow time, as each side widens its strikes on the other's rear. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/russia-slams-kyiv-in-mass-missile-drone-attack-on-putins-74th-birthday/",
+      "https://gvwire.com/2026/10/07/at-least-28-killed-in-ukraine-zelenskiy-condemns-one-of-russias-most-vile-strikes/",
+      "https://tass.com/politics/2198659",
+      "https://tass.com/emergencies/2197897"
+     ],
+     "loc": {
+      "lat": 50.59,
+      "lon": 32.39,
+      "place": "Pryluky (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Tanker hit in the Persian Gulf north of Qatar, with casualties reported",
+     "fact": "A tanker was struck by multiple projectiles about 51 nautical miles north of Madinat ash Shamal, on Qatar's northern coast, on October 7, causing casualties, Britain's UK Maritime Trade Operations (UKMTO) said, without naming an attacker. Recent attacks on shipping have been concentrated in and around the Strait of Hormuz; this one hit deeper inside the Persian Gulf. The same day in Athens, Secretary of State Marco Rubio said Iran had \"lost complete control\" of the strait.",
+     "link": "Attacks spreading beyond Hormuz to waters off the Gulf's oil producers point in the direction of the region-wide escalation that Conclusion 2 of the Iran and Hormuz analysis identifies as South Korea's costliest outcome (the attacker has not been identified). That weighs against the forecast that Brent crude will close the year below $90 a barrel.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://english.news.cn/europe/20261008/146cb21d959c426ea9609a0a50667245/c.html",
+      "https://gulfnews.com/world/gulf/qatar/tanker-off-qatar-reports-hits-from-multiple-projectiles-maritime-agency-1.500702379",
+      "https://www.cbsnews.com/live-updates/iran-war-nuclear-donald-trump-vance-rubio-strait-of-hormuz/"
+     ],
+     "loc": {
+      "lat": 26.98,
+      "lon": 51.2,
+      "place": "Persian Gulf (off northern Qatar)",
+      "isos": [
+       "QAT"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Saudi aviation authority says Houthi airport attacks killed 3, injured 36",
+     "fact": "Saudi Arabia's General Authority of Civil Aviation said on the night of October 7 that in connection with Houthi attacks on October 6 and 7, two people had been killed and 28 injured at Abha International Airport, and one killed and eight injured at King Khalid International Airport in Riyadh. The dead were two women, one Moroccan and one Algerian, and a Sudanese national. Houthi spokesman Yahya Saree claimed the strikes killed or wounded dozens of Saudi soldiers and officers, a claim that could not be verified.",
+     "link": "Houthi attacks that have now killed people even at a civilian airport in the Saudi capital show that the path to the Gulf-wide escalation flagged in Conclusion 2 of the Iran and Hormuz analysis now runs onto Saudi soil. The disconfirming signal, large-scale destruction of Gulf oil facilities, has not been confirmed, and the attacks do not move any specific forecast.",
+     "fc": [],
+     "src": [
+      "https://www.thenationalnews.com/news/gulf/2026/10/07/houthis-claim-dawn-drone-and-missile-strikes-on-saudi-and-yemeni-airports/",
+      "https://www.tribuneindia.com/news/abha-airport/3-killed-36-injured-in-houthi-attacks-on-abha-king-khalid-airports-saudi-gaca"
+     ],
+     "loc": {
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IEA members agree to speed up emergency oil releases, prioritizing diesel",
+     "fact": "At a meeting on October 7, International Energy Agency member governments agreed to finish as soon as possible the stock releases pledged under the agency's March 2026 collective action, and to put diesel first where feasible because that market is tight. About 325 million barrels have been released under the March action so far, with roughly 100 million barrels of pledges still outstanding. Member governments hold about 1.1 billion barrels of public emergency stocks, more than 200 million of them diesel, and the IEA said it stands ready to release more if needed.",
+     "link": "With the Hormuz crisis dragging on, consuming countries are thickening their supply cushion. That raises the odds that Brent crude will close the year below $90 a barrel.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.iea.org/news/statement-by-iea-executive-director-on-meeting-of-iea-member-governments-on-7-october-2026"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "Unification Minister Chung Dong-young says a U.S.-North Korea summit could take up reconfirming the demarcation line",
+     "fact": "At the National Assembly Foreign Affairs and Unification Committee's audit of his ministry, held at the Inter-Korean Talks Headquarters in Seoul on October 7, Unification Minister Chung Dong-young indicated in his answers that a U.S.-North Korea summit could include talks between Washington and Pyongyang on reconfirming the Military Demarcation Line, and that it would not matter if South Korea were left out, Money Today reported. Chung said the mine blast in the Demilitarized Zone (DMZ) could not yet be classified as an attack but acknowledged that North Korea planted the mine and bears responsibility for violating the armistice. He also said the peaceful coexistence policy is incompatible with sanctions on the North.",
+     "link": "Conclusion 2 of the Korean Peninsula analysis holds that the more realistic risk for South Korea is a deal on North Korea that leaves Seoul's interests out. The minister in charge of inter-Korean affairs saying the inter-Korean boundary can be taken up first by Washington and Pyongyang, or by the U.N. Command and Pyongyang, shows how the government weighs that risk of exclusion; it does not move any specific forecast.",
+     "fc": [],
+     "src": [
+      "https://www.mt.co.kr/politics/2026/10/07/2026100720194016339",
+      "https://www.kmib.co.kr/article/view.asp?arcid=9000020784&code=11121400&sid1=pol",
+      "https://www.dailian.co.kr/news/view/1699099/2026-%EA%B5%AD%EA%B0%90-%EC%97%AC%EC%95%BC-%E5%8C%97%EC%A7%80%EB%A2%B0-%EC%B1%85%EC%9E%84%EB%A1%A0-%ED%95%9C-2026"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Asked at the same October 7 audit about sending a letter condemning North Korea over the DMZ mine blast to the president of the U.N. Security Council, Unification Minister Chung Dong-young said its effectiveness needed to be weighed but that it was an option that could be discussed.",
+     "src": [
+      "https://m.inews24.com/v/2012787"
+     ]
+    },
+    {
+     "t": "Kyiv Mayor Vitali Klitschko said on October 7 that power outages from the strike cut electricity to some water pumping stations, disrupting water supply on the city's west bank of the Dnipro.",
+     "src": [
+      "https://kyivindependent.com/russia-slams-kyiv-in-mass-missile-drone-attack-on-putins-74th-birthday/"
+     ]
+    },
+    {
+     "t": "France's Foreign Ministry summoned Iran's ambassador on October 7 to protest what it called disinformation about French high school protests spread by official Iranian Foreign Ministry accounts. Tehran had summoned France's ambassador the day before over the treatment of protesters.",
+     "src": [
+      "https://english.aawsat.com/world/5327181-france-summons-iran-ambassador-over-%E2%80%98disinformation-campaign%E2%80%99-school-protests"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-07",
    "items": [
     {
@@ -11,8 +139,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -39,8 +166,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -62,8 +188,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -87,8 +212,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -131,8 +255,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -182,8 +305,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -206,8 +328,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -233,8 +354,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -260,8 +380,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -328,13 +447,11 @@
      "fc": [
       {
        "id": "f42",
-       "e": "none",
-       "p": 13
+       "e": "none"
       },
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -360,8 +477,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -384,8 +500,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -411,13 +526,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -485,8 +598,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -509,8 +621,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -533,8 +644,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -557,8 +667,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -599,13 +708,11 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       },
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -628,8 +735,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 85
+       "e": "none"
       }
      ],
      "src": [
@@ -651,8 +757,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -676,13 +781,11 @@
      "fc": [
       {
        "id": "f36",
-       "e": "none",
-       "p": 92
+       "e": "none"
       },
       {
        "id": "f24",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -703,8 +806,7 @@
      "fc": [
       {
        "id": "f10",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -756,8 +858,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -780,8 +881,7 @@
      "fc": [
       {
        "id": "f17",
-       "e": "none",
-       "p": 80
+       "e": "none"
       }
      ],
      "src": [
@@ -803,13 +903,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none",
-       "p": 30
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -831,8 +929,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 45
+       "e": "none"
       }
      ],
      "src": [
@@ -854,13 +951,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 10
+       "e": "none"
       }
      ],
      "src": [
@@ -915,8 +1010,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -938,13 +1032,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 10
+       "e": "none"
       }
      ],
      "src": [
@@ -969,13 +1061,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none",
-       "p": 30
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -997,8 +1087,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -1053,8 +1142,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -1076,13 +1164,11 @@
      "fc": [
       {
        "id": "f05",
-       "e": "none",
-       "p": 25
+       "e": "none"
       },
       {
        "id": "f22",
-       "e": "none",
-       "p": 35
+       "e": "none"
       }
      ],
      "src": [
@@ -1103,13 +1189,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f43",
-       "e": "down",
-       "p": 15
+       "e": "down"
       }
      ],
      "src": [
@@ -1131,13 +1215,11 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       },
       {
        "id": "f28",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -1161,13 +1243,11 @@
      "fc": [
       {
        "id": "f24",
-       "e": "up",
-       "p": 25
+       "e": "up"
       },
       {
        "id": "f44",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -1194,8 +1274,7 @@
      "fc": [
       {
        "id": "f39",
-       "e": "up",
-       "p": 70
+       "e": "up"
       }
      ],
      "src": [
