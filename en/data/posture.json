@@ -1,0 +1,508 @@
+{
+ "res": {
+  "asof": "2026-03-31",
+  "src": "U.S. Defense Manpower Data Center (DMDC) quarterly statistics (active duty by assigned duty location)",
+  "url": "https://dwp.dmdc.osd.mil/dwp/app/dod-data-reports/workforce-reports",
+  "total": 174428,
+  "note": "Only permanently stationed troops are counted. Rotational deployments, operational deployments and ship crews are not counted by country, and figures for Iraq, Syria and some other countries have not been published since 2018. The actual size of the U.S. deployment in the Middle East therefore does not appear in these statistics.",
+  "items": [
+   {
+    "k": "JPN",
+    "name": "Japan",
+    "lat": 35.75,
+    "lon": 139.35,
+    "n": 54891,
+    "prev": 54288
+   },
+   {
+    "k": "DEU",
+    "name": "Germany",
+    "lat": 49.44,
+    "lon": 7.6,
+    "n": 37009,
+    "prev": 36436
+   },
+   {
+    "k": "KOR",
+    "name": "South Korea",
+    "lat": 36.96,
+    "lon": 127.03,
+    "n": 23372,
+    "prev": 23495
+   },
+   {
+    "k": "ITA",
+    "name": "Italy",
+    "lat": 45.55,
+    "lon": 11.55,
+    "n": 12783,
+    "prev": 12662
+   },
+   {
+    "k": "GBR",
+    "name": "United Kingdom",
+    "lat": 52.41,
+    "lon": 0.56,
+    "n": 10158,
+    "prev": 10156
+   },
+   {
+    "k": "GUM",
+    "name": "Guam",
+    "lat": 13.44,
+    "lon": 144.79,
+    "n": 7137,
+    "prev": 7086
+   },
+   {
+    "k": "ESP",
+    "name": "Spain",
+    "lat": 36.62,
+    "lon": -6.35,
+    "n": 3835,
+    "prev": 3814
+   },
+   {
+    "k": "BHR",
+    "name": "Bahrain",
+    "lat": 26.2,
+    "lon": 50.6,
+    "n": 3151,
+    "prev": 3328
+   },
+   {
+    "k": "TUR",
+    "name": "Turkey",
+    "lat": 37.0,
+    "lon": 35.43,
+    "n": 1675,
+    "prev": 1661
+   },
+   {
+    "k": "BEL",
+    "name": "Belgium",
+    "lat": 50.45,
+    "lon": 3.95,
+    "n": 1104,
+    "prev": 1118
+   },
+   {
+    "k": "PRI",
+    "name": "Puerto Rico",
+    "lat": 18.2,
+    "lon": -66.5,
+    "n": 673,
+    "prev": 663
+   },
+   {
+    "k": "CUB",
+    "name": "Guantánamo (Cuba)",
+    "lat": 19.9,
+    "lon": -75.15,
+    "n": 563,
+    "prev": 559
+   },
+   {
+    "k": "KWT",
+    "name": "Kuwait",
+    "lat": 29.3,
+    "lon": 47.7,
+    "n": 540,
+    "prev": 533
+   },
+   {
+    "k": "GRC",
+    "name": "Greece",
+    "lat": 35.49,
+    "lon": 24.12,
+    "n": 448,
+    "prev": 432
+   },
+   {
+    "k": "NLD",
+    "name": "Netherlands",
+    "lat": 50.95,
+    "lon": 5.97,
+    "n": 412,
+    "prev": 414
+   },
+   {
+    "k": "POL",
+    "name": "Poland",
+    "lat": 52.4,
+    "lon": 16.9,
+    "n": 382,
+    "prev": 369
+   },
+   {
+    "k": "HND",
+    "name": "Honduras",
+    "lat": 14.38,
+    "lon": -87.62,
+    "n": 333,
+    "prev": 329
+   },
+   {
+    "k": "AUS",
+    "name": "Australia",
+    "lat": -12.4,
+    "lon": 130.9,
+    "n": 306,
+    "prev": 313
+   },
+   {
+    "k": "SGP",
+    "name": "Singapore",
+    "lat": 1.35,
+    "lon": 103.8,
+    "n": 274,
+    "prev": 271
+   },
+   {
+    "k": "SAU",
+    "name": "Saudi Arabia",
+    "lat": 24.06,
+    "lon": 47.58,
+    "n": 264,
+    "prev": 269
+   },
+   {
+    "k": "IOT",
+    "name": "Diego Garcia",
+    "lat": -7.31,
+    "lon": 72.41,
+    "n": 251,
+    "prev": 246
+   },
+   {
+    "k": "PRT",
+    "name": "Portugal (Azores)",
+    "lat": 38.76,
+    "lon": -27.09,
+    "n": 247,
+    "prev": 237
+   },
+   {
+    "k": "QAT",
+    "name": "Qatar",
+    "lat": 25.12,
+    "lon": 51.31,
+    "n": 179,
+    "prev": 239
+   },
+   {
+    "k": "EGY",
+    "name": "Egypt",
+    "lat": 30.04,
+    "lon": 31.24,
+    "n": 174,
+    "prev": 186
+   },
+   {
+    "k": "CAN",
+    "name": "Canada",
+    "lat": 45.4,
+    "lon": -75.7,
+    "n": 159,
+    "prev": 154
+   },
+   {
+    "k": "ROU",
+    "name": "Romania",
+    "lat": 44.36,
+    "lon": 28.49,
+    "n": 135,
+    "prev": 153
+   },
+   {
+    "k": "GRL",
+    "name": "Greenland",
+    "lat": 76.53,
+    "lon": -68.7,
+    "n": 131,
+    "prev": 133
+   },
+   {
+    "k": "ARE",
+    "name": "United Arab Emirates",
+    "lat": 24.25,
+    "lon": 54.55,
+    "n": 130,
+    "prev": 131
+   },
+   {
+    "k": "THA",
+    "name": "Thailand",
+    "lat": 13.75,
+    "lon": 100.5,
+    "n": 115,
+    "prev": 118
+   },
+   {
+    "k": "ISR",
+    "name": "Israel",
+    "lat": 31.8,
+    "lon": 35.2,
+    "n": 111,
+    "prev": 110
+   },
+   {
+    "k": "JOR",
+    "name": "Jordan",
+    "lat": 31.95,
+    "lon": 35.9,
+    "n": 92,
+    "prev": 92
+   },
+   {
+    "k": "MEX",
+    "name": "Mexico",
+    "lat": 19.43,
+    "lon": -99.13,
+    "n": 90,
+    "prev": 85
+   },
+   {
+    "k": "NOR",
+    "name": "Norway",
+    "lat": 59.9,
+    "lon": 10.75,
+    "n": 89,
+    "prev": 87
+   }
+  ],
+  "shares": [
+   {
+    "q": "2024-12",
+    "ip": 48.9,
+    "eu": 38.5,
+    "me": 3.0
+   },
+   {
+    "q": "2025-03",
+    "ip": 47.3,
+    "eu": 37.0,
+    "me": 2.6
+   },
+   {
+    "q": "2025-06",
+    "ip": 50.1,
+    "eu": 39.4,
+    "me": 3.0
+   },
+   {
+    "q": "2025-09",
+    "ip": 50.2,
+    "eu": 39.9,
+    "me": 3.0
+   },
+   {
+    "q": "2025-12",
+    "ip": 48.6,
+    "eu": 38.5,
+    "me": 2.8
+   },
+   {
+    "q": "2026-03",
+    "ip": 49.8,
+    "eu": 39.6,
+    "me": 2.7
+   }
+  ]
+ },
+ "fleet": {
+  "asof": "2026-10-05",
+  "src": "USNI News Fleet Tracker (approximate positions based on Navy and public information)",
+  "url": "https://news.usni.org/2026/10/05/usni-news-fleet-and-marine-tracker-oct-5-2026",
+  "items": [
+   {
+    "name": "USS George Washington",
+    "g": "Arabian Sea",
+    "type": "cv",
+    "home": "Yokosuka (Japan)",
+    "fwd": true,
+    "lat": 16.5,
+    "lon": 63.5,
+    "where": "Arabian Sea · supporting operations against Iran",
+    "note": "The carrier forward-deployed in Japan is in the Middle East"
+   },
+   {
+    "name": "USS George H.W. Bush",
+    "g": "Port call, Phuket (Thailand)",
+    "type": "cv",
+    "home": "Norfolk",
+    "lat": 7.88,
+    "lon": 98.39,
+    "where": "In port at Phuket, Thailand (arrived October 4 after operating in the Arabian Sea)"
+   },
+   {
+    "name": "USS Boxer amphibious ready group",
+    "g": "Arabian Sea",
+    "type": "ar",
+    "home": "San Diego",
+    "lat": 18.5,
+    "lon": 61.0,
+    "where": "Arabian Sea"
+   },
+   {
+    "name": "USS Theodore Roosevelt",
+    "g": "Pacific, heading west",
+    "type": "cv",
+    "home": "San Diego",
+    "lat": 21.0,
+    "lon": -150.0,
+    "where": "Pacific · heading west (reportedly toward Iran)"
+   },
+   {
+    "name": "USS Makin Island amphibious ready group",
+    "g": "Pacific, heading west",
+    "type": "ar",
+    "home": "San Diego",
+    "lat": 25.0,
+    "lon": -138.0,
+    "where": "Pacific · departed Sept. 28"
+   },
+   {
+    "name": "USS Abraham Lincoln",
+    "g": "Eastern Pacific, returning home",
+    "type": "cv",
+    "home": "San Diego",
+    "lat": 28.0,
+    "lon": -128.0,
+    "where": "Eastern Pacific · returning home"
+   },
+   {
+    "name": "USS Tripoli amphibious ready group",
+    "g": "Sasebo",
+    "type": "ar",
+    "home": "Sasebo (Japan)",
+    "fwd": true,
+    "lat": 33.16,
+    "lon": 129.72,
+    "where": "In port at Sasebo"
+   }
+  ]
+ },
+ "events": [
+  {
+   "date": "2025-10-31",
+   "s": "700 paratroopers withdrawn",
+   "kind": "down",
+   "lat": 44.36,
+   "lon": 28.49,
+   "t": "About 700 paratroopers in Germany, Romania and Poland withdrawn without replacement",
+   "grade": "Official",
+   "src": "Pentagon and U.S. Army Europe and Africa announcement (CBS report)",
+   "url": "https://www.cbsnews.com/amp/news/trump-us-troop-drawdown-europe-nato-concern-republican-rebuke",
+   "case": "ukraine",
+   "fc": [],
+   "fp": "eastern-flank-airspace-romania-black-sea"
+  },
+  {
+   "date": "2025-12",
+   "s": "Europe floor 76,000 (law)",
+   "kind": "law",
+   "lat": 50.1,
+   "lon": 8.7,
+   "t": "Congress set a floor of 76,000 U.S. troops in Europe (NDAA Sec. 1249)",
+   "grade": "Law",
+   "src": "Congressional Research Service (CRS) overview of U.S. European Command",
+   "url": "https://www.everycrsreport.com/files/2026-06-30_IF11130_808bdb10a06d2832339787be61d42919173f844c.html",
+   "case": "ukraine",
+   "fc": [],
+   "fp": "baltic-kaliningrad-suwalki"
+  },
+  {
+   "date": "2026-05-01",
+   "s": "5,000 out of Germany",
+   "kind": "down",
+   "lat": 49.44,
+   "lon": 7.6,
+   "t": "Pentagon announces withdrawal of about 5,000 U.S. troops from Germany within six to 12 months (units and bases not named)",
+   "grade": "Official",
+   "src": "Pentagon announcement (AP)",
+   "url": "https://www.kold.com/2026/05/02/us-withdraw-5000-troops-germany-next-6-12-months-fulfilling-trumps-threat/",
+   "case": "ukraine",
+   "fc": [],
+   "fp": null
+  },
+  {
+   "date": "2026-05-14",
+   "s": "Poland rotation canceled",
+   "kind": "down",
+   "lat": 52.4,
+   "lon": 16.9,
+   "t": "Nine-month rotation of an armored brigade of about 4,000 troops to Poland halted",
+   "grade": "Secondary",
+   "src": "Confirmed by U.S. Army officials (FDD analysis)",
+   "url": "https://www.fdd.org/analysis/2026/05/14/canceled-poland-deployment-further-weakens-american-deterrence-in-europe/",
+   "case": "ukraine",
+   "fc": [],
+   "fp": "baltic-kaliningrad-suwalki"
+  },
+  {
+   "date": "2026-06-18",
+   "s": "Europe posture review",
+   "kind": "plan",
+   "lat": 48.78,
+   "lon": 9.18,
+   "t": "Six-month review of U.S. posture and bases in Europe launched",
+   "grade": "Official",
+   "src": "Pentagon announcement (cited by CRS)",
+   "url": "https://www.everycrsreport.com/files/2026-06-30_IF11130_808bdb10a06d2832339787be61d42919173f844c.html",
+   "case": "ukraine",
+   "fc": [],
+   "fp": null
+  },
+  {
+   "date": "2026-07-01",
+   "s": "Luzon Strait deployment",
+   "kind": "up",
+   "lat": 20.5,
+   "lon": 121.5,
+   "t": "Marine anti-ship missiles deployed to Batanes, Philippines (Luzon Strait) and Japan's Ryukyu Islands",
+   "grade": "Secondary",
+   "src": "USNI News report (Oct. 2, 2026, on the deployment). Date per the site's resolve indicators",
+   "url": "https://news.usni.org/2026/10/02/pentagon-doubles-down-on-pacific-area-denial-need-for-high-end-munitions",
+   "case": "taiwan",
+   "fc": [
+    "f26"
+   ],
+   "fp": "taiwan-strait"
+  },
+  {
+   "date": "2026-08-19",
+   "s": "U.S.-ROK drill cut",
+   "kind": "down",
+   "lat": 37.5,
+   "lon": 127.0,
+   "t": "On President Trump's order, the U.S.-ROK Ulchi Freedom Shield exercise was cut from 11 days to five and field training scaled back",
+   "grade": "Official",
+   "src": "South Korean Joint Chiefs of Staff announcement (Al Jazeera report)",
+   "url": "https://www.aljazeera.com/news/2026/8/19/south-korea-us-scale-back-annual-military-drills-after-trumps-order",
+   "case": "korea",
+   "fc": [
+    "f54",
+    "f56"
+   ],
+   "fp": "korea"
+  },
+  {
+   "date": "2026-10-02",
+   "s": "3 carriers · about 50,000 troops",
+   "kind": "up",
+   "lat": 24.0,
+   "lon": 57.0,
+   "t": "Plan to have three carriers and two amphibious ready groups around Iran by late November; about 50,000 U.S. troops in the region",
+   "grade": "Reported",
+   "src": "Anonymous U.S. official (Al Jazeera)",
+   "url": "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
+   "case": "iran",
+   "fc": [
+    "f04",
+    "f03"
+   ],
+   "fp": "iran-war"
+  }
+ ]
+}

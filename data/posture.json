@@ -1,0 +1,508 @@
+{
+ "res": {
+  "asof": "2026-03-31",
+  "src": "미 국방부 인력데이터센터(DMDC) 분기 통계(배속 근무지 기준 현역)",
+  "url": "https://dwp.dmdc.osd.mil/dwp/app/dod-data-reports/workforce-reports",
+  "total": 174428,
+  "note": "상주 인원만 잡힙니다. 순환 배치·작전 파견·함정 승조원은 나라별로 잡히지 않고, 2018년부터 이라크·시리아 등의 수치는 공개되지 않습니다. 그래서 중동의 실제 전개 규모는 이 통계에 나타나지 않습니다.",
+  "items": [
+   {
+    "k": "JPN",
+    "name": "일본",
+    "lat": 35.75,
+    "lon": 139.35,
+    "n": 54891,
+    "prev": 54288
+   },
+   {
+    "k": "DEU",
+    "name": "독일",
+    "lat": 49.44,
+    "lon": 7.6,
+    "n": 37009,
+    "prev": 36436
+   },
+   {
+    "k": "KOR",
+    "name": "한국",
+    "lat": 36.96,
+    "lon": 127.03,
+    "n": 23372,
+    "prev": 23495
+   },
+   {
+    "k": "ITA",
+    "name": "이탈리아",
+    "lat": 45.55,
+    "lon": 11.55,
+    "n": 12783,
+    "prev": 12662
+   },
+   {
+    "k": "GBR",
+    "name": "영국",
+    "lat": 52.41,
+    "lon": 0.56,
+    "n": 10158,
+    "prev": 10156
+   },
+   {
+    "k": "GUM",
+    "name": "괌",
+    "lat": 13.44,
+    "lon": 144.79,
+    "n": 7137,
+    "prev": 7086
+   },
+   {
+    "k": "ESP",
+    "name": "스페인",
+    "lat": 36.62,
+    "lon": -6.35,
+    "n": 3835,
+    "prev": 3814
+   },
+   {
+    "k": "BHR",
+    "name": "바레인",
+    "lat": 26.2,
+    "lon": 50.6,
+    "n": 3151,
+    "prev": 3328
+   },
+   {
+    "k": "TUR",
+    "name": "튀르키예",
+    "lat": 37.0,
+    "lon": 35.43,
+    "n": 1675,
+    "prev": 1661
+   },
+   {
+    "k": "BEL",
+    "name": "벨기에",
+    "lat": 50.45,
+    "lon": 3.95,
+    "n": 1104,
+    "prev": 1118
+   },
+   {
+    "k": "PRI",
+    "name": "푸에르토리코",
+    "lat": 18.2,
+    "lon": -66.5,
+    "n": 673,
+    "prev": 663
+   },
+   {
+    "k": "CUB",
+    "name": "관타나모(쿠바)",
+    "lat": 19.9,
+    "lon": -75.15,
+    "n": 563,
+    "prev": 559
+   },
+   {
+    "k": "KWT",
+    "name": "쿠웨이트",
+    "lat": 29.3,
+    "lon": 47.7,
+    "n": 540,
+    "prev": 533
+   },
+   {
+    "k": "GRC",
+    "name": "그리스",
+    "lat": 35.49,
+    "lon": 24.12,
+    "n": 448,
+    "prev": 432
+   },
+   {
+    "k": "NLD",
+    "name": "네덜란드",
+    "lat": 50.95,
+    "lon": 5.97,
+    "n": 412,
+    "prev": 414
+   },
+   {
+    "k": "POL",
+    "name": "폴란드",
+    "lat": 52.4,
+    "lon": 16.9,
+    "n": 382,
+    "prev": 369
+   },
+   {
+    "k": "HND",
+    "name": "온두라스",
+    "lat": 14.38,
+    "lon": -87.62,
+    "n": 333,
+    "prev": 329
+   },
+   {
+    "k": "AUS",
+    "name": "호주",
+    "lat": -12.4,
+    "lon": 130.9,
+    "n": 306,
+    "prev": 313
+   },
+   {
+    "k": "SGP",
+    "name": "싱가포르",
+    "lat": 1.35,
+    "lon": 103.8,
+    "n": 274,
+    "prev": 271
+   },
+   {
+    "k": "SAU",
+    "name": "사우디아라비아",
+    "lat": 24.06,
+    "lon": 47.58,
+    "n": 264,
+    "prev": 269
+   },
+   {
+    "k": "IOT",
+    "name": "디에고가르시아",
+    "lat": -7.31,
+    "lon": 72.41,
+    "n": 251,
+    "prev": 246
+   },
+   {
+    "k": "PRT",
+    "name": "포르투갈(아조레스)",
+    "lat": 38.76,
+    "lon": -27.09,
+    "n": 247,
+    "prev": 237
+   },
+   {
+    "k": "QAT",
+    "name": "카타르",
+    "lat": 25.12,
+    "lon": 51.31,
+    "n": 179,
+    "prev": 239
+   },
+   {
+    "k": "EGY",
+    "name": "이집트",
+    "lat": 30.04,
+    "lon": 31.24,
+    "n": 174,
+    "prev": 186
+   },
+   {
+    "k": "CAN",
+    "name": "캐나다",
+    "lat": 45.4,
+    "lon": -75.7,
+    "n": 159,
+    "prev": 154
+   },
+   {
+    "k": "ROU",
+    "name": "루마니아",
+    "lat": 44.36,
+    "lon": 28.49,
+    "n": 135,
+    "prev": 153
+   },
+   {
+    "k": "GRL",
+    "name": "그린란드",
+    "lat": 76.53,
+    "lon": -68.7,
+    "n": 131,
+    "prev": 133
+   },
+   {
+    "k": "ARE",
+    "name": "아랍에미리트",
+    "lat": 24.25,
+    "lon": 54.55,
+    "n": 130,
+    "prev": 131
+   },
+   {
+    "k": "THA",
+    "name": "태국",
+    "lat": 13.75,
+    "lon": 100.5,
+    "n": 115,
+    "prev": 118
+   },
+   {
+    "k": "ISR",
+    "name": "이스라엘",
+    "lat": 31.8,
+    "lon": 35.2,
+    "n": 111,
+    "prev": 110
+   },
+   {
+    "k": "JOR",
+    "name": "요르단",
+    "lat": 31.95,
+    "lon": 35.9,
+    "n": 92,
+    "prev": 92
+   },
+   {
+    "k": "MEX",
+    "name": "멕시코",
+    "lat": 19.43,
+    "lon": -99.13,
+    "n": 90,
+    "prev": 85
+   },
+   {
+    "k": "NOR",
+    "name": "노르웨이",
+    "lat": 59.9,
+    "lon": 10.75,
+    "n": 89,
+    "prev": 87
+   }
+  ],
+  "shares": [
+   {
+    "q": "2024-12",
+    "ip": 48.9,
+    "eu": 38.5,
+    "me": 3.0
+   },
+   {
+    "q": "2025-03",
+    "ip": 47.3,
+    "eu": 37.0,
+    "me": 2.6
+   },
+   {
+    "q": "2025-06",
+    "ip": 50.1,
+    "eu": 39.4,
+    "me": 3.0
+   },
+   {
+    "q": "2025-09",
+    "ip": 50.2,
+    "eu": 39.9,
+    "me": 3.0
+   },
+   {
+    "q": "2025-12",
+    "ip": 48.6,
+    "eu": 38.5,
+    "me": 2.8
+   },
+   {
+    "q": "2026-03",
+    "ip": 49.8,
+    "eu": 39.6,
+    "me": 2.7
+   }
+  ]
+ },
+ "fleet": {
+  "asof": "2026-10-05",
+  "src": "미 해군연구소(USNI) 함대 추적(해군·공개 자료 기준의 대략적 위치)",
+  "url": "https://news.usni.org/2026/10/05/usni-news-fleet-and-marine-tracker-oct-5-2026",
+  "items": [
+   {
+    "name": "조지 워싱턴",
+    "g": "아라비아해",
+    "type": "cv",
+    "home": "요코스카(일본)",
+    "fwd": true,
+    "lat": 16.5,
+    "lon": 63.5,
+    "where": "아라비아해 · 대이란 작전 지원",
+    "note": "일본에 전진 배치된 항모가 중동에 있습니다"
+   },
+   {
+    "name": "조지 H.W. 부시",
+    "g": "푸껫(태국) 기항",
+    "type": "cv",
+    "home": "노퍽",
+    "lat": 7.88,
+    "lon": 98.39,
+    "where": "태국 푸껫 기항(10월 4일 입항, 그 전까지 아라비아해에서 작전)"
+   },
+   {
+    "name": "복서 상륙전단",
+    "g": "아라비아해",
+    "type": "ar",
+    "home": "샌디에이고",
+    "lat": 18.5,
+    "lon": 61.0,
+    "where": "아라비아해"
+   },
+   {
+    "name": "시어도어 루스벨트",
+    "g": "태평양 서쪽으로 이동",
+    "type": "cv",
+    "home": "샌디에이고",
+    "lat": 21.0,
+    "lon": -150.0,
+    "where": "태평양 · 서쪽으로 이동 중(이란 방면 보도)"
+   },
+   {
+    "name": "메이킨 아일랜드 상륙전단",
+    "g": "태평양 서쪽으로 이동",
+    "type": "ar",
+    "home": "샌디에이고",
+    "lat": 25.0,
+    "lon": -138.0,
+    "where": "태평양 · 9월 28일 출항"
+   },
+   {
+    "name": "에이브러햄 링컨",
+    "g": "동태평양 귀항",
+    "type": "cv",
+    "home": "샌디에이고",
+    "lat": 28.0,
+    "lon": -128.0,
+    "where": "동태평양 · 귀항 중"
+   },
+   {
+    "name": "트리폴리 상륙전단",
+    "g": "사세보",
+    "type": "ar",
+    "home": "사세보(일본)",
+    "fwd": true,
+    "lat": 33.16,
+    "lon": 129.72,
+    "where": "사세보 정박"
+   }
+  ]
+ },
+ "events": [
+  {
+   "date": "2025-10-31",
+   "s": "공수부대 700명 철수",
+   "kind": "down",
+   "lat": 44.36,
+   "lon": 28.49,
+   "t": "독일·루마니아·폴란드의 공수부대 약 700명을 교대 없이 철수",
+   "grade": "공식",
+   "src": "미 국방부·미 육군 유럽·아프리카사령부 발표(CBS 보도)",
+   "url": "https://www.cbsnews.com/amp/news/trump-us-troop-drawdown-europe-nato-concern-republican-rebuke",
+   "case": "ukraine",
+   "fc": [],
+   "fp": "eastern-flank-airspace-romania-black-sea"
+  },
+  {
+   "date": "2025-12",
+   "s": "유럽 하한 7.6만 명(법)",
+   "kind": "law",
+   "lat": 50.1,
+   "lon": 8.7,
+   "t": "의회가 유럽 주둔 미군의 하한을 7만 6,000명으로 정함(국방수권법 제1249조)",
+   "grade": "법",
+   "src": "미 의회조사국(CRS) 유럽사령부 개관",
+   "url": "https://www.everycrsreport.com/files/2026-06-30_IF11130_808bdb10a06d2832339787be61d42919173f844c.html",
+   "case": "ukraine",
+   "fc": [],
+   "fp": "baltic-kaliningrad-suwalki"
+  },
+  {
+   "date": "2026-05-01",
+   "s": "독일 5,000명 철수",
+   "kind": "down",
+   "lat": 49.44,
+   "lon": 7.6,
+   "t": "국방부가 독일 주둔 미군 약 5,000명을 6~12개월 안에 철수한다고 발표(대상 부대와 기지는 밝히지 않음)",
+   "grade": "공식",
+   "src": "미 국방부 발표(AP 보도)",
+   "url": "https://www.kold.com/2026/05/02/us-withdraw-5000-troops-germany-next-6-12-months-fulfilling-trumps-threat/",
+   "case": "ukraine",
+   "fc": [],
+   "fp": null
+  },
+  {
+   "date": "2026-05-14",
+   "s": "폴란드 순환 여단 취소",
+   "kind": "down",
+   "lat": 52.4,
+   "lon": 16.9,
+   "t": "폴란드로 가던 약 4,000명 규모 기갑여단의 9개월 순환 배치 중단",
+   "grade": "2차",
+   "src": "미 육군 관계자 확인(FDD 분석)",
+   "url": "https://www.fdd.org/analysis/2026/05/14/canceled-poland-deployment-further-weakens-american-deterrence-in-europe/",
+   "case": "ukraine",
+   "fc": [],
+   "fp": "baltic-kaliningrad-suwalki"
+  },
+  {
+   "date": "2026-06-18",
+   "s": "유럽 태세 검토",
+   "kind": "plan",
+   "lat": 48.78,
+   "lon": 9.18,
+   "t": "유럽 주둔 태세와 기지 6개월 검토 착수",
+   "grade": "공식",
+   "src": "미 국방부 발표(CRS 인용)",
+   "url": "https://www.everycrsreport.com/files/2026-06-30_IF11130_808bdb10a06d2832339787be61d42919173f844c.html",
+   "case": "ukraine",
+   "fc": [],
+   "fp": null
+  },
+  {
+   "date": "2026-07-01",
+   "s": "루손해협 배치",
+   "kind": "up",
+   "lat": 20.5,
+   "lon": 121.5,
+   "t": "필리핀 바타네스(루손해협)와 일본 류큐 열도에 해병대 대함 미사일 배치",
+   "grade": "2차",
+   "src": "미 해군연구소 보도(2026년 10월 2일, 배치 사실). 날짜는 사이트 의지 지표 기준",
+   "url": "https://news.usni.org/2026/10/02/pentagon-doubles-down-on-pacific-area-denial-need-for-high-end-munitions",
+   "case": "taiwan",
+   "fc": [
+    "f26"
+   ],
+   "fp": "taiwan-strait"
+  },
+  {
+   "date": "2026-08-19",
+   "s": "한미 연습 단축",
+   "kind": "down",
+   "lat": 37.5,
+   "lon": 127.0,
+   "t": "트럼프 대통령의 지시로 한미 을지 자유의 방패 연습을 11일에서 5일로 줄이고 야외 기동 훈련도 축소",
+   "grade": "공식",
+   "src": "한국 합동참모본부 발표(알자지라 보도)",
+   "url": "https://www.aljazeera.com/news/2026/8/19/south-korea-us-scale-back-annual-military-drills-after-trumps-order",
+   "case": "korea",
+   "fc": [
+    "f54",
+    "f56"
+   ],
+   "fp": "korea"
+  },
+  {
+   "date": "2026-10-02",
+   "s": "항모 3척 · 약 5만 명",
+   "kind": "up",
+   "lat": 24.0,
+   "lon": 57.0,
+   "t": "11월 말까지 항모 3척·상륙전단 2개를 이란 주변에 배치 계획. 역내 미군 약 5만 명",
+   "grade": "보도",
+   "src": "익명의 미 당국자(알자지라)",
+   "url": "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
+   "case": "iran",
+   "fc": [
+    "f04",
+    "f03"
+   ],
+   "fp": "iran-war"
+  }
+ ]
+}

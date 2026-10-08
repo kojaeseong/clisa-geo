@@ -25,7 +25,7 @@ const LABEL_AT = {USA:[-98,39], CAN:[-100,58], FRA:[2.5,46.6], NOR:[9,61.5], ESP
 const HOME = [-95, -28, 0], HOME_K = 1;
 const REGIONS = ["동아시아","동남아시아","남아시아","중앙아시아·내륙","러시아·동유럽","캅카스·아나톨리아","중동·북아프리카","유럽","북미","중남미","아프리카","오세아니아"];
 
-const S = { layer: store.get("ep.layer2") || "focus", prevTab: "overview", showFp:true, showEdge:true, showUsf:false, sel:null, selFp:null, lens:null, hover:null, hoverFp:null, rot:HOME.slice(), k:HOME_K, tab:"overview", scase: null };
+const S = { layer: "focus", prevTab: "overview", showFp:true, showEdge:true, showUsf:false, sel:null, selFp:null, lens:null, hover:null, hoverFp:null, rot:HOME.slice(), k:HOME_K, tab:"overview", scase: null };
 if (!LAYERS[S.layer]) S.layer = "focus";
 let D = null, features = [], byIso = {}, borders = null, C = {}, labelPos = {};
 const grat = d3.geoGraticule10();
@@ -261,7 +261,9 @@ function setupSearch(){
 /* ---------- load ---------- */
 /* v3.34 속도: 자료·브리핑·지도를 함께 받되, 글은 자료가 오는 즉시 그리고 지구본은 지도가 온 뒤에 그린다. 탭 내용은 처음 열 때 그린다 */
 const BRIEF_P = fetch("/data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
-fetch("/data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => { init(d); return fetch("/data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
+/* v3.86(2026-10-08 결재) 미군 해외 배치는 data/posture.json(매주·매월 예약 작업이 고침)을 따로 받아 자료에 붙인다. 못 받으면 미군 배치 없이 연다 */
+const POSTURE_P = fetch("/data/posture.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
+fetch("/data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => POSTURE_P.then(p => { if (p && p.res && p.fleet && p.events) d.posture = p; else delete d.posture; return d; })).then(d => { init(d); return fetch("/data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
   console.error(err);
   const l = $("#loading"); if (l) l.textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
 });
@@ -392,7 +394,7 @@ function drawOver(t){
     }
     octx.setLineDash([]); octx.globalAlpha = 1;
   }
-  const USF = S.showUsf && D.posture, lboxes = [], usfOps = USF ? layoutUsf(ctr, lboxes) : [];  /* v3.77 미군 배치를 켜면 관계선·분쟁지를 감추고, 나라 이름은 미군 기호를 피해 놓는다 */
+  const USF = S.showUsf && D.posture, lboxes = [], usfOps = USF ? layoutUsf(ctr, lboxes) : [];  /* 나라 이름은 미군 기호를 피해 놓는다 */
   const MIL = S.layer === "mil";  /* v3.76 군사력 보기에서는 관계선·분쟁지를 옅게 하고 이름·숫자를 맨 위에 그린다 */
   const drawLabels = () => {
   octx.font = '500 11px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif';
@@ -518,7 +520,7 @@ function requestDraw(all, spin){
     spinOnly = false; if (needBase) { drawBase(); needBase = false; } drawOver(t); lastOver = t; });
 }
 /* v3.9 자전: 360°/480초, v3.25부터 250ms마다 그림. 지구본을 만지거나 국가를 고르면 멈추고, 20초 뒤 다시 돈다. 움직임 줄이기 설정이면 돌지 않는다 */
-const SPIN = { on: store.get("ep.spin") !== "0", until: 0, last: 0, dps: 360 / 480 };
+const SPIN = { on: true,  /* v3.86: 다음 방문에는 다시 돈다 */ until: 0, last: 0, dps: 360 / 480 };
 function spinHold(ms){ SPIN.until = performance.now() + (ms || 20000); }
 /* v3.74 화면 밀림 방지(웹 분석 CLS 0.34~0.39): 이동 뒤 2.5초에 단락 건너뛰기를 되돌리면, 되살아난 단락이 한 프레임 비었다가 다시 그려지며 읽던 글이 밀린 것으로 잡혔다. 한 번 모두 배치한 화면은 그대로 둔다(되돌리지 않음) */
 function cvRestore(pn){ }
@@ -603,7 +605,7 @@ function setupInteraction(){
   over.addEventListener("wheel", () => spinHold(20000), {passive:true});
   (function(){
     const b = $("#spin"); if (!b) return;
-    const set = on => { SPIN.on = on; b.textContent = on ? "⏸" : "⟳"; const l = on ? "지구본 회전 멈춤" : "지구본 회전 시작"; b.title = l; b.setAttribute("aria-label", l); b.setAttribute("aria-pressed", on); store.set("ep.spin", on ? "1" : "0"); };
+    const set = on => { SPIN.on = on; b.textContent = on ? "⏸" : "⟳"; const l = on ? "지구본 회전 멈춤" : "지구본 회전 시작"; b.title = l; b.setAttribute("aria-label", l); b.setAttribute("aria-pressed", on); };
     if (reduceMotion) b.hidden = true;
     set(SPIN.on); b.onclick = () => set(!SPIN.on);
   })();
@@ -625,13 +627,13 @@ function setupInteraction(){
     else if (h.iso && D.countries[h.iso]) selectCountry(h.iso, true, true);
   });
 
-  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { setUsf(!S.showUsf); if (VIEW0) VIEW0.usf = null; renderOverview(); }  /* v3.85(2026-10-08 결재): 켜도 지구본을 옮기거나 회전을 멈추지 않는다 */ else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
+  $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { setUsf(!S.showUsf); if (VIEW0) VIEW0.usf = null; }  /* v3.85(2026-10-08 결재): 켜도 지구본을 옮기거나 회전을 멈추지 않는다 */ else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
   /* v3.43f 데스크탑: '지구본 색 기준' 상자를 접으면 왼쪽 아래 작은 '지도 표시' 단추로 바뀐다(처음엔 펼침, 접은 상태는 브라우저에 기억). 모바일: 예전처럼 단추로 열고 닫는다 */
   const legOff = off => { document.documentElement.classList.toggle("legoff", off); store.set("ep.legoff", off ? "1" : "0"); $("#legbtn").setAttribute("aria-expanded", !off); };
   if (!narrow()) $("#legbtn").setAttribute("aria-expanded", !document.documentElement.classList.contains("legoff"));
   $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
-  $("#legend").addEventListener("click", e => { if (e.target.closest("[data-usfgo]")) { if (VIEW0) VIEW0.usf = null; switchTab("overview"); renderOverview(); const el = document.getElementById("s-usf"); if (el) el.scrollIntoView({block: "start"}); return; } if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
+  $("#legend").addEventListener("click", e => { if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
   $("#lensoff").onclick = () => setLens(null);
   document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; const t = b.dataset.tab; navMark(TAB_ALIAS[t] || t); /* v3.74 누르기 반응(웹 분석 INP 최대 672ms): 메뉴 표시를 먼저 그리고, 무거운 화면 그리기는 다음 차례로 미룬다 */ requestAnimationFrame(() => setTimeout(() => { if (t === "strat") { S.scase = null; caseMark(); } if (t === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(t); }, 0)); });
   document.addEventListener("click", ev => {
@@ -669,7 +671,6 @@ function setupInteraction(){
     const fub = ev.target.closest("[data-fut]");
     if (fub) { const [cid, fid] = fub.dataset.fut.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("fut-" + cid + "-" + fid);
       if (t) { t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
-    if (ev.target.closest("[data-mt-off]")) { setUsf(false); renderOverview(); renderLegend(); requestDraw(false); return; }  /* v3.77 미군 배치 카드의 끄기 */
     const fwb = ev.target.closest("[data-fw]");
     if (fwb) { switchTab("forecast"); const d = document.getElementById("fw-" + fwb.dataset.fw); if (d) { d.open = true; const sc = d.previousElementSibling && d.previousElementSibling.tagName === "P" ? d.parentElement : d; requestAnimationFrame(() => sc.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"})); } return; }
     const a = ev.target.closest("[data-iso],[data-fp],[data-lens],[data-go]");
@@ -716,10 +717,12 @@ let VIEW0 = null, VIEW_CASE = null;
 const pwPath = p => /^(?:\/en)?\/power\//.test(p || ""), pwIso = p => { const m = /^(?:\/en)?\/power\/([A-Z]{3})\//.exec(p || ""); return m ? m[1] : null; };
 function pwView(iso, n){  /* 처음 들어온 쪽이면 세계 지도 자료가 아직 없을 수 있으므로, 준비될 때까지 잠시 기다린다(그사이 다른 화면으로 옮기면 그만둔다) */
   if (S.tab !== "page" || !pwPath(PAGE_CUR)) return;
+  if (/\/military\/$/.test(PAGE_CUR) && iso === "USA") { if (D.posture && !S.showUsf) { viewSave(); setUsf(true); renderLegend(); requestDraw(true); } return; }  /* v3.86 미국의 군 쪽을 여는 동안 지구본은 미국의 해외 배치를 보인다(떠나면 되돌린다) */
   if (byIso[iso] && labelPos[iso]) countryView(iso); else if (n < 40) setTimeout(() => pwView(iso, n + 1), 250);
 }
-const viewKey = () => S.tab + (S.tab === "page" ? "|" + (pwPath(PAGE_CUR) ? "power" : PAGE_CUR) : "");
-/* v3.85(2026-10-08 결재): 미군 배치를 켜면 관계선·분쟁지 스위치를 실제로 끈다(군사력 보기에서는 분쟁지를 남긴다). 방문자가 다시 켜면 함께 그린다. 미군 배치를 끄면 켜기 전 상태로 되돌린다 */
+const viewKey = () => S.tab + (S.tab === "page" ? "|" + (pwPath(PAGE_CUR) ? "power" + (/\/military\/$/.test(PAGE_CUR) ? "-mil" : "") : PAGE_CUR) : "");
+/* v3.86(2026-10-08 결재): 미군 배치는 세계 정세를 겹쳐 보는 표시가 아니라 한 행위자(미국)의 눈으로 지구본을 바꿔 보는 '보기'다.
+   켜면 관계선·분쟁지 스위치를 끄고(방문자가 다시 켜면 함께 그린다), 끄면 켜기 전 상태로 되돌린다(군사력 보기에서는 분쟁지를 남긴다) */
 function setUsf(on){
   if (!!on === S.showUsf) return;
   S.showUsf = !!on;
@@ -739,7 +742,7 @@ function viewGo(lon, lat, k, shift){
 function viewRestore(){
   const v = VIEW0; VIEW0 = null; VIEW_CASE = null; markSet(null); if (!v) return;
   if (v.layer && v.layer !== S.layer) setLayer(v.layer, true);
-  if (v.usf != null && v.usf !== S.showUsf) { setUsf(v.usf); renderLegend(); renderOverview(); }  /* 사안 화면에서 저절로 켠 미군 배치는 끈다(방문자가 직접 켜고 끈 것은 그대로) */
+  if (v.usf != null && v.usf !== S.showUsf) { setUsf(v.usf); renderLegend(); }  /* 사안 화면에서 저절로 켠 미군 배치는 끈다(방문자가 직접 켜고 끈 것은 그대로) */
   flyTo(-v.rot[0], -v.rot[1], true); zoomTo(v.k); spinHold(20000);
 }
 /* 나라(들)를 한눈에 보는 중심과 배율: 한 나라는 넓이로, 여러 나라는 서로 떨어진 거리로 */
@@ -803,7 +806,7 @@ function evPop(chip, e){
 function countryView(iso){ const v = isoView([iso]); if (!v) return; viewGo(v[0], v[1], v[2], true); markSet({isos: [iso]}); }
 function setLayer(l, temp){
   if (!LAYERS[l]) return;
-  S.layer = l; if (!temp) { store.set("ep.layer2", l); if (VIEW0) VIEW0.layer = null; }  /* 방문자가 직접 고르면 사안 화면을 떠날 때도 그 선택을 둔다 */
+  S.layer = l; if (!temp) { if (VIEW0) VIEW0.layer = null; }  /* 방문자가 직접 고르면 사안 화면을 떠날 때도 그 선택을 둔다. v3.86: 다음 방문에는 기본 상태로 연다 */
   document.querySelectorAll("[data-layer]").forEach(b => { const on = b.dataset.layer === l; b.setAttribute("aria-checked", on); b.classList.toggle("on", on); });
   renderLegend(); requestDraw(true);
   const sb = document.getElementById("scorebox"); if (sb && D) sb.innerHTML = scoreBoxHtml();
@@ -879,34 +882,47 @@ function renderLegend(){
     '<div class="keys"><div class="lt">표시 켜고 끄기</div>' +
       sw("edge", S.showEdge, '<span class="kk2"><span class="kk">' + line(C.coop, false, 18) + "협력·동맹</span><span class=\"kk\">" + line(C.conflict, true, 18) + "대립·교전</span></span>") +
       sw("fp", S.showFp, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.conflict + '" stroke="' + C.halo + '" stroke-width="1.5"/></svg>분쟁지 (크기 = 심각도)</span>') +
-      (D && D.posture ? sw("usf", S.showUsf, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.accent + '" fill-opacity=".2" stroke="' + C.accent + '" stroke-width="1.4"/></svg>미군 해외 배치</span>') : "") +
       '<div class="kk" style="padding-left:30px"><svg width="26" height="10" aria-hidden="true"><rect x="3" y="1" width="20" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>분석 범위 밖</div>' +
-    "</div>" + (S.showUsf && D && D.posture ? usfLegend() : "");
+    "</div>" + (D && D.posture ? '<div class="actv"><div class="lt">군사 배치 보기</div><button type="button" class="av" data-mt="usf" aria-pressed="' + S.showUsf + '"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.4" fill="currentColor"/></svg><span>미국의 해외 배치</span><span class="avs">' + (S.showUsf ? "보는 중 · 끄기" : "켜기") + '</span></button>' +
+      '<div class="ld">켜면 관계선과 분쟁지 표시가 꺼집니다.</div>' + (S.showUsf ? usfLegend() : "") + "</div>" : "");
 }
-/* v3.77 미군 해외 배치: 범례에는 기호 설명만, 자료와 출처는 세계 정세 탭 맨 위 카드(usfCard) */
+/* v3.77 미군 해외 배치: 범례에는 기호 설명만. v3.86부터 자료와 출처는 권력 구조 > 미국 > 군 쪽(usfParts) */
 const SHIP_SVG = c => '<svg width="16" height="10" aria-hidden="true" style="vertical-align:-1px"><path d="M1 3H15L12 9H4Z" fill="' + c + '"/><rect x="8" y="0" width="3" height="3" fill="' + c + '"/></svg>';
 function usfLegend(){
   return '<div class="usf ld"><span><b style="color:' + C.accent + '">○</b> 상주 인원</span><span>' + SHIP_SVG(C.ink) + ' 항모·상륙전단</span><span><b style="color:' + C.conflict + '">▲</b> 증파</span><span><b style="color:' + C.accent + '">▼</b> 감축</span><span>◆ 법</span><span>◇ 계획</span>' +
-    '<button type="button" class="chip" data-usfgo>자료와 출처 보기 →</button></div>';
+    '<a class="chip" href="/power/USA/military/" data-usfgo>미국의 군 · 자료와 출처 →</a></div>';
 }
 const ymdK = s => { const a = s.split("-"); return a[0] + "년 " + (+a[1]) + "월" + (a[2] ? " " + (+a[2]) + "일" : ""); };
-function usfCard(){
+/* v3.86(2026-10-08 결재) 미국의 군 쪽(/power/USA/military/)의 '배치'와 '태세 변화'를 data/posture.json으로 채운다 */
+function usfParts(){
   const P = D.posture, R = P.res, sh = R.shares, a = sh[0], z = sh[sh.length - 1], q = ymdK;
   const spark = k => { const v = sh.map(x => x[k]), mn = Math.min(...v), mx = Math.max(...v), r = (mx - mn) || 1;
     return '<svg width="64" height="18" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="1.5" points="' + v.map((y, n) => (2 + n * 12) + "," + (16 - (y - mn) / r * 14).toFixed(1)).join(" ") + '"/></svg>'; };
   const row = (k, lab) => '<tr><th>' + lab + '</th><td class="bar" style="background-size:' + z[k] + '% 8px"></td><td class="num">' + z[k].toFixed(1) + '%</td><td class="sp">' + spark(k) + '</td><td class="num m">' + a[k].toFixed(1) + "% → " + z[k].toFixed(1) + "%</td></tr>";
   const top = R.items.slice(0, 8).map(r => { const d = r.prev ? r.n - r.prev : 0; return "<li><b>" + esc(r.name) + '</b> <span class="num">' + r.n.toLocaleString("ko-KR") + '명</span> <span class="m num">' + (d >= 0 ? "+" : "") + d.toLocaleString("ko-KR") + "</span></li>"; }).join("");
-  const ev = usfEvents().slice().reverse().map(e => '<li><span class="usf-g usf-' + e.kind + '">' + USF_GL[e.kind] + e.no + '</span><span class="m num">' + ymdK(e.date) + "</span> " + esc(e.t) + ' <span class="grade">' + esc(e.grade) + "</span> " + (e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener" class="m">' + esc(e.src) + "</a>" : '<span class="m">' + esc(e.src) + "</span>") + "</li>").join("");
+  const lk = e => { const c = e.case && (D.strategies || []).find(x => x.id === e.case), fp = e.fp && D.flashpoints.find(x => x.id === e.fp);
+    const h = (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(c.title.split(":")[0]) + "</button>" : "") +
+      (e.fc || []).map(id => { const F = D.forecasts.find(f => f.id === id && f.status === "open"); return F ? '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F.q) + '">' + fcLab(F, id, F.p) + "</button>" : ""; }).join("") +
+      (fp ? '<button type="button" class="chip" data-fp="' + esc(fp.id) + '">' + esc(fp.name_ko) + "</button>" : "");
+    return h ? '<div class="ml-l">' + h + "</div>" : ""; };
+  const ev = usfEvents().slice().reverse().map(e => '<li><span class="usf-g usf-' + e.kind + '">' + USF_GL[e.kind] + e.no + '</span><span class="m num">' + ymdK(e.date) + "</span> " + esc(e.t) + ' <span class="grade">' + esc(e.grade) + "</span> " + (e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener" class="m">' + esc(e.src) + "</a>" : '<span class="m">' + esc(e.src) + "</span>") + lk(e) + "</li>").join("");
   const fl = usfFleet().map(g => "<li><b>" + esc(g.name) + "</b> " + g.vs.map(v => esc(v.name) + (v.fwd ? '<span class="m">(모항 ' + esc(v.home) + ")</span>" : "")).join(", ") + "</li>").join("");
-  return '<section class="sec usf-card" id="s-usf"><div class="usf-h"><h3>미군 해외 배치</h3><button type="button" class="chip" data-mt-off="usf">지구본에서 끄기</button></div>' +
-    '<p class="note">미군은 한쪽을 늘리면 다른 쪽을 줄여야 합니다. 그래서 어디에 얼마를 두는지는 미국이 실제로 어느 지역을 앞세우는지 보여 줍니다. 지구본의 원은 상주 인원, 기호는 최근의 증파·감축·법·계획입니다.</p>' +
-    '<h4>상주 인원의 지역별 비중</h4><p class="m">해외 상주 미군 ' + R.total.toLocaleString("ko-KR") + "명(" + ymdK(R.asof) + " 기준), " + q(a.q) + "부터 " + q(z.q) + "까지 6개 분기</p>" +
-    '<table class="usf-t">' + row("ip", "인도·태평양") + row("eu", "유럽") + row("me", "중동") + "</table>" +
-    '<p class="m">' + esc(R.note) + "</p>" +
-    '<h4>상주 인원이 많은 곳</h4><ul class="usf-top">' + top + '</ul><p class="m">숫자 옆은 직전 분기(' + q(sh[sh.length - 2].q) + ")보다 늘거나 준 인원</p>" +
-    '<h4>최근의 움직임</h4><ul class="usf-ev">' + ev + '</ul><p class="m">등급: 공식(정부 발표), 법(법 조문), 2차(분석 기관이 전한 정부 확인), 보도(익명 당국자 등 언론 보도). 지구본의 번호와 같습니다.</p>' +
-    '<h4>항모·상륙전단</h4><ul class="usf-top">' + fl + '</ul>' +
-    '<p class="m">출처: <a href="' + esc(R.url) + '" target="_blank" rel="noopener">미 국방부 인력데이터센터(DMDC)</a> 분기 통계 · <a href="' + esc(P.fleet.url) + '" target="_blank" rel="noopener">미 해군연구소(USNI) 함대 추적</a> ' + ymdK(P.fleet.asof) + " · 함정 위치는 공개 자료 기준의 대략적 해역입니다.</p></section>";
+  return {
+    deploy: '<div class="usf-card"><p class="note">이 쪽을 여는 동안 지구본에 미국의 해외 배치가 보입니다. 원은 상주 인원, 배 모양은 항모·상륙전단, 번호를 붙인 기호는 아래 태세 변화의 증파·감축·법·계획입니다.</p>' +
+      '<h4>상주 인원의 지역별 비중</h4><p class="m">해외 상주 미군 ' + R.total.toLocaleString("ko-KR") + "명(" + ymdK(R.asof) + " 기준), " + q(a.q) + "부터 " + q(z.q) + "까지 6개 분기</p>" +
+      '<table class="usf-t">' + row("ip", "인도·태평양") + row("eu", "유럽") + row("me", "중동") + "</table>" +
+      '<p class="m">' + esc(R.note) + "</p>" +
+      '<h4>상주 인원이 많은 곳</h4><ul class="usf-top">' + top + '</ul><p class="m">숫자 옆은 직전 분기(' + q(sh[sh.length - 2].q) + ")보다 늘거나 준 인원</p>" +
+      '<h4>항모·상륙전단</h4><ul class="usf-top">' + fl + '</ul>' +
+      '<p class="m">출처: <a href="' + esc(R.url) + '" target="_blank" rel="noopener">미 국방부 인력데이터센터(DMDC)</a> 분기 통계 · <a href="' + esc(P.fleet.url) + '" target="_blank" rel="noopener">미 해군연구소(USNI) 함대 추적</a> ' + ymdK(P.fleet.asof) + " · 함정 위치는 공개 자료 기준의 대략적 해역입니다. 함정 위치와 태세 변화는 매주, 상주 인원은 국방부 통계가 새로 나오는 분기마다 고칩니다.</p></div>",
+    changes: '<div class="usf-card"><ul class="usf-ev">' + ev + '</ul><p class="m">등급: 공식(정부 발표), 법(법 조문), 2차(분석 기관이 전한 정부 확인), 보도(익명 당국자 등 언론 보도). 번호는 지구본의 기호 번호와 같습니다.</p></div>'
+  };
+}
+function usfFill(){  /* 미국의 군 쪽이 글 칸에 있으면 배치·태세 변화 칸을 채운다 */
+  const a = document.getElementById("usf-deploy"), b = document.getElementById("usf-changes");
+  if (!D || !(a || b) || (a && a.dataset.done)) return;
+  if (!D.posture) { [a, b].forEach(x => { if (x) x.textContent = "미군 배치 자료를 불러오지 못했습니다. 새로고침해 주세요."; }); return; }
+  const x = usfParts(); if (a) { a.innerHTML = x.deploy; a.dataset.done = 1; } if (b) b.innerHTML = x.changes;
 }
 function insightsHtml(){
   const cs = D.strategies || [];
@@ -1158,7 +1174,7 @@ function loadBrief(){
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  $("#pane-overview").innerHTML = (S.showUsf && D.posture ? usfCard() : "") + dueHtml() +
+  $("#pane-overview").innerHTML = dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + '" title="지구본에서 위치 보기">' + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
@@ -1897,15 +1913,13 @@ function tocHtml(L){
 function renderIdeas(){
   const H = D.history;
   $("#pane-ideas").innerHTML =
-    '<div class="sec"><h2>역사와 사상</h2><p class="meta" style="margin-top:4px">역사적 선례 ' + H.analogies.length + "건 · 반복 유형 " + H.laws.length + "건 · 참고 사상가 " + D.thinkers.length + '명</p><p class="lead" style="margin-top:8px">분석의 배경이 되는 역사적 선례, 역사에서 되풀이되는 유형, 지정학 사상가의 관점을 모았습니다. 사상가의 관점을 켜면 그가 주목한 지역이 지구본에서 강조됩니다.</p></div>' +
+    '<div class="sec"><h2>역사와 사상</h2><p class="meta" style="margin-top:4px">역사적 선례 ' + H.analogies.length + "건 · 반복 유형 " + H.laws.length + "건 · 참고 사상가 " + D.thinkers.length + '명</p><p class="lead" style="margin-top:8px">분석의 배경이 되는 역사적 선례, 역사에서 되풀이되는 유형, 지정학 사상가의 관점을 모았습니다.</p></div>' +
     tocHtml([["i-an","역사적 선례"],["i-law","반복 유형"],["i-th","참고 사상가"]]) +
     '<section class="sec" id="i-an"><h3>역사적 선례 ' + ttsBtn("an") + '</h3><p class="note" style="margin-bottom:8px">현재 상황과 구조가 유사한 과거 사례와 그 전개, 현재에 대한 함의, 선례와 다른 점을 정리했습니다.</p><ul class="list">' + H.analogies.map(a => "<li>" + analogHtml(a, false) + "</li>").join("") + "</ul></section>" +
     '<section class="sec" id="i-law"><h3>역사적 반복 유형 ' + ttsBtn("law") + '</h3><ul class="list">' + H.laws.map(l => '<li class="law"><b>' + esc(l.t) + "</b><p>" + esc(l.d) + '</p><div class="chips" style="margin-top:4px">' + l.cases.map(chip).join("") + "</div></li>").join("") + "</ul></section>" +
     '<section class="sec" id="i-th"><h3>참고 사상가 ' + ttsBtn("th") + '</h3><p class="note" style="margin-bottom:8px">각 사상가의 핵심 명제와 현재 정세에 대한 적용, 역사에서 적중한 것과 빗나간 것을 정리했습니다.</p><ul class="list">' + D.thinkers.map(t => {
-      const on = S.lens && S.lens.id === t.id;
       return '<li><article class="thinker"><div class="who"><h4>' + esc(t.name) + '</h4><span class="meta">' + esc(t.life) + " · " + esc(t.role) + '</span></div><div class="works">' + esc(t.works) + "</div>" +
-        "<dl><div><dt>핵심 명제</dt><dd>" + esc(t.idea) + "</dd></div><div><dt>현재 정세에 대한 적용</dt><dd>" + esc(t.now) + "</dd></div><div><dt>적중한 것과 빗나간 것</dt><dd>" + esc(t.record) + "</dd></div></dl>" +
-        '<button type="button" class="lens-btn" data-kind="shelf" data-lens="' + t.id + '" aria-pressed="' + !!on + '">' + (on ? "관점 끄기" : "지구본에서 보기 · " + LENS_NAME[t.id]) + "</button></article></li>";
+        "<dl><div><dt>핵심 명제</dt><dd>" + esc(t.idea) + "</dd></div><div><dt>현재 정세에 대한 적용</dt><dd>" + esc(t.now) + "</dd></div><div><dt>적중한 것과 빗나간 것</dt><dd>" + esc(t.record) + "</dd></div></dl></article></li>";  /* v3.86: '지구본에서 보기'(관점) 단추를 내림 */
     }).join("") + "</ul></section>";
 }
 function renderMethod(){
@@ -2147,7 +2161,8 @@ switchTab = function(t){
   _switchTab(t);
   if (VIEW0 && VIEW0.key !== viewKey()) viewRestore();  /* v3.79 사안·일정·나라로 옮긴 지구본을 그 화면을 떠나면 되돌린다 */
   if (S.mark && !VIEW0) markSet(null);
-  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method");  /* v3.79 사이트 안내(분석 방법·이용 안내·운영자 인사말)는 지구본 없이 글만 */
+  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method" || S.tab === "ideas");
+  if (S.tab === "page") usfFill();  /* v3.86(2026-10-08 결재): 역사와 사상도 지구본 없이 */  /* v3.79 사이트 안내(분석 방법·이용 안내·운영자 인사말)는 지구본 없이 글만 */
   if (HASH_READY && ROUTES) routeSync(false);
   else if (HASH_READY && S.tab !== "detail") {
     const tok = S.tab === "strat" ? (S.scase || "strat") : S.tab;
