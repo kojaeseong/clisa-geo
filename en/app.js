@@ -469,12 +469,12 @@ function drawOver(t){
       fp._p = p;
       const rad = 2.6 + fp.severity * 1.15;
       const dim = S.lens && !S.lens.fpAll && !fp.countries.some(c => S.lens.set.has(c));
-      const fa = (MIL ? 0.3 : 1) * (S.mark && S.mark.hot ? 0.4 : 1); octx.globalAlpha = (dim ? 0.3 : 1) * fa;  /* v3.83 사건 지점을 강조하는 동안 다른 분쟁지는 옅게 */
-      if (!reduceMotion && fp.severity >= 4 && !dim && !MIL && !(S.mark && S.mark.hot)) {
+      const fa = MIL ? 0.3 : 1; octx.globalAlpha = (dim ? 0.3 : 1) * fa;
+      if (!reduceMotion && fp.severity >= 4 && !dim && !MIL) {
         const ph = ((t || 0) / 1800 + fp.phase) % 1;
         octx.beginPath(); octx.arc(p[0], p[1], rad + ph * rad * 2.4, 0, Math.PI * 2);
         octx.strokeStyle = C.conflict; octx.globalAlpha = (1 - ph) * 0.55; octx.lineWidth = 1.2; octx.stroke();
-        octx.globalAlpha = fa;
+        octx.globalAlpha = 1;
       }
       octx.beginPath(); octx.arc(p[0], p[1], rad, 0, Math.PI * 2);
       octx.fillStyle = C.conflict; octx.fill(); octx.lineWidth = 1.6; octx.strokeStyle = C.halo; octx.stroke();
@@ -490,13 +490,9 @@ function drawOver(t){
   if (S.mark && S.mark.lon != null) {  /* v3.79 일정 장소(도시)의 점과 이름 */
     const ll = [S.mark.lon, S.mark.lat];
     if (d3.geoDistance(ll, ctr) < 1.5) { const p = projection(ll);
-      const hot = S.mark.hot, mc = hot ? C.conflict : C.accent;  /* v3.83 브리핑의 사건 지점: 분쟁 빨간색으로 크게, 퍼지는 고리 두 겹 */
-      if (p && hot) { const ph = reduceMotion ? 0.35 : ((t || 0) / 1400) % 1;
-        for (const q of [ph, (ph + 0.5) % 1]) { octx.beginPath(); octx.arc(p[0], p[1], 9 + q * 22, 0, Math.PI * 2); octx.strokeStyle = C.conflict; octx.globalAlpha = (1 - q) * 0.7; octx.lineWidth = 2; octx.stroke(); }
-        octx.globalAlpha = 1; octx.beginPath(); octx.arc(p[0], p[1], 13, 0, Math.PI * 2); octx.strokeStyle = C.accent; octx.lineWidth = 2; octx.stroke(); }
-      if (p) { octx.beginPath(); octx.arc(p[0], p[1], hot ? 8.5 : 6.5, 0, Math.PI * 2); octx.fillStyle = mc; octx.fill(); octx.lineWidth = 2.5; octx.strokeStyle = C.halo; octx.stroke();
+      if (p) { octx.beginPath(); octx.arc(p[0], p[1], 6.5, 0, Math.PI * 2); octx.fillStyle = C.accent; octx.fill(); octx.lineWidth = 2.5; octx.strokeStyle = C.halo; octx.stroke();
         if (S.mark.place) { octx.font = '700 12px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif'; octx.textAlign = "center"; octx.textBaseline = "middle"; octx.lineJoin = "round";
-          octx.lineWidth = 3.5; octx.strokeStyle = C.halo; octx.strokeText(S.mark.place, p[0], p[1] - (hot ? 22 : 16)); octx.fillStyle = mc; octx.fillText(S.mark.place, p[0], p[1] - (hot ? 22 : 16)); } } }
+          octx.lineWidth = 3.5; octx.strokeStyle = C.halo; octx.strokeText(S.mark.place, p[0], p[1] - 16); octx.fillStyle = C.accent; octx.fillText(S.mark.place, p[0], p[1] - 16); } } }
   }
 }
 /* v3.77 미군 해외 배치: 상주(원, DMDC 분기 통계)와 전개(함정 기호·증파▲·감축▼·법◆·계획◇와 번호). 설명과 출처는 세계 정세 탭 맨 위 카드. 부대 단위 실시간 위치는 싣지 않는다(R24) */
@@ -572,8 +568,7 @@ function loop(){
       if (t - (SPIN.drawn || 0) > 250) {  /* v3.25 0.75°/초의 느린 자전이라 초당 4번 그려도 매끄럽다(이전 15번) */ S.rot = [S.rot[0] + SPIN.dps * (t - (SPIN.drawn || t)) / 1000, S.rot[1], S.rot[2] || 0]; SPIN.drawn = t; requestDraw(true, true); }
       SPIN.last = t;
     } else { SPIN.last = 0; SPIN.drawn = 0; }
-    const hotMk = S.mark && S.mark.hot;  /* v3.83 사건 지점의 고리는 내용 영역을 누른 직후에도 움직인다(초당 20번) */
-    if (D && (S.showFp || hotMk) && GLOBE_VIS && (t > QUIET || hotMk) && document.visibilityState === "visible" && !scheduled && t - lastOver > (t > QUIET ? 33 : 50)) { drawOver(t); lastOver = t; }
+    if (D && S.showFp && GLOBE_VIS && t > QUIET && document.visibilityState === "visible" && !scheduled && t - lastOver > 33) { drawOver(t); lastOver = t; }
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
@@ -681,7 +676,9 @@ function setupInteraction(){
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
     const blb = ev.target.closest("[data-bloc]");
-    if (blb && BR) { const [d, n] = blb.dataset.bloc.split("|"), x = BR.issues.find(z => z.date === d), it = x && x.items[+n]; if (it && it.loc) placeGo(it.loc, "Briefing · " + it.h, it.loc.lon != null); return; }  /* v3.83 사건 지점이 있는 꼭지는 그 점을 강조한다 */
+    if (blb && BR) { const [d, n] = blb.dataset.bloc.split("|"), x = BR.issues.find(z => z.date === d), it = x && x.items[+n]; if (it && it.loc) placeGo(it.loc, "Briefing · " + it.h); return; }
+    const dgb = ev.target.closest("[data-dg]");  /* v3.83 정세 요약 제목 → 관련국을 지구본에 */
+    if (dgb) { const g = (D.digest || [])[+dgb.dataset.dg]; if (g && (g.ids || []).length) placeGo({isos: g.ids}, "Situation summary · " + g.t); return; }
     const evb = ev.target.closest("[data-ev]");
     if (evb) { evGo(evb.dataset.ev, evb); return; }
     const fcp = ev.target.closest("[data-fc]");
@@ -796,14 +793,11 @@ function evGo(id, chip){
   evPop(chip, e); placeGo(e.loc || {}, "Event · " + e.t);
 }
 /* 장소(도시·분쟁지의 점)가 있으면 그곳을, 없으면 관련국을 보인다. 스마트폰에서는 지도 쪽으로 올라가고 '이전 화면'으로 돌아온다 */
-function placeGo(L, label, hot){
-  /* v3.83(2026-10-08 결재): 관련국만 있는 꼭지는 첫 나라(사건의 중심)와 그 가까이의 나라만으로 중심·배율을 잡는다(멀리 떨어진 미국 등은 테두리만 표시). 한반도 꼭지에 미국이 함께 있으면 지구본이 태평양 한가운데를 보이던 문제 */
-  const isos = L.isos || [], core = isos.filter(i => byIso[i] && labelPos[i]), c0 = core[0] && labelPos[core[0]];
-  const near = c0 ? core.filter(i => d3.geoDistance(labelPos[i], c0) < 0.6) : core;
-  const v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(near); if (!v) return;
+function placeGo(L, label){
+  const isos = L.isos || [], v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(isos); if (!v) return;
   if (narrow()) navPush();
   viewGo(v[0], v[1], v[2], true);
-  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label, hot: !!hot});
+  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label});
   if (narrow()) document.getElementById("wrap").scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"});
 }
 /* v3.79c '다가오는 일정'의 전망: 전망에 연결된 분쟁지의 위치(경제·외교 전망은 결정하는 나라) */
@@ -943,14 +937,15 @@ function insightsHtml(){
 }
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
 let BR = null; const HASH0 = location.hash;
+const PIN = '<svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M5 0a5 5 0 0 0-5 5c0 3.6 5 7 5 7s5-3.4 5-7a5 5 0 0 0-5-5Zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" fill="currentColor"/></svg>';  /* v3.83 위치 아이콘: 누르면 지구본이 그곳을 보이는 이름 끝에 붙인다(2026-10-08 결재) */
 const FCE = {up:["↑","Factors raising the probability"], down:["↓","Factors lowering the probability"], none:["–","No change"]};
 const fmtKD = s => enDate(s, true);
 function dailyIssue(x){
   const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
     return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
-  return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + esc(i.h) + "</h4><p>" + esc(i.fact) + "</p><p class=\"bl\"><span class=\"bl-k\">Bearing on the assessments</span>" + esc(i.link) + "</p>" +
-      '<div class="chips" style="margin:0">' + (i.loc ? '<button type="button" class="chip bloc" data-bloc="' + esc(x.date) + "|" + n + "\"><svg width=\"10\" height=\"12\" viewBox=\"0 0 10 12\" aria-hidden=\"true\"><path d=\"M5 0a5 5 0 0 0-5 5c0 3.6 5 7 5 7s5-3.4 5-7a5 5 0 0 0-5-5Zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z\" fill=\"currentColor\"/></svg>Show on map</button>" : "") + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +  /* v3.80 꼭지의 장소를 지구본에(2026-10-08 결재) */
+  return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + "\" title=\"Show on the globe\">" + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</h4><p>" + esc(i.fact) + "</p><p class=\"bl\"><span class=\"bl-k\">Bearing on the assessments</span>" + esc(i.link) + "</p>" +
+      '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +  /* v3.83 장소가 있는 꼭지는 제목을 누르면 지구본이 그곳을 보인다(2026-10-08 결재, 위치 보기 단추를 대신함) */
       ((i.src || []).length ? "<details class=\"src\"><summary>Sources · " + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
     weekLine(x.date) +
     ((x.more || []).length ? "<div class=\"bm\"><b>Other developments</b><ul>" + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + "\" target=\"_blank\" rel=\"noopener\" class=\"note\">Source</a>" : "") + "</li>").join("") + "</ul></div>" : "");
@@ -1187,7 +1182,7 @@ function renderOverview(){
   $("#pane-overview").innerHTML = (S.showUsf && D.posture ? usfCard() : "") + dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + "</p><h2 style=\"margin-top:4px\">Global Overview</h2><p class=\"meta\" style=\"margin-top:4px\">Analysis as of <span class=\"mono\">" + esc(enDate(D.meta.asof)) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? " · Latest developments checked <span class=\"mono\">" + esc(enDate(BR.issues[0].date)) + "</span>" : "") + " · " + pl(D.digest.length, "summary", "summaries") + " · " + pl(fps.length, "flashpoint") + "</p><p class=\"lead\" style=\"margin-top:8px\">Flashpoints around the world and the main currents in global affairs, as of the date above. Clisa Geopolitics’ assessments of these developments are in Strategic Analysis; the structural forces behind them are in World Order.</p>" +
     ((D.insights || []).length ? "<button type=\"button\" class=\"entry\" data-go=\"strat\">View Clisa Geopolitics’ " + pl(D.insights.length, "key assessment") + "<span aria-hidden=\"true\">→</span></button>" : "") + "</div>" +
-    "<section class=\"sec\"><h3>Situation summaries " + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map(g => '<article><div class="h">' + esc(g.t) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+    "<section class=\"sec\"><h3>Situation summaries " + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? "<section class=\"sec\"><h3>Ongoing discussions</h3>" + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + "Opened " + esc(enDate(t.opened)) + " · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
     "<section class=\"sec\"><h3>Flashpoints by severity</h3><ul class=\"list\">" + fps.map(fp =>
       '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(enDate(fp.last_major_event?.date || "")) + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>" +
@@ -1738,8 +1733,8 @@ function dueHtml(){
     if (x.f) { const key = "f" + x.f.due; let R = M.rows.find(r => r.key === key); if (!R) { R = {key, k: x.k, day: dayOf(x), fs: [], n: daysLeft(x.f.due)}; M.rows.push(R); } R.fs.push(x.f); }
     else M.rows.push({key: x.e.id, k: x.k, day: dayOf(x), e: x.e, n: x.e.date.length === 7 ? null : daysLeft(x.e.date), dt: evDays(x.e)});
   }
-  const row = r => '<li id="due-' + esc(r.key) + '"><span class="d">' + esc(r.day) + '</span><span class="t">' + (r.fs ? "<span class=\"evk\">Forecast</span>" + r.fs.slice(0, 3).map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep">·</span>') + (r.fs.length > 3 ? "<span class=\"sep\">·</span><button type=\"button\" class=\"fcl more\" data-go=\"forecast\">+" + (r.fs.length - 3) + " more</button>" : "")
-    : '<button type="button" class="fcl" data-ev="' + esc(r.e.id) + '">' + esc(r.e.t) + "</button>") + "</span>" +  /* v3.79 일정을 누르면 설명과 지구본의 장소(사안 화면으로 넘어가지 않음) */
+  const row = r => '<li id="due-' + esc(r.key) + '"><span class="d">' + esc(r.day) + '</span><span class="t">' + (r.fs ? "<span class=\"evk\">Forecast</span>" + r.fs.slice(0, 3).map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + PIN + "</button>").join('<span class="sep">·</span>') + (r.fs.length > 3 ? "<span class=\"sep\">·</span><button type=\"button\" class=\"fcl more\" data-go=\"forecast\">+" + (r.fs.length - 3) + " more</button>" : "")
+    : '<button type="button" class="fcl" data-ev="' + esc(r.e.id) + '">' + esc(r.e.t) + PIN + "</button>") + "</span>" +  /* v3.79 일정을 누르면 설명과 지구본의 장소(사안 화면으로 넘어가지 않음) */
     (r.fs ? '<span class="n' + (r.n <= 7 ? " hot" : "") + '">' + daysText(r.n) + "</span>" : r.dt ? '<span class="n' + (r.n != null && r.n <= 7 ? " hot" : "") + '">' + r.dt + "</span>" : "") + "</li>";
   return "<section class=\"sec due\" id=\"due\"><h3>Upcoming events</h3><div class=\"mo\">" + months.map(M => '<div class="m">' + EN_MON[+M.mk.slice(5, 7) - 1] + "</div><ul>" + M.rows.map(row).join("") + "</ul>").join("") +
     "</div><p class=\"note\" style=\"margin-top:8px\"><button type=\"button\" class=\"chip\" data-go=\"forecast\">All forecasts →</button></p></section>";
