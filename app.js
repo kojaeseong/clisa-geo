@@ -1063,7 +1063,7 @@ function tfStart(scope, btn){
   TF.scope = scope;
   /* 맨 안쪽 칸은 글 전체, 안에 칸을 품은 칸(<li><b>제목</b><p>설명</p>)은 제 몫의 글(제목)만 */
   const own = e => [...e.childNodes].filter(n => n.nodeType === 3 || (n.nodeType === 1 && !n.matches(TF_LEAF) && !n.querySelector(TF_LEAF))).map(n => n.textContent).join(" ");
-  TF.blocks = [...scope.querySelectorAll(TF_LEAF)].filter(e => !e.closest("button")).map(e => ({e, t: tfNorm(e.querySelector(TF_LEAF) ? own(e) : e.textContent)})).filter(x => x.t.length > 1);
+  TF.blocks = [...scope.querySelectorAll(TF_LEAF)].filter(e => !e.closest("button") && !e.closest("details.src, .chips"))  /* v3.86e 출처 목록과 칩 줄은 읽지 않으므로 찾는 범위에서도 뺀다(영문 쪽 제목 문장이 출처 항목에 걸려 맨 아래로 튀던 문제) */.map(e => ({e, t: tfNorm(e.querySelector(TF_LEAF) ? own(e) : e.textContent)})).filter(x => x.t.length > 1);
   const i = btn ? TF.blocks.findIndex(x => btn.compareDocumentPosition(x.e) & Node.DOCUMENT_POSITION_FOLLOWING) : 0;
   TF.last = Math.max(0, i) - 1; TF.start = Math.max(0, i);
 }
