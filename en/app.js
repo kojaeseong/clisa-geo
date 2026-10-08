@@ -469,12 +469,12 @@ function drawOver(t){
       fp._p = p;
       const rad = 2.6 + fp.severity * 1.15;
       const dim = S.lens && !S.lens.fpAll && !fp.countries.some(c => S.lens.set.has(c));
-      const fa = MIL ? 0.3 : 1; octx.globalAlpha = (dim ? 0.3 : 1) * fa;
-      if (!reduceMotion && fp.severity >= 4 && !dim && !MIL) {
+      const fa = (MIL ? 0.3 : 1) * (S.mark && S.mark.hot ? 0.4 : 1); octx.globalAlpha = (dim ? 0.3 : 1) * fa;  /* v3.83 사건 지점을 강조하는 동안 다른 분쟁지는 옅게 */
+      if (!reduceMotion && fp.severity >= 4 && !dim && !MIL && !(S.mark && S.mark.hot)) {
         const ph = ((t || 0) / 1800 + fp.phase) % 1;
         octx.beginPath(); octx.arc(p[0], p[1], rad + ph * rad * 2.4, 0, Math.PI * 2);
         octx.strokeStyle = C.conflict; octx.globalAlpha = (1 - ph) * 0.55; octx.lineWidth = 1.2; octx.stroke();
-        octx.globalAlpha = 1;
+        octx.globalAlpha = fa;
       }
       octx.beginPath(); octx.arc(p[0], p[1], rad, 0, Math.PI * 2);
       octx.fillStyle = C.conflict; octx.fill(); octx.lineWidth = 1.6; octx.strokeStyle = C.halo; octx.stroke();
@@ -490,9 +490,13 @@ function drawOver(t){
   if (S.mark && S.mark.lon != null) {  /* v3.79 일정 장소(도시)의 점과 이름 */
     const ll = [S.mark.lon, S.mark.lat];
     if (d3.geoDistance(ll, ctr) < 1.5) { const p = projection(ll);
-      if (p) { octx.beginPath(); octx.arc(p[0], p[1], 6.5, 0, Math.PI * 2); octx.fillStyle = C.accent; octx.fill(); octx.lineWidth = 2.5; octx.strokeStyle = C.halo; octx.stroke();
+      const hot = S.mark.hot, mc = hot ? C.conflict : C.accent;  /* v3.83 브리핑의 사건 지점: 분쟁 빨간색으로 크게, 퍼지는 고리 두 겹 */
+      if (p && hot) { const ph = reduceMotion ? 0.35 : ((t || 0) / 1400) % 1;
+        for (const q of [ph, (ph + 0.5) % 1]) { octx.beginPath(); octx.arc(p[0], p[1], 9 + q * 22, 0, Math.PI * 2); octx.strokeStyle = C.conflict; octx.globalAlpha = (1 - q) * 0.7; octx.lineWidth = 2; octx.stroke(); }
+        octx.globalAlpha = 1; octx.beginPath(); octx.arc(p[0], p[1], 13, 0, Math.PI * 2); octx.strokeStyle = C.accent; octx.lineWidth = 2; octx.stroke(); }
+      if (p) { octx.beginPath(); octx.arc(p[0], p[1], hot ? 8.5 : 6.5, 0, Math.PI * 2); octx.fillStyle = mc; octx.fill(); octx.lineWidth = 2.5; octx.strokeStyle = C.halo; octx.stroke();
         if (S.mark.place) { octx.font = '700 12px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif'; octx.textAlign = "center"; octx.textBaseline = "middle"; octx.lineJoin = "round";
-          octx.lineWidth = 3.5; octx.strokeStyle = C.halo; octx.strokeText(S.mark.place, p[0], p[1] - 16); octx.fillStyle = C.accent; octx.fillText(S.mark.place, p[0], p[1] - 16); } } }
+          octx.lineWidth = 3.5; octx.strokeStyle = C.halo; octx.strokeText(S.mark.place, p[0], p[1] - (hot ? 22 : 16)); octx.fillStyle = mc; octx.fillText(S.mark.place, p[0], p[1] - (hot ? 22 : 16)); } } }
   }
 }
 /* v3.77 미군 해외 배치: 상주(원, DMDC 분기 통계)와 전개(함정 기호·증파▲·감축▼·법◆·계획◇와 번호). 설명과 출처는 세계 정세 탭 맨 위 카드. 부대 단위 실시간 위치는 싣지 않는다(R24) */
@@ -568,7 +572,8 @@ function loop(){
       if (t - (SPIN.drawn || 0) > 250) {  /* v3.25 0.75°/초의 느린 자전이라 초당 4번 그려도 매끄럽다(이전 15번) */ S.rot = [S.rot[0] + SPIN.dps * (t - (SPIN.drawn || t)) / 1000, S.rot[1], S.rot[2] || 0]; SPIN.drawn = t; requestDraw(true, true); }
       SPIN.last = t;
     } else { SPIN.last = 0; SPIN.drawn = 0; }
-    if (D && S.showFp && GLOBE_VIS && t > QUIET && document.visibilityState === "visible" && !scheduled && t - lastOver > 33) { drawOver(t); lastOver = t; }
+    const hotMk = S.mark && S.mark.hot;  /* v3.83 사건 지점의 고리는 내용 영역을 누른 직후에도 움직인다(초당 20번) */
+    if (D && (S.showFp || hotMk) && GLOBE_VIS && (t > QUIET || hotMk) && document.visibilityState === "visible" && !scheduled && t - lastOver > (t > QUIET ? 33 : 50)) { drawOver(t); lastOver = t; }
     requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
@@ -676,7 +681,7 @@ function setupInteraction(){
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
     const blb = ev.target.closest("[data-bloc]");
-    if (blb && BR) { const [d, n] = blb.dataset.bloc.split("|"), x = BR.issues.find(z => z.date === d), it = x && x.items[+n]; if (it && it.loc) placeGo(it.loc, "Briefing · " + it.h); return; }
+    if (blb && BR) { const [d, n] = blb.dataset.bloc.split("|"), x = BR.issues.find(z => z.date === d), it = x && x.items[+n]; if (it && it.loc) placeGo(it.loc, "Briefing · " + it.h, it.loc.lon != null); return; }  /* v3.83 사건 지점이 있는 꼭지는 그 점을 강조한다 */
     const evb = ev.target.closest("[data-ev]");
     if (evb) { evGo(evb.dataset.ev, evb); return; }
     const fcp = ev.target.closest("[data-fc]");
@@ -791,11 +796,14 @@ function evGo(id, chip){
   evPop(chip, e); placeGo(e.loc || {}, "Event · " + e.t);
 }
 /* 장소(도시·분쟁지의 점)가 있으면 그곳을, 없으면 관련국을 보인다. 스마트폰에서는 지도 쪽으로 올라가고 '이전 화면'으로 돌아온다 */
-function placeGo(L, label){
-  const isos = L.isos || [], v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(isos); if (!v) return;
+function placeGo(L, label, hot){
+  /* v3.83(2026-10-08 결재): 관련국만 있는 꼭지는 첫 나라(사건의 중심)와 그 가까이의 나라만으로 중심·배율을 잡는다(멀리 떨어진 미국 등은 테두리만 표시). 한반도 꼭지에 미국이 함께 있으면 지구본이 태평양 한가운데를 보이던 문제 */
+  const isos = L.isos || [], core = isos.filter(i => byIso[i] && labelPos[i]), c0 = core[0] && labelPos[core[0]];
+  const near = c0 ? core.filter(i => d3.geoDistance(labelPos[i], c0) < 0.6) : core;
+  const v = L.lon != null ? [L.lon, L.lat, 3.2] : isoView(near); if (!v) return;
   if (narrow()) navPush();
   viewGo(v[0], v[1], v[2], true);
-  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label});
+  markSet({lon: L.lon, lat: L.lat, place: L.place, isos, label, hot: !!hot});
   if (narrow()) document.getElementById("wrap").scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"});
 }
 /* v3.79c '다가오는 일정'의 전망: 전망에 연결된 분쟁지의 위치(경제·외교 전망은 결정하는 나라) */
