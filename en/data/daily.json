@@ -1,6 +1,139 @@
 {
  "issues": [
   {
+   "date": "2026-10-09",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Russian guided bombs hit two buses in Kramatorsk, killing 33",
+     "fact": "Russian forces struck two passenger buses in Kramatorsk, in Ukraine's Donetsk Oblast, with guided bombs at around 10 a.m. local time on October 8, killing 33 people and wounding 18, Ukraine's State Emergency Service said. Ukraine's Air Force said in a preliminary tally that Russia launched 142 drones between 6 p.m. on October 7 and 9:30 a.m. on October 8, of which 126 were shot down or neutralized. Moscow had no immediate comment on the Kramatorsk strike; Russia's Defense Ministry claimed it downed 399 Ukrainian drones between 8 p.m. on October 7 and 8 a.m. on October 8, Moscow time.",
+     "link": "The attack, a day after the Pryluky strike, marks the second straight day that an attack has killed dozens of civilians. That fits the continuing war of attrition that Conclusion 1 of the Russia-Ukraine War analysis treats as the most likely outcome, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4172298-death-toll-from-russian-strike-on-two-buses-in-kramatorsk-rises-to-33-18-injured.html",
+      "https://mezha.net/eng/news/22f4017d_ukraine_intercepts_126/",
+      "https://www.nampa.org/text/23034246",
+      "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
+     ],
+     "loc": {
+      "lat": 48.74,
+      "lon": 37.58,
+      "place": "Kramatorsk (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Trump says the U.S. will not attack Iran before the November 3 midterms",
+     "fact": "President Donald Trump wrote on Truth Social on October 8, U.S. time, that Washington was having \"productive discussions with the Islamic Republic of Iran\" and that \"we will not be attacking Iran at any time prior to the midterm elections to be held in the United States on November 3rd.\" The New York Times, however, reported that Trump has ordered plans drawn up to resume attacks on Iran, including roughly three days of airstrikes.",
+     "link": "By pushing any new strikes past the election, the pledge suggests that the prolonged blockade standoff, which Conclusion 1 of the Iran and Hormuz analysis treats as the most likely outcome, could last at least into early November. Because the forecast that the U.S. will resume strikes on the Iranian mainland runs through the end of the year, the statement lowers its odds, but a resumption after the election remains possible.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/liveblog-october-08-2026/",
+      "https://www.axios.com/2026/10/08/trump-iran-strikes-midterm-elections",
+      "https://www.middleeasteye.net/news/trump-rules-out-new-attack-iran-until-after-midterms-oil-prices-spike"
+     ]
+    },
+    {
+     "case": "korea",
+     "h": "Seoul to recall its ambassador to Ukraine",
+     "fact": "South Korea's Foreign Ministry said on October 8 that \"the government has decided to recall the ambassador to Ukraine,\" adding that it would \"continue consultations with the Ukrainian side.\" Seoul says Ukrainian President Volodymyr Zelensky broke a confidentiality agreement when he disclosed in his September 23 speech to the UN General Assembly that two captured North Korean soldiers would go to South Korea, and it has demanded a formal apology; Kyiv says no such agreement existed.",
+     "link": "Conclusion 6 of the Korean Peninsula analysis, which weighs outcomes by their effect on individual lives, puts humanitarian issues such as the repatriation of detainees first. A dispute over prisoners of war has now escalated into an ambassadorial recall, which could weaken cooperation between Seoul and Kyiv in future humanitarian talks, including on repatriating POWs.",
+     "fc": [],
+     "src": [
+      "https://nocutnews.co.kr/news/6589170",
+      "https://www.seoul.co.kr/news/politics/2026/10/09/20261009003003"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Saudi-led coalition intercepts Houthi ballistic missiles aimed at Riyadh, debris hits kindergarten",
+     "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on October 8 that its forces intercepted and destroyed two ballistic missiles headed for Riyadh and one headed for Khamis Mushait. Saudi Civil Defense said debris from an intercepted missile fell in Riyadh, damaging a kindergarten and a medical facility. The Houthis claimed a strike on Riyadh's King Khalid International Airport, and their military spokesman, Yahya Saree, warned workers at Saudi oil facilities to leave areas the group considers targets.",
+     "link": "Conclusion 2 of the Iran and Hormuz analysis identifies a war that spreads to all the Gulf oil producers as the outcome that would cost South Korea the most. The Houthis have now named Saudi oil facilities as targets on top of the capital's airport, a move in that direction.",
+     "fc": [],
+     "src": [
+      "https://english.news.cn/20261009/025e163d7ba54a0cacd813f0fcf041b7/c.html",
+      "https://www.euronews.com/2026/10/08/houthis-claim-missile-strike-on-riyadh-airport-as-explosions-heard-in-saudi-capital"
+     ],
+     "loc": {
+      "lat": 24.71,
+      "lon": 46.68,
+      "place": "Riyadh (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Accounts mount that Eritrean troops have crossed into Tigray",
+     "fact": "Ermiyas Ababu, a commander of the government-allied Tigray Peace Force based in Mekelle, told the Associated Press that Eritrean forces entered Adigrat on October 6 and Idaga Hamus on October 7. The conflict monitor ACLED said Eritrean troops crossed the border at Zalambessa on October 7 and that Ethiopian military drones targeted them at Guada; the AP said it could not independently verify either account. Eritrean Information Minister Yemane Gebremeskel claimed on October 7 that Ethiopia was using \"a fallacious narrative of 'self defence' to rationalise and camouflage its war of aggression.\"",
+     "link": "The site has no issue analysis on this conflict but tracks it as a flashpoint. With Ethiopian Prime Minister Abiy Ahmed repeatedly pressing for access to the Red Sea, fears are growing that the two countries could clash directly for the first time since their 1998–2000 border war, which could add to the risks on Red Sea shipping routes already shaken by Houthi attacks.",
+     "fc": [],
+     "src": [
+      "https://www.clickorlando.com/news/world/2026/10/08/eritrean-soldiers-entered-northern-ethiopian-towns-government-allied-commander-says/",
+      "https://www.thenationalnews.com/news/mena/2026/10/08/ethiopia-and-eritrea-edge-closer-to-direct-conflict-as-troops-enter-tigray/"
+     ],
+     "loc": {
+      "lat": 14.28,
+      "lon": 39.46,
+      "place": "Adigrat (Ethiopia)",
+      "isos": [
+       "ETH",
+       "ERI"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Kremlin spokesman Dmitry Peskov said on October 8 that he agreed with Secretary of State Marco Rubio's assessment that the war is at a stalemate. Reuters reported that special envoy Steve Witkoff and Jared Kushner would meet a Ukrainian delegation in Miami on October 9, U.S. time.",
+     "src": [
+      "https://www.jpost.com/international/article-911119",
+      "https://tass.com/world/2199585"
+     ]
+    },
+    {
+     "t": "Iranian Foreign Minister Abbas Araghchi said on October 8 that Tehran is reviewing Washington's views on Iran's \"seven-day plan\" and will respond within days.",
+     "src": [
+      "https://www.tasnimnews.ir/en/news/2026/10/08/3717882/iran-to-reply-to-us-proposal-within-days-araqchi"
+     ]
+    },
+    {
+     "t": "Russian tech company Yandex told AFP on October 8 that a drone attack sparked a fire at its data center in Ryazan Oblast.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
+     ]
+    },
+    {
+     "t": "Gen. Jin Yeong-seung, chairman of South Korea's Joint Chiefs of Staff, told the National Assembly's National Defense Committee during its annual parliamentary audit on October 8 that he had never once thought the mine blast in the Demilitarized Zone was anything other than a provocation.",
+     "src": [
+      "https://www.mt.co.kr/politics/2026/10/08/2026100818430230280"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-08",
    "items": [
     {
