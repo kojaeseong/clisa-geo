@@ -1556,7 +1556,7 @@ function featBody(O){
 }
 function featArticle(F){
   const c = (D.strategies || []).find(x => x.id === F.case);
-  return '<article class="sec olk" id="feat-' + esc(F.id) + "\"><p class=\"eyebrow\">Feature" + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
+  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : "Features") + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
     (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + "\">View analysis · " + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</article>";
 }
 function renderFeature(){
