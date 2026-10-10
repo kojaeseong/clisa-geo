@@ -103,7 +103,7 @@ function srBuild(){
   FEATS().forEach(F => add("특집", F.title, F, () => { goFeat(F.id); return "feat-" + F.id; }));
   (D.insights || []).forEach(k => add("주요 판단", String(k.t).split(/(?<=다\.)\s/)[0], [k.t, k.classic || ""], toPane("strat")));
   (D.digest || []).forEach(g => add("세계 정세", g.t, g.d, toPane("overview")));
-  if (BR) BR.issues.forEach(x => x.items.forEach(i => add("정세 브리핑", fmtKD(x.date) + " · " + i.h, [i.fact, i.link], () => { goBrief(x.date); return "pane-brief"; })));
+  if (BR) BR.issues.forEach(x => x.items.forEach(i => add("정세 브리핑", fmtKD(x.date) + " · " + i.h, [i.fact || "", i.link || ""], () => { goBrief(x.date); return "pane-brief"; })));
   /* v3.52 전망 검색(2026-10-05): 짧은 이름과 확률을 제목으로, 사안·분쟁 지점·나라 이름과 '가능성·확률·전망' 같은 말을 본문에 넣어 "러우 전쟁 휴전 가능성" 같은 물음에 전망이 잡히게 한다. 누르면 전망과 검증의 해당 항목으로 간다 */
   D.forecasts.forEach(f => { const c = (D.strategies || []).find(x => x.fp === f.fp), fp = D.flashpoints.find(x => x.id === f.fp);
     add("전망", (f.s || f.q) + " · " + (f.status === "open" ? f.p + "%" : f.status === "yes" ? "실현" : f.status === "no" ? "불발" : "무효"),
@@ -647,6 +647,12 @@ function setupInteraction(){
     if (fb) { ev.preventDefault(); goFeat(fb.dataset.feat); return; }
     const bb = ev.target.closest("[data-brief]");
     if (bb) { ev.preventDefault(); goBrief(bb.dataset.brief); return; }
+    const lfb = ev.target.closest("[data-life]");  /* 사람들의 삶: 누구의 삶으로 볼까 */
+    if (lfb) { LIFE = lfb.dataset.life; store.set("ep.life", LIFE); const g = document.getElementById("lifegrid"), x = BR && BR.issues[0];
+      if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
+      const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = (D.strategies || []).filter(c => c.hs7).map(lifeRow).join(""); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
+    const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 10단계 */
+    if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
     const blb = ev.target.closest("[data-bloc]");
@@ -939,7 +945,7 @@ function dailyIssue(x){
   const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
     return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
-  return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</h4><p>" + esc(i.fact) + '</p><p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" +
+  return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</h4>" + (i.fact ? "<p>" + esc(i.fact) + "</p>" : "") + (i.link ? '<p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" : "") +  /* v3.92: 한 줄 정보 형식의 호는 fact·link가 없다 */
       '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +  /* v3.83 장소가 있는 꼭지는 제목을 누르면 지구본이 그곳을 보인다(2026-10-08 결재, 위치 보기 단추를 대신함) */
       ((i.src || []).length ? '<details class="src"><summary>출처 ' + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
     weekLine(x.date) +
@@ -969,7 +975,7 @@ const ttsBtn = key => '<button type="button" class="tts" data-tts="' + esc(key) 
 function ttsVoice(){ try { return (speechSynthesis.getVoices() || []).find(v => /^ko/i.test(v.lang)) || null; } catch(e){ return null; } }
 function ttsText(key){
   const [k, id] = String(key).split(":");
-  if (k === "brief" && BR) { const x = briefCur(); return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + ". " + i.fact).join(" ")  /* v3.38b(2026-10-01): 듣기에서는 '판단과의 연결'을 읽지 않는다. 결론 번호·전망 번호 같은 화면용 표현이 귀로는 어색하기 때문 */ + ((x.more || []).length ? " 그 밖의 동향. " + x.more.map(m => m.t).join(" ") : ""); }
+  if (k === "brief" && BR) { const x = briefCur(); return fmtKD(x.date) + " 정세 브리핑. " + x.items.map(i => i.h + "." + (i.fact ? " " + i.fact : "")).join(" ")  /* v3.38b(2026-10-01): 듣기에서는 '판단과의 연결'을 읽지 않는다. 결론 번호·전망 번호 같은 화면용 표현이 귀로는 어색하기 때문 */ + ((x.more || []).length ? " 그 밖의 동향. " + x.more.map(m => m.t).join(" ") : ""); }
   if (k === "digest") return "세계 정세 요약. " + D.digest.map(g => g.t + ". " + g.d).join(" ");
   if (k === "ins") return "주요 판단. " + (D.insights || []).map(g => { const a = String(g.t).split(/(?<=다\.)\s/); return a[0] + (a.length > 1 ? " 근거. " + a.slice(1).join(" ") : ""); }).join(" ");
   const cn = i => (D.countries[i] || {}).name_ko || i;
@@ -1101,8 +1107,11 @@ function renderBrief(){
   const el = $("#pane-brief"); if (!el) return;
   if (!BR || !(BR.issues || []).length) { el.innerHTML = '<div class="sec"><h2>정세 브리핑</h2><p class="note">정세 브리핑을 불러오는 중입니다.</p></div>'; return; }
   const cur = briefCur(), others = BR.issues.filter(x => x !== cur);
+  if (cur === BR.issues[0]) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>" +
+    (others.length ? '<section class="sec"><h3>지난 정보</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : ""); el.scrollTop = 0; return; }
   el.innerHTML = '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
+    (cur === BR.issues[0] ? lifeBigHtml(cur) : "") +
     dailyIssue(cur) + "</section>" +
     (others.length ? '<section class="sec"><h3>지난 정세 브리핑</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
   el.scrollTop = 0;
@@ -1653,7 +1662,7 @@ function evalHtml(c){
 /* v3.90(2026-10-10 결재): Ⅲ 인간 안보 화면 2안. 집단별 카드(첫 문장, '2030년까지 100번의 미래' 점 그림, 범주별 현재·가장 나쁜 경우·가장 좋은 경우 선 그림, 가장 나쁜 경우의 원래 단위 풀이), 숫자 표는 접힘 */
 const HS_CAT = [["개인", "개인 안전"], ["공동체", "공동체"], ["정치", "정치"], ["경제", "경제"]];
 const HS_COL = {better: "#0E8A6C", same: "#C9CED4", worse: "#D9972B", big: "#D63A1F"};
-const HS_LAB = {better: "나아짐", same: "현재와 거의 같음", worse: "나빠짐", big: "크게 나빠짐"};
+const HS_LAB = {better: "개선됨", same: "현재와 비슷함", worse: "악화됨", big: "크게 악화됨"};
 const HS_ORD = ["better", "same", "worse", "big"];
 function hsCount(H, G, key){
   const c = {better: 0, same: 0, worse: 0, big: 0}; H.scen.forEach(s => { c[G.cls[s.id]] += s[key]; });
@@ -1704,10 +1713,150 @@ function hsTables(H){
   const cur = '<div class="tbl-wrap"><table class="tbl" style="min-width:560px"><thead><tr><th>집단</th>' + HS_CAT.map(([k, l]) => "<th>" + l + "</th>").join("") + "<th>현재 경보</th></tr></thead><tbody>" +
     H.groups.map(G => "<tr><td>" + esc(G.name) + "</td>" + HS_CAT.map(([k]) => { const v = G.cat[k]; return v.na ? '<td class="note">측정 불가</td>' : '<td class="mono">' + fmt(v.now) + '<small class="hs-rw">' + esc(v.raw || "") + "</small></td>"; }).join("") + '<td class="note">' + esc(G.al_now.join("·") || "없음") + "</td></tr>").join("") + "</tbody></table></div>";
   const ex = '<div class="tbl-wrap"><table class="tbl" style="min-width:560px"><thead><tr><th>집단</th><th>범주</th><th>현재</th><th>현 노선 유지</th><th>권고 이행 시</th><th>가장 나쁜 경우</th></tr></thead><tbody>' +
-    H.groups.map(G => HS_CAT.map(([k, l]) => { const v = G.cat[k]; return v.na ? "<tr><td>" + esc(G.name) + "</td><td>" + l + '</td><td colspan="4" class="note">측정 불가</td></tr>' : "<tr><td>" + esc(G.name) + "</td><td>" + l + '</td><td class="mono">' + fmt(v.now) + '</td><td class="mono">' + fmt(v.exp) + '</td><td class="mono">' + fmt(v.rec) + '</td><td class="mono">' + (v.worst_sc ? fmt(v.worst) + ' <span class="note">(' + esc(SN[v.worst_sc].name) + " " + SN[v.worst_sc].p + "%)</span>" : '<span class="note">나빠지는 전개 없음</span>') + "</td></tr>"; }).join("")).join("") + "</tbody></table></div>";
+    H.groups.map(G => HS_CAT.map(([k, l]) => { const v = G.cat[k]; return v.na ? "<tr><td>" + esc(G.name) + "</td><td>" + l + '</td><td colspan="4" class="note">측정 불가</td></tr>' : "<tr><td>" + esc(G.name) + "</td><td>" + l + '</td><td class="mono">' + fmt(v.now) + '</td><td class="mono">' + fmt(v.exp) + '</td><td class="mono">' + fmt(v.rec) + '</td><td class="mono">' + (v.worst_sc ? fmt(v.worst) + ' <span class="note">(' + esc(SN[v.worst_sc].name) + " " + SN[v.worst_sc].p + "%)</span>" : '<span class="note">악화되는 전개 없음</span>') + "</td></tr>"; }).join("")).join("") + "</tbody></table></div>";
   const by = H.groups.map(G => '<details class="src"><summary>전개별 값 · ' + esc(G.name) + '</summary><div class="tbl-wrap"><table class="tbl" style="min-width:620px"><thead><tr><th>전개(확률)</th>' + HS_CAT.map(([k, l]) => "<th>" + l + "</th>").join("") + "<th>경보</th></tr></thead><tbody>" +
     H.scen.map(s => "<tr><td><b class=\"mono\">" + esc(s.id) + "</b> " + esc(s.name) + '<br><span class="note">' + s.p + "%" + (s.p_rec !== s.p ? " · 권고 이행 시 " + s.p_rec + "%" : "") + "</span></td>" + HS_CAT.map(([k]) => { const v = G.cat[k], r = (v.by_raw || {})[s.id]; return v.na ? '<td class="note">' + esc(r || "측정 불가") + "</td>" : '<td class="mono">' + fmt(v.by[s.id]) + (r ? '<small class="hs-rw">' + esc(r) + "</small>" : "") + "</td>"; }).join("") + '<td class="note">' + esc((G.al[s.id] || []).join("·") || "없음") + "</td></tr>").join("") + "</tbody></table></div></details>").join("");
   return '<h4 class="hs-h4">현재의 삶 · 2026년</h4>' + cur + '<h4 class="hs-h4">2030년까지의 변화(확률 가중)</h4>' + ex + '<p class="note">현 노선 유지와 권고 이행 시는 각 전개의 2030년 값에 그 확률을 곱해 더한 값입니다. 확률이 높은 전개에서 삶이 거의 변하지 않으면 이 값도 거의 움직이지 않으므로, 위험의 크기는 가장 나쁜 경우와 그 확률로 보십시오.</p>' + by;
+}
+/* 시안(2026-10-10): 확률 변경 전후의 점 개수와 변경 이력 */
+function hsCountP(H, G, pm){ return hsCount({scen: H.scen.map(s => Object.assign({}, s, {q: pm[s.id] != null ? pm[s.id] : s.p}))}, G, "q"); }
+const kd = s => { const m = /^\d{4}-(\d{2})-(\d{2})$/.exec(String(s)); return m ? (+m[1]) + "월 " + (+m[2]) + "일" : String(s); };
+function hsDiff(H, G, x){ const a = hsCountP(H, G, x.prev), b = hsCountP(H, G, x.next), d = HS_ORD.filter(k => a[k] !== b[k]).map(k => HS_LAB[k] + " " + a[k] + "→" + b[k] + "번"); return d.length ? d.join(" · ") : "점 개수 변화 없음"; }
+function hsChgLine(H, G){
+  const x = (H.changes || []).slice(-1)[0];
+  return '<p class="lh-chg">' + (x ? "<b>최근 변경 · " + kd(x.d) + " · " + esc(x.kind) + "</b><br>" + esc(hsDiff(H, G, x)) : "10월 10일 공개 이후 확률 변경 없음") + "</p>";
+}
+function hsHistHtml(H){
+  const ch = H.changes || [], SN = {}; H.scen.forEach(s => SN[s.id] = s);
+  return '<details class="src"><summary>확률 변경 이력 · ' + (ch.length ? ch.length + "건" : "변경 없음") + "</summary>" + (ch.length ? '<ul class="tl">' + ch.slice().reverse().map(x => '<li><span class="d">' + esc(x.d) + "</span><span><b>" + esc(x.kind) + "</b> · " + esc(x.why) + '<br><span class="note">' + Object.keys(x.next).filter(k => x.prev[k] !== x.next[k]).map(k => esc(k + " " + (SN[k] ? SN[k].name : "")) + " " + x.prev[k] + "% → " + x.next[k] + "%").join(" · ") + "</span><br>" + H.groups.filter(G => !G.fold).map(G => esc(G.name) + ": " + esc(hsDiff(H, G, x))).join("<br>") + "</span></li>").join("") + "</ul>" : '<p class="note">2026년 10월 10일 공개 이후 바뀐 확률이 없습니다.</p>') + "</details>";
+}
+function lifeMain(c){ const H = c.hs7; return H.groups.find(g => !g.fold) || H.groups[0]; }
+function lifeNums(n, sep){ return ["big", "worse", "better"].filter(k => n[k]).map(k => '<span style="white-space:nowrap"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + " " + n[k] + "번</span>").join(sep || " · ") || "100번 모두 현재와 거의 같음"; }
+/* 브리핑 첫머리 '사람들의 삶'(2026-10-10 통합안, 큰 카드). 누구의 삶으로 볼지 고른다: 당사국 국민·한국인·미국인·유럽인·러시아인.
+   골라진 집단이 어느 미래에서도 '거의 같음'이면 점 그림 없이 한 줄로 줄인다(영향받는 사람만 크게) */
+const LIFE_SEL = [["main", "당사국 국민"], ["KOR", "한국인"], ["USA", "미국인"], ["EU", "유럽인"], ["RUS", "러시아인"]];
+const LIFE_MAIN = {korea: "KOR", taiwan: "TWN", ukraine: "UKR", iran: "IRN", poland: "POL"};
+const LIFE_EU = ["NEU", "NORD", "BALT", "DEU", "SEU", "WCEU"];
+let LIFE = (() => { const v = store.get("ep.life"); return LIFE_SEL.some(x => x[0] === v) ? v : "main"; })();
+function lifePick(c){
+  const H = c.hs7, by = k => H.groups.find(g => g.k === k);
+  if (LIFE === "main") return by(LIFE_MAIN[c.id]) || lifeMain(c);
+  if (LIFE !== "EU") return by(LIFE);
+  const eu = H.groups.filter(g => LIFE_EU.includes(g.k)); if (!eu.length) return null;
+  const risk = g => H.scen.reduce((a, s) => a + (g.cls[s.id] === "big" ? 2 : g.cls[s.id] === "worse" ? 1 : 0) * s.p, 0);
+  return eu.slice().sort((a, b) => risk(b) - risk(a))[0];
+}
+function lifeCard(c, x){
+  const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0], k = x ? x.items.map((i, j) => i.case === c.id ? j : -1).filter(j => j >= 0) : [];
+  const brf = k.length ? '<button type="button" class="chip lh-brf" data-jump="bi-' + k[0] + '">오늘 브리핑 ' + k.length + "건 ↓</button>" : "";
+  if (!G) return '<article class="lh-card lh-none"><p class="lh-case">' + esc(nm) + '</p><p class="lh-line">이 사안에서는 계산하지 않았습니다.</p></article>';
+  const n = hsCount(H, G, "p"), hit = H.scen.some(s => G.cls[s.id] !== "same");
+  const eu = LIFE === "EU" && hit && H.groups.filter(g => LIFE_EU.includes(g.k)).length > 1 ? '<span class="lh-sub">유럽에서 영향이 가장 큰 집단</span>' : "";
+  const hd = '<p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + "</span>" + eu + "</div>";
+  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + '">10단계에서 자세히 보기 →</button>' + brf + "</div>";
+  if (!hit) return '<article class="lh-card lh-none">' + hd + '<p class="lh-flat">100번 모두 현재와 비슷함</p><p class="lh-line">' + esc(G.line) + "</p>" + go + "</article>";
+  return '<article class="lh-card">' + hd + '<div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + go + "</article>";
+}
+function lifeBigHtml(x){
+  const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
+  return '<section class="life" id="s-life"><h3 class="lm-h" style="margin:14px 0 2px">사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note" style="margin:0">5개 사안마다 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 개선되거나 악화되는 횟수입니다(판단값). 누구의 삶을 볼지 고를 수 있습니다.</p>' +
+    '<div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
+    '<div class="lh-row" id="lifegrid">' + cs.map(c => lifeCard(c, x)).join("") + "</div></section>";
+}
+/* v3.92 시안(2026-10-10): 첫 화면 = '사람들의 삶' 그래프판 + 그래프를 움직이는 한 줄 정보.
+   사안마다 한 줄(점 그림 · 집단과 횟수 · 첫 문장 · 이 사안의 최근 한 줄 정보), 그 아래 오늘의 한 줄 정보 전체와 지난 날짜 */
+const firstSent = t => { const m = /^(.+?다\.)(\s|$)/.exec(String(t || "")); return m ? m[1] : String(t || ""); };
+function lifeNumsBig(n){ return ["big", "worse", "better", "same"].filter(k => n[k]).map(k => '<span class="lb-k' + (k === "same" ? " lb-same" : "") + '"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + " <b>" + n[k] + "</b></span>").join(""); }
+const LB_SHORT = {korea: "한반도", taiwan: "대만해협", ukraine: "러-우 전쟁", iran: "이란·호르무즈", poland: "러시아-NATO"};
+function lbCase(H, G){  /* 그래프 옆 한 줄: 가장 나쁜 경우(와 가장 좋은 경우)를 원래 단위로 */
+  const SN = {}; H.scen.forEach(s => SN[s.id] = s);
+  const ws = hsWorstSc(G), bs = hsBestSc(G), fx = sid => HS_CAT.map(([k]) => { const v = G.cat[k]; if (k === "정치") return v.na || v.by[sid] > v.now - 1 ? "" : "국가 폭력 늘어남"; return (v.by_raw || {})[sid]; }).filter(Boolean);
+  const line = (lab, sid) => { const f = fx(sid), al = G.al[sid] || []; return '<p class="lb-ws"><b>' + lab + "</b> · " + esc(SN[sid].name) + " " + SN[sid].p + "%" + (f.length ? " · " + f.map(esc).join(" · ") : "") + (al.length && lab === "가장 나쁜 경우" ? ' · <span class="hs-al">' + esc(al.join("·")) + " 경보</span>" : "") + "</p>"; };
+  const bad = ws && (G.cls[ws] === "worse" || G.cls[ws] === "big");  /* 악화로 분류되는 전개가 없으면 '가장 나쁜 경우'를 보이지 않는다 */
+  return (bad ? line("가장 나쁜 경우", ws) : "") + (bs && (!bad || G.cls[bs] === "better") ? line("가장 좋은 경우", bs) : "") || '<p class="lb-line">' + esc(firstSent(G.line)) + "</p>";
+}
+function lbFx(i, quiet){  /* 한 줄 정보가 그래프·전망에 주는 영향 */
+  const fc = (i.fc || []).map(f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none; return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + "</b></button>"; }).join("");
+  return fc || (quiet ? "" : '<span class="lb-fx">그래프 변화 없음</span>');
+}
+function lbRecent(cid, n){  /* 이 사안의 최근 한 줄 정보(최근 호부터) */
+  const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case === cid && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out;
+}
+/* v3.92 시안: 일자별 선 그래프. 날마다 그날의 확률로 '악화 이상'(크게 악화됨+악화됨)과 '개선됨' 횟수를 계산해 잇는다.
+   10월 9일 값은 그날 공개돼 있던 확률에 현재의 분류를 적용한 값이다(인간 안보 그래프는 10월 10일 공개). 사안이 공개되기 전 날은 그리지 않는다.
+   확률은 판단을 고칠 때만 바뀌므로 선은 계단 모양이다. 아래 눈금은 그 사안의 한 줄 정보가 들어온 날(오늘은 빨강), 동그라미는 그래프가 바뀐 날 */
+const LB_START = "2026-10-09", LB_CASE0 = {poland: "2026-10-10"};
+const ymdAdd = (d, n) => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
+const md = d => (+d.slice(5, 7)) + "." + (+d.slice(8, 10));
+function lbTrend(c, G){
+  const H = c.hs7, today = BR.issues[0].date, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d));
+  const cur = {}; H.scen.forEach(s => cur[s.id] = s.p);
+  const mapAt = d => { let m = ch.length && ch[0].d > d ? ch[0].prev : null; ch.forEach(x => { if (x.d <= d) m = x.next; }); return m || cur; };
+  let a = LB_START, b = today; const have = (Date.parse(b) - Date.parse(a)) / 864e5;  /* 기록이 짧을 때는 7일 창에서 시작해 30일까지 늘리고, 그 뒤로는 최근 30일 */
+  const span = Math.min(29, Math.max(6, have)); if (have > span) a = ymdAdd(b, -span); const end = ymdAdd(a, span);
+  const c0 = LB_CASE0[c.id] && LB_CASE0[c.id] > a ? LB_CASE0[c.id] : a;
+  const days = []; for (let d = c0; d <= b; d = ymdAdd(d, 1)) days.push(d);
+  const ser = days.map(d => { const n = hsCountP(H, G, mapAt(d)); return {d, bad: n.big + n.worse, good: n.better}; });
+  const W = 300, Hh = 92, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
+  const mx = Math.max(...ser.map(v => Math.max(v.bad, v.good))), yMax = Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
+  const path = k => ser.map((v, i) => (i ? "H" + X(v.d).toFixed(1) + "V" : "M" + X(v.d).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("");
+  const area = k => path(k) + "V" + B + "H" + X(ser[0].d).toFixed(1) + "Z";
+  const hasGood = ser.some(v => v.good), last = ser[ser.length - 1];
+  const dots = k => ser.map(v => '<circle cx="' + X(v.d).toFixed(1) + '" cy="' + Y(v[k]).toFixed(1) + '" r="2.2" class="lt-p lt-p-' + k + '"><title>' + esc(kd(v.d) + " · " + (k === "bad" ? "악화 이상 " : "개선됨 ") + v[k] + "번") + "</title></circle>").join("");
+  const info = (BR.issues || []).filter(x => x.date >= c0 && x.date <= b && x.items.some(i => i.case === c.id)).map(x => '<rect x="' + (X(x.date) - 1.5).toFixed(1) + '" y="' + (B + 4) + '" width="3" height="6" rx="1" class="lt-tick' + (x.date === today ? " lt-today" : "") + '"><title>' + esc(kd(x.date) + " 한 줄 정보 " + x.items.filter(i => i.case === c.id).length + "건") + "</title></rect>").join("");
+  const chg = ch.filter(x => x.d >= c0 && x.d <= b && hsDiff(H, G, x) !== "점 개수 변화 없음").map(x => { const n = hsCountP(H, G, x.next); return '<circle cx="' + X(x.d).toFixed(1) + '" cy="' + Y(n.big + n.worse).toFixed(1) + '" r="4.5" class="lt-chg"><title>' + esc(kd(x.d) + " 그래프 변경 · " + x.kind) + "</title></circle>"; }).join("");
+  const xt = (span >= 20 ? [a, ymdAdd(a, Math.round(span / 3)), ymdAdd(a, Math.round(span * 2 / 3)), end] : [a, ymdAdd(a, Math.round(span / 2)), end]).map(d => '<text x="' + X(d).toFixed(1) + '" y="' + (Hh - 2) + '" class="lt-x" text-anchor="' + (d === a ? "start" : d === end ? "end" : "middle") + '">' + md(d) + "</text>").join("");
+  const pre = c0 < "2026-10-10" ? '<rect x="' + X(c0).toFixed(1) + '" y="' + T + '" width="' + (X("2026-10-10") - X(c0)).toFixed(1) + '" height="' + (B - T) + '" class="lt-pre"><title>10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다</title></rect>' : "";
+  return '<figure class="lt"><figcaption class="lt-cap"><span>일자별 변화 · 악화 이상 횟수</span><span class="note">' + (have > 29 ? "최근 30일" : kd(LB_START) + "부터") + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + " 일자별 악화 이상 횟수, " + kd(last.d) + " " + last.bad + "번") + '">' + pre +
+    [0.5, 1].map(f => '<line x1="' + L + '" x2="' + R + '" y1="' + Y(yMax * f).toFixed(1) + '" y2="' + Y(yMax * f).toFixed(1) + '" class="lt-grid"/>').join("") + '<line x1="' + L + '" x2="' + R + '" y1="' + B + '" y2="' + B + '" class="lt-ax"/>' +
+    '<text x="' + (R + 4) + '" y="' + (Y(yMax) + 3).toFixed(1) + '" class="lt-y">' + yMax + "</text>" +
+    (hasGood ? '<path d="' + path("good") + '" class="lt-good"/>' + dots("good") : "") + '<path d="' + area("bad") + '" class="lt-area"/><path d="' + path("bad") + '" class="lt-bad"/>' + dots("bad") + chg + info +
+    '<text x="' + (X(last.d) + 7).toFixed(1) + '" y="' + (Y(last.bad) + 4).toFixed(1) + '" class="lt-v">' + last.bad + "</text>" + (hasGood ? '<text x="' + (X(last.d) + 7).toFixed(1) + '" y="' + (Y(last.good) + 4).toFixed(1) + '" class="lt-v lt-vg">' + last.good + "</text>" : "") + xt + "</svg></figure>";
+}
+function lbStats(n){
+  return '<ul class="lb-st">' + ["big", "worse", "better", "same"].filter(k => n[k]).map(k => '<li class="lb-st-' + k + '"><b>' + n[k] + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span></li>").join("") + "</ul>";
+}
+function lifeRow(c){
+  const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0];
+  if (!G) return "";
+  const n = hsCount(H, G, "p"), hit = H.scen.some(s => G.cls[s.id] !== "same"), rec = lbRecent(c.id, 2), today = BR.issues[0].date;
+  const x = (H.changes || []).slice(-1)[0], chg = x && hsDiff(H, G, x) !== "점 개수 변화 없음";
+  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span><button type="button" class="lb-more" data-hs="' + esc(c.id) + '">10단계 자세히 <span aria-hidden="true">→</span></button></header>';
+  const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "오늘" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + "</li>").join("") + "</ul>" : '<p class="note">최근 정보 없음</p>';
+  if (!hit) return '<article class="lb-card lb-flat">' + head + '<p class="lb-flatline"><span class="lb-pill">100번 모두 현재와 비슷함</span>' + esc(firstSent(G.line)) + "</p>" + '<div class="lb-foot"><div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + recent + "</div></div></article>";
+  return '<article class="lb-card">' + head +
+    '<div class="lb-body"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · 10단계에서 자세히 보기") + '">' + hsDots(n) + "</button>" + lbStats(n) + lbTrend(c, G) + "</div>" +
+    '<div class="lb-foot"><div class="lb-wsw">' + lbCase(H, G) + ""  /* 그래프 변경 설명은 카드에서 뺀다(선 그래프의 동그라미와 10단계 확률 변경 이력에 둠) */ + '</div><div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + recent + "</div></div></article>";
+}
+function lifeBoardHtml(x){
+  const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
+  const csn = id => LB_SHORT[id] || "기타";
+  return '<section class="lb" id="s-life"><p class="eyebrow">국민의 삶 · ' + kd(x.date) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래</h2>' +
+    '<p class="lb-lead"><b>2030년까지를 100번 산다면, 그중 몇 번은 삶이 악화되고 몇 번은 개선될까요?</b> 5개 분쟁마다 그 횟수를 점 100개로 보입니다. 새 사건이 판단을 바꾸면 점과 선이 움직입니다. 횟수는 판단값입니다.</p>' +
+    '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
+    '<p class="lb-leg">' + HS_ORD.slice().reverse().map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>악화 이상 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><i class="lg-chg"></i>그래프 변경</span></p></div>' +
+    '<div class="lb-board" id="lifeboard">' + cs.map(lifeRow).join("") + "</div>" +
+    '<p class="lb-note">크게 악화됨: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우. 일자별 변화의 10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다(그래프는 10월 10일 공개).</p></section>' +
+    '<section class="lb-feed" id="brief"><div class="bh"><h3>오늘의 정보</h3><span class="bd">' + fmtKD(x.date) + "</span>" + ttsBtn("brief") + "</div>" +
+    '<ul class="lb-list">' + x.items.map((i, n) => '<li id="bi-' + n + '"><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + lbFx(i) +
+      ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
+      (x.more || []).map(m => '<li><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") + "</ul>" + weekLine(x.date) + "</section>";
+}
+function lifeStripHtml(x){
+  const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
+  return '<div class="lm-row" aria-label="사람들의 삶 · 2030년까지 100번의 미래">' + cs.map(c => { const G = lifeMain(c), n = hsCount(c.hs7, G, "p"), k = x.items.filter(i => i.case === c.id).length;
+    return '<button type="button" class="lm" data-hs="' + esc(c.id) + '"><span class="lm-c">' + esc(c.title.split(":")[0]) + '</span><span class="lm-g">' + esc(G.name) + "</span>" + hsDots(n) + '<span class="lm-n">' + lifeNums(n, "<br>") + "</span>" + (k ? '<span class="lm-t">오늘 브리핑 ' + k + "건</span>" : "") + "</button>"; }).join("") + "</div>";
+}
+function lifeItemHtml(id){
+  const c = (D.strategies || []).find(k => k.id === id); if (!c || !c.hs7) return "";
+  const G = lifeMain(c), n = hsCount(c.hs7, G, "p");
+  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + "의 2030년까지 100번의 미래</b><br>" + lifeNums(n) + " · 10단계에서 자세히 →</span></button>";
+}
+function lifeHeroHtml(){
+  const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
+  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보입니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안의 10단계에 있습니다.</p><div class="lh-grid">' +
+    cs.map(c => { const H = c.hs7, G = H.groups.find(g => !g.fold) || H.groups[0], n = hsCount(H, G, "p"), nm = c.title.split(":")[0];
+      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · 10단계에서 자세히 →</button></article>"; }).join("") + "</div></section>";
 }
 function hs7Html(c, n9){
   const H = c.hs7, main = H.groups.filter(G => !G.fold), fold = H.groups.filter(G => G.fold);
@@ -1716,7 +1865,8 @@ function hs7Html(c, n9){
     (fold.length ? '<details class="src"><summary>그 밖의 집단 · ' + fold.map(G => esc(G.name)).join(", ") + "</summary>" + fold.map(G => hsCard(H, G)).join("") + "</details>" : "") +
     '<div class="lesson-box"><b>해석</b>' + esc(H.read) + "</div>" +
     ((c.people || []).length ? '<details class="src"><summary>영향받는 사람 전체 · 점수로 재지 않은 집단 포함</summary><div class="tbl-wrap"><table class="tbl"><thead><tr><th>누구</th><th>무엇이 걸려 있나</th></tr></thead><tbody>' + c.people.map(p => "<tr><td>" + esc(p.who) + "</td><td>" + esc(p.how) + "</td></tr>").join("") + "</tbody></table></div></details>" : "") +  /* v3.90 2안: 기존 '영향받는 사람' 표를 접힘으로 남긴다 */
-    '<details class="src"><summary>자세한 표와 측정 방법</summary><p class="note">점수는 유엔이 정한 인간 안보 범주로 계산합니다. 개인 안전은 폭력으로 숨지는 사람의 비율, 공동체는 집을 떠나야 했던 사람의 비율(이산가족은 가족과의 연락), 정치는 국가의 고문·정치적 살해로부터의 안전(V-Dem 신체적 온전성 지수), 경제는 1인당 소득(구매력 기준)입니다. 식량·보건·환경은 기준을 넘는 일이 있을 때 경보로 보입니다. 범주끼리 합치지 않습니다. 현재 점수는 측정값이고, 미래의 확률과 값은 판단값입니다. 점 그림의 색은 전개마다 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지면 크게 나빠짐, 1점 넘게 떨어지면 나빠짐, 1점 넘게 오르면 나아짐으로 나눈 것입니다(판단값). ' + (H.split ? esc(H.split) + " " : "") + '공식과 출처는 <button type="button" class="chip" data-go="method">분석 방법 탭</button>에 있습니다.</p>' + hsTables(H) + "</details></section>";
+    hsHistHtml(H) +
+    '<details class="src"><summary>자세한 표와 측정 방법</summary><p class="note">점수는 유엔이 정한 인간 안보 범주로 계산합니다. 개인 안전은 폭력으로 숨지는 사람의 비율, 공동체는 집을 떠나야 했던 사람의 비율(이산가족은 가족과의 연락), 정치는 국가의 고문·정치적 살해로부터의 안전(V-Dem 신체적 온전성 지수), 경제는 1인당 소득(구매력 기준)입니다. 식량·보건·환경은 기준을 넘는 일이 있을 때 경보로 보입니다. 범주끼리 합치지 않습니다. 현재 점수는 측정값이고, 미래의 확률과 값은 판단값입니다. 점 그림의 색은 전개마다 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지면 크게 악화됨, 1점 넘게 떨어지면 악화됨, 1점 넘게 오르면 개선됨으로 나눈 것입니다(판단값). ' + (H.split ? esc(H.split) + " " : "") + '공식과 출처는 <button type="button" class="chip" data-go="method">분석 방법 탭</button>에 있습니다.</p>' + hsTables(H) + "</details></section>";
 }
 function humanHtml(c, n9, n10){
   if (c.hs7) return hs7Html(c, n9) + humanDivHtml(c, n10);
