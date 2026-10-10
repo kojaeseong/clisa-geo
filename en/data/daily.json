@@ -1,6 +1,108 @@
 {
  "issues": [
   {
+   "date": "2026-10-10",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "After Trump-Putin call, U.S. temporarily eases sanctions to let Russian diesel flow",
+     "fact": "After a phone call with Russian President Vladimir Putin on October 9, U.S. time, President Donald Trump wrote on Truth Social that Russia would immediately supply more than 300,000 tons of diesel, another 500,000 tons in November and 1 million tons after that, followed by 3 million more tons within a short period. The same day, the Treasury Department's Office of Foreign Assets Control (OFAC) said it was issuing a temporary general license to allow the supply of Russian diesel to the global market. The Kremlin said the call focused heavily on prospects for settling the Ukraine crisis, also touched on Iran, and that Russia confirmed its readiness to supply oil and petroleum products to U.S. and global markets. Ukrainian President Volodymyr Zelensky wrote on X that easing sanctions on Russia without a clear and lasting de-escalation agreement \"plays into Russia's hands.\"",
+     "link": "Conclusion 5 of the Russia-Ukraine War analysis holds that Russia's best move is to keep dealing with Washington while seizing the rest of Donetsk Oblast. Washington's sanctions carve-out for Russia's wartime energy sector is an example of Moscow reaping real gains from those dealings, in line with that assessment.",
+     "fc": [],
+     "src": [
+      "http://en.kremlin.ru/events/president/news/80960",
+      "https://x.com/USTreasury/status/2108630834169385310",
+      "https://www.cbsnews.com/news/trump-russia-release-diesel-oil-iran-skyrocketing-costs/",
+      "https://www.mediaite.com/online/zelensky-warns-trump-his-diesel-deal-with-putin-plays-into-russias-hands/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Saudi-led coalition launches major operation against Houthis, says 136 military targets destroyed",
+     "fact": "Saudi Arabia's General Authority of Civil Aviation said on October 9 that Houthi attacks a day earlier on facilities at Riyadh's King Khalid International Airport and on a Saudia aircraft killed three Saudi citizens, including a Saudia captain. Turki al-Maliki, spokesman for the Saudi-led coalition, claimed on X on the night of October 9 that coalition forces had destroyed 136 military targets in Houthi-held areas, and said they were providing round-the-clock air support to the Yemeni government forces' offensive and dismantling the Houthis' ballistic missile system.",
+     "link": "Conclusion 2 of the Iran and Hormuz analysis identifies a war that spreads to all the Gulf oil producers as the outcome that would cost South Korea the most. With Saudi Arabia answering the Houthi strike on its capital's airport with a large-scale operation, the war is widening into direct combat between Gulf oil producers and Iran-aligned forces.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/9/saudi-arabia-reopens-riyadh-airport-after-houthi-attack-kills-three",
+      "https://www.theweek.in/news/middle-east/2026/10/09/saudi-arabia-pilot-among-three-killed-in-houthi-attack-at-riyadh-airport.html",
+      "https://www.aa.com.tr/en/middle-east/saudi-led-coalition-announces-large-scale-operation-against-houthis-in-yemen-says-136-military-targets-destroyed/4084119"
+     ],
+     "loc": {
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Tanker hit off UAE coast catches fire, blaze extinguished",
+     "fact": "A vessel was struck by an unknown projectile on October 9 13 nautical miles west of Al Jazeera in the United Arab Emirates, the UK Maritime Trade Operations (UKMTO) said. Maritime security firm Vanguard put the strike at 10:00 GMT (2 p.m. local time) and said a fire broke out and was later extinguished; shipping and security sources told Reuters the ship was the Panama-flagged supertanker GEM NO.2, fully laden with crude. No one has claimed responsibility.",
+     "link": "After the attack north of Qatar, tankers keep getting hit in Gulf waters inside the Strait of Hormuz. The added risk to crude shipments from inside the Gulf weighs against the forecast that Brent will close the year below $90 a barrel.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://gcaptain.com/vessel-struck-by-unknown-projectile-off-uae-coast-amid-surge-in-attacks-ukmto-says/",
+      "https://english.alarabiya.net/News/gulf/2026/10/09/vessel-struck-by-unknown-projectile-off-uae-coast-ukmto-says"
+     ],
+     "loc": {
+      "isos": [
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Ethiopia's foreign minister accuses Eritrea of 'all-out invasion,' invokes self-defense",
+     "fact": "In a letter dated October 8 to French Foreign Minister Jean-Noël Barrot, Ethiopian Foreign Minister Gedion Timothewos called \"the all-out invasion of parts of northern Ethiopia by Eritrea\" \"a blatant act of aggression that engages Ethiopia's inherent right to self-defence,\" and demanded the withdrawal of Eritrean troops he said had pushed up to 60 kilometers into Tigray. A senior Ethiopian official said the letter was also sent to the other members of the UN Security Council. Eritrean Information Minister Yemane Gebremeskel hit back on X, saying Ethiopia had waged \"an unprovoked war of aggression against Eritrea\" for more than three years.",
+     "link": "The site has no issue analysis on this conflict but tracks it as a flashpoint. With Addis Ababa now invoking self-defense in an official letter, the risk of a direct clash between the two armies has grown. Eritrea claims Ethiopia's target is its Red Sea port of Assab, so the conflict could add to the risks facing Red Sea shipping routes already rattled by Houthi attacks.",
+     "fc": [],
+     "src": [
+      "https://www.cnbcafrica.com/2026/ethiopia-calls-for-immediate-withdrawal-of-eritrean-troops-in-letter-to-un",
+      "https://www.aljazeera.com/news/2026/10/9/ethiopia-and-eritrea-accuse-one-another-of-launching-war"
+     ],
+     "loc": {
+      "isos": [
+       "ETH",
+       "ERI"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "In an October 10 front-page commentary marking the 81st anniversary of the Workers' Party's founding, Rodong Sinmun said North Korea's dignity and might had reached \"the highest level.\" Senior officials, including members of the Politburo Presidium, paid respects at the Kumsusan Palace of the Sun on October 9; no visit by General Secretary Kim Jong Un was reported (via secondary reports).",
+     "src": [
+      "https://www.youthdaily.co.kr/news/article.html?no=228160",
+      "https://www.spnews.co.kr/news/articleView.html?idxno=111465"
+     ]
+    },
+    {
+     "t": "Ivan Fedorov, co-chair of the Zaporizhzhia Oblast Defense Council, said on October 9 that Russian forces had struck 51 settlements in the region 1,039 times over the previous day, killing two people and injuring 18.",
+     "src": [
+      "https://kyivindependent.com/russian-attacks-kill-at-least-41-injure-67-across-ukraine-as-glide-bombs-strike-zaporizhzhia/"
+     ]
+    },
+    {
+     "t": "Citing the Kremlin, Al Jazeera reported that the October 9 Trump-Putin call lasted about an hour and a half and that both leaders expressed interest in attending the Asia-Pacific Economic Cooperation (APEC) summit in China in November.",
+     "src": [
+      "https://www.aljazeera.com/economy/2026/10/9/trump-announces-russian-diesel-deal-amid-soaring-us-fuel-prices"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-09",
    "items": [
     {
