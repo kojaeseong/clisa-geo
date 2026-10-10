@@ -17,7 +17,7 @@
   <url><loc>https://geo.clisa.ai/case/taiwan/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/case/ukraine/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/case/iran/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://geo.clisa.ai/case/chips/</loc><lastmod>2026-10-05</lastmod></url>
+  <url><loc>https://geo.clisa.ai/case/poland/</loc><lastmod>2026-10-10</lastmod></url>
   <url><loc>https://geo.clisa.ai/case/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/grand/</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://geo.clisa.ai/ideas/</loc><lastmod>2026-10-05</lastmod></url>
@@ -56,12 +56,11 @@
   <url><loc>https://geo.clisa.ai/country/NGA/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/country/ZAF/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/country/ETH/</loc><lastmod>2026-10-05</lastmod></url>
-  <url><loc>https://geo.clisa.ai/forecast/</loc><lastmod>2026-10-09</lastmod></url>
+  <url><loc>https://geo.clisa.ai/forecast/</loc><lastmod>2026-10-10</lastmod></url>
   <url><loc>https://geo.clisa.ai/feature/2026-10-09-hangul/</loc><lastmod>2026-10-09</lastmod></url>
   <url><loc>https://geo.clisa.ai/feature/2026-10-03-population/</loc><lastmod>2026-10-03</lastmod></url>
   <url><loc>https://geo.clisa.ai/feature/2026-10-01-korea/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://geo.clisa.ai/feature/</loc><lastmod>2026-10-09</lastmod></url>
-  <url><loc>https://geo.clisa.ai/guide/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/CHN/xi-jinping/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/USA/donald-trump/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/PRK/kim-jong-un/</loc><lastmod>2026-10-02</lastmod></url>
@@ -75,6 +74,7 @@
   <url><loc>https://geo.clisa.ai/power/ISR/</loc><lastmod>2026-10-06</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/KOR/</loc><lastmod>2026-10-06</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/UKR/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://geo.clisa.ai/power/POL/</loc><lastmod>2026-10-10</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/USA/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/CHN/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/RUS/military/</loc><lastmod>2026-10-08</lastmod></url>
@@ -82,7 +82,8 @@
   <url><loc>https://geo.clisa.ai/power/ISR/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/KOR/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://geo.clisa.ai/power/UKR/military/</loc><lastmod>2026-10-08</lastmod></url>
-  <url><loc>https://geo.clisa.ai/power/</loc><lastmod>2026-10-06</lastmod></url>
+  <url><loc>https://geo.clisa.ai/power/</loc><lastmod>2026-10-10</lastmod></url>
+  <url><loc>https://geo.clisa.ai/guide/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://geo.clisa.ai/about/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://geo.clisa.ai/subscribe/</loc><lastmod>2026-10-04</lastmod></url>
 </urlset>

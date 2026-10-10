@@ -295,7 +295,7 @@ function init(d){
   const addF = (iso, v) => { FOCUS[iso] = (FOCUS[iso] || 0) + v; };
   D.forecasts.forEach(f => f.countries.forEach(i => { addF(i, 1); FCN[i] = (FCN[i] || 0) + 1; }));
   D.flashpoints.forEach(fp => fp.countries.forEach(i => addF(i, 1)));
-  (D.strategies || []).forEach(c => { (c.deciders ? c.deciders.items : []).forEach(d => addF(d.iso, 3)); const r = String(c.recipient || ""); addF(r.includes("우크라이나") ? "UKR" : r.includes("대만") ? "TWN" : "KOR", 3); });
+  (D.strategies || []).forEach(c => { (c.deciders ? c.deciders.items : []).forEach(d => addF(d.iso, 3)); const r = String(c.recipient || ""); addF(c.subject || (r.includes("우크라이나") ? "UKR" : r.includes("대만") ? "TWN" : "KOR"), 3); });
   const fmx = Math.max(1, ...Object.values(FOCUS)); for (const k of Object.keys(FOCUS)) FOCUS[k] = Math.round(100 * Math.sqrt(FOCUS[k] / fmx));
   $("#loading").remove();
   readColors(); setupInteraction(); resize();
@@ -1475,8 +1475,9 @@ function cgV2(c, X, row, qd){
 }
 function futHtml(c, n){
   const F = c.futures; if (!F) return "";
-  const base = {}; c.wellbeing.groups.forEach(g => base[g.k] = g.score);
-  const gname = {}; c.wellbeing.groups.forEach(g => gname[g.k] = g.name);
+  const WG = c.wellbeing ? c.wellbeing.groups : [];  /* v3.90 새 사안(러시아-NATO 대치)은 인간 안보 방식만 있어 기존 지표가 없다 */
+  const base = {}; WG.forEach(g => base[g.k] = g.score);
+  const gname = {}; WG.forEach(g => gname[g.k] = g.name);
   const pb = key => '<div class="pbar" role="img" aria-label="' + F.items.map(f => f.id + " " + f[key] + "%").join(", ") + '">' + F.items.map(f => '<i style="flex:' + f[key] + ' 0 0;background:' + fcol(f.id) + '">' + f.id + " " + f[key] + "%</i>").join("") + "</div>";
   const cell = (f, g, k) => {
     if (f.score) return fmt(f.score[g][k]) + wdl(f.score[g][k], base[g][k]);
@@ -1491,8 +1492,8 @@ function futHtml(c, n){
     '<div class="futs">' + F.items.map(f => '<article class="fut" id="fut-' + esc(c.id) + "-" + f.id + '" style="--c:' + fcol(f.id) + '"><div class="hd"><span class="id">' + f.id + "</span><b>" + esc(f.name) + '</b><span class="pp">' + (F.rec_same ? f.p + "%" + rg(f.rng) : "현 추세 " + f.p + "%" + rg(f.rng) + " · 권고 이행 시 " + f.p_rec + "%" + rg(f.rng_rec)) + (f.prev2w ? '<small>' + f.prev2w[0] + (F.rec_same ? "" : " · " + f.prev2w[1]) + "</small>" : f.prev ? '<small>' + f.prev[0] + " · " + f.prev[1] + "</small>" : f.id === "F5" ? "<small></small>" : "") + "</span></div>" +
       "<p>" + esc(f.story) + '</p><p class="tst"><b>성립 조건</b> · ' + esc(f.test) + (f.fc ? ' <span class="mono">(' + f.fc + ")</span>" : "") + "</p>" +
       '<p style="font-size:12px"><b>선행 징후</b> · ' + f.signs.map(esc).join(" · ") + "</p>" + sigHtml(f) +
-      '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>").join("") + "</div>" +
-    extHtml(c) + worldHtml(c) + aiHtml(c) + "</section>";
+      (c.hs7 ? '<button type="button" class="chip" data-jump="hs7-' + esc(c.id) + '">이 전개에서 사람들의 삶 · 10단계 →</button></article>' : '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>")).join("") + "</div>" +
+    extHtml(c) + (!c.external && (F.ext_list || []).length ? '<h3 style="margin:8px 0 0">바깥 변수</h3><p class="note">전략 주체가 좌우하지 못하지만 전개의 확률을 움직이는 변수입니다.</p><ul class="list">' + F.ext_list.map(x => '<li class="rv"><p style="color:var(--ink)">' + esc(x) + "</p></li>").join("") + "</ul>" : "") + worldHtml(c) + aiHtml(c) + "</section>";
 }
 /* v3.26 사안 outlook: 흐름·창·사건·경로·반증 신호. 본문의 {{fc:fNN}}은 그날 확률을 보이는 전망 칩, {{case:id}}는 사안 칩 */
 function olkT(t, fid){
@@ -1642,13 +1643,83 @@ function swapHtml(c){
 }
 function evalHtml(c){
   const G = c.client.goals;
+  const HC = c.alts.some(a => a.ev.cost);  /* v3.90 비용 판단이 없는 사안은 비용 칸을 두지 않는다 */
   const sc = s => '<span class="sc s' + (s > 0 ? "p" : s < 0 ? "n" : "z") + (Math.abs(s) === 2 ? "2" : "") + '">' + (s > 0 ? "+" + s : s < 0 ? "−" + (-s) : "0") + "</span>";
-  return '<div class="tbl-wrap"><table class="tbl evt" style="min-width:820px"><thead><tr><th>안</th>' + G.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + "<th>비용</th><th>가역성</th><th>확전 위험</th><th>실현 가능성</th></tr></thead><tbody>" +
+  return '<div class="tbl-wrap"><table class="tbl evt" style="min-width:820px"><thead><tr><th>안</th>' + G.map(g => '<th><span class="mono">' + g.id + "</span> " + esc(g.t) + "</th>").join("") + (HC ? "<th>비용</th>" : "") + "<th>가역성</th><th>확전 위험</th><th>실현 가능성</th></tr></thead><tbody>" +
     c.alts.map(a => '<tr><td><b class="mono">' + a.id + '</b><br><span class="note">' + esc(a.name) + "</span></td>" + G.map(g => { const e = a.ev[g.id]; return "<td>" + sc(e.s) + '<span class="why">' + esc(e.t) + "</span></td>"; }).join("") +
-      "<td>" + esc(a.ev.cost) + "</td><td>" + esc(a.ev.rev2) + "</td><td>" + esc(a.ev.esc2) + "</td><td>" + esc(a.ev.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
+      (HC ? "<td>" + esc(a.ev.cost) + "</td>" : "") + "<td>" + esc(a.ev.rev2) + "</td><td>" + esc(a.ev.esc2) + "</td><td>" + esc(a.ev.feas) + "</td></tr>").join("") + "</tbody></table></div>" +
     '<p class="note">−2 크게 잃음 · −1 잃음 · 0 중립 · +1 얻음 · +2 크게 얻음. 목표별 값을 더하지 않습니다. 우선순위가 앞선 목표의 값이 순위를 먼저 가릅니다.</p>';
 }
+/* v3.90(2026-10-10 결재): Ⅲ 인간 안보 화면 2안. 집단별 카드(첫 문장, '2030년까지 100번의 미래' 점 그림, 범주별 현재·가장 나쁜 경우·가장 좋은 경우 선 그림, 가장 나쁜 경우의 원래 단위 풀이), 숫자 표는 접힘 */
+const HS_CAT = [["개인", "개인 안전"], ["공동체", "공동체"], ["정치", "정치"], ["경제", "경제"]];
+const HS_COL = {better: "#0E8A6C", same: "#C9CED4", worse: "#D9972B", big: "#D63A1F"};
+const HS_LAB = {better: "나아짐", same: "현재와 거의 같음", worse: "나빠짐", big: "크게 나빠짐"};
+const HS_ORD = ["better", "same", "worse", "big"];
+function hsCount(H, G, key){
+  const c = {better: 0, same: 0, worse: 0, big: 0}; H.scen.forEach(s => { c[G.cls[s.id]] += s[key]; });
+  /* v3.90 점 100개의 합이 100이 되도록 최대 잉여 방식으로 정수화한다. 잉여가 같으면 위험 쪽(크게 나빠짐, 나빠짐)을 먼저 올려 작은 확률의 위험이 사라지지 않게 한다 */
+  const ks = ["big", "worse", "better", "same"], n = {}; ks.forEach(k => n[k] = Math.floor(c[k] + 1e-9));
+  let r = 100 - ks.reduce((a, k) => a + n[k], 0);
+  ks.slice().sort((x, y) => ((c[y] - n[y]) - (c[x] - n[x])) || ks.indexOf(x) - ks.indexOf(y)).forEach(k => { if (r > 0 && c[k] - n[k] > 1e-9) { n[k]++; r--; } });
+  return n;
+}
+function hsDots(c){
+  const seq = []; HS_ORD.forEach(k => { for (let i = 0; i < Math.round(c[k]); i++) seq.push(k); });
+  while (seq.length < 100) seq.push("same"); seq.length = 100;
+  return '<svg viewBox="0 0 110 110" class="hs-dots" role="img" aria-label="' + HS_ORD.filter(k => Math.round(c[k])).map(k => HS_LAB[k] + " " + Math.round(c[k]) + "번").join(", ") + '">' +
+    seq.map((k, i) => '<circle cx="' + (5.5 + (i % 10) * 11) + '" cy="' + (5.5 + Math.floor(i / 10) * 11) + '" r="4.2" fill="' + HS_COL[k] + '"></circle>').join("") + "</svg>";
+}
+function hsLegend(c, c2){
+  return '<ul class="hs-lg">' + HS_ORD.filter(k => Math.round(c[k]) || Math.round(c2[k])).map(k => '<li><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + " <b>" + Math.round(c[k]) + "번</b>" + (Math.round(c2[k]) !== Math.round(c[k]) ? '<span class="note hs-rec">→ 권고 이행 시 ' + Math.round(c2[k]) + "번</span>" : "") + "</li>").join("") + "</ul>";
+}
+function hsLine(H, G){
+  const SN = {}; H.scen.forEach(s => SN[s.id] = s);
+  const W = 340, L = 74, R = W - 10, sc = v => L + (R - L) * v / 100; let y = 20, rows = "";
+  HS_CAT.forEach(([k, lab]) => {
+    const v = G.cat[k];
+    rows += '<text x="0" y="' + (y + 4) + '" class="hs-l">' + lab + "</text>";
+    if (v.na) { rows += '<text x="' + L + '" y="' + (y + 4) + '" class="hs-n">측정 불가</text>'; y += 32; return; }
+    rows += '<line x1="' + L + '" x2="' + R + '" y1="' + y + '" y2="' + y + '" class="hs-t"/>';
+    if (v.worst_sc) rows += '<line x1="' + sc(v.worst) + '" x2="' + sc(v.now) + '" y1="' + y + '" y2="' + y + '" stroke="#D63A1F" stroke-width="2"/><circle cx="' + sc(v.worst) + '" cy="' + y + '" r="5" fill="var(--panel)" stroke="#D63A1F" stroke-width="2"><title>가장 나쁜 경우 ' + fmt(v.worst) + '</title></circle><text x="' + sc(v.worst) + '" y="' + (y + 17) + '" class="hs-w" text-anchor="middle">' + Math.round(v.worst) + "</text>";
+    if (v.best_sc) rows += '<line x1="' + sc(v.now) + '" x2="' + sc(v.best) + '" y1="' + y + '" y2="' + y + '" stroke="#0E8A6C" stroke-width="2"/><circle cx="' + sc(v.best) + '" cy="' + y + '" r="5" fill="var(--panel)" stroke="#0E8A6C" stroke-width="2"><title>가장 좋은 경우 ' + fmt(v.best) + '</title></circle><text x="' + sc(v.best) + '" y="' + (y + 17) + '" class="hs-b" text-anchor="middle">' + Math.round(v.best) + "</text>";
+    rows += '<circle cx="' + sc(v.now) + '" cy="' + y + '" r="5" fill="var(--accent)"><title>현재 ' + fmt(v.now) + '</title></circle><text x="' + Math.min(sc(v.now), R - 6) + '" y="' + (y - 9) + '" class="hs-v" text-anchor="middle">' + Math.round(v.now) + "</text>";
+    y += 36;
+  });
+  return '<svg viewBox="0 0 ' + W + " " + y + '" class="hs-line" role="img" aria-label="범주별 현재와 가장 나쁜 경우">' + rows + "</svg>";
+}
+function hsWorstSc(G){ const w = HS_CAT.map(([k]) => G.cat[k]).filter(v => !v.na && v.worst_sc); if (!w.length) return null; const cnt = {}; w.forEach(v => cnt[v.worst_sc] = (cnt[v.worst_sc] || 0) + 1); return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0]; }
+function hsBestSc(G){ const b = HS_CAT.map(([k]) => G.cat[k]).filter(v => !v.na && v.best_sc); return b.length ? b[0].best_sc : null; }
+function hsCard(H, G){
+  const SN = {}; H.scen.forEach(s => SN[s.id] = s);
+  const c = hsCount(H, G, "p"), c2 = hsCount(H, G, "p_rec"), ws = hsWorstSc(G), bs = hsBestSc(G);
+  const facts = ws ? HS_CAT.map(([k]) => { const v = G.cat[k]; if (k === "정치") return v.na || v.by[ws] > v.now - 1 ? "" : "국가 폭력 늘어남"; return (v.by_raw || {})[ws]; }).filter(Boolean) : [];
+  const al = ws ? (G.al[ws] || []) : [];
+  return '<article class="hs-card"><div class="hs-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><p class="hs-hl">' + esc(G.line) + '</p><div class="hs-grid"><figure><figcaption>2030년까지 100번의 미래</figcaption>' + hsDots(c) + hsLegend(c, c2) + "</figure>" +
+    '<figure><figcaption>현재(<span style="color:var(--accent)">●</span>)' + (ws ? '와 가장 나쁜 경우(<span style="color:#D63A1F">○</span>, ' + esc(SN[ws].name) + " " + SN[ws].p + "%)" : "") + (bs ? ' · 가장 좋은 경우(<span style="color:#0E8A6C">○</span>, ' + esc(SN[bs].name) + " " + SN[bs].p + "%)" : "") + " · 0~100점, 높을수록 좋음</figcaption>" + hsLine(H, G) +
+    (ws ? '<p class="hs-wf">' + esc(SN[ws].name) + "일 때 · " + facts.map(esc).join(" · ") + (al.length ? ' · <span class="hs-al">' + esc(al.join("·")) + " 경보</span>" : "") + "</p>" : "") +
+    (G.al_now.length ? '<p class="hs-wf">현재 켜진 경보 · <span class="hs-al">' + esc(G.al_now.join("·")) + "</span></p>" : "") + "</figure></div></article>";
+}
+function hsTables(H){
+  const SN = {}; H.scen.forEach(s => SN[s.id] = s);
+  const cur = '<div class="tbl-wrap"><table class="tbl" style="min-width:560px"><thead><tr><th>집단</th>' + HS_CAT.map(([k, l]) => "<th>" + l + "</th>").join("") + "<th>현재 경보</th></tr></thead><tbody>" +
+    H.groups.map(G => "<tr><td>" + esc(G.name) + "</td>" + HS_CAT.map(([k]) => { const v = G.cat[k]; return v.na ? '<td class="note">측정 불가</td>' : '<td class="mono">' + fmt(v.now) + '<small class="hs-rw">' + esc(v.raw || "") + "</small></td>"; }).join("") + '<td class="note">' + esc(G.al_now.join("·") || "없음") + "</td></tr>").join("") + "</tbody></table></div>";
+  const ex = '<div class="tbl-wrap"><table class="tbl" style="min-width:560px"><thead><tr><th>집단</th><th>범주</th><th>현재</th><th>현 노선 유지</th><th>권고 이행 시</th><th>가장 나쁜 경우</th></tr></thead><tbody>' +
+    H.groups.map(G => HS_CAT.map(([k, l]) => { const v = G.cat[k]; return v.na ? "<tr><td>" + esc(G.name) + "</td><td>" + l + '</td><td colspan="4" class="note">측정 불가</td></tr>' : "<tr><td>" + esc(G.name) + "</td><td>" + l + '</td><td class="mono">' + fmt(v.now) + '</td><td class="mono">' + fmt(v.exp) + '</td><td class="mono">' + fmt(v.rec) + '</td><td class="mono">' + (v.worst_sc ? fmt(v.worst) + ' <span class="note">(' + esc(SN[v.worst_sc].name) + " " + SN[v.worst_sc].p + "%)</span>" : '<span class="note">나빠지는 전개 없음</span>') + "</td></tr>"; }).join("")).join("") + "</tbody></table></div>";
+  const by = H.groups.map(G => '<details class="src"><summary>전개별 값 · ' + esc(G.name) + '</summary><div class="tbl-wrap"><table class="tbl" style="min-width:620px"><thead><tr><th>전개(확률)</th>' + HS_CAT.map(([k, l]) => "<th>" + l + "</th>").join("") + "<th>경보</th></tr></thead><tbody>" +
+    H.scen.map(s => "<tr><td><b class=\"mono\">" + esc(s.id) + "</b> " + esc(s.name) + '<br><span class="note">' + s.p + "%" + (s.p_rec !== s.p ? " · 권고 이행 시 " + s.p_rec + "%" : "") + "</span></td>" + HS_CAT.map(([k]) => { const v = G.cat[k], r = (v.by_raw || {})[s.id]; return v.na ? '<td class="note">' + esc(r || "측정 불가") + "</td>" : '<td class="mono">' + fmt(v.by[s.id]) + (r ? '<small class="hs-rw">' + esc(r) + "</small>" : "") + "</td>"; }).join("") + '<td class="note">' + esc((G.al[s.id] || []).join("·") || "없음") + "</td></tr>").join("") + "</tbody></table></div></details>").join("");
+  return '<h4 class="hs-h4">현재의 삶 · 2026년</h4>' + cur + '<h4 class="hs-h4">2030년까지의 변화(확률 가중)</h4>' + ex + '<p class="note">현 노선 유지와 권고 이행 시는 각 전개의 2030년 값에 그 확률을 곱해 더한 값입니다. 확률이 높은 전개에서 삶이 거의 변하지 않으면 이 값도 거의 움직이지 않으므로, 위험의 크기는 가장 나쁜 경우와 그 확률로 보십시오.</p>' + by;
+}
+function hs7Html(c, n9){
+  const H = c.hs7, main = H.groups.filter(G => !G.fold), fold = H.groups.filter(G => G.fold);
+  return '<section class="stp" id="hs7-' + esc(c.id) + '">' + stpH(n9, "이 사안이 사람들의 삶에 미치는 영향") + '<p class="hs-lead">' + esc(H.lead) + "</p>" +
+    main.map(G => hsCard(H, G)).join("") +
+    (fold.length ? '<details class="src"><summary>그 밖의 집단 · ' + fold.map(G => esc(G.name)).join(", ") + "</summary>" + fold.map(G => hsCard(H, G)).join("") + "</details>" : "") +
+    '<div class="lesson-box"><b>해석</b>' + esc(H.read) + "</div>" +
+    ((c.people || []).length ? '<details class="src"><summary>영향받는 사람 전체 · 점수로 재지 않은 집단 포함</summary><div class="tbl-wrap"><table class="tbl"><thead><tr><th>누구</th><th>무엇이 걸려 있나</th></tr></thead><tbody>' + c.people.map(p => "<tr><td>" + esc(p.who) + "</td><td>" + esc(p.how) + "</td></tr>").join("") + "</tbody></table></div></details>" : "") +  /* v3.90 2안: 기존 '영향받는 사람' 표를 접힘으로 남긴다 */
+    '<details class="src"><summary>자세한 표와 측정 방법</summary><p class="note">점수는 유엔이 정한 인간 안보 범주로 계산합니다. 개인 안전은 폭력으로 숨지는 사람의 비율, 공동체는 집을 떠나야 했던 사람의 비율(이산가족은 가족과의 연락), 정치는 국가의 고문·정치적 살해로부터의 안전(V-Dem 신체적 온전성 지수), 경제는 1인당 소득(구매력 기준)입니다. 식량·보건·환경은 기준을 넘는 일이 있을 때 경보로 보입니다. 범주끼리 합치지 않습니다. 현재 점수는 측정값이고, 미래의 확률과 값은 판단값입니다. 점 그림의 색은 전개마다 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지면 크게 나빠짐, 1점 넘게 떨어지면 나빠짐, 1점 넘게 오르면 나아짐으로 나눈 것입니다(판단값). ' + (H.split ? esc(H.split) + " " : "") + '공식과 출처는 <button type="button" class="chip" data-go="method">분석 방법 탭</button>에 있습니다.</p>' + hsTables(H) + "</details></section>";
+}
 function humanHtml(c, n9, n10){
+  if (c.hs7) return hs7Html(c, n9) + humanDivHtml(c, n10);
   const W = c.wellbeing, I = D.indicator, H = c.human;
   const base = {}; W.groups.forEach(g => base[g.k] = g.score);
   const gname = {}; W.groups.forEach(g => gname[g.k] = g.name);
@@ -1665,6 +1736,11 @@ function humanHtml(c, n9, n10){
     '<h3 style="margin:6px 0 0">2030년 기대치' + (c.futures.rec_same ? "" : "로 본 권고의 효과") + '</h3><div class="tbl-wrap"><table class="tbl" style="min-width:520px"><thead><tr><th>집단</th><th>차원</th><th>2026년</th><th>' + (c.futures.rec_same ? "기대치" : "현 추세") + "</th>" + (c.futures.rec_same ? "" : "<th>권고 이행 시</th>") + '<th>가장 나쁜 미래</th></tr></thead><tbody>' + erows.join("") + "</tbody></table></div>" +
     '<p class="note">' + esc(E.note) + (c.futures.rec_same ? " ▲▼는 2026년 대비 변화입니다." : " 현 추세 열의 ▲▼는 2026년 대비, 권고 이행 시 열의 ▲▼는 현 추세 대비 변화입니다.") + '</p><div class="lesson-box"><b>해석</b>' + esc(E.read) + "</div></section>" +
     '<section class="stp">' + stpH(n10, "클리사의 판단과 전략 주체 순위의 차이") + '<p class="note">' + esc(H.note) + '</p><div class="divs">' +
+    H.items.map(x => '<article class="dv"><div class="hd"><span class="id">' + esc(x.alt) + "</span><b>" + esc((c.alts.find(a => a.id === x.alt) || {}).name || "") + '</b></div><dl><dt>전략 주체 기준</dt><dd>' + esc(x.client) + '</dd><dt>클리사의 판단</dt><dd class="cl">' + esc(x.clisa) + '</dd><dt>전략 주체가 치르는 것</dt><dd>' + esc(x.cost) + '</dd><dt>사람에게 돌아오는 것</dt><dd>' + esc(x.gain) + "</dd></dl></article>").join("") + "</div></section>";
+}
+function humanDivHtml(c, n10){
+  const H = c.human;
+  return '<section class="stp">' + stpH(n10, "클리사의 판단과 전략 주체 순위의 차이") + '<p class="note">' + esc(H.note) + '</p><div class="divs">' +
     H.items.map(x => '<article class="dv"><div class="hd"><span class="id">' + esc(x.alt) + "</span><b>" + esc((c.alts.find(a => a.id === x.alt) || {}).name || "") + '</b></div><dl><dt>전략 주체 기준</dt><dd>' + esc(x.client) + '</dd><dt>클리사의 판단</dt><dd class="cl">' + esc(x.clisa) + '</dd><dt>전략 주체가 치르는 것</dt><dd>' + esc(x.cost) + '</dd><dt>사람에게 돌아오는 것</dt><dd>' + esc(x.gain) + "</dd></dl></article>").join("") + "</div></section>";
 }
 function prevHtml(c){
@@ -1788,13 +1864,13 @@ function caseFullHtml(c){
 }
 /* v3.52 사안의 결정권자: 전략 주체의 결정권자와 사안에서 분석한 주요국 결정권자를 모두 칩으로(2026-10-05 결재) */
 function caseLeaders(c){
-  const L = LLK(), me = c.id === "ukraine" ? "UKR" : "KOR";
+  const L = LLK(), me = c.subject || (c.id === "ukraine" ? "UKR" : "KOR");
   const xs = [...new Set([me].concat(((c.deciders || {}).items || []).map(d => d.iso)))].filter(i => L[i]);
   return xs.length ? '<div class="chips cl-ld" style="margin:8px 0 0"><span class="note">결정권자</span>' + xs.map(i => '<a class="chip" href="' + lurl(i) + '">' + esc(L[i].name) + (i === me ? ' <span class="note">전략 주체</span>' : "") + "</a>").join("") + "</div>" + casePower(c) : casePower(c);
 }
 /* v3.53 사안 머리의 권력 구조 칩: 전략 주체와 결정권을 가진 나라 가운데 권력 구조 쪽이 있는 나라 */
 function casePower(c){
-  const P = PLK(), me = c.id === "ukraine" ? "UKR" : "KOR";
+  const P = PLK(), me = c.subject || (c.id === "ukraine" ? "UKR" : "KOR");
   const xs = [...new Set([me].concat(((c.deciders || {}).items || []).map(d => d.iso)))].filter(i => P[i]);
   return xs.length ? '<div class="chips cl-ld" style="margin:6px 0 0"><span class="note">권력 구조</span>' + xs.map(i => '<a class="chip" href="/power/#' + i + '">' + esc(P[i].name) + "</a>").join("") + "</div>" : "";
 }
@@ -1949,8 +2025,8 @@ function renderMethod(){
       M.intent_types.map(t => "<tr><td><b>" + esc(t.k) + "</b></td><td>" + esc(t.why) + '</td><td class="note">' + esc(t.trap) + "</td><td>" + esc(t.ex) + "</td></tr>").join("") + "</tbody></table></div></section>" : "") +
     (inner ? '<section class="sec method"><h3>산출 양식</h3><div class="tmpl">' + M.outputs.map(o => '<div class="' + (o.kind === "산출" ? "" : "chk") + '"><span class="kind">' + esc(o.kind) + "</span><b>" + esc(o.k) + "</b><p>" + esc(o.t) + "</p><ol>" + o.fields.map(x => "<li>" + esc(x) + "</li>").join("") + "</ol></div>").join("") + "</div></section>" : "") +
     (inner ? '<section class="sec method"><h3>' + esc(I.title) + ' · 공식과 출처</h3><p>' + esc(I.unit) + '</p><div class="idim" style="margin-top:8px">' + I.dims.map(d => "<div><b>" + esc(d.name) + "</b><code>" + esc(d.formula) + "</code><ul>" + d.parts.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul><small>출처 · " + esc(d.src) + "</small></div>").join("") + "</div>" +
-      '<h3 style="margin-top:14px">지표의 규칙</h3><ul>' + I.rules.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>"
-     : '<section class="sec method"><h3>' + esc(I.title) + '</h3><p>' + esc(I.unit) + ' 지표는 ' + I.dims.map(d => esc(d.name)).join(", ") + '의 4개 차원으로 이루어지며, 차원들을 하나의 점수로 합치지 않습니다.</p><ul style="margin-top:6px">' + I.dims.map(d => "<li><b>" + esc(d.name) + "</b> · 출처 " + esc(d.src) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>") +
+      '<h3 style="margin-top:14px">지표의 규칙</h3><ul>' + (I.rules || []).map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>"
+     : '<section class="sec method"><h3>' + esc(I.title) + '</h3><p>' + esc(I.unit) + (I.dims.length === 4 ? ' 지표는 ' + I.dims.map(d => esc(d.name)).join(", ") + '의 4개 차원으로 이루어지며, 차원들을 하나의 점수로 합치지 않습니다.' : "") + '</p><ul style="margin-top:6px">' + I.dims.map(d => "<li><b>" + esc(d.name) + "</b>" + (d.formula && I.dims.length !== 4 ? " · " + esc(d.formula) + (d.parts || []).map(x => ". " + esc(x)).join("") : "") + " · 출처 " + esc(d.src) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>") +
     '<section class="sec method"><h3>검증과 갱신</h3><ul>' + M.update.map(x => "<li>" + esc(x) + "</li>").join("") + "<li>국가 프로필, 분쟁지, 전망은 하나의 자료 파일에 담겨 있어, 새로 조사한 자료로 파일을 교체하면 사이트 전체가 갱신됩니다.</li><li>" + (pub ? "이미 공개한 판단을 바꿀 때는 전망과 검증 탭의 판단 변경 공지에 날짜와 변경 내용, 그 이유를 밝힙니다." : "") + "</li><li>전망은 삭제하지 않습니다. 검증 시점이 지나면 실현·불발을 밝히고 정확도에 반영합니다. 질문이 만들어진 시점에 이미 답이 정해져 있었던 전망은 무효로 표시하고 정확도에서 뺍니다.</li></ul></section>" +
     (inner ? frameworkHtml() : "") +
     '<section class="sec method"><h3>분석 범위</h3><p>' + esc(D.meta.scope) + ". 지도에 색이 있는 국가가 분석 대상이며, 회색은 아직 분석 범위 밖의 국가입니다. EU·NATO는 국가가 아니므로 별도 프로필로 다룹니다.</p></section>" +
@@ -2302,6 +2378,6 @@ document.addEventListener("click", ev => {
 });
 })();
 
-/*langsw-ko*/(function(){ const upd = () => { const a = document.getElementById("langsw"); if (a) a.setAttribute("href", "/en" + location.pathname + location.search + location.hash); };
+/*langsw-ko*/(function(){ const EN_PENDING = ["/case/poland/", "/power/POL/"]; const upd = () => { const a = document.getElementById("langsw"); if (a) a.setAttribute("href", EN_PENDING.some(x => location.pathname.startsWith(x)) ? "/en/" : "/en" + location.pathname + location.search + location.hash); };
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
   addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/

@@ -488,7 +488,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .bar.na i{display:none}
 .est{font-size:10px; color:var(--muted); border:1px dashed var(--muted); border-radius:3px; padding:0 3px; margin-left:4px}
 .pstack{display:grid; gap:6px}
-.prow{display:grid; grid-template-columns:78px 1fr; gap:8px; align-items:center; font-size:12px; color:var(--ink-2)}
+.prow{display:grid; grid-template-columns:78px minmax(0,1fr); gap:8px; align-items:center; font-size:12px; color:var(--ink-2)}
 .pbar{display:flex; height:22px; gap:2px}
 .pbar.pmini{height:20px; margin-top:6px} .pbar.pmini button{display:flex; align-items:center; justify-content:center; font:600 10.5px var(--mono); color:#fff; border:0; padding:0; border-radius:3px; min-width:0; overflow:hidden; white-space:nowrap; cursor:pointer} .pbar.pmini button:hover{filter:brightness(1.12)} .pbar.pmini button:focus-visible{outline:2px solid var(--ink); outline-offset:1px}
 .fut{scroll-margin-top:64px}
@@ -878,6 +878,24 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 @media (max-width:600px){ .ess-fig{padding:10px 6px 8px; margin-left:-4px; margin-right:-4px} }
 .ess-fig .note{margin:6px 0 0}
 .ess-fold{margin:4px 0 12px}
+/* v3.90 Ⅲ 인간 안보 2안 */
+.hs-rec{display:block;white-space:nowrap;padding-left:18px;font-size:.92em}
+.hs-lead{font-size:15.5px!important;line-height:1.7!important;font-weight:500}
+.hs-card{border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px;background:var(--panel)}
+.hs-hd b{font-size:16px} .hs-hd span{color:var(--muted);font-size:12px;margin-left:8px}
+.hs-hl{margin:0}
+.hs-grid{display:grid;grid-template-columns:190px minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:640px){.hs-grid{grid-template-columns:1fr}}
+.hs-card figure{margin:0;min-width:0} .hs-card figcaption{font-size:11.5px;color:var(--muted);margin-bottom:4px;line-height:1.5}
+.hs-dots{width:170px;height:170px;display:block}
+.hs-lg{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:3px} .pane .hs-lg li{font-size:12px;line-height:1.5}
+.hs-lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.hs-line{width:100%;max-width:440px;display:block}
+.hs-l{font-size:12px;fill:var(--ink)} .hs-n{font-size:11.5px;fill:var(--muted)} .hs-t{stroke:var(--line);stroke-width:2}
+.hs-v{font:500 11px var(--mono);fill:var(--ink)} .hs-w{font:600 11px var(--mono);fill:#D63A1F} .hs-b{font:600 11px var(--mono);fill:#0E8A6C}
+@media (max-width:640px){.hs-l{font-size:14px}.hs-v,.hs-w,.hs-b{font-size:13px}.hs-n{font-size:13px}}
+.pane .hs-wf{margin:6px 0 0;font-size:12.5px;color:var(--ink-2)} .hs-al{color:#D63A1F;font-weight:600}
+.hs-rw{display:block;color:var(--muted);font:11px/1.45 var(--sans);margin-top:2px} .hs-h4{margin:10px 0 4px;font-size:13px}
 
 .lang-sw{display:inline-flex; align-items:center; flex:none; height:40px; padding:0 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink-2); font-size:14px; text-decoration:none; white-space:nowrap; box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
 .lang-sw:hover{border-color:var(--ink-2); color:var(--ink)}
