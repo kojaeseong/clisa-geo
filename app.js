@@ -650,7 +650,7 @@ function setupInteraction(){
     const lfb = ev.target.closest("[data-life]");  /* 사람들의 삶: 누구의 삶으로 볼까 */
     if (lfb) { LIFE = lfb.dataset.life; store.set("ep.life", LIFE); const g = document.getElementById("lifegrid"), x = BR && BR.issues[0];
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
-      const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = (D.strategies || []).filter(c => c.hs7).map(lifeRow).join(""); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
+      const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = lifeRows(); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
     const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 10단계 */
     if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
@@ -1663,7 +1663,7 @@ function evalHtml(c){
 const HS_CAT = [["개인", "개인 안전"], ["공동체", "공동체"], ["정치", "정치"], ["경제", "경제"]];
 const HS_COL = {better: "#0E8A6C", same: "#C9CED4", worse: "#D9972B", big: "#D63A1F"};
 const HS_LAB = {better: "개선됨", same: "현재와 비슷함", worse: "악화됨", big: "크게 악화됨"};
-const HS_ORD = ["better", "same", "worse", "big"];
+const HS_ORD = ["big", "worse", "better", "same"];  /* v3.92c: 점 그림(위에서부터)·횟수·구성 설명의 순서를 하나로(크게 악화됨 → 악화됨 → 개선됨 → 현재와 비슷함) */
 function hsCount(H, G, key){
   const c = {better: 0, same: 0, worse: 0, big: 0}; H.scen.forEach(s => { c[G.cls[s.id]] += s[key]; });
   /* v3.90 점 100개의 합이 100이 되도록 최대 잉여 방식으로 정수화한다. 잉여가 같으면 위험 쪽(크게 나빠짐, 나빠짐)을 먼저 올려 작은 확률의 위험이 사라지지 않게 한다 */
@@ -1816,26 +1816,56 @@ function lbTrend(c, G){
 function lbStats(n){
   return '<ul class="lb-st">' + ["big", "worse", "better", "same"].filter(k => n[k]).map(k => '<li class="lb-st-' + k + '"><b>' + n[k] + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span></li>").join("") + "</ul>";
 }
+function lbMix(H, G){  /* v3.92c 점 100개의 구성: 분류마다 그 분류에 드는 전개와 확률 */
+  return '<div class="lb-mix"><p class="lb-lab">점 100개의 구성</p><ul>' + ["big", "worse", "better", "same"].map(k => {
+    const ss = H.scen.filter(s => G.cls[s.id] === k && s.p > 0).sort((x, y) => y.p - x.p); if (!ss.length) return "";
+    const sh = ss.slice(0, 3), more = ss.length - sh.length;
+    return '<li><span class="lb-mk"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + '</span><span class="lb-ms">' + sh.map(s => esc(s.name) + " " + s.p + "%").join(" · ") + (more ? " 외 " + more + "개" : "") + "</span></li>";
+  }).join("") + "</ul></div>";
+}
+function lbDetail(H, G, sid, lab){  /* v3.92c 가장 나쁜(좋은) 경우의 4개 차원: 원래 단위와 점수 변화 */
+  const S = H.scen.find(s => s.id === sid); if (!S) return "";
+  const rows = HS_CAT.map(([k, nm]) => { const v = G.cat[k]; if (!v || v.na) return ""; const to = v.by[sid], d = to - v.now; if (Math.abs(d) <= 1) return "";
+    const raw = k === "정치" ? (d < 0 ? "국가 폭력 늘어남" : "국가 폭력 줄어듦") : ((v.by_raw || {})[sid] || "");
+    return '<li><span class="lb-dk">' + nm + '</span><span class="lb-dv">' + esc(raw) + '</span><span class="lb-dp">' + Math.round(v.now) + "→" + Math.round(to) + "점</span></li>"; }).join("");
+  const al = (G.al || {})[sid] || [];
+  return '<div class="lb-det"><p class="lb-lab">' + lab + ' · <b>' + esc(S.name) + "</b> " + S.p + "%</p>" + (rows ? '<ul>' + rows + "</ul>" : "") + (al.length ? '<p class="lb-al"><span class="hs-al">' + esc(al.join("·")) + " 경보</span></p>" : "") + "</div>";
+}
+function lbBrief(H, G, sid, lab){  /* 가장 나쁜 경우를 자세히 보인 카드에서는 가장 좋은 경우를 한 줄로 */
+  const S = H.scen.find(s => s.id === sid); if (!S) return "";
+  const f = HS_CAT.map(([k, nm]) => { const v = G.cat[k]; if (!v || v.na) return ""; const d = v.by[sid] - v.now; if (Math.abs(d) <= 1) return ""; return nm + " " + Math.round(v.now) + "→" + Math.round(v.by[sid]) + "점"; }).filter(Boolean);
+  return '<p class="lb-ws"><b>' + lab + "</b> · " + esc(S.name) + " " + S.p + "%" + (f.length ? " · " + esc(f.join(", ")) : "") + "</p>";
+}
+function lbExplain(H, G){
+  const ws = hsWorstSc(G), bs = hsBestSc(G), bad = ws && (G.cls[ws] === "worse" || G.cls[ws] === "big"), good = bs && G.cls[bs] === "better";
+  if (!bad && !good) return '<p class="lb-flatline">' + esc(firstSent(G.line)) + "</p>";
+  return lbMix(H, G) + (bad ? lbDetail(H, G, ws, "가장 나쁜 경우") : "") + (good ? (bad ? lbBrief(H, G, bs, "가장 좋은 경우") : lbDetail(H, G, bs, "가장 좋은 경우")) : "");
+}
 function lifeRow(c){
   const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0];
   if (!G) return "";
-  const n = hsCount(H, G, "p"), hit = H.scen.some(s => G.cls[s.id] !== "same"), rec = lbRecent(c.id, 2), today = BR.issues[0].date;
-  const x = (H.changes || []).slice(-1)[0], chg = x && hsDiff(H, G, x) !== "점 개수 변화 없음";
+  const n = hsCount(H, G, "p"), rec = lbRecent(c.id, 3), today = BR.issues[0].date;
   const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span><button type="button" class="lb-more" data-hs="' + esc(c.id) + '">10단계 자세히 <span aria-hidden="true">→</span></button></header>';
   const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "오늘" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + "</li>").join("") + "</ul>" : '<p class="note">최근 정보 없음</p>';
-  if (!hit) return '<article class="lb-card lb-flat">' + head + '<p class="lb-flatline"><span class="lb-pill">100번 모두 현재와 비슷함</span>' + esc(firstSent(G.line)) + "</p>" + '<div class="lb-foot"><div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + recent + "</div></div></article>";
-  return '<article class="lb-card">' + head +
-    '<div class="lb-body"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · 10단계에서 자세히 보기") + '">' + hsDots(n) + "</button>" + lbStats(n) + lbTrend(c, G) + "</div>" +
-    '<div class="lb-foot"><div class="lb-wsw">' + lbCase(H, G) + ""  /* 그래프 변경 설명은 카드에서 뺀다(선 그래프의 동그라미와 10단계 확률 변경 이력에 둠) */ + '</div><div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + recent + "</div></div></article>";
+  /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
+  return '<article class="lb-card">' + head + '<div class="lb-cols">' +
+    '<div class="lb-left"><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · 10단계에서 자세히 보기") + '">' + hsDots(n) + "</button>" + lbStats(n) + "</div>" + lbExplain(H, G) + "</div>" +
+    '<div class="lb-right">' + lbTrend(c, G) + '<div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + recent + "</div></div></div></article>";
+}
+function lbImpact(c){ const G = lifePick(c); if (!G) return [-1, -1]; const n = hsCount(c.hs7, G, "p"); return [n.big + n.worse + n.better, n.big + n.worse]; }
+function lifeRows(){  /* v3.92c: 색 점(나쁜 삶·나은 삶)이 많은 사안부터. 같으면 악화 이상이 많은 쪽, 그다음 원래 순서 */
+  const cs = (D.strategies || []).filter(c => c.hs7).map((c, i) => [c, lbImpact(c), i]);
+  cs.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));
+  return cs.map(([c]) => lifeRow(c)).join("");
 }
 function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "기타";
   return '<section class="lb" id="s-life"><p class="eyebrow">국민의 삶 · ' + kd(x.date) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래</h2>' +
-    '<p class="lb-lead"><b>2030년까지를 100번 산다면, 그중 몇 번은 삶이 악화되고 몇 번은 개선될까요?</b> 5개 분쟁마다 그 횟수를 점 100개로 보입니다. 새 사건이 판단을 바꾸면 점과 선이 움직입니다. 횟수는 판단값입니다.</p>' +
+    '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 분쟁마다 그 횟수를 점 100개로 보입니다. 새 사건이 판단을 바꾸면 점과 선이 움직입니다. 횟수는 판단값입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
-    '<p class="lb-leg">' + HS_ORD.slice().reverse().map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>악화 이상 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><i class="lg-chg"></i>그래프 변경</span></p></div>' +
-    '<div class="lb-board" id="lifeboard">' + cs.map(lifeRow).join("") + "</div>" +
+    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>악화 이상 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><i class="lg-chg"></i>그래프 변경</span></p></div>' +
+    '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     '<p class="lb-note">크게 악화됨: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우. 일자별 변화의 10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다(그래프는 10월 10일 공개).</p></section>' +
     '<section class="lb-feed" id="brief"><div class="bh"><h3>오늘의 정보</h3><span class="bd">' + fmtKD(x.date) + "</span>" + ttsBtn("brief") + "</div>" +
     '<ul class="lb-list">' + x.items.map((i, n) => '<li id="bi-' + n + '"><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + lbFx(i) +
