@@ -1102,16 +1102,24 @@ window.ttsFollowEnd = () => tfEnd();
   addEventListener("wheel", hold, {passive: true}); addEventListener("touchmove", hold, {passive: true});
   addEventListener("keydown", e => { if (/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End| )$/.test(e.key)) hold(); });
   addEventListener("mousedown", e => { if (e.target.classList && e.target.classList.contains("pane")) hold(); }); })();  /* 스크롤 막대 끌기 */
+function pastIssue(o){  /* v3.92e: 지난 정보는 눌러서 그 자리에서 펼친다. 그날의 한 줄 정보를 모두 보이고, 전문이 있는 호는 '전문 보기'를 붙인다 */
+  const full = o.items.some(i => i.fact), csn = id => LB_SHORT[id] || "기타";
+  return '<details class="lb-past"><summary><span class="mono">' + fmtKD(o.date) + '</span><span class="nm">' + esc((o.items[0] || {}).h || "") + '</span><span class="lb-pn">' + (o.items.length + (o.more || []).length) + "건</span></summary>" +
+    '<ul class="lb-list">' + o.items.map(i => '<li><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
+    (o.more || []).map(m => '<li><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") + "</ul>" +
+    '<p class="lb-pf"><a class="chip" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '">' + (full ? "이날 정세 브리핑 전문 보기 →" : "이날 쪽으로 →") + "</a></p></details>";
+}
 function briefCur(){ return BR && ((BR.issues || []).find(x => x.date === S.bdate) || BR.issues[0]); }
 function renderBrief(){
   const el = $("#pane-brief"); if (!el) return;
   if (!BR || !(BR.issues || []).length) { el.innerHTML = '<div class="sec"><h2>정세 브리핑</h2><p class="note">정세 브리핑을 불러오는 중입니다.</p></div>'; return; }
   const cur = briefCur(), others = BR.issues.filter(x => x !== cur);
-  if (cur === BR.issues[0]) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>" +
-    (others.length ? '<section class="sec"><h3>지난 정보</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : ""); el.scrollTop = 0; return; }
-  el.innerHTML = '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
+  /* v3.92d: 최신 호도 날짜를 골라 들어오면(지난 정보 목록, 검색, /brief/날짜/) 예전 형식 전문으로 보인다. 전문(fact)이 있는 최신 호는 지난 정보 맨 위에 둔다 */
+  const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.fact));
+  if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>" +
+    (past.length ? '<section class="sec lb-pastw"><h3>지난 정보</h3>' + past.map(pastIssue).join("") + "</section>" : ""); el.scrollTop = 0; return; }
+  el.innerHTML = (cur === BR.issues[0] ? '<p class="lb-back"><button type="button" class="chip" data-brief="">← 국민의 삶과 오늘의 정보</button></p>' : "") + '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
-    (cur === BR.issues[0] ? lifeBigHtml(cur) : "") +
     dailyIssue(cur) + "</section>" +
     (others.length ? '<section class="sec"><h3>지난 정세 브리핑</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
   el.scrollTop = 0;
@@ -1867,7 +1875,7 @@ function lifeBoardHtml(x){
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>악화 이상 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><i class="lg-chg"></i>그래프 변경</span></p></div>' +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     '<p class="lb-note">크게 악화됨: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우. 일자별 변화의 10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다(그래프는 10월 10일 공개).</p></section>' +
-    '<section class="lb-feed" id="brief"><div class="bh"><h3>오늘의 정보</h3><span class="bd">' + fmtKD(x.date) + "</span>" + ttsBtn("brief") + "</div>" +
+    '<section class="lb-feed" id="brief"><div class="bh"><h3>오늘의 정보</h3><span class="bd">' + fmtKD(x.date) + "</span></div>" +
     '<ul class="lb-list">' + x.items.map((i, n) => '<li id="bi-' + n + '"><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + lbFx(i) +
       ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
       (x.more || []).map(m => '<li><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") + "</ul>" + weekLine(x.date) + "</section>";
