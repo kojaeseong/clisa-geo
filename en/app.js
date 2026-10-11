@@ -688,7 +688,7 @@ function setupInteraction(){
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
       const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = lifeRows(); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
     const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 삶에 미치는 영향 */
-    if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
+    if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = (hsb.dataset.hsg && document.getElementById("hs7-" + id + "-" + hsb.dataset.hsg)) || document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
     const blb = ev.target.closest("[data-bloc]");
@@ -1388,7 +1388,7 @@ function renderGrand(){
     "<section class=\"sec\"><h3>Grand strategy by country</h3><div class=\"chips\" style=\"margin:0\">" + Object.values(D.countries).filter(c => c.gs).map(c => chip(c.iso)).join("") + "</div></section>" +
     "";
 }
-const FP_AN = {"rus-ukr":"rus-ukr", "iran-war":"iran-war", "taiwan-strait":"taiwan", "korea":"korea-deal"};
+const FP_AN = {"rus-ukr":"rus-ukr", "iran-war":"iran-war", "taiwan-strait":"taiwan", "korea":"korea-deal", "baltic-kaliningrad-suwalki":"east-flank"};
 function histBlock(c){
   const h = c.hist; if (!h) return "";
   return "<section class=\"sec hist\"><h3>Geopolitics in history</h3><p class=\"hist-mean\">" + esc(h.meaning) + "</p>" +
@@ -1666,7 +1666,7 @@ function extHtml(c){
     "<div class=\"tbl-wrap\"><table class=\"tbl ext\" style=\"min-width:600px\"><thead><tr><th>External variable (through 2030)</th><th>Likelihood</th>" + X.order.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span><br>" + esc(fn[k]) + "</th>").join("") + "<th>Judgments affected</th></tr></thead><tbody>" +
     "<tr class=\"base\"><td>Baseline · current trend</td><td class=\"mono\">—</td>" + X.base.map(v => '<td class="mono">' + v + "</td>").join("") + "<td></td></tr>" +
     X.items.map(x => "<tr><td><b>" + esc(x.t) + '</b><br><span class="note">' + esc(x.def) + '</span></td><td class="mono">' + x.p + "%</td>" + x.cond.map((v, i) => '<td class="mono">' + v + dv(v, X.base[i]) + "</td>").join("") + '<td class="note">' + esc(x.flips) + "</td></tr>").join("") +
-    "</tbody></table></div><p class=\"note\">The middle columns show the probability (%) of each scenario if the variable occurs; ▲▼ show change from the baseline. These are judgment estimates, so differences of about ±5 points should not be read as meaningful.</p><div class=\"exts\">" + X.items.map(x => '<details class="dec"><summary><span class="nm">' + esc(x.id + " " + x.t) + '</span><span class="pw">' + x.p + '%</span><span class="fr">' + esc(x.why) + "</span></summary><dl><dt>Countries that would react most</dt><dd>" + x.who.map(chip).join(" ") + "</dd><dt>Leading indicators</dt><dd>" + esc(x.sign) + "</dd></dl></details>").join("") + "</div>" +
+    "</tbody></table></div><p class=\"note\">The middle columns show the probability (%) of each scenario if the variable occurs; ▲▼ show change from the baseline. These are judgment estimates, so differences of about ±5 points should not be read as meaningful.</p><div class=\"exts\">" + X.items.map(x => '<details class="dec"><summary><span class="nm">' + esc(x.id + " " + x.t) + '</span><span class="pw">' + x.p + '%</span><span class="fr">' + esc(x.why) + "</span></summary><dl><dt>Countries that would react most</dt><dd>" + x.who.map(chip).join(" ") + "</dd>" + (x.crit ? "<dt>Criteria</dt><dd>" + esc(x.crit) + "</dd>" : "") + "<dt>Leading indicators</dt><dd>" + esc(x.sign) + "</dd>" + (x.basis ? "<dt>Evidence and precedents</dt><dd>" + esc(x.basis) + "</dd>" : "") + "</dl></details>").join("") + "</div>" +
     "<div class=\"lesson-box\"><b>What the external variables imply</b><ul class=\"facts\" style=\"margin-top:6px\">" + X.reads.map(r => "<li>" + esc(r) + "</li>").join("") + "</ul></div>";
 }
 function counterHtml(c){
@@ -1742,12 +1742,15 @@ function hsLine(H, G){
 }
 function hsWorstSc(G){ const w = HS_CAT.map(([k]) => G.cat[k]).filter(v => !v.na && v.worst_sc); if (!w.length) return null; const cnt = {}; w.forEach(v => cnt[v.worst_sc] = (cnt[v.worst_sc] || 0) + 1); return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0]; }
 function hsBestSc(G){ const b = HS_CAT.map(([k]) => G.cat[k]).filter(v => !v.na && v.best_sc); return b.length ? b[0].best_sc : null; }
-function hsCard(H, G){
+/* v3.96i 집단 순서: 2030년까지 100번의 미래에서 삶이 달라지는(점이 칠해지는) 횟수가 많은 집단부터. 같으면 크게 악화됨·악화됨이 많은 쪽, 그다음 자료 순서 */
+function hsOrd(H, gs){ const n = G => hsCount(H, G, "p"), sc = gs.map((G, i) => { const c = n(G); return {G, i, k: [100 - c.same, c.big, c.worse]}; });
+  return sc.sort((a, b) => b.k[0] - a.k[0] || b.k[1] - a.k[1] || b.k[2] - a.k[2] || a.i - b.i).map(x => x.G); }
+function hsCard(H, G, cid){
   const SN = {}; H.scen.forEach(s => SN[s.id] = s);
   const c = hsCount(H, G, "p"), c2 = hsCount(H, G, "p_rec"), ws = hsWorstSc(G), bs = hsBestSc(G);
   const facts = ws ? HS_CAT.map(([k]) => { const v = G.cat[k]; if (k === "정치") return v.na || v.by[ws] > v.now - 1 ? "" : "More state violence"; return (v.by_raw || {})[ws]; }).filter(Boolean) : [];
   const al = ws ? (G.al[ws] || []) : [];
-  return '<article class="hs-card"><div class="hs-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><p class="hs-hl">' + esc(G.line) + "</p><div class=\"hs-grid\"><figure><figcaption>100 futures through 2030</figcaption>" + hsDots(c) + hsLegend(c, c2) + "</figure>" +
+  return '<article class="hs-card"' + (cid ? ' id="hs7-' + esc(cid) + "-" + esc(G.k) + '"' : "") + '><div class="hs-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><p class="hs-hl">' + esc(G.line) + "</p><div class=\"hs-grid\"><figure><figcaption>100 futures through 2030</figcaption>" + hsDots(c) + hsLegend(c, c2) + "</figure>" +
     "<figure><figcaption>Now (<span style=\"color:var(--accent)\">●</span>)" + (ws ? " and worst case (<span style=\"color:#C8102E\">○</span>, " + esc(SN[ws].name) + " " + SN[ws].p + "%)" : "") + (bs ? " · best case (<span style=\"color:#0EA5A4\">○</span>, " + esc(SN[bs].name) + " " + SN[bs].p + "%)" : "") + " · scores 0–100, higher is better</figcaption>" + hsLine(H, G) +
     (ws ? '<p class="hs-wf">' + esc(SN[ws].name) + " scenario · " + facts.map(esc).join(" · ") + (al.length ? ' · <span class="hs-al">' + esc(al.join("·")) + " alert</span>" : "") + "</p>" : "") +
     (G.al_now.length ? "<p class=\"hs-wf\">Current alerts · <span class=\"hs-al\">" + esc(G.al_now.join("·")) + "</span></p>" : "") + "</figure></div></article>";
@@ -1797,7 +1800,7 @@ function lifeCard(c, x){
   const n = hsCount(H, G, "p"), hit = H.scen.some(s => G.cls[s.id] !== "same");
   const eu = LIFE === "EU" && hit && H.groups.filter(g => LIFE_EU.includes(g.k)).length > 1 ? "<span class=\"lh-sub\">The most affected group in Europe</span>" : "";
   const hd = '<p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + "</span>" + eu + "</div>";
-  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + "\">More on the effects on people's lives →</button>" + brf + "</div>";
+  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + "\">See the effects on lives →</button>" + brf + "</div>";
   if (!hit) return '<article class="lh-card lh-none">' + hd + "<p class=\"lh-flat\">About the same as today in all 100 futures</p><p class=\"lh-line\">" + esc(G.line) + "</p>" + go + "</article>";
   return '<article class="lh-card">' + hd + '<div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + go + "</article>";
 }
@@ -1917,7 +1920,7 @@ function lifeRow(c){
   const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
   /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
   return '<article class="lb-card">' + head + '<div class="lb-cols">' +
-    '<div class="lb-left"><p class="lb-lab lb-fut">100 futures through 2030</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · more on the effects on people's lives") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
+    '<div class="lb-left"><p class="lb-lab lb-fut">100 futures through 2030</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · see the effects on lives in detail") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
     '<div class="lb-right">' + lbTrend(c, G) + lbWhy(c, G) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + recent + "</div></div></div></article>";
 }
 function lbImpact(c){ const G = lifePick(c); if (!G) return [-1, -1]; const n = hsCount(c.hs7, G, "p"); return [n.big + n.worse + n.better, n.big + n.worse]; }
@@ -1962,7 +1965,7 @@ function renderIndustry(){
   if (!IND) { el.innerHTML = "<div class=\"sec\"><p class=\"note\">Loading industry impact…</p></div>";
     fetch("/en/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry impact could not be loaded.</p></div>"; }).catch(() => {}); return; }
   el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Impact · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">100 futures through 2030: the outlook for industry profits</h2>" +
-    "<p class=\"lb-lead\"><b>Suppose the years to 2030 played out a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of the five issues, 100 dots show the spread of possible futures. The baseline is each industry's projected profit if the issue stays as it is today. Select a chart to see the detailed reasoning behind it. The dot counts are Clisa Geopolitics' own estimates.</p>" +
+    "<p class=\"lb-lead\"><b>Suppose the years to 2030 played out a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of the five issues, 100 dots show the spread of possible futures. The baseline is each industry's projected profit if the issue stays as it is today. Select a chart to see the detailed reasoning behind it. The dot counts are calculated from Clisa Geopolitics' judgment estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Choose which country's industries to show\">" + [["kr", "South Korean industries"], ["us", "U.S. industries"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "</p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
@@ -1974,7 +1977,7 @@ function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "Other";
   return "<section class=\"lb\" id=\"s-life\"><p class=\"eyebrow\">People's Lives · as of " + enDate(x.date) + "</p><h2 class=\"lb-h\">100 futures through 2030</h2>" +
-    "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of the five issues, 100 dots show the spread of possible futures, and that spread shifts as new events unfold. The dot counts are Clisa Geopolitics' own estimates.</p>" +
+    "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of the five issues, 100 dots show the spread of possible futures, and that spread shifts as new events unfold. The dot counts are calculated from Clisa Geopolitics' judgment estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Whose lives to show\">" + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Key dot counts over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><b class=\"lg-pv\">22</b>Count just before a change</span></p></div>" +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
@@ -1992,19 +1995,19 @@ function lifeStripHtml(x){
 function lifeItemHtml(id){
   const c = (D.strategies || []).find(k => k.id === id); if (!c || !c.hs7) return "";
   const G = lifeMain(c), n = hsCount(c.hs7, G, "p");
-  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + ": 100 futures through 2030</b><br>" + lifeNums(n) + " · more on the effects on lives →</span></button>";
+  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + ": 100 futures through 2030</b><br>" + lifeNums(n) + " · see the effects on lives →</span></button>";
 }
 function lifeHeroHtml(){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
-  return "<section class=\"sec\" id=\"s-life\"><h3>People's lives · 100 futures through 2030</h3><p class=\"note\">For one group in each of the five issues, the dots show how many of 100 possible futures through 2030 leave life better or worse. Probabilities and classifications are judgment estimates; the method is set out in each issue's analysis under ‘What this issue means for people's lives’.</p><div class=\"lh-grid\">" +
+  return "<section class=\"sec\" id=\"s-life\"><h3>People's lives · 100 futures through 2030</h3><p class=\"note\">For one group in each of the five issues, the dots show how many of 100 possible futures through 2030 leave that group better or worse off. Probabilities and classifications are judgment estimates; the method is set out in each issue's analysis under ‘What this issue means for people's lives’.</p><div class=\"lh-grid\">" +
     cs.map(c => { const H = c.hs7, G = H.groups.find(g => !g.fold) || H.groups[0], n = hsCount(H, G, "p"), nm = c.title.split(":")[0];
-      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · more on the effects on lives →</button></article>"; }).join("") + "</div></section>";
+      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · see the effects on lives →</button></article>"; }).join("") + "</div></section>";
 }
 function hs7Html(c, n9){
-  const H = c.hs7, main = H.groups.filter(G => !G.fold), fold = H.groups.filter(G => G.fold);
+  const H0 = c.hs7, main = hsOrd(H0, H0.groups.filter(G => !G.fold)), fold = hsOrd(H0, H0.groups.filter(G => G.fold)), H = Object.assign({}, H0, {groups: main.concat(fold)});
   return '<section class="stp" id="hs7-' + esc(c.id) + '">' + stpH(n9, "What this issue means for people's lives") + '<p class="hs-lead">' + esc(H.lead) + "</p>" +
-    main.map(G => hsCard(H, G)).join("") +
-    (fold.length ? "<details class=\"src\"><summary>Other groups · " + fold.map(G => esc(G.name)).join(", ") + "</summary>" + fold.map(G => hsCard(H, G)).join("") + "</details>" : "") +
+    main.map(G => hsCard(H, G, c.id)).join("") +
+    (fold.length ? "<details class=\"src\"><summary>Other groups · " + fold.map(G => esc(G.name)).join(", ") + "</summary>" + fold.map(G => hsCard(H, G, c.id)).join("") + "</details>" : "") +
     "<div class=\"lesson-box\"><b>Reading the graph</b>" + esc(H.read) + "</div>" +
     ((c.people || []).length ? "<details class=\"src\"><summary>Everyone affected · including groups not scored</summary><div class=\"tbl-wrap\"><table class=\"tbl\"><thead><tr><th>Who</th><th>What is at stake</th></tr></thead><tbody>" + c.people.map(p => "<tr><td>" + esc(p.who) + "</td><td>" + esc(p.how) + "</td></tr>").join("") + "</tbody></table></div></details>" : "") +  /* v3.90 2안: 기존 '영향받는 사람' 표를 접힘으로 남긴다 */
     hsHistHtml(H) +
@@ -2041,6 +2044,13 @@ function prevHtml(c){
     P.conclusions.map(k => "<li><b>" + esc(k.id + " · " + k.t) + "</b><span>" + esc(k.why) + "</span></li>").join("") + '</ol><div class="verdict">' +
     P.verdict.excluded.map(x => "<div class=\"misread\"><b>Not put forward</b>" + esc(x) + "</div>").join("") + P.verdict.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + ". " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + "</div></div></details>";
 }
+/* v3.96i 사안 요약에 '사람들의 삶'을 꺼내 둔다: 분석 전문을 펼치지 않아도 집단별 100번의 미래와 그 집단의 자세한 내용으로 가는 단추가 보이게 */
+function briefLife(c){
+  const H = c.hs7; if (!H) return "";
+  const gs = hsOrd(H, H.groups.filter(G => !G.fold)).filter(G => hsCount(H, G, "p").same < 100);
+  return '<div class="bl-row">' + gs.map(G => { const n = hsCount(H, G, "p"); return '<button type="button" class="bi-life" data-hs="' + esc(c.id) + '" data-hsg="' + esc(G.k) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + "</b><br>" + lifeNums(n) + "</span></button>"; }).join("") + "</div>" +
+    '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + "\">See the effects on lives →</button>" + "</div>";
+}
 function briefHtml(c){
   const B = c.brief || {};
   const top = c.futures.items.slice().sort((a, b) => b.p - a.p)[0];
@@ -2054,7 +2064,7 @@ function briefHtml(c){
       "<div class=\"pbar pmini\" role=\"group\" aria-label=\"Probability by scenario\">" + c.futures.items.map(f => '<button type="button" ' + fb(f) + ' style="flex:' + f.p + ' 0 0;background:' + fcol(f.id) + '" title="' + esc(f.id + " " + f.name + " " + f.p + "%") + '"' + (f.p < 15 ? ' class="sm"' : "") + ">" + f.id + "<span>" + f.p + "%</span></button>").join("") + "</div></dd>" +
     (W ? "<dt>The other side’s best move</dt><dd><b>" + esc(enShort(W.name)) + "</b> · " + esc(W.ranked[0].t) + "</dd>" : "") +
     (B.eq ? "<dt>The likely outcome</dt><dd>" + esc(B.eq) + "</dd>" : "") +
-    (B.human ? "<dt>What it means for people</dt><dd>" + esc(B.human) + "</dd>" : "") +
+    (B.human ? "<dt>What it means for people</dt><dd>" + esc(B.human) + briefLife(c) + "</dd>" : "") +
     (fcs.length ? "<dt>Related forecasts <span class=\"note mono\">" + fcs.length + '</span></dt><dd><div class="chips" style="margin:0">' + fcs.map(f => fcBtn(f.id)).join("") + "</div><p class=\"note\" style=\"margin:4px 0 0\">Listed by nearest resolution date. Select one to see the question and its resolution date.</p></dd>" : "") +
     "</dl></section>";
 }

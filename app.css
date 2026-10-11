@@ -1037,6 +1037,7 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .lm .lm-t{font:600 11.5px/1.4 var(--sans);color:var(--accent);border-top:1px dashed var(--line);padding-top:5px}
 .bi-life{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:var(--bg,transparent);cursor:pointer;font:12.5px/1.5 var(--sans);color:var(--ink-2);text-align:left;margin-top:8px}
 .bi-life .hs-dots{width:44px;height:44px;flex:none} .bi-life b{color:var(--ink);font-weight:600}
+.bl-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;margin-top:10px} .bl-row .bi-life{margin-top:0} .brief .lh-act{margin-top:8px}  /* v3.96i 사안 요약의 사람들의 삶 */
 @media (max-width: 960px){ .lm-row{display:flex;overflow-x:auto;scrollbar-width:none;padding-bottom:4px} .lm{flex:0 0 150px} }
 .hs-card{border:1px solid var(--line);border-radius:10px;padding:14px;display:grid;gap:8px;background:var(--panel)}
 .hs-hd b{font-size:16px} .hs-hd span{color:var(--muted);font-size:12px;margin-left:8px}

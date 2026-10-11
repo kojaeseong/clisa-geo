@@ -660,7 +660,7 @@ function setupInteraction(){
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
       const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = lifeRows(); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
     const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 삶에 미치는 영향 */
-    if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
+    if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = (hsb.dataset.hsg && document.getElementById("hs7-" + id + "-" + hsb.dataset.hsg)) || document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
     const blb = ev.target.closest("[data-bloc]");
@@ -1360,7 +1360,7 @@ function renderGrand(){
     '<section class="sec"><h3>국가별 대전략</h3><div class="chips" style="margin:0">' + Object.values(D.countries).filter(c => c.gs).map(c => chip(c.iso)).join("") + "</div></section>" +
     "";
 }
-const FP_AN = {"rus-ukr":"rus-ukr", "iran-war":"iran-war", "taiwan-strait":"taiwan", "korea":"korea-deal"};
+const FP_AN = {"rus-ukr":"rus-ukr", "iran-war":"iran-war", "taiwan-strait":"taiwan", "korea":"korea-deal", "baltic-kaliningrad-suwalki":"east-flank"};
 function histBlock(c){
   const h = c.hist; if (!h) return "";
   return '<section class="sec hist"><h3>역사 속 지정학</h3><p class="hist-mean">' + esc(h.meaning) + "</p>" +
@@ -1638,7 +1638,7 @@ function extHtml(c){
     '<div class="tbl-wrap"><table class="tbl ext" style="min-width:600px"><thead><tr><th>바깥 변수 (2030년까지)</th><th>발생 가능성</th>' + X.order.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span><br>" + esc(fn[k]) + "</th>").join("") + "<th>영향받는 판단</th></tr></thead><tbody>" +
     '<tr class="base"><td>기준 · 현 추세</td><td class="mono">—</td>' + X.base.map(v => '<td class="mono">' + v + "</td>").join("") + "<td></td></tr>" +
     X.items.map(x => "<tr><td><b>" + esc(x.t) + '</b><br><span class="note">' + esc(x.def) + '</span></td><td class="mono">' + x.p + "%</td>" + x.cond.map((v, i) => '<td class="mono">' + v + dv(v, X.base[i]) + "</td>").join("") + '<td class="note">' + esc(x.flips) + "</td></tr>").join("") +
-    '</tbody></table></div><p class="note">가운데 칸은 해당 변수가 발생했을 때의 전개별 확률(%)이며, ▲▼는 기준 대비 변화입니다. 판단값이므로 ±5 안팎의 차이에는 의미를 두지 않습니다.</p><div class="exts">' + X.items.map(x => '<details class="dec"><summary><span class="nm">' + esc(x.id + " " + x.t) + '</span><span class="pw">' + x.p + '%</span><span class="fr">' + esc(x.why) + '</span></summary><dl><dt>가장 크게 반응하는 국가</dt><dd>' + x.who.map(chip).join(" ") + "</dd><dt>선행 신호</dt><dd>" + esc(x.sign) + "</dd></dl></details>").join("") + "</div>" +
+    '</tbody></table></div><p class="note">가운데 칸은 해당 변수가 발생했을 때의 전개별 확률(%)이며, ▲▼는 기준 대비 변화입니다. 판단값이므로 ±5 안팎의 차이에는 의미를 두지 않습니다.</p><div class="exts">' + X.items.map(x => '<details class="dec"><summary><span class="nm">' + esc(x.id + " " + x.t) + '</span><span class="pw">' + x.p + '%</span><span class="fr">' + esc(x.why) + '</span></summary><dl><dt>가장 크게 반응하는 국가</dt><dd>' + x.who.map(chip).join(" ") + "</dd>" + (x.crit ? "<dt>성립 기준</dt><dd>" + esc(x.crit) + "</dd>" : "") + "<dt>선행 신호</dt><dd>" + esc(x.sign) + "</dd>" + (x.basis ? "<dt>근거와 선례</dt><dd>" + esc(x.basis) + "</dd>" : "") + "</dl></details>").join("") + "</div>" +
     '<div class="lesson-box"><b>바깥 변수의 함의</b><ul class="facts" style="margin-top:6px">' + X.reads.map(r => "<li>" + esc(r) + "</li>").join("") + "</ul></div>";
 }
 function counterHtml(c){
@@ -1714,12 +1714,15 @@ function hsLine(H, G){
 }
 function hsWorstSc(G){ const w = HS_CAT.map(([k]) => G.cat[k]).filter(v => !v.na && v.worst_sc); if (!w.length) return null; const cnt = {}; w.forEach(v => cnt[v.worst_sc] = (cnt[v.worst_sc] || 0) + 1); return Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0]; }
 function hsBestSc(G){ const b = HS_CAT.map(([k]) => G.cat[k]).filter(v => !v.na && v.best_sc); return b.length ? b[0].best_sc : null; }
-function hsCard(H, G){
+/* v3.96i 집단 순서: 2030년까지 100번의 미래에서 삶이 달라지는(점이 칠해지는) 횟수가 많은 집단부터. 같으면 크게 악화됨·악화됨이 많은 쪽, 그다음 자료 순서 */
+function hsOrd(H, gs){ const n = G => hsCount(H, G, "p"), sc = gs.map((G, i) => { const c = n(G); return {G, i, k: [100 - c.same, c.big, c.worse]}; });
+  return sc.sort((a, b) => b.k[0] - a.k[0] || b.k[1] - a.k[1] || b.k[2] - a.k[2] || a.i - b.i).map(x => x.G); }
+function hsCard(H, G, cid){
   const SN = {}; H.scen.forEach(s => SN[s.id] = s);
   const c = hsCount(H, G, "p"), c2 = hsCount(H, G, "p_rec"), ws = hsWorstSc(G), bs = hsBestSc(G);
   const facts = ws ? HS_CAT.map(([k]) => { const v = G.cat[k]; if (k === "정치") return v.na || v.by[ws] > v.now - 1 ? "" : "국가 폭력 늘어남"; return (v.by_raw || {})[ws]; }).filter(Boolean) : [];
   const al = ws ? (G.al[ws] || []) : [];
-  return '<article class="hs-card"><div class="hs-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><p class="hs-hl">' + esc(G.line) + '</p><div class="hs-grid"><figure><figcaption>2030년까지 100번의 미래</figcaption>' + hsDots(c) + hsLegend(c, c2) + "</figure>" +
+  return '<article class="hs-card"' + (cid ? ' id="hs7-' + esc(cid) + "-" + esc(G.k) + '"' : "") + '><div class="hs-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><p class="hs-hl">' + esc(G.line) + '</p><div class="hs-grid"><figure><figcaption>2030년까지 100번의 미래</figcaption>' + hsDots(c) + hsLegend(c, c2) + "</figure>" +
     '<figure><figcaption>현재(<span style="color:var(--accent)">●</span>)' + (ws ? '와 가장 나쁜 경우(<span style="color:#C8102E">○</span>, ' + esc(SN[ws].name) + " " + SN[ws].p + "%)" : "") + (bs ? ' · 가장 좋은 경우(<span style="color:#0EA5A4">○</span>, ' + esc(SN[bs].name) + " " + SN[bs].p + "%)" : "") + " · 0~100점, 높을수록 좋음</figcaption>" + hsLine(H, G) +
     (ws ? '<p class="hs-wf">' + esc(SN[ws].name) + "일 때 · " + facts.map(esc).join(" · ") + (al.length ? ' · <span class="hs-al">' + esc(al.join("·")) + " 경보</span>" : "") + "</p>" : "") +
     (G.al_now.length ? '<p class="hs-wf">현재 켜진 경보 · <span class="hs-al">' + esc(G.al_now.join("·")) + "</span></p>" : "") + "</figure></div></article>";
@@ -1934,7 +1937,7 @@ function renderIndustry(){
   if (!IND) { el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오는 중입니다.</p></div>';
     fetch("/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오지 못했습니다.</p></div>'; }).catch(() => {}); return; }
   el.innerHTML = '<section class="lb ind" id="s-ind"><p class="eyebrow">산업별 영향 · ' + kd(IND.asof) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래를 가정, 산업별 이익은?</h2>' +
-    '<p class="lb-lead"><b>2030년까지 미래를 100번 반복한다고 가정하면, 산업별 이익이 현 추세를 뚜렷하게 상회하는 경우와 하회하는 경우는 각각 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 표현합니다. 각 사안이 현재 상태를 유지할 때의 산업별 이익 추정이 비교의 기준입니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스가 자체적으로 추정한 값입니다.</p>' +
+    '<p class="lb-lead"><b>2030년까지 미래를 100번 반복한다고 가정하면, 산업별 이익이 현 추세를 뚜렷하게 상회하는 경우와 하회하는 경우는 각각 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 표현합니다. 각 사안이 현재 상태를 유지할 때의 산업별 이익 추정이 비교의 기준입니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스의 판단값으로 계산한 결과입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="어느 나라 산업을 볼까">' + [["kr", "한국 산업"], ["us", "미국 산업"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "</p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
@@ -1946,7 +1949,7 @@ function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "기타";
   return '<section class="lb" id="s-life"><p class="eyebrow">국민의 삶 · ' + kd(x.date) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래</h2>' +
-    '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 보이며, 새로운 사건에 따라 그 가능성은 달라집니다. 점의 개수는 클리사 지오폴리틱스가 자체적으로 추정한 값입니다.</p>' +
+    '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 보이며, 새로운 사건에 따라 그 가능성은 달라집니다. 점의 개수는 클리사 지오폴리틱스의 판단값으로 계산한 결과입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>주요 점 개수 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><b class="lg-pv">22</b>변경 직전 점 개수</span></p></div>' +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
@@ -1973,10 +1976,10 @@ function lifeHeroHtml(){
       return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · 삶에 미치는 영향 자세히 →</button></article>"; }).join("") + "</div></section>";
 }
 function hs7Html(c, n9){
-  const H = c.hs7, main = H.groups.filter(G => !G.fold), fold = H.groups.filter(G => G.fold);
+  const H0 = c.hs7, main = hsOrd(H0, H0.groups.filter(G => !G.fold)), fold = hsOrd(H0, H0.groups.filter(G => G.fold)), H = Object.assign({}, H0, {groups: main.concat(fold)});
   return '<section class="stp" id="hs7-' + esc(c.id) + '">' + stpH(n9, "이 사안이 사람들의 삶에 미치는 영향") + '<p class="hs-lead">' + esc(H.lead) + "</p>" +
-    main.map(G => hsCard(H, G)).join("") +
-    (fold.length ? '<details class="src"><summary>그 밖의 집단 · ' + fold.map(G => esc(G.name)).join(", ") + "</summary>" + fold.map(G => hsCard(H, G)).join("") + "</details>" : "") +
+    main.map(G => hsCard(H, G, c.id)).join("") +
+    (fold.length ? '<details class="src"><summary>그 밖의 집단 · ' + fold.map(G => esc(G.name)).join(", ") + "</summary>" + fold.map(G => hsCard(H, G, c.id)).join("") + "</details>" : "") +
     '<div class="lesson-box"><b>해석</b>' + esc(H.read) + "</div>" +
     ((c.people || []).length ? '<details class="src"><summary>영향받는 사람 전체 · 점수로 재지 않은 집단 포함</summary><div class="tbl-wrap"><table class="tbl"><thead><tr><th>누구</th><th>무엇이 걸려 있나</th></tr></thead><tbody>' + c.people.map(p => "<tr><td>" + esc(p.who) + "</td><td>" + esc(p.how) + "</td></tr>").join("") + "</tbody></table></div></details>" : "") +  /* v3.90 2안: 기존 '영향받는 사람' 표를 접힘으로 남긴다 */
     hsHistHtml(H) +
@@ -2013,6 +2016,13 @@ function prevHtml(c){
     P.conclusions.map(k => "<li><b>" + esc(k.id + " · " + k.t) + "</b><span>" + esc(k.why) + "</span></li>").join("") + '</ol><div class="verdict">' +
     P.verdict.excluded.map(x => '<div class="misread"><b>제시하지 않음</b>' + esc(x) + "</div>").join("") + P.verdict.ranked.map((r, j) => '<div class="rk"><b>' + (j + 1) + "순위 " + esc(r.id) + "</b><span>" + esc(r.t) + "</span></div>").join("") + "</div></div></details>";
 }
+/* v3.96i 사안 요약에 '사람들의 삶'을 꺼내 둔다: 분석 전문을 펼치지 않아도 집단별 100번의 미래와 그 집단의 자세한 내용으로 가는 단추가 보이게 */
+function briefLife(c){
+  const H = c.hs7; if (!H) return "";
+  const gs = hsOrd(H, H.groups.filter(G => !G.fold)).filter(G => hsCount(H, G, "p").same < 100);
+  return '<div class="bl-row">' + gs.map(G => { const n = hsCount(H, G, "p"); return '<button type="button" class="bi-life" data-hs="' + esc(c.id) + '" data-hsg="' + esc(G.k) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + "</b><br>" + lifeNums(n) + "</span></button>"; }).join("") + "</div>" +
+    '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + '">삶에 미치는 영향 자세히 →</button>' + "</div>";
+}
 function briefHtml(c){
   const B = c.brief || {};
   const top = c.futures.items.slice().sort((a, b) => b.p - a.p)[0];
@@ -2026,7 +2036,7 @@ function briefHtml(c){
       '<div class="pbar pmini" role="group" aria-label="전개별 확률">' + c.futures.items.map(f => '<button type="button" ' + fb(f) + ' style="flex:' + f.p + ' 0 0;background:' + fcol(f.id) + '" title="' + esc(f.id + " " + f.name + " " + f.p + "%") + '"' + (f.p < 15 ? ' class="sm"' : "") + ">" + f.id + "<span>" + f.p + "%</span></button>").join("") + "</div></dd>" +
     (W ? "<dt>상대편에서 본 최선의 수</dt><dd><b>" + esc(W.name.split(" ")[0]) + "</b> · " + esc(W.ranked[0].t) + "</dd>" : "") +
     (B.eq ? "<dt>균형점</dt><dd>" + esc(B.eq) + "</dd>" : "") +
-    (B.human ? "<dt>개인에게 미치는 영향</dt><dd>" + esc(B.human) + "</dd>" : "") +
+    (B.human ? "<dt>개인에게 미치는 영향</dt><dd>" + esc(B.human) + briefLife(c) + "</dd>" : "") +
     (fcs.length ? '<dt>관련 전망 <span class="note mono">' + fcs.length + '</span></dt><dd><div class="chips" style="margin:0">' + fcs.map(f => fcBtn(f.id)).join("") + '</div><p class="note" style="margin:4px 0 0">검증 시점이 가까운 순서입니다. 누르면 질문과 검증 시점을 볼 수 있습니다.</p></dd>' : "") +
     "</dl></section>";
 }
