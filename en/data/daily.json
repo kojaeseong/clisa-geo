@@ -7,7 +7,7 @@
      "case": "ukraine",
      "h": "After Trump-Putin call, U.S. temporarily eases sanctions to let Russian diesel flow",
      "fact": "After a phone call with Russian President Vladimir Putin on October 9, U.S. time, President Donald Trump wrote on Truth Social that Russia would immediately supply more than 300,000 tons of diesel, another 500,000 tons in November and 1 million tons after that, followed by 3 million more tons within a short period. The same day, the Treasury Department's Office of Foreign Assets Control (OFAC) said it was issuing a temporary general license to allow the supply of Russian diesel to the global market. The Kremlin said the call focused heavily on prospects for settling the Ukraine crisis, also touched on Iran, and that Russia confirmed its readiness to supply oil and petroleum products to U.S. and global markets. Ukrainian President Volodymyr Zelensky wrote on X that easing sanctions on Russia without a clear and lasting de-escalation agreement \"plays into Russia's hands.\"",
-     "link": "Conclusion 5 of the Russia-Ukraine War analysis holds that Russia's best move is to keep dealing with Washington while seizing the rest of Donetsk Oblast. Washington's sanctions carve-out for Russia's wartime energy sector is an example of Moscow reaping real gains from those dealings, in line with that assessment.",
+     "link": "Conclusion 5 of the Russia-Ukraine war analysis holds that Russia's best move is to keep dealing with Washington while seizing the rest of Donetsk Oblast. Washington's sanctions carve-out for Russia's wartime energy sector is an example of Moscow reaping real gains from those dealings, in line with that assessment.",
      "fc": [],
      "src": [
       "http://en.kremlin.ru/events/president/news/80960",
@@ -44,12 +44,13 @@
     {
      "case": "iran",
      "h": "Tanker hit off UAE coast catches fire, blaze extinguished",
-     "fact": "A vessel was struck by an unknown projectile on October 9 13 nautical miles west of Al Jazeera in the United Arab Emirates, the UK Maritime Trade Operations (UKMTO) said. Maritime security firm Vanguard put the strike at 10:00 GMT (2 p.m. local time) and said a fire broke out and was later extinguished; shipping and security sources told Reuters the ship was the Panama-flagged supertanker GEM NO.2, fully laden with crude. No one has claimed responsibility.",
-     "link": "After the attack north of Qatar, tankers keep getting hit in Gulf waters inside the Strait of Hormuz. The added risk to crude shipments from inside the Gulf weighs against the forecast that Brent will close the year below $90 a barrel.",
+     "fact": "A vessel was struck by an unknown projectile 13 nautical miles west of Al Jazeera in the United Arab Emirates on October 9, the UK Maritime Trade Operations (UKMTO) said. Maritime security firm Vanguard put the strike at 10:00 GMT (2 p.m. local time) and said a fire broke out and was later extinguished; shipping and security sources told Reuters the ship was the Panama-flagged supertanker GEM NO.2, fully laden with crude. No one has claimed responsibility.",
+     "link": "After the attack north of Qatar, tankers keep getting hit in Gulf waters beyond the Strait of Hormuz. The added risk to crude shipments from inside the Gulf weighs against the forecast that Brent will close the year below $90 a barrel.",
      "fc": [
       {
        "id": "f13",
-       "e": "down"
+       "e": "down",
+       "p": 30
       }
      ],
      "src": [
@@ -109,11 +110,12 @@
      "case": "ukraine",
      "h": "Russian guided bombs hit two buses in Kramatorsk, killing 33",
      "fact": "Russian forces struck two passenger buses in Kramatorsk, in Ukraine's Donetsk Oblast, with guided bombs at around 10 a.m. local time on October 8, killing 33 people and wounding 18, Ukraine's State Emergency Service said. Ukraine's Air Force said in a preliminary tally that Russia launched 142 drones between 6 p.m. on October 7 and 9:30 a.m. on October 8, of which 126 were shot down or neutralized. Moscow had no immediate comment on the Kramatorsk strike; Russia's Defense Ministry claimed it downed 399 Ukrainian drones between 8 p.m. on October 7 and 8 a.m. on October 8, Moscow time.",
-     "link": "The attack, a day after the Pryluky strike, marks the second straight day that an attack has killed dozens of civilians. That fits the continuing war of attrition that Conclusion 1 of the Russia-Ukraine War analysis treats as the most likely outcome, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "The attack, a day after the Pryluky strike, marks the second straight day that an attack has killed dozens of civilians. That fits the continuing war of attrition that Conclusion 1 of the Russia-Ukraine war analysis treats as the most likely outcome, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -140,7 +142,8 @@
      "fc": [
       {
        "id": "f04",
-       "e": "down"
+       "e": "down",
+       "p": 50
       }
      ],
      "src": [
@@ -242,11 +245,12 @@
      "case": "ukraine",
      "h": "Russia pounds Ukraine in nationwide missile and drone strike, killing at least 28",
      "fact": "Russian missiles and drones struck across Ukraine before dawn Kyiv time on October 7, killing at least 28 people, according to Interior Minister Ivan Vyhivskyi. Twenty of the dead, including five children, were in Pryluky, said Chernihiv Oblast Governor Viacheslav Chaus. Ukraine's Air Force said it shot down or neutralized 39 of 48 cruise missiles, 117 of 130 drones and five ballistic missiles, without saying how many ballistic missiles were fired. Russia's Defense Ministry claimed a massive strike on military-industrial sites in Kyiv and six regions, including Chernihiv and Poltava, among them facilities that produce and store Flamingo cruise missiles.",
-     "link": "The predawn attack on Kyiv was part of a nationwide barrage, and it follows Ukraine's drone assault on the Moscow area that ran from the night of October 5 into the early hours of October 6, Moscow time, as each side widens its strikes on the other's rear. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "The predawn attack on Kyiv was part of a nationwide barrage, and it follows Ukraine's drone assault on the Moscow area that ran from the night of October 5 into the early hours of October 6, Moscow time, as each side widens its strikes on the other's rear. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -268,12 +272,13 @@
     {
      "case": "iran",
      "h": "Tanker hit in the Persian Gulf north of Qatar, with casualties reported",
-     "fact": "A tanker was struck by multiple projectiles about 51 nautical miles north of Madinat ash Shamal, on Qatar's northern coast, on October 7, causing casualties, Britain's UK Maritime Trade Operations (UKMTO) said, without naming an attacker. Recent attacks on shipping have been concentrated in and around the Strait of Hormuz; this one hit deeper inside the Persian Gulf. The same day in Athens, Secretary of State Marco Rubio said Iran had \"lost complete control\" of the strait.",
+     "fact": "A tanker was struck by multiple projectiles about 51 nautical miles north of Madinat ash Shamal, on Qatar's northern coast, on October 7, causing casualties, the UK Maritime Trade Operations (UKMTO) center said, without naming an attacker. Recent attacks on shipping have been concentrated in and around the Strait of Hormuz; this one hit deeper inside the Persian Gulf. The same day in Athens, Secretary of State Marco Rubio said Iran had \"lost complete control\" of the strait.",
      "link": "Attacks spreading beyond Hormuz to waters off the Gulf's oil producers point in the direction of the region-wide escalation that Conclusion 2 of the Iran and Hormuz analysis identifies as South Korea's costliest outcome (the attacker has not been identified). That weighs against the forecast that Brent crude will close the year below $90 a barrel.",
      "fc": [
       {
        "id": "f13",
-       "e": "down"
+       "e": "down",
+       "p": 30
       }
      ],
      "src": [
@@ -315,7 +320,8 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up"
+       "e": "up",
+       "p": 30
       }
      ],
      "src": [
@@ -326,7 +332,7 @@
      "case": "korea",
      "h": "Unification Minister Chung Dong-young says a U.S.-North Korea summit could take up reconfirming the demarcation line",
      "fact": "At the National Assembly Foreign Affairs and Unification Committee's audit of his ministry, held at the Inter-Korean Talks Headquarters in Seoul on October 7, Unification Minister Chung Dong-young indicated in his answers that a U.S.-North Korea summit could include talks between Washington and Pyongyang on reconfirming the Military Demarcation Line, and that it would not matter if South Korea were left out, Money Today reported. Chung said the mine blast in the Demilitarized Zone (DMZ) could not yet be classified as an attack but acknowledged that North Korea planted the mine and bears responsibility for violating the armistice. He also said the peaceful coexistence policy is incompatible with sanctions on the North.",
-     "link": "Conclusion 2 of the Korean Peninsula analysis holds that the more realistic risk for South Korea is a deal on North Korea that leaves Seoul's interests out. The minister in charge of inter-Korean affairs saying the inter-Korean boundary can be taken up first by Washington and Pyongyang, or by the U.N. Command and Pyongyang, shows how the government weighs that risk of exclusion; it does not move any specific forecast.",
+     "link": "Conclusion 2 of the Korean Peninsula analysis holds that the realistic risk for South Korea is a deal on North Korea that leaves Seoul's interests out. The minister in charge of inter-Korean affairs saying the inter-Korean boundary can be taken up first by Washington and Pyongyang, or by the U.N. Command and Pyongyang, shows how the government weighs that risk of exclusion; it does not move any specific forecast.",
      "fc": [],
      "src": [
       "https://www.mt.co.kr/politics/2026/10/07/2026100720194016339",
@@ -370,11 +376,12 @@
      "case": "ukraine",
      "h": "Russia hits Kyiv with missiles before dawn on October 7, killing two",
      "fact": "Explosions were heard in Kyiv at about 3:15 a.m. and again at about 5:15 a.m. local time on October 7, after Ukraine's Air Force warned that several Russian Tu-95 bombers were approaching the border. Kyiv Mayor Vitali Klitschko reported strikes on nonresidential areas in the Obolon and Shevchenkivskyi districts and damage to a warehouse in the Podil district, and the Kyiv City Military Administration said two people were killed in a fire at a garage cooperative in the Darnytskyi district. As of publication, Ukraine's Air Force had not released a full tally, and Russia's Defense Ministry had not issued a statement.",
-     "link": "The strike came hours after President Volodymyr Zelensky warned on the night of October 6 that Russia was preparing a massive attack, and it follows Ukraine's drone barrage on the Moscow area, as the two sides trade strikes on each other's capitals. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "The strike came hours after President Volodymyr Zelensky warned on the night of October 6 that Russia was preparing a massive attack, and it follows Ukraine's drone barrage on the Moscow area, as the two sides trade strikes on each other's capitals. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -401,7 +408,8 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 90
       }
      ],
      "src": [
@@ -419,11 +427,12 @@
      "case": "ukraine",
      "h": "Drones hit two merchant ships in Bulgaria's exclusive economic zone, sinking one",
      "fact": "According to Bulgarian broadcaster Nova, the Togo-flagged Alfa Watan and the Palau-flagged Able were struck by drones on October 6 in Bulgaria's exclusive economic zone. The Alfa Watan sank, and all 18 crew members of the Able were rescued. It was not clear who launched the drones. The same day, Odesa Oblast Governor Oleh Kiper said one person was killed aboard a Marshall Islands-flagged ship in a Russian attack.",
-     "link": "A day after an attack off Romania on October 5, merchant ships came under attack in the exclusive economic zone of Bulgaria, another NATO member, widening the danger to Black Sea shipping. That is consistent with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "A day after an attack off Romania on October 5, merchant ships came under attack in the exclusive economic zone of Bulgaria, another NATO member, widening the danger to Black Sea shipping. That is consistent with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -443,11 +452,12 @@
      "case": "ukraine",
      "h": "Ukraine launches mass drone attack on Moscow area; two killed in surrounding region",
      "fact": "Moscow Mayor Sergei Sobyanin said 650 drones headed toward Moscow and the surrounding region from 8:30 p.m. on October 5 to 5 a.m. on October 6, Moscow time, and that most were shot down. Moscow region authorities said two people were killed. TASS, tallying Russian Defense Ministry reports, counted 868 drones downed overnight. The same night, Ukraine's Air Force said Russia had launched 137 drones and that 114 were shot down or neutralized.",
-     "link": "Ukraine is stepping up attacks on Russia's capital region, which fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. That weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "Ukraine is stepping up attacks on Russia's capital region, which fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. That weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -490,7 +500,8 @@
      "fc": [
       {
        "id": "f13",
-       "e": "none"
+       "e": "none",
+       "p": 30
       }
      ],
      "src": [
@@ -536,11 +547,12 @@
      "case": "korea",
      "h": "Joint Chiefs conclude North Korean troops planted DMZ mine, blow up mines in first removal",
      "fact": "Kwon Dae-won, vice chairman of the Joint Chiefs of Staff, told a Ministry of National Defense briefing on October 5, 2026, that the military had reached a final conclusion that the September 21 blast in the demilitarized zone (DMZ), which seriously injured two soldiers and lightly injured a third, was caused by a resin antipersonnel mine North Korean troops had planted about 10 meters south of the Military Demarcation Line (MDL). The United Nations Command assessed that the mine had been deliberately planted within the previous 12 months. At 12:51 p.m. the same day, the military blew up and removed North Korean mines south of the MDL. The Joint Chiefs called on the North to offer a sincere apology and to remove the remaining mines immediately.",
-     "link": "The finding squarely rebuts the \"farce\" claim in Kim Yo Jong's September 30 statement. With the two Koreas now at odds over the basic facts, the situation points in the same direction as the armed stalemate described in Conclusion 1 of the Korean Peninsula analysis. That the military moved to clear the mines itself, with no channel for dialogue, raises the forecast that inter-Korean military hotlines will remain unrestored.",
+     "link": "The finding squarely rebuts the \"farce\" claim in Kim Yo Jong's September 30 statement. With the two Koreas now at odds over the basic facts, the situation points in the same direction as the Armed stalemate scenario described in Conclusion 1 of the Korean Peninsula analysis. That the military moved to clear the mines itself, with no channel for dialogue, raises the odds of the forecast that inter-Korean military hotlines will remain unrestored.",
      "fc": [
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 90
       }
      ],
      "src": [
@@ -559,11 +571,12 @@
      "case": "ukraine",
      "h": "Turkish-owned grain ship sinks after drone attack in Romania's exclusive economic zone",
      "fact": "The Royad Mammadov, a Turkish-owned grain ship flying the flag of Saint Kitts and Nevis, sank on October 5 after a drone attack in Romania's exclusive economic zone, about 20 nautical miles off the Romanian coast. The ship had left Ukraine's port of Izmail bound for Ravenna, Italy. Two people were killed and one is missing; Romanian authorities rescued 11. Ukrainian President Volodymyr Zelensky blamed Moscow, saying, \"Russia consistently chooses terror and sinking civilian ships instead of normal navigation.\" No Russian response has been confirmed.",
-     "link": "With the attack reaching into a NATO member's exclusive economic zone, the risk to Black Sea shipping has grown alongside the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. Because Washington has been raising a Black Sea grain corridor as an agenda item for the trilateral talks, the attack lowers the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "With the attack reaching into a NATO member's exclusive economic zone, the risk to Black Sea shipping has grown alongside the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. Because Washington has been raising a Black Sea grain corridor as an agenda item for the trilateral talks, the attack lowers the odds of the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -585,11 +598,12 @@
      "case": "ukraine",
      "h": "Russian glide bombs kill six, wound 59 in Kharkiv",
      "fact": "Three Russian glide bombs struck industrial facilities and residential areas in Kharkiv's Slobidskyi district on October 5, killing six people and wounding 59, said Oleh Syniehubov, head of the Kharkiv Regional Military Administration. Ukraine's Air Force said Russia launched 205 drones overnight, 172 of which were shot down or neutralized. Russia's Defense Ministry claimed it had shot down 199 Ukrainian drones between 8 p.m. on October 4 and 8 a.m. on October 5, Moscow time.",
-     "link": "Both sides keep targeting each other's cities and energy facilities, in line with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine War analysis. The strike lowers the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "Both sides keep targeting each other's cities and energy facilities, in line with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. The strike lowers the odds of the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -611,11 +625,12 @@
      "case": "iran",
      "h": "Saudi Arabia, Turkey and Pakistan activate \"collective deterrence measures\" over Houthi attacks, deploy forces to Saudi Arabia",
      "fact": "The Mecca defense alliance of Saudi Arabia, Turkey and Pakistan held an emergency meeting in Riyadh on October 5 and decided to rapidly deploy agreed military forces and capabilities to Saudi Arabia. Saudi Defense Minister Khalid bin Salman said that, in response to Houthi missile and drone attacks, the alliance's committee had \"agreed to activate collective deterrence measures, within the framework of the Alliance.\" The joint statement did not mention Iran.",
-     "link": "Conclusion 2 of the Iran and Hormuz analysis holds that the future in which South Korea loses most is an escalation that spreads to all of the Gulf oil producers. Large-scale destruction of Gulf producers' facilities, the disconfirming signal, has not yet been confirmed, but with forces from countries outside the Gulf moving into Saudi Arabia, the Yemen front now has room to grow into a wider military standoff. The move lowers the forecast that Brent will end the year below $90.",
+     "link": "Conclusion 2 of the Iran and Hormuz analysis holds that the future in which South Korea loses most is an escalation that spreads to all of the Gulf oil producers. Large-scale destruction of Gulf producers' facilities, the disconfirming signal, has not yet been confirmed, but with forces from countries outside the Gulf moving into Saudi Arabia, the Yemen front now has room to grow into a wider military standoff. The move lowers the odds of the forecast that Brent will end the year below $90.",
      "fc": [
       {
        "id": "f13",
-       "e": "down"
+       "e": "down",
+       "p": 30
       }
      ],
      "src": [
@@ -682,11 +697,13 @@
      "fc": [
       {
        "id": "f42",
-       "e": "none"
+       "e": "none",
+       "p": 13
       },
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 85
       }
      ],
      "src": [
@@ -708,11 +725,12 @@
      "case": "ukraine",
      "h": "Zelensky says U.S. has proposed trilateral technical-level talks by end of October",
      "fact": "Ukrainian President Volodymyr Zelensky said at a joint news conference in Kyiv with German Chancellor Friedrich Merz on October 4, 2026, that Washington is proposing a trilateral, technical-level meeting with Ukraine and Russia by the end of October. The United Arab Emirates has been floated as the venue, and Ukraine is ready to take part, he said. At the same news conference, Merz announced €1.46 billion in aid, including interceptor drones and air defense missiles.",
-     "link": "The announcement comes from Kyiv; no Russian response has been confirmed. The Abu Dhabi talks reported since late September have now taken shape as a formal U.S. proposal, which raises the forecast that U.S.-Russia-Ukraine technical-level talks will take place, with a resolution date of October 31.",
+     "link": "The announcement comes from Kyiv; no Russian response has been confirmed. The Abu Dhabi talks reported since late September have now taken shape as a formal U.S. proposal, which raises the odds of the forecast that U.S.-Russia-Ukraine technical-level talks will take place, with a resolution date of October 31.",
      "fc": [
       {
        "id": "f02",
-       "e": "up"
+       "e": "up",
+       "p": 50
       }
      ],
      "src": [
@@ -731,11 +749,12 @@
      "case": "ukraine",
      "h": "Russia strikes Kyiv bridges for fourth straight day",
      "fact": "Russia struck Kyiv's Southern Bridge and Northern Bridge on four consecutive days from October 1 to 4, 2026; a drone attack on October 4 damaged the Northern Bridge's roadway and injured two people. On October 3, Russia's Foreign Ministry renewed its warning to foreigners, including diplomatic staff, not to remain in Ukraine. Russia's Defense Ministry claimed it shot down 559 Ukrainian drones between the night of October 3 and the morning of October 4, and Zelensky said Ukraine would step up strikes on Russian oil refineries.",
-     "link": "In the same week that Washington proposed trilateral talks, both sides are escalating attacks on each other's infrastructure. That is in line with Conclusion 5 of the Russia-Ukraine War analysis, under which Moscow keeps dealing with Washington without easing military pressure, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
+     "link": "In the same week that Washington proposed trilateral talks, both sides are escalating attacks on each other's infrastructure. That is in line with Conclusion 5 of the Russia-Ukraine war analysis, under which Moscow keeps dealing with Washington without easing military pressure, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       }
      ],
      "src": [
@@ -757,15 +776,17 @@
      "case": "iran",
      "h": "Iran holds to seven conditions for reopening the strait; Trump: \"the easy way or the hard way\"",
      "fact": "President Donald Trump told reporters at the White House on October 3, 2026, that with a decision on Iran ahead, the only remaining question was whether it would be \"the easy way or the hard way.\" Iranian parliament speaker Mohammad Bagher Ghalibaf said on October 4 that the era of imposing one-sided demands was over and that the Strait of Hormuz would not reopen until Iran's seven conditions, based on the Islamabad Memorandum of Understanding, were met. The same day, Foreign Minister Abbas Araghchi warned diplomats in Tehran that if the United States turned to a military solution again, Iran was better prepared than before.",
-     "link": "Iran says it is reviewing the U.S. reply, yet it has again tied reopening the strait to lifting sanctions and the blockade as a single package. That runs against Conclusion 7 of the Iran and Hormuz analysis, which saw room for a deal in a phased agreement, and it lowers the forecast that the U.S. and Iran will sign a phased agreement while raising the forecast that the U.S. will resume airstrikes on Iran's mainland.",
+     "link": "Iran says it is reviewing the U.S. reply, yet it has again tied reopening the strait to lifting sanctions and the blockade as a single package. That runs against Conclusion 7 of the Iran and Hormuz analysis, which saw room for a deal in a phased agreement, and it lowers the odds of the forecast that the U.S. and Iran will sign a phased agreement while raising the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland.",
      "fc": [
       {
        "id": "f38",
-       "e": "down"
+       "e": "down",
+       "p": 30
       },
       {
        "id": "f04",
-       "e": "up"
+       "e": "up",
+       "p": 45
       }
      ],
      "src": [
@@ -829,11 +850,12 @@
      "case": "iran",
      "h": "U.S. sends carrier group and Marines to Middle East; Trump says war will end \"right after the election\"",
      "fact": "A U.S. official confirmed on October 1, 2026, that the Theodore Roosevelt carrier strike group and the Makin Island amphibious ready group, carrying about 2,200 Marines, had set out for the Middle East. Once they arrive, three aircraft carriers and two amphibious groups will be massed around Iran by the end of November. In a speech in Denton, Texas, on October 2, Trump said Iran was \"ready to fold up\" and that the war would end \"right after the election\" or \"maybe before the election.\"",
-     "link": "A day after Trump raised the prospect of wider strikes after the midterms, a costly movement of forces has followed, a heavier signal than words. The reinforcements will be fully assembled just after the November 3 midterm elections, the timing Trump pointed to. The move raises the forecast that the U.S. will resume airstrikes on Iran's mainland.",
+     "link": "A day after Trump raised the prospect of wider strikes after the midterms, a costly movement of forces has followed, a heavier signal than words. The reinforcements will be fully assembled just after the November 3 midterm elections, the timing Trump pointed to. The move raises the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland.",
      "fc": [
       {
        "id": "f04",
-       "e": "up"
+       "e": "up",
+       "p": 45
       }
      ],
      "src": [
@@ -852,11 +874,12 @@
      "case": "korea",
      "h": "Kim Yo Jong again denies blame for mine blast, rules out \"the slightest space or room\" for ties with Seoul",
      "fact": "In a statement on October 2, 2026, Kim Yo Jong again insisted that North Korea had nothing to do with the mine explosion in the Demilitarized Zone (DMZ), and called the South Korean government's demand for an apology \"really despicable.\" She added, \"We do not allow the slightest space or room for us to go with the ROK.\" The presidential office in Seoul responded the same day that it would establish the facts transparently and that the North should stop its pointless criticism and engage in dialogue.",
-     "link": "The statement came a day after President Lee Jae-myung called for restoring dialogue in his Armed Forces Day address. Among the disconfirming signals in the Korean Peninsula analysis, it comes close to North Korea formally declaring that it will not accept South Korea as a negotiating partner. The signal's other condition, more frequent missile launches, has not appeared. The statement raises the forecast that inter-Korean military hotlines will remain unrestored.",
+     "link": "The statement came a day after President Lee Jae-myung called for restoring dialogue in his Armed Forces Day address. Among the disconfirming signals in the Korean Peninsula analysis, it comes close to North Korea formally declaring that it will not accept South Korea as a negotiating partner. The signal's other condition, more frequent missile launches, has not appeared. The statement raises the odds of the forecast that inter-Korean military hotlines will remain unrestored.",
      "fc": [
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 85
       }
      ],
      "src": [
@@ -875,11 +898,12 @@
      "case": "ukraine",
      "h": "Russia launches massive strike on Ukraine's energy facilities ahead of winter",
      "fact": "Russia attacked Ukraine's energy facilities with about 190 drones and ballistic missiles from the night of September 30 into October 1, 2026. Seven people were killed, and Kyiv and three surrounding regions imposed emergency power outages for the first time since spring. Ukraine's prime minister said it was the first combined attack on this scale since the end of the last heating season.",
-     "link": "The strike came right after a September 29 report that Washington was pushing for talks in Abu Dhabi in October on limited deals such as a halt to attacks on energy facilities. It is in line with Conclusion 5 of the Russia-Ukraine War analysis: Moscow keeps dealing with Washington while seeking further military gains. The forecast that U.S.-Russia-Ukraine technical-level talks will take place, which asks only whether talks are held, does not move.",
+     "link": "The strike came right after a September 29 report that Washington was pushing for talks in Abu Dhabi in October on limited deals such as a halt to attacks on energy facilities. It is in line with Conclusion 5 of the Russia-Ukraine war analysis: Moscow keeps dealing with Washington while seeking further military gains. The forecast that U.S.-Russia-Ukraine technical-level talks will take place, which asks only whether talks are held, does not move.",
      "fc": [
       {
        "id": "f02",
-       "e": "none"
+       "e": "none",
+       "p": 50
       }
      ],
      "src": [
@@ -898,11 +922,12 @@
      "case": "iran",
      "h": "G7 agrees to release 100 million barrels of oil reserves",
      "fact": "According to a G7 leaders' joint statement released by the French presidency on October 2, 2026, the G7 agreed to release 100 million barrels of emergency oil reserves through the International Energy Agency over four months, concentrating diesel releases in the first 20 days. The leaders also pledged to refrain from restricting exports of energy products. Brent crude fell to $100.80 a barrel after the announcement.",
-     "link": "The move responds to a rise in European diesel prices from €1.59 to €2.24 a liter since the Iran war began on February 28. One hundred million barrels over four months comes to just over 800,000 barrels a day, so it is unlikely to bring prices down much unless traffic through the strait recovers. It slightly raises the forecast that Brent will end the year below $90.",
+     "link": "The move responds to a rise in European diesel prices from €1.59 to €2.24 a liter since the Iran war began on February 28. One hundred million barrels over four months comes to just over 800,000 barrels a day, so it is unlikely to bring prices down much unless traffic through the strait recovers. It slightly raises the odds of the forecast that Brent will end the year below $90.",
      "fc": [
       {
        "id": "f13",
-       "e": "up"
+       "e": "up",
+       "p": 30
       }
      ],
      "src": [
@@ -939,15 +964,17 @@
      "case": "iran",
      "h": "Trump says stepping up Iran strikes after midterms is \"possible\"",
      "fact": "In a Time magazine interview published on October 1, 2026, Trump said it was \"possible\" when asked whether he could increase the bombing of Iran after the November midterm elections. The same day, a U.S. official told Axios that Secretary of State Marco Rubio had ordered Iranian Foreign Minister Abbas Araghchi's delegation, then in New York, to leave the country; Iran denied this, saying the delegation had left on a prearranged schedule.",
-     "link": "Right after Iran received the U.S. reply, Washington sent its delegation home and raised the prospect of wider strikes, a sign that the phased exchange described in Conclusion 7 of the Iran and Hormuz analysis is unlikely to lead to a signing soon. It raises the forecast that the U.S. will resume airstrikes on Iran's mainland and lowers the forecast that the U.S. and Iran will sign a phased agreement.",
+     "link": "Right after Iran received the U.S. reply, Washington sent its delegation home and raised the prospect of wider strikes, a sign that the phased exchange described in Conclusion 7 of the Iran and Hormuz analysis is unlikely to lead to a signing soon. It raises the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland and lowers the odds of the forecast that the U.S. and Iran will sign a phased agreement.",
      "fc": [
       {
        "id": "f04",
-       "e": "up"
+       "e": "up",
+       "p": 45
       },
       {
        "id": "f38",
-       "e": "down"
+       "e": "down",
+       "p": 30
       }
      ],
      "src": [
@@ -970,7 +997,8 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none"
+       "e": "none",
+       "p": 85
       }
      ],
      "src": [
@@ -988,11 +1016,12 @@
      "case": "ukraine",
      "h": "Russia warns it would use \"all its arsenal, including nuclear weapons\" if Kaliningrad is blockaded",
      "fact": "In a diplomatic note sent to NATO member states on September 30, 2026, Russia claimed to have information that NATO was preparing an air and naval blockade of Kaliningrad and warned that, if a blockade were imposed, it was ready to use \"all its arsenal, including nuclear weapons.\" At a Valdai Discussion Club meeting in Moscow on October 1, President Vladimir Putin said the warning was not a threat but a response to attempts to intimidate Russia; NATO Secretary-General Mark Rutte countered that Russia must stop its nuclear threats.",
-     "link": "After a string of provocations along NATO's eastern flank through September, Moscow has now raised nuclear use in writing. That fits Conclusion 5 of the Russia-Ukraine War analysis, under which Russia keeps dealing with Washington while increasing pressure on Europe. It has no direct bearing on the forecast that U.S.-Russia-Ukraine technical-level talks will take place.",
+     "link": "After a string of provocations along NATO's eastern flank through September, Moscow has now raised nuclear use in writing. That fits Conclusion 5 of the Russia-Ukraine war analysis, under which Russia keeps dealing with Washington while increasing pressure on Europe. It has no direct bearing on the forecast that U.S.-Russia-Ukraine technical-level talks will take place.",
      "fc": [
       {
        "id": "f02",
-       "e": "none"
+       "e": "none",
+       "p": 50
       }
      ],
      "src": [
@@ -1016,11 +1045,13 @@
      "fc": [
       {
        "id": "f36",
-       "e": "none"
+       "e": "none",
+       "p": 92
       },
       {
        "id": "f24",
-       "e": "none"
+       "e": "none",
+       "p": 25
       }
      ],
      "src": [
@@ -1037,11 +1068,12 @@
      "case": null,
      "h": "Pakistan launches airstrikes on Afghanistan's Kunar and Helmand provinces",
      "fact": "Pakistan carried out airstrikes on Afghanistan's Kunar and Helmand provinces on the night of September 30, 2026. Zabihullah Mujahid, spokesman for the Taliban government, said nine people were killed and condemned the strikes as aggression; Pakistan's Ministry of Information and Broadcasting claimed 22 militants were killed; and the U.N. Assistance Mission in Afghanistan said at least 10 civilians, most of them children, were killed.",
-     "link": "The strikes follow the September 24 raids on 10 sites including Kandahar, and there is no sign of mediation or ceasefire talks. They lower the forecast of a formal ceasefire between Pakistan and the Taliban.",
+     "link": "The strikes follow the September 24 raids on 10 sites including Kandahar, and there is no sign of mediation or ceasefire talks. They lower the odds of the forecast of a formal ceasefire between Pakistan and the Taliban.",
      "fc": [
       {
        "id": "f10",
-       "e": "down"
+       "e": "down",
+       "p": 20
       }
      ],
      "src": [
@@ -1093,7 +1125,8 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 85
       }
      ],
      "src": [
@@ -1116,7 +1149,8 @@
      "fc": [
       {
        "id": "f17",
-       "e": "none"
+       "e": "none",
+       "p": 80
       }
      ],
      "src": [
@@ -1138,11 +1172,13 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none"
+       "e": "none",
+       "p": 30
       },
       {
        "id": "f03",
-       "e": "none"
+       "e": "none",
+       "p": 25
       }
      ],
      "src": [
@@ -1164,7 +1200,8 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none"
+       "e": "none",
+       "p": 45
       }
      ],
      "src": [
@@ -1182,15 +1219,17 @@
      "case": "ukraine",
      "h": "Russia hits power grid around Kyiv ahead of winter",
      "fact": "Russian missile and drone attacks overnight on September 30, 2026, killed three people in the city of Kyiv and a child in the surrounding Kyiv region. Zelensky said the attacks targeted energy facilities and damaged the power grid; energy facilities in the Zhytomyr, Mykolaiv, Kirovohrad and Rivne regions and the port of Izmail were also hit. Russia's Defense Ministry confirmed the strikes.",
-     "link": "The attacks uphold the assessment in Conclusion 1 of the Russia-Ukraine War analysis that the war of attrition will continue. Russia has not been confirmed to accept the U.S.-backed halt to mutual strikes on energy facilities, and no date has been announced for the trilateral technical-level talks in forecast f02, which resolves on October 31.",
+     "link": "The attacks uphold the assessment in Conclusion 1 of the Russia-Ukraine war analysis that the war of attrition will continue. There is no confirmation that Russia has accepted the halt to mutual strikes on energy facilities that Washington is pushing, and no date has been announced for the trilateral technical-level talks in forecast f02, which resolves on October 31.",
      "fc": [
       {
        "id": "f02",
-       "e": "none"
+       "e": "none",
+       "p": 50
       },
       {
        "id": "f01",
-       "e": "none"
+       "e": "none",
+       "p": 10
       }
      ],
      "src": [
@@ -1241,11 +1280,12 @@
      "case": "korea",
      "h": "Kim Yo Jong claims DMZ mine blast was staged by Seoul",
      "fact": "On September 29, 2026, the Joint Chiefs of Staff said in a statement issued in the name of its vice chairman, Kwon Dae-won, that debris from the September 21 blast site contained the same components as North Korean mines, that responsibility lay entirely with the North, and that the military would take corresponding measures. On September 30, Kim Yo Jong, department director of the Workers' Party Central Committee, called this \"a clear farce\" in a statement carried by the Korean Central News Agency (KCNA), warning that \"ringleaders of provocation should be prepared for paying price.\"",
-     "link": "With no channel through which the two Koreas could jointly verify the incident, the dispute over responsibility is turning directly into threats. That raises the forecast that inter-Korean military hotlines will remain unrestored, and it runs opposite to the conditions for managed coexistence (restored hotlines and reunions of separated families under Korean Peninsula C1).",
+     "link": "With no channel through which the two Koreas could jointly verify the incident, the dispute over responsibility is turning directly into threats. That raises the odds of the forecast that inter-Korean military hotlines will remain unrestored, and it runs opposite to the conditions for managed coexistence (restored hotlines and reunions of separated families under Korean Peninsula C1).",
      "fc": [
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 85
       }
      ],
      "src": [
@@ -1263,15 +1303,17 @@
      "case": "ukraine",
      "h": "Russian drone strike sets Kyiv's Academy of Sciences ablaze",
      "fact": "A Russian drone attack on September 29 set fire to the building of the National Academy of Sciences of Ukraine in Kyiv, killing at least two people; Zelensky said nine people were killed nationwide that day. The same day, the Ukrainian outlet LIGA.net, citing The Atlantic, reported that Washington was pushing for U.S.-Russia-Ukraine talks in Abu Dhabi in October and saw a halt to mutual strikes on energy facilities as a possible point of agreement.",
-     "link": "If trilateral talks take place in October, the forecast that U.S.-Russia-Ukraine technical-level talks will be held resolves yes, so the report raises that forecast. But because the agenda is a partial deal such as a halt to strikes on energy facilities rather than a full ceasefire, the assessment that the war of attrition will continue (Russia-Ukraine C1) stands.",
+     "link": "If trilateral talks take place in October, the forecast that U.S.-Russia-Ukraine technical-level talks will be held resolves yes, so the report raises the odds of that forecast. But because the agenda is a partial deal such as a halt to strikes on energy facilities rather than a full ceasefire, the assessment that the war of attrition will continue (Russia-Ukraine C1) stands.",
      "fc": [
       {
        "id": "f02",
-       "e": "up"
+       "e": "up",
+       "p": 50
       },
       {
        "id": "f01",
-       "e": "none"
+       "e": "none",
+       "p": 10
       }
      ],
      "src": [
@@ -1296,11 +1338,13 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none"
+       "e": "none",
+       "p": 30
       },
       {
        "id": "f03",
-       "e": "none"
+       "e": "none",
+       "p": 25
       }
      ],
      "src": [
@@ -1322,7 +1366,8 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down"
+       "e": "down",
+       "p": 30
       }
      ],
      "src": [
@@ -1377,7 +1422,8 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up"
+       "e": "up",
+       "p": 85
       }
      ],
      "src": [
@@ -1399,11 +1445,13 @@
      "fc": [
       {
        "id": "f05",
-       "e": "none"
+       "e": "none",
+       "p": 25
       },
       {
        "id": "f22",
-       "e": "none"
+       "e": "none",
+       "p": 35
       }
      ],
      "src": [
@@ -1424,11 +1472,13 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down"
+       "e": "down",
+       "p": 30
       },
       {
        "id": "f43",
-       "e": "down"
+       "e": "down",
+       "p": 15
       }
      ],
      "src": [
@@ -1450,11 +1500,13 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down"
+       "e": "down",
+       "p": 10
       },
       {
        "id": "f28",
-       "e": "down"
+       "e": "down",
+       "p": 30
       }
      ],
      "src": [
@@ -1478,11 +1530,13 @@
      "fc": [
       {
        "id": "f24",
-       "e": "up"
+       "e": "up",
+       "p": 25
       },
       {
        "id": "f44",
-       "e": "up"
+       "e": "up",
+       "p": 30
       }
      ],
      "src": [
@@ -1509,7 +1563,8 @@
      "fc": [
       {
        "id": "f39",
-       "e": "up"
+       "e": "up",
+       "p": 70
       }
      ],
      "src": [
