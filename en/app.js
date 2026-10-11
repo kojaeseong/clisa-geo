@@ -1869,7 +1869,7 @@ function lbWhy(c, G){
     "<span class=\"lb-why-n\"><span class=\"lb-why-k\">Worse or much worse " + (a.big + a.worse) + "→" + (b.big + b.worse) + "</span><span class=\"lb-why-k\">Better " + a.better + "→" + b.better + "</span></span></p>";
 }
 function lbStats(n, dl){  /* v3.94g: 3개 색 분류는 0번이어도 늘 보이고(0번은 맨 뒤), 최근 7일 증감도 0까지 모두 보인다 */
-  const ks = ["big", "worse", "better"].filter(k => n[k]).concat(n.same ? ["same"] : [], ["big", "worse", "better"].filter(k => !n[k]));
+  const ks = ["big", "worse", "better"].filter(k => n[k]).concat(n.same ? ["same"] : [], ["big", "worse", "better"].filter(k => !n[k]), n.same ? [] : ["same"]);  /* v3.96e: 현재와 비슷함도 0번이면 맨 뒤에 0으로(4개 분류 늘 표시) */
   return '<ul class="lb-st' + (ks.length > 3 ? " lb-st4" : "") + '">' + ks.map(k => { const d = dl ? (dl[k] || 0) : 0;
     const cls = !d ? "z" : k === "same" ? "n" : ((d > 0) === (k === "better") ? "good" : "bad");
     return '<li class="lb-st-' + k + (n[k] ? "" : " lb-st-zero") + '"><b>' + (n[k] || 0) + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>" +
