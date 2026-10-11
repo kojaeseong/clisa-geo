@@ -339,7 +339,7 @@ function init(d){
   setLayer(S.layer);
   renderOverview(); renderDetail();
   /* v3.43 첫 화면은 언제나 정세 브리핑(최신 호 전문). 특정 주소·#표식으로 들어오면 그 화면 */
-  if (!HASH0) switchTab("brief");
+  if (!HASH0) switchTab("overview");  /* v3.99(2026-10-12 결재): 첫 화면은 지구본과 세계 정세(맨 위 정세 브리핑) */
   const Q0 = ROUTES && /[?&]q(=|&|$)/.test(location.search) ? (new URLSearchParams(location.search).get("q") || "") : null;
   if (!applyRoute()) applyHash(); HASH_READY = true; ROUTE_FIRST = false; routeSync(true);
   if (Q0 !== null) { srOpen(); if (Q0) { $("#srchq").value = Q0; srRender(); } }
@@ -682,11 +682,11 @@ function setupInteraction(){
     const icb = ev.target.closest("[data-indc]");  /* v3.93 산업별 영향: 나라 고르기 */
     if (icb) { INDC = icb.dataset.indc; INDOPEN = null; renderIndustry(); return; }
     const icl = ev.target.closest("[data-ind]");  /* 칸을 누르면 전개별 판단을 펼치고 다시 누르면 접는다 */
-    if (icl) { INDOPEN = INDOPEN === icl.dataset.ind ? null : icl.dataset.ind; const b = document.getElementById("indboard"); if (b) b.innerHTML = indRows(); return; }
+    if (icl) { const md = icl.dataset.indm || "d"; INDOPEN = INDOPEN === icl.dataset.ind && INDMODE === md ? null : icl.dataset.ind; INDMODE = md; indBoard(); return; }
     const lfb = ev.target.closest("[data-life]");  /* 사람들의 삶: 누구의 삶으로 볼까 */
     if (lfb) { LIFE = lfb.dataset.life; store.set("ep.life", LIFE); const g = document.getElementById("lifegrid"), x = BR && BR.issues[0];
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
-      const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = lifeRows(); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
+      const lb = document.getElementById("lifeboard"); if (lb) { lb.innerHTML = lifeRows(); fitTrends(lb); } document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
     const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 삶에 미치는 영향 */
     if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = (hsb.dataset.hsg && document.getElementById("hs7-" + id + "-" + hsb.dataset.hsg)) || document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
@@ -883,7 +883,7 @@ function selectFp(id, fromMap){
 }
 /* v3.42 사이트 메뉴의 현재 위치 표시(사안 화면·나라 화면은 '세계 정세'·'전략 분석' 아래로 본다) */
 function navMark(t){
-  const k = t === "detail" ? "overview" : t === "page" ? ((LOC().match(/^\/(leader|power|guide|brief|about)/) || [])[1] || "") : t;
+  const k = t === "detail" || (t === "brief" && S.bdate) ? "overview" : t === "page" ? ((LOC().match(/^\/(leader|power|guide|brief|about)/) || [])[1] || "") : t;
   document.querySelectorAll(".gnav [data-tab],.gnav [data-nav]").forEach(a => { if ((a.dataset.tab || a.dataset.nav) === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   const g = document.querySelector(".gmore"); if (g) g.classList.toggle("cur", !!g.querySelector("[aria-current]"));
 }
@@ -1152,9 +1152,8 @@ function renderBrief(){
   const cur = briefCur(), others = BR.issues.filter(x => x !== cur);
   /* v3.92d: 최신 호도 날짜를 골라 들어오면(지난 정보 목록, 검색, /brief/날짜/) 예전 형식 전문으로 보인다. 전문(fact)이 있는 최신 호는 지난 정보 맨 위에 둔다 */
   const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.fact));
-  if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>" +
-    (past.length ? "<section class=\"sec lb-pastw\"><h3>Earlier updates</h3>" + past.map(pastIssue).join("") + "</section>" : ""); el.scrollTop = 0; return; }
-  el.innerHTML = (cur === BR.issues[0] ? "<p class=\"lb-back\"><button type=\"button\" class=\"chip\" data-brief=\"\">← People's Lives and today's updates</button></p>" : "") + "<section class=\"sec dbrief\" id=\"brief\"><div class=\"bh\"><h2>Briefing</h2><span class=\"bd\">" + enDate(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
+  if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); return; }  /* v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
+  el.innerHTML = (cur === BR.issues[0] ? "<p class=\"lb-back\"><button type=\"button\" class=\"chip\" data-go=\"overview\" data-bgo=\"1\">← Briefing in Global Overview</button></p>" : "") + "<section class=\"sec dbrief\" id=\"brief\"><div class=\"bh\"><h2>Briefing</h2><span class=\"bd\">" + enDate(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     "<p class=\"note\">Major recent events and how they bear on Clisa Geopolitics’ assessments and forecasts. The arrows (↑·↓) show whether an event makes a forecast more or less likely to come true. Forecast probabilities are reviewed and revised every week.</p>" +
     dailyIssue(cur) + "</section>" +
     (others.length ? "<section class=\"sec\"><h3>Past briefings</h3><ul class=\"list blist\">" + others.map(o => '<li><a class="row-btn" href="/en/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
@@ -1188,7 +1187,7 @@ function stripGo(x){
       } 
     else switchTab("forecast");
     return; }
-  S.bdate = null; renderBrief(); switchTab("brief"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
+  switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
   if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } }
 }
 function runStrip(st, list){
@@ -1210,6 +1209,7 @@ function loadBrief(){
   BRIEF_P.then(b => {
     if (!b || !(b.issues || []).length) { $("#bstrip").hidden = true; return; }
     BR = b; const cur = b.issues[0];
+    if (typeof IND !== "undefined" && IND && document.getElementById("indboard")) indBoard();  /* v3.98: 산업 탭이 브리핑 자료보다 먼저 그려졌으면 추이를 넣어 다시 그림 */
     /* v3.27 판단 변경 공지(머리말 n.k, 없으면 "분석 갱신")는 공지 날짜로부터 7일 동안 띠 첫머리에 두고, 그 뒤로 브리핑 제목을 돌린다(2026-10-01) */
     /* v3.44b 특집 공지는 11일 동안 둔다(2026-10-04) */
     const ymd = x => x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"), lim = ymd(new Date(Date.now() - 7 * 864e5)), limF = ymd(new Date(Date.now() - 11 * 864e5));
@@ -1224,10 +1224,38 @@ function loadBrief(){
     renderOverview(); renderBrief(); SR.idx = null; if (S.tab === "brief" && ROUTES) applyRoute();
   }).catch(() => { const st = $("#bstrip"); if (st && !BR) st.hidden = true; });
 }
+/* v3.99 시안: 정세 브리핑을 세계 정세 탭 맨 위에. 최근 3개 호(발행일 기준)를 펼쳐 두고, 그 이전 호는 '지난 브리핑 더보기'로 그 자리에서 펼친다.
+   정보마다 그날 그 사안의 확률이 바뀌었으면 국민의 삶(그 사안의 카드)과 산업별 미래(그 변경으로 점 개수가 가장 크게 움직인 업종의 추이)로 가는 단추를 붙인다 */
+const BH_N = 2;  /* 2026-10-12 결재: 최근 2개 호(발행일 기준) */
+function bhFx(i, d){
+  const fc = (i.fc || []).map(f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none; return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + "\"><span class=\"lb-fcl\">Forecast</span> " + esc(F && F.s ? F.s : f.id) + " " + e[0] + "</button>"; }).join("");
+  const C = i.case ? (D.strategies || []).find(s => s.id === i.case) : null, moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
+  return fc + (moved ? "<span class=\"bh-gx\"><span class=\"lb-fx lb-fx-on\">Graphs updated</span><button type=\"button\" class=\"bh-go\" data-golife=\"" + esc(i.case) + "\">People's Lives →</button><button type=\"button\" class=\"bh-go\" data-goind=\"" + esc(i.case + "|" + d) + "\">Industry Outlook →</button></span>" : "");
+}
+function bhItems(x, top){
+  const csn = id => LB_SHORT[id] || "Other";
+  return '<ul class="lb-list">' + x.items.map((i, n) => '<li' + (top ? ' id="bi-' + n + '"' : "") + '><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + "\" title=\"Show on the globe\">" + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + bhFx(i, x.date) +
+    ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + "\" target=\"_blank\" rel=\"noopener\">Source</a>" : "") + "</li>").join("") +
+    (x.more || []).map(m => "<li><span class=\"lb-cs lb-etc\">Other</span><span class=\"lb-t\">" + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + "\" target=\"_blank\" rel=\"noopener\">Source</a>" : "") + "</li>").join("") + "</ul>";
+}
+function briefHomeHtml(){
+  if (!BR || !(BR.issues || []).length) return "";
+  const top = BR.issues.slice(0, BH_N), old = BR.issues.slice(BH_N);
+  return "<section class=\"sec bhome\" id=\"brief\"><div class=\"bh\"><h2>Briefing</h2>" + ttsBtn("brief") + "</div>" +
+    top.map((x, k) => '<div class="bh-day"><p class="bh-dd"><span>' + fmtKD(x.date) + "</span>" + (x.items.some(i => i.fact) ? '<a class="bh-full" href="/en/brief/' + esc(x.date) + '/" data-brief="' + esc(x.date) + "\">Full briefing →</a>" : "") + "</p>" + bhItems(x, !k) + weekLine(x.date) + "</div>").join("") +
+    (old.length ? "<button type=\"button\" class=\"bh-more\" data-bmore=\"1\" aria-expanded=\"false\">Earlier briefings · <span class=\"mono\">" + old.length + " days</span></button><div class=\"bh-old\" hidden>" + old.map(pastIssue).join("") + "</div>" : "") + "</section>";
+}
+document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기(그 자리에서 펼침), 정세 브리핑으로 가는 단추 */
+  const m = ev.target.closest("[data-bmore]"); if (m) { const o = m.nextElementSibling, op = m.getAttribute("aria-expanded") !== "true"; if (o) o.hidden = !op; m.setAttribute("aria-expanded", op); m.firstChild.textContent = op ? "Hide earlier briefings · " : "Earlier briefings · "; return; }
+  const lx = ev.target.closest("[data-lbx]"); if (lx) { const md = lx.dataset.lbxm || "d"; LBX = LBX === lx.dataset.lbx && LBXM === md ? null : lx.dataset.lbx; LBXM = md; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } return; }
+  const gl = ev.target.closest("[data-golife]"); if (gl) { S.bdate = null; const rows = lbxGroups(), r = rows.find(x => x[4].some(p => p[0].id === gl.dataset.golife)); if (r) { LBX = r[0] + "|" + gl.dataset.golife; LBXM = "t"; } renderBrief(); switchTab("brief"); requestAnimationFrame(() => { const a = r && document.getElementById("lbx-" + r[0]); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }); return; }
+  const gi = ev.target.closest("[data-goind]"); if (gi) { const [cid, d] = gi.dataset.goind.split("|"); switchTab("industry"); let n = 0; const go = () => { if (!IND) { if (++n < 60) setTimeout(go, 100); return; } indJump(cid, d); }; go(); return; }
+  const g = ev.target.closest("[data-bgo]"); if (g) requestAnimationFrame(() => { const b = document.getElementById("brief"); if (b) b.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+});
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  $("#pane-overview").innerHTML = dueHtml() +
+  $("#pane-overview").innerHTML = briefHomeHtml() + dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + "</p><h2 style=\"margin-top:4px\">Global Overview</h2><p class=\"meta\" style=\"margin-top:4px\">Analysis as of <span class=\"mono\">" + esc(enDate(D.meta.asof)) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? " · Latest developments checked <span class=\"mono\">" + esc(enDate(BR.issues[0].date)) + "</span>" : "") + " · " + pl(D.digest.length, "summary", "summaries") + " · " + pl(fps.length, "flashpoint") + "</p><p class=\"lead\" style=\"margin-top:8px\">Flashpoints around the world and the main currents in global affairs, as of the date above. Clisa Geopolitics’ assessments of these developments are in Strategic Analysis; the structural forces behind them are in World Order.</p>" +
     ((D.insights || []).length ? "<button type=\"button\" class=\"entry\" data-go=\"strat\">View Clisa Geopolitics’ " + pl(D.insights.length, "key assessment") + "<span aria-hidden=\"true\">→</span></button>" : "") + "</div>" +
     "<section class=\"sec\"><h3>Situation summaries " + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
@@ -1828,6 +1856,9 @@ function lbFx(i, quiet, d){  /* 한 줄 정보가 그래프·전망에 주는 �
   const moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
   return fc + (moved ? "<span class=\"lb-fx lb-fx-on\">Graph updated</span>" : "") || (quiet ? "" : "<span class=\"lb-fx\">No change to the graph</span>");
 }
+function lbRecentHtml(rec, today){  /* v3.98: 국민의 삶 카드와 산업별 영향 선 그래프 상세가 함께 씀 */
+  return rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
+}
 function lbRecent(cid, n){  /* 이 사안의 최근 한 줄 정보(최근 호부터) */
   const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case === cid && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out;
 }
@@ -1837,31 +1868,36 @@ function lbRecent(cid, n){  /* 이 사안의 최근 한 줄 정보(최근 호부
 const LB_START = "2026-10-09", LB_CASE0 = {poland: "2026-10-10"};
 const ymdAdd = (d, n) => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
 const md = d => (+d.slice(5, 7)) + "." + (+d.slice(8, 10));
-function lbTrend(c, G){  /* v3.96f: 점 그림의 4개 분류마다 선 하나(그 기간에 한 번이라도 있는 분류만), 색은 점 그림과 같게. 현재와 비슷함이 기간 내내 50번 이상이면 그 선은 빼서 다른 선이 공간을 쓰게 함(모두 현재와 비슷함이면 그 선만) */
-  const H = c.hs7, today = BR.issues[0].date, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d));
+function lbTrend(c, G, LAB, OPT){ LAB = LAB || HS_LAB; OPT = OPT || {};  /* v3.96f: 점 그림의 4개 분류마다 선 하나(그 기간에 한 번이라도 있는 분류만), 색은 점 그림과 같게. 현재와 비슷함이 기간 내내 50번 이상이면 그 선은 빼서 다른 선이 공간을 쓰게 함(모두 현재와 비슷함이면 그 선만) */
+  const H = c.hs7, today = BR.issues[0].date, ch = OPT.ch || (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d));
   const cur = {}; H.scen.forEach(s => cur[s.id] = s.p);
-  const mapAt = d => { let m = ch.length && ch[0].d > d ? ch[0].prev : null; ch.forEach(x => { if (x.d <= d) m = x.next; }); return m || cur; };
+  const mapAt = OPT.mapAt || (d => { let m = ch.length && ch[0].d > d ? ch[0].prev : null; ch.forEach(x => { if (x.d <= d) m = x.next; }); return m || cur; }), cnt = OPT.cnt || (m => hsCountP(H, G, m));  /* v3.99: 5개 사안 종합은 날짜로 점 개수를 계산하는 함수를 넘겨 받음 */
   let a = LB_START, b = today; const have = (Date.parse(b) - Date.parse(a)) / 864e5;  /* 기록이 짧을 때는 7일 창에서 시작해 30일까지 늘리고, 그 뒤로는 최근 30일 */
   const span = Math.min(29, Math.max(6, have)); if (have > span) a = ymdAdd(b, -span); const end = ymdAdd(a, span);
-  const c0 = LB_CASE0[c.id] && LB_CASE0[c.id] > a ? LB_CASE0[c.id] : a;
+  const s0 = OPT.c0 || LB_CASE0[c.id], c0 = s0 && s0 > a ? s0 : a;
   const days = []; for (let d = c0; d <= b; d = ymdAdd(d, 1)) days.push(d);
-  const ser = days.map(d => Object.assign({d}, hsCountP(H, G, mapAt(d))));
+  const ser = days.map(d => Object.assign({d}, cnt(mapAt(d))));
   const KS0 = HS_ORD.filter(k => ser.some(v => v[k] > 0)), KS = KS0.length > 1 && ser.every(v => v.same >= 50) ? KS0.filter(k => k !== "same") : KS0, LC = {big: "#C8102E", worse: "#E8890C", better: "#0EA5A4", same: "#8C96A3"};
-  const W = 300, Hh = 154, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
+  const W = OPT.w || 300, Hh = OPT.h || 154, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
   const mx = Math.max(1, ...ser.map(v => Math.max(...KS.map(k => v[k])))), yMax = mx >= 95 ? 100 : Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
   const path = k => ser.map((v, i) => (i ? "H" + X(v.d).toFixed(1) + "V" : "M" + X(v.d).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("");
   const last = ser[ser.length - 1];
-  const dots = k => ser.map(v => '<circle cx="' + X(v.d).toFixed(1) + '" cy="' + Y(v[k]).toFixed(1) + '" r="2.2" fill="' + LC[k] + '"><title>' + esc(kd(v.d) + " · " + HS_LAB[k] + " " + v[k] + "") + "</title></circle>").join("");
-  const info = (BR.issues || []).filter(x => x.date >= c0 && x.date <= b && x.items.some(i => i.case === c.id)).map(x => '<rect x="' + (X(x.date) - 1.5).toFixed(1) + '" y="' + (B + 4) + '" width="3" height="6" rx="1" class="lt-tick' + (x.date === today ? " lt-today" : "") + '"><title>' + esc(kd(x.date) + " · one-line updates: " + x.items.filter(i => i.case === c.id).length + "") + "</title></rect>").join("");
-  const chg = ch.filter(x => x.d >= c0 && x.d <= b).map(x => { const p = hsCountP(H, G, x.prev), n = hsCountP(H, G, x.next);  /* v3.96g: 바뀐 지점에 동그라미 대신 바뀌기 직전의 점 개수를 작은 숫자로(선의 왼쪽 위, 같은 날 숫자끼리 10px 간격) */
+  const dots = k => ser.map(v => '<circle cx="' + X(v.d).toFixed(1) + '" cy="' + Y(v[k]).toFixed(1) + '" r="2.2" fill="' + LC[k] + '"><title>' + esc(kd(v.d) + " · " + LAB[k] + " " + v[k] + "") + "</title></circle>").join("");
+  const mine = i => OPT.anyCase ? !!i.case : i.case === c.id;
+  const info = (BR.issues || []).filter(x => x.date >= c0 && x.date <= b && x.items.some(mine)).map(x => '<rect x="' + (X(x.date) - 1.5).toFixed(1) + '" y="' + (B + 4) + '" width="3" height="6" rx="1" class="lt-tick' + (x.date === today ? " lt-today" : "") + '"><title>' + esc(kd(x.date) + " · one-line updates: " + x.items.filter(mine).length + "") + "</title></rect>").join("");
+  const chg = ch.filter(x => x.d >= c0 && x.d <= b).map(x => { const p = cnt(x.prev), n = cnt(x.next);  /* v3.96g: 바뀐 지점에 동그라미 대신 바뀌기 직전의 점 개수를 작은 숫자로(선의 왼쪽 위, 같은 날 숫자끼리 10px 간격) */
     const ls = KS.filter(k => p[k] !== n[k]).map(k => ({k, y: Y(p[k]) - 4})).sort((u, v) => u.y - v.y); ls.forEach((o, i) => { if (i && o.y - ls[i - 1].y < 10) o.y = ls[i - 1].y + 10; });
-    return ls.map(o => '<text x="' + (X(x.d) - 3).toFixed(1) + '" y="' + o.y.toFixed(1) + '" class="lt-pv" text-anchor="end" fill="' + LC[o.k] + '"><title>' + esc(kd(x.d) + " · before the change, " + HS_LAB[o.k] + " " + p[o.k] + " → " + n[o.k] + " · " + x.kind) + "</title>" + p[o.k] + "</text>").join(""); }).join("");
+    return ls.map(o => '<text x="' + (X(x.d) - 3).toFixed(1) + '" y="' + o.y.toFixed(1) + '" class="lt-pv" text-anchor="end" fill="' + LC[o.k] + '"><title>' + esc(kd(x.d) + " · before the change, " + LAB[o.k] + " " + p[o.k] + " → " + n[o.k] + " · " + x.kind) + "</title>" + p[o.k] + "</text>").join(""); }).join("");
   const lab = KS.map(k => ({k, y: Y(last[k]) + 4})).sort((p, q) => p.y - q.y);  /* 오른쪽 끝 숫자: 겹치지 않게 11px 간격으로 밀어 냄 */
   lab.forEach((o, i) => { if (i && o.y - lab[i - 1].y < 11) o.y = lab[i - 1].y + 11; });
   const over = lab.length ? lab[lab.length - 1].y - (B + 4) : 0; if (over > 0) lab.forEach(o => o.y -= over);
   const xt = (span >= 20 ? [a, ymdAdd(a, Math.round(span / 3)), ymdAdd(a, Math.round(span * 2 / 3)), end] : [a, ymdAdd(a, Math.round(span / 2)), end]).map(d => '<text x="' + X(d).toFixed(1) + '" y="' + (Hh - 2) + '" class="lt-x" text-anchor="' + (d === a ? "start" : d === end ? "end" : "middle") + '">' + md(d) + "</text>").join("");
   const pre = c0 < "2026-10-10" ? '<rect x="' + X(c0).toFixed(1) + '" y="' + T + '" width="' + (X("2026-10-10") - X(c0)).toFixed(1) + '" height="' + (B - T) + "\" class=\"lt-pre\"><title>The October 9 value applies the current classification to that day's probabilities</title></rect>" : "";
-  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Key dot counts, daily</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily key dot counts, " + kd(last.d) + " " + KS.map(k => HS_LAB[k] + " " + last[k] + "").join(", ")) + '">' + pre +
+  if (OPT.bare) return '<svg class="lt-bare" viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily key dot counts, " + kd(last.d) + " " + KS.map(k => LAB[k] + " " + last[k] + "").join(", ")) + '">' + pre +
+    [0.5, 1].map(f => '<line x1="' + L + '" x2="' + R + '" y1="' + Y(yMax * f).toFixed(1) + '" y2="' + Y(yMax * f).toFixed(1) + '" class="lt-grid"/>').join("") + '<line x1="' + L + '" x2="' + R + '" y1="' + B + '" y2="' + B + '" class="lt-ax"/>' +
+    '<text x="' + (R + 4) + '" y="' + (Y(yMax) + 3).toFixed(1) + '" class="lt-y">' + yMax + "</text>" + KS.map(k => '<path d="' + path(k) + '" class="lt-ln" stroke="' + LC[k] + '"/>' + dots(k)).join("") + chg + info +
+    lab.map(o => '<text x="' + (X(last.d) + 7).toFixed(1) + '" y="' + o.y.toFixed(1) + '" class="lt-v" fill="' + LC[o.k] + '">' + last[o.k] + "</text>").join("") + xt + "</svg>";  /* v3.99: 최종 결과 칸 안에 바로 보이는 선 그래프(제목 없이) */
+  return '<figure class="lt"' + (OPT.tag ? ' data-lt="' + esc(OPT.tag) + '" data-w="' + W + '"' : "") + "><figcaption class=\"lt-cap\"><span>Key dot counts by day</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily key dot counts, " + kd(last.d) + " " + KS.map(k => LAB[k] + " " + last[k] + "").join(", ")) + '">' + pre +
     [0.5, 1].map(f => '<line x1="' + L + '" x2="' + R + '" y1="' + Y(yMax * f).toFixed(1) + '" y2="' + Y(yMax * f).toFixed(1) + '" class="lt-grid"/>').join("") + '<line x1="' + L + '" x2="' + R + '" y1="' + B + '" y2="' + B + '" class="lt-ax"/>' +
     '<text x="' + (R + 4) + '" y="' + (Y(yMax) + 3).toFixed(1) + '" class="lt-y">' + yMax + "</text>" +
     KS.map(k => '<path d="' + path(k) + '" class="lt-ln" stroke="' + LC[k] + '"/>' + dots(k)).join("") + chg + info +
@@ -1917,14 +1953,57 @@ function lifeRow(c){
   if (!G) return "";
   const n = hsCount(H, G, "p"), rec = lbRecent(c.id, 3), today = BR.issues[0].date;
   const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(G.al_now.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Effects on lives <span aria-hidden=\"true\">→</span></button></header>";
-  const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
+  const recent = lbRecentHtml(rec, today);
   /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
-  return '<article class="lb-card">' + head + '<div class="lb-cols">' +
+  return '<article class="lb-card" id="lb-' + esc(c.id) + '">' + head + '<div class="lb-cols">' +
     '<div class="lb-left"><p class="lb-lab lb-fut">100 futures through 2030</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · see the effects on lives in detail") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
-    '<div class="lb-right">' + lbTrend(c, G) + lbWhy(c, G) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + recent + "</div></div></div></article>";
+    '<div class="lb-right">' + lbTrend(c, G, null, {tag: "lb|" + c.id}) + lbWhy(c, G) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + recent + "</div></div></div></article>";
+}
+/* v3.99 시안(2026-10-12 제안): 국민의 삶도 산업별 미래처럼 국민(집단)마다 한 줄. 왼쪽에 5개 사안 종합, 오른쪽에 사안별 점 그래프와 그 아래 점 개수 추이.
+   점 그래프를 누르면 그 사안의 판단 근거(점 100개의 구성, 가장 나쁜·좋은 경우), 추이를 누르면 선 그래프와 최근 변경·최근 정보 */
+let LBX = null, LBXM = "d";
+const LIFE_EU_ORD = ["WCEU", "SEU", "NEU", "DEU", "NORD", "BALT"];
+function lbxGroups(){  /* [[행 키, 이름, 크기, 경보, [[사안, 집단]…]]…] */
+  const cs = (D.strategies || []).filter(c => c.hs7);
+  if (LIFE === "main") return [["main", "People in the countries involved", "", [], cs.map(c => [c, c.hs7.groups.find(g => g.k === LIFE_MAIN[c.id]) || lifeMain(c)])]];
+  const ks = LIFE === "EU" ? LIFE_EU_ORD : [LIFE];
+  return ks.map(k => { const pr = cs.map(c => [c, c.hs7.groups.find(g => g.k === k)]).filter(x => x[1]); if (!pr.length) return null; const G = pr[0][1];
+    return [k, G.name, G.size, G.al_now || [], pr]; }).filter(Boolean);
+}
+function lbxScore(pr){ return pr.reduce((a, [c, G]) => { const n = hsCount(c.hs7, G, "p"); return [a[0] + n.big + n.worse + n.better, a[1] + n.big + n.worse]; }, [0, 0]); }
+function lifeRows(){
+  const rows = lbxGroups().map((r, i) => [r, lbxScore(r[4]), i]);
+  rows.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));
+  return rows.map(([r]) => lbxRow(r)).join("");
+}
+function lbxRow([rk, name, size, al, pr]){
+  const ord = pr.map(([c, G], i) => [c, G, hsCount(c.hs7, G, "p"), i]);
+  ord.sort((x, y) => ((y[2].big + y[2].worse + y[2].better) - (x[2].big + x[2].worse + x[2].better)) || ((y[2].big + y[2].worse) - (x[2].big + x[2].worse)) || (x[3] - y[3]));
+  const cells = ord.map(([c, G, n]) => { const id = rk + "|" + c.id, open = LBX === id;
+    return dotCell('data-lbx="' + esc(id) + '"', esc(LB_SHORT[c.id] || c.title) + (rk === "main" ? '<small class="ind-sub">' + esc(G.name) + "</small>" : ""), n, lbDelta(c, G), open && LBXM !== "t", open && LBXM === "t", indSpark(indSer(c, G))); }).join("");
+  const full = rk !== "main" && cmbFull(rk), ak = "life|" + rk, oa = LBX === rk + "|all";
+  const all = full ? dotCell('data-lbx="' + esc(rk + "|all") + '"', "All five issues combined", cmbCount(ak, BR.issues[0].date), cmbDelta(ak), oa && LBXM !== "t", oa && LBXM === "t", cmbLine(ak, name, HS_LAB), "ind-allc") : "";
+  const op = LBX && LBX.split("|")[0] === rk ? LBX.split("|")[1] : null, oc = op && op !== "all" ? pr.find(x => x[0].id === op) : null;
+  const det = oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("All five issues combined · " + esc(name), cmbCount(ak, BR.issues[0].date), "life", rk, HS_LAB)) : oc ? (LBXM === "t" ? lbxTrend(oc[0], oc[1]) : lbxDetail(oc[0], oc[1])) : "";
+  return '<article class="lb-card ind-card lbx-card' + (full ? "" : " lbx-noall") + (rk === "main" ? " lbx-main" : "") + '" id="lbx-' + esc(rk) + '"><header class="lb-hd"><b class="lb-gname">' + esc(name) + "</b>" + (size ? '<span class="lb-size">' + esc(size) + "</span>" : "") +
+    (al.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(al.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + (rk === "main" ? "<span class=\"ind-mem\">For each issue, people in the countries directly involved</span>" : "") + "</header>" +
+    (full ? '<div class="ind-all">' + all + "</div>" : "") + '<div class="ind-cw">' + (full ? "<p class=\"ind-capr\">100 futures, issue by issue</p>" : "") + '<div class="ind-cells">' + cells + "</div></div>" + det + "</article>";
+}
+function lbxDetail(c, G){
+  const nm = c.title.split(":")[0];
+  return '<div class="ind-det lbx-det"><p class="lb-lab">' + esc(nm) + " · " + esc(G.name) + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + '" data-hsg="' + esc(G.k) + "\">See effects on people's lives <span aria-hidden=\"true\">→</span></button></p>" + lbExplain(c.hs7, G) + "</div>";
+}
+function lbxTrend(c, G){
+  const nm = c.title.split(":")[0];
+  return '<div class="ind-det ind-det-t"><p class="lb-lab">' + esc(nm) + " · " + esc(G.name) + "</p>" + lbTrend(c, G, null, {tag: "lbg|" + c.id + "|" + G.k, w: 680, h: 220}) +
+    '<div class="ind-tr">' + indWhy(c, G, HS_LAB, "Dot counts for " + esc(G.name)) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + lbRecentHtml(lbRecent(c.id, 3), BR.issues[0].date) + "</div></div></div>";
+}
+function lbxAllTrend(rk, name){
+  return "<div class=\"ind-det ind-det-t\"><p class=\"lb-lab\">All five issues combined · " + esc(name) + "</p>" + cmbTrend("life|" + rk, name, null, {tag: "cmb|life|" + rk, w: 680, h: 220}) +
+    '<div class="ind-tr">' + cmbWhy("life|" + rk, HS_LAB) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + lbRecentHtml(cmbRecent(3), BR.issues[0].date) + "</div></div></div>";
 }
 function lbImpact(c){ const G = lifePick(c); if (!G) return [-1, -1]; const n = hsCount(c.hs7, G, "p"); return [n.big + n.worse + n.better, n.big + n.worse]; }
-function lifeRows(){  /* v3.92c: 색 점(나쁜 삶·나은 삶)이 많은 사안부터. 같으면 악화 이상이 많은 쪽, 그다음 원래 순서 */
+function lifeRowsOld(){  /* v3.92c: 색 점(나쁜 삶·나은 삶)이 많은 사안부터. 같으면 악화 이상이 많은 쪽, 그다음 원래 순서 */
   const cs = (D.strategies || []).filter(c => c.hs7).map((c, i) => [c, lbImpact(c), i]);
   cs.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));
   return cs.map(([c]) => lifeRow(c)).join("");
@@ -1933,27 +2012,227 @@ function lifeRows(){  /* v3.92c: 색 점(나쁜 삶·나은 삶)이 많은 사�
 /* v3.93 산업별 영향: data/industry.json(탭을 열 때만 받음). 업종마다 5개 사안의 '점 100개'를 나란히 보이고, 칸을 누르면 전개별 판단과 근거를 펼친다.
    분류: 정상 영업이익(기준 매출 × 10년 영업이익률 중앙값, 하한 3%) 대비 +10% 넘게 개선됨, −10% 넘게 악화됨, −30% 넘게 또는 업종 적자 크게 악화됨.
    비교 기준은 사안마다 '현 상태 지속' 전개(국민의 삶 그래프의 이란 사안은 전쟁 전 기준이라 다름). */
-let IND = null, INDC = "kr", INDOPEN = null;
+let IND = null, INDC = "kr", INDOPEN = null, INDMODE = "d";  /* v3.98: INDMODE d = 점 그래프 상세(전개별 판단), t = 선 그래프 상세(추이) */
 const IND_LAB = {big: "Much worse", worse: "Worse", better: "Better", same: "In line with trend"};
 const IND_SHORT = {korea: "Korean Peninsula", taiwan: "Taiwan Strait", ukraine: "Russia-Ukraine war", iran: "Iran and Hormuz", poland: "Russia-NATO"};
 function indCount(k, c){ const v = IND.cells[k][c.id]; const G = {cls: {}}; c.scen.forEach(s => G.cls[s.id] = v[s.id].c); return hsCount({scen: c.scen}, G, "p"); }
 function indPct(x){ return (x > 0 ? "+" : x < 0 ? "−" : "") + Math.abs(Math.round(x * 100)) + "%"; }
+/* v3.98 시안: 산업별 영향의 추이(국민의 삶과 같은 날짜별 확률 이력 × 업종 분류) */
+/* v3.99 시안: 5개 사안 종합. 사안마다 전개가 하나씩 일어나는 100번의 미래를 함께 놓고, 그 결합 효과로 분류한다.
+   사안 사이의 상관은 대전략 분석의 세계 시나리오 A~E로만 넣는다(같은 세계 시나리오 안에서는 사안끼리 독립). 세계 시나리오별 조건부 확률은 각 사안의
+   'world' 표를 쓰되, 그날의 전개 확률에 맞도록 비례 조정(반복 비례 맞춤)한다. 결합 효과: 산업은 정상 영업이익 대비 변화율의 합, 국민의 삶은 4개 범주 점수 변화의 합(0~100점 안). */
+const CMB = {cache: {}};
+function cmbCases(){ return (D.strategies || []).filter(s => s.hs7 && s.world && s.world.rows && s.world.rows.length); }
+function cmbCond(s, pd){
+  const W = s.world, ord = W.order, ids = s.hs7.scen.map(x => x.id), fam = id => ord.includes(id) ? id : (ord.find(o => id.indexOf(o) === 0) || id);
+  const fs = {}; ids.forEach(id => { const f = fam(id); fs[f] = (fs[f] || 0) + (pd[id] || 0); });
+  const wp = W.rows.map(r => r.p / 100), tot = wp.reduce((x, y) => x + y, 0); wp.forEach((v, i) => wp[i] = v / tot);
+  /* 국민의 삶의 전개가 전략 분석의 전개와 묶음이 다를 때(한반도: '무장한 정체'에 '체제 유지 승계' 일부 2%p를 넣음) 세계 시나리오 표를 그 묶음에 맞게 옮긴다.
+     옮기는 몫 = 공개 당시 국민의 삶 전개 확률의 묶음 합과 전략 분석 전개 확률(world.base)의 차이 */
+  const P0 = {}; s.hs7.scen.forEach(x => P0[x.id] = x.p); const f0 = {}; ids.forEach(id => { const f = fam(id); f0[f] = (f0[f] || 0) + (P0[id] || 0); });
+  const dif = ord.map((o, j) => W.base && W.base[j] ? (f0[o] || 0) - W.base[j] : 0), T = dif.reduce((x, y) => x + Math.max(0, y), 0);
+  const C2 = W.rows.map(r => { if (!T) return r.cond.slice(); const give = ord.map((o, j) => dif[j] < 0 ? r.cond[j] * (-dif[j] / W.base[j]) : 0), G = give.reduce((x, y) => x + y, 0);
+    return r.cond.map((c, j) => dif[j] < 0 ? c - give[j] : dif[j] > 0 ? c + G * dif[j] / T : c); });
+  let M = W.rows.map((r, w) => ids.map(id => { const j = ord.indexOf(fam(id)); return Math.max(1e-6, j < 0 ? 1 : C2[w][j]) * (fs[fam(id)] ? (pd[id] || 0) / fs[fam(id)] : 0); }));
+  const nr = () => { M = M.map(row => { const t = row.reduce((x, y) => x + y, 0) || 1; return row.map(v => v / t); }); };
+  for (let it = 0; it < 40; it++) { nr(); const mix = ids.map((_, k) => M.reduce((x, row, w) => x + wp[w] * row[k], 0)); M = M.map(row => row.map((v, k) => mix[k] > 0 ? v * ((pd[ids[k]] || 0) / 100) / mix[k] : 0)); }
+  nr(); return {ids, wp, M};
+}
+function cmbMaps(d){ return cmbCases().map(s => lbMapAt(s.hs7)(d)); }
+function cmbSig(d){ return cmbCases().map(s => (s.hs7.changes || []).filter(x => x.d <= d).length).join("."); }
+function cmbProb(val, clsf, d){  /* val(s, sid) → 효과 벡터(없으면 null = 이 사안의 계산 대상 아님), clsf(벡터) → 분류 */
+  const cs = cmbCases(), maps = cmbMaps(d), per = cs.map((s, i) => ({s, C: cmbCond(s, maps[i])})), out = {big: 0, worse: 0, better: 0, same: 0}, byW = [];
+  per[0].C.wp.forEach((pw, w) => { const ow = {big: 0, worse: 0, better: 0, same: 0};
+    let dist = [{v: null, p: 1}];
+    per.forEach(({s, C}) => { const nd = new Map();
+      dist.forEach(o => C.ids.forEach((id, k) => { const q = C.M[w][k]; if (!q) return; const e = val(s, id); const v2 = o.v ? o.v.map((x, j) => x + (e ? e[j] : 0)) : (e ? e.slice() : null);
+        const key = v2 ? v2.map(x => x.toFixed(3)).join(",") : "0"; const z = nd.get(key); if (z) z.p += o.p * q; else nd.set(key, {v: v2, p: o.p * q}); }));
+      dist = [...nd.values()]; });
+    dist.forEach(o => { const k = clsf(o.v); out[k] += pw * o.p; ow[k] += o.p; }); byW.push(ow);
+  });
+  const ks = ["big", "worse", "better", "same"], G = {cls: {}}; ks.forEach(k => G.cls[k] = k); const R = o => hsCount({scen: ks.map(k => ({id: k, q: o[k] * 100}))}, G, "q");
+  const r = R(out), W0 = cs[0].world.rows; r.w = byW.map((o, i) => Object.assign(R(o), {id: W0[i].id, name: W0[i].name, p: W0[i].p})); return r;
+}
+function cmbChParts(k, s, sid){  /* v3.99 경로 구분: 한 칸의 효과를 경로별 몫으로 [[경로, 값]…] */
+  const v = IND.cells[k] && IND.cells[k][s.id], z = v && v[sid]; if (!z || !z.x) return [];
+  return z.ch2 && z.w2 ? [[z.ch || "?", z.x * (1 - z.w2)], [z.ch2, z.x * z.w2]] : [[z.ch || ("?" + s.id), z.x]];
+}
+function cmbChSum(parts){  /* 같은 경로의 같은 부호 효과는 가장 큰 것 하나만, 반대 부호는 더해 상쇄, 경로끼리는 더함 */
+  const m = {}; parts.forEach(([c, x]) => { const o = m[c] || (m[c] = {p: 0, n: 0}); if (x > 0) o.p = Math.max(o.p, x); else o.n = Math.min(o.n, x); });
+  return Object.values(m).reduce((t, o) => t + o.p + o.n, 0);
+}
+function cmbIndProb(k, d){  /* 산업 종합: 전개 조합을 모두 펼쳐 경로 규칙으로 합침 */
+  const cs = cmbCases(), maps = cmbMaps(d), per = cs.map((s, i) => ({s, C: cmbCond(s, maps[i]), P: {}}));
+  per.forEach(o => o.C.ids.forEach(id => o.P[id] = cmbChParts(k, o.s, id)));
+  const cl = x => { x = Math.round(x * 1000) / 1000; return x > 0.10 ? "better" : x < -0.30 ? "big" : x < -0.10 ? "worse" : "same"; };
+  const out = {big: 0, worse: 0, better: 0, same: 0}, byW = [];
+  per[0].C.wp.forEach((pw, w) => { const ow = {big: 0, worse: 0, better: 0, same: 0};
+    const go = (i, q, parts) => { if (q < 1e-12) return; if (i === per.length) { const c = cl(cmbChSum(parts)); ow[c] += q; out[c] += pw * q; return; }
+      const o = per[i]; o.C.ids.forEach((id, j) => { const qq = o.C.M[w][j]; if (qq) go(i + 1, q * qq, o.P[id].length ? parts.concat(o.P[id]) : parts); }); };
+    go(0, 1, []); byW.push(ow); });
+  const ks = ["big", "worse", "better", "same"], G = {cls: {}}; ks.forEach(x => G.cls[x] = x); const R = o => hsCount({scen: ks.map(x => ({id: x, q: o[x] * 100}))}, G, "q");
+  const r = R(out), W0 = cs[0].world.rows; r.w = byW.map((o, i) => Object.assign(R(o), {id: W0[i].id, name: W0[i].name, p: W0[i].p})); return r;
+}
+function cmbCount(key, d){  /* key: "ind|<산업 키>" 또는 "life|<집단 키>". 확률이 바뀐 날에만 다시 계산 */
+  const ck = key + "@" + cmbSig(d); if (CMB.cache[ck]) return CMB.cache[ck];
+  const [t, k] = key.split("|"); let r;
+  if (t === "ind") r = cmbIndProb(k, d);
+  else { const CAT = ["개인", "공동체", "정치", "경제"], now = cmbNow(k);
+    r = cmbProb((s, sid) => { const G = s.hs7.groups.find(g => g.k === k); if (!G) return null; return CAT.map(c => { const x = G.cat[c]; return x && !x.na && x.by && x.by[sid] != null ? x.by[sid] - x.now : 0; }); },
+      v => { const dd = v ? v.map((x, j) => Math.round(Math.max(-now[j], Math.min(100 - now[j], x)) * 10) / 10) : [0, 0, 0, 0];  /* 부동소수 경계: 합계를 0.1점에서 반올림한 뒤 분류(검토 지적) */
+        if (Math.max(...dd) > 20) return "better"; if (Math.min(...dd) < -20 || dd.filter(q => q < -10).length >= 2) return "big"; if (Math.min(...dd) < -1) return "worse"; if (Math.max(...dd) > 1) return "better"; return "same"; }, d); }
+  return (CMB.cache[ck] = r);
+}
+function cmbNow(k){ const CAT = ["개인", "공동체", "정치", "경제"]; for (const s of cmbCases()) { const G = s.hs7.groups.find(g => g.k === k); if (G) return CAT.map(c => G.cat[c] && !G.cat[c].na ? G.cat[c].now : 50); } return [50, 50, 50, 50]; }
+function cmbFull(k){ return cmbCases().every(s => s.hs7.groups.some(g => g.k === k)); }  /* 국민의 삶 종합은 5개 사안 모두에서 계산한 집단만 */
+function cmbCh(){ const ds = [...new Set(cmbCases().flatMap(s => (s.hs7.changes || []).map(x => x.d)))].sort(); return ds.map(d => ({d, prev: ymdAdd(d, -1), next: d, kind: "Probability adjustment"})); }
+function cmbC0(){ return Object.values(LB_CASE0).sort().pop() || LB_START; }
+function cmbTrend(key, name, LAB, opt){ return lbTrend({id: "all", hs7: {scen: [], changes: []}}, {name}, LAB, Object.assign({mapAt: d => d, cnt: d => cmbCount(key, d), ch: cmbCh(), anyCase: true, c0: cmbC0()}, opt || {})); }
+function cmbLine(key, name, LAB){ return cmbTrend(key, name, LAB, {bare: true, w: 300, h: 130}); }
+function cmbSpark(key){  /* 칸 안의 작은 추이선과 같은 모양 */
+  const today = BR.issues[0].date, c0 = cmbC0(), days = []; for (let d = c0; d <= today; d = ymdAdd(d, 1)) days.push(d);
+  const ser = days.map(d => cmbCount(key, d)), KS0 = HS_ORD.filter(k => ser.some(v => v[k] > 0)), KS = KS0.length > 1 && ser.every(v => v.same >= 50) ? KS0.filter(k => k !== "same") : KS0;
+  return indSpark({days, ser, KS});
+}
+function cmbWhy(key, LAB){  /* 종합의 선 그래프 아래 상자: 가장 최근 확률 변경일에 바뀐 사안과 종합 점 개수의 변화 */
+  const ch = cmbCh(), x = ch[ch.length - 1];
+  if (!x) return "<div class=\"ind-why ind-why0\"><p class=\"iw-h\"><b>No recent change</b></p></div>";
+  const a = cmbCount(key, x.prev), b = cmbCount(key, x.next), ks0 = ["big", "worse", "better"].filter(k => a[k] || b[k]), ks = ks0.length ? ks0 : ["same"];
+  const row = (l, u, v) => '<li><span class="iw-k">' + l + '</span><span class="iw-v">' + u + '<i>→</i>' + v + "</span></li>";
+  const cs = cmbCases().filter(s => (s.hs7.changes || []).some(z => z.d === x.d));
+  return '<div class="ind-why"><p class="iw-h"><b>Changed ' + enDate(x.d, true) + "</b></p>" +
+    cs.map(s => { const z = (s.hs7.changes || []).filter(q => q.d === x.d).pop(); if (!z) return ""; const SN = {}; s.hs7.scen.forEach(q => SN[q.id] = q.name);
+      const ds = Object.keys(z.next).filter(q => z.prev[q] !== z.next[q]).sort((p, q) => Math.abs(z.next[q] - z.prev[q]) - Math.abs(z.next[p] - z.prev[p]));
+      return '<div class="iw-s"><p class="iw-t">' + esc(LB_SHORT[s.id] || s.title.split(":")[0]) + " scenario probabilities</p><ul>" + ds.map(q => row(esc(SN[q] || q), z.prev[q] + "%", z.next[q] + "%")).join("") + "</ul></div>"; }).join("") +
+    "<div class=\"iw-s\"><p class=\"iw-t\">Dot counts, all five issues combined</p><ul>" + ks.map(k => row('<i class="iw-c" style="background:' + HS_COL[k] + '"></i>' + LAB[k], a[k] + "", b[k] + "")).join("") + "</ul></div></div>";
+}
+function indG(I, c){ const v = IND.cells[I.k][c.id], G = {cls: {}, name: I.name}; c.scen.forEach(s => G.cls[s.id] = v[s.id].c); return G; }
+function indCase(c){ return typeof BR !== "undefined" && BR && BR.issues && BR.issues.length && D ? (D.strategies || []).find(s => s.id === c.id && s.hs7) : null; }
+function indDelta(cs, G){ const H = cs.hs7, a = hsCountP(H, G, lbMapAt(H)(ymdAdd(BR.issues[0].date, -7))), b = hsCount(H, G, "p"), o = {}; HS_ORD.forEach(k => o[k] = b[k] - a[k]); return o; }
+function indSer(cs, G){  /* 칸 안의 작은 추이선 자료: 국민의 삶 선 그래프와 같은 규칙(현재와 비슷함이 늘 50번 이상이면 뺌) */
+  const H = cs.hs7, mapAt = lbMapAt(H), today = BR.issues[0].date; let a = LB_START; const have = (Date.parse(today) - Date.parse(a)) / 864e5, span = Math.min(29, Math.max(6, have)); if (have > span) a = ymdAdd(today, -span);
+  const c0 = LB_CASE0[cs.id] && LB_CASE0[cs.id] > a ? LB_CASE0[cs.id] : a, days = []; for (let d = c0; d <= today; d = ymdAdd(d, 1)) days.push(d);
+  const ser = days.map(d => hsCountP(H, G, mapAt(d))), KS0 = HS_ORD.filter(k => ser.some(v => v[k] > 0)), KS = KS0.length > 1 && ser.every(v => v.same >= 50) ? KS0.filter(k => k !== "same") : KS0;
+  return {days, ser, KS};
+}
+function indSpark(S){  /* v3.98: 작은 추이선은 모양만 보임. 세로는 그 칸의 최솟값~최댓값, 가로는 자료가 있는 기간을 칸 너비에 맞춤. 바뀐 적이 없으면 가운데 수평선 */
+  const {days, ser, KS} = S, W = 96, Hh = 30, n = days.length, vs = ser.flatMap(v => KS.map(k => v[k])), lo = Math.min(...vs), hi = Math.max(...vs);
+  const X = i => 3 + (W - 6) * (n > 1 ? i / (n - 1) : 1), Y = v => hi === lo ? Hh / 2 - 1 : Hh - 6 - (Hh - 12) * (v - lo) / (hi - lo);
+  const LC = {big: "#C8102E", worse: "#E8890C", better: "#0EA5A4", same: "#8C96A3"};
+  return '<svg class="ind-sp" viewBox="0 0 ' + W + " " + Hh + '" aria-hidden="true">' +
+    KS.map(k => '<path d="' + ser.map((v, i) => (i ? "H" + X(i).toFixed(1) + "V" : "M" + X(i).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("") + '" fill="none" stroke="' + LC[k] + '" stroke-width="1.8" stroke-linejoin="round"/><circle cx="' + X(n - 1).toFixed(1) + '" cy="' + Y(ser[n - 1][k]).toFixed(1) + '" r="2.2" fill="' + LC[k] + '"/>').join("") + "</svg>";
+}
 function indDetail(I, c){
   const v = IND.cells[I.k][c.id], T = {base: "Baseline", shock: "3-year average from the year of the event", state: "2030 level"};
-  return '<div class="ind-det"><p class="lb-lab">' + esc(c.title) + " · " + esc(I.name) + (c.id === "iran" ? " <span class=\"note\">This issue is measured against a continuing war (the People's Lives graph uses the prewar baseline).</span>" : "") + '</p><ul>' +
+  return '<div class="ind-det"><p class="lb-lab">' + esc(c.title) + " · " + esc(I.name) + (c.id === "iran" ? " <span class=\"note\">This issue is measured against a continuing war.</span>" : "") + '</p><ul>' +
     c.scen.slice().sort((a, b) => b.p - a.p).map(s => { const z = v[s.id];
       return '<li><span class="ind-sn">' + esc(s.name) + ' <span class="mono">' + s.p + '%</span></span><span class="ind-c" style="--c:' + HS_COL[z.c] + '">' + (s.t === "base" ? "Baseline path" : IND_LAB[z.c] + " " + indPct(z.x)) + '</span>' +
         (s.t === "base" ? "<span class=\"ind-w note\">The conflict persists in its current form. Other scenarios are measured against this baseline.</span>" : '<span class="ind-w">' + (z.w ? esc(z.w) + " " : "") + "<span class=\"note\">Revenue " + indPct(z.r / 100) + ", margin " + (z.dm >= 0 ? "+" : "−") + Math.abs(z.dm) + " pp · range " + indPct(z.lo) + " to " + indPct(z.hi) + " · " + T[s.t] + "</span></span>") + "</li>"; }).join("") + "</ul></div>";
 }
+function indWhy(cs, G, LAB, lab2){ LAB = LAB || IND_LAB;  /* v3.98: 선 그래프 오른쪽 상자. 가장 최근 확률 변경의 까닭, 바뀐 전개 확률, 이 업종의 점 개수 변화 */
+  const H = cs.hs7, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d)), x = ch[ch.length - 1];
+  if (!x) return "<div class=\"ind-why ind-why0\"><p class=\"iw-h\"><b>No recent change</b></p><p class=\"iw-r\">Probabilities for this issue have not changed since they were published on October 10.</p></div>";
+  const SN = {}; H.scen.forEach(s => SN[s.id] = s.name);
+  const ds = Object.keys(x.next).filter(k => x.prev[k] !== x.next[k]).sort((p, q) => Math.abs(x.next[q] - x.prev[q]) - Math.abs(x.next[p] - x.prev[p]));
+  const a = hsCountP(H, G, x.prev), b = hsCountP(H, G, x.next), ks0 = ["big", "worse", "better"].filter(k => a[k] || b[k]), ks = ks0.length ? ks0 : ["same"];
+  const row = (l, u, v) => '<li><span class="iw-k">' + l + '</span><span class="iw-v">' + u + '<i>→</i>' + v + "</span></li>";
+  return '<div class="ind-why"><p class="iw-h"><b>Changed ' + enDate(x.d, true) + "</b></p>" + (x.why ? '<p class="iw-r">' + esc(x.why) + "</p>" : "") +
+    "<div class=\"iw-s\"><p class=\"iw-t\">Scenario probabilities</p><ul>" + ds.map(k => row(esc(SN[k] || k), x.prev[k] + "%", x.next[k] + "%")).join("") + "</ul></div>" +
+    '<div class="iw-s"><p class="iw-t">' + (lab2 || "Dot counts for this industry") + '</p><ul>' + ks.map(k => row('<i class="iw-c" style="background:' + HS_COL[k] + '"></i>' + LAB[k], a[k] + "", b[k] + "")).join("") + "</ul></div></div>";
+}
+const IND_NARROW = typeof matchMedia === "function" ? matchMedia("(max-width:699px)") : null;
+function indTrendPanel(I, c){  /* v3.98: 칸 아래쪽(작은 추이선)을 누르면 펼치는 선 그래프 상세. 위 = 선 그래프(전체 폭), 아래 왼쪽 = 최근 변경, 아래 오른쪽 = 최근 정보 */
+  const cs = indCase(c), G = indG(I, c); if (!cs) return "";
+  const opt = IND_NARROW && IND_NARROW.matches ? {w: 340, h: 196} : {w: 680, h: 220};
+  opt.tag = "ind|" + I.k + "|" + c.id;
+  return '<div class="ind-det ind-det-t"><p class="lb-lab">' + esc(c.title) + " · " + esc(I.name) + '</p>' + lbTrend(cs, G, IND_LAB, opt) +
+    '<div class="ind-tr">' + indWhy(cs, G) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + lbRecentHtml(lbRecent(cs.id, 3), BR.issues[0].date) + "</div></div></div>";
+}
+function indJump(cid, d){  /* v3.99(2026-10-12 결재): 정세 브리핑의 '산업별 미래 →' — 그날의 확률 변경으로 점 개수가 가장 크게 움직인 업종의 선 그래프 상세를 연다 */
+  const c = IND.cases.find(x => x.id === cid), cs = c && indCase(c), ch = cs && (cs.hs7.changes || []).filter(x => x.d === d).pop();
+  let best = null;
+  if (ch) IND.inds.forEach((I, i) => { const G = indG(I, c), a = hsCountP(cs.hs7, G, ch.prev), b = hsCountP(cs.hs7, G, ch.next), sc = ["big", "worse", "better"].reduce((t, k) => t + Math.abs(b[k] - a[k]), 0);
+    const key = [sc, I.c === INDC ? 1 : 0, -i]; if (sc && (!best || key[0] > best.key[0] || (key[0] === best.key[0] && (key[1] > best.key[1] || (key[1] === best.key[1] && key[2] > best.key[2]))))) best = {I, key}; });
+  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "t"; }
+  renderIndustry();
+  requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+}
+function indBoard(){ const b = document.getElementById("indboard"); if (b) { b.innerHTML = indRows(); fitTrends(b); } }
+function fitTrends(root){  /* v3.99: 선 그래프의 그림 폭을 실제로 보이는 폭에 맞춰 다시 그려 글자 크기가 화면 폭과 관계없이 같게 한다(지구본 없는 넓은 화면) */
+  (root || document).querySelectorAll("figure.lt[data-lt]").forEach(f => { const w = Math.round(f.clientWidth); if (!w || Math.abs(w - +f.dataset.w) < 6) return;
+    const [k, a, b] = f.dataset.lt.split("|"); let html = "";
+    if (k === "lbg") { const c = (D.strategies || []).find(x => x.id === a), G = c && c.hs7.groups.find(g => g.k === b); if (G) html = lbTrend(c, G, null, {tag: f.dataset.lt, w, h: w < 600 ? 196 : 220}); }
+    else if (k === "lb") { const c = (D.strategies || []).find(x => x.id === a), G = c && lifePick(c); if (G) html = lbTrend(c, G, null, {tag: f.dataset.lt, w, h: Math.round(Math.min(210, Math.max(154, w * 0.42)))}); }
+    else if (k === "cmb") { const [, t, key] = f.dataset.lt.split("|"); const nm = t === "ind" ? ((IND && IND.inds.find(x => x.k === key)) || {}).name : key; html = cmbTrend(t + "|" + key, nm || "", t === "ind" ? IND_LAB : null, {tag: f.dataset.lt, w, h: w < 600 ? 196 : t === "ind" ? 230 : 220}); }
+    else if (k === "ind" && IND) { const I = IND.inds.find(x => x.k === a), c = IND.cases.find(x => x.id === b), cs = c && indCase(c); if (I && cs) html = lbTrend(cs, indG(I, c), IND_LAB, {tag: f.dataset.lt, w, h: w < 600 ? 196 : 230}); }
+    if (html) f.outerHTML = html; });
+}
+{ let rt = 0; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (S.tab === "brief" || S.tab === "industry") fitTrends(document.getElementById("pane-" + S.tab)); }, 150); }); }
+if (IND_NARROW && IND_NARROW.addEventListener) IND_NARROW.addEventListener("change", () => { if (INDOPEN && INDMODE === "t") indBoard(); });
+function dotCell(at, name, n, dl, oD, oT, spark, cls){  /* v3.99: 점 그래프 칸(위: 점 그래프와 개수, 아래: 점 개수 추이). at = 누를 때 쓰는 data 속성 이름, 값은 "<행>|<열>" */
+  const k0 = at.split("=")[0], bad = n.big + n.worse, good = n.better;
+  const dv = k => dl && dl[k] ? '<i class="ind-d ' + ((dl[k] > 0) === (k === "better") ? "good" : "bad") + "\" title=\"Change over the past 7 days\">" + (dl[k] > 0 ? "▲" : "▼") + Math.abs(dl[k]) + "</i>" : "";
+  return '<div class="ind-cell' + (oD || oT ? " on" : "") + (cls ? " " + cls : "") + '"><button type="button" class="ind-cb' + (oD ? " on" : "") + '" ' + at + " title=\"Open the reasoning\" aria-expanded=\"" + !!oD + '"><span class="ind-cn">' + name + "</span>" + hsDots(n) +
+    '<span class="ind-ct">' + (bad || good ? (n.big ? "<b class=\"ind-big\">Much worse " + n.big + dv("big") + "</b>" : "") + (n.worse ? "<b class=\"ind-bad\">Worse " + n.worse + dv("worse") + "</b>" : "") + (good ? "<b class=\"ind-good\">Better " + good + dv("better") + "</b>" : "") : "<span class=\"note\">No change</span>") + "</span></button>" +
+    (spark ? '<button type="button" class="ind-tb' + (oT ? " on" : "") + '" ' + at + ' ' + k0 + "m=\"t\" title=\"Open the line chart and recent changes\" aria-expanded=\"" + !!oT + "\"><span class=\"ind-tl\">Dot-count trend</span>" + spark + "</button>" : "") + "</div>";
+}
+function cmbDelta(key){ const t = BR.issues[0].date, a = cmbCount(key, ymdAdd(t, -7)), b = cmbCount(key, t), o = {}; HS_ORD.forEach(k => o[k] = b[k] - a[k]); return o; }
+const CMB_NOTE = {  /* v3.99: 종합 그래프의 계산 설명(짧게) */
+  ind: "The combined chart adds up the profit change judged for each issue across 100 futures in which all five issues unfold together, then compares the total with the current trend. A loss from one issue can be offset by a gain from another. Where two issues act through the same channel (for example, the same European defense procurement), only the larger of the two effects is counted. Factory capacity limits are not taken into account. Links between the issues are captured through the world scenarios on the World Order tab.",
+  life: "The combined chart adds up the change in the four category scores judged for each issue across 100 futures in which all five issues unfold together, then compares the result with today. Links between the issues are captured through the world scenarios on the World Order tab."};
+function cmbDetail(title, n, kind, key, LAB){  /* 종합 점 그래프를 누르면: 국민의 삶 카드와 같은 형식의 근거, 짧은 계산 설명, 국제 질서 흐름별 점 개수 */
+  return '<div class="ind-det lbx-det cmb-det"><p class="lb-lab">' + title + "</p>" + cmbExplain(kind, key, LAB) +
+    '<p class="cmb-m1">' + CMB_NOTE[kind] + "</p>" +
+    "<details class=\"cmb-wd\"><summary>How the 100 futures shift with the world order</summary><div class=\"cmb-l\">" + n.w.map(w => '<div class="cmb-w"><p class="cmb-c">' + esc(w.name) + ' <span class="mono">' + w.p + '%</span></p><div class="cmb-b">' + hsDots(w) + '<span class="cmb-n">' + lifeNums(w, "<br>") + "</span></div></div>").join("") + "</div></details></div>";
+}
+function cmbCombos(kind, k, d){  /* 오늘 확률로 5개 사안의 전개 조합을 모두 펼침(세계 시나리오로 가중). [{p, sids, v, c}] */
+  const cs = cmbCases(), maps = cmbMaps(d), per = cs.map((s, i) => ({s, C: cmbCond(s, maps[i])})), CAT = ["개인", "공동체", "정치", "경제"];
+  const val = kind === "ind" ? (s, sid) => { const v = IND.cells[k] && IND.cells[k][s.id]; return [v && v[sid] ? v[sid].x : 0]; }  /* 사안별 원래 효과(표시용) */
+    : (s, sid) => { const G = s.hs7.groups.find(g => g.k === k); return CAT.map(c => { const x = G && G.cat[c]; return x && !x.na && x.by && x.by[sid] != null ? x.by[sid] - x.now : 0; }); };
+  const now = kind === "ind" ? [0] : cmbNow(k), M = new Map();
+  per[0].C.wp.forEach((pw, w) => { let L = [{p: pw, sids: [], v: now.map(() => 0)}];
+    per.forEach(({s, C}) => { const nl = []; L.forEach(o => C.ids.forEach((id, j) => { const q = C.M[w][j]; if (q > 1e-9) { const e = val(s, id); nl.push({p: o.p * q, sids: o.sids.concat(id), v: o.v.map((x, i) => x + e[i])}); } })); L = nl; });
+    L.forEach(o => { const key = o.sids.join(","); const z = M.get(key); if (z) z.p += o.p; else M.set(key, o); }); });
+  if (kind === "ind") M.forEach(o => { o.raw = o.v[0]; o.v = [cmbChSum(o.sids.flatMap((sid, i) => cmbChParts(k, per[i].s, sid)))]; });  /* 합계는 경로 규칙으로 */
+  const cl = kind === "ind" ? v => { const x = Math.round(v[0] * 1000) / 1000; return x > 0.10 ? "better" : x < -0.30 ? "big" : x < -0.10 ? "worse" : "same"; }
+    : v => { const dd = v.map((x, j) => Math.round(Math.max(-now[j], Math.min(100 - now[j], x)) * 10) / 10); if (Math.max(...dd) > 20) return "better"; if (Math.min(...dd) < -20 || dd.filter(q => q < -10).length >= 2) return "big"; if (Math.min(...dd) < -1) return "worse"; if (Math.max(...dd) > 1) return "better"; return "same"; };
+  return {cs, now, val, L: [...M.values()].map(o => Object.assign(o, {c: cl(o.v)}))};
+}
+function cmbExplain(kind, k, LAB){  /* 국민의 삶 카드와 같은 형식: 점 100개의 구성(분류마다 주로 들어 있는 전개), 가장 나쁜·좋은 경우 */
+  const {cs, now, val, L} = cmbCombos(kind, k, BR.issues[0].date), SN = {}; cs.forEach(s => s.hs7.scen.forEach(x => SN[s.id + "|" + x.id] = x.name));
+  const nm = key => { const c = key.split("|")[0], sh = LB_SHORT[c] || "", n = SN[key] || ""; return n.indexOf(sh.split(/[·\s-]/)[0]) === 0 ? n : sh + " " + n; };
+  const sign = (s, sid) => { const e = val(s, sid); return Math.min(...e) < -1e-9 ? -1 : Math.max(...e) > 1e-9 ? 1 : 0; };
+  const mix = ["big", "worse", "better"].map(c => { const sub = L.filter(o => o.c === c), tot = sub.reduce((a, o) => a + o.p, 0); if (tot < 0.005) return "";
+    const acc = {}; sub.forEach(o => o.sids.forEach((sid, i) => { if (sign(cs[i], sid) === (c === "better" ? 1 : -1)) { const key = cs[i].id + "|" + sid; acc[key] = (acc[key] || 0) + o.p; } }));
+    const top = Object.entries(acc).sort((a, b) => b[1] - a[1]).filter(e => Math.round(e[1] * 100) >= 1).slice(0, 3);
+    return '<li><span class="lb-mk"><i style="background:' + HS_COL[c] + '"></i>' + LAB[c] + '</span><span class="lb-ms">' + (top.length ? top.map(([key, p]) => esc(nm(key)) + " " + Math.round(p * 100) + "").join(" · ") : "Small changes from several issues adding up") + "</span></li>"; }).join("");
+  const pick = c => L.filter(o => o.c === c).sort((a, b) => b.p - a.p)[0];
+  const wc = pick("big") ? "big" : pick("worse") ? "worse" : null, w = wc && pick(wc), b = pick("better");
+  const CN = ["개인", "공동체", "정치", "경제"].map(k => (HS_CAT.find(c => c[0] === k) || [k, k])[1]);
+  const det = (o, lab) => { if (!o) return ""; const sc = o.sids.map((sid, i) => [cs[i], sid]).filter(([s, sid]) => sign(s, sid));
+    const rows = kind === "ind" ? sc.map(([s, sid]) => '<li><span class="lb-dk">' + esc(LB_SHORT[s.id]) + '</span><span class="lb-dv">' + esc(SN[s.id + "|" + sid]) + '</span><span class="lb-dp">' + indPct(val(s, sid)[0]) + "</span></li>").join("") + (Math.abs(o.raw - o.v[0]) > 0.0005 ? "<li><span class=\"lb-dk\">Overlap</span><span class=\"lb-dv\">Same channel: only the larger effect counts</span><span class=\"lb-dp\">" + indPct(o.v[0] - o.raw) + "</span></li>" : "") + "<li class=\"cmb-sum\"><span class=\"lb-dk\">Total</span><span class=\"lb-dv\"></span><span class=\"lb-dp\">" + indPct(o.v[0]) + "</span></li>"
+      : CN.map((nm, j) => { const to = Math.max(0, Math.min(100, now[j] + o.v[j])); return Math.abs(o.v[j]) > 1 ? '<li><span class="lb-dk">' + nm + '</span><span class="lb-dv"></span><span class="lb-dp">' + Math.round(now[j]) + "→" + Math.round(to) + "</span></li>" : ""; }).join("");
+    return '<div class="lb-det"><p class="lb-lab">' + lab + " · <b>" + sc.map(([s, sid]) => esc(nm(s.id + "|" + sid))).join(" + ") + "</b> (" + (o.p < 0.005 ? "under 1% likely" : "likelihood " + Math.round(o.p * 100) + "%") + ")" + '<span class="lb-col">' + (kind === "ind" ? "Profit vs. trend" : "Score: now → this case") + "</span></p><ul>" + rows + "</ul></div>"; };
+  return '<div class="lb-mix"><ul>' + mix + "</ul></div>" + (w ? det(w, "If the most likely bad case plays out") : "") + (b ? det(b, "If the most likely good case plays out") : "");
+}
+function cmbRecent(n){ const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out; }
 function indRow(I){
   const ns = IND.cases.map((c, i) => [c, indCount(I.k, c), i]);
   ns.sort((x, y) => ((y[1].big + y[1].worse + y[1].better) - (x[1].big + x[1].worse + x[1].better)) || ((y[1].big + y[1].worse) - (x[1].big + x[1].worse)) || (x[2] - y[2]));  /* v3.94f: 업종마다 색 점이 많은 분쟁부터 */
-  const cells = ns.map(([c, n]) => { const bad = n.big + n.worse, good = n.better, open = INDOPEN === I.k + "|" + c.id;
-    return '<button type="button" class="ind-cell' + (open ? " on" : "") + '" data-ind="' + esc(I.k + "|" + c.id) + '" aria-expanded="' + open + '"><span class="ind-cn">' + esc(IND_SHORT[c.id] || c.title) + "</span>" + hsDots(n) +
-      '<span class="ind-ct">' + (bad || good ? (n.big ? "<b class=\"ind-big\">Much worse " + n.big + "</b>" : "") + (n.worse ? "<b class=\"ind-bad\">Worse " + n.worse + "</b>" : "") + (good ? "<b class=\"ind-good\">Better " + good + "</b>" : "") : "<span class=\"note\">No change</span>") + "</span></button>"; }).join("");  /* v3.94g: 크게 악화를 따로, 한 줄에 하나씩 */
-  const op = INDOPEN && INDOPEN.split("|")[0] === I.k ? IND.cases.find(c => c.id === INDOPEN.split("|")[1]) : null;
-  return '<article class="lb-card ind-card"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + "</b><span class=\"lb-size\">Normal operating margin " + (I.m * 100).toFixed(1) + "%" + (I.floor ? " (floor)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
-    '<div class="ind-cells">' + cells + "</div>" + (op ? indDetail(I, op) : "") + "</article>";
+  const cells = ns.map(([c, n]) => { const bad = n.big + n.worse, good = n.better, open = INDOPEN === I.k + "|" + c.id, oD = open && INDMODE !== "t", oT = open && INDMODE === "t", cs = indCase(c), G = indG(I, c), dl = cs ? indDelta(cs, G) : {};
+    const dv = k => dl[k] ? '<i class="ind-d ' + ((dl[k] > 0) === (k === "better") ? "good" : "bad") + "\" title=\"Change over the past 7 days\">" + (dl[k] > 0 ? "▲" : "▼") + Math.abs(dl[k]) + "</i>" : "";
+    return '<div class="ind-cell' + (open ? " on" : "") + '"><button type="button" class="ind-cb' + (oD ? " on" : "") + '" data-ind="' + esc(I.k + "|" + c.id) + '" aria-expanded="' + oD + '"><span class="ind-cn">' + esc(IND_SHORT[c.id] || c.title) + "</span>" + hsDots(n) +
+      '<span class="ind-ct">' + (bad || good ? (n.big ? "<b class=\"ind-big\">Much worse " + n.big + dv("big") + "</b>" : "") + (n.worse ? "<b class=\"ind-bad\">Worse " + n.worse + dv("worse") + "</b>" : "") + (good ? "<b class=\"ind-good\">Better " + good + dv("better") + "</b>" : "") : "<span class=\"note\">No change</span>") + "</span></button>" + (cs ? '<button type="button" class="ind-tb' + (oT ? " on" : "") + '" data-ind="' + esc(I.k + "|" + c.id) + '" data-indm="t" aria-expanded="' + oT + "\"><span class=\"ind-tl\">Dot-count trend</span>" + indSpark(indSer(cs, G)) + "</button>" : "") + "</div>"; }).join("");  /* v3.94g: 크게 악화를 따로, 한 줄에 하나씩 */
+  const op = INDOPEN && INDOPEN.split("|")[0] === I.k ? IND.cases.find(c => c.id === INDOPEN.split("|")[1]) : null, oa = INDOPEN === I.k + "|all", ak = "ind|" + I.k;
+  const opd = op ? (INDMODE === "t" ? indTrendPanel(I, op) : indDetail(I, op)) : oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("All five issues combined · " + esc(I.name), cmbCount(ak, BR.issues[0].date), "ind", I.k, IND_LAB)) : "";
+  const all = dotCell('data-ind="' + esc(I.k + "|all") + '"', "All five issues combined", cmbCount(ak, BR.issues[0].date), cmbDelta(ak), oa && INDMODE !== "t", oa && INDMODE === "t", cmbLine(ak, I.name, IND_LAB), "ind-allc");
+  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + "</b><span class=\"lb-size\">Normal operating margin " + (I.m * 100).toFixed(1) + "%" + (I.floor ? " (floor)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
+    '<div class="ind-all">' + all + "</div><div class=\"ind-cw\"><p class=\"ind-capr\">100 futures, issue by issue</p><div class=\"ind-cells\">" + cells + "</div></div>" + opd + "</article>";
+}
+function indAllTrend(I){
+  const opt = IND_NARROW && IND_NARROW.matches ? {w: 340, h: 196} : {w: 680, h: 230}; opt.tag = "cmb|ind|" + I.k;
+  return "<div class=\"ind-det ind-det-t\"><p class=\"lb-lab\">All five issues combined · " + esc(I.name) + "</p>" + cmbTrend("ind|" + I.k, I.name, IND_LAB, opt) +
+    '<div class="ind-tr">' + cmbWhy("ind|" + I.k, IND_LAB) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + lbRecentHtml(cmbRecent(3), BR.issues[0].date) + "</div></div></div>";
 }
 function indRows(){
   const L = IND.inds.filter(I => I.c === INDC).map((I, i) => { const t = IND.cases.reduce((a, c) => { const n = indCount(I.k, c); return [a[0] + n.big + n.worse + n.better, a[1] + n.big + n.worse]; }, [0, 0]); return [I, t, i]; });
@@ -1962,30 +2241,27 @@ function indRows(){
 }
 function renderIndustry(){
   const el = $("#pane-industry"); if (!el) return;
-  if (!IND) { el.innerHTML = "<div class=\"sec\"><p class=\"note\">Loading industry impact…</p></div>";
-    fetch("/en/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry impact could not be loaded.</p></div>"; }).catch(() => {}); return; }
-  el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Impact · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">100 futures through 2030: the outlook for industry profits</h2>" +
+  if (!IND) { el.innerHTML = "<div class=\"sec\"><p class=\"note\">Loading Industry Outlook…</p></div>";
+    fetch("/en/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry Outlook could not be loaded.</p></div>"; }).catch(() => {}); return; }
+  el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Outlook · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">100 futures through 2030: the outlook for industry profits</h2>" +
     "<p class=\"lb-lead\"><b>Suppose the years to 2030 played out a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of the five issues, 100 dots show the spread of possible futures. The baseline is each industry's projected profit if the issue stays as it is today. Select a chart to see the detailed reasoning behind it. The dot counts are calculated from Clisa Geopolitics' judgment estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Choose which country's industries to show\">" + [["kr", "South Korean industries"], ["us", "U.S. industries"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
-    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "</p></div>" +
+    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Key dot counts over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><b class=\"lg-pv\">22</b>Count just before a change</span>" + "</p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
     "<div class=\"ind-note\"><p><b>How the assessment works.</b> For each industry, every scenario in each conflict is assessed for how far 2030 operating profit would diverge from the current trend, through shifts in revenue and in operating margin. The change is measured against the industry's normal operating profit, based on the median operating margin of the past decade (with a floor of 3 percent). A gain of more than 10 percent counts as Better; a decline of more than 10 percent as Worse; and a decline of more than 30 percent, or an industry-wide loss, as Much worse. Shocks such as a blockade or a war are measured as a three-year average from the year they occur; changes of state such as a ceasefire or a settlement are measured at their 2030 level. Industries with thin normal margins (defense at 5.0 percent, shipbuilding at 3.0 percent) tend to show outsize swings from even modest changes in margin.</p>" +
     "<p><b>Sources.</b> Company results are drawn from raw filings with DART, the electronic disclosure system run by South Korea's Financial Supervisory Service, and with the U.S. Securities and Exchange Commission (SEC). For U.S. companies that do not report operating income—all financial firms, the integrated oil majors, and some agriculture and aerospace companies—pretax income is used instead. The normal operating margin for South Korean finance is based on the past three years.</p>" +
-    "<p class=\"note\">This tab assesses how conflicts could affect the profits of entire industries. It does not constitute investment advice on any individual company.</p></div></section>";
+    "<p class=\"note\">This tab assesses how conflicts could affect the profits of entire industries. It does not constitute investment advice on any individual company.</p></div></section>"; fitTrends(el);
 }
 function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "Other";
   return "<section class=\"lb\" id=\"s-life\"><p class=\"eyebrow\">People's Lives · as of " + enDate(x.date) + "</p><h2 class=\"lb-h\">100 futures through 2030</h2>" +
-    "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of the five issues, 100 dots show the spread of possible futures, and that spread shifts as new events unfold. The dot counts are calculated from Clisa Geopolitics' judgment estimates.</p>" +
+    "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of the five issues, 100 dots show the spread of possible futures, and that spread shifts as new events unfold. Select a chart to see the detailed reasoning. The dot counts are calculated from Clisa Geopolitics' judgment estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Whose lives to show\">" + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Key dot counts over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><b class=\"lg-pv\">22</b>Count just before a change</span></p></div>" +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     "<p class=\"lb-note\">Much worse: any one category falls by more than 20 points, or two categories fall by more than 10 points each. In the daily chart, the October 9 value applies the current classification to that day's probabilities (the graph was published on October 10).</p></section>" +
-    "<section class=\"lb-feed\" id=\"brief\"><div class=\"bh\"><h3>Today's updates</h3><span class=\"bd\">" + fmtKD(x.date) + "</span></div>" +
-    '<ul class="lb-list">' + x.items.map((i, n) => '<li id="bi-' + n + '"><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + "\" title=\"Show on the globe\">" + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + lbFx(i, false, x.date) +
-      ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + "\" target=\"_blank\" rel=\"noopener\">Source</a>" : "") + "</li>").join("") +
-      (x.more || []).map(m => "<li><span class=\"lb-cs lb-etc\">Other</span><span class=\"lb-t\">" + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + "\" target=\"_blank\" rel=\"noopener\">Source</a>" : "") + "</li>").join("") + "</ul>" + weekLine(x.date) + "</section>";
+    "<p class=\"lb-tobr\"><button type=\"button\" class=\"chip\" data-go=\"overview\" data-bgo=\"1\">What moved these graphs · see the briefing →</button></p>";
 }
 function lifeStripHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
@@ -2434,7 +2710,7 @@ function routeOf(){
   const t = S.tab;
   if (t === "overview") return "/";
   if (t === "strat") return "/case/" + (S.scase ? S.scase + "/" : "");
-  if (t === "brief") { if (!BR) return LOC().indexOf("/brief/") === 0 ? LOC() : "/brief/"; const c = briefCur(); return "/brief/" + (c && BR && c !== BR.issues[0] ? c.date + "/" : ""); }
+  if (t === "brief") { if (!BR) return /^\/(brief|life)\//.test(LOC()) ? LOC() : "/life/"; const c = briefCur(); return c && BR && S.bdate ? "/brief/" + c.date + "/" : "/life/"; }  /* v3.99: 국민의 삶은 /life/, 날짜별 브리핑 전문은 /brief/날짜/ */
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return "/feature/" + (c && c !== L[0] ? c.id + "/" : ""); }
   if (t === "page") return LOC();
   if (t === "method") return "/" + (S.info || "method") + "/";
@@ -2457,14 +2733,15 @@ function applyRoute(){
   if ((m = p.match(/^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/))) {
     if (BR && !BR.issues.some(x => x.date === m[1])) { pageGo(enAdd(p)); return true; }
     S.bdate = m[1]; renderBrief(); switchTab("brief"); return true; }
-  if (/^\/brief\/?$/.test(p)) { S.bdate = null; renderBrief(); switchTab("brief"); return true; }
+  if (/^\/life\/?$/.test(p)) { S.bdate = null; renderBrief(); switchTab("brief"); return true; }
+  if (/^\/brief\/?$/.test(p)) { switchTab("overview"); requestAnimationFrame(() => { const b = document.getElementById("brief"); if (b) b.scrollIntoView({block: "start"}); }); return true; }  /* v3.99: 정세 브리핑은 세계 정세 맨 위 */
   if (/^\/industry\/?$/.test(p)) { switchTab("industry"); return true; }
   if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
   if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
   if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) { pageGo(enAdd(p)); return true; }
   if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { switchTab(m[1]); return true; }
-  if (p === "/" && !location.hash) { switchTab(ROUTE_FIRST && !location.search ? "brief" : "overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
+  if (p === "/" && !location.hash) { switchTab("overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
   return false;
 }
 addEventListener("popstate", () => { if (D && ROUTES) { HASH_READY = false; applyRoute(); HASH_READY = true; if (S.tab !== "page") document.title = titleOf(); } });
@@ -2479,7 +2756,7 @@ function titleOf(){
   if (t === "page") return (PAGE_C[PAGE_CUR] || {}).t || document.title;
   if (t === "overview" || !D) return SITE_T;
   if (t === "strat") { const c = S.scase && (D.strategies || []).find(x => x.id === S.scase); return (c ? c.title : gl("strat")) + sx; }
-  if (t === "brief") { const c = BR && briefCur(), m = c && c !== BR.issues[0] && /^(\d{4})-(\d{2})-(\d{2})/.exec(c.date); return gl("brief") + (m ? " · " + enDate(c.date) : "") + sx; }
+  if (t === "brief") { const c = BR && S.bdate && briefCur(), m = c && /^(\d{4})-(\d{2})-(\d{2})/.exec(c.date); return (m ? "Briefing · " + enDate(c.date) : gl("brief")) + sx; }
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return (c && c !== L[0] ? c.title : gl("feature")) + sx; }
   if (t === "detail") return S.sel && hasPage(S.sel) ? D.countries[S.sel].name_ko + ": Situation and Grand Strategy" + sx : SITE_T;
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
@@ -2512,7 +2789,7 @@ function pageGo(url, push, after){
   }).catch(() => { if (seq === PAGE_SEQ) location.href = u.href; }).finally(() => document.documentElement.classList.remove("pg-wait"));
 }
 /* 사이트 안의 링크(a href)를 화면 안에서 옮긴다. 새 창·수정 키·다른 사이트·파일은 브라우저에 맡긴다 */
-const SOFT_RE = /^\/(?:$|(?:case|country|brief|feature|leader|power|guide|about|subscribe|grand|ideas|method|forecast)(?:\/|$))/;
+const SOFT_RE = /^\/(?:$|(?:case|country|brief|life|industry|feature|leader|power|guide|about|subscribe|grand|ideas|method|forecast)(?:\/|$))/;
 document.addEventListener("click", ev => {
   if (!ROUTES || !D || ev.defaultPrevented || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
   const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
@@ -2540,7 +2817,8 @@ switchTab = function(t){
   _switchTab(t);
   if (VIEW0 && VIEW0.key !== viewKey()) viewRestore();  /* v3.79 사안·일정·나라로 옮긴 지구본을 그 화면을 떠나면 되돌린다 */
   if (S.mark && !VIEW0) markSet(null);
-  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method" || S.tab === "ideas");
+  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method" || S.tab === "ideas" || S.tab === "industry" || (S.tab === "brief" && !S.bdate));  /* v3.99(2026-10-12 결재): 산업별 미래와 국민의 삶도 지구본 없이 넓은 글 칸 */
+  if (S.tab === "brief" || S.tab === "industry") fitTrends(document.getElementById("pane-" + S.tab));
   if (S.tab === "page") usfFill();  /* v3.86(2026-10-08 결재): 역사와 사상도 지구본 없이 */  /* v3.79 사이트 안내(분석 방법·이용 안내·운영자 인사말)는 지구본 없이 글만 */
   if (HASH_READY && ROUTES) routeSync(false);
   else if (HASH_READY && S.tab !== "detail") {
@@ -2596,7 +2874,7 @@ function navBack(){
 document.addEventListener("click", ev => {
   if (ev.target.closest("#navback,[data-navback]")) return;
   if (ev.target.closest(".gnav")) return;
-  if (ev.target.closest("[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],#bstrip,#srchres [data-sri]")) navPush();
+  if (ev.target.closest("[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],[data-golife],[data-goind],#bstrip,#srchres [data-sri]")) navPush();
 }, true);
 document.addEventListener("click", ev => {
   const b = ev.target.closest("#navback,[data-navback]"); if (!b) return;
