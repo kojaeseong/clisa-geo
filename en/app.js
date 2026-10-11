@@ -1837,7 +1837,7 @@ function lbTrend(c, G){
   const c0 = LB_CASE0[c.id] && LB_CASE0[c.id] > a ? LB_CASE0[c.id] : a;
   const days = []; for (let d = c0; d <= b; d = ymdAdd(d, 1)) days.push(d);
   const ser = days.map(d => { const n = hsCountP(H, G, mapAt(d)); return {d, bad: n.big + n.worse, good: n.better}; });
-  const W = 300, Hh = 118, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
+  const W = 300, Hh = 162, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
   const mx = Math.max(...ser.map(v => Math.max(v.bad, v.good))), yMax = Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
   const path = k => ser.map((v, i) => (i ? "H" + X(v.d).toFixed(1) + "V" : "M" + X(v.d).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("");
   const area = k => path(k) + "V" + B + "H" + X(ser[0].d).toFixed(1) + "Z";
@@ -1872,7 +1872,7 @@ function lbStats(n, dl){
     (d ? '<em class="lb-dl lb-dl-' + ((d > 0) === (k === "better") ? "good" : "bad") + "\" title=\"Change over the past 7 days\">" + (d > 0 ? "▲" : "▼") + Math.abs(d) + "</em>" : (has ? '<em class="lb-dl lb-dl-0"></em>' : "")) + "</li>"; }).join("") + (has ? "<li class=\"lb-dl-note\">▲▼ change over the past 7 days</li>" : "") + "</ul>";
 }
 function lbMix(H, G){  /* v3.92c 점 100개의 구성: 분류마다 그 분류에 드는 전개와 확률 */
-  return "<div class=\"lb-mix\"><p class=\"lb-lab\">Breakdown of the 100 dots</p><ul>" + ["big", "worse", "better", "same"].map(k => {
+  return '<div class="lb-mix"><ul>' +  /* v3.94f: 제목 '점 100개의 구성' 삭제(위 '2030년까지 100번의 미래'와 색 이름으로 이어짐) */ ["big", "worse", "better", "same"].map(k => {
     const ss = H.scen.filter(s => G.cls[s.id] === k && s.p > 0).sort((x, y) => y.p - x.p); if (!ss.length) return "";
     const sh = ss.slice(0, 3), more = ss.length - sh.length;
     return '<li><span class="lb-mk"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + '</span><span class="lb-ms">' + sh.map(s => esc(s.name) + " " + s.p + "%").join(" · ") + (more ? " and " + more + " more" : "") + "</span></li>";
@@ -1930,7 +1930,8 @@ function indDetail(I, c){
         (s.t === "base" ? "<span class=\"ind-w note\">The conflict persists in its current form. Other scenarios are measured against this baseline.</span>" : '<span class="ind-w">' + (z.w ? esc(z.w) + " " : "") + "<span class=\"note\">Revenue " + indPct(z.r / 100) + ", margin " + (z.dm >= 0 ? "+" : "−") + Math.abs(z.dm) + " pp · range " + indPct(z.lo) + " to " + indPct(z.hi) + " · " + T[s.t] + "</span></span>") + "</li>"; }).join("") + "</ul></div>";
 }
 function indRow(I){
-  const ns = IND.cases.map(c => [c, indCount(I.k, c)]);
+  const ns = IND.cases.map((c, i) => [c, indCount(I.k, c), i]);
+  ns.sort((x, y) => ((y[1].big + y[1].worse + y[1].better) - (x[1].big + x[1].worse + x[1].better)) || ((y[1].big + y[1].worse) - (x[1].big + x[1].worse)) || (x[2] - y[2]));  /* v3.94f: 업종마다 색 점이 많은 분쟁부터 */
   const cells = ns.map(([c, n]) => { const bad = n.big + n.worse, good = n.better, open = INDOPEN === I.k + "|" + c.id;
     return '<button type="button" class="ind-cell' + (open ? " on" : "") + '" data-ind="' + esc(I.k + "|" + c.id) + '" aria-expanded="' + open + '"><span class="ind-cn">' + esc(IND_SHORT[c.id] || c.title) + "</span>" + hsDots(n) +
       '<span class="ind-ct">' + (bad || good ? (bad ? "<b class=\"ind-bad\">Worse " + bad + "</b>" : "") + (good ? "<b class=\"ind-good\">Better " + good + "</b>" : "") : "<span class=\"note\">No change</span>") + "</span></button>"; }).join("");

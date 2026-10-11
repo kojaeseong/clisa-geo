@@ -896,7 +896,7 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .lbwrap{display:grid;gap:22px}
 .lb .eyebrow{margin:0} .lb-h{margin:2px 0 6px;font-size:24px;letter-spacing:-.02em}
 .lb-lead b{color:var(--ink);font-weight:700;display:block;margin-bottom:2px}
-.pane .lb-lead{margin:0;color:var(--ink-2);font-size:14px!important;line-height:1.65!important;max-width:62ch}
+.pane .lb-lead{margin:0;color:var(--ink-2);font-size:14px!important;line-height:1.65!important;max-width:none;word-break:keep-all}  /* v3.94f: 머리 문장이 칸 너비를 다 쓰도록(62ch 제한 해제) */
 .lb-ctl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;margin:14px 0 4px}
 .lb-ctl .lsel{margin:0;background:var(--bg,#eef1f4);border-radius:999px;padding:3px;gap:2px;flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none} .lb-ctl .lsel button{white-space:nowrap}
 .lb-ctl .lsel button{border:0;background:transparent;padding:6px 13px}
