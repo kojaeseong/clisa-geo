@@ -1830,7 +1830,7 @@ function lbRecent(cid, n){  /* 이 사안의 최근 한 줄 정보(최근 호부
 const LB_START = "2026-10-09", LB_CASE0 = {poland: "2026-10-10"};
 const ymdAdd = (d, n) => { const t = new Date(d + "T00:00:00Z"); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
 const md = d => (+d.slice(5, 7)) + "." + (+d.slice(8, 10));
-function lbTrend(c, G){
+function lbTrend(c, G){  /* v3.96f: 점 그림의 4개 분류마다 선 하나(그 기간에 한 번이라도 있는 분류만), 색은 점 그림과 같게. 현재와 비슷함이 기간 내내 50번 이상이면 그 선은 빼서 다른 선이 공간을 쓰게 함(모두 현재와 비슷함이면 그 선만) */
   const H = c.hs7, today = BR.issues[0].date, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d));
   const cur = {}; H.scen.forEach(s => cur[s.id] = s.p);
   const mapAt = d => { let m = ch.length && ch[0].d > d ? ch[0].prev : null; ch.forEach(x => { if (x.d <= d) m = x.next; }); return m || cur; };
@@ -1838,22 +1838,25 @@ function lbTrend(c, G){
   const span = Math.min(29, Math.max(6, have)); if (have > span) a = ymdAdd(b, -span); const end = ymdAdd(a, span);
   const c0 = LB_CASE0[c.id] && LB_CASE0[c.id] > a ? LB_CASE0[c.id] : a;
   const days = []; for (let d = c0; d <= b; d = ymdAdd(d, 1)) days.push(d);
-  const ser = days.map(d => { const n = hsCountP(H, G, mapAt(d)); return {d, bad: n.big + n.worse, good: n.better}; });
+  const ser = days.map(d => Object.assign({d}, hsCountP(H, G, mapAt(d))));
+  const KS0 = HS_ORD.filter(k => ser.some(v => v[k] > 0)), KS = KS0.length > 1 && ser.every(v => v.same >= 50) ? KS0.filter(k => k !== "same") : KS0, LC = {big: "#C8102E", worse: "#E8890C", better: "#0EA5A4", same: "#8C96A3"};
   const W = 300, Hh = 154, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
-  const mx = Math.max(...ser.map(v => Math.max(v.bad, v.good))), yMax = Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
+  const mx = Math.max(1, ...ser.map(v => Math.max(...KS.map(k => v[k])))), yMax = mx >= 95 ? 100 : Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
   const path = k => ser.map((v, i) => (i ? "H" + X(v.d).toFixed(1) + "V" : "M" + X(v.d).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("");
-  const area = k => path(k) + "V" + B + "H" + X(ser[0].d).toFixed(1) + "Z";
-  const hasGood = ser.some(v => v.good), last = ser[ser.length - 1];
-  const dots = k => ser.map(v => '<circle cx="' + X(v.d).toFixed(1) + '" cy="' + Y(v[k]).toFixed(1) + '" r="2.2" class="lt-p lt-p-' + k + '"><title>' + esc(kd(v.d) + " · " + (k === "bad" ? "Worse or much worse: " : "Better: ") + v[k] + "") + "</title></circle>").join("");
+  const last = ser[ser.length - 1];
+  const dots = k => ser.map(v => '<circle cx="' + X(v.d).toFixed(1) + '" cy="' + Y(v[k]).toFixed(1) + '" r="2.2" fill="' + LC[k] + '"><title>' + esc(kd(v.d) + " · " + HS_LAB[k] + " " + v[k] + "") + "</title></circle>").join("");
   const info = (BR.issues || []).filter(x => x.date >= c0 && x.date <= b && x.items.some(i => i.case === c.id)).map(x => '<rect x="' + (X(x.date) - 1.5).toFixed(1) + '" y="' + (B + 4) + '" width="3" height="6" rx="1" class="lt-tick' + (x.date === today ? " lt-today" : "") + '"><title>' + esc(kd(x.date) + " · one-line updates: " + x.items.filter(i => i.case === c.id).length + "") + "</title></rect>").join("");
-  const chg = ch.filter(x => x.d >= c0 && x.d <= b && hsDiff(H, G, x) !== "No change in the dot counts").map(x => { const n = hsCountP(H, G, x.next); return '<circle cx="' + X(x.d).toFixed(1) + '" cy="' + Y(n.big + n.worse).toFixed(1) + '" r="4.5" class="lt-chg"><title>' + esc(kd(x.d) + " · graph change · " + x.kind) + "</title></circle>"; }).join("");
+  const chg = ch.filter(x => x.d >= c0 && x.d <= b).map(x => { const p = hsCountP(H, G, x.prev), n = hsCountP(H, G, x.next); return KS.filter(k => p[k] !== n[k]).map(k => '<circle cx="' + X(x.d).toFixed(1) + '" cy="' + Y(n[k]).toFixed(1) + '" r="4.5" class="lt-chg"><title>' + esc(kd(x.d) + " · graph change · " + x.kind) + "</title></circle>").join(""); }).join("");
+  const lab = KS.map(k => ({k, y: Y(last[k]) + 4})).sort((p, q) => p.y - q.y);  /* 오른쪽 끝 숫자: 겹치지 않게 11px 간격으로 밀어 냄 */
+  lab.forEach((o, i) => { if (i && o.y - lab[i - 1].y < 11) o.y = lab[i - 1].y + 11; });
+  const over = lab.length ? lab[lab.length - 1].y - (B + 4) : 0; if (over > 0) lab.forEach(o => o.y -= over);
   const xt = (span >= 20 ? [a, ymdAdd(a, Math.round(span / 3)), ymdAdd(a, Math.round(span * 2 / 3)), end] : [a, ymdAdd(a, Math.round(span / 2)), end]).map(d => '<text x="' + X(d).toFixed(1) + '" y="' + (Hh - 2) + '" class="lt-x" text-anchor="' + (d === a ? "start" : d === end ? "end" : "middle") + '">' + md(d) + "</text>").join("");
   const pre = c0 < "2026-10-10" ? '<rect x="' + X(c0).toFixed(1) + '" y="' + T + '" width="' + (X("2026-10-10") - X(c0)).toFixed(1) + '" height="' + (B - T) + "\" class=\"lt-pre\"><title>The October 9 value applies the current classification to that day's probabilities</title></rect>" : "";
-  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Worse or much worse · daily</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily count of futures worse or much worse, " + kd(last.d) + " " + last.bad + "") + '">' + pre +
+  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Key dot counts, daily</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily key dot counts, " + kd(last.d) + " " + KS.map(k => HS_LAB[k] + " " + last[k] + "").join(", ")) + '">' + pre +
     [0.5, 1].map(f => '<line x1="' + L + '" x2="' + R + '" y1="' + Y(yMax * f).toFixed(1) + '" y2="' + Y(yMax * f).toFixed(1) + '" class="lt-grid"/>').join("") + '<line x1="' + L + '" x2="' + R + '" y1="' + B + '" y2="' + B + '" class="lt-ax"/>' +
     '<text x="' + (R + 4) + '" y="' + (Y(yMax) + 3).toFixed(1) + '" class="lt-y">' + yMax + "</text>" +
-    (hasGood ? '<path d="' + path("good") + '" class="lt-good"/>' + dots("good") : "") + '<path d="' + area("bad") + '" class="lt-area"/><path d="' + path("bad") + '" class="lt-bad"/>' + dots("bad") + chg + info +
-    '<text x="' + (X(last.d) + 7).toFixed(1) + '" y="' + (Y(last.bad) + 4).toFixed(1) + '" class="lt-v">' + last.bad + "</text>" + (hasGood ? '<text x="' + (X(last.d) + 7).toFixed(1) + '" y="' + (Y(last.good) + 4).toFixed(1) + '" class="lt-v lt-vg">' + last.good + "</text>" : "") + xt + "</svg></figure>";
+    KS.map(k => '<path d="' + path(k) + '" class="lt-ln" stroke="' + LC[k] + '"/>' + dots(k)).join("") + chg + info +
+    lab.map(o => '<text x="' + (X(last.d) + 7).toFixed(1) + '" y="' + o.y.toFixed(1) + '" class="lt-v" fill="' + LC[o.k] + '">' + last[o.k] + "</text>").join("") + xt + "</svg></figure>";
 }
 /* v3.94(2026-10-11 결재: 가안+나안) 그래프가 움직인 까닭을 보이기. 나안: 점 개수 옆 최근 7일 증감. 가안: 선 그래프 아래 최근 변경 한 줄 */
 function lbMapAt(H){ const ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d)), cur = {}; H.scen.forEach(s => cur[s.id] = s.p);
@@ -1967,7 +1970,7 @@ function lifeBoardHtml(x){
   return "<section class=\"lb\" id=\"s-life\"><p class=\"eyebrow\">People's Lives · as of " + enDate(x.date) + "</p><h2 class=\"lb-h\">100 futures through 2030</h2>" +
     "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of the five issues, 100 dots show the spread of possible futures, and that spread shifts as new events unfold. The dot counts are Clisa Geopolitics' own estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Whose lives to show\">" + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
-    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Worse or much worse, over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><i class=\"lg-chg\"></i>Graph change</span></p></div>" +
+    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Key dot counts over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><i class=\"lg-chg\"></i>Graph change</span></p></div>" +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     "<p class=\"lb-note\">Much worse: any one category falls by more than 20 points, or two categories fall by more than 10 points each. In the daily chart, the October 9 value applies the current classification to that day's probabilities (the graph was published on October 10).</p></section>" +
     "<section class=\"lb-feed\" id=\"brief\"><div class=\"bh\"><h3>Today's updates</h3><span class=\"bd\">" + fmtKD(x.date) + "</span></div>" +
