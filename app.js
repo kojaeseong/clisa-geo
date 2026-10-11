@@ -1787,9 +1787,11 @@ function lbCase(H, G){  /* 그래프 옆 한 줄: 가장 나쁜 경우(와 가�
   const bad = ws && (G.cls[ws] === "worse" || G.cls[ws] === "big");  /* 악화로 분류되는 전개가 없으면 '가장 나쁜 경우'를 보이지 않는다 */
   return (bad ? line("가장 나쁜 경우", ws) : "") + (bs && (!bad || G.cls[bs] === "better") ? line("가장 좋은 경우", bs) : "") || '<p class="lb-line">' + esc(firstSent(G.line)) + "</p>";
 }
-function lbFx(i, quiet){  /* 한 줄 정보가 그래프·전망에 주는 영향 */
+function lbFx(i, quiet, d){  /* 한 줄 정보가 그래프·전망에 주는 영향. v3.95: 그날 그 사안의 전개 확률이 바뀌었으면 '그래프 변경' */
   const fc = (i.fc || []).map(f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none; return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + "</b></button>"; }).join("");
-  return fc || (quiet ? "" : '<span class="lb-fx">그래프 변화 없음</span>');
+  const C = d && i.case ? (D.strategies || []).find(s => s.id === i.case) : null;
+  const moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
+  return fc + (moved ? '<span class="lb-fx lb-fx-on">그래프 변경</span>' : "") || (quiet ? "" : '<span class="lb-fx">그래프 변화 없음</span>');
 }
 function lbRecent(cid, n){  /* 이 사안의 최근 한 줄 정보(최근 호부터) */
   const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case === cid && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out;
@@ -1941,7 +1943,7 @@ function lifeBoardHtml(x){
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     '<p class="lb-note">크게 악화됨: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우. 일자별 변화의 10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다(그래프는 10월 10일 공개).</p></section>' +
     '<section class="lb-feed" id="brief"><div class="bh"><h3>오늘의 정보</h3><span class="bd">' + fmtKD(x.date) + "</span></div>" +
-    '<ul class="lb-list">' + x.items.map((i, n) => '<li id="bi-' + n + '"><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + lbFx(i) +
+    '<ul class="lb-list">' + x.items.map((i, n) => '<li id="bi-' + n + '"><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + lbFx(i, false, x.date) +
       ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
       (x.more || []).map(m => '<li><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") + "</ul>" + weekLine(x.date) + "</section>";
 }

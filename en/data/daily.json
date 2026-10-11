@@ -1,6 +1,124 @@
 {
  "issues": [
   {
+   "date": "2026-10-11",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Saudi Arabia: Houthis strike Riyadh airport again, killing 12, including an American, and wounding 309",
+     "fc": [],
+     "src": [
+      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
+      "https://www.cbsnews.com/news/riyadh-saudi-airport-attack-deaths-injuries/",
+      "https://www.aljazeera.com/news/2026/10/10/attack-on-airport-in-saudi-capital-riyadh-leaves-several-injured"
+     ],
+     "loc": {
+      "lat": 24.96,
+      "lon": 46.7,
+      "place": "King Khalid International Airport, Riyadh (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Trump calls attack on Saudi Arabia \"not acceptable,\" says U.S. will \"look at\" joining strikes on Houthis",
+     "fc": [],
+     "src": [
+      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian glide bombs on Zaporizhzhia kill at least 20, including three children",
+     "fc": [],
+     "src": [
+      "https://mezha.net/eng/news/mezha-8f4b10ffda8117e2ccbbb01c_russian_glide_bomb/",
+      "https://www.aljazeera.com/news/2026/10/10/us-hosts-productive-trilateral-talks-to-end-russia-ukraine-war"
+     ],
+     "loc": {
+      "lat": 47.84,
+      "lon": 35.14,
+      "place": "Zaporizhzhia (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Trump says \"time for Ukraine to get a new president,\" blames Zelensky over diesel prices",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/",
+      "https://kyivindependent.com/he-better-damn-well-stop-trump-slams-zelensky-for-attacking-russian-refineries-says-ukraine-should-get-new-president",
+      "https://abcnews.com/US/wireStory/trump-time-ukraine-new-president-blames-zelenskyy-diesel-137162216"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "h": "Lai: Taiwan \"open to exchanges\" but \"will not accept subordination\"; Beijing's Taiwan Affairs Office decries \"separatist thinking\"",
+     "fc": [],
+     "src": [
+      "https://focustaiwan.tw/politics/202610100003",
+      "https://www.aljazeera.com/news/2026/10/10/taiwan-president-says-defence-spending-boost-aims-to-deter-war"
+     ],
+     "loc": {
+      "lat": 25.04,
+      "lon": 121.51,
+      "place": "Taipei (Taiwan)",
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "OFAC General License 135 authorizes the sale, delivery, offloading and importation into the United States of Russian-origin diesel fuel, and remains in effect through April 7, 2027.",
+     "src": [
+      "https://www.hsfkramer.com/notes/sanctions/2026-posts/ofac-issues-general-license-135-authorizing-transactions-involving-russian-origin-diesel-fuel"
+     ]
+    },
+    {
+     "t": "Ukrainian President Volodymyr Zelensky wrote on X that with the Zaporizhzhia strike, Russia had \"expressed its thanks\" for the lifting of sanctions on diesel exports.",
+     "src": [
+      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/"
+     ]
+    },
+    {
+     "t": "In his National Day address, Taiwanese President Lai Ching-te said that increased defense investment is meant \"not to provoke\" but \"to deter war.\"",
+     "src": [
+      "https://focustaiwan.tw/politics/202610100003"
+     ]
+    },
+    {
+     "t": "North Korea marked the 81st anniversary of the Workers' Party on October 10; Kim Jong Un attended a celebratory performance at the Pyongyang Indoor Stadium but gave no speech or statement, KCNA reported on October 11.",
+     "src": [
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-10",
    "items": [
     {

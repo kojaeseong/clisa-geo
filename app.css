@@ -955,7 +955,7 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .pane .lb-rc li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;font-size:12.5px;line-height:1.5}
 .lb-d{font:600 11px var(--mono);color:var(--muted);flex:none;min-width:28px} .lb-d.lb-today{color:#D63A1F}
 .lb-t{color:var(--ink);flex:1 1 200px;min-width:0} .lb-t .bh{all:unset;cursor:pointer} .lb-t .bh:hover{text-decoration:underline}
-.lb-fx{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.lb-fx{font-size:11.5px;color:var(--muted);white-space:nowrap} .lb-fx-on{color:var(--accent);font-weight:700}
 .lb-card.lb-flat{background:transparent;border-style:dashed;padding:12px 16px 10px;gap:8px}
 .lb-flat .lb-gname{font-size:15px;color:var(--ink-2)}
 .pane .lb-flatline{margin:0;font-size:12.5px!important;line-height:1.6!important;color:var(--ink-2)}

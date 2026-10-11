@@ -1,6 +1,124 @@
 {
  "issues": [
   {
+   "date": "2026-10-11",
+   "items": [
+    {
+     "case": "iran",
+     "h": "사우디 \"후티, 리야드 공항 또 공격\"…미국인 포함 12명 사망·309명 부상",
+     "fc": [],
+     "src": [
+      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
+      "https://www.cbsnews.com/news/riyadh-saudi-airport-attack-deaths-injuries/",
+      "https://www.aljazeera.com/news/2026/10/10/attack-on-airport-in-saudi-capital-riyadh-leaves-several-injured"
+     ],
+     "loc": {
+      "lat": 24.96,
+      "lon": 46.7,
+      "place": "리야드 킹칼리드 국제공항(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "트럼프 \"사우디 공격 용납 못 해\"…후티 공격 합류 \"검토하겠다\"",
+     "fc": [],
+     "src": [
+      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 자포리자에 활공폭탄…어린이 3명 포함 최소 20명 사망",
+     "fc": [],
+     "src": [
+      "https://mezha.net/eng/news/mezha-8f4b10ffda8117e2ccbbb01c_russian_glide_bomb/",
+      "https://www.aljazeera.com/news/2026/10/10/us-hosts-productive-trilateral-talks-to-end-russia-ukraine-war"
+     ],
+     "loc": {
+      "lat": 47.84,
+      "lon": 35.14,
+      "place": "자포리자(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "트럼프 \"우크라이나, 새 대통령 맞을 때\"…경유값 놓고 젤렌스키 겨냥",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/",
+      "https://kyivindependent.com/he-better-damn-well-stop-trump-slams-zelensky-for-attacking-russian-refineries-says-ukraine-should-get-new-president",
+      "https://abcnews.com/US/wireStory/trump-time-ukraine-new-president-blames-zelenskyy-diesel-137162216"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "h": "라이칭더 \"교류엔 열려 있지만 종속은 거부\"…중국 대만판공실 \"독립 분열 사고\"",
+     "fc": [],
+     "src": [
+      "https://focustaiwan.tw/politics/202610100003",
+      "https://www.aljazeera.com/news/2026/10/10/taiwan-president-says-defence-spending-boost-aims-to-deter-war"
+     ],
+     "loc": {
+      "lat": 25.04,
+      "lon": 121.51,
+      "place": "타이베이(대만)",
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "미국 재무부 해외자산통제실의 일반 허가 135호는 러시아산 경유의 판매·운송·하역과 미국 수입까지 허용하며, 2027년 4월 7일까지 유효합니다.",
+     "src": [
+      "https://www.hsfkramer.com/notes/sanctions/2026-posts/ofac-issues-general-license-135-authorizing-transactions-involving-russian-origin-diesel-fuel"
+     ]
+    },
+    {
+     "t": "젤렌스키 우크라이나 대통령은 자포리자 공격을 두고 러시아가 경유 제재 완화에 '감사'를 표한 것이라고 X에 썼습니다.",
+     "src": [
+      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/"
+     ]
+    },
+    {
+     "t": "라이칭더 대만 총통은 국경일 연설에서 국방 투자 확대가 \"도발이 아니라 전쟁 억지를 위한 것\"이라고 말했습니다.",
+     "src": [
+      "https://focustaiwan.tw/politics/202610100003"
+     ]
+    },
+    {
+     "t": "북한은 10월 10일 노동당 창건 81주년을 맞았고, 김정은 국무위원장은 평양 실내체육관에서 축하 공연을 관람했으나 연설이나 성명은 내지 않았다고 조선중앙통신이 11일 보도했습니다.",
+     "src": [
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-10",
    "items": [
     {
