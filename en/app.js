@@ -1837,7 +1837,7 @@ function lbTrend(c, G){
   const c0 = LB_CASE0[c.id] && LB_CASE0[c.id] > a ? LB_CASE0[c.id] : a;
   const days = []; for (let d = c0; d <= b; d = ymdAdd(d, 1)) days.push(d);
   const ser = days.map(d => { const n = hsCountP(H, G, mapAt(d)); return {d, bad: n.big + n.worse, good: n.better}; });
-  const W = 300, Hh = 92, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
+  const W = 300, Hh = 118, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
   const mx = Math.max(...ser.map(v => Math.max(v.bad, v.good))), yMax = Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
   const path = k => ser.map((v, i) => (i ? "H" + X(v.d).toFixed(1) + "V" : "M" + X(v.d).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("");
   const area = k => path(k) + "V" + B + "H" + X(ser[0].d).toFixed(1) + "Z";
@@ -1847,7 +1847,7 @@ function lbTrend(c, G){
   const chg = ch.filter(x => x.d >= c0 && x.d <= b && hsDiff(H, G, x) !== "No change in the dot counts").map(x => { const n = hsCountP(H, G, x.next); return '<circle cx="' + X(x.d).toFixed(1) + '" cy="' + Y(n.big + n.worse).toFixed(1) + '" r="4.5" class="lt-chg"><title>' + esc(kd(x.d) + " · graph change · " + x.kind) + "</title></circle>"; }).join("");
   const xt = (span >= 20 ? [a, ymdAdd(a, Math.round(span / 3)), ymdAdd(a, Math.round(span * 2 / 3)), end] : [a, ymdAdd(a, Math.round(span / 2)), end]).map(d => '<text x="' + X(d).toFixed(1) + '" y="' + (Hh - 2) + '" class="lt-x" text-anchor="' + (d === a ? "start" : d === end ? "end" : "middle") + '">' + md(d) + "</text>").join("");
   const pre = c0 < "2026-10-10" ? '<rect x="' + X(c0).toFixed(1) + '" y="' + T + '" width="' + (X("2026-10-10") - X(c0)).toFixed(1) + '" height="' + (B - T) + "\" class=\"lt-pre\"><title>The October 9 value applies the current classification to that day's probabilities</title></rect>" : "";
-  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Daily change · futures worse or much worse</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily count of futures worse or much worse, " + kd(last.d) + " " + last.bad + "") + '">' + pre +
+  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Daily count · worse or much worse</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily count of futures worse or much worse, " + kd(last.d) + " " + last.bad + "") + '">' + pre +
     [0.5, 1].map(f => '<line x1="' + L + '" x2="' + R + '" y1="' + Y(yMax * f).toFixed(1) + '" y2="' + Y(yMax * f).toFixed(1) + '" class="lt-grid"/>').join("") + '<line x1="' + L + '" x2="' + R + '" y1="' + B + '" y2="' + B + '" class="lt-ax"/>' +
     '<text x="' + (R + 4) + '" y="' + (Y(yMax) + 3).toFixed(1) + '" class="lt-y">' + yMax + "</text>" +
     (hasGood ? '<path d="' + path("good") + '" class="lt-good"/>' + dots("good") : "") + '<path d="' + area("bad") + '" class="lt-area"/><path d="' + path("bad") + '" class="lt-bad"/>' + dots("bad") + chg + info +
@@ -1863,13 +1863,13 @@ function lbWhy(c, G){
   const SN = {}; H.scen.forEach(s => SN[s.id] = s.name);
   const ds = Object.keys(x.next).filter(k => x.prev[k] !== x.next[k]).sort((p, q) => Math.abs(x.next[q] - x.prev[q]) - Math.abs(x.next[p] - x.prev[p]));
   const a = hsCountP(H, G, x.prev), b = hsCountP(H, G, x.next);
-  return '<p class="lb-why"><b>Changed ' + enDate(x.d, true) + "</b> · " + ds.slice(0, 2).map(k => esc(SN[k] || k) + " " + x.prev[k] + "→" + x.next[k] + "%").join(", ") + (ds.length > 2 ? " and " + (ds.length - 2) + " more" : "") +
-    "<span class=\"lb-why-n\">→ worse or much worse: " + (a.big + a.worse) + "→" + (b.big + b.worse) + ", better: " + a.better + "→" + b.better + "</span></p>";
+  return '<p class="lb-why"><b>Changed ' + enDate(x.d, true) + "</b><span class=\"lb-why-c\">" + ds.slice(0, 2).map(k => '<span class="lb-why-k">' + esc(SN[k] || k) + " " + x.prev[k] + "→" + x.next[k] + "%</span>").join("") + (ds.length > 2 ? "<span class=\"lb-why-k\">and " + (ds.length - 2) + " more</span>" : "") + "</span>" +
+    "<span class=\"lb-why-n\"><span class=\"lb-why-k\">Worse or much worse " + (a.big + a.worse) + "→" + (b.big + b.worse) + "</span><span class=\"lb-why-k\">Better " + a.better + "→" + b.better + "</span></span></p>";
 }
 function lbStats(n, dl){
   const has = dl && ["big", "worse", "better"].some(k => dl[k]);
   return '<ul class="lb-st">' + ["big", "worse", "better", "same"].filter(k => n[k]).map(k => { const d = dl && k !== "same" ? dl[k] : 0; return '<li class="lb-st-' + k + '"><b>' + n[k] + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>" +
-    (d ? '<em class="lb-dl lb-dl-' + ((d > 0) === (k === "better") ? "good" : "bad") + "\" title=\"Change over the past 7 days\">" + (d > 0 ? "▲" : "▼") + Math.abs(d) + "</em>" : "") + "</li>"; }).join("") + (has ? "<li class=\"lb-dl-note\">▲▼ change over the past 7 days</li>" : "") + "</ul>";
+    (d ? '<em class="lb-dl lb-dl-' + ((d > 0) === (k === "better") ? "good" : "bad") + "\" title=\"Change over the past 7 days\">" + (d > 0 ? "▲" : "▼") + Math.abs(d) + "</em>" : (has ? '<em class="lb-dl lb-dl-0"></em>' : "")) + "</li>"; }).join("") + (has ? "<li class=\"lb-dl-note\">▲▼ change over the past 7 days</li>" : "") + "</ul>";
 }
 function lbMix(H, G){  /* v3.92c 점 100개의 구성: 분류마다 그 분류에 드는 전개와 확률 */
   return "<div class=\"lb-mix\"><p class=\"lb-lab\">Breakdown of the 100 dots</p><ul>" + ["big", "worse", "better", "same"].map(k => {
@@ -1883,13 +1883,13 @@ function lbDetail(H, G, sid, lab){  /* v3.92c 가장 나쁜(좋은) 경우의 4�
   const rows = HS_CAT.map(([k, nm]) => { const v = G.cat[k]; if (!v || v.na) return ""; const to = v.by[sid], d = to - v.now; if (Math.abs(d) <= 1) return "";
     const raw = k === "정치" ? (d < 0 ? "More state violence" : "Less state violence") : ((v.by_raw || {})[sid] || "");
     return '<li><span class="lb-dk">' + nm + '</span><span class="lb-dv">' + esc(raw) + '</span><span class="lb-dp">' + Math.round(v.now) + "→" + Math.round(to) + "</span></li>"; }).join("");
-  const al = (G.al || {})[sid] || [];
-  return '<div class="lb-det"><p class="lb-lab">' + lab + ' · <b>' + esc(S.name) + "</b> " + S.p + "%</p>" + (rows ? '<ul>' + rows + "</ul>" : "") + (al.length ? '<p class="lb-al"><span class="hs-al">' + esc(al.join("·")) + " alert</span></p>" : "") + "</div>";
+  /* v3.94c: 예상 경보는 카드에 쓰지 않는다(현재 켜진 경보만 카드 머리에). 제목은 '~가 오면', 점수 칸에 '현재→이 경우' 머리말 */
+  return '<div class="lb-det"><p class="lb-lab">' + "If the " + lab.toLowerCase() + " comes · <b>" + esc(S.name) + "</b> (" + S.p + "% likely)" + '<span class="lb-col">score: now → this case</span></p>' + (rows ? '<ul>' + rows + "</ul>" : "") + "</div>";
 }
 function lbBrief(H, G, sid, lab){  /* 가장 나쁜 경우를 자세히 보인 카드에서는 가장 좋은 경우를 한 줄로 */
   const S = H.scen.find(s => s.id === sid); if (!S) return "";
   const f = HS_CAT.map(([k, nm]) => { const v = G.cat[k]; if (!v || v.na) return ""; const d = v.by[sid] - v.now; if (Math.abs(d) <= 1) return ""; return nm + " " + Math.round(v.now) + "→" + Math.round(v.by[sid]) + ""; }).filter(Boolean);
-  return '<p class="lb-ws"><b>' + lab + "</b> · " + esc(S.name) + " " + S.p + "%" + (f.length ? " · " + esc(f.join(", ")) : "") + "</p>";
+  return '<div class="lb-det lb-det-b"><p class="lb-lab">' + "If the " + lab.toLowerCase() + " comes · <b>" + esc(S.name) + "</b> (" + S.p + "% likely)" + (f.length ? '<span class="lb-col">score: now → this case</span></p><p class="lb-ws">' + esc(f.join(" · ")) + "</p>" : "</p>") + "</div>";
 }
 function lbExplain(H, G){
   const ws = hsWorstSc(G), bs = hsBestSc(G), bad = ws && (G.cls[ws] === "worse" || G.cls[ws] === "big"), good = bs && G.cls[bs] === "better";
@@ -1900,11 +1900,11 @@ function lifeRow(c){
   const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0];
   if (!G) return "";
   const n = hsCount(H, G, "p"), rec = lbRecent(c.id, 3), today = BR.issues[0].date;
-  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span><button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Step 10 <span aria-hidden=\"true\">→</span></button></header>";
-  const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
+  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">Current alerts · ' + esc(G.al_now.join(", ")) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Step 10 <span aria-hidden=\"true\">→</span></button></header>";
+  const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
   /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
   return '<article class="lb-card">' + head + '<div class="lb-cols">' +
-    '<div class="lb-left"><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · more in Step 10") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
+    '<div class="lb-left"><p class="lb-lab lb-fut">100 futures through 2030</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · more in Step 10") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
     '<div class="lb-right">' + lbTrend(c, G) + lbWhy(c, G) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + recent + "</div></div></div></article>";
 }
 function lbImpact(c){ const G = lifePick(c); if (!G) return [-1, -1]; const n = hsCount(c.hs7, G, "p"); return [n.big + n.worse + n.better, n.big + n.worse]; }
