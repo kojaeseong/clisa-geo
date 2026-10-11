@@ -1818,7 +1818,9 @@ function lbTrend(c, G){  /* v3.96f: 점 그림의 4개 분류마다 선 하나(�
   const last = ser[ser.length - 1];
   const dots = k => ser.map(v => '<circle cx="' + X(v.d).toFixed(1) + '" cy="' + Y(v[k]).toFixed(1) + '" r="2.2" fill="' + LC[k] + '"><title>' + esc(kd(v.d) + " · " + HS_LAB[k] + " " + v[k] + "번") + "</title></circle>").join("");
   const info = (BR.issues || []).filter(x => x.date >= c0 && x.date <= b && x.items.some(i => i.case === c.id)).map(x => '<rect x="' + (X(x.date) - 1.5).toFixed(1) + '" y="' + (B + 4) + '" width="3" height="6" rx="1" class="lt-tick' + (x.date === today ? " lt-today" : "") + '"><title>' + esc(kd(x.date) + " 한 줄 정보 " + x.items.filter(i => i.case === c.id).length + "건") + "</title></rect>").join("");
-  const chg = ch.filter(x => x.d >= c0 && x.d <= b).map(x => { const p = hsCountP(H, G, x.prev), n = hsCountP(H, G, x.next); return KS.filter(k => p[k] !== n[k]).map(k => '<circle cx="' + X(x.d).toFixed(1) + '" cy="' + Y(n[k]).toFixed(1) + '" r="4.5" class="lt-chg"><title>' + esc(kd(x.d) + " 그래프 변경 · " + x.kind) + "</title></circle>").join(""); }).join("");
+  const chg = ch.filter(x => x.d >= c0 && x.d <= b).map(x => { const p = hsCountP(H, G, x.prev), n = hsCountP(H, G, x.next);  /* v3.96g: 바뀐 지점에 동그라미 대신 바뀌기 직전의 점 개수를 작은 숫자로(선의 왼쪽 위, 같은 날 숫자끼리 10px 간격) */
+    const ls = KS.filter(k => p[k] !== n[k]).map(k => ({k, y: Y(p[k]) - 4})).sort((u, v) => u.y - v.y); ls.forEach((o, i) => { if (i && o.y - ls[i - 1].y < 10) o.y = ls[i - 1].y + 10; });
+    return ls.map(o => '<text x="' + (X(x.d) - 3).toFixed(1) + '" y="' + o.y.toFixed(1) + '" class="lt-pv" text-anchor="end" fill="' + LC[o.k] + '"><title>' + esc(kd(x.d) + " 변경 전 " + HS_LAB[o.k] + " " + p[o.k] + "번 → " + n[o.k] + "번 · " + x.kind) + "</title>" + p[o.k] + "</text>").join(""); }).join("");
   const lab = KS.map(k => ({k, y: Y(last[k]) + 4})).sort((p, q) => p.y - q.y);  /* 오른쪽 끝 숫자: 겹치지 않게 11px 간격으로 밀어 냄 */
   lab.forEach((o, i) => { if (i && o.y - lab[i - 1].y < 11) o.y = lab[i - 1].y + 11; });
   const over = lab.length ? lab[lab.length - 1].y - (B + 4) : 0; if (over > 0) lab.forEach(o => o.y -= over);
@@ -1942,7 +1944,7 @@ function lifeBoardHtml(x){
   return '<section class="lb" id="s-life"><p class="eyebrow">국민의 삶 · ' + kd(x.date) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래</h2>' +
     '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 보이며, 새로운 사건에 따라 그 가능성은 달라집니다. 점의 개수는 클리사 지오폴리틱스가 자체적으로 추정한 값입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
-    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>주요 점 개수 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><i class="lg-chg"></i>그래프 변경</span></p></div>' +
+    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>주요 점 개수 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><b class="lg-pv">22</b>변경 직전 점 개수</span></p></div>' +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     '<p class="lb-note">크게 악화됨: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우. 일자별 변화의 10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다(그래프는 10월 10일 공개).</p></section>' +
     '<section class="lb-feed" id="brief"><div class="bh"><h3>오늘의 정보</h3><span class="bd">' + fmtKD(x.date) + "</span></div>" +
