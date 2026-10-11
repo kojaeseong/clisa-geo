@@ -2150,7 +2150,7 @@ function dotCell(at, name, n, dl, oD, oT, spark, cls){  /* v3.99: 점 그래프 
 }
 function cmbDelta(key){ const t = BR.issues[0].date, a = cmbCount(key, ymdAdd(t, -7)), b = cmbCount(key, t), o = {}; HS_ORD.forEach(k => o[k] = b[k] - a[k]); return o; }
 const CMB_NOTE = {  /* v3.99: 종합 그래프의 계산 설명(짧게) */
-  ind: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 이익 변화를 합쳐 현 추세와 비교한 결과입니다. 한 사안의 손실을 다른 사안의 이득이 메우기도 합니다. 다만 두 사안의 효과가 같은 경로(예: 같은 유럽 방산 조달)를 거치면 높은 쪽의 수치 하나만 반영합니다. 공장의 생산 능력 한계는 반영하지 않았습니다. 사안 사이의 연관은 국제 질서 탭의 세계 시나리오로 반영했습니다.",
+  ind: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 이익 변화를 합쳐 현 추세와 비교한 결과입니다. 한 사안의 손실을 다른 사안의 이득이 메우기도 합니다. 다만 두 사안의 효과가 같은 경로(예: 같은 유럽 방산 조달)를 거치면 영향이 큰 수치 하나만 반영합니다. 공장의 생산 능력 한계는 반영하지 않았습니다. 사안 사이의 연관은 국제 질서 탭의 세계 시나리오로 반영했습니다.",
   life: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 4개 범주 점수의 변화를 합쳐 현재와 비교한 결과입니다. 사안 사이의 연관은 국제 질서 탭의 세계 시나리오로 반영했습니다."};
 function cmbDetail(title, n, kind, key, LAB){  /* 종합 점 그래프를 누르면: 국민의 삶 카드와 같은 형식의 근거, 짧은 계산 설명, 국제 질서 흐름별 점 개수 */
   return '<div class="ind-det lbx-det cmb-det"><p class="lb-lab">' + title + "</p>" + cmbExplain(kind, key, LAB) +
@@ -2182,7 +2182,7 @@ function cmbExplain(kind, k, LAB){  /* 국민의 삶 카드와 같은 형식: �
   const wc = pick("big") ? "big" : pick("worse") ? "worse" : null, w = wc && pick(wc), b = pick("better");
   const CN = ["개인", "공동체", "정치", "경제"].map(k => (HS_CAT.find(c => c[0] === k) || [k, k])[1]);
   const det = (o, lab) => { if (!o) return ""; const sc = o.sids.map((sid, i) => [cs[i], sid]).filter(([s, sid]) => sign(s, sid));
-    const rows = kind === "ind" ? sc.map(([s, sid]) => '<li><span class="lb-dk">' + esc(LB_SHORT[s.id]) + '</span><span class="lb-dv">' + esc(SN[s.id + "|" + sid]) + '</span><span class="lb-dp">' + indPct(val(s, sid)[0]) + "</span></li>").join("") + (Math.abs(o.raw - o.v[0]) > 0.0005 ? '<li><span class="lb-dk">겹침 조정</span><span class="lb-dv">같은 경로는 높은 쪽 수치만 반영</span><span class="lb-dp">' + indPct(o.v[0] - o.raw) + "</span></li>" : "") + '<li class="cmb-sum"><span class="lb-dk">합계</span><span class="lb-dv"></span><span class="lb-dp">' + indPct(o.v[0]) + "</span></li>"
+    const rows = kind === "ind" ? sc.map(([s, sid]) => '<li><span class="lb-dk">' + esc(LB_SHORT[s.id]) + '</span><span class="lb-dv">' + esc(SN[s.id + "|" + sid]) + '</span><span class="lb-dp">' + indPct(val(s, sid)[0]) + "</span></li>").join("") + (Math.abs(o.raw - o.v[0]) > 0.0005 ? '<li><span class="lb-dk">겹침 조정</span><span class="lb-dv">같은 경로는 영향이 큰 수치만 반영</span><span class="lb-dp">' + indPct(o.v[0] - o.raw) + "</span></li>" : "") + '<li class="cmb-sum"><span class="lb-dk">합계</span><span class="lb-dv"></span><span class="lb-dp">' + indPct(o.v[0]) + "</span></li>"
       : CN.map((nm, j) => { const to = Math.max(0, Math.min(100, now[j] + o.v[j])); return Math.abs(o.v[j]) > 1 ? '<li><span class="lb-dk">' + nm + '</span><span class="lb-dv"></span><span class="lb-dp">' + Math.round(now[j]) + "→" + Math.round(to) + "점</span></li>" : ""; }).join("");
     return '<div class="lb-det"><p class="lb-lab">' + lab + " · <b>" + sc.map(([s, sid]) => esc(nm(s.id + "|" + sid))).join(" + ") + "</b> (" + (o.p < 0.005 ? "확률 1% 미만" : "확률 " + Math.round(o.p * 100) + "%") + ")" + '<span class="lb-col">' + (kind === "ind" ? "현 추세 대비 이익" : "점수 현재→이 경우") + "</span></p><ul>" + rows + "</ul></div>"; };
   return '<div class="lb-mix"><ul>' + mix + "</ul></div>" + (w ? det(w, "가장 흔한 나쁜 경우가 오면") : "") + (b ? det(b, "가장 흔한 좋은 경우가 오면") : "");
