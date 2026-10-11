@@ -1837,7 +1837,7 @@ function lbTrend(c, G){
   const c0 = LB_CASE0[c.id] && LB_CASE0[c.id] > a ? LB_CASE0[c.id] : a;
   const days = []; for (let d = c0; d <= b; d = ymdAdd(d, 1)) days.push(d);
   const ser = days.map(d => { const n = hsCountP(H, G, mapAt(d)); return {d, bad: n.big + n.worse, good: n.better}; });
-  const W = 300, Hh = 162, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
+  const W = 300, Hh = 154, L = 6, R = W - 34, T = 12, B = Hh - 22, X = d => L + (R - L) * ((Date.parse(d) - Date.parse(a)) / 864e5) / span;
   const mx = Math.max(...ser.map(v => Math.max(v.bad, v.good))), yMax = Math.max(10, Math.ceil((mx + 1) / 5) * 5), Y = v => B - (B - T) * v / yMax;
   const path = k => ser.map((v, i) => (i ? "H" + X(v.d).toFixed(1) + "V" : "M" + X(v.d).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("");
   const area = k => path(k) + "V" + B + "H" + X(ser[0].d).toFixed(1) + "Z";
@@ -1866,10 +1866,12 @@ function lbWhy(c, G){
   return '<p class="lb-why"><b>Changed ' + enDate(x.d, true) + "</b><span class=\"lb-why-c\">" + ds.slice(0, 2).map(k => '<span class="lb-why-k">' + esc(SN[k] || k) + " " + x.prev[k] + "→" + x.next[k] + "%</span>").join("") + (ds.length > 2 ? "<span class=\"lb-why-k\">and " + (ds.length - 2) + " more</span>" : "") + "</span>" +
     "<span class=\"lb-why-n\"><span class=\"lb-why-k\">Worse or much worse " + (a.big + a.worse) + "→" + (b.big + b.worse) + "</span><span class=\"lb-why-k\">Better " + a.better + "→" + b.better + "</span></span></p>";
 }
-function lbStats(n, dl){
-  const has = dl && ["big", "worse", "better"].some(k => dl[k]);
-  return '<ul class="lb-st">' + ["big", "worse", "better", "same"].filter(k => n[k]).map(k => { const d = dl && k !== "same" ? dl[k] : 0; return '<li class="lb-st-' + k + '"><b>' + n[k] + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>" +
-    (d ? '<em class="lb-dl lb-dl-' + ((d > 0) === (k === "better") ? "good" : "bad") + "\" title=\"Change over the past 7 days\">" + (d > 0 ? "▲" : "▼") + Math.abs(d) + "</em>" : (has ? '<em class="lb-dl lb-dl-0"></em>' : "")) + "</li>"; }).join("") + (has ? "<li class=\"lb-dl-note\">▲▼ change over the past 7 days</li>" : "") + "</ul>";
+function lbStats(n, dl){  /* v3.94g: 3개 색 분류는 0번이어도 늘 보이고(0번은 맨 뒤), 최근 7일 증감도 0까지 모두 보인다 */
+  const ks = ["big", "worse", "better"].filter(k => n[k]).concat(n.same ? ["same"] : [], ["big", "worse", "better"].filter(k => !n[k]));
+  return '<ul class="lb-st' + (ks.length > 3 ? " lb-st4" : "") + '">' + ks.map(k => { const d = dl ? (dl[k] || 0) : 0;
+    const cls = !d ? "z" : k === "same" ? "n" : ((d > 0) === (k === "better") ? "good" : "bad");
+    return '<li class="lb-st-' + k + (n[k] ? "" : " lb-st-zero") + '"><b>' + (n[k] || 0) + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>" +
+      '<em class="lb-dl lb-dl-' + cls + "\" title=\"Change over the past 7 days\">" + (d ? (d > 0 ? "▲" : "▼") + Math.abs(d) : "0") + "</em></li>"; }).join("") + "<li class=\"lb-dl-note\">▲▼ change over the past 7 days</li>" + "</ul>";
 }
 function lbMix(H, G){  /* v3.92c 점 100개의 구성: 분류마다 그 분류에 드는 전개와 확률 */
   return '<div class="lb-mix"><ul>' +  /* v3.94f: 제목 '점 100개의 구성' 삭제(위 '2030년까지 100번의 미래'와 색 이름으로 이어짐) */ ["big", "worse", "better", "same"].map(k => {
@@ -1934,7 +1936,7 @@ function indRow(I){
   ns.sort((x, y) => ((y[1].big + y[1].worse + y[1].better) - (x[1].big + x[1].worse + x[1].better)) || ((y[1].big + y[1].worse) - (x[1].big + x[1].worse)) || (x[2] - y[2]));  /* v3.94f: 업종마다 색 점이 많은 분쟁부터 */
   const cells = ns.map(([c, n]) => { const bad = n.big + n.worse, good = n.better, open = INDOPEN === I.k + "|" + c.id;
     return '<button type="button" class="ind-cell' + (open ? " on" : "") + '" data-ind="' + esc(I.k + "|" + c.id) + '" aria-expanded="' + open + '"><span class="ind-cn">' + esc(IND_SHORT[c.id] || c.title) + "</span>" + hsDots(n) +
-      '<span class="ind-ct">' + (bad || good ? (bad ? "<b class=\"ind-bad\">Worse " + bad + "</b>" : "") + (good ? "<b class=\"ind-good\">Better " + good + "</b>" : "") : "<span class=\"note\">No change</span>") + "</span></button>"; }).join("");
+      '<span class="ind-ct">' + (bad || good ? (n.big ? "<b class=\"ind-big\">Much worse " + n.big + "</b>" : "") + (n.worse ? "<b class=\"ind-bad\">Worse " + n.worse + "</b>" : "") + (good ? "<b class=\"ind-good\">Better " + good + "</b>" : "") : "<span class=\"note\">No change</span>") + "</span></button>"; }).join("");  /* v3.94g: 크게 악화를 따로, 한 줄에 하나씩 */
   const op = INDOPEN && INDOPEN.split("|")[0] === I.k ? IND.cases.find(c => c.id === INDOPEN.split("|")[1]) : null;
   return '<article class="lb-card ind-card"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + "</b><span class=\"lb-size\">Normal operating margin " + (I.m * 100).toFixed(1) + "%" + (I.floor ? " (floor)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
     '<div class="ind-cells">' + cells + "</div>" + (op ? indDetail(I, op) : "") + "</article>";
