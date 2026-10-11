@@ -979,6 +979,12 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 @container (min-width:470px) and (max-width:590px){ .lb-right{grid-template-columns:minmax(0,300px) minmax(0,1fr);column-gap:18px;align-items:start} .lb-right .lb-rcw{grid-column:1 / -1} }
 @media (max-width: 960px){ @container (min-width:470px){ .lb-right{grid-template-columns:minmax(0,300px) minmax(0,1fr);column-gap:18px;align-items:start} .lb-right .lb-rcw{grid-column:1 / -1} } }
 #lifeboard .lb-st{align-self:stretch;justify-content:space-around} #lifeboard .lb-why-k{white-space:normal;word-break:keep-all} #lifeboard,#pane-industry{word-break:keep-all;overflow-wrap:anywhere}  /* v3.94g: 한국어를 어절 단위로 줄바꿈 */
+/* v3.94h 국민의 삶 카드 글자 체계: 이름 17 · 본문 13(줄 간격 1.55) · 작은 제목·머리말 11(회색, 굵게) · 큰 숫자 21 · 작은 숫자 12(고정폭). 본문 목록의 줄 간격을 하나로 */
+#lifeboard .lb-card :is(.lb-mix li,.lb-det li,.lb-ws,.lb-why,.lb-rc li,.lb-flatline,.lb-line){font-size:13px!important;line-height:1.55!important}
+#lifeboard .lb-card :is(.lb-lab,.lt-cap,.lt-cap .note,.lb-col,.lb-dl-note){font:600 11px/1.4 var(--sans)!important;color:var(--muted);letter-spacing:.02em}
+#lifeboard .lb-card .lb-lab b{color:var(--ink)} #lifeboard .lb-card .lb-col{margin-top:1px}
+#lifeboard .lb-card :is(.lb-dp,.lb-rc .lb-d){font:600 12px/1.55 var(--mono)!important}
+#lifeboard .lb-card .lb-why b{font-size:13px!important} #lifeboard .lb-card .lb-mix ul,#lifeboard .lb-card .lb-det ul{gap:3px} #lifeboard .lb-card .lb-rc{gap:6px}
 .lb-past{border-bottom:1px solid var(--line)} .lb-past summary{display:flex;align-items:baseline;gap:10px;padding:10px 0;cursor:pointer;list-style:none} .lb-past summary::-webkit-details-marker{display:none}
 .lb-past summary::before{content:"▸";color:var(--muted);font-size:11px;flex:none} .lb-past[open] summary::before{content:"▾"}
 .lb-past summary .mono{flex:none;color:var(--muted);font-size:12px} .lb-past summary .nm{flex:1 1 auto;min-width:0;color:var(--ink);font-weight:600} .lb-pn{flex:none;font-size:11.5px;color:var(--muted)}

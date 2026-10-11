@@ -1831,7 +1831,7 @@ function lbMapAt(H){ const ch = (H.changes || []).slice().sort((a, b) => a.d.loc
 function lbDelta(c, G){ const H = c.hs7, a = hsCountP(H, G, lbMapAt(H)(ymdAdd(BR.issues[0].date, -7))), b = hsCount(H, G, "p"), o = {}; HS_ORD.forEach(k => o[k] = b[k] - a[k]); return o; }
 function lbWhy(c, G){
   const H = c.hs7, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d)), x = ch[ch.length - 1];
-  if (!x) return '<p class="lb-why lb-why0"><b>최근 변경 없음</b> · 공개(10월 10일) 이후 이 사안의 확률은 바뀌지 않았습니다.</p>';
+  if (!x) return '<p class="lb-why lb-why0"><b>최근 변경 없음</b>공개(10월 10일) 이후 이 사안의 확률은 바뀌지 않았습니다.</p>';
   const SN = {}; H.scen.forEach(s => SN[s.id] = s.name);
   const ds = Object.keys(x.next).filter(k => x.prev[k] !== x.next[k]).sort((p, q) => Math.abs(x.next[q] - x.prev[q]) - Math.abs(x.next[p] - x.prev[p]));
   const a = hsCountP(H, G, x.prev), b = hsCountP(H, G, x.next);
@@ -1923,7 +1923,7 @@ function renderIndustry(){
   if (!IND) { el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오는 중입니다.</p></div>';
     fetch("/data/industry.json").then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오지 못했습니다.</p></div>'; }).catch(() => {}); return; }
   el.innerHTML = '<section class="lb ind" id="s-ind"><p class="eyebrow">산업별 영향 · ' + kd(IND.asof) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래를 가정, 산업별 이익은?</h2>' +
-    '<p class="lb-lead"><b>2030년까지 미래를 100번 반복한다고 가정하면, 산업별 이익이 현 추세를 뚜렷하게 상회하는 경우와 하회하는 경우는 각각 몇 번일까요?</b> 5개 분쟁마다 그 횟수를 점 100개로 보입니다. 비교 기준은 분쟁이 현재 상태로 이어질 때의 산업 이익입니다. 칸을 누르면 전개별 판단과 근거가 열립니다. 횟수는 판단값입니다.</p>' +
+    '<p class="lb-lead"><b>2030년까지 미래를 100번 반복한다고 가정하면, 산업별 이익이 현 추세를 뚜렷하게 상회하는 경우와 하회하는 경우는 각각 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 표현합니다. 각 사안이 현재 상태를 유지할 때의 산업별 이익 추정이 비교의 기준입니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스가 자체적으로 추정한 값입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="어느 나라 산업을 볼까">' + [["kr", "한국 산업"], ["us", "미국 산업"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "</p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
@@ -1935,7 +1935,7 @@ function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "기타";
   return '<section class="lb" id="s-life"><p class="eyebrow">국민의 삶 · ' + kd(x.date) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래</h2>' +
-    '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 분쟁마다 그 횟수를 점 100개로 보입니다. 새 사건이 판단을 바꾸면 점과 선이 움직입니다. 횟수는 판단값입니다.</p>' +
+    '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 보이며, 새로운 사건에 따라 그 가능성은 달라집니다. 점의 개수는 클리사 지오폴리틱스가 자체적으로 추정한 값입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>악화 이상 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><i class="lg-chg"></i>그래프 변경</span></p></div>' +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
@@ -2202,7 +2202,7 @@ function renderForecasts(){
   const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
   const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
   $("#pane-forecast").innerHTML =
-    '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시합니다. 검증 시점이 지나면 실현 여부와 정확도를 밝히고, 빗나간 전망도 삭제하지 않습니다.</p></div>' +
+    '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시하며, 검증 시점에 실제 발생 여부를 점검하고 그 결과도 공개합니다.</p></div>' +
     '<div class="score-card"><div><b class="mono">' + fs.length + '</b><span>전체 전망</span></div><div><b class="mono">' + done.length + '</b><span>검증 완료</span></div><div><b class="mono">' + brier + '</b><span>정확도(브라이어 점수)</span></div></div>' +
     '<p class="note">정확도는 브라이어 점수, 곧 (확률 − 실제 결과)²의 평균으로 나타냅니다. 0이 가장 정확하며, 모든 전망에 50%를 부여하면 0.25가 됩니다.' + (PUB() ? "" : "") + "</p>" +
     (FCR().length ? '<section class="sec" id="f-week"><h3>주간 전망 점검</h3><p class="note" style="margin-bottom:8px">매주 월요일, 지난 한 주의 사건을 반영해 전망의 확률을 다시 봅니다. 조정한 전망과 그대로 둔 전망을 이유와 함께 밝힙니다.</p>' + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
@@ -2261,7 +2261,7 @@ function renderMethod(){
   const P = F.prev, pub = PUB();
   const inner = !pub; /* 작업 설명서는 내부판에만 */
   $("#pane-method").innerHTML =
-    '<div class="sec"><h2>분석 방법</h2><p class="lead" style="margin-top:8px">클리사 지오폴리틱스의 목적과 판단의 구성, 검증 방식, 자료와 한계를 밝힙니다. 궁극적 목적은 개별 인간의 행복이며, 이는 계산의 변수가 아니라 모든 분석의 방향을 정하는 기준입니다.</p>' + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
+    '<div class="sec"><h2>분석 방법</h2><p class="lead" style="margin-top:8px">클리사 지오폴리틱스의 목적과 판단의 구성, 검증 방식, 자료와 한계를 밝힙니다. 궁극적 목적은 개별 인간의 행복이며, 모든 분석의 방향을 정하는 기준입니다.</p>' + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
     '<section class="sec"><h3>헌장' + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" + questionsHtml() +
     '<section class="sec"><h3>판단의 구성</h3><div class="tree"><div class="root">' + esc(T.root) + '</div><div class="arrow"></div>' +
       '<div class="layers">' + LY.map(l => '<div class="layer l' + l.id + '"><div class="lh"><b>' + esc(LNAME[l.id]) + "</b><span>" + esc(l.q) + '</span></div><p class="note">' + esc(l.d) + "</p>" +

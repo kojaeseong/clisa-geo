@@ -1847,7 +1847,7 @@ function lbTrend(c, G){
   const chg = ch.filter(x => x.d >= c0 && x.d <= b && hsDiff(H, G, x) !== "No change in the dot counts").map(x => { const n = hsCountP(H, G, x.next); return '<circle cx="' + X(x.d).toFixed(1) + '" cy="' + Y(n.big + n.worse).toFixed(1) + '" r="4.5" class="lt-chg"><title>' + esc(kd(x.d) + " · graph change · " + x.kind) + "</title></circle>"; }).join("");
   const xt = (span >= 20 ? [a, ymdAdd(a, Math.round(span / 3)), ymdAdd(a, Math.round(span * 2 / 3)), end] : [a, ymdAdd(a, Math.round(span / 2)), end]).map(d => '<text x="' + X(d).toFixed(1) + '" y="' + (Hh - 2) + '" class="lt-x" text-anchor="' + (d === a ? "start" : d === end ? "end" : "middle") + '">' + md(d) + "</text>").join("");
   const pre = c0 < "2026-10-10" ? '<rect x="' + X(c0).toFixed(1) + '" y="' + T + '" width="' + (X("2026-10-10") - X(c0)).toFixed(1) + '" height="' + (B - T) + "\" class=\"lt-pre\"><title>The October 9 value applies the current classification to that day's probabilities</title></rect>" : "";
-  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Daily count · worse or much worse</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily count of futures worse or much worse, " + kd(last.d) + " " + last.bad + "") + '">' + pre +
+  return "<figure class=\"lt\"><figcaption class=\"lt-cap\"><span>Worse or much worse · daily</span><span class=\"note\">" + (have > 29 ? "Last 30 days" : "Since " + kd(LB_START)) + '</span></figcaption><svg viewBox="0 0 ' + W + " " + Hh + '" role="img" aria-label="' + esc(G.name + ": daily count of futures worse or much worse, " + kd(last.d) + " " + last.bad + "") + '">' + pre +
     [0.5, 1].map(f => '<line x1="' + L + '" x2="' + R + '" y1="' + Y(yMax * f).toFixed(1) + '" y2="' + Y(yMax * f).toFixed(1) + '" class="lt-grid"/>').join("") + '<line x1="' + L + '" x2="' + R + '" y1="' + B + '" y2="' + B + '" class="lt-ax"/>' +
     '<text x="' + (R + 4) + '" y="' + (Y(yMax) + 3).toFixed(1) + '" class="lt-y">' + yMax + "</text>" +
     (hasGood ? '<path d="' + path("good") + '" class="lt-good"/>' + dots("good") : "") + '<path d="' + area("bad") + '" class="lt-area"/><path d="' + path("bad") + '" class="lt-bad"/>' + dots("bad") + chg + info +
@@ -1859,7 +1859,7 @@ function lbMapAt(H){ const ch = (H.changes || []).slice().sort((a, b) => a.d.loc
 function lbDelta(c, G){ const H = c.hs7, a = hsCountP(H, G, lbMapAt(H)(ymdAdd(BR.issues[0].date, -7))), b = hsCount(H, G, "p"), o = {}; HS_ORD.forEach(k => o[k] = b[k] - a[k]); return o; }
 function lbWhy(c, G){
   const H = c.hs7, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d)), x = ch[ch.length - 1];
-  if (!x) return "<p class=\"lb-why lb-why0\"><b>No recent change</b> · Probabilities for this issue have not changed since publication on October 10.</p>";
+  if (!x) return "<p class=\"lb-why lb-why0\"><b>No recent change</b>Probabilities for this issue have not changed since publication on October 10.</p>";
   const SN = {}; H.scen.forEach(s => SN[s.id] = s.name);
   const ds = Object.keys(x.next).filter(k => x.prev[k] !== x.next[k]).sort((p, q) => Math.abs(x.next[q] - x.prev[q]) - Math.abs(x.next[p] - x.prev[p]));
   const a = hsCountP(H, G, x.prev), b = hsCountP(H, G, x.next);
@@ -1871,7 +1871,7 @@ function lbStats(n, dl){  /* v3.94g: 3개 색 분류는 0번이어도 늘 보이
   return '<ul class="lb-st' + (ks.length > 3 ? " lb-st4" : "") + '">' + ks.map(k => { const d = dl ? (dl[k] || 0) : 0;
     const cls = !d ? "z" : k === "same" ? "n" : ((d > 0) === (k === "better") ? "good" : "bad");
     return '<li class="lb-st-' + k + (n[k] ? "" : " lb-st-zero") + '"><b>' + (n[k] || 0) + '</b><span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>" +
-      '<em class="lb-dl lb-dl-' + cls + "\" title=\"Change over the past 7 days\">" + (d ? (d > 0 ? "▲" : "▼") + Math.abs(d) : "0") + "</em></li>"; }).join("") + "<li class=\"lb-dl-note\">▲▼ change over the past 7 days</li>" + "</ul>";
+      '<em class="lb-dl lb-dl-' + cls + "\" title=\"Change over the past 7 days\">" + (d ? (d > 0 ? "▲" : "▼") + Math.abs(d) : "0") + "</em></li>"; }).join("") + "<li class=\"lb-dl-note\">▲▼ 7-day change</li>" + "</ul>";
 }
 function lbMix(H, G){  /* v3.92c 점 100개의 구성: 분류마다 그 분류에 드는 전개와 확률 */
   return '<div class="lb-mix"><ul>' +  /* v3.94f: 제목 '점 100개의 구성' 삭제(위 '2030년까지 100번의 미래'와 색 이름으로 이어짐) */ ["big", "worse", "better", "same"].map(k => {
@@ -1886,12 +1886,12 @@ function lbDetail(H, G, sid, lab){  /* v3.92c 가장 나쁜(좋은) 경우의 4�
     const raw = k === "정치" ? (d < 0 ? "More state violence" : "Less state violence") : ((v.by_raw || {})[sid] || "");
     return '<li><span class="lb-dk">' + nm + '</span><span class="lb-dv">' + esc(raw) + '</span><span class="lb-dp">' + Math.round(v.now) + "→" + Math.round(to) + "</span></li>"; }).join("");
   /* v3.94c: 예상 경보는 카드에 쓰지 않는다(현재 켜진 경보만 카드 머리에). 제목은 '~가 오면', 점수 칸에 '현재→이 경우' 머리말 */
-  return '<div class="lb-det"><p class="lb-lab">' + "If the " + lab.toLowerCase() + " comes · <b>" + esc(S.name) + "</b> (" + S.p + "% likely)" + '<span class="lb-col">score: now → this case</span></p>' + (rows ? '<ul>' + rows + "</ul>" : "") + "</div>";
+  return '<div class="lb-det"><p class="lb-lab">' + "If the " + lab.toLowerCase() + " plays out · <b>" + esc(S.name) + "</b> (" + S.p + "% likely)" + '<span class="lb-col">Score: now → scenario</span></p>' + (rows ? '<ul>' + rows + "</ul>" : "") + "</div>";
 }
 function lbBrief(H, G, sid, lab){  /* 가장 나쁜 경우를 자세히 보인 카드에서는 가장 좋은 경우를 한 줄로 */
   const S = H.scen.find(s => s.id === sid); if (!S) return "";
   const f = HS_CAT.map(([k, nm]) => { const v = G.cat[k]; if (!v || v.na) return ""; const d = v.by[sid] - v.now; if (Math.abs(d) <= 1) return ""; return nm + " " + Math.round(v.now) + "→" + Math.round(v.by[sid]) + ""; }).filter(Boolean);
-  return '<div class="lb-det lb-det-b"><p class="lb-lab">' + "If the " + lab.toLowerCase() + " comes · <b>" + esc(S.name) + "</b> (" + S.p + "% likely)" + (f.length ? '<span class="lb-col">score: now → this case</span></p><p class="lb-ws">' + esc(f.join(" · ")) + "</p>" : "</p>") + "</div>";
+  return '<div class="lb-det lb-det-b"><p class="lb-lab">' + "If the " + lab.toLowerCase() + " plays out · <b>" + esc(S.name) + "</b> (" + S.p + "% likely)" + (f.length ? '<span class="lb-col">Score: now → scenario</span></p><p class="lb-ws">' + esc(f.join(" · ")) + "</p>" : "</p>") + "</div>";
 }
 function lbExplain(H, G){
   const ws = hsWorstSc(G), bs = hsBestSc(G), bad = ws && (G.cls[ws] === "worse" || G.cls[ws] === "big"), good = bs && G.cls[bs] === "better";
@@ -1902,7 +1902,7 @@ function lifeRow(c){
   const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0];
   if (!G) return "";
   const n = hsCount(H, G, "p"), rec = lbRecent(c.id, 3), today = BR.issues[0].date;
-  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">Current alerts · ' + esc(G.al_now.join(", ")) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Step 10 <span aria-hidden=\"true\">→</span></button></header>";
+  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(G.al_now.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Step 10 <span aria-hidden=\"true\">→</span></button></header>";
   const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
   /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
   return '<article class="lb-card">' + head + '<div class="lb-cols">' +
@@ -1951,7 +1951,7 @@ function renderIndustry(){
   if (!IND) { el.innerHTML = "<div class=\"sec\"><p class=\"note\">Loading industry impact…</p></div>";
     fetch("/en/data/industry.json").then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry impact could not be loaded.</p></div>"; }).catch(() => {}); return; }
   el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Impact · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">100 futures through 2030: the outlook for industry profits</h2>" +
-    "<p class=\"lb-lead\"><b>Run the years to 2030 a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of five conflicts, the answer appears as 100 dots. The baseline is the industry's profit if the conflict simply continues in its current state. Select a cell to see the assessment and the reasoning behind each scenario. The counts are judgment estimates.</p>" +
+    "<p class=\"lb-lead\"><b>Suppose the years to 2030 played out a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of the five issues, 100 dots show the spread of possible futures. The baseline is each industry's projected profit if the issue stays as it is today. Select a chart to see the detailed reasoning behind it. The dot counts are Clisa Geopolitics' own estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Choose which country's industries to show\">" + [["kr", "South Korean industries"], ["us", "U.S. industries"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "</p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
@@ -1963,7 +1963,7 @@ function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "Other";
   return "<section class=\"lb\" id=\"s-life\"><p class=\"eyebrow\">People's Lives · as of " + enDate(x.date) + "</p><h2 class=\"lb-h\">100 futures through 2030</h2>" +
-    "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of five conflicts, the answer is shown as 100 dots. When new events change the assessment, the dots and lines move. The counts are judgment estimates.</p>" +
+    "<p class=\"lb-lead\"><b>If you could live through the years to 2030 a hundred times, how many of those lives would be better than today, and how many worse?</b> For each of the five issues, 100 dots show the spread of possible futures, and that spread shifts as new events unfold. The dot counts are Clisa Geopolitics' own estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Whose lives to show\">" + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Worse or much worse, over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><i class=\"lg-chg\"></i>Graph change</span></p></div>" +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
@@ -2230,7 +2230,7 @@ function renderForecasts(){
   const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
   const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
   $("#pane-forecast").innerHTML =
-    "<div class=\"sec\"><h2>Forecasts and Track Record</h2><p class=\"lead\" style=\"margin-top:8px\">Every forecast states a probability and a resolution date. Once that date passes, the outcome and the forecast’s accuracy are published, and forecasts that missed are not deleted.</p></div>" +
+    "<div class=\"sec\"><h2>Forecasts and Track Record</h2><p class=\"lead\" style=\"margin-top:8px\">Every forecast states its probability and a resolution date; on that date, it is checked against what actually happened, and the result is published.</p></div>" +
     '<div class="score-card"><div><b class="mono">' + fs.length + "</b><span>Total forecasts</span></div><div><b class=\"mono\">" + done.length + "</b><span>Resolved</span></div><div><b class=\"mono\">" + brier + "</b><span>Accuracy (Brier score)</span></div></div>" +
     "<p class=\"note\">Accuracy is measured by the Brier score: the mean of (probability − actual outcome)². Zero is perfect; assigning 50% to every forecast yields 0.25." + (PUB() ? "" : "") + "</p>" +
     (FCR().length ? "<section class=\"sec\" id=\"f-week\"><h3>Weekly forecast review</h3><p class=\"note\" style=\"margin-bottom:8px\">Every Monday, forecast probabilities are revisited in light of the previous week’s events. Both revised and unchanged forecasts are listed, with reasons.</p>" + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
@@ -2289,7 +2289,7 @@ function renderMethod(){
   const P = F.prev, pub = PUB();
   const inner = !pub; /* 작업 설명서는 내부판에만 */
   $("#pane-method").innerHTML =
-    "<div class=\"sec\"><h2>Methodology</h2><p class=\"lead\" style=\"margin-top:8px\">This section sets out the purpose of Clisa Geopolitics, how its judgments are structured, how they are verified, and its sources and limitations. The ultimate purpose is individual human well-being, which is not a variable in the calculation but the standard that sets the direction of all analysis.</p>" + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
+    "<div class=\"sec\"><h2>Methodology</h2><p class=\"lead\" style=\"margin-top:8px\">This section sets out the purpose of Clisa Geopolitics, how its judgments are structured and verified, and its sources and limitations. Its ultimate aim is the well-being of individual people, the standard that guides every analysis.</p>" + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
     "<section class=\"sec\"><h3>Charter" + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" + questionsHtml() +
     "<section class=\"sec\"><h3>How judgments are structured</h3><div class=\"tree\"><div class=\"root\">" + esc(T.root) + '</div><div class="arrow"></div>' +
       '<div class="layers">' + LY.map(l => '<div class="layer l' + l.id + '"><div class="lh"><b>' + esc(LNAME[l.id]) + "</b><span>" + esc(l.q) + '</span></div><p class="note">' + esc(l.d) + "</p>" +
