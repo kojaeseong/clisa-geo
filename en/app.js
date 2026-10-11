@@ -254,7 +254,7 @@ function srLand(paneId, vs, from){
   blk.classList.add("srch-hit"); setTimeout(() => blk.classList.add("fade"), 1600); setTimeout(() => blk.classList.remove("srch-hit", "fade"), 3000);
 }
 function srOpen(){
-  if (!SR.LD && !SR.ldw) { SR.ldw = 1; fetch("/en/data/search_leaders.json").then(r => r.ok ? r.json() : Promise.reject()).then(j => { SR.LD = j; SR.idx = null; if (!$("#srch").hidden) { srBuild(); srRender(); } }).catch(() => { SR.ldw = 0; }); }
+  if (!SR.LD && !SR.ldw) { SR.ldw = 1; fetch("/en/data/search_leaders.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : Promise.reject()).then(j => { SR.LD = j; SR.idx = null; if (!$("#srch").hidden) { srBuild(); srRender(); } }).catch(() => { SR.ldw = 0; }); }
   if (!SR.idx) srBuild(); $("#srch").hidden = false; const i = $("#srchq"); i.focus(); i.select(); srRender(); }
 function srClose(){ $("#srch").hidden = true; $("#srchopen").focus({preventScroll:true}); }
 function srGo(i){
@@ -288,10 +288,14 @@ function setupSearch(){
 
 /* ---------- load ---------- */
 /* v3.34 속도: 자료·브리핑·지도를 함께 받되, 글은 자료가 오는 즉시 그리고 지구본은 지도가 온 뒤에 그린다. 탭 내용은 처음 열 때 그린다 */
+/* v3.96h 새 판 확인: 열어 둔 화면이나 브라우저에 남은 화면이 옛 판이면 한 번 다시 불러온다(화면의 clisa-build 판 표시와 /ver.json 비교, fresh_ver.py) */
+(function(){ const me = document.querySelector('meta[name="clisa-build"]'), mv = me ? me.getAttribute("content") : "", sc = document.querySelector('script[src*="app.js?v="]'), lg = sc && sc.getAttribute("src").indexOf("/en/") === 0 ? "en" : "ko"; if (!mv) return;
+  let hid = 0; const chk = () => fetch("/ver.json", {cache: "no-store"}).then(r => r.ok ? r.json() : null).then(j => { const nv = j && j[lg]; if (!nv || nv === mv) return; try { const k = "vre:" + nv; if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, "1"); } catch(e){ return; } location.reload(); }).catch(() => {});
+  chk(); document.addEventListener("visibilitychange", () => { if (document.hidden) hid = Date.now(); else if (hid && Date.now() - hid > 180000) chk(); }); addEventListener("pageshow", e => { if (e.persisted) chk(); }); })();
 const BRIEF_P = fetch("/en/data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
 /* v3.86(2026-10-08 결재) 미군 해외 배치는 data/posture.json(매주·매월 예약 작업이 고침)을 따로 받아 자료에 붙인다. 못 받으면 미군 배치 없이 연다 */
 const POSTURE_P = fetch("/en/data/posture.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
-fetch("/en/data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => POSTURE_P.then(p => { if (p && p.res && p.fleet && p.events) d.posture = p; else delete d.posture; return d; })).then(d => { init(d); return fetch("/data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
+fetch("/en/data/eurasia.json", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => POSTURE_P.then(p => { if (p && p.res && p.fleet && p.events) d.posture = p; else delete d.posture; return d; })).then(d => { init(d); return fetch("/data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
   console.error(err);
   const l = $("#loading"); if (l) l.textContent = "Couldn’t load the data. Please refresh the page.";
 });
@@ -683,7 +687,7 @@ function setupInteraction(){
     if (lfb) { LIFE = lfb.dataset.life; store.set("ep.life", LIFE); const g = document.getElementById("lifegrid"), x = BR && BR.issues[0];
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
       const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = lifeRows(); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
-    const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 10단계 */
+    const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 삶에 미치는 영향 */
     if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
@@ -1495,7 +1499,7 @@ function decHtml(c, n){
 let CGF = null;
 document.addEventListener("toggle", e => { const d = e.target; if (!d.open || !d.matches || !d.matches("details.cgf[data-fk]") || d.dataset.on) return; d.dataset.on = "1";
   const put = () => { const p = d.querySelector("p"); if (p) p.textContent = (CGF && CGF[d.dataset.fk]) || "Could not load the summary. Select the meeting name to view the original."; };
-  if (CGF) put(); else fetch("/data/cg_speakers.json").then(r => r.ok ? r.json() : {}).then(j => { CGF = j; put(); }).catch(() => { CGF = {}; put(); }); }, true);
+  if (CGF) put(); else fetch("/data/cg_speakers.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : {}).then(j => { CGF = j; put(); }).catch(() => { CGF = {}; put(); }); }, true);
 function congHtml(c){
   const X = c.congress; if (!X || !X.length) return "";
   const row = (k, v) => v ? "<dt>" + k + "</dt><dd>" + esc(v) + "</dd>" : "";
@@ -1541,7 +1545,7 @@ function futHtml(c, n){
     '<div class="futs">' + F.items.map(f => '<article class="fut" id="fut-' + esc(c.id) + "-" + f.id + '" style="--c:' + fcol(f.id) + '"><div class="hd"><span class="id">' + f.id + "</span><b>" + esc(f.name) + '</b><span class="pp">' + (F.rec_same ? f.p + "%" + rg(f.rng) : "Current trend " + f.p + "%" + rg(f.rng) + " · if the recommendation is followed " + f.p_rec + "%" + rg(f.rng_rec)) + (f.prev2w ? '<small>' + f.prev2w[0] + (F.rec_same ? "" : " · " + f.prev2w[1]) + "</small>" : f.prev ? '<small>' + f.prev[0] + " · " + f.prev[1] + "</small>" : f.id === "F5" ? "<small></small>" : "") + "</span></div>" +
       "<p>" + esc(f.story) + "</p><p class=\"tst\"><b>Resolution criteria</b> · " + esc(f.test) + (f.fc ? ' <span class="mono">(' + f.fc + ")</span>" : "") + "</p>" +
       "<p style=\"font-size:12px\"><b>Early signs</b> · " + f.signs.map(esc).join(" · ") + "</p>" + sigHtml(f) +
-      (c.hs7 ? '<button type="button" class="chip" data-jump="hs7-' + esc(c.id) + "\">People's lives in this scenario · Step 10 →</button></article>" : "<details class=\"src\"><summary>What this scenario means for people (well-being index)</summary>" + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼ show change from 2026." : " Values run from worse to better.") + "</p></details></article>")).join("") + "</div>" +
+      (c.hs7 ? '<button type="button" class="chip" data-jump="hs7-' + esc(c.id) + "\">What this scenario means for people's lives →</button></article>" : "<details class=\"src\"><summary>What this scenario means for people (well-being index)</summary>" + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼ show change from 2026." : " Values run from worse to better.") + "</p></details></article>")).join("") + "</div>" +
     extHtml(c) + (!c.external && (F.ext_list || []).length ? "<h3 style=\"margin:8px 0 0\">External variables</h3><p class=\"note\">Factors the strategic actor cannot control but that shift the probability of each scenario.</p><ul class=\"list\">" + F.ext_list.map(x => '<li class="rv"><p style="color:var(--ink)">' + esc(x) + "</p></li>").join("") + "</ul>" : "") + worldHtml(c) + aiHtml(c) + "</section>";
 }
 /* v3.26 사안 outlook: 흐름·창·사건·경로·반증 신호. 본문의 {{fc:fNN}}은 그날 확률을 보이는 전망 칩, {{case:id}}는 사안 칩 */
@@ -1793,7 +1797,7 @@ function lifeCard(c, x){
   const n = hsCount(H, G, "p"), hit = H.scen.some(s => G.cls[s.id] !== "same");
   const eu = LIFE === "EU" && hit && H.groups.filter(g => LIFE_EU.includes(g.k)).length > 1 ? "<span class=\"lh-sub\">The most affected group in Europe</span>" : "";
   const hd = '<p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + "</span>" + eu + "</div>";
-  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + "\">More in Step 10 →</button>" + brf + "</div>";
+  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + "\">More on the effects on people's lives →</button>" + brf + "</div>";
   if (!hit) return '<article class="lh-card lh-none">' + hd + "<p class=\"lh-flat\">About the same as today in all 100 futures</p><p class=\"lh-line\">" + esc(G.line) + "</p>" + go + "</article>";
   return '<article class="lh-card">' + hd + '<div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + go + "</article>";
 }
@@ -1909,11 +1913,11 @@ function lifeRow(c){
   const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0];
   if (!G) return "";
   const n = hsCount(H, G, "p"), rec = lbRecent(c.id, 3), today = BR.issues[0].date;
-  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(G.al_now.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Step 10 <span aria-hidden=\"true\">→</span></button></header>";
+  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(G.al_now.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + "\">Effects on lives <span aria-hidden=\"true\">→</span></button></header>";
   const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
   /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
   return '<article class="lb-card">' + head + '<div class="lb-cols">' +
-    '<div class="lb-left"><p class="lb-lab lb-fut">100 futures through 2030</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · more in Step 10") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
+    '<div class="lb-left"><p class="lb-lab lb-fut">100 futures through 2030</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · more on the effects on people's lives") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
     '<div class="lb-right">' + lbTrend(c, G) + lbWhy(c, G) + "<div class=\"lb-rcw\"><p class=\"lb-lab\">Latest updates</p>" + recent + "</div></div></div></article>";
 }
 function lbImpact(c){ const G = lifePick(c); if (!G) return [-1, -1]; const n = hsCount(c.hs7, G, "p"); return [n.big + n.worse + n.better, n.big + n.worse]; }
@@ -1956,7 +1960,7 @@ function indRows(){
 function renderIndustry(){
   const el = $("#pane-industry"); if (!el) return;
   if (!IND) { el.innerHTML = "<div class=\"sec\"><p class=\"note\">Loading industry impact…</p></div>";
-    fetch("/en/data/industry.json").then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry impact could not be loaded.</p></div>"; }).catch(() => {}); return; }
+    fetch("/en/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry impact could not be loaded.</p></div>"; }).catch(() => {}); return; }
   el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Impact · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">100 futures through 2030: the outlook for industry profits</h2>" +
     "<p class=\"lb-lead\"><b>Suppose the years to 2030 played out a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of the five issues, 100 dots show the spread of possible futures. The baseline is each industry's projected profit if the issue stays as it is today. Select a chart to see the detailed reasoning behind it. The dot counts are Clisa Geopolitics' own estimates.</p>" +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Choose which country's industries to show\">" + [["kr", "South Korean industries"], ["us", "U.S. industries"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
@@ -1988,13 +1992,13 @@ function lifeStripHtml(x){
 function lifeItemHtml(id){
   const c = (D.strategies || []).find(k => k.id === id); if (!c || !c.hs7) return "";
   const G = lifeMain(c), n = hsCount(c.hs7, G, "p");
-  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + ": 100 futures through 2030</b><br>" + lifeNums(n) + " · more in Step 10 →</span></button>";
+  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + ": 100 futures through 2030</b><br>" + lifeNums(n) + " · more on the effects on lives →</span></button>";
 }
 function lifeHeroHtml(){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
-  return "<section class=\"sec\" id=\"s-life\"><h3>People's lives · 100 futures through 2030</h3><p class=\"note\">For one group in each of the five issues, the dots show how many of 100 possible futures through 2030 leave life better or worse. Probabilities and classifications are judgment estimates; the method is set out in Step 10 of each issue.</p><div class=\"lh-grid\">" +
+  return "<section class=\"sec\" id=\"s-life\"><h3>People's lives · 100 futures through 2030</h3><p class=\"note\">For one group in each of the five issues, the dots show how many of 100 possible futures through 2030 leave life better or worse. Probabilities and classifications are judgment estimates; the method is set out in each issue's analysis under ‘What this issue means for people's lives’.</p><div class=\"lh-grid\">" +
     cs.map(c => { const H = c.hs7, G = H.groups.find(g => !g.fold) || H.groups[0], n = hsCount(H, G, "p"), nm = c.title.split(":")[0];
-      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · more in Step 10 →</button></article>"; }).join("") + "</div></section>";
+      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · more on the effects on lives →</button></article>"; }).join("") + "</div></section>";
 }
 function hs7Html(c, n9){
   const H = c.hs7, main = H.groups.filter(G => !G.fold), fold = H.groups.filter(G => G.fold);

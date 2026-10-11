@@ -226,7 +226,7 @@ function srLand(paneId, vs, from){
   blk.classList.add("srch-hit"); setTimeout(() => blk.classList.add("fade"), 1600); setTimeout(() => blk.classList.remove("srch-hit", "fade"), 3000);
 }
 function srOpen(){
-  if (!SR.LD && !SR.ldw) { SR.ldw = 1; fetch("/data/search_leaders.json").then(r => r.ok ? r.json() : Promise.reject()).then(j => { SR.LD = j; SR.idx = null; if (!$("#srch").hidden) { srBuild(); srRender(); } }).catch(() => { SR.ldw = 0; }); }
+  if (!SR.LD && !SR.ldw) { SR.ldw = 1; fetch("/data/search_leaders.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : Promise.reject()).then(j => { SR.LD = j; SR.idx = null; if (!$("#srch").hidden) { srBuild(); srRender(); } }).catch(() => { SR.ldw = 0; }); }
   if (!SR.idx) srBuild(); $("#srch").hidden = false; const i = $("#srchq"); i.focus(); i.select(); srRender(); }
 function srClose(){ $("#srch").hidden = true; $("#srchopen").focus({preventScroll:true}); }
 function srGo(i){
@@ -260,10 +260,14 @@ function setupSearch(){
 
 /* ---------- load ---------- */
 /* v3.34 속도: 자료·브리핑·지도를 함께 받되, 글은 자료가 오는 즉시 그리고 지구본은 지도가 온 뒤에 그린다. 탭 내용은 처음 열 때 그린다 */
+/* v3.96h 새 판 확인: 열어 둔 화면이나 브라우저에 남은 화면이 옛 판이면 한 번 다시 불러온다(화면의 clisa-build 판 표시와 /ver.json 비교, fresh_ver.py) */
+(function(){ const me = document.querySelector('meta[name="clisa-build"]'), mv = me ? me.getAttribute("content") : "", sc = document.querySelector('script[src*="app.js?v="]'), lg = sc && sc.getAttribute("src").indexOf("/en/") === 0 ? "en" : "ko"; if (!mv) return;
+  let hid = 0; const chk = () => fetch("/ver.json", {cache: "no-store"}).then(r => r.ok ? r.json() : null).then(j => { const nv = j && j[lg]; if (!nv || nv === mv) return; try { const k = "vre:" + nv; if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, "1"); } catch(e){ return; } location.reload(); }).catch(() => {});
+  chk(); document.addEventListener("visibilitychange", () => { if (document.hidden) hid = Date.now(); else if (hid && Date.now() - hid > 180000) chk(); }); addEventListener("pageshow", e => { if (e.persisted) chk(); }); })();
 const BRIEF_P = fetch("/data/daily.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
 /* v3.86(2026-10-08 결재) 미군 해외 배치는 data/posture.json(매주·매월 예약 작업이 고침)을 따로 받아 자료에 붙인다. 못 받으면 미군 배치 없이 연다 */
 const POSTURE_P = fetch("/data/posture.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).catch(() => null);
-fetch("/data/eurasia.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => POSTURE_P.then(p => { if (p && p.res && p.fleet && p.events) d.posture = p; else delete d.posture; return d; })).then(d => { init(d); return fetch("/data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
+fetch("/data/eurasia.json", {cache: "no-cache"}).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => POSTURE_P.then(p => { if (p && p.res && p.fleet && p.events) d.posture = p; else delete d.posture; return d; })).then(d => { init(d); return fetch("/data/world-50m.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }); }).then(w => initGlobe(w)).catch(err => {
   console.error(err);
   const l = $("#loading"); if (l) l.textContent = "데이터를 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
 });
@@ -655,7 +659,7 @@ function setupInteraction(){
     if (lfb) { LIFE = lfb.dataset.life; store.set("ep.life", LIFE); const g = document.getElementById("lifegrid"), x = BR && BR.issues[0];
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
       const lb = document.getElementById("lifeboard"); if (lb) lb.innerHTML = lifeRows(); document.querySelectorAll("[data-life]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.life === LIFE))); return; }
-    const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 10단계 */
+    const hsb = ev.target.closest("[data-hs]");  /* 시안: 세계 정세 카드 → 그 사안의 삶에 미치는 영향 */
     if (hsb) { const id = hsb.dataset.hs; goCase(id); const d = caseFill(id); if (d) d.open = true; setTimeout(() => { const t = document.getElementById("hs7-" + id); if (t) t.scrollIntoView({block: "start"}); }, 60); return; }
     const cs = ev.target.closest("[data-case]");
     if (cs) { goCase(cs.dataset.case, true); return; }
@@ -1467,7 +1471,7 @@ function decHtml(c, n){
 let CGF = null;
 document.addEventListener("toggle", e => { const d = e.target; if (!d.open || !d.matches || !d.matches("details.cgf[data-fk]") || d.dataset.on) return; d.dataset.on = "1";
   const put = () => { const p = d.querySelector("p"); if (p) p.textContent = (CGF && CGF[d.dataset.fk]) || "불러오지 못했습니다. 회의 이름을 눌러 원문을 보십시오."; };
-  if (CGF) put(); else fetch("/data/cg_speakers.json").then(r => r.ok ? r.json() : {}).then(j => { CGF = j; put(); }).catch(() => { CGF = {}; put(); }); }, true);
+  if (CGF) put(); else fetch("/data/cg_speakers.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : {}).then(j => { CGF = j; put(); }).catch(() => { CGF = {}; put(); }); }, true);
 function congHtml(c){
   const X = c.congress; if (!X || !X.length) return "";
   const row = (k, v) => v ? "<dt>" + k + "</dt><dd>" + esc(v) + "</dd>" : "";
@@ -1513,7 +1517,7 @@ function futHtml(c, n){
     '<div class="futs">' + F.items.map(f => '<article class="fut" id="fut-' + esc(c.id) + "-" + f.id + '" style="--c:' + fcol(f.id) + '"><div class="hd"><span class="id">' + f.id + "</span><b>" + esc(f.name) + '</b><span class="pp">' + (F.rec_same ? f.p + "%" + rg(f.rng) : "현 추세 " + f.p + "%" + rg(f.rng) + " · 권고 이행 시 " + f.p_rec + "%" + rg(f.rng_rec)) + (f.prev2w ? '<small>' + f.prev2w[0] + (F.rec_same ? "" : " · " + f.prev2w[1]) + "</small>" : f.prev ? '<small>' + f.prev[0] + " · " + f.prev[1] + "</small>" : f.id === "F5" ? "<small></small>" : "") + "</span></div>" +
       "<p>" + esc(f.story) + '</p><p class="tst"><b>성립 조건</b> · ' + esc(f.test) + (f.fc ? ' <span class="mono">(' + f.fc + ")</span>" : "") + "</p>" +
       '<p style="font-size:12px"><b>선행 징후</b> · ' + f.signs.map(esc).join(" · ") + "</p>" + sigHtml(f) +
-      (c.hs7 ? '<button type="button" class="chip" data-jump="hs7-' + esc(c.id) + '">이 전개에서 사람들의 삶 · 10단계 →</button></article>' : '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>")).join("") + "</div>" +
+      (c.hs7 ? '<button type="button" class="chip" data-jump="hs7-' + esc(c.id) + '">이 전개가 삶에 미치는 영향 →</button></article>' : '<details class="src"><summary>이 전개에서 개인의 삶 (행복 지표)</summary>' + ftab(f) + '<p class="note">' + esc(f.why) + (f.score ? " ▲▼는 2026년 대비 변화." : " 값은 나쁜 쪽 ~ 좋은 쪽.") + "</p></details></article>")).join("") + "</div>" +
     extHtml(c) + (!c.external && (F.ext_list || []).length ? '<h3 style="margin:8px 0 0">바깥 변수</h3><p class="note">전략 주체가 좌우하지 못하지만 전개의 확률을 움직이는 변수입니다.</p><ul class="list">' + F.ext_list.map(x => '<li class="rv"><p style="color:var(--ink)">' + esc(x) + "</p></li>").join("") + "</ul>" : "") + worldHtml(c) + aiHtml(c) + "</section>";
 }
 /* v3.26 사안 outlook: 흐름·창·사건·경로·반증 신호. 본문의 {{fc:fNN}}은 그날 확률을 보이는 전망 칩, {{case:id}}는 사안 칩 */
@@ -1765,7 +1769,7 @@ function lifeCard(c, x){
   const n = hsCount(H, G, "p"), hit = H.scen.some(s => G.cls[s.id] !== "same");
   const eu = LIFE === "EU" && hit && H.groups.filter(g => LIFE_EU.includes(g.k)).length > 1 ? '<span class="lh-sub">유럽에서 영향이 가장 큰 집단</span>' : "";
   const hd = '<p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + "</span>" + eu + "</div>";
-  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + '">10단계에서 자세히 보기 →</button>' + brf + "</div>";
+  const go = '<div class="lh-act"><button type="button" class="chip" data-hs="' + esc(c.id) + '">삶에 미치는 영향 자세히 →</button>' + brf + "</div>";
   if (!hit) return '<article class="lh-card lh-none">' + hd + '<p class="lh-flat">100번 모두 현재와 비슷함</p><p class="lh-line">' + esc(G.line) + "</p>" + go + "</article>";
   return '<article class="lh-card">' + hd + '<div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + go + "</article>";
 }
@@ -1881,11 +1885,11 @@ function lifeRow(c){
   const H = c.hs7, G = lifePick(c), nm = c.title.split(":")[0];
   if (!G) return "";
   const n = hsCount(H, G, "p"), rec = lbRecent(c.id, 3), today = BR.issues[0].date;
-  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">현재 경보 · ' + esc(G.al_now.join("·")) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + '">10단계 자세히 <span aria-hidden="true">→</span></button></header>';
+  const head = '<header class="lb-hd"><span class="lb-case">' + esc(nm) + '</span><b class="lb-gname">' + esc(G.name) + '</b><span class="lb-size">' + esc(G.size) + '</span>' + (G.al_now && G.al_now.length ? '<span class="lb-alnow">현재 경보 · ' + esc(G.al_now.join("·")) + "</span>" : "") + '<button type="button" class="lb-more" data-hs="' + esc(c.id) + '">삶에 미치는 영향 자세히 <span aria-hidden="true">→</span></button></header>';
   const recent = rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "오늘" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">전망</span> ') + "</li>").join("") + "</ul>" : '<p class="note">최근 정보 없음</p>';
   /* v3.92c: 왼쪽 칸 = 점 그림·횟수와 그 설명, 오른쪽 칸 = 선 그래프와 최근 정보. 두 칸은 세로선으로 나눈다. 100번 모두 현재와 비슷한 집단도 같은 모양으로 그린다 */
   return '<article class="lb-card">' + head + '<div class="lb-cols">' +
-    '<div class="lb-left"><p class="lb-lab lb-fut">2030년까지 100번의 미래</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · 10단계에서 자세히 보기") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
+    '<div class="lb-left"><p class="lb-lab lb-fut">2030년까지 100번의 미래</p><div class="lb-top"><button type="button" class="lb-dots" data-hs="' + esc(c.id) + '" aria-label="' + esc(nm + " · " + G.name + " · 삶에 미치는 영향 자세히 보기") + '">' + hsDots(n) + "</button>" + lbStats(n, lbDelta(c, G)) + "</div>" + lbExplain(H, G) + "</div>" +
     '<div class="lb-right">' + lbTrend(c, G) + lbWhy(c, G) + '<div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + recent + "</div></div></div></article>";
 }
 function lbImpact(c){ const G = lifePick(c); if (!G) return [-1, -1]; const n = hsCount(c.hs7, G, "p"); return [n.big + n.worse + n.better, n.big + n.worse]; }
@@ -1928,7 +1932,7 @@ function indRows(){
 function renderIndustry(){
   const el = $("#pane-industry"); if (!el) return;
   if (!IND) { el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오는 중입니다.</p></div>';
-    fetch("/data/industry.json").then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오지 못했습니다.</p></div>'; }).catch(() => {}); return; }
+    fetch("/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = '<div class="sec"><p class="note">산업별 영향을 불러오지 못했습니다.</p></div>'; }).catch(() => {}); return; }
   el.innerHTML = '<section class="lb ind" id="s-ind"><p class="eyebrow">산업별 영향 · ' + kd(IND.asof) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래를 가정, 산업별 이익은?</h2>' +
     '<p class="lb-lead"><b>2030년까지 미래를 100번 반복한다고 가정하면, 산업별 이익이 현 추세를 뚜렷하게 상회하는 경우와 하회하는 경우는 각각 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 표현합니다. 각 사안이 현재 상태를 유지할 때의 산업별 이익 추정이 비교의 기준입니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스가 자체적으로 추정한 값입니다.</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="어느 나라 산업을 볼까">' + [["kr", "한국 산업"], ["us", "미국 산업"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
@@ -1960,13 +1964,13 @@ function lifeStripHtml(x){
 function lifeItemHtml(id){
   const c = (D.strategies || []).find(k => k.id === id); if (!c || !c.hs7) return "";
   const G = lifeMain(c), n = hsCount(c.hs7, G, "p");
-  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + "의 2030년까지 100번의 미래</b><br>" + lifeNums(n) + " · 10단계에서 자세히 →</span></button>";
+  return '<button type="button" class="bi-life" data-hs="' + esc(id) + '">' + hsDots(n) + "<span><b>" + esc(G.name) + "의 2030년까지 100번의 미래</b><br>" + lifeNums(n) + " · 삶에 미치는 영향 자세히 →</span></button>";
 }
 function lifeHeroHtml(){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
-  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보입니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안의 10단계에 있습니다.</p><div class="lh-grid">' +
+  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보입니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안 분석의 \'이 사안이 사람들의 삶에 미치는 영향\'에 있습니다.</p><div class="lh-grid">' +
     cs.map(c => { const H = c.hs7, G = H.groups.find(g => !g.fold) || H.groups[0], n = hsCount(H, G, "p"), nm = c.title.split(":")[0];
-      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · 10단계에서 자세히 →</button></article>"; }).join("") + "</div></section>";
+      return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · 삶에 미치는 영향 자세히 →</button></article>"; }).join("") + "</div></section>";
 }
 function hs7Html(c, n9){
   const H = c.hs7, main = H.groups.filter(G => !G.fold), fold = H.groups.filter(G => G.fold);
