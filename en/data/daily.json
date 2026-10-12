@@ -17,7 +17,8 @@
        "PRK",
        "KOR"
       ]
-     }
+     },
+     "fact": "South Korea's Joint Chiefs of Staff said North Korea fired an unidentified projectile into the East Sea on the morning of October 12 and that it is analyzing the projectile's range, altitude, and other specifications."
     },
     {
      "case": "ukraine",
@@ -34,7 +35,8 @@
        "RUS",
        "UKR"
       ]
-     }
+     },
+     "fact": "President Trump wrote on Truth Social on October 11 that an \"energy ceasefire\" between Russia and Ukraine was effective immediately and that both sides had agreed to it. Moscow has not confirmed the agreement and did not immediately comment."
     },
     {
      "case": "ukraine",
@@ -51,7 +53,8 @@
        "UKR",
        "RUS"
       ]
-     }
+     },
+     "fact": "According to PBS, Ukraine's presidential office confirmed that Russia struck a power plant in Kharkiv on the evening of October 11, after Trump's ceasefire announcement."
     },
     {
      "case": "iran",
@@ -60,7 +63,7 @@
       {
        "id": "f03",
        "e": "down",
-       "p": 25
+       "p": 20
       },
       {
        "id": "f38",
@@ -77,7 +80,8 @@
        "IRN",
        "USA"
       ]
-     }
+     },
+     "fact": "Iranian security chief Rezaei said on October 11 that the U.S. reply to the seven conditions Iran has set for reopening the Strait of Hormuz accepted some of them but left others unresolved, and that Iran considers it insufficient."
     },
     {
      "case": "iran",
@@ -96,6 +100,22 @@
        "SAU",
        "YEM"
       ]
+     },
+     "fact": "Riyadh's King Khalid International Airport was attacked on October 11 for the second day in a row; Saudi Arabia's civil aviation authority said the latest attack caused injuries, and Yemen's Houthi rebels claimed responsibility for it."
+    },
+    {
+     "case": "iran",
+     "h": "UKMTO: tanker leaving the Strait of Hormuz hit by unidentified projectile",
+     "fact": "The U.K. Maritime Trade Operations center (UKMTO) said on October 11 that an unidentified projectile struck a tanker leaving the Strait of Hormuz, damaging its port side, and that all crew members were safe.",
+     "fc": [],
+     "src": [
+      "https://gulfnews.com/world/mena/tanker-struck-by-unidentified-projectile-in-strait-of-hormuz-ukmto-says-1.500706575"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
      }
     },
     {
@@ -111,7 +131,8 @@
        "KOR",
        "SAU"
       ]
-     }
+     },
+     "fact": "South Korea's Foreign Ministry raised its travel alert for all of Saudi Arabia to Level 3, advising citizens to leave, effective 10 p.m. on October 11."
     },
     {
      "case": null,
@@ -125,12 +146,13 @@
       "isos": [
        "PAK"
       ]
-     }
+     },
+     "fact": "Acting on Prime Minister Shehbaz Sharif's advice, President Asif Ali Zardari declared a state of emergency on October 11 in Khyber Pakhtunkhwa, the province governed by former Prime Minister Imran Khan's party. The federal government cited deteriorating security and the provincial government's \"deliberate disengagement from the fight against terrorism.\""
     }
    ],
    "more": [
     {
-     "t": "Ukrainian President Volodymyr Zelensky said on October 11 that Ukraine is ready to stop striking Russian energy facilities and expects Russia to do the same.",
+     "t": "Ukrainian President Volodymyr Zelensky said on October 11 that Ukraine is ready to stop striking Russian energy facilities and is counting on Russia to show the same readiness.",
      "src": [
       "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
      ]
@@ -145,12 +167,6 @@
      "t": "Russia's Defense Ministry said on October 11 that it had shot down 909 Ukrainian fixed-wing drones and two guided bombs over the past day.",
      "src": [
       "https://tass.com/defense/2200515"
-     ]
-    },
-    {
-     "t": "The U.K. Maritime Trade Operations (UKMTO) said on October 11 that an unidentified projectile hit a tanker leaving the Strait of Hormuz, damaging its port side; all crew are safe.",
-     "src": [
-      "https://gulfnews.com/world/mena/tanker-struck-by-unidentified-projectile-in-strait-of-hormuz-ukmto-says-1.500706575"
      ]
     },
     {

@@ -1111,9 +1111,9 @@ window.ttsFollowEnd = () => tfEnd();
   addEventListener("keydown", e => { if (/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End| )$/.test(e.key)) hold(); });
   addEventListener("mousedown", e => { if (e.target.classList && e.target.classList.contains("pane")) hold(); }); })();  /* 스크롤 막대 끌기 */
 function pastIssue(o){  /* v3.92e: 지난 정보는 눌러서 그 자리에서 펼친다. 그날의 한 줄 정보를 모두 보이고, 전문이 있는 호는 '전문 보기'를 붙인다 */
-  const full = o.items.some(i => i.fact), csn = id => LB_SHORT[id] || "기타";
+  const full = o.items.some(i => i.link), csn = id => LB_SHORT[id] || "기타";
   return '<details class="lb-past"><summary><span class="mono">' + fmtKD(o.date) + '</span><span class="nm">' + esc((o.items[0] || {}).h || "") + '</span><span class="lb-pn">' + (o.items.length + (o.more || []).length) + "건</span></summary>" +
-    '<ul class="lb-list">' + o.items.map(i => '<li><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
+    '<ul class="lb-list">' + o.items.map(i => '<li><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + bhFact(i) + "</li>").join("") +
     (o.more || []).map(m => '<li><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") + "</ul>" +
     '<p class="lb-pf"><a class="chip" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '">' + (full ? "이날 정세 브리핑 전문 보기 →" : "이날 쪽으로 →") + "</a></p></details>";
 }
@@ -1123,7 +1123,7 @@ function renderBrief(){
   if (!BR || !(BR.issues || []).length) { el.innerHTML = '<div class="sec"><h2>정세 브리핑</h2><p class="note">정세 브리핑을 불러오는 중입니다.</p></div>'; return; }
   const cur = briefCur(), others = BR.issues.filter(x => x !== cur);
   /* v3.92d: 최신 호도 날짜를 골라 들어오면(지난 정보 목록, 검색, /brief/날짜/) 예전 형식 전문으로 보인다. 전문(fact)이 있는 최신 호는 지난 정보 맨 위에 둔다 */
-  const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.fact));
+  const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.link));
   if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); return; }  /* v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
   el.innerHTML = (cur === BR.issues[0] ? '<p class="lb-back"><button type="button" class="chip" data-go="overview" data-bgo="1">← 세계 정세의 정세 브리핑</button></p>' : "") + '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
@@ -1198,26 +1198,29 @@ function loadBrief(){
 }
 /* v3.99 시안: 정세 브리핑을 세계 정세 탭 맨 위에. 최근 3개 호(발행일 기준)를 펼쳐 두고, 그 이전 호는 '지난 브리핑 더보기'로 그 자리에서 펼친다.
    정보마다 그날 그 사안의 확률이 바뀌었으면 국민의 삶(그 사안의 카드)과 산업별 미래(그 변경으로 점 개수가 가장 크게 움직인 업종의 추이)로 가는 단추를 붙인다 */
-const BH_N = 2;  /* 2026-10-12 결재: 최근 2개 호(발행일 기준) */
+const BH_CUT = 6, BH_N = 2;  /* 2026-10-12 결재: 최근 2개 호(발행일 기준) */
 function bhFx(i, d){
   const fc = (i.fc || []).map(f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none; return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '"><span class="lb-fcl">전망</span> ' + esc(F && F.s ? F.s : f.id) + " " + e[0] + "</button>"; }).join("");
   const C = i.case ? (D.strategies || []).find(s => s.id === i.case) : null, moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
   return fc + (moved ? '<span class="bh-gx"><span class="lb-fx lb-fx-on">그래프 변경</span><button type="button" class="bh-go" data-golife="' + esc(i.case) + '">국민의 삶 →</button><button type="button" class="bh-go" data-goind="' + esc(i.case + "|" + d) + '">산업별 미래 →</button></span>' : "");
 }
+function bhFact(i){ return i.fact && !i.link ? '<span class="lb-f">' + esc(i.fact) + "</span>" : ""; }  /* v4.01(2026-10-12 결재): 한 줄 정보 아래 사실 1~2문장(판단과의 연결 문장이 있는 예전 형식 호는 전문 쪽에서 봄) */
 function bhItems(x, top){
-  const csn = id => LB_SHORT[id] || "기타";
-  return '<ul class="lb-list">' + x.items.map((i, n) => '<li' + (top ? ' id="bi-' + n + '"' : "") + '><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + bhFx(i, x.date) +
-    ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
-    (x.more || []).map(m => '<li><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") + "</ul>";
+  const csn = id => LB_SHORT[id] || "기타", N = x.items.length + (x.more || []).length, cut = N > BH_CUT, cx = k => cut && k >= BH_CUT ? ' class="bh-x"' : "";  /* 하루 6줄이 넘으면 나머지는 접는다 */
+  return '<ul class="lb-list' + (cut ? " bh-cut" : "") + '">' + x.items.map((i, n) => '<li' + (top ? ' id="bi-' + n + '"' : "") + cx(n) + '><span class="lb-cs">' + esc(csn(i.case)) + '</span><span class="lb-t">' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</span>" + bhFx(i, x.date) +
+    ((i.src || []).length ? '<a class="lb-src" href="' + esc(i.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + bhFact(i) + "</li>").join("") +
+    (x.more || []).map((m, k) => '<li' + cx(x.items.length + k) + '><span class="lb-cs lb-etc">기타</span><span class="lb-t">' + esc(firstSent(m.t)) + "</span>" + ((m.src || []).length ? '<a class="lb-src" href="' + esc(m.src[0]) + '" target="_blank" rel="noopener">출처</a>' : "") + "</li>").join("") +
+    (cut ? '<li class="bh-xb"><button type="button" class="bh-xbtn" data-bcut="1">' + "나머지 " + (N - BH_CUT) + "건 더 보기" + "</button></li>" : "") + "</ul>";
 }
 function briefHomeHtml(){
   if (!BR || !(BR.issues || []).length) return "";
   const top = BR.issues.slice(0, BH_N), old = BR.issues.slice(BH_N);
   return '<section class="sec bhome" id="brief"><div class="bh"><h2>정세 브리핑</h2>' + ttsBtn("brief") + "</div>" +
-    top.map((x, k) => '<div class="bh-day"><p class="bh-dd"><span>' + fmtKD(x.date) + "</span>" + (x.items.some(i => i.fact) ? '<a class="bh-full" href="/brief/' + esc(x.date) + '/" data-brief="' + esc(x.date) + '">전문 보기 →</a>' : "") + "</p>" + bhItems(x, !k) + weekLine(x.date) + "</div>").join("") +
+    top.map((x, k) => '<div class="bh-day"><p class="bh-dd"><span>' + fmtKD(x.date) + "</span>" + (x.items.some(i => i.link) ? '<a class="bh-full" href="/brief/' + esc(x.date) + '/" data-brief="' + esc(x.date) + '">전문 보기 →</a>' : "") + "</p>" + bhItems(x, !k) + weekLine(x.date) + "</div>").join("") +
     (old.length ? '<button type="button" class="bh-more" data-bmore="1" aria-expanded="false">지난 브리핑 더보기 <span class="mono">' + old.length + '일</span></button><div class="bh-old" hidden>' + old.map(pastIssue).join("") + "</div>" : "") + "</section>";
 }
 document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기(그 자리에서 펼침), 정세 브리핑으로 가는 단추 */
+  const bc = ev.target.closest("[data-bcut]"); if (bc) { const u = bc.closest("ul"); if (u) u.classList.remove("bh-cut"); bc.closest("li").remove(); return; }
   const m = ev.target.closest("[data-bmore]"); if (m) { const o = m.nextElementSibling, op = m.getAttribute("aria-expanded") !== "true"; if (o) o.hidden = !op; m.setAttribute("aria-expanded", op); m.firstChild.textContent = op ? "지난 브리핑 접기 " : "지난 브리핑 더보기 "; return; }
   const lx = ev.target.closest("[data-lbx]"); if (lx) { const md = lx.dataset.lbxm || "d"; LBX = LBX === lx.dataset.lbx && LBXM === md ? null : lx.dataset.lbx; LBXM = md; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } if (LBX) { const x = document.querySelector('[data-lbx="' + CSS.escape(LBX) + '"]'); detReveal(x && (x.closest(".mc,.ma,.lbx-card") || x).querySelector(".ind-det")); } return; }
   const dj = ev.target.closest("[data-dj]"); if (dj) { const a = document.getElementById(dj.dataset.dj); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); return; }

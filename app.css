@@ -1013,6 +1013,7 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .lb-list{list-style:none;margin:10px 0 0;padding:0;display:grid}
 .pane .lb-list li{padding:9px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:13px;line-height:1.55}
 .lb-list .lb-t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lb-list .lb-f{flex:1 1 calc(100% - 4em);order:1;font-size:12.5px;line-height:1.6;color:var(--ink-2)} .lb-list li:has(>.lb-f)>:not(.lb-cs):not(.lb-t):not(.lb-f){order:3} .lb-list li:has(>.lb-f)>.lb-src{order:2;align-self:flex-end} .lb-list.bh-cut li.bh-x{display:none} .lb-list li.bh-xb{border-bottom:0;padding:8px 0 0} .bh-xbtn{border:1px solid var(--line);background:var(--panel);color:var(--accent);border-radius:999px;padding:5px 12px;font:600 12.5px var(--sans);cursor:pointer}
 .lb-cs{font:700 11px/1.7 var(--sans);color:var(--accent);background:var(--hl,rgba(27,79,138,.08));border-radius:4px;padding:0 7px;flex:none} .lb-etc{color:var(--muted);background:transparent;border:1px solid var(--line)}
 .lb-src{font-size:11.5px;color:var(--muted)}
 @media (max-width: 960px){ .lb-body{grid-template-columns:64px minmax(0,1fr);gap:12px} .lb-dots,.lb-dots .hs-dots{width:64px;height:64px} .lb-body .lt{grid-column:1 / -1} .lb-foot{grid-template-columns:1fr;gap:10px} .lb-ctl{flex-direction:column;align-items:flex-start} .lb-ctl .lsel button{padding:6px 9px;font-size:12px} .lb-more{margin-left:0;flex-basis:100%;text-align:left} }
