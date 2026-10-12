@@ -1,6 +1,166 @@
 {
  "issues": [
   {
+   "date": "2026-10-12",
+   "items": [
+    {
+     "case": "korea",
+     "h": "합참 \"북한, 동해상으로 미상 발사체 발사\"…제원 분석 중",
+     "fc": [],
+     "src": [
+      "https://www.koreaherald.com/article/10899073",
+      "https://www.dt.co.kr/article/12088452",
+      "https://www.news1.kr/diplomacy/defense-diplomacy/6316432"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "트럼프 \"러-우 에너지 휴전 즉시 발효, 양측 합의\"…러시아는 확인 안 해",
+     "fc": [],
+     "src": [
+      "https://time.com/article/2026/10/11/trump-claims-russia-and-ukraine-have-agreed-to-an-energy-ceasefire-/",
+      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks",
+      "https://www.fontanka.ru/2026/10/12/76694201/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "우크라이나 대통령실, 휴전 발표 뒤 러시아의 하르키우 발전소 공격 확인",
+     "fc": [],
+     "src": [
+      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
+     ],
+     "loc": {
+      "lat": 49.99,
+      "lon": 36.23,
+      "place": "하르키우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란 안보 책임자 레자이 \"미국 답신, 불충분하다고 본다\"…호르무즈 협상 난항",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.thenationalnews.com/news/mena/2026/10/11/iran-says-us-response-to-proposal-to-reopen-strait-of-hormuz-is-insufficient/",
+      "https://www.timesofisrael.com/liveblog_entry/iran-says-us-response-to-its-proposal-to-reopen-hormuz-was-insufficient/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "리야드 공항 이틀째 피격, 사우디 \"부상자 발생\"…후티, 책임 주장",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/11/yemen-fighting-expands-as-houthis-attack-saudi-airport-what-to-know",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/",
+      "https://english.news.cn/20261012/6a26e48e24be4f3a9cbda0f95c171b68/c.html"
+     ],
+     "loc": {
+      "lat": 24.96,
+      "lon": 46.7,
+      "place": "리야드 킹칼리드 국제공항(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "외교부, 사우디 전역 여행경보 3단계 '출국 권고'로 상향",
+     "fc": [],
+     "src": [
+      "https://www.kukinews.com/article/view/kuk202610120002",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008792258"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "자르다리 파키스탄 대통령, 임란 칸 정당 집권 카이베르파크툰크와주에 비상사태",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.pk/pakistan/pakistan-president-imposes-emergency-in-opposition-ruled-khyber-pakhtunkhwa-province-3003824",
+      "https://tribune.com.pk/story/2634222/president-zardari-signs-off-on-emergency-rule-in-k-p"
+     ],
+     "loc": {
+      "isos": [
+       "PAK"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "젤렌스키 우크라이나 대통령은 11일 우크라이나는 러시아 에너지 시설 타격을 멈출 준비가 돼 있으며 러시아에도 같은 준비를 기대한다고 밝혔습니다.",
+     "src": [
+      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
+     ]
+    },
+    {
+     "t": "우크라이나 경찰에 따르면 11일 러시아 미사일이 하르키우 외곽 피소친을 타격해 최소 3명이 숨지고 25명이 다쳤습니다.",
+     "src": [
+      "https://kyivindependent.com/3-killed-25-injured-in-russian-strike-near-kharkiv/"
+     ]
+    },
+    {
+     "t": "러시아 국방부는 11일 지난 하루 동안 우크라이나의 고정익 드론 909대와 유도폭탄 2발을 격추했다고 발표했습니다.",
+     "src": [
+      "https://tass.com/defense/2200515"
+     ]
+    },
+    {
+     "t": "영국 해사무역작전센터(UKMTO)는 11일 호르무즈 해협을 빠져나가던 유조선 1척이 미상의 발사체에 맞아 좌현이 손상됐으며 선원은 모두 무사하다고 밝혔습니다.",
+     "src": [
+      "https://gulfnews.com/world/mena/tanker-struck-by-unidentified-projectile-in-strait-of-hormuz-ukmto-says-1.500706575"
+     ]
+    },
+    {
+     "t": "사우디아라비아·이집트·파키스탄·튀르키예는 11일 공동성명에서 후티의 공격을 국제법의 노골적 위반이라고 규탄했습니다.",
+     "src": [
+      "https://www.arabnews.pk/saudi-arabia/saudi-arabia-egypt-pakistan-and-turkiye-condemn-houthi-attacks-on-kingdom-3003867",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-11",
    "items": [
     {

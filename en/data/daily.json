@@ -1,6 +1,168 @@
 {
  "issues": [
   {
+   "date": "2026-10-12",
+   "items": [
+    {
+     "case": "korea",
+     "h": "South Korea's Joint Chiefs: North Korea fires \"unidentified projectile\" into East Sea; specs under analysis",
+     "fc": [],
+     "src": [
+      "https://www.koreaherald.com/article/10899073",
+      "https://www.dt.co.kr/article/12088452",
+      "https://www.news1.kr/diplomacy/defense-diplomacy/6316432"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Trump declares Russia-Ukraine \"ENERGY CEASEFIRE\" effective immediately, says \"Both parties have agreed\"; Moscow hasn't confirmed",
+     "fc": [],
+     "src": [
+      "https://time.com/article/2026/10/11/trump-claims-russia-and-ukraine-have-agreed-to-an-energy-ceasefire-/",
+      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks",
+      "https://www.fontanka.ru/2026/10/12/76694201/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Ukraine's presidential office confirms Russian strike on Kharkiv power plant after ceasefire announcement",
+     "fc": [],
+     "src": [
+      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
+     ],
+     "loc": {
+      "lat": 49.99,
+      "lon": 36.23,
+      "place": "Kharkiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iranian security chief Rezaei on U.S. reply: \"we consider it insufficient\"; Hormuz talks falter",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down",
+       "p": 25
+      },
+      {
+       "id": "f38",
+       "e": "down",
+       "p": 25
+      }
+     ],
+     "src": [
+      "https://www.thenationalnews.com/news/mena/2026/10/11/iran-says-us-response-to-proposal-to-reopen-strait-of-hormuz-is-insufficient/",
+      "https://www.timesofisrael.com/liveblog_entry/iran-says-us-response-to-its-proposal-to-reopen-hormuz-was-insufficient/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Riyadh airport hit for second straight day; Saudi aviation authority reports injuries as Houthis claim attack",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/11/yemen-fighting-expands-as-houthis-attack-saudi-airport-what-to-know",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/",
+      "https://english.news.cn/20261012/6a26e48e24be4f3a9cbda0f95c171b68/c.html"
+     ],
+     "loc": {
+      "lat": 24.96,
+      "lon": 46.7,
+      "place": "King Khalid International Airport, Riyadh (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "South Korea's Foreign Ministry raises travel alert for all of Saudi Arabia to Level 3, advising citizens to leave",
+     "fc": [],
+     "src": [
+      "https://www.kukinews.com/article/view/kuk202610120002",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008792258"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Pakistan's President Zardari declares state of emergency in Khyber Pakhtunkhwa, governed by Imran Khan's party",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.pk/pakistan/pakistan-president-imposes-emergency-in-opposition-ruled-khyber-pakhtunkhwa-province-3003824",
+      "https://tribune.com.pk/story/2634222/president-zardari-signs-off-on-emergency-rule-in-k-p"
+     ],
+     "loc": {
+      "isos": [
+       "PAK"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Ukrainian President Volodymyr Zelensky said on October 11 that Ukraine is ready to stop striking Russian energy facilities and expects Russia to do the same.",
+     "src": [
+      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
+     ]
+    },
+    {
+     "t": "A Russian missile struck Pisochyn, on the outskirts of Kharkiv, on October 11, killing at least three people and injuring 25, according to Ukraine's National Police.",
+     "src": [
+      "https://kyivindependent.com/3-killed-25-injured-in-russian-strike-near-kharkiv/"
+     ]
+    },
+    {
+     "t": "Russia's Defense Ministry said on October 11 that it had shot down 909 Ukrainian fixed-wing drones and two guided bombs over the past day.",
+     "src": [
+      "https://tass.com/defense/2200515"
+     ]
+    },
+    {
+     "t": "The U.K. Maritime Trade Operations (UKMTO) said on October 11 that an unidentified projectile hit a tanker leaving the Strait of Hormuz, damaging its port side; all crew are safe.",
+     "src": [
+      "https://gulfnews.com/world/mena/tanker-struck-by-unidentified-projectile-in-strait-of-hormuz-ukmto-says-1.500706575"
+     ]
+    },
+    {
+     "t": "Saudi Arabia, Egypt, Pakistan and Turkey issued a joint statement on October 11 condemning the Houthi attacks as a \"blatant violation of international law.\"",
+     "src": [
+      "https://www.arabnews.pk/saudi-arabia/saudi-arabia-egypt-pakistan-and-turkiye-condemn-houthi-attacks-on-kingdom-3003867",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-11",
    "items": [
     {

@@ -654,7 +654,7 @@ function setupInteraction(){
     const icb = ev.target.closest("[data-indc]");  /* v3.93 산업별 영향: 나라 고르기 */
     if (icb) { INDC = icb.dataset.indc; INDOPEN = null; renderIndustry(); return; }
     const icl = ev.target.closest("[data-ind]");  /* 칸을 누르면 전개별 판단을 펼치고 다시 누르면 접는다 */
-    if (icl) { const md = icl.dataset.indm || "d"; INDOPEN = INDOPEN === icl.dataset.ind && INDMODE === md ? null : icl.dataset.ind; INDMODE = md; indBoard(); return; }
+    if (icl) { const md = icl.dataset.indm || "d"; INDOPEN = INDOPEN === icl.dataset.ind && INDMODE === md ? null : icl.dataset.ind; INDMODE = md; indBoard(); if (INDOPEN) { const b = document.querySelector('[data-ind="' + CSS.escape(INDOPEN) + '"]'); detReveal(b && (b.closest(".mc,.ma,.ind-card") || b).querySelector(".ind-det")); } return; }
     const lfb = ev.target.closest("[data-life]");  /* 사람들의 삶: 누구의 삶으로 볼까 */
     if (lfb) { LIFE = lfb.dataset.life; store.set("ep.life", LIFE); const g = document.getElementById("lifegrid"), x = BR && BR.issues[0];
       if (g) g.innerHTML = (D.strategies || []).filter(c => c.hs7).map(c => lifeCard(c, x)).join("");
@@ -1219,8 +1219,12 @@ function briefHomeHtml(){
 }
 document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기(그 자리에서 펼침), 정세 브리핑으로 가는 단추 */
   const m = ev.target.closest("[data-bmore]"); if (m) { const o = m.nextElementSibling, op = m.getAttribute("aria-expanded") !== "true"; if (o) o.hidden = !op; m.setAttribute("aria-expanded", op); m.firstChild.textContent = op ? "지난 브리핑 접기 " : "지난 브리핑 더보기 "; return; }
-  const lx = ev.target.closest("[data-lbx]"); if (lx) { const md = lx.dataset.lbxm || "d"; LBX = LBX === lx.dataset.lbx && LBXM === md ? null : lx.dataset.lbx; LBXM = md; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } return; }
-  const gl = ev.target.closest("[data-golife]"); if (gl) { S.bdate = null; const rows = lbxGroups(), r = rows.find(x => x[4].some(p => p[0].id === gl.dataset.golife)); if (r) { LBX = r[0] + "|" + gl.dataset.golife; LBXM = "t"; } renderBrief(); switchTab("brief"); requestAnimationFrame(() => { const a = r && document.getElementById("lbx-" + r[0]); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }); return; }
+  const lx = ev.target.closest("[data-lbx]"); if (lx) { const md = lx.dataset.lbxm || "d"; LBX = LBX === lx.dataset.lbx && LBXM === md ? null : lx.dataset.lbx; LBXM = md; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } if (LBX) { const x = document.querySelector('[data-lbx="' + CSS.escape(LBX) + '"]'); detReveal(x && (x.closest(".mc,.ma,.lbx-card") || x).querySelector(".ind-det")); } return; }
+  const mj = ev.target.closest("[data-mj]"); if (mj) { MIOPEN = mj.dataset.mj; INDOPEN = null; indBoard(); mGo("ind-" + MIOPEN); return; }
+  const mlj = ev.target.closest("[data-mlj]"); if (mlj) { MLOPEN = mlj.dataset.mlj; LBX = null; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } mGo("lbx-" + MLOPEN); return; }
+  const mi = ev.target.closest("[data-mi]"); if (mi) { MIOPEN = MIOPEN === mi.dataset.mi ? null : mi.dataset.mi; INDOPEN = null; indBoard(); detReveal(MIOPEN && document.getElementById("ind-" + MIOPEN)); return; }
+  const ml = ev.target.closest("[data-ml]"); if (ml) { MLOPEN = MLOPEN === ml.dataset.ml ? null : ml.dataset.ml; LBX = null; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } detReveal(MLOPEN && document.getElementById("lbx-" + MLOPEN)); return; }
+  const gl = ev.target.closest("[data-golife]"); if (gl) { S.bdate = null; const rows = lbxGroups(), r = rows.find(x => x[4].some(p => p[0].id === gl.dataset.golife)); if (r) { LBX = r[0] + "|" + gl.dataset.golife; LBXM = "t"; MLOPEN = r[0]; } renderBrief(); switchTab("brief"); if (r && isMob()) mGo("lbx-" + r[0]); else requestAnimationFrame(() => { const a = r && document.getElementById("lbx-" + r[0]); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }); return; }
   const gi = ev.target.closest("[data-goind]"); if (gi) { const [cid, d] = gi.dataset.goind.split("|"); switchTab("industry"); let n = 0; const go = () => { if (!IND) { if (++n < 60) setTimeout(go, 100); return; } indJump(cid, d); }; go(); return; }
   const g = ev.target.closest("[data-bgo]"); if (g) requestAnimationFrame(() => { const b = document.getElementById("brief"); if (b) b.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
 });
@@ -1946,6 +1950,7 @@ function lbxScore(pr){ return pr.reduce((a, [c, G]) => { const n = hsCount(c.hs7
 function lifeRows(){
   const rows = lbxGroups().map((r, i) => [r, lbxScore(r[4]), i]);
   rows.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));
+  if (isMob()) return lifeRowsM(rows);
   return rows.map(([r]) => lbxRow(r)).join("");
 }
 function lbxRow([rk, name, size, al, pr]){
@@ -2099,7 +2104,7 @@ function indDetail(I, c){
   return '<div class="ind-det"><p class="lb-lab">' + esc(c.title) + " · " + esc(I.name) + (c.id === "iran" ? ' <span class="note">이 사안은 전쟁이 지속되는 경우를 기준으로 합니다.</span>' : "") + '</p><ul>' +
     c.scen.slice().sort((a, b) => b.p - a.p).map(s => { const z = v[s.id];
       return '<li><span class="ind-sn">' + esc(s.name) + ' <span class="mono">' + s.p + '%</span></span><span class="ind-c" style="--c:' + HS_COL[z.c] + '">' + (s.t === "base" ? "기준 경로" : IND_LAB[z.c] + " " + indPct(z.x)) + '</span>' +
-        (s.t === "base" ? '<span class="ind-w note">분쟁이 현재 상태로 이어질 때. 다른 전개는 이 경우와 비교합니다.</span>' : '<span class="ind-w">' + (z.w ? esc(z.w) + " " : "") + '<span class="note">매출 ' + indPct(z.r / 100) + ", 이익률 " + (z.dm >= 0 ? "+" : "−") + Math.abs(z.dm) + "%p · 구간 " + indPct(z.lo) + "~" + indPct(z.hi) + " · " + T[s.t] + "</span></span>") + "</li>"; }).join("") + "</ul></div>";
+        (s.t === "base" ? '<span class="ind-w note">사안이 현재 상태로 이어질 때. 다른 전개는 이 경우와 비교합니다.</span>' : '<span class="ind-w">' + (z.w ? esc(z.w) + " " : "") + '<span class="note">매출 ' + indPct(z.r / 100) + ", 이익률 " + (z.dm >= 0 ? "+" : "−") + Math.abs(z.dm) + "%p · 구간 " + indPct(z.lo) + "~" + indPct(z.hi) + " · " + T[s.t] + "</span></span>") + "</li>"; }).join("") + "</ul></div>";
 }
 function indWhy(cs, G, LAB, lab2){ LAB = LAB || IND_LAB;  /* v3.98: 선 그래프 오른쪽 상자. 가장 최근 확률 변경의 까닭, 바뀐 전개 확률, 이 업종의 점 개수 변화 */
   const H = cs.hs7, ch = (H.changes || []).slice().sort((a, b) => a.d.localeCompare(b.d)), x = ch[ch.length - 1];
@@ -2125,9 +2130,9 @@ function indJump(cid, d){  /* v3.99(2026-10-12 결재): 정세 브리핑의 '산
   let best = null;
   if (ch) IND.inds.forEach((I, i) => { const G = indG(I, c), a = hsCountP(cs.hs7, G, ch.prev), b = hsCountP(cs.hs7, G, ch.next), sc = ["big", "worse", "better"].reduce((t, k) => t + Math.abs(b[k] - a[k]), 0);
     const key = [sc, I.c === INDC ? 1 : 0, -i]; if (sc && (!best || key[0] > best.key[0] || (key[0] === best.key[0] && (key[1] > best.key[1] || (key[1] === best.key[1] && key[2] > best.key[2]))))) best = {I, key}; });
-  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "t"; }
+  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "t"; MIOPEN = best.I.k; }
   renderIndustry();
-  requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+  if (best && isMob()) mGo("ind-" + best.I.k); else requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
 }
 function indBoard(){ const b = document.getElementById("indboard"); if (b) { b.innerHTML = indRows(); fitTrends(b); } }
 function fitTrends(root){  /* v3.99: 선 그래프의 그림 폭을 실제로 보이는 폭에 맞춰 다시 그려 글자 크기가 화면 폭과 관계없이 같게 한다(지구본 없는 넓은 화면) */
@@ -2140,7 +2145,7 @@ function fitTrends(root){  /* v3.99: 선 그래프의 그림 폭을 실제로 �
     if (html) f.outerHTML = html; });
 }
 { let rt = 0; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { if (S.tab === "brief" || S.tab === "industry") fitTrends(document.getElementById("pane-" + S.tab)); }, 150); }); }
-if (IND_NARROW && IND_NARROW.addEventListener) IND_NARROW.addEventListener("change", () => { if (INDOPEN && INDMODE === "t") indBoard(); });
+if (IND_NARROW && IND_NARROW.addEventListener) IND_NARROW.addEventListener("change", () => { if (IND && document.getElementById("indboard")) indBoard(); const lb = document.getElementById("lifeboard"); if (lb && BR) { lb.innerHTML = lifeRows(); fitTrends(lb); } });
 function dotCell(at, name, n, dl, oD, oT, spark, cls){  /* v3.99: 점 그래프 칸(위: 점 그래프와 개수, 아래: 점 개수 추이). at = 누를 때 쓰는 data 속성 이름, 값은 "<행>|<열>" */
   const k0 = at.split("=")[0], bad = n.big + n.worse, good = n.better;
   const dv = k => dl && dl[k] ? '<i class="ind-d ' + ((dl[k] > 0) === (k === "better") ? "good" : "bad") + '" title="최근 7일 변화">' + (dl[k] > 0 ? "▲" : "▼") + Math.abs(dl[k]) + "</i>" : "";
@@ -2206,9 +2211,77 @@ function indAllTrend(I){
   return '<div class="ind-det ind-det-t"><p class="lb-lab">5개 사안 종합 · ' + esc(I.name) + "</p>" + cmbTrend("ind|" + I.k, I.name, IND_LAB, opt) +
     '<div class="ind-tr">' + cmbWhy("ind|" + I.k, IND_LAB) + '<div class="lb-rcw"><p class="lb-lab">최근 정보</p>' + lbRecentHtml(cmbRecent(3), BR.issues[0].date) + "</div></div></div>";
 }
+/* v3.99c 휴대전화(699px 이하) 전용 구조: 목록 → 펼침 → 상세가 누른 줄 바로 아래.
+   1) 산업(국민)마다 한 줄: 이름, 5개 사안 종합의 작은 점 그림과 개수. 누르면 그 자리에서 펼침
+   2) 펼치면 종합의 점 그래프와 선 그래프를 크게, 그 아래 사안별 줄(작은 점 그림·개수·추이선)
+   3) 사안 줄이나 종합 그래프를 누르면 상세가 바로 그 아래에 열림(화면 아래로 밀려나지 않게) */
+let MIOPEN = undefined, MLOPEN = undefined;
+const isMob = () => !!(IND_NARROW && IND_NARROW.matches);
+const M_LAB = {big: "크게 악화", worse: "악화", better: "개선"};
+function mNums(n, dl){
+  const dv = k => dl && dl[k] ? ' <i class="ind-d ' + ((dl[k] > 0) === (k === "better") ? "good" : "bad") + '">' + (dl[k] > 0 ? "▲" : "▼") + Math.abs(dl[k]) + "</i>" : "";
+  const t = ["big", "worse", "better"].filter(k => n[k]).map(k => '<b class="m-' + k + '">' + M_LAB[k] + " " + n[k] + dv(k) + "</b>").join("");
+  return t || '<span class="note">변화 없음</span>';
+}
+function mCaseRow(at, open, mode, name, sub, n, dl, spark, det){  /* 사안 한 줄: 왼쪽(점·이름·개수)은 판단 근거, 오른쪽(추이선)은 선 그래프 */
+  const k0 = at.split("=")[0], oD = open && mode !== "t", oT = open && mode === "t";
+  return '<div class="mc' + (open ? " on" : "") + '"><div class="mc-r"><button type="button" class="mc-a' + (oD ? " on" : "") + '" ' + at + ' aria-expanded="' + oD + '">' + hsDots(n) +
+    '<span class="mc-t"><span class="mc-n">' + name + (sub ? "<small>" + sub + "</small>" : "") + '</span><span class="mc-c">' + mNums(n, dl) + "</span></span></button>" +
+    (spark ? '<button type="button" class="mc-s' + (oT ? " on" : "") + '" ' + at + " " + k0 + 'm="t" aria-expanded="' + oT + '">' + spark + '<span class="mc-sl">추이 ›</span></button>' : "") + "</div>" + (open ? det : "") + "</div>";
+}
+function mAll(at, open, mode, n, dl, line, det){  /* 펼친 줄의 맨 위: 종합 점 그래프와 선 그래프 */
+  const k0 = at.split("=")[0], oD = open && mode !== "t", oT = open && mode === "t";
+  return '<div class="ma' + (open ? " on" : "") + '"><p class="ma-h">5개 사안 종합</p><button type="button" class="ma-d' + (oD ? " on" : "") + '" ' + at + ' aria-expanded="' + oD + '">' + hsDots(n) +
+    '<span class="ma-c">' + mNums(n, dl) + '<span class="ma-more">판단 근거 ›</span></span></button>' +
+    '<button type="button" class="ma-l' + (oT ? " on" : "") + '" ' + at + " " + k0 + 'm="t" aria-expanded="' + oT + '"><span class="ma-lh">점 개수 추이 ›</span>' + line + "</button>" + (open ? det : "") + "</div>";
+}
+function mLine(key, name, LAB){  /* 휴대전화: 종합 선 그래프를 화면 폭에 맞춰 그려 글자가 사안별 선 그래프와 같은 크기로 보이게 */
+  const w = Math.max(240, Math.min(600, (innerWidth || 390) - 84)); return cmbTrend(key, name, LAB, {bare: true, w, h: Math.round(Math.min(200, Math.max(160, w * 0.55)))}); }
+function mChips(list, attr, cur){  /* 휴대전화: 펼치기 전에 무엇이 있는지 보이는 칩 목록. 칩 아래 막대는 종합의 크게 악화·악화·개선 점 개수(100개 중) */
+  return '<nav class="mchips" id="mchips" aria-label="바로 가기">' + list.map(([k, nm, n]) => '<button type="button" class="mch' + (k === cur ? " on" : "") + '" ' + attr + '="' + esc(k) + '" aria-pressed="' + (k === cur) + '"><span class="mch-n">' + esc(nm) + "</span>" +
+    (n ? '<span class="mch-b" aria-hidden="true">' + ["big", "worse", "better"].map(x => n[x] ? '<i class="mb-' + x + '" style="width:' + n[x] + '%"></i>' : "").join("") + "</span>" : "") + "</button>").join("") + "</nav>";
+}
+function mGo(id){ requestAnimationFrame(() => { const a = document.getElementById(id); if (!a) return; const t = a.querySelector(".mc.on,.ma.on") || a; t.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }); }
+function mTopTarget(){ const p = document.getElementById("pane-" + S.tab); if (!p || p.hidden || !p.querySelector("#indboard,#lifeboard")) return null; return p.querySelector("#mchips") || p.querySelector(".lb-ctl"); }
+function mTopList(){  /* 휴대전화의 산업별 미래·국민의 삶: 목록(칩)을 지나 내려가면 '위로' 단추가 '↑ 목록'이 되어 칩 목록으로 돌아간다 */
+  const t = isMob() && (S.tab === "industry" || S.tab === "brief") ? mTopTarget() : null; return t && t.getBoundingClientRect().bottom < 0 ? t : null; }
+function mSort(a){ return a.sort((x, y) => ((y[1].big + y[1].worse + y[1].better) - (x[1].big + x[1].worse + x[1].better)) || ((y[1].big + y[1].worse) - (x[1].big + x[1].worse)) || (x[2] - y[2])); }
+function indRowsM(L){
+  if (MIOPEN === undefined) MIOPEN = null;  /* 처음에는 모두 닫고 위의 산업 칩을 목차로 쓴다 */
+  const today = BR.issues[0].date;
+  return mChips(L.map(([I]) => [I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-mj", MIOPEN) + L.map(([I]) => { const ak = "ind|" + I.k, n = cmbCount(ak, today), ex = MIOPEN === I.k;
+    let body = "";
+    if (ex) { const ns = mSort(IND.cases.map((c, i) => [c, indCount(I.k, c), i])), oa = INDOPEN === I.k + "|all";
+      body = '<div class="mi-b">' + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
+        '<p class="ind-capr">사안별 100번의 미래</p>' + ns.map(([c, nc]) => { const id = I.k + "|" + c.id, op = INDOPEN === id, cs = indCase(c), G = indG(I, c);
+          return mCaseRow('data-ind="' + esc(id) + '"', op, INDMODE, esc(IND_SHORT[c.id] || c.title), "", nc, cs ? indDelta(cs, G) : null, cs ? indSpark(indSer(cs, G)) : "", op ? (INDMODE === "t" ? indTrendPanel(I, c) : indDetail(I, c)) : ""); }).join("") +
+        '<p class="mi-mem">' + esc(I.mem.join(", ")) + " · 정상 영업이익률 " + (I.m * 100).toFixed(1) + "%</p></div>"; }
+    return '<article class="mi' + (ex ? " ex" : "") + '" id="ind-' + esc(I.k) + '"><button type="button" class="mi-h" data-mi="' + esc(I.k) + '" aria-expanded="' + ex + '">' + hsDots(n) +
+      '<span class="mi-t"><span class="mi-n">' + esc(I.name) + '</span><span class="mi-c">' + mNums(n) + '</span></span><span class="mi-x" aria-hidden="true"></span></button>' + body + "</article>";
+  }).join("");
+}
+function lifeRowsM(rows){
+  if (MLOPEN && !rows.some(r => r[0][0] === MLOPEN)) MLOPEN = null;
+  const today = BR.issues[0].date, one = rows.length === 1;
+  return (one ? "" : mChips(rows.map(([r]) => [r[0], r[1], r[0] !== "main" && cmbFull(r[0]) ? cmbCount("life|" + r[0], today) : null]), "data-mlj", MLOPEN)) + rows.map(([r]) => { const [rk, name, size, al, pr] = r, full = rk !== "main" && cmbFull(rk), ak = "life|" + rk, n = full ? cmbCount(ak, today) : null, ex = one || MLOPEN === rk;
+    let body = "";
+    if (ex) { const ord = mSort(pr.map(([c, G], i) => [c, hsCount(c.hs7, G, "p"), i, G])), oa = LBX === rk + "|all";
+      body = '<div class="mi-b">' + (full ? mAll('data-lbx="' + esc(rk + "|all") + '"', oa, LBXM, n, cmbDelta(ak), mLine(ak, name, HS_LAB), oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("5개 사안 종합 · " + esc(name), n, "life", rk, HS_LAB)) : "") + '<p class="ind-capr">사안별 100번의 미래</p>' : "") +
+        ord.map(([c, nc, , G]) => { const id = rk + "|" + c.id, op = LBX === id;
+          return mCaseRow('data-lbx="' + esc(id) + '"', op, LBXM, esc(LB_SHORT[c.id] || c.title), rk === "main" ? esc(G.name) : "", nc, lbDelta(c, G), indSpark(indSer(c, G)), op ? (LBXM === "t" ? lbxTrend(c, G) : lbxDetail(c, G)) : ""); }).join("") +
+        (size || al.length ? '<p class="mi-mem">' + esc(size) + (al.length ? (size ? " · " : "") + "현재 경보 " + esc(al.join("·")) : "") + "</p>" : "") + "</div>"; }
+    const head = (full ? hsDots(n) : "") + '<span class="mi-t"><span class="mi-n">' + esc(name) + '</span><span class="mi-c">' + (full ? mNums(n) : '<span class="note">' + (rk === "main" ? "사안마다 직접 당사국의 국민" : "") + "</span>") + "</span></span>";
+    return '<article class="mi' + (ex ? " ex" : "") + (full ? "" : " mi-nd") + '" id="lbx-' + esc(rk) + '">' + (one ? '<div class="mi-h mi-h1">' + head + "</div>" : '<button type="button" class="mi-h" data-ml="' + esc(rk) + '" aria-expanded="' + ex + '">' + head + '<span class="mi-x" aria-hidden="true"></span></button>') + body + "</article>";
+  }).join("");
+}
+function detReveal(el){  /* 누른 곳 아래에 열린 상세가 화면 밖이면 보이도록 부드럽게 내림 */
+  if (!el) return; requestAnimationFrame(() => { const r = el.getBoundingClientRect(), vh = innerHeight || document.documentElement.clientHeight;
+    if (r.top > vh * 0.75 || r.top < 0) el.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+}
 function indRows(){
   const L = IND.inds.filter(I => I.c === INDC).map((I, i) => { const t = IND.cases.reduce((a, c) => { const n = indCount(I.k, c); return [a[0] + n.big + n.worse + n.better, a[1] + n.big + n.worse]; }, [0, 0]); return [I, t, i]; });
   L.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));  /* 색 점이 많은 업종부터 */
+  if (isMob()) return indRowsM(L);
   return L.map(([I]) => indRow(I)).join("");
 }
 function renderIndustry(){
@@ -2907,15 +2980,18 @@ const CLOCKS = [["서울·도쿄", "Asia/Seoul"], ["베이징·타이베이", "A
 })();
 
 /* 위로 가기 */
-const topBtn = document.getElementById("totop");
+const topBtn = document.getElementById("totop"), TOP_TX = topBtn ? topBtn.textContent : "";
 function updTop(){
   if (!topBtn) return;
+  const lt = mTopList(), tx = lt ? "↑ 목록" : TOP_TX; if (topBtn.textContent !== tx) topBtn.textContent = tx; topBtn.classList.toggle("totop-l", !!lt);
+  if (lt) { topBtn.hidden = false; return; }
   if (narrow()) { const p = document.getElementById("panel"); topBtn.hidden = !(scrollY > p.offsetTop + 900); }
   else { const a = document.getElementById("pane-" + S.tab); topBtn.hidden = !(a && a.scrollTop > 900); }
 }
 document.getElementById("panel").addEventListener("scroll", updTop, true);
 addEventListener("scroll", updTop, {passive:true});
 topBtn.onclick = () => {
+  const lt = mTopList(); if (lt) { lt.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); setTimeout(updTop, 600); return; }
   if (narrow()) document.getElementById("panel").scrollIntoView({block:"start"});
   else { const a = document.getElementById("pane-" + S.tab); if (a) a.scrollTop = 0; }
   updTop();
