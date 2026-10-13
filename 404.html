@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>클리사 지오폴리틱스</title>
+<script>
+/* v4.02(2026-10-13): clisa.ai가 클리사 지오폴리틱스로 바뀌기 전 의정 클리사가 쓰던 경로는 korea.clisa.ai의 같은 경로로 넘긴다 */
+(function(){
+  var p = location.pathname;
+  if (/^\/(m\/|invest\/|ops\.html$|join\.html$|login\.html$|members\.html$|reset\.html$|icon\.svg$|favicon\.svg$|data\/[a-z]+-\d+\.json$)/.test(p)) {
+    location.replace("https://korea.clisa.ai" + p + location.search + location.hash);
+    document.documentElement.setAttribute("data-moving", "1");
+  }
+})();
+</script>
+<style>
+:root{--bg:#f7f6f2;--ink:#1d1f24;--ink2:#5b6070;--line:#d9d6cc;--acc:#1f4fd8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14161a;--ink:#eceae4;--ink2:#a3a7b3;--line:#2c2f36;--acc:#7da2ff}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);color:var(--ink);
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;line-height:1.6;padding:24px 16px}
+main{max-width:440px;text-align:center}
+h1{font-size:22px;margin:0 0 8px}
+p{color:var(--ink2);margin:0 0 20px}
+a{display:inline-block;padding:10px 16px;border:1px solid var(--line);border-radius:8px;color:var(--ink);text-decoration:none}
+a:hover{border-color:var(--acc);color:var(--acc)}
+.mv{display:none}
+[data-moving] .nf{display:none}
+[data-moving] .mv{display:block}
+</style>
+</head>
+<body>
+<main>
+  <div class="mv" id="mv">
+    <h1>의정 클리사는 korea.clisa.ai로 옮겼습니다</h1>
+    <p>잠시 뒤 새 주소의 같은 쪽으로 이동합니다.</p>
+  </div>
+  <div class="nf" id="nf">
+    <h1>찾으시는 쪽이 없습니다</h1>
+    <p>주소가 바뀌었거나 없어진 쪽입니다.</p>
+    <a href="/">클리사 지오폴리틱스 첫 화면으로</a>
+  </div>
+</main>
+<script>
+if (/^\/en(\/|$)/.test(location.pathname)) {
+  document.documentElement.lang = "en";
+  document.title = "Clisa Geopolitics";
+  var nf = document.getElementById("nf");
+  nf.innerHTML = '<h1>Page not found</h1><p>This page has moved or no longer exists.</p><a href="/en/">Go to the Clisa Geopolitics home page</a>';
+}
+</script>
+</body>
+</html>

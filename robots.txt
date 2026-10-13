@@ -25,5 +25,5 @@ User-agent: YouBot
 User-agent: img2dataset
 Disallow: /
 
-Sitemap: https://geo.clisa.ai/sitemap.xml
-Sitemap: https://geo.clisa.ai/en/sitemap.xml
+Sitemap: https://clisa.ai/sitemap.xml
+Sitemap: https://clisa.ai/en/sitemap.xml
