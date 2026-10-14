@@ -1,6 +1,180 @@
 {
  "issues": [
   {
+   "date": "2026-10-14",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "러시아, 키이우 열병합발전소·아파트에 탄도미사일…2명 사망",
+     "fact": "러시아는 13일 밤 10시 40분쯤(키이우 시각) 탄도미사일로 키이우를 공격해 데스냔스키 구역의 아파트 건물과 제4열병합발전소 부지를 타격했습니다. 키이우포스트는 14일 새벽 기준 2명이 숨지고 21명이 다쳤다고 보도했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.kyivpost.com/post/86971",
+      "https://www.president.gov.ua/en/news/volodimir-zelenskij-i-mark-karni-obgovorili-rosijskij-udar-b-106881"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러 국방부 \"우크라이나 드론 604대 요격\"…모스크바 방면만 417대",
+     "fact": "러시아 국방부는 12일 오후 8시부터 13일 오전 8시(모스크바 시각)까지 15개 지역과 아조프해 상공에서 우크라이나 드론 604대를 요격했다고 발표했습니다. 소뱌닌 모스크바 시장은 그중 417대가 모스크바 방면으로 날아왔다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://tass.com/emergencies/2201249",
+      "https://www.themoscowtimes.com/2026/10/13/ukraine-holds-off-refinery-attacks-for-second-day-after-trump-ceasefire-claim-a93957"
+     ],
+     "loc": {
+      "lat": 55.76,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "트럼프, 러시아 에너지 휴전 위반 묻자 \"나중에 알려 주겠다\"",
+     "fact": "트럼프 대통령은 13일 백악관에서 러시아가 에너지 휴전을 위반했느냐는 질문에 나중에 알려 주겠다며 우크라이나도 전날 많은 곳을 공격했다고 말했습니다. 그는 젤렌스키 대통령이 그런 말보다 협상 타결에 집중해야 한다고 했습니다.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/trump-refuses-to-accuse-russia-of-breaking-energy-ceasefire-says-ukraine-hit-sites-the-day-before/",
+      "https://tass.com/world/2201151"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "UKMTO \"호르무즈서 유조선·컨테이너선, 미상 발사체에 피격\"",
+     "fact": "영국 해사무역기구(UKMTO)는 13일 호르무즈 해협에서 유조선 1척과 컨테이너선 1척이 미상의 발사체에 맞았다고 밝혔습니다. 정확한 시각과 피해 정도는 확인되지 않았고 당국이 조사 중이라고 했습니다.",
+     "fc": [],
+     "src": [
+      "https://gulfnews.com/world/mena/two-ships-struck-by-unknown-projectiles-in-strait-of-hormuz-1.500709543",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디 다란 아람코 시설 피격…동맹군 \"후티 탄도미사일\"",
+     "fact": "사우디 정부는 14일 새벽(현지 시각) 동부 다란의 아람코 행정 건물이 공격받아 제한적인 화재가 났고 부상자는 없다고 밝혔습니다. 사우디 주도 동맹군은 후티가 동부주로 쏜 탄도미사일을 요격했으며 파편이 다란 주거지에 떨어졌다고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/",
+      "https://www.foxnews.com/live-news/us-iran-war-saudi-arabia-trump-houthis-10-13-26"
+     ],
+     "loc": {
+      "lat": 26.29,
+      "lon": 50.11,
+      "place": "다란(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디 주도 동맹군, 사나·다마르·사다의 후티 석유시설 공습",
+     "fact": "사우디 주도 동맹군은 13일 예멘 사나·다마르·사다의 석유시설이 후티의 전쟁 수행을 뒷받침한다며 공습했다고 밝혔습니다. 앞서 동맹군은 사나의 연료 시설 주변 주민에게 대피를 경고했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/",
+      "https://www.thenationalnews.com/news/mena/2026/10/13/saudi-led-coalition-and-houthis-trade-threats-over-oil-installations/"
+     ],
+     "loc": {
+      "lat": 15.37,
+      "lon": 44.19,
+      "place": "사나(예멘)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "IMF, 올해 세계 성장률 전망 3.1%로 0.1%p 상향",
+     "fact": "국제통화기금(IMF)은 13일 방콕 연차총회에서 낸 세계경제전망에서 올해 세계 성장률을 7월 전망보다 0.1%포인트 높은 3.1%로, 내년은 3.4%로 제시했습니다. 올해 유가는 평균 배럴당 96달러로 41% 가까이 오를 것으로 봤습니다.",
+     "fc": [],
+     "src": [
+      "https://abcnews.com/International/wireStory/imf-raises-forecast-world-growth-year-economies-slow-137214411",
+      "https://mediacenter.imf.org/news/imf---world-economic-outlook-annual-meetings--2026/s/22f94667-d194-473b-87b2-34c692b5a5a3"
+     ]
+    },
+    {
+     "case": null,
+     "h": "콩고민주공화국 에볼라 확진자 9,000명 넘어…사망 4,381명",
+     "fact": "콩고민주공화국 보건부 자료에 따르면 13일 기준 에볼라 확진자는 9,066명, 사망자는 4,381명입니다. 승인된 백신이 없는 분디부교형으로 7개 주에 번졌고, 앞서 케냐에서도 유입 사례가 확인됐습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/13/dr-congo-ebola-cases-pass-9000-as-efforts-to-curb-transmission-falter"
+     ],
+     "loc": {
+      "isos": [
+       "COD",
+       "KEN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "우크라이나 공군은 12일 오후 6시부터 13일 아침까지 러시아가 탄도미사일 5발, 미사일형 드론 9기, 공격 드론 108대를 쐈고 드론 88대를 격추하거나 무력화했다고 밝혔습니다.",
+     "src": [
+      "https://en.interfax.com.ua/news/general/1218947.html"
+     ]
+    },
+    {
+     "t": "젤렌스키 대통령은 13일 저녁 연설에서 위트코프 특사와 쿠슈너에게 며칠 안에 만나자는 제안을 보냈다고 밝혔습니다.",
+     "src": [
+      "https://www.president.gov.ua/en/news/budut-horoshi-rishennya-na-pidtrimku-ukrayini-na-comu-tizhni-106873"
+     ]
+    },
+    {
+     "t": "사우디 민간항공청은 리야드 킹칼리드 국제공항의 운영 중단을 17일까지 늘렸고, 미국 국무부는 사우디 공항이 공격받을 수 있다며 이용 시 각별히 주의하라고 당부했습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
+     ]
+    },
+    {
+     "t": "브렌트유 선물은 13일 배럴당 105.69달러로 0.9% 내려 마감했습니다.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-saudi-arabia-trump-houthis-10-13-26"
+     ]
+    },
+    {
+     "t": "조선중앙통신은 13일 김정은이 노동당 창건 81주년을 맞아 11일 제2경제위원회 국방혁명박물관 준공식에 참석했다고 보도했습니다.",
+     "src": [
+      "https://koreanewsservice.com/revolutionary-activities/19323/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-13",
    "items": [
     {
