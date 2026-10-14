@@ -174,6 +174,18 @@ details.src ul{margin:8px 0 0; padding-left:18px; font-size:12px; display:grid; 
 .thinker dl{margin:0; display:grid; gap:8px}
 .thinker dt{font-size:11px; font-weight:600; color:var(--accent); letter-spacing:.03em}
 .thinker dd{margin:0; font-size:13px; color:var(--ink-2)}
+.thinker .tsub{font-size:11px; font-weight:600; color:var(--accent); border:1px solid var(--line); border-radius:3px; padding:1px 6px}
+.thinker .props{margin:0; padding-left:0; list-style:none; display:grid; gap:6px}
+.thinker .props li{font-size:13px; color:var(--ink); line-height:1.55; display:flex; gap:8px; align-items:baseline}
+.thinker .pk{flex:none; font-size:11px; font-weight:700; padding:1px 6px; border-radius:3px; border:1px solid var(--line)}
+.thinker .pk-f{color:var(--accent)}
+.thinker .pk-v{color:var(--muted)}
+.thinker .tq{margin:0 0 4px; padding-left:10px; border-left:2px solid var(--line); font-size:13px; color:var(--ink)}
+.thinker .tq-o{margin:0 0 4px; font-size:12px; color:var(--muted); font-style:italic}
+.thinker .tq-s{margin:0; font-size:11px; color:var(--muted)}
+.thinker .tsrc{margin:0; font-size:11px; color:var(--muted); line-height:1.7; word-break:break-all}
+.thinker .tsrc a{color:var(--muted); padding:0 2px} .thinker .tsg{white-space:nowrap}
+.th-idx{margin:0 0 10px} .th-idx a.chip{text-decoration:none} #i-th li[id]{scroll-margin-top:72px}
 .lens-btn{justify-self:start; border:1px solid var(--ink-2); background:transparent; border-radius:6px; padding:5px 12px; font-size:12px; cursor:pointer}
 .lens-btn[aria-pressed="true"]{background:var(--ink); color:var(--panel); border-color:var(--ink)}
 .empty{display:grid; gap:14px}

@@ -996,7 +996,7 @@ function ttsText(key){
   const H = D.history || {};
   if (k === "an") return "역사적 선례. " + (H.analogies || []).map(x => x.now + ". " + [].concat(x.cases || []).join(", ") + ". " + (x.then || "") + " " + (x.implies || "") + " " + (x.breaks || "")).join(" ");
   if (k === "law") return "역사적 반복 유형. " + (H.laws || []).map(x => x.t + ". " + x.d).join(" ");
-  if (k === "th") return "참고 사상가. " + (D.thinkers || []).map(x => x.name + ". " + (x.idea || "") + " " + (x.now || "") + " " + (x.record || "")).join(" ");
+  if (k === "th") return "참고 사상가. " + (D.thinkers || []).map(x => x.name + ". " + (x.bio || "") + " 핵심 명제. " + (x.props || []).map(p => p.t).join(" ") + " " + (x.claim || x.idea || "") + " " + (x.develop || "") + " " + (x.critique || "") + " " + (x.now || "") + " " + (x.record || "")).join(" ");
   if (k === "case") { const c = (D.strategies || []).find(z => z.id === id); if (!c) return ""; const B = c.brief || {}; /* v3.75 사안 요약 듣기에 화면 순서대로 '가장 유력한 전개'와 '상대편에서 본 최선의 수'를 넣는다(빠져 있어 건너뛰던 것, 2026-10-07). 괄호 속 보충은 읽지 않는다 */
     const top = ((c.futures || {}).items || []).slice().sort((x, y) => y.p - x.p)[0], W = (c.counter || [])[0];
     return c.title + ". " + (B.q ? "핵심 질문. " + B.q + (/[.?!]$/.test(B.q) ? " " : "? ") : "") + (B.a ? "판단. " + B.a + " " : "") + (top ? "가장 유력한 전개. " + top.name + ", " + top.p + "퍼센트. " : "") + (W && W.ranked && W.ranked[0] ? "상대편에서 본 최선의 수. " + W.name.replace(/\s*\(.*\)\s*$/, "") + ". " + ttsNoParen(W.ranked[0].t) + " " : "") + (B.eq ? "균형점. " + B.eq + " " : "") + (B.human ? "개인에게 미치는 영향. " + B.human : ""); }
@@ -2628,9 +2628,17 @@ function renderIdeas(){
     tocHtml([["i-an","역사적 선례"],["i-law","반복 유형"],["i-th","참고 사상가"]]) +
     '<section class="sec" id="i-an"><h3>역사적 선례 ' + ttsBtn("an") + '</h3><p class="note" style="margin-bottom:8px">현재 상황과 구조가 유사한 과거 사례와 그 전개, 현재에 대한 함의, 선례와 다른 점을 정리했습니다.</p><ul class="list">' + H.analogies.map(a => "<li>" + analogHtml(a, false) + "</li>").join("") + "</ul></section>" +
     '<section class="sec" id="i-law"><h3>역사적 반복 유형 ' + ttsBtn("law") + '</h3><ul class="list">' + H.laws.map(l => '<li class="law"><b>' + esc(l.t) + "</b><p>" + esc(l.d) + '</p><div class="chips" style="margin-top:4px">' + l.cases.map(chip).join("") + "</div></li>").join("") + "</ul></section>" +
-    '<section class="sec" id="i-th"><h3>참고 사상가 ' + ttsBtn("th") + '</h3><p class="note" style="margin-bottom:8px">각 사상가의 핵심 명제와 현재 정세에 대한 적용, 역사에서 적중한 것과 빗나간 것을 정리했습니다.</p><ul class="list">' + D.thinkers.map(t => {
-      return '<li><article class="thinker"><div class="who"><h4>' + esc(t.name) + '</h4><span class="meta">' + esc(t.life) + " · " + esc(t.role) + '</span></div><div class="works">' + esc(t.works) + "</div>" +
-        "<dl><div><dt>핵심 명제</dt><dd>" + esc(t.idea) + "</dd></div><div><dt>현재 정세에 대한 적용</dt><dd>" + esc(t.now) + "</dd></div><div><dt>적중한 것과 빗나간 것</dt><dd>" + esc(t.record) + "</dd></div></dl></article></li>";  /* v3.86: '지구본에서 보기'(관점) 단추를 내림 */
+    '<section class="sec" id="i-th"><h3>참고 사상가 ' + ttsBtn("th") + '</h3><p class="note" style="margin-bottom:8px">사상가마다 약력, 핵심 명제, 핵심 주장과 생각의 전개, 대표 구절, 비판과 한계, 현재 정세에 비추어 본 모습, 역사에 들어맞은 것과 어긋난 것을 정리했습니다. 핵심 명제의 \'예측\'은 세계가 어떻게 움직이는지에 관한 명제로 현실에서 맞고 틀림을 가릴 수 있고, \'평가\'는 무엇이 옳은지에 관한 명제입니다.</p>' +
+      '<div class="chips th-idx">' + D.thinkers.map(t => '<a class="chip" href="#th-' + esc(t.id) + '">' + esc(t.name) + "</a>").join("") + "</div>" +
+      '<ul class="list">' + D.thinkers.map(t => {
+      const row = (k, v) => v ? "<div><dt>" + k + "</dt><dd>" + v + "</dd></div>" : "";
+      const props = (t.props || []).length ? '<ol class="props">' + t.props.map(p => '<li><span class="pk ' + (p.k === "예측" || p.k === "Predictive" ? "pk-f" : "pk-v") + '">' + esc(p.k) + "</span>" + esc(p.t) + "</li>").join("") + "</ol>" : "";
+      const q = t.quote, quote = q ? '<blockquote class="tq">' + esc(q.ko) + "</blockquote>" + (q.orig && q.ko.replace(/["“”'‘’]/g, "").trim() !== q.orig.replace(/["“”'‘’]/g, "").trim() ? '<p class="tq-o">' + esc(q.orig) + "</p>" : "") + '<p class="tq-s">' + esc(q.src) + "</p>" : "";
+      const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
+      const grp = []; (t.sources || []).forEach(u => { const h = hostOf(u); let g = grp.find(x => x.h === h); if (!g) { g = {h, us: []}; grp.push(g); } g.us.push(u); });
+      const srcs = grp.length ? '<p class="tsrc">' + grp.map(g => '<span class="tsg">' + esc(g.h) + " " + g.us.map((u, i) => '<a href="' + esc(u) + '" target="_blank" rel="noopener" title="' + esc(u) + '">' + (i + 1) + "</a>").join(" ") + "</span>").join(" · ") + "</p>" : "";
+      return '<li id="th-' + esc(t.id) + '"><article class="thinker"><div class="who"><h4>' + esc(t.name) + '</h4><span class="meta">' + esc(t.life) + " · " + esc(t.role) + "</span>" + (t.sub ? '<span class="tsub">' + esc(t.sub) + "</span>" : "") + '</div><div class="works">' + esc(t.works) + "</div>" +
+        "<dl>" + row("약력", esc(t.bio || "")) + row("핵심 명제", props) + row("핵심 주장", esc(t.claim || t.idea || "")) + row("생각의 전개", esc(t.develop || "")) + row("대표 구절", quote) + row("비판과 한계", esc(t.critique || "")) + row("현재 정세에 비추면", esc(t.now || "")) + row("들어맞은 것과 어긋난 것", esc(t.record || "")) + row("출처 N건".replace("N", (t.sources || []).length), srcs) + "</dl></article></li>";  /* v4.03 사상가 기본 정보 14명(2026-10-14 결재) */
     }).join("") + "</ul></section>";
 }
 function renderMethod(){
