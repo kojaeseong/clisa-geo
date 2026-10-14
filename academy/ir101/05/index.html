@@ -159,7 +159,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}
 .ac-tnav{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:15px;margin-right:auto}.ac-tnav a{color:var(--ink-2);text-decoration:none}.ac-tnav a:hover{color:var(--accent)}
 .ac-tside{display:flex;align-items:center;gap:10px}.ac-geo{font-size:14px;color:var(--accent);text-decoration:none;white-space:nowrap}
 @media(max-width:600px){.ac-top{padding:12px 16px}.ac-tnav{order:3;flex:1 1 100%;font-size:14px}.ac-tside{margin-left:auto}.ac-tbrand b{font-size:18px}.ac-tbrand span{display:none}}
-.speaking{background:rgba(31,79,216,.10);border-radius:3px}
+.speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}
 </style>
 </head>
 <body>
@@ -285,13 +285,22 @@ details.ac-fold ul{font-size:15px;line-height:1.75}
 <li>2026년 사실과 전망: 클리사 지오폴리틱스 공개 자료(기준일 2026년 10월 12일)</li>
 <li>개정 기록: 2026년 10월 초안</li>
 </ul></details><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span><a href="/academy/ir101/02/">← 이전 회차</a></span><a href="/academy/ir101/">강좌 목록</a><span></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',q=[],on=false,cur=null;
-function stop(){on=false;S.cancel();b.setAttribute('aria-pressed','false');b.textContent=b.dataset.l;if(cur)cur.classList.remove('speaking');cur=null}
-function next(){if(!on||!q.length){stop();return}var it=q.shift();if(cur)cur.classList.remove('speaking');cur=it.el;cur.classList.add('speaking');
-var u=new SpeechSynthesisUtterance(it.t);u.lang=L;u.rate=1;u.onend=next;u.onerror=next;S.speak(u)}
-b.addEventListener('click',function(){if(on){stop();return}q=[];document.querySelectorAll('.note-art h1,.note-art h2,.note-art>p,.note-art>ul>li,.note-art>ol>li,.note-art figcaption').forEach(function(el){if(el.closest('details.ac-fold')||el.classList.contains('byline'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(s){s=s.trim();if(s)q.push({t:s,el:el})})});
-on=true;b.setAttribute('aria-pressed','true');b.textContent=b.dataset.s;next()});window.addEventListener('pagehide',stop)})();</script>
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('details.ac-fold')||el.classList.contains('byline'))return;
+var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
+if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
+function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
+function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
+b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
+document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;
+var el=e.target.closest(SEL);if(!el)return;if(!q)build();for(var i=0;i<q.length;i++)if(q[i].el===el){hold=0;play(i);return}});
+var h=function(){if(on)hold=Date.now()+10000};addEventListener('wheel',h,{passive:true});addEventListener('touchmove',h,{passive:true});
+addEventListener('keydown',function(e){if(/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End| )$/.test(e.key))h()});
+addEventListener('pagehide',function(){stop()})})();</script>
 </main>
 <footer><p>클리사 아카데미의 강의 노트는 AI(Anthropic의 Claude)가 쓰고, 다른 AI와 운영자가 사실과 인용을 독립적으로 검토합니다. 다만 이 검토는 완벽한 검수가 아니어서 잘못된 내용이 남아 있을 수 있습니다.</p><p>강의 노트는 학습을 위한 자료이며 투자·법률·정책 자문이 아닙니다. 2026년 사안에 대입한 부분의 확률 전망은 클리사 지오폴리틱스가 판단 근거와 함께 제시한 추정치입니다.</p><p>© 2026 고재성 · <a href="/academy/about/">대표 인사말</a> · <a href="/">클리사 지오폴리틱스</a></p><p>클리사 아카데미의 화면·강의 노트와 도표는 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 '클리사 아카데미'와 해당 페이지 주소를 출처로 밝혀 주십시오(본문을 40자 이상 복사하면 출처가 자동으로 붙습니다). 전부 또는 상당 부분을 복제·재배포하려면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 먼저 허락을 받아 주십시오.</p><p><a href="mailto:academy@clisa.ai">academy@clisa.ai</a></p></footer>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "58e343ace23448bcb4d24c4bde3a2dd9"}'></script>

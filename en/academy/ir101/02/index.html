@@ -159,7 +159,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}
 .ac-tnav{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:15px;margin-right:auto}.ac-tnav a{color:var(--ink-2);text-decoration:none}.ac-tnav a:hover{color:var(--accent)}
 .ac-tside{display:flex;align-items:center;gap:10px}.ac-geo{font-size:14px;color:var(--accent);text-decoration:none;white-space:nowrap}
 @media(max-width:600px){.ac-top{padding:12px 16px}.ac-tnav{order:3;flex:1 1 100%;font-size:14px}.ac-tside{margin-left:auto}.ac-tbrand b{font-size:18px}.ac-tbrand span{display:none}}
-.speaking{background:rgba(31,79,216,.10);border-radius:3px}
+.speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}
 </style>
 </head>
 <body>
@@ -267,13 +267,22 @@ details.ac-fold ul{font-size:15px;line-height:1.75}
 <li>2026 facts and forecasts: Clisa Geopolitics public materials (as of October 12, 2026, v3.15). The date of U.S. support for South Korean enrichment and nuclear-powered submarines is given as November 2025 in the precedents and alternatives entry for the Korean Peninsula issue but as 2026 in the signals of the U.S. country entry; this note uses November 2025, on which two entries and their source (Arms Control Today, December 2025) agree. The type of missile fired on October 3 is presented as North Korea's claim in the North Korea country entry but without attribution in the facts entry for the Korean Peninsula issue; this note attributes it to North Korea. The condition in the third row of the forecast table, labeled current trend (A0) on the site, is option A0 (staying the course) for the Korean Peninsula issue. Taiwan's special defense budget is given in New Taiwan dollars.</li>
 <li>Revision history: Draft, October 2026. On October 15, 2026, 18 points from independent review were incorporated, among them replacing the conditions for revisiting the assessment, aligning the account of nuclear-powered submarines with Jervis, pp. 207–208, recasting the Anglo-German naval race as Jervis's own analysis, correcting the account of Melos and its section numbers, marking the conditional probability in the forecast table, and replacing two Taiwan forecasts that overlapped with session 5 with a forecast on a framework for cooperation on the Korean Peninsula.</li>
 </ul></details><p class="ac-report">If you find an error, please write to <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>. Corrections are recorded in the revision history.</p></article><nav class="ac-pn"><span><a href="/en/academy/ir101/01/">← Previous session</a></span><a href="/en/academy/ir101/">Course page</a><span><a href="/en/academy/ir101/05/">Next session →</a></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',q=[],on=false,cur=null;
-function stop(){on=false;S.cancel();b.setAttribute('aria-pressed','false');b.textContent=b.dataset.l;if(cur)cur.classList.remove('speaking');cur=null}
-function next(){if(!on||!q.length){stop();return}var it=q.shift();if(cur)cur.classList.remove('speaking');cur=it.el;cur.classList.add('speaking');
-var u=new SpeechSynthesisUtterance(it.t);u.lang=L;u.rate=1;u.onend=next;u.onerror=next;S.speak(u)}
-b.addEventListener('click',function(){if(on){stop();return}q=[];document.querySelectorAll('.note-art h1,.note-art h2,.note-art>p,.note-art>ul>li,.note-art>ol>li,.note-art figcaption').forEach(function(el){if(el.closest('details.ac-fold')||el.classList.contains('byline'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(s){s=s.trim();if(s)q.push({t:s,el:el})})});
-on=true;b.setAttribute('aria-pressed','true');b.textContent=b.dataset.s;next()});window.addEventListener('pagehide',stop)})();</script>
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('details.ac-fold')||el.classList.contains('byline'))return;
+var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
+if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
+function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
+function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
+b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
+document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;
+var el=e.target.closest(SEL);if(!el)return;if(!q)build();for(var i=0;i<q.length;i++)if(q[i].el===el){hold=0;play(i);return}});
+var h=function(){if(on)hold=Date.now()+10000};addEventListener('wheel',h,{passive:true});addEventListener('touchmove',h,{passive:true});
+addEventListener('keydown',function(e){if(/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End| )$/.test(e.key))h()});
+addEventListener('pagehide',function(){stop()})})();</script>
 </main>
 <footer><p>Clisa Academy lecture notes are written by AI (Anthropic's Claude), and their facts and citations are independently checked by a separate AI and by the operator. This review is not exhaustive, and errors may remain.</p><p>The lecture notes are educational material, not investment, legal, or policy advice. Probabilistic forecasts cited where a session applies theory to 2026 are estimates that Clisa Geopolitics presents together with its reasoning.</p><p>© 2026 Jae-Seong Ko · <a href="/en/academy/about/">A Note from the Founder</a> · <a href="/en/">Clisa Geopolitics</a></p><p>The design, lecture notes, and figures of Clisa Academy are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Academy” and the page address as the source (copying 40 or more characters of text adds the source automatically). To reproduce or redistribute all or a substantial part, please ask for permission first at <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>.</p><p><a href="mailto:academy@clisa.ai">academy@clisa.ai</a></p></footer>
 <script defer src="/en/shell.js?v=db5eaa7835"></script>
