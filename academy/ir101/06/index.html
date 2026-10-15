@@ -143,7 +143,7 @@ table.jv{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5;ma
 table.jv th{background:var(--panel-2);font-weight:600;font-size:13.5px}table.jv td{font-weight:600}.jn{display:block;font-size:18px;line-height:1.2}
 .ac-report{margin:28px 0 8px;padding:12px 14px;border-radius:6px;background:var(--panel-2);font-size:14.5px;line-height:1.7}
 details.ac-fold{margin:1.2em 0;border-top:1px solid var(--line);padding-top:8px}details.ac-fold>summary{cursor:pointer;font:700 19px/1.5 var(--sans);margin:.6em 0}
-details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
+details.ac-fold ul{font-size:15px;line-height:1.75}details.ac-sol{margin:1.2em 0;border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:#FAFBFC}details.ac-sol>summary{cursor:pointer;font-weight:700;color:#16307F;padding:6px 0}details.ac-sol[open]>summary{margin-bottom:6px;border-bottom:1px dashed var(--line)}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
 .ac-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
 .ac-list{list-style:none;padding:0;margin:8px 0}.ac-list li{margin:0!important;display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
 .ac-list .n{font:500 13px var(--mono);color:var(--muted);padding-top:3px}.ac-list .soon{color:var(--muted)}.ac-list .soon em{font-style:normal;font-size:13px;margin-left:6px;border:1px solid var(--line);border-radius:10px;padding:0 8px}
@@ -263,7 +263,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <p><strong>문제 1. 비준 집합 계산.</strong> A국과 B국이 무역 협정에서 A국의 시장 개방 폭 x(0~100)를 정합니다. A국은 x가 작을수록, B국은 x가 클수록 유리합니다. A국 의회는 x가 50 이하면, B국 의회는 x가 30 이상이면 비준합니다. 협상가는 겹치는 구간의 가운데에서 합의한다고 가정합니다. (가) 합의 구간과 합의점은? (나) A국 의회가 강경해져 35 이하만 비준하면? (다) 25 이하만 비준하면?</p>
 <p><strong>문제 2. 청중 비용과 위협.</strong> A국 지도자가 B국에 양보를 요구하며 위협합니다. B국이 양보하면 A국은 전쟁 없이 쟁점의 가치 4를 얻습니다. B국이 버티면 A국 지도자는 싸우거나 물러섭니다. 싸우면 4를 얻고 전쟁 비용 10을 치르며, 물러서면 청중 비용 a를 치릅니다(비공개 위협이면 a = 0). 싸우는 것과 물러서는 것의 값이 같으면 A국 지도자는 싸운다고 가정합니다. B국은 양보하면 −1, 싸우면 −3, A국이 물러서면 +2를 얻습니다. (가) a = 0일 때와 a = 8일 때 결과는? (나) 위협이 믿을 만해지는 a의 조건은? (다) a = 8인데 B국이 a = 0이라고 믿으면?</p>
 <p><strong>문제 3. 이론의 칸에 사례 놓기.</strong> 다음을 두 수준 게임, 청중 비용, 전환 전쟁 가운데 알맞은 칸에 놓고 근거를 대십시오. (가) 1934년 호혜통상협정법이 관세 협정의 시행 권한을 대통령에게 미리 맡겨, 협정마다 의회 비준을 받지 않게 한 것 (나) 1982년 아르헨티나 군사정부의 포클랜드 침공 (다) 2026년 10월 8일 트럼프 대통령의 '중간선거 전에는 이란을 공격하지 않겠다'는 발언</p>
-<h4>풀이</h4>
+<details class="ac-sol"><summary>풀이 보기</summary>
 <p><strong>문제 1.</strong></p>
 <ol>
 <li>(가) 두 조건을 함께 만족하는 구간은 30~50이고 합의점은 40입니다.</li>
@@ -282,7 +282,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>(나) 전환 전쟁. 경제난과 항의 속에서 관심을 돌리고 정통성을 높이려 했다는 평가가 근거입니다. 다만 승리 연합이 작은 군사정부는 정책 실패를 견디기 쉽다는 것이 선출인단 이론의 기본 예상이어서, 패전 뒤의 몰락은 패전이 승리 연합인 군 내부의 지지까지 무너뜨렸다고 보아야 설명됩니다(이 강의의 해석).</li>
 <li>(다) 선거를 앞둔 지도자가 무력을 쓴다는 전환 전쟁 가설의 한 갈래와 반대 방향의 신호입니다. 실패 위험이 큰 시기를 피한다는 점에서는 선출인단 이론으로 볼 수 있습니다. 다만 미국의 해상봉쇄는 이어지고 있어 발언 하나로 어느 쪽도 확인할 수 없습니다(이 강의의 해석).</li>
 </ol>
-<h3>실증 연구와 반론</h3>
+</details><h3>실증 연구와 반론</h3>
 <p>톰즈와 스나이더·보그하드는 청중 비용이 실제로 있는지를, 치오자·괴만스는 전환 전쟁 가설을 시험합니다.</p>
 <p><strong>톰즈(2007): 유권자는 물러선 지도자를 벌한다.</strong> 마이클 톰즈(Michael Tomz)는 여론조사에 넣은 실험으로 청중 비용을 직접 재려 했습니다. 청중 비용은 여러 조건에서 나타났고 위협의 수위가 높을수록 컸으며, 정책에 영향을 미칠 수 있는, 정치 활동에 적극적인 시민에게서 특히 컸습니다. 시민들이 국가와 지도자의 국제적 평판을 걱정하기 때문이라는 예비 증거도 냈습니다. 한계는 실제 위기가 아니라 가상 상황에 대한 응답이라는 점입니다.</p>
 <p><strong>스나이더·보그하드(2011): 청중 비용은 '한 푼'에 그친다.</strong> 잭 스나이더와 에리카 보그하드(Erica D. Borghard)는 1945년 이후 실제 위기에서 청중 비용의 증거를 거의 찾지 못했다고 보고했습니다. 이유는 4가지입니다. 지도자는 모호하지 않은 위협을 경솔하다고 여기고, 대중은 말과 행동의 일치보다 정책의 내용을 중시하며, 위협이 없어도 국가의 평판과 명예를 중시하고, 민주국가의 위협을 받은 권위주의 국가는 청중 비용을 이론의 예상대로 보지 않습니다. 한계는 사례 해석에 기대는 질적 연구라는 점으로, 마크 트래텐버그(Marc Trachtenberg)가 2012년 비슷한 결론을 내자 브라니슬라프 슬란체프(Branislav L. Slantchev)는 사례 증거와 해석이 설득력이 약하다고 반박했습니다.</p>
@@ -323,15 +323,19 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>2026년 10월 15일 독립 검토 30건(상 4, 중 10, 하 16) 반영: 고전 절의 시칠리아 원정 토론을 7회차에 넘기고 칸트 예비조항 제4조로 바꿈, 호혜통상협정법을 비준 문턱 인하가 아니라 사전 권한 위임으로 바로잡고 심화 문제 3을 맞춤, 베르사유 조약 표결(1919년 11월 19일 39 대 55, 1920년 3월 19일 49 대 35)을 바로잡음, 주한미군 조항의 해석을 '의회가 상대국에 더 우호적인 경우'로 고치고 4절에 작은 비준 집합의 이점이 생기는 조건을 더함, 머리 줄을 Gov 40 5·6주차로, 퍼트넘 인용 쪽수를 438쪽으로, 심화 문제 2에 양보 시 값과 동점 규칙을 넣음, 한국 국회 동의 논의에 여당 의석과 9월 18일 대통령 발언, 전환 전쟁 가설에 레비(1989)의 정식화와 발언 해석의 단서, 선출인단 이론의 적용 범위, 검증표 머리말, 판단의 재검토 조건, 실증 연구를 3편 형식으로 정리(치오자·괴만스 추가), 스무트-홀리의 주(州) 표기와 보복 수치 삭제, 대만 예산 '상한', 의회 결의와 거부권 문장, 대상 불명 표현, 이익집단 원어, 민주평화와의 연결, 피어론 모형 단서, 문제 1의 유리한 방향, 『독재자의 핸드북』 출판사. 반영하지 않은 것: '양면 게임'·'윈셋'을 주 용어로 바꾸자는 제안은 강좌 계획서(운영자 결재)의 용어를 따르고 학계 통용어를 괄호로 병기해 운영자 결재 사항으로 남깁니다. 보그하드(Borghard) 표기는 저자 발음 자료를 확인하지 못해 그대로 둡니다. 대목 1의 외부 비판자는 원문으로 확인한 연구가 없어 퍼트넘 자신의 본 정상회담 사례로 두었습니다. 고전 후보 가운데 토크빌 『미국의 민주주의』 1권 2부 5장(대외 문제 처리 대목)은 원문 게시본을 끝까지 가져오지 못해 쓰지 않았습니다.</li>
 <li>2026년 10월 15일 영문판 원어민 검토의 내용 지적 반영: 해상봉쇄의 주체를 '미국의 해상봉쇄'로 밝히고(사이트 자료의 이란 사안 사실 항목 '미국은 해상봉쇄를 재개'), 호르무즈 해협 기여가 트럼프 대통령이 요청한 파병 등의 기여임을 밝혔습니다(이란 사안 사실 항목과 미국 국가 항목).</li>
 </ul></section><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span><a href="/academy/ir101/05/">← 이전 회차</a></span><a href="/academy/ir101/">강좌 목록</a><span><a href="/academy/ir101/07/">다음 회차 →</a></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption,.ac-sol>p,.ac-sol>ol>li,.ac-sol>ul>li',
 SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+var EN_=/^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;function cl(x){x=x.replace(/\s+/g,' ');for(var k=0;k<3;k++)x=x.replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g,function(m,y){return y!==undefined&&EN_.test(y)?y.trim()+',':''});x=x.replace(/\b((?:[A-Z]\.){2,})/g,function(m){return m.replace(/\./g,'')}).replace(/\b(e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|St|No|pp?|vol|eds?|Jr|Sr)\./g,'$1').replace(/\b([A-Z])\.\s(?=[A-Z])/g,'$1 ');return x.replace(/\s+([,.;:!?。、])/g,'$1').replace(/\s+/g,' ').trim()}
+var wl=null,wp=false;function wake(x){try{if(x){if(!wl&&!wp&&navigator.wakeLock){wp=true;navigator.wakeLock.request('screen').then(function(w){wp=false;if(!on){w.release();return}wl=w;w.addEventListener('release',function(){wl=null})}).catch(function(){wp=false})}}else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&on)wake(true)});
+var SPL=null;try{SPL=new RegExp('(?<=[.!?。])\\s+')}catch(e){}
 function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('.ac-refs')||el.classList.contains('byline')||el.classList.contains('ac-report'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+var t=cl(el.closest('.ac-sol')?el.textContent:el.innerText);if(!t)return;(SPL?t.split(SPL):(t.match(/[^.!?。]+[.!?。]?/g)||[t])).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
 function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
 if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
 function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
-function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
-function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+function stop(keep){gen++;on=false;wake(false);S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();while(i<q.length&&q[i].el.closest('details:not([open])'))i++;if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);wake(true);pos=i;mark(q[i].el,f);
 var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
 b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
 document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;

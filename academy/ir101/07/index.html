@@ -143,7 +143,7 @@ table.jv{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5;ma
 table.jv th{background:var(--panel-2);font-weight:600;font-size:13.5px}table.jv td{font-weight:600}.jn{display:block;font-size:18px;line-height:1.2}
 .ac-report{margin:28px 0 8px;padding:12px 14px;border-radius:6px;background:var(--panel-2);font-size:14.5px;line-height:1.7}
 details.ac-fold{margin:1.2em 0;border-top:1px solid var(--line);padding-top:8px}details.ac-fold>summary{cursor:pointer;font:700 19px/1.5 var(--sans);margin:.6em 0}
-details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
+details.ac-fold ul{font-size:15px;line-height:1.75}details.ac-sol{margin:1.2em 0;border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:#FAFBFC}details.ac-sol>summary{cursor:pointer;font-weight:700;color:#16307F;padding:6px 0}details.ac-sol[open]>summary{margin-bottom:6px;border-bottom:1px dashed var(--line)}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
 .ac-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
 .ac-list{list-style:none;padding:0;margin:8px 0}.ac-list li{margin:0!important;display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
 .ac-list .n{font:500 13px var(--mono);color:var(--muted);padding-top:3px}.ac-list .soon{color:var(--muted)}.ac-list .soon em{font-style:normal;font-size:13px;margin-left:6px;border:1px solid var(--line);border-radius:10px;padding:0 8px}
@@ -293,7 +293,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <p><strong>문제 1. 이득 틀과 손실 틀.</strong> 한 나라가 분쟁 지역 100을 두고 선택합니다. (가) 현재 아무것도 갖지 않았다고 보는 틀: 협상으로 50을 확실히 얻기와, 무력으로 50% 확률로 100을 얻고 50% 확률로 아무것도 못 얻기. (나) 이미 100을 가진 것으로 보는 틀: 협상으로 50을 확실히 잃기와, 무력으로 50% 확률로 100을 잃고 50% 확률로 아무것도 잃지 않기. 각 틀에서 두 선택지의 기대값과 전망 가치를 구하고 어느 쪽을 고를지 답하십시오.</p>
 <p><strong>문제 2. 준거점이 옮겨 갈 때.</strong> A국은 지난해 B국의 땅 20을 차지했습니다. 휴전안은 A가 10을 갖고 10을 돌려주는 것입니다. 전쟁을 이어 가면 50% 확률로 A가 20을 모두 지키고, 50% 확률로 모두 잃습니다. (가) A의 준거점이 차지하기 전(0)에 머물러 있으면 A는 무엇을 고릅니까? (나) A가 차지한 땅에 익숙해져 준거점이 20으로 옮겨 갔다면 어떻습니까? (다) B의 준거점은 빼앗기기 전(20을 가진 상태)입니다. B는 무엇을 고릅니까? (나)와 (다)를 함께 보면 휴전 가능성에 대해 무엇을 말할 수 있습니까?</p>
 <p><strong>문제 3. 오인 유형에 놓기.</strong> 다음 2개 진술 (가)·(나)를 저비스의 유형에 놓고 근거를 대십시오. (가) 푸틴 대통령은 2004년 베슬란 인질 사건 직후 '약함을 보였고, 약한 자는 맞는다'며 외부 세력이 러시아에서 '더 기름진 조각'을 떼어 가려 한다고 말했습니다. (나) 시진핑 주석은 2023년 3월 연설에서 '미국이 이끄는 서방 국가들'의 전방위 억제를 직접 지목했습니다. (다) 이 진술들을 오인이라 하려면 무엇을 확인해야 합니까?</p>
-<h4>풀이</h4>
+<details class="ac-sol"><summary>풀이 보기</summary>
 <p><strong>문제 1.</strong></p>
 <ol>
 <li>기대값은 (가)의 두 선택지가 모두 50, (나)는 모두 −50이고, 최종 상태도 '확실히 50'과 '반반의 확률로 100 또는 0'으로 같습니다.</li>
@@ -313,7 +313,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>(나) 여러 나라의 개별 조치를 하나의 지휘 아래 움직이는 억제로 묶은 점에서 8장의 유형에 가깝습니다(이 강의의 해석).</li>
 <li>(다) 상대가 실제로 조율해 움직였다면 정확한 인식이므로, 실제와의 차이를 보여야 합니다. 저비스의 유형은 의심할 지점을 알려 줄 뿐입니다.</li>
 </ol>
-<h3>실증 연구와 반론</h3>
+</details><h3>실증 연구와 반론</h3>
 <p><strong>맥더못(1998): 같은 대통령도 처지에 따라 달랐다.</strong> 맥더못은 카터의 두 결정(본문 6절)에 아이젠하워의 U-2기 사건과 1956년 수에즈 위기를 더해 비교했습니다. 처지는 회고록, 인터뷰, 여론조사, 의회가 대통령 거부권을 무효로 만든 횟수, 다른 국제 사건으로 정했습니다(9쪽). 아이젠하워는 U-2기 격추 뒤 손실 영역에서 공개적으로 거짓 해명을 하는 위험을 졌고, 수에즈에서는 이득 영역에서 제3세계 여론이라는 확실한 이득을 택했다는 결과입니다(10~11쪽). 맥더못은 위험 성향을 성격이 아니라 처지의 산물로 보았습니다(3쪽). 한계는 그도 인정했듯 처지를 정하기가 어렵고, 결과를 알고 분류할 위험이 있다는 점입니다(이 강의의 해석).</p>
 <p><strong>뵈처(1995)와 레비(1997): 실험실 밖으로 옮기기 어렵다.</strong> 윌리엄 뵈처(William A. Boettcher III)는 국제정치 적용 연구를 검토한 뒤, 숫자 대신 말로 된 확률 표현을 준 실험을 했습니다. 결과는 전망 이론을 부분적으로만 지지했고, 어떤 확률 표현 묶음을 썼느냐에 따라 결과가 달라졌습니다. 그는 확률 정보가 결정자에게 어떻게 전달되는지에 더 주목하자고 했습니다. 다만 실험 한 번의 결과여서 일반화에는 한계가 있습니다(이 강의의 해석). 레비는 1997년 이론의 내적 타당성보다 외적 타당성의 문제가 더 크다고 보고, 결정의 틀이 어떻게 짜이는지와 개인의 손실 회피가 집단 결정에서 어떻게 나타나는지를 연구 과제로 제시했습니다[2차 자료].</p>
 <p><strong>호로위츠·스탬(2014): 처지보다 경력.</strong> 국가 지도자 자료인 아르키고스(Archigos)를 넓혀 지도자의 군 경력을 부호화하고, 군 경력이 무력의 쓸모에 대한 판단을 바꾼다는 가설을 시험했습니다. 결과는 본문 4절에서 본 대로입니다. 맥더못과 달리, 무력에 대한 태도를 처지가 아니라 지도자 개인이 쌓은 경력에서 찾는 셈입니다(이 강의의 해석). 서평에서는 이념처럼 결정적인 변수를 재지 못하고, 영국 대처 총리처럼 지표와 실제 행동이 어긋나는 경우가 있다는 비판이 나왔습니다[2차 자료]. 두 접근은 경쟁하기보다, 경력이 정하는 기본 성향 위에 처지가 더해지는 관계로 볼 수 있습니다(이 강의의 해석).</p>
@@ -354,15 +354,19 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>2026년 10월 15일 독립 검토 31건 반영: 3·5회차와 겹치던 검증표 2줄(대만 봉쇄 92%, 미-이란 휴전 20%)을 '권력 구조' 탭의 시진핑·트럼프 가설 전망으로 바꾸고, 푸틴 정전 전망은 '전망과 검증' 탭 f01(8%)을 쓰고 '권력 구조' 탭 전망과의 조건 차이를 밝혔습니다. 1980년 4월 인질 수(52명 → 53명)와 헬리콥터 서술, 레비 1992년 논문 2편 구분, 저비스에게 돌린 '권고'·'예측' 문장, 도표의 '위로 오목'(→ 위로 볼록)과 '약 2.25배', 레바다센터 조사의 틀 짜기 해석, 검증표 결과 열과 판단 조건의 불일치, 시진핑 단락의 근거와 준거점 문제, 카너먼·렌숀 주장의 범위, 재니스 사례(한국전쟁·마셜 플랜), 4장 서술, [2차 자료]와 해석 표시, 원어 병기, 어색한 표현, 심화의 '담지자'와 쪽수(277쪽), 참고값과 풀이 숫자, 전쟁 비용 가정, 비판자 명시, 맥더못 단락의 본문 중복을 고쳤습니다. 반영하지 않은 것: 6회차와 다른 각도임을 밝히는 문장(트럼프 줄을 지상군 전망으로 바꿔 겹침이 줄었고 분량 상한 때문), 심화 문제 2 풀이에 5회차 전쟁 비용과의 연결 문장(분량 상한), 2026년 자료를 공개 자료로만 다시 짜자는 제안('권력 구조' 탭은 이번 집필 지시에서 자료로 지정되었고, 지침과의 차이는 운영자 결재 사항으로 남깁니다).</li>
 <li>2026년 10월 15일 영문판 원어민 검토(C4~C9) 반영: 4차 핵시험 날짜(2016년 1월 6일)를 넣고, 저비스 읽을거리의 장 범위를 4·6·8–10장으로 넓히고, 뵈처 논문의 부제를 Crossref 서지로 확인해 더했습니다. 레비 1992년 논문 2편의 쪽수는 Crossref 조회가 접속 제한(429)으로 막혀 확인하지 못해 '쪽수 확인하지 못함'을 그대로 두었습니다. 카너먼·트버스키 표 I의 다른 스캔본(stafforini.com PDF)은 웹 도구가 본문을 읽지 못해 대조하지 못했으므로, 문제 3의 80%에 관한 설명은 그대로 둡니다. 이란 로드맵 서술은 사이트 자료로 확인해 7회차 표현을 유지하고 3회차를 고쳤습니다.</li>
 </ul></section><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span><a href="/academy/ir101/06/">← 이전 회차</a></span><a href="/academy/ir101/">강좌 목록</a><span></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption,.ac-sol>p,.ac-sol>ol>li,.ac-sol>ul>li',
 SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+var EN_=/^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;function cl(x){x=x.replace(/\s+/g,' ');for(var k=0;k<3;k++)x=x.replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g,function(m,y){return y!==undefined&&EN_.test(y)?y.trim()+',':''});x=x.replace(/\b((?:[A-Z]\.){2,})/g,function(m){return m.replace(/\./g,'')}).replace(/\b(e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|St|No|pp?|vol|eds?|Jr|Sr)\./g,'$1').replace(/\b([A-Z])\.\s(?=[A-Z])/g,'$1 ');return x.replace(/\s+([,.;:!?。、])/g,'$1').replace(/\s+/g,' ').trim()}
+var wl=null,wp=false;function wake(x){try{if(x){if(!wl&&!wp&&navigator.wakeLock){wp=true;navigator.wakeLock.request('screen').then(function(w){wp=false;if(!on){w.release();return}wl=w;w.addEventListener('release',function(){wl=null})}).catch(function(){wp=false})}}else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&on)wake(true)});
+var SPL=null;try{SPL=new RegExp('(?<=[.!?。])\\s+')}catch(e){}
 function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('.ac-refs')||el.classList.contains('byline')||el.classList.contains('ac-report'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+var t=cl(el.closest('.ac-sol')?el.textContent:el.innerText);if(!t)return;(SPL?t.split(SPL):(t.match(/[^.!?。]+[.!?。]?/g)||[t])).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
 function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
 if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
 function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
-function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
-function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+function stop(keep){gen++;on=false;wake(false);S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();while(i<q.length&&q[i].el.closest('details:not([open])'))i++;if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);wake(true);pos=i;mark(q[i].el,f);
 var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
 b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
 document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;

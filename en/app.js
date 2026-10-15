@@ -1055,7 +1055,7 @@ function ttsStop(done){
 function ttsToggle(b){
   if (TTS.btn === b) { ttsStop(); return; }
   ttsStop(); const key = b.dataset.tts, v = ttsVoice(), t = ttsText(key); if (!v || !t) return;
-  const parts = ttsSplit(t);
+  const parts = ttsSplit(ttsDrop(t));
   if (TTS.sc) TTS.sc.classList.remove("tts-live"); TTS.sc = b.closest(".pane") || document.body; TTS.sc.classList.add("tts-live"); TTS.last = b;
   let from = TTS.pos[key] || 0; if (from >= parts.length) from = 0;
   TTS.btn = b; TTS.key = key; TTS.cur = from; b.setAttribute("aria-pressed", "true"); b.textContent = "■ Stop";
@@ -1070,6 +1070,9 @@ function ttsToggle(b){
 }
 /* v3.46c 원하는 곳부터 듣기(2026-10-04): 듣는 중이거나 멈춘 상태에서 문단을 누르면 그 문단의 첫 문장부터 읽는다.
    누른 문단의 글에 듣기용 문장의 앞(또는 끝) 조각이 들어 있는 첫 문장을 찾는다. 연결·단추·칩을 누를 때와 글을 고를 때는 움직이지 않는다 */
+/* v4.10 (2026-10-15 operator request): do not read text inside parentheses or square brackets (original-language names, dates, source marks) */
+const TTS_ENUM = /^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;  /* keep enumerators such as (1), (a), (i) */
+const ttsDrop = t => { let s = String(t); for (let k = 0; k < 2; k++) s = s.replace(/(\s*)\(([^()]*)\)|\s*（[^（）]*）|\s*\[[^\[\]]*\]/g, (m, sp, x) => x !== undefined && TTS_ENUM.test(x) ? (sp || "") + x.trim() + "," : ""); return s; };
 const ttsSplit = t => String(t).replace(/\s+/g, " ").trim().split(EN_SENT).filter(Boolean);
 window.ttsPick = (target, parts) => {
   const blk = target && target.closest && target.closest(TF_SEL); if (!blk) return -1;
@@ -1088,7 +1091,7 @@ function ttsSetup(){
   document.addEventListener("click", e => {
     const b = TTS.btn || (TTS.last && TTS.last.isConnected ? TTS.last : null); if (!b || e.target.closest(TTS_SKIP)) return;
     if (!TTS.sc || !TTS.sc.contains(e.target) || String(getSelection ? getSelection() : "").length) return;
-    const key = b.dataset.tts, n = window.ttsPick(e.target, ttsSplit(ttsText(key))); if (n < 0) return;
+    const key = b.dataset.tts, n = window.ttsPick(e.target, ttsSplit(ttsDrop(ttsText(key)))); if (n < 0) return;
     ttsStop(); TTS.pos[key] = n; ttsToggle(b);
   });
   addEventListener("pagehide", () => ttsStop());
@@ -1097,7 +1100,7 @@ function ttsSetup(){
    듣기용 글은 화면 글과 조금 다르므로(퍼센트·괄호 생략 등) 문장 앞·가운데·끝 조각으로 찾고, 찾지 못하면 직전 위치에 머문다.
    접힌 곳(details) 안이면 펼친다. 손으로 스크롤하면 10초 동안 따라가기를 멈춘다(표시는 계속). 결정권자 쪽 듣기도 window.ttsFollow로 같이 쓴다 */
 const TF = {scope: null, blocks: [], last: -1, el: null, hold: 0};
-const tfNorm = t => String(t).replace(/percent/gi, "").replace(/[^0-9A-Za-z가-힣]/g, "");
+const tfNorm = t => String(t).replace(/percent/gi, "").replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g, (m, x) => x !== undefined && TTS_ENUM.test(x) ? x : "").replace(/[^0-9A-Za-z가-힣]/g, "");
 const TF_SEL = "p,li,dd,dt,h1,h2,h3,h4,h5,td,th,summary,blockquote", TF_LEAF = TF_SEL + ",div";
 /* 범위: 단추가 든 탭(또는 결정권자 쪽 글 칸) 전체의 맨 안쪽 글 칸들. 찾기는 단추 바로 뒤의 칸에서 시작한다 */
 function tfStart(scope, btn){

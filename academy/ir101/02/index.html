@@ -143,7 +143,7 @@ table.jv{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5;ma
 table.jv th{background:var(--panel-2);font-weight:600;font-size:13.5px}table.jv td{font-weight:600}.jn{display:block;font-size:18px;line-height:1.2}
 .ac-report{margin:28px 0 8px;padding:12px 14px;border-radius:6px;background:var(--panel-2);font-size:14.5px;line-height:1.7}
 details.ac-fold{margin:1.2em 0;border-top:1px solid var(--line);padding-top:8px}details.ac-fold>summary{cursor:pointer;font:700 19px/1.5 var(--sans);margin:.6em 0}
-details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
+details.ac-fold ul{font-size:15px;line-height:1.75}details.ac-sol{margin:1.2em 0;border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:#FAFBFC}details.ac-sol>summary{cursor:pointer;font-weight:700;color:#16307F;padding:6px 0}details.ac-sol[open]>summary{margin-bottom:6px;border-bottom:1px dashed var(--line)}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
 .ac-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
 .ac-list{list-style:none;padding:0;margin:8px 0}.ac-list li{margin:0!important;display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
 .ac-list .n{font:500 13px var(--mono);color:var(--muted);padding-top:3px}.ac-list .soon{color:var(--muted)}.ac-list .soon em{font-style:normal;font-size:13px;margin-left:6px;border:1px solid var(--line);border-radius:10px;padding:0 8px}
@@ -266,7 +266,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <p><strong>문제 1. 균형 찾기.</strong> 내시 균형(Nash equilibrium)은 어느 나라도 혼자 선택을 바꿔 더 나아질 수 없는 칸입니다. 협력(군비 억제)·배신(군비 증강)의 보수가 (A, B) 순으로 협력·협력 (4, 4), 협력·배신 (0, x), 배신·협력 (x, 0), 배신·배신 (1, 1)입니다. (가) x = 3일 때와 x = 5일 때 순수전략(pure strategy) 내시 균형을 모두 찾으십시오. (나) x가 얼마를 넘으면 게임의 성격이 바뀝니까?</p>
 <p><strong>문제 2. 방아쇠 전략의 조건.</strong> 문제 1의 x = 5 게임을 끝없이 되풀이합니다. 두 나라는 처음에 협력하되 상대가 한 번이라도 배신하면 계속 배신하는 방아쇠 전략(grim trigger strategy)을 씁니다. 다음 회 보수는 할인 인자(discount factor) δ(0과 1 사이)배, 그다음 회는 δ²배로 셉니다. δ가 클수록 미래를 무겁게 여깁니다. 보수는 T(혼자 배신, 5), R(함께 협력, 4), P(함께 배신, 1), S(혼자 협력, 0)입니다. (가) 협력이 유지되는 δ의 조건을 구하십시오. (나) 선제공격의 이익이 커져 T가 7이 되면 어떻습니까? (다) 함께 배신하는 비용이 커져 P가 0.5가 되면 어떻습니까? 죄수의 딜레마가 유지되려면 P &gt; S여야 합니다.</p>
 <p><strong>문제 3. 저비스의 표에 사례 놓기.</strong> 본문 3절의 2×2 표에 다음 사례를 놓고 근거를 대십시오. (가) 1922년 워싱턴 해군 군축조약: 일본은 주력함을 미국의 5분의 3으로 받아들였고, 미국은 태평양 섬들을 요새화하지 않기로 해 일본 근해에서 싸우기 어려워졌습니다. (나) 1930년 런던 해군회의: 일본은 중순양함을 미국의 70%로 요구했으나 미국은 60%를 고집했고, 일본 대표는 미국이 그 10퍼센트 우위를 쥐는 한 일본을 공격할 수 있다고 말했습니다.</p>
-<h4>풀이</h4>
+<details class="ac-sol"><summary>풀이 보기</summary>
 <p><strong>문제 1.</strong></p>
 <ol>
 <li>x = 3: 상대가 협력하면 협력(4 &gt; 3), 상대가 배신하면 배신(1 &gt; 0)이 낫습니다. 균형은 (협력, 협력)과 (배신, 배신) 2개로, 사슴 사냥입니다.</li>
@@ -287,7 +287,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>(가) 바다 건너 공격이 어려워져 방어 우위입니다(196쪽). 전함의 종류만 보면 공방 겸용이라 ②(방어 우위·구별 불가)이고, '자국 땅에서만 잘 싸우는 군대는 방어적'이라는 기준(204쪽)으로 쓰임을 보면 ④(방어 우위·구별 가능)입니다(이 강의의 해석).</li>
 <li>(나) 순양함은 종류로는 구별할 수 없어 윗줄(구별 불가)입니다. 다만 저비스는 방어에 필요한 양을 넘는 수량이 공격 의도로 보인다고 했습니다(200쪽). (가)의 조건을 따르면 방어 우위여서 ②에 가깝습니다(이 강의의 해석).</li>
 </ol>
-<h3>실증 연구와 반론</h3>
+</details><h3>실증 연구와 반론</h3>
 <p>월리스와 딜은 군비 경쟁이 전쟁 위험을 높이는지를, 리버는 공격·방어 균형을 시험합니다.</p>
 <p><strong>월리스(1979): 군비 경쟁은 확전의 신호다.</strong> 마이클 월리스(Michael D. Wallace)는 군비 경쟁 뒤에 일어난 강대국 간 심각한 분쟁이 전쟁으로 번지기 쉬운지 물었습니다. 분쟁 전 두 나라 군사비 증가율을 곱한 지수로 군비 경쟁을 가렸습니다. 군비 경쟁 뒤의 분쟁은 28건 중 23건이 전쟁으로 번졌고, 그렇지 않은 분쟁은 71건 중 3건이었습니다. 한계로는 분류와 지수 구성(딜 1983), 세계대전에 얽힌 나라 쌍의 처리(샘플 1997)가 지적됩니다.</p>
 <p><strong>딜(1983): 관계는 뚜렷하지 않다.</strong> 폴 딜(Paul F. Diehl)은 월리스의 분류와 지수를 고쳐 전쟁상관관계(Correlates of War) 프로젝트의 1816~1970년 강대국 간 심각한 분쟁으로 다시 시험했습니다. 상호 군비 증강 뒤의 분쟁 가운데 전쟁으로 번진 것은 25%였고 전쟁의 77% 가까이는 군비 경쟁이 없던 시기 뒤에 일어났습니다. 수전 샘플(Susan G. Sample)은 1997년 세계대전의 논란 있는 나라 쌍을 빼고 측정과 표본을 바꿔도 양(+)의 관계가 유의하며, 확전하지 않은 것으로 분류된 군비 경쟁의 상당수가 5년 안에 전쟁에 이르렀다고 보고해, 분쟁 직후의 확전만 보는 방식의 한계를 보였습니다.</p>
@@ -322,15 +322,19 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>2026년 10월 15일 심화 절 추가: 저비스 원문(sfu.ca 게시 스캔본)으로 187·188·189·190·191·196·199·200·201·203·204쪽을 대조했고, 글레이저·카우프만, 리버, 월리스, 딜, 애덤스의 서지는 Crossref 메타데이터, 샘플은 RePEc로 확인했으며, 요지는 하버드 벨퍼센터 초록(글레이저·카우프만, 리버, 애덤스)·DeepDyve 초록(월리스)·미시간대 Deep Blue 초록(딜)·RePEc 초록(샘플)으로 확인했습니다. 월리스 자료의 대상 기간은 확인하지 못했습니다.</li>
 <li>2026년 10월 15일 심화 절 독립 검토 20건 가운데 19건 반영(문제 2의 P를 −2에서 0.5로 바꿔 P &gt; S 조건 명시, T를 9에서 7로 바꿔 R &gt; (T+S)/2 유지, δ를 할인 인자로 고침, 문제 3에 필요한 사실을 문제에 넣고 1차대전 사례는 대목 1로 옮김, 기동력 서술을 203쪽에 맞춤, 애덤스(2003/04) 추가, 월리스 한계의 출처를 딜·샘플로 바꿈 등). 비판자로 잭 레비(1984)를 넣자는 제안은 논문의 논지를 원문이나 초록으로 확인하지 못해 반영하지 않았습니다.</li>
 </ul></section><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span><a href="/academy/ir101/01/">← 이전 회차</a></span><a href="/academy/ir101/">강좌 목록</a><span><a href="/academy/ir101/03/">다음 회차 →</a></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption,.ac-sol>p,.ac-sol>ol>li,.ac-sol>ul>li',
 SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+var EN_=/^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;function cl(x){x=x.replace(/\s+/g,' ');for(var k=0;k<3;k++)x=x.replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g,function(m,y){return y!==undefined&&EN_.test(y)?y.trim()+',':''});x=x.replace(/\b((?:[A-Z]\.){2,})/g,function(m){return m.replace(/\./g,'')}).replace(/\b(e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|St|No|pp?|vol|eds?|Jr|Sr)\./g,'$1').replace(/\b([A-Z])\.\s(?=[A-Z])/g,'$1 ');return x.replace(/\s+([,.;:!?。、])/g,'$1').replace(/\s+/g,' ').trim()}
+var wl=null,wp=false;function wake(x){try{if(x){if(!wl&&!wp&&navigator.wakeLock){wp=true;navigator.wakeLock.request('screen').then(function(w){wp=false;if(!on){w.release();return}wl=w;w.addEventListener('release',function(){wl=null})}).catch(function(){wp=false})}}else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&on)wake(true)});
+var SPL=null;try{SPL=new RegExp('(?<=[.!?。])\\s+')}catch(e){}
 function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('.ac-refs')||el.classList.contains('byline')||el.classList.contains('ac-report'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+var t=cl(el.closest('.ac-sol')?el.textContent:el.innerText);if(!t)return;(SPL?t.split(SPL):(t.match(/[^.!?。]+[.!?。]?/g)||[t])).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
 function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
 if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
 function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
-function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
-function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+function stop(keep){gen++;on=false;wake(false);S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();while(i<q.length&&q[i].el.closest('details:not([open])'))i++;if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);wake(true);pos=i;mark(q[i].el,f);
 var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
 b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
 document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;

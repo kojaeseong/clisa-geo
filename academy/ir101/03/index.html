@@ -143,7 +143,7 @@ table.jv{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5;ma
 table.jv th{background:var(--panel-2);font-weight:600;font-size:13.5px}table.jv td{font-weight:600}.jn{display:block;font-size:18px;line-height:1.2}
 .ac-report{margin:28px 0 8px;padding:12px 14px;border-radius:6px;background:var(--panel-2);font-size:14.5px;line-height:1.7}
 details.ac-fold{margin:1.2em 0;border-top:1px solid var(--line);padding-top:8px}details.ac-fold>summary{cursor:pointer;font:700 19px/1.5 var(--sans);margin:.6em 0}
-details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
+details.ac-fold ul{font-size:15px;line-height:1.75}details.ac-sol{margin:1.2em 0;border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:#FAFBFC}details.ac-sol>summary{cursor:pointer;font-weight:700;color:#16307F;padding:6px 0}details.ac-sol[open]>summary{margin-bottom:6px;border-bottom:1px dashed var(--line)}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
 .ac-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
 .ac-list{list-style:none;padding:0;margin:8px 0}.ac-list li{margin:0!important;display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
 .ac-list .n{font:500 13px var(--mono);color:var(--muted);padding-top:3px}.ac-list .soon{color:var(--muted)}.ac-list .soon em{font-style:normal;font-size:13px;margin-left:6px;border:1px solid var(--line);border-radius:10px;padding:0 8px}
@@ -271,7 +271,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <p><strong>문제 1. 공공재와 무임승차.</strong> A~E국 5개 나라가 해협 순찰에 함정을 1척씩 보낼지 각자 정합니다. 보내는 비용은 그 나라에 10이고, 함정이 1척 늘 때마다 5개 나라가 모두 4씩 이익을 얻습니다. (가) 다른 나라들이 몇 척을 보내든, 한 나라가 1척을 보내면 보내지 않을 때보다 순이익이 얼마나 달라집니까? 균형은 무엇입니까? (나) 모두 보낼 때와 아무도 보내지 않을 때 각국의 보수를 비교하십시오. (다) A국만 1척당 이익이 12이고 나머지는 그대로 4라면 균형은 어떻게 됩니까?</p>
 <p><strong>문제 2. 바깥 선택지.</strong> 두 나라가 합의하면 100을 나눕니다. 합의가 깨지면 A국은 20, B국은 10을 얻습니다(바깥 선택지). 합의로 더 생기는 이익을 반씩 나눈다고 가정합니다. (가) A국의 몫이 될 수 있는 범위와 합의 결과는? (나) B국이 다른 공급처를 확보해 바깥 선택지가 40이 되면? (다) A국 60, B국 50이면?</p>
 <p><strong>문제 3. 감시와 배신의 기대값.</strong> 한 나라가 합의를 몰래 어기면 30을 더 얻고, 위반이 드러나면 제재가 되살아나 100을 잃습니다. 드러날 확률은 p입니다. 드러나도 더 얻은 30은 그대로 가지며, 이 나라는 기대값만 보고 기대값이 같으면 지킨다고 가정합니다. (가) p = 0.1일 때와 사찰로 p = 0.5가 될 때 어기는 편이 이익입니까? 위반을 막는 최소한의 p는? (나) 드러나도 제재가 실제로 되살아날 확률이 0.4라면(예: 한 나라가 거부권으로 막을 수 있음) 최소한의 p는?</p>
-<h4>풀이</h4>
+<details class="ac-sol"><summary>풀이 보기</summary>
 <p><strong>문제 1.</strong></p>
 <ol>
 <li>(가) 4 − 10 = −6만큼 줄어듭니다. 다른 나라가 무엇을 하든 보내지 않는 편이 낫고(지배 전략), 균형은 아무도 보내지 않는 것입니다.</li>
@@ -289,7 +289,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>(가) 어기면 기대값이 30 − 100p, 지키면 0입니다. p = 0.1이면 20 &gt; 0이어서 어기고, p = 0.5이면 −20 &lt; 0이어서 지킵니다. 30 − 100p ≤ 0, 곧 p ≥ 0.3이면 지키며, p가 정확히 0.3일 때는 가정에 따라 지킵니다.</li>
 <li>(나) 어길 때의 기대값이 30 − 40p가 되어 p ≥ 0.75여야 합니다. 감시와 집행의 효과는 곱해지므로 한쪽이 약하면 다른 쪽을 훨씬 강하게 해야 합니다. 본문 6절의 JCPOA처럼 거부권이 오히려 제재 복원을 부르게 한 설계는 0.4를 1에 가깝게 올리는 장치로 볼 수 있습니다(이 강의의 해석).</li>
 </ol>
-<h3>실증 연구와 반론</h3>
+</details><h3>실증 연구와 반론</h3>
 <p>두 연구는 올슨·젝하우저의 부담 분담 가설을 다른 시기와 방법으로 시험해 다른 결론에 이릅니다.</p>
 <p><strong>오닐(1990): 크기와 부담의 관계는 약해졌다.</strong> 존 오닐(John R. Oneal)은 초기 냉전기 NATO 회원국의 국방 부담 차이를 잘 설명한 올슨의 이론이 그 뒤에도 들어맞는지 물었습니다. 그는 경제 규모와 국방 부담(GDP 대비 군사비)의 관계가 통계적으로 유의하지 않을 만큼 약해졌다고 보고, 그 원인을 그리스·튀르키예·포르투갈의 사적 이익 추구와 나머지 유럽 회원국 사이의 협력 증가에서 찾았습니다. 이를 시험하는 회귀분석에서는 부담을 해마다 NATO 평균에 견준 지수로 바꾸고 이 3개 나라를 뺐습니다. 그래도 NATO는 비교적 순수한 공공재를 만드는 특권 집단이라고 결론지었습니다. 국방비만 보고 각국이 얻는 혜택은 직접 재지 않는다는 점이 한계입니다(이 강의의 해석).</p>
 <p><strong>샌들러·머독(2000): 냉전 뒤에는 혜택에 맞춰 냈다.</strong> 샌들러와 제임스 머독(James C. Murdoch)은 1990년대 NATO의 부담 분담을 지불 능력과 받는 혜택의 2가지 기준으로 보았습니다. 아이슬란드를 뺀 15개 회원국의 1988~1999년 자료로 국방 부담과 GDP의 순위상관을 구하고, 각국의 부담 비중을 NATO 안의 인구·GDP·노출된 국경 비중과 견주었습니다. 1990~1999년에는 큰 나라가 작은 나라의 몫까지 졌다는 증거가 없었고, 부담은 각국이 얻는 혜택과 대체로 맞았습니다. 이들은 냉전 뒤에도 결합생산 모형이 들어맞는다고 보면서, 회원국이 늘면 불균형이 다시 커질 수 있다고 예측했습니다. 오닐과 결론이 갈리지만 시기와 방법이 달라 어느 쪽이 옳다고 바로 말하기는 어렵습니다(이 강의의 해석).</p>
@@ -320,15 +320,19 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>2026년 10월 15일 심화 절 독립 검토 14건(중 4, 하 10) 가운데 11건 반영: 오닐 단락에서 관계의 약화와 3개 나라를 뺀 회귀분석을 나눠 앞뒤를 맞춤, 실증 절에 샌들러·머독(2000)을 더해 동맹 이론 안의 논쟁을 드러냄, 271·278·279쪽에 맞춰 한계비용 분담의 조건(혜택 비율대로 비용 분담)을 저자들의 말로 바로잡고 '이 강의의 해석' 표시를 뗌, 대목 2의 제목·번역·풀이의 번역투를 고침, 표본(아이슬란드 제외)·검정·크기 척도(GNP) 보완, 270·272쪽 서술 보완, 샌들러를 비판자가 아니라 순수 공공재 가정을 공격한 후속 연구자로 고침, 문제 1(가)의 물음과 A국 표기, 문제 3의 경계값 가정, 문제 2의 내시 협상해 단서, 리틀 아틀란티스 원어 병기, 대목 1 제목을 본문과 겹치지 않게 바꾸고 '불균형하게'로 용어 통일. 제재 논쟁(페이프 1997, 엘리엇 1998, 페이프 1998, 볼드윈과 페이프 1998)은 9회차(유엔 안보리와 대북 제재)와 겹치고 분량 상한(4,500자) 안에서 동맹 연구를 더하려고 심화 절과 읽을거리에서 뺐으므로, 이에 관한 3건(제재 대상국 용어와 성공률 표기, 볼드윈 단락 제목과 페이프의 답, 볼드윈·페이프 통신란 표기와 끝 쪽)은 반영할 대상이 없어졌습니다. 이 4편의 서지는 Crossref 메타데이터로 확인했고(엘리엇 50–65쪽, 페이프 1998 66–77쪽, 볼드윈·페이프 189–198쪽), 페이프의 재분류 내역(40건 중 18·8·6·3·5건)은 [2차 자료] 『윌슨 쿼털리』 요약과 로와트(2006)의 영국 상원 의견서로 확인해 두었으니 9회차에서 쓸 수 있습니다. 검토가 제안한 '1949~66년 순수 공공재, 1967년 이후 결합생산'의 시기 구분은 샌들러·머독 보고서의 선행 연구 정리이고 이들 자신의 자료는 1988~1999년이어서, 연구 소개에는 쓰지 않았습니다.</li>
 <li>2026년 10월 15일 영문판 원어민 검토(C9) 반영: 이란의 9월 25일 로드맵을 사이트 사건 항목과 전망 f03의 근거에 맞춰 '7일 휴전·해협 재개방'에서 '7일 내 해협 재개방'으로 고쳤습니다(사이트의 일부 요약은 '7일 휴전·해협 재개방'으로 줄여 씀). 7회차와 표현을 맞춘 것입니다.</li>
 </ul></section><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span><a href="/academy/ir101/02/">← 이전 회차</a></span><a href="/academy/ir101/">강좌 목록</a><span><a href="/academy/ir101/04/">다음 회차 →</a></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption,.ac-sol>p,.ac-sol>ol>li,.ac-sol>ul>li',
 SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+var EN_=/^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;function cl(x){x=x.replace(/\s+/g,' ');for(var k=0;k<3;k++)x=x.replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g,function(m,y){return y!==undefined&&EN_.test(y)?y.trim()+',':''});x=x.replace(/\b((?:[A-Z]\.){2,})/g,function(m){return m.replace(/\./g,'')}).replace(/\b(e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|St|No|pp?|vol|eds?|Jr|Sr)\./g,'$1').replace(/\b([A-Z])\.\s(?=[A-Z])/g,'$1 ');return x.replace(/\s+([,.;:!?。、])/g,'$1').replace(/\s+/g,' ').trim()}
+var wl=null,wp=false;function wake(x){try{if(x){if(!wl&&!wp&&navigator.wakeLock){wp=true;navigator.wakeLock.request('screen').then(function(w){wp=false;if(!on){w.release();return}wl=w;w.addEventListener('release',function(){wl=null})}).catch(function(){wp=false})}}else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&on)wake(true)});
+var SPL=null;try{SPL=new RegExp('(?<=[.!?。])\\s+')}catch(e){}
 function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('.ac-refs')||el.classList.contains('byline')||el.classList.contains('ac-report'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+var t=cl(el.closest('.ac-sol')?el.textContent:el.innerText);if(!t)return;(SPL?t.split(SPL):(t.match(/[^.!?。]+[.!?。]?/g)||[t])).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
 function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
 if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
 function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
-function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
-function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+function stop(keep){gen++;on=false;wake(false);S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();while(i<q.length&&q[i].el.closest('details:not([open])'))i++;if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);wake(true);pos=i;mark(q[i].el,f);
 var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
 b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
 document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;

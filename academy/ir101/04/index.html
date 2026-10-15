@@ -143,7 +143,7 @@ table.jv{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5;ma
 table.jv th{background:var(--panel-2);font-weight:600;font-size:13.5px}table.jv td{font-weight:600}.jn{display:block;font-size:18px;line-height:1.2}
 .ac-report{margin:28px 0 8px;padding:12px 14px;border-radius:6px;background:var(--panel-2);font-size:14.5px;line-height:1.7}
 details.ac-fold{margin:1.2em 0;border-top:1px solid var(--line);padding-top:8px}details.ac-fold>summary{cursor:pointer;font:700 19px/1.5 var(--sans);margin:.6em 0}
-details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
+details.ac-fold ul{font-size:15px;line-height:1.75}details.ac-sol{margin:1.2em 0;border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:#FAFBFC}details.ac-sol>summary{cursor:pointer;font-weight:700;color:#16307F;padding:6px 0}details.ac-sol[open]>summary{margin-bottom:6px;border-bottom:1px dashed var(--line)}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
 .ac-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
 .ac-list{list-style:none;padding:0;margin:8px 0}.ac-list li{margin:0!important;display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
 .ac-list .n{font:500 13px var(--mono);color:var(--muted);padding-top:3px}.ac-list .soon{color:var(--muted)}.ac-list .soon em{font-style:normal;font-size:13px;margin-left:6px;border:1px solid var(--line);border-radius:10px;padding:0 8px}
@@ -312,7 +312,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 </table></div>
 <p><strong>문제 2. 세력 분포와 동맹 선택.</strong> 국력이 A 50, B 30, C 20입니다. 더 약한 쪽에 붙는 것을 균형(balancing), 더 강한 쪽에 붙는 것을 편승(bandwagoning)이라고 합니다. (가) C가 균형과 편승을 택할 때 두 진영의 국력을 구하십시오. (나) 10년 뒤 A 60, B 25, C 15가 됐습니다. 이미 손잡은 B와 C가 각자 군비 증강 같은 내적 균형(internal balancing)만으로 A와 대등해지려면 그때 두 나라 국력의 합을 몇 퍼센트 늘려야 합니까? (다) A가 바다 건너 멀리 있고 B가 C의 이웃이라면 C의 선택은 어떻게 달라질 수 있습니까?</p>
 <p><strong>문제 3. 힘의 극성과 동맹의 극성.</strong> 프랭크 웨이먼(Frank Whelon Wayman)은 국력의 분포(힘의 극성)와 동맹 블록의 수(동맹의 극성)를 따로 쟀습니다. 힘이 다극일 때 일어난 전쟁은 4분의 3이 규모가 컸고, 양극일 때는 작았습니다. 20세기에는 동맹이 두 진영으로 갈리면 전쟁 가능성이 높아지고, 여러 갈래로 나뉘면 평화가 이어졌습니다. 19세기에는 동맹에 관해 반대 결과가 나왔습니다. 다음 사례를 '힘 양극·다극 × 동맹 양극·다극' 표에 놓고 전쟁 가능성과 규모를 예상하십시오. (가) 1907~1914년 유럽: 강대국 여럿이 삼국동맹과 삼국협상으로 나뉨. (나) 1955~1965년: 미소 대립 아래 NATO와 바르샤바조약기구가 맞섬. (다) 본문 5절의 '무장한 다극': 강대국 여럿에 중간국이 사안별로 소다자 협정을 맺음.</p>
-<h4>풀이</h4>
+<details class="ac-sol"><summary>풀이 보기</summary>
 <p><strong>문제 1.</strong></p>
 <ol>
 <li>가: 0.30 이상은 A뿐이라 단극. Σsᵢ² = 0.36 + 4 × 0.01 = 0.40, CON = √(0.20 / 0.80) = 0.50.</li>
@@ -332,7 +332,7 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>(나) 힘 양극·동맹 양극. 전쟁 가능성은 높지만 규모는 작을 것입니다.</li>
 <li>(다) 힘 다극·동맹 다극. 20세기 결과로는 평화가 이어지나, 전쟁이 나면 클 수 있습니다. 웨이먼이 20세기 결과가 맞다면 안정의 조합이라고 본 '힘 양극·동맹 다극'은 어느 사례에도 없습니다(76쪽).</li>
 </ol>
-<h3>실증 연구와 반론</h3>
+</details><h3>실증 연구와 반론</h3>
 <p><strong>싱어·브레머·스터키(1972): 시대마다 답이 다르다.</strong> 싱어와 스튜어트 브레머(Stuart Bremer), 존 스터키(John Stuckey)는 강대국의 국력 집중도가 강대국 전쟁의 양을 좌우하는지 물었습니다. 1820~1965년 자료로 견주었더니, 19세기에는 국력이 고르게 나뉠수록 안정적이었고 20세기에는 반대였습니다[2차 자료]. 이 연구는 시기에 따라 결과가 뒤집힌 까닭을 설명하지 못했습니다(이 강의의 해석).</p>
 <p><strong>웨이먼(1984): 힘과 동맹은 다르게 작용한다.</strong> 웨이먼은 1816~1965년을 5년 단위로 나누어 국력 집중도와 동맹 블록 지수를 뒤이은 5년의 전쟁 규모(참전국별 전쟁 개월 수의 합)와 견주었고(68~69쪽), 결과는 문제 3에 옮겼습니다(71~72쪽). 두 지수는 서로 거의 상관이 없어(70쪽) 둘을 따로 재야 한다는 전제를 뒷받침했습니다. 다만 어느 상관계수도 전쟁 규모 변동의 절반을 설명하지 못해, 저자는 인과관계를 시사하는 수준으로만 보았습니다(75~76쪽).</p>
 <p><strong>맨스필드(1992)와 레이·벤틀리(2010): 관계는 한 방향이 아니다.</strong> 에드워드 맨스필드(Edward D. Mansfield)는 집중도를 강대국의 수와 그들 사이의 불평등으로 나누어 시험했습니다. 집중도는 전쟁 빈도와 관련이 있었지만, 집중도가 중간일 때 전쟁이 가장 잦은 역U자형이어서 세력균형론도 세력 우위론(power preponderance theory)도 예상하지 못한 관계였습니다. 제임스 리 레이(James Lee Ray)와 패트릭 벤틀리(Patrick Bentley)는 40년 가까운 연구 결과가 일관되지 않고 이론적 논거부터 약하다고 비판하면서도, 문제가 CON 지표 자체에 있지는 않다고 보았습니다.</p>
@@ -375,15 +375,19 @@ details.ac-fold ul{font-size:15px;line-height:1.75}.ac-refs ul{font-size:15px;li
 <li>2026년 10월 15일 심화 절 추가: 월포스(1999) 원문(하버드대 벨퍼센터 게시 PDF)으로 7·12·23~24·28쪽, 왈츠(2000) 원문(같은 센터 PDF)으로 27~28쪽, 몬테이루 원문(같은 센터 PDF)으로 26·37쪽을 대조했습니다. 쪽수는 PDF 추출본의 머리글 위치를 몬테이루(2011) 각주의 월포스 쪽 인용(7~8쪽)과 왈츠 쪽 인용(28~29쪽)에 맞추어 정했습니다. 웨이먼(1984)은 미시간대 Deep Blue 원문으로 61·68~72·75~76쪽을 대조했고, 학술지명은 RePEc와 UCSD 강의 읽을거리 목록으로 확인했습니다. CON 산식은 레이·싱어(1973) 원문(Deep Blue) 422쪽의 정의(점유율 표준편차를 N개 체제에서 가능한 최대 표준편차로 나눈 값)를 풀어 쓴 것이고, 학술지명·권호는 DOI(10.1177/004912417300100401)로 확인했습니다. CINC의 구성 지표는 전쟁상관관계 프로젝트 누리집으로 확인했습니다. 맨스필드(1992)와 레이·벤틀리(2010)는 SAGE 누리집의 서지와 초록으로 확인했고 본문은 확인하지 못했습니다. 맨스필드(1992)의 자료 기간과 추정 방법도 확인하지 못했습니다. 맨스필드의 1993년 논문(「Concentration, Polarity, and the Distribution of Power」, International Studies Quarterly 37권 1호, 105–128쪽)은 독립 검토에서 옥스퍼드대 출판부 목차로 서지만 확인했고 초록과 본문은 확인하지 못해, 초록을 확인한 1992년 논문을 소개했습니다. 싱어·브레머·스터키(1972)의 결과는 [2차 자료] Robert Powell, 「Stability and the Distribution of Power」, World Politics 48(1996년 1월), 239쪽과 웨이먼(1984)의 인용으로만 확인했고, 원문과 장의 쪽수는 확인하지 못했습니다. 왈츠(1964) 원문도 확인하지 못해 원전 읽기에 쓰지 않았습니다.</li>
 <li>2026년 10월 15일 심화 절 독립 검토 14건 가운데 13건 반영(월포스·왈츠 쪽수 정정, 웨이먼 70쪽 '유의하지 않음'은 두 지수 사이의 상관이라는 점과 75~76쪽의 한계로 고침, 문제 1 풀이의 연결을 맨스필드 대신 웨이먼의 TWOCON으로 바꿈, 문제 3에 웨이먼의 결과를 넣어 문제만으로 풀 수 있게 함, 문제 2(나)를 동맹을 맺은 뒤의 내적 균형으로 고치고 '현재'의 모호함을 없앰, 문제 2(다)에 국력과 위협 기준의 차이를 밝힘, 패권 이론의 가정과 몬테이루 비판에 쪽수를 붙임, CON의 기원을 싱어·브레머·스터키(1972)로 밝힘, 맨스필드 1993년 논문 서술 정정, 연구별 한계와 레이·벤틀리의 단서 보완, 웨이먼 안정 조합의 조건 명시, 번역투와 용어 정리). 분량 지적(공백 제외 약 7,950자)은 반영하지 않았습니다. 심화 절은 공백 포함 약 4,500자로, 집필 지침의 3,000~4,500자 안에 있습니다. 문제 2(다)에 월트의 위협 균형론을 이름으로 넣는 것은 서지를 확인하지 않아 하지 않았습니다.</li>
 </ul></section><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span><a href="/academy/ir101/03/">← 이전 회차</a></span><a href="/academy/ir101/">강좌 목록</a><span><a href="/academy/ir101/05/">다음 회차 →</a></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
-var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption',
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption,.ac-sol>p,.ac-sol>ol>li,.ac-sol>ul>li',
 SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+var EN_=/^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;function cl(x){x=x.replace(/\s+/g,' ');for(var k=0;k<3;k++)x=x.replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g,function(m,y){return y!==undefined&&EN_.test(y)?y.trim()+',':''});x=x.replace(/\b((?:[A-Z]\.){2,})/g,function(m){return m.replace(/\./g,'')}).replace(/\b(e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|St|No|pp?|vol|eds?|Jr|Sr)\./g,'$1').replace(/\b([A-Z])\.\s(?=[A-Z])/g,'$1 ');return x.replace(/\s+([,.;:!?。、])/g,'$1').replace(/\s+/g,' ').trim()}
+var wl=null,wp=false;function wake(x){try{if(x){if(!wl&&!wp&&navigator.wakeLock){wp=true;navigator.wakeLock.request('screen').then(function(w){wp=false;if(!on){w.release();return}wl=w;w.addEventListener('release',function(){wl=null})}).catch(function(){wp=false})}}else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&on)wake(true)});
+var SPL=null;try{SPL=new RegExp('(?<=[.!?。])\\s+')}catch(e){}
 function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('.ac-refs')||el.classList.contains('byline')||el.classList.contains('ac-report'))return;
-var t=el.innerText.replace(/\s+/g,' ').trim();if(!t)return;(t.match(/[^.!?。]+[.!?。]?/g)||[t]).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+var t=cl(el.closest('.ac-sol')?el.textContent:el.innerText);if(!t)return;(SPL?t.split(SPL):(t.match(/[^.!?。]+[.!?。]?/g)||[t])).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
 function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
 if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
 function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
-function stop(keep){gen++;on=false;S.cancel();ui(false);if(!keep){mark(null);}}
-function play(i){if(!q)build();if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);pos=i;mark(q[i].el,f);
+function stop(keep){gen++;on=false;wake(false);S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();while(i<q.length&&q[i].el.closest('details:not([open])'))i++;if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);wake(true);pos=i;mark(q[i].el,f);
 var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
 b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
 document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;
