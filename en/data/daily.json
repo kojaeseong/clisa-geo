@@ -1,6 +1,144 @@
 {
  "issues": [
   {
+   "date": "2026-10-15",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Ukraine's air force counts 39 Russian missiles and 128 drones; 600,000 lose power",
+     "fact": "Ukraine's air force said Russia launched 39 missiles and 128 drones between 6 p.m. on October 13 and the morning of October 14, Kyiv time, and that four missiles and 115 drones were shot down or neutralized. President Volodymyr Zelensky said at least 600,000 people lost power.",
+     "fc": [],
+     "src": [
+      "https://en.interfax.com.ua/news/general/1219699.html",
+      "https://abcnews.com/International/600000-power-ukraine-russia-launches-missile-drone-attack/story?id=137248732"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia's Defense Ministry claims strikes on six power plants around Kyiv and Kharkiv",
+     "fact": "Russia's Defense Ministry said on October 14 that its forces had struck the No. 4, 5 and 6 combined heat and power plants and the Trypillia thermal power plant near Kyiv, two plants near Kharkiv, and a data center in Kyiv with ground-launched precision weapons and long-range drones. It claimed the sites supported Ukraine's armed forces and defense industry.",
+     "fc": [],
+     "src": [
+      "https://tass.com/defense/2201755"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "North Korea test-fires two types of submarine-launched strategic cruise missiles in the East Sea",
+     "fact": "The Korean Central News Agency reported on October 15 that North Korea test-fired two types of submarine-launched strategic cruise missiles in the East Sea on October 14. It said the test was meant to verify the navy's mission capabilities and the reliability of its war deterrent, and claimed it had no negative impact on the security of neighboring countries.",
+     "fc": [],
+     "src": [
+      "https://theprint.in/world/north-korea-says-it-tested-submarine-launched-cruise-missiles-kcna-says/3072146/"
+     ],
+     "loc": {
+      "isos": [
+       "PRK"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Singapore-flagged container ship sinks in Strait of Hormuz after projectile strike",
+     "fact": "Singapore's Maritime and Port Authority (MPA) said on October 14 that the Singapore-flagged container ship GFS Pride had sunk in the Strait of Hormuz and that all 21 crew members were evacuated. The ship caught fire after being hit by a projectile on October 13. Iran's Revolutionary Guards claimed a container ship sank after hitting a mine but did not name the vessel.",
+     "fc": [],
+     "src": [
+      "https://gcaptain.com/containership-sinks-as-hormuz-attacks-spiral-out-of-control/",
+      "https://www.seatrade-maritime.com/security/iran-claims-mine-sank-container-ship-amid-fresh-hormuz-attacks"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "Strait of Hormuz",
+      "isos": [
+       "IRN",
+       "SGP",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Houthis claim they targeted Riyadh's King Khalid airport; coalition intercepts ballistic missile",
+     "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on October 14 that the coalition had intercepted and destroyed a ballistic missile the Houthis fired toward Riyadh. Houthi spokesman Yahya Saree claimed the group had targeted King Khalid International Airport.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/",
+      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ],
+     "loc": {
+      "lat": 24.71,
+      "lon": 46.68,
+      "place": "Riyadh (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "U.S. consumer prices rise 3.7 percent in September as gasoline jumps 34.2 percent",
+     "fact": "The Bureau of Labor Statistics said on October 14 that consumer prices in September were 3.7 percent higher than a year earlier. Energy prices rose 20.4 percent and gasoline 34.2 percent, while core prices, excluding food and energy, rose 2.6 percent.",
+     "fc": [],
+     "src": [
+      "https://www.bls.gov/news.release/archives/cpi_10142026.htm"
+     ],
+     "loc": {
+      "isos": [
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Russia's Defense Ministry said it shot down 902 Ukrainian drones over several Russian regions, Crimea and the Sea of Azov overnight from October 13 into the morning of October 14.",
+     "src": [
+      "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
+     ]
+    },
+    {
+     "t": "Zelensky met British Prime Minister Andy Burnham in London on October 14, and Burnham said Britain would speed up deliveries of British-made air defenses.",
+     "src": [
+      "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
+     ]
+    },
+    {
+     "t": "Serhii Beskrestnov, a technology adviser to Zelensky, said SpaceX had imposed a speed limit on Starlink terminals in motion so that military terminals stop working above 160 kilometers per hour, disrupting operations.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/14/massive-russian-attack-on-ukraine-kills-at-least-six-cuts-power-in-kyiv"
+     ]
+    },
+    {
+     "t": "Reuters, citing Iranian officials, reported that Iran shifted tactics in its attacks on shipping in the Strait of Hormuz about 10 days ago to keep oil prices high and influence the U.S. midterm elections.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ]
+    },
+    {
+     "t": "Israeli Prime Minister Benjamin Netanyahu told Army Radio on October 14 that a preemptive strike on Iran before the October 27 election would not be good for Israel.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-14",
    "items": [
     {

@@ -1,6 +1,144 @@
 {
  "issues": [
   {
+   "date": "2026-10-15",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "우크라 공군, 러 미사일 39발·드론 128대 집계…60만 명 정전",
+     "fact": "우크라이나 공군은 키이우 시각 13일 오후 6시부터 14일 아침까지 러시아가 미사일 39발과 드론 128대를 쏴 미사일 4발과 드론 115대를 격추·무력화했다고 밝혔습니다. 젤렌스키 대통령은 최소 60만 명이 전기를 잃었다고 했습니다.",
+     "fc": [],
+     "src": [
+      "https://en.interfax.com.ua/news/general/1219699.html",
+      "https://abcnews.com/International/600000-power-ukraine-russia-launches-missile-drone-attack/story?id=137248732"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러 국방부, 키이우·하르키우 일대 발전소 6곳 타격 주장",
+     "fact": "러시아 국방부는 14일 지상발사 정밀무기와 장거리 드론으로 키이우 일대의 제4·5·6열병합발전소와 트리필랴 화력발전소, 하르키우 일대 발전소 2곳, 키이우의 데이터센터를 타격했다고 발표했습니다. 우크라이나 군과 군수산업을 지원하는 시설이라고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://tass.com/defense/2201755"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "북한, 동해서 잠수함발사 전략순항미사일 2종 시험발사",
+     "fact": "조선중앙통신은 15일 북한이 14일 동해상에서 잠수함발사 전략순항미사일 2종을 시험발사했다고 보도했습니다. 해군의 임무 수행 능력과 전쟁억제력의 신뢰성을 검증하려는 것이며 주변국 안보에 부정적 영향은 없었다고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://theprint.in/world/north-korea-says-it-tested-submarine-launched-cruise-missiles-kcna-says/3072146/"
+     ],
+     "loc": {
+      "isos": [
+       "PRK"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "싱가포르 선적 컨테이너선, 호르무즈서 발사체 맞고 침몰",
+     "fact": "싱가포르 해사항만청(MPA)은 14일 호르무즈 해협에서 13일 발사체에 맞아 불이 난 자국 선적 컨테이너선 GFS 프라이드호가 침몰했고 선원 21명은 모두 대피했다고 밝혔습니다. 이란 혁명수비대는 컨테이너선 한 척이 기뢰에 부딪혀 가라앉았다고 주장했으나 배 이름은 밝히지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://gcaptain.com/containership-sinks-as-hormuz-attacks-spiral-out-of-control/",
+      "https://www.seatrade-maritime.com/security/iran-claims-mine-sank-container-ship-amid-fresh-hormuz-attacks"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN",
+       "SGP",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "후티, 리야드 킹칼리드 공항 겨냥 주장…동맹군은 탄도미사일 요격",
+     "fact": "사우디 주도 동맹군의 투르키 알말리키 대변인은 14일 후티가 리야드를 향해 쏜 탄도미사일을 요격해 파괴했다고 밝혔습니다. 후티의 야흐야 사리 대변인은 킹칼리드 국제공항을 겨냥했다고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/",
+      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ],
+     "loc": {
+      "lat": 24.71,
+      "lon": 46.68,
+      "place": "리야드(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "미국 9월 소비자물가 3.7% 상승…휘발유는 34.2%",
+     "fact": "미국 노동통계국은 14일 9월 소비자물가가 1년 전보다 3.7% 올랐다고 발표했습니다. 에너지는 20.4%, 휘발유는 34.2% 올랐고, 식품과 에너지를 뺀 근원 물가는 2.6% 상승했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.bls.gov/news.release/archives/cpi_10142026.htm"
+     ],
+     "loc": {
+      "isos": [
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "러시아 국방부는 13일 밤부터 14일 아침 사이 러시아 여러 지역과 크림, 아조프해 상공에서 우크라이나 드론 902대를 격추했다고 밝혔습니다.",
+     "src": [
+      "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
+     ]
+    },
+    {
+     "t": "젤렌스키 대통령은 14일 런던에서 앤디 버넘 영국 총리를 만났고, 버넘 총리는 영국산 방공무기의 인도를 앞당기겠다고 밝혔습니다.",
+     "src": [
+      "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
+     ]
+    },
+    {
+     "t": "젤렌스키 대통령의 기술 고문 세르히 베스크레스노우는 스페이스X가 이동 중인 스타링크 단말기에 속도 제한을 걸어 시속 160km 이상에서 군용 단말기가 작동하지 않게 됐고 작전에 차질이 생겼다고 밝혔습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/14/massive-russian-attack-on-ukraine-kills-at-least-six-cuts-power-in-kyiv"
+     ]
+    },
+    {
+     "t": "로이터는 이란 관리들을 인용해 이란이 열흘쯤 전부터 유가를 높게 유지하고 미국 중간선거에 영향을 주려고 호르무즈 해협 선박 공격의 전술을 바꿨다고 보도했습니다.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ]
+    },
+    {
+     "t": "네타냐후 이스라엘 총리는 14일 군 라디오 인터뷰에서 27일 총선 전에 이란을 선제공격하는 것은 이스라엘에 좋지 않다고 말했습니다.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-14",
    "items": [
     {
