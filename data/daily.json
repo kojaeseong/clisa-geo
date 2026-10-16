@@ -1,6 +1,156 @@
 {
  "issues": [
   {
+   "date": "2026-10-16",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "우크라이나, 러 정유시설 공격 재개…랴잔 정유공장 화재",
+     "fact": "젤렌스키 대통령은 15일 공개된 파이낸셜타임스 인터뷰에서 러시아 정유시설 공격 제한을 풀었다고 밝혔습니다. 러시아 국방부는 15일 랴잔 정유공장을 노린 순항미사일 4발과 드론 69대를 격추했다고 발표했고, 말코프 랴잔 주지사는 정유공장에 불이 났다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour",
+      "https://tass.com/emergencies/2202339",
+      "https://en.iz.ru/en/2184538/2026-10-15/russian-defense-ministry-has-revealed-details-mass-attack-ukrainian-armed-forces-ryazan-oil-refinery"
+     ],
+     "loc": {
+      "lat": 54.63,
+      "lon": 39.74,
+      "place": "랴잔(러시아)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키, 러 드론 850대 넘게 공격 밝혀…키로보흐라드주 3명 사망",
+     "fact": "젤렌스키 대통령은 15일 러시아가 전날 0시부터 이날 오전 9시까지 공격 드론 850대 넘게 쏴 수십 곳의 도시와 마을을 공격했다고 밝혔습니다. 우크라이나 비상사태청은 키로보흐라드주에서 10시간 넘는 드론 공격으로 3명이 숨지고 6명이 다쳤다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://united24media.com/war-in-ukraine/russia-bombards-ukraine-with-over-850-shahed-drones-in-relentless-day-and-night-attack-23473",
+      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란군, 호르무즈 해협 완전 봉쇄 주장…'위반' 유조선 화재 발표",
+     "fact": "이란군 해군은 15일 추적 장치를 끈 채 호르무즈 해협 동쪽 '금지 수역'을 지나려던 '위반' 유조선에 불이 났다고 발표했으나 배 이름과 화재 원인은 밝히지 않았습니다. 하비볼라 사야리 이란군 조정 부참모총장은 같은 날 해협이 완전히 닫혔다고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.thehawk.in/news/world/irans-navy-says-violating-oil-tanker-caught-fire-east-of-hormuz-strait",
+      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "후티, 아덴 대통령궁에 미사일…5명 사망",
+     "fact": "알에르야니 예멘 공보장관은 15일 후티가 아덴의 마아시크 대통령궁에 미사일 5발을 쐈다고 밝혔고, 보건장관은 5명이 숨지고 16명이 다쳤다고 했습니다. 후티는 아덴의 사우디 군사작전 본부를 겨냥했다고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/15/houthis-target-yemens-presidential-palace-in-aden-with-missiles",
+      "https://www.abc.net.au/news/2026-10-16/houthis-attack-aden-killing-five-and-wounding-16/107268204"
+     ],
+     "loc": {
+      "lat": 12.78,
+      "lon": 45.04,
+      "place": "아덴(예멘)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "라브로프, 우크라 재무장 돕는 휴전은 없다는 입장 밝혀",
+     "fact": "라브로프 러시아 외무장관은 15일 바쿠 기자회견에서 특별군사작전의 목표와 우크라이나 분쟁에 대한 러시아의 입장은 바뀌지 않았다고 말했습니다. 러시아 매체들은 그가 우크라이나를 재무장시킬 휴전은 없을 것이라고 말했다고 전했습니다.",
+     "fc": [],
+     "src": [
+      "https://en.apa.az/cis-countries/lavrov-zelenskyy-is-challenging-trump-not-interested-in-elections-530293",
+      "https://newsukraine.rbc.ua/news/no-ceasefire-russia-makes-another-statement-1792064988.html"
+     ],
+     "loc": {
+      "lat": 40.41,
+      "lon": 49.87,
+      "place": "바쿠(아제르바이잔)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "국방부 대변인, 요건 계속 바뀌면 전작권 전환 어렵다는 개인 견해 밝혀",
+     "fact": "국방부 대변인은 15일 정례 브리핑에서 요건이 계속 바뀌면 전시작전통제권은 전환될 수 없을 것이라며 개인 견해라고 밝혔습니다. 브런슨 주한미군사령관은 14일 워싱턴에서 조건과 계획이 바뀌어 새 기준을 지켜야 한다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f55",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/15/south-korea-official-says-shifting-goalposts-could-block-wartime-command-transfer-from-us"
+     ],
+     "loc": {
+      "lat": 37.54,
+      "lon": 126.98,
+      "place": "서울(한국)",
+      "isos": [
+       "KOR",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "우크라이나 공군은 15일 오후 6시부터 16일 아침까지 러시아가 드론 149대를 쐈고 그 가운데 114대를 격추하거나 무력화했으며 24곳이 피격됐다고 밝혔습니다.",
+     "src": [
+      "https://unn.ua/en/news/most-of-the-drones-launched-by-the-russian-federation-overnight-were-jet-powered-air-defense-neutralized-slightly-more-than-half"
+     ]
+    },
+    {
+     "t": "푸틴 대통령은 15일 기업인 단체 '델로바야 로시야' 대회에서 우크라이나가 와일드베리스·오존 물류창고를 먼저 공격했고 러시아가 대응하기 시작했다고 주장했습니다.",
+     "src": [
+      "https://meduza.io/en/news/2026/10/15/they-started-it-we-re-responding-putin-warns-ukraine-over-strikes-on-energy-facilities-warehouses-and-data-centers"
+     ]
+    },
+    {
+     "t": "우크라이나 국방 당국자들은 스타링크 군용판 스타실드가 하루 넘는 제한 끝에 이동 중인 단말기에서 다시 작동한다고 밝혔으나, 워싱턴 주재 우크라이나 외교 책임자는 속도가 완전히 회복되지는 않았다고 말했습니다.",
+     "src": [
+      "https://www.sofx.com/ukraine-resumes-refinery-strikes-as-starshield-service-returns-rejecting-energy-ceasefire/"
+     ]
+    },
+    {
+     "t": "브뤼셀 유럽연합 정상회의는 15일 첫날 차기 장기 예산을 놓고 합의하지 못했고, 16일 둘째 날 젤렌스키 대통령과 우크라이나 지원을 논의합니다.",
+     "src": [
+      "https://www.euronews.com/2026/10/16/eu-summit-leaders-to-rally-behind-zelenskyy-amid-bitter-row-with-trump"
+     ]
+    },
+    {
+     "t": "중국 상무부 허야둥 대변인은 15일 유럽행 희토류 수출 허가의 심사·승인을 계속 신속히 처리하겠다며 유럽연합이 중국 기업의 이중용도 품목 허가 문제 해결에 호응하기를 희망한다고 말했습니다.",
+     "src": [
+      "https://www.globaltimes.cn/page/202610/1372328.shtml"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-15",
    "items": [
     {

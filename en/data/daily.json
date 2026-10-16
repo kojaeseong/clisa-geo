@@ -1,6 +1,156 @@
 {
  "issues": [
   {
+   "date": "2026-10-16",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Ukraine resumes strikes on Russian refineries; fire breaks out at Ryazan plant",
+     "fact": "President Volodymyr Zelensky told the Financial Times, in an interview published October 15, that he had lifted the restriction on striking Russian oil refineries. Russia's Defense Ministry said the same day that it shot down four cruise missiles and 69 drones aimed at the Ryazan refinery, and Ryazan Governor Pavel Malkov said the refinery caught fire.",
+     "fc": [],
+     "src": [
+      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour",
+      "https://tass.com/emergencies/2202339",
+      "https://en.iz.ru/en/2184538/2026-10-15/russian-defense-ministry-has-revealed-details-mass-attack-ukrainian-armed-forces-ryazan-oil-refinery"
+     ],
+     "loc": {
+      "lat": 54.63,
+      "lon": 39.74,
+      "place": "Ryazan (Russia)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says Russia launched more than 850 drones; three killed in Kirovohrad region",
+     "fact": "Zelensky said Russia fired more than 850 attack drones between midnight October 14 and 9 a.m. October 15, hitting dozens of cities and villages. Ukraine's State Emergency Service said a drone attack lasting more than 10 hours killed three people and injured six in the Kirovohrad region.",
+     "fc": [],
+     "src": [
+      "https://united24media.com/war-in-ukraine/russia-bombards-ukraine-with-over-850-shahed-drones-in-relentless-day-and-night-attack-23473",
+      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran's military claims Hormuz fully closed; reports fire on 'violating' tanker",
+     "fact": "The Iranian army's navy said on October 15 that a \"violating\" oil tanker caught fire while trying to cross a \"forbidden region\" east of the Strait of Hormuz with its tracking system switched off, without naming the ship or the cause of the fire. Habibollah Sayyari, the army's deputy chief of staff for coordination, claimed the same day that the strait was completely closed.",
+     "fc": [],
+     "src": [
+      "https://www.thehawk.in/news/world/irans-navy-says-violating-oil-tanker-caught-fire-east-of-hormuz-strait",
+      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Houthis fire missiles at presidential palace in Aden; five killed",
+     "fact": "Yemeni Information Minister Moammar al-Eryani said on October 15 that the Houthis fired five missiles at the al-Maashiq presidential palace in Aden, and the health minister said five people were killed and 16 wounded. The Houthis claimed they had targeted a Saudi military operations headquarters in Aden.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/15/houthis-target-yemens-presidential-palace-in-aden-with-missiles",
+      "https://www.abc.net.au/news/2026-10-16/houthis-attack-aden-killing-five-and-wounding-16/107268204"
+     ],
+     "loc": {
+      "lat": 12.78,
+      "lon": 45.04,
+      "place": "Aden (Yemen)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Lavrov says there will be no ceasefire that lets Ukraine rearm",
+     "fact": "Russian Foreign Minister Sergei Lavrov told a news conference in Baku on October 15 that the objectives of the special military operation and Russia's position on the Ukraine conflict had not changed. Russian media reported that he said there would be no ceasefire allowing Ukraine to rearm.",
+     "fc": [],
+     "src": [
+      "https://en.apa.az/cis-countries/lavrov-zelenskyy-is-challenging-trump-not-interested-in-elections-530293",
+      "https://newsukraine.rbc.ua/news/no-ceasefire-russia-makes-another-statement-1792064988.html"
+     ],
+     "loc": {
+      "lat": 40.41,
+      "lon": 49.87,
+      "place": "Baku (Azerbaijan)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "Seoul defense spokesperson, speaking personally, says shifting requirements could stall OPCON transfer",
+     "fact": "A spokesperson for South Korea's Ministry of National Defense told a regular briefing on October 15 that wartime operational control (OPCON) could not be transferred if the requirements kept changing, adding that this was a personal view. Gen. Xavier Brunson, commander of U.S. Forces Korea, said in Washington on October 14 that the conditions and the plan had changed and new standards had to be met.",
+     "fc": [
+      {
+       "id": "f55",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/15/south-korea-official-says-shifting-goalposts-could-block-wartime-command-transfer-from-us"
+     ],
+     "loc": {
+      "lat": 37.54,
+      "lon": 126.98,
+      "place": "Seoul (South Korea)",
+      "isos": [
+       "KOR",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Ukraine's air force said Russia launched 149 drones between 6 p.m. on October 15 and the morning of October 16, that 114 were shot down or neutralized, and that 24 locations were hit.",
+     "src": [
+      "https://unn.ua/en/news/most-of-the-drones-launched-by-the-russian-federation-overnight-were-jet-powered-air-defense-neutralized-slightly-more-than-half"
+     ]
+    },
+    {
+     "t": "Putin claimed at a congress of the business group Delovaya Rossiya on October 15 that Ukraine had struck Wildberries and Ozon warehouses first and that Russia had begun to respond.",
+     "src": [
+      "https://meduza.io/en/news/2026/10/15/they-started-it-we-re-responding-putin-warns-ukraine-over-strikes-on-energy-facilities-warehouses-and-data-centers"
+     ]
+    },
+    {
+     "t": "Ukrainian defense officials said Starshield, the military version of Starlink, was working again on moving terminals after more than a day of restrictions, though Ukraine's top diplomat in Washington said speeds had not fully recovered.",
+     "src": [
+      "https://www.sofx.com/ukraine-resumes-refinery-strikes-as-starshield-service-returns-rejecting-energy-ceasefire/"
+     ]
+    },
+    {
+     "t": "An EU summit in Brussels ended its first day on October 15 without agreement on the next long-term budget; on October 16, the second day, leaders will discuss support for Ukraine with Zelensky.",
+     "src": [
+      "https://www.euronews.com/2026/10/16/eu-summit-leaders-to-rally-behind-zelenskyy-amid-bitter-row-with-trump"
+     ]
+    },
+    {
+     "t": "Chinese Commerce Ministry spokesperson He Yadong said on October 15 that China would keep expediting the review and approval of rare earth export licenses for Europe and hoped the EU would respond by helping resolve dual-use export license issues for Chinese companies.",
+     "src": [
+      "https://www.globaltimes.cn/page/202610/1372328.shtml"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-15",
    "items": [
     {
