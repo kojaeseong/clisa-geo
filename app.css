@@ -1210,6 +1210,24 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .ma>.ind-det{margin-top:12px}
 .pane .mi-mem{margin:12px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted)}
 .mi-b .ind-capr{margin:2px 0 4px!important}
+/* v4.08 시안(2026-10-16): 탭마다 '그래서 무엇인가'를 한 문장으로. 색은 주어(파랑)와 점 개수 구절(점 그림과 같은 색 계열, 글자용으로 짙게)만 */
+.one{flex-basis:100%;margin:8px 0 4px;padding:12px 16px;background:var(--panel-2);border-radius:10px;font:600 18px/1.55 var(--sans);color:var(--ink);letter-spacing:-.01em}
+.one small{display:block;font:600 11.5px/1.4 var(--sans);color:var(--muted);letter-spacing:0;margin-bottom:3px}
+.one .o-s{color:var(--accent);font-weight:700} .one .o-g{color:#0F766E;font-weight:700} .one .o-w{color:#B45309;font-weight:700} .one .o-b{color:#B91C1C;font-weight:700}
+.mi-b>.one{margin:0 0 12px}
+@media (max-width:699px){ .one{font-size:16px;padding:10px 12px} }
+.ic{padding:14px 16px 12px 18px} .ic-h{font:700 19px/1.55 var(--sans);letter-spacing:-.01em} .ic-h .o-s{color:var(--accent)}
+.ic-why{font-size:13.5px;line-height:1.7;color:var(--muted);margin-top:2px}
+@media (max-width:699px){ .ic-h{font-size:17px} }
+.scn-h b{font:700 20px/1.35 var(--serif)} .scn-h .p{font:600 28px var(--mono);color:var(--accent)} .scn-h .p small{font-size:14px!important}
+@media (max-width:699px){ .scn-h b{font-size:18px} .scn-h .p{font-size:24px} }
+.fw ul{gap:10px} .fw li{background:var(--panel-2);border-radius:10px;padding:12px 14px} .fw li p{margin:6px 0 0;font-size:14px;line-height:1.7;color:var(--ink-2)}
+details.fw .pp{display:inline-block;margin-left:4px;padding:2px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font:600 13px var(--mono);color:var(--ink)} details.fw .pp i{font-style:normal;color:var(--muted);margin-right:4px} details.fw .pp.pp0{color:var(--muted)}
+.fw summary b{font-size:16px}
+/* v4.09(2026-10-16): 영문판 사안별 칸은 낱말이 길어 점 그림 옆에 개수가 들어가지 않으므로(Much wors…) 점 그림 아래로 내린다 */
+html[lang="en"] .app.noglobe :is(#pane-industry,#pane-brief) .ind-cells .ind-cb{grid-template-columns:minmax(0,1fr);grid-template-areas:"n" "d" "c";justify-items:center;row-gap:8px}
+html[lang="en"] .app.noglobe :is(#pane-industry,#pane-brief) .ind-cells .ind-cb .ind-cn{justify-content:center;text-align:center}
+html[lang="en"] .app.noglobe :is(#pane-industry,#pane-brief) .ind-cells .ind-cb .ind-ct{justify-items:center}
 
 .lang-sw{display:inline-flex; align-items:center; flex:none; height:40px; padding:0 12px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink-2); font-size:14px; text-decoration:none; white-space:nowrap; box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
 .lang-sw:hover{border-color:var(--ink-2); color:var(--ink)}

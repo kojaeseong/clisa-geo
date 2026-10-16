@@ -966,10 +966,41 @@ function usfFill(){  /* 미국의 군 쪽이 글 칸에 있으면 배치·태세
   if (!D.posture) { [a, b].forEach(x => { if (x) x.textContent = "Could not load U.S. deployment data. Please refresh the page."; }); return; }
   const x = usfParts(); if (a) { a.innerHTML = x.deploy; a.dataset.done = 1; } if (b) b.innerHTML = x.changes;
 }
+/* v4.08 (English): one-line summary above the Industry Outlook and People's Lives charts, and the subject phrase of each key judgment. Fixed sentence frames; only the dot counts change */
+const oB = (k, t) => '<b class="o-' + k + '">' + t + "</b>";
+const enList = L => L.length < 2 ? L[0] : L.slice(0, -1).join(", ") + " and " + L[L.length - 1];
+function oneInd(name, n){
+  const G = n.better, K = n.big, B = n.big + n.worse, S = n.same, sj = oB("s", esc(name) + ":"), par = K ? " (" + (K === B ? "all of them" : K) + " by more than 30% or into a loss)" : "";
+  let t;
+  if (!G && !B) t = sj + " profits stay in line with trend in all 100 futures through 2030.";
+  else { t = sj + " profits " + (G >= B ? oB("g", "beat the trend by more than 10% in " + G + " of 100 futures") + " through 2030" + (B ? " and " + oB("w", "fall short by more than 10% in " + B) + par : " and never fall short by more than 10%")
+      : oB("w", "fall short of the trend by more than 10% in " + B + " of 100 futures") + " through 2030" + par + (G ? " and " + oB("g", "beat it by more than 10% in " + G) : " and never beat it by more than 10%")) + ".";
+    if (S) t += " In " + S + ", they stay in line with trend."; }
+  return '<p class="one"><small>All five issues combined</small>' + t + "</p>";
+}
+function oneLife(name, n){
+  const G = n.better, K = n.big, B = n.big + n.worse, S = n.same, sj = oB("s", esc(name) + ":"), par = K ? " (" + (K === B ? "all of them much worse" : "much worse in " + K) + ")" : "";
+  let t;
+  if (!G && !B) t = sj + " life stays about the same as today in all 100 futures through 2030.";
+  else { t = sj + " life is " + (B >= G ? oB("w", "worse than today in " + B + " of 100 futures") + " through 2030" + par + (G ? " and " + oB("g", "better in " + G) : " and better in none")
+      : oB("g", "better than today in " + G + " of 100 futures") + " through 2030" + (B ? " and " + oB("w", "worse in " + B) + par : " and worse in none")) + ".";
+    if (S) t += " In " + S + ", it is about the same."; }
+  return '<p class="one"><small>All five issues combined</small>' + t + "</p>";
+}
+function oneMain(pr){  /* people directly involved differ by issue, so they can't be combined: show who fares worst and best side by side */
+  const a = pr.map(([c, G]) => { const n = hsCount(c.hs7, G, "p"); return [G.name, n.big + n.worse]; });
+  const hi = Math.max(...a.map(x => x[1])), lo = Math.min(...a.map(x => x[1])), nm = v => a.filter(x => x[1] === v).map(x => x[0]);
+  const t = hi === lo ? "For the people directly involved in every issue, life is worse than today in " + oB("w", hi + " of 100 futures") + " through 2030."
+    : "Across 100 futures through 2030, life is worse than today most often for " + oB("s", esc(enList(nm(hi)))) + " (" + oB("w", hi + " of 100") + ") and least often for " + oB("s", esc(enList(nm(lo)))) + " (" + oB("w", String(lo)) + ").";
+  return '<p class="one">' + t + "</p>";
+}
+const INS_SUBJ = ["For South Korea, a risk as real as war", "What North Korea wants most out of negotiations", "South Korea's troop shortage around 2040", "A ceasefire on the current front line in the Russia-Ukraine war", "The course of events in the Taiwan Strait", "Iran", "A permanent U.S. military presence"];
+function insHead(h){ const s = INS_SUBJ.find(p => String(h).indexOf(p) === 0); return s ? oB("s", esc(s)) + esc(String(h).slice(s.length)) : esc(h); }
+
 function insightsHtml(){
   const cs = D.strategies || [];
   return (D.insights || []).length ? "<section class=\"sec\" id=\"s-ins\"><h3>Key assessments " + ttsBtn("ins") + "</h3><p class=\"note\" style=\"margin-bottom:8px\">Listed first are the assessments in which Clisa Geopolitics reaches conclusions that differ from the conventional view. Select a chip to see the forecasts tied to an assessment, or the button below to go to the analysis of that issue.</p><ol class=\"ic-list\">" + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = enHead(k.t); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
-      return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => { const F = D.forecasts.find(f => f.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }).join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
+      return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => { const F = D.forecasts.find(f => f.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }).join("") + '</div><p class="ic-h">' + insHead(head) + "</p>" +
         (rest ? "<p class=\"ic-why\"><b>Reasoning</b> " + esc(rest) + "</p>" : "") + (c || k.feature ? '<div class="chips" style="margin:0">' + (k.feature ? FEATS().filter(F => F.id === k.feature).map(featBtn).join("") : "") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + "\">View analysis · " + esc(c.title.split(":")[0]) + "</button>" : "") + "</div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
 }
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
@@ -996,7 +1027,7 @@ function weekLine(date){
   return "<p class=\"bw1\"><b>This week’s forecast review</b> " + [ch ? ch + " revised" : "", keep ? keep + " unchanged" : ""].filter(Boolean).join(", ") + ' <button type="button" class="chip" data-fw="' + esc(r.date) + "\">View in Forecasts and Track Record →</button></p>";
 }
 function weekHtml(r, open){  /* v3.50 전망 번호 대신 짧은 이름(교본 9장) */
-  const li = it => { const F = D.forecasts.find(z => z.id === it.id); return '<li data-fid="' + esc(it.id) + '"><button type="button" class="fcchip" data-fc="' + esc(it.id) + '" title="' + esc(F ? F.q : "") + '">' + (F && F.s ? '<span class="fcs">' + esc(F.s) + "</span>" : esc(it.id)) + '</button> <span class="pp">' + (it.from === it.to ? it.to + "% (unchanged)" : it.from + "% → " + it.to + "%") + "</span><p>" + esc(it.why) + "</p></li>"; };
+  const li = it => { const F = D.forecasts.find(z => z.id === it.id); return '<li data-fid="' + esc(it.id) + '"><button type="button" class="fcchip" data-fc="' + esc(it.id) + '" title="' + esc(F ? F.q : "") + '">' + (F && F.s ? '<span class="fcs">' + esc(F.s) + "</span>" : esc(it.id)) + '</button> <span class="pp' + (it.from === it.to ? ' pp0">' + it.to + "% (unchanged)" : '"><i aria-hidden="true">' + (it.to > it.from ? "▲" : "▼") + "</i>" + it.from + "% → " + it.to + "%") + "</span><p>" + esc(it.why) + "</p></li>"; };
   return '<details class="fw" id="fw-' + esc(r.date) + '"' + (open ? " open" : "") + '><summary><b>' + fmtKD(r.date) + " review</b> <span class=\"note\">" + r.items.filter(it => it.from !== it.to).length + " revised · " + r.items.filter(it => it.from === it.to).length + " unchanged</span></summary>" +
     (r.note ? '<p class="note">' + esc(r.note) + "</p>" : "") + (r.items.length ? "<ul>" + r.items.map(li).join("") + "</ul>" : "") + "</details>";
 }
@@ -1999,7 +2030,7 @@ function lbxRow([rk, name, size, al, pr]){
   const op = LBX && LBX.split("|")[0] === rk ? LBX.split("|")[1] : null, oc = op && op !== "all" ? pr.find(x => x[0].id === op) : null;
   const det = oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("All five issues combined · " + esc(name), cmbCount(ak, BR.issues[0].date), "life", rk, HS_LAB)) : oc ? (LBXM === "t" ? lbxTrend(oc[0], oc[1]) : lbxDetail(oc[0], oc[1])) : "";
   return '<article class="lb-card ind-card lbx-card' + (full ? "" : " lbx-noall") + (rk === "main" ? " lbx-main" : "") + '" id="lbx-' + esc(rk) + '"><header class="lb-hd"><b class="lb-gname">' + esc(name) + "</b>" + (size ? '<span class="lb-size">' + esc(size) + "</span>" : "") +
-    (al.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(al.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + (rk === "main" ? "<span class=\"ind-mem\">For each issue, people in the countries directly involved</span>" : "") + "</header>" +
+    (al.length ? '<span class="lb-alnow">Current alerts · ' + esc((a => a.length < 2 ? a[0] : a.slice(0, -1).join(", ") + " & " + a[a.length - 1])(al.map((x, i) => i ? x.toLowerCase() : x))) + "</span>" : "") + (rk === "main" ? "<span class=\"ind-mem\">For each issue, people in the countries directly involved</span>" + oneMain(pr) : full ? oneLife(name, cmbCount(ak, BR.issues[0].date)) : "") + "</header>" +
     (full ? '<div class="ind-all">' + all + "</div>" : "") + '<div class="ind-cw">' + (full ? "<p class=\"ind-capr\">100 futures, issue by issue</p>" : "") + '<div class="ind-cells">' + cells + "</div></div>" + det + "</article>";
 }
 function lbxDetail(c, G){
@@ -2243,7 +2274,7 @@ function indRow(I){
   const op = INDOPEN && INDOPEN.split("|")[0] === I.k ? IND.cases.find(c => c.id === INDOPEN.split("|")[1]) : null, oa = INDOPEN === I.k + "|all", ak = "ind|" + I.k;
   const opd = op ? (INDMODE === "t" ? indTrendPanel(I, op) : indDetail(I, op)) : oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("All five issues combined · " + esc(I.name), cmbCount(ak, BR.issues[0].date), "ind", I.k, IND_LAB)) : "";
   const all = dotCell('data-ind="' + esc(I.k + "|all") + '"', "All five issues combined", cmbCount(ak, BR.issues[0].date), cmbDelta(ak), oa && INDMODE !== "t", oa && INDMODE === "t", cmbLine(ak, I.name, IND_LAB), "ind-allc");
-  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + "</b><span class=\"lb-size\">Normal operating margin " + (I.m * 100).toFixed(1) + "%" + (I.floor ? " (floor)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
+  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + "</b><span class=\"lb-size\">Normal operating margin " + (I.m * 100).toFixed(1) + "%" + (I.floor ? " (floor)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span>" + oneInd(I.name, cmbCount(ak, BR.issues[0].date)) + "</header>" +
     '<div class="ind-all">' + all + "</div><div class=\"ind-cw\"><p class=\"ind-capr\">100 futures, issue by issue</p><div class=\"ind-cells\">" + cells + "</div></div>" + opd + "</article>";
 }
 function indAllTrend(I){
@@ -2294,7 +2325,7 @@ function indRowsM(L){
   return mChips(L.map(([I]) => [I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-mj", MIOPEN) + L.map(([I]) => { const ak = "ind|" + I.k, n = cmbCount(ak, today), ex = MIOPEN === I.k;
     let body = "";
     if (ex) { const ns = mSort(IND.cases.map((c, i) => [c, indCount(I.k, c), i])), oa = INDOPEN === I.k + "|all";
-      body = '<div class="mi-b">' + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("All five issues combined · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
+      body = '<div class="mi-b">' + oneInd(I.name, n) + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("All five issues combined · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
         "<p class=\"ind-capr\">100 futures, issue by issue</p>" + ns.map(([c, nc]) => { const id = I.k + "|" + c.id, op = INDOPEN === id, cs = indCase(c), G = indG(I, c);
           return mCaseRow('data-ind="' + esc(id) + '"', op, INDMODE, esc(IND_SHORT[c.id] || c.title), "", nc, cs ? indDelta(cs, G) : null, cs ? indSpark(indSer(cs, G)) : "", op ? (INDMODE === "t" ? indTrendPanel(I, c) : indDetail(I, c)) : ""); }).join("") +
         '<p class="mi-mem">' + esc(I.mem.join(", ")) + " · Normal operating margin " + (I.m * 100).toFixed(1) + "%</p></div>"; }
@@ -2308,7 +2339,7 @@ function lifeRowsM(rows){
   return (one ? "" : mChips(rows.map(([r]) => [r[0], r[1], r[0] !== "main" && cmbFull(r[0]) ? cmbCount("life|" + r[0], today) : null]), "data-mlj", MLOPEN)) + rows.map(([r]) => { const [rk, name, size, al, pr] = r, full = rk !== "main" && cmbFull(rk), ak = "life|" + rk, n = full ? cmbCount(ak, today) : null, ex = one || MLOPEN === rk;
     let body = "";
     if (ex) { const ord = mSort(pr.map(([c, G], i) => [c, hsCount(c.hs7, G, "p"), i, G])), oa = LBX === rk + "|all";
-      body = '<div class="mi-b">' + (full ? mAll('data-lbx="' + esc(rk + "|all") + '"', oa, LBXM, n, cmbDelta(ak), mLine(ak, name, HS_LAB), oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("All five issues combined · " + esc(name), n, "life", rk, HS_LAB)) : "") + "<p class=\"ind-capr\">100 futures, issue by issue</p>" : "") +
+      body = '<div class="mi-b">' + (rk === "main" ? oneMain(pr) : full ? oneLife(name, n) : "") + (full ? mAll('data-lbx="' + esc(rk + "|all") + '"', oa, LBXM, n, cmbDelta(ak), mLine(ak, name, HS_LAB), oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("All five issues combined · " + esc(name), n, "life", rk, HS_LAB)) : "") + "<p class=\"ind-capr\">100 futures, issue by issue</p>" : "") +
         ord.map(([c, nc, , G]) => { const id = rk + "|" + c.id, op = LBX === id;
           return mCaseRow('data-lbx="' + esc(id) + '"', op, LBXM, esc(LB_SHORT[c.id] || c.title), rk === "main" ? esc(G.name) : "", nc, lbDelta(c, G), indSpark(indSer(c, G)), op ? (LBXM === "t" ? lbxTrend(c, G) : lbxDetail(c, G)) : ""); }).join("") +
         (size || al.length ? '<p class="mi-mem">' + esc(size) + (al.length ? (size ? " · " : "") + "Alerts: " + esc(al.join("·")) : "") + "</p>" : "") + "</div>"; }

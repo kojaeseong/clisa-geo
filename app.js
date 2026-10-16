@@ -938,10 +938,43 @@ function usfFill(){  /* 미국의 군 쪽이 글 칸에 있으면 배치·태세
   if (!D.posture) { [a, b].forEach(x => { if (x) x.textContent = "미군 배치 자료를 불러오지 못했습니다. 새로고침해 주세요."; }); return; }
   const x = usfParts(); if (a) { a.innerHTML = x.deploy; a.dataset.done = 1; } if (b) b.innerHTML = x.changes;
 }
+/*ONE{*/ /* v4.08 시안(2026-10-16): 산업별 미래·국민의 삶 카드 맨 위 한 문장, 전략 분석 판단 문장의 주어 구절. 정해 둔 틀 문장에 점 개수만 끼운다 */
+const jo = (w, a, b) => { const t = String(w), c = t.slice(-1), h = c.charCodeAt(0) - 0xAC00; return t + ((h >= 0 && h <= 11171) ? (h % 28 ? a : b) : ("013678".indexOf(c) >= 0 ? a : b)); };
+const roOf = w => { const h = String(w).slice(-1).charCodeAt(0) - 0xAC00; return (h >= 0 && h <= 11171 && h % 28 && h % 28 !== 8) ? "으로" : "로"; };
+const oB = (k, t) => '<b class="o-' + k + '">' + t + "</b>";
+function oneInd(name, n){
+  const G = n.better, K = n.big, B = n.big + n.worse, S = n.same, sj = oB("s", esc(name) + " 이익은"), par = K ? "(" + (K === B ? "모두" : "그 가운데 " + K + "번은") + " 30% 넘게 줄거나 적자)" : "";
+  let t;
+  if (!G && !B) t = sj + " 2030년까지 100번의 미래 모두 현 추세와 비슷합니다.";
+  else { t = sj + " 2030년까지 100번의 미래 중 " + (G >= B ? oB("g", G + "번 현 추세보다 10% 넘게 늘고") + ", " + (B ? oB("w", B + "번은 10% 넘게 줄어듭니다") + par : "10% 넘게 줄어드는 경우는 없습니다")
+      : oB("w", B + "번 현 추세보다 10% 넘게 줄고") + par + ", " + (G ? oB("g", G + "번은 10% 넘게 늘어납니다") : "10% 넘게 늘어나는 경우는 없습니다")) + ".";
+    if (S) t += " " + S + "번은 현 추세와 비슷합니다."; }
+  return '<p class="one"><small>5개 사안 종합</small>' + t + "</p>";
+}
+function oneLife(name, n){
+  const G = n.better, K = n.big, B = n.big + n.worse, S = n.same, sj = oB("s", esc(jo(name, "은", "는"))), par = K ? "(" + (K === B ? "모두" : "그 가운데 " + K + "번은") + " 크게 나빠진 삶)" : "";
+  let t;
+  if (!G && !B) t = sj + " 2030년까지 100번의 미래 모두 현재와 비슷한 삶입니다.";
+  else { t = sj + " 2030년까지 100번의 미래 중 " + (B >= G ? oB("w", B + "번이 현재보다 나쁜 삶") + par + "이고, " + (G ? oB("g", G + "번이 나은 삶") + "입니다" : "나은 삶은 없습니다")
+      : oB("g", G + "번이 현재보다 나은 삶") + "이고, " + (B ? oB("w", B + "번이 나쁜 삶") + par + "입니다" : "나쁜 삶은 없습니다")) + ".";
+    if (S) t += " " + S + "번은 현재와 비슷한 삶입니다."; }
+  return '<p class="one"><small>5개 사안 종합</small>' + t + "</p>";
+}
+function oneMain(pr){  /* 당사국 국민: 사안마다 국민이 달라 합칠 수 없으므로, 현재보다 나쁜 삶이 가장 많은 국민과 가장 적은 국민을 나란히 */
+  const a = pr.map(([c, G]) => { const n = hsCount(c.hs7, G, "p"); return [G.name, n.big + n.worse]; });
+  const hi = Math.max(...a.map(x => x[1])), lo = Math.min(...a.map(x => x[1])), nm = v => a.filter(x => x[1] === v).map(x => x[0]);
+  const list = v => { const L = nm(v); return L.length > 1 ? L.slice(0, -1).map((x, i) => i === L.length - 2 ? jo(x, "과", "와") : x + ",").join(" ") + " " + L[L.length - 1] : L[0]; };
+  const t = hi === lo ? "당사국 국민은 모두 2030년까지 100번의 미래 중 " + oB("w", hi + "번") + "이 현재보다 나쁜 삶입니다."
+    : "2030년까지 100번의 미래 가운데 현재보다 나쁜 삶이 가장 많은 국민은 " + oB("s", esc(list(hi))) + roOf(list(hi)) + " " + oB("w", hi + "번") + "이고, 가장 적은 국민은 " + oB("s", esc(list(lo))) + roOf(list(lo)) + " " + oB("w", lo + "번") + "입니다.";
+  return '<p class="one">' + t + "</p>";
+}
+const INS_SUBJ = ["한국에 전쟁 못지않게 현실적인 위험은", "북한이 협상의 대가로 가장 원하는 것은", "2040년 전후 한국의 병력 부족은", "현재 전선에서의 러-우 정전은", "대만해협의 향방은", "이란은", "미군 상설 주둔이 겨냥하는 것은"];
+function insHead(h){ const s = INS_SUBJ.find(p => String(h).indexOf(p) === 0); return s ? oB("s", esc(s)) + esc(String(h).slice(s.length)) : esc(h); }
+/*}ONE*/
 function insightsHtml(){
   const cs = D.strategies || [];
   return (D.insights || []).length ? '<section class="sec" id="s-ins"><h3>주요 판단 ' + ttsBtn("ins") + '</h3><p class="note" style="margin-bottom:8px">클리사 지오폴리틱스의 분석 가운데 통상적 시각과 결론을 달리하는 판단을 우선 제시합니다. 칩을 누르면 그 판단과 관련한 전망이 뜨고, 아래 단추를 누르면 해당 사안의 분석으로 이동합니다.</p><ol class="ic-list">' + D.insights.map((k, n) => { const c = cs.find(x => x.id === k.case); const m = String(k.t).match(/^(.+?다\.)\s(.+)$/s); const head = m ? m[1] : k.t, rest = m ? m[2] : "";
-      return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => { const F = D.forecasts.find(f => f.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }).join("") + '</div><p class="ic-h">' + esc(head) + "</p>" +
+      return '<li class="ic ic-' + esc(k.case) + '"><div class="ic-top"><span class="ic-n">' + (n + 1) + '</span>' + (c ? '<span class="ic-case">' + esc(c.title.split(":")[0]) + "</span>" : "") + (k.fc || []).map(id => { const F = D.forecasts.find(f => f.id === id); return '<button type="button" class="fcchip" data-fc="' + esc(id) + '" title="' + esc(F ? F.q : "") + '">' + fcLab(F, id, F ? F.p : null) + "</button>"; }).join("") + '</div><p class="ic-h">' + insHead(head) + "</p>" +
         (rest ? '<p class="ic-why"><b>근거</b> ' + esc(rest) + "</p>" : "") + (c || k.feature ? '<div class="chips" style="margin:0">' + (k.feature ? FEATS().filter(F => F.id === k.feature).map(featBtn).join("") : "") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + "</div>" : "") + "</li>"; }).join("") + "</ol></section>" : "";
 }
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
@@ -968,7 +1001,7 @@ function weekLine(date){
   return '<p class="bw1"><b>이번 주 전망 점검</b> ' + [ch ? ch + "건 조정" : "", keep ? keep + "건 유지" : ""].filter(Boolean).join(", ") + ' <button type="button" class="chip" data-fw="' + esc(r.date) + '">전망과 검증에서 보기 →</button></p>';
 }
 function weekHtml(r, open){  /* v3.50 전망 번호 대신 짧은 이름(교본 9장) */
-  const li = it => { const F = D.forecasts.find(z => z.id === it.id); return '<li data-fid="' + esc(it.id) + '"><button type="button" class="fcchip" data-fc="' + esc(it.id) + '" title="' + esc(F ? F.q : "") + '">' + (F && F.s ? '<span class="fcs">' + esc(F.s) + "</span>" : esc(it.id)) + '</button> <span class="pp">' + (it.from === it.to ? it.to + "% 유지" : it.from + "% → " + it.to + "%") + "</span><p>" + esc(it.why) + "</p></li>"; };
+  const li = it => { const F = D.forecasts.find(z => z.id === it.id); return '<li data-fid="' + esc(it.id) + '"><button type="button" class="fcchip" data-fc="' + esc(it.id) + '" title="' + esc(F ? F.q : "") + '">' + (F && F.s ? '<span class="fcs">' + esc(F.s) + "</span>" : esc(it.id)) + '</button> <span class="pp' + (it.from === it.to ? ' pp0">' + it.to + "% 유지" : '"><i aria-hidden="true">' + (it.to > it.from ? "▲" : "▼") + "</i>" + it.from + "% → " + it.to + "%") + "</span><p>" + esc(it.why) + "</p></li>"; };
   return '<details class="fw" id="fw-' + esc(r.date) + '"' + (open ? " open" : "") + '><summary><b>' + fmtKD(r.date) + ' 점검</b> <span class="note">' + r.items.filter(it => it.from !== it.to).length + "건 조정 · " + r.items.filter(it => it.from === it.to).length + "건 유지</span></summary>" +
     (r.note ? '<p class="note">' + esc(r.note) + "</p>" : "") + (r.items.length ? "<ul>" + r.items.map(li).join("") + "</ul>" : "") + "</details>";
 }
@@ -1971,7 +2004,7 @@ function lbxRow([rk, name, size, al, pr]){
   const op = LBX && LBX.split("|")[0] === rk ? LBX.split("|")[1] : null, oc = op && op !== "all" ? pr.find(x => x[0].id === op) : null;
   const det = oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("5개 사안 종합 · " + esc(name), cmbCount(ak, BR.issues[0].date), "life", rk, HS_LAB)) : oc ? (LBXM === "t" ? lbxTrend(oc[0], oc[1]) : lbxDetail(oc[0], oc[1])) : "";
   return '<article class="lb-card ind-card lbx-card' + (full ? "" : " lbx-noall") + (rk === "main" ? " lbx-main" : "") + '" id="lbx-' + esc(rk) + '"><header class="lb-hd"><b class="lb-gname">' + esc(name) + "</b>" + (size ? '<span class="lb-size">' + esc(size) + "</span>" : "") +
-    (al.length ? '<span class="lb-alnow">현재 경보 · ' + esc(al.join("·")) + "</span>" : "") + (rk === "main" ? '<span class="ind-mem">사안마다 직접 당사국의 국민</span>' : "") + "</header>" +
+    (al.length ? '<span class="lb-alnow">현재 경보 · ' + esc(al.join("·")) + "</span>" : "") + (rk === "main" ? '<span class="ind-mem">사안마다 직접 당사국의 국민</span>' + oneMain(pr) : full ? oneLife(name, cmbCount(ak, BR.issues[0].date)) : "") + "</header>" +
     (full ? '<div class="ind-all">' + all + "</div>" : "") + '<div class="ind-cw">' + (full ? '<p class="ind-capr">사안별 100번의 미래</p>' : "") + '<div class="ind-cells">' + cells + "</div></div>" + det + "</article>";
 }
 function lbxDetail(c, G){
@@ -2215,7 +2248,7 @@ function indRow(I){
   const op = INDOPEN && INDOPEN.split("|")[0] === I.k ? IND.cases.find(c => c.id === INDOPEN.split("|")[1]) : null, oa = INDOPEN === I.k + "|all", ak = "ind|" + I.k;
   const opd = op ? (INDMODE === "t" ? indTrendPanel(I, op) : indDetail(I, op)) : oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), cmbCount(ak, BR.issues[0].date), "ind", I.k, IND_LAB)) : "";
   const all = dotCell('data-ind="' + esc(I.k + "|all") + '"', "5개 사안 종합", cmbCount(ak, BR.issues[0].date), cmbDelta(ak), oa && INDMODE !== "t", oa && INDMODE === "t", cmbLine(ak, I.name, IND_LAB), "ind-allc");
-  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + '</b><span class="lb-size">정상 영업이익률 ' + (I.m * 100).toFixed(1) + "%" + (I.floor ? "(하한)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
+  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + '</b><span class="lb-size">정상 영업이익률 ' + (I.m * 100).toFixed(1) + "%" + (I.floor ? "(하한)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span>" + oneInd(I.name, cmbCount(ak, BR.issues[0].date)) + "</header>" +
     '<div class="ind-all">' + all + '</div><div class="ind-cw"><p class="ind-capr">사안별 100번의 미래</p><div class="ind-cells">' + cells + "</div></div>" + opd + "</article>";
 }
 function indAllTrend(I){
@@ -2266,7 +2299,7 @@ function indRowsM(L){
   return mChips(L.map(([I]) => [I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-mj", MIOPEN) + L.map(([I]) => { const ak = "ind|" + I.k, n = cmbCount(ak, today), ex = MIOPEN === I.k;
     let body = "";
     if (ex) { const ns = mSort(IND.cases.map((c, i) => [c, indCount(I.k, c), i])), oa = INDOPEN === I.k + "|all";
-      body = '<div class="mi-b">' + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
+      body = '<div class="mi-b">' + oneInd(I.name, n) + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
         '<p class="ind-capr">사안별 100번의 미래</p>' + ns.map(([c, nc]) => { const id = I.k + "|" + c.id, op = INDOPEN === id, cs = indCase(c), G = indG(I, c);
           return mCaseRow('data-ind="' + esc(id) + '"', op, INDMODE, esc(IND_SHORT[c.id] || c.title), "", nc, cs ? indDelta(cs, G) : null, cs ? indSpark(indSer(cs, G)) : "", op ? (INDMODE === "t" ? indTrendPanel(I, c) : indDetail(I, c)) : ""); }).join("") +
         '<p class="mi-mem">' + esc(I.mem.join(", ")) + " · 정상 영업이익률 " + (I.m * 100).toFixed(1) + "%</p></div>"; }
@@ -2280,7 +2313,7 @@ function lifeRowsM(rows){
   return (one ? "" : mChips(rows.map(([r]) => [r[0], r[1], r[0] !== "main" && cmbFull(r[0]) ? cmbCount("life|" + r[0], today) : null]), "data-mlj", MLOPEN)) + rows.map(([r]) => { const [rk, name, size, al, pr] = r, full = rk !== "main" && cmbFull(rk), ak = "life|" + rk, n = full ? cmbCount(ak, today) : null, ex = one || MLOPEN === rk;
     let body = "";
     if (ex) { const ord = mSort(pr.map(([c, G], i) => [c, hsCount(c.hs7, G, "p"), i, G])), oa = LBX === rk + "|all";
-      body = '<div class="mi-b">' + (full ? mAll('data-lbx="' + esc(rk + "|all") + '"', oa, LBXM, n, cmbDelta(ak), mLine(ak, name, HS_LAB), oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("5개 사안 종합 · " + esc(name), n, "life", rk, HS_LAB)) : "") + '<p class="ind-capr">사안별 100번의 미래</p>' : "") +
+      body = '<div class="mi-b">' + (rk === "main" ? oneMain(pr) : full ? oneLife(name, n) : "") + (full ? mAll('data-lbx="' + esc(rk + "|all") + '"', oa, LBXM, n, cmbDelta(ak), mLine(ak, name, HS_LAB), oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("5개 사안 종합 · " + esc(name), n, "life", rk, HS_LAB)) : "") + '<p class="ind-capr">사안별 100번의 미래</p>' : "") +
         ord.map(([c, nc, , G]) => { const id = rk + "|" + c.id, op = LBX === id;
           return mCaseRow('data-lbx="' + esc(id) + '"', op, LBXM, esc(LB_SHORT[c.id] || c.title), rk === "main" ? esc(G.name) : "", nc, lbDelta(c, G), indSpark(indSer(c, G)), op ? (LBXM === "t" ? lbxTrend(c, G) : lbxDetail(c, G)) : ""); }).join("") +
         (size || al.length ? '<p class="mi-mem">' + esc(size) + (al.length ? (size ? " · " : "") + "현재 경보 " + esc(al.join("·")) : "") + "</p>" : "") + "</div>"; }
