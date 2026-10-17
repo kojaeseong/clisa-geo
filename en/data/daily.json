@@ -1,6 +1,162 @@
 {
  "issues": [
   {
+   "date": "2026-10-17",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Trump waives most tariffs and sanctions under the Graham Russia sanctions law two days before they take effect",
+     "fact": "President Trump signed an executive order on October 16 waiving most of the tariffs and sanctions in the Lindsey O. Graham Sanctioning Russia and Iran Act of 2026, which were set to take effect October 18, and certified to Congress that the move serves the national interest. The waiver also covers 100 percent additional tariffs on the five largest importers of Russian oil and gas, and it sets no expiration date.",
+     "fc": [],
+     "src": [
+      "https://www.whitehouse.gov/presidential-actions/2026/10/implementing-the-lindsey-o-graham-sanctioning-russia-and-iran-act-of-2026/",
+      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "Washington (United States)",
+      "isos": [
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia launches massive attack on Ukraine's energy infrastructure, hitting more than 15 power facilities",
+     "fact": "Ukraine's air force said Russia fired 332 drones plus ballistic and cruise missiles between 6 p.m. on October 16 and the morning of October 17, and that 293 were shot down or neutralized; President Volodymyr Zelensky said more than 15 power generation and transmission facilities were attacked. Russia's Defense Ministry said it struck targets including a steel plant in Zaporizhzhia and a transformer factory run by Ukraine's Defense Ministry.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4175336-ukraines-adf-down-four-kalibr-missiles-289-drones-in-overnight-russian-attack.html",
+      "https://www.kyivpost.com/post/87367",
+      "https://tass.com/defense/2203463"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Gerasimov claims capture of Dobropillia; Ukraine's General Staff denies it",
+     "fact": "Valery Gerasimov, chief of Russia's General Staff, reported to President Vladimir Putin on October 16 that Russian forces had captured Dobropillia in the Donetsk region. Andrii Kovalov, a spokesman for Ukraine's General Staff, said on October 17 that the claim was false and that the town remains under the control of Ukrainian forces.",
+     "fc": [],
+     "src": [
+      "https://unn.ua/en/news/gerasimov-reported-to-putin-the-purported-capture-of-dobropillia",
+      "https://mezha.net/eng/news/mezha-e555710b7f78d112c5f004ff_ukraine-s_general_staff"
+     ],
+     "loc": {
+      "lat": 48.47,
+      "lon": 37.08,
+      "place": "Dobropillia (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IRGC claims a 'violating' supertanker struck a mine and exploded in the Strait of Hormuz",
+     "fact": "The navy of Iran's Islamic Revolutionary Guard Corps claimed on October 17 that a \"violating\" supertanker carrying more than 2 million barrels of crude hit a mine and exploded while crossing the Strait of Hormuz on an \"unauthorized\" route with its location and radar systems switched off. The IRGC did not name the ship or give its exact location.",
+     "fc": [],
+     "src": [
+      "https://english.news.cn/20261017/f2e79b1e309741bb98fed4d21969a3f8/c.html",
+      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "UKMTO says two tankers were hit off Jubail, Saudi Arabia",
+     "fact": "The U.K. Maritime Trade Operations agency (UKMTO) said on October 17 that two tankers were hit on October 16 northeast of Jubail, Saudi Arabia: one about 68 nautical miles out by an unknown projectile, the other about 78 nautical miles out by a rocket-propelled grenade fired from a small boat. All crew members were safe, and it was not clear who carried out the attacks.",
+     "fc": [],
+     "src": [
+      "https://www.arabtimesonline.com/news/second-tanker-attacked-off-saudi-arabias-jubail-in-same-area/",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
+     ],
+     "loc": {
+      "isos": [
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Egypt's Sisi asks parliament for emergency session to authorize defending Saudi Arabia",
+     "fact": "Egyptian President Abdel Fattah el-Sisi, speaking at a military academy graduation on October 17, asked parliament to hold an emergency session to authorize action to protect Saudi Arabia if Riyadh requests it. He said he had no intention of attacking anyone and would only defend Saudi Arabia.",
+     "fc": [],
+     "src": [
+      "https://english.ahram.org.eg/UI/Front/Inner.aspx?NewsContentID=580157"
+     ],
+     "loc": {
+      "lat": 30.02,
+      "lon": 31.76,
+      "place": "New Administrative Capital (Egypt)",
+      "isos": [
+       "EGY",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "North Korea says it tested a new ultra-high-speed precision-guided torpedo using AI",
+     "fact": "North Korea's Korean Central News Agency reported on October 17 that a new ultra-high-speed precision-guided torpedo, with AI technology applied to its target detection and guidance functions, was successfully test-fired underwater on October 15.",
+     "fc": [],
+     "src": [
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261017/n-korea-conducts-underwater-test-of-new-precision-guided-torpedo-using-ai-kcna",
+      "https://www.malaymail.com/news/world/2026/10/17/north-korea-advances-ai-weapons-programme-with-new-precision-guided-torpedo/239390"
+     ],
+     "loc": {
+      "isos": [
+       "PRK"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Adm. Brad Cooper, commander of U.S. Central Command, said on October 16 that \"the Strait of Hormuz is controlled by the United States and our regional partners, not Iran.\"",
+     "src": [
+      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
+     ]
+    },
+    {
+     "t": "Iranian President Masoud Pezeshkian said in Yerevan, Armenia, on October 16 that Iran does not seek nuclear weapons and is ready for dialogue.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
+     ]
+    },
+    {
+     "t": "Indian Shipping Minister Sarbananda Sonowal said the tanker ST 3, with 15 Indian seafarers aboard, was struck by a projectile in the Strait of Hormuz on October 16 and that all crew members were safe.",
+     "src": [
+      "https://gulfnews.com/world/asia/india/indian-crew-safe-after-tanker-incidents-in-strait-of-hormuz-and-romania-minister-1.500713630"
+     ]
+    },
+    {
+     "t": "European Council President António Costa said after the October 16 summit that leaders had identified the means to cover Ukraine's financing needs for this year and had asked the European Commission for a proposal on its additional needs for 2027.",
+     "src": [
+      "https://www.consilium.europa.eu/en/press/press-releases/2026/10/16/remarks-by-president-antonio-costa-at-the-press-conference-following-the-european-council-meeting-of-15-16-october-2026/"
+     ]
+    },
+    {
+     "t": "Rep. Gregory Meeks, the top Democrat on the House Foreign Affairs Committee, introduced bipartisan legislation on October 16 to block the Russian diesel purchase deal proposed by President Trump.",
+     "src": [
+      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-16",
    "items": [
     {

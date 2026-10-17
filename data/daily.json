@@ -1,6 +1,162 @@
 {
  "issues": [
   {
+   "date": "2026-10-17",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "트럼프, 시행 이틀 앞둔 대러 '그레이엄 제재법' 관세·제재 대부분 면제",
+     "fact": "트럼프 대통령은 16일 행정명령으로 18일 시행 예정이던 '린지 O. 그레이엄 러시아·이란 제재법'의 관세와 제재 대부분을 면제하고 국익에 맞는다는 인증을 의회에 냈습니다. 러시아산 원유·가스 최대 수입국 5곳에 대한 100% 추가 관세도 면제했고 기한은 정하지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://www.whitehouse.gov/presidential-actions/2026/10/implementing-the-lindsey-o-graham-sanctioning-russia-and-iran-act-of-2026/",
+      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "워싱턴(미국)",
+      "isos": [
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 우크라 에너지 시설 대규모 공격…발전·송전 시설 15곳 넘게 피격",
+     "fact": "우크라이나 공군은 16일 오후 6시부터 17일 아침까지 러시아가 드론 332대와 탄도·순항미사일을 쐈고 293기를 격추·무력화했다고 밝혔고, 젤렌스키 대통령은 발전·송전 시설 15곳 넘게 공격받았다고 했습니다. 러시아 국방부는 자포리자 제철소와 우크라이나 국방부가 관리하는 변압기 공장 등을 타격했다고 발표했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4175336-ukraines-adf-down-four-kalibr-missiles-289-drones-in-overnight-russian-attack.html",
+      "https://www.kyivpost.com/post/87367",
+      "https://tass.com/defense/2203463"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "게라시모프, 도브로필랴 점령 주장…우크라 총참모부는 부인",
+     "fact": "게라시모프 러시아군 총참모장은 16일 푸틴 대통령에게 도네츠크주 도브로필랴를 점령했다고 보고했습니다. 우크라이나 총참모부 코발료우 대변인은 17일 이를 사실이 아니라며 도브로필랴는 우크라이나군 통제 아래 있다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://unn.ua/en/news/gerasimov-reported-to-putin-the-purported-capture-of-dobropillia",
+      "https://mezha.net/eng/news/mezha-e555710b7f78d112c5f004ff_ukraine-s_general_staff"
+     ],
+     "loc": {
+      "lat": 48.47,
+      "lon": 37.08,
+      "place": "도브로필랴(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "혁명수비대, '규정 위반' 초대형 유조선이 호르무즈서 기뢰에 맞아 폭발했다고 주장",
+     "fact": "이란 혁명수비대 해군은 17일 원유 200만 배럴 넘게 실은 '규정 위반' 초대형 유조선이 위치·레이더 장치를 끈 채 승인되지 않은 항로로 호르무즈 해협을 지나다 기뢰에 맞아 폭발했다고 주장했습니다. 배 이름과 정확한 위치는 밝히지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://english.news.cn/20261017/f2e79b1e309741bb98fed4d21969a3f8/c.html",
+      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "UKMTO, 사우디 주바일 앞바다서 유조선 2척 피격 발표",
+     "fact": "영국 해사무역작전(UKMTO)은 16일 사우디아라비아 주바일 북동쪽 약 68해리와 78해리 해상에서 유조선 2척이 각각 미상 발사체와 소형 보트에서 쏜 로켓추진유탄에 맞았고 선원은 모두 무사하다고 17일 밝혔습니다. 공격 주체는 밝혀지지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://www.arabtimesonline.com/news/second-tanker-attacked-off-saudi-arabias-jubail-in-same-area/",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
+     ],
+     "loc": {
+      "isos": [
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "시시 이집트 대통령, 사우디 방어 승인 위한 의회 긴급회의 요청",
+     "fact": "압둘팟타흐 시시 이집트 대통령은 17일 사관학교 졸업식에서 사우디아라비아가 요청하면 사우디를 지키는 조치를 승인하도록 의회에 긴급회의를 열어 달라고 요청했습니다. 그는 누구도 공격할 뜻은 없고 사우디만 방어하겠다고 말했습니다.",
+     "fc": [],
+     "src": [
+      "https://english.ahram.org.eg/UI/Front/Inner.aspx?NewsContentID=580157"
+     ],
+     "loc": {
+      "lat": 30.02,
+      "lon": 31.76,
+      "place": "신행정수도(이집트)",
+      "isos": [
+       "EGY",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "북한, AI 적용한 신형 초고속 정밀유도어뢰 수중 시험 발표",
+     "fact": "조선중앙통신은 17일 표적 탐지와 유도 기능에 AI 기술을 적용한 신형 초고속 정밀유도어뢰의 수중 시험사격을 15일 진행해 성공했다고 보도했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261017/n-korea-conducts-underwater-test-of-new-precision-guided-torpedo-using-ai-kcna",
+      "https://www.malaymail.com/news/world/2026/10/17/north-korea-advances-ai-weapons-programme-with-new-precision-guided-torpedo/239390"
+     ],
+     "loc": {
+      "isos": [
+       "PRK"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "브래드 쿠퍼 미 중부사령관은 16일 호르무즈 해협은 이란이 아니라 미국과 역내 파트너가 통제한다고 말했습니다.",
+     "src": [
+      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
+     ]
+    },
+    {
+     "t": "페제시키안 이란 대통령은 16일 아르메니아 예레반에서 이란은 핵무기를 추구하지 않으며 대화할 준비가 돼 있다고 말했습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
+     ]
+    },
+    {
+     "t": "소노왈 인도 해운장관은 인도 선원 15명이 탄 유조선 'ST 3'가 16일 호르무즈 해협에서 발사체에 맞았으나 선원은 모두 무사하다고 밝혔습니다.",
+     "src": [
+      "https://gulfnews.com/world/asia/india/indian-crew-safe-after-tanker-incidents-in-strait-of-hormuz-and-romania-minister-1.500713630"
+     ]
+    },
+    {
+     "t": "코스타 유럽이사회 상임의장은 16일 정상회의 뒤 우크라이나의 올해 재정 수요를 메울 수단을 찾았다며 집행위원회에 2027년 추가 재정 수요에 대한 제안을 요청했다고 밝혔습니다.",
+     "src": [
+      "https://www.consilium.europa.eu/en/press/press-releases/2026/10/16/remarks-by-president-antonio-costa-at-the-press-conference-following-the-european-council-meeting-of-15-16-october-2026/"
+     ]
+    },
+    {
+     "t": "그레고리 미크스 미 하원 외교위원회 민주당 간사는 16일 트럼프 대통령이 제안한 러시아산 경유 구매 거래를 막는 초당적 법안을 발의했습니다.",
+     "src": [
+      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-16",
    "items": [
     {
