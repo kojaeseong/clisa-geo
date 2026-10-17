@@ -942,14 +942,15 @@ function usfFill(){  /* 미국의 군 쪽이 글 칸에 있으면 배치·태세
 const jo = (w, a, b) => { const t = String(w), c = t.slice(-1), h = c.charCodeAt(0) - 0xAC00; return t + ((h >= 0 && h <= 11171) ? (h % 28 ? a : b) : ("013678".indexOf(c) >= 0 ? a : b)); };
 const roOf = w => { const h = String(w).slice(-1).charCodeAt(0) - 0xAC00; return (h >= 0 && h <= 11171 && h % 28 && h % 28 !== 8) ? "으로" : "로"; };
 const oB = (k, t) => '<b class="o-' + k + '">' + t + "</b>";
-function oneInd(name, n){
+function oneInd(name, n, I){
   const G = n.better, K = n.big, B = n.big + n.worse, S = n.same, sj = oB("s", esc(name) + " 이익은"), par = K ? "(" + (K === B ? "모두" : "그 가운데 " + K + "번은") + " 30% 넘게 줄거나 적자)" : "";
   let t;
   if (!G && !B) t = sj + " 2030년까지 100번의 미래 모두 현 추세와 비슷합니다.";
   else { t = sj + " 2030년까지 100번의 미래 중 " + (G >= B ? oB("g", G + "번 현 추세보다 10% 넘게 늘고") + ", " + (B ? oB("w", B + "번은 10% 넘게 줄어듭니다") + par : "10% 넘게 줄어드는 경우는 없습니다")
-      : oB("w", B + "번 현 추세보다 10% 넘게 줄고") + par + ", " + (G ? oB("g", G + "번은 10% 넘게 늘어납니다") : "10% 넘게 늘어나는 경우는 없습니다")) + ".";
-    if (S) t += " " + S + "번은 현 추세와 비슷합니다."; }
-  return '<p class="one"><small>5개 사안 종합</small>' + t + "</p>";
+      : G ? oB("w", B + "번 현 추세보다 10% 넘게 줄고") + par + ", " + oB("g", G + "번은 10% 넘게 늘어납니다") : oB("w", B + "번 현 추세보다 10% 넘게 줄어듭니다") + par) + ".";
+    if (S) t += " " + S + "번은 현 추세와 비슷합니다.";
+    }
+  return '<p class="one"><small>5개 사안 종합</small>' + t + (I ? indKeys(I) : "") + "</p>";
 }
 function oneLife(name, n){
   const G = n.better, K = n.big, B = n.big + n.worse, S = n.same, sj = oB("s", esc(jo(name, "은", "는"))), par = K ? "(" + (K === B ? "모두" : "그 가운데 " + K + "번은") + " 크게 나빠진 삶)" : "";
@@ -957,19 +958,39 @@ function oneLife(name, n){
   if (!G && !B) t = sj + " 2030년까지 100번의 미래 모두 현재와 비슷한 삶입니다.";
   else { t = sj + " 2030년까지 100번의 미래 중 " + (B >= G ? oB("w", B + "번이 현재보다 나쁜 삶") + par + "이고, " + (G ? oB("g", G + "번이 나은 삶") + "입니다" : "나은 삶은 없습니다")
       : oB("g", G + "번이 현재보다 나은 삶") + "이고, " + (B ? oB("w", B + "번이 나쁜 삶") + par + "입니다" : "나쁜 삶은 없습니다")) + ".";
-    if (S) t += " " + S + "번은 현재와 비슷한 삶입니다."; }
+    if (S) t += " " + S + "번은 현재와 비슷한 삶입니다.";
+    }
   return '<p class="one"><small>5개 사안 종합</small>' + t + "</p>";
 }
 function oneMain(pr){  /* 당사국 국민: 사안마다 국민이 달라 합칠 수 없으므로, 현재보다 나쁜 삶이 가장 많은 국민과 가장 적은 국민을 나란히 */
-  const a = pr.map(([c, G]) => { const n = hsCount(c.hs7, G, "p"); return [G.name, n.big + n.worse]; });
+  const a = pr.map(([c, G]) => { const n = hsCount(c.hs7, G, "p"); return [G.name, n.big + n.worse, n.better]; });
   const hi = Math.max(...a.map(x => x[1])), lo = Math.min(...a.map(x => x[1])), nm = v => a.filter(x => x[1] === v).map(x => x[0]);
   const list = v => { const L = nm(v); return L.length > 1 ? L.slice(0, -1).map((x, i) => i === L.length - 2 ? jo(x, "과", "와") : x + ",").join(" ") + " " + L[L.length - 1] : L[0]; };
   const t = hi === lo ? "당사국 국민은 모두 2030년까지 100번의 미래 중 " + oB("w", hi + "번") + "이 현재보다 나쁜 삶입니다."
-    : "2030년까지 100번의 미래 가운데 현재보다 나쁜 삶이 가장 많은 국민은 " + oB("s", esc(list(hi))) + roOf(list(hi)) + " " + oB("w", hi + "번") + "이고, 가장 적은 국민은 " + oB("s", esc(list(lo))) + roOf(list(lo)) + " " + oB("w", lo + "번") + "입니다.";
+    : "2030년까지 100번의 미래 가운데 현재보다 나쁜 삶이 가장 많은 국민은 " + oB("s", esc(list(hi))) + roOf(list(hi)) + " " + oB("w", hi + "번") + "이고, " + (lo ? "가장 적은 국민은 " + oB("s", esc(list(lo))) + roOf(list(lo)) + " " + oB("w", lo + "번") + "입니다." : oB("s", esc(jo(list(lo), "은", "는"))) + " 나빠지는 경우가 없습니다.");
   return '<p class="one">' + t + "</p>";
 }
 const INS_SUBJ = ["한국에 전쟁 못지않게 현실적인 위험은", "북한이 협상의 대가로 가장 원하는 것은", "2040년 전후 한국의 병력 부족은", "현재 전선에서의 러-우 정전은", "대만해협의 향방은", "이란은", "미군 상설 주둔이 겨냥하는 것은"];
 function insHead(h){ const s = INS_SUBJ.find(p => String(h).indexOf(p) === 0); return s ? oB("s", esc(s)) + esc(String(h).slice(s.length)) : esc(h); }
+function indKeys(I){  /* v4.12(2026-10-17 결재): 산업마다 이익을 가장 크게 줄이는 전개와 늘리는 전개(가능성 × 크기 기준) */
+  const all = []; IND.cases.forEach(c => c.scen.forEach(s => { const z = (IND.cells[I.k][c.id] || {})[s.id]; if (z && Math.abs(z.x) >= 0.03) all.push({c, s, x: z.x, e: s.p * Math.abs(z.x)}); }));
+  const pick = (f, big) => all.filter(o => f(o) && (!big || Math.abs(o.x) > 0.10)).sort((a, b) => b.e - a.e)[0];  /* 점 그림에 색으로 잡히는 전개(±10% 넘게)를 먼저, 없으면 3% 넘는 전개 */
+  const dn = pick(o => o.x < 0, 1) || pick(o => o.x < 0), up = pick(o => o.x > 0, 1) || pick(o => o.x > 0);
+  const lab = o => esc(IND_SHORT[o.c.id] || o.c.title) + " ‘" + esc(o.s.name) + "’(100번 중 " + o.s.p + "번)";
+  return '<span class="ok"><i class="ok-w">하락 요인</i>' + (dn ? lab(dn) + ": 이익이 현 추세보다 약 " + Math.round(-dn.x * 100) + "% 줄어듭니다." : "어느 전개에서도 이익이 3% 넘게 줄지 않습니다.") + "</span>" +
+    '<span class="ok"><i class="ok-g">상승 요인</i>' + (up ? lab(up) + ": 이익이 현 추세보다 약 " + Math.round(up.x * 100) + "% 늘어납니다." : "어느 전개에서도 이익이 3% 넘게 늘지 않습니다.") + "</span>";
+}
+const IND_GRP = {a: ["분쟁 결과에 따라 이익이 크게 변하는 산업", "전개에 따라 이익이 현 추세보다 10% 넘게 늘어나는 경우가 있는 산업입니다."],
+  b: ["분쟁이 주로 위험으로 작용하는 산업", "분쟁이 해결되어도 이익이 현 추세보다 10% 넘게 늘어나는 경우는 없고, 나쁜 전개에서는 크게 줄어드는 산업입니다."],
+  c: ["이 분쟁들의 영향이 작은 산업", "100번의 미래 가운데 이익이 현 추세보다 10% 넘게 달라지는 경우가 5번 미만인 산업입니다."], open: "칸 펼쳐 보기",
+  note: "하락 요인과 상승 요인은 이익을 현 추세보다 10% 넘게 바꾸는 전개 가운데 가능성과 변화의 크기를 곱한 값이 가장 큰 전개입니다. 그런 전개가 없으면 3% 넘게 바꾸는 전개 가운데 고릅니다."};
+function indGrp(I){ if (IND.cases.some(c => c.scen.some(s => ((IND.cells[I.k][c.id] || {})[s.id] || {}).c === "better"))) return "a";
+  const n = cmbCount("ind|" + I.k, BR.issues[0].date); return n.big + n.worse + n.better < 5 ? "c" : "b"; }
+function indGrpWrap(L, f){  /* 산업을 3개 묶음으로: 기회와 위험이 함께, 위험이 주로, 영향이 작음(접어 둠) */
+  return ["a", "b", "c"].map(g => { const M = L.filter(x => indGrp(x[0]) === g); if (!M.length) return "";
+    const h = '<h3 class="ind-gh">' + IND_GRP[g][0] + '</h3><p class="ind-gd">' + (g === "c" ? esc(M.map(x => x[0].name).join(", ")) + " · " : "") + IND_GRP[g][1] + "</p>";
+    return '<section class="ind-g ind-g-' + g + '">' + h + (g === "c" ? '<details class="ind-small"><summary>' + IND_GRP.open + "</summary>" + M.map(f).join("") + "</details>" : M.map(f).join("")) + "</section>"; }).join("");
+}
 /*}ONE*/
 function insightsHtml(){
   const cs = D.strategies || [];
@@ -1825,7 +1846,10 @@ function lifeMain(c){ const H = c.hs7; return H.groups.find(g => !g.fold) || H.g
 function lifeNums(n, sep){ return ["big", "worse", "better"].filter(k => n[k]).map(k => '<span style="white-space:nowrap"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + " " + n[k] + "번</span>").join(sep || " · ") || "100번 모두 현재와 거의 같음"; }
 /* 브리핑 첫머리 '사람들의 삶'(2026-10-10 통합안, 큰 카드). 누구의 삶으로 볼지 고른다: 당사국 국민·한국인·미국인·유럽인·러시아인.
    골라진 집단이 어느 미래에서도 '거의 같음'이면 점 그림 없이 한 줄로 줄인다(영향받는 사람만 크게) */
-const LIFE_SEL = [["main", "당사국 국민"], ["KOR", "한국인"], ["USA", "미국인"], ["EU", "유럽인"], ["RUS", "러시아인"]];
+const LIFE_SEL_ALL = [["main", "당사국 국민"], ["KOR", "한국인"], ["USA", "미국인"], ["EU", "유럽인"], ["RUS", "러시아인"]];
+const LIFE_SEL = LIFE_SEL_ALL.slice(0, 1);  /* v4.11(2026-10-17 결재): 한국인·미국인·유럽인·러시아인 보기는 기준 시점(현재 값이 2025년 통계라 이미 입은 분쟁 피해가 빠짐)을 2026년으로 맞춘 뒤 다시 올린다 */
+const LIFE_MAIN2 = {ukraine: "RUS"};  /* v4.11: 교전 양쪽을 모두 계산한 사안은 상대국 국민도 당사국 보기에 */
+const lpid = (c, G) => c.id + (LIFE_MAIN[c.id] && G.k !== LIFE_MAIN[c.id] ? "~" + G.k : "");
 const LIFE_MAIN = {korea: "KOR", taiwan: "TWN", ukraine: "UKR", iran: "IRN", poland: "POL"};
 const LIFE_EU = ["NEU", "NORD", "BALT", "DEU", "SEU", "WCEU"];
 let LIFE = (() => { const v = store.get("ep.life"); return LIFE_SEL.some(x => x[0] === v) ? v : "main"; })();
@@ -1851,7 +1875,7 @@ function lifeCard(c, x){
 function lifeBigHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   return '<section class="life" id="s-life"><h3 class="lm-h" style="margin:14px 0 2px">사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note" style="margin:0">5개 사안마다 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 개선되거나 악화되는 횟수입니다(판단값). 누구의 삶을 볼지 고를 수 있습니다.</p>' +
-    '<div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
+    '<div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + (LIFE_SEL.length > 1 ? LIFE_SEL : []).map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<div class="lh-row" id="lifegrid">' + cs.map(c => lifeCard(c, x)).join("") + "</div></section>";
 }
 /* v3.92 시안(2026-10-10): 첫 화면 = '사람들의 삶' 그래프판 + 그래프를 움직이는 한 줄 정보.
@@ -1981,7 +2005,7 @@ let LBX = null, LBXM = "d";
 const LIFE_EU_ORD = ["WCEU", "SEU", "NEU", "DEU", "NORD", "BALT"];
 function lbxGroups(){  /* [[행 키, 이름, 크기, 경보, [[사안, 집단]…]]…] */
   const cs = (D.strategies || []).filter(c => c.hs7);
-  if (LIFE === "main") return [["main", "당사국 국민", "", [], cs.map(c => [c, c.hs7.groups.find(g => g.k === LIFE_MAIN[c.id]) || lifeMain(c)])]];
+  if (LIFE === "main") return [["main", "당사국 국민", "", [], cs.flatMap(c => [[c, c.hs7.groups.find(g => g.k === LIFE_MAIN[c.id]) || lifeMain(c)]].concat(LIFE_MAIN2[c.id] && c.hs7.groups.some(g => g.k === LIFE_MAIN2[c.id]) ? [[c, c.hs7.groups.find(g => g.k === LIFE_MAIN2[c.id])]] : []))]];
   const ks = LIFE === "EU" ? LIFE_EU_ORD : [LIFE];
   return ks.map(k => { const pr = cs.map(c => [c, c.hs7.groups.find(g => g.k === k)]).filter(x => x[1]); if (!pr.length) return null; const G = pr[0][1];
     return [k, G.name, G.size, G.al_now || [], pr]; }).filter(Boolean);
@@ -1997,14 +2021,14 @@ function lifeRows(){
 function lbxRow([rk, name, size, al, pr]){
   const ord = pr.map(([c, G], i) => [c, G, hsCount(c.hs7, G, "p"), i]);
   ord.sort((x, y) => ((y[2].big + y[2].worse + y[2].better) - (x[2].big + x[2].worse + x[2].better)) || ((y[2].big + y[2].worse) - (x[2].big + x[2].worse)) || (x[3] - y[3]));
-  const cells = ord.map(([c, G, n]) => { const id = rk + "|" + c.id, open = LBX === id;
+  const cells = ord.map(([c, G, n]) => { const id = rk + "|" + lpid(c, G), open = LBX === id;
     return dotCell('data-lbx="' + esc(id) + '"', esc(LB_SHORT[c.id] || c.title) + (rk === "main" ? '<small class="ind-sub">' + esc(G.name) + "</small>" : ""), n, lbDelta(c, G), open && LBXM !== "t", open && LBXM === "t", indSpark(indSer(c, G))); }).join("");
   const full = rk !== "main" && cmbFull(rk), ak = "life|" + rk, oa = LBX === rk + "|all";
   const all = full ? dotCell('data-lbx="' + esc(rk + "|all") + '"', "5개 사안 종합", cmbCount(ak, BR.issues[0].date), cmbDelta(ak), oa && LBXM !== "t", oa && LBXM === "t", cmbLine(ak, name, HS_LAB), "ind-allc") : "";
-  const op = LBX && LBX.split("|")[0] === rk ? LBX.split("|")[1] : null, oc = op && op !== "all" ? pr.find(x => x[0].id === op) : null;
+  const op = LBX && LBX.split("|")[0] === rk ? LBX.split("|")[1] : null, oc = op && op !== "all" ? pr.find(x => lpid(x[0], x[1]) === op) : null;
   const det = oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("5개 사안 종합 · " + esc(name), cmbCount(ak, BR.issues[0].date), "life", rk, HS_LAB)) : oc ? (LBXM === "t" ? lbxTrend(oc[0], oc[1]) : lbxDetail(oc[0], oc[1])) : "";
   return '<article class="lb-card ind-card lbx-card' + (full ? "" : " lbx-noall") + (rk === "main" ? " lbx-main" : "") + '" id="lbx-' + esc(rk) + '"><header class="lb-hd"><b class="lb-gname">' + esc(name) + "</b>" + (size ? '<span class="lb-size">' + esc(size) + "</span>" : "") +
-    (al.length ? '<span class="lb-alnow">현재 경보 · ' + esc(al.join("·")) + "</span>" : "") + (rk === "main" ? '<span class="ind-mem">사안마다 직접 당사국의 국민</span>' + oneMain(pr) : full ? oneLife(name, cmbCount(ak, BR.issues[0].date)) : "") + "</header>" +
+    (al.length ? '<span class="lb-alnow">현재 경보 · ' + esc(al.join("·")) + "</span>" : "") + (rk === "main" ? '<span class="ind-mem">사안마다 직접 당사국의 국민(러-우 전쟁은 교전 양쪽)</span>' + oneMain(pr) : full ? oneLife(name, cmbCount(ak, BR.issues[0].date)) : "") + "</header>" +
     (full ? '<div class="ind-all">' + all + "</div>" : "") + '<div class="ind-cw">' + (full ? '<p class="ind-capr">사안별 100번의 미래</p>' : "") + '<div class="ind-cells">' + cells + "</div></div>" + det + "</article>";
 }
 function lbxDetail(c, G){
@@ -2248,7 +2272,7 @@ function indRow(I){
   const op = INDOPEN && INDOPEN.split("|")[0] === I.k ? IND.cases.find(c => c.id === INDOPEN.split("|")[1]) : null, oa = INDOPEN === I.k + "|all", ak = "ind|" + I.k;
   const opd = op ? (INDMODE === "t" ? indTrendPanel(I, op) : indDetail(I, op)) : oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), cmbCount(ak, BR.issues[0].date), "ind", I.k, IND_LAB)) : "";
   const all = dotCell('data-ind="' + esc(I.k + "|all") + '"', "5개 사안 종합", cmbCount(ak, BR.issues[0].date), cmbDelta(ak), oa && INDMODE !== "t", oa && INDMODE === "t", cmbLine(ak, I.name, IND_LAB), "ind-allc");
-  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + '</b><span class="lb-size">정상 영업이익률 ' + (I.m * 100).toFixed(1) + "%" + (I.floor ? "(하한)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span>" + oneInd(I.name, cmbCount(ak, BR.issues[0].date)) + "</header>" +
+  return '<article class="lb-card ind-card" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + '</b><span class="lb-size">정상 영업이익률 ' + (I.m * 100).toFixed(1) + "%" + (I.floor ? "(하한)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span>" + oneInd(I.name, cmbCount(ak, BR.issues[0].date), I) + "</header>" +
     '<div class="ind-all">' + all + '</div><div class="ind-cw"><p class="ind-capr">사안별 100번의 미래</p><div class="ind-cells">' + cells + "</div></div>" + opd + "</article>";
 }
 function indAllTrend(I){
@@ -2296,16 +2320,16 @@ function mSort(a){ return a.sort((x, y) => ((y[1].big + y[1].worse + y[1].better
 function indRowsM(L){
   if (MIOPEN === undefined) MIOPEN = null;  /* 처음에는 모두 닫고 위의 산업 칩을 목차로 쓴다 */
   const today = BR.issues[0].date;
-  return mChips(L.map(([I]) => [I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-mj", MIOPEN) + L.map(([I]) => { const ak = "ind|" + I.k, n = cmbCount(ak, today), ex = MIOPEN === I.k;
+  return mChips(L.map(([I]) => [I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-mj", MIOPEN) + indGrpWrap(L, ([I]) => { const ak = "ind|" + I.k, n = cmbCount(ak, today), ex = MIOPEN === I.k;
     let body = "";
     if (ex) { const ns = mSort(IND.cases.map((c, i) => [c, indCount(I.k, c), i])), oa = INDOPEN === I.k + "|all";
-      body = '<div class="mi-b">' + oneInd(I.name, n) + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
+      body = '<div class="mi-b">' + oneInd(I.name, n, I) + mAll('data-ind="' + esc(I.k + "|all") + '"', oa, INDMODE, n, cmbDelta(ak), mLine(ak, I.name, IND_LAB), oa ? (INDMODE === "t" ? indAllTrend(I) : cmbDetail("5개 사안 종합 · " + esc(I.name), n, "ind", I.k, IND_LAB)) : "") +
         '<p class="ind-capr">사안별 100번의 미래</p>' + ns.map(([c, nc]) => { const id = I.k + "|" + c.id, op = INDOPEN === id, cs = indCase(c), G = indG(I, c);
           return mCaseRow('data-ind="' + esc(id) + '"', op, INDMODE, esc(IND_SHORT[c.id] || c.title), "", nc, cs ? indDelta(cs, G) : null, cs ? indSpark(indSer(cs, G)) : "", op ? (INDMODE === "t" ? indTrendPanel(I, c) : indDetail(I, c)) : ""); }).join("") +
         '<p class="mi-mem">' + esc(I.mem.join(", ")) + " · 정상 영업이익률 " + (I.m * 100).toFixed(1) + "%</p></div>"; }
     return '<article class="mi' + (ex ? " ex" : "") + '" id="ind-' + esc(I.k) + '"><button type="button" class="mi-h" data-mi="' + esc(I.k) + '" aria-expanded="' + ex + '">' + hsDots(n) +
       '<span class="mi-t"><span class="mi-n">' + esc(I.name) + '</span><span class="mi-c">' + mNums(n) + '</span></span><span class="mi-x" aria-hidden="true"></span></button>' + body + "</article>";
-  }).join("");
+  });
 }
 function lifeRowsM(rows){
   if (MLOPEN && !rows.some(r => r[0][0] === MLOPEN)) MLOPEN = null;
@@ -2314,10 +2338,10 @@ function lifeRowsM(rows){
     let body = "";
     if (ex) { const ord = mSort(pr.map(([c, G], i) => [c, hsCount(c.hs7, G, "p"), i, G])), oa = LBX === rk + "|all";
       body = '<div class="mi-b">' + (rk === "main" ? oneMain(pr) : full ? oneLife(name, n) : "") + (full ? mAll('data-lbx="' + esc(rk + "|all") + '"', oa, LBXM, n, cmbDelta(ak), mLine(ak, name, HS_LAB), oa ? (LBXM === "t" ? lbxAllTrend(rk, name) : cmbDetail("5개 사안 종합 · " + esc(name), n, "life", rk, HS_LAB)) : "") + '<p class="ind-capr">사안별 100번의 미래</p>' : "") +
-        ord.map(([c, nc, , G]) => { const id = rk + "|" + c.id, op = LBX === id;
+        ord.map(([c, nc, , G]) => { const id = rk + "|" + lpid(c, G), op = LBX === id;
           return mCaseRow('data-lbx="' + esc(id) + '"', op, LBXM, esc(LB_SHORT[c.id] || c.title), rk === "main" ? esc(G.name) : "", nc, lbDelta(c, G), indSpark(indSer(c, G)), op ? (LBXM === "t" ? lbxTrend(c, G) : lbxDetail(c, G)) : ""); }).join("") +
         (size || al.length ? '<p class="mi-mem">' + esc(size) + (al.length ? (size ? " · " : "") + "현재 경보 " + esc(al.join("·")) : "") + "</p>" : "") + "</div>"; }
-    const head = (full ? hsDots(n) : "") + '<span class="mi-t"><span class="mi-n">' + esc(name) + '</span><span class="mi-c">' + (full ? mNums(n) : '<span class="note">' + (rk === "main" ? "사안마다 직접 당사국의 국민" : "") + "</span>") + "</span></span>";
+    const head = (full ? hsDots(n) : "") + '<span class="mi-t"><span class="mi-n">' + esc(name) + '</span><span class="mi-c">' + (full ? mNums(n) : '<span class="note">' + (rk === "main" ? "사안마다 직접 당사국의 국민(러-우 전쟁은 교전 양쪽)" : "") + "</span>") + "</span></span>";
     return '<article class="mi' + (ex ? " ex" : "") + (full ? "" : " mi-nd") + '" id="lbx-' + esc(rk) + '">' + (one ? '<div class="mi-h mi-h1">' + head + "</div>" : '<button type="button" class="mi-h" data-ml="' + esc(rk) + '" aria-expanded="' + ex + '">' + head + '<span class="mi-x" aria-hidden="true"></span></button>') + body + "</article>";
   }).join("");
 }
@@ -2328,9 +2352,10 @@ function detReveal(el){  /* 누른 곳 아래에 열린 상세가 화면 밖이�
 function indRows(){
   const L = IND.inds.filter(I => I.c === INDC).map((I, i) => { const t = IND.cases.reduce((a, c) => { const n = indCount(I.k, c); return [a[0] + n.big + n.worse + n.better, a[1] + n.big + n.worse]; }, [0, 0]); return [I, t, i]; });
   L.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));  /* 색 점이 많은 업종부터 */
-  if (isMob()) return indRowsM(L);
+  const G = ["a", "b", "c"].flatMap(g => L.filter(x => indGrp(x[0]) === g));  /* v4.12 묶음 순서대로 */
+  if (isMob()) return indRowsM(G);
   const today = BR.issues[0].date;  /* 데스크톱에도 산업 칩(누르면 그 산업으로 이동) */
-  return mChips(L.map(([I]) => ["ind-" + I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-dj", null) + L.map(([I]) => indRow(I)).join("");
+  return mChips(G.map(([I]) => ["ind-" + I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-dj", null) + indGrpWrap(G, ([I]) => indRow(I));
 }
 function renderIndustry(){
   const el = $("#pane-industry"); if (!el) return;
@@ -2341,7 +2366,7 @@ function renderIndustry(){
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="어느 나라 산업을 볼까">' + [["kr", "한국 산업"], ["us", "미국 산업"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>주요 점 개수 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><b class="lg-pv">22</b>변경 직전 점 개수</span>' + "</p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
-    '<div class="ind-note"><p><b>어떻게 판단했나요.</b> 산업마다 각 분쟁의 전개별로 2030년 산업 영업이익이 현 추세와 비교해 얼마나 달라지는지를 판단했습니다(매출 변화와 영업이익률 변화). 변화의 크기는 그 산업의 정상 영업이익(최근 10년 영업이익률 중앙값, 최소 3%)에 대한 비율로 계산합니다. +10% 넘게 늘면 개선됨, 10% 넘게 줄면 악화됨, 30% 넘게 줄거나 산업 전체가 적자가 되면 크게 악화됨입니다. 봉쇄·전쟁 같은 충격은 사건이 난 해부터 3년 평균, 정전·합의 같은 상태 변화는 2030년 수준으로 봅니다. 정상 영업이익률이 낮은 산업(방산 5.0%, 조선 3.0%)은 이익률이 조금만 변해도 변화율이 크게 나타나는 경향이 있습니다.</p>' +
+    '<div class="ind-note"><p>' + IND_GRP.note + '</p><p><b>어떻게 판단했나요.</b> 산업마다 각 분쟁의 전개별로 2030년 산업 영업이익이 현 추세와 비교해 얼마나 달라지는지를 판단했습니다(매출 변화와 영업이익률 변화). 변화의 크기는 그 산업의 정상 영업이익(최근 10년 영업이익률 중앙값, 최소 3%)에 대한 비율로 계산합니다. +10% 넘게 늘면 개선됨, 10% 넘게 줄면 악화됨, 30% 넘게 줄거나 산업 전체가 적자가 되면 크게 악화됨입니다. 봉쇄·전쟁 같은 충격은 사건이 난 해부터 3년 평균, 정전·합의 같은 상태 변화는 2030년 수준으로 봅니다. 정상 영업이익률이 낮은 산업(방산 5.0%, 조선 3.0%)은 이익률이 조금만 변해도 변화율이 크게 나타나는 경향이 있습니다.</p>' +
     '<p><b>출처.</b> 실적은 금융감독원 전자공시(DART)와 미국 증권거래위원회(SEC) 원자료입니다. 영업이익을 공시하지 않는 미국 기업(금융업 전부, 통합 석유회사, 일부 농업·항공우주 기업)은 세전이익을 씁니다. 한국 금융업의 정상 영업이익률은 최근 3년 값입니다.</p>' +
     '<p class="note">이 탭은 분쟁이 산업 전체의 이익에 미칠 영향을 판단한 것이며, 개별 기업에 대한 투자를 권하지 않습니다.</p></div></section>'; fitTrends(el);
 }
@@ -2349,8 +2374,8 @@ function lifeBoardHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
   const csn = id => LB_SHORT[id] || "기타";
   return '<section class="lb" id="s-life"><p class="eyebrow">국민의 삶 · ' + kd(x.date) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래</h2>' +
-    '<p class="lb-lead"><b>2030년까지 100번을 살게 된다면, 현재보다 나은 삶은 몇 번, 나쁜 삶은 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 보이며, 새로운 사건에 따라 그 가능성은 달라집니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스의 판단값으로 계산한 결과입니다.</p>' +
-    '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + LIFE_SEL.map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
+    '<p class="lb-lead"><b>5개 분쟁은 2030년까지 당사국 국민의 삶을 어떻게 바꿀까요? 100번의 미래 가운데 분쟁 때문에 현재보다 나아지는 삶과 나빠지는 삶은 각각 몇 번일까요?</b> 사안마다 미래의 가능성을 점 100개로 보이며, 새로운 사건에 따라 그 가능성은 달라집니다. 분쟁이 주는 영향만 계산하고 경제 성장처럼 분쟁과 관계없는 변화는 넣지 않았습니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스의 판단값으로 계산한 결과입니다.</p>' +
+    '<div class="lb-ctl"><div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + (LIFE_SEL.length > 1 ? LIFE_SEL : []).map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>주요 점 개수 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><b class="lg-pv">22</b>변경 직전 점 개수</span></p></div>' +
     '<div class="lb-board" id="lifeboard">' + lifeRows() + "</div>" +
     '<p class="lb-note">크게 악화됨: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우. 일자별 변화의 10월 9일 값은 그날의 확률에 현재 분류를 적용한 값입니다(그래프는 10월 10일 공개).</p></section>' +

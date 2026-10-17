@@ -1211,6 +1211,17 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .pane .mi-mem{margin:12px 0 0;font-size:11.5px;line-height:1.5;color:var(--muted)}
 .mi-b .ind-capr{margin:2px 0 4px!important}
 /* v4.08 시안(2026-10-16): 탭마다 '그래서 무엇인가'를 한 문장으로. 색은 주어(파랑)와 점 개수 구절(점 그림과 같은 색 계열, 글자용으로 짙게)만 */
+.lsel:empty{display:none}
+#pane-industry h3.ind-gh{font:800 19px/1.4 var(--sans);margin:30px 0 2px;color:var(--ink);letter-spacing:-.01em;text-transform:none} #pane-industry .ind-g:first-child h3.ind-gh{margin-top:8px} #pane-industry p.ind-gd{margin:0 0 12px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.ind-g>.lb-card+.lb-card,.ind-g>details>.lb-card+.lb-card{margin-top:14px} details.ind-small>summary{cursor:pointer;font:600 13.5px var(--sans);color:var(--accent);margin:0 0 12px}
+.one .ok{display:block;margin-top:7px;font:500 15px/1.6 var(--sans);letter-spacing:0} .one .ok i{font:700 11.5px var(--sans);font-style:normal;padding:2px 9px;border-radius:999px;margin-right:8px;white-space:nowrap}
+.one .ok-w{background:#FDF0E1;color:#9A4A06} .one .ok-g{background:#E3F3F0;color:#0F766E}
+@media (max-width:699px){ .one .ok{font-size:14px} #pane-industry h3.ind-gh{font-size:17px} } .lbx-main .ind-cells .ind-cn .ind-sub{text-align:center}
+.lbx-main .ind-cells{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (min-width:1100px){ .lbx-main .ind-cells{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .app.noglobe #pane-brief .lbx-main .ind-cells .ind-cb{grid-template-columns:minmax(0,1fr);grid-template-areas:"n" "d" "c";justify-items:center;row-gap:8px}
+  .app.noglobe #pane-brief .lbx-main .ind-cells .ind-cb .ind-cn{justify-content:center;text-align:center}
+  .app.noglobe #pane-brief .lbx-main .ind-cells .ind-cb .ind-ct{justify-items:center} }
 .one{flex-basis:100%;margin:8px 0 4px;padding:12px 16px;background:var(--panel-2);border-radius:10px;font:600 18px/1.55 var(--sans);color:var(--ink);letter-spacing:-.01em}
 .one small{display:block;font:600 11.5px/1.4 var(--sans);color:var(--muted);letter-spacing:0;margin-bottom:3px}
 .one .o-s{color:var(--accent);font-weight:700} .one .o-g{color:#0F766E;font-weight:700} .one .o-w{color:#B45309;font-weight:700} .one .o-b{color:#B91C1C;font-weight:700}
