@@ -1004,8 +1004,8 @@ function indKeys(I){  /* v4.12 (English): the scenario that cuts / lifts the ind
   return '<span class="ok"><i class="ok-w">Downside driver</i>' + (dn ? lab(dn) + ": profits about " + Math.round(-dn.x * 100) + " percent below trend." : "No scenario cuts profits by more than 3 percent.") + "</span>" +
     '<span class="ok"><i class="ok-g">Upside driver</i>' + (up ? lab(up) + ": profits about " + Math.round(up.x * 100) + " percent above trend." : "No scenario lifts profits by more than 3 percent.") + "</span>";
 }
-const IND_GRP = {a: ["Industries whose profits swing with how the conflicts turn out", "Industries whose profits rise more than 10 percent above trend in at least one scenario."],
-  b: ["Industries for which the conflicts are mainly a risk", "Even if the conflicts are resolved, profits never rise more than 10 percent above trend, and the bad scenarios cut them sharply."],
+const IND_GRP = {a: ["Industries whose profits change sharply depending on how the conflicts turn out", "Industries whose profits rise more than 10 percent above trend in at least one scenario."],
+  b: ["Industries for which the conflicts are mainly a risk", "Some scenarios cut profits sharply, but none lift them sharply. The industry's own growth is already in the baseline; the conflicts act only as risks that could knock it off that path."],
   c: ["Industries little affected by these conflicts", "In fewer than 5 of 100 futures do profits move more than 10 percent from trend."], open: "Show the charts",
   note: "The downside and upside drivers are, among scenarios that move profits more than 10 percent from trend, the ones with the largest likelihood times size of change. If there are none, they are chosen from scenarios that move profits more than 3 percent."};
 function indGrp(I){ if (IND.cases.some(c => c.scen.some(s => ((IND.cells[I.k][c.id] || {})[s.id] || {}).c === "better"))) return "a";
@@ -1015,6 +1015,11 @@ function indGrpWrap(L, f){
     const h = '<h3 class="ind-gh">' + IND_GRP[g][0] + '</h3><p class="ind-gd">' + (g === "c" ? esc(enList(M.map(x => x[0].name))) + ". " : "") + IND_GRP[g][1] + "</p>";
     return '<section class="ind-g ind-g-' + g + '">' + h + (g === "c" ? '<details class="ind-small"><summary>' + IND_GRP.open + "</summary>" + M.map(f).join("") + "</details>" : M.map(f).join("")) + "</section>"; }).join("");
 }
+const IND_TXT = {  /* v4.13 (English): Industry Outlook reframed as how much the conflicts shake each industry's profits */
+  h2: "How much will five conflicts shake industry profits?",
+  lead: "<b>Where, and by how much, five conflicts could move industry profits through 2030.</b> The baseline is the profit path each industry follows if every conflict stays as it is today; growth unrelated to the conflicts is already in that baseline. Each dot is one way a conflict could unfold, and larger dots are more likely. Dots clustered near zero mean the conflicts barely change the industry's path. Select a row to see the reasoning for each scenario. Dot positions and sizes are Clisa Geopolitics' judgment estimates.",
+  size: "Dot size = likelihood of the scenario", band: "Gray band = in line with trend (±10%)",
+  of: p => p + " of 100 futures", chg: x => "profits " + indPct(x)};
 
 function insightsHtml(){
   const cs = D.strategies || [];
@@ -2219,9 +2224,9 @@ function indJump(cid, d){  /* v3.99(2026-10-12 결재): 정세 브리핑의 '산
   let best = null;
   if (ch) IND.inds.forEach((I, i) => { const G = indG(I, c), a = hsCountP(cs.hs7, G, ch.prev), b = hsCountP(cs.hs7, G, ch.next), sc = ["big", "worse", "better"].reduce((t, k) => t + Math.abs(b[k] - a[k]), 0);
     const key = [sc, I.c === INDC ? 1 : 0, -i]; if (sc && (!best || key[0] > best.key[0] || (key[0] === best.key[0] && (key[1] > best.key[1] || (key[1] === best.key[1] && key[2] > best.key[2]))))) best = {I, key}; });
-  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "t"; MIOPEN = best.I.k; }
+  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "d"; MIOPEN = best.I.k; }
   renderIndustry();
-  if (best && isMob()) mGo("ind-" + best.I.k); else requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+  requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
 }
 function indBoard(){ const b = document.getElementById("indboard"); if (b) { b.innerHTML = indRows(); fitTrends(b); } }
 function trendH(w, wide){  /* 데스크톱에서 선 그래프 높이를 보이는 칸의 높이에 맞춘다(그래프와 변경 내용이 한 화면에 더 많이 들어오게) */
@@ -2286,6 +2291,21 @@ function cmbExplain(kind, k, LAB){  /* 국민의 삶 카드와 같은 형식: �
   return '<div class="lb-mix"><ul>' + mix + "</ul></div>" + (w ? det(w, "If the most likely bad case plays out") : "") + (b ? det(b, "If the most likely good case plays out") : "");
 }
 function cmbRecent(n){ const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out; }
+function indX(x){ const v = Math.max(-0.6, Math.min(0.6, x)); return (50 + v / 0.6 * 50).toFixed(2); }
+function indStrip(I){  /* v4.13: 사안마다 한 줄, 전개마다 점 하나(가로 위치 = 현 추세 대비 이익 변화, 크기 = 가능성, 색 = 분류). 줄을 누르면 판단 근거 */
+  const ax = [-0.3, -0.1, 0, 0.1, 0.3];
+  const grid = '<span class="ist-band" style="left:' + indX(-0.1) + "%;width:" + (indX(0.1) - indX(-0.1)).toFixed(2) + '%"></span>' + ax.map(a => '<span class="ist-g' + (a ? "" : " ist-0") + '" style="left:' + indX(a) + '%"></span>').join("");
+  const head = '<div class="ist-r ist-ax" aria-hidden="true"><span class="ist-c"></span><span class="ist-p">' + ax.map(a => '<span class="ist-al' + (Math.abs(a) === 0.1 ? " ist-al10" : "") + '" style="left:' + indX(a) + '%">' + (a ? (a > 0 ? "+" : "−") + Math.round(Math.abs(a * 100)) + "%" : "0") + "</span>").join("") + "</span></div>";
+  const rows = IND.cases.map(c => { const v = IND.cells[I.k][c.id] || {}, id = I.k + "|" + c.id, open = INDOPEN === id;
+    const dots = c.scen.filter(s => s.t !== "base").sort((a, b) => b.p - a.p).map(s => { const z = v[s.id] || {x: 0, c: "same"}, d = Math.round(7 + 12 * Math.sqrt(Math.min(s.p, 50) / 50));
+      return '<i class="ist-d ist-' + z.c + (Math.abs(z.x) > 0.6 ? " ist-cl" : "") + '" style="left:' + indX(z.x) + "%;width:" + d + "px;height:" + d + 'px" title="' + esc(s.name + " · " + IND_TXT.of(s.p) + " · " + IND_TXT.chg(z.x)) + '"></i>'; }).join("");
+    return '<button type="button" class="ist-r' + (open ? " on" : "") + '" data-ind="' + esc(id) + '" aria-expanded="' + open + '"><span class="ist-c">' + esc(IND_SHORT[c.id] || c.title) + '</span><span class="ist-p">' + grid + dots + "</span></button>" + (open ? indDetail(I, c) : ""); }).join("");
+  return '<div class="ist">' + head + rows + "</div>";
+}
+function indRow2(I){
+  return '<article class="lb-card ind2" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + "</b><span class=\"lb-size\">Normal operating margin " + (I.m * 100).toFixed(1) + "%" + (I.floor ? " (floor)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
+    '<p class="one one-k">' + indKeys(I) + "</p>" + indStrip(I) + "</article>";
+}
 function indRow(I){
   const ns = IND.cases.map((c, i) => [c, indCount(I.k, c), i]);
   ns.sort((x, y) => ((y[1].big + y[1].worse + y[1].better) - (x[1].big + x[1].worse + x[1].better)) || ((y[1].big + y[1].worse) - (x[1].big + x[1].worse)) || (x[2] - y[2]));  /* v3.94f: 업종마다 색 점이 많은 분쟁부터 */
@@ -2377,18 +2397,16 @@ function indRows(){
   const L = IND.inds.filter(I => I.c === INDC).map((I, i) => { const t = IND.cases.reduce((a, c) => { const n = indCount(I.k, c); return [a[0] + n.big + n.worse + n.better, a[1] + n.big + n.worse]; }, [0, 0]); return [I, t, i]; });
   L.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));  /* 색 점이 많은 업종부터 */
   const G = ["a", "b", "c"].flatMap(g => L.filter(x => indGrp(x[0]) === g));  /* v4.12 묶음 순서대로 */
-  if (isMob()) return indRowsM(G);
-  const today = BR.issues[0].date;  /* 데스크톱에도 산업 칩(누르면 그 산업으로 이동) */
-  return mChips(G.map(([I]) => ["ind-" + I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-dj", null) + indGrpWrap(G, ([I]) => indRow(I));
+  return mChips(G.map(([I]) => ["ind-" + I.k, I.name, null]), "data-dj", null) + indGrpWrap(G, ([I]) => indRow2(I));  /* v4.13: 데스크톱·휴대전화 같은 카드(점 그림 100개·선 그래프 대신 전개별 점) */
 }
 function renderIndustry(){
   const el = $("#pane-industry"); if (!el) return;
   if (!IND) { el.innerHTML = "<div class=\"sec\"><p class=\"note\">Loading Industry Outlook…</p></div>";
     fetch("/en/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = "<div class=\"sec\"><p class=\"note\">Industry Outlook could not be loaded.</p></div>"; }).catch(() => {}); return; }
-  el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Outlook · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">100 futures through 2030: the outlook for industry profits</h2>" +
-    "<p class=\"lb-lead\"><b>Suppose the years to 2030 played out a hundred times. In how many would an industry's profits clearly beat the current trend, and in how many would they clearly fall short?</b> For each of the five issues, 100 dots show the spread of possible futures. The baseline is each industry's projected profit if the issue stays as it is today. Select a chart to see the detailed reasoning behind it. The dot counts are calculated from Clisa Geopolitics' judgment estimates.</p>" +
+  el.innerHTML = "<section class=\"lb ind\" id=\"s-ind\"><p class=\"eyebrow\">Industry Outlook · as of " + enDate(IND.asof) + "</p><h2 class=\"lb-h\">" + IND_TXT.h2 + '</h2>' +
+    '<p class="lb-lead">' + IND_TXT.lead + '</p>' +
     "<div class=\"lb-ctl\"><div class=\"lsel\" role=\"group\" aria-label=\"Choose which country's industries to show\">" + [["kr", "South Korean industries"], ["us", "U.S. industries"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
-    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + "<span class=\"lb-leg-l\"><i class=\"lg-bad\"></i>Key dot counts over time</span><span class=\"lb-leg-l\"><i class=\"lg-tick\"></i>One-line update</span><span class=\"lb-leg-l\"><b class=\"lg-pv\">22</b>Count just before a change</span>" + "</p></div>" +
+    '<p class="lb-leg">' + ["big", "worse", "better", "same"].map(k => '<span><i class="ist-' + k + '"></i>' + IND_LAB[k] + "</span>").join("") + "<span>" + IND_TXT.size + "</span><span>" + IND_TXT.band + "</span></p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
     '<div class="ind-note"><p>' + IND_GRP.note + "</p><p><b>How the assessment works.</b> For each industry, every scenario in each conflict is assessed for how far 2030 operating profit would diverge from the current trend, through shifts in revenue and in operating margin. The change is measured against the industry's normal operating profit, based on the median operating margin of the past decade (with a floor of 3 percent). A gain of more than 10 percent counts as Better; a decline of more than 10 percent as Worse; and a decline of more than 30 percent, or an industry-wide loss, as Much worse. Shocks such as a blockade or a war are measured as a three-year average from the year they occur; changes of state such as a ceasefire or a settlement are measured at their 2030 level. Industries with thin normal margins (defense at 5.0 percent, shipbuilding at 3.0 percent) tend to show outsize swings from even modest changes in margin.</p>" +
     "<p><b>Sources.</b> Company results are drawn from raw filings with DART, the electronic disclosure system run by South Korea's Financial Supervisory Service, and with the U.S. Securities and Exchange Commission (SEC). For U.S. companies that do not report operating income—all financial firms, the integrated oil majors, and some agriculture and aerospace companies—pretax income is used instead. The normal operating margin for South Korean finance is based on the past three years.</p>" +

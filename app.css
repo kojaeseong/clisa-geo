@@ -1212,7 +1212,22 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .mi-b .ind-capr{margin:2px 0 4px!important}
 /* v4.08 시안(2026-10-16): 탭마다 '그래서 무엇인가'를 한 문장으로. 색은 주어(파랑)와 점 개수 구절(점 그림과 같은 색 계열, 글자용으로 짙게)만 */
 .lsel:empty{display:none}
-#pane-industry h3.ind-gh{font:800 19px/1.4 var(--sans);margin:30px 0 2px;color:var(--ink);letter-spacing:-.01em;text-transform:none} #pane-industry .ind-g:first-child h3.ind-gh{margin-top:8px} #pane-industry p.ind-gd{margin:0 0 12px;font-size:13.5px;color:var(--muted);line-height:1.6}
+.ist{display:grid;gap:1px;margin-top:2px} .ist-r{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;column-gap:12px;width:100%;border:0;background:transparent;padding:5px 6px;border-radius:8px;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.ist-r:hover,.ist-r.on{background:var(--panel-2)} .ist-r:focus-visible{outline:2px solid var(--accent);outline-offset:1px} .ist-ax{cursor:default;padding:0 6px 2px} .ist-ax:hover{background:transparent}
+.ist-c{font:600 13px/1.3 var(--sans);color:var(--ink-2)} .ist-p{position:relative;display:block;height:28px;margin:0 10px} .ist-ax .ist-p{height:16px}
+.ist-al{position:absolute;top:0;transform:translateX(-50%);font:500 11px var(--mono);color:var(--muted);white-space:nowrap}
+.ist-band{position:absolute;top:3px;bottom:3px;background:rgba(140,150,163,.12);border-radius:3px} .ist-g{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.8} .ist-0{width:1px;background:#8C96A3;opacity:1}
+.ist-d{position:absolute;top:50%;transform:translate(-50%,-50%);border-radius:50%;box-shadow:0 0 0 2px var(--panel);transition:transform .12s} .ist-r:hover .ist-d{transform:translate(-50%,-50%) scale(1.08)} .ist-r:hover .ist-d,.ist-r.on .ist-d{box-shadow:0 0 0 2px var(--panel-2)}
+.ist-big{background:#C8102E} .ist-worse{background:#F59E0B} .ist-better{background:#0EA5A4} .ist-same{background:#AEB6C0} .ist-cl{outline:1.5px dashed #6B7580;outline-offset:2px}
+.lb-leg i.ist-big,.lb-leg i.ist-worse,.lb-leg i.ist-better,.lb-leg i.ist-same{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.ind2{padding:18px 20px 14px;gap:14px} .ind2 .lb-gname{font-size:18px}
+.ind2 .one-k{margin:0;padding:12px 14px;background:transparent;border-left:3px solid var(--line);border-radius:0;font-size:15px}
+.ind2 .one-k .ok{margin-top:10px;font-size:14.5px;line-height:1.6} .ind2 .one-k .ok:first-child{margin-top:0} .ind2 .one-k .ok i{display:inline-block;margin:0 0 3px 0;margin-right:8px}
+.ind2 .ind-det{margin:6px 0 8px;padding:12px 4px 4px}
+@media (min-width:1000px){ .ind2{grid-template-columns:minmax(0,5fr) minmax(0,8fr);grid-template-areas:"h h" "k s";column-gap:30px;align-items:start}
+  .ind2>.lb-hd{grid-area:h} .ind2>.one-k{grid-area:k} .ind2>.ist{grid-area:s} .ind2 .one-k .ok i{display:table;margin:0 0 4px} }
+@media (max-width:699px){ .ist-r{grid-template-columns:minmax(0,1fr);row-gap:1px;padding:4px 0} .ist-ax .ist-c{display:none} .ist-c{font-size:11.5px;padding-left:4px} .ist-p{margin:0 8px} .ist-al{font-size:10px} .ist-al10{display:none} .ist-d{transform:translate(-50%,-50%) scale(.72)} .ind2 .lb-hd{gap:2px 8px} }
+#pane-industry h3.ind-gh{font:800 19px/1.4 var(--sans);margin:30px 0 2px;color:var(--ink);letter-spacing:-.01em;text-transform:none} #pane-industry .mchips+.ind-g h3.ind-gh,#pane-industry .ind-g:first-child h3.ind-gh{margin-top:10px} #pane-industry p.ind-gd{margin:0 0 12px;font-size:13.5px;color:var(--muted);line-height:1.6}
 .ind-g>.lb-card+.lb-card,.ind-g>details>.lb-card+.lb-card{margin-top:14px} details.ind-small>summary{cursor:pointer;font:600 13.5px var(--sans);color:var(--accent);margin:0 0 12px}
 .one .ok{display:block;margin-top:7px;font:500 15px/1.6 var(--sans);letter-spacing:0} .one .ok i{font:700 11.5px var(--sans);font-style:normal;padding:2px 9px;border-radius:999px;margin-right:8px;white-space:nowrap}
 .one .ok-w{background:#FDF0E1;color:#9A4A06} .one .ok-g{background:#E3F3F0;color:#0F766E}

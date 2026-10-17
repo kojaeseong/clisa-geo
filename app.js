@@ -194,7 +194,7 @@ function srRender(){
   let R = srSearch(q), part = false;
   if (!R.length && q.trim().split(/\s+/).length > 1) { R = srSearch(q, true); part = R.length > 0; }  /* v3.52 */
   if (!R.length) { box.innerHTML = '<div class="srch-empty">‘' + esc(q) + '’에 맞는 내용이 없습니다. 더 짧은 낱말이나 다른 이름으로 찾아 보십시오.<div class="chips" style="margin-top:10px">' + SR_EX.map(x => '<button type="button" class="chip" data-srq="' + esc(x) + '">' + esc(x) + "</button>").join("") + "</div></div>"; return; }
-  let h = part ? '<div class="srch-note">찾는 말이 모두 들어 있는 내용은 없어, 일부 낱말이 맞는 내용을 보입니다.</div>' : "";
+  let h = part ? '<div class="srch-note">찾는 말이 모두 들어 있는 내용은 없어, 일부 낱말이 맞는 내용을 보여 줍니다.</div>' : "";
   /* v3.19 제목이 맞은 묶음을 먼저 보인다. 점수가 같으면 SR_ORDER 순서 */
   const best = {}; R.forEach(r => { if (!(r.e.g in best)) best[r.e.g] = r.sc; });
   const GO = SR_ORDER.filter(g => g in best).sort((a, b) => best[b] - best[a] || SR_ORDER.indexOf(a) - SR_ORDER.indexOf(b));
@@ -981,7 +981,7 @@ function indKeys(I){  /* v4.12(2026-10-17 결재): 산업마다 이익을 가장
     '<span class="ok"><i class="ok-g">상승 요인</i>' + (up ? lab(up) + ": 이익이 현 추세보다 약 " + Math.round(up.x * 100) + "% 늘어납니다." : "어느 전개에서도 이익이 3% 넘게 늘지 않습니다.") + "</span>";
 }
 const IND_GRP = {a: ["분쟁 결과에 따라 이익이 크게 변하는 산업", "전개에 따라 이익이 현 추세보다 10% 넘게 늘어나는 경우가 있는 산업입니다."],
-  b: ["분쟁이 주로 위험으로 작용하는 산업", "분쟁이 해결되어도 이익이 현 추세보다 10% 넘게 늘어나는 경우는 없고, 나쁜 전개에서는 크게 줄어드는 산업입니다."],
+  b: ["분쟁이 주로 위험으로 작용하는 산업", "이익을 크게 줄이는 전개는 있지만 크게 늘리는 전개는 없는 산업입니다. 이 산업의 성장은 기준선에 이미 들어 있고, 분쟁은 그 길을 끊을 수 있는 위험으로만 작용합니다."],
   c: ["이 분쟁들의 영향이 작은 산업", "100번의 미래 가운데 이익이 현 추세보다 10% 넘게 달라지는 경우가 5번 미만인 산업입니다."], open: "칸 펼쳐 보기",
   note: "하락 요인과 상승 요인은 이익을 현 추세보다 10% 넘게 바꾸는 전개 가운데 가능성과 변화의 크기를 곱한 값이 가장 큰 전개입니다. 그런 전개가 없으면 3% 넘게 바꾸는 전개 가운데 고릅니다."};
 function indGrp(I){ if (IND.cases.some(c => c.scen.some(s => ((IND.cells[I.k][c.id] || {})[s.id] || {}).c === "better"))) return "a";
@@ -991,6 +991,11 @@ function indGrpWrap(L, f){  /* 산업을 3개 묶음으로: 기회와 위험이 
     const h = '<h3 class="ind-gh">' + IND_GRP[g][0] + '</h3><p class="ind-gd">' + (g === "c" ? esc(M.map(x => x[0].name).join(", ")) + " · " : "") + IND_GRP[g][1] + "</p>";
     return '<section class="ind-g ind-g-' + g + '">' + h + (g === "c" ? '<details class="ind-small"><summary>' + IND_GRP.open + "</summary>" + M.map(f).join("") + "</details>" : M.map(f).join("")) + "</section>"; }).join("");
 }
+const IND_TXT = {  /* v4.13(2026-10-17 결재): 산업별 미래를 '분쟁이 산업 이익을 얼마나 흔드는가'로 개편 */
+  h2: "5개 분쟁은 산업 이익을 얼마나 흔들까?",
+  lead: "<b>5개 분쟁이 2030년까지 산업별 이익을 어디서, 얼마나 흔드는지 보여 줍니다.</b> 기준선은 각 분쟁이 현재 상태로 이어질 때 그 산업이 가는 이익 추세이며, 분쟁과 관계없는 성장은 이 기준선에 이미 들어 있습니다. 점 하나가 분쟁의 전개 하나이고, 점이 클수록 그 전개의 가능성이 큽니다. 점이 0 근처에 모여 있으면 분쟁이 그 산업의 길을 거의 바꾸지 않는다는 뜻입니다. 줄을 누르면 전개별 판단 근거가 열립니다. 점의 위치와 크기는 클리사 지오폴리틱스의 판단값입니다.",
+  size: "점 크기 = 그 전개의 가능성", band: "회색 띠 = 현 추세와 비슷함(±10%)",
+  of: p => "100번 중 " + p + "번", chg: x => "이익 " + indPct(x)};
 /*}ONE*/
 function insightsHtml(){
   const cs = D.strategies || [];
@@ -2195,9 +2200,9 @@ function indJump(cid, d){  /* v3.99(2026-10-12 결재): 정세 브리핑의 '산
   let best = null;
   if (ch) IND.inds.forEach((I, i) => { const G = indG(I, c), a = hsCountP(cs.hs7, G, ch.prev), b = hsCountP(cs.hs7, G, ch.next), sc = ["big", "worse", "better"].reduce((t, k) => t + Math.abs(b[k] - a[k]), 0);
     const key = [sc, I.c === INDC ? 1 : 0, -i]; if (sc && (!best || key[0] > best.key[0] || (key[0] === best.key[0] && (key[1] > best.key[1] || (key[1] === best.key[1] && key[2] > best.key[2]))))) best = {I, key}; });
-  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "t"; MIOPEN = best.I.k; }
+  if (best) { INDC = best.I.c; INDOPEN = best.I.k + "|" + cid; INDMODE = "d"; MIOPEN = best.I.k; }
   renderIndustry();
-  if (best && isMob()) mGo("ind-" + best.I.k); else requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+  requestAnimationFrame(() => { const a = best && document.getElementById("ind-" + best.I.k); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
 }
 function indBoard(){ const b = document.getElementById("indboard"); if (b) { b.innerHTML = indRows(); fitTrends(b); } }
 function trendH(w, wide){  /* 데스크톱에서 선 그래프 높이를 보이는 칸의 높이에 맞춘다(그래프와 변경 내용이 한 화면에 더 많이 들어오게) */
@@ -2262,6 +2267,21 @@ function cmbExplain(kind, k, LAB){  /* 국민의 삶 카드와 같은 형식: �
   return '<div class="lb-mix"><ul>' + mix + "</ul></div>" + (w ? det(w, "가장 흔한 나쁜 경우가 오면") : "") + (b ? det(b, "가장 흔한 좋은 경우가 오면") : "");
 }
 function cmbRecent(n){ const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out; }
+function indX(x){ const v = Math.max(-0.6, Math.min(0.6, x)); return (50 + v / 0.6 * 50).toFixed(2); }
+function indStrip(I){  /* v4.13: 사안마다 한 줄, 전개마다 점 하나(가로 위치 = 현 추세 대비 이익 변화, 크기 = 가능성, 색 = 분류). 줄을 누르면 판단 근거 */
+  const ax = [-0.3, -0.1, 0, 0.1, 0.3];
+  const grid = '<span class="ist-band" style="left:' + indX(-0.1) + "%;width:" + (indX(0.1) - indX(-0.1)).toFixed(2) + '%"></span>' + ax.map(a => '<span class="ist-g' + (a ? "" : " ist-0") + '" style="left:' + indX(a) + '%"></span>').join("");
+  const head = '<div class="ist-r ist-ax" aria-hidden="true"><span class="ist-c"></span><span class="ist-p">' + ax.map(a => '<span class="ist-al' + (Math.abs(a) === 0.1 ? " ist-al10" : "") + '" style="left:' + indX(a) + '%">' + (a ? (a > 0 ? "+" : "−") + Math.round(Math.abs(a * 100)) + "%" : "0") + "</span>").join("") + "</span></div>";
+  const rows = IND.cases.map(c => { const v = IND.cells[I.k][c.id] || {}, id = I.k + "|" + c.id, open = INDOPEN === id;
+    const dots = c.scen.filter(s => s.t !== "base").sort((a, b) => b.p - a.p).map(s => { const z = v[s.id] || {x: 0, c: "same"}, d = Math.round(7 + 12 * Math.sqrt(Math.min(s.p, 50) / 50));
+      return '<i class="ist-d ist-' + z.c + (Math.abs(z.x) > 0.6 ? " ist-cl" : "") + '" style="left:' + indX(z.x) + "%;width:" + d + "px;height:" + d + 'px" title="' + esc(s.name + " · " + IND_TXT.of(s.p) + " · " + IND_TXT.chg(z.x)) + '"></i>'; }).join("");
+    return '<button type="button" class="ist-r' + (open ? " on" : "") + '" data-ind="' + esc(id) + '" aria-expanded="' + open + '"><span class="ist-c">' + esc(IND_SHORT[c.id] || c.title) + '</span><span class="ist-p">' + grid + dots + "</span></button>" + (open ? indDetail(I, c) : ""); }).join("");
+  return '<div class="ist">' + head + rows + "</div>";
+}
+function indRow2(I){
+  return '<article class="lb-card ind2" id="ind-' + esc(I.k) + '"><header class="lb-hd"><b class="lb-gname">' + esc(I.name) + '</b><span class="lb-size">정상 영업이익률 ' + (I.m * 100).toFixed(1) + "%" + (I.floor ? "(하한)" : "") + '</span><span class="ind-mem">' + esc(I.mem.join(", ")) + "</span></header>" +
+    '<p class="one one-k">' + indKeys(I) + "</p>" + indStrip(I) + "</article>";
+}
 function indRow(I){
   const ns = IND.cases.map((c, i) => [c, indCount(I.k, c), i]);
   ns.sort((x, y) => ((y[1].big + y[1].worse + y[1].better) - (x[1].big + x[1].worse + x[1].better)) || ((y[1].big + y[1].worse) - (x[1].big + x[1].worse)) || (x[2] - y[2]));  /* v3.94f: 업종마다 색 점이 많은 분쟁부터 */
@@ -2353,18 +2373,16 @@ function indRows(){
   const L = IND.inds.filter(I => I.c === INDC).map((I, i) => { const t = IND.cases.reduce((a, c) => { const n = indCount(I.k, c); return [a[0] + n.big + n.worse + n.better, a[1] + n.big + n.worse]; }, [0, 0]); return [I, t, i]; });
   L.sort((x, y) => (y[1][0] - x[1][0]) || (y[1][1] - x[1][1]) || (x[2] - y[2]));  /* 색 점이 많은 업종부터 */
   const G = ["a", "b", "c"].flatMap(g => L.filter(x => indGrp(x[0]) === g));  /* v4.12 묶음 순서대로 */
-  if (isMob()) return indRowsM(G);
-  const today = BR.issues[0].date;  /* 데스크톱에도 산업 칩(누르면 그 산업으로 이동) */
-  return mChips(G.map(([I]) => ["ind-" + I.k, I.name, cmbCount("ind|" + I.k, today)]), "data-dj", null) + indGrpWrap(G, ([I]) => indRow(I));
+  return mChips(G.map(([I]) => ["ind-" + I.k, I.name, null]), "data-dj", null) + indGrpWrap(G, ([I]) => indRow2(I));  /* v4.13: 데스크톱·휴대전화 같은 카드(점 그림 100개·선 그래프 대신 전개별 점) */
 }
 function renderIndustry(){
   const el = $("#pane-industry"); if (!el) return;
   if (!IND) { el.innerHTML = '<div class="sec"><p class="note">산업별 미래를 불러오는 중입니다.</p></div>';
     fetch("/data/industry.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(d => { if (d) { IND = d; renderIndustry(); } else el.innerHTML = '<div class="sec"><p class="note">산업별 미래를 불러오지 못했습니다.</p></div>'; }).catch(() => {}); return; }
-  el.innerHTML = '<section class="lb ind" id="s-ind"><p class="eyebrow">산업별 미래 · ' + kd(IND.asof) + ' 기준</p><h2 class="lb-h">2030년까지 100번의 미래를 가정, 산업별 이익은?</h2>' +
-    '<p class="lb-lead"><b>2030년까지 미래를 100번 반복한다고 가정하면, 산업별 이익이 현 추세를 뚜렷하게 상회하는 경우와 하회하는 경우는 각각 몇 번일까요?</b> 5개 사안마다 미래의 가능성을 점 100개로 표현합니다. 각 사안이 현재 상태를 유지할 때의 산업별 이익 추정이 비교의 기준입니다. 그래프를 누르면 판단의 상세한 근거가 열립니다. 점의 개수는 클리사 지오폴리틱스의 판단값으로 계산한 결과입니다.</p>' +
+  el.innerHTML = '<section class="lb ind" id="s-ind"><p class="eyebrow">산업별 미래 · ' + kd(IND.asof) + ' 기준</p><h2 class="lb-h">' + IND_TXT.h2 + '</h2>' +
+    '<p class="lb-lead">' + IND_TXT.lead + '</p>' +
     '<div class="lb-ctl"><div class="lsel" role="group" aria-label="어느 나라 산업을 볼까">' + [["kr", "한국 산업"], ["us", "미국 산업"]].map(([k, l]) => '<button type="button" data-indc="' + k + '" aria-pressed="' + (k === INDC) + '">' + l + "</button>").join("") + "</div>" +
-    '<p class="lb-leg">' + HS_ORD.map(k => '<span><i style="background:' + HS_COL[k] + '"></i>' + IND_LAB[k] + "</span>").join("") + '<span class="lb-leg-l"><i class="lg-bad"></i>주요 점 개수 추이</span><span class="lb-leg-l"><i class="lg-tick"></i>한 줄 정보</span><span class="lb-leg-l"><b class="lg-pv">22</b>변경 직전 점 개수</span>' + "</p></div>" +
+    '<p class="lb-leg">' + ["big", "worse", "better", "same"].map(k => '<span><i class="ist-' + k + '"></i>' + IND_LAB[k] + "</span>").join("") + "<span>" + IND_TXT.size + "</span><span>" + IND_TXT.band + "</span></p></div>" +
     '<div class="lb-board" id="indboard">' + indRows() + "</div>" +
     '<div class="ind-note"><p>' + IND_GRP.note + '</p><p><b>어떻게 판단했나요.</b> 산업마다 각 분쟁의 전개별로 2030년 산업 영업이익이 현 추세와 비교해 얼마나 달라지는지를 판단했습니다(매출 변화와 영업이익률 변화). 변화의 크기는 그 산업의 정상 영업이익(최근 10년 영업이익률 중앙값, 최소 3%)에 대한 비율로 계산합니다. +10% 넘게 늘면 개선됨, 10% 넘게 줄면 악화됨, 30% 넘게 줄거나 산업 전체가 적자가 되면 크게 악화됨입니다. 봉쇄·전쟁 같은 충격은 사건이 난 해부터 3년 평균, 정전·합의 같은 상태 변화는 2030년 수준으로 봅니다. 정상 영업이익률이 낮은 산업(방산 5.0%, 조선 3.0%)은 이익률이 조금만 변해도 변화율이 크게 나타나는 경향이 있습니다.</p>' +
     '<p><b>출처.</b> 실적은 금융감독원 전자공시(DART)와 미국 증권거래위원회(SEC) 원자료입니다. 영업이익을 공시하지 않는 미국 기업(금융업 전부, 통합 석유회사, 일부 농업·항공우주 기업)은 세전이익을 씁니다. 한국 금융업의 정상 영업이익률은 최근 3년 값입니다.</p>' +
@@ -2393,7 +2411,7 @@ function lifeItemHtml(id){
 }
 function lifeHeroHtml(){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
-  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보입니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안 분석의 \'이 사안이 사람들의 삶에 미치는 영향\'에 있습니다.</p><div class="lh-grid">' +
+  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보여 줍니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안 분석의 \'이 사안이 사람들의 삶에 미치는 영향\'에 있습니다.</p><div class="lh-grid">' +
     cs.map(c => { const H = c.hs7, G = H.groups.find(g => !g.fold) || H.groups[0], n = hsCount(H, G, "p"), nm = c.title.split(":")[0];
       return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · 삶에 미치는 영향 자세히 →</button></article>"; }).join("") + "</div></section>";
 }
