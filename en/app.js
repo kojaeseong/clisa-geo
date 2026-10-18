@@ -1645,7 +1645,9 @@ function futHtml(c, n){
 /* v3.26 사안 outlook: 흐름·창·사건·경로·반증 신호. 본문의 {{fc:fNN}}은 그날 확률을 보이는 전망 칩, {{case:id}}는 사안 칩 */
 function olkT(t, fid){
   return esc(t).replace(/\{\{n:([\d,]+)\}\}/g, (m, ns) => '<sup class="fn">' + ns.split(",").map(n => '<button type="button" data-jump="fn-' + esc(fid || "") + "-" + n + '" id="fnr-' + esc(fid || "") + "-" + n + "\" aria-label=\"Key term " + n + '">' + n + "</button>").join("·") + "</sup>")  /* v3.29 용어 풀이 번호 */.replace(/\{\{fc:(f\d+)\}\}/g, (m, id) => { const F = D.forecasts.find(f => f.id === id); return F ? ' <button type="button" class="fcchip" data-fc="' + id + '" title="' + esc(F.q) + '">' + fcLab(F, id, F.p) + "</button>" : ""; })
-    .replace(/\{\{case:([\w-]+)\}\}/g, (m, id) => { const k = (D.strategies || []).find(x => x.id === id); return k ? ' <button type="button" class="chip" data-case="' + esc(id) + '">' + esc(k.title.split(":")[0]) + "</button>" : ""; });
+    .replace(/\{\{case:([\w-]+)\}\}/g, (m, id) => { const k = (D.strategies || []).find(x => x.id === id); return k ? ' <button type="button" class="chip" data-case="' + esc(id) + '">' + esc(k.title.split(":")[0]) + "</button>" : ""; })
+    .replace(/\{\{life:([\w-]+)\|([^}|]+)\}\}/g, (m, id, lab) => ' <button type="button" class="chip" data-golife="' + id + '">' + lab + "</button>")  /* v4.17 특집 칩: 국민의 삶 탭의 그 사안 줄로 */
+    .replace(/\{\{acad:([\w\/-]+)\|([^}|]+)\}\}/g, (m, p, lab) => ' <a class="chip" href="' + (location.pathname.indexOf("/en/") === 0 ? "/en" : "") + "/academy/" + p + '/">' + lab + "</a>");  /* v4.17 특집 칩: 클리사 아카데미 강의로 */
 }
 /* v3.28 특집: 글마다 제목·날짜·사안. 특집 탭에 최신 글은 펼치고 지난 글은 접어 둔다. 사안 화면·주요 판단 카드에는 제목을 단 단추만 둔다 */
 const FEATS = () => D.features || [];
