@@ -16,7 +16,7 @@
   function evDate(e){ if (e.date.length === 7) return "Sometime in " + EN_MON[+e.date.slice(5, 7) - 1]; var a = fmtKD(e.date); if (!e.end) return a; var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(e.end); return m && e.end.slice(0, 7) === e.date.slice(0, 7) ? a + "–" + (+m[3]) : a + " – " + fmtKD(e.end); }
 
   /* 세계 시각(지구본 화면과 같은 도시·같은 배치) */
-  var CLOCKS = [["Seoul/Tokyo", "Asia/Seoul"], ["Beijing/Taipei", "Asia/Shanghai"], ["Tehran", "Asia/Tehran"], ["Moscow", "Europe/Moscow"], ["Kyiv", "Europe/Kyiv"], ["Brussels", "Europe/Brussels"], ["London", "Europe/London"], ["Washington/New York", "America/New_York"]];
+  var CLOCKS = [["Seoul/Tokyo", "Asia/Seoul"], ["Beijing/Taipei", "Asia/Shanghai"], ["Tehran", "Asia/Tehran"], ["Moscow", "Europe/Moscow"], ["Kyiv", "Europe/Kyiv"], ["Brussels", "Europe/Brussels"], ["London", "Europe/London"], ["DC/NYC", "America/New_York"]];
   (function(){
     var el = document.getElementById("clocks"); if (!el || !window.Intl) return;
     var fm = {}, fd = {};
@@ -24,7 +24,7 @@
     var Fd = function(tz){ return fd[tz] || (fd[tz] = new Intl.DateTimeFormat("en-CA", {timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit"})); };
     el.innerHTML = CLOCKS.map(function(c){ return '<span class="clk" data-tz="' + c[1] + '"><span class="c">' + c[0] + '</span><span class="t"></span><span class="d"></span></span>'; }).join("");
     var tick = function(){ var now = new Date(), seoul = Fd("Asia/Seoul").format(now);
-      [].forEach.call(el.querySelectorAll(".clk"), function(x){ var tz = x.dataset.tz, tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); var d = Fd(tz).format(now); x.querySelector(".d").textContent = d === seoul ? "" : (d < seoul ? "−1 day" : "+1 day"); }); };
+      [].forEach.call(el.querySelectorAll(".clk"), function(x){ var tz = x.dataset.tz, tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); var d = Fd(tz).format(now); x.querySelector(".d").textContent = d === seoul ? "" : (d < seoul ? "−1d" : "+1d"); }); };
     try { tick(); el.hidden = false; setInterval(function(){ if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
     var sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand b"), top = document.querySelector(".top"), lastW = 0;
     var wrapped = function(){ return sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4; };

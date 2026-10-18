@@ -3079,7 +3079,7 @@ addEventListener("scroll", fcPopClose, true); addEventListener("resize", fcPopCl
 
 /* v3.39 세계 시각: 1초마다 갱신(콜론 깜빡임, 움직임 줄이기 설정이면 깜빡이지 않음). 서울과 날짜가 다르면 −1일·+1일을 붙인다 */
 /* 배치(2026-10-01): 서울 칸이 맨 왼쪽, 서울과 가까운 순으로 두 칸씩 오른쪽으로. 각 칸은 위가 서울에 더 가까운 도시. 세로로 먼저 채우는 그리드 */
-const CLOCKS = [["Seoul/Tokyo", "Asia/Seoul"], ["Beijing/Taipei", "Asia/Shanghai"], ["Tehran", "Asia/Tehran"], ["Moscow", "Europe/Moscow"], ["Kyiv", "Europe/Kyiv"], ["Brussels", "Europe/Brussels"], ["London", "Europe/London"], ["Washington/New York", "America/New_York"]];
+const CLOCKS = [["Seoul/Tokyo", "Asia/Seoul"], ["Beijing/Taipei", "Asia/Shanghai"], ["Tehran", "Asia/Tehran"], ["Moscow", "Europe/Moscow"], ["Kyiv", "Europe/Kyiv"], ["Brussels", "Europe/Brussels"], ["London", "Europe/London"], ["DC/NYC", "America/New_York"]];
 (function(){
   const el = document.getElementById("clocks"); if (!el || !window.Intl) return;
   const fm = {}; const F = tz => fm[tz] || (fm[tz] = new Intl.DateTimeFormat("en-US", {timeZone: tz, hour: "2-digit", minute: "2-digit", hourCycle: "h23"}));
@@ -3087,7 +3087,7 @@ const CLOCKS = [["Seoul/Tokyo", "Asia/Seoul"], ["Beijing/Taipei", "Asia/Shanghai
   const ymd = (tz, d) => { const p = Fd(tz).formatToParts(d), g = t => (p.find(x => x.type === t) || {}).value; return g("year") + "-" + g("month") + "-" + g("day"); };
   el.innerHTML = CLOCKS.map(([c, tz]) => '<span class="clk" data-tz="' + tz + '"><span class="c">' + c + '</span><span class="t"></span><span class="d"></span></span>').join("");
   const tick = () => { const now = new Date(), seoul = ymd("Asia/Seoul", now);
-    el.querySelectorAll(".clk").forEach(x => { const tz = x.dataset.tz; const tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); const d = ymd(tz, now); x.querySelector(".d").textContent = d === seoul ? "" : d < seoul ? "−1 day" : "+1 day"; }); };
+    el.querySelectorAll(".clk").forEach(x => { const tz = x.dataset.tz; const tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); const d = ymd(tz, now); x.querySelector(".d").textContent = d === seoul ? "" : d < seoul ? "−1d" : "+1d"; }); };
   try { tick(); el.hidden = false; setInterval(() => { if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
   /* 검색창이 둘째 줄로 밀리면(글꼴·배율 때문에 폭이 모자랄 때) 시각을 숨겨 머리글을 한 줄로 지킨다 */
   const sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand h1");
