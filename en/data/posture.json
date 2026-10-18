@@ -311,9 +311,9 @@
   ]
  },
  "fleet": {
-  "asof": "2026-10-05",
+  "asof": "2026-10-13",
   "src": "USNI News Fleet Tracker (approximate positions based on Navy and public information)",
-  "url": "https://news.usni.org/2026/10/05/usni-news-fleet-and-marine-tracker-oct-5-2026",
+  "url": "https://news.usni.org/2026/10/13/usni-news-fleet-and-marine-tracker-oct-13-2026",
   "items": [
    {
     "name": "USS George Washington",
@@ -328,12 +328,12 @@
    },
    {
     "name": "USS George H.W. Bush",
-    "g": "Port call, Phuket (Thailand)",
+    "g": "Arabian Sea",
     "type": "cv",
     "home": "Norfolk",
-    "lat": 7.88,
-    "lon": 98.39,
-    "where": "In port at Phuket, Thailand (arrived October 4 after operating in the Arabian Sea)"
+    "lat": 14.5,
+    "lon": 62.5,
+    "where": "Arabian Sea · supporting operations in the Middle East (left Phuket, Thailand, on October 9)"
    },
    {
     "name": "USS Boxer amphibious ready group",
@@ -346,30 +346,21 @@
    },
    {
     "name": "USS Theodore Roosevelt",
-    "g": "Pacific, heading west",
+    "g": "Western Pacific",
     "type": "cv",
     "home": "San Diego",
-    "lat": 21.0,
-    "lon": -150.0,
-    "where": "Pacific · heading west (reportedly toward Iran)"
+    "lat": 22.0,
+    "lon": 160.0,
+    "where": "Pacific · heading west in the U.S. 7th Fleet area"
    },
    {
     "name": "USS Makin Island amphibious ready group",
-    "g": "Pacific, heading west",
+    "g": "Pacific, west of Hawaii",
     "type": "ar",
     "home": "San Diego",
-    "lat": 25.0,
-    "lon": -138.0,
-    "where": "Pacific · departed Sept. 28"
-   },
-   {
-    "name": "USS Abraham Lincoln",
-    "g": "Eastern Pacific, returning home",
-    "type": "cv",
-    "home": "San Diego",
-    "lat": 28.0,
-    "lon": -128.0,
-    "where": "Eastern Pacific · returning home"
+    "lat": 21.0,
+    "lon": -162.0,
+    "where": "Pacific · left Pearl Harbor, Hawaii, on October 12"
    },
    {
     "name": "USS Tripoli amphibious ready group",
