@@ -28,11 +28,11 @@
     try { tick(); el.hidden = false; setInterval(function(){ if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
     var sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand b"), top = document.querySelector(".top"), lastW = 0;
     var wrapped = function(){ return sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4; };
-    var fit = function(){ if (!sb || !h1) return; if (innerWidth !== lastW) { lastW = innerWidth; el.classList.remove("tight"); top.classList.remove("snug"); el.style.zoom = ""; }
+    var fit = function(){ if (!sb || !h1) return; el.classList.remove("tight"); top.classList.remove("snug"); el.style.zoom = "";  /* v4.19 매번 처음부터 맞춘다 */
       if (el.classList.contains("tight") || getComputedStyle(el).display === "none") return;
       if (!wrapped()) return;
-      if (!top.classList.contains("snug")) { top.classList.add("snug"); if (!wrapped()) return; }
-      for (var z = 0.95; z >= 0.7; z -= 0.05) { el.style.zoom = z; if (!wrapped()) return; }
+      top.classList.add("snug"); if (!wrapped()) return;
+      for (var z = 0.95; z >= 0.79; z -= 0.05) { el.style.zoom = z; if (!wrapped()) return; }
       el.style.zoom = ""; el.classList.add("tight"); top.classList.remove("snug"); };
     fit(); addEventListener("resize", fit);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);

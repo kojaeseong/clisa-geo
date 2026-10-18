@@ -2987,7 +2987,7 @@ switchTab = function(t){
   _switchTab(t);
   if (VIEW0 && VIEW0.key !== viewKey()) viewRestore();  /* v3.79 사안·일정·나라로 옮긴 지구본을 그 화면을 떠나면 되돌린다 */
   if (S.mark && !VIEW0) markSet(null);
-  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method" || S.tab === "ideas" || S.tab === "industry" || (S.tab === "brief" && !S.bdate));  /* v3.99(2026-10-12 결재): 산업별 미래와 국민의 삶도 지구본 없이 넓은 글 칸 */
+  document.querySelector(".app").classList.toggle("noglobe", S.tab === "method" || S.tab === "ideas" || S.tab === "industry" || S.tab === "feature" || (S.tab === "brief" && !S.bdate));  /* v4.19(2026-10-18 결재): 특집도 지구본 없이, 글 칸은 680px(글자 확대 반영 시 약 770px)로 가운데 */  /* v3.99(2026-10-12 결재): 산업별 미래와 국민의 삶도 지구본 없이 넓은 글 칸 */
   if (S.tab === "brief" || S.tab === "industry") fitTrends(document.getElementById("pane-" + S.tab));
   if (S.tab === "page") usfFill();  /* v3.86(2026-10-08 결재): 역사와 사상도 지구본 없이 */  /* v3.79 사이트 안내(분석 방법·이용 안내·운영자 인사말)는 지구본 없이 글만 */
   if (HASH_READY && ROUTES) routeSync(false);
@@ -3094,11 +3094,11 @@ const CLOCKS = [["Seoul/Tokyo", "Asia/Seoul"], ["Beijing/Taipei", "Asia/Shanghai
   let lastW = 0; const top = document.querySelector(".top");
   const wrapped = () => sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4;
   /* 1단계 snug(부제 숨김·검색창 축소) → 2단계 시각 묶음을 0.7배까지 축소(zoom) → 3단계 tight(숨김) */
-  const fit = () => { if (!sb || !h1) return; if (innerWidth !== lastW) { lastW = innerWidth; el.classList.remove("tight"); top.classList.remove("snug"); el.style.zoom = ""; }
+  const fit = () => { if (!sb || !h1) return; el.classList.remove("tight"); top.classList.remove("snug"); el.style.zoom = "";  /* v4.19 매번 처음부터 맞춘다: 글꼴이 늦게 들어오면 처음 계산에서 숨긴 시각이 다시 나오지 않던 문제 */
     if (el.classList.contains("tight") || getComputedStyle(el).display === "none") return;
     if (!wrapped()) return;
-    if (!top.classList.contains("snug")) { top.classList.add("snug"); if (!wrapped()) return; }
-    for (let z = 0.95; z >= 0.7; z -= 0.05) { el.style.zoom = z; if (!wrapped()) return; }
+    top.classList.add("snug"); if (!wrapped()) return;  /* v4.19 먼저 검색창·영문 제호를 줄이고, 그다음 시각을 0.8배까지(더 작으면 읽기 어려워 숨긴다) */
+    for (let z = 0.95; z >= 0.79; z -= 0.05) { el.style.zoom = z; if (!wrapped()) return; }
     el.style.zoom = ""; el.classList.add("tight"); top.classList.remove("snug"); };
   fit(); addEventListener("resize", fit);
   if (document.fonts) { document.fonts.addEventListener("loadingdone", fit); if (document.fonts.ready) document.fonts.ready.then(fit); }

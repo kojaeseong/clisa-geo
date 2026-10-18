@@ -37,9 +37,9 @@ a{color:var(--accent)}
 @supports (grid-template-columns: subgrid){ .clocks{grid-template-columns:repeat(4, auto auto auto); column-gap:6px} .clocks .clk{display:grid; grid-column:span 3; grid-template-columns:subgrid; align-items:baseline} .clocks .clk .d{min-width:6px} .top.snug .clocks{column-gap:5px} }  /* v3.43h 도시 이름·시각을 열에 맞춘다(한 칸 = 이름|시각|날짜차) */
 .toggles{flex:0 1 auto; min-width:0}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
-@media (min-width: 1200px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
+@media (min-width: 1040px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
 /* v3.39d 폭이 모자랄 때 1단계: 머리글의 한글 부제를 숨기고 검색창·시각을 더 줄인다. 2단계(tight): 시각을 숨긴다 */
-.top.snug .brand .ko{letter-spacing:.1em; font-size:12px} .top.snug .srch-open{flex-basis:240px; width:240px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.top.snug{column-gap:14px} .top.snug .srch-open{flex-basis:190px; width:190px; min-width:0} .top.snug .srch-open kbd{display:none} .top.snug .brand h1{font-size:19px} @media (min-width: 961px){ .brand{display:grid; grid-template-columns:auto auto; column-gap:10px; row-gap:4px; align-items:center} .brand .logo{grid-row:1 / span 2} .brand h1{grid-column:2; align-self:end} .brand .ko{grid-column:2; align-self:start; margin-left:1px; font-size:11px; letter-spacing:.14em} .brand .asof,.brand .edtag{grid-column:2} }  /* v4.19(2026-10-18 요청): 한글 제호는 늘 영문 제호 아래에 둔다(데스크톱). 폭이 모자라면 검색창·영문 제호를 먼저 줄이고, 시각은 0.8배까지만 줄인다. 브라우저 110% 배율(창 폭 약 1,100px)까지 세계 시각을 보인다 */ .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 .tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
 .tg input{position:absolute; opacity:0; width:1px; height:1px}
@@ -73,7 +73,9 @@ a{color:var(--accent)}
 .markbar{top:52px; max-width:calc(100% - 68px)} .lensbar:not([hidden]) ~ .markbar{top:92px} #markname{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 /* v3.79 사이트 안내 탭: 지구본 없이 글만, 읽기 좋은 폭으로 가운데 */
 .app.noglobe .stage{grid-template-columns:minmax(0,1fr)!important} .app.noglobe #wrap{display:none}
-.app.noglobe #pane-method > *, .app.noglobe #pane-ideas > *{width:100%; max-width:860px; margin-inline:auto}  /* v3.86 역사와 사상 탭도 */
+.app.noglobe #pane-method > *, .app.noglobe #pane-ideas > *{width:100%; max-width:860px; margin-inline:auto}
+.app.noglobe #pane-feature > *{width:100%; max-width:680px; margin-inline:auto} .app.noglobe #pane-feature .ess-fig svg{max-width:600px}  /* v4.19 특집: 긴 글이라 줄 길이를 한글 45~50자로, 그림은 글 칸 폭에 맞춘다 */
+.app.noglobe .tabs .wide-btn, .app.noglobe .gnav .wide-btn{visibility:hidden}  /* 지구본이 없는 탭에서는 읽기 영역 넓히기 단추가 할 일이 없다 */  /* v3.86 역사와 사상 탭도 */
 .app.noglobe #pane-brief > *, .app.noglobe :is(#pane-industry,#pane-brief) > *{width:100%; max-width:1200px; margin-inline:auto}  /* v3.99 산업별 미래·국민의 삶: 지구본 없이 넓은 글 칸 */
 .bh{all:unset; cursor:pointer; color:inherit; font:inherit; line-height:inherit; text-align:left} .bh svg,.fcl svg{display:inline-block; margin-left:5px; vertical-align:-1px; color:var(--accent)} .bh:hover,.bh:focus-visible{text-decoration:underline; text-underline-offset:3px} .bh:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
 .info-top .info-nav{margin-top:10px} .info-nav a.chip{text-decoration:none}
@@ -829,8 +831,8 @@ details.fw ul{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px
 @supports (grid-template-columns: subgrid){ .clocks{grid-template-columns:repeat(4, auto auto auto); column-gap:6px} .clocks .clk{display:grid; grid-column:span 3; grid-template-columns:subgrid; align-items:baseline} .clocks .clk .d{min-width:6px} .top.snug .clocks{column-gap:5px} }  /* v3.43h 도시 이름·시각을 열에 맞춘다(한 칸 = 이름|시각|날짜차) */
 .toggles{flex:0 1 auto; min-width:0}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
-@media (min-width: 1200px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
-.top.snug .brand .ko{letter-spacing:.1em; font-size:12px} .top.snug .srch-open{flex-basis:240px; width:240px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+@media (min-width: 1040px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
+.top.snug{column-gap:14px} .top.snug .srch-open{flex-basis:190px; width:190px; min-width:0} .top.snug .srch-open kbd{display:none} .top.snug .brand h1{font-size:19px} @media (min-width: 961px){ .brand{display:grid; grid-template-columns:auto auto; column-gap:10px; row-gap:4px; align-items:center} .brand .logo{grid-row:1 / span 2} .brand h1{grid-column:2; align-self:end} .brand .ko{grid-column:2; align-self:start; margin-left:1px; font-size:11px; letter-spacing:.14em} .brand .asof,.brand .edtag{grid-column:2} }  /* v4.19(2026-10-18 요청): 한글 제호는 늘 영문 제호 아래에 둔다(데스크톱). 폭이 모자라면 검색창·영문 제호를 먼저 줄이고, 시각은 0.8배까지만 줄인다. 브라우저 110% 배율(창 폭 약 1,100px)까지 세계 시각을 보인다 */ .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 @media (max-width: 960px){ #astrip{display:none !important} }
 .srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
