@@ -5,6 +5,81 @@
    "items": [
     {
      "case": "ukraine",
+     "h": "러시아, 키이우 등에 미사일·드론 공격…키이우 1명 사망·8명 부상",
+     "fact": "우크라이나 공군은 19일 밤사이 러시아가 드론 269대와 탄도·순항미사일로 공격해 드론 243대와 미사일 4발을 격추·무력화했고 25곳이 피격됐다고 밝혔습니다. 러시아 국방부는 키이우의 데이터센터와 미사일 보관 시설, 오데사 남서쪽 130km 해상의 화물선을 타격했다고 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://abcnews.com/International/wireStory/russian-missiles-drones-hit-kyiv-overnight-killing-1-137371029",
+      "https://www.ukrinform.net/rubric-ato/4175779-air-defense-forces-shoot-down-four-russian-missiles-and-243-drones-since-this-evening.html",
+      "https://tass.com/politics/2203979"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "WSJ, 푸틴이 트럼프·시진핑과 우크라이나 3자 정상회담을 제안했다고 보도",
+     "fact": "월스트리트저널은 18일(미국 시각) 푸틴 대통령이 11월 18~19일 선전 APEC 정상회의 때 트럼프 대통령·시진핑 주석과 우크라이나 종전을 논의하자고 제안했고 젤렌스키 대통령은 빠진다고 보도했습니다. 페스코프 대변인은 회담과 의제에 대한 분명한 이해가 아직 없다고 했고, 미국 고위 당국자는 트럼프가 동의하지 않았으나 받아들일 여지는 있다고 말했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.brecorder.com/news/40444891/putin-proposes-summit-with-trump-and-xi-to-discuss-ukraine-deal-wsj-says",
+      "https://www.cnbc.com/2026/10/19/putin-trump-xi-ukraine-war-energy.html"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "USA",
+       "CHN",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키, 값 치른 패트리엇 미사일을 미국이 일부만 인도 승인했다고 주장",
+     "fact": "젤렌스키 대통령은 18일 공개된 블룸버그 인터뷰에서 PURL(나토 동맹국 재원의 미국 무기 구매 제도)로 값을 치른 패트리엇 미사일 가운데 미국이 일부만 인도를 승인했고 이는 기술 문제가 아니라고 말했습니다. 우크라이나가 항복하도록 설득하려는 조치가 있었다고도 주장했습니다.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/us-delaying-patriot-missiles-already-paid-for-under-nato-initiative-zelensky-says/",
+      "https://www.ukrinform.net/rubric-polytics/4175836-us-delaying-delivery-of-patriot-missiles-already-paid-for-by-ukraine-zelensky.html"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "북중 교역, 9월 2억 9,900만 달러…1~9월 18.6% 증가",
+     "fact": "북한전문매체 NK뉴스에 따르면 중국 해관총서가 18일 공개한 9월 북중 교역액은 약 2억 9,900만 달러로 8월(2억 3,800만 달러)보다 늘어 올해 4월 다음으로 많았습니다. 산케이신문 집계로 1~9월 교역액은 약 22억 7,000만 달러로 1년 전보다 18.6% 늘었습니다.",
+     "fc": [
+      {
+       "id": "f23",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.nknews.org/2026/10/north-korea-china-trade-soared-to-300m-last-month-ahead-of-bridge-opening-data/",
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008804422"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
      "h": "상트페테르부르크, 대규모 드론 공격에 석유터미널 화재…1명 사망",
      "fact": "베글로프 상트페테르부르크 주지사는 18일 '대규모' 드론 공격으로 1명이 숨지고 5명이 다쳤으며 석유 터미널과 유류 저장소 등에 불이 났다고 밝혔습니다. 러시아 국방부는 17일 오후 8시부터 18일 오전 8시까지 우크라이나 드론 1,015대를 격추했다고 발표했습니다.",
      "fc": [],

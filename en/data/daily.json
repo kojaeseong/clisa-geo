@@ -5,6 +5,81 @@
    "items": [
     {
      "case": "ukraine",
+     "h": "Russia strikes Kyiv and other areas with missiles and drones, killing 1 and injuring 8 in Kyiv",
+     "fact": "Ukraine's air force said Russia attacked overnight into October 19 with 269 drones and ballistic and cruise missiles, and that 243 drones and four missiles were shot down or neutralized, with hits recorded at 25 locations. Russia's Defense Ministry claimed it struck a data center and missile storage sites in Kyiv, as well as a cargo ship at sea 130 kilometers southwest of Odesa.",
+     "fc": [],
+     "src": [
+      "https://abcnews.com/International/wireStory/russian-missiles-drones-hit-kyiv-overnight-killing-1-137371029",
+      "https://www.ukrinform.net/rubric-ato/4175779-air-defense-forces-shoot-down-four-russian-missiles-and-243-drones-since-this-evening.html",
+      "https://tass.com/politics/2203979"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "WSJ reports Putin proposed a three-way summit on Ukraine with Trump and Xi",
+     "fact": "The Wall Street Journal reported on October 18 (U.S. time) that Russian President Vladimir Putin proposed discussing an end to the war in Ukraine with President Donald Trump and Chinese President Xi Jinping at the APEC summit in Shenzhen on November 18–19, without Ukrainian President Volodymyr Zelensky. Kremlin spokesman Dmitry Peskov said there was no clear understanding yet about the meeting or its agenda, and a senior U.S. official said Trump had not agreed but might be open to it.",
+     "fc": [],
+     "src": [
+      "https://www.brecorder.com/news/40444891/putin-proposes-summit-with-trump-and-xi-to-discuss-ukraine-deal-wsj-says",
+      "https://www.cnbc.com/2026/10/19/putin-trump-xi-ukraine-war-energy.html"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "USA",
+       "CHN",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky claims U.S. has cleared only some of the Patriot missiles already paid for",
+     "fact": "In a Bloomberg interview published October 18, Ukrainian President Volodymyr Zelensky said Washington had approved delivery of only some of the Patriot missiles bought through PURL, the program that uses NATO allies' money to buy U.S. weapons, and that this was not a technical issue. He also claimed that steps had been taken to convince Ukraine to capitulate.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/us-delaying-patriot-missiles-already-paid-for-under-nato-initiative-zelensky-says/",
+      "https://www.ukrinform.net/rubric-polytics/4175836-us-delaying-delivery-of-patriot-missiles-already-paid-for-by-ukraine-zelensky.html"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "North Korea-China trade hits $299 million in September, up 18.6 percent year to date",
+     "fact": "China's General Administration of Customs data released October 18 put North Korea-China trade at about $299 million in September, up from $238 million in August and the highest monthly total this year after April, the North Korea-focused outlet NK News reported. By the Sankei Shimbun's count, trade from January through September totaled about $2.27 billion, up 18.6 percent from a year earlier.",
+     "fc": [
+      {
+       "id": "f23",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.nknews.org/2026/10/north-korea-china-trade-soared-to-300m-last-month-ahead-of-bridge-opening-data/",
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008804422"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
      "h": "Massive drone attack sets St. Petersburg oil terminal ablaze, killing 1",
      "fact": "St. Petersburg Gov. Alexander Beglov said on October 18 that a \"massive\" drone attack killed one person, injured five and set fire to an oil terminal and a fuel depot, among other sites. Russia's Defense Ministry said it downed 1,015 Ukrainian drones between 8 p.m. on October 17 and 8 a.m. on October 18.",
      "fc": [],
