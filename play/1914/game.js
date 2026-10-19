@@ -74,7 +74,7 @@ function music(play){
 function soundBtn(){ return '<button class="sbtn" id="snd" aria-pressed="'+(SND.on?'true':'false')+'">'+(SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'))+'</button>'; }
 function bindSound(){ var b=document.getElementById('snd'); if(!b) return; b.onclick=function(){ SND.on=!SND.on; store('wod-sound',SND.on?'on':'off'); b.textContent=SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'); b.setAttribute('aria-pressed',SND.on?'true':'false'); if(SND.on){ sfx('click'); music(true);} else music(false); }; }
 
-function brand(){return '<div class="brandbar"><a href="'+SITE+'/">CLISA</a><span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+soundBtn()+'</span></div>';}
+function brand(){return '<div class="brandbar"><a href="'+SITE+'/" target="_blank" rel="noopener">CLISA</a><span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+soundBtn()+'</span></div>';}
 function render(h){ app.innerHTML=h; bindSound(); }
 function dayLabel(d){ if(!d) return ''; var m=d.match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return esc(d); return EN?(+m[3])+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][+m[2]-1]:(+m[2])+'월 '+(+m[3])+'일'; }
 function yearOf(d){ var m=String(d||'').match(/^(\d{4})/); return m?m[1]:''; }
@@ -306,7 +306,7 @@ function ending(nx){
      '<div class="sec"><h3>'+T('배경 읽기','Background reading')+'</h3>'+(C.background||[]).map(function(b){return '<details class="bg"><summary>'+esc(b.q)+'</summary>'+b.a.map(function(q){return '<p>'+esc(q)+'</p>';}).join('')+'</details>';}).join('')+'</div>'},
    {tab:T('실제 역사','History'),h:'<div class="sec"><h3>'+T('실제로 일어난 일','What actually happened')+'</h3><ul class="plain">'+C.history.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>'+
      '<div class="sec"><h3>'+T('한반도와 동아시아','Korea and East Asia')+'</h3><ul class="plain">'+C.eastasia.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>'+
-     '<div class="sec"><h3>'+T('함께 읽을 강의','Related lectures')+'</h3><ul class="plain">'+lec.map(function(q){return '<li><a href="'+SITE+'/academy/ir101/'+q+'/">'+esc(C.lectureTitles[q])+'</a></li>';}).join('')+'</ul></div>'+
+     '<div class="sec"><h3>'+T('함께 읽을 강의','Related lectures')+'</h3><ul class="plain">'+lec.map(function(q){return '<li><a href="'+SITE+'/academy/ir101/'+q+'/" target="_blank" rel="noopener">'+esc(C.lectureTitles[q])+'</a></li>';}).join('')+'</ul></div>'+
      '<div class="share"><button class="btn" id="again">'+T('다른 나라로 다시 하기','Play another power')+'</button></div>'+more()+rights()}
   ];
   function show(p){
@@ -323,16 +323,16 @@ function ending(nx){
 }
 /* shrink a canvas font until the text fits; result left in x._t */
 function fit(x,s,font,px,w){ s=String(s||''); while(px>16){ x.font=font.replace('%',px); if(x.measureText(s).width<=w) break; px-=2; } x._t=s; }
-/* links back into clisa.ai from the ending screen (text needs operator approval before going public) */
+/* links back into clisa.ai open in a new tab so the game (and its music) keeps running; from the ending screen (text needs operator approval before going public) */
 function more(){
   var L=EN?[['/en/brief/','Briefings','Recent events linked to our assessments and forecasts'],['/en/forecast/','Forecasts','Probability forecasts and how they turned out'],['/en/academy/ir101/','Intro to IR','The ideas behind the July Crisis, lecture by lecture'],['/en/subscribe/','Subscribe','New briefings and features in your feed reader']]
     :[['/brief/','정세 브리핑','최근 사건을 클리사의 판단·전망과 연결해 정리'],['/forecast/','전망과 검증','사안별 확률 전망과 그 결과'],['/academy/ir101/','국제정치 입문','7월 위기를 움직인 생각을 강의로'],['/subscribe/','새 글 알림 받기','새 브리핑과 특집을 구독 앱으로']];
-  return '<div class="sec more"><h3>'+T('1914년의 질문은 현재도 이어집니다','The questions of 1914 are still open')+'</h3><div class="morelinks">'+L.map(function(a){return '<a href="'+a[0]+'"><b>'+esc(a[1])+'</b><span>'+esc(a[2])+'</span></a>';}).join('')+'</div></div>';
+  return '<div class="sec more"><h3>'+T('1914년의 질문은 현재도 이어집니다','The questions of 1914 are still open')+'</h3><div class="morelinks">'+L.map(function(a){return '<a href="'+SITE.replace(/\/en$/,'')+a[0]+'" target="_blank" rel="noopener"><b>'+esc(a[1])+'</b><span>'+esc(a[2])+'</span></a>';}).join('')+'</div></div>';
 }
 /* copyright and contact, shown on the title screen and at the end of the ending pages */
 function rights(){
   return '<footer class="rights"><p>'+T('© 2026 클리사 지오폴리틱스. 이 게임의 글, 그림, 지도, 프로그램의 저작권은 클리사 지오폴리틱스에 있습니다. 지도의 바탕 자료(Natural Earth)와 인용한 사료는 공개 자료입니다.','© 2026 Clisa Geopolitics. The text, artwork, maps and software of this game are the copyright of Clisa Geopolitics. The base map data (Natural Earth) and the quoted historical documents are in the public domain.')+'</p>'+
-    '<p>'+T('문의','Contact')+' <a href="mailto:clisageo@clisa.ai">clisageo@clisa.ai</a> · <a href="'+SITE+'/">clisa.ai'+(EN?'/en':'')+'</a></p></footer>';
+    '<p>'+T('문의','Contact')+' <a href="mailto:clisageo@clisa.ai">clisageo@clisa.ai</a> · <a href="'+SITE+'/" target="_blank" rel="noopener">clisa.ai'+(EN?'/en':'')+'</a></p></footer>';
 }
 function shareCard(t,E,k,same,asked){
   var W=1080,H=1350,cv=document.createElement('canvas'); cv.width=W; cv.height=H; var x=cv.getContext('2d');
