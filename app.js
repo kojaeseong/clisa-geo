@@ -1310,7 +1310,7 @@ function renderOverview(){
 function forecastRow(f, compact){
   const st = {open:["open","검증 전"], yes:["yes","실현"], no:["no","불발"], void:["void","무효"]}[f.status] || ["open","검증 전"];
   return '<li data-fid="' + esc(f.id) + '"><div class="fc"><div class="q">' + esc(f.q) + '</div><div class="p">' + f.p + '<small>%</small></div><div class="prob"><i style="width:' + f.p + '%"></i></div>' +
-    (compact ? "" : '<div class="b">' + esc(f.basis) + "</div>") + (f.void && !compact ? '<div class="vr">무효 처리 · ' + esc(f.void) + "</div>" : "") +
+    (compact ? "" : '<div class="b">' + esc(f.basis) + "</div>") + (f.rs && !compact ? '<div class="b rs">결과 확인 · ' + esc(f.rs) + "</div>" : "") /* v4.21 rs */ + (f.void && !compact ? '<div class="vr">무효 처리 · ' + esc(f.void) + "</div>" : "") +
     '<div class="foot"><span class="mono fid">' + esc(f.id) + '</span><span class="st ' + st[0] + '">' + st[1] + '</span><span>검증 시점 <span class="mono">' + esc(f.due) + "</span></span>" + (compact ? "" : fcHist(f.id) + '<span class="chips" style="margin:0">' + f.countries.map(chip).join("") + "</span>") + "</div></div></li>";
 }
 function renderDetail(){
