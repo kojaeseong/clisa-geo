@@ -6,7 +6,7 @@
     {
      "case": "ukraine",
      "h": "Russian missiles and drones hit Kyiv and other regions; 1 killed, 8 injured in the capital",
-     "fact": "Russia launched 269 drones along with ballistic and cruise missiles overnight into October 19, Ukraine's air force said, adding that 243 drones and four missiles were shot down or neutralized and that hits were recorded at 25 locations. Russia's Defense Ministry claimed it struck a data center and missile storage sites in Kyiv, as well as a cargo ship at sea 130 kilometers southwest of Odesa.",
+     "fact": "Russia launched 269 drones along with ballistic and cruise missiles overnight on October 18–19, Ukraine's air force said, adding that 243 drones and four missiles were shot down or neutralized and that hits were recorded at 25 locations. Russia's Defense Ministry claimed it struck a data center in Kyiv and a locomotive depot it said was used to store missiles, as well as a cargo ship at sea 130 kilometers southwest of Odesa.",
      "fc": [],
      "src": [
       "https://abcnews.com/International/wireStory/russian-missiles-drones-hit-kyiv-overnight-killing-1-137371029",
@@ -54,6 +54,22 @@
       "isos": [
        "UKR",
        "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Rubio says Ukraine currently has no access to Starshield, denies ordering a speed cap",
+     "fact": "Secretary of State Marco Rubio told reporters on October 17 that Ukraine does not currently have access to Starshield, the military version of Starlink, and that its request is under discussion. He called reports that the White House ordered Starlink speeds slowed \"categorically false,\" though Ukrainian defense officials had earlier said Starshield was working again.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/18/rubio-says-ukraine-without-access-to-starshield-future-under-discussion",
+      "https://www.kyivpost.com/post/87400"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR"
       ]
      }
     },
@@ -131,7 +147,7 @@
     {
      "case": "iran",
      "h": "IRGC claims another 'noncompliant' tanker hit a mine south of Hormuz",
-     "fact": "Iran's Revolutionary Guard navy claimed late on October 18 (early October 19 in Tehran) that a tanker leaving the strait by an unauthorized southern route with its navigation systems switched off struck a mine, causing an explosion and fire in its engine room. It did not name the ship, and there was no independent confirmation.",
+     "fact": "Iran's Revolutionary Guard navy claimed early on October 19, Tehran time, that a tanker leaving the strait by an unauthorized southern route with its navigation systems switched off struck a mine, causing an explosion and fire in its engine room. It did not name the ship, and there was no independent confirmation.",
      "fc": [],
      "src": [
       "https://wanaen.com/irgc-navy-says-non-compliant-tanker-hit-by-sea-mine-south-of-strait-of-hormuz/",
@@ -231,7 +247,7 @@
     {
      "case": null,
      "h": "French protests spiral into riots and looting, with at least 1,800 arrested",
-     "fact": "Protests by about 550,000 people across France on October 17, by the authorities' count, over rising living costs and worsening school conditions descended into arson and looting. At least 1,800 people were arrested, according to an AP tally; Al Jazeera, citing the Interior Ministry, put the number at about 2,400. In a televised address on October 18, President Emmanuel Macron said looters would have to pay for the damage.",
+     "fact": "Protests by about 550,000 people across France on October 17, by the authorities' count, over rising living costs and worsening school conditions descended into arson and looting. At least 1,800 people were arrested, according to a CBS News tally; Al Jazeera, citing the Interior Ministry, put the number at about 2,400. In a televised address on October 18, President Emmanuel Macron said looters would have to pay for the damage.",
      "fc": [],
      "src": [
       "https://www.cbsnews.com/news/protests-france-rising-living-costs-students/",
