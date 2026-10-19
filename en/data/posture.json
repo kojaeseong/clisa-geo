@@ -494,6 +494,20 @@
     "f03"
    ],
    "fp": "iran-war"
+  },
+  {
+   "date": "2026-10-14",
+   "s": "Battalion to Panama",
+   "kind": "up",
+   "lat": 8.98,
+   "lon": -79.52,
+   "t": "A battalion of about 600 soldiers from the Army's 10th Mountain Division began deploying to a jungle training base in Panama and is expected to train with Colombian and Honduran forces, according to an Oct. 14 report (U.S. Southern Command declined to comment on the deployment)",
+   "grade": "Reported",
+   "src": "Anonymous U.S. military officials (The New York Times, cited by The Daily Caller)",
+   "url": "https://dailycaller.com/2026/10/15/pentagon-soldiers-latin-america-trump-cartels-drug-trafficking/",
+   "case": null,
+   "fc": [],
+   "fp": "caribbean-pacific-boat-strikes"
   }
  ]
 }

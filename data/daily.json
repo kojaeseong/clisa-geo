@@ -1,6 +1,208 @@
 {
  "issues": [
   {
+   "date": "2026-10-19",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "상트페테르부르크, 대규모 드론 공격에 석유터미널 화재…1명 사망",
+     "fact": "베글로프 상트페테르부르크 주지사는 18일 '대규모' 드론 공격으로 1명이 숨지고 5명이 다쳤으며 석유 터미널과 유류 저장소 등에 불이 났다고 밝혔습니다. 러시아 국방부는 17일 오후 8시부터 18일 오전 8시까지 우크라이나 드론 1,015대를 격추했다고 발표했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/18/ukrainian-drone-attack-on-russias-st-petersburg-kills-1-hits-energy-sites",
+      "https://voennoedelo.com/en/posts/id21090-russia-says-1-015-ukrainian-drones-downed-overnight"
+     ],
+     "loc": {
+      "lat": 59.94,
+      "lon": 30.31,
+      "place": "상트페테르부르크(러시아)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "루비오, 트럼프가 대러 제재·관세 면제의 영향을 60일 동안 분석한다고 밝혀",
+     "fact": "루비오 국무장관은 17일 기자들에게 트럼프 대통령이 16일 면제한 대러 제재와 관세의 경제적 영향을 최대 60일 동안 분석하려 한다고 말했습니다. 16일 행정명령에는 면제 기한이 정해져 있지 않습니다.",
+     "fc": [],
+     "src": [
+      "https://www.spokesman.com/stories/2026/oct/17/rubio-says-trump-to-take-up-to-60-days-to-weigh-ru/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키 \"미국이 3자 회담 제안…러시아·미국 확인은 아직\"",
+     "fact": "젤렌스키 대통령은 17일 기자들에게 미국이 3자 회담을 제안했으나 러시아와 미국 어느 쪽도 아직 확인하지 않았다고 말했습니다. 장소로는 아랍에미리트·사우디아라비아 같은 중동 국가, G20 정상회의 때의 미국, 유럽 국가가 거론된다고 했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-polytics/4175468-zelensky-us-working-to-arrange-possible-meeting-with-putin.html"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "혁명수비대, '규정 위반' 유조선이 호르무즈 남쪽서 또 기뢰에 맞았다고 주장",
+     "fact": "이란 혁명수비대 해군은 18일 밤(테헤란 현지 시각 19일 새벽) 항법장치를 끈 채 승인되지 않은 남쪽 항로로 해협을 빠져나가던 유조선이 기뢰에 맞아 기관실에서 폭발과 화재가 났다고 주장했습니다. 선박 이름은 밝히지 않았고 독립 확인은 없습니다.",
+     "fc": [],
+     "src": [
+      "https://wanaen.com/irgc-navy-says-non-compliant-tanker-hit-by-sea-mine-south-of-strait-of-hormuz/",
+      "https://tass.com/world/2203869"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디 나지란 주택가에 발사체 떨어져 6명 부상",
+     "fact": "사우디 민방위는 18일 발사체가 나지란 주택가에 떨어져 시민 6명이 다치고 주택 3채와 차량 3대가 부서졌다고 밝혔고, 사우디 언론은 이를 후티의 발사체로 보도했습니다. 같은 날 나지란에서는 사우디군 헬기가 추락해 장교 2명이 숨졌습니다.",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.pk/saudi-arabia/saudi-civil-defense-says-6-citizens-injured-after-projectile-falls-in-najran-3004548",
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ],
+     "loc": {
+      "lat": 17.49,
+      "lon": 44.13,
+      "place": "나지란(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "h": "대만 해순서, 중국 해경선 등 16척 퇴거…\"하이브리드전\" 규탄",
+     "fact": "대만 해순서는 18일 본섬 동·남·서남쪽 바다와 둥사(프라타스)군도 주변에서 중국 해경선·조사선·어선 16척을 쫓아냈고 일부는 제한 수역에 들어왔다고 밝혔습니다. 해순서는 중국이 여러 곳에서 동시에 하이브리드전을 벌여 현상을 일방적으로 바꾸려 한다고 규탄했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/19/2003866217",
+      "https://www.aljazeera.com/news/2026/10/18/taiwan-drives-away-16-chinese-ships-accused-of-maritime-harassment"
+     ],
+     "loc": {
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "트럼프, 이스라엘 총선 9일 앞두고 네타냐후 '전면 지지' 선언",
+     "fact": "트럼프 대통령은 18일 트루스소셜에 네타냐후 총리를 전면 지지한다고 밝히고, 이란이 노선을 바꾸지 않으면 곧 일을 끝낼 것이라며 네타냐후가 아닌 지도자라면 미국이 직접 해야 하는데 그럴 생각이 없다고 했습니다. 이스라엘 총선은 27일입니다.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "up"
+      },
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.jta.org/2026/10/18/global/trump-endorses-netanyahu-ahead-of-israeli-elections-citing-iranian-threat",
+      "https://www.axios.com/2026/10/18/trump-endorses-netanyahu-israel-election-iran"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "파키스탄군·아프간 탈레반, 쿠람 국경서 교전",
+     "fact": "파키스탄 보안 당국자들은 17일 카이베르파크툰크와주 쿠람 지역 국경 여러 곳에서 아프간 탈레반과 몇 시간 동안 교전했고 포병 지원을 받은 부대가 탈레반 초소를 파괴했다고 주장했습니다. 탈레반 정부는 즉각 논평하지 않았고 사상자 수는 확인되지 않았습니다.",
+     "fc": [
+      {
+       "id": "f10",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.clickorlando.com/news/world/2026/10/17/pakistani-forces-afghan-taliban-exchange-fire-after-militants-attempt-to-infiltrate-pakistan/",
+      "https://kabulnow.com/2026/10/pakistani-media-reports-deaths-of-afghan-taliban-fighters-in-border-clashes/"
+     ],
+     "loc": {
+      "lat": 33.9,
+      "lon": 70.1,
+      "place": "쿠람(파키스탄)",
+      "isos": [
+       "PAK",
+       "AFG"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "프랑스, 전국 시위가 폭동·약탈로 번져 최소 1,800명 체포",
+     "fact": "17일 프랑스 전국에서 생활비 상승과 학교 여건 악화에 항의한 시위(당국 집계 약 55만 명)가 방화와 약탈로 번져 AP 집계로 최소 1,800명이 체포됐습니다(알자지라는 내무부를 인용해 약 2,400명). 마크롱 대통령은 18일 대국민 연설에서 약탈한 사람들은 피해를 갚아야 한다고 말했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/news/protests-france-rising-living-costs-students/",
+      "https://www.aljazeera.com/news/2026/10/18/macron-denounces-frances-nationwide-rioting-looting"
+     ],
+     "loc": {
+      "isos": [
+       "FRA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "젤렌스키 대통령은 18일 NBC 인터뷰에서 미국이 러시아 미사일 발사 정보를 다시 공유하고 있다고 말했고, 같은 날 위트코프·쿠슈너 특사와 통화했습니다.",
+     "src": [
+      "https://kyivindependent.com/a-great-deal-depends-on-americas-position-zelensky-holds-call-with-trumps-peace-envoys-as-us-pivots-to-moscows-side/"
+     ]
+    },
+    {
+     "t": "아락치 이란 외무장관은 18일 바그다드에서 7일 안에 호르무즈 해협을 다시 연다는 이란의 제안이 여전히 유효하다고 말했습니다.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-peace-talks-oil-strait-hormuz-trump-october-18"
+     ]
+    },
+    {
+     "t": "이란 언론은 라브로프 러시아 외무장관이 19일 테헤란을 방문한다고 전했습니다.",
+     "src": [
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ]
+    },
+    {
+     "t": "이집트 의회는 사우디아라비아에 대한 군사 지원 승인 표결을 19일로 미뤘습니다.",
+     "src": [
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ]
+    },
+    {
+     "t": "나우세다 리투아니아 대통령은 18일 드론으로 보이는 물체가 영공에 들어와 폭발했다고 밝혔고, 우크라이나 외무부 대변인은 러시아의 전자전으로 우크라이나 드론의 항로가 바뀌었을 수 있다며 사과했습니다.",
+     "src": [
+      "https://kyivindependent.com/nato-jets-scramble-as-drone-explodes-in-lithuanian-airspace/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-17",
    "items": [
     {

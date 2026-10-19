@@ -494,6 +494,20 @@
     "f03"
    ],
    "fp": "iran-war"
+  },
+  {
+   "date": "2026-10-14",
+   "s": "파나마 1개 대대 전개",
+   "kind": "up",
+   "lat": 8.98,
+   "lon": -79.52,
+   "t": "육군 제10산악사단 1개 대대(약 600명)가 파나마의 정글 훈련 기지로 전개를 시작했고, 콜롬비아·온두라스 군과의 훈련에 나설 예정이라고 10월 14일 보도됨(남부사령부는 배치에 대해 논평하지 않음)",
+   "grade": "보도",
+   "src": "익명의 미군 당국자(뉴욕타임스 보도, 데일리콜러 인용)",
+   "url": "https://dailycaller.com/2026/10/15/pentagon-soldiers-latin-america-trump-cartels-drug-trafficking/",
+   "case": null,
+   "fc": [],
+   "fp": "caribbean-pacific-boat-strikes"
   }
  ]
 }

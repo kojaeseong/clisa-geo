@@ -1,6 +1,208 @@
 {
  "issues": [
   {
+   "date": "2026-10-19",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Massive drone attack sets St. Petersburg oil terminal ablaze, killing 1",
+     "fact": "St. Petersburg Gov. Alexander Beglov said on October 18 that a \"massive\" drone attack killed one person, injured five and set fire to an oil terminal and a fuel depot, among other sites. Russia's Defense Ministry said it downed 1,015 Ukrainian drones between 8 p.m. on October 17 and 8 a.m. on October 18.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/18/ukrainian-drone-attack-on-russias-st-petersburg-kills-1-hits-energy-sites",
+      "https://voennoedelo.com/en/posts/id21090-russia-says-1-015-ukrainian-drones-downed-overnight"
+     ],
+     "loc": {
+      "lat": 59.94,
+      "lon": 30.31,
+      "place": "St. Petersburg (Russia)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Rubio says Trump wants up to 60 days to weigh impact of waived Russia sanctions, tariffs",
+     "fact": "Secretary of State Marco Rubio told reporters on October 17 that President Trump plans to spend up to 60 days analyzing the economic effects of the Russia sanctions and tariffs he waived on October 16. The October 16 executive order itself sets no end date for the waiver.",
+     "fc": [],
+     "src": [
+      "https://www.spokesman.com/stories/2026/oct/17/rubio-says-trump-to-take-up-to-60-days-to-weigh-ru/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says U.S. proposed three-way talks, but Moscow and Washington have yet to confirm",
+     "fact": "Ukrainian President Volodymyr Zelensky told reporters on October 17 that the United States had proposed a trilateral meeting but that neither Russia nor the U.S. had yet confirmed it. He said possible venues include a Middle Eastern country such as the UAE or Saudi Arabia, the U.S. during the G20 summit, or a European country.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-polytics/4175468-zelensky-us-working-to-arrange-possible-meeting-with-putin.html"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IRGC claims another rule-breaking tanker hit a mine south of Hormuz",
+     "fact": "Iran's Revolutionary Guard navy claimed late on October 18 (early October 19 in Tehran) that a tanker leaving the strait by an unauthorized southern route with its navigation systems switched off struck a mine, causing an explosion and fire in its engine room. It did not name the ship, and there was no independent confirmation.",
+     "fc": [],
+     "src": [
+      "https://wanaen.com/irgc-navy-says-non-compliant-tanker-hit-by-sea-mine-south-of-strait-of-hormuz/",
+      "https://tass.com/world/2203869"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Projectile hits residential area in Saudi Arabia's Najran, injuring 6",
+     "fact": "Saudi Civil Defense said on October 18 that a projectile fell on a residential area of Najran, injuring six civilians and damaging three homes and three vehicles; Saudi media attributed it to the Houthis. The same day, a Saudi military helicopter crashed in Najran, killing two officers.",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.pk/saudi-arabia/saudi-civil-defense-says-6-citizens-injured-after-projectile-falls-in-najran-3004548",
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ],
+     "loc": {
+      "lat": 17.49,
+      "lon": 44.13,
+      "place": "Najran (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "h": "Taiwan's coast guard drives off 16 Chinese ships, accuses Beijing of hybrid warfare",
+     "fact": "Taiwan's Coast Guard Administration said on October 18 it drove away 16 Chinese vessels, including coast guard ships, research vessels and fishing boats, off the main island's eastern, southern and southwestern coasts and around the Pratas Islands, adding that some had entered restricted waters. It condemned China for waging hybrid warfare at several locations at once to change the status quo unilaterally.",
+     "fc": [],
+     "src": [
+      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/19/2003866217",
+      "https://www.aljazeera.com/news/2026/10/18/taiwan-drives-away-16-chinese-ships-accused-of-maritime-harassment"
+     ],
+     "loc": {
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Trump fully endorses Netanyahu nine days before Israel's election",
+     "fact": "In an October 18 Truth Social post, President Trump gave Prime Minister Benjamin Netanyahu his \"Complete and Total Endorsement,\" saying the job would soon be finished unless Iran changes course and that with any other leader the U.S. would have to do it itself, which he is not inclined to do. Israel votes on October 27.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "up"
+      },
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.jta.org/2026/10/18/global/trump-endorses-netanyahu-ahead-of-israeli-elections-citing-iranian-threat",
+      "https://www.axios.com/2026/10/18/trump-endorses-netanyahu-israel-election-iran"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Pakistani troops and Afghan Taliban clash along the Kurram border",
+     "fact": "Pakistani security officials claimed that troops fought Afghan Taliban forces for hours at several points along the border in Khyber Pakhtunkhwa province's Kurram district on October 17 and that artillery-backed units destroyed Taliban posts. The Taliban government had no immediate comment, and there was no confirmed casualty count.",
+     "fc": [
+      {
+       "id": "f10",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.clickorlando.com/news/world/2026/10/17/pakistani-forces-afghan-taliban-exchange-fire-after-militants-attempt-to-infiltrate-pakistan/",
+      "https://kabulnow.com/2026/10/pakistani-media-reports-deaths-of-afghan-taliban-fighters-in-border-clashes/"
+     ],
+     "loc": {
+      "lat": 33.9,
+      "lon": 70.1,
+      "place": "Kurram (Pakistan)",
+      "isos": [
+       "PAK",
+       "AFG"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "French protests spiral into riots and looting, with at least 1,800 arrested",
+     "fact": "Protests across France on October 17 over the rising cost of living and worsening school conditions, about 550,000 people by the authorities' count, descended into arson and looting. At least 1,800 people were arrested, according to an AP tally; Al Jazeera, citing the Interior Ministry, put the number at about 2,400. In a televised address on October 18, President Emmanuel Macron said looters would have to pay for the damage.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/news/protests-france-rising-living-costs-students/",
+      "https://www.aljazeera.com/news/2026/10/18/macron-denounces-frances-nationwide-rioting-looting"
+     ],
+     "loc": {
+      "isos": [
+       "FRA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Zelensky said in an NBC interview on October 18 that the U.S. has resumed sharing intelligence on Russian missile launches, and he spoke by phone the same day with U.S. envoys Steve Witkoff and Jared Kushner.",
+     "src": [
+      "https://kyivindependent.com/a-great-deal-depends-on-americas-position-zelensky-holds-call-with-trumps-peace-envoys-as-us-pivots-to-moscows-side/"
+     ]
+    },
+    {
+     "t": "Iranian Foreign Minister Abbas Araghchi said in Baghdad on October 18 that Iran's offer to reopen the Strait of Hormuz within seven days is still on the table.",
+     "src": [
+      "https://www.foxnews.com/live-news/us-iran-war-peace-talks-oil-strait-hormuz-trump-october-18"
+     ]
+    },
+    {
+     "t": "Iranian media reported that Russian Foreign Minister Sergei Lavrov will visit Tehran on October 19.",
+     "src": [
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ]
+    },
+    {
+     "t": "Egypt's parliament pushed back to October 19 a vote to approve military support for Saudi Arabia.",
+     "src": [
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ]
+    },
+    {
+     "t": "Lithuanian President Gitanas Nauseda said on October 18 that what appeared to be a drone entered Lithuanian airspace and exploded; a Ukrainian Foreign Ministry spokesperson apologized, saying Russian electronic warfare may have pushed a Ukrainian drone off course.",
+     "src": [
+      "https://kyivindependent.com/nato-jets-scramble-as-drone-explodes-in-lithuanian-airspace/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-17",
    "items": [
     {
