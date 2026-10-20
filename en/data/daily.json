@@ -1,6 +1,191 @@
 {
  "issues": [
   {
+   "date": "2026-10-20",
+   "items": [
+    {
+     "case": "korea",
+     "h": "Kim Yo Jong says North's military weighs restarting loudspeakers, adding tactical strike assets",
+     "fact": "Kim Yo Jong, director of the Workers' Party's General Affairs Department, said in an October 19 statement carried by state media that the situation on the southern border was very unstable, and claimed South Korean troops issued 2,870 warning broadcasts and fired warning shots 201 times between August 1 and October 17. South Korea's Defense Ministry on October 20 expressed grave concern and vowed a decisive response if Pyongyang uses this as a pretext for further provocations.",
+     "fc": [],
+     "src": [
+      "https://www.koreaherald.com/article/10907760",
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008804964",
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261020/defense-ministry-voices-grave-concern-over-n-korea-heightening-border-tensions-with-threats"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Hegseth made unannounced Israel trip to meet Netanyahu, Axios reports",
+     "fact": "Axios reported October 19, citing two sources, that Defense Secretary Pete Hegseth made an unannounced trip to Israel and met Prime Minister Benjamin Netanyahu; the Pentagon declined to comment. The same day, Netanyahu posted video of a call with President Trump on X in which he said, \"Donald, we have a job to finish,\" invoking Iran.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.al-monitor.com/originals/2026/10/hegseth-meets-netanyahu-unannounced-visit-israel-axios-reports",
+      "https://www.timesofisrael.com/liveblog_entry/we-have-a-job-to-finish-netanyahu-invokes-iran-in-call-with-trump-after-endorsement-us-president-says-pm-treated-unfairly/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Houthi missile strike on Yemeni government base in Shabwa kills 53",
+     "fact": "A spokesperson for Yemeni government forces said the Houthis fired three ballistic missiles on October 19 at the al-Alam base in Shabwa, where new recruits were training; local authorities in Shabwa said 53 people were killed and 200 wounded. The Houthis claimed the attack, saying they targeted a Saudi-backed base.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/19/at-least-18-killed-in-houthi-attack-on-military-camp-in-yemens-shabwa",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
+     ],
+     "loc": {
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian drone strike on Kharkiv-region park in Nova Vodolaha kills six, including three children",
+     "fact": "Oleh Syniehubov, head of the Kharkiv Regional Military Administration, said October 19 that a Russian drone struck a park in central Nova Vodolaha, killing six people, three of them children. President Zelensky called for sanctions on Russia to stay in place as long as the killings continue.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4176041-three-children-among-six-killed-in-russian-strike-on-kharkiv-region-park.html",
+      "https://www.ukrinform.net/rubric-ato/4176051-pure-atrocity-zelensky-urges-partners-not-to-lift-russia-sanctions-after-children-killed-in-kharkiv-region.html"
+     ],
+     "loc": {
+      "lat": 49.72,
+      "lon": 35.87,
+      "place": "Nova Vodolaha (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky offers 30-day pause on refinery strikes in exchange for Patriot help",
+     "fact": "On an October 19 video call with a bipartisan U.S. congressional delegation, Zelensky said Kyiv had offered to stop striking Russian oil refineries for 30 days if the U.S. provided Patriot air-defense support for that period. He also said Russia had rejected a mutual halt to energy strikes and that partners gave no advance warning of recent ballistic missile attacks.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4176077-zelensky-holds-online-meeting-with-bipartisan-delegation-of-us-congress.html"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Witkoff to hold Oslo talks this week before meeting Putin, Reuters reports",
+     "fact": "Reuters reported October 19, citing people familiar with the plans, that envoy Steve Witkoff is expected to meet Zelensky and representatives of Britain, France, Germany, Poland, the EU and NATO in Norway this week before traveling to Russia to see Putin, though the schedule could change.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/witkoff-plans-ukraine-peace-talks-in-norway-putin-meeting-in-russia/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS",
+       "NOR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "In Tehran, Lavrov says Russian specialists will return to Bushehr in stages",
+     "fact": "Russian Foreign Minister Sergey Lavrov met Foreign Minister Abbas Araghchi and President Masoud Pezeshkian in Tehran on October 19 and said Russian specialists who left the Bushehr nuclear plant during the war would gradually return. Araghchi said the insecurity around the Strait of Hormuz is a direct result of U.S. and Israeli military attacks.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/19/russias-lavrov-to-discuss-us-war-and-regional-security-during-tehran-visit",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "Tehran (Iran)",
+      "isos": [
+       "RUS",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Alberta voters reject starting a separation process as 76 percent vote to stay in Canada",
+     "fact": "In Alberta's October 19 referendum, with more than 1 million votes counted, about 76 percent chose to remain in Canada and about 23 percent backed starting a process toward a separation vote; CBC projected on October 20 that Alberta would stay.",
+     "fc": [],
+     "src": [
+      "https://www.daytondailynews.com/nation-world/alberta-polls-close-in-separation-vote-testing-carney-s-push-for-canadian-unity/article_fa89dff1-4a05-5b02-a8fe-abd34310c7c1.html"
+     ],
+     "loc": {
+      "isos": [
+       "CAN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "France orders partial curfews in Paris, Lyon, Nice and Lille after violent protests",
+     "fact": "At Prime Minister Sébastien Lecornu's request, prefects on October 19 imposed partial overnight curfews around Place de la République and Les Halles in Paris (11 p.m. October 19 to 6 a.m. October 20) and in Lyon, Nice, Lille and elsewhere, some covering only minors. Lecornu said the government could declare a state of emergency if needed.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/19/frances-macron-declines-ministers-resignation-after-violent-protests"
+     ],
+     "loc": {
+      "isos": [
+       "FRA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Egypt's state news agency MENA said October 19 that parliament had postponed until October 26 its vote authorizing the military to defend Saudi Arabia.",
+     "src": [
+      "https://english.news.cn/20261019/004ceed5632246c69f56cd029ce84be5/c.html"
+     ]
+    },
+    {
+     "t": "Maha Al Saud, CEO of the FII Institute, said October 19 that the Future Investment Initiative conference in Riyadh, set for October 26–29, will move to 2027.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
+     ]
+    },
+    {
+     "t": "Russia's Defense Ministry said it downed 136 Ukrainian fixed-wing drones over 14 regions between 8 p.m. October 19 and 8 a.m. October 20, Moscow time.",
+     "src": [
+      "https://tass.com/politics/2204447"
+     ]
+    },
+    {
+     "t": "Randall Schriver, chair of the U.S.-China Economic and Security Review Commission, told a forum in Taipei on October 20 that Chinese coast guard patrols east of Taiwan would be \"highly destabilizing if they continue to operationalize this law enforcement role.\"",
+     "src": [
+      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/20/2003866305"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-19",
    "items": [
     {
