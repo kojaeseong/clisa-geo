@@ -2708,7 +2708,7 @@ const FCT = {
   whyH: "Why it changed or held", week: "Weekly forecast review", first: p => "Started at " + p + "%", firstD: "Forecast made",
   evH: "Related events", evNote: "Events the daily briefing linked to this forecast. The arrows show whether an event makes the outcome more or less likely.", evGo: "That day's briefing →",
   E: {up: ["↑", "Factors raising the probability"], down: ["↓", "Factors lowering the probability"], none: ["–", "No change"]},
-  ocH: "When the result comes in", ocNote: (d, p) => "The outcome will be checked on " + d + " against a probability of " + p + "%. This is what each outcome adds to the accuracy (Brier) score; closer to 0 is better.",
+  ocH: "When the result comes in", ocNote: (d, p) => "Resolves " + d + ". If the current " + p + "% holds until then, the forecast would score as shown below for each outcome (the average of its daily Brier scores). Closer to 0 is better.",
   ocY: "If it happens", ocN: "If it does not",
   yLow: p => "At " + p + "%, it was judged unlikely, so it would join the missed forecasts.", yHigh: p => "At " + p + "%, it was judged likely, so the forecast would hold up.",
   nLow: p => "At " + p + "%, it was judged unlikely, so the forecast would hold up.", nHigh: p => "At " + p + "%, it was judged likely, so it would join the missed forecasts.",
@@ -2717,10 +2717,10 @@ const FCT = {
   calH: "What resolves when", calNote: "Each dot is one forecast. Darker dots are forecasts judged more likely; click one to open it.",
   calM: (y, m, first) => EN_MON[m - 1].slice(0, 3) + (first || m === 1 ? " " + y : ""), calRest: (y, m0) => (m0 === 7 ? "H2 " : EN_MON[m0 - 1].slice(0, 3) + "–Dec ") + y, calY: y => String(y),
   legP: "Probability", legB: ["20% or less", "21–40%", "41–60%", "61–80%", "81% or more"],
-  hDays: done => done ? "days to the next result" : "days to the first result", hToday: "Resolves today", hK: (d, c) => "Resolves " + d + " · " + c, hNote: "When the result is in, this card will show whether the forecast was right.", hStart: d => "Started " + d,
-  stOpen: "open", stChg: "changed since made", stDone: "resolved", stVoid: "voided",
-  rel: n => pl(n, "related item"), later: n => pl(n, "later forecast") + " · see the full list ↓",
-  accH: "How accuracy is calculated", accP: d => "For each resolved forecast, take (probability − outcome)², counting an outcome that happened as 1 and one that did not as 0, and average the results (the Brier score). Closer to 0 is better; giving every forecast 50% scores 0.25." + (d ? " The score will appear here after the first result on " + d + "." : ""),
+  hDays: (done, n) => (n === 1 ? "day" : "days") + (done ? " to the next result" : " to the first result"), hToday: "Resolves today", hK: (d, c) => "Resolves " + d + " · " + c, hNote: "When the result is in, this card will show whether the forecast was right.", hStart: d => "Started " + d,
+  stOpen: "open", stChg: "revised", stDone: "resolved", stVoid: "voided",
+  rel: n => pl(n, "related event"), later: n => pl(n, "later forecast") + " · see the full list ↓",
+  accH: "How accuracy is calculated", accP: d => "For each resolved forecast, take (probability − outcome)² using the probability on each day from publication to the resolution date (or to the day the event occurs, if it comes true sooner), and average the results (the Brier score). An outcome that happened counts as 1; one that did not counts as 0. Closer to 0 is better; giving every forecast 50 percent scores 0.25." + (d ? " The score will appear here after the first result comes in on " + d + "." : ""), accGo: "See how results are checked in Methodology →",
   href: p => EN_P + p,
   tweet: (q, p, d) => "“" + q + "” Clisa Geopolitics puts this at " + p + "%. Resolves " + d + ".",
 };
@@ -2732,6 +2732,14 @@ const fcAdd = (s, n) => new Date(fcUTC(s) + n * 864e5).toISOString().slice(0, 10
 const fcCaseOf = f => (D.strategies || []).find(c => c.fp === f.fp);
 const fcCaseName = f => { const c = fcCaseOf(f); return c ? c.title.split(":")[0] : FCT.etc; };
 const fcHistOf = f => ((D.fc_hist || {})[f.id] || [[f.made || f.due, f.p]]);
+/* v4.24 기간 평균 브라이어 점수(2026-10-20 결재): 공개한 날부터 검증 시점(그 전에 실현이 확정되면 그날)까지 날마다의 확률로 매긴 점수의 평균.
+   확률을 고치지 않은 날은 직전 확률이 이어진다. 아직 열린 전망은 현재 확률이 검증 시점까지 이어진다고 본다 */
+const fcEnd = f => (f.resolved && f.resolved < f.due ? f.resolved : f.due);
+function fcBrierT(f, y){
+  const H = fcHistOf(f), end = fcEnd(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
+  for (; d <= end && n < 5000; d = fcAdd(d, 1)) { while (i + 1 < H.length && H[i + 1][0] <= d) { i++; cur = H[i][1]; } s += Math.pow(cur / 100 - y, 2); n++; }
+  return n ? s / n : Math.pow(f.p / 100 - y, 2);
+}
 const fcPP = it => it.from === it.to ? FCT.keep(it.to) : FCT.chg(it.from, it.to);
 function fcOpen(id){ S.ffc = id || null; S.fcw = "30"; renderForecasts(); switchTab("forecast"); }
 /* v4.23 전망과 검증 탭 머리(2026-10-20 결재): 다음 결과 카드·숫자 꼬리표·판가름 달력 */
@@ -2749,7 +2757,7 @@ function fcSpark(f, t){
 function fcHeroHtml(op, done, t){
   const nx = op[0]; if (!nx) return "";
   const n = fcDays(t, nx.due);
-  return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
+  return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length, n) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
     '<div class="fh-t"><small>' + esc(FCT.hK(FCT.md(nx.due), fcCaseName(nx))) + "</small><div>" + esc(nx.s || nx.q) + "</div><p>" + FCT.hNote + "</p></div>" +
     '<div class="fh-p"><b>' + nx.p + "%</b><span>" + FCT.pNow + "</span>" + fcSpark(nx, t) + "</div></button>";
 }
@@ -2846,7 +2854,7 @@ function fcDetailHtml(f){
     "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
     (res || f.status === "void" ? '<section class="sec fd-rc"><p class="eyebrow">' + FCT.resH + (f.resolved ? FCT.resD(FCT.ymd(f.resolved)) : "") + "</p>" +
       (f.status === "void" ? "<p><b>" + FCT.voidL + "</b></p><p>" + esc(f.void || "") + "</p>" :
-        "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, br(f.p, f.status === "yes")) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
+        "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, fcBrierT(f, f.status === "yes" ? 1 : 0).toFixed(2)) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
         ((f.outcome_src || []).length ? '<p class="note">' + f.outcome_src.map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]) + "</a>").join(" · ") + "</p>" : "")) + "</section>" : "") +
     '<section class="sec"><div class="fd-ht"><h3>' + FCT.chartH + '</h3><div class="fd-seg" role="group" aria-label="' + FCT.span + '"><button type="button" data-fcw="30" aria-pressed="' + (S.fcw !== "all") + '">' + FCT.w30 + '</button><button type="button" data-fcw="all" aria-pressed="' + (S.fcw === "all") + '">' + FCT.wAll + "</button></div></div>" +
       fcChart(f, t) +
@@ -2858,8 +2866,8 @@ function fcDetailHtml(f){
     (evs.length ? '<section class="sec"><h3>' + FCT.evH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.evNote + '</p><ul class="fd-tl">' +
       evs.map(([dt, k, it]) => { const a = FCT.E[k] || FCT.E.none; return '<li><span class="d">' + FCT.md(dt) + '</span><div><span class="fd-ar ' + (FCT.E[k] ? k : "none") + '">' + a[0] + " " + a[1] + "</span> <b>" + esc(it.h) + "</b>" + (it.link ? "<p>" + esc(it.link) + "</p>" : "") + '<a class="fd-more" href="' + FCT.href("/brief/" + esc(dt) + "/") + '">' + FCT.evGo + "</a></div></li>"; }).join("") + "</ul></section>" : "") +
     (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.ocNote(FCT.ymd(f.due), f.p) + "</p>" +
-      '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + br(f.p, true) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
-      '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + br(f.p, false) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
+      '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + fcBrierT(f, 1).toFixed(2) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
+      '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + fcBrierT(f, 0).toFixed(2) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
       (H[0][1] !== f.p ? '<p class="note" style="margin-top:8px">' + FCT.ocFirst(H[0][1], br(H[0][1], true), br(H[0][1], false)) + "</p>" : "") + "</section>" : "") +
     (sib.length ? '<section class="sec"><h3>' + FCT.sibH + '</h3><ul class="fsoon">' + sib.map(x => '<li><button type="button" data-fcd="' + esc(x.id) + '"><span class="dl"></span><span class="sq">' + esc(x.s || x.q) + "<small>" + FCT.due(FCT.ymd(x.due)) + '</small></span><span class="pb"><i style="width:' + x.p + '%"></i></span><b>' + x.p + "%</b></button></li>").join("") + "</ul></section>" : "") +
     '<section class="sec"><h3>' + FCT.shareH + '</h3><div class="fd-share"><a class="chip" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(FCT.tweet(f.q, f.p, FCT.ymd(f.due))) + "&url=" + encodeURIComponent(url) + '" target="_blank" rel="noopener">' + FCT.shareX + '</a><button type="button" class="chip" data-fccopy="' + esc(url) + '">' + FCT.copy + '</button><a class="chip" href="' + FCT.href("/subscribe/") + '">' + FCT.sub + "</a></div></section>";
@@ -2869,14 +2877,14 @@ function renderForecasts(){
   const fs = D.forecasts.slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
   const done = fs.filter(f => f.status === "yes" || f.status === "no");
   const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
-  const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
+  const brier = done.length ? (done.reduce((s, f) => s + fcBrierT(f, f.status === "yes" ? 1 : 0), 0) / done.length).toFixed(3) : "—";  /* v4.24 기간 평균 */
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
     "<div class=\"sec\"><h2>Forecasts and Track Record</h2><p class=\"lead\" style=\"margin-top:8px\">Every forecast states its probability and a resolution date; on that date, it is checked against what actually happened, and the result is published.</p></div>" +
     fcHeroHtml(op0, done, t0) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
     fcCalHtml(op0, t0) +  /* v4.23 판가름 달력 */
     fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
-    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + "</p></details>" +
+    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
     (FCR().length ? "<section class=\"sec\" id=\"f-week\"><h3>Weekly forecast review</h3><p class=\"note\" style=\"margin-bottom:8px\">Every Monday, forecast probabilities are revisited in light of the previous week’s events. Both revised and unchanged forecasts are listed, with reasons.</p>" + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
     "<section class=\"sec\"><h3>Missed forecasts</h3><p class=\"note\" style=\"margin-bottom:8px\">Forecasts rated 50% or higher that did not happen, or rated below 50% that did.</p>" + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : "<p class=\"note\">No forecasts have been resolved yet.</p>") + "</section>" +
     ((PUB() && (D.notices || []).length) ? "<section class=\"sec\"><h3>Revised assessments</h3><ul class=\"tl\">" + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(enDate(l.date)) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + "\">View analysis · " + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
@@ -2932,6 +2940,12 @@ function renderIdeas(){
         "<dl>" + row("Biographical note", esc(t.bio || "")) + row("Core propositions", props) + row("Core argument", esc(t.claim || t.idea || "")) + row("How the thinking developed", esc(t.develop || "")) + row("Signature passage", quote) + row("Criticism and limits", esc(t.critique || "")) + row("In light of current events", esc(t.now || "")) + row("What held up and what didn't", esc(t.record || "")) + row("Sources (N)".replace("N", (t.sources || []).length), srcs) + "</dl></article></li>";  /* v4.03 사상가 기본 정보 14명(2026-10-14 결재) */
     }).join("") + "</ul></section>";
 }
+function divisionHtml(M){  /* v4.24 사람과 AI의 분업(2026-10-20 결재) */
+  const V = M.division; if (!V) return "";
+  const g = V.game, at = g ? (g.after == null ? V.p.length - 1 : g.after) : -1;
+  return '<section class="sec" id="m-div"><h3>' + esc(V.t) + "</h3>" + V.p.map((t, i) => '<p style="margin:0 0 10px;line-height:1.75">' + esc(t) + "</p>" +
+    (i === at ? '<p style="margin:0 0 12px"><a class="chip" href="' + esc(FCT.href(g.href)) + '">' + esc(g.label) + "</a></p>" : "")).join("") + "</section>";
+}
 function renderMethod(){
   const F = D.philosophy, M = D.methodology, I = D.indicator;
   const R = F.rules || [];
@@ -2943,7 +2957,7 @@ function renderMethod(){
   const inner = !pub; /* 작업 설명서는 내부판에만 */
   $("#pane-method").innerHTML =
     "<div class=\"sec\"><h2>Methodology</h2><p class=\"lead\" style=\"margin-top:8px\">This section sets out the purpose of Clisa Geopolitics, how its judgments are structured and verified, and its sources and limitations. Its ultimate aim is the well-being of individual people, the standard that guides every analysis.</p>" + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
-    "<section class=\"sec\"><h3>Charter" + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" + questionsHtml() +
+    "<section class=\"sec\"><h3>Charter" + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" + questionsHtml() + divisionHtml(M) +
     "<section class=\"sec\"><h3>How judgments are structured</h3><div class=\"tree\"><div class=\"root\">" + esc(T.root) + '</div><div class="arrow"></div>' +
       '<div class="layers">' + LY.map(l => '<div class="layer l' + l.id + '"><div class="lh"><b>' + esc(LNAME[l.id]) + "</b><span>" + esc(l.q) + '</span></div><p class="note">' + esc(l.d) + "</p>" +
         (inner ? '<ol class="steps" style="counter-reset:st ' + ((stepsOf(l.id)[0] || {n: 1}).n - 1) + '">' + stepsOf(l.id).map(st => "<li><div><b>" + esc(st.t) + "</b><p>" + esc(st.d) + "</p>" + st.rules.map(rc).join("") + "</div></li>").join("") + "</ol>" : "") + "</div>").join("") + "</div>" +

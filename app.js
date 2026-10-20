@@ -2684,7 +2684,7 @@ const FCT = {
   whyH: "변동·유지 이유", week: "주간 전망 점검", first: p => "처음 확률 " + p + "%", firstD: "전망을 만든 날",
   evH: "관련 사건", evNote: "정세 브리핑에서 이 전망과 연결한 사건입니다. 화살표는 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다.", evGo: "그날의 정세 브리핑 →",
   E: {up: ["↑", "확률 상승 요인"], down: ["↓", "확률 하락 요인"], none: ["–", "변화 없음"]},
-  ocH: "결과가 나오면", ocNote: (d, p) => d + "에 확률 " + p + "%로 결과를 확인합니다. 결과마다 이 전망이 정확도(브라이어 점수)에 더하는 값입니다. 0에 가까울수록 정확합니다.",
+  ocH: "결과가 나오면", ocNote: (d, p) => d + "에 결과를 확인합니다. 현재 확률 " + p + "%가 그날까지 이어진다고 보면, 결과마다 이 전망의 점수(날마다의 확률로 매긴 브라이어 점수의 평균)는 다음과 같습니다. 0에 가까울수록 정확합니다.",
   ocY: "실현되면", ocN: "불발되면",
   yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
   nLow: p => p + "%로 낮게 본 대로 일어나지 않은 것입니다.", nHigh: p => p + "%로 높게 본 일이 일어나지 않은 것이므로 「빗나간 전망」에 오릅니다.",
@@ -2696,7 +2696,7 @@ const FCT = {
   hDays: done => done ? "일 뒤 다음 결과" : "일 뒤 첫 결과", hToday: "오늘 판가름", hK: (d, c) => d + " 판가름 · " + c, hNote: "결과가 나오면 이 자리에 맞았는지 틀렸는지 표시합니다.", hStart: d => d + " 처음",
   stOpen: "진행 중", stChg: "확률을 바꾼 전망", stDone: "결과 확인", stVoid: "무효",
   rel: n => "관련 꼭지 " + n + "건", later: n => "그 뒤의 전망 " + n + "건 · 전체 목록에서 보기 ↓",
-  accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다 (확률 − 실제 결과)²를 구해 평균을 냅니다(브라이어 점수). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""),
+  accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
   href: p => p,
   tweet: (q, p, d) => "「" + q + "」 클리사 지오폴리틱스의 전망 " + p + "% · 검증 시점 " + d,
 };
@@ -2708,6 +2708,14 @@ const fcAdd = (s, n) => new Date(fcUTC(s) + n * 864e5).toISOString().slice(0, 10
 const fcCaseOf = f => (D.strategies || []).find(c => c.fp === f.fp);
 const fcCaseName = f => { const c = fcCaseOf(f); return c ? c.title.split(":")[0] : FCT.etc; };
 const fcHistOf = f => ((D.fc_hist || {})[f.id] || [[f.made || f.due, f.p]]);
+/* v4.24 기간 평균 브라이어 점수(2026-10-20 결재): 공개한 날부터 검증 시점(그 전에 실현이 확정되면 그날)까지 날마다의 확률로 매긴 점수의 평균.
+   확률을 고치지 않은 날은 직전 확률이 이어진다. 아직 열린 전망은 현재 확률이 검증 시점까지 이어진다고 본다 */
+const fcEnd = f => (f.resolved && f.resolved < f.due ? f.resolved : f.due);
+function fcBrierT(f, y){
+  const H = fcHistOf(f), end = fcEnd(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
+  for (; d <= end && n < 5000; d = fcAdd(d, 1)) { while (i + 1 < H.length && H[i + 1][0] <= d) { i++; cur = H[i][1]; } s += Math.pow(cur / 100 - y, 2); n++; }
+  return n ? s / n : Math.pow(f.p / 100 - y, 2);
+}
 const fcPP = it => it.from === it.to ? FCT.keep(it.to) : FCT.chg(it.from, it.to);
 function fcOpen(id){ S.ffc = id || null; S.fcw = "30"; renderForecasts(); switchTab("forecast"); }
 /* v4.23 전망과 검증 탭 머리(2026-10-20 결재): 다음 결과 카드·숫자 꼬리표·판가름 달력 */
@@ -2725,7 +2733,7 @@ function fcSpark(f, t){
 function fcHeroHtml(op, done, t){
   const nx = op[0]; if (!nx) return "";
   const n = fcDays(t, nx.due);
-  return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
+  return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length, n) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
     '<div class="fh-t"><small>' + esc(FCT.hK(FCT.md(nx.due), fcCaseName(nx))) + "</small><div>" + esc(nx.s || nx.q) + "</div><p>" + FCT.hNote + "</p></div>" +
     '<div class="fh-p"><b>' + nx.p + "%</b><span>" + FCT.pNow + "</span>" + fcSpark(nx, t) + "</div></button>";
 }
@@ -2822,7 +2830,7 @@ function fcDetailHtml(f){
     "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
     (res || f.status === "void" ? '<section class="sec fd-rc"><p class="eyebrow">' + FCT.resH + (f.resolved ? FCT.resD(FCT.ymd(f.resolved)) : "") + "</p>" +
       (f.status === "void" ? "<p><b>" + FCT.voidL + "</b></p><p>" + esc(f.void || "") + "</p>" :
-        "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, br(f.p, f.status === "yes")) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
+        "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, fcBrierT(f, f.status === "yes" ? 1 : 0).toFixed(2)) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
         ((f.outcome_src || []).length ? '<p class="note">' + f.outcome_src.map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]) + "</a>").join(" · ") + "</p>" : "")) + "</section>" : "") +
     '<section class="sec"><div class="fd-ht"><h3>' + FCT.chartH + '</h3><div class="fd-seg" role="group" aria-label="' + FCT.span + '"><button type="button" data-fcw="30" aria-pressed="' + (S.fcw !== "all") + '">' + FCT.w30 + '</button><button type="button" data-fcw="all" aria-pressed="' + (S.fcw === "all") + '">' + FCT.wAll + "</button></div></div>" +
       fcChart(f, t) +
@@ -2834,8 +2842,8 @@ function fcDetailHtml(f){
     (evs.length ? '<section class="sec"><h3>' + FCT.evH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.evNote + '</p><ul class="fd-tl">' +
       evs.map(([dt, k, it]) => { const a = FCT.E[k] || FCT.E.none; return '<li><span class="d">' + FCT.md(dt) + '</span><div><span class="fd-ar ' + (FCT.E[k] ? k : "none") + '">' + a[0] + " " + a[1] + "</span> <b>" + esc(it.h) + "</b>" + (it.link ? "<p>" + esc(it.link) + "</p>" : "") + '<a class="fd-more" href="' + FCT.href("/brief/" + esc(dt) + "/") + '">' + FCT.evGo + "</a></div></li>"; }).join("") + "</ul></section>" : "") +
     (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.ocNote(FCT.ymd(f.due), f.p) + "</p>" +
-      '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + br(f.p, true) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
-      '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + br(f.p, false) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
+      '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + fcBrierT(f, 1).toFixed(2) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
+      '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + fcBrierT(f, 0).toFixed(2) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
       (H[0][1] !== f.p ? '<p class="note" style="margin-top:8px">' + FCT.ocFirst(H[0][1], br(H[0][1], true), br(H[0][1], false)) + "</p>" : "") + "</section>" : "") +
     (sib.length ? '<section class="sec"><h3>' + FCT.sibH + '</h3><ul class="fsoon">' + sib.map(x => '<li><button type="button" data-fcd="' + esc(x.id) + '"><span class="dl"></span><span class="sq">' + esc(x.s || x.q) + "<small>" + FCT.due(FCT.ymd(x.due)) + '</small></span><span class="pb"><i style="width:' + x.p + '%"></i></span><b>' + x.p + "%</b></button></li>").join("") + "</ul></section>" : "") +
     '<section class="sec"><h3>' + FCT.shareH + '</h3><div class="fd-share"><a class="chip" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(FCT.tweet(f.q, f.p, FCT.ymd(f.due))) + "&url=" + encodeURIComponent(url) + '" target="_blank" rel="noopener">' + FCT.shareX + '</a><button type="button" class="chip" data-fccopy="' + esc(url) + '">' + FCT.copy + '</button><a class="chip" href="' + FCT.href("/subscribe/") + '">' + FCT.sub + "</a></div></section>";
@@ -2845,14 +2853,14 @@ function renderForecasts(){
   const fs = D.forecasts.slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
   const done = fs.filter(f => f.status === "yes" || f.status === "no");
   const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
-  const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
+  const brier = done.length ? (done.reduce((s, f) => s + fcBrierT(f, f.status === "yes" ? 1 : 0), 0) / done.length).toFixed(3) : "—";  /* v4.24 기간 평균 */
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
     '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시하며, 검증 시점에 실제 발생 여부를 점검하고 그 결과도 공개합니다.</p></div>' +
     fcHeroHtml(op0, done, t0) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
     fcCalHtml(op0, t0) +  /* v4.23 판가름 달력 */
     fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
-    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + "</p></details>" +
+    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
     (FCR().length ? '<section class="sec" id="f-week"><h3>주간 전망 점검</h3><p class="note" style="margin-bottom:8px">매주 월요일, 지난 한 주의 사건을 반영해 전망의 확률을 다시 봅니다. 조정한 전망과 그대로 둔 전망을 이유와 함께 밝힙니다.</p>' + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
     '<section class="sec"><h3>빗나간 전망</h3><p class="note" style="margin-bottom:8px">50% 이상으로 본 전망이 불발되거나 50% 미만으로 본 전망이 실현된 경우입니다.</p>' + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : '<p class="note">검증이 끝난 전망이 아직 없습니다.</p>') + "</section>" +
     ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + '">사안 분석 보기 · ' + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
@@ -2908,6 +2916,12 @@ function renderIdeas(){
         "<dl>" + row("약력", esc(t.bio || "")) + row("핵심 명제", props) + row("핵심 주장", esc(t.claim || t.idea || "")) + row("생각의 전개", esc(t.develop || "")) + row("대표 구절", quote) + row("비판과 한계", esc(t.critique || "")) + row("현재 정세에 비추면", esc(t.now || "")) + row("들어맞은 것과 어긋난 것", esc(t.record || "")) + row("출처 N건".replace("N", (t.sources || []).length), srcs) + "</dl></article></li>";  /* v4.03 사상가 기본 정보 14명(2026-10-14 결재) */
     }).join("") + "</ul></section>";
 }
+function divisionHtml(M){  /* v4.24 사람과 AI의 분업(2026-10-20 결재) */
+  const V = M.division; if (!V) return "";
+  const g = V.game, at = g ? (g.after == null ? V.p.length - 1 : g.after) : -1;
+  return '<section class="sec" id="m-div"><h3>' + esc(V.t) + "</h3>" + V.p.map((t, i) => '<p style="margin:0 0 10px;line-height:1.75">' + esc(t) + "</p>" +
+    (i === at ? '<p style="margin:0 0 12px"><a class="chip" href="' + esc(FCT.href(g.href)) + '">' + esc(g.label) + "</a></p>" : "")).join("") + "</section>";
+}
 function renderMethod(){
   const F = D.philosophy, M = D.methodology, I = D.indicator;
   const R = F.rules || [];
@@ -2919,7 +2933,7 @@ function renderMethod(){
   const inner = !pub; /* 작업 설명서는 내부판에만 */
   $("#pane-method").innerHTML =
     '<div class="sec"><h2>분석 방법</h2><p class="lead" style="margin-top:8px">클리사 지오폴리틱스의 목적과 판단의 구성, 검증 방식, 자료와 한계를 밝힙니다. 궁극적 목적은 개별 인간의 행복이며, 모든 분석의 방향을 정하는 기준입니다.</p>' + (pub ? "" : '<p class="note" style="margin-top:6px">' + esc(M.version) + (M.status ? " · " + esc(M.status) : "") + "</p>") + "</div>" +
-    '<section class="sec"><h3>헌장' + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" + questionsHtml() +
+    '<section class="sec"><h3>헌장' + (F.charter.status && !pub ? " · " + esc(F.charter.status) : "") + '</h3><div class="charter">' + F.charter.items.map(it => "<div><b>" + esc(it.k) + "</b><p>" + esc(it.t) + (it.by ? "<small>" + esc(it.by) + "</small>" : "") + "</p></div>").join("") + "</div></section>" + questionsHtml() + divisionHtml(M) +
     '<section class="sec"><h3>판단의 구성</h3><div class="tree"><div class="root">' + esc(T.root) + '</div><div class="arrow"></div>' +
       '<div class="layers">' + LY.map(l => '<div class="layer l' + l.id + '"><div class="lh"><b>' + esc(LNAME[l.id]) + "</b><span>" + esc(l.q) + '</span></div><p class="note">' + esc(l.d) + "</p>" +
         (inner ? '<ol class="steps" style="counter-reset:st ' + ((stepsOf(l.id)[0] || {n: 1}).n - 1) + '">' + stepsOf(l.id).map(st => "<li><div><b>" + esc(st.t) + "</b><p>" + esc(st.d) + "</p>" + st.rules.map(rc).join("") + "</div></li>").join("") + "</ol>" : "") + "</div>").join("") + "</div>" +

@@ -294,7 +294,7 @@ function ending(nx){
      (t.traits?'<p class="tp">'+esc(t.traits)+'</p>':'')+
      (t.you?'<p class="tp you">'+esc(t.you)+'</p>':'')+
      '<div class="pair">'+T('찰떡 궁합 ','Best match: ')+esc(mate.name||'')+T(' · 상극 ',' · Opposite: ')+esc(foe.name||'')+T(' · 실제 역사와 같은 선택 ',' · Same as history: ')+same+' / '+asked+'</div>'+
-     '<div class="share"><button class="btn small" id="card">'+T('결과 카드 만들기','Make result card')+'</button><button class="btn small ghost" id="copy">'+T('링크 복사','Copy link')+'</button></div><div id="cardbox" class="cardbox" hidden></div></div>'+
+     '<div class="share"><button class="btn small" id="card">'+T('결과 카드 만들기','Make result card')+'</button><button class="btn small ghost" id="copy">'+T('게임 주소 복사','Copy game link')+'</button></div><div id="cardbox" class="cardbox" hidden></div></div>'+
      (F?'<div class="sec"><h3>'+esc(F.name)+' ('+esc(F.years)+', '+esc(F.country)+')</h3><p>'+esc(F.life)+'</p><p>'+esc(F.story)+'</p></div>':'<p class="tp">'+esc(t.story||'')+'</p>')+
      (t.kin&&t.kin.length?'<div class="sec"><h3>'+T('당신과 닮은 또 다른 인물','Others who decided like you')+'</h3>'+t.kin.map(function(q){return '<div class="kin"><b>'+esc(q.name)+'</b> <span>'+esc(q.years)+' · '+esc(q.country)+'</span><p>'+esc(q.why)+'</p></div>';}).join('')+'</div>':'')+
      (t.caution?'<div class="note"><b>'+T('이 유형이 놓치기 쉬운 것','What this type tends to miss')+'</b>'+esc(t.caution)+'</div>':'')+
@@ -351,9 +351,22 @@ function shareCard(t,E,k,same,asked){
   fit(x,T('결말 ','Ending ')+k+' · '+E.title,'400 %px '+DISP,54,W-140); x.fillText(x._t,70,910);
   x.save(); x.translate(70,1000); x.rotate(-0.04); x.strokeStyle=red; x.lineWidth=5; x.font='800 40px '+sans; var st=T('실제 역사와 같은 선택 ','Same as history ')+same+'/'+asked, sw=Math.max(560,x.measureText(st).width+48); x.strokeRect(0,0,sw,86); x.fillStyle=red; x.fillText(st,24,58); x.restore();
   x.fillStyle=ink; x.fillRect(70,H-150,W-140,2); x.font='500 30px "IBM Plex Mono",monospace'; x.fillText('clisa.ai'+(EN?'/en':'')+'/play/1914',70,H-100);
-  var url=cv.toDataURL('image/png'), box=document.getElementById('cardbox');
-  box.innerHTML='<img src="'+url+'" alt="'+T('결과 카드','Result card')+'"><p class="foot">'+T('이미지를 길게 누르거나 오른쪽 버튼을 눌러 저장하세요.','Long-press or right-click the image to save it.')+'</p><button class="btn small ghost" id="cardclose">'+T('닫기','Close')+'</button>';
+  var url=cv.toDataURL('image/png'), box=document.getElementById('cardbox'), fname='world-of-decision-1914.png';
+  /* 2026-10-20: card copy, save and share (copy falls back to save where the browser blocks image copying) */
+  var blobP=new Promise(function(res){ if(cv.toBlob) cv.toBlob(function(b){res(b);},'image/png'); else fetch(url).then(function(r){return r.blob();}).then(res); });
+  var canShare=false; try{ canShare=!!(navigator.canShare&&navigator.canShare({files:[new File([new Blob([''],{type:'image/png'})],fname,{type:'image/png'})]})); }catch(e){}
+  box.innerHTML='<img src="'+url+'" alt="'+T('결과 카드','Result card')+'"><div class="share" style="margin-top:0">'+
+    '<button class="btn small" id="cardcopy">'+T('카드 이미지 복사','Copy card image')+'</button>'+
+    '<a class="btn small ghost" id="cardsave" style="text-decoration:none" href="'+url+'" download="'+fname+'">'+T('이미지 저장','Save image')+'</a>'+
+    (canShare?'<button class="btn small ghost" id="cardshare">'+T('공유','Share')+'</button>':'')+
+    '<button class="btn small ghost" id="cardclose">'+T('닫기','Close')+'</button></div>'+
+    '<p class="foot">'+T('이미지를 길게 누르거나 오른쪽 버튼을 눌러 저장할 수도 있습니다.','You can also long-press or right-click the image to save it.')+'</p>';
   box.hidden=false; document.getElementById('cardclose').onclick=function(){box.hidden=true;};
+  var save=function(){ var a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); };
+  document.getElementById('cardcopy').onclick=function(){ var b=this, fail=function(){ save(); b.textContent=T('복사가 막혀 이미지로 저장했습니다','Copy blocked; image saved instead'); };
+    try{ if(!(navigator.clipboard&&navigator.clipboard.write&&window.ClipboardItem)) return fail();
+      navigator.clipboard.write([new ClipboardItem({'image/png':blobP})]).then(function(){ b.textContent=T('복사했습니다','Copied'); }, fail); }catch(e){ fail(); } };
+  var sh=document.getElementById('cardshare'); if(sh) sh.onclick=function(){ blobP.then(function(bl){ return navigator.share({files:[new File([bl],fname,{type:'image/png'})], title:'WORLD OF DECISION · 1914', text:T('나의 전략가 유형: ','My strategist type: ')+(t.name||''), url:location.href.split('#')[0]}); }).catch(function(){}); };
 }
 Promise.all([get(BASE+'data/common.'+LANG+'.json'),opt(BASE+'data/maps'+(EN?'.en':'')+'.json'),opt(BASE+'data/types.'+LANG+'.json')]).then(function(r){
   C=r[0]; MAPS=r[1]; TYPES=r[2];
