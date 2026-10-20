@@ -311,9 +311,9 @@
   ]
  },
  "fleet": {
-  "asof": "2026-10-13",
+  "asof": "2026-10-19",
   "src": "USNI News Fleet Tracker (approximate positions based on Navy and public information)",
-  "url": "https://news.usni.org/2026/10/13/usni-news-fleet-and-marine-tracker-oct-13-2026",
+  "url": "https://news.usni.org/2026/10/19/usni-news-fleet-and-marine-tracker-oct-19-2026",
   "items": [
    {
     "name": "USS George Washington",
@@ -323,7 +323,7 @@
     "fwd": true,
     "lat": 16.5,
     "lon": 63.5,
-    "where": "Arabian Sea · supporting operations against Iran",
+    "where": "Arabian Sea · supporting operations in the Middle East",
     "note": "The carrier forward-deployed in Japan is in the Middle East"
    },
    {
@@ -331,36 +331,36 @@
     "g": "Arabian Sea",
     "type": "cv",
     "home": "Norfolk",
-    "lat": 14.5,
-    "lon": 62.5,
-    "where": "Arabian Sea · supporting operations in the Middle East (left Phuket, Thailand, on October 9)"
+    "lat": 16.5,
+    "lon": 63.5,
+    "where": "Arabian Sea · supporting operations in the Middle East"
    },
    {
     "name": "USS Boxer amphibious ready group",
     "g": "Arabian Sea",
     "type": "ar",
     "home": "San Diego",
-    "lat": 18.5,
-    "lon": 61.0,
+    "lat": 16.5,
+    "lon": 63.5,
     "where": "Arabian Sea"
    },
    {
     "name": "USS Theodore Roosevelt",
-    "g": "Western Pacific",
+    "g": "Yokosuka",
     "type": "cv",
     "home": "San Diego",
-    "lat": 22.0,
-    "lon": 160.0,
-    "where": "Pacific · heading west in the U.S. 7th Fleet area"
+    "lat": 35.3,
+    "lon": 139.7,
+    "where": "Yokosuka (Japan) · arrived October 16, departed October 19 (destination not reported)"
    },
    {
     "name": "USS Makin Island amphibious ready group",
     "g": "Pacific, west of Hawaii",
     "type": "ar",
     "home": "San Diego",
-    "lat": 21.0,
-    "lon": -162.0,
-    "where": "Pacific · left Pearl Harbor, Hawaii, on October 12"
+    "lat": 19.0,
+    "lon": 175.0,
+    "where": "Pacific · heading west after a port visit to Hawaii"
    },
    {
     "name": "USS Tripoli amphibious ready group",
@@ -368,8 +368,8 @@
     "type": "ar",
     "home": "Sasebo (Japan)",
     "fwd": true,
-    "lat": 33.16,
-    "lon": 129.72,
+    "lat": 33.2,
+    "lon": 129.7,
     "where": "In port at Sasebo"
    }
   ]
