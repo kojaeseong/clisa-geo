@@ -1,4 +1,5 @@
 
+@font-face{font-family:"Clisa Pct";font-style:normal;font-display:swap;font-weight:45 920;src:url(https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/woff2-dynamic-subset/PretendardVariable.subset.87.woff2) format("woff2-variations");unicode-range:U+25}
 :root{
   --focus-0:#DDE7F7; --focus-1:#1A3FB8;
   --bg:#E9ECEF; --panel:#FFFFFF; --panel-2:#F2F4F6; --ink:#101418; --ink-2:#2F3842; --muted:#6B7580; --line:#D2D8DE;
@@ -7,7 +8,7 @@
   --d-geo:#2a78d6; --d-power:#eb6834; --d-regime:#1baf7a; --d-memory:#eda100; --d-deal:#8a63d2; --risk-0:#F6E6E1; --risk-1:#9C2217; --mil-0:#DDE5ED; --mil-1:#1C4A77; --pol-0:#E1EBDD; --pol-1:#2B6535; --econ-0:#F1E7CF; --econ-1:#81530F;
   --serif:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --mono:"Clisa Pct","IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;  /* v4.22 % 기호만 Pretendard(IBM Plex Mono의 %는 사선이 동그라미를 가로질러 잘린 듯 보임, 2026-10-20) */
   color-scheme:light;
 }
 [hidden]{display:none!important}
@@ -168,6 +169,60 @@ details.src ul{margin:8px 0 0; padding-left:18px; font-size:12px; display:grid; 
 .score-card div:first-child{border-left:0}
 .score-card b{font:500 18px var(--mono)}
 .score-card span{font-size:11px; color:var(--muted)}
+/* v4.22 판가름 목록·전망별 화면(2026-10-20 결재) */
+.score-card .hl{background:var(--accent-soft)} .score-card .hl b{color:var(--accent)}
+#pane-forecast > .score-card{content-visibility:visible; overflow:clip; flex-shrink:0}  /* v4.22 성적표 칸이 높이 2px로 눌려 보이지 않던 결함: 넘침 숨김(overflow:hidden)이면 글 칸 격자에서 최소 높이가 0이 되어 줄어든다. clip은 그렇지 않다 */
+.fsoon{list-style:none; margin:0; padding:0}
+.fsoon li button{display:grid; grid-template-columns:60px 1fr 56px 38px; gap:10px; align-items:center; width:100%; padding:9px 0; border:0; border-top:1px solid var(--line); background:none; color:inherit; font:inherit; text-align:left; cursor:pointer}
+.fsoon li:first-child button{border-top:0}
+.fsoon .dl{font:500 12px var(--mono); color:var(--muted); text-align:right; white-space:nowrap}
+.fsoon.s30 .dl{color:var(--conflict); font-weight:600}
+.fsoon .sq{font-weight:600; font-size:14px; line-height:1.4; min-width:0}
+.fsoon .sq small{display:block; font-weight:400; font-size:12px; color:var(--muted)}
+.fsoon .pb{height:6px; background:var(--panel-2); border-radius:3px; overflow:hidden} .fsoon .pb i{display:block; height:100%; background:var(--accent)}
+.fsoon b{font:500 14px var(--mono); text-align:right}
+.fsoon li button:hover .sq{color:var(--accent)}
+details.more>summary{cursor:pointer; font-size:13px; color:var(--accent); padding:8px 0 0}
+.fd-h{display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start}
+.fd-q{font-size:19px; line-height:1.45; margin:4px 0 0}
+.fd-p{text-align:right} .fd-p b{display:block; font:500 38px/1 var(--mono); color:var(--accent)} .fd-p span{font-size:12px; color:var(--muted)}
+.fd-meta{display:grid; grid-template-columns:76px 1fr; gap:6px 12px; font-size:13px; margin:12px 0 0; border-top:1px solid var(--line); padding-top:12px}
+.fd-meta dt{color:var(--muted)} .fd-meta dd{margin:0}
+.fd-dd{display:inline-block; margin-left:4px; padding:0 8px; border-radius:999px; background:#FBE9E5; color:var(--conflict); font-size:12px; font-weight:600}
+.fd-ht{display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px}
+.fd-seg{display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden}
+.fd-seg button{font:600 12px var(--sans); padding:4px 10px; border:0; background:var(--panel); color:var(--muted); cursor:pointer}
+.fd-seg button[aria-pressed="true"]{background:var(--ink); color:#fff}
+.fd-ch{width:100%; height:auto; display:block}
+.fd-ch .g{stroke:var(--line); stroke-width:1} .fd-ch .g50{stroke:#9AA4AE; stroke-dasharray:3 3}
+.fd-ch .ax{font:11px var(--sans); fill:var(--muted)}
+.fd-ch .ln{fill:none; stroke:var(--accent); stroke-width:3; stroke-linejoin:round}
+.fd-ch .ln.fut{stroke-dasharray:5 5; stroke-width:2; opacity:.55}
+.fd-ch .vl{stroke-width:1.2} .fd-ch .vl.today{stroke:var(--ink-2); stroke-dasharray:2 3} .fd-ch .vl.due{stroke:var(--conflict)}
+.fd-ch .ax.due{fill:var(--conflict); font-weight:600} .fd-ch .ax.today{fill:var(--ink-2); font-weight:600}
+.fd-ch .rv{fill:var(--panel); stroke:var(--accent); stroke-width:2} .fd-ch .rv.chg{fill:var(--accent)}
+.fd-ch .vlab{font:600 12px var(--mono); fill:var(--accent)}
+.fd-ch .ev circle{fill:var(--panel-2); stroke:var(--line)} .fd-ch .ev text{font:700 11px var(--sans); fill:var(--muted)}
+.fd-ch .ev.up circle{fill:#E6EDFC; stroke:var(--accent)} .fd-ch .ev.up text{fill:var(--accent)}
+.fd-ch .ev.down circle{fill:#FBE9E5; stroke:var(--conflict)} .fd-ch .ev.down text{fill:var(--conflict)}
+.fd-leg{display:flex; flex-wrap:wrap; gap:4px 12px; font-size:11.5px; color:var(--muted); margin:6px 0}
+.fd-leg i{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:-1px; border:2px solid var(--accent)}
+.fd-leg i.f{background:var(--accent)} .fd-leg i.o{background:var(--panel)} .fd-leg i.u{background:#E6EDFC} .fd-leg i.d{border-color:var(--conflict); background:#FBE9E5}
+.fd-tl{list-style:none; margin:0; padding:0; display:grid; gap:14px}
+.fd-tl li{display:grid; grid-template-columns:58px 1fr; gap:10px}
+.fd-tl .d{font-size:13px; color:var(--muted); white-space:nowrap}
+.fd-tl p{margin:3px 0 0; font-size:14px; line-height:1.6; color:var(--ink-2)}
+.fd-ar{display:inline-block; font-size:11px; font-weight:700; padding:0 7px; border-radius:4px; background:var(--panel-2); color:var(--muted)}
+.fd-ar.up{background:#E6EDFC; color:var(--accent)} .fd-ar.down{background:#FBE9E5; color:var(--conflict)}
+.fd-more{font-size:12px; color:var(--accent); text-decoration:none}
+.fd-oc{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.fd-oc>div{border:1px solid var(--line); border-radius:10px; padding:12px; display:grid; gap:4px}
+.fd-oc h4{margin:0; font-size:13px} .fd-oc b{font:500 20px var(--mono)} .fd-oc .y b{color:var(--conflict)} .fd-oc .n b{color:var(--coop)}
+.fd-oc p{margin:0; font-size:13px; line-height:1.55; color:var(--ink-2)}
+.fd-rc{border:2px solid var(--ink); border-radius:12px; padding:14px 16px}
+.fd-rc p{margin:4px 0 0}
+.fd-share{display:flex; flex-wrap:wrap; gap:6px}
+@media (max-width: 600px){ .fd-oc{grid-template-columns:1fr} .fsoon li button{grid-template-columns:56px 1fr 38px} .fsoon .pb{display:none} .fd-q{font-size:17px} .fd-p b{font-size:32px} }
 
 .thinker{display:grid; gap:10px; padding-bottom:4px}
 .thinker .who{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}

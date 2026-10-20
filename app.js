@@ -108,7 +108,7 @@ function srBuild(){
   D.forecasts.forEach(f => { const c = (D.strategies || []).find(x => x.fp === f.fp), fp = D.flashpoints.find(x => x.id === f.fp);
     add("전망", (f.s || f.q) + " · " + (f.status === "open" ? f.p + "%" : f.status === "yes" ? "실현" : f.status === "no" ? "불발" : "무효"),
       [f.q, f.basis, f.void || "", c ? cshort(c) : "", fp ? fp.name_ko : "", (f.countries || []).map(nm).join(" "), "가능성 확률 전망 검증 " + (f.due || "")],
-      () => { S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + f.id + '"]'); if (li) { if (!li.id) li.id = "fc-" + f.id; return li.id; } return "pane-forecast"; });
+      () => { fcOpen(f.id); return "pane-forecast"; });  /* v4.22 전망별 화면으로 */
   });
   const G = D.grand || {};
   (G.trends || []).forEach(t => add("국제 질서", t.t, t, toPane("grand")));
@@ -639,7 +639,7 @@ function setupInteraction(){
   $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
   $("#legend").addEventListener("click", e => { if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
   $("#lensoff").onclick = () => setLens(null);
-  document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; const t = b.dataset.tab; navMark(TAB_ALIAS[t] || t); /* v3.74 누르기 반응(웹 분석 INP 최대 672ms): 메뉴 표시를 먼저 그리고, 무거운 화면 그리기는 다음 차례로 미룬다 */ requestAnimationFrame(() => setTimeout(() => { if (t === "strat") { S.scase = null; caseMark(); } if (t === "brief" && S.bdate) { S.bdate = null; renderBrief(); } switchTab(t); }, 0)); });
+  document.querySelectorAll(".gnav [data-tab]").forEach(b => b.onclick = e => { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) return; e.preventDefault(); const g = b.closest("details"); if (g) g.open = false; const t = b.dataset.tab; navMark(TAB_ALIAS[t] || t); /* v3.74 누르기 반응(웹 분석 INP 최대 672ms): 메뉴 표시를 먼저 그리고, 무거운 화면 그리기는 다음 차례로 미룬다 */ requestAnimationFrame(() => setTimeout(() => { if (t === "strat") { S.scase = null; caseMark(); } if (t === "brief" && S.bdate) { S.bdate = null; renderBrief(); } if (t === "forecast" && S.ffc) { S.ffc = null; renderForecasts(); } switchTab(t); }, 0)); });
   document.addEventListener("click", ev => {
     const ly = ev.target.closest("[data-layer]");
     if (ly) { setLayer(ly.dataset.layer); return; }
@@ -672,7 +672,13 @@ function setupInteraction(){
     const fcp = ev.target.closest("[data-fc]");
     if (fcp && !fcp.closest("#fcpop")) { fcPop(fcp); if (fcp.closest("#due")) fcGo(fcp.dataset.fc); return; }
     const fcb = ev.target.closest("[data-fcgo]");
-    if (fcb) { fcPopClose(); fcb.dataset.fc = fcb.dataset.fcgo; S.fcf = "all"; renderForecasts(); switchTab("forecast"); const li = document.querySelector('#f-all li[data-fid="' + fcb.dataset.fc + '"]'); if (li) { li.scrollIntoView({block:"center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 3000); } return; }
+    if (fcb) { fcPopClose(); fcOpen(fcb.dataset.fcgo); return; }  /* v4.22 전망과 검증에서 보기: 전망별 화면으로 */
+    const fcd = ev.target.closest("[data-fcd]");  /* v4.22 전망별 화면 열기(빈 값이면 목록) */
+    if (fcd) { fcOpen(fcd.dataset.fcd); return; }
+    const fcw = ev.target.closest("[data-fcw]");
+    if (fcw) { S.fcw = fcw.dataset.fcw; const pn = $("#pane-forecast"), y = pn.scrollTop; renderForecasts(); pn.scrollTop = y; return; }
+    const fcc = ev.target.closest("[data-fccopy]");
+    if (fcc) { try { navigator.clipboard.writeText(fcc.dataset.fccopy); fcc.textContent = FCT.copied; } catch(e){} return; }
     const ff = ev.target.closest("[data-fcf]");
     if (ff) { S.fcf = ff.dataset.fcf; renderForecasts(); const a = document.getElementById("f-all"); if (a) a.scrollIntoView({block:"start"}); return; }
     const jb = ev.target.closest("[data-jump]");
@@ -1006,7 +1012,7 @@ function insightsHtml(){
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
 let BR = null; const HASH0 = location.hash;
 const PIN = '<svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M5 0a5 5 0 0 0-5 5c0 3.6 5 7 5 7s5-3.4 5-7a5 5 0 0 0-5-5Zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" fill="currentColor"/></svg>';  /* v3.83 위치 아이콘: 누르면 지구본이 그곳을 보이는 이름 끝에 붙인다(2026-10-08 결재) */
-const FCE = {up:["↑","확률을 올릴 요인"], down:["↓","확률을 내릴 요인"], none:["–","변화 없음"]};
+const FCE = {up:["↑","확률 상승 요인"], down:["↓","확률 하락 요인"], none:["–","변화 없음"]};
 const fmtKD = s => { const a = String(s).split("-").map(Number); return a[1] + "월 " + a[2] + "일"; };
 function dailyIssue(x){
   const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
@@ -1243,6 +1249,7 @@ function loadBrief(){
   BRIEF_P.then(b => {
     if (!b || !(b.issues || []).length) { $("#bstrip").hidden = true; return; }
     BR = b; const cur = b.issues[0];
+    if (S.ffc && S.tab === "forecast") renderForecasts();  /* v4.22 전망별 화면의 관련 사건은 브리핑 자료가 온 뒤 */
     if (typeof IND !== "undefined" && IND && document.getElementById("indboard")) indBoard();  /* v3.98: 산업 탭이 브리핑 자료보다 먼저 그려졌으면 추이를 넣어 다시 그림 */
     /* v3.27 판단 변경 공지(머리말 n.k, 없으면 "분석 갱신")는 공지 날짜로부터 7일 동안 띠 첫머리에 두고, 그 뒤로 브리핑 제목을 돌린다(2026-10-01) */
     /* v3.44b 특집 공지는 11일 동안 둔다(2026-10-04) */
@@ -1311,7 +1318,7 @@ function forecastRow(f, compact){
   const st = {open:["open","검증 전"], yes:["yes","실현"], no:["no","불발"], void:["void","무효"]}[f.status] || ["open","검증 전"];
   return '<li data-fid="' + esc(f.id) + '"><div class="fc"><div class="q">' + esc(f.q) + '</div><div class="p">' + f.p + '<small>%</small></div><div class="prob"><i style="width:' + f.p + '%"></i></div>' +
     (compact ? "" : '<div class="b">' + esc(f.basis) + "</div>") + (f.rs && !compact ? '<div class="b rs">결과 확인 · ' + esc(f.rs) + "</div>" : "") /* v4.21 rs */ + (f.void && !compact ? '<div class="vr">무효 처리 · ' + esc(f.void) + "</div>" : "") +
-    '<div class="foot"><span class="mono fid">' + esc(f.id) + '</span><span class="st ' + st[0] + '">' + st[1] + '</span><span>검증 시점 <span class="mono">' + esc(f.due) + "</span></span>" + (compact ? "" : fcHist(f.id) + '<span class="chips" style="margin:0">' + f.countries.map(chip).join("") + "</span>") + "</div></div></li>";
+    '<div class="foot"><span class="mono fid">' + esc(f.id) + '</span><span class="st ' + st[0] + '">' + st[1] + '</span><span>검증 시점 <span class="mono">' + esc(f.due) + "</span></span>" + (compact ? "" : fcHist(f.id) + '<span class="chips" style="margin:0">' + f.countries.map(chip).join("") + '<button type="button" class="chip" data-fcd="' + esc(f.id) + '">' + FCT.detail + '</button></span>') + "</div></div></li>";  /* v4.22 전망별 화면 */
 }
 function renderDetail(){
   const el = $("#pane-detail");
@@ -2659,15 +2666,134 @@ function fcByBranch(c, fs){
   h += rest.length ? '<div style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0">그 밖의 이 사안 전망</h4><ul class="list">' + rest.map(f => forecastRow(f, false)).join("") + "</ul></div>" : "";
   return h;
 }
+/* v4.22 전망별 화면(/forecast/f02/)과 판가름 목록(2026-10-20 결재). 일자별 확률은 공개판 fc_hist(그날 공개판에 실렸던 값 그대로).
+   화면 문구는 모두 FCT에 둔다(영문판은 en/patch_app.py가 FCT 구역을 en/fct_en.js로 통째로 바꾼다) */
+/*FCT{*/
+const FCT = {
+  md: s => (+s.slice(5, 7)) + "월 " + (+s.slice(8, 10)) + "일", ymd: s => (+s.slice(0, 4)) + "년 " + (+s.slice(5, 7)) + "월 " + (+s.slice(8, 10)) + "일", ym: s => s.slice(2, 4) + "년 " + (+s.slice(5, 7)) + "월",
+  tk: s => FCT.md(s), left: n => n + "일 남음", late: n => n + "일 지남", dd: n => n + "일", cnt: n => n + "건", more: n => n + "건 더 보기",
+  today: "오늘", checking: "결과 확인 중", firstRes: "첫 결과", acc: "정확도(브라이어 점수)", detail: "자세히 보기 →", copied: "복사했습니다", title: s => s + " · 전망",
+  late_h: "결과를 확인하고 있는 전망", s30: "30일 내 판가름 날 전망", s30none: "30일 안에 검증 시점이 오는 전망은 없습니다.", s90: "90일 내 판가름 날 전망",
+  due: d => "검증 " + d, etc: "그 밖의 분쟁", back: "← 전망 목록", eyebrow: (id, c) => "전망 " + id + " · " + c,
+  pNow: "현재 확률", pThen: "당시 확률", caseGo: c => c + " 사안 →", dueAt: "검증 시점", made: "만든 날", madeV: (d, p) => d + " · 처음 확률 " + p + "%", rs: "결과 확인",
+  resH: "검증 결과", resD: d => " · " + d + " 확정", voidL: "무효", yes: "실현", no: "불발", resSub: (p, b) => "당시 확률 " + p + "% · 브라이어 점수 " + b,
+  chartH: "일자별 확률 변화", span: "기간", w30: "최근 30일", wAll: "전체 기간", aria: s => s + " 일자별 확률 변화", ev: "사건",
+  revT: (d, x) => d + " 주간 전망 점검 · " + x, keep: p => p + "% 유지", chg: (a, b) => a + "% → " + b + "%",
+  legF: "확률을 바꾼 주간 점검", legO: "그대로 둔 주간 점검", legU: "정세 브리핑 · 확률 상승 요인", legD: "정세 브리핑 · 확률 하락 요인",
+  chartNote: "확률은 매주 월요일 주간 전망 점검에서 다시 보며, 그래프의 값은 그날 공개판에 실렸던 확률 그대로입니다.", futNote: " 점선은 검증 시점까지 남은 기간입니다.",
+  whyH: "변동·유지 이유", week: "주간 전망 점검", first: p => "처음 확률 " + p + "%", firstD: "전망을 만든 날",
+  evH: "관련 사건", evNote: "정세 브리핑에서 이 전망과 연결한 사건입니다. 화살표는 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다.", evGo: "그날의 정세 브리핑 →",
+  E: {up: ["↑", "확률 상승 요인"], down: ["↓", "확률 하락 요인"], none: ["–", "변화 없음"]},
+  ocH: "결과가 나오면", ocNote: (d, p) => d + "에 확률 " + p + "%로 결과를 확인합니다. 결과마다 이 전망이 정확도(브라이어 점수)에 더하는 값입니다. 0에 가까울수록 정확합니다.",
+  ocY: "실현되면", ocN: "불발되면",
+  yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
+  nLow: p => p + "%로 낮게 본 대로 일어나지 않은 것입니다.", nHigh: p => p + "%로 높게 본 일이 일어나지 않은 것이므로 「빗나간 전망」에 오릅니다.",
+  ocFirst: (p, a, b) => "처음 확률 " + p + "%를 그대로 뒀을 때의 점수 · 실현 " + a + ", 불발 " + b,
+  sibH: "같은 사안의 전망", shareH: "공유", shareX: "X에 공유", copy: "주소 복사", sub: "새 글 알림 받기",
+  href: p => p,
+  tweet: (q, p, d) => "「" + q + "」 클리사 지오폴리틱스의 전망 " + p + "% · 검증 시점 " + d,
+};
+/*}FCT*/
+const fcToday = () => { const n = new Date(), k = new Date(n.getTime() + (n.getTimezoneOffset() + 540) * 60000); return k.getFullYear() + "-" + String(k.getMonth() + 1).padStart(2, "0") + "-" + String(k.getDate()).padStart(2, "0"); };
+const fcUTC = s => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
+const fcDays = (a, b) => Math.round((fcUTC(b) - fcUTC(a)) / 864e5);
+const fcAdd = (s, n) => new Date(fcUTC(s) + n * 864e5).toISOString().slice(0, 10);
+const fcCaseOf = f => (D.strategies || []).find(c => c.fp === f.fp);
+const fcCaseName = f => { const c = fcCaseOf(f); return c ? c.title.split(":")[0] : FCT.etc; };
+const fcHistOf = f => ((D.fc_hist || {})[f.id] || [[f.made || f.due, f.p]]);
+const fcPP = it => it.from === it.to ? FCT.keep(it.to) : FCT.chg(it.from, it.to);
+function fcOpen(id){ S.ffc = id || null; S.fcw = "30"; renderForecasts(); switchTab("forecast"); }
+function fcSoonRow(f, t){
+  const n = fcDays(t, f.due);
+  return '<li><button type="button" data-fcd="' + esc(f.id) + '"><span class="dl">' + (n < 0 ? FCT.late(-n) : FCT.dd(n)) + '</span><span class="sq">' + esc(f.s || f.q) + "<small>" + esc(fcCaseName(f)) + " · " + FCT.due(FCT.md(f.due)) + '</small></span><span class="pb"><i style="width:' + f.p + '%"></i></span><b>' + f.p + "%</b></button></li>";
+}
+function fcSoonHtml(t){
+  const op = D.forecasts.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
+  const late = op.filter(f => f.due < t), a = op.filter(f => f.due >= t && fcDays(t, f.due) <= 30), b = op.filter(f => { const n = fcDays(t, f.due); return n > 30 && n <= 90; });
+  const ul = (xs, c) => '<ul class="fsoon' + (c ? " " + c : "") + '">' + xs.map(f => fcSoonRow(f, t)).join("") + "</ul>";
+  return '<section class="sec" id="f-soon">' +
+    (late.length ? "<h3>" + FCT.late_h + ' <span class="note">' + FCT.cnt(late.length) + "</span></h3>" + ul(late, "s30") + '<div style="height:14px"></div>' : "") +
+    "<h3>" + FCT.s30 + "</h3>" + (a.length ? ul(a, "s30") : '<p class="note">' + FCT.s30none + "</p>") +
+    (b.length ? '<h3 style="margin-top:14px">' + FCT.s90 + ' <span class="note">' + FCT.cnt(b.length) + "</span></h3>" + ul(b.slice(0, 5)) +
+      (b.length > 5 ? '<details class="more"><summary>' + FCT.more(b.length - 5) + "</summary>" + ul(b.slice(5)) + "</details>" : "") : "") + "</section>";
+}
+function fcEvents(f){
+  const out = []; if (!BR) return out;
+  BR.issues.forEach(x => x.items.forEach(it => (it.fc || []).forEach(r => { if (r.id === f.id) out.push([x.date, r.e, it]); })));
+  return out.sort((a, b) => b[0].localeCompare(a[0]));
+}
+function fcChart(f, t){
+  const H = fcHistOf(f), made = H[0][0], open = f.status === "open";
+  const x1 = open ? (f.due > t && fcDays(t, f.due) <= 30 ? f.due : t) : f.status === "void" ? (f.due < t ? f.due : t) : (f.resolved && f.resolved < f.due ? f.resolved : f.due);  /* 무효는 오늘까지, 확정된 전망은 확정일까지 */
+  let x0 = S.fcw === "all" ? made : fcAdd(x1 > t ? t : x1, -30);
+  if (fcDays(x0, x1) < 7) x0 = fcAdd(x1, -7);
+  const nw = innerWidth < 600, W = nw ? 340 : 520, Ht = nw ? 250 : 262, L = 44, R = 10, T = 22, B = 66, span = Math.max(1, fcDays(x0, x1));  /* 좁은 화면은 좁은 그림(글자 크기 유지) */
+  const X = d => L + (W - L - R) * Math.max(0, Math.min(1, fcDays(x0, d) / span)), Y = p => T + (Ht - T - B) * (1 - p / 100);
+  const o = ['<svg class="fd-ch" viewBox="0 0 ' + W + " " + Ht + '" role="img" aria-label="' + esc(FCT.aria(f.s || f.q)) + '">'];
+  [0, 25, 50, 75, 100].forEach(p => o.push('<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(p) + '" y2="' + Y(p) + '" class="g' + (p === 50 ? " g50" : "") + '"/><text x="' + (L - 6) + '" y="' + (Y(p) + 4) + '" class="ax" text-anchor="end">' + p + "%</text>"));
+  const tk = t > x0 && t < x1 ? [x0, fcAdd(x0, Math.round(fcDays(x0, t) / 2)), t, x1] : [0, 1, 2, 3, 4].map(i => fcAdd(x0, Math.round(span * i / 4)));  /* 오늘이 안에 있으면 처음·가운데·오늘·끝 */
+  let tkl = ""; tk.forEach((d, i) => { const lb = span > 200 ? FCT.ym(d) : FCT.tk(d); if (lb === tkl || (i && i < tk.length - 1 && fcDays(d, x1) < span * .12)) return; tkl = lb; o.push('<text x="' + X(d) + '" y="' + (Ht - B + 16) + '" class="ax" text-anchor="' + (i === 0 ? "start" : i === tk.length - 1 ? "end" : "middle") + '">' + lb + "</text>"); });
+  const st = made > x0 ? made : x0; let cur = H[0][1]; H.forEach(h => { if (h[0] <= st) cur = h[1]; });
+  const lineEnd = open ? (t < x1 ? t : x1) : x1;
+  let d = "M" + X(st) + "," + Y(cur); const lab = [[st, cur]];
+  H.forEach(h => { if (h[0] > st && h[0] <= lineEnd) { d += " H" + X(h[0]) + " V" + Y(h[1]); cur = h[1]; lab.push([h[0], h[1]]); } });
+  d += " H" + X(lineEnd); o.push('<path d="' + d + '" class="ln"/>');
+  if (open && lineEnd < x1) o.push('<path d="M' + X(lineEnd) + "," + Y(cur) + " H" + X(x1) + '" class="ln fut"/>');
+  const tl = t === x1 || (f.due > t && f.due <= x1 && X(f.due) - X(t) < 120);  /* 검증 시점 표시와 겹치면 오늘 표시는 선의 왼쪽에 */
+  if (t >= x0 && t <= x1) o.push('<line x1="' + X(t) + '" x2="' + X(t) + '" y1="' + (T - 6) + '" y2="' + (Ht - B) + '" class="vl today"/><text x="' + (X(t) + (tl ? -4 : 4)) + '" y="' + (tl ? T + 8 : T - 9) + '" class="ax today" text-anchor="' + (tl ? "end" : "start") + '">' + FCT.today + "</text>");
+  if (f.due >= x0 && f.due <= x1 && f.due !== t) o.push('<line x1="' + X(f.due) + '" x2="' + X(f.due) + '" y1="' + (T - 6) + '" y2="' + (Ht - B) + '" class="vl due"/><text x="' + (X(f.due) - 4) + '" y="' + (T - 9) + '" class="ax due" text-anchor="end">' + FCT.dueAt + "</text>");
+  FCR().forEach(r => r.items.forEach(it => { if (it.id === f.id && r.date >= x0 && r.date <= x1) o.push('<circle cx="' + X(r.date) + '" cy="' + Y(it.to) + '" r="5" class="rv' + (it.from !== it.to ? " chg" : "") + '"><title>' + esc(FCT.revT(FCT.md(r.date), fcPP(it))) + "</title></circle>"); }));
+  lab.forEach(([dd, p]) => o.push('<text x="' + (X(dd) + 6) + '" y="' + (Y(p) - 8) + '" class="vlab">' + p + "%</text>"));
+  const yb = Ht - B + 40;
+  o.push('<text x="' + (L - 6) + '" y="' + (yb + 4) + '" class="ax" text-anchor="end">' + FCT.ev + '</text><line x1="' + L + '" x2="' + (W - R) + '" y1="' + yb + '" y2="' + yb + '" class="g"/>');
+  fcEvents(f).forEach(([dt, k, it]) => { if (dt < x0 || dt > x1) return; const a = FCT.E[k] || FCT.E.none; o.push('<g class="ev ' + (FCT.E[k] ? k : "none") + '"><circle cx="' + X(dt) + '" cy="' + yb + '" r="7"/><text x="' + X(dt) + '" y="' + (yb + 4) + '" text-anchor="middle">' + a[0] + "</text><title>" + esc(FCT.md(dt) + " · " + it.h) + "</title></g>"); });
+  o.push("</svg>");
+  return o.join("");
+}
+function fcDetailHtml(f){
+  const t = fcToday(), H = fcHistOf(f), open = f.status === "open", n = fcDays(t, f.due), c = fcCaseOf(f);
+  const sib = D.forecasts.filter(x => x.fp && x.fp === f.fp && x.id !== f.id).sort((a, b) => a.due.localeCompare(b.due));
+  const rv = []; FCR().forEach(r => r.items.forEach(it => { if (it.id === f.id) rv.push([r.date, it]); }));
+  const evs = fcEvents(f), br = (p, y) => Math.pow(p / 100 - (y ? 1 : 0), 2).toFixed(2), low = f.p < 50, res = f.status === "yes" || f.status === "no";
+  const url = location.origin + FCT.href("/forecast/" + f.id + "/");
+  return '<div class="sec"><p style="margin:0 0 10px"><button type="button" class="chip back" data-fcd="">' + FCT.back + "</button></p>" +
+    '<div class="fd-h"><div><p class="eyebrow">' + esc(FCT.eyebrow(f.id, fcCaseName(f))) + '</p><h2 class="fd-q">' + esc(f.q) + "</h2></div>" +
+    '<div class="fd-p"><b>' + f.p + "%</b><span>" + (open ? FCT.pNow : FCT.pThen) + "</span></div></div>" +
+    '<div class="chips" style="margin-top:8px">' + (f.countries || []).map(chip).join("") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(FCT.caseGo(c.title.split(":")[0])) + "</button>" : "") + "</div>" +
+    '<dl class="fd-meta"><dt>' + FCT.dueAt + "</dt><dd>" + FCT.ymd(f.due) + (open ? ' <span class="fd-dd">' + (n > 0 ? FCT.left(n) : n === 0 ? FCT.today : FCT.checking) + "</span>" : "") + "</dd>" +
+    "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
+    (res || f.status === "void" ? '<section class="sec fd-rc"><p class="eyebrow">' + FCT.resH + (f.resolved ? FCT.resD(FCT.ymd(f.resolved)) : "") + "</p>" +
+      (f.status === "void" ? "<p><b>" + FCT.voidL + "</b></p><p>" + esc(f.void || "") + "</p>" :
+        "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, br(f.p, f.status === "yes")) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
+        ((f.outcome_src || []).length ? '<p class="note">' + f.outcome_src.map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]) + "</a>").join(" · ") + "</p>" : "")) + "</section>" : "") +
+    '<section class="sec"><div class="fd-ht"><h3>' + FCT.chartH + '</h3><div class="fd-seg" role="group" aria-label="' + FCT.span + '"><button type="button" data-fcw="30" aria-pressed="' + (S.fcw !== "all") + '">' + FCT.w30 + '</button><button type="button" data-fcw="all" aria-pressed="' + (S.fcw === "all") + '">' + FCT.wAll + "</button></div></div>" +
+      fcChart(f, t) +
+      '<div class="fd-leg"><span><i class="f"></i>' + FCT.legF + '</span><span><i class="o"></i>' + FCT.legO + '</span><span><i class="u"></i>' + FCT.legU + '</span><span><i class="d"></i>' + FCT.legD + "</span></div>" +
+      '<p class="note">' + FCT.chartNote + (open ? FCT.futNote : "") + "</p></section>" +
+    '<section class="sec"><h3>' + FCT.whyH + '</h3><ul class="fd-tl">' +
+      rv.map(([dt, it]) => '<li><span class="d">' + FCT.md(dt) + "</span><div><b>" + fcPP(it) + '</b> <span class="note">' + FCT.week + "</span><p>" + esc(it.why) + "</p></div></li>").join("") +
+      '<li><span class="d">' + FCT.md(H[0][0]) + "</span><div><b>" + FCT.first(H[0][1]) + '</b> <span class="note">' + FCT.firstD + "</span><p>" + esc(f.basis || "") + "</p></div></li></ul></section>" +
+    (evs.length ? '<section class="sec"><h3>' + FCT.evH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.evNote + '</p><ul class="fd-tl">' +
+      evs.map(([dt, k, it]) => { const a = FCT.E[k] || FCT.E.none; return '<li><span class="d">' + FCT.md(dt) + '</span><div><span class="fd-ar ' + (FCT.E[k] ? k : "none") + '">' + a[0] + " " + a[1] + "</span> <b>" + esc(it.h) + "</b>" + (it.link ? "<p>" + esc(it.link) + "</p>" : "") + '<a class="fd-more" href="' + FCT.href("/brief/" + esc(dt) + "/") + '">' + FCT.evGo + "</a></div></li>"; }).join("") + "</ul></section>" : "") +
+    (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.ocNote(FCT.ymd(f.due), f.p) + "</p>" +
+      '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + br(f.p, true) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
+      '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + br(f.p, false) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
+      (H[0][1] !== f.p ? '<p class="note" style="margin-top:8px">' + FCT.ocFirst(H[0][1], br(H[0][1], true), br(H[0][1], false)) + "</p>" : "") + "</section>" : "") +
+    (sib.length ? '<section class="sec"><h3>' + FCT.sibH + '</h3><ul class="fsoon">' + sib.map(x => '<li><button type="button" data-fcd="' + esc(x.id) + '"><span class="dl"></span><span class="sq">' + esc(x.s || x.q) + "<small>" + FCT.due(FCT.ymd(x.due)) + '</small></span><span class="pb"><i style="width:' + x.p + '%"></i></span><b>' + x.p + "%</b></button></li>").join("") + "</ul></section>" : "") +
+    '<section class="sec"><h3>' + FCT.shareH + '</h3><div class="fd-share"><a class="chip" href="https://twitter.com/intent/tweet?text=' + encodeURIComponent(FCT.tweet(f.q, f.p, FCT.ymd(f.due))) + "&url=" + encodeURIComponent(url) + '" target="_blank" rel="noopener">' + FCT.shareX + '</a><button type="button" class="chip" data-fccopy="' + esc(url) + '">' + FCT.copy + '</button><a class="chip" href="' + FCT.href("/subscribe/") + '">' + FCT.sub + "</a></div></section>";
+}
 function renderForecasts(){
+  if (S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) { $("#pane-forecast").innerHTML = fcDetailHtml(F); return; } S.ffc = null; }
   const fs = D.forecasts.slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
   const done = fs.filter(f => f.status === "yes" || f.status === "no");
   const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
   const brier = done.length ? (done.reduce((s, f) => s + Math.pow(f.p / 100 - (f.status === "yes" ? 1 : 0), 2), 0) / done.length).toFixed(3) : "—";
+  const t0 = fcToday(), nx = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due))[0];
   $("#pane-forecast").innerHTML =
     '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시하며, 검증 시점에 실제 발생 여부를 점검하고 그 결과도 공개합니다.</p></div>' +
-    '<div class="score-card"><div><b class="mono">' + fs.length + '</b><span>전체 전망</span></div><div><b class="mono">' + done.length + '</b><span>검증 완료</span></div><div><b class="mono">' + brier + '</b><span>정확도(브라이어 점수)</span></div></div>' +
+    '<div class="score-card"><div><b class="mono">' + fs.length + '</b><span>전체 전망</span></div><div><b class="mono">' + done.length + '</b><span>검증 완료</span></div>' + (done.length || !nx ? '<div><b class="mono">' + brier + '</b><span>정확도(브라이어 점수)</span></div>' : '<div class="hl"><b class="mono">' + FCT.md(nx.due) + '</b><span>' + FCT.firstRes + ' · ' + (fcDays(t0, nx.due) > 0 ? FCT.left(fcDays(t0, nx.due)) : FCT.checking) + '</span></div>') + '</div>' +  /* v4.22 결과가 하나도 없으면 셋째 칸은 첫 결과 날짜 */
     '<p class="note">정확도는 브라이어 점수, 곧 (확률 − 실제 결과)²의 평균으로 나타냅니다. 0이 가장 정확하며, 모든 전망에 50%를 부여하면 0.25가 됩니다.' + (PUB() ? "" : "") + "</p>" +
+    fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
     (FCR().length ? '<section class="sec" id="f-week"><h3>주간 전망 점검</h3><p class="note" style="margin-bottom:8px">매주 월요일, 지난 한 주의 사건을 반영해 전망의 확률을 다시 봅니다. 조정한 전망과 그대로 둔 전망을 이유와 함께 밝힙니다.</p>' + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
     '<section class="sec"><h3>빗나간 전망</h3><p class="note" style="margin-bottom:8px">50% 이상으로 본 전망이 불발되거나 50% 미만으로 본 전망이 실현된 경우입니다.</p>' + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : '<p class="note">검증이 끝난 전망이 아직 없습니다.</p>') + "</section>" +
     ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + '">사안 분석 보기 · ' + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
@@ -2860,6 +2986,7 @@ function routeOf(){
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return "/feature/" + (c && c !== L[0] ? c.id + "/" : ""); }
   if (t === "page") return location.pathname;
   if (t === "method") return "/" + (S.info || "method") + "/";
+  if (t === "forecast" && S.ffc) return "/forecast/" + S.ffc + "/";  /* v4.22 전망별 화면 */
   if (/^(grand|ideas|forecast|industry)$/.test(t)) return "/" + t + "/";
   if (t === "detail") return S.sel && hasPage(S.sel) ? "/country/" + S.sel + "/" : "/";
   return null;
@@ -2886,7 +3013,8 @@ function applyRoute(){
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
   if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
   if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) { pageGo(p); return true; }
-  if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { switchTab(m[1]); return true; }
+  if ((m = p.match(/^\/forecast\/(f\d+)\/?$/)) && D.forecasts.some(f => f.id === m[1])) { fcOpen(m[1]); return true; }  /* v4.22 */
+  if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { if (m[1] === "forecast" && S.ffc) { S.ffc = null; renderForecasts(); } switchTab(m[1]); return true; }
   if (p === "/" && !location.hash) { switchTab("overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
   return false;
 }
@@ -2905,6 +3033,7 @@ function titleOf(){
   if (t === "brief") { const c = BR && S.bdate && briefCur(), m = c && /^(\d{4})-(\d{2})-(\d{2})/.exec(c.date); return (m ? "정세 브리핑 " + (+m[1]) + "년 " + (+m[2]) + "월 " + (+m[3]) + "일" : gl("brief")) + sx; }
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return (c && c !== L[0] ? c.title : gl("feature")) + sx; }
   if (t === "detail") return S.sel && hasPage(S.sel) ? D.countries[S.sel].name_ko + " 정세와 대전략" + sx : SITE_T;
+  if (t === "forecast" && S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) return FCT.title(F.s || F.q) + sx; }  /* v4.22 */
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
 const isPagePath = p => { if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
@@ -2990,12 +3119,12 @@ addEventListener("hashchange", () => { if (D) applyHash(); });
 /* v3.32 이전 화면: 칩·카드·띠·검색 결과로 화면을 옮길 때마다 직전 화면(탭, 사안, 선택한 나라·분쟁지, 스크롤 위치)을 쌓아 두고 되돌린다 */
 const NAV = []; let NAV_BUSY = false;
 const navBtn = document.getElementById("navback");
-function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, path: S.tab === "page" ? PAGE_CUR : null, info: S.info, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
+function navSnap(){ const pn = document.getElementById("pane-" + S.tab); return {tab: S.tab, path: S.tab === "page" ? PAGE_CUR : null, info: S.info, scase: S.scase, sel: S.sel, selFp: S.selFp, fcf: S.fcf, ffc: S.ffc || null, y: narrow() ? scrollY : (pn ? pn.scrollTop : 0)}; }
 function navUpd(){ if (navBtn) navBtn.hidden = !NAV.length; }
 function navPush(){
   if (NAV_BUSY || !D) return;
   const s = navSnap(), t = NAV[NAV.length - 1];
-  if (t && t.tab === s.tab && t.path === s.path && t.scase === s.scase && t.sel === s.sel && t.selFp === s.selFp && Math.abs(t.y - s.y) < 40) return;
+  if (t && t.tab === s.tab && t.path === s.path && t.scase === s.scase && t.sel === s.sel && t.selFp === s.selFp && t.ffc === s.ffc && Math.abs(t.y - s.y) < 40) return;
   NAV.push(s); if (NAV.length > 30) NAV.shift(); navUpd();
 }
 function navBack(){
@@ -3008,7 +3137,7 @@ function navBack(){
     else {
       if (s.tab === "strat") { S.scase = s.scase; renderStrat(); }
       if (s.tab === "method") S.info = s.info;
-      if (s.tab === "forecast" && s.fcf) { S.fcf = s.fcf; renderForecasts(); }
+      if (s.tab === "forecast") { if (s.fcf) S.fcf = s.fcf; S.ffc = s.ffc || null; renderForecasts(); }
       switchTab(s.tab);
     }
   } finally { NAV_BUSY = false; }
@@ -3020,7 +3149,7 @@ function navBack(){
 document.addEventListener("click", ev => {
   if (ev.target.closest("#navback,[data-navback]")) return;
   if (ev.target.closest(".gnav")) return;
-  if (ev.target.closest("[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],[data-golife],[data-goind],#bstrip,#srchres [data-sri]")) navPush();
+  if (ev.target.closest("[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],[data-fcd],[data-golife],[data-goind],#bstrip,#srchres [data-sri]")) navPush();
 }, true);
 document.addEventListener("click", ev => {
   const b = ev.target.closest("#navback,[data-navback]"); if (!b) return;
@@ -3037,7 +3166,7 @@ function fcPop(chip){
   fcPopClose();
   const st = {yes: "실현", no: "불발", void: "무효"}[F.status];
   const ef = chip.classList.contains("bfc-up") ? "up" : chip.classList.contains("bfc-down") ? "down" : chip.classList.contains("bfc-none") ? "none" : null;
-  const EF = {up: ["↑", "확률을 올릴 요인"], down: ["↓", "확률을 내릴 요인"], none: ["–", "변화 없음"]};
+  const EF = {up: ["↑", "확률 상승 요인"], down: ["↓", "확률 하락 요인"], none: ["–", "변화 없음"]};
   const el = document.createElement("div"); el.id = "fcpop"; el.dataset.for = id; el._chip = chip; el.setAttribute("role", "dialog");
   el.innerHTML = '<div class="fcp-h"><span class="mono">' + esc(id) + "</span> 전망 · " + (st ? esc(st) : "현재 " + F.p + "%") + '<button type="button" class="fcp-x" aria-label="닫기">×</button></div><p>' + esc(F.q) + "</p>" +
     (ef ? '<p class="fcp-e">이 사건 · <b class="fe-' + ef + '">' + EF[ef][0] + "</b> " + EF[ef][1] + "</p>" : "") +
