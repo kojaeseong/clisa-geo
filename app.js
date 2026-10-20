@@ -1012,7 +1012,7 @@ function insightsHtml(){
 /* v3.20 정세 브리핑: data/daily.json(평일 갱신)을 따로 읽는다. 없으면 아무것도 보이지 않는다. */
 let BR = null; const HASH0 = location.hash;
 const PIN = '<svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M5 0a5 5 0 0 0-5 5c0 3.6 5 7 5 7s5-3.4 5-7a5 5 0 0 0-5-5Zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" fill="currentColor"/></svg>';  /* v3.83 위치 아이콘: 누르면 지구본이 그곳을 보이는 이름 끝에 붙인다(2026-10-08 결재) */
-const FCE = {up:["↑","가능성 증가 요인"], down:["↓","가능성 감소 요인"], none:["–","변화 없음"]};
+const FCE = {up:["↑","확률 상승 요인"], down:["↓","확률 하락 요인"], none:["–","변화 없음"]};
 const fmtKD = s => { const a = String(s).split("-").map(Number); return a[1] + "월 " + a[2] + "일"; };
 function dailyIssue(x){
   const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
@@ -2679,11 +2679,11 @@ const FCT = {
   resH: "검증 결과", resD: d => " · " + d + " 확정", voidL: "무효", yes: "실현", no: "불발", resSub: (p, b) => "당시 확률 " + p + "% · 브라이어 점수 " + b,
   chartH: "일자별 확률 변화", span: "기간", w30: "최근 30일", wAll: "전체 기간", aria: s => s + " 일자별 확률 변화", ev: "사건",
   revT: (d, x) => d + " 주간 전망 점검 · " + x, keep: p => p + "% 유지", chg: (a, b) => a + "% → " + b + "%",
-  legF: "확률을 바꾼 주간 점검", legO: "그대로 둔 주간 점검", legU: "정세 브리핑 · 가능성 증가 요인", legD: "정세 브리핑 · 가능성 감소 요인",
+  legF: "확률을 바꾼 주간 점검", legO: "그대로 둔 주간 점검", legU: "정세 브리핑 · 확률 상승 요인", legD: "정세 브리핑 · 확률 하락 요인",
   chartNote: "확률은 매주 월요일 주간 전망 점검에서 다시 보며, 그래프의 값은 그날 공개판에 실렸던 확률 그대로입니다.", futNote: " 점선은 검증 시점까지 남은 기간입니다.",
   whyH: "변동·유지 이유", week: "주간 전망 점검", first: p => "처음 확률 " + p + "%", firstD: "전망을 만든 날",
   evH: "관련 사건", evNote: "정세 브리핑에서 이 전망과 연결한 사건입니다. 화살표는 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다.", evGo: "그날의 정세 브리핑 →",
-  E: {up: ["↑", "가능성 증가 요인"], down: ["↓", "가능성 감소 요인"], none: ["–", "변화 없음"]},
+  E: {up: ["↑", "확률 상승 요인"], down: ["↓", "확률 하락 요인"], none: ["–", "변화 없음"]},
   ocH: "결과가 나오면", ocNote: (d, p) => d + "에 확률 " + p + "%로 결과를 확인합니다. 결과마다 이 전망이 정확도(브라이어 점수)에 더하는 값입니다. 0에 가까울수록 정확합니다.",
   ocY: "실현되면", ocN: "불발되면",
   yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
@@ -3166,7 +3166,7 @@ function fcPop(chip){
   fcPopClose();
   const st = {yes: "실현", no: "불발", void: "무효"}[F.status];
   const ef = chip.classList.contains("bfc-up") ? "up" : chip.classList.contains("bfc-down") ? "down" : chip.classList.contains("bfc-none") ? "none" : null;
-  const EF = {up: ["↑", "가능성 증가 요인"], down: ["↓", "가능성 감소 요인"], none: ["–", "변화 없음"]};
+  const EF = {up: ["↑", "확률 상승 요인"], down: ["↓", "확률 하락 요인"], none: ["–", "변화 없음"]};
   const el = document.createElement("div"); el.id = "fcpop"; el.dataset.for = id; el._chip = chip; el.setAttribute("role", "dialog");
   el.innerHTML = '<div class="fcp-h"><span class="mono">' + esc(id) + "</span> 전망 · " + (st ? esc(st) : "현재 " + F.p + "%") + '<button type="button" class="fcp-x" aria-label="닫기">×</button></div><p>' + esc(F.q) + "</p>" +
     (ef ? '<p class="fcp-e">이 사건 · <b class="fe-' + ef + '">' + EF[ef][0] + "</b> " + EF[ef][1] + "</p>" : "") +
