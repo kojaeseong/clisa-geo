@@ -1,6 +1,207 @@
 {
  "issues": [
   {
+   "date": "2026-10-21",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Witkoff to take Oslo proposals to Russian leaders in St. Petersburg on October 21",
+     "fact": "After talks in Oslo on October 20 with Ukrainian President Volodymyr Zelensky, U.S. envoy Steve Witkoff and Finnish President Alexander Stubb, Norwegian Prime Minister Jonas Gahr Støre told reporters that Witkoff would take the Oslo proposals to the Russian side in St. Petersburg on October 21 and try to pave the way for a U.S.-Ukraine-Russia leaders' meeting.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://censor.net/en/news/4029495/witkoff-to-take-oslo-proposals-to-russian-leaders-in-st-petersburg",
+      "https://kyivindependent.com/zelensky-meets-trump-envoy-witkoff-in-norway-as-us-ukraine-ties-sour/",
+      "https://www.axios.com/2026/10/20/putin-witkoff-russia-ukraine-war",
+      "https://tass.com/world/2205013"
+     ],
+     "loc": {
+      "lat": 59.91,
+      "lon": 10.75,
+      "place": "Oslo (Norway)",
+      "isos": [
+       "NOR",
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says U.S. intelligence is flowing again: \"We are thankful that intelligence works now\"",
+     "fact": "At a joint press conference in Oslo on October 20, Zelensky said U.S. early warning of Russian ballistic missile launches is flowing again. He also said the negotiating document contains several kinds of security guarantees, which Witkoff will pass on to Russia.",
+     "fc": [],
+     "src": [
+      "https://www.kyivpost.com/post/87676"
+     ],
+     "loc": {
+      "lat": 59.91,
+      "lon": 10.75,
+      "place": "Oslo (Norway)",
+      "isos": [
+       "UKR",
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Trump says Zelensky \"has to want to settle this war\" or it will be \"a very bad thing\"",
+     "fact": "Speaking at the White House on October 20, President Trump said Russia has an \"unlimited\" supply of manpower and that Zelensky \"has to want to settle this war, and if he doesn't, I think it's going to be a very bad thing.\" On a possible Putin-Zelensky meeting, he cited \"tremendous\" hatred between the two and said, \"I don't care how it's done.\"",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/20/i-dont-care-how-its-done-trump-pressures-ukraine-to-cut-peace-deal",
+      "https://english.news.cn/20261021/c5f2de9d1b9341b8af7338904f0e9dd8/c.html"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "Washington (U.S.)",
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian drones kill one, injure 18 in Kyiv on October 20",
+     "fact": "Kyiv Mayor Vitali Klitschko said Russian attacks on the capital on October 20 killed one person and injured 18. The city health department had counted one dead and 12 injured since midnight as of 5:50 p.m. local time.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4176504-russian-drone-attack-on-kyiv-injury-toll-rises-to-18-one-dead.html",
+      "https://www.ukrinform.net/rubric-ato/4176435-russian-attacks-leave-one-dead-12-injured-in-kyiv-since-midnight.html"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Araghchi says Hormuz reopens only if the U.S. accepts Iran's terms; Rezaei rules out shipping out \"a single gram\" of enriched uranium",
+     "fact": "In an interview with Iraq's Al-Ikhbariya on October 20, Foreign Minister Abbas Araghchi said that under Iran's seven-day plan the Strait of Hormuz was to have fully reopened on the sixth day, and that Washington must honor its commitments under the Islamabad memorandum. Mohsen Rezaei, secretary of the Supreme National Security Council, ruled out shipping any enriched uranium out of Iran in a post on X the same day.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aninews.in/news/world/middle-east/hormuz-is-closed-until-america-accepts-our-conditions-araghchi-demands-us-to-honour-mou-commitments20261021064930/",
+      "https://gulfnews.com/world/mena/hormuz-stays-shut-until-us-accepts-irans-7-day-deal-araghchi-1.500717768"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "h": "Chinese coast guard ship goes dark, enters restricted waters off Pratas and faces off with Taiwan",
+     "fact": "Taiwan's Coast Guard Administration said on October 20 that a China Coast Guard ship, its automatic identification system (AIS) switched off, entered restricted waters northeast of the Pratas Islands early that day and faced off with the Taiwanese patrol vessel Taichung. The Chinese ship broadcast that \"the so-called Republic of China does not exist.\"",
+     "fc": [],
+     "src": [
+      "https://www.taipeitimes.com/News/front/archives/2026/10/21/2003866335"
+     ],
+     "loc": {
+      "lat": 20.7,
+      "lon": 116.72,
+      "place": "Pratas Islands (Taiwan)",
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Death toll from drone strike on market in disputed Abyei rises to at least 153",
+     "fact": "Yohanna Akol Ngor, caretaker information minister for the Abyei administration, said a drone strike around 11 a.m. local time on October 19 on the Amiet market and a nearby fuel depot killed at least 153 people, and blamed Sudan's military. A senior Sudanese officer, speaking anonymously, said the army targeted fuel tankers bound for the Rapid Support Forces (RSF).",
+     "fc": [],
+     "src": [
+      "https://gulfnews.com/world/africa/drone-strike-on-a-market-in-disputed-african-region-of-abyei-kills-at-least-153-1.500717774",
+      "https://www.radiotamazuj.org/en/news/article/73-killed-in-drone-attacks-on-abyei-market"
+     ],
+     "loc": {
+      "lat": 9.6,
+      "lon": 28.44,
+      "place": "Abyei (disputed by Sudan and South Sudan)",
+      "isos": [
+       "SDN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Nigeria confirms Ebola case in woman from Uganda, traces 44 contacts",
+     "fact": "Nigeria's Federal Ministry of Health and Social Welfare said a woman who traveled from Uganda tested positive for Ebola in Abuja, and Health Minister Muhammad Pate said 44 contacts are being traced, Al Jazeera reported on October 20. Congo has recorded more than 9,000 cases since May in an outbreak of the Bundibugyo strain, which has no licensed vaccine.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/20/kenya-confirms-ninth-ebola-case"
+     ],
+     "loc": {
+      "lat": 9.06,
+      "lon": 7.49,
+      "place": "Abuja (Nigeria)",
+      "isos": [
+       "NGA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "South Korea's Foreign Ministry said at its regular briefing on October 20 that it will withdraw some staff from its embassy in Ukraine (about half, according to a ministry official), leaving a chargé d'affaires and consular staff, citing a high threat of air strikes and Kyiv's failure to take \"forward-looking measures\" over its public disclosure of the transfer of North Korean prisoners of war.",
+     "src": [
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008806940",
+      "https://www.aljazeera.com/news/2026/10/20/south-korea-to-pull-more-embassy-staff-from-ukraine-after-pow-row"
+     ]
+    },
+    {
+     "t": "A spokesperson for the PLA Southern Theater Command Navy said on October 20 that the U.S. littoral combat ship USS Charleston entered waters near Sabina Shoal in the South China Sea without permission and demanded that the U.S. side \"immediately cease such activities.\"",
+     "src": [
+      "https://dailycaller.com/2026/10/20/china-sends-navy-after-us-warship-taiwan-maritime-standoff/"
+     ]
+    },
+    {
+     "t": "The websites of Rodong Sinmun and the Korean Central News Agency have been unreachable since the evening of October 20 and remained down as of the morning of October 21, according to South Korea's Unification Ministry and others.",
+     "src": [
+      "https://www.fnnews.com/news/202610211030118854"
+     ]
+    },
+    {
+     "t": "Kharkiv Governor Oleh Syniehubov said a Russian drone attack on the village of Korotych overnight on October 20–21 killed two residents in their 80s.",
+     "src": [
+      "https://kyivindependent.com/russian-drones-kill-2-in-kharkiv-oblast-strike-university-building-in-kremenchuk/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-20",
    "items": [
     {
