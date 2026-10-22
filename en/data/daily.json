@@ -1,6 +1,200 @@
 {
  "issues": [
   {
+   "date": "2026-10-22",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Kremlin says it is ready to resume three-way talks around November 10 after Witkoff meeting",
+     "fact": "After Putin met U.S. envoy Steve Witkoff in St. Petersburg on October 21, presidential aide Yuri Ushakov said Russia is ready in principle to resume three-way talks with the U.S. and Ukraine around November 10. Russia freed jailed American Stephen Hubbard, 74, as the meeting began.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://tass.com/politics/2205585",
+      "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy",
+      "https://www.cbsnews.com/news/russia-stephen-hubbard-freed-american-ukraine-war-witkoff-putin/"
+     ],
+     "loc": {
+      "lat": 59.94,
+      "lon": 30.31,
+      "place": "St. Petersburg (Russia)",
+      "isos": [
+       "RUS",
+       "USA",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky hopes for U.S.-Russia-Ukraine talks by early November",
+     "fact": "On his way back to Kyiv from Norway, Zelensky told reporters he believes the three-way talks should take place no later than early November (Al Jazeera, October 21). Ushakov told Russian state TV channel Vesti the talks could be held in Abu Dhabi.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Netanyahu says toppling Iran's regime is the only way to end its threat",
+     "fact": "Speaking at an Israeli military officers' graduation ceremony on October 21, Israeli Prime Minister Benjamin Netanyahu said the only way to remove Iran's threat for good is to overthrow the regime. He said he had issued directives to the military, the Mossad and other security services but did not say what they were.",
+     "fc": [],
+     "src": [
+      "https://thisisbeirut.com.lb/news/politics/netanyahu-says-overthrowing-irans-regime-is-necessary-to-eliminate-threat",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ],
+     "loc": {
+      "isos": [
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "State Department orders non-emergency staff and families out of Saudi Arabia over Houthi attacks",
+     "fact": "State Department spokesperson Tommy Pigott said on X on October 21 that the department had ordered non-emergency employees and their families to leave Saudi Arabia, citing attacks by the Iran-backed Houthis on Saudi airports and infrastructure. Saudi Arabia's civil aviation authority said an attack late on October 21 on King Fahd International Airport in Dammam killed one person and injured eight.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/news/us-saudi-arabia-ordered-departure-houthis/",
+      "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
+     ],
+     "loc": {
+      "lat": 26.47,
+      "lon": 49.8,
+      "place": "Dammam (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "USA",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IRGC spokesman warns Iran will respond and go on the offensive if attacked",
+     "fact": "In an October 21 interview with the Student News Network, IRGC spokesman Hossein Mohebbi said the Guards' doctrine, which had been largely defensive, now includes offensive action, and that any country that attacks Iran will face both a response and an offensive, IranWire reported.",
+     "fc": [],
+     "src": [
+      "https://iranwire.com/en/news/159162-irgc-announces-shift-to-offensive-military-strategy/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "Kim Yo Jong says loudspeakers aimed at South Korea will be on standby within days",
+     "fact": "In an October 22 statement carried by KCNA, Kim Yo Jong, director of the Workers' Party's General Affairs Department, said North Korea's new means of response will go on mission standby along the entire border and its loudspeakers aimed at South Korea will be on standby within days. In an October 21 statement, she said the loudspeakers would be operating along the entire border sometime in October.",
+     "fc": [],
+     "src": [
+      "https://www.fnnews.com/news/202610220703222153",
+      "https://www.khan.co.kr/article/202610212243005/",
+      "https://www.japantimes.co.jp/news/2026/10/22/asia-pacific/north-korea-kim-yo-jong/"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian ballistic missiles and drones hit Kyiv overnight October 21–22, injuring 15",
+     "fact": "Kyiv Mayor Vitali Klitschko said Russian ballistic missile and drone attacks overnight on October 21–22 (local time) injured 15 people, including two 15-year-olds. Metro infrastructure on the Pivdennyi Bridge and an ambulance station in the Pecherskyi district were damaged.",
+     "fc": [],
+     "src": [
+      "https://www.kyivpost.com/post/87796"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Moscow mayor reports downing drones overnight October 21–22; TASS tallies 630",
+     "fact": "Moscow Mayor Sergei Sobyanin reported downing wave after wave of Ukrainian drones headed for Moscow between 8:30 p.m. on October 21 and 4 a.m. on October 22 (Moscow time); TASS, tallying his announcements, put the total at 630. He said 163 were downed as they approached the city, and two people were injured near Voronovo.",
+     "fc": [],
+     "src": [
+      "https://tass.com/emergencies/2205911",
+      "https://tass.com/politics/2205939"
+     ],
+     "loc": {
+      "lat": 55.76,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "U.S. Embassy in Canada accuses Canadian politicians of trying to sway the midterms",
+     "fact": "In a fact sheet released October 21, the U.S. Embassy in Canada claimed that Industry Minister Mélanie Joly, Ontario Premier Doug Ford and others are trying to influence the November 3 U.S. midterm elections through their responses to President Donald Trump's tariffs. Joly had denied any interference on October 14, saying her work in the U.S. was aimed at attracting investment.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/21/us-accuses-canada-of-election-interference-ahead-of-midterms"
+     ],
+     "loc": {
+      "lat": 45.42,
+      "lon": -75.7,
+      "place": "Ottawa (Canada)",
+      "isos": [
+       "USA",
+       "CAN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "In a joint statement in Doha on October 21, Qatar's Emir Sheikh Tamim bin Hamad Al Thani and French President Emmanuel Macron called for restoring freedom of navigation in the Strait of Hormuz without constraints or fees and for implementing the Gaza ceasefire.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/22/qatar-france-call-for-opening-of-hormuz-and-gaza-ceasefire-implementation"
+     ]
+    },
+    {
+     "t": "Saudi Arabia's energy ministry said October 21 that debris from a drone intercepted as it headed for the Shaybah oil field in the east killed two people and injured two.",
+     "src": [
+      "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
+     ]
+    },
+    {
+     "t": "Mexican authorities on October 21 charged former Chihuahua state Attorney General César Jáuregui with treason for allowing U.S. agents to take part in an anti-drug operation.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/21/mexico-charges-prosecutor-with-treason-over-us-involvement-in-drug-raid"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-21",
    "items": [
     {

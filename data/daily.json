@@ -1,6 +1,200 @@
 {
  "issues": [
   {
+   "date": "2026-10-22",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "크렘린, 위트코프 회담 뒤 3자 회담 11월 10일께 재개 준비 밝혀",
+     "fact": "우샤코프 대통령 보좌관은 21일 상트페테르부르크에서 푸틴 대통령과 위트코프 특사가 만난 뒤, 러시아가 원칙적으로 11월 10일께 미·러·우 3자 회담을 재개할 준비가 돼 있다고 밝혔습니다. 러시아는 이날 회담을 시작하며 수감 중이던 미국인 스티븐 허버드(74)를 풀어 줬습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://tass.com/politics/2205585",
+      "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy",
+      "https://www.cbsnews.com/news/russia-stephen-hubbard-freed-american-ukraine-war-witkoff-putin/"
+     ],
+     "loc": {
+      "lat": 59.94,
+      "lon": 30.31,
+      "place": "상트페테르부르크(러시아)",
+      "isos": [
+       "RUS",
+       "USA",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키, 미·러·우 3자 회담 늦어도 11월 초 개최 기대",
+     "fact": "젤렌스키 대통령은 노르웨이에서 키이우로 돌아오는 길에 기자들에게 3자 회담이 늦어도 11월 초에는 열려야 한다는 생각을 밝혔습니다(알자지라 21일 보도). 우샤코프 보좌관은 러시아 국영 방송 베스티에 회담이 아부다비에서 열릴 수 있다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "네타냐후, 이란 위협 없앨 유일한 길은 정권 전복이라고 밝혀",
+     "fact": "네타냐후 이스라엘 총리는 21일 이스라엘군 장교 임관식 연설에서 이란의 위협을 완전히 없앨 방법은 이란 정권을 무너뜨리는 것 하나뿐이라고 말했습니다. 군과 모사드 등 안보기관에 지시를 내렸다고 했으나 지시 내용은 밝히지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://thisisbeirut.com.lb/news/politics/netanyahu-says-overthrowing-irans-regime-is-necessary-to-eliminate-threat",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ],
+     "loc": {
+      "isos": [
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "미 국무부, 후티 공격에 사우디 주재 비긴급 직원·가족 출국 명령",
+     "fact": "피곳 국무부 대변인은 21일 X에서 이란이 지원하는 후티가 사우디 공항과 기반시설을 공격하고 있다며 사우디 주재 비긴급 직원과 가족에게 출국 명령을 냈다고 밝혔습니다. 21일 밤늦게 담맘 킹파흐드 국제공항이 공격받아 1명이 숨지고 8명이 다쳤다고 사우디 민간항공청이 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/news/us-saudi-arabia-ordered-departure-houthis/",
+      "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
+     ],
+     "loc": {
+      "lat": 26.47,
+      "lon": 49.8,
+      "place": "담맘(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "USA",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란 혁명수비대 대변인, 공격받으면 대응과 함께 공세 나서겠다고 경고",
+     "fact": "모헵비 혁명수비대 대변인은 21일 학생통신(SNN) 인터뷰에서 혁명수비대의 교리가 방어 위주였으나 이제 공세 행동을 포함한다며, 이란을 공격하는 나라에는 대응과 함께 공세에 나서겠다고 말했습니다(이란와이어 보도).",
+     "fc": [],
+     "src": [
+      "https://iranwire.com/en/news/159162-irgc-announces-shift-to-offensive-military-strategy/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "김여정 \"대한국 확성기들도 수일 안으로 대기상태에 들어가게 된다\"",
+     "fact": "김여정 노동당 총무부장은 22일 조선중앙통신으로 낸 담화에서 전 국경선에서 '새로운 대응수단들'이 임무대기태세에 들어가고 대한국 확성기들도 수일 안으로 대기상태에 들어간다고 밝혔습니다. 21일 담화에서는 확성기를 10월 중 전 국경선에서 가동하겠다고 했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.fnnews.com/news/202610220703222153",
+      "https://www.khan.co.kr/article/202610212243005/",
+      "https://www.japantimes.co.jp/news/2026/10/22/asia-pacific/north-korea-kim-yo-jong/"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 21일 밤부터 22일 새벽 키이우에 탄도미사일·드론 공격…15명 부상",
+     "fact": "클리치코 키이우 시장은 21일 밤부터 22일 새벽(현지 시각) 사이 러시아의 탄도미사일·드론 공격으로 15세 어린이 2명을 포함해 15명이 다쳤다고 밝혔습니다. 남부 다리의 지하철 시설과 페체르스크 지구 구급차 기지가 피해를 입었습니다.",
+     "fc": [],
+     "src": [
+      "https://www.kyivpost.com/post/87796"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "모스크바 시장, 21일 밤~22일 새벽 드론 격추 발표…타스 집계 630대",
+     "fact": "소뱌닌 모스크바 시장은 21일 오후 8시 30분부터 22일 오전 4시(모스크바 시각)까지 모스크바로 향하던 우크라이나 드론을 잇달아 격추했다고 밝혔고, 타스 통신은 그 발표를 집계해 630대로 셌습니다. 모스크바에 접근하던 163대가 격추됐고 보로노보 인근에서 2명이 다쳤습니다.",
+     "fc": [],
+     "src": [
+      "https://tass.com/emergencies/2205911",
+      "https://tass.com/politics/2205939"
+     ],
+     "loc": {
+      "lat": 55.76,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "주캐나다 미국대사관, 캐나다 정치인들의 중간선거 개입 시도 주장",
+     "fact": "주캐나다 미국대사관은 21일 낸 자료에서 졸리 산업장관과 포드 온타리오주 총리 등이 트럼프 대통령의 관세에 대응하며 11월 3일 미국 중간선거에 영향을 주려 한다고 주장했습니다. 졸리 장관은 앞서 14일 미국에서 한 일은 투자 유치라며 개입 의혹을 부인한 바 있습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/21/us-accuses-canada-of-election-interference-ahead-of-midterms"
+     ],
+     "loc": {
+      "lat": 45.42,
+      "lon": -75.7,
+      "place": "오타와(캐나다)",
+      "isos": [
+       "USA",
+       "CAN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "카타르의 타밈 국왕과 마크롱 프랑스 대통령은 21일 도하에서 낸 공동성명에서 호르무즈 해협의 항행 자유를 제약이나 수수료 없이 회복하고 가자 휴전을 이행하라고 촉구했습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/22/qatar-france-call-for-opening-of-hormuz-and-gaza-ceasefire-implementation"
+     ]
+    },
+    {
+     "t": "사우디 에너지부는 21일 동부 샤이바 유전을 노린 드론을 요격하는 과정에서 떨어진 잔해로 2명이 숨지고 2명이 다쳤다고 밝혔습니다.",
+     "src": [
+      "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
+     ]
+    },
+    {
+     "t": "멕시코 당국은 21일 미국 요원의 마약 단속 작전 참여를 허용한 혐의로 하우레기 전 치와와주 검찰총장을 반역죄로 기소했습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/21/mexico-charges-prosecutor-with-treason-over-us-involvement-in-drug-raid"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-21",
    "items": [
     {
