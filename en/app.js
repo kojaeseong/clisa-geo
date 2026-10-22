@@ -2694,6 +2694,7 @@ function fcByBranch(c, fs){
    화면 문구는 모두 FCT에 둔다(영문판은 en/patch_app.py가 FCT 구역을 en/fct_en.js로 통째로 바꾼다) */
 /* v4.22 forecast pages and resolution lists: English strings (replaces the Korean FCT block; en/patch_app.py) */
 const FCT = {
+  yd: ["Remote chance", "Highly unlikely", "Unlikely", "Realistic possibility", "Likely", "Highly likely", "Almost certain"], ydNote: "The likelihood terms next to each probability follow the wording used in UK government intelligence assessments. The UK leaves deliberate gaps between terms (for example, 5–10%), while Clisa assigns a term to every probability.",
   md: s => enDate(s, true), ymd: s => enDate(s), ym: s => EN_MON[+s.slice(5, 7) - 1].slice(0, 3) + " " + s.slice(0, 4),
   tk: s => EN_MON[+s.slice(5, 7) - 1].slice(0, 3) + " " + (+s.slice(8, 10)), left: n => pl(n, "day") + " left", late: n => "Past due", dd: n => pl(n, "day"), cnt: n => pl(n, "forecast"), more: n => "Show " + n + " more",
   today: "Today", checking: "Result pending", firstRes: "First result", acc: "Accuracy (Brier score)", detail: "Details →", copied: "Copied", title: s => s + " · Forecast",
@@ -2759,7 +2760,7 @@ function fcHeroHtml(op, done, t){
   const n = fcDays(t, nx.due);
   return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length, n) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
     '<div class="fh-t"><small>' + esc(FCT.hK(FCT.md(nx.due), fcCaseName(nx))) + "</small><div>" + esc(nx.s || nx.q) + "</div><p>" + FCT.hNote + "</p></div>" +
-    '<div class="fh-p"><b>' + nx.p + "%</b><span>" + FCT.pNow + "</span>" + fcSpark(nx, t) + "</div></button>";
+    '<div class="fh-p"><b>' + nx.p + "%</b>" + ydWord(nx.p, "yw yh") + "<span>" + FCT.pNow + "</span>" + fcSpark(nx, t) + "</div></button>";
 }
 function fcStatsHtml(fs, op, done, brier){
   const chg = op.filter(f => fcHistOf(f)[0][1] !== f.p).length, vd = fs.filter(f => f.status === "void").length;
@@ -2790,7 +2791,13 @@ function fcCalTip(){
 }
 function fcSoonRow(f, t){
   const n = fcDays(t, f.due);
-  return '<li><button type="button" data-fcd="' + esc(f.id) + '"><span class="dl">' + (n < 0 ? FCT.late(-n) : FCT.dd(n)) + '</span><span class="sq">' + esc(f.s || f.q) + "<small>" + esc(fcCaseName(f)) + " · " + FCT.due(FCT.md(f.due)) + fcRowX(f) + '</small></span><span class="pb"><i style="width:' + f.p + '%"></i></span><b>' + f.p + "%</b></button></li>";
+  return '<li><button type="button" data-fcd="' + esc(f.id) + '"><span class="dl">' + (n < 0 ? FCT.late(-n) : FCT.dd(n)) + '</span><span class="sq">' + esc(f.s || f.q) + "<small>" + esc(fcCaseName(f)) + " · " + FCT.due(FCT.md(f.due)) + fcRowX(f) + '</small></span><span class="pb"><i style="width:' + f.p + '%"></i></span><b>' + f.p + "%" + ydWord(f.p) + "</b></button></li>";
+}
+function ydBand(p){ return p <= 7 ? 0 : p <= 22 ? 1 : p <= 37 ? 2 : p <= 52 ? 3 : p <= 77 ? 4 : p <= 92 ? 5 : 6; }
+function ydWord(p, cls){  /* v4.27 확률 잣대 표현: 첫 낱말과 나머지를 나눠 휴대전화 목록에서 줄을 바꾼다 */
+  const t = FCT.yd[ydBand(+p)], i = t.indexOf(" ");
+  const inner = (i > 0 && (t.indexOf("chance") === 0 || !/[가-힣]/.test(t))) ? '<span class="y1">' + esc(t.slice(0, i)) + '</span> <span class="y2">' + esc(t.slice(i + 1)) + "</span>" : esc(t);
+  return '<span class="' + (cls || "yw") + '">' + inner + "</span>";
 }
 function fcRowX(f){  /* v4.23 처음 확률과 다르면 변화, 정세 브리핑에서 연결한 꼭지 수 */
   const h0 = fcHistOf(f)[0][1], n = fcEvents(f).length;
@@ -2848,7 +2855,7 @@ function fcDetailHtml(f){
   const url = location.origin + FCT.href("/forecast/" + f.id + "/");
   return '<div class="sec"><p style="margin:0 0 10px"><button type="button" class="chip back" data-fcd="">' + FCT.back + "</button></p>" +
     '<div class="fd-h"><div><p class="eyebrow">' + esc(FCT.eyebrow(f.id, fcCaseName(f))) + '</p><h2 class="fd-q">' + esc(f.q) + "</h2></div>" +
-    '<div class="fd-p"><b>' + f.p + "%</b><span>" + (open ? FCT.pNow : FCT.pThen) + "</span></div></div>" +
+    '<div class="fd-p"><b>' + f.p + "%</b>" + ydWord(f.p, "yw yd") + "<span>" + (open ? FCT.pNow : FCT.pThen) + "</span></div></div>" +
     '<div class="chips" style="margin-top:8px">' + (f.countries || []).map(chip).join("") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(FCT.caseGo(c.title.split(":")[0])) + "</button>" : "") + "</div>" +
     '<dl class="fd-meta"><dt>' + FCT.dueAt + "</dt><dd>" + FCT.ymd(f.due) + (open ? ' <span class="fd-dd">' + (n > 0 ? FCT.left(n) : n === 0 ? FCT.today : FCT.checking) + "</span>" : "") + "</dd>" +
     "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
@@ -2880,7 +2887,7 @@ function renderForecasts(){
   const brier = done.length ? (done.reduce((s, f) => s + fcBrierT(f, f.status === "yes" ? 1 : 0), 0) / done.length).toFixed(3) : "—";  /* v4.24 기간 평균 */
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
-    "<div class=\"sec\"><h2>Forecasts and Track Record</h2><p class=\"lead\" style=\"margin-top:8px\">Every forecast states its probability and a resolution date; on that date, it is checked against what actually happened, and the result is published.</p></div>" +
+    "<div class=\"sec\"><h2>Forecasts and Track Record</h2><p class=\"lead\" style=\"margin-top:8px\">Every forecast states its probability and a resolution date; on that date, it is checked against what actually happened, and the result is published.</p><p class=\"ydnote\">" + esc(FCT.ydNote) + "</p></div>" +
     fcHeroHtml(op0, done, t0) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
     fcCalHtml(op0, t0) +  /* v4.23 판가름 달력 */
     fcSoonHtml(t0) +  /* v4.22 판가름 목록 */

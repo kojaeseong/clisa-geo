@@ -251,6 +251,18 @@ details.more>summary{cursor:pointer; font-size:13px; color:var(--accent); paddin
 .fd-rc p{margin:4px 0 0}
 .fd-share{display:flex; flex-wrap:wrap; gap:6px}
 @media (max-width: 600px){ .fd-oc{grid-template-columns:1fr} .fsoon li button{grid-template-columns:56px 1fr 38px} .fsoon .pb{display:none} .fd-q{font-size:17px} .fd-p b{font-size:32px} }
+/* v4.27 확률 잣대 표현 */
+.fsoon li button{grid-template-columns:60px 1fr 56px 96px}
+html[lang="en"] .fsoon li button{grid-template-columns:60px 1fr 56px 128px}
+.fsoon b{display:flex; flex-direction:column; align-items:flex-end; gap:2px; line-height:1.1}
+.fsoon .sq{word-break:keep-all; overflow-wrap:break-word}
+.yw{font:500 11px var(--sans); color:var(--muted); white-space:nowrap; letter-spacing:-.01em}
+.fh-p .yh{display:block; font-size:14px; font-weight:600; color:#fff; margin-top:6px}
+.fh-p .yh + span{margin-top:2px}
+.fd-p .yd{display:block; font-size:17px; font-weight:700; color:var(--accent); margin:4px 0 2px}
+.fd-p .yd span{font:inherit; color:inherit}
+.ydnote{margin:6px 0 0; font-size:12.5px; line-height:1.6; color:var(--muted)}
+@media (max-width: 600px){ .fsoon li button{grid-template-columns:52px 1fr 58px} html[lang="en"] .fsoon li button{grid-template-columns:52px 1fr 70px} .fsoon b .y1{display:block} .fsoon b .yw{white-space:normal; text-align:right} }
 
 .thinker{display:grid; gap:10px; padding-bottom:4px}
 .thinker .who{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
