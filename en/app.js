@@ -2694,7 +2694,7 @@ function fcByBranch(c, fs){
    화면 문구는 모두 FCT에 둔다(영문판은 en/patch_app.py가 FCT 구역을 en/fct_en.js로 통째로 바꾼다) */
 /* v4.22 forecast pages and resolution lists: English strings (replaces the Korean FCT block; en/patch_app.py) */
 const FCT = {
-  yd: ["Remote chance", "Highly unlikely", "Unlikely", "Realistic possibility", "Likely", "Highly likely", "Almost certain"], ydNote: "The likelihood terms next to each probability follow the wording used in UK government intelligence assessments. The UK leaves deliberate gaps between terms (for example, 5–10%), while Clisa assigns a term to every probability.",
+  yd: ["Remote chance", "Highly unlikely", "Unlikely", "Realistic possibility", "Likely", "Highly likely", "Almost certain"], ydNote: "The likelihood terms next to each forecast probability follow the wording used in UK government intelligence assessments. The UK leaves deliberate gaps between terms (for example, 5–10%), while Clisa assigns a term to every probability.",
   md: s => enDate(s, true), ymd: s => enDate(s), ym: s => EN_MON[+s.slice(5, 7) - 1].slice(0, 3) + " " + s.slice(0, 4),
   tk: s => EN_MON[+s.slice(5, 7) - 1].slice(0, 3) + " " + (+s.slice(8, 10)), left: n => pl(n, "day") + " left", late: n => "Past due", dd: n => pl(n, "day"), cnt: n => pl(n, "forecast"), more: n => "Show " + n + " more",
   today: "Today", checking: "Result pending", firstRes: "First result", acc: "Accuracy (Brier score)", detail: "Details →", copied: "Copied", title: s => s + " · Forecast",
