@@ -143,7 +143,7 @@ function title(){
    '<div class="row">'+(EN?'<span class="ko">'+esc(C.sub||'')+'</span>':'<span class="ko">'+esc(C.title)+'</span>')+'<span class="stamp-r">'+esc(C.ep)+'</span></div>'+
    '<p class="hook">'+esc(C.hook)+'</p>'+
    '<button class="btn" id="go">'+T('결정하러 가기','Take your seat')+'</button>'+
-   '<div class="count"><div><b>37</b>'+T('일간의 위기',' days of crisis')+'</div><div><b>6</b>'+T('개 나라',' powers')+'</div><div><b>'+Object.keys(C.endings).length+'</b>'+T('개 결말',' endings')+'</div></div>'+rights()+'</section>');
+   '<div class="count"><div><b>37</b>'+T('일간의 위기',' days of crisis')+'</div><div><b>6</b>'+T('개 나라',' powers')+'</div><div><b>?</b>'+T('알 수 없는 결말',' an unknown ending')+'</div></div>'+rights()+'</section>');
   document.getElementById('go').onclick=function(){ sfx('stamp'); music(true); roles(); };
 }
 function roles(){
