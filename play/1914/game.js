@@ -123,8 +123,9 @@ function timeline(n){
 }
 /* v4.24 (2026-10-23) three-area switch: Geopolitics · Academy · Game, same tab (progress is saved per role). The off-site preview keeps the plain label. */
 function areaNav(){ if(!LANGLINK) return '<span>CLISA GAMES</span>'; return '<nav class="asw" aria-label="'+T('클리사 영역','Clisa sections')+'"><a href="'+SITE+'/">'+T('지오폴리틱스','Geopolitics')+'</a><a href="'+SITE+'/academy/">'+T('아카데미','Academy')+'</a><a href="'+SITE+'/play/" class="on" aria-current="page">'+T('게임','Game')+'</a></nav>'; }
-function brand(){return '<div class="brandbar">'+areaNav()+'<span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+langBtn()+soundBtn()+'</span></div>';}
-function render(h){ app.innerHTML=h; bindSound(); }
+function chgBtn(){ return (R&&VIEW!==roles)?'<button class="sbtn" id="chg" title="'+T('다른 자리에서 다시 시작합니다. 이 자리의 진행은 지워집니다.','Start again in another chair. Progress in this chair is discarded.')+'">'+T('자리 바꾸기','Change chair')+'</button>':''; }
+function brand(){return '<div class="brandbar">'+areaNav()+'<span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+langBtn()+chgBtn()+soundBtn()+'</span></div>';}
+function render(h){ app.innerHTML=h; bindSound(); var cb=document.getElementById('chg'); if(cb) cb.onclick=function(){ sfx('click'); R=null; S=null; roles(); }; }
 function dayLabel(d){ if(!d) return ''; var m=d.match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return esc(d); return EN?(+m[3])+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][+m[2]-1]:(+m[2])+'월 '+(+m[3])+'일'; }
 function yearOf(d){ var m=String(d||'').match(/^(\d{4})/); return m?m[1]:''; }
 function setTheme(id){
