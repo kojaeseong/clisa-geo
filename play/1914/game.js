@@ -92,7 +92,21 @@ function bindSound(){ var l=document.getElementById('lsw'); if(l) l.onclick=func
 
 /* 2026-10-23 (partner suggestion): roles already played light up on the role screen; kept in the browser as role:ending pairs */
 function doneMap(){ var m={}; String(store('wod-done')||'').split(',').forEach(function(x){ var a=x.split(':'); if(a[0]) m[a[0]]=a[1]||''; }); return m; }
-function markDone(id,k){ var m=doneMap(); m[id]=k; store('wod-done',Object.keys(m).map(function(x){return x+':'+m[x];}).join(',')); }
+function markDone(id,k){ var m=doneMap(); m[id]=k; store('wod-done',Object.keys(m).map(function(x){return x+':'+m[x];}).join(','));
+  /* 2026-10-23 (operator decision): the finished run is kept so its ending, type and card can be opened again from the role screen */
+  var sv={}; try{ sv=JSON.parse(store('wod-save')||'{}')||{}; }catch(e){}
+  sv[id]={k:k,g:S.g,flags:S.flags,ax:S.ax,axLast:S.axLast,qn:S.qn,hist:S.hist.map(function(h){return [h.id,h.pick];})};
+  store('wod-save',JSON.stringify(sv)); }
+function savedRun(id){ try{ var sv=JSON.parse(store('wod-save')||'{}'); return sv&&sv[id]||null; }catch(e){ return null; } }
+function replay(id){
+  var sv=savedRun(id); if(!sv) return;
+  get(BASE+'data/'+id+'.'+LANG+'.json').then(function(r){
+    R=r; setTheme(id);
+    S={g:sv.g,flags:sv.flags||{},ax:sv.ax||{},axLast:sv.axLast||{},hist:[],node:r.first,qn:sv.qn||0};
+    S.hist=(sv.hist||[]).map(function(a){ var n=R.nodes[a[0]], c=n&&n.choices.filter(function(x){return x.key===a[1];})[0]; S.node=a[0]; return c?histEntry(n,c):null; }).filter(function(x){return x;});
+    ending('END:'+sv.k,0,true);
+  });
+}
 /* ③ (partner suggestion): a calendar strip from 28 June to 4 August with the current scene and the decisions already made */
 function timeline(n){
   var d0=Date.UTC(1914,5,28), d1=Date.UTC(1914,7,4), span=d1-d0;
@@ -137,10 +151,10 @@ function roles(){
     var h=brand()+'<h2 class="h2">'+T('누구의 자리에 앉으시겠습니까?','Whose chair will you take?')+'</h2><p class="lead">'+T('어느 역할을 골라도 같은 1914년 7월 안에서 움직입니다. 한 역할을 끝내면 다른 나라의 자리에서 다시 해 보세요.','Every role plays out inside the same July 1914. When you finish one, try again from another capital.')+
       (nd?' <span class="prog">'+T('끝낸 자리 ','Chairs completed: ')+nd+' / '+ROLES.length+'</span>':'')+'</p><div class="roles">';
     ROLES.forEach(function(r,i){var d=list[i], dk=dm[r.id];
-      h+='<button class="role'+(d?'':' off')+(dk!==undefined?' done':'')+'" data-id="'+r.id+'">'+(dk!==undefined?'<span class="donek">'+T('끝냄','Done')+(dk?' · '+T('결말 ','Ending ')+esc(dk):'')+'</span>':'')+'<span class="flag">'+FLAGS[r.flag]+'</span>'+
+      h+='<button class="role'+(d?'':' off')+(dk!==undefined?' done':'')+'" data-id="'+r.id+'">'+(dk!==undefined?'<span class="donek'+(savedRun(r.id)?' re':'')+'"'+(savedRun(r.id)?' data-replay="'+r.id+'" role="button" title="'+T('지난 결과 다시 보기','Open the last result')+'"':'')+'>'+T('끝냄','Done')+(dk?' · '+T('결말 ','Ending ')+esc(dk):'')+(savedRun(r.id)?' · '+T('결과 보기','Result')+' →':'')+'</span>':'')+'<span class="flag">'+FLAGS[r.flag]+'</span>'+
         '<span class="cty">'+esc(d?d.country:'')+'</span><span class="who">'+esc(d?d.person:T('준비 중','Coming soon'))+'</span><span class="card">'+esc(d?d.card:'')+'</span>'+(d?'':'<span class="soon">'+T('준비 중','Coming soon')+'</span>')+'</button>';});
     render(h+'</div>');
-    app.querySelectorAll('.role').forEach(function(b){b.onclick=function(){ sfx('click'); start(b.dataset.id);};});
+    app.querySelectorAll('.role').forEach(function(b){b.onclick=function(ev){ var rp=ev.target.closest&&ev.target.closest('[data-replay]'); sfx('click'); if(rp) replay(rp.dataset.replay); else start(b.dataset.id);};});
     top();
   });
 }
