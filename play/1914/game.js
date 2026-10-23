@@ -1,16 +1,16 @@
-/* WORLD OF DECISION · 1914 — game engine (ko first; en later via ?lang=en) */
+/* WORLD OF DECISION · 1914 — game engine (ko and en; 2026-10-23 in-place language switch: the screen, the data and the address change, the music and the game state carry on) */
 (function(){
 'use strict';
 var LANG=(new URLSearchParams(location.search).get('lang')==='en'||/^en/.test(document.documentElement.lang||''))?'en':'ko';
 /* data and engine live once under /play/1914/; the English page sets data-base to reuse them */
-var BASE=document.documentElement.getAttribute('data-base')||'';
-var EN=LANG==='en';
+/* the base is absolute so that data and audio still resolve after the address is switched between /play/1914/ and /en/play/1914/ */
+var BASE=document.documentElement.getAttribute('data-base')||(/\/play\/1914\/$/.test(location.pathname)?location.pathname.replace(/^\/en\//,'/'):'');
+var EN, SITE, DISP, SWITCHING=false, VIEW=null;
 function T(ko,en){return EN?en:ko;}
-var SITE=EN?'/en':'';
 var LANGLINK=true; /* the off-site preview turns the switch off */
-document.documentElement.lang=LANG;
 /* Black Han Sans has no accented Latin letters, so English headings use Archivo Black */
-var DISP=EN?'"Archivo Black",sans-serif':'"Black Han Sans",sans-serif';
+function setLang(l){ LANG=l; EN=l==='en'; SITE=EN?'/en':''; DISP=EN?'"Archivo Black",sans-serif':'"Black Han Sans",sans-serif'; document.documentElement.lang=l; document.title='WORLD OF DECISION · 1914 | '+(EN?'Clisa Geopolitics':'클리사 지오폴리틱스'); }
+setLang(LANG);
 var ROLES=[
  {id:'de',flag:'de'},{id:'at',flag:'at'},{id:'ru',flag:'ru'},{id:'fr',flag:'fr'},{id:'gb',flag:'gb'},{id:'rs',flag:'rs'}
 ];
@@ -31,7 +31,8 @@ var THEME={
  gb:{stripe:['#C1121F','#FFFFFF','#0B2A5B'],acc:'#0B2A5B'},
  rs:{stripe:['#C6363C','#0C4076','#FFFFFF'],acc:'#A3262C'}
 };
-var IMGLAB=EN?{wilhelm2:'Wilhelm II',bethmann:'Bethmann Hollweg',moltke:'Moltke',berchtold:'Berchtold',franzjoseph:'Franz Joseph',tisza:'Tisza',conrad:'Conrad',nicholas2:'Nicholas II',sazonov:'Sazonov',poincare:'Poincaré',viviani:'Viviani',grey:'Grey',asquith:'Asquith',churchill:'Churchill',pasic:'Pašić',albert1:'Albert I',lichnowsky:'Lichnowsky',jaures:'Jaurès'}:{wilhelm2:'빌헬름 2세',bethmann:'베트만홀베크',moltke:'몰트케',berchtold:'베르히톨트',franzjoseph:'프란츠 요제프',tisza:'티서',conrad:'콘라트',nicholas2:'니콜라이 2세',sazonov:'사조노프',poincare:'푸앵카레',viviani:'비비아니',grey:'그레이',asquith:'아스퀴스',churchill:'처칠',pasic:'파시치',albert1:'알베르 1세',lichnowsky:'리히노프스키',jaures:'조레스'};
+var IMGLABS={en:{wilhelm2:'Wilhelm II',bethmann:'Bethmann Hollweg',moltke:'Moltke',berchtold:'Berchtold',franzjoseph:'Franz Joseph',tisza:'Tisza',conrad:'Conrad',nicholas2:'Nicholas II',sazonov:'Sazonov',poincare:'Poincaré',viviani:'Viviani',grey:'Grey',asquith:'Asquith',churchill:'Churchill',pasic:'Pašić',albert1:'Albert I',lichnowsky:'Lichnowsky',jaures:'Jaurès'},ko:{wilhelm2:'빌헬름 2세',bethmann:'베트만홀베크',moltke:'몰트케',berchtold:'베르히톨트',franzjoseph:'프란츠 요제프',tisza:'티서',conrad:'콘라트',nicholas2:'니콜라이 2세',sazonov:'사조노프',poincare:'푸앵카레',viviani:'비비아니',grey:'그레이',asquith:'아스퀴스',churchill:'처칠',pasic:'파시치',albert1:'알베르 1세',lichnowsky:'리히노프스키',jaures:'조레스'}};
+function IMGLAB(){return IMGLABS[LANG];}
 var app=document.getElementById('app');
 var C=null, R=null, S=null, MAPS=null, TYPES=null, cache={};
 var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -43,7 +44,7 @@ function tx(s){return esc(clean(s));}
 function get(url){ if(cache[url]) return Promise.resolve(cache[url]);
   return fetch(url,{cache:'no-cache'}).then(function(r){if(!r.ok) throw new Error(url+' '+r.status); return r.json();}).then(function(j){cache[url]=j;return j;});}
 function opt(url){ return get(url).catch(function(){return null;}); }
-function top(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});}
+function top(){ if(SWITCHING) return; window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});}
 function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
 
 /* ---------- sound (synthesised, no files) ---------- */
@@ -72,9 +73,24 @@ function music(play){
   try{ var a=track(SND.idx); if(play&&SND.on) a.play().catch(function(){}); else a.pause(); }catch(e){}
 }
 function soundBtn(){ return '<button class="sbtn" id="snd" aria-pressed="'+(SND.on?'true':'false')+'">'+(SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'))+'</button>'; }
-function bindSound(){ var b=document.getElementById('snd'); if(!b) return; b.onclick=function(){ SND.on=!SND.on; store('wod-sound',SND.on?'on':'off'); b.textContent=SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'); b.setAttribute('aria-pressed',SND.on?'true':'false'); if(SND.on){ sfx('click'); music(true);} else music(false); }; }
+function langBtn(){ return LANGLINK?'<button class="sbtn lbtn" id="lsw" lang="'+(EN?'ko':'en')+'" aria-label="'+(EN?'한국어로 보기':'View in English')+'">'+(EN?'한국어':'English')+'</button>':''; }
+/* switch the language in place: same screen, same role and choices, same music; only the words, the data and the address change */
+function switchLang(l){
+  if(l===LANG) return;
+  setLang(l);
+  if(/^\/(en\/)?play\/1914\/$/.test(location.pathname)){ try{ var q=new URLSearchParams(location.search); q.delete('lang'); var qs=q.toString(); history.replaceState(null,'',(EN?'/en':'')+'/play/1914/'+(qs?'?'+qs:'')+location.hash); }catch(e){} }
+  var jobs=[get(BASE+'data/common.'+LANG+'.json'),opt(BASE+'data/maps'+(EN?'.en':'')+'.json'),opt(BASE+'data/types.'+LANG+'.json')];
+  if(R) jobs.push(get(BASE+'data/'+R.id+'.'+LANG+'.json'));
+  Promise.all(jobs).then(function(r){
+    C=r[0]; MAPS=r[1]; TYPES=r[2];
+    if(R){ R=r[3]; if(S) S.hist=S.hist.map(function(h){ var n=R.nodes[h.id]; var c=n&&n.choices.filter(function(x){return x.key===h.pick;})[0]; return c?histEntry(n,c):h; }); }
+    SWITCHING=true; try{ if(VIEW) VIEW(); } finally{ SWITCHING=false; }
+  }).catch(function(e){ app.textContent=T('자료를 불러오지 못했습니다. ','Could not load the game data. ')+e.message; });
+}
+function bindSound(){ var l=document.getElementById('lsw'); if(l) l.onclick=function(){ sfx('click'); switchLang(EN?'ko':'en'); };
+  var b=document.getElementById('snd'); if(!b) return; b.onclick=function(){ SND.on=!SND.on; store('wod-sound',SND.on?'on':'off'); b.textContent=SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'); b.setAttribute('aria-pressed',SND.on?'true':'false'); if(SND.on){ sfx('click'); music(true);} else music(false); }; }
 
-function brand(){return '<div class="brandbar"><a href="'+SITE+'/" target="_blank" rel="noopener">CLISA</a><span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+soundBtn()+'</span></div>';}
+function brand(){return '<div class="brandbar"><a href="'+SITE+'/" target="_blank" rel="noopener">CLISA</a><span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+langBtn()+soundBtn()+'</span></div>';}
 function render(h){ app.innerHTML=h; bindSound(); }
 function dayLabel(d){ if(!d) return ''; var m=d.match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return esc(d); return EN?(+m[3])+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][+m[2]-1]:(+m[2])+'월 '+(+m[3])+'일'; }
 function yearOf(d){ var m=String(d||'').match(/^(\d{4})/); return m?m[1]:''; }
@@ -87,9 +103,9 @@ function setTheme(id){
 
 /* ---------- screens ---------- */
 function title(){
-  setTheme(null);
+  VIEW=title; setTheme(null);
   render('<section class="title">'+
-   '<div class="kicker"><span>CLISA GAMES</span><span class="bb-r">'+(LANGLINK?(EN?'<a class="lang" href="/play/1914/" hreflang="ko" lang="ko">한국어</a>':'<a class="lang" href="/en/play/1914/" hreflang="en" lang="en">English</a>'):'')+'<span>'+esc(C.ep)+'</span>'+soundBtn()+'</span></div>'+
+   '<div class="kicker"><span>CLISA GAMES</span><span class="bb-r"><span>'+esc(C.ep)+'</span>'+langBtn()+soundBtn()+'</span></div>'+
    '<div class="of">WORLD OF</div><h1>DECISION</h1>'+
    '<div class="row">'+(EN?'<span class="ko">'+esc(C.sub||'')+'</span>':'<span class="ko">'+esc(C.title)+'</span>')+'<span class="stamp-r">'+esc(C.ep)+'</span></div>'+
    '<p class="hook">'+esc(C.hook)+'</p>'+
@@ -98,7 +114,7 @@ function title(){
   document.getElementById('go').onclick=function(){ sfx('stamp'); music(true); roles(); };
 }
 function roles(){
-  setTheme(null);
+  VIEW=roles; setTheme(null);
   Promise.all(ROLES.map(function(r){return opt(BASE+'data/'+r.id+'.'+LANG+'.json');})).then(function(list){
     var h=brand()+'<h2 class="h2">'+T('누구의 자리에 앉으시겠습니까?','Whose chair will you take?')+'</h2><p class="lead">'+T('어느 역할을 골라도 같은 1914년 7월 안에서 움직입니다. 한 역할을 끝내면 다른 나라의 자리에서 다시 해 보세요.','Every role plays out inside the same July 1914. When you finish one, try again from another capital.')+'</p><div class="roles">';
     ROLES.forEach(function(r,i){var d=list[i];
@@ -118,6 +134,7 @@ function start(id){
 }
 /* prologue in pages: the shared opening, the role, the dossier */
 function prologue(p){
+  VIEW=function(){ prologue(p); };
   var pages=[
     '<div class="stamp"><div class="day">'+T('6월 28일','28 June')+'</div><div class="meta"><b>1914'+T('년','')+'</b> · '+T('일요일 오전 · 사라예보','Sunday morning · Sarajevo')+'</div></div>'+
     mapBox({key:'europe',marks:['sarajevo','berlin','vienna','rome','paris','london','st_petersburg'],caption:T('1914년 6월의 유럽. 3국동맹(독일·오스트리아-헝가리·이탈리아)과 3국협상(프랑스·러시아·영국), 그리고 사라예보','Europe in June 1914: the Triple Alliance (Germany, Austria-Hungary, Italy), the Triple Entente (France, Russia, Britain), and Sarajevo')})+
@@ -149,7 +166,7 @@ function hud(delta){
 }
 function portrait(key){
   if(!key) return '';
-  var lab=IMGLAB[key]||'', src=(R.images&&R.images[key])||(C.images&&C.images[key]);
+  var lab=IMGLAB()[key]||'', src=(R.images&&R.images[key])||(C.images&&C.images[key]);
   if(!src) return '';
   return '<figure class="portrait"><img src="'+esc(src.src)+'" alt="'+esc(lab)+'" loading="lazy"><figcaption>'+esc(lab)+(src.credit?'<br>'+esc(src.credit):'')+'</figcaption></figure>';
 }
@@ -167,11 +184,11 @@ function mapBox(m){
    (m.caption?'<figcaption>'+tx(m.caption)+'</figcaption>':'')+(M.credit?'<figcaption class="cr">'+esc(M.credit)+'</figcaption>':'')+'</figure>';
 }
 /* telegrams arrived as printed tape pasted line by line onto the form: one strip per '/' segment */
-function typeOut(el,text){
+function typeOut(el,text,instant){
   var lines=String(text).split(/\s*\/\s*/).filter(function(x){return x;});
   el.innerHTML=lines.map(function(){return '<span class="strip"></span>';}).join('');
   var st=el.querySelectorAll('.strip');
-  if(reduce){ lines.forEach(function(x,k){st[k].textContent=x;}); el.classList.add('done'); return; }
+  if(reduce||instant){ lines.forEach(function(x,k){st[k].textContent=x;}); el.classList.add('done'); return; }
   sfx('wire');
   var k=0,i=0; (function step(){ if(k>=lines.length){ el.classList.add('done'); return; }
     i+=2; st[k].textContent=lines[k].slice(0,i); st[k].classList.add('on'); if(i%6===0) sfx('key');
@@ -185,7 +202,7 @@ function head(n){
 /* a scene is shown in pages: what happened meanwhile → the room and the voices → the decision */
 function scene(id){
   var n=R.nodes[id]; if(!n){ app.textContent=T('장면을 찾을 수 없습니다: ','Scene not found: ')+id; return; }
-  S.node=id; S.qn++;
+  S.node=id; S.qn++; S.chosen=null; S.delta=null;
   S.order=n.choices.map(function(_,i){return i;}); for(var a=S.order.length-1;a>0;a--){ var b=Math.floor(Math.random()*(a+1)), t=S.order[a]; S.order[a]=S.order[b]; S.order[b]=t; }
   var pages=[];
   if(n.event||n.telegram||n.map) pages.push('brief');
@@ -193,6 +210,7 @@ function scene(id){
   scenePage(n,pages,0);
 }
 function scenePage(n,pages,p){
+  VIEW=function(){ scenePage(R.nodes[S.node],pages,p); };
   var kind=pages[p], body='';
   if(kind==='brief'){
     body=(n.event?'<div class="event"><span class="lab">'+T('그사이','Meanwhile')+'</span>'+tx(n.event)+'</div>':'')+
@@ -206,11 +224,13 @@ function scenePage(n,pages,p){
       '<p class="ask">'+T('당신의 결정은?','Your decision?')+'</p><div class="choices">'+(S.order||n.choices.map(function(_,i){return i;})).map(function(i,pos){var c=n.choices[i]; return '<button class="choice" data-i="'+i+'" data-k="'+String.fromCharCode(65+pos)+'">'+tx(c.text)+(c.why?'<span class="why">'+tx(c.why)+'</span>':'')+'</button>';}).join('')+'</div><div id="res"></div>';
   }
   var last=p===pages.length-1;
-  render(brand()+hud()+head(n)+'<div class="pg">'+body+'</div>'+(last?pager(p,pages.length,''):pager(p,pages.length,T('다음','Next'))));
+  var done=last&&S.chosen!=null;
+  render(brand()+hud(done?S.delta:null)+head(n)+'<div class="pg">'+body+'</div>'+(last?pager(p,pages.length,''):pager(p,pages.length,T('다음','Next'))));
   top();
-  if(kind==='brief'&&n.telegram) typeOut(document.getElementById('tx'),clean(n.telegram.text||''));
+  if(kind==='brief'&&n.telegram) typeOut(document.getElementById('tx'),clean(n.telegram.text||''),SWITCHING);
   bindPager(function(){ scenePage(n,pages,p-1); }, function(){ scenePage(n,pages,p+1); });
   if(last) app.querySelectorAll('.choice').forEach(function(b){b.onclick=function(){choose(n,+b.dataset.i);};});
+  if(done){ markPick(S.chosen); showResult(n,n.choices[S.chosen],S.delta,true); }  /* a choice already made on this scene (redrawn after a language switch) */
 }
 function apply(c,n){
   var d={}, fx=Object.assign({},c.fx||{});
@@ -222,22 +242,29 @@ function apply(c,n){
   return d;
 }
 function pairOf(a){return {P:0,R:0,H:1,D:1,S:2,A:2,F:3,L:3}[a];}
+/* no same-as-history label during play: the July Crisis is not a quiz, and the comparison waits for the ending */
+function histEntry(n,c){
+  var rc=n.choices.filter(function(x){return x.real===true;})[0]||n.choices.filter(function(x){return x.real==='partial';})[0]||{};
+  return {id:n.id||S.node,date:n.date,title:clean(n.title),pick:c.key,text:clean(c.text),real:c.real,realKey:rc.key,realText:clean(rc.text),realNote:c.realNote?clean(c.realNote):''};
+}
+function markPick(i){ app.querySelectorAll('.choice').forEach(function(b){b.disabled=true; if(+b.dataset.i===i) b.classList.add('picked');}); }
 function choose(n,i){
   var c=n.choices[i];
-  app.querySelectorAll('.choice').forEach(function(b){b.disabled=true; if(+b.dataset.i===i) b.classList.add('picked');});
+  markPick(i);
   var d=apply(c,n);
-  /* no same-as-history label during play: the July Crisis is not a quiz, and the comparison waits for the ending */
-  var rc=n.choices.filter(function(x){return x.real===true;})[0]||n.choices.filter(function(x){return x.real==='partial';})[0]||{};
-  S.hist.push({id:n.id||S.node,date:n.date,title:clean(n.title),pick:c.key,text:clean(c.text),real:c.real,realKey:rc.key,realText:clean(rc.text),realNote:c.realNote?clean(c.realNote):''});
+  S.hist.push(histEntry(n,c)); S.chosen=i; S.delta=d;
   document.getElementById('hud').outerHTML=hud(d);
   var nx0=resolve(c.next), heavy=(d.risk||0)>=15||nx0==='END:E';
   sfx(heavy?'drum':'stamp'); if(d.risk) setTimeout(function(){ sfx(d.risk>0?'rise':'fall'); }, heavy?900:350);
-  var res=document.getElementById('res');
+  showResult(n,c,d,false);
+}
+function showResult(n,c,d,quiet){
+  var nx0=resolve(c.next), res=document.getElementById('res');
   res.innerHTML='<div class="result">'+
     '<p class="after">'+tx(c.after||'')+'</p>'+
     (n.note?'<div class="note"><b>'+T('역사 노트','History note')+'</b>'+tx(n.note.text)+'</div>':'')+
     '<div class="next"><button class="btn" id="nx">'+(isEnd(nx0)?T('결말 보기','See the ending'):T('다음 장면','Next scene'))+'</button></div></div>';
-  res.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  if(!quiet) res.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
   document.getElementById('nx').onclick=function(){ sfx('click'); setTimeout(function(){sfx('page');},60); var nx=resolve(c.next); if(isEnd(nx)) ending(nx); else scene(nx); };
 }
 function has(f){ return Array.isArray(f)? f.some(function(x){return S.flags[x];}) : !!S.flags[f]; }
@@ -277,8 +304,8 @@ function axisBars(){
     return '<div class="axb"><span>'+esc(C.axes[p[0]])+' '+a+'</span><div class="axt"><div style="width:'+w+'%"></div></div><span>'+b+' '+esc(C.axes[p[1]])+'</span></div>';}).join('')+'</div>';
 }
 /* the ending is a small dossier of pages */
-function ending(nx){
-  sfx('end');
+function ending(nx,p0,quiet){
+  if(!quiet) sfx('end');
   var k=endingKey(nx), E=C.endings[k]||{title:k,text:''};
   var ep=(R.epilogues||{})[k]||''; (R.epilogueAdd||[]).forEach(function(a){ if([].concat(a.ending).indexOf(k)>=0&&test(a)) ep+=(ep?' ':'')+a.text; }); if(S.g.prestige<30&&'ABFG'.indexOf(k)>=0) ep+=(ep?' ':'')+T('국내에서는 굴욕 외교라는 비판이 거셌습니다.','At home, critics attacked the settlement as a humiliating climb-down.');
   var code=typeCode(), t=typeOf(code)||{}, mate=typeOf(flip(code,3))||{}, foe=typeOf(flip(code))||{};
@@ -310,6 +337,7 @@ function ending(nx){
      '<div class="share"><button class="btn" id="again">'+T('다른 나라로 다시 하기','Play another power')+'</button></div>'+more()+rights()}
   ];
   function show(p){
+    VIEW=function(){ ending(nx,p,true); };
     render(brand()+'<div class="tabs" role="tablist">'+pages.map(function(x,i){return '<button role="tab" class="tab'+(i===p?' on':'')+'" data-p="'+i+'" aria-selected="'+(i===p)+'">'+esc(x.tab)+'</button>';}).join('')+'</div>'+
       '<div class="pg">'+pages[p].h+'</div>'+pager(p,pages.length,p<pages.length-1?T('다음','Next'):''));
     app.querySelectorAll('.tab').forEach(function(b){ b.onclick=function(){ sfx('page'); show(+b.dataset.p); }; });
@@ -319,7 +347,7 @@ function ending(nx){
     var cd=document.getElementById('card'); if(cd) cd.onclick=function(){ sfx('stamp'); shareCard(t,E,k,same,asked); };
     top();
   }
-  show(0);
+  show(p0||0);
 }
 /* shrink a canvas font until the text fits; result left in x._t */
 function fit(x,s,font,px,w){ s=String(s||''); while(px>16){ x.font=font.replace('%',px); if(x.measureText(s).width<=w) break; px-=2; } x._t=s; }
