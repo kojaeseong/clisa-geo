@@ -2578,6 +2578,34 @@ function upcomingHtml(){
 /* v3.43 사안별 분석: 사안 전부를 한 화면에 차례로 펼친다. 사안 단추는 해당 사안으로 스크롤하고, 읽는 위치에 따라 단추 강조와 주소(/case/사안/)가 바뀐다.
    분석 전문(details.full)은 처음 펼칠 때 그린다. 전문이 사안 분량의 약 9할이어서, 모든 사안을 펼쳐도 처음 그리는 양은 예전 한 사안보다 적다 */
 let STRAT_D = null;
+/* v4.29 둘째 전략 주체(2026-10-23): 한 사안에 전략 주체가 둘이면 둘째 주체의 4·5·7~11단계를 따로 펼친다 */
+function s2Html(c){
+  const X = c.s2; if (!X) return "";
+  const nmS = X.client.name, G = X.client.goals, AUX = X.aux || [];
+  const stH = (n, t) => '<div class="stp-h"><i>' + n + "</i><b>" + esc(t) + '</b><span class="s2tag">' + esc(nmS) + "</span></div>";
+  const step = (n, t, body) => '<section class="stp">' + stH(n, t) + body + "</section>";
+  const sc = s => typeof s === "string" ? '<span class="sc sz">' + esc(s) + "</span>" : '<span class="sc s' + (s > 0 ? "p" : s < 0 ? "n" : "z") + (Math.abs(s) === 2 ? "2" : "") + '">' + (s > 0 ? "+" + s : s < 0 ? "−" + (-s) : "0") + "</span>";
+  const A = id => X.alts.find(a => a.id === id) || {};
+  const code = id => '<span class="s2c">' + esc(id) + "</span>";
+  const altCard = a => '<li><div class="s2a-h">' + code(a.id) + "<b>" + esc(a.name) + "</b></div><p>" + esc(a.desc) + "</p></li>";
+  const main = X.alts.filter(a => !AUX.includes(a.id)), aux = X.alts.filter(a => AUX.includes(a.id));
+  const evCard = r => '<li class="s2e"><div class="s2e-h">' + code(r.id) + "<b>" + esc(A(r.id).name) + "</b><span class=\"s2e-t\">Reversibility: " + esc(r.rev) + " · Escalation risk: " + esc(r.esc) + " · Feasibility: " + esc(r.feas) + '</span></div><div class="s2e-g">' + r.s.map((v, k) => '<span><em>' + esc(G[k].s || G[k].id) + "</em>" + sc(v) + "</span>").join("") + "</div><p>" + esc(r.why) + "</p></li>";
+  const evMain = X.eval.rows.filter(r => !AUX.includes(r.id)), evAux = X.eval.rows.filter(r => AUX.includes(r.id));
+  const F = (c.futures || {}).items || [], rec = X.rec;
+  const dlt = f => { const d = rec.p[f.id] - f.p; return d === 0 ? "<span class=\"s2d z\">No change</span>" : '<span class="s2d ' + (d > 0 ? "up" : "dn") + '">' + (d > 0 ? "+" : "−") + Math.abs(d) + "%p</span>"; };
+  const R1 = X.ranked[0];
+  return "<section class=\"s2box\"><div class=\"s2h\"><p class=\"eyebrow\">Strategic actor 2</p><h3>" + esc(nmS) + "</h3><p>" + "This issue has two strategic actors. Steps 2–11 above are assessed against the objectives of the " + esc(c.client.name) + "; the steps below, built on the same situation assessment (steps 1–6), are assessed against the objectives of the " + esc(nmS) + ".</p><div class=\"s2sum\"><span><em>Objectives</em>" + G.length + "</span><span><em>Options</em>" + X.alts.length + "</span><span><em>Top option</em>" + esc(R1.name) + "</span></div></div>" +
+    step(4, "Full review of options", '<p class="note">' + esc(X.deciders) + "</p><h4 class=\"s2sub\">Courses of action · choose one</h4><ul class=\"s2alts\">" + main.map(altCard).join("") + "</ul><h4 class=\"s2sub\">Supporting measures</h4><ul class=\"s2alts\">" + aux.map(altCard).join("") + "</ul>") +
+    step(5, "Response of the most capable adversary (" + (X.foe || "adversary") + ")", '<dl class="s2resp">' + X.responses.map(r => "<dt>" + code(r[0]) + esc(A(r[0]).name) + "</dt><dd>" + esc(r[1]) + "</dd>").join("") + "</dl>") +
+    step(7, "Strategic actor and objectives", "<p><b>" + esc(nmS) + "</b> · Priority order: <span class=\"mono\">" + esc(X.client.order) + '</span></p><ul class="list goals">' + G.map(g => '<li class="rv"><span><b class="mono" style="color:var(--accent)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + "<br><span class=\"note\">Source · " + esc(g.src) + "</span></p></li>").join("") + '</ul><p class="note">' + esc(X.client.note) + "</p>") +
+    step(8, "Evaluating options against objectives", '<p class="note">' + esc(X.eval.base) + '</p><ul class="s2ev">' + evMain.map(evCard).join("") + "</ul><h4 class=\"s2sub\">Supporting measures</h4><ul class=\"s2ev\">" + evAux.map(evCard).join("") + "</ul>") +
+    step(9, "Ranking by the strategic actor’s standard", '<p class="note">' + esc(X.rule) + "</p><div class=\"s2r1\"><p class=\"s2r1-k\">Top option</p><h4>" + esc(R1.name) + '</h4><p class="s2path">' + esc(R1.id) + "</p><p>" + esc(R1.t) + '</p></div><ol class="s2rk" start="2">' + X.ranked.slice(1).map(r => "<li><div><b>" + esc(r.name) + "</b>" + code(r.id) + "</div><p>" + esc(r.t) + "</p></li>").join("") + "</ol>" +
+      "<div class=\"s2p\"><p class=\"s2p-h\">Scenario probabilities if this course is followed</p><table><thead><tr><th>Scenario</th><th>Now</th><th>Under the top option</th><th></th></tr></thead><tbody>" + F.map(f => "<tr><td>" + esc(f.name) + '</td><td class="mono">' + f.p + '%</td><td class="mono">' + rec.p[f.id] + "% <small>(" + rec.rng[f.id][0] + (rec.rng[f.id][1] !== rec.rng[f.id][0] ? "~" + rec.rng[f.id][1] : "") + ")</small></td><td>" + dlt(f) + "</td></tr>").join("") + '</tbody></table><p class="note">' + esc(rec.basis) + "</p></div>" +
+      "<details class=\"src\"><summary>Precedent check · " + X.prec.length + "</summary><ul>" + X.prec.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></details>") +
+    step(10, "Who is affected", '<dl class="s2ppl">' + X.people.map(r => "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>").join("") + "</dl>") +
+    step(11, "Where the Clisa Geopolitics assessment differs", '<p class="note">' + esc(X.diff.note) + "</p><div class=\"tbl-wrap\"><table class=\"tbl s2df\"><thead><tr><th>Option</th><th>" + esc(nmS) + " ranking</th><th>People-centered</th><th>Why</th></tr></thead><tbody>" + X.diff.rows.map(r => '<tr' + (r[1] !== r[2] ? ' class="ne"' : "") + "><td><b>" + esc(r[0]) + '</b></td><td class="mono">' + r[1] + "</td><td class=\"mono\">" + r[2] + "</td><td>" + esc(r[3]) + "</td></tr>").join("") + "</tbody></table></div><div class=\"lesson-box\"><b>What is paid and what is gained</b>" + esc(X.diff.pay) + "</div><div class=\"lesson-box\"><b>Do the two strategic actors’ choices fit together?</b>" + esc(X.fit) + "</div>") +
+    "</section>";
+}
 function caseFullHtml(c){
   const step = (n, t, body) => '<section class="stp">' + stpH(n, t) + body + "</section>";
   const layer = (L, q) => '<div class="lyr l' + L + '"><b>' + LNAME[L] + "</b><span>" + esc(q) + "</span></div>";
@@ -2603,6 +2631,7 @@ function caseFullHtml(c){
         "<div class=\"lesson-box\"><b>Tensions within the combination</b>" + esc(c.rank2.tension) + "</div><div class=\"lesson-box\"><b>Left for the strategic actor to decide</b>" + esc(c.rank2.undecided) + "</div></div>") + swapHtml(c) + counterHtml(c) + twowayHtml(c) +
       layer("3", lq("3")) +
       humanHtml(c, 10, 11) +
+      s2Html(c) +
       layer("V", lq("V")) +
       step(12, "Forecasts and disconfirming signals", '<ul class="list">' + c.predictions.map(p => '<li><div class="fc"><div class="q">' + esc(p.q) + '</div><div class="p">' + p.p + "<small>%</small></div><div class=\"foot\"><span>Resolution date <span class=\"mono\">" + esc(enDate(p.due)) + "</span></span><span>" + esc(p.note) + "</span></div></div></li>").join("") + "</ul><p class=\"note\" style=\"margin-top:6px\">All related forecasts for this issue (" + pf.join(", ") + ") are on the Forecasts and Track Record tab. <button type=\"button\" class=\"chip\" data-go=\"forecast\">View Forecasts and Track Record</button></p><h3 style=\"margin:10px 0 6px\">What would prompt a reassessment</h3><ul class=\"watch\">" + c.falsify.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul>") +
       (PUB() || !c.changed ? "" : '<section class="sec"><h3></h3><ul class="list">' + c.changed.map(x => '<li class="rv"><p style="color:var(--ink)">' + esc(x) + "</p></li>").join("") + "</ul></section>") +
@@ -2613,7 +2642,7 @@ function caseFullHtml(c){
 function caseLeaders(c){
   const L = LLK(), me = c.subject || (c.id === "ukraine" ? "UKR" : "KOR");
   const xs = [...new Set([me].concat(((c.deciders || {}).items || []).map(d => d.iso)))].filter(i => L[i]);
-  return xs.length ? "<div class=\"chips cl-ld\" style=\"margin:8px 0 0\"><span class=\"note\">Decision-makers</span>" + xs.map(i => '<a class="chip" href="' + lurl(i) + '">' + esc(L[i].name) + (i === me ? " <span class=\"note\">strategic actor</span>" : "") + "</a>").join("") + "</div>" + casePower(c) : casePower(c);
+  return xs.length ? "<div class=\"chips cl-ld\" style=\"margin:8px 0 0\"><span class=\"note\">Decision-makers</span>" + xs.map(i => '<a class="chip" href="' + lurl(i) + '">' + esc(L[i].name) + (i === me || (c.s2 && i === c.s2.subject) ? " <span class=\"note\">strategic actor</span>" : "") + "</a>").join("") + "</div>" + casePower(c) : casePower(c);
 }
 /* v3.53 사안 머리의 권력 구조 칩: 전략 주체와 결정권을 가진 나라 가운데 권력 구조 쪽이 있는 나라 */
 function casePower(c){
@@ -2623,7 +2652,7 @@ function casePower(c){
 }
 function caseArt(c, i){
   const cl = c.client;
-  return '<article class="sec case-a" id="case-' + esc(c.id) + '" data-cid="' + esc(c.id) + "\" style=\"display:grid;gap:22px\"><div><p class=\"eyebrow\">Issue " + (i + 1) + " · Strategic actor: " + esc(cl ? cl.name : c.recipient) + " · As of " + esc(enDate(c.asof)) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + caseLeaders(c) + (FEATS().some(F => F.case === c.id) ? '<div class="chips" style="margin:8px 0 0">' + FEATS().filter(F => F.case === c.id).map(featBtn).join("") + "</div>" : "") + "</div>" +
+  return '<article class="sec case-a" id="case-' + esc(c.id) + '" data-cid="' + esc(c.id) + "\" style=\"display:grid;gap:22px\"><div><p class=\"eyebrow\">Issue " + (i + 1) + " · Strategic actor: " + esc(cl ? cl.name : c.recipient) + (c.s2 ? " · " + esc(c.s2.client.name) : "") + " · As of " + esc(enDate(c.asof)) + '</p><h2 style="margin-top:4px;font-size:20px">' + esc(c.title) + " " + ttsBtn("case:" + c.id) + "</h2>" + (c.status ? '<p class="meta" style="margin-top:4px">' + esc(c.status) + "</p>" : "") + caseLeaders(c) + (FEATS().some(F => F.case === c.id) ? '<div class="chips" style="margin:8px 0 0">' + FEATS().filter(F => F.case === c.id).map(featBtn).join("") + "</div>" : "") + "</div>" +
     briefHtml(c) + theoryHtml(c) + publicsHtml(c) +
     '<details class="full" data-cid="' + esc(c.id) + "\"><summary>Full analysis · from situation assessment to verification</summary><div class=\"full-body\"></div></details>" +
     "<div class=\"chips\" style=\"margin:0\"><button type=\"button\" class=\"chip\" data-go=\"method\">View Methodology</button><button type=\"button\" class=\"chip\" data-fp=\"" + esc(c.fp) + "\">View on map · " + esc((D.flashpoints.find(f => f.id === c.fp) || {}).name_ko || "") + "</button></div>" + caseFbHtml(c) + "</article>";

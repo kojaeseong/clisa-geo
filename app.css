@@ -251,6 +251,57 @@ details.more>summary{cursor:pointer; font-size:13px; color:var(--accent); paddin
 .fd-rc p{margin:4px 0 0}
 .fd-share{display:flex; flex-wrap:wrap; gap:6px}
 @media (max-width: 600px){ .fd-oc{grid-template-columns:1fr} .fsoon li button{grid-template-columns:56px 1fr 38px} .fsoon .pb{display:none} .fd-q{font-size:17px} .fd-p b{font-size:32px} }
+/* v4.29 둘째 전략 주체 */
+.s2box{word-break:keep-all; overflow-wrap:anywhere; display:grid; gap:26px; margin-top:6px; padding-top:22px; border-top:3px solid var(--accent)}
+.s2h{display:grid; gap:6px; padding:16px 18px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2)}
+.s2h .eyebrow{margin:0}
+.s2h h3{font:700 21px var(--serif); margin:0; color:var(--ink)}
+.s2h p{font-size:13.5px; color:var(--ink-2); margin:0}
+.s2sum{display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:4px; font-size:13px}
+.s2sum em{font-style:normal; color:var(--muted); margin-right:6px}
+.s2tag{margin-left:auto; font:600 11px var(--sans); color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:1px 8px; white-space:nowrap}
+.s2c{display:inline-block; font:600 11.5px var(--mono); color:var(--accent); background:var(--panel-2); border:1px solid var(--line); border-radius:4px; padding:0 5px; margin-right:6px; white-space:nowrap}
+.s2sub{font:600 13px var(--sans); color:var(--muted); margin:4px 0 -4px}
+.s2alts{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:8px}
+.s2alts li{border:1px solid var(--line); border-radius:8px; padding:10px 12px; display:grid; gap:4px; align-content:start}
+.s2a-h{display:flex; align-items:baseline; flex-wrap:wrap; gap:2px}
+.s2a-h b{font-size:14px}
+.s2alts p{font-size:13px; color:var(--ink-2); margin:0}
+.s2resp{display:grid; grid-template-columns:minmax(160px, 30%) 1fr; margin:0; border-top:1px solid var(--line)}
+.s2resp dt, .s2resp dd{margin:0; padding:9px 0; border-bottom:1px solid var(--line); font-size:13px}
+.s2resp dt{font-weight:600; padding-right:12px}
+.s2ev{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.s2e{border:1px solid var(--line); border-radius:8px; padding:10px 12px; display:grid; gap:8px}
+.s2e-h{display:flex; align-items:baseline; flex-wrap:wrap; gap:2px 0}
+.s2e-h b{font-size:14px}
+.s2e-t{margin-left:auto; font-size:12px; color:var(--muted)}
+.s2e-g{display:grid; grid-template-columns:repeat(6, minmax(0, 1fr)); gap:6px}
+.s2e-g span{display:grid; gap:3px; justify-items:start}
+.s2e-g em{font-style:normal; font-size:11.5px; color:var(--muted)}
+.s2e p{font-size:13px; color:var(--ink-2); margin:0}
+.s2r1{border:2px solid var(--accent); border-radius:10px; padding:14px 16px; display:grid; gap:6px}
+.s2r1-k{font:700 12px var(--mono); color:var(--accent); margin:0}
+.s2r1 h4{font:700 17px var(--serif); margin:0}
+.s2path{font:500 12.5px var(--mono); color:var(--muted); margin:0}
+.s2r1 p:last-child{font-size:13.5px; margin:0}
+.s2rk{margin:0; padding-left:28px; display:grid; gap:10px}
+.s2rk li::marker{font:600 13px var(--mono); color:var(--accent)}
+.s2rk li > div{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 8px}
+.s2rk li b{font-size:14px}
+.s2rk li p{font-size:13px; color:var(--ink-2); margin:2px 0 0}
+.s2p{border:1px solid var(--line); border-radius:8px; padding:12px 14px; background:var(--panel-2); display:grid; gap:8px}
+.s2p-h{font:600 13px var(--sans); color:var(--accent); margin:0}
+.s2p table{width:100%; border-collapse:collapse; font-size:13px}
+.s2p th{font-weight:500; color:var(--muted); text-align:left; padding:4px 0; border-bottom:1px solid var(--line)}
+.s2p td{padding:5px 0; border-bottom:1px solid var(--line)}
+.s2p td.mono small{color:var(--muted)}
+.s2d{font:600 11.5px var(--mono); white-space:nowrap; color:var(--ink-2)} .s2d.z{font:400 12px var(--sans); color:var(--muted)}
+.s2ppl{display:grid; grid-template-columns:minmax(150px, 26%) 1fr; margin:0; border-top:1px solid var(--line)}
+.s2ppl dt, .s2ppl dd{margin:0; padding:9px 0; border-bottom:1px solid var(--line); font-size:13px}
+.s2ppl dt{font-weight:600; padding-right:12px}
+.s2df td.mono{white-space:nowrap} .s2df th:nth-child(2), .s2df th:nth-child(3){min-width:4.5em} .s2df td:first-child{min-width:150px}
+.s2df tr.ne td:nth-child(2), .s2df tr.ne td:nth-child(3){color:var(--accent); font-weight:600}
+@media (max-width: 600px){ .s2alts{grid-template-columns:1fr} .s2resp, .s2ppl{grid-template-columns:1fr} .s2resp dt, .s2ppl dt{border-bottom:0; padding-bottom:0} .s2e-g{grid-template-columns:repeat(3, minmax(0, 1fr))} .s2e-t{margin-left:0; width:100%} .s2tag{display:none} .s2p th:nth-child(4), .s2p td:nth-child(4){display:none} }
 /* v4.27 확률 잣대 표현 */
 .fsoon li button{grid-template-columns:60px 1fr 56px 96px}
 html[lang="en"] .fsoon li button{grid-template-columns:60px 1fr 56px 128px}
