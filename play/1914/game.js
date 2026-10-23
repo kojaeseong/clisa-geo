@@ -90,6 +90,23 @@ function switchLang(l){
 function bindSound(){ var l=document.getElementById('lsw'); if(l) l.onclick=function(){ sfx('click'); switchLang(EN?'ko':'en'); };
   var b=document.getElementById('snd'); if(!b) return; b.onclick=function(){ SND.on=!SND.on; store('wod-sound',SND.on?'on':'off'); b.textContent=SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'); b.setAttribute('aria-pressed',SND.on?'true':'false'); if(SND.on){ sfx('click'); music(true);} else music(false); }; }
 
+/* 2026-10-23 (partner suggestion): roles already played light up on the role screen; kept in the browser as role:ending pairs */
+function doneMap(){ var m={}; String(store('wod-done')||'').split(',').forEach(function(x){ var a=x.split(':'); if(a[0]) m[a[0]]=a[1]||''; }); return m; }
+function markDone(id,k){ var m=doneMap(); m[id]=k; store('wod-done',Object.keys(m).map(function(x){return x+':'+m[x];}).join(',')); }
+/* ③ (partner suggestion): a calendar strip from 28 June to 4 August with the current scene and the decisions already made */
+function timeline(n){
+  var d0=Date.UTC(1914,5,28), d1=Date.UTC(1914,7,4), span=d1-d0;
+  var at=function(s){ var m=String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return null; var v=(Date.UTC(+m[1],+m[2]-1,+m[3])-d0)/span; return Math.max(0,Math.min(1,v)); };
+  var cur=at(n.date); if(cur==null) return '';
+  var ticks=[['1914-06-28',T('6.28','28 Jun')],['1914-07-05',''],['1914-07-12',''],['1914-07-19',''],['1914-07-23',T('7.23','23 Jul')],['1914-07-28',T('7.28','28 Jul')],['1914-08-04',T('8.4','4 Aug')]];
+  var past=(S.hist||[]).map(function(h){return at(h.date);}).filter(function(v){return v!=null;});
+  var over=String(n.date||'')>'1914-08-04', before=String(n.date||'')<'1914-06-28';
+  return '<div class="tl" aria-label="'+esc(T('달력','Calendar'))+'"><div class="tl-bar">'+
+    ticks.map(function(x){ var v=at(x[0]); return '<i class="tk" style="left:'+(v*100)+'%"></i>'+(x[1]?'<span class="tl-l" style="left:'+(v*100)+'%">'+x[1]+'</span>':''); }).join('')+
+    past.map(function(v){ return '<i class="pt" style="left:'+(v*100)+'%"></i>'; }).join('')+
+    '<i class="now" style="left:'+(cur*100)+'%"></i></div>'+
+    '<div class="tl-now" style="left:'+(cur*100)+'%"><span>'+(over?T('8월 4일 이후 · ','after 4 Aug · '):before?T('6월 28일 이전 · ','before 28 Jun · '):'')+dayLabel(n.date)+'</span></div></div>';
+}
 function brand(){return '<div class="brandbar"><a href="'+SITE+'/" target="_blank" rel="noopener">CLISA</a><span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+langBtn()+soundBtn()+'</span></div>';}
 function render(h){ app.innerHTML=h; bindSound(); }
 function dayLabel(d){ if(!d) return ''; var m=d.match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return esc(d); return EN?(+m[3])+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][+m[2]-1]:(+m[2])+'월 '+(+m[3])+'일'; }
@@ -116,9 +133,11 @@ function title(){
 function roles(){
   VIEW=roles; setTheme(null);
   Promise.all(ROLES.map(function(r){return opt(BASE+'data/'+r.id+'.'+LANG+'.json');})).then(function(list){
-    var h=brand()+'<h2 class="h2">'+T('누구의 자리에 앉으시겠습니까?','Whose chair will you take?')+'</h2><p class="lead">'+T('어느 역할을 골라도 같은 1914년 7월 안에서 움직입니다. 한 역할을 끝내면 다른 나라의 자리에서 다시 해 보세요.','Every role plays out inside the same July 1914. When you finish one, try again from another capital.')+'</p><div class="roles">';
-    ROLES.forEach(function(r,i){var d=list[i];
-      h+='<button class="role'+(d?'':' off')+'" data-id="'+r.id+'"><span class="flag">'+FLAGS[r.flag]+'</span>'+
+    var dm=doneMap(), nd=ROLES.filter(function(r){return dm[r.id]!==undefined;}).length;
+    var h=brand()+'<h2 class="h2">'+T('누구의 자리에 앉으시겠습니까?','Whose chair will you take?')+'</h2><p class="lead">'+T('어느 역할을 골라도 같은 1914년 7월 안에서 움직입니다. 한 역할을 끝내면 다른 나라의 자리에서 다시 해 보세요.','Every role plays out inside the same July 1914. When you finish one, try again from another capital.')+
+      (nd?' <span class="prog">'+T('끝낸 자리 ','Chairs completed: ')+nd+' / '+ROLES.length+'</span>':'')+'</p><div class="roles">';
+    ROLES.forEach(function(r,i){var d=list[i], dk=dm[r.id];
+      h+='<button class="role'+(d?'':' off')+(dk!==undefined?' done':'')+'" data-id="'+r.id+'">'+(dk!==undefined?'<span class="donek">'+T('끝냄','Done')+(dk?' · '+T('결말 ','Ending ')+esc(dk):'')+'</span>':'')+'<span class="flag">'+FLAGS[r.flag]+'</span>'+
         '<span class="cty">'+esc(d?d.country:'')+'</span><span class="who">'+esc(d?d.person:T('준비 중','Coming soon'))+'</span><span class="card">'+esc(d?d.card:'')+'</span>'+(d?'':'<span class="soon">'+T('준비 중','Coming soon')+'</span>')+'</button>';});
     render(h+'</div>');
     app.querySelectorAll('.role').forEach(function(b){b.onclick=function(){ sfx('click'); start(b.dataset.id);};});
@@ -156,13 +175,13 @@ function bindPager(prev,next){
   if(a) a.onclick=function(){ sfx('click'); sfx('page'); prev(); };
   if(b) b.onclick=function(){ sfx('click'); setTimeout(function(){sfx('page');},60); next(); };
 }
-function hud(delta){
+function hud(delta,n){
   var keys=['risk','ally','home','prestige'];
   var lab={risk:C.gauges.risk,ally:R.allyLabel||C.gauges.ally,home:C.gauges.home,prestige:C.gauges.prestige};
   return '<div class="hud" id="hud"><div class="stripe" aria-hidden="true"></div><div class="hud-top"><span class="who">'+esc(R.person)+'</span><span class="qn">'+T('결정 ','Decision ')+(S.qn)+'</span></div><div class="gauges">'+
    keys.map(function(k){var v=S.g[k], d=delta&&delta[k]||0;
      return '<div class="g '+k+'"><div class="lab"><span>'+esc(lab[k])+'</span><span>'+v+(d?'<span class="d '+(d>0?'up':'dn')+'">'+(d>0?'+':'')+d+'</span>':'')+'</span></div><div class="bar"><div class="fill" style="width:'+v+'%"></div></div></div>';}).join('')+
-   '</div></div>';
+   '</div>'+(n?timeline(n):'')+'</div>';
 }
 function portrait(key){
   if(!key) return '';
@@ -225,7 +244,7 @@ function scenePage(n,pages,p){
   }
   var last=p===pages.length-1;
   var done=last&&S.chosen!=null;
-  render(brand()+hud(done?S.delta:null)+head(n)+'<div class="pg">'+body+'</div>'+(last?pager(p,pages.length,''):pager(p,pages.length,T('다음','Next'))));
+  render(brand()+hud(done?S.delta:null,n)+head(n)+'<div class="pg">'+body+'</div>'+(last?pager(p,pages.length,''):pager(p,pages.length,T('다음','Next'))));
   top();
   if(kind==='brief'&&n.telegram) typeOut(document.getElementById('tx'),clean(n.telegram.text||''),SWITCHING);
   bindPager(function(){ scenePage(n,pages,p-1); }, function(){ scenePage(n,pages,p+1); });
@@ -253,7 +272,7 @@ function choose(n,i){
   markPick(i);
   var d=apply(c,n);
   S.hist.push(histEntry(n,c)); S.chosen=i; S.delta=d;
-  document.getElementById('hud').outerHTML=hud(d);
+  document.getElementById('hud').outerHTML=hud(d,n);
   var nx0=resolve(c.next), heavy=(d.risk||0)>=15||nx0==='END:E';
   sfx(heavy?'drum':'stamp'); if(d.risk) setTimeout(function(){ sfx(d.risk>0?'rise':'fall'); }, heavy?900:350);
   showResult(n,c,d,false);
@@ -307,6 +326,7 @@ function axisBars(){
 function ending(nx,p0,quiet){
   if(!quiet) sfx('end');
   var k=endingKey(nx), E=C.endings[k]||{title:k,text:''};
+  if(!quiet) markDone(R.id,k);
   var ep=(R.epilogues||{})[k]||''; (R.epilogueAdd||[]).forEach(function(a){ if([].concat(a.ending).indexOf(k)>=0&&test(a)) ep+=(ep?' ':'')+a.text; }); if(S.g.prestige<30&&'ABFG'.indexOf(k)>=0) ep+=(ep?' ':'')+T('국내에서는 굴욕 외교라는 비판이 거셌습니다.','At home, critics attacked the settlement as a humiliating climb-down.');
   var code=typeCode(), t=typeOf(code)||{}, mate=typeOf(flip(code,3))||{}, foe=typeOf(flip(code))||{};
   var asked=S.hist.length, same=S.hist.filter(function(x){return x.real===true;}).length;
