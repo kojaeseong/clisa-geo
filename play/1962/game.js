@@ -226,7 +226,12 @@ function mapBox(m){
     var mx=(a[0]+b[0])/2, my=(a[1]+b[1])/2-Math.abs(b[0]-a[0])*.18-10;
     out+='<path class="mr" d="M'+a[0]+','+a[1]+' Q'+mx+','+my+' '+b[0]+','+b[1]+'" marker-end="url(#ah-'+m.key+')"/>'; });
   (m.marks||[]).forEach(function(k){ var p=P[k]; if(!p) return;
-    out+='<circle class="mk" cx="'+p[0]+'" cy="'+p[1]+'" r="'+(M.r?Math.max(M.r,9):9)+'"/><text class="ml" x="'+(p[0]+(p[3]==='l'?-14:14))+'" y="'+(p[1]+9)+'"'+(p[3]==='l'?' text-anchor="end"':'')+'>'+esc(p[2])+'</text>'; });
+    var side=p[3]||'r', lx=p[0], ly=p[1]+9, anc='';
+    if(side==='l'){ lx-=14; anc=' text-anchor="end"'; } else if(side==='r'){ lx+=14; }
+    else if(side==='u'){ ly=p[1]-14; anc=' text-anchor="middle"'; } else if(side==='d'){ ly=p[1]+36; anc=' text-anchor="middle"'; }
+    else if(side==='ul'){ lx-=10; ly=p[1]-12; anc=' text-anchor="end"'; } else if(side==='ur'){ lx+=10; ly=p[1]-12; }
+    else if(side==='dl'){ lx-=10; ly=p[1]+34; anc=' text-anchor="end"'; } else if(side==='dr'){ lx+=10; ly=p[1]+34; }
+    out+='<circle class="mk" cx="'+p[0]+'" cy="'+p[1]+'" r="'+(M.r?Math.max(M.r,9):9)+'"/><text class="ml" x="'+lx+'" y="'+ly+'"'+anc+'>'+esc(p[2])+'</text>'; });
   return '<figure class="map"><svg viewBox="'+M.vb+'" role="img" aria-label="'+esc(clean(m.caption)||T('지도','Map'))+'"><defs><marker id="ah-'+m.key+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>'+M.base+out+'</svg>'+
    (M.legend&&M.legend.length?'<div class="maplegend">'+M.legend.map(function(l){return '<span><i class="lg" style="border-color:'+esc(l.color)+(l.thin?';border-width:1px':'')+'"></i>'+esc(EN&&l.en?l.en:l.label)+'</span>';}).join('')+'</div>':'')+
    (m.caption?'<figcaption>'+tx(m.caption)+'</figcaption>':'')+(M.credit?'<figcaption class="cr">'+esc(M.credit)+'</figcaption>':'')+'</figure>';
