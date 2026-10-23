@@ -14,6 +14,7 @@
 [hidden]{display:none!important}
 html,body{height:100%}
 body{background:var(--bg); color:var(--ink); font:14px/1.6 var(--sans); -webkit-font-smoothing:antialiased}
+:root:lang(ko) body{word-break:keep-all; overflow-wrap:anywhere}  /* v4.32(2026-10-23 결재): 국문은 사이트 전체에서 줄을 단어 단위로 바꾼다 */
 *{box-sizing:border-box}
 button{font:inherit; color:inherit}
 button:focus-visible,input:focus-visible+span,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
@@ -22,7 +23,7 @@ a{color:var(--accent)}
 .app{height:100%; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto 1fr; padding-inline:16px; padding-block:0 16px; gap:12px}
 .top{display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; padding-top:14px}
 .brand{display:flex; align-items:center; gap:10px 12px; flex-wrap:wrap; margin-right:auto}
-.brand h1{margin:0; font:800 21px/1 "Archivo",var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink)}
+.brand :is(h1,.bh1){margin:0; font:800 21px/1 "Archivo",var(--sans); letter-spacing:.06em; text-transform:uppercase; color:var(--ink)}
 .brand .logo{width:28px; height:28px; flex:none}
 .brand .ko{font:800 12.5px var(--sans); color:var(--ink); letter-spacing:.18em; margin-left:2px}  /* v3.51 한글 제호: 영문 제호와 같은 무게·넓은 자간(결재 2026-10-05) */
 .edtag{font:600 11px var(--sans); color:var(--conflict); border:1px solid var(--conflict); border-radius:4px; padding:1px 6px}
@@ -40,7 +41,7 @@ a{color:var(--accent)}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
 @media (min-width: 1040px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
 /* v3.39d 폭이 모자랄 때 1단계: 머리글의 한글 부제를 숨기고 검색창·시각을 더 줄인다. 2단계(tight): 시각을 숨긴다 */
-.top.snug{column-gap:14px} .top.snug .srch-open{flex-basis:190px; width:190px; min-width:0} .top.snug .srch-open kbd{display:none} .top.snug .brand h1{font-size:19px} @media (min-width: 961px){ .brand{display:grid; grid-template-columns:auto auto; column-gap:10px; row-gap:4px; align-items:center} .brand .logo{grid-row:1 / span 2} .brand h1{grid-column:2; align-self:end} .brand .ko{grid-column:2; align-self:start; margin-left:1px; font-size:11px; letter-spacing:.14em} .brand .asof,.brand .edtag{grid-column:2} } html[lang="en"] .brand .logo{grid-row:1} html[lang="en"] .brand h1{align-self:center} /* v4.20(2026-10-19): 영문판은 한글 제호 줄이 없으므로 로고를 한 줄에 두고 영문 제호와 세로 중앙을 맞춘다(데스크톱) */  /* v4.19(2026-10-18 요청): 한글 제호는 늘 영문 제호 아래에 둔다(데스크톱). 폭이 모자라면 검색창·영문 제호를 먼저 줄이고, 시각은 0.8배까지만 줄인다. 브라우저 110% 배율(창 폭 약 1,100px)까지 세계 시각을 보인다 */ .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.top.snug{column-gap:14px} .top.snug .srch-open{flex-basis:190px; width:190px; min-width:0} .top.snug .srch-open kbd{display:none} .top.snug .brand :is(h1,.bh1){font-size:19px} @media (min-width: 961px){ .brand{display:grid; grid-template-columns:auto auto; column-gap:10px; row-gap:4px; align-items:center} .brand .logo{grid-row:1 / span 2} .brand :is(h1,.bh1){grid-column:2; align-self:end} .brand .ko{grid-column:2; align-self:start; margin-left:1px; font-size:11px; letter-spacing:.14em} .brand .asof,.brand .edtag{grid-column:2} } html[lang="en"] .brand .logo{grid-row:1} html[lang="en"] .brand :is(h1,.bh1){align-self:center} /* v4.20(2026-10-19): 영문판은 한글 제호 줄이 없으므로 로고를 한 줄에 두고 영문 제호와 세로 중앙을 맞춘다(데스크톱) */  /* v4.19(2026-10-18 요청): 한글 제호는 늘 영문 제호 아래에 둔다(데스크톱). 폭이 모자라면 검색창·영문 제호를 먼저 줄이고, 시각은 0.8배까지만 줄인다. 브라우저 110% 배율(창 폭 약 1,100px)까지 세계 시각을 보인다 */ .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 .tg{position:relative; display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--ink-2); cursor:pointer; user-select:none}
 .tg input{position:absolute; opacity:0; width:1px; height:1px}
@@ -715,7 +716,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 }
 @media (max-width: 480px){
   .seg button{padding:6px 8px}
-  .brand h1{font-size:18px} .brand .logo{width:24px; height:24px} .brand .ko{display:none}
+  .brand :is(h1,.bh1){font-size:18px} .brand .logo{width:24px; height:24px} .brand .ko{display:none}
 }
 @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto!important} }
 /* v3.3 */
@@ -882,7 +883,7 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
   .top{gap:8px 10px}
   .brand{display:contents}
   .brand .logo{order:1}
-  .brand h1{order:2; flex:1 1 calc(100% - 44px); min-width:0; font-size:min(18px, 4.6vw); white-space:nowrap}
+  .brand :is(h1,.bh1){order:2; flex:1 1 calc(100% - 44px); min-width:0; font-size:min(18px, 4.6vw); white-space:nowrap}
   .brand .edtag{order:3}
   .brand .asof{order:4; flex:none; white-space:nowrap; font-size:11px}
   .toggles{order:5; flex:1; width:auto; min-width:0}
@@ -978,7 +979,7 @@ details.fw ul{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px
 .toggles{flex:0 1 auto; min-width:0}
 .clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
 @media (min-width: 1040px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
-.top.snug{column-gap:14px} .top.snug .srch-open{flex-basis:190px; width:190px; min-width:0} .top.snug .srch-open kbd{display:none} .top.snug .brand h1{font-size:19px} @media (min-width: 961px){ .brand{display:grid; grid-template-columns:auto auto; column-gap:10px; row-gap:4px; align-items:center} .brand .logo{grid-row:1 / span 2} .brand h1{grid-column:2; align-self:end} .brand .ko{grid-column:2; align-self:start; margin-left:1px; font-size:11px; letter-spacing:.14em} .brand .asof,.brand .edtag{grid-column:2} } html[lang="en"] .brand .logo{grid-row:1} html[lang="en"] .brand h1{align-self:center} /* v4.20(2026-10-19): 영문판은 한글 제호 줄이 없으므로 로고를 한 줄에 두고 영문 제호와 세로 중앙을 맞춘다(데스크톱) */  /* v4.19(2026-10-18 요청): 한글 제호는 늘 영문 제호 아래에 둔다(데스크톱). 폭이 모자라면 검색창·영문 제호를 먼저 줄이고, 시각은 0.8배까지만 줄인다. 브라우저 110% 배율(창 폭 약 1,100px)까지 세계 시각을 보인다 */ .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.top.snug{column-gap:14px} .top.snug .srch-open{flex-basis:190px; width:190px; min-width:0} .top.snug .srch-open kbd{display:none} .top.snug .brand :is(h1,.bh1){font-size:19px} @media (min-width: 961px){ .brand{display:grid; grid-template-columns:auto auto; column-gap:10px; row-gap:4px; align-items:center} .brand .logo{grid-row:1 / span 2} .brand :is(h1,.bh1){grid-column:2; align-self:end} .brand .ko{grid-column:2; align-self:start; margin-left:1px; font-size:11px; letter-spacing:.14em} .brand .asof,.brand .edtag{grid-column:2} } html[lang="en"] .brand .logo{grid-row:1} html[lang="en"] .brand :is(h1,.bh1){align-self:center} /* v4.20(2026-10-19): 영문판은 한글 제호 줄이 없으므로 로고를 한 줄에 두고 영문 제호와 세로 중앙을 맞춘다(데스크톱) */  /* v4.19(2026-10-18 요청): 한글 제호는 늘 영문 제호 아래에 둔다(데스크톱). 폭이 모자라면 검색창·영문 제호를 먼저 줄이고, 시각은 0.8배까지만 줄인다. 브라우저 110% 배율(창 폭 약 1,100px)까지 세계 시각을 보인다 */ .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
 .clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
 @media (max-width: 960px){ #astrip{display:none !important} }
 .srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
@@ -999,7 +1000,7 @@ details.fw ul{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px
   .top{gap:8px 10px}
   .brand{display:contents}
   .brand .logo{order:1}
-  .brand h1{order:2; flex:1 1 calc(100% - 44px); min-width:0; font-size:min(18px, 4.6vw); white-space:nowrap}
+  .brand :is(h1,.bh1){order:2; flex:1 1 calc(100% - 44px); min-width:0; font-size:min(18px, 4.6vw); white-space:nowrap}
   .brand .edtag{order:3}
   .brand .asof{order:4; flex:none; white-space:nowrap; font-size:11px}
   .toggles{order:5; flex:1; width:auto; min-width:0}
@@ -1161,6 +1162,7 @@ html.pg-wait, html.pg-wait a{cursor:progress}
 .ind-cell{grid-template-rows:auto auto 1fr;align-content:start} .ind-cn{min-height:2.6em;display:flex;align-items:center;justify-content:center}  /* v3.94g: 칸 이름 2줄·개수 3줄 높이를 늘 확보해 칸끼리 정렬 */
 .ind-det{border-top:1px solid var(--line);padding-top:10px} .ind-det ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .pane .ind-det>ul>li{display:grid;grid-template-columns:minmax(0,13em) 11.5em minmax(0,1fr);gap:4px 14px;font-size:12.5px;line-height:1.55;align-items:baseline}
+button.futgo{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:var(--line);text-decoration-thickness:1px;text-underline-offset:3px} button.futgo:hover,button.futgo:focus-visible{color:var(--accent);text-decoration-color:currentColor}
 .ind-sn{color:var(--ink);font-weight:600} .ind-sn .mono{color:var(--muted);font-weight:400}
 .ind-c{font-weight:700;white-space:nowrap} .ind-c::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:5px}
 .ind-w{color:var(--ink-2)} .ind-w .note{display:block}

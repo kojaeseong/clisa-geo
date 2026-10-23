@@ -688,6 +688,9 @@ function setupInteraction(){
     const cgb = ev.target.closest("[data-cg]");  /* v3.81 핵심 판단의 의회 변수 → 그 사안의 '의회의 쟁점' */
     if (cgb) { const [cid, i] = cgb.dataset.cg.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("cg-" + cid + "-" + i);
       if (t) { t.open = true; t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
+    const fgo = ev.target.closest("[data-futgo]");  /* v4.32(2026-10-23 지시): 산업별 미래·국민의 삶의 전개 이름 → 그 사안의 전개 설명 */
+    if (fgo) { const [cid, fid] = fgo.dataset.futgo.split(":"); goCase(cid); setTimeout(() => { const d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("fut-" + cid + "-" + fid);
+      if (t) { t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } }, 80); return; }
     const fub = ev.target.closest("[data-fut]");
     if (fub) { const [cid, fid] = fub.dataset.fut.split(":"), d = caseFill(cid); if (d) d.open = true; const t = document.getElementById("fut-" + cid + "-" + fid);
       if (t) { t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); t.classList.add("srch-hit"); setTimeout(() => t.classList.add("fade"), 1600); setTimeout(() => t.classList.remove("srch-hit", "fade"), 3000); } return; }
@@ -1993,7 +1996,7 @@ function lbMix(H, G){  /* v3.92c 점 100개의 구성: 분류마다 그 분류�
   return '<div class="lb-mix"><ul>' +  /* v3.94f: 제목 '점 100개의 구성' 삭제(위 '2030년까지 100번의 미래'와 색 이름으로 이어짐) */ ["big", "worse", "better", "same"].map(k => {
     const ss = H.scen.filter(s => G.cls[s.id] === k && s.p > 0).sort((x, y) => y.p - x.p); if (!ss.length) return "";
     const sh = ss.slice(0, 3), more = ss.length - sh.length;
-    return '<li><span class="lb-mk"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + '</span><span class="lb-ms">' + sh.map(s => esc(s.name) + " " + s.p + "%").join(" · ") + (more ? " 외 " + more + "개" : "") + "</span></li>";
+    return '<li><span class="lb-mk"><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + '</span><span class="lb-ms">' + sh.map(s => futGo(((D.strategies || []).find(x => x.hs7 === H) || {}).id, s.id, esc(s.name)) + " " + s.p + "%").join(" · ") + (more ? " 외 " + more + "개" : "") + "</span></li>";
   }).join("") + "</ul></div>";
 }
 function lbDetail(H, G, sid, lab){  /* v3.92c 가장 나쁜(좋은) 경우의 4개 차원: 원래 단위와 점수 변화 */
@@ -2002,12 +2005,12 @@ function lbDetail(H, G, sid, lab){  /* v3.92c 가장 나쁜(좋은) 경우의 4�
     const raw = k === "정치" ? (d < 0 ? "국가 폭력 늘어남" : "국가 폭력 줄어듦") : ((v.by_raw || {})[sid] || "");
     return '<li><span class="lb-dk">' + nm + '</span><span class="lb-dv">' + esc(raw) + '</span><span class="lb-dp">' + Math.round(v.now) + "→" + Math.round(to) + "점</span></li>"; }).join("");
   /* v3.94c: 예상 경보는 카드에 쓰지 않는다(현재 켜진 경보만 카드 머리에). 제목은 '~가 오면', 점수 칸에 '현재→이 경우' 머리말 */
-  return '<div class="lb-det"><p class="lb-lab">' + lab + '가 오면 · <b>' + esc(S.name) + "</b> (확률 " + S.p + '%)<span class="lb-col">점수 현재→이 경우</span></p>' + (rows ? '<ul>' + rows + "</ul>" : "") + "</div>";
+  return '<div class="lb-det"><p class="lb-lab">' + lab + '가 오면 · <b>' + futGo(((D.strategies || []).find(x => x.hs7 === H) || {}).id, S.id, esc(S.name)) + "</b> (확률 " + S.p + '%)<span class="lb-col">점수 현재→이 경우</span></p>' + (rows ? '<ul>' + rows + "</ul>" : "") + "</div>";
 }
 function lbBrief(H, G, sid, lab){  /* 가장 나쁜 경우를 자세히 보인 카드에서는 가장 좋은 경우를 한 줄로 */
   const S = H.scen.find(s => s.id === sid); if (!S) return "";
   const f = HS_CAT.map(([k, nm]) => { const v = G.cat[k]; if (!v || v.na) return ""; const d = v.by[sid] - v.now; if (Math.abs(d) <= 1) return ""; return nm + " " + Math.round(v.now) + "→" + Math.round(v.by[sid]) + "점"; }).filter(Boolean);
-  return '<div class="lb-det lb-det-b"><p class="lb-lab">' + lab + '가 오면 · <b>' + esc(S.name) + "</b> (확률 " + S.p + '%)' + (f.length ? '<span class="lb-col">점수 현재→이 경우</span></p><p class="lb-ws">' + esc(f.join(" · ")) + "</p>" : "</p>") + "</div>";
+  return '<div class="lb-det lb-det-b"><p class="lb-lab">' + lab + '가 오면 · <b>' + futGo(((D.strategies || []).find(x => x.hs7 === H) || {}).id, S.id, esc(S.name)) + "</b> (확률 " + S.p + '%)' + (f.length ? '<span class="lb-col">점수 현재→이 경우</span></p><p class="lb-ws">' + esc(f.join(" · ")) + "</p>" : "</p>") + "</div>";
 }
 function lbExplain(H, G){
   const ws = hsWorstSc(G), bs = hsBestSc(G), bad = ws && (G.cls[ws] === "worse" || G.cls[ws] === "big"), good = bs && G.cls[bs] === "better";
@@ -2190,11 +2193,13 @@ function indSpark(S){  /* v3.98: 작은 추이선은 모양만 보임. 세로는
   return '<svg class="ind-sp" viewBox="0 0 ' + W + " " + Hh + '" aria-hidden="true">' +
     KS.map(k => '<path d="' + ser.map((v, i) => (i ? "H" + X(i).toFixed(1) + "V" : "M" + X(i).toFixed(1) + ",") + Y(v[k]).toFixed(1)).join("") + '" fill="none" stroke="' + LC[k] + '" stroke-width="1.8" stroke-linejoin="round"/><circle cx="' + X(n - 1).toFixed(1) + '" cy="' + Y(ser[n - 1][k]).toFixed(1) + '" r="2.2" fill="' + LC[k] + '"/>').join("") + "</svg>";
 }
+/* v4.32 전개 이름을 누르면 그 사안의 전개 설명으로(F4a~F4d처럼 한 전개를 나눈 것은 본래 전개 F4로) */
+function futGo(cid, sid, label){ return cid ? '<button type="button" class="futgo" data-futgo="' + esc(cid) + ":" + esc(String(sid).replace(/^([A-Z]\d+)[a-z]$/, "$1")) + '" title="전개 설명 보기">' + label + "</button>" : label; }
 function indDetail(I, c){
   const v = IND.cells[I.k][c.id], T = {base: "기준", shock: "사건이 난 해부터 3년 평균", state: "2030년 수준"};
   return '<div class="ind-det"><p class="lb-lab">' + esc(c.title) + " · " + esc(I.name) + (c.id === "iran" ? ' <span class="note">이 사안은 전쟁이 지속되는 경우를 기준으로 합니다.</span>' : "") + '</p><ul>' +
     c.scen.slice().sort((a, b) => b.p - a.p).map(s => { const z = v[s.id];
-      return '<li><span class="ind-sn">' + esc(s.name) + ' <span class="mono">' + s.p + '%</span></span><span class="ind-c" style="--c:' + HS_COL[z.c] + '">' + (s.t === "base" ? "기준 경로" : IND_LAB[z.c] + " " + indPct(z.x)) + '</span>' +
+      return '<li><span class="ind-sn">' + futGo(c.id, s.id, esc(s.name)) + ' <span class="mono">' + s.p + '%</span></span><span class="ind-c" style="--c:' + HS_COL[z.c] + '">' + (s.t === "base" ? "기준 경로" : IND_LAB[z.c] + " " + indPct(z.x)) + '</span>' +
         (s.t === "base" ? '<span class="ind-w note">사안이 현재 상태로 이어질 때. 다른 전개는 이 경우와 비교합니다.</span>' : '<span class="ind-w">' + (z.w ? esc(z.w) + " " : "") + '<span class="note">매출 ' + indPct(z.r / 100) + ", 이익률 " + (z.dm >= 0 ? "+" : "−") + Math.abs(z.dm) + "%p · 구간 " + indPct(z.lo) + "~" + indPct(z.hi) + " · " + T[s.t] + "</span></span>") + "</li>"; }).join("") + "</ul></div>";
 }
 function indWhy(cs, G, LAB, lab2){ LAB = LAB || IND_LAB;  /* v3.98: 선 그래프 오른쪽 상자. 가장 최근 확률 변경의 까닭, 바뀐 전개 확률, 이 업종의 점 개수 변화 */
@@ -3276,7 +3281,7 @@ function navBack(){
 document.addEventListener("click", ev => {
   if (ev.target.closest("#navback,[data-navback]")) return;
   if (ev.target.closest(".gnav")) return;
-  if (ev.target.closest("[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],[data-fcd],[data-golife],[data-goind],#bstrip,#srchres [data-sri]")) navPush();
+  if (ev.target.closest("[data-futgo],[data-case],[data-fcgo],[data-feat],[data-iso],[data-fp],[data-go],[data-exit],[data-q],[data-fcf],[data-fcd],[data-golife],[data-goind],#bstrip,#srchres [data-sri]")) navPush();
 }, true);
 document.addEventListener("click", ev => {
   const b = ev.target.closest("#navback,[data-navback]"); if (!b) return;
@@ -3321,7 +3326,7 @@ const CLOCKS = [["서울·도쿄", "Asia/Seoul"], ["베이징·타이베이", "A
     el.querySelectorAll(".clk").forEach(x => { const tz = x.dataset.tz; const tt = F(tz).format(now); x.querySelector(".t").innerHTML = tt.slice(0, 2) + '<b class="' + (now.getSeconds() % 2 ? "off" : "") + '">:</b>' + tt.slice(3, 5); const d = Fd(tz).format(now); x.querySelector(".d").textContent = d === seoul ? "" : d < seoul ? "−1일" : "+1일"; }); };
   try { tick(); el.hidden = false; setInterval(() => { if (document.visibilityState === "visible") tick(); }, 1000); } catch (e) { el.hidden = true; }
   /* 검색창이 둘째 줄로 밀리면(글꼴·배율 때문에 폭이 모자랄 때) 시각을 숨겨 머리글을 한 줄로 지킨다 */
-  const sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand h1");
+  const sb = document.getElementById("srchopen"), h1 = document.querySelector(".brand :is(h1,.bh1)");
   let lastW = 0; const top = document.querySelector(".top");
   const wrapped = () => sb.getBoundingClientRect().top > h1.getBoundingClientRect().bottom - 4;
   /* 1단계 snug(부제 숨김·검색창 축소) → 2단계 시각 묶음을 0.7배까지 축소(zoom) → 3단계 tight(숨김) */
@@ -3363,6 +3368,13 @@ document.addEventListener("click", ev => {
   try { navigator.clipboard.writeText(v).then(() => done(true), sel); } catch(e){ sel(); }
 });
 })();
+/* v4.32(2026-10-23 결재, 머리말 제목 중복 정리): 쪽의 제목 h1이 있는 쪽(국가·권력 구조·특집·브리핑 등)에서는 머리글의 사이트 이름(p.bh1)이 제목이 아니다.
+   탭 화면(전망과 검증·전략 분석 등)처럼 보이는 h1이 없으면 사이트 이름을 1단계 제목(role=heading)으로 알려 화면 읽기 프로그램이 제목 없이 두지 않게 한다 */
+(function(){ const b = document.querySelector(".brand .bh1"); if (!b) return;
+  const sync = () => { const other = [...document.querySelectorAll("h1")].some(h => h.offsetParent !== null);
+    if (other) { b.removeAttribute("role"); b.removeAttribute("aria-level"); } else { b.setAttribute("role", "heading"); b.setAttribute("aria-level", "1"); } };
+  let t = 0; new MutationObserver(() => { clearTimeout(t); t = setTimeout(sync, 150); }).observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"]});
+  sync(); })();
 
 /*langsw-ko*/(function(){ const EN_PENDING = ["/case/poland/", "/power/POL/"]; const upd = () => { const a = document.getElementById("langsw"); if (a) a.setAttribute("href", EN_PENDING.some(x => location.pathname.startsWith(x)) ? "/en/" : "/en" + location.pathname + location.search + location.hash); };
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });

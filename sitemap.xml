@@ -68,7 +68,7 @@
   <url><loc>https://clisa.ai/country/NGA/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/country/ZAF/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/country/ETH/</loc><lastmod>2026-10-12</lastmod></url>
-  <url><loc>https://clisa.ai/forecast/</loc><lastmod>2026-10-21</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f01/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f02/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f03/</loc><lastmod>2026-10-12</lastmod></url>
@@ -80,7 +80,7 @@
   <url><loc>https://clisa.ai/forecast/f09/</loc><lastmod>2026-09-26</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f10/</loc><lastmod>2026-09-26</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f11/</loc><lastmod>2026-09-26</lastmod></url>
-  <url><loc>https://clisa.ai/forecast/f12/</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f12/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f13/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f14/</loc><lastmod>2026-09-27</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f15/</loc><lastmod>2026-10-05</lastmod></url>
@@ -140,6 +140,10 @@
   <url><loc>https://clisa.ai/forecast/f69/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f70/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f71/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f72/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f73/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f74/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f75/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/industry/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://clisa.ai/life/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/feature/2026-10-18-attrition/</loc><lastmod>2026-10-18</lastmod></url>
