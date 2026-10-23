@@ -377,3 +377,5 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 :root[data-role="ru"] .tl-l{color:#4A4A4A}
 .tl-l[style*="left:100%"],.tl-now[style*="left:100%"]{transform:translateX(-100%)}
 @media (max-width:480px){.brandbar .bb-r>span{display:none}}
+.vlead{margin:0 0 10px;font-size:13px;line-height:1.6;color:var(--muted);border-left:3px solid var(--rule);padding-left:10px}
+.vh{font:400 17px/1.3 var(--head);margin:0 0 10px;color:var(--acc)}

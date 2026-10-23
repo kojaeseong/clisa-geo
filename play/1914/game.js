@@ -223,21 +223,33 @@ function scene(id){
   var n=R.nodes[id]; if(!n){ app.textContent=T('장면을 찾을 수 없습니다: ','Scene not found: ')+id; return; }
   S.node=id; S.qn++; S.chosen=null; S.delta=null;
   S.order=n.choices.map(function(_,i){return i;}); for(var a=S.order.length-1;a>0;a--){ var b=Math.floor(Math.random()*(a+1)), t=S.order[a]; S.order[a]=S.order[b]; S.order[b]=t; }
+  scenePage(n,scenePages(n),0);
+}
+/* 2026-10-23 (operator decision): a long room page is split so that the voices get a page of their own; short scenes stay on one page */
+function splitAt(){ return EN?1000:450; }  /* Latin text runs about twice the characters of Korean for the same scene */
+function scenePages(n){
   var pages=[];
   if(n.event||n.telegram||n.map) pages.push('brief');
-  pages.push('room'); pages.push('decide');
-  scenePage(n,pages,0);
+  var v=n.voices||[], len=clean(n.scene||'').length+v.reduce(function(s,x){return s+clean(x.text||'').length;},0);
+  if(v.length&&(len>splitAt()||v.length>=3)){ pages.push('room0'); pages.push('voices'); } else pages.push('room');
+  pages.push('decide');
+  return pages;
 }
+function voicesHtml(n){ return '<div class="voices">'+(n.voices||[]).map(function(v){var me=/당신|^You\b/.test(v.who); return '<div class="voice'+(me?' me':'')+'"><div class="w">'+esc(v.who)+(v.kind==='quote'?'<i class="q">'+T('기록','On record')+'</i>':'<i>'+T('요지','In substance')+'</i>')+'</div><div class="t">'+(v.kind==='quote'?'“'+tx(v.text)+'”':tx(v.text))+'</div></div>';}).join('')+'</div>'; }
 function scenePage(n,pages,p){
-  VIEW=function(){ scenePage(R.nodes[S.node],pages,p); };
+  VIEW=function(){ var m=R.nodes[S.node], pg=scenePages(m); scenePage(m,pg,Math.min(p,pg.length-1)); };  /* the page count can differ by language */
   var kind=pages[p], body='';
   if(kind==='brief'){
     body=(n.event?'<div class="event"><span class="lab">'+T('그사이','Meanwhile')+'</span>'+tx(n.event)+'</div>':'')+
       (n.telegram?'<div class="telegram"><div class="th"><span class="tt">'+T('전 보','TELEGRAM')+'</span><span class="tf"><i>'+T('발신','From')+'</i>'+esc(n.telegram.from||'')+'</span><span class="tf"><i>'+T('일시','Date')+'</i>'+esc(n.telegram.at||'')+'</span></div><div class="tx" id="tx"></div></div>':'')+
       mapBox(n.map);
   } else if(kind==='room'){
-    body='<div class="paper">'+portrait(n.img)+'<p class="prose" style="margin:0 0 14px">'+tx(n.scene)+'</p>'+
-      '<div class="voices">'+(n.voices||[]).map(function(v){var me=/당신|^You\b/.test(v.who); return '<div class="voice'+(me?' me':'')+'"><div class="w">'+esc(v.who)+(v.kind==='quote'?'<i class="q">'+T('기록','On record')+'</i>':'<i>'+T('요지','In substance')+'</i>')+'</div><div class="t">'+(v.kind==='quote'?'“'+tx(v.text)+'”':tx(v.text))+'</div></div>';}).join('')+'</div></div>';
+    body='<div class="paper">'+portrait(n.img)+'<p class="prose" style="margin:0 0 14px">'+tx(n.scene)+'</p>'+voicesHtml(n)+'</div>';
+  } else if(kind==='room0'){
+    body='<div class="paper">'+portrait(n.img)+'<p class="prose" style="margin:0">'+tx(n.scene)+'</p></div>';
+  } else if(kind==='voices'){
+    var lead=clean(n.scene||'').split(/(?<=[.다요!?])\s+/)[0];
+    body='<div class="paper"><p class="vlead">'+esc(lead)+'</p><h3 class="vh">'+T('방 안의 목소리','Voices in the room')+'</h3>'+voicesHtml(n)+'</div>';
   } else {
     body=(n.pressure?'<div class="pressure"><span class="lab">'+T('속사정 · ','Behind the scenes · ')+esc(n.pressure.title)+'</span><p>'+tx(n.pressure.text)+'</p>'+(n.pressure.fx?'<p class="pfx">'+T('이 압력은 일부 선택의 결과에 영향을 줍니다.','This pressure changes the outcome of some choices.')+'</p>':'')+'</div>':'')+
       '<p class="ask">'+T('당신의 결정은?','Your decision?')+'</p><div class="choices">'+(S.order||n.choices.map(function(_,i){return i;})).map(function(i,pos){var c=n.choices[i]; return '<button class="choice" data-i="'+i+'" data-k="'+String.fromCharCode(65+pos)+'">'+tx(c.text)+(c.why?'<span class="why">'+tx(c.why)+'</span>':'')+'</button>';}).join('')+'</div><div id="res"></div>';
