@@ -231,7 +231,7 @@ function typeOut(el,text,instant){
 }
 function head(n){
   var hypo=n.hypo||/\(가상/.test(n.title||'');
-  return '<div class="stamp"><div class="day">'+dayLabel(n.date)+'</div><div class="meta"><b>'+esc(yearOf(n.date)+T('년',''))+'</b>'+esc((n.time?' · '+n.time:'')+(n.place?' · '+n.place:''))+'</div>'+(hypo?'<span class="hypo">'+T('가상 전개','Alternate path')+'</span>':'')+'</div>'+
+  return '<div class="stamp"><div class="day">'+dayLabel(n.date)+'</div><div class="meta"><b>'+esc(yearOf(n.date)+T('년',''))+'</b>'+esc((n.time?' · '+n.time:'')+(n.place?' · '+n.place:''))+'</div>'+''+'</div>'+
    '<h2 class="scene-title">'+tx(n.title)+'</h2>'+(n.clock?'<div class="clock">'+esc(n.clock)+'</div>':'');
 }
 /* a scene is shown in pages: what happened meanwhile → the room and the voices → the decision */
