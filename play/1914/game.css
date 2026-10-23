@@ -356,7 +356,8 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 /* 2026-10-23 partner suggestions: completed roles light up; calendar strip in the HUD */
 .role{position:relative}
 .role.done .flag{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--ink)}
-.role .donek{position:absolute;top:10px;right:10px;font:500 10.5px var(--mono);letter-spacing:.06em;border:1px solid var(--ink);padding:1px 6px;background:var(--paper)}
+.role .rt{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.role .donek{font:500 10.5px var(--mono);letter-spacing:.06em;border:1px solid var(--ink);padding:2px 7px;background:var(--paper);line-height:1.5}
 .roles .role:not(.done):not(.off){opacity:.88}
 .prog{font:500 12px var(--mono);color:var(--ink-2);white-space:nowrap}
 .tl{position:relative;margin:26px 0 0;padding-bottom:16px;font:500 10.5px var(--mono);letter-spacing:.03em}
