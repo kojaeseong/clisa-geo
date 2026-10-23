@@ -133,7 +133,7 @@ function srBuild(){
   (D.digest || []).forEach(g => add("Global Overview", g.t, g.d, toPane("overview")));
   if (BR) BR.issues.forEach(x => x.items.forEach(i => add("Briefings", fmtKD(x.date) + " · " + i.h, [i.fact || "", i.link || ""], () => { goBrief(x.date); return "pane-brief"; })));
   /* v3.52 전망 검색(2026-10-05): 짧은 이름과 확률을 제목으로, 사안·분쟁 지점·나라 이름과 '가능성·확률·전망' 같은 말을 본문에 넣어 "러우 전쟁 휴전 가능성" 같은 물음에 전망이 잡히게 한다. 누르면 전망과 검증의 해당 항목으로 간다 */
-  D.forecasts.forEach(f => { const c = (D.strategies || []).find(x => x.fp === f.fp), fp = D.flashpoints.find(x => x.id === f.fp);
+  D.forecasts.forEach(f => { const c = fcCase(f), fp = D.flashpoints.find(x => x.id === f.fp);
     add("Forecasts", (f.s || f.q) + " · " + (f.status === "open" ? f.p + "%" : f.status === "yes" ? "Resolved yes" : f.status === "no" ? "Resolved no" : "Voided"),
       [f.q, f.basis, f.void || "", c ? cshort(c) : "", fp ? fp.name_ko : "", (f.countries || []).map(nm).join(" "), "chance probability forecast resolution " + (f.due || "")],
       () => { fcOpen(f.id); return "pane-forecast"; });  /* v4.22 전망별 화면으로 */
@@ -799,6 +799,18 @@ function isoView(isos){
   if (isos.length === 1) { const p = labelPos[isos[0]]; return [p[0], p[1], Math.max(1.3, Math.min(3.6, 0.9 / Math.sqrt(d3.geoArea(byIso[isos[0]]))))]; }
   const c = d3.geoCentroid({type: "MultiPoint", coordinates: isos.map(i => labelPos[i])}); let dm = 0;
   for (const a of isos) for (const b of isos) dm = Math.max(dm, d3.geoDistance(labelPos[a], labelPos[b]));
+  /* v4.31(2026-10-23 결재): 멀리 떨어진 나라가 섞이면(이란·미국처럼 대양 한가운데가 나오는 경우) 가장 작은 나라를 중심에 두고,
+     그 나라에서 약 3,000km 안에 국경이 있는 나라까지만 함께 보인다. 나머지 나라는 색 표시만 남는다(markSet은 그대로 모든 나라) */
+  if (dm > 0.8) {
+    const s = isos.slice().sort((a, b) => d3.geoArea(byIso[a]) - d3.geoArea(byIso[b]))[0], p0 = labelPos[s];
+    const near = iso => { let best = null, bd = 9; const walk = x => { if (typeof x[0] === "number") { const d = d3.geoDistance(p0, x); if (d < bd) { bd = d; best = x; } } else x.forEach(walk); };
+      walk(byIso[iso].geometry.coordinates); if (bd >= 0.47) return null; return d3.geoDistance(p0, labelPos[iso]) < 0.47 ? labelPos[iso] : best; };  /* 이웃 나라의 가운데가 가까우면 그 나라 전체를, 멀면(러시아처럼 큰 나라) 가까운 국경 쪽만 */
+    const pts = [p0].concat(isos.filter(i => i !== s).map(near).filter(Boolean));
+    if (pts.length === 1) return isoView([s]);
+    const cc = d3.geoCentroid({type: "MultiPoint", coordinates: pts}); let d = 0;
+    for (const a of pts) for (const b of pts) d = Math.max(d, d3.geoDistance(a, b));
+    return [cc[0], cc[1], Math.max(1.3, Math.min(3, 1.6 / Math.max(d, 0.01)))];
+  }
   const lat = dm > 1.2 ? isos.reduce((a, i) => a + labelPos[i][1], 0) / isos.length : c[1];  /* 멀리 떨어진 나라들(미국·중국)은 극지방 위가 아니라 두 나라 위도의 평균에서 본다 */
   return [c[0], lat, Math.max(1, Math.min(3, 1.6 / Math.max(dm, 0.01)))];
 }
@@ -2500,7 +2512,7 @@ function briefHtml(c){
   const B = c.brief || {};
   const top = c.futures.items.slice().sort((a, b) => b.p - a.p)[0];
   const W = (c.counter || [])[0];
-  const fcs = D.forecasts.filter(f => f.fp === c.fp && f.status === "open").sort((a, b) => a.due.localeCompare(b.due));
+  const fcs = D.forecasts.filter(f => fcIn(f, c) && f.status === "open").sort((a, b) => a.due.localeCompare(b.due));
   const fb = f => 'data-fut="' + esc(c.id) + ":" + esc(f.id) + '"';
   return '<section class="brief"><dl class="tw">' +
     (B.q ? "<dt>The question</dt><dd>" + esc(B.q) + "</dd>" : "") +
@@ -2615,7 +2627,7 @@ function caseFullHtml(c){
   const lq = id => (T.find(x => x.id === id) || {}).q || "";
   const cl = c.client;
   const an = FP_AN[c.fp] ? D.history.analogies.find(x => x.id === FP_AN[c.fp]) : null;
-  const pf = D.forecasts.filter(f => f.fp === c.fp).map(f => f.id);
+  const pf = D.forecasts.filter(f => fcIn(f, c)).map(f => f.id);
   return concHtml(c) +
       layer("1", lq("1")) +
       precHtml(c) +
@@ -2715,7 +2727,7 @@ function fcByBranch(c, fs){
   let h = its.map(it => '<div class="fbr" style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0"><span class="mono" style="color:' + fcol(it.id) + '">' + esc(it.id) + "</span> " + esc(it.name) + ' <span class="mono">' + it.p + "%</span>" + (it.rng ? ' <span class="rng">(' + it.rng[0] + "~" + it.rng[1] + ")</span>" : "") + "</h4><p class=\"note\" style=\"margin:2px 0 0\">Resolution criteria · " + esc(it.test) + "</p>" +
     sub("Forecasts tied to the resolution criteria", it.fc ? [it.fc] : []) + sub("Forecasts that tilt toward this scenario", (it.sig || []).filter(g => g.dir === "+").map(g => g.id)) + sub("Forecasts that tilt away from it", (it.sig || []).filter(g => g.dir === "-").map(g => g.id)) +
     (!it.fc && !(it.sig || []).length ? "<p class=\"note\" style=\"margin:6px 0 0\">No forecasts are linked to this scenario yet. It will be checked against its resolution criteria at the end of 2030.</p>" : "") + "</div>").join("");
-  const cf = f => f.fp === c.fp, expo = (D.fc_expo || []).map(byId).filter(f => f && cf(f) && !used.has(f.id));
+  const cf = f => fcIn(f, c), expo = (D.fc_expo || []).map(byId).filter(f => f && cf(f) && !used.has(f.id));
   h += expo.length ? "<div style=\"border-top:1px solid var(--line);padding-top:10px;margin-top:14px\"><h4 style=\"margin:0\">South Korea’s exposure and the recommendations</h4><p class=\"note\" style=\"margin:2px 0 0\">These forecasts ask not which scenario will materialize but what price South Korea pays and whether the recommendations are carried out.</p><ul class=\"list\">" + expo.map(f => { used.add(f.id); return forecastRow(f, false); }).join("") + "</ul></div>" : "";
   const rest = fs.filter(f => cf(f) && !used.has(f.id));
   h += rest.length ? "<div style=\"border-top:1px solid var(--line);padding-top:10px;margin-top:14px\"><h4 style=\"margin:0\">Other forecasts on this issue</h4><ul class=\"list\">" + rest.map(f => forecastRow(f, false)).join("") + "</ul></div>" : "";
@@ -2761,7 +2773,10 @@ const fcToday = () => { const n = new Date(), k = new Date(n.getTime() + (n.getT
 const fcUTC = s => Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10));
 const fcDays = (a, b) => Math.round((fcUTC(b) - fcUTC(a)) / 864e5);
 const fcAdd = (s, n) => new Date(fcUTC(s) + n * 864e5).toISOString().slice(0, 10);
-const fcCaseOf = f => (D.strategies || []).find(c => c.fp === f.fp);
+/* v4.31(2026-10-23 결재): 전망의 사안은 분쟁 지점(fp)이 아니라 cases(첫째가 주 사안)로 정한다. fp는 지도에만 쓴다 */
+function fcCase(f){ const cs = D.strategies || []; return (f.cases && cs.find(c => c.id === f.cases[0])) || cs.find(c => c.fp === f.fp); }
+function fcIn(f, c){ return f.cases ? f.cases.includes(c.id) : f.fp === c.fp; }
+const fcCaseOf = f => fcCase(f);
 const fcCaseName = f => { const c = fcCaseOf(f); return c ? c.title.split(":")[0] : FCT.etc; };
 const fcHistOf = f => ((D.fc_hist || {})[f.id] || [[f.made || f.due, f.p]]);
 /* v4.24 기간 평균 브라이어 점수(2026-10-20 결재): 공개한 날부터 검증 시점(그 전에 실현이 확정되면 그날)까지 날마다의 확률로 매긴 점수의 평균.
@@ -2926,7 +2941,7 @@ function renderForecasts(){
     (FCR().length ? "<section class=\"sec\" id=\"f-week\"><h3>Weekly forecast review</h3><p class=\"note\" style=\"margin-bottom:8px\">Every Monday, forecast probabilities are revisited in light of the previous week’s events. Both revised and unchanged forecasts are listed, with reasons.</p>" + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
     "<section class=\"sec\"><h3>Missed forecasts</h3><p class=\"note\" style=\"margin-bottom:8px\">Forecasts rated 50% or higher that did not happen, or rated below 50% that did.</p>" + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : "<p class=\"note\">No forecasts have been resolved yet.</p>") + "</section>" +
     ((PUB() && (D.notices || []).length) ? "<section class=\"sec\"><h3>Revised assessments</h3><ul class=\"tl\">" + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(enDate(l.date)) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + "\">View analysis · " + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
-    (() => { const cs = D.strategies || [], cf = f => { const c = cs.find(x => x.fp === f.fp); return c ? c.id : "etc"; };
+    (() => { const cs = D.strategies || [], cf = f => { const c = fcCase(f); return c ? c.id : "etc"; };
       const opts = [["all", "All", fs.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], fs.filter(f => cf(f) === c.id).length]), [["etc", "Other conflicts", fs.filter(f => cf(f) === "etc").length]]);
       const sel = S.fcf || "all", shown = sel === "all" ? fs : fs.filter(f => cf(f) === sel);
       const cc = cs.find(c => c.id === sel);
