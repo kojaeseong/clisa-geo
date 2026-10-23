@@ -45,7 +45,7 @@
   /* 띠 */
   function runStrip(st, list){
     var bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d"), k = 0, hold = false;
-    var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/en/"; st.hidden = false; };
+    var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/en/"; st.classList.toggle("bs-due", !!x.a); st.hidden = false; };  /* v4.24 좁은 화면에서 예정 항목이 돌 때 띠의 왼쪽 선을 붉게 */
     show();
     if (!reduceMotion) setInterval(function(){
       if (hold || document.visibilityState !== "visible" || list().length < 2) return;
@@ -65,8 +65,8 @@
         .concat((s.events || []).filter(function(e){ var n = daysLeft(e.date.length === 7 ? e.date + "-01" : e.date); return n != null && n <= days && (e.date.length === 7 ? daysLeft(e.date + "-28") >= 0 : (e.end ? daysLeft(e.end) : n) >= 0); }).map(function(e){ return {k: evKey(e), e: e}; }));
       return L.sort(function(a, c){ return a.k.localeCompare(c.k); });
     };
-    var agendaItems = function(){ return agenda(90).map(function(x){ return x.f ? {k: "Resolution due", d: x.f.due, t: (x.f.s || x.f.id + " " + x.f.q) + " · " + daysText(daysLeft(x.f.due)), go: "/en/forecast/#" + x.f.id, soon: daysLeft(x.f.due) <= 30}
-      : {k: "Upcoming", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), go: "/en/", soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30}; }); };
+    var agendaItems = function(){ return agenda(90).map(function(x){ return x.f ? {a: 1, k: "Resolution due", d: x.f.due, t: (x.f.s || x.f.id + " " + x.f.q) + " · " + daysText(daysLeft(x.f.due)), go: "/en/forecast/#" + x.f.id, soon: daysLeft(x.f.due) <= 30}
+      : {a: 1, k: "Upcoming", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), go: "/en/", soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30}; }); };
     var MAIN = [];
     if (b && (b.issues || []).length) {
       var cur = b.issues[0], d7 = new Date(Date.now() - 7 * 864e5), lim = d7.getFullYear() + "-" + String(d7.getMonth() + 1).padStart(2, "0") + "-" + String(d7.getDate()).padStart(2, "0"); var d3 = new Date(Date.now() - 2 * 864e5), lim3 = d3.getFullYear() + "-" + String(d3.getMonth() + 1).padStart(2, "0") + "-" + String(d3.getDate()).padStart(2, "0");

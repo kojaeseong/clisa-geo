@@ -38,9 +38,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="/app.css?v=01028e7547">
-<style>.ac-sw{display:inline-flex;align-items:center;gap:9px;height:40px;padding:0 14px 0 6px;border:1px solid #D2D8DE;border-radius:999px;background:#fff;color:#101418;text-decoration:none;white-space:nowrap;flex:none;transition:border-color .15s,box-shadow .15s}.ac-sw:hover{border-color:#1F4FD8;box-shadow:0 1px 6px rgba(31,79,216,.15)}.ac-sw-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#EAF0FD;color:#1F4FD8;flex:none}.ac-sw-tx{display:flex;flex-direction:column;line-height:1.15}.ac-sw b{font-size:13.5px;font-weight:700}.ac-sw small{font-size:11px;font-weight:500;color:#6B7580}@media(max-width:600px){.ac-sw small{display:none}.ac-sw{padding:0 12px 0 5px;gap:7px}}.srch-open span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}</style>
-<meta name="clisa-build" content="a0ac9f47c3bd">
+<link rel="stylesheet" href="/app.css?v=f4c325d99e">
+<style>.asw{display:inline-flex;align-items:center;height:40px;padding:3px;border:1px solid #D2D8DE;border-radius:999px;background:#fff;box-shadow:inset 0 1px 2px rgba(0,0,0,.04);flex:none;position:relative;white-space:nowrap}.asw a{position:relative;z-index:1;display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:999px;font-size:13.5px;font-weight:700;color:#6B7580;text-decoration:none;letter-spacing:-.01em;transition:color .15s}.asw a:hover{color:#101418}.asw a.on{color:#fff}.asw .asw-k{position:absolute;top:3px;bottom:3px;border-radius:999px;background:#1F4FD8;z-index:0;transition:left .22s cubic-bezier(.4,0,.2,1),width .22s cubic-bezier(.4,0,.2,1)}.asw .asw-lbl{font:600 10.5px "IBM Plex Mono",monospace;letter-spacing:.1em;color:#6B7580;padding:0 10px 0 11px;text-transform:uppercase}@media(max-width:600px){.asw a{padding:0 10px;font-size:13px;flex:1;justify-content:center}.asw .asw-lbl{display:none}.toggles{flex-wrap:wrap}.toggles .asw{order:3;width:100%;margin:0}}.srch-open span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}</style>
+<meta name="clisa-build" content="715a20ae4614">
 </head>
 <body>
 
@@ -54,7 +54,7 @@
     <div class="clocks" id="clocks" hidden aria-label="세계 시각"></div>
     <div class="toggles">
       <button type="button" class="srch-open" id="srchopen" aria-label="사이트 검색" title="사이트 검색 ( / )"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg><span>나라·사안·인물 검색</span><kbd>/</kbd></button>
-      <a class="ac-sw" href="/academy/" title="클리사 아카데미"><span class="ac-sw-ic"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 11.5V16c0 1.3 2.7 3 6 3s6-1.7 6-3v-4.5"/><path d="M22 9v5"/></svg></span><span class="ac-sw-tx"><b>클리사 아카데미</b><small>정치학·외교학 과정</small></span></a>
+      <nav class="asw" aria-label="클리사 영역"><span class="asw-lbl">클리사</span><a href="/" class="on" aria-current="page">지오폴리틱스</a><a href="/academy/">아카데미</a><a href="/play/">게임</a><span class="asw-k"></span></nav>
       <a class="lang-sw" id="langsw" href="/en/brief/2026-10-16/" hreflang="en" lang="en" title="View in English">English</a>
     </div>
     <div class="strips">
@@ -137,8 +137,9 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
-<script src="/app.js?v=c01e66d1c5"></script>
+<script src="/app.js?v=374314fb92"></script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "58e343ace23448bcb4d24c4bde3a2dd9"}'></script>
+<script>(function(){var n=document.querySelector(".asw");if(!n)return;var o=n.querySelector("a.on"),k=n.querySelector(".asw-k");function f(){k.style.left=o.offsetLeft+"px";k.style.width=o.offsetWidth+"px"}f();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(f);addEventListener("resize",f);addEventListener("load",f);if(window.ResizeObserver)new ResizeObserver(f).observe(n)})();</script>
 </body>
 </html>

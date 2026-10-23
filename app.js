@@ -1233,7 +1233,7 @@ function stripGo(x){
 function runStrip(st, list){
   const bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d");
   let k = 0, hold = false;
-  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.hidden = false; };
+  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.e)); st.hidden = false; };  /* v4.24 좁은 화면에서 예정 항목이 돌 때 띠의 왼쪽 선을 붉게 */
   show();
   if (!reduceMotion) setInterval(() => {
     if (hold || document.visibilityState !== "visible" || list().length < 2) return;

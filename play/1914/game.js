@@ -121,7 +121,9 @@ function timeline(n){
     '<i class="now" style="left:'+(cur*100)+'%"></i></div>'+
     '<div class="tl-now" style="left:'+(cur*100)+'%"><span>'+(over?T('8월 4일 이후 · ','after 4 Aug · '):before?T('6월 28일 이전 · ','before 28 Jun · '):'')+dayLabel(n.date)+'</span></div></div>';
 }
-function brand(){return '<div class="brandbar"><a href="'+SITE+'/" target="_blank" rel="noopener">CLISA</a><span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+langBtn()+soundBtn()+'</span></div>';}
+/* v4.24 (2026-10-23) three-area switch: Geopolitics · Academy · Game, same tab (progress is saved per role). The off-site preview keeps the plain label. */
+function areaNav(){ if(!LANGLINK) return '<span>CLISA GAMES</span>'; return '<nav class="asw" aria-label="'+T('클리사 영역','Clisa sections')+'"><a href="'+SITE+'/">'+T('지오폴리틱스','Geopolitics')+'</a><a href="'+SITE+'/academy/">'+T('아카데미','Academy')+'</a><a href="'+SITE+'/play/" class="on" aria-current="page">'+T('게임','Game')+'</a></nav>'; }
+function brand(){return '<div class="brandbar">'+areaNav()+'<span class="bb-r"><span>WORLD OF DECISION · 1914</span>'+langBtn()+soundBtn()+'</span></div>';}
 function render(h){ app.innerHTML=h; bindSound(); }
 function dayLabel(d){ if(!d) return ''; var m=d.match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return esc(d); return EN?(+m[3])+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][+m[2]-1]:(+m[2])+'월 '+(+m[3])+'일'; }
 function yearOf(d){ var m=String(d||'').match(/^(\d{4})/); return m?m[1]:''; }
@@ -136,7 +138,7 @@ function setTheme(id){
 function title(){
   VIEW=title; setTheme(null);
   render('<section class="title">'+
-   '<div class="kicker"><span>CLISA GAMES</span><span class="bb-r"><span>'+esc(C.ep)+'</span>'+langBtn()+soundBtn()+'</span></div>'+
+   '<div class="kicker">'+areaNav()+'<span class="bb-r"><span>'+esc(C.ep)+'</span>'+langBtn()+soundBtn()+'</span></div>'+
    '<div class="of">WORLD OF</div><h1>DECISION</h1>'+
    '<div class="row">'+(EN?'<span class="ko">'+esc(C.sub||'')+'</span>':'<span class="ko">'+esc(C.title)+'</span>')+'<span class="stamp-r">'+esc(C.ep)+'</span></div>'+
    '<p class="hook">'+esc(C.hook)+'</p>'+
