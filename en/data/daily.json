@@ -1,6 +1,208 @@
 {
  "issues": [
   {
+   "date": "2026-10-23",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Trump on Iran: \"We may do it a little bit further\"",
+     "fact": "Speaking to reporters at the White House on October 22 before leaving for a rally in Iowa, President Trump said, \"We've knocked the hell out of them, and we may do it a little bit further.\" He added, \"We can't let Iran have a nuclear weapon.\"",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.anews.com.tr/world/2026/10/22/trump-says-us-may-do-it-a-little-bit-further-in-iran",
+      "https://www.breitbart.com/politics/2026/10/22/trump-signals-more-iran-strikes-we-may-do-it-a-little-bit-further/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "Washington (U.S.)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Trump claims Iran is \"making up fake hits, mines\" to push up oil prices",
+     "fact": "In a Truth Social post on October 22, Trump claimed Iran \"is doing everything they can to drive up the price of Oil prior to the U.S. Midterm Election\" and is \"making up fake hits, mines, and everything else.\" Iran's Islamic Revolutionary Guard Corps (IRGC) claimed the same day that four tankers had been hit and three had struck mines; the claims could not be independently verified.",
+     "fc": [],
+     "src": [
+      "https://www.iranintl.com/en/202610223072",
+      "https://gcaptain.com/iran-claims-more-ships-struck-near-hormuz-as-trump-accuses-tehran-of-faking-hits/",
+      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IRGC warns conflict \"will extend\" to U.S. bases in the region if U.S. keeps helping tankers through Hormuz",
+     "fact": "In a statement on its Sepah News site on October 22, the IRGC warned, referring to U.S. help for tankers transiting the strait, that \"if this trend continues, the conflict will extend to its bases in the region.\" A U.S. Central Command spokesperson, speaking to Al Jazeera on condition of anonymity, called the mine claims incorrect and said 95 percent of vessels are getting through.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/22/iran-says-seven-ships-hit-in-hormuz-strait-warns-us-of-wider-response",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "Strait of Hormuz",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Brent settles at $113, its highest close since early May",
+     "fact": "Brent crude rose 4.0 percent on October 22 to settle at $113.17 a barrel, while U.S. West Texas Intermediate crude gained 2.4 percent to $99.47. It was Brent's highest settlement since May 4.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.nationthailand.com/news/world/40072637",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Saudi airport attack death toll rises to two; coalition intercepts missile aimed at Najran",
+     "fact": "Saudi Arabia's civil aviation authority said on October 22 that the death toll from the attack on King Fahd International Airport in Dammam had risen to two. The Saudi-led coalition said the same day it had intercepted a Houthi ballistic missile aimed at Najran, and AFP, citing sources, reported that Aramco told essential staff at its Dhahran headquarters to evacuate.",
+     "fc": [],
+     "src": [
+      "https://gulfnews.com/world/mena/middle-east-war-saudi-airport-attack-kills-one-as-us-orders-embassy-departures-1.500719174",
+      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ],
+     "loc": {
+      "lat": 26.47,
+      "lon": 49.8,
+      "place": "Dammam (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "Reuters: U.S. and South Korean officials see little chance of a Trump-Kim meeting this year",
+     "fact": "Citing five people familiar with the matter, Reuters reported that U.S. and South Korean officials see little chance of a meeting this year between Trump and North Korean leader Kim Jong Un. The sources said Washington has received no response from Pyongyang on holding one.",
+     "fc": [
+      {
+       "id": "f05",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://en.apa.az/america/us-south-korean-officials-see-little-chance-of-trump-kim-meeting-this-year-531749",
+      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/23/exclusive-us-south-korean-officials-see-little-chance-of-trump-kim-meeting-this-year"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says Russia launched a \"demonstrative strike\" right after talks, sees no real change in its attitude",
+     "fact": "Zelensky said on social media on October 22 that Russia fired 21 ballistic missiles at Kyiv in three waves from the evening of October 21 into the early hours of October 22 (local time), and also used three ballistic missiles fitted with cluster warheads. He said 12 regions came under attack and 34 people were wounded, five of them children.",
+     "fc": [],
+     "src": [
+      "https://news.liga.net/en/politics/news/zelenskyy-and-sybiha-comment-on-russias-humanism-after-new-attack",
+      "https://www.kyivpost.com/post/87830",
+      "https://www.cbsnews.com/news/zelenskyy-russia-cluster-warheads-deadly-strikes-hours-after-us-prisoner-release/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Kremlin says Abu Dhabi is the venue under discussion for three-way talks",
+     "fact": "Kremlin spokesman Dmitry Peskov said on October 22 that \"at this point, we are talking about Abu Dhabi\" as the venue for talks among Russia, the U.S. and Ukraine. Asked whether Russia's negotiators were preparing documents or proposals, he declined to say, telling reporters not to get ahead of themselves.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://tass.com/politics/2206267"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "CENTCOM said on October 22 that 100 days had passed since it reinstated its naval blockade of Iran, with no seaborne exports or imports other than humanitarian aid cleared by U.S. forces, and that it had blocked more than $25 billion in Iranian crude exports.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ]
+    },
+    {
+     "t": "Yemen's Defense Ministry said on October 22 that it would treat Houthi rallies and mobilization events as legitimate military targets and warned residents of Houthi-held areas not to take part.",
+     "src": [
+      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ]
+    },
+    {
+     "t": "Asked on October 22 about Philippine plans to work with Taiwan on undersea cables and gray-zone challenges, Chinese Foreign Ministry spokesperson Mao Ning said, \"There is no gray zone on the Taiwan question,\" and urged Manila to abide by the one-China principle.",
+     "src": [
+      "https://www.fmprc.gov.cn/mfa_eng/xw/fyrbt/202610/t20261022_12045376.html"
+     ]
+    },
+    {
+     "t": "French President Emmanuel Macron described last weekend's riots as seditious acts by the \"ultra-left,\" and authorities banned protests on October 22 around the Élysée Palace, parliament and major stations in Paris and in Lyon, Lille and Grenoble. Justice Minister Gérald Darmanin said more than 2,700 people had been detained.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/22/macron-blames-seditious-ultra-left-for-unrest-as-france-bans-protests"
+     ]
+    },
+    {
+     "t": "A government representative in Chad's Wadi Fira province told AFP that a drone of unknown origin struck Bamina, a town on the Sudanese border, this week, killing four people and wounding 14.",
+     "src": [
+      "https://www.arabnews.com/middle-east/drone-strike-kills-four-in-chad-town-near-sudan-3007793"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-22",
    "items": [
     {
@@ -10,8 +212,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -37,8 +238,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -206,8 +406,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 20
+       "e": "up"
       }
      ],
      "src": [
@@ -254,8 +453,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -299,13 +497,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 20
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -428,8 +624,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -667,8 +862,7 @@
      "fc": [
       {
        "id": "f23",
-       "e": "up",
-       "p": 80
+       "e": "up"
       }
      ],
      "src": [
@@ -789,13 +983,11 @@
      "fc": [
       {
        "id": "f59",
-       "e": "up",
-       "p": 20
+       "e": "up"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -817,8 +1009,7 @@
      "fc": [
       {
        "id": "f10",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -1140,8 +1331,7 @@
      "fc": [
       {
        "id": "f55",
-       "e": "down",
-       "p": 50
+       "e": "down"
       }
      ],
      "src": [
@@ -1533,13 +1723,11 @@
      "fc": [
       {
        "id": "f05",
-       "e": "up",
-       "p": 25
+       "e": "up"
       },
       {
        "id": "f22",
-       "e": "up",
-       "p": 35
+       "e": "up"
       }
      ],
      "src": [
@@ -1575,8 +1763,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 8
+       "e": "down"
       }
      ],
      "src": [
@@ -1651,8 +1838,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -1771,13 +1957,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 25
+       "e": "down"
       },
       {
        "id": "f38",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -2054,8 +2238,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -2119,8 +2302,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2147,8 +2329,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "down",
-       "p": 50
+       "e": "down"
       }
      ],
      "src": [
@@ -2254,8 +2435,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2282,8 +2462,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -2325,8 +2504,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -2385,8 +2563,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2413,8 +2590,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -2436,8 +2612,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2461,8 +2636,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2505,8 +2679,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -2556,8 +2729,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -2580,8 +2752,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2607,8 +2778,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2634,8 +2804,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -2702,13 +2871,11 @@
      "fc": [
       {
        "id": "f42",
-       "e": "none",
-       "p": 13
+       "e": "none"
       },
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -2734,8 +2901,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -2758,8 +2924,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2785,13 +2950,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -2859,8 +3022,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -2883,8 +3045,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -2907,8 +3068,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -2931,8 +3091,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -2973,13 +3132,11 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       },
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -3002,8 +3159,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 85
+       "e": "none"
       }
      ],
      "src": [
@@ -3025,8 +3181,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -3050,13 +3205,11 @@
      "fc": [
       {
        "id": "f36",
-       "e": "none",
-       "p": 92
+       "e": "none"
       },
       {
        "id": "f24",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -3077,8 +3230,7 @@
      "fc": [
       {
        "id": "f10",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -3130,8 +3282,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -3154,8 +3305,7 @@
      "fc": [
       {
        "id": "f17",
-       "e": "none",
-       "p": 80
+       "e": "none"
       }
      ],
      "src": [
@@ -3177,13 +3327,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none",
-       "p": 30
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -3205,8 +3353,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 45
+       "e": "none"
       }
      ],
      "src": [
@@ -3228,13 +3375,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 10
+       "e": "none"
       }
      ],
      "src": [
@@ -3289,8 +3434,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -3312,13 +3456,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 10
+       "e": "none"
       }
      ],
      "src": [
@@ -3343,13 +3485,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none",
-       "p": 30
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -3371,8 +3511,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -3427,8 +3566,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -3450,13 +3588,11 @@
      "fc": [
       {
        "id": "f05",
-       "e": "none",
-       "p": 25
+       "e": "none"
       },
       {
        "id": "f22",
-       "e": "none",
-       "p": 35
+       "e": "none"
       }
      ],
      "src": [
@@ -3477,13 +3613,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f43",
-       "e": "down",
-       "p": 15
+       "e": "down"
       }
      ],
      "src": [
@@ -3505,13 +3639,11 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       },
       {
        "id": "f28",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -3535,13 +3667,11 @@
      "fc": [
       {
        "id": "f24",
-       "e": "up",
-       "p": 25
+       "e": "up"
       },
       {
        "id": "f44",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -3568,8 +3698,7 @@
      "fc": [
       {
        "id": "f39",
-       "e": "up",
-       "p": 70
+       "e": "up"
       }
      ],
      "src": [

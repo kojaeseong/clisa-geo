@@ -1,6 +1,208 @@
 {
  "issues": [
   {
+   "date": "2026-10-23",
+   "items": [
+    {
+     "case": "iran",
+     "h": "트럼프 \"이란에 조금 더 할 수도 있다\"",
+     "fact": "트럼프 대통령은 22일(현지 시각) 아이오와 유세에 나서기 전 백악관에서 기자들에게 미국이 이란을 크게 타격했다며 \"조금 더 할 수도 있다\"고 말했습니다. 이란이 핵무기를 갖게 둘 수는 없다고도 했습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.anews.com.tr/world/2026/10/22/trump-says-us-may-do-it-a-little-bit-further-in-iran",
+      "https://www.breitbart.com/politics/2026/10/22/trump-signals-more-iran-strikes-we-may-do-it-a-little-bit-further/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "워싱턴(미국)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "트럼프 \"이란, 유가 올리려 가짜 피격·기뢰 꾸며내\" 주장",
+     "fact": "트럼프 대통령은 22일 트루스소셜에서 이란이 중간선거 전에 유가를 끌어올리려 '가짜 피격과 기뢰'를 꾸며내고 있다고 주장했습니다. 이란 혁명수비대는 같은 날 유조선 4척이 피격되고 3척이 기뢰에 걸렸다고 주장했으나, 독립적으로 확인되지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://www.iranintl.com/en/202610223072",
+      "https://gcaptain.com/iran-claims-more-ships-struck-near-hormuz-as-trump-accuses-tehran-of-faking-hits/",
+      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "혁명수비대, 미국 유조선 통항 지원에 \"분쟁이 역내 미군 기지로 확대\" 경고",
+     "fact": "이란 혁명수비대는 22일 세파뉴스에 낸 성명에서 미국이 유조선의 해협 통항을 돕는 것을 두고 \"이 추세가 계속되면 분쟁이 역내 미군 기지로 확대될 것\"이라고 경고했습니다. 미 중부사령부 대변인은 익명으로 기뢰 주장이 틀렸으며 선박의 95%가 해협을 통과한다고 알자지라에 말했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/22/iran-says-seven-ships-hit-in-hormuz-strait-warns-us-of-wider-response",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "브렌트유, 배럴당 113달러 마감…5월 초 이후 최고",
+     "fact": "브렌트유는 22일 4.0% 오른 배럴당 113.17달러, 미국 서부텍사스산 원유(WTI)는 2.4% 오른 99.47달러에 거래를 마쳤습니다. 브렌트유 종가로는 5월 4일 이후 가장 높습니다.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.nationthailand.com/news/world/40072637",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "사우디 담맘 공항 공격 사망자 2명으로…연합군, 나지란 겨냥 미사일 요격",
+     "fact": "사우디 민간항공청은 22일 담맘 킹파흐드 국제공항 공격의 사망자가 2명으로 늘었다고 밝혔습니다. 사우디 주도 연합군은 같은 날 나지란을 겨냥한 후티의 탄도미사일을 요격했다고 밝혔고, 아람코가 다란 본사의 필수 인력에 대피를 지시했다고 AFP가 소식통을 인용해 보도했습니다.",
+     "fc": [],
+     "src": [
+      "https://gulfnews.com/world/mena/middle-east-war-saudi-airport-attack-kills-one-as-us-orders-embassy-departures-1.500719174",
+      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ],
+     "loc": {
+      "lat": 26.47,
+      "lon": 49.8,
+      "place": "담맘(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "로이터 \"한미 당국자들, 연내 트럼프-김정은 회담 가능성 낮게 봐\"",
+     "fact": "로이터는 사정을 아는 5명을 인용해 한미 당국자들이 연내 트럼프 대통령과 김정은 국무위원장의 회담 가능성을 낮게 본다고 보도했습니다. 이들은 미국이 회담에 관해 북한으로부터 답을 받지 못했다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f05",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://en.apa.az/america/us-south-korean-officials-see-little-chance-of-trump-kim-meeting-this-year-531749",
+      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/23/exclusive-us-south-korean-officials-see-little-chance-of-trump-kim-meeting-this-year"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키 \"회담 직후 과시적 공격…러시아 태도에 실질적 변화 없어\"",
+     "fact": "젤렌스키 대통령은 22일 소셜미디어에서 러시아가 21일 저녁부터 22일 새벽(현지 시각)까지 키이우에 탄도미사일 21발을 세 차례에 나눠 쐈고, 집속탄두를 단 탄도미사일 3발도 썼다고 밝혔습니다. 12개 주가 공격받아 어린이 5명을 포함해 34명이 다쳤다고 했습니다.",
+     "fc": [],
+     "src": [
+      "https://news.liga.net/en/politics/news/zelenskyy-and-sybiha-comment-on-russias-humanism-after-new-attack",
+      "https://www.kyivpost.com/post/87830",
+      "https://www.cbsnews.com/news/zelenskyy-russia-cluster-warheads-deadly-strikes-hours-after-us-prisoner-release/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "크렘린 \"3자 회담 장소, 현재로선 아부다비\"",
+     "fact": "페스코프 크렘린 대변인은 22일 미·러·우 3자 회담 장소로 \"현재로선 아부다비를 말하고 있다\"고 밝혔습니다. 러시아 협상단이 문서나 제안을 준비하고 있느냐는 질문에는 앞서 나가지 말라며 답하지 않았습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://tass.com/politics/2206267"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "미 중부사령부는 22일 대이란 해상봉쇄를 재개한 지 100일이 됐다며 미군이 허용한 인도 물자 말고는 해상으로 이란에 드나든 수출입이 없었고, 원유 수출 250억 달러어치 이상을 막았다고 밝혔습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ]
+    },
+    {
+     "t": "예멘 국방부는 22일 후티의 집회와 동원 행사를 정당한 군사 표적으로 보겠다며 후티 장악 지역 주민에게 참여하지 말라고 경고했습니다.",
+     "src": [
+      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ]
+    },
+    {
+     "t": "마오닝 중국 외교부 대변인은 22일 필리핀이 대만과 해저케이블·회색지대 문제에서 협력하려 한다는 질문에 \"대만 문제에는 회색지대가 없다\"며 필리핀에 하나의 중국 원칙을 지키라고 요구했습니다.",
+     "src": [
+      "https://www.fmprc.gov.cn/mfa_eng/xw/fyrbt/202610/t20261022_12045376.html"
+     ]
+    },
+    {
+     "t": "마크롱 프랑스 대통령은 지난 주말 폭동을 '극좌'의 선동 행위로 규정했고, 프랑스 당국은 22일 파리 엘리제궁·의회·주요 역 주변과 리옹·릴·그르노블의 시위를 금지했습니다. 다르마냉 법무장관은 2,700명 이상이 구금됐다고 밝혔습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/22/macron-blames-seditious-ultra-left-for-unrest-as-france-bans-protests"
+     ]
+    },
+    {
+     "t": "차드 와디피라주의 정부 대표는 이번 주 수단 국경 마을 바미나에 출처를 알 수 없는 드론 공격이 있어 4명이 숨지고 14명이 다쳤다고 AFP에 밝혔습니다.",
+     "src": [
+      "https://www.arabnews.com/middle-east/drone-strike-kills-four-in-chad-town-near-sudan-3007793"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-22",
    "items": [
     {
