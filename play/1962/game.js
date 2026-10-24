@@ -231,7 +231,8 @@ function mapBox(m){
     else if(side==='u'){ ly=p[1]-14; anc=' text-anchor="middle"'; } else if(side==='d'){ ly=p[1]+36; anc=' text-anchor="middle"'; }
     else if(side==='ul'){ lx-=10; ly=p[1]-12; anc=' text-anchor="end"'; } else if(side==='ur'){ lx+=10; ly=p[1]-12; }
     else if(side==='dl'){ lx-=10; ly=p[1]+34; anc=' text-anchor="end"'; } else if(side==='dr'){ lx+=10; ly=p[1]+34; }
-    out+='<circle class="mk" cx="'+p[0]+'" cy="'+p[1]+'" r="'+(M.r?Math.max(M.r,9):9)+'"/><text class="ml" x="'+lx+'" y="'+ly+'"'+anc+'>'+esc(p[2])+'</text>'; });
+    else if(side==='L'&&p[4]){ lx=p[0]+p[4][0]; ly=p[1]+p[4][1]; anc=p[4][0]<0?' text-anchor="end"':''; out+='<path class="mld" d="M'+p[0]+','+p[1]+' L'+(lx+(p[4][0]<0?4:-4))+','+(ly-5)+'"/>'; }   // 빽빽한 곳: 표지를 밖으로 빼고 선으로 잇는다
+    out+='<circle class="mk" cx="'+p[0]+'" cy="'+p[1]+'" r="'+(M.r||9)+'"/><text class="ml" x="'+lx+'" y="'+ly+'"'+anc+'>'+esc(p[2])+'</text>'; });
   return '<figure class="map"><svg viewBox="'+M.vb+'" role="img" aria-label="'+esc(clean(m.caption)||T('지도','Map'))+'"><defs><marker id="ah-'+m.key+'" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>'+M.base+out+'</svg>'+
    (M.legend&&M.legend.length?'<div class="maplegend">'+M.legend.map(function(l){return '<span><i class="lg" style="border-color:'+esc(l.color)+(l.thin?';border-width:1px':'')+'"></i>'+esc(EN&&l.en?l.en:l.label)+'</span>';}).join('')+'</div>':'')+
    (m.caption?'<figcaption>'+tx(m.caption)+'</figcaption>':'')+(M.credit?'<figcaption class="cr">'+esc(M.credit)+'</figcaption>':'')+'</figure>';
