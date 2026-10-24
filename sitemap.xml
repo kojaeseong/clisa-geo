@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clisa.ai/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/</loc><lastmod>2026-10-24</lastmod></url>
+  <url><loc>https://clisa.ai/brief/2026-10-24/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://clisa.ai/brief/2026-10-23/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/brief/2026-10-22/</loc><lastmod>2026-10-22</lastmod></url>
   <url><loc>https://clisa.ai/brief/2026-10-21/</loc><lastmod>2026-10-21</lastmod></url>
@@ -24,7 +25,7 @@
   <url><loc>https://clisa.ai/brief/2026-10-01/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://clisa.ai/brief/2026-09-30/</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://clisa.ai/brief/2026-09-29/</loc><lastmod>2026-09-29</lastmod></url>
-  <url><loc>https://clisa.ai/brief/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/brief/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://clisa.ai/case/korea/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/case/taiwan/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/case/ukraine/</loc><lastmod>2026-10-18</lastmod></url>
@@ -146,12 +147,13 @@
   <url><loc>https://clisa.ai/forecast/f75/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f76/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://clisa.ai/industry/</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://clisa.ai/life/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/life/</loc><lastmod>2026-10-24</lastmod></url>
   <url><loc>https://clisa.ai/feature/2026-10-18-attrition/</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://clisa.ai/feature/2026-10-09-hangul/</loc><lastmod>2026-10-09</lastmod></url>
   <url><loc>https://clisa.ai/feature/2026-10-03-population/</loc><lastmod>2026-10-03</lastmod></url>
   <url><loc>https://clisa.ai/feature/2026-10-01-korea/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://clisa.ai/feature/</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://clisa.ai/guide/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/power/CHN/xi-jinping/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://clisa.ai/power/USA/donald-trump/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://clisa.ai/power/PRK/kim-jong-un/</loc><lastmod>2026-10-02</lastmod></url>
@@ -174,7 +176,6 @@
   <url><loc>https://clisa.ai/power/KOR/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://clisa.ai/power/UKR/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://clisa.ai/power/</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://clisa.ai/guide/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/about/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://clisa.ai/subscribe/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://clisa.ai/academy/</loc><lastmod>2026-10-16</lastmod></url>
@@ -194,6 +195,5 @@
   <url><loc>https://clisa.ai/academy/ir101/12/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://clisa.ai/academy/ir101/13/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://clisa.ai/play/</loc><lastmod>2026-10-23</lastmod></url>
-  <url><loc>https://clisa.ai/play/1914/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/play/1962/</loc><lastmod>2026-10-23</lastmod></url>
 </urlset>

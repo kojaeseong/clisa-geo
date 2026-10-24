@@ -1,6 +1,255 @@
 {
  "issues": [
   {
+   "date": "2026-10-24",
+   "items": [
+    {
+     "case": "poland",
+     "h": "화물선, 루마니아 영해 바로 밖서 드론 맞고 침몰…루마니아 대통령, 러시아 지목",
+     "fact": "코모로 선적 화물선 호리우호가 23일 루마니아 콘스탄차항에서 약 13해리, 루마니아 영해 바로 바깥에서 드론 공격을 받아 침몰해 우크라이나인 선원 1명이 숨지고 3명이 실종됐습니다. 니쿠쇼르 단 루마니아 대통령은 러시아가 우크라이나 전쟁에서 벌이는 확전의 일부라고 말했고, 러시아는 보도 시점까지 공개 반응을 내지 않았습니다.",
+     "fc": [
+      {
+       "id": "f62",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.kyivpost.com/post/88003",
+      "https://www.marineinsight.com/romania-blames-russia-as-drone-sinks-ship-off-constanta/",
+      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
+     ],
+     "loc": {
+      "lat": 44.17,
+      "lon": 28.64,
+      "place": "콘스탄차 앞바다(루마니아)",
+      "isos": [
+       "ROU",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "트럼프, 이란에 \"또 한 번 작은 '에픽 퓨리'를 할 수도\"",
+     "fact": "트럼프 대통령은 23일(현지 시각) 플로리다주 포트마이어스 유세에서 이란 전쟁을 언급하며 \"또 한 번 작은 '에픽 퓨리'를 할 수도 있고, 아니면 그들이 합의할 것\"이라고 말했습니다. '에픽 퓨리'는 미군의 대이란 작전 이름입니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/liveblog_entry/trump-says-us-may-do-another-little-epic-fury-against-iran/",
+      "https://www.breitbart.com/politics/2026/10/23/trump-threatens-iran-strike-another-little-epic-fury/"
+     ],
+     "loc": {
+      "lat": 26.46,
+      "lon": -81.77,
+      "place": "포트마이어스(미국)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "바락 미국대사, 주말 이란 공습 가능성에 \"물론\"…트럼프는 아는 바 없다고 밝혀",
+     "fact": "톰 바락 주튀르키예 미국대사는 23일 공개된 인터뷰에서 이번 주말 공습이 있을 수 있느냐는 질문에 \"물론\"이라고 답했습니다. 트럼프 대통령은 같은 날 이 발언에 대해 아는 바가 없다고 말했습니다. 트럼프 대통령은 앞서 공습이 11월 3일 중간선거 전에는 없을 것이라고 말한 바 있습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/",
+      "https://www.twz.com/news-features/on-the-brink-of-epic-fury-round-two",
+      "https://www.timesofisrael.com/us-envoy-we-could-strike-iran-this-weekend-trump-i-dont-know-anything-about-that"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키, 미·러·우 3자 회담 11월 전반 아부다비서 실무급부터 열릴 계획 밝혀",
+     "fact": "젤렌스키 대통령은 23일 미국 허드슨연구소 화상 연설에서 미·러·우 협상팀이 11월 전반에 아부다비에서 만날 계획이라고 밝혔습니다. 실무급 회담이 성과를 내면 정상회담으로 넘어가야 한다고 했고, 10월 회담은 러시아가 다른 이유를 대 열리지 않았다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/trilateral-peace-talks-with-russia-us-negotiators-to-begin-in-november-zelensky-says/"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "우크라이나·러시아, 멜라니아 트럼프 중재로 올레시키 국지 휴전 합의",
+     "fact": "백악관과 루비네츠 우크라이나 인권옴부즈맨은 23일 러시아가 점령한 헤르손주 올레시키 일대에서 민간인 대피와 구호품 전달을 위한 국지 휴전이 멜라니아 트럼프 미국 대통령 부인의 중재로 합의됐다고 밝혔습니다. 러시아 총참모부는 27일 오전 4시(현지 시각)부터 휴전한다고 밝혔고, 백악관은 시작일을 29일로 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
+     ],
+     "loc": {
+      "lat": 46.62,
+      "lon": 32.72,
+      "place": "올레시키(우크라이나 헤르손주)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "미 국무부, 후티 공격 우려에 요르단·레바논·카타르·UAE 대사관 인원 감축",
+     "fact": "CBS에 따르면 미 국무부는 23일(현지 시각) 후티의 로켓·미사일·드론 공격 우려를 이유로 요르단·레바논·카타르·아랍에미리트 주재 대사관의 인원을 줄이되 대사관은 계속 연다고 밝혔습니다. 사우디아라비아 주재 비긴급 직원에게는 이번 주 초 출국 명령을 냈습니다.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "JOR",
+       "LBN",
+       "QAT",
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "브렌트유, 배럴당 116.72달러 마감…4월 29일 이후 최고",
+     "fact": "로이터에 따르면 브렌트유 선물은 23일 3.14% 오른 배럴당 116.72달러, 미국 서부텍사스산 원유(WTI)는 3.8% 오른 103.27달러에 마감했습니다. 로이터는 후티의 사우디아라비아 공격이 공급 차질 우려를 키웠다고 전했습니다.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://live.euronext.com/en/financial-news/oil-prices-jump-3-houthi-attacks-oil-spill-highest-settlement-april"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "왈츠 미 유엔대사, 이란 전쟁 1년 더 갈 가능성에 \"그 전에 협상 테이블 나오길\"",
+     "fact": "마이크 왈츠 유엔 주재 미국대사는 파이낸셜타임스 인터뷰에서 이란 전쟁이 1년 더 이어질 가능성에 대해 가정은 하지 않겠다면서 \"그 전에 이란이 의미 있는 방식으로 협상 테이블에 나오기를 바란다\"고 말했습니다. 미 해군이 대이란 해상봉쇄를 당분간 유지할 수 있다고도 했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f70",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "우크라이나·러시아, 포로 270명씩 교환…두 달 만",
+     "fact": "젤렌스키 대통령은 23일 우크라이나 포로 270명이 돌아오고 러시아 포로 270명이 러시아로 송환됐다고 밝혔습니다. 8월 이후 두 달 만의 교환이며, 돌아온 포로 대부분은 2022년 마리우폴 포위전 때 붙잡힌 군인입니다.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/270-ukrainian-pows-return-home-in-latest-swap-with-russia/",
+      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "국방부, 북한에 군사분계선 확인·통신선 복원 협의할 군사회담 제의",
+     "fact": "김홍철 국방부 국방정책실장은 23일 오후 담화에서 지상 군사분계선의 위치를 상호 확인하고 군 통신선 복원과 접경지역 우발 충돌 방지 방안을 협의할 남북 군사당국회담을 북측에 공식 제안했습니다. 유엔군사령부가 참여하는 3자 회담도 가능하다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.hankyung.com/article/2026102317681",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739",
+      "https://www.nknews.org/2026/10/seoul-again-proposes-talks-with-north-korea-on-border-lines-amid-rising-tensions/"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "CBS는 23일 클레이턴 미 국가정보장이 루비오 국무장관에게 보낸 메모에서 이란의 미국인 겨냥 살해 음모가 \"진전된 단계\"에 이르렀다고 경고했다고 보도했습니다.",
+     "src": [
+      "https://www.cbsnews.com/news/iran-target-u-s-personnel/"
+     ]
+    },
+    {
+     "t": "아락치 이란 외무장관은 23일 다음 주 두 나라 대통령이 참석하는 이란·러시아 회담이 열린다고 밝혔고, 이란 타스님 통신은 페제시키안 대통령이 27일 모스크바 가스수출국 정상회의에 참석한다고 보도했습니다.",
+     "src": [
+      "https://www.arabnews.com/middle-east/iranian-president-to-meet-putin-in-moscow-iran-media-3008004",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ]
+    },
+    {
+     "t": "영국·프랑스·독일·이탈리아와 튀르키예·사우디아라비아·파키스탄·이집트의 외무장관들은 23일 이스탄불에서 만나 호르무즈 해협과 예멘, 러-우 전쟁을 논의했습니다(AFP 보도).",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ]
+    },
+    {
+     "t": "군 당국은 23일 국회에 북한이 2024년 이후 비무장지대에 지뢰 약 96만 발을 묻은 것으로 추정한다고 보고했습니다.",
+     "src": [
+      "https://www.hankyung.com/article/2026102317681",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739"
+     ]
+    },
+    {
+     "t": "산두 몰도바 대통령은 23일 러시아의 게란 드론이 몰도바 중부의 민가 근처에 떨어진 뒤 러시아 대사관 직원 1명을 기피 인물로 지정했다고 밝혔습니다.",
+     "src": [
+      "https://kyivindependent.com/moldova-expels-russian-diplomat-after-russian-geran-drone-falls-near-family-homes/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-23",
    "items": [
     {

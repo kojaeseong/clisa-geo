@@ -1,6 +1,255 @@
 {
  "issues": [
   {
+   "date": "2026-10-24",
+   "items": [
+    {
+     "case": "poland",
+     "h": "Cargo ship sinks after drone strike just outside Romanian waters; Romania's president blames Russia",
+     "fact": "The Comoros-flagged cargo ship Khoryv sank on October 23 after a drone strike about 13 nautical miles off the Romanian port of Constanta, just beyond Romania's territorial waters. One Ukrainian sailor was killed and three crew members are missing. Romanian President Nicusor Dan called the attack part of Russia's escalation of its war in Ukraine; Russia had not publicly responded.",
+     "fc": [
+      {
+       "id": "f62",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.kyivpost.com/post/88003",
+      "https://www.marineinsight.com/romania-blames-russia-as-drone-sinks-ship-off-constanta/",
+      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
+     ],
+     "loc": {
+      "lat": 44.17,
+      "lon": 28.64,
+      "place": "Off Constanta (Romania)",
+      "isos": [
+       "ROU",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Trump on Iran: \"We may do another little Epic Fury\"",
+     "fact": "At a rally in Fort Myers, Florida, on October 23, President Trump said of the Iran war, \"We may do another little Epic Fury, or they'll agree.\" Operation Epic Fury is the U.S. military's name for its campaign against Iran.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/liveblog_entry/trump-says-us-may-do-another-little-epic-fury-against-iran/",
+      "https://www.breitbart.com/politics/2026/10/23/trump-threatens-iran-strike-another-little-epic-fury/"
+     ],
+     "loc": {
+      "lat": 26.46,
+      "lon": -81.77,
+      "place": "Fort Myers (U.S.)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Asked about a weekend strike on Iran, U.S. ambassador Barrack says \"absolutely\"; Trump says he knows nothing about it",
+     "fact": "Asked in an interview released October 23 whether a strike could come this weekend, Tom Barrack, the U.S. ambassador to Turkey, answered, \"Absolutely.\" Trump said the same day that he didn't know anything about it. He had said earlier that a strike would not come before the November 3 midterm elections.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/",
+      "https://www.twz.com/news-features/on-the-brink-of-epic-fury-round-two",
+      "https://www.timesofisrael.com/us-envoy-we-could-strike-iran-this-weekend-trump-i-dont-know-anything-about-that"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says technical-level U.S.-Russia-Ukraine talks are planned in Abu Dhabi for the first half of November",
+     "fact": "In a video address to the Hudson Institute on October 23, President Zelensky said negotiating teams from the U.S., Russia and Ukraine plan to meet in Abu Dhabi in the first half of November. If the technical-level talks are productive, he said, they should move to a meeting of leaders; an October meeting fell through because Russia cited other reasons.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/trilateral-peace-talks-with-russia-us-negotiators-to-begin-in-november-zelensky-says/"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Ukraine and Russia agree to a local ceasefire around Oleshky, mediated by Melania Trump",
+     "fact": "The White House and Ukraine's human rights ombudsman, Dmytro Lubinets, said on October 23 that first lady Melania Trump had mediated a local ceasefire around Russian-occupied Oleshky in Kherson Oblast. The truce is meant to allow civilian evacuations and aid deliveries. Russia's General Staff said it would begin at 4 a.m. local time on October 27; the White House gave the start date as October 29.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
+     ],
+     "loc": {
+      "lat": 46.62,
+      "lon": 32.72,
+      "place": "Oleshky (Kherson Oblast, Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "State Department cuts embassy staff in Jordan, Lebanon, Qatar and the UAE over Houthi threat",
+     "fact": "The State Department said on October 23 that it is reducing staff at its embassies in Jordan, Lebanon, Qatar and the United Arab Emirates, which will remain open, citing concerns about Houthi rocket, missile and drone attacks, CBS reported. Nonessential staff at the U.S. Embassy in Saudi Arabia were ordered to leave earlier in the week.",
+     "fc": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "JOR",
+       "LBN",
+       "QAT",
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Brent settles at $116.72, its highest close since April 29",
+     "fact": "Brent crude futures settled at $116.72 a barrel on October 23, up 3.14 percent, and U.S. West Texas Intermediate closed at $103.27, up 3.8 percent, according to Reuters. Reuters said Houthi attacks on Saudi Arabia stoked fears of supply disruptions.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://live.euronext.com/en/financial-news/oil-prices-jump-3-houthi-attacks-oil-spill-highest-settlement-april"
+     ]
+    },
+    {
+     "case": "iran",
+     "h": "Waltz on the prospect of another year of war in Iran: \"One would hope\" Tehran comes to the table first",
+     "fact": "Asked by the Financial Times whether the Iran war could last another year, Mike Waltz, the U.S. ambassador to the United Nations, declined to speculate but said, \"One would hope that they'll come to the table in a meaningful way before that.\" He added that the U.S. Navy can maintain the naval blockade of Iran for the foreseeable future.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f70",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Ukraine and Russia swap 270 prisoners each, the first exchange in two months",
+     "fact": "President Zelensky said on October 23 that 270 Ukrainian prisoners of war had come home and 270 Russian POWs had been returned to Russia. It was the first swap since August; most of the returning Ukrainians were captured during the 2022 siege of Mariupol.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/270-ukrainian-pows-return-home-in-latest-swap-with-russia/",
+      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "Seoul proposes military talks with North Korea to verify the MDL and restore hotlines",
+     "fact": "In a statement on the afternoon of October 23, Kim Hong-cheol, South Korea's deputy minister for national defense policy, formally proposed military talks with the North to jointly verify where the land Military Demarcation Line lies, restore military communication lines and discuss ways to prevent accidental clashes along the border. He said three-way talks including the UN Command were also possible.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.hankyung.com/article/2026102317681",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739",
+      "https://www.nknews.org/2026/10/seoul-again-proposes-talks-with-north-korea-on-border-lines-amid-rising-tensions/"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "PRK"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "CBS News reported on October 23 that Director of National Intelligence Jay Clayton warned Secretary of State Marco Rubio in a memo that lethal Iranian plots against Americans had \"reached advanced stages.\"",
+     "src": [
+      "https://www.cbsnews.com/news/iran-target-u-s-personnel/"
+     ]
+    },
+    {
+     "t": "Iranian Foreign Minister Abbas Araghchi said on October 23 that Iran-Russia talks attended by both presidents would take place next week, and Iran's Tasnim news agency reported that President Masoud Pezeshkian will attend a summit of gas-exporting countries in Moscow on October 27.",
+     "src": [
+      "https://www.arabnews.com/middle-east/iranian-president-to-meet-putin-in-moscow-iran-media-3008004",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ]
+    },
+    {
+     "t": "Foreign ministers from Britain, France, Germany, Italy, Turkey, Saudi Arabia, Pakistan and Egypt met in Istanbul on October 23 to discuss the Strait of Hormuz, Yemen and the Russia-Ukraine war, AFP reported.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ]
+    },
+    {
+     "t": "South Korea's military told lawmakers on October 23 that North Korea is estimated to have laid about 960,000 land mines in the Demilitarized Zone since 2024.",
+     "src": [
+      "https://www.hankyung.com/article/2026102317681",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739"
+     ]
+    },
+    {
+     "t": "Moldovan President Maia Sandu said on October 23 that Moldova had declared a Russian embassy staffer persona non grata after a Russian Geran drone came down near homes in central Moldova.",
+     "src": [
+      "https://kyivindependent.com/moldova-expels-russian-diplomat-after-russian-geran-drone-falls-near-family-homes/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-23",
    "items": [
     {
