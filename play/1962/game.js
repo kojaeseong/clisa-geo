@@ -296,7 +296,7 @@ function scenePage(n,pages,p){
   VIEW=function(){ var m=R.nodes[S.node], pg=scenePages(m); scenePage(m,pg,Math.min(p,pg.length-1)); };  /* the page count can differ by language */
   var kind=pages[p], body='';
   if(kind==='brief'){
-    body=(n.event?'<div class="event"><span class="lab">'+T('그사이','Meanwhile')+'</span>'+tx(n.event)+'</div>':'')+
+    body=(n.event?'<div class="event"><span class="lab">'+(R.fog?T('당신이 아는 것','What you know'):T('그사이','Meanwhile'))+'</span>'+tx(n.event)+'</div>':'')+
       (n.telegram?docHtml(n.telegram):'')+
       mapBox(n.map);
   } else if(kind==='room'){
@@ -332,7 +332,7 @@ function pairOf(a){return {P:0,R:0,H:1,D:1,S:2,A:2,F:3,L:3}[a];}
 /* no same-as-history label during play: the July Crisis is not a quiz, and the comparison waits for the ending */
 function histEntry(n,c){
   var rc=n.choices.filter(function(x){return x.real===true;})[0]||n.choices.filter(function(x){return x.real==='partial';})[0]||{};
-  return {id:n.id||S.node,date:n.date,title:clean(n.title),pick:c.key,text:clean(c.text),real:c.real,realKey:rc.key,realText:clean(rc.text),realNote:c.realNote?clean(c.realNote):'',note:n.note&&n.note.text?clean(n.note.text):''};
+  return {id:n.id||S.node,date:n.date,title:clean(n.title),pick:c.key,text:clean(c.text),real:c.real,realKey:rc.key,realText:clean(rc.text),realNote:c.realNote?clean(c.realNote):'',note:n.note&&n.note.text?clean(n.note.text):'',unknown:n.unknown?clean(n.unknown):''};
 }
 function markPick(i){ app.querySelectorAll('.choice').forEach(function(b){b.disabled=true; if(+b.dataset.i===i) b.classList.add('picked');}); }
 function choose(n,i){
@@ -403,6 +403,9 @@ function ending(nx,p0,quiet){
    {tab:T('결말','Ending'),h:'<div class="end-k"><span>'+T('결말 ','Ending ')+esc(k)+'</span><span>'+esc(C.ep)+'</span></div><h2 class="end-t">'+esc(E.title)+'</h2>'+
      '<div class="end-hypo">'+(E.hypo?T('당신이 만든 1962년 · 가상의 역사','Your 1962 · an alternate history'):T('실제로 일어난 역사','What really happened'))+'</div>'+
      '<div class="paper prose"><p>'+tx(E.text)+'</p>'+(ep?'<p>'+tx(ep)+'</p>':'')+'</div>'},
+   /* 2026-10-25 현장의 안개: 게임 중에는 감춘 바깥 사정을 결말에서 결정마다 드러낸다 */
+   (S.hist.some(function(x){return x.unknown;})?{tab:T('그때 몰랐던 것','What you did not know'),h:'<div class="sec"><h3>'+T('그때 당신이 몰랐던 것','What you did not know at the time')+'</h3><p class="lead">'+T('당신이 결정을 내리던 바로 그 시각, 당신이 볼 수 없던 곳에서 벌어지던 일입니다.','At the very hour of each decision, this is what was happening where you could not see.')+'</p>'+
+     S.hist.filter(function(x){return x.unknown;}).map(function(x){ return '<div class="kin"><b>'+esc(dayLabel(x.date))+' · '+esc(x.title)+'</b><br><span>'+T('당신의 결정: ','Your decision: ')+esc(x.text)+'</span><p>'+tx(x.unknown)+'</p></div>'; }).join('')+'</div>'}:null),
    {tab:T('전략가 유형','Strategist type'),h:'<div class="typecard"><div class="k">STRATEGIST TYPE</div><div class="n">'+esc(t.name||code)+'</div><div class="l">'+esc(t.line||'')+'</div>'+
      '<div class="ax">'+code.split('').map(function(a){return '<span>'+esc(C.axes[a])+'</span>';}).join('')+'</div>'+axisBars()+
      (t.traits?'<p class="tp">'+esc(t.traits)+'</p>':'')+
@@ -423,7 +426,7 @@ function ending(nx,p0,quiet){
      '<div class="sec"><h3>'+T('한반도와 동아시아','Korea and East Asia')+'</h3><ul class="plain">'+C.eastasia.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>'+
      '<div class="sec"><h3>'+T('함께 읽을 강의','Related lectures')+'</h3><ul class="plain">'+lec.map(function(q){return '<li><a href="'+SITE+'/academy/ir101/'+q+'/" target="_blank" rel="noopener">'+esc(C.lectureTitles[q])+'</a></li>';}).join('')+'</ul></div>'+
      '<div class="share"><button class="btn" id="again">'+T('다른 나라로 다시 하기','Play another power')+'</button></div>'+more()+rights()}
-  ];
+  ].filter(Boolean);
   function show(p){
     VIEW=function(){ ending(nx,p,true); };
     render(brand()+'<div class="tabs" role="tablist">'+pages.map(function(x,i){return '<button role="tab" class="tab'+(i===p?' on':'')+'" data-p="'+i+'" aria-selected="'+(i===p)+'">'+esc(x.tab)+'</button>';}).join('')+'</div>'+
