@@ -83,10 +83,15 @@ var BGM_CAMP={jfk:'west',hm:'west',nsk:'east',pl:'east',ar:'east',fc:'east',ut:'
 function bgmFor(id){ var c=BGM_CAMP[id]; return (c?[BASE+'audio/'+c+'.mp3']:[]).concat(BGM_COMMON); }
 var BGM=bgmFor(null), BGMVOL=.35, NOBGM=document.documentElement.getAttribute('data-bgm')==='off';
 SND.list=[]; SND.idx=0;
-function setPlaylist(id){ var L=bgmFor(id); if(L.join('|')===BGM.join('|')) return;
-  var was=false; try{ var cur=SND.list[SND.idx]; was=!!(cur&&!cur.paused); if(cur) cur.pause(); }catch(e){}
-  BGM=L; SND.list=[]; SND.idx=0; if(was&&SND.on) music(true); }
-function track(k){ if(!SND.list[k]){ var a=new Audio(BGM[k]); a.preload='none'; a.volume=BGMVOL; a.addEventListener('ended',function(){ if(SND.on&&SND.idx===k){ SND.idx=(k+1)%BGM.length; var b=track(SND.idx); b.currentTime=0; b.play().catch(function(){}); } }); SND.list[k]=a; } return SND.list[k]; }
+/* 2026-10-25: 역할을 골라도 흐르던 곡을 끊지 않는다. 지금 곡이 끝나면 새 진영의 목록을 첫 곡부터 튼다 */
+var PENDING=null;
+function setPlaylist(id){ var L=bgmFor(id); if(L.join('|')===(PENDING||BGM).join('|')) return;
+  var cur=SND.list[SND.idx], playing=false; try{ playing=!!(cur&&!cur.paused&&!cur.ended); }catch(e){}
+  if(playing){ PENDING=L; return; }
+  PENDING=null; BGM=L; SND.list=[]; SND.idx=0; }
+function track(k){ if(!SND.list[k]){ var a=new Audio(BGM[k]); a.preload='none'; a.volume=BGMVOL; a.addEventListener('ended',function(){ if(SND.list[k]!==a||!SND.on||SND.idx!==k) return;
+    if(PENDING){ BGM=PENDING; PENDING=null; SND.list=[]; SND.idx=0; } else SND.idx=(k+1)%BGM.length;
+    var b=track(SND.idx); b.currentTime=0; b.play().catch(function(){}); }); SND.list[k]=a; } return SND.list[k]; }
 /* v1962: as in 1914, the stored tracks play one after another in rotation; scenes never switch or restart the music */
 function music(play){
   if(NOBGM) return;
