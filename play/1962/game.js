@@ -93,12 +93,12 @@ function music(play){
   try{ var a=track(SND.idx); if(play&&SND.on) a.play().catch(function(){}); else a.pause(); }catch(e){}
 }
 function soundBtn(){ return '<button class="sbtn" id="snd" aria-pressed="'+(SND.on?'true':'false')+'">'+(SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'))+'</button>'; }
-function langBtn(){ return false?'<button class="sbtn lbtn" id="lsw" lang="'+(EN?'ko':'en')+'" aria-label="'+(EN?'한국어로 보기':'View in English')+'">'+(EN?'한국어':'English')+'</button>':''; }
+function langBtn(){ return LANGLINK?'<button class="sbtn lbtn" id="lsw" lang="'+(EN?'ko':'en')+'" aria-label="'+(EN?'한국어로 보기':'View in English')+'">'+(EN?'한국어':'English')+'</button>':''; }
 /* switch the language in place: same screen, same role and choices, same music; only the words, the data and the address change */
 function switchLang(l){
   if(l===LANG) return;
   setLang(l);
-  if(/^\/(en\/)?play\/1914\/$/.test(location.pathname)){ try{ var q=new URLSearchParams(location.search); q.delete('lang'); var qs=q.toString(); history.replaceState(null,'',(EN?'/en':'')+'/play/1914/'+(qs?'?'+qs:'')+location.hash); }catch(e){} }
+  if(/^\/(en\/)?play\/1962\/$/.test(location.pathname)){ try{ var q=new URLSearchParams(location.search); q.delete('lang'); var qs=q.toString(); history.replaceState(null,'',(EN?'/en':'')+'/play/1962/'+(qs?'?'+qs:'')+location.hash); }catch(e){} }
   var jobs=[get(BASE+'data/common.'+LANG+'.json'),opt(BASE+'data/maps'+(EN?'.en':'')+'.json'),opt(BASE+'data/types.'+LANG+'.json')];
   if(R) jobs.push(get(BASE+'data/'+R.id+'.'+LANG+'.json'));
   Promise.all(jobs).then(function(r){
@@ -436,8 +436,8 @@ function ending(nx,p0,quiet){
 function fit(x,s,font,px,w){ s=String(s||''); while(px>16){ x.font=font.replace('%',px); if(x.measureText(s).width<=w) break; px-=2; } x._t=s; }
 /* links back into clisa.ai open in a new tab so the game (and its music) keeps running; from the ending screen (text needs operator approval before going public) */
 function more(){
-  var L=EN?[['/en/brief/','Briefings','Recent events linked to our assessments and forecasts'],['/en/forecast/','Forecasts','Probability forecasts and how they turned out'],['/en/academy/ir101/','Intro to IR','The ideas behind the July Crisis, lecture by lecture'],['/en/subscribe/','Subscribe','New briefings and features in your feed reader']]
-    :[['/brief/','정세 브리핑','최근 사건을 클리사의 판단·전망과 연결해 정리'],['/forecast/','전망과 검증','사안별 확률 전망과 그 결과'],['/academy/ir101/','국제정치 입문','7월 위기를 움직인 생각을 강의로'],['/subscribe/','새 글 알림 받기','새 브리핑과 특집을 구독 앱으로']];
+  var L=EN?[['/en/brief/','Briefings','Recent events linked to our assessments and forecasts'],['/en/forecast/','Forecasts','Probability forecasts and how they turned out'],['/en/academy/ir101/','Intro to IR','The ideas behind the crisis, lecture by lecture'],['/en/subscribe/','Subscribe','New briefings and features in your feed reader']]
+    :[['/brief/','정세 브리핑','최근 사건을 클리사의 판단·전망과 연결해 정리'],['/forecast/','전망과 검증','사안별 확률 전망과 그 결과'],['/academy/ir101/','국제정치 입문','위기를 움직인 생각을 강의로'],['/subscribe/','새 글 알림 받기','새 브리핑과 특집을 구독 앱으로']];
   return '<div class="sec more"><h3>'+T('1962년의 질문은 현재도 이어집니다','The questions of 1962 are still open')+'</h3><div class="morelinks">'+L.map(function(a){return '<a href="'+SITE.replace(/\/en$/,'')+a[0]+'" target="_blank" rel="noopener"><b>'+esc(a[1])+'</b><span>'+esc(a[2])+'</span></a>';}).join('')+'</div></div>';
 }
 /* copyright and contact, shown on the title screen and at the end of the ending pages */
