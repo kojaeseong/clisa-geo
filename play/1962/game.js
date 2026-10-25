@@ -77,8 +77,15 @@ function sfx(kind){
   if(kind==='end'){ [98,147,196].forEach(function(fq,i){ var os3=ctx.createOscillator(), g8=ctx.createGain(); os3.type='triangle'; os3.frequency.value=fq; os3.connect(g8).connect(out); g8.gain.setValueAtTime(0.0001,t); g8.gain.exponentialRampToValueAtTime(.13,t+.4+i*.15); g8.gain.exponentialRampToValueAtTime(0.0001,t+3); os3.start(t); os3.stop(t+3.1); }); }
 }
 /* the operator's two score tracks play one after the other, alternating for as long as the game is open */
-var BGM=[BASE+'audio/countdown.mp3',BASE+'audio/sonar.mp3'], BGMVOL=.35, NOBGM=document.documentElement.getAttribute('data-bgm')==='off';
+/* 2026-10-25: 진영별 음악. 첫 곡만 진영마다 다르고(서방·소련 측·유엔) 잠수함·불안·카운트다운 세 곡은 공통. 역할을 고를 때 한 번 바뀌고, 장면 전환에는 바뀌지 않는다 */
+var BGM_COMMON=[BASE+'audio/submarine.mp3',BASE+'audio/uneasy.mp3',BASE+'audio/countdown.mp3'];
+var BGM_CAMP={jfk:'west',hm:'west',nsk:'east',pl:'east',ar:'east',fc:'east',ut:'un'};
+function bgmFor(id){ var c=BGM_CAMP[id]; return (c?[BASE+'audio/'+c+'.mp3']:[]).concat(BGM_COMMON); }
+var BGM=bgmFor(null), BGMVOL=.35, NOBGM=document.documentElement.getAttribute('data-bgm')==='off';
 SND.list=[]; SND.idx=0;
+function setPlaylist(id){ var L=bgmFor(id); if(L.join('|')===BGM.join('|')) return;
+  var was=false; try{ var cur=SND.list[SND.idx]; was=!!(cur&&!cur.paused); if(cur) cur.pause(); }catch(e){}
+  BGM=L; SND.list=[]; SND.idx=0; if(was&&SND.on) music(true); }
 function track(k){ if(!SND.list[k]){ var a=new Audio(BGM[k]); a.preload='none'; a.volume=BGMVOL; a.addEventListener('ended',function(){ if(SND.on&&SND.idx===k){ SND.idx=(k+1)%BGM.length; var b=track(SND.idx); b.currentTime=0; b.play().catch(function(){}); } }); SND.list[k]=a; } return SND.list[k]; }
 /* v1962: as in 1914, the stored tracks play one after another in rotation; scenes never switch or restart the music */
 function music(play){
@@ -150,7 +157,7 @@ function setTheme(id){
 
 /* ---------- screens ---------- */
 function title(){
-  VIEW=title; setTheme(null);
+  VIEW=title; setTheme(null); setPlaylist(null);
   render('<section class="title">'+
    '<div class="kicker">'+areaNav()+'<span class="bb-r"><span>'+esc(C.ep)+'</span>'+langBtn()+soundBtn()+'</span></div>'+
    '<div class="of">WORLD OF</div><h1>DECISION</h1>'+
@@ -161,7 +168,7 @@ function title(){
   document.getElementById('go').onclick=function(){ sfx('stamp'); music(true); roles(); };
 }
 function roles(){
-  VIEW=roles; setTheme(null);
+  VIEW=roles; setTheme(null); setPlaylist(null);
   Promise.all(ROLES.map(function(r){return opt(BASE+'data/'+r.id+'.'+LANG+'.json');})).then(function(list){
     var dm=doneMap(), nd=ROLES.filter(function(r){return dm[r.id]!==undefined;}).length;
     var h=brand()+'<h2 class="h2">'+T('누구의 자리에 앉으시겠습니까?','Whose chair will you take?')+'</h2><p class="lead">'+T('어느 자리를 골라도 같은 1962년 10월 안에서 움직입니다. 짧은 자리(아르히포프·플리예프)에서 시작해 보셔도 좋습니다.','Every chair plays out inside the same October 1962. The short chairs (Arkhipov, Pliyev) are a good place to start.')+
@@ -176,7 +183,7 @@ function roles(){
 }
 function start(id){
   get(BASE+'data/'+id+'.'+LANG+'.json').then(function(r){
-    R=r; setTheme(id);
+    R=r; setTheme(id); setPlaylist(id);
     S={g:Object.assign({risk:30,ally:60,home:50,prestige:50},r.start||{}),flags:{},ax:{},axLast:{},hist:[],node:r.first,qn:0};
     prologue(0);
   });
