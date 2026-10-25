@@ -2757,6 +2757,8 @@ const FCT = {
   whyH: "Why it changed or held", week: "Weekly forecast review", first: p => "Started at " + p + "%", firstD: "Forecast made",
   evH: "Related events", evNote: "Events the daily briefing linked to this forecast. The arrows show whether an event makes the outcome more or less likely.", evGo: "That day's briefing →",
   E: {up: ["↑", "Factors raising the probability"], down: ["↓", "Factors lowering the probability"], none: ["–", "No change"]},
+  fzH: "Probability used for scoring", fzV: (d, p, k) => p + "%, as it stood on " + d + " (changes in the final " + (k === 1 ? "day do" : ["zero", "one", "two", "three", "four", "five", "six", "seven"][k] + " days do") + " not count toward the score)",
+  ocNoteF: (d, p, fd) => "Resolves " + d + ". Because changes in the final days do not count, those days are scored at the " + p + "% probability that stood on " + fd + "; on that basis, the scores for each outcome are shown below. Closer to 0 is better.",
   ocH: "When the result comes in", ocNote: (d, p) => "Resolves " + d + ". If the current " + p + "% holds until then, the forecast would score as shown below for each outcome (the average of its daily Brier scores). Closer to 0 is better.",
   ocY: "If it happens", ocN: "If it does not",
   yLow: p => "At " + p + "%, it was judged unlikely, so it would join the missed forecasts.", yHigh: p => "At " + p + "%, it was judged likely, so the forecast would hold up.",
@@ -2769,7 +2771,7 @@ const FCT = {
   hDays: (done, n) => (n === 1 ? "day" : "days") + (done ? " to the next result" : " to the first result"), hToday: "Resolves today", hK: (d, c) => "Resolves " + d + " · " + c, hNote: "When the result is in, this card will show whether the forecast was right.", hStart: d => "Started " + d,
   stOpen: "open", stChg: "revised", stDone: "resolved", stVoid: "voided",
   rel: n => pl(n, "related event"), later: n => pl(n, "later forecast") + " · see the full list ↓",
-  accH: "How accuracy is calculated", accP: d => "For each resolved forecast, take (probability − outcome)² using the probability on each day from publication to the resolution date (or to the day the event occurs, if it comes true sooner), and average the results (the Brier score). An outcome that happened counts as 1; one that did not counts as 0. Closer to 0 is better; giving every forecast 50 percent scores 0.25." + (d ? " The score will appear here after the first result comes in on " + d + "." : ""), accGo: "See how results are checked in Methodology →",
+  accH: "How accuracy is calculated", accP: d => "For each resolved forecast, take (probability − outcome)² using the probability on each day from publication to the resolution date (or to the day the event occurs, if it comes true sooner), and average the results (the Brier score). Probabilities can be revised until the resolution date, but revisions made in the last seven days up to and including that date do not count; those days are scored at the probability that stood the day before (for forecasts open only briefly, the window never exceeds a quarter of the period from publication to the resolution date). An outcome that happened counts as 1; one that did not counts as 0. Closer to 0 is better; giving every forecast 50 percent scores 0.25." + (d ? " The score will appear here after the first result comes in on " + d + "." : ""), accGo: "See how results are checked in Methodology →",
   href: p => EN_P + p,
   tweet: (q, p, d) => "“" + q + "” Clisa Geopolitics puts this at " + p + "%. Resolves " + d + ".",
 };
@@ -2787,9 +2789,13 @@ const fcHistOf = f => ((D.fc_hist || {})[f.id] || [[f.made || f.due, f.p]]);
 /* v4.24 기간 평균 브라이어 점수(2026-10-20 결재): 공개한 날부터 검증 시점(그 전에 실현이 확정되면 그날)까지 날마다의 확률로 매긴 점수의 평균.
    확률을 고치지 않은 날은 직전 확률이 이어진다. 아직 열린 전망은 현재 확률이 검증 시점까지 이어진다고 본다 */
 const fcEnd = f => (f.resolved && f.resolved < f.due ? f.resolved : f.due);
+/* v4.34 마지막 k일 동결(2026-10-25 결재): k = min(7, 공개 일수의 4분의 1). 동결일(검증 시점 k일 전) 뒤에 고친 확률은 점수에 넣지 않는다 */
+const fcFzK = f => { const H = fcHistOf(f); return Math.max(0, Math.min(7, Math.floor((fcDays(H[0][0], f.due) + 1) / 4))); };
+const fcFz = f => fcAdd(f.due, -fcFzK(f));
+const fcPAt = (f, d) => { const H = fcHistOf(f); let p = H[0][1]; H.forEach(h => { if (h[0] <= d) p = h[1]; }); return p; };
 function fcBrierT(f, y){
-  const H = fcHistOf(f), end = fcEnd(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
-  for (; d <= end && n < 5000; d = fcAdd(d, 1)) { while (i + 1 < H.length && H[i + 1][0] <= d) { i++; cur = H[i][1]; } s += Math.pow(cur / 100 - y, 2); n++; }
+  const H = fcHistOf(f), end = fcEnd(f), fz = fcFz(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
+  for (; d <= end && n < 5000; d = fcAdd(d, 1)) { const q = d <= fz ? d : fz; while (i + 1 < H.length && H[i + 1][0] <= q) { i++; cur = H[i][1]; } s += Math.pow(cur / 100 - y, 2); n++; }
   return n ? s / n : Math.pow(f.p / 100 - y, 2);
 }
 const fcPP = it => it.from === it.to ? FCT.keep(it.to) : FCT.chg(it.from, it.to);
@@ -2899,7 +2905,7 @@ function fcChart(f, t){
   return o.join("");
 }
 function fcDetailHtml(f){
-  const t = fcToday(), H = fcHistOf(f), open = f.status === "open", n = fcDays(t, f.due), c = fcCaseOf(f);
+  const t = fcToday(), H = fcHistOf(f), open = f.status === "open", n = fcDays(t, f.due), c = fcCaseOf(f), fz = fcFz(f), fzOn = fcFzK(f) > 0 && t > fz, pz = fcPAt(f, fz);
   const sib = D.forecasts.filter(x => x.fp && x.fp === f.fp && x.id !== f.id).sort((a, b) => a.due.localeCompare(b.due));
   const rv = []; FCR().forEach(r => r.items.forEach(it => { if (it.id === f.id) rv.push([r.date, it]); }));
   const evs = fcEvents(f), br = (p, y) => Math.pow(p / 100 - (y ? 1 : 0), 2).toFixed(2), low = f.p < 50, res = f.status === "yes" || f.status === "no";
@@ -2909,7 +2915,7 @@ function fcDetailHtml(f){
     '<div class="fd-p"><b>' + f.p + "%</b>" + ydWord(f.p, "yw yd") + "<span>" + (open ? FCT.pNow : FCT.pThen) + "</span></div></div>" +
     '<div class="chips" style="margin-top:8px">' + (f.countries || []).map(chip).join("") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(FCT.caseGo(c.title.split(":")[0])) + "</button>" : "") + "</div>" +
     '<dl class="fd-meta"><dt>' + FCT.dueAt + "</dt><dd>" + FCT.ymd(f.due) + (open ? ' <span class="fd-dd">' + (n > 0 ? FCT.left(n) : n === 0 ? FCT.today : FCT.checking) + "</span>" : "") + "</dd>" +
-    "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
+    "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (fzOn ? "<dt>" + FCT.fzH + "</dt><dd>" + FCT.fzV(FCT.ymd(fz), pz, fcFzK(f)) + "</dd>" : "") + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
     (res || f.status === "void" ? '<section class="sec fd-rc"><p class="eyebrow">' + FCT.resH + (f.resolved ? FCT.resD(FCT.ymd(f.resolved)) : "") + "</p>" +
       (f.status === "void" ? "<p><b>" + FCT.voidL + "</b></p><p>" + esc(f.void || "") + "</p>" :
         "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, fcBrierT(f, f.status === "yes" ? 1 : 0).toFixed(2)) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
@@ -2923,7 +2929,7 @@ function fcDetailHtml(f){
       '<li><span class="d">' + FCT.md(H[0][0]) + "</span><div><b>" + FCT.first(H[0][1]) + '</b> <span class="note">' + FCT.firstD + "</span><p>" + esc(f.basis || "") + "</p></div></li></ul></section>" +
     (evs.length ? '<section class="sec"><h3>' + FCT.evH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.evNote + '</p><ul class="fd-tl">' +
       evs.map(([dt, k, it]) => { const a = FCT.E[k] || FCT.E.none; return '<li><span class="d">' + FCT.md(dt) + '</span><div><span class="fd-ar ' + (FCT.E[k] ? k : "none") + '">' + a[0] + " " + a[1] + "</span> <b>" + esc(it.h) + "</b>" + (it.link ? "<p>" + esc(it.link) + "</p>" : "") + '<a class="fd-more" href="' + FCT.href("/brief/" + esc(dt) + "/") + '">' + FCT.evGo + "</a></div></li>"; }).join("") + "</ul></section>" : "") +
-    (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.ocNote(FCT.ymd(f.due), f.p) + "</p>" +
+    (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + (fzOn ? FCT.ocNoteF(FCT.ymd(f.due), pz, FCT.ymd(fz)) : FCT.ocNote(FCT.ymd(f.due), f.p)) + "</p>" +
       '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + fcBrierT(f, 1).toFixed(2) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
       '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + fcBrierT(f, 0).toFixed(2) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
       (H[0][1] !== f.p ? '<p class="note" style="margin-top:8px">' + FCT.ocFirst(H[0][1], br(H[0][1], true), br(H[0][1], false)) + "</p>" : "") + "</section>" : "") +

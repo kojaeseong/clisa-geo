@@ -2733,6 +2733,8 @@ const FCT = {
   whyH: "변동·유지 이유", week: "주간 전망 점검", first: p => "처음 확률 " + p + "%", firstD: "전망을 만든 날",
   evH: "관련 사건", evNote: "정세 브리핑에서 이 전망과 연결한 사건입니다. 화살표는 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다.", evGo: "그날의 정세 브리핑 →",
   E: {up: ["↑", "확률 상승 요인"], down: ["↓", "확률 하락 요인"], none: ["–", "변화 없음"]},
+  fzH: "점수에 쓰이는 확률", fzV: (d, p, k) => d + "의 " + p + "% (마지막 " + k + "일 동안 고친 확률은 점수에 넣지 않습니다)",
+  ocNoteF: (d, p, fd) => d + "에 결과를 확인합니다. 마지막 기간에 고친 확률은 점수에 넣지 않고 그 기간을 " + fd + "의 확률 " + p + "%로 계산하면, 결과마다 이 전망의 점수는 다음과 같습니다. 0에 가까울수록 정확합니다.",
   ocH: "결과가 나오면", ocNote: (d, p) => d + "에 결과를 확인합니다. 현재 확률 " + p + "%가 그날까지 이어진다고 보면, 결과마다 이 전망의 점수(날마다의 확률로 매긴 브라이어 점수의 평균)는 다음과 같습니다. 0에 가까울수록 정확합니다.",
   ocY: "실현되면", ocN: "불발되면",
   yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
@@ -2745,7 +2747,7 @@ const FCT = {
   hDays: done => done ? "일 뒤 다음 결과" : "일 뒤 첫 결과", hToday: "오늘 판가름", hK: (d, c) => d + " 판가름 · " + c, hNote: "결과가 나오면 이 자리에 맞았는지 틀렸는지 표시합니다.", hStart: d => d + " 처음",
   stOpen: "진행 중", stChg: "확률을 바꾼 전망", stDone: "결과 확인", stVoid: "무효",
   rel: n => "관련 꼭지 " + n + "건", later: n => "그 뒤의 전망 " + n + "건 · 전체 목록에서 보기 ↓",
-  accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
+  accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 확률은 검증 시점 직전까지 고칠 수 있지만, 검증 시점까지의 마지막 7일 동안 고친 확률은 점수에 넣지 않고 그 기간은 바로 앞 날의 확률로 계산합니다(공개 기간이 짧은 전망은 이 기간이 공개일부터 검증 시점까지의 4분의 1을 넘지 않습니다). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
   href: p => p,
   tweet: (q, p, d) => "「" + q + "」 클리사 지오폴리틱스의 전망 " + p + "% · 검증 시점 " + d,
 };
@@ -2763,9 +2765,13 @@ const fcHistOf = f => ((D.fc_hist || {})[f.id] || [[f.made || f.due, f.p]]);
 /* v4.24 기간 평균 브라이어 점수(2026-10-20 결재): 공개한 날부터 검증 시점(그 전에 실현이 확정되면 그날)까지 날마다의 확률로 매긴 점수의 평균.
    확률을 고치지 않은 날은 직전 확률이 이어진다. 아직 열린 전망은 현재 확률이 검증 시점까지 이어진다고 본다 */
 const fcEnd = f => (f.resolved && f.resolved < f.due ? f.resolved : f.due);
+/* v4.34 마지막 k일 동결(2026-10-25 결재): k = min(7, 공개 일수의 4분의 1). 동결일(검증 시점 k일 전) 뒤에 고친 확률은 점수에 넣지 않는다 */
+const fcFzK = f => { const H = fcHistOf(f); return Math.max(0, Math.min(7, Math.floor((fcDays(H[0][0], f.due) + 1) / 4))); };
+const fcFz = f => fcAdd(f.due, -fcFzK(f));
+const fcPAt = (f, d) => { const H = fcHistOf(f); let p = H[0][1]; H.forEach(h => { if (h[0] <= d) p = h[1]; }); return p; };
 function fcBrierT(f, y){
-  const H = fcHistOf(f), end = fcEnd(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
-  for (; d <= end && n < 5000; d = fcAdd(d, 1)) { while (i + 1 < H.length && H[i + 1][0] <= d) { i++; cur = H[i][1]; } s += Math.pow(cur / 100 - y, 2); n++; }
+  const H = fcHistOf(f), end = fcEnd(f), fz = fcFz(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
+  for (; d <= end && n < 5000; d = fcAdd(d, 1)) { const q = d <= fz ? d : fz; while (i + 1 < H.length && H[i + 1][0] <= q) { i++; cur = H[i][1]; } s += Math.pow(cur / 100 - y, 2); n++; }
   return n ? s / n : Math.pow(f.p / 100 - y, 2);
 }
 const fcPP = it => it.from === it.to ? FCT.keep(it.to) : FCT.chg(it.from, it.to);
@@ -2875,7 +2881,7 @@ function fcChart(f, t){
   return o.join("");
 }
 function fcDetailHtml(f){
-  const t = fcToday(), H = fcHistOf(f), open = f.status === "open", n = fcDays(t, f.due), c = fcCaseOf(f);
+  const t = fcToday(), H = fcHistOf(f), open = f.status === "open", n = fcDays(t, f.due), c = fcCaseOf(f), fz = fcFz(f), fzOn = fcFzK(f) > 0 && t > fz, pz = fcPAt(f, fz);
   const sib = D.forecasts.filter(x => x.fp && x.fp === f.fp && x.id !== f.id).sort((a, b) => a.due.localeCompare(b.due));
   const rv = []; FCR().forEach(r => r.items.forEach(it => { if (it.id === f.id) rv.push([r.date, it]); }));
   const evs = fcEvents(f), br = (p, y) => Math.pow(p / 100 - (y ? 1 : 0), 2).toFixed(2), low = f.p < 50, res = f.status === "yes" || f.status === "no";
@@ -2885,7 +2891,7 @@ function fcDetailHtml(f){
     '<div class="fd-p"><b>' + f.p + "%</b>" + ydWord(f.p, "yw yd") + "<span>" + (open ? FCT.pNow : FCT.pThen) + "</span></div></div>" +
     '<div class="chips" style="margin-top:8px">' + (f.countries || []).map(chip).join("") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(FCT.caseGo(c.title.split(":")[0])) + "</button>" : "") + "</div>" +
     '<dl class="fd-meta"><dt>' + FCT.dueAt + "</dt><dd>" + FCT.ymd(f.due) + (open ? ' <span class="fd-dd">' + (n > 0 ? FCT.left(n) : n === 0 ? FCT.today : FCT.checking) + "</span>" : "") + "</dd>" +
-    "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
+    "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (fzOn ? "<dt>" + FCT.fzH + "</dt><dd>" + FCT.fzV(FCT.ymd(fz), pz, fcFzK(f)) + "</dd>" : "") + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
     (res || f.status === "void" ? '<section class="sec fd-rc"><p class="eyebrow">' + FCT.resH + (f.resolved ? FCT.resD(FCT.ymd(f.resolved)) : "") + "</p>" +
       (f.status === "void" ? "<p><b>" + FCT.voidL + "</b></p><p>" + esc(f.void || "") + "</p>" :
         "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, fcBrierT(f, f.status === "yes" ? 1 : 0).toFixed(2)) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
@@ -2899,7 +2905,7 @@ function fcDetailHtml(f){
       '<li><span class="d">' + FCT.md(H[0][0]) + "</span><div><b>" + FCT.first(H[0][1]) + '</b> <span class="note">' + FCT.firstD + "</span><p>" + esc(f.basis || "") + "</p></div></li></ul></section>" +
     (evs.length ? '<section class="sec"><h3>' + FCT.evH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.evNote + '</p><ul class="fd-tl">' +
       evs.map(([dt, k, it]) => { const a = FCT.E[k] || FCT.E.none; return '<li><span class="d">' + FCT.md(dt) + '</span><div><span class="fd-ar ' + (FCT.E[k] ? k : "none") + '">' + a[0] + " " + a[1] + "</span> <b>" + esc(it.h) + "</b>" + (it.link ? "<p>" + esc(it.link) + "</p>" : "") + '<a class="fd-more" href="' + FCT.href("/brief/" + esc(dt) + "/") + '">' + FCT.evGo + "</a></div></li>"; }).join("") + "</ul></section>" : "") +
-    (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + FCT.ocNote(FCT.ymd(f.due), f.p) + "</p>" +
+    (open ? '<section class="sec"><h3>' + FCT.ocH + '</h3><p class="note" style="margin-bottom:8px">' + (fzOn ? FCT.ocNoteF(FCT.ymd(f.due), pz, FCT.ymd(fz)) : FCT.ocNote(FCT.ymd(f.due), f.p)) + "</p>" +
       '<div class="fd-oc"><div class="y"><h4>' + FCT.ocY + "</h4><b>" + fcBrierT(f, 1).toFixed(2) + "</b><p>" + (low ? FCT.yLow(f.p) : FCT.yHigh(f.p)) + "</p></div>" +
       '<div class="n"><h4>' + FCT.ocN + "</h4><b>" + fcBrierT(f, 0).toFixed(2) + "</b><p>" + (low ? FCT.nLow(f.p) : FCT.nHigh(f.p)) + "</p></div></div>" +
       (H[0][1] !== f.p ? '<p class="note" style="margin-top:8px">' + FCT.ocFirst(H[0][1], br(H[0][1], true), br(H[0][1], false)) + "</p>" : "") + "</section>" : "") +
