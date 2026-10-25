@@ -440,8 +440,9 @@ function rights(){
 }
 function shareCard(t,E,k,same,asked){
   var W=1080,H=1350,cv=document.createElement('canvas'); cv.width=W; cv.height=H; var x=cv.getContext('2d');
-  var ink='#111111',red='#C1121F',sans='"Pretendard Variable","Noto Sans KR",sans-serif', th=THEME[R.id]||{stripe:[ink]};
-  x.fillStyle='#EDEDED'; x.fillRect(0,0,W,H);
+  /* 1962: 짙은 남색 바탕(1914의 회색과 구분), 흰 글씨 */
+  var ink='#FFFFFF',red='#FF5A5A',sans='"Pretendard Variable","Noto Sans KR",sans-serif', th=THEME[R.id]||{stripe:[ink]};
+  x.fillStyle='#0B1F3A'; x.fillRect(0,0,W,H);
   th.stripe.forEach(function(c,i){ x.fillStyle=c; x.fillRect(0,i*18,W,18); });
   x.fillStyle=ink; x.fillRect(70,90,W-140,4); x.fillRect(70,102,W-140,2);
   x.textAlign='left'; x.font='500 28px "IBM Plex Mono",monospace'; x.fillText('CLISA GAMES',70,155); x.textAlign='right'; x.fillText(C.ep,W-70,155);
@@ -450,11 +451,11 @@ function shareCard(t,E,k,same,asked){
   x.fillStyle=ink; x.fillRect(70,460,W-140,2);
   x.font='500 30px '+sans; fit(x,R.person+T(' · 당신의 전략가 유형',' · your strategist type'),'500 %px '+sans,30,W-140); x.fillText(x._t,70,540);
   fit(x,t.name||'','400 %px '+DISP,120,W-140); x.fillText(x._t,66,690);
-  fit(x,t.line||'','600 %px '+sans,40,W-140); x.fillStyle='#4A4A4A'; x.fillText(x._t,70,760);
+  fit(x,t.line||'','600 %px '+sans,40,W-140); x.fillStyle='#C9D3E0'; x.fillText(x._t,70,760);
   x.fillStyle=ink; x.fillRect(70,820,W-140,2);
   fit(x,T('결말 ','Ending ')+k+' · '+E.title,'400 %px '+DISP,54,W-140); x.fillText(x._t,70,910);
   x.save(); x.translate(70,1000); x.rotate(-0.04); x.strokeStyle=red; x.lineWidth=5; x.font='800 40px '+sans; var st=T('실제 역사와 같은 선택 ','Same as history ')+same+'/'+asked, sw=Math.max(560,x.measureText(st).width+48); x.strokeRect(0,0,sw,86); x.fillStyle=red; x.fillText(st,24,58); x.restore();
-  x.fillStyle=ink; x.fillRect(70,H-150,W-140,2); x.font='500 30px "IBM Plex Mono",monospace'; x.fillText('clisa.ai'+(EN?'/en':'')+'/play/1914',70,H-100);
+  x.fillStyle=ink; x.fillRect(70,H-150,W-140,2); x.font='500 30px "IBM Plex Mono",monospace'; x.fillText('clisa.ai'+(EN?'/en':'')+'/play/1962',70,H-100);
   var url=cv.toDataURL('image/png'), box=document.getElementById('cardbox'), fname='world-of-decision-1962.png';
   /* 2026-10-20: card copy, save and share (copy falls back to save where the browser blocks image copying) */
   var blobP=new Promise(function(res){ if(cv.toBlob) cv.toBlob(function(b){res(b);},'image/png'); else fetch(url).then(function(r){return r.blob();}).then(res); });
