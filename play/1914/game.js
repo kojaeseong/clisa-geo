@@ -408,7 +408,7 @@ function more(){
 }
 /* copyright and contact, shown on the title screen and at the end of the ending pages */
 function rights(){
-  return '<footer class="rights"><p>'+T('© 2026 클리사 지오폴리틱스. 이 게임의 글, 그림, 지도, 프로그램의 저작권은 클리사 지오폴리틱스에 있습니다. 지도의 바탕 자료(Natural Earth)와 인용한 사료는 공개 자료입니다.','© 2026 Clisa Geopolitics. The text, artwork, maps and software of this game are the copyright of Clisa Geopolitics. The base map data (Natural Earth) and the quoted historical documents are in the public domain.')+'</p>'+
+  return '<footer class="rights"><p>'+T('© 2026 클리사 지오폴리틱스. 이 게임의 글, 그림, 지도, 음악, 프로그램의 저작권은 클리사 지오폴리틱스에 있습니다. 음악은 클리사가 직접 만든 곡입니다. 지도의 바탕 자료(Natural Earth)와 인용한 사료는 공개 자료입니다.','© 2026 Clisa Geopolitics. The text, artwork, maps, music and software of this game are the copyright of Clisa Geopolitics. The music was produced by Clisa. The base map data (Natural Earth) and the quoted historical documents are open sources.')+'</p>'+
     '<p>'+T('문의','Contact')+' <a href="mailto:clisageo@clisa.ai">clisageo@clisa.ai</a> · <a href="'+SITE+'/" target="_blank" rel="noopener">clisa.ai'+(EN?'/en':'')+'</a></p></footer>';
 }
 function shareCard(t,E,k,same,asked){
