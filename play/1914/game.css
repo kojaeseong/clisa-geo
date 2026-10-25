@@ -389,3 +389,7 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 .asw a:hover{opacity:1}.asw a.on{opacity:1;font-weight:700;border:1px solid currentColor}
 :root[data-role] .brandbar .asw a{color:var(--on-dim)}
 @media (max-width:480px){.asw a{padding:0 7px;font-size:10px;letter-spacing:.05em}}
+
+/* 2026-10-26 이어서 하기 */
+.title .cont{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.title .cont-n{flex-basis:100%;font:500 13px var(--mono);letter-spacing:.04em;color:var(--ink-2)}

@@ -460,3 +460,7 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 .map .mk{stroke-width:2}
 .map .mr{stroke-width:3;stroke-dasharray:8 5}
 .map .mm-cl.en{font-size:11px;letter-spacing:.03em}
+
+/* 2026-10-26 이어서 하기 */
+.title .cont{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.title .cont-n{flex-basis:100%;font:500 13px var(--mono);letter-spacing:.04em;color:var(--ink-2)}

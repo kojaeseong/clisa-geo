@@ -93,9 +93,26 @@ function track(k){ if(!SND.list[k]){ var a=new Audio(BGM[k]); a.preload='none'; 
     if(PENDING){ BGM=PENDING; PENDING=null; SND.list=[]; SND.idx=0; } else SND.idx=(k+1)%BGM.length;
     var b=track(SND.idx); b.currentTime=0; b.play().catch(function(){}); }); SND.list[k]=a; } return SND.list[k]; }
 /* v1962: as in 1914, the stored tracks play one after another in rotation; scenes never switch or restart the music */
+/* 2026-10-26: 이어 틀기와 탭 사이 음악 정리. 떠날 때의 곡과 위치를 저장했다가 다음 재생에서 그 자리부터 튼다. 게임 탭이 둘이면 나중에 튼 탭만 소리를 낸다 */
+var TABID=String(Math.random()).slice(2,10), PAUSEDBY=false, RESTORE=null;
+try{ var rb=JSON.parse(store('wod62-bgm')||'null'); if(rb&&rb.list&&rb.list.length&&Date.now()-rb.at<6*3600*1000) RESTORE=rb; }catch(e){}
+function bgmSave(){ try{ var a=SND.list[SND.idx]; if(!a||!(a.currentTime>0)) return; store('wod62-bgm',JSON.stringify({list:BGM,idx:SND.idx,t:a.currentTime,pending:(typeof PENDING!=='undefined'?PENDING:null),at:Date.now()})); }catch(e){} }
+function claim(){ PAUSEDBY=false; store('clisa-audio',TABID+':'+Date.now()); }
+function seekPlay(a,t){ var done=false, fin=function(){ if(done) return; done=true; a.volume=BGMVOL; };
+  var go=function(){ try{ if(t>0&&(!a.duration||t<a.duration-1)) a.currentTime=t; }catch(e){} a.addEventListener('seeked',fin,{once:true}); setTimeout(fin,1500); };
+  a.volume=0; if(a.readyState>=1) go(); else a.addEventListener('loadedmetadata',go,{once:true}); a.preload='auto';
+  a.play().catch(function(){ fin(); }); }
+window.addEventListener('pagehide',bgmSave);
+document.addEventListener('visibilitychange',function(){ if(document.hidden) bgmSave(); else if(PAUSEDBY&&SND.on){ music(true); } });
+window.addEventListener('storage',function(e){ if(e.key!=='clisa-audio'||!e.newValue||e.newValue.indexOf(TABID+':')===0) return; var a=SND.list[SND.idx]; if(a&&!a.paused){ bgmSave(); a.pause(); PAUSEDBY=true; } });
 function music(play){
   if(NOBGM) return;
-  try{ var a=track(SND.idx); if(play&&SND.on) a.play().catch(function(){}); else a.pause(); }catch(e){}
+  try{
+    if(play&&SND.on&&RESTORE){ var rs=RESTORE; RESTORE=null;
+      if(rs.list.every(function(u){return typeof u==='string';})){ BGM=rs.list; SND.list=[]; SND.idx=Math.max(0,Math.min(rs.idx|0,BGM.length-1)); if(rs.pending&&typeof PENDING!=='undefined') PENDING=rs.pending;
+        seekPlay(track(SND.idx),+rs.t||0); claim(); return; } }
+    var a=track(SND.idx); if(play&&SND.on){ a.play().catch(function(){}); claim(); } else { a.pause(); PAUSEDBY=false; }
+  }catch(e){}
 }
 function soundBtn(){ return '<button class="sbtn" id="snd" aria-pressed="'+(SND.on?'true':'false')+'">'+(SND.on?T('소리 켬','Sound on'):T('소리 끔','Sound off'))+'</button>'; }
 function langBtn(){ return LANGLINK?'<button class="sbtn lbtn" id="lsw" lang="'+(EN?'ko':'en')+'" aria-label="'+(EN?'한국어로 보기':'View in English')+'">'+(EN?'한국어':'English')+'</button>':''; }
@@ -122,6 +139,19 @@ function markDone(id,k){ var m=doneMap(); m[id]=k; store('wod62-done',Object.key
   var sv={}; try{ sv=JSON.parse(store('wod62-save')||'{}')||{}; }catch(e){}
   sv[id]={k:k,g:S.g,flags:S.flags,ax:S.ax,axLast:S.axLast,qn:S.qn,hist:S.hist.map(function(h){return [h.id,h.pick];})};
   store('wod62-save',JSON.stringify(sv)); }
+/* 2026-10-26: 진행 중인 판을 장면마다 저장한다. 다른 페이지에 갔다가 돌아오면 첫 화면의 「이어서 하기」로 마지막 장면부터 잇는다 */
+function liveGet(){ try{ var v=JSON.parse(store('wod62-live')||'null'); return v&&v.id&&ROLES.some(function(x){return x.id===v.id;})?v:null; }catch(e){ return null; } }
+function liveSave(node,qn){ if(!R||!S) return; store('wod62-live',JSON.stringify({id:R.id,node:node,qn:qn,g:S.g,flags:S.flags,ax:S.ax,axLast:S.axLast,hist:S.hist.map(function(h){return [h.id,h.pick];}),at:Date.now()})); }
+function liveClear(){ try{ localStorage.removeItem('wod62-live'); }catch(e){} }
+function resume(){
+  var sv=liveGet(); if(!sv){ title(); return; }
+  get(BASE+'data/'+sv.id+'.'+LANG+'.json').then(function(r){
+    R=r; setTheme(r.id); if(typeof setPlaylist==='function') setPlaylist(r.id);
+    S={g:sv.g,flags:sv.flags||{},ax:sv.ax||{},axLast:sv.axLast||{},hist:[],node:r.first,qn:sv.qn||0};
+    S.hist=(sv.hist||[]).map(function(a){ var n=R.nodes[a[0]], c=n&&n.choices.filter(function(x){return x.key===a[1];})[0]; S.node=a[0]; return c?histEntry(n,c):null; }).filter(function(x){return x;});
+    if(sv.node==='PRO') prologue(0); else if(isEnd(sv.node)) ending(sv.node); else if(R.nodes[sv.node]) scene(sv.node); else { liveClear(); R=null; S=null; title(); }
+  }).catch(function(){ liveClear(); title(); });
+}
 function savedRun(id){ try{ var sv=JSON.parse(store('wod62-save')||'{}'); return sv&&sv[id]||null; }catch(e){ return null; } }
 function replay(id){
   var sv=savedRun(id); if(!sv) return;
@@ -147,10 +177,10 @@ function timeline(n){
     '<div class="tl-now" style="left:'+(cur*100)+'%"><span>'+(over?T('10월 28일 이후 · ','after 28 Oct · '):before?T('10월 14일 이전 · ','before 14 Oct · '):'')+dayLabel(n.date)+'</span></div></div>';
 }
 /* v4.24 (2026-10-23) three-area switch: Geopolitics · Academy · Game, same tab (progress is saved per role). The off-site preview keeps the plain label. */
-function areaNav(){ if(!LANGLINK) return '<span>CLISA GAMES</span>'; return '<nav class="asw" aria-label="'+T('클리사 영역','Clisa sections')+'"><a href="'+SITE+'/">'+T('지오폴리틱스','Geopolitics')+'</a><a href="'+SITE+'/academy/">'+T('아카데미','Academy')+'</a><a href="'+SITE+'/play/" class="on" aria-current="page">'+T('게임','Game')+'</a></nav>'; }
+function areaNav(){ if(!LANGLINK) return '<span>CLISA GAMES</span>'; return '<nav class="asw" aria-label="'+T('클리사 영역','Clisa sections')+'"><a href="'+SITE+'/" target="_blank" rel="noopener">'+T('지오폴리틱스','Geopolitics')+'</a><a href="'+SITE+'/academy/" target="_blank" rel="noopener">'+T('아카데미','Academy')+'</a><a href="'+SITE+'/play/" class="on" aria-current="page">'+T('게임','Game')+'</a></nav>'; }
 function chgBtn(){ return (R&&VIEW!==roles)?'<button class="sbtn" id="chg" title="'+T('다른 자리에서 다시 시작합니다. 이 자리의 진행은 지워집니다.','Start again in another chair. Progress in this chair is discarded.')+'">'+T('자리 바꾸기','Change chair')+'</button>':''; }
 function brand(){return '<div class="brandbar">'+areaNav()+'<span class="bb-r"><span>WORLD OF DECISION · 1962</span>'+langBtn()+chgBtn()+soundBtn()+'</span></div>';}
-function render(h){ app.innerHTML=h; bindSound(); var cb=document.getElementById('chg'); if(cb) cb.onclick=function(){ sfx('click'); R=null; S=null; roles(); }; }
+function render(h){ app.innerHTML=h; bindSound(); var cb=document.getElementById('chg'); if(cb) cb.onclick=function(){ sfx('click'); liveClear(); R=null; S=null; roles(); }; }
 function dayLabel(d){ if(!d) return ''; var m=d.match(/^(\d{4})-(\d{2})-(\d{2})/); if(!m) return esc(d); return EN?(+m[3])+' '+['January','February','March','April','May','June','July','August','September','October','November','December'][+m[2]-1]:(+m[2])+'월 '+(+m[3])+'일'; }
 function yearOf(d){ var m=String(d||'').match(/^(\d{4})/); return m?m[1]:''; }
 function setTheme(id){
@@ -162,15 +192,18 @@ function setTheme(id){
 
 /* ---------- screens ---------- */
 function title(){
+  var LIVE=liveGet();
   VIEW=title; setTheme(null); setPlaylist(null);
   render('<section class="title">'+
    '<div class="kicker">'+areaNav()+'<span class="bb-r"><span>'+esc(C.ep)+'</span>'+langBtn()+soundBtn()+'</span></div>'+
    '<div class="of">WORLD OF</div><h1>DECISION</h1>'+
    '<div class="row">'+(EN?'<span class="ko">'+esc(C.sub||'')+'</span>':'<span class="ko">'+esc(C.title)+'</span>')+'<span class="stamp-r">'+esc(C.ep)+'</span></div>'+
    '<p class="hook">'+esc(C.hook)+'</p>'+
-   '<button class="btn" id="go">'+T('결정하러 가기','Take your seat')+'</button>'+
+   (LIVE?'<div class="cont"><button class="btn" id="cont">'+T('이어서 하기','Continue')+'</button><button class="btn ghost" id="go">'+T('새로 시작하기','Start over')+'</button><span class="cont-n" id="contn"></span></div>':'<button class="btn" id="go">'+T('결정하러 가기','Take your seat')+'</button>')+
    '<div class="count"><div><b>13</b>'+T('일간의 위기',' days of crisis')+'</div><div><b>7</b>'+T('개 자리',' chairs')+'</div><div><b>?</b>'+T('알 수 없는 결말',' an unknown ending')+'</div></div>'+rights()+'</section>');
   document.getElementById('go').onclick=function(){ sfx('stamp'); music(true); roles(); };
+  if(LIVE){ document.getElementById('cont').onclick=function(){ sfx('stamp'); music(true); resume(); };
+    opt(BASE+'data/'+LIVE.id+'.'+LANG+'.json').then(function(r){ var el=document.getElementById('contn'); if(!r||!el) return; var n=r.nodes[LIVE.node]; el.textContent=r.person+(n&&n.date?' · '+dayLabel(n.date).replace(/<[^>]*>/g,''):''); }); }
 }
 function roles(){
   VIEW=roles; setTheme(null); setPlaylist(null);
@@ -190,7 +223,7 @@ function start(id){
   get(BASE+'data/'+id+'.'+LANG+'.json').then(function(r){
     R=r; setTheme(id); setPlaylist(id);
     S={g:Object.assign({risk:30,ally:60,home:50,prestige:50},r.start||{}),flags:{},ax:{},axLast:{},hist:[],node:r.first,qn:0};
-    prologue(0);
+    liveSave('PRO',0); prologue(0);
   });
 }
 /* prologue in pages: the shared opening, the role, the dossier */
@@ -277,7 +310,7 @@ function head(n){
 /* a scene is shown in pages: what happened meanwhile → the room and the voices → the decision */
 function scene(id){
   var n=R.nodes[id]; if(!n){ app.textContent=T('장면을 찾을 수 없습니다: ','Scene not found: ')+id; return; }
-  S.node=id; S.qn++; S.chosen=null; S.delta=null;
+  S.node=id; S.qn++; S.chosen=null; S.delta=null; liveSave(id,S.qn-1);
   S.order=n.choices.map(function(_,i){return i;}); for(var a=S.order.length-1;a>0;a--){ var b=Math.floor(Math.random()*(a+1)), t=S.order[a]; S.order[a]=S.order[b]; S.order[b]=t; }
   scenePage(n,scenePages(n),0);
 }
@@ -343,6 +376,7 @@ function choose(n,i){
   document.getElementById('hud').outerHTML=hud(d,n);
   var nx0=resolve(c.next), heavy=(d.risk||0)>=15||nx0==='END:E';
   sfx(heavy?'drum':'stamp'); if(d.risk) setTimeout(function(){ sfx(d.risk>0?'rise':'fall'); }, heavy?900:350);
+  liveSave(resolve(c.next),S.qn);
   showResult(n,c,d,false);
 }
 function showResult(n,c,d,quiet){
@@ -393,7 +427,7 @@ function axisBars(){
 function ending(nx,p0,quiet){
   if(!quiet) sfx('end');
   var k=endingKey(nx), E=C.endings[k]||{title:k,text:''};
-  if(!quiet) markDone(R.id,k);
+  if(!quiet){ markDone(R.id,k); liveClear(); }
   var ep=(R.epilogues||{})[k]||''; (R.epilogueAdd||[]).forEach(function(a){ if([].concat(a.ending).indexOf(k)>=0&&test(a)) ep+=(ep?' ':'')+a.text; }); if(S.g.prestige<30&&'ABFG'.indexOf(k)>=0) ep+=(ep?' ':'')+T('국내에서는 굴욕 외교라는 비판이 거셌습니다.','At home, critics attacked the settlement as a humiliating climb-down.');
   var code=typeCode(), t=typeOf(code)||{}, mate=typeOf(flip(code,3))||{}, foe=typeOf(flip(code))||{};
   var asked=S.hist.length, same=S.hist.filter(function(x){return x.real===true;}).length;
