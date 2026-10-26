@@ -934,7 +934,7 @@ function switchTab(t){
   document.getElementById("pane-" + t).scrollTop = 0;
 }
 function renderLegend(){
-  if (!C.risk) return;
+  if (!C.mil) return;  /* v4.36b: 판단 점수 층을 내린 뒤 C.risk가 없어 범례가 비던 오류(E68) */
   const L = LAYERS[S.layer], stops = [0, .25, .5, .75, 1].map(v => C[S.layer](v)).join(",");
   const line = (col, dash, w) => { w = w || 26; return '<svg width="' + w + '" height="8" aria-hidden="true"><line x1="1" y1="4" x2="' + (w - 1) + '" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>"; };
   const tk = "<span>Fewer</span><span></span><span>More</span>";
@@ -1393,7 +1393,7 @@ function renderDetail(){
   const recent = (c.recent || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
   const fig = (label, val, sub) => "<div><dt>" + label + "</dt><dd>" + val + (sub ? "<small>" + sub + "</small>" : "") + "</dd></div>";
   el.innerHTML =
-    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · Short profile") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + " " + (c.situation ? ttsBtn("country:" + c.iso) : "") + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p>" + leaderLink(c.iso, "Decision-maker analysis · ") + " " + powerLink(c.iso, "Power structure · ") + "</div>" +
+    back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + " " + (c.situation ? ttsBtn("country:" + c.iso) : "") + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p>" + leaderLink(c.iso, "Decision-maker analysis · ") + " " + powerLink(c.iso, "Power structure · ") + "</div>" +
     '<p class="lead">' + esc(c.situation) + "</p>" + linksHtml(c) + gsBlock(c) + countryIntentHtml(c) + countryPublicsHtml(c) + histBlock(c) +
     "<section class=\"sec\"><h3>Capabilities</h3><dl class=\"figs\">" +
       fig("Defense spending", fmtUsdBn(m.spend_usd_bn), m.spend_year ? m.spend_year + "" : "") +
