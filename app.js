@@ -12,7 +12,7 @@ if (store.get("ep.legoff") === "1") document.documentElement.classList.add("lego
 
 const LAYERS = {
   focus:{label:"분석 대상 지역", desc:"짙을수록 해당 국가가 관련된 전략 분석과 전망이 많습니다."},
-  mil:{label:"군사력", desc:"SIPRI 2025년 군사비(로그 눈금). 짙을수록 많습니다. 나라 이름 아래 숫자는 현역 병력(IISS)과 핵탄두 추정치(SIPRI)입니다."}
+  mil:{label:"군사력", desc:"SIPRI 2025년 군사비(로그 눈금). 이름 아래 숫자는 현역 병력과 핵탄두입니다."}
 };
 /* v4.36(2026-10-27 결재) 판단 점수를 내리고 군사력 색은 측정값(SIPRI 군사비)으로: 5억~1조 달러를 0~100에 로그로 놓는다 */
 function milV(c){ const x = c && c.mil && c.mil.spend_usd_bn; if (!x) return null; return Math.max(0, Math.min(100, (Math.log10(x) - Math.log10(0.5)) / (3 - Math.log10(0.5)) * 100)); }
@@ -353,8 +353,8 @@ function fillFor(f){
   const c = f.iso && D.countries[f.iso];
   if (!c) return C.landOut;
   const mv = S.layer === "mil" ? milV(c) : 0;
-  if (S.layer === "mil" && mv == null) return S.lens && !S.lens.set.has(f.iso) ? C.landOut : d3.interpolateLab(C.mil(0), C.landOut)(0.6);
-  const col = ramp(S.layer, S.layer === "focus" ? (FOCUS[f.iso] || 0) : mv);
+  if (S.layer === "mil" && mv == null) return C.landOut;  /* 군사비 자료 없음은 분석 범위 밖과 같은 회색(범례에 밝힘) */
+  const col = ramp(S.layer, S.layer === "focus" ? (FOCUS[f.iso] || 0) : 25 + 0.75 * mv);  /* 군사력: 가장 연한 색도 회색·바다와 구별되게 25부터 */
   if (S.lens && !S.lens.set.has(f.iso)) return d3.interpolateLab(col, C.landOut)(0.78);
   return col;
 }
@@ -907,7 +907,7 @@ function switchTab(t){
 }
 function renderLegend(){
   if (!C.mil) return;  /* v4.36b: 판단 점수 층을 내린 뒤 C.risk가 없어 범례가 비던 오류(E68) */
-  const L = LAYERS[S.layer], stops = [0, .25, .5, .75, 1].map(v => C[S.layer](v)).join(",");
+  const L = LAYERS[S.layer], stops = (S.layer === "mil" ? [.25, .44, .63, .81, 1] : [0, .25, .5, .75, 1]).map(v => C[S.layer](v)).join(",");
   const line = (col, dash, w) => { w = w || 26; return '<svg width="' + w + '" height="8" aria-hidden="true"><line x1="1" y1="4" x2="' + (w - 1) + '" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>"; };
   const tk = "<span>적음</span><span></span><span>많음</span>";
   const sw = (k, on, body) => '<button type="button" class="mt" data-mt="' + k + '" aria-pressed="' + on + '"><span class="sw" aria-hidden="true"></span>' + body + "</button>";
@@ -915,10 +915,10 @@ function renderLegend(){
   $("#legend").innerHTML = '<button type="button" class="legx" data-legx aria-label="접기" title="접기">×</button>' +
     '<div><label class="lt" for="lysel">지구본 색 기준</label><select id="lysel">' + Object.keys(LAYERS).map(k => '<option value="' + k + '"' + (k === S.layer ? " selected" : "") + ">" + LAYERS[k].label + "</option>").join("") + '</select><div class="ld">' + L.desc + "</div></div>" +
     '<div class="ramp" style="background:linear-gradient(90deg,' + stops + ')"></div><div class="ticks">' + tk + "</div>" +
+    '<div class="kk"><svg width="20" height="10" aria-hidden="true"><rect x="1" y="1" width="18" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>' + (S.layer === "mil" ? "분석 범위 밖·군사비 자료 없음" : "분석 범위 밖") + "</div>" +
     '<div class="keys"><div class="lt">표시 켜고 끄기</div>' +
       sw("edge", S.showEdge, '<span class="kk2"><span class="kk">' + line(C.coop, false, 18) + "협력·동맹</span><span class=\"kk\">" + line(C.conflict, true, 18) + "대립·교전</span></span>") +
       sw("fp", S.showFp, '<span class="kk"><svg width="26" height="12" aria-hidden="true"><circle cx="13" cy="6" r="5" fill="' + C.conflict + '" stroke="' + C.halo + '" stroke-width="1.5"/></svg>분쟁지 (크기 = 심각도)</span>') +
-      '<div class="kk" style="padding-left:30px"><svg width="26" height="10" aria-hidden="true"><rect x="3" y="1" width="20" height="8" rx="1" fill="' + C.landOut + '" stroke="' + C.line + '"/></svg>분석 범위 밖</div>' +
     "</div>" + (D && D.posture ? '<div class="actv"><div class="lt">군사 배치 보기</div><button type="button" class="av" data-mt="usf" aria-pressed="' + S.showUsf + '"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2.4" fill="currentColor"/></svg><span>미군 해외 배치</span><span class="avs">' + (S.showUsf ? "보는 중 · 끄기" : "켜기") + '</span></button>' +
       '<div class="ld">켜면 관계선과 분쟁지 표시가 꺼집니다.</div>' + (S.showUsf ? usfLegend() : "") + "</div>" : "");
 }
@@ -1452,7 +1452,7 @@ function scoreBoxHtml(){
   const top = Object.values(D.countries).filter(c => !c.offmap && milV(c) != null).sort((a, b) => b.mil.spend_usd_bn - a.mil.spend_usd_bn).slice(0, 10);
   return '<div class="layer-sw" role="radiogroup" aria-label="지구본 보기 방식">' + Object.keys(LAYERS).map(k => '<button type="button" role="radio" class="chip' + (k === S.layer ? " on" : "") + '" aria-checked="' + (k === S.layer) + '" data-layer="' + k + '">' + LAYERS[k].label + "</button>").join("") + "</div>" +
     '<p class="note" style="margin:8px 0">군사비 상위 10개국 · SIPRI 2025년(막대는 로그 눈금)</p><div class="bars">' + top.map(c =>
-      '<button type="button" class="bar" data-iso="' + c.iso + '"><span>' + esc(c.name_ko) + '</span><span class="track"><span class="fill" style="display:block;width:' + milV(c) + "%;background:" + ramp("mil", milV(c)) + '"></span></span><span class="v">' + fmtUsdBn(c.mil.spend_usd_bn) + "</span></button>").join("") + "</div>";
+      '<button type="button" class="bar" data-iso="' + c.iso + '"><span>' + esc(c.name_ko) + '</span><span class="track"><span class="fill" style="display:block;width:' + milV(c) + "%;background:" + ramp("mil", 25 + 0.75 * milV(c)) + '"></span></span><span class="v">' + fmtUsdBn(c.mil.spend_usd_bn) + "</span></button>").join("") + "</div>";
 }
 function renderGrand(){
   const G = D.grand, M = G.matrix_order;
