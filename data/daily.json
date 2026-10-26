@@ -1,6 +1,233 @@
 {
  "issues": [
   {
+   "date": "2026-10-26",
+   "items": [
+    {
+     "case": "korea",
+     "h": "김정은, 신압록강대교 건너 중국 단둥 당일 방문…왕후닝이 영접",
+     "fact": "김정은 국무위원장은 24일 신압록강대교를 건너 중국 랴오닝성 단둥을 당일 방문해 항미원조기념탑에 헌화하고 자동차 공장을 둘러봤다고 신화통신(24일)과 조선중앙통신(25일)이 보도했습니다. 왕후닝 전국정치협상회의 주석이 맞이하고 배웅했으며, 시진핑 주석과의 만남은 보도되지 않았습니다.",
+     "fc": [
+      {
+       "id": "f23",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/24/north-koreas-kim-jong-un-arrives-in-china-south-korean-media-says",
+      "https://www.cbsnews.com/news/north-korea-kim-jong-un-china-visit-bridge/",
+      "https://www.khan.co.kr/article/202610251134001/",
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261025/north-korean-leader-kim-jong-un-visits-china-to-inaugurate-a-new-cross-border-bridge"
+     ],
+     "loc": {
+      "lat": 40.13,
+      "lon": 124.39,
+      "place": "단둥(중국)",
+      "isos": [
+       "PRK",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "우샤코프 크렘린 보좌관, 미·러·우 협상 재개 시점으로 11월 4일 이후 제시",
+     "fact": "유리 우샤코프 크렘린 외교 보좌관은 25일 러시아 방송 베스티에 다음 기한은 국경일인 11월 4일이며 그 뒤에 협상을 재개할 준비가 돼 있다고 말했습니다. 첫 회의는 예비적 성격이 될 것이라고 했습니다(RBC 보도).",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://mezha.net/eng/news/mezha-506728c359c6d78d3bba1b72_russia_is_ready",
+      "https://www.pravda.com.ua/eng/news/2026/10/25/8059626/",
+      "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "트럼프, 이란 재공습에 \"어쩌면 내일\"…이튿날엔 \"오늘 공습은 없다\"",
+     "fact": "트럼프 대통령은 24일(현지 시각) 이란을 다시 공격하느냐는 기자 질문에 \"생각하고 있고, 어쩌면 내일\"이라고 말했고, 25일 미시간 유세에 나서기 전 백악관에서는 \"오늘 공습은 없다\"고 말했습니다. 공격 여부를 결정했는지는 밝히지 않았습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.tbsnews.net/worldbiz/usa/trump-says-us-could-strike-iran-soon-tomorrow-or-reach-big-beautiful-deal-1582706",
+      "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/",
+      "https://gulfnews.com/world/mena/middle-east-war-drone-missile-intercepted-over-riyadh-as-king-khalid-airport-resumes-operations-1.500722685"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "후티, 사우디 얀부 아람코 시설 등 공격 주장…사우디는 미사일 요격 발표",
+     "fact": "예멘 후티 반군은 24일 사우디아라비아 얀부의 아람코 시설과 라비그 정유공장 등을 공격했다고 주장했으나 피해는 확인되지 않았습니다. 사우디 주도 연합군은 24일 얀부·타이프를 겨냥한 탄도미사일 2발, 25일 남부를 겨냥한 탄도미사일 10발 등을 요격했다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.ibtimes.co.uk/houthis-claim-strikes-saudi-aramco-oil-refinery-after-coalition-airstrikes-reportedly-kill-16-1827603",
+      "https://www.rferl.org/a/iran-live-blog-trump-middle-east/33803414.html",
+      "https://gulfnews.com/world/mena/middle-east-war-drone-missile-intercepted-over-riyadh-as-king-khalid-airport-resumes-operations-1.500722685"
+     ],
+     "loc": {
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란 외무부, 중재자 통해 미국과 메시지 주고받고 있다고 밝혀",
+     "fact": "이란 국영 매체에 따르면 에스마일 바가이 외무부 대변인은 독일 방송 인터뷰에서 이란이 외교에 열려 있고 중재자를 통해 미국과 메시지를 주고받고 있지만 '완전한 항복' 요구는 받아들일 수 없다고 말했습니다. 아락치 외무장관은 25일 전쟁 여부와 관계없이 이란의 정책은 같다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/",
+      "https://www.dawn.com/news/2039716"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "북한, 안보리 의장에 서한…\"지뢰 폭발은 한국 자작극\" 주장",
+     "fact": "북한은 25일 유엔 안전보장이사회 의장에게 서한을 보내 9월 21일 비무장지대 지뢰 폭발 사건을 한국의 자작극이라고 주장하고, 영토나 인원을 침범하면 자위권을 행사하겠다고 경고했다고 조선중앙통신이 26일 보도했습니다. 북한 매체는 국방부의 23일 군사회담 제안을 보도하지 않았습니다.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.fnnews.com/news/202610260920597475",
+      "https://mezha.net/eng/news/mezha-d7900cd0840862e466af2115_north_korea_accuses",
+      "https://www.kukinews.com/article/view/kuk202610260003"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "세르비아 총선, 학생운동 명단 승리…부치치 패배 인정",
+     "fact": "25일 치른 세르비아 총선에서 알렉산다르 부치치 전 대통령은 표본 집계를 근거로 선거에서 졌다고 인정했습니다. 그는 학생 명단이 250석 가운데 135~140석, 자기 진영이 약 105석을 얻을 것이라고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.euronews.com/2026/10/25/vucic-concedes-defeat-in-pivotal-serbian-elections-says-student-movement-has-won",
+      "https://www.aljazeera.com/news/2026/10/25/serbia-voter-turnout-highest-in-decades-as-students-oppose-longtime-leader"
+     ],
+     "loc": {
+      "isos": [
+       "SRB"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "브라질 대선 결선, 룰라 대통령 4선 성공",
+     "fact": "브라질 최고선거법원은 25일 치른 대선 결선 투표에서 룰라 다시우바 대통령이 51.76%를 얻어 플라비우 보우소나루 상원의원(48.24%)을 이겼다고 발표했습니다. 표 차는 400만 표 이상입니다.",
+     "fc": [],
+     "src": [
+      "https://www.aa.com.tr/en/americas/brazils-president-lula-da-silva-wins-historic-4th-term-after-defeating-flavio-bolsonaro/4100537",
+      "https://www.latintimes.com/lula-defeats-flavio-bolsonaro-brazil-runoff-600552"
+     ],
+     "loc": {
+      "isos": [
+       "BRA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "마차도, 10개월 넘는 망명 끝내고 베네수엘라 귀국",
+     "fact": "베네수엘라 야권 지도자 마리아 코리나 마차도는 25일 10개월 넘는 망명을 끝내고 귀국해 라라주의 한 교회에서 지지자들을 만났습니다. 루비오 미 국무장관은 미국이 지원한 화해 회담의 결과라고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/25/venezuelas-opposition-leader-maria-corina-machado-returns-from-exile",
+      "https://www.cbsnews.com/news/venezuela-opposition-maria-corina-machado-return/"
+     ],
+     "loc": {
+      "isos": [
+       "VEN",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "우크라이나 공군은 러시아가 24일 밤부터 25일 아침(현지 시각) 사이 드론 153대를 날려 119대를 격추하거나 무력화했다고 밝혔습니다. 우크라이나 당국은 24일 밤 드니프로 지역 공격으로 4명이 숨졌다고 밝혔습니다.",
+     "src": [
+      "https://www.euronews.com/2026/10/25/russian-strikes-on-ukraine-kill-four-and-injure-28-authorities-say",
+      "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ]
+    },
+    {
+     "t": "머스크는 우크라이나군이 스타링크 이용약관을 어기고 공격용 드론에 썼다고 주장했고, 베스크레스노우 우크라이나 대통령 고문은 상용 스타링크로는 장·중거리 타격을 할 수 없다고 반박했습니다.",
+     "src": [
+      "https://www.pbs.org/newshour/world/ukraine-disputes-elon-musks-claim-that-its-military-violated-starlinks-terms-of-service",
+      "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ]
+    },
+    {
+     "t": "이란 타스님 통신은 25일 이란 육군 방공망이 반다르아바스 상공에서 미군 무인기를 격추했다고 주장했으며, 이 주장은 독립적으로 확인되지 않았습니다.",
+     "src": [
+      "https://www.tasnimnews.ir/en/news/2026/10/25/3731598/iran-downs-us-lucas-drone",
+      "https://anewz.tv/middle-east-conflict/news/25883/iran-war-latest-tehran-shoots-down-us-drone/news"
+     ]
+    },
+    {
+     "t": "네타냐후 이스라엘 총리는 25일 27일 총선을 앞두고 이란이나 그 대리 세력이 선거를 방해하려 공격할 수 있다고 경고했습니다.",
+     "src": [
+      "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/"
+     ]
+    },
+    {
+     "t": "25일 오전 김포 애기봉 전망대에서 황해도 개풍군 해안 접경지에 남쪽으로 포구를 둔 북한군 122㎜ 자주포로 추정되는 장비가 포착됐다고 연합뉴스가 보도했습니다.",
+     "src": [
+      "https://www.kukinews.com/article/view/kuk202610260003",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008814071"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-24",
    "items": [
     {

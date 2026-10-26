@@ -1,6 +1,233 @@
 {
  "issues": [
   {
+   "date": "2026-10-26",
+   "items": [
+    {
+     "case": "korea",
+     "h": "Kim Jong Un makes day trip to China's Dandong, greeted by Wang Huning",
+     "fact": "North Korean leader Kim Jong Un crossed the New Yalu River Bridge on October 24 for a one-day visit to Dandong in China's Liaoning province, laying a wreath at the memorial to China's Korean War intervention and touring a car factory, according to Xinhua (October 24) and KCNA (October 25). Wang Huning, chairman of the Chinese People's Political Consultative Conference, received him and saw him off; no meeting with Xi Jinping was reported.",
+     "fc": [
+      {
+       "id": "f23",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/24/north-koreas-kim-jong-un-arrives-in-china-south-korean-media-says",
+      "https://www.cbsnews.com/news/north-korea-kim-jong-un-china-visit-bridge/",
+      "https://www.khan.co.kr/article/202610251134001/",
+      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261025/north-korean-leader-kim-jong-un-visits-china-to-inaugurate-a-new-cross-border-bridge"
+     ],
+     "loc": {
+      "lat": 40.13,
+      "lon": 124.39,
+      "place": "Dandong (China)",
+      "isos": [
+       "PRK",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Kremlin aide Ushakov says U.S.-Russia-Ukraine talks can resume after November 4",
+     "fact": "Yuri Ushakov, the Kremlin's foreign policy aide, told Russian TV channel Vesti on October 25 that the next deadline is November 4, a Russian national holiday, and that Moscow is ready to resume talks after that. He said the first meeting would be preliminary, RBC reported.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://mezha.net/eng/news/mezha-506728c359c6d78d3bba1b72_russia_is_ready",
+      "https://www.pravda.com.ua/eng/news/2026/10/25/8059626/",
+      "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Trump on new Iran strikes: \"maybe tomorrow\" — then \"There will not be a strike today\"",
+     "fact": "Asked on October 24 (local time) whether the U.S. would strike Iran again, President Trump told reporters, \"We're thinking about doing it, and maybe tomorrow.\" On October 25, at the White House before leaving for a rally in Michigan, he said, \"There will not be a strike today.\" He did not say whether he had made a decision.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.tbsnews.net/worldbiz/usa/trump-says-us-could-strike-iran-soon-tomorrow-or-reach-big-beautiful-deal-1582706",
+      "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/",
+      "https://gulfnews.com/world/mena/middle-east-war-drone-missile-intercepted-over-riyadh-as-king-khalid-airport-resumes-operations-1.500722685"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Houthis claim strikes on Aramco site in Yanbu; Saudi Arabia says it intercepted missiles",
+     "fact": "Yemen's Houthis claimed on October 24 that they struck an Aramco facility in Yanbu, the Rabigh refinery and other targets in Saudi Arabia; no damage has been confirmed. The Saudi-led coalition said it intercepted two ballistic missiles aimed at Yanbu and Taif on October 24 and 10 aimed at southern Saudi Arabia on October 25, among others.",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.ibtimes.co.uk/houthis-claim-strikes-saudi-aramco-oil-refinery-after-coalition-airstrikes-reportedly-kill-16-1827603",
+      "https://www.rferl.org/a/iran-live-blog-trump-middle-east/33803414.html",
+      "https://gulfnews.com/world/mena/middle-east-war-drone-missile-intercepted-over-riyadh-as-king-khalid-airport-resumes-operations-1.500722685"
+     ],
+     "loc": {
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran says it is trading messages with the U.S. through intermediaries",
+     "fact": "Foreign Ministry spokesman Esmail Baghaei told a German broadcaster that Iran remains open to diplomacy and is passing messages to the U.S. through intermediaries, but that Iran cannot accept demands for \"complete surrender,\" Iranian state media reported. Foreign Minister Abbas Araghchi said on October 25 that Iran's policies stay the same whether or not there is war.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/",
+      "https://www.dawn.com/news/2039716"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "North Korea claims to UN Security Council that South staged DMZ mine blast",
+     "fact": "North Korea sent a letter on October 25 to the president of the UN Security Council calling the September 21 mine explosion in the DMZ a South Korean fabrication and warning that it would exercise its right of self-defense if its territory or personnel were violated, KCNA reported on October 26. North Korean media have not reported the South Korean Defense Ministry's October 23 proposal for military talks.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.fnnews.com/news/202610260920597475",
+      "https://mezha.net/eng/news/mezha-d7900cd0840862e466af2115_north_korea_accuses",
+      "https://www.kukinews.com/article/view/kuk202610260003"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Student movement wins Serbia's election as Vučić concedes defeat",
+     "fact": "Former President Aleksandar Vučić conceded defeat in Serbia's October 25 parliamentary election, citing a sample count. He said the Student List would win 135 to 140 of the 250 seats and his own camp about 105.",
+     "fc": [],
+     "src": [
+      "https://www.euronews.com/2026/10/25/vucic-concedes-defeat-in-pivotal-serbian-elections-says-student-movement-has-won",
+      "https://www.aljazeera.com/news/2026/10/25/serbia-voter-turnout-highest-in-decades-as-students-oppose-longtime-leader"
+     ],
+     "loc": {
+      "isos": [
+       "SRB"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Lula wins a fourth term in Brazil's presidential runoff",
+     "fact": "Brazil's Superior Electoral Court declared President Luiz Inácio Lula da Silva the winner of the October 25 runoff with 51.76 percent of the vote against 48.24 percent for Senator Flávio Bolsonaro, a margin of more than 4 million votes.",
+     "fc": [],
+     "src": [
+      "https://www.aa.com.tr/en/americas/brazils-president-lula-da-silva-wins-historic-4th-term-after-defeating-flavio-bolsonaro/4100537",
+      "https://www.latintimes.com/lula-defeats-flavio-bolsonaro-brazil-runoff-600552"
+     ],
+     "loc": {
+      "isos": [
+       "BRA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Machado returns to Venezuela after more than 10 months in exile",
+     "fact": "Venezuelan opposition leader María Corina Machado returned home on October 25 after more than 10 months in exile and greeted supporters at a church in Lara state. Secretary of State Marco Rubio said her return was the result of U.S.-backed reconciliation talks.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/25/venezuelas-opposition-leader-maria-corina-machado-returns-from-exile",
+      "https://www.cbsnews.com/news/venezuela-opposition-maria-corina-machado-return/"
+     ],
+     "loc": {
+      "isos": [
+       "VEN",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Ukraine's air force said Russia launched 153 drones overnight on October 24–25 and that 119 were shot down or neutralized; Ukrainian authorities said a Russian attack on the Dnipro area on the night of October 24 killed four people.",
+     "src": [
+      "https://www.euronews.com/2026/10/25/russian-strikes-on-ukraine-kill-four-and-injure-28-authorities-say",
+      "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ]
+    },
+    {
+     "t": "Elon Musk claimed Ukraine's military violated Starlink's terms of service by using it for offensive drone strikes; Serhii Beskrestnov, an adviser to President Zelensky, countered that commercial Starlink cannot be used for long- or medium-range strikes.",
+     "src": [
+      "https://www.pbs.org/newshour/world/ukraine-disputes-elon-musks-claim-that-its-military-violated-starlinks-terms-of-service",
+      "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ]
+    },
+    {
+     "t": "Iran's Tasnim news agency claimed on October 25 that army air defenses shot down a U.S. drone over Bandar Abbas; the claim has not been independently verified.",
+     "src": [
+      "https://www.tasnimnews.ir/en/news/2026/10/25/3731598/iran-downs-us-lucas-drone",
+      "https://anewz.tv/middle-east-conflict/news/25883/iran-war-latest-tehran-shoots-down-us-drone/news"
+     ]
+    },
+    {
+     "t": "Israeli Prime Minister Benjamin Netanyahu warned on October 25 that Iran or its proxies could attack to disrupt Israel's October 27 general election.",
+     "src": [
+      "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/"
+     ]
+    },
+    {
+     "t": "Yonhap reported that what appears to be a North Korean 122mm self-propelled gun, its barrel pointed south, was spotted on the morning of October 25 in a coastal border area of Kaepung County, Hwanghae Province, as seen from the Aegibong observatory in Gimpo.",
+     "src": [
+      "https://www.kukinews.com/article/view/kuk202610260003",
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008814071"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-24",
    "items": [
     {

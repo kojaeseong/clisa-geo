@@ -508,6 +508,22 @@
    "case": null,
    "fc": [],
    "fp": "caribbean-pacific-boat-strikes"
+  },
+  {
+   "date": "2026-10-21",
+   "s": "중동 거점 인력 축소",
+   "kind": "down",
+   "lat": 26.0,
+   "lon": 50.6,
+   "t": "후티와 이란의 위협을 이유로 중동 거점의 미군 인력을 조용히 줄이고 있다고 10월 21일 보도됨(규모와 기지는 밝히지 않음). 같은 날 국무부는 사우디아라비아 주재 비긴급 직원과 가족의 출국을 명령함",
+   "grade": "보도",
+   "src": "익명의 미 당국자와 미군 고위 당국자(CBS 보도), 국무부 출국 명령",
+   "url": "https://www.cbsnews.com/news/us-saudi-arabia-ordered-departure-houthis/",
+   "case": "iran",
+   "fc": [
+    "f04"
+   ],
+   "fp": "iran-war"
   }
  ]
 }

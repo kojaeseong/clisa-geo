@@ -508,6 +508,22 @@
    "case": null,
    "fc": [],
    "fp": "caribbean-pacific-boat-strikes"
+  },
+  {
+   "date": "2026-10-21",
+   "s": "Mideast posts thinned",
+   "kind": "down",
+   "lat": 26.0,
+   "lon": 50.6,
+   "t": "The U.S. military is quietly reducing its footprint at posts in the Middle East because of Houthi and Iranian threats, according to an Oct. 21 report (size and bases not disclosed). The same day, the State Department ordered non-emergency staff and family members to leave Saudi Arabia",
+   "grade": "Reported",
+   "src": "Anonymous U.S. official and senior U.S. military official (CBS News); State Department ordered departure",
+   "url": "https://www.cbsnews.com/news/us-saudi-arabia-ordered-departure-houthis/",
+   "case": "iran",
+   "fc": [
+    "f04"
+   ],
+   "fp": "iran-war"
   }
  ]
 }
