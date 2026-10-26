@@ -12,11 +12,10 @@ if (store.get("ep.legoff") === "1") document.documentElement.classList.add("lego
 
 const LAYERS = {
   focus:{label:"분석 대상 지역", desc:"짙을수록 해당 국가가 관련된 전략 분석과 전망이 많습니다."},
-  risk:{label:"위험도", desc:"판단 점수. 높을수록 무력 충돌이나 체제 불안의 위험이 큽니다."},
-  mil:{label:"군사력", desc:"판단 점수. 세계 기준(미국 = 100)의 상대적 군사 능력. 나라 이름 아래 숫자는 현역 병력(IISS)과 핵탄두 추정치(SIPRI)입니다."},
-  pol:{label:"정치 안정", desc:"판단 점수. 높을수록 정권과 정책 방향이 안정적입니다."},
-  econ:{label:"경제 비중", desc:"판단 점수. 경제 규모와 충격에 대한 회복력."}
+  mil:{label:"군사력", desc:"SIPRI 2025년 군사비(로그 눈금). 짙을수록 많습니다. 나라 이름 아래 숫자는 현역 병력(IISS)과 핵탄두 추정치(SIPRI)입니다."}
 };
+/* v4.36(2026-10-27 결재) 판단 점수를 내리고 군사력 색은 측정값(SIPRI 군사비)으로: 5억~1조 달러를 0~100에 로그로 놓는다 */
+function milV(c){ const x = c && c.mil && c.mil.spend_usd_bn; if (!x) return null; return Math.max(0, Math.min(100, (Math.log10(x) - Math.log10(0.5)) / (3 - Math.log10(0.5)) * 100)); }
 const JLAYERS = ["risk", "mil", "pol", "econ"];
 const TAB_ALIAS = {philo:"method", shelf:"ideas", history:"ideas", exit:"strat"};
 let FOCUS = {}, FCN = {};
@@ -353,7 +352,9 @@ const versor = (function(){
 function fillFor(f){
   const c = f.iso && D.countries[f.iso];
   if (!c) return C.landOut;
-  const col = ramp(S.layer, S.layer === "focus" ? (FOCUS[f.iso] || 0) : (c.scores ? c.scores[S.layer] : 50));
+  const mv = S.layer === "mil" ? milV(c) : 0;
+  if (S.layer === "mil" && mv == null) return S.lens && !S.lens.set.has(f.iso) ? C.landOut : d3.interpolateLab(C.mil(0), C.landOut)(0.6);
+  const col = ramp(S.layer, S.layer === "focus" ? (FOCUS[f.iso] || 0) : mv);
   if (S.lens && !S.lens.set.has(f.iso)) return d3.interpolateLab(col, C.landOut)(0.78);
   return col;
 }
@@ -714,7 +715,7 @@ function showTip(h, x, y){
     else html = "<b>" + esc(o.name) + '</b> 상주 미군 <span class="num">' + o.n.toLocaleString("ko-KR") + "</span>명" + (o.prev ? '<br><span class="m">직전 분기 ' + o.prev.toLocaleString("ko-KR") + "명 · " + ((o.n - o.prev) >= 0 ? "+" : "") + (o.n - o.prev).toLocaleString("ko-KR") + "</span>" : "") + '<br><span class="m">미 국방부 인력데이터센터 · ' + ymd(P.res.asof) + " 기준</span>";
   }
   else if (h.fp) html = "<b>" + esc(h.fp.name_ko) + "</b><br>" + pips(h.fp.severity) + ' <span class="m">심각도 ' + h.fp.severity + "/5</span><br><span class=\"m num\">" + esc(h.fp.last_major_event ? h.fp.last_major_event.date : "") + "</span> " + esc(h.fp.last_major_event ? h.fp.last_major_event.text : "");
-  else if (h.iso && D.countries[h.iso]) { const c = D.countries[h.iso]; html = "<b>" + esc(c.name_ko) + '</b> <span class="m">' + esc(c.region) + "</span><br>" + (S.layer === "focus" ? '관련 전망 <span class="num">' + (FCN[c.iso] || 0) + "</span>건" : LAYERS[S.layer].label + ' <span class="num">' + (c.scores ? c.scores[S.layer] : "—") + "</span>") + '<br><span class="m">' + esc(shortLeader(c.leader)) + "</span>"; }
+  else if (h.iso && D.countries[h.iso]) { const c = D.countries[h.iso]; html = "<b>" + esc(c.name_ko) + '</b> <span class="m">' + esc(c.region) + "</span><br>" + (S.layer === "focus" ? '관련 전망 <span class="num">' + (FCN[c.iso] || 0) + "</span>건" : '국방비 <span class="num">' + fmtUsdBn(c.mil && c.mil.spend_usd_bn) + "</span>") + '<br><span class="m">' + esc(shortLeader(c.leader)) + "</span>"; }
   else if (h.f) html = "<b>" + esc(h.f.properties.name) + '</b><br><span class="m">분석 범위 밖</span>';
   if (!html) return hideTip();
   tip.innerHTML = html; tip.hidden = false;
@@ -908,7 +909,7 @@ function renderLegend(){
   if (!C.risk) return;
   const L = LAYERS[S.layer], stops = [0, .25, .5, .75, 1].map(v => C[S.layer](v)).join(",");
   const line = (col, dash, w) => { w = w || 26; return '<svg width="' + w + '" height="8" aria-hidden="true"><line x1="1" y1="4" x2="' + (w - 1) + '" y2="4" stroke="' + col + '" stroke-width="2"' + (dash ? ' stroke-dasharray="5 4"' : "") + "/></svg>"; };
-  const tk = S.layer === "focus" ? "<span>적음</span><span></span><span>많음</span>" : "<span>0</span><span>50</span><span>100</span>";
+  const tk = "<span>적음</span><span></span><span>많음</span>";
   const sw = (k, on, body) => '<button type="button" class="mt" data-mt="' + k + '" aria-pressed="' + on + '"><span class="sw" aria-hidden="true"></span>' + body + "</button>";
   $("#legend").classList.toggle("usfon", !!(S.showUsf && D && D.posture));
   $("#legend").innerHTML = '<button type="button" class="legx" data-legx aria-label="접기" title="접기">×</button>' +
@@ -1369,9 +1370,7 @@ function renderDetail(){
   const fig = (label, val, sub) => "<div><dt>" + label + "</dt><dd>" + val + (sub ? "<small>" + sub + "</small>" : "") + "</dd></div>";
   el.innerHTML =
     back + '<div class="sec"><p class="eyebrow">' + esc(c.region) + (c.tier === 1 ? "" : " · 약식 프로필") + '</p><h2 style="margin-top:4px">' + esc(c.name_ko) + " " + (c.situation ? ttsBtn("country:" + c.iso) : "") + '</h2><p class="meta" style="margin-top:4px">' + esc(c.leader) + "</p>" + leaderLink(c.iso, "결정권자 분석 · ") + " " + powerLink(c.iso, "권력 구조 · ") + "</div>" +
-    '<p class="lead">' + esc(c.situation) + "</p>" + gsBlock(c) + countryIntentHtml(c) + countryPublicsHtml(c) + histBlock(c) +
-    '<section class="sec"><h3>판단 점수 <span style="font-weight:400">(0–100)</span></h3><div class="scores">' + JLAYERS.map(k =>
-      '<div class="score"><span' + (k === S.layer ? ' style="font-weight:600"' : "") + ">" + LAYERS[k].label + '</span><span class="track" style="height:8px;background:var(--panel-2);border-radius:2px;overflow:hidden"><span style="display:block;height:100%;width:' + c.scores[k] + "%;background:" + ramp(k, c.scores[k]) + ';border-radius:0 4px 4px 0"></span></span><span class="mono" style="text-align:right;font-size:12px">' + c.scores[k] + "</span></div>").join("") + "</div></section>" +
+    '<p class="lead">' + esc(c.situation) + "</p>" + linksHtml(c) + gsBlock(c) + countryIntentHtml(c) + countryPublicsHtml(c) + histBlock(c) +
     '<section class="sec"><h3>능력 지표</h3><dl class="figs">' +
       fig("국방비", fmtUsdBn(m.spend_usd_bn), m.spend_year ? m.spend_year + "년" : "") +
       fig("현역 병력", fmtPeople(m.active_personnel)) +
@@ -1387,6 +1386,22 @@ function renderDetail(){
     (fcs.length ? '<section class="sec"><h3>관련 전망</h3><ul class="list">' + fcs.map(f => forecastRow(f, true)).join("") + '</ul><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기</button></p></section>' : "") +
     ((c.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + c.uncertain.length + "건</summary><ul>" + c.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
     '<details class="src"><summary>출처 ' + (c.sources || []).length + "건</summary><ul>" + (c.sources || []).map(srcItem).join("") + "</ul></details>";
+}
+/* v4.36(2026-10-27 결재) 나라 카드의 '클리사 지오폴리틱스에서 보기': 관련 사안(결정권자이거나 본문에 이름이 3번 이상), 진행 중인 전망, 정세 요약, 일정 */
+function linksHtml(c){
+  const iso = c.iso, ids = (c.links && c.links.cases) || [];
+  const cs = (D.strategies || []).filter(k => ids.includes(k.id));
+  const fs = D.forecasts.filter(f => f.status === "open" && (f.countries || []).includes(iso)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 5);
+  const dg = D.digest.map((g, gi) => [g, gi]).filter(([g]) => (g.ids || []).includes(iso));
+  const ev = (D.events || []).filter(e => ((e.loc || {}).isos || []).includes(iso) && daysLeft(e.date.length === 7 ? e.date + "-28" : (e.end || e.date)) >= 0);
+  if (!cs.length && !fs.length && !dg.length && !ev.length) return "";
+  const row = (k, body) => '<p class="note" style="margin:6px 0 0"><b style="color:var(--ink-2)">' + k + "</b> " + body + "</p>";
+  return '<section class="sec" id="c-links"><h3>클리사 지오폴리틱스에서 보기</h3>' +
+    (cs.length ? row("사안", cs.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join(" ")) : "") +
+    (fs.length ? row("전망", fs.map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep"> · </span>')) : "") +
+    (dg.length ? row("정세 요약", dg.map(([g, gi]) => '<button type="button" class="fcl" data-dg="' + gi + '">' + esc(g.t) + "</button>").join('<span class="sep"> · </span>')) : "") +
+    (ev.length ? row("일정", ev.map(e => '<button type="button" class="fcl" data-ev="' + esc(e.id) + '">' + esc(evDate(e)) + " " + esc(e.t) + "</button>").join('<span class="sep"> · </span>')) : "") +
+    "</section>";
 }
 function countryIntentHtml(c){
   const v = c.intent; const cases = (D.strategies || []).filter(k => k.deciders && k.deciders.items.some(d => d.iso === c.iso));
@@ -1434,11 +1449,10 @@ function dyadHtml(a, b){
 let mxSel = ["USA", "CHN"];
 const ABBR = {USA:"미", CHN:"중", RUS:"러", EUR:"EU", JPN:"일", KOR:"한", PRK:"북", IND:"인", IRN:"이란", ISR:"이스", TUR:"튀"};
 function scoreBoxHtml(){
-  const L = S.layer === "focus" ? "risk" : S.layer;
-  const top = Object.values(D.countries).filter(c => !c.offmap && c.scores).sort((a, b) => b.scores[L] - a.scores[L]).slice(0, 10);
+  const top = Object.values(D.countries).filter(c => !c.offmap && milV(c) != null).sort((a, b) => b.mil.spend_usd_bn - a.mil.spend_usd_bn).slice(0, 10);
   return '<div class="layer-sw" role="radiogroup" aria-label="지구본 보기 방식">' + Object.keys(LAYERS).map(k => '<button type="button" role="radio" class="chip' + (k === S.layer ? " on" : "") + '" aria-checked="' + (k === S.layer) + '" data-layer="' + k + '">' + LAYERS[k].label + "</button>").join("") + "</div>" +
-    '<p class="note" style="margin:8px 0">' + LAYERS[L].label + " 상위 10개국 · " + esc(LAYERS[L].desc) + '</p><div class="bars">' + top.map(c =>
-      '<button type="button" class="bar" data-iso="' + c.iso + '"><span>' + esc(c.name_ko) + '</span><span class="track"><span class="fill" style="display:block;width:' + c.scores[L] + "%;background:" + ramp(L, c.scores[L]) + '"></span></span><span class="v">' + c.scores[L] + "</span></button>").join("") + "</div>";
+    '<p class="note" style="margin:8px 0">군사비 상위 10개국 · SIPRI 2025년(막대는 로그 눈금)</p><div class="bars">' + top.map(c =>
+      '<button type="button" class="bar" data-iso="' + c.iso + '"><span>' + esc(c.name_ko) + '</span><span class="track"><span class="fill" style="display:block;width:' + milV(c) + "%;background:" + ramp("mil", milV(c)) + '"></span></span><span class="v">' + fmtUsdBn(c.mil.spend_usd_bn) + "</span></button>").join("") + "</div>";
 }
 function renderGrand(){
   const G = D.grand, M = G.matrix_order;
@@ -1463,7 +1477,7 @@ function renderGrand(){
   const cnt = k => cs.filter(c => c.drivers.top === k).length;
   $("#pane-grand").innerHTML =
     '<div class="sec"><h2>국제 질서</h2><p class="meta" style="margin-top:4px">세계 시나리오 ' + G.scenarios.length + "건 · 구조적 흐름 " + G.trends.length + "건 · 관계 분석 " + G.dyads.length + '건</p><p class="lead" style="margin-top:8px">개별 사안을 넘어 국제 질서 전반을 움직이는 구조를 분석합니다. 2030년까지의 세계 시나리오와 구조적 흐름, 주요 행위자의 대전략과 상호 관계를 다루고, 각 시나리오가 개별 사안의 전개에 미치는 영향을 함께 제시합니다.</p></div>' +
-    tocHtml([["g-scn","시나리오"],["g-trend","구조적 흐름"],["g-mx","관계 행렬"],["g-drv","대전략의 동인"],["g-ten","역사와 구조"],["g-score","국가별 점수"]]) +
+    tocHtml([["g-scn","시나리오"],["g-trend","구조적 흐름"],["g-mx","관계 행렬"],["g-drv","대전략의 동인"],["g-ten","역사와 구조"],["g-score","지구본 보기 방식"]]) +
     '<section class="sec" id="g-scn"><h3>2030년까지의 세계 시나리오 · 확률 합계 100% ' + ttsBtn("scn") + '</h3><ul class="list">' + G.scenarios.map(sc => {
       const th = D.thinkers.find(t => t.id === sc.thinker);
       return '<li class="scn"><div class="scn-h"><b>' + esc(sc.id + ". " + sc.name) + '</b><span class="p">' + sc.p + '<small style="font-size:12px;color:var(--muted)">%</small></span></div><div class="prob"><i style="width:' + sc.p + '%"></i></div><p style="font-size:13px;color:var(--ink-2)">' + esc(sc.d) + '</p><div><h3 style="margin:4px 0 4px">선행 신호</h3><ul>' + sc.signals.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></div><div class="kr"><b>한국에는</b> · ' + esc(sc.korea) + "</div>" + (sc.case_fut || sc.korea_fut ? '<div class="note" style="margin:0;display:grid;gap:3px"><b style="color:var(--ink-2)">이 시나리오에서 각 사안의 2030년 전개</b>' + Object.entries(Object.assign({korea: sc.korea_fut}, sc.case_fut || {})).filter(([, m]) => m).map(([cid, m]) => { const k = (D.strategies || []).find(x => x.id === cid); return '<span><button type="button" class="chip" data-case="' + cid + '">' + esc(k ? k.title.split(":")[0] : cid) + "</button> " + Object.entries(m).map(([f, v]) => '<span class="mono" style="color:' + fcol(f) + '">' + f + " " + v + "%</span>").join(" · ") + "</span>"; }).join("") + "</div>" : "") + (th ? '<button type="button" class="lens-btn" data-lens="' + th.id + '">관련 사상가 관점 · ' + esc(th.name) + "</button>" : "") + "</li>";
@@ -1476,7 +1490,7 @@ function renderGrand(){
       '<div style="display:grid;gap:2px;margin-top:8px">' + cs.map(c => '<button type="button" class="drv-row" data-iso="' + c.iso + '"><span class="n">' + esc(c.name_ko) + "</span>" + drvBar(c.drivers.w) + '<span class="t">' + DLAB[c.drivers.top] + " " + c.drivers.w[c.drivers.top] + "</span></button>").join("") + "</div></section>" +
     '<section class="sec" id="g-ten"><h3>역사와 구조가 어긋나는 관계 ' + ttsBtn("ten") + '</h3><p class="note" style="margin-bottom:8px">역사적 원한은 깊으나 힘의 구조가 협력을 요구하는 관계입니다. 기억과 구조 가운데 어느 쪽이 우세한지를 보면 역사가 대전략을 얼마나 움직이는지 알 수 있습니다.</p><ul class="list">' +
       G.tensions.map(t => '<li class="ten"><div class="hd"><b>' + esc(nm(t.a)) + " ↔ " + esc(nm(t.b)) + '</b><span class="st ' + (t.verdict === "구조 우위" ? "yes" : "open") + '">' + esc(t.verdict) + "</span></div><dl><dt>기억</dt><dd>" + esc(t.memory) + "</dd><dt>구조</dt><dd>" + esc(t.structure) + "</dd></dl><p class=\"note\">" + esc(t.note) + "</p></li>").join("") + "</ul></section>" +
-    '<section class="sec" id="g-score"><h3>국가별 판단 점수와 지구본 보기 방식</h3><p class="note" style="margin-bottom:8px">지구본의 기본 화면은 분석 대상 지역입니다. 아래의 4개 점수는 측정값이 아니라 판단값이며, 보조 자료로 제공합니다.</p><div id="scorebox">' + scoreBoxHtml() + "</div></section>" +
+    '<section class="sec" id="g-score"><h3>지구본 보기 방식</h3><p class="note" style="margin-bottom:8px">지구본의 기본 화면은 분석 대상 지역입니다. 군사력 보기는 SIPRI 2025년 군사비로 색을 칠합니다.</p><div id="scorebox">' + scoreBoxHtml() + "</div></section>" +
     '<section class="sec"><h3>국가별 대전략</h3><div class="chips" style="margin:0">' + Object.values(D.countries).filter(c => c.gs).map(c => chip(c.iso)).join("") + "</div></section>" +
     "";
 }
