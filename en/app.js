@@ -1484,6 +1484,7 @@ function aswFold(){
   addEventListener("keydown", e => { if (e.key === "Escape") set(false); });
 }
 /* v4.38 권역별 정세: 권역(zone)은 자료 D.zones, 나라마다 c.zone. 미국·중국은 역외 강대국(D.zones_powers)이라 권역에 넣지 않는다 */
+S.zfold = store.get("ep.zfold") === "1";
 const ZN = () => (D && D.zones) || [], ZPW = () => (D && D.zones_powers) || [];
 const zoneOf = id => ZN().find(z => z.id === id);
 const zoneIsos = id => Object.keys(D.countries).filter(k => D.countries[k].zone === id);
@@ -1505,8 +1506,10 @@ function zonePins(set){
 }
 function zoneBarSync(){
   const b = document.getElementById("zonebar"); if (!b) return; if (!ZN().length) { b.hidden = true; return; }
-  b.innerHTML = '<span class="lbl">' + "Regions" + "</span>" + ZN().map(z => '<button type="button" class="zc" data-zone="' + esc(z.id) + '" aria-pressed="' + (S.zone === z.id) + '">' + esc(z.name_ko) + "</button>").join("") +
-    '<span class="lbl zp">' + LKZ_H[1] + "</span>" + ZPW().map(i => '<button type="button" class="zc" data-iso="' + i + '">' + esc(D.countries[i].name_ko) + "</button>").join("") +
+  const fold = !narrow() && S.zfold, z0 = zoneOf(S.zone); b.classList.toggle("fold", !!fold);  /* v4.38b 지도 표시처럼 접기(데스크톱) */
+  if (fold) { b.innerHTML = '<button type="button" class="legbtn zbtn" data-zfold="0" aria-expanded="false"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7.2"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4"/></svg>' + "Regions" + (z0 ? " <b>" + esc(z0.name_ko) + "</b>" : "") + "</button>"; b.hidden = false; return; }
+  b.innerHTML = '<span class="lbl">' + "Regions" + '</span><button type="button" class="zx" data-zfold="1" aria-label="' + "Collapse" + '" title="' + "Collapse" + '">×</button>' + ZN().map(z => '<button type="button" class="zc" data-zone="' + esc(z.id) + '" aria-pressed="' + (S.zone === z.id) + '">' + esc(z.name_ko) + "</button>").join("") +
+    '<div class="zp-row"><span class="lbl zp">' + LKZ_H[1] + "</span>" + ZPW().map(i => '<button type="button" class="zc" data-iso="' + i + '">' + esc(D.countries[i].name_ko) + "</button>").join("") + "</div>" +
     (D.countries.EUR ? '<span class="lbl zp zo">' + "Non-state actors" + '</span><button type="button" class="zc zo" data-iso="EUR">' + esc(D.countries.EUR.name_ko) + "</button>" : "");  /* 휴대전화에서는 국가 밖 행위자도 이 줄로(지구본 아래 따로 있던 줄을 대신) */
   b.hidden = false;
   const on = b.querySelector('[aria-pressed="true"]'); if (on && narrow()) on.scrollIntoView({block: "nearest", inline: "center"});
@@ -1529,6 +1532,7 @@ function goZone(id){
 }
 function zoneOff(){ if (!S.zone) return; S.zone = null; S.zonePins = null; if (S.zoneLeg) { document.documentElement.classList.remove("legoff"); S.zoneLeg = false; } if (S.lens && String(S.lens.id).indexOf("zone:") === 0) S.lens = null; zoneBarSync(); requestDraw(true); }
 document.addEventListener("click", ev => {
+  const zf = ev.target.closest("[data-zfold]"); if (zf) { S.zfold = zf.dataset.zfold === "1"; store.set("ep.zfold", S.zfold ? "1" : "0"); zoneBarSync(); return; }
   const zb = ev.target.closest("[data-zone]");  /* v4.38 권역 단추: 다시 누르면 권역 보기를 끄고 세계 정세로 */
   if (zb) { ev.preventDefault(); if (S.zone === zb.dataset.zone && S.tab === "region") { zoneOff(); viewRestore(); switchTab("overview"); } else goZone(zb.dataset.zone); return; }
   const b = ev.target.closest("[data-lkm]"); if (!b || !S.lk) return;  /* 연결 칸의 더 보기(그 자리에서) */
