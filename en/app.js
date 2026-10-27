@@ -307,6 +307,8 @@ function ensureRendered(t){ if (D && TAB_RENDER[t] && !RENDERED[t]) TAB_RENDER[t
 const PUB = () => !!(D && D.meta && D.meta.edition === "public");
 function initGlobe(w){
   if (!D) return;
+  zoneBarSync();  /* v4.38 */
+  aswFold();
   const numToIso = {};
   for (const [iso, c] of Object.entries(D.countries)) if (c.num) numToIso[c.num] = iso;
   features = topojson.feature(w, w.objects.countries).features;
@@ -500,6 +502,18 @@ function drawOver(t){
       if (p) { octx.beginPath(); octx.arc(p[0], p[1], 6.5, 0, Math.PI * 2); octx.fillStyle = C.accent; octx.fill(); octx.lineWidth = 2.5; octx.strokeStyle = C.halo; octx.stroke();
         if (S.mark.place) { octx.font = '700 12px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif'; octx.textAlign = "center"; octx.textBaseline = "middle"; octx.lineJoin = "round";
           octx.lineWidth = 3.5; octx.strokeStyle = C.halo; octx.strokeText(S.mark.place, p[0], p[1] - 16); octx.fillStyle = C.accent; octx.fillText(S.mark.place, p[0], p[1] - 16); } } }
+  }
+  if (S.zonePins && S.zonePins.length) {  /* v4.38 권역 지구본: 최근 2주 브리핑의 사건 장소(●)와 다가오는 일정(○), 이름은 겹치지 않는 것만 */
+    const pts = [], bx = [];
+    for (const q of S.zonePins) { const ll = [q.lon, q.lat]; if (d3.geoDistance(ll, ctr) > 1.45) continue; const p = projection(ll); if (!p) continue;
+      if (pts.some(o => Math.hypot(o[0] - p[0], o[1] - p[1]) < 5)) continue; pts.push([p[0], p[1], q]); }
+    for (const [x, y, q] of pts) { octx.beginPath(); octx.arc(x, y, 4.5, 0, Math.PI * 2);
+      if (q.k === "b") { octx.fillStyle = C.accent; octx.fill(); octx.lineWidth = 1.6; octx.strokeStyle = C.halo; octx.stroke(); }
+      else { octx.fillStyle = C.halo; octx.fill(); octx.lineWidth = 2.2; octx.strokeStyle = C.accent; octx.stroke(); } }
+    octx.font = '600 10.5px "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif'; octx.textAlign = "left"; octx.textBaseline = "middle"; octx.lineJoin = "round";
+    for (const [x, y, q] of pts) { if (!q.place) continue; const w = octx.measureText(q.place).width, b = [x + 7, y - 7, x + 9 + w, y + 7];
+      if (bx.some(o => b[0] < o[2] && b[2] > o[0] && b[1] < o[3] && b[3] > o[1])) continue; bx.push(b);
+      octx.lineWidth = 3; octx.strokeStyle = C.halo; octx.strokeText(q.place, x + 8, y); octx.fillStyle = C.ink; octx.fillText(q.place, x + 8, y); }
   }
 }
 /* v3.77 미군 해외 배치: 상주(원, DMDC 분기 통계)와 전개(함정 기호·증파▲·감축▼·법◆·계획◇와 번호). 설명과 출처는 세계 정세 탭 맨 위 카드. 부대 단위 실시간 위치는 싣지 않는다(R24) */
@@ -905,7 +919,7 @@ function selectFp(id, fromMap){
 }
 /* v3.42 사이트 메뉴의 현재 위치 표시(사안 화면·나라 화면은 '세계 정세'·'전략 분석' 아래로 본다) */
 function navMark(t){
-  const k = t === "detail" || (t === "brief" && S.bdate) ? "overview" : t === "page" ? ((LOC().match(/^\/(leader|power|guide|brief|about)/) || [])[1] || "") : t;
+  const k = t === "detail" || t === "region" || (t === "brief" && S.bdate) ? "overview" : t === "page" ? ((LOC().match(/^\/(leader|power|guide|brief|about)/) || [])[1] || "") : t;
   document.querySelectorAll(".gnav [data-tab],.gnav [data-nav]").forEach(a => { if ((a.dataset.tab || a.dataset.nav) === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   const g = document.querySelector(".gmore"); if (g) g.classList.toggle("cur", !!g.querySelector("[aria-current]"));
 }
@@ -925,6 +939,7 @@ gnavFit(); addEventListener("resize", gnavFit); if (document.fonts && document.f
     if (dx) m.style.transform = "translateX(" + Math.round(dx) + "px)"; }); })();
 function switchTab(t){
   t = TAB_ALIAS[t] || t;
+  if (t !== "region" && S.zone) zoneOff();  /* v4.38 */
   if (t === "method" && typeof infoLoad === "function") { if (!S.info) S.info = "method"; setTimeout(() => { infoLoad("guide"); infoLoad("about"); }, 0); }
   if (!document.getElementById("pane-" + t)) t = "overview";
   S.tab = t; if (t !== "detail") store.set("ep.tab", t);
@@ -1409,46 +1424,116 @@ function renderDetail(){
     ((c.uncertain || []).length ? "<details class=\"src\"><summary>Unverified · " + c.uncertain.length + "</summary><ul>" + c.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
     "<details class=\"src\"><summary>Sources · " + (c.sources || []).length + "</summary><ul>" + (c.sources || []).map(srcItem).join("") + "</ul></details>";
 }
-/* v4.36(2026-10-27 결재) 나라 카드의 '클리사 지오폴리틱스에서 보기' · v4.37(같은 날 결재) 콘텐츠를 한곳에: 사안·분쟁지·전망(진행 중 → 결과, 5개씩 더 보기)·브리핑(최근부터 10개씩 더 보기)·정세 요약·특집·일정·역사 게임 */
+/* v4.36(2026-10-27 결재) 나라 카드의 '클리사 지오폴리틱스에서 보기' · v4.37(같은 날 결재) 콘텐츠를 한곳에 · v4.38 권역 페이지도 같은 함수(lkHtml) */
 const LK_GAME = {"1914": "The July Crisis before the First World War", "1962": "The Cuban Missile Crisis"};
-const LK_STEP = {br: 10, fc: 5};
+const LK_STEP = {br: 10, fc: 5}, LKZ_STEP = {br: 10, fc: 10};
 const LK_H = "Issues|Flashpoints|Forecasts|Briefings|Briefing digest|Features|Calendar|History games".split("|");  /* 줄 머리 이름표(영문판은 이 한 줄을 통째로 옮김) */
-function lkState(iso){ if (!S.lk || S.lk.iso !== iso) S.lk = {iso: iso, br: LK_STEP.br, fc: LK_STEP.fc}; return S.lk; }
+const LKZ_H = "Countries|Extra-regional powers".split("|");
+function lkState(kind, key, step){ S.lk = S.lk || {}; const o = S.lk[kind]; if (!o || o.key !== key) S.lk[kind] = {key: key, br: step.br, fc: step.fc, step: step}; return S.lk[kind]; }
 function linksHtml(c){ return '<div id="c-links-w">' + linksBody(c) + "</div>"; }
-function lkRefresh(){ const w = document.getElementById("c-links-w"); if (w && S.sel && D.countries[S.sel]) w.innerHTML = linksBody(D.countries[S.sel]); }
-function linksBody(c){
-  const iso = c.iso, L = c.links || {}, st = lkState(iso);
-  const cs = (D.strategies || []).filter(k => (L.cases || []).includes(k.id));
-  const fps = D.flashpoints.filter(f => (f.countries || []).includes(iso));
-  const fo = D.forecasts.filter(f => (f.countries || []).includes(iso));
-  const fs = fo.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due))
-    .concat(fo.filter(f => f.status !== "open").sort((a, b) => String(b.resolved || b.due).localeCompare(String(a.resolved || a.due))));
-  const br = []; if (BR) (BR.issues || []).forEach(x => (x.items || []).forEach(i => { if (((i.loc || {}).isos || []).includes(iso)) br.push([x, i]); }));
-  const dg = D.digest.map((g, gi) => [g, gi]).filter(([g]) => (g.ids || []).includes(iso));
-  const ft = FEATS().filter(F => (L.feats || []).includes(F.id));
-  const ev = (D.events || []).filter(e => ((e.loc || {}).isos || []).includes(iso) && daysLeft(e.date.length === 7 ? e.date + "-28" : (e.end || e.date)) >= 0);
-  const gm = (L.games || []).filter(g => LK_GAME[g]);
-  if (!(cs.length + fps.length + fs.length + br.length + dg.length + ft.length + ev.length + gm.length)) return "";
+function lkRefresh(){
+  const w = document.getElementById("c-links-w"); if (w && S.sel && D.countries[S.sel]) w.innerHTML = linksBody(D.countries[S.sel]);
+  if (S.zone) { const z = document.getElementById("z-links-w"); if (z) z.innerHTML = zoneBody(S.zone); S.zonePins = zonePins(new Set(zoneIsos(S.zone))); requestDraw(); }
+}
+const lkHas = (xs, set) => (xs || []).some(i => set.has(i));
+/* 연결 자료 모으기: 나라 하나(set 크기 1)든 권역이든 같은 기준 */
+function lkData(set, L){
+  const fo = D.forecasts.filter(f => lkHas(f.countries, set));
+  const br = []; if (BR) (BR.issues || []).forEach(x => (x.items || []).forEach(i => { if (lkHas((i.loc || {}).isos, set)) br.push([x, i]); }));
+  return {
+    cs: (D.strategies || []).filter(k => (L.cases || []).includes(k.id)),
+    fps: D.flashpoints.filter(f => lkHas(f.countries, set)),
+    fs: fo.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due)).concat(fo.filter(f => f.status !== "open").sort((a, b) => String(b.resolved || b.due).localeCompare(String(a.resolved || a.due)))),
+    br: br,
+    dg: D.digest.map((g, gi) => [g, gi]).filter(([g]) => lkHas(g.ids, set)),
+    ft: FEATS().filter(F => (L.feats || []).includes(F.id)),
+    ev: (D.events || []).filter(e => lkHas((e.loc || {}).isos, set) && daysLeft(e.date.length === 7 ? e.date + "-28" : (e.end || e.date)) >= 0),
+    gm: (L.games || []).filter(g => LK_GAME[g])
+  };
+}
+function lkHtml(id, kind, st, d, pre){
+  pre = pre || "";
+  if (!pre && !(d.cs.length + d.fps.length + d.fs.length + d.br.length + d.dg.length + d.ft.length + d.ev.length + d.gm.length)) return "";
   const row = (k, body, c) => '<div class="lk-r' + (c ? " c" : "") + '"><span class="lk-h">' + k + '</span><div class="lk-b">' + body + "</div></div>";
-  const li = (d, t, v) => '<li><span class="d">' + d + '</span><span class="t">' + t + "</span>" + (v ? '<span class="v">' + v + "</span>" : "") + "</li>";
-  const more = (k, n) => n > 0 ? '<button type="button" class="bh-xbtn lk-more" data-lkm="' + k + '">' + "More" + ' <span class="mono">' + n + "</span></button>" : "";
+  const li = (dd, t, v) => '<li><span class="d">' + dd + '</span><span class="t">' + t + "</span>" + (v ? '<span class="v">' + v + "</span>" : "") + "</li>";
+  const more = (k, n) => n > 0 ? '<button type="button" class="bh-xbtn lk-more" data-lkm="' + kind + ":" + k + '">' + "More" + ' <span class="mono">' + n + "</span></button>" : "";
   const ym = x => x.slice(0, 4) + "." + x.slice(5, 7), md = x => x.slice(5, 7) + "." + x.slice(8, 10);
   const RS = {yes: "Resolved yes", no: "Resolved no", void: "Voided"};
-  const fsv = fs.slice(0, st.fc), brv = br.slice(0, st.br);
-  return "<section class=\"sec\" id=\"c-links\"><h3>On Clisa Geopolitics</h3><div class=\"lk\">" +
-    (cs.length ? row(LK_H[0], '<div class="chips">' + cs.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>", 1) : "") +
-    (fps.length ? row(LK_H[1], '<div class="chips">' + fps.map(f => '<button type="button" class="chip" data-fp="' + esc(f.id) + '">' + esc(f.name_ko) + "</button>").join("") + "</div>", 1) : "") +
-    (fs.length ? row(LK_H[2], "<ul>" + fsv.map(f => li(ym(f.due), '<button type="button" class="lt" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + esc(f.s || f.q) + "</button>" + (RS[f.status] ? ' <span class="lk-rs">' + RS[f.status] + "</span>" : ""), f.p + "%")).join("") + "</ul>" + more("fc", fs.length - fsv.length)) : "") +
-    (br.length ? row(LK_H[3], "<ul>" + brv.map(([x, i]) => li(md(x.date), '<a class="lt" href="' + FCT.href("/brief/" + esc(x.date) + "/") + '" data-brief="' + esc(x.date) + '">' + esc(i.h) + "</a>")).join("") + "</ul>" + more("br", br.length - brv.length)) : "") +
-    (dg.length ? row(LK_H[4], "<ul>" + dg.map(([g, gi]) => li("", '<button type="button" class="lt" data-dg="' + gi + '">' + esc(g.t) + "</button>")).join("") + "</ul>") : "") +
-    (ft.length ? row(LK_H[5], "<ul>" + ft.map(F => li(md(F.date), '<a class="lt" href="' + FCT.href("/feature/" + esc(F.id) + "/") + '" data-feat="' + esc(F.id) + '">' + esc(F.title) + "</a>")).join("") + "</ul>") : "") +
-    (ev.length ? row(LK_H[6], "<ul>" + ev.map(e => li(e.date.length === 7 ? ym(e.date) : md(e.date), '<button type="button" class="lt" data-ev="' + esc(e.id) + '">' + esc(e.t) + "</button>")).join("") + "</ul>") : "") +
-    (gm.length ? row(LK_H[7], "<ul>" + gm.map(g => li(g, '<a class="lt" href="' + FCT.href("/play/" + g + "/") + '">' + LK_GAME[g] + "</a>")).join("") + "</ul>") : "") +
+  const fsv = d.fs.slice(0, st.fc), brv = d.br.slice(0, st.br);
+  return '<section class="sec lkbox" id="' + id + '">' + (kind === "c" ? "<h3>On Clisa Geopolitics</h3>" : "") + '<div class="lk">' + pre +
+    (d.cs.length ? row(LK_H[0], '<div class="chips">' + d.cs.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>", 1) : "") +
+    (d.fps.length ? row(LK_H[1], '<div class="chips">' + d.fps.map(f => '<button type="button" class="chip" data-fp="' + esc(f.id) + '">' + esc(f.name_ko) + "</button>").join("") + "</div>", 1) : "") +
+    (d.fs.length ? row(LK_H[2], "<ul>" + fsv.map(f => li(ym(f.due), '<button type="button" class="lt" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + esc(f.s || f.q) + "</button>" + (RS[f.status] ? ' <span class="lk-rs">' + RS[f.status] + "</span>" : ""), f.p + "%")).join("") + "</ul>" + more("fc", d.fs.length - fsv.length)) : "") +
+    (d.br.length ? row(LK_H[3], "<ul>" + brv.map(([x, i]) => li(md(x.date), '<a class="lt" href="' + FCT.href("/brief/" + esc(x.date) + "/") + '" data-brief="' + esc(x.date) + '">' + esc(i.h) + "</a>")).join("") + "</ul>" + more("br", d.br.length - brv.length)) : "") +
+    (d.dg.length ? row(LK_H[4], "<ul>" + d.dg.map(([g, gi]) => li("", '<button type="button" class="lt" data-dg="' + gi + '">' + esc(g.t) + "</button>")).join("") + "</ul>") : "") +
+    (d.ft.length ? row(LK_H[5], "<ul>" + d.ft.map(F => li(md(F.date), '<a class="lt" href="' + FCT.href("/feature/" + esc(F.id) + "/") + '" data-feat="' + esc(F.id) + '">' + esc(F.title) + "</a>")).join("") + "</ul>") : "") +
+    (d.ev.length ? row(LK_H[6], "<ul>" + d.ev.map(e => li(e.date.length === 7 ? ym(e.date) : md(e.date), '<button type="button" class="lt" data-ev="' + esc(e.id) + '">' + esc(e.t) + "</button>")).join("") + "</ul>") : "") +
+    (d.gm.length ? row(LK_H[7], "<ul>" + d.gm.map(g => li(g, '<a class="lt" href="' + FCT.href("/play/" + g + "/") + '">' + LK_GAME[g] + "</a>")).join("") + "</ul>") : "") +
     "</div></section>";
 }
-document.addEventListener("click", ev => {  /* v4.37 나라 카드 연결 칸의 더 보기(그 자리에서 5개·10개씩) */
-  const b = ev.target.closest("[data-lkm]"); if (!b || !S.lk) return;
-  const k = b.dataset.lkm; S.lk[k] += LK_STEP[k]; lkRefresh();
+function linksBody(c){ return lkHtml("c-links", "c", lkState("c", c.iso, LK_STEP), lkData(new Set([c.iso]), c.links || {})); }
+/* v4.38 시안: 휴대전화에서 세 영역 전환 단추를 펼침 단추 하나로 */
+function aswFold(){
+  const n = document.querySelector(".toggles .asw"); if (!n || document.querySelector(".asw-t")) return; const o = n.querySelector("a.on"); if (!o) return;
+  const t = document.createElement("button"); t.type = "button"; t.className = "asw-t"; t.setAttribute("aria-haspopup", "true"); t.setAttribute("aria-expanded", "false"); t.setAttribute("aria-label", n.getAttribute("aria-label") || "");
+  t.innerHTML = "<span>" + esc(o.textContent) + '</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  n.parentNode.insertBefore(t, n);
+  const set = v => { n.classList.toggle("open", v); t.setAttribute("aria-expanded", v); };
+  t.addEventListener("click", e => { e.stopPropagation(); set(!n.classList.contains("open")); });
+  document.addEventListener("click", e => { if (!n.contains(e.target) && e.target !== t) set(false); });
+  addEventListener("keydown", e => { if (e.key === "Escape") set(false); });
+}
+/* v4.38 권역별 정세: 권역(zone)은 자료 D.zones, 나라마다 c.zone. 미국·중국은 역외 강대국(D.zones_powers)이라 권역에 넣지 않는다 */
+const ZN = () => (D && D.zones) || [], ZPW = () => (D && D.zones_powers) || [];
+const zoneOf = id => ZN().find(z => z.id === id);
+const zoneIsos = id => Object.keys(D.countries).filter(k => D.countries[k].zone === id);
+function zoneBody(id){
+  const set = new Set(zoneIsos(id)), U = {cases: [], feats: [], games: []};
+  /* 사안은 권역 나라가 결정권자인 사안, 특집·게임은 권역 나라 연결의 합 */
+  (D.strategies || []).forEach(k => { if (((k.deciders || {}).items || []).some(x => set.has(x.iso))) U.cases.push(k.id); });
+  set.forEach(i => { const L = D.countries[i].links || {}; ["feats", "games"].forEach(t => (L[t] || []).forEach(v => { if (!U[t].includes(v)) U[t].push(v); })); });
+  const nm = i => (D.countries[i] || {}).name_ko || i;
+  const pre = '<div class="lk-r c"><span class="lk-h">' + LKZ_H[0] + '</span><div class="lk-b"><div class="chips">' + [...set].sort((a, b) => nm(a).localeCompare(nm(b), "ko")).map(chip).join("") + "</div></div></div>" +
+    '<div class="lk-r c"><span class="lk-h">' + LKZ_H[1] + '</span><div class="lk-b"><div class="chips">' + ZPW().map(chip).join("") + "</div></div></div>";
+  return lkHtml("z-links", "z", lkState("z", id, LKZ_STEP), lkData(set, U), pre);
+}
+function zonePins(set){
+  const out = [], t0 = new Date(Date.now() - 14 * 864e5), lim = t0.getFullYear() + "-" + String(t0.getMonth() + 1).padStart(2, "0") + "-" + String(t0.getDate()).padStart(2, "0");
+  if (BR) (BR.issues || []).forEach(x => { if (x.date < lim) return; (x.items || []).forEach(i => { const L = i.loc; if (L && L.lon != null && lkHas(L.isos, set)) out.push({lon: L.lon, lat: L.lat, place: String(L.place || "").split("(")[0].trim(), k: "b"}); }); });
+  (D.events || []).forEach(e => { const L = e.loc; if (L && L.lon != null && lkHas(L.isos, set) && daysLeft(e.date.length === 7 ? e.date + "-28" : (e.end || e.date)) >= 0) out.push({lon: L.lon, lat: L.lat, place: String(L.place || "").split("(")[0].trim(), k: "e"}); });
+  return out;
+}
+function zoneBarSync(){
+  const b = document.getElementById("zonebar"); if (!b) return; if (!ZN().length) { b.hidden = true; return; }
+  b.innerHTML = '<span class="lbl">' + "Regions" + "</span>" + ZN().map(z => '<button type="button" class="zc" data-zone="' + esc(z.id) + '" aria-pressed="' + (S.zone === z.id) + '">' + esc(z.name_ko) + "</button>").join("") +
+    '<span class="lbl zp">' + LKZ_H[1] + "</span>" + ZPW().map(i => '<button type="button" class="zc" data-iso="' + i + '">' + esc(D.countries[i].name_ko) + "</button>").join("") +
+    (D.countries.EUR ? '<span class="lbl zp zo">' + "Non-state actors" + '</span><button type="button" class="zc zo" data-iso="EUR">' + esc(D.countries.EUR.name_ko) + "</button>" : "");  /* 휴대전화에서는 국가 밖 행위자도 이 줄로(지구본 아래 따로 있던 줄을 대신) */
+  b.hidden = false;
+  const on = b.querySelector('[aria-pressed="true"]'); if (on && narrow()) on.scrollIntoView({block: "nearest", inline: "center"});
+}
+function renderRegion(){
+  const el = document.getElementById("pane-region"); if (!el) return; const z = zoneOf(S.zone); if (!z) { el.innerHTML = ""; return; }
+  el.innerHTML = '<div class="sec"><p class="eyebrow">' + "Regional Outlook" + '</p><h2 style="margin-top:4px">' + esc(z.name_ko) + "</h2>" +
+    '<p class="note">' + "Issues, forecasts and briefings involving the countries of this region. The U.S. and China act across several regions, so they are listed separately as extra-regional powers." + "</p>" +
+    '<p class="note zkey"><span class="zk b"></span>' + "Event locations in the past two weeks' briefings" + ' <span class="zk e"></span>' + "Upcoming events" + "</p></div>" +
+    '<div id="z-links-w">' + zoneBody(z.id) + "</div>";
+  el.scrollTop = 0;
+}
+function goZone(id){
+  const z = zoneOf(id); if (!z) return;
+  const set = new Set(zoneIsos(id));
+  S.zone = id; S.lens = {id: "zone:" + id, set: set, off: []}; S.zonePins = zonePins(set);
+  const H0 = document.documentElement; if (!narrow() && !H0.classList.contains("legoff")) { H0.classList.add("legoff"); S.zoneLeg = true; }  /* 권역을 가리지 않게 범례를 잠시 접음(저장하지 않음) */
+  renderRegion(); switchTab("region"); zoneBarSync();
+  viewGo(z.lon, z.lat, z.k, true); requestDraw(true);
+}
+function zoneOff(){ if (!S.zone) return; S.zone = null; S.zonePins = null; if (S.zoneLeg) { document.documentElement.classList.remove("legoff"); S.zoneLeg = false; } if (S.lens && String(S.lens.id).indexOf("zone:") === 0) S.lens = null; zoneBarSync(); requestDraw(true); }
+document.addEventListener("click", ev => {
+  const zb = ev.target.closest("[data-zone]");  /* v4.38 권역 단추: 다시 누르면 권역 보기를 끄고 세계 정세로 */
+  if (zb) { ev.preventDefault(); if (S.zone === zb.dataset.zone && S.tab === "region") { zoneOff(); viewRestore(); switchTab("overview"); } else goZone(zb.dataset.zone); return; }
+  const b = ev.target.closest("[data-lkm]"); if (!b || !S.lk) return;  /* 연결 칸의 더 보기(그 자리에서) */
+  const [kind, k] = b.dataset.lkm.split(":"), o = S.lk[kind]; if (!o) return;
+  o[k] += o.step[k]; lkRefresh();
 });
 function countryIntentHtml(c){
   const v = c.intent; const cases = (D.strategies || []).filter(k => k.deciders && k.deciders.items.some(d => d.iso === c.iso));
@@ -3190,6 +3275,7 @@ function routeOf(){
   if (t === "forecast" && S.ffc) return "/forecast/" + S.ffc + "/";  /* v4.22 전망별 화면 */
   if (/^(grand|ideas|forecast|industry)$/.test(t)) return "/" + t + "/";
   if (t === "detail") return S.sel && hasPage(S.sel) ? "/country/" + S.sel + "/" : "/";
+  if (t === "region") return S.zone ? "/region/" + S.zone + "/" : "/";  /* v4.38 */
   return null;
 }
 function routeSync(rep){
@@ -3204,6 +3290,7 @@ function applyRoute(){
   if ((m = p.match(/^\/case\/([a-z0-9-]+)\/?$/)) && ss.some(c => c.id === m[1])) { goCase(m[1]); return true; }
   if (/^\/case\/?$/.test(p)) { S.scase = null; switchTab("strat"); return true; }
   if ((m = p.match(/^\/country\/([A-Z]{3})\/?$/)) && D.countries[m[1]]) { selectCountry(m[1], true); return true; }
+  if ((m = p.match(/^\/region\/([a-z-]+)\/?$/)) && zoneOf(m[1])) { goZone(m[1]); return true; }  /* v4.38 */
   if ((m = p.match(/^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/))) {
     if (BR && !BR.issues.some(x => x.date === m[1])) { pageGo(enAdd(p)); return true; }
     S.bdate = m[1]; renderBrief(); switchTab("brief"); return true; }
@@ -3234,6 +3321,7 @@ function titleOf(){
   if (t === "brief") { const c = BR && S.bdate && briefCur(), m = c && /^(\d{4})-(\d{2})-(\d{2})/.exec(c.date); return (m ? "Briefing · " + enDate(c.date) : gl("brief")) + sx; }
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return (c && c !== L[0] ? c.title : gl("feature")) + sx; }
   if (t === "detail") return S.sel && hasPage(S.sel) ? D.countries[S.sel].name_ko + ": Situation and Grand Strategy" + sx : SITE_T;
+  if (t === "region") { const z = zoneOf(S.zone); return z ? z.name_ko + " Outlook" + sx : SITE_T; }  /* v4.38 */
   if (t === "forecast" && S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) return FCT.title(F.s || F.q) + sx; }  /* v4.22 */
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
@@ -3265,7 +3353,7 @@ function pageGo(url, push, after){
   }).catch(() => { if (seq === PAGE_SEQ) location.href = u.href; }).finally(() => document.documentElement.classList.remove("pg-wait"));
 }
 /* 사이트 안의 링크(a href)를 화면 안에서 옮긴다. 새 창·수정 키·다른 사이트·파일은 브라우저에 맡긴다 */
-const SOFT_RE = /^\/(?:$|(?:case|country|brief|life|industry|feature|leader|power|guide|about|subscribe|grand|ideas|method|forecast)(?:\/|$))/;
+const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|grand|ideas|method|forecast)(?:\/|$))/;
 document.addEventListener("click", ev => {
   if (!ROUTES || !D || ev.defaultPrevented || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
   const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
