@@ -1,6 +1,207 @@
 {
  "issues": [
   {
+   "date": "2026-10-27",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Russia and Ukraine begin local ceasefire around Oleshky, brokered by Melania Trump",
+     "fact": "Ukraine's parliamentary human rights commissioner, Dmytro Lubinets, said a ceasefire to allow aid deliveries and civilian evacuations took effect around Oleshky in Kherson Oblast at 3 a.m. Kyiv time on October 27, and Russia's Defense Ministry said its forces stopped firing in the Kherson direction at 4 a.m. Moscow time. The AP reported that the pause is due to last at least through Saturday and that a new round of U.S.-brokered Russia-Ukraine talks is expected next month.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/local-ceasefire-in-besieged-oleshky-begins-ukrainian-russian-officials-say/",
+      "https://www.wral.com/news/ap/f2614-localized-russia-ukraine-ceasefire-takes-effect-in-oleshky-in-deal-brokered-by-melania-trump/",
+      "https://en.iz.ru/en/2191155/2026-10-27/what-happened-night-october-27-main-thing"
+     ],
+     "loc": {
+      "lat": 46.62,
+      "lon": 32.72,
+      "place": "Oleshky (Kherson Oblast, Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian ballistic missile strike on Kyiv kills one, injures 10 including university dorm students",
+     "fact": "A Russian ballistic missile attack on Kyiv late on October 26 killed one person and injured 10, including students in a university dormitory, Mayor Vitali Klitschko said. Ukraine's Air Force had warned that several ballistic missiles launched from the direction of Bryansk were heading for the capital; schools and medical facilities were among the sites damaged.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4178447-russian-ballistic-missile-attack-on-kyiv-kills-one-injures-10-and-damages-medical-facilities-and-school.html",
+      "https://kyivindependent.com/paramedics-caught-under-fire-as-russian-ballistic-missiles-slam-kyiv/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Saudi, Turkish and Pakistani security chiefs meet Iran's leaders in Tehran, agree to keep talking",
+     "fact": "Saudi Defense Minister Khalid bin Salman, Pakistani army chief Asim Munir and Turkish intelligence chief Ibrahim Kalin met President Masoud Pezeshkian and other Iranian leaders in Tehran on October 26. Iranian state media said the four countries agreed to continue talks on strengthening cooperation; no concrete agreement was announced.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/27/iran-saudi-turkiye-and-pakistan-agree-to-more-talks-amid-houthi-attacks",
+      "https://www.trtworld.com/article/580f8aaf943f",
+      "https://www.arabnews.com/saudi-arabia/saudi-defense-minister-meets-with-iranian-president-at-makkah-pact-talks-in-tehran-3008284"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "Tehran (Iran)",
+      "isos": [
+       "IRN",
+       "SAU",
+       "TUR",
+       "PAK"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Egypt's parliament authorizes Sisi to help defend Saudi Arabia against Houthi attacks",
+     "fact": "Egypt's House of Representatives on October 26 authorized President Abdel Fattah el-Sisi to take the measures needed to support Saudi Arabia, Al-Ahram reported. The authorization is conditional on a request from Riyadh, and Sisi had said earlier that any support would be limited to defending Saudi territory and borders and would not include attacks on Yemen.",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.dawn.com/news/2039982/egypt-approves-military-support-for-saudi-arabia-after-houthi-attacks-escalate",
+      "https://www.aljazeera.com/news/2026/10/26/egyptian-parliament-authorises-military-aid-for-saudi-arabia"
+     ],
+     "loc": {
+      "lat": 30.04,
+      "lon": 31.24,
+      "place": "Cairo (Egypt)",
+      "isos": [
+       "EGY",
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran's military chief warns ships that stray from designated routes in southern waters will face damage",
+     "fact": "Maj. Gen. Ali Abdollahi, chief of the general staff of Iran's armed forces, said on October 26 during a visit to the Gulf of Oman coast that any vessel that, for any reason, strays from designated routes or ignores Iranian procedures is putting itself at risk and will suffer serious damage, Press TV reported.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.presstv.co.uk/Detail/2026/10/26/779268/vessels-violating-iran%E2%80%99s-protocols-in-southern-waters-will-suffer-damage-top-commander"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "Romanian intelligence blames September fire near Brasov arms plant on Russian-run sabotage network",
+     "fact": "The Romanian Intelligence Service (SRI) and anti-organized crime and terrorism prosecutors (DIICOT) said on October 26 that a fire on September 14 near Carfil, a subsidiary of state arms maker Romarm in Brasov, was the work of a Russian-directed sabotage network. Two of the three suspects (two Belarusians and a Ukrainian) were arrested in Germany; no casualties were reported.",
+     "fc": [
+      {
+       "id": "f62",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://hotnews.ro/retea-de-sabotaj-coordonata-din-rusia-implicata-in-incendiul-de-la-platforma-carfil-din-brasov-anunta-sri-tintele-retelei-si-cum-are-loc-recrutarea-2387182",
+      "https://kyivindependent.com/russian-sabotage-network-behind-romanian-arson-attack-officials-say/"
+     ],
+     "loc": {
+      "lat": 45.65,
+      "lon": 25.61,
+      "place": "Brasov (Romania)",
+      "isos": [
+       "ROU",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Jordan strikes southern Syria after church shooting; Damascus denies prior coordination",
+     "fact": "Jordan's armed forces said they struck hideouts of armed groups in southeastern Syria on October 26 in coordination with the Syrian government, but Damascus disputed that, saying there had been no prior coordination or notice. Syria's Civil Defense said at least seven people, including three children, were killed in Daraa and Sweida provinces.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/26/jordan-launches-air-strikes-in-syria-in-response-to-a-fatal-church-shooting"
+     ],
+     "loc": {
+      "isos": [
+       "JOR",
+       "SYR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "The Saudi-led coalition said it intercepted three Houthi ballistic missiles aimed at the Eastern Province and four drones headed for southern Saudi Arabia early on October 27. No casualties were reported.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/27/iran-saudi-turkiye-and-pakistan-agree-to-more-talks-amid-houthi-attacks",
+      "https://kuwaittimes.com/article/52459/world/coalition-intercepts-3-houthi-missiles-toward-eastern-province-4-drones/"
+     ]
+    },
+    {
+     "t": "At a rally in Mississippi on October 26, President Trump said the war with Iran was started by Iran, not the United States.",
+     "src": [
+      "https://foxnews.com/live-news/iran-war-news-trump-israel-saudi-october-26"
+     ]
+    },
+    {
+     "t": "Iranian President Masoud Pezeshkian arrived in Moscow for the Gas Exporting Countries Forum summit and is expected to meet Russian President Vladimir Putin.",
+     "src": [
+      "https://www.anews.com.tr/world/2026/10/27/iranian-president-arrives-in-russia-for-gas-exporters-summit",
+      "https://www.aa.com.tr/en/world/iranian-president-to-visit-russia-for-gas-summit-meet-putin/4100852"
+     ]
+    },
+    {
+     "t": "South Korea's Joint Chiefs of Staff said on October 27 that it assesses the North Korean self-propelled guns spotted along the coast of Kaepung County in Hwanghae Province to be older models and is closely watching the intent behind their exposure.",
+     "src": [
+      "https://www.segye.com/newsView/20261027510056",
+      "https://www.news1.kr/diplomacy/defense-diplomacy/6333145"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-26",
    "items": [
     {
@@ -10,8 +211,7 @@
      "fc": [
       {
        "id": "f23",
-       "e": "up",
-       "p": 80
+       "e": "up"
       }
      ],
      "src": [
@@ -37,13 +237,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       }
      ],
      "src": [
@@ -66,8 +264,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -89,8 +286,7 @@
      "fc": [
       {
        "id": "f75",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -112,8 +308,7 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -134,8 +329,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 90
+       "e": "none"
       }
      ],
      "src": [
@@ -244,8 +438,7 @@
      "fc": [
       {
        "id": "f62",
-       "e": "up",
-       "p": 12
+       "e": "up"
       }
      ],
      "src": [
@@ -271,8 +464,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -296,8 +488,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -319,8 +510,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -341,8 +531,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       }
      ],
      "src": [
@@ -383,8 +572,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -398,13 +586,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 20
+       "e": "down"
       },
       {
        "id": "f70",
-       "e": "down",
-       "p": 22
+       "e": "down"
       }
      ],
      "src": [
@@ -440,8 +626,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 90
+       "e": "none"
       }
      ],
      "src": [
@@ -502,8 +687,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -544,8 +728,7 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -569,8 +752,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -604,8 +786,7 @@
      "fc": [
       {
        "id": "f05",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -647,8 +828,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -709,8 +889,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -736,8 +915,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -905,8 +1083,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 20
+       "e": "up"
       }
      ],
      "src": [
@@ -953,8 +1130,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -998,13 +1174,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 20
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -1127,8 +1301,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -1366,8 +1539,7 @@
      "fc": [
       {
        "id": "f23",
-       "e": "up",
-       "p": 80
+       "e": "up"
       }
      ],
      "src": [
@@ -1488,13 +1660,11 @@
      "fc": [
       {
        "id": "f59",
-       "e": "up",
-       "p": 20
+       "e": "up"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -1516,8 +1686,7 @@
      "fc": [
       {
        "id": "f10",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -1839,8 +2008,7 @@
      "fc": [
       {
        "id": "f55",
-       "e": "down",
-       "p": 50
+       "e": "down"
       }
      ],
      "src": [
@@ -2232,13 +2400,11 @@
      "fc": [
       {
        "id": "f05",
-       "e": "up",
-       "p": 25
+       "e": "up"
       },
       {
        "id": "f22",
-       "e": "up",
-       "p": 35
+       "e": "up"
       }
      ],
      "src": [
@@ -2274,8 +2440,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 8
+       "e": "down"
       }
      ],
      "src": [
@@ -2350,8 +2515,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -2470,13 +2634,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 25
+       "e": "down"
       },
       {
        "id": "f38",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -2753,8 +2915,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -2818,8 +2979,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2846,8 +3006,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "down",
-       "p": 50
+       "e": "down"
       }
      ],
      "src": [
@@ -2953,8 +3112,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -2981,8 +3139,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -3024,8 +3181,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -3084,8 +3240,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -3112,8 +3267,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -3135,8 +3289,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -3160,8 +3313,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -3204,8 +3356,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -3255,8 +3406,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -3279,8 +3429,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -3306,8 +3455,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -3333,8 +3481,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -3401,13 +3548,11 @@
      "fc": [
       {
        "id": "f42",
-       "e": "none",
-       "p": 13
+       "e": "none"
       },
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -3433,8 +3578,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -3457,8 +3601,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -3484,13 +3627,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -3558,8 +3699,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -3582,8 +3722,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -3606,8 +3745,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -3630,8 +3768,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -3672,13 +3809,11 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       },
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -3701,8 +3836,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 85
+       "e": "none"
       }
      ],
      "src": [
@@ -3724,8 +3858,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -3749,13 +3882,11 @@
      "fc": [
       {
        "id": "f36",
-       "e": "none",
-       "p": 92
+       "e": "none"
       },
       {
        "id": "f24",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -3776,8 +3907,7 @@
      "fc": [
       {
        "id": "f10",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -3829,8 +3959,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -3853,8 +3982,7 @@
      "fc": [
       {
        "id": "f17",
-       "e": "none",
-       "p": 80
+       "e": "none"
       }
      ],
      "src": [
@@ -3876,13 +4004,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none",
-       "p": 30
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -3904,8 +4030,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 45
+       "e": "none"
       }
      ],
      "src": [
@@ -3927,13 +4052,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 10
+       "e": "none"
       }
      ],
      "src": [
@@ -3988,8 +4111,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -4011,13 +4133,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 10
+       "e": "none"
       }
      ],
      "src": [
@@ -4042,13 +4162,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "none",
-       "p": 30
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -4070,8 +4188,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -4126,8 +4243,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -4149,13 +4265,11 @@
      "fc": [
       {
        "id": "f05",
-       "e": "none",
-       "p": 25
+       "e": "none"
       },
       {
        "id": "f22",
-       "e": "none",
-       "p": 35
+       "e": "none"
       }
      ],
      "src": [
@@ -4176,13 +4290,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f43",
-       "e": "down",
-       "p": 15
+       "e": "down"
       }
      ],
      "src": [
@@ -4204,13 +4316,11 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       },
       {
        "id": "f28",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -4234,13 +4344,11 @@
      "fc": [
       {
        "id": "f24",
-       "e": "up",
-       "p": 25
+       "e": "up"
       },
       {
        "id": "f44",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -4267,8 +4375,7 @@
      "fc": [
       {
        "id": "f39",
-       "e": "up",
-       "p": 70
+       "e": "up"
       }
      ],
      "src": [

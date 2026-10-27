@@ -1,6 +1,207 @@
 {
  "issues": [
   {
+   "date": "2026-10-27",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "러·우, 멜라니아 트럼프 중재로 헤르손주 올레시키 일대 국지 휴전 발효",
+     "fact": "드미트로 루비네츠 우크라이나 의회 인권위원은 27일 오전 3시(키이우 시각) 올레시키 일대에서 인도적 지원과 주민 대피를 위한 휴전이 발효됐다고 밝혔고, 러시아 국방부도 모스크바 시각 4시부터 헤르손 방면의 사격을 멈췄다고 발표했습니다. AP는 휴전이 적어도 토요일까지 이어지며 미국이 중재하는 러·우 협상이 다음 달 다시 열릴 예정이라고 보도했습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/local-ceasefire-in-besieged-oleshky-begins-ukrainian-russian-officials-say/",
+      "https://www.wral.com/news/ap/f2614-localized-russia-ukraine-ceasefire-takes-effect-in-oleshky-in-deal-brokered-by-melania-trump/",
+      "https://en.iz.ru/en/2191155/2026-10-27/what-happened-night-october-27-main-thing"
+     ],
+     "loc": {
+      "lat": 46.62,
+      "lon": 32.72,
+      "place": "올레시키(우크라이나 헤르손주)",
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 키이우에 탄도미사일 공격…1명 사망·대학 기숙사 학생 등 10명 부상",
+     "fact": "26일 밤(현지 시각) 러시아의 탄도미사일 공격으로 키이우에서 1명이 숨지고 대학 기숙사 학생 등 10명이 다쳤다고 비탈리 클리치코 키이우 시장이 밝혔습니다. 우크라이나 공군은 브랸스크 방면에서 발사된 탄도미사일 여러 발이 키이우로 향한다고 경보했고, 학교와 의료시설 등이 피해를 입었습니다.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4178447-russian-ballistic-missile-attack-on-kyiv-kills-one-injures-10-and-damages-medical-facilities-and-school.html",
+      "https://kyivindependent.com/paramedics-caught-under-fire-as-russian-ballistic-missiles-slam-kyiv/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디·튀르키예·파키스탄 대표단, 테헤란서 이란 지도부와 회담…대화 이어 가기로",
+     "fact": "칼리드 빈 살만 사우디아라비아 국방장관, 아심 무니르 파키스탄 육군참모총장, 이브라힘 칼른 튀르키예 국가정보청장이 26일 테헤란에서 마수드 페제시키안 대통령 등 이란 지도부와 만났습니다. 이란 국영 매체는 네 나라가 협력 강화를 위한 대화를 이어 가기로 했다고 전했고, 구체적 합의는 발표되지 않았습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/27/iran-saudi-turkiye-and-pakistan-agree-to-more-talks-amid-houthi-attacks",
+      "https://www.trtworld.com/article/580f8aaf943f",
+      "https://www.arabnews.com/saudi-arabia/saudi-defense-minister-meets-with-iranian-president-at-makkah-pact-talks-in-tehran-3008284"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "테헤란(이란)",
+      "isos": [
+       "IRN",
+       "SAU",
+       "TUR",
+       "PAK"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이집트 하원, 후티 공격받는 사우디 방어 지원 권한을 시시 대통령에 부여",
+     "fact": "이집트 하원은 26일 압델 파타 시시 대통령이 사우디아라비아를 지원하는 데 필요한 조치를 할 수 있도록 승인했다고 알아흐람이 보도했습니다. 승인은 사우디가 요청할 경우를 전제로 하며, 앞서 시시 대통령은 지원이 사우디 영토와 국경의 방어에 한정되고 예멘 공격은 포함하지 않는다고 밝힌 바 있습니다.",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.dawn.com/news/2039982/egypt-approves-military-support-for-saudi-arabia-after-houthi-attacks-escalate",
+      "https://www.aljazeera.com/news/2026/10/26/egyptian-parliament-authorises-military-aid-for-saudi-arabia"
+     ],
+     "loc": {
+      "lat": 30.04,
+      "lon": 31.24,
+      "place": "카이로(이집트)",
+      "isos": [
+       "EGY",
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란군 총참모장, 남부 해역 지정 항로 벗어난 선박은 피해 입을 것이라고 경고",
+     "fact": "알리 압돌라히 이란군 총참모장은 26일 오만해 연안을 방문해 어떤 이유로든 지정 항로를 벗어나거나 이란의 절차를 무시하는 선박은 스스로 위험을 자초해 심각한 피해를 입을 것이라고 말했다고 프레스TV가 보도했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.presstv.co.uk/Detail/2026/10/26/779268/vessels-violating-iran%E2%80%99s-protocols-in-southern-waters-will-suffer-damage-top-commander"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "루마니아 정보청, 9월 브라쇼브 무기공장 인근 화재를 러시아 조종 사보타주로 발표",
+     "fact": "루마니아 정보청(SRI)과 조직범죄·테러수사국(DIICOT)은 26일 9월 14일 브라쇼브의 국영 무기회사 로마름 자회사 카르필 인근에서 난 화재가 러시아가 조종한 사보타주망의 소행이라고 발표했습니다. 용의자 3명(벨라루스인 2명, 우크라이나인 1명) 가운데 2명은 독일에서 체포됐고, 사상자는 보도되지 않았습니다.",
+     "fc": [
+      {
+       "id": "f62",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://hotnews.ro/retea-de-sabotaj-coordonata-din-rusia-implicata-in-incendiul-de-la-platforma-carfil-din-brasov-anunta-sri-tintele-retelei-si-cum-are-loc-recrutarea-2387182",
+      "https://kyivindependent.com/russian-sabotage-network-behind-romanian-arson-attack-officials-say/"
+     ],
+     "loc": {
+      "lat": 45.65,
+      "lon": 25.61,
+      "place": "브라쇼브(루마니아)",
+      "isos": [
+       "ROU",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "요르단, 교회 총격 사건 뒤 시리아 남부 공습…시리아는 사전 조율 부인",
+     "fact": "요르단군은 26일 시리아 정부와 조율해 시리아 남동부의 무장세력 은신처를 공습했다고 밝혔으나, 시리아 정부는 사전 조율이나 통보가 없었다고 반박했습니다. 시리아 민방위대는 다라·스웨이다주에서 어린이 3명을 포함해 최소 7명이 숨졌다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/26/jordan-launches-air-strikes-in-syria-in-response-to-a-fatal-church-shooting"
+     ],
+     "loc": {
+      "isos": [
+       "JOR",
+       "SYR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "사우디 주도 연합군은 27일 새벽 동부주를 겨냥한 후티 탄도미사일 3발과 남부로 향하던 드론 4대를 요격했으며 사상자는 없다고 밝혔습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/27/iran-saudi-turkiye-and-pakistan-agree-to-more-talks-amid-houthi-attacks",
+      "https://kuwaittimes.com/article/52459/world/coalition-intercepts-3-houthi-missiles-toward-eastern-province-4-drones/"
+     ]
+    },
+    {
+     "t": "트럼프 대통령은 26일 미시시피 유세에서 이란과의 전쟁은 미국이 아니라 이란이 시작했다고 말했습니다.",
+     "src": [
+      "https://foxnews.com/live-news/iran-war-news-trump-israel-saudi-october-26"
+     ]
+    },
+    {
+     "t": "페제시키안 이란 대통령은 가스수출국포럼 정상회의에 참석하려고 모스크바에 도착했으며, 푸틴 대통령과 회담할 예정입니다.",
+     "src": [
+      "https://www.anews.com.tr/world/2026/10/27/iranian-president-arrives-in-russia-for-gas-exporters-summit",
+      "https://www.aa.com.tr/en/world/iranian-president-to-visit-russia-for-gas-summit-meet-putin/4100852"
+     ]
+    },
+    {
+     "t": "합동참모본부는 27일 황해도 개풍군 해안에 드러난 북한 자주포를 구형으로 파악하고 있으며 그 의도를 면밀히 살피고 있다고 밝혔습니다.",
+     "src": [
+      "https://www.segye.com/newsView/20261027510056",
+      "https://www.news1.kr/diplomacy/defense-diplomacy/6333145"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-10-26",
    "items": [
     {
