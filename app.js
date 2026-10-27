@@ -1035,7 +1035,7 @@ function dailyIssue(x){
     return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
   return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + '" title="지구본에서 위치 보기">' + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</h4>" + (i.fact ? "<p>" + esc(i.fact) + "</p>" : "") + (i.link ? '<p class="bl"><span class="bl-k">판단과의 연결</span>' + esc(i.link) + "</p>" : "") +  /* v3.92: 한 줄 정보 형식의 호는 fact·link가 없다 */
-      '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + "</div>" +  /* v3.83 장소가 있는 꼭지는 제목을 누르면 지구본이 그곳을 보인다(2026-10-08 결재, 위치 보기 단추를 대신함) */
+      '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + ((i.loc || {}).isos || []).map(chip).join("") + "</div>" +  /* v4.37 꼭지의 나라 → 나라 카드 */  /* v3.83 장소가 있는 꼭지는 제목을 누르면 지구본이 그곳을 보인다(2026-10-08 결재, 위치 보기 단추를 대신함) */
       ((i.src || []).length ? '<details class="src"><summary>출처 ' + i.src.length + "</summary><ul>" + i.src.map(srcItem).join("") + "</ul></details>" : "") + "</article>").join("") +
     weekLine(x.date) +
     ((x.more || []).length ? '<div class="bm"><b>그 밖의 동향</b><ul>' + x.more.map(m => "<li>" + esc(m.t) + ((m.src || []).length ? ' <a href="' + esc(m.src[0]) + '" target="_blank" rel="noopener" class="note">출처</a>' : "") + "</li>").join("") + "</ul></div>" : "");
@@ -1264,7 +1264,7 @@ function runStrip(st, list){
 function loadBrief(){
   BRIEF_P.then(b => {
     if (!b || !(b.issues || []).length) { $("#bstrip").hidden = true; return; }
-    BR = b; const cur = b.issues[0];
+    BR = b; const cur = b.issues[0]; lkRefresh();  /* v4.37 나라 카드 연결 칸의 브리핑 */
     if (S.tab === "forecast") { const pn = $("#pane-forecast"), y = pn ? pn.scrollTop : 0; renderForecasts(); if (pn) pn.scrollTop = y; }  /* v4.22 전망별 화면의 관련 사건은 브리핑 자료가 온 뒤 · v4.23 목록의 관련 꼭지 수도 */
     if (typeof IND !== "undefined" && IND && document.getElementById("indboard")) indBoard();  /* v3.98: 산업 탭이 브리핑 자료보다 먼저 그려졌으면 추이를 넣어 다시 그림 */
     /* v3.27 판단 변경 공지(머리말 n.k, 없으면 "분석 갱신")는 공지 날짜로부터 7일 동안 띠 첫머리에 두고, 그 뒤로 브리핑 제목을 돌린다(2026-10-01) */
@@ -1382,27 +1382,50 @@ function renderDetail(){
     (p.regime ? '<section class="sec"><h3>정치</h3><dl class="kv"><dt>체제</dt><dd>' + esc(p.regime) + "</dd>" + (p.stability ? "<dt>안정성</dt><dd>" + esc(p.stability) + "</dd>" : "") + "</dl></section>" : "") +
     (recent.length ? '<section class="sec"><h3>최근 동향</h3><ul class="tl">' + recent.map(r => '<li><span class="d">' + esc(r.date) + "</span><span>" + esc(r.text) + "</span></li>").join("") + "</ul></section>" : "") +
     (c.watch && c.watch.length ? '<section class="sec"><h3>주시할 변수</h3><ul class="watch">' + c.watch.map(w => "<li>" + esc(w) + "</li>").join("") + "</ul></section>" : "") +
-    (fps.length ? '<section class="sec"><h3>관련 분쟁지</h3><div class="chips" style="margin:0">' + fps.map(f => '<button type="button" class="chip" data-fp="' + esc(f.id) + '">' + esc(f.name_ko) + "</button>").join("") + "</div></section>" : "") +
-    (fcs.length ? '<section class="sec"><h3>관련 전망</h3><ul class="list">' + fcs.map(f => forecastRow(f, true)).join("") + '</ul><p class="note" style="margin-top:8px"><button type="button" class="chip" data-go="forecast">전망 전체 보기</button></p></section>' : "") +
     ((c.uncertain || []).length ? '<details class="src"><summary>확인하지 못한 사항 ' + c.uncertain.length + "건</summary><ul>" + c.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "") +
     '<details class="src"><summary>출처 ' + (c.sources || []).length + "건</summary><ul>" + (c.sources || []).map(srcItem).join("") + "</ul></details>";
 }
-/* v4.36(2026-10-27 결재) 나라 카드의 '클리사 지오폴리틱스에서 보기': 관련 사안(결정권자이거나 본문에 이름이 3번 이상), 진행 중인 전망, 정세 요약, 일정 */
-function linksHtml(c){
-  const iso = c.iso, ids = (c.links && c.links.cases) || [];
-  const cs = (D.strategies || []).filter(k => ids.includes(k.id));
-  const fs = D.forecasts.filter(f => f.status === "open" && (f.countries || []).includes(iso)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 5);
+/* v4.36(2026-10-27 결재) 나라 카드의 '클리사 지오폴리틱스에서 보기' · v4.37(같은 날 결재) 콘텐츠를 한곳에: 사안·분쟁지·전망(진행 중 → 결과, 5개씩 더 보기)·브리핑(최근부터 10개씩 더 보기)·정세 요약·특집·일정·역사 게임 */
+const LK_GAME = {"1914": "제1차 세계대전 직전의 7월 위기", "1962": "쿠바 미사일 위기"};
+const LK_STEP = {br: 10, fc: 5};
+const LK_H = "사안|분쟁지|전망|브리핑|정세 요약|특집|일정|역사 게임".split("|");  /* 줄 머리 이름표(영문판은 이 한 줄을 통째로 옮김) */
+function lkState(iso){ if (!S.lk || S.lk.iso !== iso) S.lk = {iso: iso, br: LK_STEP.br, fc: LK_STEP.fc}; return S.lk; }
+function linksHtml(c){ return '<div id="c-links-w">' + linksBody(c) + "</div>"; }
+function lkRefresh(){ const w = document.getElementById("c-links-w"); if (w && S.sel && D.countries[S.sel]) w.innerHTML = linksBody(D.countries[S.sel]); }
+function linksBody(c){
+  const iso = c.iso, L = c.links || {}, st = lkState(iso);
+  const cs = (D.strategies || []).filter(k => (L.cases || []).includes(k.id));
+  const fps = D.flashpoints.filter(f => (f.countries || []).includes(iso));
+  const fo = D.forecasts.filter(f => (f.countries || []).includes(iso));
+  const fs = fo.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due))
+    .concat(fo.filter(f => f.status !== "open").sort((a, b) => String(b.resolved || b.due).localeCompare(String(a.resolved || a.due))));
+  const br = []; if (BR) (BR.issues || []).forEach(x => (x.items || []).forEach(i => { if (((i.loc || {}).isos || []).includes(iso)) br.push([x, i]); }));
   const dg = D.digest.map((g, gi) => [g, gi]).filter(([g]) => (g.ids || []).includes(iso));
+  const ft = FEATS().filter(F => (L.feats || []).includes(F.id));
   const ev = (D.events || []).filter(e => ((e.loc || {}).isos || []).includes(iso) && daysLeft(e.date.length === 7 ? e.date + "-28" : (e.end || e.date)) >= 0);
-  if (!cs.length && !fs.length && !dg.length && !ev.length) return "";
-  const row = (k, body) => '<p class="note" style="margin:6px 0 0"><b style="color:var(--ink-2)">' + k + "</b> " + body + "</p>";
-  return '<section class="sec" id="c-links"><h3>클리사 지오폴리틱스에서 보기</h3>' +
-    (cs.length ? row("사안", cs.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join(" ")) : "") +
-    (fs.length ? row("전망", fs.map(f => '<button type="button" class="fcl" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + fcLab(f, f.id, f.p) + "</button>").join('<span class="sep"> · </span>')) : "") +
-    (dg.length ? row("정세 요약", dg.map(([g, gi]) => '<button type="button" class="fcl" data-dg="' + gi + '">' + esc(g.t) + "</button>").join('<span class="sep"> · </span>')) : "") +
-    (ev.length ? row("일정", ev.map(e => '<button type="button" class="fcl" data-ev="' + esc(e.id) + '">' + esc(evDate(e)) + " " + esc(e.t) + "</button>").join('<span class="sep"> · </span>')) : "") +
-    "</section>";
+  const gm = (L.games || []).filter(g => LK_GAME[g]);
+  if (!(cs.length + fps.length + fs.length + br.length + dg.length + ft.length + ev.length + gm.length)) return "";
+  const row = (k, body, c) => '<div class="lk-r' + (c ? " c" : "") + '"><span class="lk-h">' + k + '</span><div class="lk-b">' + body + "</div></div>";
+  const li = (d, t, v) => '<li><span class="d">' + d + '</span><span class="t">' + t + "</span>" + (v ? '<span class="v">' + v + "</span>" : "") + "</li>";
+  const more = (k, n) => n > 0 ? '<button type="button" class="bh-xbtn lk-more" data-lkm="' + k + '">' + "더 보기" + ' <span class="mono">' + n + "</span></button>" : "";
+  const ym = x => x.slice(0, 4) + "." + x.slice(5, 7), md = x => x.slice(5, 7) + "." + x.slice(8, 10);
+  const RS = {yes: "실현", no: "불발", void: "무효"};
+  const fsv = fs.slice(0, st.fc), brv = br.slice(0, st.br);
+  return '<section class="sec" id="c-links"><h3>클리사 지오폴리틱스에서 보기</h3><div class="lk">' +
+    (cs.length ? row(LK_H[0], '<div class="chips">' + cs.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>", 1) : "") +
+    (fps.length ? row(LK_H[1], '<div class="chips">' + fps.map(f => '<button type="button" class="chip" data-fp="' + esc(f.id) + '">' + esc(f.name_ko) + "</button>").join("") + "</div>", 1) : "") +
+    (fs.length ? row(LK_H[2], "<ul>" + fsv.map(f => li(ym(f.due), '<button type="button" class="lt" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + esc(f.s || f.q) + "</button>" + (RS[f.status] ? ' <span class="lk-rs">' + RS[f.status] + "</span>" : ""), f.p + "%")).join("") + "</ul>" + more("fc", fs.length - fsv.length)) : "") +
+    (br.length ? row(LK_H[3], "<ul>" + brv.map(([x, i]) => li(md(x.date), '<a class="lt" href="' + FCT.href("/brief/" + esc(x.date) + "/") + '" data-brief="' + esc(x.date) + '">' + esc(i.h) + "</a>")).join("") + "</ul>" + more("br", br.length - brv.length)) : "") +
+    (dg.length ? row(LK_H[4], "<ul>" + dg.map(([g, gi]) => li("", '<button type="button" class="lt" data-dg="' + gi + '">' + esc(g.t) + "</button>")).join("") + "</ul>") : "") +
+    (ft.length ? row(LK_H[5], "<ul>" + ft.map(F => li(md(F.date), '<a class="lt" href="' + FCT.href("/feature/" + esc(F.id) + "/") + '" data-feat="' + esc(F.id) + '">' + esc(F.title) + "</a>")).join("") + "</ul>") : "") +
+    (ev.length ? row(LK_H[6], "<ul>" + ev.map(e => li(e.date.length === 7 ? ym(e.date) : md(e.date), '<button type="button" class="lt" data-ev="' + esc(e.id) + '">' + esc(e.t) + "</button>")).join("") + "</ul>") : "") +
+    (gm.length ? row(LK_H[7], "<ul>" + gm.map(g => li(g, '<a class="lt" href="' + FCT.href("/play/" + g + "/") + '">' + LK_GAME[g] + "</a>")).join("") + "</ul>") : "") +
+    "</div></section>";
 }
+document.addEventListener("click", ev => {  /* v4.37 나라 카드 연결 칸의 더 보기(그 자리에서 5개·10개씩) */
+  const b = ev.target.closest("[data-lkm]"); if (!b || !S.lk) return;
+  const k = b.dataset.lkm; S.lk[k] += LK_STEP[k]; lkRefresh();
+});
 function countryIntentHtml(c){
   const v = c.intent; const cases = (D.strategies || []).filter(k => k.deciders && k.deciders.items.some(d => d.iso === c.iso));
   if (!v && !cases.length) return "";
@@ -1688,10 +1711,12 @@ function featBody(O){
     ((O.notes || []).length ? '<section class="fnotes"><h3>' + esc(O.notes_h || "용어 풀이") + "</h3><ol>" + O.notes.map((n, i) => '<li id="fn-' + esc(O.id) + "-" + (i + 1) + '"><b>' + esc(n.k) + "</b> · " + esc(n.t) + ' <button type="button" class="fnback" data-jump="fnr-' + esc(O.id) + "-" + (i + 1) + '" aria-label="본문으로 돌아가기">↩</button></li>').join("") + "</ol></section>" : "") +
     ((O.sources || []).length ? '<details class="src"><summary>출처 ' + O.sources.length + "건</summary><ul>" + O.sources.map(u => /^https?:/.test(u) ? srcItem(u) : "<li>" + esc(u) + "</li>").join("") + "</ul></details>" : "");
 }
+/* v4.37 특집에 나오는 나라(links.feats: 나라 이름 3번 이상) */
+const fIsos = F => Object.keys(D.countries).filter(k => ((D.countries[k].links || {}).feats || []).includes(F.id));
 function featArticle(F){
   const c = (D.strategies || []).find(x => x.id === F.case);
   return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : '특집') + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
-    (c ? '<div class="chips" style="margin:0"><button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button></div>" : "") + "</article>";
+    ((c || fIsos(F).length) ? '<div class="chips" style="margin:0">' + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + fIsos(F).map(chip).join("") + "</div>" : "") + "</article>";
 }
 function renderFeature(){
   const L0 = FEATS(); if (!$("#pane-feature")) return;
