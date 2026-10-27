@@ -1071,10 +1071,18 @@ function insightsHtml(){
 let BR = null; const HASH0 = location.hash;
 const PIN = '<svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M5 0a5 5 0 0 0-5 5c0 3.6 5 7 5 7s5-3.4 5-7a5 5 0 0 0-5-5Zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" fill="currentColor"/></svg>';  /* v3.83 위치 아이콘: 누르면 지구본이 그곳을 보이는 이름 끝에 붙인다(2026-10-08 결재) */
 const FCE = {up:["↑","Factors raising the probability"], down:["↓","Factors lowering the probability"], none:["–","No change"]};
+/* v4.38d(2026-10-27 결재): 브리핑의 전망 칩 앞면에 현재 확률·짧은 이름·검증 시점, 맨 끝에 이 사건의 방향(↑↓–)을 떼어 둔다 */
+const FCDUE_W = "due|-|".split("|");
+const fcDueS = d => "due " + enDate(d, String(d).slice(0, 4) === String(new Date().getFullYear()));
+function fcChip(f){
+  const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none, st = F && {yes: "Resolved yes", no: "Resolved no", void: "Voided"}[F.status];
+  return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' +
+    (F ? '<span class="bfc-p">' + (st ? esc(st) : F.p + "%") + "</span>" : "") + '<span class="bfc-t">' + esc(F && F.s ? F.s : f.id) + "</span>" +
+    (F && F.due && !st ? '<span class="bfc-d">' + fcDueS(F.due) + "</span>" : "") + '<span class="bfc-e" aria-hidden="true">' + e[0] + '</span><span class="sr">' + e[1] + "</span></button>";
+}
 const fmtKD = s => enDate(s, true);
 function dailyIssue(x){
-  const fc = f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none;
-    return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + '</b><span class="sr">' + e[1] + "</span></button>"; };
+  const fc = fcChip;
   const cs = id => { const c = (D.strategies || []).find(k => k.id === id); return c ? '<button type="button" class="chip" data-case="' + esc(id) + '">' + esc(c.title.split(":")[0]) + "</button>" : ""; };
   return x.items.map((i, n) => '<article class="bi"' + (x === (BR.issues || [])[0] ? ' id="bi-' + n + '"' : "") + '><h4>' + (i.loc ? '<button type="button" class="bh" data-bloc="' + esc(x.date) + "|" + n + "\" title=\"Show on the globe\">" + esc(i.h) + PIN + "</button>" : esc(i.h)) + "</h4>" + (i.fact ? "<p>" + esc(i.fact) + "</p>" : "") + (i.link ? "<p class=\"bl\"><span class=\"bl-k\">Bearing on the assessments</span>" + esc(i.link) + "</p>" : "") +  /* v3.92: 한 줄 정보 형식의 호는 fact·link가 없다 */
       '<div class="chips" style="margin:0">' + cs(i.case) + (i.fc || []).map(fc).join("") + ((i.loc || {}).isos || []).map(chip).join("") + "</div>" +  /* v4.37 꼭지의 나라 → 나라 카드 */  /* v3.83 장소가 있는 꼭지는 제목을 누르면 지구본이 그곳을 보인다(2026-10-08 결재, 위치 보기 단추를 대신함) */
@@ -1327,7 +1335,7 @@ function loadBrief(){
    정보마다 그날 그 사안의 확률이 바뀌었으면 국민의 삶(그 사안의 카드)과 산업별 미래(그 변경으로 점 개수가 가장 크게 움직인 업종의 추이)로 가는 단추를 붙인다 */
 const BH_CUT = 6, BH_N = 2;  /* 2026-10-12 결재: 최근 2개 호(발행일 기준) */
 function bhFx(i, d){
-  const fc = (i.fc || []).map(f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none; return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + "\"><span class=\"lb-fcl\">Forecast</span> " + esc(F && F.s ? F.s : f.id) + " " + e[0] + "</button>"; }).join("");
+  const fc = (i.fc || []).map(fcChip).join("");
   const C = i.case ? (D.strategies || []).find(s => s.id === i.case) : null, moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
   return fc + (moved ? "<span class=\"bh-gx\"><span class=\"lb-fx lb-fx-on\">Graphs updated</span><button type=\"button\" class=\"bh-go\" data-golife=\"" + esc(i.case) + "\">People's Lives →</button><button type=\"button\" class=\"bh-go\" data-goind=\"" + esc(i.case + "|" + d) + "\">Industry Outlook →</button></span>" : "");
 }
@@ -2081,13 +2089,13 @@ function lbCase(H, G){  /* 그래프 옆 한 줄: 가장 나쁜 경우(와 가�
   return (bad ? line("Worst case", ws) : "") + (bs && (!bad || G.cls[bs] === "better") ? line("Best case", bs) : "") || '<p class="lb-line">' + esc(firstSent(G.line)) + "</p>";
 }
 function lbFx(i, quiet, d){  /* 한 줄 정보가 그래프·전망에 주는 영향. v3.95: 그날 그 사안의 전개 확률이 바뀌었으면 '그래프 변경' */
-  const fc = (i.fc || []).map(f => { const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none; return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' + fcLab(F, f.id, F ? F.p : null) + ' <b aria-hidden="true">' + e[0] + "</b></button>"; }).join("");
+  const fc = (i.fc || []).map(fcChip).join("");
   const C = d && i.case ? (D.strategies || []).find(s => s.id === i.case) : null;
   const moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
   return fc + (moved ? "<span class=\"lb-fx lb-fx-on\">Graph updated</span>" : "") || (quiet ? "" : "<span class=\"lb-fx\">No change to the graph</span>");
 }
 function lbRecentHtml(rec, today){  /* v3.98: 국민의 삶 카드와 산업별 영향 선 그래프 상세가 함께 씀 */
-  return rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true).replace(/(<button type="button" class="fcchip bfc[^>]*>)/g, '$1<span class="lb-fcl">Forecast</span> ') + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
+  return rec.length ? '<ul class="lb-rc">' + rec.map(([d, i]) => '<li><span class="lb-d' + (d === today ? " lb-today" : "") + '">' + (d === today ? "Today" : md(d)) + '</span><span class="lb-t">' + esc(i.h) + "</span>" + lbFx(i, true) + "</li>").join("") + "</ul>" : "<p class=\"note\">No recent updates</p>";
 }
 function lbRecent(cid, n){  /* 이 사안의 최근 한 줄 정보(최근 호부터) */
   const out = []; (BR.issues || []).some(x => { x.items.forEach(i => { if (i.case === cid && out.length < n) out.push([x.date, i]); }); return out.length >= n; }); return out;
@@ -3470,7 +3478,7 @@ function fcPop(chip){
   const ef = chip.classList.contains("bfc-up") ? "up" : chip.classList.contains("bfc-down") ? "down" : chip.classList.contains("bfc-none") ? "none" : null;
   const EF = {up: ["↑", "Factors raising the probability"], down: ["↓", "Factors lowering the probability"], none: ["–", "No change"]};
   const el = document.createElement("div"); el.id = "fcpop"; el.dataset.for = id; el._chip = chip; el.setAttribute("role", "dialog");
-  el.innerHTML = '<div class="fcp-h"><span class="mono">' + esc(id) + "</span> forecast · " + (st ? esc(st) : "Currently " + F.p + "%") + "<button type=\"button\" class=\"fcp-x\" aria-label=\"Close\">×</button></div><p>" + esc(F.q) + "</p>" +
+  el.innerHTML = '<div class="fcp-h"><b class="fcp-s">' + esc(F.s || F.q) + "</b> · " + (st ? esc(st) : "Currently " + F.p + "%") + "<button type=\"button\" class=\"fcp-x\" aria-label=\"Close\">×</button></div><p>" + esc(F.q) + "</p>" +
     (ef ? "<p class=\"fcp-e\">This event · <b class=\"fe-" + ef + '">' + EF[ef][0] + "</b> " + EF[ef][1] + "</p>" : "") +
     "<p class=\"fcp-d\">Resolution date <span class=\"mono\">" + esc(enDate(F.due)) + '</span></p><button type="button" class="chip" data-fcgo="' + esc(id) + "\">View in Forecasts and Track Record →</button>";
   document.body.appendChild(el); FCP = el;

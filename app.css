@@ -935,6 +935,8 @@ details.fw ul{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px
 .entry:hover{background:var(--panel)}
 .fcchip{border:1px solid var(--line); background:var(--panel); border-radius:4px; padding:0 6px; font:500 11px var(--mono); color:var(--ink-2); cursor:pointer}
 .fcchip:hover{border-color:var(--accent); color:var(--accent)}
+.bfc .bfc-p{font:700 11.5px var(--mono); color:var(--ink); margin-right:5px} .bfc .bfc-d{color:var(--muted); font-size:.92em; margin-left:6px; white-space:nowrap}
+.bfc .bfc-e{font-weight:700; margin-left:6px; padding-left:6px; border-left:1px solid var(--line)} .bfc-up .bfc-e{color:var(--conflict)} .bfc-down .bfc-e{color:var(--accent)} .bfc-none .bfc-e{color:var(--muted)}
 .evk{font:600 11px var(--mono); color:var(--muted); margin-right:6px}
 .mo{display:grid; grid-template-columns:44px 1fr; gap:4px 12px; margin-top:8px; font-size:14px} .mo .m{font:700 13px var(--mono); color:var(--accent); padding-top:4px} .mo ul{margin:0; padding:0; list-style:none}
 .mo li{display:flex; gap:10px; align-items:baseline; padding:4px 0; border-bottom:1px solid var(--line)} .mo li:last-child{border-bottom:0}
@@ -1298,6 +1300,7 @@ button.futgo{font:inherit;color:inherit;background:none;border:0;padding:0;margi
 .bh-gx{display:inline-flex;align-items:baseline;gap:6px;flex-wrap:wrap}
 .bh-go{border:1px solid var(--line);background:transparent;border-radius:999px;padding:1px 9px;font:600 11.5px/1.6 var(--sans);color:var(--accent);cursor:pointer} .bh-go:hover{border-color:var(--accent)}
 .bh-more{display:flex;align-items:baseline;justify-content:center;gap:6px;width:100%;margin:14px 0 0;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel-2);font:600 13px var(--sans);color:var(--ink);cursor:pointer} .bh-more:hover{border-color:var(--accent)} .bh-more .mono{font-size:11.5px;color:var(--muted)}
+.bhome .fcchip.bfc{color:var(--ink-2)}  /* v4.38d 방향 색은 칩 끝의 화살표에만 */
 .bh-old{margin-top:6px} .bhome{word-break:keep-all;overflow-wrap:anywhere} .bhome .fcchip{font:500 11.5px/1.6 var(--sans);border-radius:999px;padding:1px 9px} .bhome .lb-fcl{font-weight:700;color:var(--muted);margin-right:2px} .bhome .bfc-up{color:var(--conflict)} .bhome .bfc-down{color:var(--accent)}
 .pane .lb-tobr{margin:14px 0 0}
 
