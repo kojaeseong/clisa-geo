@@ -822,9 +822,11 @@ details.full>summary{cursor:pointer; font:700 15px var(--sans); color:var(--ink)
 .srch-open svg{width:15px; height:15px; color:var(--ink-2)}
 .legbtn{display:none; position:absolute; top:12px; right:12px; align-items:center; gap:6px; border:1px solid var(--ink-2); background:var(--panel); color:var(--ink); border-radius:8px; padding:6px 10px; font:600 12.5px var(--sans); cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.1)}
 .legbtn svg{width:16px; height:16px}
+#legbtn .lgm{display:none; align-items:center; gap:6px; margin-left:4px; padding-left:9px; border-left:1px solid var(--line); font-weight:500; color:var(--ink-2)} #legbtn .lgm i{display:block; width:34px; height:7px; border-radius:2px}
 .legx{position:absolute; top:4px; right:4px; border:0; background:none; color:var(--muted); font:400 18px/1 var(--sans); padding:4px 7px; border-radius:6px; cursor:pointer}
 .legx:hover{color:var(--ink); background:var(--panel-2)}
-@media (min-width: 961px){ html.legoff .legend{display:none} html.legoff .legbtn{display:inline-flex; top:auto; right:auto; left:12px; bottom:12px} }
+@media (min-width: 961px){ html.legoff .legend{display:none} html.legoff .legbtn{display:inline-flex; top:auto; right:auto; left:12px; bottom:12px}
+ html.legoff #legbtn .lgm{display:inline-flex} }
 .legbtn[aria-expanded="true"]{background:var(--ink); color:var(--panel)}
 .legend select{display:block; width:100%; margin:4px 0 2px; font:13px var(--sans); padding:4px 6px; border:1px solid var(--line); border-radius:6px; background:var(--panel); color:var(--ink)}
 .legend .keys{display:grid; gap:4px}

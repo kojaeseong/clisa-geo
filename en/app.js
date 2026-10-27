@@ -35,7 +35,7 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 960px)").matches;
 const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
-if (store.get("ep.legoff") === "1") document.documentElement.classList.add("legoff");
+{ const v = store.get("ep.legoff"); if (v === "1" || (v !== "0" && matchMedia("(min-width: 961px)").matches)) document.documentElement.classList.add("legoff"); }  /* v4.38c(2026-10-27): 처음 오는 데스크톱 방문자는 범례를 접은 채로(지구본을 가리지 않게), 펼치거나 접은 뒤에는 그 선택대로 */
 
 const LAYERS = {
   focus:{label:"Analytical focus", desc:"Darker shading means more strategic analyses and forecasts involving the country."},
@@ -307,6 +307,7 @@ function ensureRendered(t){ if (D && TAB_RENDER[t] && !RENDERED[t]) TAB_RENDER[t
 const PUB = () => !!(D && D.meta && D.meta.edition === "public");
 function initGlobe(w){
   if (!D) return;
+  if (!narrow() && !document.documentElement.classList.contains("legoff") && !S.zfold) S.zfoldAuto = true;  /* v4.38c 범례를 펼쳐 둔 방문자는 권역 판을 접은 채로 */
   zoneBarSync();  /* v4.38 */
   aswFold();
   const numToIso = {};
@@ -677,7 +678,7 @@ function setupInteraction(){
   $("#legend").addEventListener("click", e => { const b = e.target.closest("[data-mt]"); if (!b) return; if (b.dataset.mt === "fp") S.showFp = !S.showFp; else if (b.dataset.mt === "usf") { setUsf(!S.showUsf); if (VIEW0) VIEW0.usf = null; }  /* v3.85(2026-10-08 결재): 켜도 지구본을 옮기거나 회전을 멈추지 않는다 */ else S.showEdge = !S.showEdge; renderLegend(); requestDraw(false); });
   $("#legend").addEventListener("change", e => { if (e.target.id === "lysel") setLayer(e.target.value); });
   /* v3.43f 데스크탑: '지구본 색 기준' 상자를 접으면 왼쪽 아래 작은 '지도 표시' 단추로 바뀐다(처음엔 펼침, 접은 상태는 브라우저에 기억). 모바일: 예전처럼 단추로 열고 닫는다 */
-  const legOff = off => { document.documentElement.classList.toggle("legoff", off); store.set("ep.legoff", off ? "1" : "0"); $("#legbtn").setAttribute("aria-expanded", !off); };
+  const legOff = off => legSet(off, true);
   if (!narrow()) $("#legbtn").setAttribute("aria-expanded", !document.documentElement.classList.contains("legoff"));
   $("#legbtn").onclick = () => { if (!narrow()) { legOff(false); return; } const L = $("#legend"), o = !L.classList.contains("open"); L.classList.toggle("open", o); $("#legbtn").setAttribute("aria-expanded", o); };
   $("#legend").addEventListener("click", e => { if (!e.target.closest("[data-legx]")) return; if (narrow()) { $("#legend").classList.remove("open"); $("#legbtn").setAttribute("aria-expanded", false); } else legOff(true); });
@@ -955,6 +956,8 @@ function renderLegend(){
   const tk = "<span>Fewer</span><span></span><span>More</span>";
   const sw = (k, on, body) => '<button type="button" class="mt" data-mt="' + k + '" aria-pressed="' + on + '"><span class="sw" aria-hidden="true"></span>' + body + "</button>";
   $("#legend").classList.toggle("usfon", !!(S.showUsf && D && D.posture));
+  const lbn = document.getElementById("legbtn");  /* v4.38c 접힌 범례 단추에도 최소 범례(권역 단추처럼 현재 값을 보인다) */
+  if (lbn) lbn.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3 2.5 7 10 11l7.5-4L10 3Z"/><path d="m2.5 10.5 7.5 4 7.5-4"/><path d="m2.5 14 7.5 4 7.5-4"/></svg>' + "Map layers" + '<span class="lgm"><i style="background:linear-gradient(90deg,' + stops + ')"></i>' + esc(L.label) + "</span>";
   $("#legend").innerHTML = "<button type=\"button\" class=\"legx\" data-legx aria-label=\"Collapse\" title=\"Collapse\">×</button>" +
     "<div><label class=\"lt\" for=\"lysel\">Color the globe by</label><select id=\"lysel\">" + Object.keys(LAYERS).map(k => '<option value="' + k + '"' + (k === S.layer ? " selected" : "") + ">" + LAYERS[k].label + "</option>").join("") + '</select><div class="ld">' + L.desc + "</div></div>" +
     '<div class="ramp" style="background:linear-gradient(90deg,' + stops + ')"></div><div class="ticks">' + tk + "</div>" +
@@ -1485,6 +1488,12 @@ function aswFold(){
 }
 /* v4.38 권역별 정세: 권역(zone)은 자료 D.zones, 나라마다 c.zone. 미국·중국은 역외 강대국(D.zones_powers)이라 권역에 넣지 않는다 */
 S.zfold = store.get("ep.zfold") === "1";
+/* v4.38c 범례와 권역 판은 데스크톱에서 함께 펼치지 않는다: 범례를 펼치면 권역 판이 잠시 접히고, 권역 판을 펼치면 범례가 접힌다 */
+function legSet(off, keep){
+  const H0 = document.documentElement; H0.classList.toggle("legoff", off); if (keep) store.set("ep.legoff", off ? "1" : "0");
+  const b = document.getElementById("legbtn"); if (b) b.setAttribute("aria-expanded", !off);
+  if (!narrow()) { if (!off && !S.zfold && !S.zfoldAuto) { S.zfoldAuto = true; zoneBarSync(); } else if (off && S.zfoldAuto) { S.zfoldAuto = false; zoneBarSync(); } }
+}
 const ZN = () => (D && D.zones) || [], ZPW = () => (D && D.zones_powers) || [];
 const zoneOf = id => ZN().find(z => z.id === id);
 const zoneIsos = id => Object.keys(D.countries).filter(k => D.countries[k].zone === id);
@@ -1506,7 +1515,7 @@ function zonePins(set){
 }
 function zoneBarSync(){
   const b = document.getElementById("zonebar"); if (!b) return; if (!ZN().length) { b.hidden = true; return; }
-  const fold = !narrow() && S.zfold, z0 = zoneOf(S.zone); b.classList.toggle("fold", !!fold);  /* v4.38b 지도 표시처럼 접기(데스크톱) */
+  const fold = !narrow() && (S.zfold || S.zfoldAuto), z0 = zoneOf(S.zone); b.classList.toggle("fold", !!fold);  /* v4.38b 지도 표시처럼 접기(데스크톱) */
   if (fold) { b.innerHTML = '<button type="button" class="legbtn zbtn" data-zfold="0" aria-expanded="false"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7.2"/><path d="M2.8 10h14.4M10 2.8c2.2 2.3 2.2 12.1 0 14.4M10 2.8c-2.2 2.3-2.2 12.1 0 14.4"/></svg>' + "Regions" + (z0 ? " <b>" + esc(z0.name_ko) + "</b>" : "") + "</button>"; b.hidden = false; return; }
   b.innerHTML = '<span class="lbl">' + "Regions" + '</span><button type="button" class="zx" data-zfold="1" aria-label="' + "Collapse" + '" title="' + "Collapse" + '">×</button>' + ZN().map(z => '<button type="button" class="zc" data-zone="' + esc(z.id) + '" aria-pressed="' + (S.zone === z.id) + '">' + esc(z.name_ko) + "</button>").join("") +
     '<div class="zp-row"><span class="lbl zp">' + LKZ_H[1] + "</span>" + ZPW().map(i => '<button type="button" class="zc" data-iso="' + i + '">' + esc(D.countries[i].name_ko) + "</button>").join("") + "</div>" +
@@ -1526,13 +1535,13 @@ function goZone(id){
   const z = zoneOf(id); if (!z) return;
   const set = new Set(zoneIsos(id));
   S.zone = id; S.lens = {id: "zone:" + id, set: set, off: []}; S.zonePins = zonePins(set);
-  const H0 = document.documentElement; if (!narrow() && !H0.classList.contains("legoff")) { H0.classList.add("legoff"); S.zoneLeg = true; }  /* 권역을 가리지 않게 범례를 잠시 접음(저장하지 않음) */
+  const H0 = document.documentElement; if (!narrow() && !H0.classList.contains("legoff")) { legSet(true, false); S.zoneLeg = true; }  /* 권역을 가리지 않게 범례를 잠시 접음(저장하지 않음) */
   renderRegion(); switchTab("region"); zoneBarSync();
   viewGo(z.lon, z.lat, z.k, true); requestDraw(true);
 }
-function zoneOff(){ if (!S.zone) return; S.zone = null; S.zonePins = null; if (S.zoneLeg) { document.documentElement.classList.remove("legoff"); S.zoneLeg = false; } if (S.lens && String(S.lens.id).indexOf("zone:") === 0) S.lens = null; zoneBarSync(); requestDraw(true); }
+function zoneOff(){ if (!S.zone) return; S.zone = null; S.zonePins = null; if (S.zoneLeg) { S.zoneLeg = false; legSet(false, false); } if (S.lens && String(S.lens.id).indexOf("zone:") === 0) S.lens = null; zoneBarSync(); requestDraw(true); }
 document.addEventListener("click", ev => {
-  const zf = ev.target.closest("[data-zfold]"); if (zf) { S.zfold = zf.dataset.zfold === "1"; store.set("ep.zfold", S.zfold ? "1" : "0"); zoneBarSync(); return; }
+  const zf = ev.target.closest("[data-zfold]"); if (zf) { S.zfold = zf.dataset.zfold === "1"; S.zfoldAuto = false; store.set("ep.zfold", S.zfold ? "1" : "0"); if (!S.zfold && !narrow() && !document.documentElement.classList.contains("legoff")) legSet(true, true); zoneBarSync(); return; }
   const zb = ev.target.closest("[data-zone]");  /* v4.38 권역 단추: 다시 누르면 권역 보기를 끄고 세계 정세로 */
   if (zb) { ev.preventDefault(); if (S.zone === zb.dataset.zone && S.tab === "region") { zoneOff(); viewRestore(); switchTab("overview"); } else goZone(zb.dataset.zone); return; }
   const b = ev.target.closest("[data-lkm]"); if (!b || !S.lk) return;  /* 연결 칸의 더 보기(그 자리에서) */
