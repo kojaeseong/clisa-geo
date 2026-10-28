@@ -43,9 +43,12 @@
   document.addEventListener("keydown", function(e){ if (e.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) { e.preventDefault(); location.href = "/en/?q="; } });
 
   /* 띠 */
+  var esc = function(t){ return String(t).replace(/[&<>"]/g, function(c){ return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); };
+  /* v4.41(2026-10-28 결재): 전망은 머리말 '전망'과 확률 문장(이름 가능성 ○% · 날짜 판가름 · 남은 날)으로 보인다 */
+  function dueStripHtml(f){ var y = String(f.due).slice(0, 4); return '<span class="bs-nm">' + esc(f.s || f.id) + '</span><span class="bs-pr">: <b class="bs-p">' + f.p + "%</b> chance" + '<span class="bs-x"> · resolves ' + fmtKD(f.due) + (y === String(new Date().getFullYear()) ? "" : ", " + y) + " · " + esc(daysText(daysLeft(f.due))) + "</span></span>"; }
   function runStrip(st, list){
     var bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d"), k = 0, hold = false;
-    var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/en/"; st.classList.toggle("bs-due", !!x.a); st.hidden = false; };  /* v4.24 좁은 화면에서 예정 항목이 돌 때 띠의 왼쪽 선을 붉게 */
+    var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/en/"; st.classList.toggle("bs-due", !!x.a); st.hidden = false; };  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만(a) */
     show();
     if (!reduceMotion) setInterval(function(){
       if (hold || document.visibilityState !== "visible" || list().length < 2) return;
@@ -65,17 +68,18 @@
         .concat((s.events || []).filter(function(e){ var n = daysLeft(e.date.length === 7 ? e.date + "-01" : e.date); return n != null && n <= days && (e.date.length === 7 ? daysLeft(e.date + "-28") >= 0 : (e.end ? daysLeft(e.end) : n) >= 0); }).map(function(e){ return {k: evKey(e), e: e}; }));
       return L.sort(function(a, c){ return a.k.localeCompare(c.k); });
     };
-    var agendaItems = function(){ return agenda(90).map(function(x){ return x.f ? {a: 1, k: "Resolution due", d: x.f.due, t: (x.f.s || x.f.id + " " + x.f.q) + " · " + daysText(daysLeft(x.f.due)), go: "/en/forecast/#" + x.f.id, soon: daysLeft(x.f.due) <= 30}
-      : {a: 1, k: "Upcoming", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), go: "/en/", soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30}; }); };
-    var MAIN = [];
+    var agendaItems = function(){ return agenda(90).map(function(x){ return x.f ? {a: 1, k: "Forecast", d: "", f: x.f, go: "/en/forecast/#" + x.f.id, soon: daysLeft(x.f.due) <= 30, dl: daysLeft(x.f.due)}
+      : {e: 1, k: "Upcoming", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), go: "/en/", soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30, dl: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date)}; }); };
+    var NS = [], FRS = [], BRS = [];
     if (b && (b.issues || []).length) {
       var cur = b.issues[0], d7 = new Date(Date.now() - 7 * 864e5), lim = d7.getFullYear() + "-" + String(d7.getMonth() + 1).padStart(2, "0") + "-" + String(d7.getDate()).padStart(2, "0"); var d3 = new Date(Date.now() - 2 * 864e5), lim3 = d3.getFullYear() + "-" + String(d3.getMonth() + 1).padStart(2, "0") + "-" + String(d3.getDate()).padStart(2, "0");
-      MAIN = (s.notices || []).filter(function(n){ return n.date >= lim; }).sort(function(a, c){ return c.date.localeCompare(a.date); })
-        .map(function(n){ return {k: n.k || "Analysis update", d: n.date, t: n.h, go: n.link ? "/en/" + n.link : "/en/"}; })
-        .concat((s.fcr || []).filter(function(r){ return r.date >= lim3; }).map(function(r){ return {k: "Forecast revised", d: r.date, t: r.s + " " + r.from + "% → " + r.to + "%", go: "/en/forecast/#fw-" + r.date}; }))
-        .concat(cur.items.map(function(i){ return {k: "Briefings", d: cur.date, t: i.h, go: "/en/brief/" + cur.date + "/"}; }));
+      NS = (s.notices || []).filter(function(n){ return n.date >= lim; }).sort(function(a, c){ return c.date.localeCompare(a.date); })
+        .map(function(n){ return {k: n.k || "Analysis update", d: n.date, t: n.h, go: n.link ? "/en/" + n.link : "/en/"}; });
+      FRS = (s.fcr || []).filter(function(r){ return r.date >= lim3; }).map(function(r){ return {a: 1, k: "Forecast revised", d: r.date, t: r.s + " " + r.from + "% → " + r.to + "%", go: "/en/forecast/#fw-" + r.date}; });
+      BRS = cur.items.map(function(i){ return {k: "Briefings", d: cur.date, t: i.h, go: "/en/brief/" + cur.date + "/"}; });
     }
-    runStrip(bs, function(){ return narrow() ? MAIN.concat(agendaItems().filter(function(x){ return x.soon; })) : MAIN; });
-    if (as) runStrip(as, function(){ return narrow() ? [] : agendaItems(); });
+    /* v4.41(2026-10-28 결재): 파란 띠는 공지·브리핑·60일 안의 예정 행사, 붉은 띠는 전망 조정과 60일 안의 전망. 좁은 화면도 같은 두 띠를 위아래로 둔다 */
+    runStrip(bs, function(){ return NS.concat(BRS, agendaItems().filter(function(x){ return x.e && x.dl <= 60; })); });
+    if (as) runStrip(as, function(){ return FRS.concat(agendaItems().filter(function(x){ return x.f && x.dl <= 60; })); });
   });
 })();

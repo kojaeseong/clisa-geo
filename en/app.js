@@ -348,7 +348,7 @@ function init(d){
   setupSearch();
   ttsSetup();
   loadBrief();
-  runStrip($("#astrip"), () => narrow() ? [] : agendaItems());
+  runStrip($("#astrip"), () => frsItems().concat(agendaItems().filter(x => x.f && x.dl <= 60)));  /* v4.41(2026-10-28 결재): 붉은 띠는 전망만(전망 조정 + 60일 안에 판가름 나는 전망). 예정 행사는 파란 띠로 */
   loop();
 }
 
@@ -1277,8 +1277,8 @@ function dailyHtml(){
 }
 /* v3.36b 돌아가는 띠. 항목 {k 머리말, d 날짜, t 제목, 그리고 n(공지)·j(브리핑 번호)·f(전망)·e(사건) 가운데 하나}. 4초마다 한 건씩 바꾸고, 마우스를 올리거나 누르고 있으면 멈춘다 */
 function agendaItems(){
-  return agenda(90).map(x => x.f ? {k: "Resolution due", d: x.f.due, t: (x.f.s || x.f.id + " " + x.f.q) + " · " + daysText(daysLeft(x.f.due)), f: x.f, soon: daysLeft(x.f.due) <= 30}
-    : {k: "Upcoming", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), e: x.e, soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30});
+  return agenda(90).map(x => x.f ? {k: "Forecast", d: "", t: (x.f.s || x.f.id + " " + x.f.q) + " · " + daysText(daysLeft(x.f.due)), f: x.f, soon: daysLeft(x.f.due) <= 30, dl: daysLeft(x.f.due)}
+    : {k: "Upcoming", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), e: x.e, soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30, dl: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date)});
 }
 function stripGo(x){
   if (x.w) { switchTab("forecast"); const d = document.getElementById("fw-" + x.w.date); if (d) { d.open = true; const li = d.querySelector('li[data-fid="' + x.w.id + '"]') || d;
@@ -1296,15 +1296,16 @@ function stripGo(x){
   switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
   if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } }
 }
-/* v4.40(2026-10-28): 검증 예정 띠의 전망은 브리핑 전망 칩과 같은 차례로 보인다: 현재 확률 · 짧은 이름 · 남은 날 · 최근 변경(날짜 직전 확률→현재) */
-function dueStripHtml(f){
-  const h = (D.fc_hist || {})[f.id] || [], n = h.length, ch = n > 1 && h[n - 1][1] !== h[n - 2][1] ? fmtKD(h[n - 1][0]) + " " + h[n - 2][1] + "%→" + h[n - 1][1] + "%" : "";
-  return '<b class="bs-p">' + f.p + '%</b> ' + esc(f.s || f.id) + '<span class="bs-x"> · ' + esc(daysText(daysLeft(f.due))) + (ch ? " · " + esc(ch) : "") + "</span>";
-}
+/* v4.41(2026-10-28): 다가오는 일정 띠에서 전망은 머리말 '전망'과 확률 문장(이름 가능성 ○% · 날짜 판가름 · 남은 날)으로 보여 실제 일정('예정')과 구별한다 */
+/* v3.52b 전망 조정(주간 전망 점검에서 확률을 바꾼 전망)은 점검한 날부터 사흘 동안 돌린다(2026-10-05). v4.41부터 붉은 띠(모바일은 한 띠에서 붉게) */
+function frsItems(){ const d = new Date(Date.now() - 2 * 864e5), lim3 = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  return FCR().filter(r => r.date >= lim3).flatMap(r => r.items.filter(it => it.from !== it.to).map(it => { const F = D.forecasts.find(z => z.id === it.id);
+      return {k: "Forecast revised", d: r.date, t: (F && F.s ? F.s : it.id) + " " + it.from + "% → " + it.to + "%", w: {date: r.date, id: it.id}}; })); }
+function dueStripHtml(f){ return '<span class="bs-nm">' + esc(f.s || f.id) + '</span><span class="bs-pr">: <b class="bs-p">' + f.p + "%</b> chance" + '<span class="bs-x"> · resolves ' + enDate(f.due, String(f.due).slice(0, 4) === String(new Date().getFullYear())) + " · " + esc(daysText(daysLeft(f.due))) + "</span></span>"; }
 function runStrip(st, list){
   const bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d");
   let k = 0, hold = false;
-  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.e)); st.hidden = false; };  /* v4.24 좁은 화면에서 예정 항목이 돌 때 띠의 왼쪽 선을 붉게 */
+  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.w)); st.hidden = false; };  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만 붉게, 예정 행사는 파랗게 */
   show();
   if (!reduceMotion) setInterval(() => {
     if (hold || document.visibilityState !== "visible" || list().length < 2) return;
@@ -1327,12 +1328,9 @@ function loadBrief(){
     const ymd = x => x.getFullYear() + "-" + String(x.getMonth() + 1).padStart(2, "0") + "-" + String(x.getDate()).padStart(2, "0"), lim = ymd(new Date(Date.now() - 7 * 864e5)), limF = ymd(new Date(Date.now() - 11 * 864e5));
     const NS = (D.notices || []).filter(n => n.date >= (n.k === "Features" ? limF : lim)).slice().sort((a, b) => b.date.localeCompare(a.date))
       .map(n => ({k: n.k || "Analysis update", d: n.date, t: n.h || String(n.text).split(EN_SENT)[0], n}));
-    /* v3.52b 전망 조정(주간 전망 점검에서 확률을 바꾼 전망)은 점검한 날부터 사흘 동안 공지 다음에 돌린다(2026-10-05) */
-    const lim3 = ymd(new Date(Date.now() - 2 * 864e5));
-    const FRS = FCR().filter(r => r.date >= lim3).flatMap(r => r.items.filter(it => it.from !== it.to).map(it => { const F = D.forecasts.find(z => z.id === it.id);
-      return {k: "Forecast revised", d: r.date, t: (F && F.s ? F.s : it.id) + " " + it.from + "% → " + it.to + "%", w: {date: r.date, id: it.id}}; }));
-    const MAIN = NS.concat(FRS, cur.items.map((i, j) => ({k: "Briefings", d: cur.date, t: i.h, j})));
-    runStrip($("#bstrip"), () => narrow() ? MAIN.concat(agendaItems().filter(x => x.soon)) : MAIN);  /* 모바일: 띠가 하나이므로 30일 안의 일정을 섞는다(2026-10-01) */
+    const BRS = cur.items.map((i, j) => ({k: "Briefings", d: cur.date, t: i.h, j}));
+    /* v4.41(2026-10-28 결재): 파란 띠는 일어났거나 정해진 일(공지·브리핑·60일 안의 예정 행사), 붉은 띠는 전망. 좁은 화면도 같은 두 띠를 위아래로 둔다 */
+    runStrip($("#bstrip"), () => NS.concat(BRS, agendaItems().filter(x => x.e && x.dl <= 60)));
     renderOverview(); renderBrief(); SR.idx = null; if (S.tab === "brief" && ROUTES) applyRoute();
   }).catch(() => { const st = $("#bstrip"); if (st && !BR) st.hidden = true; });
 }
