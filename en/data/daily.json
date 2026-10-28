@@ -1,6 +1,164 @@
 {
  "issues": [
   {
+   "date": "2026-10-28",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Iran's Persian Gulf Strait Authority warns of legal action against Sinokor's entire fleet starting November 1",
+     "fact": "Iran's Persian Gulf Strait Authority said on X on October 27 that vessels of South Korea's Sinokor Merchant Marine had committed the most transit violations in the Strait of Hormuz over the past three months, that it had already acted against seven of them, and that it would take legal action against all of the company's ships starting November 1. The Korea Shipowners' Association said on October 28 that the vessels in question are not owned by Sinokor but sub-chartered to an overseas oil company and carry no South Korean crew, Reuters reported.",
+     "fc": [
+      {
+       "id": "f37",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.arabnews.com/world/iran-says-sinokor-vessels-face-legal-action-south-korean-shipowners-deny-link-3008633",
+      "https://www.khan.co.kr/article/202610272107001/",
+      "https://www.newspim.com/news/view/20261028000042"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Likud leads partial count in Israel's election as neither bloc secures a majority",
+     "fact": "With about 40 percent of ballots counted in Israel's October 27 election, the Central Elections Committee's partial results gave Likud 21.70 percent and Yashar, led by former military chief Gadi Eisenkot, 15.72 percent, the AP reported. Prime Minister Benjamin Netanyahu claimed early on October 28 that the right-wing bloc had won a decisive majority among the Zionist and Jewish public. The final tally is due by October 30, and official results will be published November 4.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.daytondailynews.com/nation-world/the-latest-as-votes-are-counted-no-clear-winner-emerges-in-israels-election/article_4ef65cb2-7d04-5637-a643-db52ff90002b.html",
+      "https://www.timesofisrael.com/liveblog_entry/netanyahu-right-wing-bloc-won-decisive-majority-claims-iran-weaker-than-ever-israel-stronger-than-ever/",
+      "https://aljazeera.com/news/2026/10/28/five-key-takeaways-from-israels-parliamentary-elections"
+     ],
+     "loc": {
+      "isos": [
+       "ISR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Finnish and Norwegian leaders relay negotiation messages to Putin ahead of Abu Dhabi talks",
+     "fact": "Finnish President Alexander Stubb and Norwegian Prime Minister Jonas Gahr Støre said they spoke with Russian President Vladimir Putin on October 27, in consultation with Ukraine, to convey messages on future negotiations, and that the call was linked to an upcoming meeting in Abu Dhabi. The Kyiv Independent reported that trilateral U.S.-Russia-Ukraine talks are expected in Abu Dhabi sometime in November.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.presidentti.fi/en/president-stubb-and-prime-minister-store-held-a-phone-call-with-president-putin/",
+      "https://www.abc.net.au/news/2026-10-28/putin-nordic-prime-ministers-phone-call-ukraine/107316960",
+      "https://kyivindependent.com/norway-finland-call-putin-ahead-of-potential-abu-dhabi-peace-talks-2/"
+     ],
+     "loc": {
+      "lat": 60.17,
+      "lon": 24.94,
+      "place": "Helsinki (Finland)",
+      "isos": [
+       "FIN",
+       "NOR",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IAEA's Grossi tells Security Council Iran is not providing access to verify its highly enriched uranium",
+     "fact": "IAEA Director General Rafael Grossi told a UN Security Council meeting on October 27 that Iran has not provided the information and access needed to verify its declared nuclear material, singling out about 440 kilograms of highly enriched uranium as a particular concern. He said the agency had not detected any repair or reconstruction work at the struck facilities since June 2025.",
+     "fc": [
+      {
+       "id": "f68",
+       "e": "down"
+      },
+      {
+       "id": "f33",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.anews.com.tr/world/2026/10/27/un-nuclear-watchdog-chief-urges-iran-to-grant-iaea-access-to-verify-nuclear-material",
+      "https://www.freepressjournal.in/world/iran-has-not-rebuilt-nuclear-sites-hit-by-us-israel-strikes-says-iaea-chief-rafael-grossi-at-un-security-council-meeting"
+     ],
+     "loc": {
+      "lat": 40.75,
+      "lon": -73.97,
+      "place": "UN headquarters, New York (U.S.)",
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Pezeshkian meets Putin in Moscow as Qatar urges Iran to reopen the strait",
+     "fact": "Iranian President Masoud Pezeshkian met Russian President Vladimir Putin on October 27 on the sidelines of the Gas Exporting Countries Forum summit in Moscow and said the region can resolve its problems without relying on the United States, AFP reported. Qatar's emir, Sheikh Tamim bin Hamad Al Thani, also met him in Moscow that day, and Qatari foreign ministry official Ibrahim Al-Hashmi said Iran must demonstrate good faith and reopen the Strait of Hormuz.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.koreatimes.co.kr/world/20261028/iran-president-tells-putin-region-can-solve-problems-without-us",
+      "https://www.brecorder.com/news/40446149/qatar-ruler-iran-president-discussed-war-hormuz-in-moscow-meeting"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "IRN",
+       "RUS",
+       "QAT"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "First lady Melania Trump said on X on October 27 that the Oleshky ceasefire zone had been expanded beyond Oleshky into the Kherson region to give humanitarian vehicles safe passage.",
+     "src": [
+      "https://www.yahoo.com/news/world/articles/first-lady-melania-trump-says-161008740.html"
+     ],
+     "case": "ukraine"
+    },
+    {
+     "t": "Yemen's Houthis claimed a ballistic missile strike on Saudi Arabia's Ras Tanura refinery on October 27; the damage has not been independently verified.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-diplomacy-oil-prices-strait-of-hormuz/"
+     ],
+     "case": "iran"
+    },
+    {
+     "t": "North Korea's state news agency KCNA reported on October 28 that Kim Jong Un met on October 27 with participants in the Korean People's Army's Third Conference of Company Commanders and said a company commander's foremost revolutionary task is to complete combat preparations for full wartime readiness.",
+     "src": [
+      "https://www.hankookilbo.com/news/article/A2026102809220003565"
+     ],
+     "case": "korea"
+    }
+   ]
+  },
+  {
    "date": "2026-10-27",
    "items": [
     {

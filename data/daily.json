@@ -1,6 +1,164 @@
 {
  "issues": [
   {
+   "date": "2026-10-28",
+   "items": [
+    {
+     "case": "iran",
+     "h": "이란 페르시아만해협청, 장금상선 선박 전체에 11월 1일부터 법적 조치 예고",
+     "fact": "이란 페르시아만해협청은 27일(현지 시각) X에 장금상선(시노코) 선박이 최근 3개월 동안 호르무즈 해협 통항 규정을 가장 많이 어겼고 이미 7척에 조치했다며 11월 1일부터 이 회사의 모든 선박에 법적 조치를 하겠다고 밝혔습니다. 한국해운협회는 28일 해당 선박이 장금상선 소유가 아니라 해외 석유회사에 재용선된 배이고 한국인 선원은 없다고 밝혔다고 로이터가 보도했습니다.",
+     "fc": [
+      {
+       "id": "f37",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.arabnews.com/world/iran-says-sinokor-vessels-face-legal-action-south-korean-shipowners-deny-link-3008633",
+      "https://www.khan.co.kr/article/202610272107001/",
+      "https://www.newspim.com/news/view/20261028000042"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "이스라엘 총선 부분 개표, 리쿠드 1위…어느 진영도 과반 확정 못 해",
+     "fact": "27일 치른 이스라엘 총선의 중앙선거위원회 부분 개표(약 40%)에서 리쿠드가 21.70%, 가디 아이젠코트 전 참모총장의 야샤르가 15.72%를 얻었다고 AP가 보도했습니다. 네타냐후 총리는 28일 새벽 시온주의·유대계 대중 사이에서 우파 진영이 결정적 과반을 얻었다고 주장했으며, 최종 집계는 30일까지, 공식 공표는 11월 4일에 나옵니다.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.daytondailynews.com/nation-world/the-latest-as-votes-are-counted-no-clear-winner-emerges-in-israels-election/article_4ef65cb2-7d04-5637-a643-db52ff90002b.html",
+      "https://www.timesofisrael.com/liveblog_entry/netanyahu-right-wing-bloc-won-decisive-majority-claims-iran-weaker-than-ever-israel-stronger-than-ever/",
+      "https://aljazeera.com/news/2026/10/28/five-key-takeaways-from-israels-parliamentary-elections"
+     ],
+     "loc": {
+      "isos": [
+       "ISR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "핀란드·노르웨이 정상, 푸틴과 통화…아부다비 회의 앞두고 협상 메시지 전달",
+     "fact": "알렉산데르 스투브 핀란드 대통령과 요나스 가르 스퇴레 노르웨이 총리는 27일 우크라이나와 협의 아래 푸틴 대통령과 통화해 앞으로의 협상에 관한 메시지를 전했으며, 이 통화가 아부다비에서 열릴 회의와 관련된다고 밝혔습니다. 키이우인디펜던트는 미·러·우 3자 회담이 11월 중 아부다비에서 열릴 것으로 예상된다고 보도했습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.presidentti.fi/en/president-stubb-and-prime-minister-store-held-a-phone-call-with-president-putin/",
+      "https://www.abc.net.au/news/2026-10-28/putin-nordic-prime-ministers-phone-call-ukraine/107316960",
+      "https://kyivindependent.com/norway-finland-call-putin-ahead-of-potential-abu-dhabi-peace-talks-2/"
+     ],
+     "loc": {
+      "lat": 60.17,
+      "lon": 24.94,
+      "place": "헬싱키(핀란드)",
+      "isos": [
+       "FIN",
+       "NOR",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "그로시 IAEA 사무총장, 안보리서 이란이 고농축우라늄 검증 접근 주지 않는다고 보고",
+     "fact": "라파엘 그로시 국제원자력기구 사무총장은 27일 유엔 안전보장이사회 회의에서 이란이 신고한 핵물질의 검증에 필요한 정보와 접근을 제공하지 않고 있다며 고농축우라늄 약 440kg을 특히 우려되는 사안으로 꼽았습니다. 그는 2025년 6월 이후 피격 시설의 복구·재건 활동은 확인하지 못했다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f68",
+       "e": "down"
+      },
+      {
+       "id": "f33",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.anews.com.tr/world/2026/10/27/un-nuclear-watchdog-chief-urges-iran-to-grant-iaea-access-to-verify-nuclear-material",
+      "https://www.freepressjournal.in/world/iran-has-not-rebuilt-nuclear-sites-hit-by-us-israel-strikes-says-iaea-chief-rafael-grossi-at-un-security-council-meeting"
+     ],
+     "loc": {
+      "lat": 40.75,
+      "lon": -73.97,
+      "place": "뉴욕 유엔 본부(미국)",
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "페제시키안, 모스크바서 푸틴과 회담…카타르는 이란에 해협 재개방 촉구",
+     "fact": "마수드 페제시키안 이란 대통령은 27일 모스크바 가스수출국포럼 정상회의 계기에 블라디미르 푸틴 대통령과 회담하고 미국에 기대지 않고도 역내 문제를 해결할 수 있다고 말했습니다(AFP). 타밈 빈 하마드 알사니 카타르 국왕도 같은 날 모스크바에서 그를 만났으며, 카타르 외무부의 이브라힘 알하시미는 이란이 선의를 보이고 호르무즈 해협을 다시 열어야 한다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.koreatimes.co.kr/world/20261028/iran-president-tells-putin-region-can-solve-problems-without-us",
+      "https://www.brecorder.com/news/40446149/qatar-ruler-iran-president-discussed-war-hormuz-in-moscow-meeting"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "IRN",
+       "RUS",
+       "QAT"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "멜라니아 트럼프 여사는 27일 X에 올레시키 휴전 구역이 인도적 지원 차량의 안전한 통행을 위해 올레시키를 넘어 헤르손주 안으로 넓어졌다고 밝혔습니다.",
+     "src": [
+      "https://www.yahoo.com/news/world/articles/first-lady-melania-trump-says-161008740.html"
+     ],
+     "case": "ukraine"
+    },
+    {
+     "t": "예멘 후티는 27일 사우디아라비아 라스타누라 정유시설을 탄도미사일로 공격했다고 주장했으며, 피해는 독립적으로 확인되지 않았습니다.",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-diplomacy-oil-prices-strait-of-hormuz/"
+     ],
+     "case": "iran"
+    },
+    {
+     "t": "조선중앙통신은 28일 김정은 국무위원장이 27일 조선인민군 제3차 중대장대회 참가자들을 만나 중대장의 제1 혁명 임무는 만반의 임전 태세를 위한 싸움 준비 완성이라고 말했다고 보도했습니다.",
+     "src": [
+      "https://www.hankookilbo.com/news/article/A2026102809220003565"
+     ],
+     "case": "korea"
+    }
+   ]
+  },
+  {
    "date": "2026-10-27",
    "items": [
     {

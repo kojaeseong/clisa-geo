@@ -1272,10 +1272,15 @@ function stripGo(x){
   switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
   if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } }
 }
+/* v4.40(2026-10-28): 검증 예정 띠의 전망은 브리핑 전망 칩과 같은 차례로 보인다: 현재 확률 · 짧은 이름 · 남은 날 · 최근 변경(날짜 직전 확률→현재) */
+function dueStripHtml(f){
+  const h = (D.fc_hist || {})[f.id] || [], n = h.length, ch = n > 1 && h[n - 1][1] !== h[n - 2][1] ? fmtKD(h[n - 1][0]) + " " + h[n - 2][1] + "%→" + h[n - 1][1] + "%" : "";
+  return '<b class="bs-p">' + f.p + '%</b> ' + esc(f.s || f.id) + '<span class="bs-x"> · ' + esc(daysText(daysLeft(f.due))) + (ch ? " · " + esc(ch) : "") + "</span>";
+}
 function runStrip(st, list){
   const bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d");
   let k = 0, hold = false;
-  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.e)); st.hidden = false; };  /* v4.24 좁은 화면에서 예정 항목이 돌 때 띠의 왼쪽 선을 붉게 */
+  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.e)); st.hidden = false; };  /* v4.24 좁은 화면에서 예정 항목이 돌 때 띠의 왼쪽 선을 붉게 */
   show();
   if (!reduceMotion) setInterval(() => {
     if (hold || document.visibilityState !== "visible" || list().length < 2) return;
