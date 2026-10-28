@@ -497,3 +497,70 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 }
 
 /* 2026-10-28 일부 모바일 브라우저에서 점수판 아래가 역할 색으로 덮이고 본문이 그려지지 않는 문제(이탈리아 독자 화면): 10-27(2)에 넣은 will-change를 뺀다 */
+
+/* 2026-10-29 1962 전문 양식 5가지(운영자 결정): 출처마다 종이·글씨·도착 리듬이 다르다 */
+.dx{position:relative;margin:0 0 14px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18);min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+.dx i{font-style:normal}
+.dx .tx{white-space:pre-wrap;min-height:3em}
+.dx .tx.cur::after,.dx .dgrp.cur::after{content:"▌";animation:blink 1s steps(1) infinite;margin-left:1px}
+.dx .tx.fade{animation:dxfade .9s ease both}
+@keyframes dxfade{from{opacity:0}to{opacity:1}}
+/* W 서방 텔레타이프·타자 */
+.dW{background:#F4F1E8;color:#1D1D1F;padding:16px 18px 18px;font:400 12.5px/1.55 "Courier Prime","Courier New",monospace}
+.dW .dcls{font:700 14px "Courier Prime",monospace;letter-spacing:.45em;text-align:center;color:#B3121B;margin:0 0 8px;text-transform:uppercase}
+.dW .dcls.b{margin:12px 0 0}
+.dW .dlh{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:end;border-bottom:1.5px solid #1D1D1F;padding-bottom:8px;margin-bottom:10px}
+.dW .dorg{font:700 14.5px "Courier Prime",monospace;letter-spacing:.05em}
+.dW .dlab{font:700 12.5px "Courier Prime",monospace;letter-spacing:.16em;text-align:right}
+.dW .dlab small{display:block;font:400 11.5px "Courier Prime",monospace;letter-spacing:.02em}
+.dW .drt{display:grid;grid-template-columns:52px 1fr;gap:1px 10px;margin-bottom:10px;font:400 12.5px/1.55 "Courier Prime","Nanum Gothic Coding",monospace}
+.dW .drt i{font:400 12px "Courier Prime",monospace;color:#5A5D61}
+.dW .tx{font:400 14.5px/1.85 "Courier Prime","Nanum Gothic Coding",monospace}
+.dW .dfoot{display:flex;justify-content:flex-end;margin-top:10px;font:400 13px "Courier Prime","Nanum Gothic Coding",monospace}
+/* T 소련·쿠바 타자 문서 */
+.dT{background:#EEF0EA;color:#20262B;padding:14px 18px 18px;border-top:6px solid #A3161B}
+.dT.cu{border-top-color:#002A8F}
+.dT .dtop{display:flex;justify-content:space-between;gap:10px;font:400 11.5px/1.45 "PT Mono","Courier New",monospace;flex-wrap:wrap}
+.dT .dtop .r{text-align:right}
+.dT .dvne{display:table;margin:10px auto 0;transform:rotate(-3deg);border:2px solid #A3161B;color:#A3161B;font:700 11.5px "PT Mono",monospace;letter-spacing:.16em;padding:2px 8px;white-space:nowrap}
+.dT .dttl{font:700 18px "PT Mono","Courier New",monospace;letter-spacing:.3em;text-align:center;margin:12px 0 2px;color:#A3161B}
+.dT.cu .dttl{color:#002A8F}
+.dT .dttl.k{font:700 17px "PT Mono","Nanum Gothic Coding",monospace;letter-spacing:.4em;margin-bottom:10px}
+.dT .dttl2{font:400 11px "PT Mono","Nanum Gothic Coding",monospace;text-align:center;letter-spacing:.3em;color:#5A6168;margin-bottom:10px}
+.dT .dff{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font:400 12.5px/1.5 "PT Mono","Nanum Gothic Coding",monospace;border-top:1px solid #20262B;border-bottom:1px solid #20262B;padding:7px 0;margin-bottom:12px}
+.dT .dff i{color:#5A6168;font-size:11.5px}
+.dT .tx{font:400 14.5px/1.9 "PT Mono","Nanum Gothic Coding",monospace}
+.dT .dsig{text-align:right;font:400 13px "PT Mono","Nanum Gothic Coding",monospace;margin-top:10px}
+/* F 방송 청취 티커 */
+.dF{background:#F5E9A8;color:#2A2414;padding:16px 16px 16px 30px;background-image:radial-gradient(circle at 12px 14px,rgba(0,0,0,.55) 3px,transparent 3.4px);background-size:100% 26px;background-repeat:repeat-y}
+.dF .dtear{position:absolute;left:0;right:0;top:-1px;height:7px;background:linear-gradient(-45deg,rgba(0,0,0,.35) 4px,transparent 0) 0 0/10px 7px repeat-x}
+.dF .dslug{font:700 12.5px/1.6 "Courier Prime","Nanum Gothic Coding",monospace;text-transform:uppercase}
+.dF .dslug span{display:block}
+.dF .tx{font:400 14.5px/1.8 "Courier Prime","Nanum Gothic Coding",monospace;margin-top:8px}
+.dF .dend{font:700 12.5px "Courier Prime","Nanum Gothic Coding",monospace;margin-top:8px}
+/* P 인쇄 기록 */
+.dP{background:#FBFAF6;color:#1B1F24;padding:20px 22px 22px}
+.dP .dmast{display:grid;grid-template-columns:auto 1fr auto;gap:8px 12px;align-items:center;border-bottom:2px solid #1B1F24;padding-bottom:10px;color:#3B6FB6}
+.dP .dmast svg{width:38px;height:38px}
+.dP .dun{font:700 14px "PT Serif",serif;letter-spacing:.12em;color:#1B1F24}
+.dP .dun small{display:block;font:400 10.5px "PT Serif",serif;letter-spacing:.18em}
+.dP .dsym{font:700 13px "PT Serif",serif;text-align:right;color:#1B1F24}
+.dP .dsym small{display:block;font:400 11px "PT Serif","Nanum Myeongjo",serif}
+.dP .drec{text-align:center;font:700 14px/1.5 "PT Serif","Nanum Myeongjo",serif;margin:12px 0 8px}
+.dP .dspk{font:400 12.5px/1.5 "PT Serif","Nanum Myeongjo",serif;color:#4A4F55;margin-bottom:8px}
+.dP .tx{white-space:normal;font:400 15px/1.95 "PT Serif","Nanum Myeongjo",serif;text-align:justify}
+.dP .tx p{margin:0 0 .6em;text-indent:1.4em}
+.dP .dsig{text-align:right;font:400 13.5px "PT Serif","Nanum Myeongjo",serif;margin-top:8px}
+/* R 해군 라디오그램 */
+.dR{background:#E9ECE6;color:#1F2A24;padding:14px 18px 18px;border:1px solid #6F7A72}
+.dR .dh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font:400 11.5px "PT Mono","Nanum Gothic Coding",monospace;border-bottom:1px solid #1F2A24;padding-bottom:6px}
+.dR .dff{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font:400 12px/1.5 "Courier Prime","Nanum Gothic Coding",monospace;margin:8px 0 6px}
+.dR .dff i{color:#5D6861}
+.dR .dgrp{font:400 15px/1.9 "PT Mono",monospace;letter-spacing:.1em;word-spacing:.5em;color:#3B5A8A;min-height:2em}
+.dR .ddec{font:400 11px "Courier Prime","Nanum Gothic Coding",monospace;color:#5D6861;margin:8px 0 4px;letter-spacing:.2em}
+.dR .tx{font:400 14.5px/1.9 "Courier Prime","Nanum Gothic Coding",monospace;border-top:1px dashed #6F7A72;padding-top:8px}
+.dR .dsig{text-align:right;font:400 13px "Courier Prime","Nanum Gothic Coding",monospace;margin-top:8px}
+@media (max-width:520px){.dW,.dT,.dP,.dR{padding-left:14px;padding-right:14px}.dF{padding-left:28px}.dW .drt{grid-template-columns:44px 1fr}}
+
+/* 2026-10-29 좁은 화면에서 위쪽 메뉴 줄(게임·언어·자리 바꾸기·소리)이 화면 밖으로 밀려 가로 스크롤이 생기던 문제: 줄바꿈을 허용한다 */
+@media (max-width:520px){.brandbar{flex-wrap:wrap;row-gap:6px}.brandbar .bb-r{flex-wrap:wrap;justify-content:flex-end;gap:6px 8px;min-width:0}}

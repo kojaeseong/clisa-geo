@@ -283,24 +283,83 @@ function mapBox(m){
    (m.caption?'<figcaption>'+tx(m.caption)+'</figcaption>':'')+(M.credit?'<figcaption class="cr">'+esc(M.credit)+'</figcaption>':'')+'</figure>';
 }
 
-/* v1962: formal document block — telegram, radiogram, order, letter — with sender, addressee, copies, number, classification, date, subject, signature */
-function docHtml(d){
-  var kind=d.kind||T('전 보','TELEGRAM');
-  var top='<div class="th"><span class="tt">'+esc(kind)+'</span>'+(d.no?'<span class="tf"><i>'+T('번호','No.')+'</i>'+esc(d.no)+'</span>':'<span></span>')+(d.cls?'<span class="tc">'+esc(d.cls)+'</span>':'<span></span>')+'</div>';
-  var rows=[[T('발신','FROM'),d.from],[T('수신','TO'),d.to],[T('참조','COPY'),d.cc],[T('일시','DATE'),d.at],[T('제목','SUBJECT'),d.subject]].filter(function(r){return r[1];});
-  var hd='<div class="td">'+rows.map(function(r){return '<div class="tr"><i>'+r[0]+'</i><span>'+esc(r[1])+'</span></div>';}).join('')+'</div>';
-  return '<div class="telegram doc"><div class="tdoc">'+top+hd+'<div class="tx" id="tx"></div>'+(d.sign?'<div class="tsign">'+esc(d.sign)+'</div>':'')+'</div></div>';
+/* 2026-10-29 1962 전문 양식(운영자 결정): 1914식 종이띠 대신 출처별 당시 양식 5가지.
+   W 서방 텔레타이프·타자 문서, T 소련·쿠바 타자 문서(암호 전문 포함), F 방송 청취 티커, P 인쇄 기록(유엔·포고·전사), R 해군 라디오그램 */
+var DOCSPEC={
+ 'AR-00':['T','su'],'AR-01':['R','su'],
+ 'FC-02':['T','cu'],'FC-03':['T','su'],'FC-05':['P','un','SECURITY COUNCIL'],'FC-06':['T','cu'],'FC-07':['T','su'],'FC-09':['P','un','PRESS RELEASE'],'FC-10':['F','RADIO MOSCOW'],'FC-11':['T','su'],'FC-12':['T','su'],
+ 'HM-01':['W','FOREIGN OFFICE','CYPHER TELEGRAM'],'HM-02':['W','DEPARTMENT OF STATE','OUTGOING TELEGRAM'],'HM-03':['W','THE WHITE HOUSE','MESSAGE'],'HM-04':['W','FOREIGN OFFICE','CYPHER TELEGRAM'],'HM-05':['W',"PRIME MINISTER'S OFFICE",'MINUTE'],'HM-07':['W','FOREIGN OFFICE','COPY'],'HM-08':['P','tr','TELEPHONE CONVERSATION'],'HM-09':['F','MONITORED BROADCAST'],'HM-10':['W','FOREIGN OFFICE','EMERGENCY TELEGRAM'],
+ 'HM-H1':['W','FOREIGN OFFICE','DRAFT MINUTE'],'HM-H2':['W','FOREIGN OFFICE','CYPHER TELEGRAM'],'HM-H3':['W','FOREIGN OFFICE','CYPHER TELEGRAM'],'HM-H4':['W','FOREIGN OFFICE','CYPHER TELEGRAM'],'HM-H5':['W','FOREIGN OFFICE','CYPHER TELEGRAM'],
+ 'JFK-01':['W','NATIONAL PHOTOGRAPHIC INTERPRETATION CENTER','REPORT'],'JFK-10':['W','THE WHITE HOUSE','INCOMING MESSAGE'],'JFK-11':['W','THE WHITE HOUSE','OUTGOING MESSAGE'],'JFK-12':['P','wh','PROCLAMATION'],'JFK-14':['W','DEPARTMENT OF STATE','TRANSLATION'],'JFK-16':['W','DEPARTMENT OF STATE','INCOMING TELEGRAM'],'JFK-17':['F','FBIS'],'JFK-18':['W','JOINT CHIEFS OF STAFF','MEMORANDUM'],'JFK-19':['W','DEPARTMENT OF STATE','OUTGOING TELEGRAM'],'JFK-20':['W','DEPARTMENT OF STATE','OUTGOING TELEGRAM'],'JFK-21':['F','FBIS · URGENT'],'JFK-B1':['W','JOINT CHIEFS OF STAFF','MESSAGE'],
+ 'UT-01':['P','un','SECURITY COUNCIL'],'UT-02':['P','un','SECURITY COUNCIL'],'UT-03':['W','UNITED STATES MISSION TO THE UNITED NATIONS','MEMORANDUM'],'UT-04':['P','un','PRESS RELEASE'],'UT-05':['P','un','PRESS RELEASE'],'UT-06':['P','un','PRESS RELEASE'],'UT-07':['P','un','PRESS RELEASE'],'UT-08':['P','un','PRESS RELEASE'],'UT-H3':['W','DEPARTMENT OF STATE','DRAFT STATEMENT'],'UT-H5':['P','un','PRESS RELEASE']
+};
+function docSpec(d,id){
+  var s=DOCSPEC[id]; if(s) return s;
+  if(/^(NK|PL)-/.test(id||'')) return ['T','su'];
+  var k=String(d.kind||''), f=String(d.from||'');
+  if(/방송|broadcast/i.test(k)) return ['F','MONITORED BROADCAST'];
+  if(/라디오그램|radiogram/i.test(k)) return ['R','su'];
+  if(/회의록|보도자료|포고|record|press|proclamation/i.test(k)) return ['P','un','UNITED NATIONS'];
+  if(/소련|흐루쇼프|알렉세예프|트로스트니크|그로미코|도브리닌|말리놉스키|Soviet|Khrushchev|Alekseev|Trostnik|Gromyko|Dobrynin|Malinovsky/i.test(f)) return ['T','su'];
+  if(/쿠바|카스트로|Cuba|Castro/i.test(f)) return ['T','cu'];
+  return ['W','',T('전보','TELEGRAM')];
 }
-/* telegrams arrived as printed tape pasted line by line onto the form: one strip per '/' segment */
+var DOCFORM='W';
+function dRow(lab,val){ return val?'<i>'+lab+'</i><span>'+esc(val)+'</span>':''; }
+function docHtml(d,id){
+  var s=docSpec(d,id), f=s[0]; DOCFORM=f;
+  var cls=d.cls?esc(d.cls):'', sign=d.sign?esc(d.sign):'';
+  if(f==='W'){
+    return '<div class="dx dW">'+(cls?'<div class="dcls">'+cls+'</div>':'')+
+      '<div class="dlh"><span class="dorg">'+esc(s[1]||'')+'</span><span class="dlab">'+esc(s[2]||'')+(d.no?'<small>'+esc(d.no)+'</small>':'')+'</span></div>'+
+      '<div class="drt">'+dRow('FROM',d.from)+dRow('TO',d.to)+dRow('INFO',d.cc)+dRow('DATE',d.at)+dRow('SUBJ',d.subject)+'</div>'+
+      '<div class="tx" id="tx"></div>'+(sign?'<div class="dfoot"><span>'+sign+'</span></div>':'')+(cls?'<div class="dcls b">'+cls+'</div>':'')+'</div>';
+  }
+  if(f==='T'){
+    var cu=s[1]==='cu', ciph=/암호|cipher|cypher/i.test(d.kind||''), pri=/최우선|priority|immediate/i.test((d.at||'')+(d.cls||''));
+    var ru={'극비':'СОВ. СЕКРЕТНО','특급 비밀':'ОСОБОЙ ВАЖНОСТИ','top secret':'СОВ. СЕКРЕТНО','secret':'СЕКРЕТНО'}, ck=String(d.cls||'').split(/\s*·\s*/)[0].toLowerCase();
+    var off=cu?'REPÚBLICA DE CUBA':'СССР', offcls=cu?(/긴급|urgent/i.test(d.cls||'')?'URGENTE':''):(ru[ck]||ru[String(d.cls||'').split(/\s*·\s*/)[0]]||'');
+    var title=ciph?'<div class="dttl">ШИФРТЕЛЕГРАММА</div><div class="dttl2">'+esc(d.kind)+'</div>':'<div class="dttl k">'+esc(d.kind||'')+'</div>';
+    return '<div class="dx dT'+(cu?' cu':'')+'"><div class="dtop"><span>'+off+'</span><span class="r">'+(offcls?offcls+'<br>':'')+cls+'</span></div>'+
+      (pri&&!cu?'<div class="dvne">ВНЕ ОЧЕРЕДИ</div>':'')+title+
+      '<div class="dff">'+dRow(T('번호','No.'),d.no)+dRow(T('발신','From'),d.from)+dRow(T('수신','To'),d.to)+dRow(T('참조','Copy'),d.cc)+dRow(T('일시','Date'),d.at)+dRow(T('제목','Subject'),d.subject)+'</div>'+
+      '<div class="tx" id="tx"></div>'+(sign?'<div class="dsig">'+sign+'</div>':'')+'</div>';
+  }
+  if(f==='F'){
+    return '<div class="dx dF"><div class="dtear"></div><div class="dslug"><span>'+esc(s[1]||'')+'</span>'+(d.at?'<span>'+esc(d.at)+'</span>':'')+(d.from?'<span>'+esc(d.from)+'</span>':'')+(d.subject?'<span>'+esc(d.subject)+'</span>':'')+'</div>'+
+      '<div class="tx" id="tx"></div><div class="dend">'+(sign?esc(sign)+' · ':'')+'END</div></div>';
+  }
+  if(f==='P'){
+    var sym=d.no||((String(d.cls||'').match(/(SG|S)\/[0-9.]+/)||[''])[0]);
+    var em=s[1]==='un'?'<svg viewBox="-12 -12 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width=".6"><circle r="10"/><circle r="6.5"/><circle r="3"/><path d="M0-10V10M-10 0H10M-7.1-7.1L7.1 7.1M7.1-7.1L-7.1 7.1"/></g></svg>':'';
+    var org=s[1]==='un'?'UNITED NATIONS':(s[1]==='wh'?'THE WHITE HOUSE':'');
+    return '<div class="dx dP"><div class="dmast">'+em+'<span class="dun">'+org+'<small>'+esc(s[2]||'')+'</small></span><span class="dsym">'+esc(sym)+'<small>'+esc(d.at||'')+'</small></span></div>'+
+      (d.subject?'<div class="drec">'+esc(d.subject)+'</div>':'')+(d.from?'<div class="dspk">'+esc(d.from)+(d.to?' → '+esc(d.to):'')+'</div>':'')+
+      '<div class="tx" id="tx"></div>'+(sign?'<div class="dsig">'+sign+'</div>':'')+'</div>';
+  }
+  return '<div class="dx dR"><div class="dh"><span>РАДИОГРАММА</span><span>'+(cls?'СОВ. СЕКРЕТНО · '+cls:'')+'</span><span>'+esc(d.at||'')+'</span></div>'+
+    '<div class="dff">'+dRow(T('발신','From'),d.from)+dRow(T('수신','To'),d.to)+dRow(T('참조','Copy'),d.cc)+'</div>'+
+    '<div class="dgrp" id="txg"></div><div class="ddec">— '+T('해 독','DECODED')+' —</div><div class="tx" id="tx"></div>'+(sign?'<div class="dsig">'+sign+'</div>':'')+'</div>';
+}
+/* 양식별 도착 리듬: 텔레타이프는 고른 속도와 줄바꿈 멈춤, 타자기는 고르지 않은 속도, 티커는 빠르게, 인쇄 기록은 문단째, 라디오그램은 숫자군 다음 해독문 */
+var DOCT=0;
 function typeOut(el,text,instant){
-  var lines=String(text).split(/\s*\/\s*/).filter(function(x){return x;});
-  el.innerHTML=lines.map(function(){return '<span class="strip"></span>';}).join('');
-  var st=el.querySelectorAll('.strip');
-  if(reduce||instant){ lines.forEach(function(x,k){st[k].textContent=x;}); el.classList.add('done'); return; }
-  sfx('wire');
-  var k=0,i=0; (function step(){ if(k>=lines.length){ el.classList.add('done'); return; }
-    i+=2; st[k].textContent=lines[k].slice(0,i); st[k].classList.add('on'); if(i%6===0) sfx('key');
-    if(i>=lines[k].length){ k++; i=0; setTimeout(step,180); } else setTimeout(step,24); })();
+  if(!el) return; clearTimeout(DOCT);
+  var f=DOCFORM, parts=String(text).split(/\s*\/\s*/).filter(function(x){return x;}), full=parts.join('\n');
+  var g=document.getElementById('txg'), groups='';
+  if(g){ var seed=full.length; for(var n=0;n<Math.min(30,8+Math.ceil(full.length/12));n++){ seed=(seed*9301+49297)%233280; groups+=(n?' ':'')+String(10000+Math.floor(seed/233280*89999)); } }
+  function fill(){ if(g) g.textContent=groups; if(f==='P') el.innerHTML=parts.map(function(p){return '<p>'+esc(p)+'</p>';}).join(''); else el.textContent=full; el.classList.add('done'); }
+  if(reduce||instant){ fill(); return; }
+  if(f==='P'){ fill(); el.classList.add('fade'); return; }
+  var spd={W:[16,320],T:[0,620],F:[9,110],R:[18,380]}[f]||[16,320];
+  function run(src,target,cb,mode){ var i=0; target.classList.add('cur'); var avg={W:16,T:50,F:9,R:18,G:36}[mode]||16, k=Math.min(1,6500/Math.max(1,src.length*avg));
+    (function step(){ if(i>=src.length){ target.classList.remove('cur'); if(cb) cb(); return; }
+      var ch=src[i++]; target.textContent+=ch; if(i%(mode==='T'?3:6)===0) sfx('key');
+      var d=ch==='\n'?Math.min(spd[1],k<1?220:spd[1]):(mode==='T'?(ch===' '?70:28+Math.random()*44):(mode==='G'?(ch===' '?90:30):spd[0]))*k;
+      DOCT=setTimeout(step,d); })(); }
+  el.textContent=''; sfx('wire');
+  if(f==='R'&&g){ g.textContent=''; run(groups,g,function(){ DOCT=setTimeout(function(){ run(full,el,function(){ el.classList.add('done'); },'R'); },500); },'G'); }
+  else run(full,el,function(){ el.classList.add('done'); },f);
 }
 function head(n){
   var hypo=n.hypo||/\(가상/.test(n.title||'');
@@ -330,7 +389,7 @@ function scenePage(n,pages,p){
   var kind=pages[p], body='';
   if(kind==='brief'){
     body=(n.event?'<div class="event"><span class="lab">'+(R.fog?T('당신이 아는 것','What you know'):T('그사이','Meanwhile'))+'</span>'+tx(n.event)+'</div>':'')+
-      (n.telegram?docHtml(n.telegram):'')+
+      (n.telegram?docHtml(n.telegram,S.node):'')+
       mapBox(n.map);
   } else if(kind==='room'){
     body='<div class="paper wm">'+(function(){var e=(ROLES.filter(function(r){return r.id===R.id;})[0]||{}).emblem;return e&&EMBLEM[e]?'<span class="wmk" aria-hidden="true">'+EMBLEM[e]+'</span>':'';})()+portrait(n.img)+'<p class="prose" style="margin:0 0 14px">'+tx(n.scene)+'</p>'+voicesHtml(n)+'</div>';
