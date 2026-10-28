@@ -486,7 +486,7 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 
 /* 2026-10-27(2) 모바일: 스크롤할 때 브라우저 주소창이 접혔다 펴지며 고정 점수판의 맨 위 띠가 보였다 사라지는 문제. 맨 위 띠를 없애고, 고정되는 부분을 이름 한 줄과 점수 한 줄로 줄인다. 날짜 띠는 장면 머리의 날짜로 대신한다. 점수판을 별도 층으로 올려 위치 재계산을 줄인다 */
 @media (max-width:520px){
-  .hud{padding:5px 0 6px;margin-bottom:8px;will-change:transform}
+  .hud{padding:5px 0 6px;margin-bottom:8px}
   .hud .stripe{display:none}
   .hud-top{margin-bottom:3px}
   .hud .gauges{grid-template-columns:repeat(4,minmax(0,1fr));gap:0 8px}
@@ -495,3 +495,5 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
   .hud .g .bar{height:4px;margin-top:2px}
   .hud .tl{display:none}
 }
+
+/* 2026-10-28 일부 모바일 브라우저에서 점수판 아래가 역할 색으로 덮이고 본문이 그려지지 않는 문제(이탈리아 독자 화면): 10-27(2)에 넣은 will-change를 뺀다 */
