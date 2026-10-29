@@ -1,6 +1,150 @@
 {
  "issues": [
   {
+   "date": "2026-10-29",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "Zelensky eyes Abu Dhabi talks with U.S., Russia November 6–10; Kremlin says Europe excluded",
+     "fact": "Ukrainian President Volodymyr Zelensky said at a press conference with Dutch Prime Minister Rob Jetten in The Hague on October 28 that he hopes three-way talks with the U.S. and Russia will take place in Abu Dhabi between November 6 and 10, and that Kyiv is waiting for Washington's answer. Kremlin foreign policy aide Yuri Ushakov told Interfax that European countries will not be included in the talks, Al Jazeera reported the same day.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.ukrinform.net/rubric-polytics/4179077-zelensky-ukraine-hopes-to-hold-trilateral-meeting-in-abu-dhabi-by-nov-10.html",
+      "https://www.koreatimes.co.kr/world/20261029/ukraine-russia-us-peace-negotiators-to-meet-between-nov-6-and-10-zelensky-says",
+      "https://www.aljazeera.com/news/2026/10/28/kremlin-says-european-countries-not-included-in-next-ukraine-talks"
+     ],
+     "loc": {
+      "lat": 52.08,
+      "lon": 4.3,
+      "place": "The Hague (Netherlands)",
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA",
+       "NLD"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran, mediators discuss speeding up war-ending seven-day plan; official calls Qatari draft \"unacceptable ideas\"",
+     "fact": "Iranian Foreign Minister Abbas Araghchi said on X on October 28 that Tehran is \"in close and ongoing contact with intermediaries\" on ways to carry out the seven-day plan \"in even less than a week.\" Reuters reported the same day that Qatari mediators handed Iran a new seven-day draft deal to end the war on October 25, and that a senior Iranian official involved in the talks called it \"unacceptable ideas and not an offer.\"",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.arabnews.pk/middle-east/iran-says-discussing-plan-with-mediators-to-end-war-reopen-hormuz-3005467",
+      "https://www.yahoo.com/news/articles/qatari-mediators-present-iran-deal-090117875.html",
+      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/28/qatari-mediators-present-iran-with-new-deal-to-end-the-war-official-says"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "North Korea fires about 10 short-range ballistic missiles into the East Sea from the Wonsan area",
+     "fact": "South Korea's Joint Chiefs of Staff said it detected about 10 short-range ballistic missiles North Korea fired from the Wonsan area into the East Sea at around 12:30 p.m. on October 29. The launch came six days after the Ministry of National Defense on October 23 proposed military talks on confirming the location of the Military Demarcation Line and restoring military communication lines, among other items; Pyongyang has not responded.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.voakorea.com/a/korean-peninsula-10-29-26/8216418.html",
+      "https://www.khan.co.kr/article/202610291311001/",
+      "https://www.yahoo.com/news/world/articles/north-korea-fires-projectile-toward-035947094.html"
+     ],
+     "loc": {
+      "lat": 39.15,
+      "lon": 127.44,
+      "place": "Wonsan area (North Korea)",
+      "isos": [
+       "PRK",
+       "KOR",
+       "JPN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Israel count at 90 percent: Netanyahu bloc 53 seats, Eisenkot's 48, neither with a majority",
+     "fact": "With 89.8 percent of votes counted just after 9 p.m. local time on October 28, Central Elections Committee results put Prime Minister Benjamin Netanyahu's bloc at 53 seats, former military chief Gadi Eisenkot's bloc at 48 and Arab-led parties at a record 19, The Times of Israel reported. Roughly 430,000 to 480,000 double-envelope ballots remain, and official results will be published November 4.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/with-85-of-votes-counted-netanyahu-bloc-has-53-seats-eisenkots-48-arab-parties-surge-to-19/",
+      "https://www.aljazeera.com/news/2026/10/29/no-clear-winner-in-israeli-election-with-nearly-90-percent-of-votes-counted"
+     ],
+     "loc": {
+      "isos": [
+       "ISR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Putin tells 48 African nations Russian business does not engage in \"neo-colonial exploitation\"",
+     "fact": "The third Russia-Africa summit was held in Moscow on October 28 with 48 African countries represented, 22 of them by their leaders, Al Jazeera reported. President Vladimir Putin said, \"Our business does not engage in the predatory, neo-colonial exploitation of natural and human resources,\" and Ethiopian Prime Minister Abiy Ahmed said on X the same day that his country had received 12 Russian Su-35 fighter jets.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/28/putin-tells-african-leaders-moscow-will-not-pursue-neo-colonialism",
+      "https://www.aljazeera.com/news/2026/10/28/ethiopia-receives-12-russian-su-35-jets-plans-s-400-acquisition"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "RUS",
+       "ETH"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Britain said on October 28 it will raise support for Ukraine by £10 billion alongside its budget, including £500 million in military aid to plug gaps in Ukraine's air defenses this winter.",
+     "src": [
+      "https://www.gov.uk/government/news/prime-minister-and-chancellors-call-with-the-president-of-ukraine-28-october-2026"
+     ],
+     "case": "ukraine"
+    },
+    {
+     "t": "Iraqi Prime Minister Ali al-Zaidi visited Damascus on October 28, the first trip to Syria by an Iraqi prime minister since the fall of the Assad regime, and discussed Iraqi oil exports through the Baniyas pipeline, among other issues, with President Ahmed al-Sharaa.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/28/iraqi-pm-ali-al-zaidi-meets-ahmed-al-sharaa-in-historic-syria-visit"
+     ],
+     "case": null
+    }
+   ]
+  },
+  {
    "date": "2026-10-28",
    "items": [
     {

@@ -1,6 +1,150 @@
 {
  "issues": [
   {
+   "date": "2026-10-29",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "젤렌스키, 미·러·우 3자 회의 11월 6~10일 아부다비 개최 기대…크렘린은 유럽 불참 밝혀",
+     "fact": "볼로디미르 젤렌스키 우크라이나 대통령은 28일 헤이그에서 롭 예턴 네덜란드 총리와 연 기자회견에서 미·러·우 3자 회의가 11월 6일부터 10일 사이 아부다비에서 열리기를 바라며 미국의 답을 기다린다고 말했습니다. 유리 우샤코프 크렘린 외교보좌관은 인테르팍스에 이 회의에 유럽 나라들은 포함되지 않는다고 밝혔다고 알자지라가 같은 날 보도했습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.ukrinform.net/rubric-polytics/4179077-zelensky-ukraine-hopes-to-hold-trilateral-meeting-in-abu-dhabi-by-nov-10.html",
+      "https://www.koreatimes.co.kr/world/20261029/ukraine-russia-us-peace-negotiators-to-meet-between-nov-6-and-10-zelensky-says",
+      "https://www.aljazeera.com/news/2026/10/28/kremlin-says-european-countries-not-included-in-next-ukraine-talks"
+     ],
+     "loc": {
+      "lat": 52.08,
+      "lon": 4.3,
+      "place": "헤이그(네덜란드)",
+      "isos": [
+       "UKR",
+       "RUS",
+       "USA",
+       "NLD"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란, 중재국과 7일 종전 계획 조기 이행 협의…카타르 새 초안엔 이란 고위 관리 \"수용할 수 없는 구상\"",
+     "fact": "아바스 아라그치 이란 외무장관은 28일 X에 중재국과 긴밀히 접촉하며 7일 계획을 일주일보다 짧게 이행할 방안을 검토하고 있다고 밝혔습니다. 로이터는 같은 날 카타르 중재단이 25일 이란에 7일 일정의 새 종전 초안을 전달했으며, 협상에 관여한 이란 고위 관리가 이를 \"수용할 수 없는 구상일 뿐 제안이 아니다\"라고 했다고 보도했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.arabnews.pk/middle-east/iran-says-discussing-plan-with-mediators-to-end-war-reopen-hormuz-3005467",
+      "https://www.yahoo.com/news/articles/qatari-mediators-present-iran-deal-090117875.html",
+      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/28/qatari-mediators-present-iran-with-new-deal-to-end-the-war-official-says"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "korea",
+     "h": "북한, 원산 일대서 동해상으로 단거리 탄도미사일 10여 발 발사",
+     "fact": "합동참모본부는 29일 낮 12시 30분쯤 북한이 원산 일대에서 동해상으로 쏜 단거리 탄도미사일 10여 발을 포착했다고 밝혔습니다. 국방부가 23일 군사분계선 위치 확인과 군 통신선 복원 등을 의제로 군사당국 회담을 제의한 지 6일 만이며, 북한은 이 제의에 응답하지 않은 상태입니다.",
+     "fc": [
+      {
+       "id": "f15",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.voakorea.com/a/korean-peninsula-10-29-26/8216418.html",
+      "https://www.khan.co.kr/article/202610291311001/",
+      "https://www.yahoo.com/news/world/articles/north-korea-fires-projectile-toward-035947094.html"
+     ],
+     "loc": {
+      "lat": 39.15,
+      "lon": 127.44,
+      "place": "원산 일대(북한)",
+      "isos": [
+       "PRK",
+       "KOR",
+       "JPN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "이스라엘 총선 90% 개표, 네타냐후 진영 53석·아이젠코트 진영 48석…어느 쪽도 과반 못 미쳐",
+     "fact": "이스라엘 중앙선거위원회의 28일 밤 9시 직후(현지 시각) 89.8% 개표 결과로 네타냐후 총리 진영은 53석, 가디 아이젠코트 전 참모총장 진영은 48석, 아랍계 정당은 사상 최다인 19석으로 집계됐다고 타임스오브이스라엘이 보도했습니다. 이중봉투 표 약 43만~48만 표가 남았으며 공식 결과는 11월 4일 발표됩니다.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/with-85-of-votes-counted-netanyahu-bloc-has-53-seats-eisenkots-48-arab-parties-surge-to-19/",
+      "https://www.aljazeera.com/news/2026/10/29/no-clear-winner-in-israeli-election-with-nearly-90-percent-of-votes-counted"
+     ],
+     "loc": {
+      "isos": [
+       "ISR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "푸틴, 아프리카 48개국 모인 정상회의서 \"러시아 기업은 신식민주의적 착취 안 해\" 주장",
+     "fact": "제3차 러시아·아프리카 정상회의가 28일 모스크바에서 열려 아프리카 48개국이 참석했고 이 가운데 22개국은 정상이 직접 왔다고 알자지라가 보도했습니다. 블라디미르 푸틴 대통령은 러시아 기업이 천연·인적 자원을 약탈적·신식민주의적으로 착취하지 않는다고 말했으며, 아비 아머드 에티오피아 총리는 같은 날 X에 러시아제 Su-35 전투기 12대를 인도받았다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/28/putin-tells-african-leaders-moscow-will-not-pursue-neo-colonialism",
+      "https://www.aljazeera.com/news/2026/10/28/ethiopia-receives-12-russian-su-35-jets-plans-s-400-acquisition"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "ETH"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "영국 정부는 28일 예산안에 맞춰 우크라이나 지원을 100억 파운드 늘리고 그 가운데 5억 파운드는 이번 겨울 방공 공백을 메울 군사 지원에 쓴다고 밝혔습니다.",
+     "src": [
+      "https://www.gov.uk/government/news/prime-minister-and-chancellors-call-with-the-president-of-ukraine-28-october-2026"
+     ],
+     "case": "ukraine"
+    },
+    {
+     "t": "알리 알자이디 이라크 총리는 28일 아사드 정권 붕괴 뒤 이라크 총리로는 처음 시리아를 방문해 다마스쿠스에서 아흐마드 알샤라 대통령과 바니야스 송유관을 통한 이라크 원유 수출 등을 논의했습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/28/iraqi-pm-ali-al-zaidi-meets-ahmed-al-sharaa-in-historic-syria-visit"
+     ],
+     "case": null
+    }
+   ]
+  },
+  {
    "date": "2026-10-28",
    "items": [
     {
