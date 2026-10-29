@@ -133,7 +133,7 @@ function srBuild(){
   if (BR) BR.issues.forEach(x => x.items.forEach(i => add("Briefings", fmtKD(x.date) + " · " + i.h, [i.fact || "", i.link || ""], () => { goBrief(x.date); return "pane-brief"; })));
   /* v3.52 전망 검색(2026-10-05): 짧은 이름과 확률을 제목으로, 사안·분쟁 지점·나라 이름과 '가능성·확률·전망' 같은 말을 본문에 넣어 "러우 전쟁 휴전 가능성" 같은 물음에 전망이 잡히게 한다. 누르면 전망과 검증의 해당 항목으로 간다 */
   D.forecasts.forEach(f => { const c = fcCase(f), fp = D.flashpoints.find(x => x.id === f.fp);
-    add("Forecasts", (f.s || f.q) + " · " + (f.status === "open" ? f.p + "%" : f.status === "yes" ? "Resolved yes" : f.status === "no" ? "Resolved no" : "Voided"),
+    add("Forecasts", (f.s || f.q) + " · " + (f.status === "open" ? f.p + "%" : fcHM(f)),
       [f.q, f.basis, f.void || "", c ? cshort(c) : "", fp ? fp.name_ko : "", (f.countries || []).map(nm).join(" "), "chance probability forecast resolution " + (f.due || "")],
       () => { fcOpen(f.id); return "pane-forecast"; });  /* v4.22 전망별 화면으로 */
   });
@@ -1075,7 +1075,7 @@ const FCE = {up:["↑","Factors raising the probability"], down:["↓","Factors 
 const FCDUE_W = "due|-|".split("|");
 const fcDueS = d => "due " + enDate(d, String(d).slice(0, 4) === String(new Date().getFullYear()));
 function fcChip(f){
-  const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none, st = F && {yes: "Resolved yes", no: "Resolved no", void: "Voided"}[F.status];
+  const F = D.forecasts.find(z => z.id === f.id), e = FCE[f.e] || FCE.none, st = F && F.status && F.status !== "open" ? fcHM(F) : null;
   return '<button type="button" class="fcchip bfc bfc-' + esc(f.e) + '" data-fc="' + esc(f.id) + '" title="' + esc((F ? F.q + " · " : "") + e[1]) + '">' +
     (F ? '<span class="bfc-p">' + (st ? esc(st) : F.p + "%") + "</span>" : "") + '<span class="bfc-t">' + esc(F && F.s ? F.s : f.id) + "</span>" +
     (F && F.due && !st ? '<span class="bfc-d">' + fcDueS(F.due) + "</span>" : "") + '<span class="bfc-e" aria-hidden="true">' + e[0] + '</span><span class="sr">' + e[1] + "</span></button>";
@@ -1384,7 +1384,7 @@ function renderOverview(){
     "<p class=\"note\">Clisa Geopolitics analyses are written with the help of AI (Anthropic’s Claude) and reviewed by editors.</p>";
 }
 function forecastRow(f, compact){
-  const st = {open:["open","Open"], yes:["yes","Resolved yes"], no:["no","Resolved no"], void:["void","Voided"]}[f.status] || ["open","Open"];
+  const st = !f.status || f.status === "open" ? ["open","Open"] : [{[FCT.hit]: "yes", [FCT.miss]: "no"}[fcHM(f)] || "void", fcHM(f)];  /* v4.43 상태는 예측이 맞았는지(적중·빗나감)로 */
   return '<li data-fid="' + esc(f.id) + '"><div class="fc"><div class="q">' + esc(f.q) + '</div><div class="p">' + f.p + '<small>%</small></div><div class="prob"><i style="width:' + f.p + '%"></i></div>' +
     (compact ? "" : '<div class="b">' + esc(f.basis) + "</div>") + (f.rs && !compact ? "<div class=\"b rs\">Resolves on: " + esc(f.rs) + "</div>" : "") /* v4.21 rs */ + (f.void && !compact ? "<div class=\"vr\">Voided · " + esc(f.void) + "</div>" : "") +
     '<div class="foot"><span class="mono fid">' + esc(f.id) + '</span><span class="st ' + st[0] + '">' + st[1] + "</span><span>Resolution date <span class=\"mono\">" + esc(enDate(f.due)) + "</span></span>" + (compact ? "" : fcHist(f.id) + '<span class="chips" style="margin:0">' + f.countries.map(chip).join("") + '<button type="button" class="chip" data-fcd="' + esc(f.id) + '">' + FCT.detail + '</button></span>') + "</div></div></li>";  /* v4.22 전망별 화면 */
@@ -1472,12 +1472,12 @@ function lkHtml(id, kind, st, d, pre){
   const li = (dd, t, v) => '<li><span class="d">' + dd + '</span><span class="t">' + t + "</span>" + (v ? '<span class="v">' + v + "</span>" : "") + "</li>";
   const more = (k, n) => n > 0 ? '<button type="button" class="bh-xbtn lk-more" data-lkm="' + kind + ":" + k + '">' + "More" + ' <span class="mono">' + n + "</span></button>" : "";
   const ym = x => x.slice(0, 4) + "." + x.slice(5, 7), md = x => x.slice(5, 7) + "." + x.slice(8, 10);
-  const RS = {yes: "Resolved yes", no: "Resolved no", void: "Voided"};
+  const RS = f => f.status && f.status !== "open" ? fcHM(f) : "";
   const fsv = d.fs.slice(0, st.fc), brv = d.br.slice(0, st.br);
   return '<section class="sec lkbox" id="' + id + '">' + (kind === "c" ? "<h3>On Clisa Geopolitics</h3>" : "") + '<div class="lk">' + pre +
     (d.cs.length ? row(LK_H[0], '<div class="chips">' + d.cs.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</div>", 1) : "") +
     (d.fps.length ? row(LK_H[1], '<div class="chips">' + d.fps.map(f => '<button type="button" class="chip" data-fp="' + esc(f.id) + '">' + esc(f.name_ko) + "</button>").join("") + "</div>", 1) : "") +
-    (d.fs.length ? row(LK_H[2], "<ul>" + fsv.map(f => li(ym(f.due), '<button type="button" class="lt" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + esc(f.s || f.q) + "</button>" + (RS[f.status] ? ' <span class="lk-rs">' + RS[f.status] + "</span>" : ""), f.p + "%")).join("") + "</ul>" + more("fc", d.fs.length - fsv.length)) : "") +
+    (d.fs.length ? row(LK_H[2], "<ul>" + fsv.map(f => li(ym(f.due), '<button type="button" class="lt" data-fc="' + esc(f.id) + '" title="' + esc(f.q) + '">' + esc(f.s || f.q) + "</button>" + (RS(f) ? ' <span class="lk-rs">' + RS(f) + "</span>" : ""), f.p + "%")).join("") + "</ul>" + more("fc", d.fs.length - fsv.length)) : "") +
     (d.br.length ? row(LK_H[3], "<ul>" + brv.map(([x, i]) => li(md(x.date), '<a class="lt" href="' + FCT.href("/brief/" + esc(x.date) + "/") + '" data-brief="' + esc(x.date) + '">' + esc(i.h) + "</a>")).join("") + "</ul>" + more("br", d.br.length - brv.length)) : "") +
     (d.dg.length ? row(LK_H[4], "<ul>" + d.dg.map(([g, gi]) => li("", '<button type="button" class="lt" data-dg="' + gi + '">' + esc(g.t) + "</button>")).join("") + "</ul>") : "") +
     (d.ft.length ? row(LK_H[5], "<ul>" + d.ft.map(F => li(md(F.date), '<a class="lt" href="' + FCT.href("/feature/" + esc(F.id) + "/") + '" data-feat="' + esc(F.id) + '">' + esc(F.title) + "</a>")).join("") + "</ul>") : "") +
@@ -2897,7 +2897,9 @@ const FCT = {
   late_h: "Forecasts awaiting their result", s30: "Resolving within 30 days", s30none: "No forecast reaches its resolution date in the next 30 days.", s90: "Resolving within 90 days",
   due: d => "Resolves " + d, etc: "Other conflicts", back: "← All forecasts", eyebrow: (id, c) => "Forecast " + id + " · " + c,
   pNow: "Current probability", pThen: "Probability at the time", caseGo: c => c + " analysis →", dueAt: "Resolution date", made: "Made", madeV: (d, p) => d + " · started at " + p + "%", rs: "Resolves on",
-  resH: "Result", resD: d => " · confirmed " + d, voidL: "Voided", yes: "Resolved yes", no: "Resolved no", resSub: (p, b) => "Probability at the time " + p + "% · Brier score " + b,
+  resH: "Result", resD: d => " · confirmed " + d, voidL: "Voided", yes: "Happened", no: "Did not happen", resSub: (p, b) => "Probability at the time " + p + "% · Brier score " + b, hit: "Right call", miss: "Wrong call", half: "No verdict", resHalf: "Rated a realistic possibility (38–52 percent), so it is neither a right nor a wrong call.",
+  resMsg: (v, p, hi, miss, y) => "The forecast put the chance at " + (hi ? "" : "only ") + p + " percent, " + (miss ? "but" : "and") + " it " + (y ? "happened." : "did not happen."), resVerb: "",
+  resExpl: b => "Brier score " + b + " (average of daily scores) · 0 is perfect; a forecast held at 50% throughout scores 0.25",
   chartH: "Probability over time", span: "Period", w30: "Last 30 days", wAll: "All time", aria: s => s + ": probability over time", ev: "Events",
   revT: (d, x) => d + " weekly review · " + x, keep: p => p + "%, unchanged", chg: (a, b) => a + "% → " + b + "%",
   legF: "Weekly review that changed it", legO: "Weekly review that kept it", legU: "Briefing · raises the probability", legD: "Briefing · lowers the probability",
@@ -2940,6 +2942,7 @@ const fcEnd = f => (f.resolved && f.resolved < f.due ? f.resolved : f.due);
 /* v4.34 마지막 k일 동결(2026-10-25 결재): k = min(7, 공개 일수의 4분의 1). 동결일(검증 시점 k일 전) 뒤에 고친 확률은 점수에 넣지 않는다 */
 const fcFzK = f => { const H = fcHistOf(f); return Math.max(0, Math.min(7, Math.floor((fcDays(H[0][0], f.due) + 1) / 4))); };
 const fcFz = f => fcAdd(f.due, -fcFzK(f));
+const fcHM = f => { if (f.status === "void") return FCT.voidL; const z = fcFz(f), ps = fcPAt(f, fcEnd(f) < z ? fcEnd(f) : z); return ydBand(ps) === 3 ? FCT.half : ((f.status === "yes") !== (ps > 50)) ? FCT.miss : FCT.hit; };  /* v4.43 적중·빗나감('가능성 있음' 38~52%는 판정하지 않음, 점수에 쓰인 확률 기준) */
 const fcPAt = (f, d) => { const H = fcHistOf(f); let p = H[0][1]; H.forEach(h => { if (h[0] <= d) p = h[1]; }); return p; };
 function fcBrierT(f, y){
   const H = fcHistOf(f), end = fcEnd(f), fz = fcFz(f); let d = H[0][0], i = 0, cur = H[0][1], s = 0, n = 0;
@@ -3060,13 +3063,13 @@ function fcDetailHtml(f){
   const url = location.origin + FCT.href("/forecast/" + f.id + "/");
   return '<div class="sec"><p style="margin:0 0 10px"><button type="button" class="chip back" data-fcd="">' + FCT.back + "</button></p>" +
     '<div class="fd-h"><div><p class="eyebrow">' + esc(FCT.eyebrow(f.id, fcCaseName(f))) + '</p><h2 class="fd-q">' + esc(f.q) + "</h2></div>" +
-    '<div class="fd-p"><b>' + f.p + "%</b>" + ydWord(f.p, "yw yd") + "<span>" + (open ? FCT.pNow : FCT.pThen) + "</span></div></div>" +
+    (() => { const pv = res ? fcPAt(f, fcEnd(f) < fz ? fcEnd(f) : fz) : f.p; return '<div class="fd-p"><b>' + pv + "%</b>" + ydWord(pv, "yw yd") + "<span>" + (open ? FCT.pNow : res ? FCT.fzH : FCT.pThen) + "</span></div></div>"; })() +
     '<div class="chips" style="margin-top:8px">' + (f.countries || []).map(chip).join("") + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">' + esc(FCT.caseGo(c.title.split(":")[0])) + "</button>" : "") + "</div>" +
     '<dl class="fd-meta"><dt>' + FCT.dueAt + "</dt><dd>" + FCT.ymd(f.due) + (open ? ' <span class="fd-dd">' + (n > 0 ? FCT.left(n) : n === 0 ? FCT.today : FCT.checking) + "</span>" : "") + "</dd>" +
     "<dt>" + FCT.made + "</dt><dd>" + FCT.madeV(FCT.ymd(H[0][0]), H[0][1]) + "</dd>" + (fzOn ? "<dt>" + FCT.fzH + "</dt><dd>" + FCT.fzV(FCT.ymd(fz), pz, fcFzK(f)) + "</dd>" : "") + (f.rs ? "<dt>" + FCT.rs + "</dt><dd>" + esc(f.rs) + "</dd>" : "") + "</dl></div>" +
     (res || f.status === "void" ? '<section class="sec fd-rc"><p class="eyebrow">' + FCT.resH + (f.resolved ? FCT.resD(FCT.ymd(f.resolved)) : "") + "</p>" +
       (f.status === "void" ? "<p><b>" + FCT.voidL + "</b></p><p>" + esc(f.void || "") + "</p>" :
-        "<p><b>" + (f.status === "yes" ? FCT.yes : FCT.no) + '</b> <span class="note">' + FCT.resSub(f.p, fcBrierT(f, f.status === "yes" ? 1 : 0).toFixed(2)) + "</span></p>" + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
+        (() => { const y = f.status === "yes", ps = fcPAt(f, fcEnd(f) < fz ? fcEnd(f) : fz), hf = ydBand(ps) === 3, mi = !hf && (y !== (ps > 50)); return '<p><b class="fd-hm ' + (hf ? "h" : mi ? "m" : "w") + '">' + (hf ? FCT.half : mi ? FCT.miss : FCT.hit) + "</b></p><p><b>" + esc(hf ? (f.ro ? f.ro + " " : "") + FCT.resHalf : f.ro && FCT.resYes ? f.ro + " " + (mi ? FCT.resNo : FCT.resYes) : FCT.resMsg(f.rv || FCT.resVerb, ps, ps > 50, mi, y)) + '</b></p><p class="note">' + FCT.resExpl(fcBrierT(f, y ? 1 : 0).toFixed(2)) + "</p>"; })() + (f.outcome ? "<p>" + esc(f.outcome) + "</p>" : "") +
         ((f.outcome_src || []).length ? '<p class="note">' + f.outcome_src.map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]) + "</a>").join(" · ") + "</p>" : "")) + "</section>" : "") +
     '<section class="sec"><div class="fd-ht"><h3>' + FCT.chartH + '</h3><div class="fd-seg" role="group" aria-label="' + FCT.span + '"><button type="button" data-fcw="30" aria-pressed="' + (S.fcw !== "all") + '">' + FCT.w30 + '</button><button type="button" data-fcw="all" aria-pressed="' + (S.fcw === "all") + '">' + FCT.wAll + "</button></div></div>" +
       fcChart(f, t) +
@@ -3088,7 +3091,7 @@ function renderForecasts(){
   if (S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) { $("#pane-forecast").innerHTML = fcDetailHtml(F); return; } S.ffc = null; }
   const fs = D.forecasts.slice().sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p);
   const done = fs.filter(f => f.status === "yes" || f.status === "no");
-  const miss = done.filter(f => (f.status === "yes") !== (f.p >= 50));
+  const miss = done.filter(f => { const z = fcFz(f), ps = fcPAt(f, fcEnd(f) < z ? fcEnd(f) : z); return ydBand(ps) !== 3 && (f.status === "yes") !== (ps > 50); });  /* v4.43: 점수에 쓰인 확률 기준, '가능성 있음'(38~52%)은 적중·빗나감 어느 쪽도 아님(2026-10-29) */
   const brier = done.length ? (done.reduce((s, f) => s + fcBrierT(f, f.status === "yes" ? 1 : 0), 0) / done.length).toFixed(3) : "—";  /* v4.24 기간 평균 */
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
@@ -3098,7 +3101,7 @@ function renderForecasts(){
     fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
     '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
     (FCR().length ? "<section class=\"sec\" id=\"f-week\"><h3>Weekly forecast review</h3><p class=\"note\" style=\"margin-bottom:8px\">Every Monday, forecast probabilities are revisited in light of the previous week’s events. Both revised and unchanged forecasts are listed, with reasons.</p>" + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
-    "<section class=\"sec\"><h3>Missed forecasts</h3><p class=\"note\" style=\"margin-bottom:8px\">Forecasts rated 50% or higher that did not happen, or rated below 50% that did.</p>" + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : "<p class=\"note\">No forecasts have been resolved yet.</p>") + "</section>" +
+    "<section class=\"sec\"><h3>Missed forecasts</h3><p class=\"note\" style=\"margin-bottom:8px\">Forecasts that gave 53 percent or more to an event that did not happen, or 37 percent or less to one that did, using the probability that counts for scoring. Forecasts rated a realistic possibility (38–52 percent) count as neither right nor wrong calls.</p>" + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : "<p class=\"note\">No missed forecasts yet.</p>") + "</section>" +
     ((PUB() && (D.notices || []).length) ? "<section class=\"sec\"><h3>Revised assessments</h3><ul class=\"tl\">" + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(enDate(l.date)) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + "\">View analysis · " + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
     (() => { const cs = D.strategies || [], cf = f => { const c = fcCase(f); return c ? c.id : "etc"; };
       const opts = [["all", "All", fs.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], fs.filter(f => cf(f) === c.id).length]), [["etc", "Other conflicts", fs.filter(f => cf(f) === "etc").length]]);
@@ -3477,7 +3480,7 @@ function fcPop(chip){
   const id = chip.dataset.fc, F = D.forecasts.find(f => f.id === id); if (!F) return;
   if (FCP && FCP.dataset.for === id && FCP._chip === chip) { fcPopClose(); return; }
   fcPopClose();
-  const st = {yes: "Resolved yes", no: "Resolved no", void: "Voided"}[F.status];
+  const st = F.status && F.status !== "open" ? fcHM(F) : null;
   const ef = chip.classList.contains("bfc-up") ? "up" : chip.classList.contains("bfc-down") ? "down" : chip.classList.contains("bfc-none") ? "none" : null;
   const EF = {up: ["↑", "Factors raising the probability"], down: ["↓", "Factors lowering the probability"], none: ["–", "No change"]};
   const el = document.createElement("div"); el.id = "fcpop"; el.dataset.for = id; el._chip = chip; el.setAttribute("role", "dialog");

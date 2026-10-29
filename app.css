@@ -250,6 +250,7 @@ details.more>summary{cursor:pointer; font-size:13px; color:var(--accent); paddin
 .fd-oc p{margin:0; font-size:13px; line-height:1.55; color:var(--ink-2)}
 .fd-rc{border:2px solid var(--ink); border-radius:12px; padding:14px 16px}
 .fd-rc p{margin:4px 0 0}
+.fd-hm{display:inline-block;padding:1px 10px;border-radius:6px;font-weight:800}.fd-hm.w{background:#FFD400;color:#111}.fd-hm.m{background:#D62828;color:#fff}.fd-hm.h{background:#CDEBFF;color:#0B3D66}
 .fd-share{display:flex; flex-wrap:wrap; gap:6px}
 @media (max-width: 600px){ .fd-oc{grid-template-columns:1fr} .fsoon li button{grid-template-columns:56px 1fr 38px} .fsoon .pb{display:none} .fd-q{font-size:17px} .fd-p b{font-size:32px} }
 /* v4.29 둘째 전략 주체 */
@@ -1239,7 +1240,7 @@ button.futgo{font:inherit;color:inherit;background:none;border:0;padding:0;margi
 .lb-feed .bh{display:flex;align-items:baseline;gap:10px} .lb-feed h3{margin:0;font-size:17px}
 .lb-list{list-style:none;margin:10px 0 0;padding:0;display:grid}
 .pane .lb-list li{padding:9px 0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;font-size:13px;line-height:1.55}
-.lb-list .lb-t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.lb-list .lb-t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden} .lb-list li>.lb-t{flex:1 1 100%} .lb-list li:has(>.lb-etc)>.lb-t{display:block;-webkit-line-clamp:none;overflow:visible}  /* 2026-10-29 분류 표시는 화면 폭과 분류 길이와 관계없이 늘 제목 위에 둠(왼쪽에 두면 제목 아래가 비고, 좁은 화면에서 긴 분류만 위로 올라가던 불일치) */  /* 2026-10-29 '기타' 줄은 문장이라 두 줄 제한을 풀고 끝까지 보여 줌 */
 .lb-list .lb-f{flex:1 1 calc(100% - 4em);order:1;font-size:12.5px;line-height:1.6;color:var(--ink-2)} .lb-list li:has(>.lb-f)>:not(.lb-cs):not(.lb-t):not(.lb-f){order:3} .lb-list li:has(>.lb-f)>.lb-src{order:2;align-self:flex-end} .lb-list.bh-cut li.bh-x{display:none} .lb-list li.bh-xb{border-bottom:0;padding:8px 0 0} .bh-xbtn{border:1px solid var(--line);background:var(--panel);color:var(--accent);border-radius:999px;padding:5px 12px;font:600 12.5px var(--sans);cursor:pointer}
 .lb-cs{font:700 11px/1.7 var(--sans);color:var(--accent);background:var(--hl,rgba(27,79,138,.08));border-radius:4px;padding:0 7px;flex:none} .lb-etc{color:var(--muted);background:transparent;border:1px solid var(--line)}
 .lb-src{font-size:11.5px;color:var(--muted)}
