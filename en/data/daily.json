@@ -1,6 +1,136 @@
 {
  "issues": [
   {
+   "date": "2026-10-30",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Tankers hit in Strait of Hormuz; Revolutionary Guards claim three struck mines",
+     "fact": "Britain's UK Maritime Trade Operations (UKMTO) said a tanker leaving the strait was hit by an unknown projectile near Khasab, Oman, at around 8 p.m. local time on October 29. Iran's Revolutionary Guards navy claimed that over the previous 24 hours three tankers using an unauthorized southern route exploded and caught fire after hitting mines; the claim has not been independently verified.",
+     "fc": [],
+     "src": [
+      "https://gulfnews.com/world/mena/tankers-hit-by-unknown-projectiles-in-strait-of-hormuz-as-ship-attacks-escalate-1.500729052",
+      "https://tass.com/world/2210269",
+      "https://www.cbsnews.com/live-updates/iran-war-donald-trump-qatar-mediators-new-proposal-end-war/"
+     ],
+     "loc": {
+      "lat": 26.18,
+      "lon": 56.25,
+      "place": "Near Khasab (Oman)",
+      "isos": [
+       "OMN",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian drone hits Dnipro train platform, killing 14",
+     "fact": "A Russian drone struck a platform at Dnipro station, where a Zaporizhzhia-bound train was waiting, during the day on October 29 local time, killing 14 people and wounding 14, said Oleksandr Hanzha, head of the Dnipropetrovsk regional military administration. Five more people were killed the same day in Chernihiv and Kremenchuk.",
+     "fc": [],
+     "src": [
+      "https://euromaidanpress.com/2026/10/29/russian-jet-drone-hits-dnipro-railway-platform-killing-14-people-next-to-a-zaporizhzhia-bound-train/",
+      "https://www.abc.net.au/news/2026-10-30/russian-drone-strike-kills-at-least-14-at-rail-platform/107325816",
+      "https://www.aljazeera.com/news/2026/10/29/russia-says-more-than-600-drones-launched-towards-moscow-overnight"
+     ],
+     "loc": {
+      "lat": 48.47,
+      "lon": 35.01,
+      "place": "Dnipro (Ukraine)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran's Tasnim says Tehran received Vance letter but has not replied",
+     "fact": "Iran's Tasnim news agency reported on October 29 that Tehran had received a letter from U.S. Vice President JD Vance to Mohsen Rezaei, secretary of the Supreme National Security Council, but had not yet responded, and that its seven conditions still stand. President Trump said the letter was about medical supplies and that he had not ordered talks to resume.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.jpost.com/middle-east/iran-news/article-913254",
+      "https://www.euronews.com/2026/10/29/jd-vance-contacts-senior-iranian-official-in-bid-to-revive-peace-talks"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Israel finishes count: Netanyahu bloc at 53 seats, Likud largest party with 27",
+     "fact": "Likud won 27 seats and Yashar 21 with all votes counted, according to Central Elections Committee results released early on October 30 local time, the Times of Israel reported. By bloc, Netanyahu's has 53 seats, Eisenkot's 48 and Arab parties 19. Official results are slated to go to President Isaac Herzog on November 4.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/with-all-votes-counted-netanyahus-bloc-at-53-seats-eisenkots-48-arab-parties-19/"
+     ],
+     "loc": {
+      "isos": [
+       "ISR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Yemen's Houthis claimed attacks on six targets in Saudi Arabia on October 29, including the Ras Tanura and Rabigh refineries, Aramco's Abqaiq facility, airports in Riyadh and Dammam, and a military headquarters in Najran. The Saudi-led coalition intercepted two ballistic missiles headed for Riyadh, and Saudi civil defense said debris injured one citizen.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/30/houthi-forces-claim-six-attacks-on-saudi-airports-oil-facilities"
+     ],
+     "case": "iran"
+    },
+    {
+     "t": "South Korean National Security Adviser Wi Sung-lac told lawmakers at a parliamentary audit on October 29 that Seoul is weighing options for a Strait of Hormuz deployment, including maritime patrol aircraft, in consultation with Washington, and that it will not send combat troops, Reuters reported.",
+     "src": [
+      "https://www.yahoo.com/news/articles/south-korea-says-considering-deployment-064737359.html"
+     ],
+     "case": "iran"
+    },
+    {
+     "t": "North Korea's KCNA reported on October 30 that Kim Jong Un, chairman of the State Affairs Commission, attended an unmanned aviation technology exhibition on October 29, watched firings by suicide drones, 600mm multiple rocket launchers and other weapons, and called for bringing artificial intelligence into unmanned systems.",
+     "src": [
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008823075"
+     ],
+     "case": "korea"
+    },
+    {
+     "t": "Delcy Rodríguez, who has led Venezuela since Maduro's removal, said on October 29 that elections will be held but gave no date; the same day, at a news conference in Caracas, María Corina Machado called for a presidential election in 2027.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/30/machado-lauds-trump-for-freedom-floodgate-urges-2027-elections"
+     ],
+     "case": null
+    },
+    {
+     "t": "An Italian CH-47 Chinook helicopter with the EU force in Bosnia (EUFOR) crashed during training in the Brcko area on October 29, killing four Italians and injuring 11.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/30/eu-force-helicopter-crash-kills-four-in-bosnia"
+     ],
+     "case": null
+    }
+   ]
+  },
+  {
    "date": "2026-10-29",
    "items": [
     {
