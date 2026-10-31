@@ -2919,6 +2919,7 @@ const FCT = {
   calM: (y, m, first) => EN_MON[m - 1].slice(0, 3) + (first || m === 1 ? " " + y : ""), calRest: (y, m0) => (m0 === 7 ? "H2 " : EN_MON[m0 - 1].slice(0, 3) + "–Dec ") + y, calY: y => String(y),
   legP: "Probability", legB: ["20% or less", "21–40%", "41–60%", "61–80%", "81% or more"],
   hDays: (done, n) => (n === 1 ? "day" : "days") + (done ? " to the next result" : " to the first result"), hToday: "Resolves today", hK: (d, c) => "Resolves " + d + " · " + c, hNote: "When the result is in, this card will show whether the forecast was right.", hStart: d => "Started " + d,
+  rcBig: ["Right call", "Wrong call", "No verdict"], rcFz: "Probability used for scoring", rcK: (d, c) => "Resolved " + d + " · " + c, rcNext: (n, x) => n + (n === 1 ? " day" : " days") + " to the next result · " + x, rcNextT: x => "Next result today · " + x,
   stOpen: "open", stChg: "revised", stDone: "resolved", stVoid: "voided",
   rel: n => pl(n, "related event"), later: n => pl(n, "later forecast") + " · see the full list ↓",
   accH: "How accuracy is calculated", accP: d => "For each resolved forecast, take (probability − outcome)² using the probability on each day from publication to the resolution date (or to the day the event occurs, if it comes true sooner), and average the results (the Brier score). Probabilities can be revised until the resolution date, but revisions made in the last seven days up to and including that date do not count; those days are scored at the probability that stood the day before (for forecasts open only briefly, the window never exceeds a quarter of the period from publication to the resolution date). An outcome that happened counts as 1; one that did not counts as 0. Closer to 0 is better; giving every forecast 50 percent scores 0.25." + (d ? " The score will appear here after the first result comes in on " + d + "." : ""), accGo: "See how results are checked in Methodology →",
@@ -2969,6 +2970,16 @@ function fcHeroHtml(op, done, t){
   return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length, n) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
     '<div class="fh-t"><small>' + esc(FCT.hK(FCT.md(nx.due), fcCaseName(nx))) + "</small><div>" + esc(nx.s || nx.q) + "</div><p>" + FCT.hNote + "</p></div>" +
     '<div class="fh-p"><b>' + nx.p + "%</b>" + ydWord(nx.p, "yw yh") + "<span>" + FCT.pNow + "</span>" + fcSpark(nx, t) + "</div></button>";
+}
+/* v4.52 최근 결과 카드(2026-11-01 결재): 결과가 정해진 날부터 7일 동안 맨 위에 둔다 */
+function fcRecentHtml(op, done, t){
+  const r = done.filter(f => f.resolved && fcDays(f.resolved, t) >= 0 && fcDays(f.resolved, t) <= 6).sort((a, b) => b.resolved.localeCompare(a.resolved))[0]; if (!r) return "";
+  const y = r.status === "yes", z = fcFz(r), ps = fcPAt(r, fcEnd(r) < z ? fcEnd(r) : z), hf = ydBand(ps) === 3, mi = !hf && (y !== (ps > 50)), k = hf ? 2 : mi ? 1 : 0;
+  const msg = hf ? FCT.resHalf : FCT.resMsg(r.rv || FCT.resVerb, ps, ps > 50, mi, y), nx = op[0], n = nx ? fcDays(t, nx.due) : 0;
+  return '<button type="button" class="fh-card fh-rc" data-fcd="' + esc(r.id) + '"><div class="fh-cd"><b class="k' + k + '">' + FCT.rcBig[k] + "</b><span>" + FCT.resH + "</span></div>" +
+    '<div class="fh-t"><small>' + esc(FCT.rcK(FCT.md(r.resolved), fcCaseName(r))) + "</small><div>" + esc(r.s || r.q) + "</div><p>" + esc(msg) + "</p></div>" +
+    '<div class="fh-p"><b>' + ps + "%</b><span>" + FCT.rcFz + "</span><span class=\"o\">" + (y ? FCT.yes : FCT.no) + "</span></div></button>" +
+    (nx ? '<button type="button" class="fh-next" data-fcd="' + esc(nx.id) + '">' + esc(n > 0 ? FCT.rcNext(n, nx.s || nx.q) : FCT.rcNextT(nx.s || nx.q)) + " →</button>" : "");
 }
 function fcStatsHtml(fs, op, done, brier){
   const chg = op.filter(f => fcHistOf(f)[0][1] !== f.p).length, vd = fs.filter(f => f.status === "void").length;
@@ -3096,7 +3107,7 @@ function renderForecasts(){
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
     "<div class=\"sec\"><h2>Forecasts and Track Record</h2><p class=\"lead\" style=\"margin-top:8px\">Every forecast states its probability and a resolution date; on that date, it is checked against what actually happened, and the result is published.</p><p class=\"ydnote\">" + esc(FCT.ydNote) + "</p></div>" +
-    fcHeroHtml(op0, done, t0) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
+    (fcRecentHtml(op0, done, t0) || fcHeroHtml(op0, done, t0)) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
     fcCalHtml(op0, t0) +  /* v4.23 판가름 달력 */
     fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
     '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +

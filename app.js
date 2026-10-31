@@ -2895,6 +2895,7 @@ const FCT = {
   calM: (y, m, first) => (first ? y + "년<br>" : "") + m + "월", calRest: (y, m0) => y + "년 " + (m0 === 7 ? "하반기" : m0 + "~12월"), calY: y => y + "년",
   legP: "확률", legB: ["20% 이하", "21~40%", "41~60%", "61~80%", "81% 이상"],
   hDays: done => done ? "일 뒤 다음 결과" : "일 뒤 첫 결과", hToday: "오늘 판가름", hK: (d, c) => d + " 판가름 · " + c, hNote: "결과가 나오면 이 자리에 맞았는지 틀렸는지 표시합니다.", hStart: d => d + " 처음",
+  rcBig: ["적중", "빗나감", "중립"], rcFz: "점수에 쓰인 확률", rcK: (d, c) => d + " 결정 · " + c, rcNext: (n, x) => n + "일 뒤 다음 결과 · " + x, rcNextT: x => "오늘 다음 결과 · " + x,
   stOpen: "진행 중", stChg: "확률을 바꾼 전망", stDone: "결과 확인", stVoid: "무효",
   rel: n => "관련 꼭지 " + n + "건", later: n => "그 뒤의 전망 " + n + "건 · 전체 목록에서 보기 ↓",
   accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 확률은 검증 시점 직전까지 고칠 수 있지만, 검증 시점까지의 마지막 7일 동안 고친 확률은 점수에 넣지 않고 그 기간은 바로 앞 날의 확률로 계산합니다(공개 기간이 짧은 전망은 이 기간이 공개일부터 검증 시점까지의 4분의 1을 넘지 않습니다). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
@@ -2945,6 +2946,16 @@ function fcHeroHtml(op, done, t){
   return '<button type="button" class="fh-card" data-fcd="' + esc(nx.id) + '"><div class="fh-cd">' + (n > 0 ? "<b>" + n + "</b><span>" + FCT.hDays(done.length, n) + "</span>" : "<b>" + (n === 0 ? "0" : "…") + "</b><span>" + (n === 0 ? FCT.hToday : FCT.checking) + "</span>") + "</div>" +
     '<div class="fh-t"><small>' + esc(FCT.hK(FCT.md(nx.due), fcCaseName(nx))) + "</small><div>" + esc(nx.s || nx.q) + "</div><p>" + FCT.hNote + "</p></div>" +
     '<div class="fh-p"><b>' + nx.p + "%</b>" + ydWord(nx.p, "yw yh") + "<span>" + FCT.pNow + "</span>" + fcSpark(nx, t) + "</div></button>";
+}
+/* v4.52 최근 결과 카드(2026-11-01 결재): 결과가 정해진 날부터 7일 동안 맨 위에 둔다 */
+function fcRecentHtml(op, done, t){
+  const r = done.filter(f => f.resolved && fcDays(f.resolved, t) >= 0 && fcDays(f.resolved, t) <= 6).sort((a, b) => b.resolved.localeCompare(a.resolved))[0]; if (!r) return "";
+  const y = r.status === "yes", z = fcFz(r), ps = fcPAt(r, fcEnd(r) < z ? fcEnd(r) : z), hf = ydBand(ps) === 3, mi = !hf && (y !== (ps > 50)), k = hf ? 2 : mi ? 1 : 0;
+  const msg = hf ? FCT.resHalf : FCT.resMsg(r.rv || FCT.resVerb, ps, ps > 50, mi, y), nx = op[0], n = nx ? fcDays(t, nx.due) : 0;
+  return '<button type="button" class="fh-card fh-rc" data-fcd="' + esc(r.id) + '"><div class="fh-cd"><b class="k' + k + '">' + FCT.rcBig[k] + "</b><span>" + FCT.resH + "</span></div>" +
+    '<div class="fh-t"><small>' + esc(FCT.rcK(FCT.md(r.resolved), fcCaseName(r))) + "</small><div>" + esc(r.s || r.q) + "</div><p>" + esc(msg) + "</p></div>" +
+    '<div class="fh-p"><b>' + ps + "%</b><span>" + FCT.rcFz + "</span><span class=\"o\">" + (y ? FCT.yes : FCT.no) + "</span></div></button>" +
+    (nx ? '<button type="button" class="fh-next" data-fcd="' + esc(nx.id) + '">' + esc(n > 0 ? FCT.rcNext(n, nx.s || nx.q) : FCT.rcNextT(nx.s || nx.q)) + " →</button>" : "");
 }
 function fcStatsHtml(fs, op, done, brier){
   const chg = op.filter(f => fcHistOf(f)[0][1] !== f.p).length, vd = fs.filter(f => f.status === "void").length;
@@ -3072,7 +3083,7 @@ function renderForecasts(){
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
     '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시하며, 검증 시점에 실제 발생 여부를 점검하고 그 결과도 공개합니다.</p><p class="ydnote">' + esc(FCT.ydNote) + "</p></div>" +
-    fcHeroHtml(op0, done, t0) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
+    (fcRecentHtml(op0, done, t0) || fcHeroHtml(op0, done, t0)) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
     fcCalHtml(op0, t0) +  /* v4.23 판가름 달력 */
     fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
     '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
