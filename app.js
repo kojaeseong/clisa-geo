@@ -2886,10 +2886,10 @@ const FCT = {
   fzH: "점수에 쓰이는 확률", fzV: (d, p, k) => d + "의 " + p + "% (마지막 " + k + "일 동안 고친 확률은 점수에 넣지 않습니다)",
   ocNoteF: (d, p, fd) => d + "에 결과를 확인합니다. 마지막 기간에 고친 확률은 점수에 넣지 않고 그 기간을 " + fd + "의 확률 " + p + "%로 계산하면, 결과마다 이 전망의 점수는 다음과 같습니다. 0에 가까울수록 정확합니다.",
   ocH: "결과가 나오면", ocNote: (d, p) => d + "에 결과를 확인합니다. 현재 확률 " + p + "%가 그날까지 이어진다고 보면, 결과마다 이 전망의 점수(날마다의 확률로 매긴 브라이어 점수의 평균)는 다음과 같습니다. 0에 가까울수록 정확합니다.",
-  ocY: "실현되면", ocN: "불발되면",
+  ocY: "실현되면", ocN: "실현되지 않으면",
   yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
   nLow: p => p + "%로 낮게 본 대로 일어나지 않은 것입니다.", nHigh: p => p + "%로 높게 본 일이 일어나지 않은 것이므로 「빗나간 전망」에 오릅니다.",
-  ocFirst: (p, a, b) => "처음 확률 " + p + "%를 그대로 뒀을 때의 점수 · 실현 " + a + ", 불발 " + b,
+  ocFirst: (p, a, b) => "처음 확률 " + p + "%를 그대로 뒀을 때의 점수 · 실현되면 " + a + ", 실현되지 않으면 " + b,
   sibH: "같은 사안의 전망", shareH: "공유", shareX: "X에 공유", copy: "주소 복사", sub: "새 글 알림 받기",
   calH: "언제 무엇이 판가름 나는가", calNote: "점 하나가 전망 하나입니다. 진할수록 일어날 확률이 높다고 본 전망이고, 누르면 그 전망으로 갑니다.",
   calM: (y, m, first) => (first ? y + "년<br>" : "") + m + "월", calRest: (y, m0) => y + "년 " + (m0 === 7 ? "하반기" : m0 + "~12월"), calY: y => y + "년",
@@ -3166,7 +3166,7 @@ function renderMethod(){
     (inner ? '<section class="sec method"><h3>' + esc(I.title) + ' · 공식과 출처</h3><p>' + esc(I.unit) + '</p><div class="idim" style="margin-top:8px">' + I.dims.map(d => "<div><b>" + esc(d.name) + "</b><code>" + esc(d.formula) + "</code><ul>" + d.parts.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul><small>출처 · " + esc(d.src) + "</small></div>").join("") + "</div>" +
       '<h3 style="margin-top:14px">지표의 규칙</h3><ul>' + (I.rules || []).map(x => "<li>" + esc(x) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>"
      : '<section class="sec method"><h3>' + esc(I.title) + '</h3><p>' + esc(I.unit) + (I.dims.length === 4 ? ' 지표는 ' + I.dims.map(d => esc(d.name)).join(", ") + '의 4개 차원으로 이루어지며, 차원들을 하나의 점수로 합치지 않습니다.' : "") + '</p><ul style="margin-top:6px">' + I.dims.map(d => "<li><b>" + esc(d.name) + "</b>" + (d.formula && I.dims.length !== 4 ? " · " + esc(d.formula) + (d.parts || []).map(x => ". " + esc(x)).join("") : "") + " · 출처 " + esc(d.src) + "</li>").join("") + '</ul><h3 style="margin-top:14px">지표의 한계</h3><ul>' + I.limits.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></section>") +
-    '<section class="sec method"><h3>검증과 갱신</h3><ul>' + M.update.map(x => "<li>" + esc(x) + "</li>").join("") + "<li>국가 프로필, 분쟁지, 전망은 하나의 자료 파일에 담겨 있어, 새로 조사한 자료로 파일을 교체하면 사이트 전체가 갱신됩니다.</li><li>" + (pub ? "이미 공개한 판단을 바꿀 때는 전망과 검증 탭의 판단 변경 공지에 날짜와 변경 내용, 그 이유를 밝힙니다." : "") + "</li><li>전망은 삭제하지 않습니다. 검증 시점이 지나면 실현·불발을 밝히고 정확도에 반영합니다. 질문이 만들어진 시점에 이미 답이 정해져 있었던 전망은 무효로 표시하고 정확도에서 뺍니다.</li></ul></section>" +
+    '<section class="sec method"><h3>검증과 갱신</h3><ul>' + M.update.map(x => "<li>" + esc(x) + "</li>").join("") + "<li>국가 프로필, 분쟁지, 전망은 하나의 자료 파일에 담겨 있어, 새로 조사한 자료로 파일을 교체하면 사이트 전체가 갱신됩니다.</li><li>" + (pub ? "이미 공개한 판단을 바꿀 때는 전망과 검증 탭의 판단 변경 공지에 날짜와 변경 내용, 그 이유를 밝힙니다." : "") + "</li><li>전망은 삭제하지 않습니다. 검증 시점이 지나면 실현 여부를 밝히고 정확도에 반영합니다. 질문이 만들어진 시점에 이미 답이 정해져 있었던 전망은 무효로 표시하고 정확도에서 뺍니다.</li></ul></section>" +
     (inner ? frameworkHtml() : "") +
     '<section class="sec method"><h3>분석 범위</h3><p>' + esc(D.meta.scope) + ". 지도에 색이 있는 국가가 분석 대상이며, 회색은 아직 분석 범위 밖의 국가입니다. EU·NATO는 국가가 아니므로 별도 프로필로 다룹니다.</p></section>" +
     '<section class="sec method"><h3>수치와 점수</h3><ul>' + D.meta.method.map(m => "<li>" + esc(m) + "</li>").join("") + "</ul></section>" +
