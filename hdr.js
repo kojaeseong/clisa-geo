@@ -34,6 +34,16 @@
     setInterval(function(){ if (document.visibilityState === "hidden") return; var t = Date.now(); CL.forEach(function(c){ if (t - c.t >= (c.m ? 2000 : 4000) - 60) { c.t = t; step(c); } }); }, 500);
     setInterval(function(){ CL.forEach(function(c){ if (!c.b.matches(":hover")) build(c); }); }, 30000);
   }
+
+  /* 밤 화면: 처음에는 기기 설정을 따르고(머리 안의 작은 스크립트가 그리기 전에 정한다), 단추로 바꾸면 그 선택을 기억한다 */
+  var th = H.querySelector(".hd-th");
+  function thLabel(){ var d = document.documentElement.dataset.theme === "dark"; if (!th) return; th.setAttribute("aria-pressed", d ? "true" : "false");
+    var t = EN ? (d ? "Light mode" : "Dark mode") : (d ? "낮 화면으로 보기" : "밤 화면으로 보기"); th.title = t; th.setAttribute("aria-label", t); }
+  function thSet(t){ document.documentElement.dataset.theme = t; try { localStorage.setItem("ep.theme", t); } catch (e) {}
+    thLabel(); try { if (typeof readColors === "function") { readColors(); if (typeof requestDraw === "function") requestDraw(true); } } catch (e) {} }
+  if (th) { thLabel(); th.addEventListener("click", function(){ thSet(document.documentElement.dataset.theme === "dark" ? "light" : "dark"); }); }
+  /* 읽기 영역 넓히기 단추를 없앴으므로 늘 넓게 읽는다(전에 좁게 고른 방문자도) */
+  try { var ap = document.querySelector(".app"); if (ap && !ap.classList.contains("wide")) { ap.classList.add("wide"); localStorage.setItem("ep.wide", "1"); dispatchEvent(new Event("resize")); } } catch (e) {}
   function all(){ place(); knobs(); CL.forEach(build); }
   all(); addEventListener("resize", all); addEventListener("load", all); if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
 })();

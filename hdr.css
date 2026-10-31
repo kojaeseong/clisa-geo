@@ -32,7 +32,7 @@ header.hd nav.gnav a[aria-current="page"]{color:var(--accent,#1F4FD8);font-weigh
 header.hd nav.gnav .gs{display:none}
 header.hd nav.gnav .sep{width:1px;margin:13px 8px;background:var(--line,#D2D8DE)}
 header.hd nav.gnav .bar{position:absolute;bottom:0;left:0;width:0;height:3px;border-radius:3px 3px 0 0;background:var(--accent,#1F4FD8);transition:left .4s cubic-bezier(.2,.8,.2,1),width .4s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-header.hd nav.gnav .wide-btn{position:absolute;right:16px;top:50%;transform:translateY(-50%);margin:0}
+header.hd nav.gnav .wide-btn{display:none!important}  /* 2026-11-01 운영자 지시: 읽기 영역 넓히기 단추를 없앤다(화면 앱이 단추를 찾으므로 감춰 두고, 늘 넓게 읽기) */
 header.hd .hd-strips{padding:8px 24px 10px;background:var(--bg,#E9ECEF);border-top:1px solid var(--line,#D2D8DE)}
 header.hd .strips{display:flex!important;flex-direction:row!important;gap:10px}
 header.hd .strips .bstrip{flex:1 1 0!important;width:auto!important;min-width:0;height:36px;border-radius:9px}
@@ -74,3 +74,48 @@ header.hd .hd-r1>*{order:0!important}
 @media (max-width:900px){header.hd .brand{max-width:100%;overflow:hidden}header.hd .brand .tag{max-width:100%;overflow:hidden;text-overflow:ellipsis}html[lang="en"] header.hd .brand .tag{font-size:clamp(9px,2.4vw,10.5px)!important}}
 @media (max-width:900px){header.hd .hd-sw .asw{flex:none}header.hd .hd-sw .hd-clk-m{flex:1 1 auto;min-width:0}header.hd .hd-clk-m span{overflow:hidden}html[lang="en"] header.hd .hd-sw .asw a{padding:0 9px;font-size:12px}html[lang="en"] header.hd .hd-clk-m i{font-size:9.5px}}
 @media (max-width:900px){html[lang="en"] header.hd nav.gnav a{font-size:11.5px!important;letter-spacing:-.01em}}
+
+/* 개편 ④ 색·글꼴(2026-11-01): 밤 화면. 색 이름표를 바꾸고, 직접 쓴 밝은 색 몇 곳만 따로 맞춘다. 지구본 색은 app.js readColors()가 이름표에서 다시 읽는다 */
+:root[data-theme="dark"]{--bg:#0D1116;--panel:#151A21;--panel-2:#1C222A;--ink:#E7EBF0;--ink-2:#C2C9D2;--muted:#8A95A2;--line:#2A323C;
+ --ocean:#0E1826;--ocean-2:#15233A;--grat:rgba(160,190,230,.10);--land-out:#222B37;--border:rgba(230,235,240,.28);
+ --accent:#6E95FF;--accent-soft:rgba(110,149,255,.15);--coop:#2FBF96;--conflict:#FF6B5B;--halo:#0D1116;
+ --focus-0:#1A2438;--focus-1:#7EA2FF;--risk-0:#2A1C1A;--risk-1:#FF6B5B;--mil-0:#192231;--mil-1:#7FB0E8;--pol-0:#18261B;--pol-1:#6FCB82;--econ-0:#28220F;--econ-1:#E0B25A;
+ color-scheme:dark}
+:root[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+:root[data-theme="dark"] .panel,:root[data-theme="dark"] .globe-wrap{border-color:rgba(255,255,255,.06);box-shadow:none}
+:root[data-theme="dark"] .fd-seg button[aria-pressed="true"]{background:var(--accent);color:#0D1116}
+:root[data-theme="dark"] .fcal-tip{background:#2A323C;color:var(--ink)}
+:root[data-theme="dark"] .fd-dd,:root[data-theme="dark"] .fd-ch .ev.down circle,:root[data-theme="dark"] .fd-leg i.d,:root[data-theme="dark"] .fd-ar.down{background:#3A1F1B;fill:#3A1F1B}
+:root[data-theme="dark"] .fd-ch .ev.up circle,:root[data-theme="dark"] .fd-leg i.u,:root[data-theme="dark"] .fd-ar.up{background:#1C2A4A;fill:#1C2A4A}
+:root[data-theme="dark"] .one .ok-w{background:#3A2A12;color:#F0B46A}:root[data-theme="dark"] .one .ok-g{background:#12302B;color:#5FD1B5}
+:root[data-theme="dark"] img:not([src$=".svg"]){filter:brightness(.92)}
+:root[data-theme="dark"] header.hd nav.gnav a[aria-current="page"]{color:#9DB6FF}
+:root[data-theme="dark"] header.hd nav.gnav .bar{background:#6E95FF}
+:root[data-theme="dark"] header.hd nav.gnav{border-top-color:#222A33}
+:root[data-theme="dark"] header.hd .asw{background:#222A33;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)}
+:root[data-theme="dark"] header.hd .asw a{color:var(--ink-2)}:root[data-theme="dark"] header.hd .asw a.on{color:#fff}
+:root[data-theme="dark"] header.hd .hd-clk em{color:#FF7A6B}
+@media (max-width:900px){:root[data-theme="dark"] header.hd nav.gnav a[aria-current="page"]{background:#3D6BF0;color:#fff}}
+header.hd .hd-th{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;padding:0;border:1px solid var(--line,#D2D8DE);border-radius:999px;background:var(--panel,#fff);color:var(--ink-2,#2F3842);cursor:pointer}
+header.hd .hd-th:hover{border-color:var(--accent);color:var(--accent)}
+header.hd .hd-th svg{width:16px;height:16px}
+header.hd .hd-th .i-sun{display:none}:root[data-theme="dark"] header.hd .hd-th .i-moon{display:none}:root[data-theme="dark"] header.hd .hd-th .i-sun{display:block}
+@media (max-width:900px){
+ header.hd .hd-r1{grid-template-columns:72px minmax(0,1fr) 72px}
+ header.hd .hd-r{gap:4px}
+ header.hd .hd-th{width:34px;height:34px}
+ header.hd .lang-sw{height:34px!important;padding:0 8px!important}
+ header.hd .srch-open{width:34px!important;height:34px!important}
+}
+/* 영문판 글꼴(2026-11-01 제안): 본문은 Inter, 제목은 Source Serif 4. 영어 본문은 조금 크게, 줄 간격 넓게 */
+html[lang="en"]{--sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--serif:"Source Serif 4","Source Serif Pro",Georgia,serif}
+html[lang="en"] body{font-family:var(--sans);font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased}
+html[lang="en"] .pane p,html[lang="en"] .page-pre p,html[lang="en"] .page-pre li{line-height:1.65}
+html[lang="en"] .pane h2,html[lang="en"] .page-pre h1,html[lang="en"] .page-pre h2{font-family:var(--serif);letter-spacing:-.01em}
+:root[data-theme="dark"]{--same:#3A4350}
+
+/* 2026-11-01 운영자 지시: 밤 화면의 파란 글씨를 더 맑은 하늘빛으로. 파란 바탕에 흰 글씨인 단추는 진한 파랑을 그대로 둔다 */
+:root[data-theme="dark"]{--accent:#82B1FF;--accent-soft:rgba(130,177,255,.15);--focus-1:#82B1FF}
+:root[data-theme="dark"] header.hd nav.gnav a[aria-current="page"]{color:#A8C8FF}
+:root[data-theme="dark"] header.hd nav.gnav .bar{background:#82B1FF}
+:root[data-theme="dark"] :is(.tts[aria-pressed="true"],.zkey .zk.b,.legend .av[aria-pressed="true"],.zonebar .zc[aria-pressed="true"],.fsoon .pb i,.prob i,.bar i::after,.fd-leg i.f,.gs-box.goal h5 i,.legend .mt[aria-pressed="true"] .sw,.tg input:checked+span::before){background:#3D6BF0;border-color:#3D6BF0}

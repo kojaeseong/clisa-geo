@@ -1971,7 +1971,7 @@ function evalHtml(c){
 }
 /* v3.90(2026-10-10 결재): Ⅲ 인간 안보 화면 2안. 집단별 카드(첫 문장, '2030년까지 100번의 미래' 점 그림, 범주별 현재·가장 나쁜 경우·가장 좋은 경우 선 그림, 가장 나쁜 경우의 원래 단위 풀이), 숫자 표는 접힘 */
 const HS_CAT = [["개인", "Personal safety"], ["공동체", "Community"], ["정치", "Political"], ["경제", "Economic"]];
-const HS_COL = {better: "#0EA5A4", same: "#D3D8DE", worse: "#F59E0B", big: "#C8102E"};  /* v3.93 색상 B안(2026-10-11 결재): 진홍·호박색·청록 */
+const HS_COL = {better: "#0EA5A4", same: "var(--same,#D3D8DE)", worse: "#F59E0B", big: "#C8102E"}  /* v4.57 밤 화면: 현재와 비슷함은 색 이름표로 */;  /* v3.93 색상 B안(2026-10-11 결재): 진홍·호박색·청록 */
 const HS_LAB = {better: "Better", same: "About the same", worse: "Worse", big: "Much worse"};
 const HS_ORD = ["big", "worse", "better", "same"];  /* v3.92c: 점 그림(위에서부터)·횟수·구성 설명의 순서를 하나로(크게 악화됨 → 악화됨 → 개선됨 → 현재와 비슷함) */
 function hsCount(H, G, key){
@@ -1986,7 +1986,7 @@ function hsDots(c){
   const seq = []; HS_ORD.forEach(k => { for (let i = 0; i < Math.round(c[k]); i++) seq.push(k); });
   while (seq.length < 100) seq.push("same"); seq.length = 100;
   return '<svg viewBox="0 0 110 110" class="hs-dots" role="img" aria-label="' + HS_ORD.filter(k => Math.round(c[k])).map(k => HS_LAB[k] + " " + Math.round(c[k]) + "").join(", ") + '">' +
-    seq.map((k, i) => '<circle cx="' + (5.5 + (i % 10) * 11) + '" cy="' + (5.5 + Math.floor(i / 10) * 11) + '" r="4.2" fill="' + HS_COL[k] + '"></circle>').join("") + "</svg>";
+    seq.map((k, i) => '<circle cx="' + (5.5 + (i % 10) * 11) + '" cy="' + (5.5 + Math.floor(i / 10) * 11) + '" r="4.2" style="fill:' + HS_COL[k] + '"></circle>').join("") + "</svg>";
 }
 function hsLegend(c, c2){
   return '<ul class="hs-lg">' + HS_ORD.filter(k => Math.round(c[k]) || Math.round(c2[k])).map(k => '<li><i style="background:' + HS_COL[k] + '"></i>' + HS_LAB[k] + " <b>" + Math.round(c[k]) + "</b>" + (Math.round(c2[k]) !== Math.round(c[k]) ? "<span class=\"note hs-rec\">→ if the recommendation is followed: " + Math.round(c2[k]) + "</span>" : "") + "</li>").join("") + "</ul>";
