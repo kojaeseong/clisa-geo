@@ -1,6 +1,160 @@
 {
  "issues": [
   {
+   "date": "2026-10-31",
+   "items": [
+    {
+     "case": "iran",
+     "h": "오만, 호르무즈서 불탄 유조선 선원 25명 구조…혁명수비대, 무단 항로 유조선 3척 멈춰 섰다고 주장",
+     "fact": "오만 해양안보센터는 30일 호르무즈 해협에서 공격을 받아 불이 난 파나마 선적 유조선 리티호의 선원 25명을 해군이 구조했다고 밝혔습니다. 같은 날 이란 혁명수비대는 승인되지 않은 항로를 쓴 유조선 3척이 기뢰 등에 따른 사고로 멈춰 섰다고 주장했으나 미군은 기뢰 주장을 부인했고, 리티호가 이 3척에 들어가는지는 분명하지 않습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/30/oman-rescues-25-from-burning-oil-tanker-in-strait-of-hormuz",
+      "https://www.brecorder.com/news/40446767/oman-rescues-25-from-burning-ship-iran-halts-tankers"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "OMN",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "크렘린, 우크라이나에 숨 돌릴 틈 주는 휴전 반대…3자 회담 날짜는 미국과 조율 중",
+     "fact": "드미트리 페스코프 크렘린 대변인은 30일 러시아는 우크라이나에 숨 돌릴 틈을 주는 휴전에 반대하며 아부다비 3자 회담 전에 전투를 멈출 계획이 없다고 말했다고 타스 통신이 보도했습니다. 유리 우샤코프 대통령 보좌관은 같은 날 회담은 11월에 열리며 미국과 날짜 조율을 시작했지만 구체적인 날짜는 정해지지 않았다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://tass.com/politics/2211035",
+      "https://tass.com/politics/2211091"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "카타르 중재단, 테헤란 재방문…트럼프 \"이란 전쟁, 곧 마무리될 것\"",
+     "fact": "협상 내용을 보고받은 관계자는 30일 카타르 중재단이 미국과 조율해 미-이란 합의를 끌어내려고 테헤란을 다시 찾았다고 로이터에 말했고, 이란 고위 관리는 제안을 수용할 수 없다고 했습니다. 트럼프 대통령은 같은 날 캔자스시티 라디오 KCMO 인터뷰에서 이란 전쟁이 곧 마무리될 것이라며 핵무기를 결코 갖지 않는다는 보장이 필요하다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.arabnews.pk/middle-east/qatari-mediators-return-to-tehran-to-push-for-us-iran-deal-official-says-3005638",
+      "https://theprint.in/world/trump-on-iran-war-its-going-to-get-wrapped-up-soon/3086248/"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "테헤란(이란)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "캐나다·EU, '미래를 위한 동맹' 출범…캐나다, EU 첫 준회원 추진",
+     "fact": "마크 카니 캐나다 총리와 안토니우 코스타 유럽이사회 상임의장, 우르줄라 폰데어라이엔 집행위원장은 30일 몬트리올 정상회의에서 '미래를 위한 동맹'을 출범하고 캐나다가 EU의 첫 준회원이 되는 방안을 추진하기로 했다고 캐나다 총리실이 발표했습니다. 준회원의 내용과 범위는 앞으로 몇 달 동안 정하며, 두 쪽은 디지털 무역협정과 경쟁협정 협상을 마쳤습니다.",
+     "fc": [],
+     "src": [
+      "https://www.pm.gc.ca/en/news/news-releases/2026/10/30/canada-and-european-union-announce-new-alliance-future-create-greater",
+      "https://www.pm.gc.ca/en/news/statements/2026/10/30/joint-statement-canada-and-european-union-building-together-alliance"
+     ],
+     "loc": {
+      "lat": 45.5,
+      "lon": -73.57,
+      "place": "몬트리올(캐나다)",
+      "isos": [
+       "CAN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "애틀랜타서 G20 외교장관회의 개막…라브로프 참석, 단체 사진은 취소",
+     "fact": "마코 루비오 미 국무장관이 주재하는 주요 20개국(G20) 외교장관회의가 30일 애틀랜타에서 이틀 일정으로 열렸고, 세르게이 라브로프 러시아 외무장관이 참석했으며 왕이 중국 외교부장은 대리인을 보냈다고 AFP가 보도했습니다. 일부 유럽 당국자가 라브로프와 함께 서는 것을 꺼려 예정된 단체 사진은 취소됐습니다.",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.com/world/rubio-hosts-g20-ministers-as-iran-ukraine-wars-divide-members-3009047"
+     ],
+     "loc": {
+      "lat": 33.75,
+      "lon": -84.39,
+      "place": "애틀랜타(미국)",
+      "isos": [
+       "USA",
+       "RUS",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "미 국무부, 우크라이나에 패트리엇 PAC-3 미사일 500발 판매 승인…21억 달러 규모",
+     "fact": "미 국무부는 30일 우크라이나에 패트리엇 PAC-3 미사일 500발과 부품·지원을 약 21억 달러에 판매하는 방안을 승인했다고 밝혔습니다. 결정을 보고받은 2명은 이 미사일이 아직 생산되지 않았고 2030년대 초에야 인도될 것으로 예상된다고 말했다고 알자지라·로이터가 보도했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/31/us-greenlights-2-1bn-patriot-missile-sale-to-ukraine"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "러시아와 우크라이나 인권 옴부즈맨은 30일 국지 휴전 중인 헤르손주 올레시키에서 인도적 지원과 주민 대피를 진행했으며, 러시아 측은 휴전이 지켜졌다고 밝혔습니다.",
+     "src": [
+      "https://iz.ru/en/node/2193893"
+     ],
+     "case": "ukraine"
+    },
+    {
+     "t": "브라질 외교부는 29일 아르헨티나 대리대사를 불러 대선에서 진 플라비우 보우소나루 상원의원이 아르헨티나를 거쳐 미국으로 출국한 경위를 물었다고 로이터가 소식통을 인용해 보도했으며, 아르헨티나 외교장관은 공식 요청을 받지 않았다고 부인했습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/31/brazil-summons-argentinian-diplomat-over-bolsonaros-flight-to-us"
+     ],
+     "case": null
+    }
+   ]
+  },
+  {
    "date": "2026-10-30",
    "items": [
     {

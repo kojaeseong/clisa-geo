@@ -1,6 +1,160 @@
 {
  "issues": [
   {
+   "date": "2026-10-31",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Oman rescues 25 from burning tanker; Revolutionary Guards claim three tankers halted",
+     "fact": "Oman's Maritime Security Centre said on October 30 that its navy rescued 25 crew members from the RITI, a Panama-flagged tanker that caught fire after being attacked in the Strait of Hormuz. Iran's Revolutionary Guards claimed the same day that three tankers using unauthorized routes were halted after incidents including mine strikes; the U.S. military has denied the mine claims, and it is unclear whether the RITI is one of the three.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/30/oman-rescues-25-from-burning-oil-tanker-in-strait-of-hormuz",
+      "https://www.brecorder.com/news/40446767/oman-rescues-25-from-burning-ship-iran-halts-tankers"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "Strait of Hormuz",
+      "isos": [
+       "OMN",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Kremlin opposes truce that gives Ukraine a respite; talks date in works with U.S.",
+     "fact": "Kremlin spokesman Dmitry Peskov said on October 30 that Russia opposes a ceasefire that would give Ukraine a respite and has no plans to halt fighting before the three-way talks in Abu Dhabi, TASS reported. Presidential aide Yuri Ushakov said the same day that the talks will be held in November and that coordination on a date with Washington has begun, though no specific date has been set.",
+     "fc": [
+      {
+       "id": "f02",
+       "e": "down"
+      },
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://tass.com/politics/2211035",
+      "https://tass.com/politics/2211091"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Qatari mediators return to Tehran; Trump says Iran war will be \"wrapped up soon\"",
+     "fact": "Qatari mediators returned to Tehran on October 30 to push for a U.S.-Iran deal in coordination with Washington, an official briefed on the talks told Reuters, while a senior Iranian official called the proposals unacceptable. President Trump told Kansas City radio station KCMO the same day that the war is \"going to get wrapped up soon,\" adding, \"We need a guarantee there'll never be a nuclear weapon.\"",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.arabnews.pk/middle-east/qatari-mediators-return-to-tehran-to-push-for-us-iran-deal-official-says-3005638",
+      "https://theprint.in/world/trump-on-iran-war-its-going-to-get-wrapped-up-soon/3086248/"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "Tehran (Iran)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Canada, EU launch Alliance for the Future; Canada aims to be first EU associate member",
+     "fact": "Canadian Prime Minister Mark Carney, European Council President António Costa and European Commission President Ursula von der Leyen launched the Alliance for the Future at a summit in Montreal on October 30, with Canada working toward becoming the EU's first associate member, the prime minister's office said. The substance and scope of that status will be worked out over the coming months; the two sides also concluded negotiations on digital trade and competition agreements.",
+     "fc": [],
+     "src": [
+      "https://www.pm.gc.ca/en/news/news-releases/2026/10/30/canada-and-european-union-announce-new-alliance-future-create-greater",
+      "https://www.pm.gc.ca/en/news/statements/2026/10/30/joint-statement-canada-and-european-union-building-together-alliance"
+     ],
+     "loc": {
+      "lat": 45.5,
+      "lon": -73.57,
+      "place": "Montreal (Canada)",
+      "isos": [
+       "CAN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "G20 foreign ministers' meeting opens in Atlanta with Lavrov; group photo scrapped",
+     "fact": "A two-day G20 foreign ministers' meeting hosted by Secretary of State Marco Rubio opened in Atlanta on October 30, with Russian Foreign Minister Sergei Lavrov attending and Chinese Foreign Minister Wang Yi sending a representative, AFP reported. A planned group photo was canceled after some European officials balked at appearing alongside Lavrov.",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.com/world/rubio-hosts-g20-ministers-as-iran-ukraine-wars-divide-members-3009047"
+     ],
+     "loc": {
+      "lat": 33.75,
+      "lon": -84.39,
+      "place": "Atlanta (United States)",
+      "isos": [
+       "USA",
+       "RUS",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "State Department approves $2.1 billion sale of 500 Patriot missiles to Ukraine",
+     "fact": "The State Department said on October 30 it approved the possible sale to Ukraine of 500 Patriot PAC-3 missiles, plus parts and support, for an estimated $2.1 billion. Two people briefed on the decision said the missiles have not yet been built and are not expected to be delivered until the early 2030s, Al Jazeera and Reuters reported.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/31/us-greenlights-2-1bn-patriot-missile-sale-to-ukraine"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Russian and Ukrainian human rights ombudsmen carried out a humanitarian mission on October 30 in Oleshky, in Kherson region, under a local ceasefire, delivering aid and evacuating residents; the Russian side said the truce was observed.",
+     "src": [
+      "https://iz.ru/en/node/2193893"
+     ],
+     "case": "ukraine"
+    },
+    {
+     "t": "Brazil's Foreign Ministry summoned Argentina's chargé d'affaires on October 29 to ask how defeated presidential candidate Sen. Flávio Bolsonaro left for the U.S. via Argentina, Reuters reported, citing sources; Argentina's foreign minister denied receiving a formal request.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/31/brazil-summons-argentinian-diplomat-over-bolsonaros-flight-to-us"
+     ],
+     "case": null
+    }
+   ]
+  },
+  {
    "date": "2026-10-30",
    "items": [
     {
