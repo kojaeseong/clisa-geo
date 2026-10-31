@@ -1376,7 +1376,7 @@ function renderOverview(){
   $("#pane-overview").innerHTML = briefHomeHtml() + dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + "</p><h2 style=\"margin-top:4px\">Global Overview</h2><p class=\"meta\" style=\"margin-top:4px\">Analysis as of <span class=\"mono\">" + esc(enDate(D.meta.asof)) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? " · Latest developments checked <span class=\"mono\">" + esc(enDate(BR.issues[0].date)) + "</span>" : "") + " · " + pl(D.digest.length, "summary", "summaries") + " · " + pl(fps.length, "flashpoint") + "</p><p class=\"lead\" style=\"margin-top:8px\">Flashpoints around the world and the main currents in global affairs, as of the date above. Clisa Geopolitics’ assessments of these developments are in Strategic Analysis; the structural forces behind them are in World Order.</p>" +
     ((D.insights || []).length ? "<button type=\"button\" class=\"entry\" data-go=\"strat\">View Clisa Geopolitics’ " + pl(D.insights.length, "key assessment") + "<span aria-hidden=\"true\">→</span></button>" : "") + "</div>" +
-    "<section class=\"sec\"><h3>Situation summaries " + ttsBtn("digest") + '</h3><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+    "<section class=\"sec\"><h3>Situation summaries " + ttsBtn("digest") + "</h3><p class=\"meta\" style=\"margin:-2px 0 8px\">Updated weekly · <a href=\"/en/digest/\">Past summaries →</a></p><div class=\"digest\">" + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? "<section class=\"sec\"><h3>Ongoing discussions</h3>" + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + "Opened " + esc(enDate(t.opened)) + " · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
     "<section class=\"sec\"><h3>Flashpoints by severity</h3><ul class=\"list\">" + fps.map(fp =>
       '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(enDate(fp.last_major_event?.date || "")) + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>" +
@@ -3338,7 +3338,7 @@ function applyRoute(){
   if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
   if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
-  if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) { pageGo(enAdd(p)); return true; }
+  if (/^\/(leader|power|subscribe|digest)(\/|$)/.test(p)) { pageGo(enAdd(p)); return true; }
   if ((m = p.match(/^\/forecast\/(f\d+)\/?$/)) && D.forecasts.some(f => f.id === m[1])) { fcOpen(m[1]); return true; }  /* v4.22 */
   if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { if (m[1] === "forecast" && S.ffc) { S.ffc = null; renderForecasts(); } switchTab(m[1]); return true; }
   if (p === "/" && !location.hash) { switchTab("overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
@@ -3363,7 +3363,7 @@ function titleOf(){
   if (t === "forecast" && S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) return FCT.title(F.s || F.q) + sx; }  /* v4.22 */
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
-const isPagePath = p => { if (/^\/(leader|power|subscribe)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
+const isPagePath = p => { if (/^\/(leader|power|subscribe|digest)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
 function pageShow(p, x){
   ttsStop(); try { speechSynthesis.cancel(); } catch(e){}
   const pn = document.getElementById("pane-page"); pn.innerHTML = x.h;
@@ -3391,7 +3391,7 @@ function pageGo(url, push, after){
   }).catch(() => { if (seq === PAGE_SEQ) location.href = u.href; }).finally(() => document.documentElement.classList.remove("pg-wait"));
 }
 /* 사이트 안의 링크(a href)를 화면 안에서 옮긴다. 새 창·수정 키·다른 사이트·파일은 브라우저에 맡긴다 */
-const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|grand|ideas|method|forecast)(?:\/|$))/;
+const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|digest|grand|ideas|method|forecast)(?:\/|$))/;
 document.addEventListener("click", ev => {
   if (!ROUTES || !D || ev.defaultPrevented || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
   const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
