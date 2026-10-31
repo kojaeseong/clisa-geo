@@ -3240,7 +3240,7 @@ function footHtml(noMail){
     "<p>Clisa Geopolitics analyses are written with the help of AI (Anthropic’s Claude) and reviewed by editors.</p>" +
     "<p>Content on this site is analysis provided for informational purposes and is not investment, legal, or policy advice. Probabilistic forecasts are estimates presented together with the reasoning behind them.</p>" +
     "<p>This site has no user accounts. Email addresses and messages received as feedback are used only to reply and to correct errors, and are deleted one year after they are handled.</p>" +
-    "<p>© 2026 Jae-Seong Ko · <a href=\"/en/about/\">A Note from the Founder</a> · <a href=\"/en/subscribe/\">Subscribe</a></p>" +
+    "<p>© 2026 Jae-Seong Ko · <a href=\"/en/about/\">A Note from the Founder</a> · <a href=\"/en/subscribe/\">Subscribe</a> · <a href=\"/method/\">Site Guide</a></p>" +
     "<p>The design, text, and data compilations of Clisa Geopolitics are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Geopolitics” and the page address as the source (copying 40 or more characters of text adds the source automatically). To reproduce or redistribute all or a substantial part, please ask for permission first at <a href='mailto:clisageo@clisa.ai'>clisageo@clisa.ai</a>.</p></footer>";
 }
 function caseFbHtml(c){
