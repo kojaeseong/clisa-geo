@@ -78,9 +78,9 @@ function sfx(kind){
 }
 /* the operator's two score tracks play one after the other, alternating for as long as the game is open */
 /* 2026-10-25: 진영별 음악. 첫 곡만 진영마다 다르고(서방·소련 측·유엔) 잠수함·불안·카운트다운 세 곡은 공통. 역할을 고를 때 한 번 바뀌고, 장면 전환에는 바뀌지 않는다 */
-var BGM_COMMON=[BASE+'audio/submarine.mp3',BASE+'audio/uneasy.mp3',BASE+'audio/countdown.mp3'];
-var BGM_CAMP={jfk:'west',hm:'west',nsk:'east',pl:'east',ar:'east',fc:'east',ut:'un'};
-function bgmFor(id){ var c=BGM_CAMP[id]; return (c?[BASE+'audio/'+c+'.mp3']:[]).concat(BGM_COMMON); }
+/* 2026-11-02 (operator decision): every role plays the same two tracks, west then countdown, alternating */
+var BGM_COMMON=[BASE+'audio/west.mp3',BASE+'audio/countdown.mp3'];
+function bgmFor(id){ return BGM_COMMON.slice(); }
 var BGM=bgmFor(null), BGMVOL=.35, NOBGM=document.documentElement.getAttribute('data-bgm')==='off';
 SND.list=[]; SND.idx=0;
 /* 2026-10-25: 역할을 골라도 흐르던 곡을 끊지 않는다. 지금 곡이 끝나면 새 진영의 목록을 첫 곡부터 튼다 */
