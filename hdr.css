@@ -32,7 +32,7 @@ header.hd nav.gnav a[aria-current="page"]{color:var(--accent,#1F4FD8);font-weigh
 header.hd nav.gnav .gs{display:none}
 header.hd nav.gnav .sep{width:1px;margin:13px 8px;background:var(--line,#D2D8DE)}
 header.hd nav.gnav .bar{position:absolute;bottom:0;left:0;width:0;height:3px;border-radius:3px 3px 0 0;background:var(--accent,#1F4FD8);transition:left .4s cubic-bezier(.2,.8,.2,1),width .4s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-header.hd nav.gnav .wide-btn{display:none!important}  /* 2026-11-01 운영자 지시: 읽기 영역 넓히기 단추를 없앤다(화면 앱이 단추를 찾으므로 감춰 두고, 늘 넓게 읽기) */
+header.hd nav.gnav .wide-btn{display:none!important}  /* 2026-11-01: 읽기 영역 넓히기 단추를 없앤다(화면 앱이 단추를 찾으므로 감춰 두고, 늘 넓게 읽기) */
 header.hd .hd-strips{padding:8px 24px 10px;background:var(--bg,#E9ECEF);border-top:1px solid var(--line,#D2D8DE)}
 header.hd .strips{display:flex!important;flex-direction:row!important;gap:10px}
 header.hd .strips .bstrip{flex:1 1 0!important;width:auto!important;min-width:0;height:36px;border-radius:9px}
@@ -114,8 +114,21 @@ html[lang="en"] .pane p,html[lang="en"] .page-pre p,html[lang="en"] .page-pre li
 html[lang="en"] .pane h2,html[lang="en"] .page-pre h1,html[lang="en"] .page-pre h2{font-family:var(--serif);letter-spacing:-.01em}
 :root[data-theme="dark"]{--same:#3A4350}
 
-/* 2026-11-01 운영자 지시: 밤 화면의 파란 글씨를 더 맑은 하늘빛으로. 파란 바탕에 흰 글씨인 단추는 진한 파랑을 그대로 둔다 */
+/* 2026-11-01: 밤 화면의 파란 글씨를 더 맑은 하늘빛으로. 파란 바탕에 흰 글씨인 단추는 진한 파랑을 그대로 둔다 */
 :root[data-theme="dark"]{--accent:#82B1FF;--accent-soft:rgba(130,177,255,.15);--focus-1:#82B1FF}
 :root[data-theme="dark"] header.hd nav.gnav a[aria-current="page"]{color:#A8C8FF}
 :root[data-theme="dark"] header.hd nav.gnav .bar{background:#82B1FF}
 :root[data-theme="dark"] :is(.tts[aria-pressed="true"],.zkey .zk.b,.legend .av[aria-pressed="true"],.zonebar .zc[aria-pressed="true"],.fsoon .pb i,.prob i,.bar i::after,.fd-leg i.f,.gs-box.goal h5 i,.legend .mt[aria-pressed="true"] .sw,.tg input:checked+span::before){background:#3D6BF0;border-color:#3D6BF0}
+/* 2026-11-01 휴대전화 제호가 잘리던 것: 양옆 칸이 72px로 넓어진 만큼 제호를 줄인다 */
+@media (max-width:900px){header.hd .brand :is(h1,.bh1,b){font-size:clamp(11.5px,3.45vw,15px)!important}header.hd .brand .logo{width:clamp(17px,5vw,22px)!important;height:clamp(17px,5vw,22px)!important}}
+@media (max-width:380px){header.hd .hd-r1{grid-template-columns:64px minmax(0,1fr) 64px;gap:4px;padding:10px 10px 8px}header.hd .hd-th,header.hd .srch-open{width:30px!important;height:30px!important}header.hd .lang-sw{height:30px!important;padding:0 6px!important;font-size:12px}header.hd .brand .row{gap:4px}header.hd .brand :is(h1,.bh1,b){font-size:12px!important;letter-spacing:.03em}}
+/* 2026-11-01 밤 화면: 특집 도표(SVG)에 직접 쓴 어두운 글자·밝은 눈금선 색을 밤 색으로 */
+:root[data-theme="dark"] svg [fill="#0E1726"],:root[data-theme="dark"] svg [fill="#344054"]{fill:#E2E7EE}
+:root[data-theme="dark"] svg [fill="#475467"]{fill:#C2C9D2}
+:root[data-theme="dark"] svg [fill="#667085"]{fill:#9AA6B2}
+:root[data-theme="dark"] svg [stroke="#E3E8EF"],:root[data-theme="dark"] svg [stroke="#E4E7EC"]{stroke:#2E3641}
+:root[data-theme="dark"] svg [fill="#E3E8EF"],:root[data-theme="dark"] svg [fill="#E4E7EC"]{fill:#2E3641}
+:root[data-theme="dark"] svg [fill="#D3D8DE"]{fill:#3A4350}
+:root[data-theme="dark"] svg [fill="#98A2B3"]{fill:#7B8696}
+:root[data-theme="dark"] svg text[fill="#2a78d6"]{fill:#82B1FF}
+:root[data-theme="dark"] svg [stroke="#2a78d6"]{stroke:#82B1FF}

@@ -816,6 +816,8 @@ function caseView(id){
   if (VIEW0 && VIEW0.usf != null && usf !== S.showUsf) { setUsf(usf); renderLegend(); requestDraw(true); }
 }
 /* 지구본에 표시하는 장소·나라(일정, 권력 구조의 나라). label이 있으면 지구본 위 띠에 이름과 '표시 해제'를 보인다 */
+/* v4.58 개편 보조 스크립트(hdr.js·life2.js)가 쓰는 창구: 지구본 표시, 밤·낮 전환 때 다시 칠하기, 화면 상태 읽기 */
+window.CLISA = {markSet: m => markSet(m), recolor: () => { readColors(); requestDraw(true); }, state: () => S, data: () => D};
 function markSet(m){
   S.mark = m || null; const b = document.getElementById("markbar");
   if (b) { b.hidden = !(m && m.label); if (m && m.label) document.getElementById("markname").textContent = m.label; }
@@ -912,6 +914,7 @@ gnavFit(); addEventListener("resize", gnavFit); if (document.fonts && document.f
     if (dx) m.style.transform = "translateX(" + Math.round(dx) + "px)"; }); })();
 function switchTab(t){
   t = TAB_ALIAS[t] || t;
+  document.dispatchEvent(new CustomEvent("clisa:tab", {detail: t}));  /* v4.58 개편 ②③ 보조 스크립트용 */
   if (t !== "region" && S.zone) zoneOff();  /* v4.38 */
   if (t === "method" && typeof infoLoad === "function") { if (!S.info) S.info = "method"; setTimeout(() => { infoLoad("guide"); infoLoad("about"); }, 0); }
   if (!document.getElementById("pane-" + t)) t = "overview";
@@ -1234,7 +1237,7 @@ function renderBrief(){
   const cur = briefCur(), others = BR.issues.filter(x => x !== cur);
   /* v3.92d: 최신 호도 날짜를 골라 들어오면(지난 정보 목록, 검색, /brief/날짜/) 예전 형식 전문으로 보인다. 전문(fact)이 있는 최신 호는 지난 정보 맨 위에 둔다 */
   const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.link));
-  if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); return; }  /* v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
+  if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); document.dispatchEvent(new CustomEvent("clisa:life", {detail: el})); return; }  /* v4.58 개편 ③: life2.js가 이 신호로 국민별로 보기를 그린다 · v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
   el.innerHTML = (cur === BR.issues[0] ? '<p class="lb-back"><button type="button" class="chip" data-go="overview" data-bgo="1">← 세계 정세의 정세 브리핑</button></p>' : "") + '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
     dailyIssue(cur) + "</section>" +

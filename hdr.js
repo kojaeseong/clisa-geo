@@ -40,7 +40,7 @@
   function thLabel(){ var d = document.documentElement.dataset.theme === "dark"; if (!th) return; th.setAttribute("aria-pressed", d ? "true" : "false");
     var t = EN ? (d ? "Light mode" : "Dark mode") : (d ? "낮 화면으로 보기" : "밤 화면으로 보기"); th.title = t; th.setAttribute("aria-label", t); }
   function thSet(t){ document.documentElement.dataset.theme = t; try { localStorage.setItem("ep.theme", t); } catch (e) {}
-    thLabel(); try { if (typeof readColors === "function") { readColors(); if (typeof requestDraw === "function") requestDraw(true); } } catch (e) {} }
+    thLabel(); try { if (window.CLISA) window.CLISA.recolor(); } catch (e) {} }
   if (th) { thLabel(); th.addEventListener("click", function(){ thSet(document.documentElement.dataset.theme === "dark" ? "light" : "dark"); }); }
   /* 읽기 영역 넓히기 단추를 없앴으므로 늘 넓게 읽는다(전에 좁게 고른 방문자도) */
   try { var ap = document.querySelector(".app"); if (ap && !ap.classList.contains("wide")) { ap.classList.add("wide"); localStorage.setItem("ep.wide", "1"); dispatchEvent(new Event("resize")); } } catch (e) {}
