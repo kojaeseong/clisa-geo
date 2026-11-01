@@ -363,7 +363,7 @@ function typeOut(el,text,instant){
 }
 function head(n){
   var hypo=n.hypo||/\(가상/.test(n.title||'');
-  return '<div class="stamp"><div class="day">'+dayLabel(n.date)+'</div><div class="meta"><b>'+esc(yearOf(n.date)+T('년',''))+'</b>'+esc((n.time?' · '+n.time:'')+(n.place?' · '+n.place:''))+'</div>'+''+'</div>'+
+  return '<div class="stamp"><div class="day">'+dayLabel(n.date)+'</div><div class="meta"><b>'+esc((yearOf(n.date)||'1962')+T('년',''))+'</b>'+esc((n.time?' · '+n.time:'')+(n.place?' · '+n.place:''))+'</div>'+''+'</div>'+
    '<h2 class="scene-title">'+tx(n.title)+'</h2>'+(n.clock?'<div class="clock">'+esc(n.clock)+'</div>':'');
 }
 /* a scene is shown in pages: what happened meanwhile → the room and the voices → the decision */
@@ -496,6 +496,8 @@ function ending(nx,p0,quiet){
    {tab:T('결말','Ending'),h:'<div class="end-k"><span>'+T('결말 ','Ending ')+esc(k)+'</span><span>'+esc(C.ep)+'</span></div><h2 class="end-t">'+esc(E.title)+'</h2>'+
      '<div class="end-hypo">'+(E.hypo?T('당신이 만든 1962년 · 가상의 역사','Your 1962 · an alternate history'):T('실제로 일어난 역사','What really happened'))+'</div>'+
      '<div class="paper prose"><p>'+tx(E.text)+'</p>'+(ep?'<p>'+tx(ep)+'</p>':'')+'</div>'},
+   /* 2026-11-02 escalation ladder: what the records of the time say about the war this ending imagines */
+   (E.after?{tab:T('그 뒤의 일','What came next'),h:'<div class="sec"><h3>'+T('그 뒤의 일','What came next')+'</h3><p class="lead">'+T('이 결말은 가상의 역사입니다. 아래의 숫자는 모두 당시의 문서에 남아 있는 것입니다.','This ending is an alternate history. Every number below comes from the records of the time.')+'</p><div class="paper prose"><p>'+tx(E.after.text)+'</p></div>'+(E.after.src?'<p class="foot">'+T('출처: ','Sources: ')+esc(E.after.src)+'</p>':'')+'</div>'}:null),
    /* 2026-10-25 현장의 안개: 게임 중에는 감춘 바깥 사정을 결말에서 결정마다 드러낸다 */
    (S.hist.some(function(x){return x.unknown;})?{tab:T('그때 몰랐던 것','What you did not know'),h:'<div class="sec"><h3>'+T('그때 당신이 몰랐던 것','What you did not know at the time')+'</h3><p class="lead">'+T('당신이 결정을 내리던 바로 그 시각, 당신이 볼 수 없던 곳에서 벌어지던 일입니다.','At the very hour of each decision, this is what was happening where you could not see.')+'</p>'+
      S.hist.filter(function(x){return x.unknown;}).map(function(x){ return '<div class="kin"><b>'+esc(dayLabel(x.date))+' · '+esc(x.title)+'</b><br><span>'+T('당신의 결정: ','Your decision: ')+esc(x.text)+'</span><p>'+tx(x.unknown)+'</p></div>'; }).join('')+'</div>'}:null),
