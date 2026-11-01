@@ -1,0 +1,25 @@
+/* 밤 화면: 아카데미와 게임 소개 쪽(2026-11-01 운영자 결정). 한 곳에서 고른 낮·밤이 사이트 전체에 이어진다(localStorage ep.theme). 색은 지오폴리틱스 밤 화면(hdr.css)과 같다 */
+:root[data-theme="dark"]{--bg:#0D1116;--panel:#151A21;--panel-2:#1C222A;--ink:#E7EBF0;--ink-2:#C2C9D2;--muted:#8A95A2;--line:#2A323C;
+ --accent:#82B1FF;--accent-soft:rgba(130,177,255,.15);--coop:#2FBF96;--conflict:#FF6B5B;color-scheme:dark}
+:root[data-theme="dark"] body{background:var(--bg);color:var(--ink)}
+:root[data-theme="dark"] .btn:not(.ghost){background:#3D6BF0;color:#fff}
+:root[data-theme="dark"] .ac-top{background:var(--panel);border-color:var(--line)}
+.ac-th{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;padding:0;border:1px solid var(--line,#D2D8DE);border-radius:999px;background:var(--panel,#fff);color:var(--ink-2,#2F3842);cursor:pointer}
+.ac-th:hover{border-color:var(--accent);color:var(--accent)}
+.ac-th svg{width:16px;height:16px}
+.ac-th .i-sun{display:none}:root[data-theme="dark"] .ac-th .i-moon{display:none}:root[data-theme="dark"] .ac-th .i-sun{display:block}
+@media(max-width:600px){.ac-th{width:32px;height:32px}}
+:root[data-theme="dark"] .asw{background:#222A33;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)}
+:root[data-theme="dark"] .asw a{color:var(--ink-2)}:root[data-theme="dark"] .asw a:hover{color:#fff}:root[data-theme="dark"] .asw a.on{color:#fff}
+:root[data-theme="dark"] .lang-sw{background:var(--panel);color:var(--ink-2);border-color:var(--line)}
+.ac-top .ac-tbrand+.ac-tside{margin-left:auto}  /* 게임 소개 쪽: 영역 전환·밤 화면·언어 단추를 오른쪽 끝으로(2026-11-01 운영자 지시, 지오폴리틱스·아카데미와 같게) */
+/* 아카데미 본문의 고정 색(밝은 화면 기준)을 밤 화면에서 바꾼다. 그림(figure.afig)은 흰 바탕과 밝은 화면 색을 그대로 둔다 */
+:root[data-theme="dark"] figure.afig{--bg:#fff;--panel:#fff;--panel-2:#F2F4F6;--ink:#101418;--ink-2:#2F3842;--muted:#6B7580;--line:#D2D8DE;--accent:#1F4FD8;--accent-soft:rgba(31,79,216,.09);--coop:#0E8A6C;--conflict:#D63A1F;color:#101418;color-scheme:light}
+:root[data-theme="dark"] .ac-sw{background:var(--panel);border-color:var(--line);color:var(--ink)}
+:root[data-theme="dark"] .ac-sw small{color:var(--muted)}
+:root[data-theme="dark"] .ac-sw-ic{background:rgba(130,177,255,.15);color:#82B1FF}
+:root[data-theme="dark"] .ac-sw:hover{border-color:#82B1FF}
+:root[data-theme="dark"] .note-art h3,:root[data-theme="dark"] details.ac-sol>summary{color:#A9C4FF}
+:root[data-theme="dark"] details.ac-sol{background:var(--panel-2)}
+:root[data-theme="dark"] .speaking{background:rgba(130,177,255,.14);box-shadow:0 0 0 5px rgba(130,177,255,.14)}
+:root[data-theme="dark"] .gmore-m{box-shadow:0 8px 24px rgba(0,0,0,.5)}

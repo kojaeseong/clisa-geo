@@ -42,6 +42,7 @@
   function thSet(t){ document.documentElement.dataset.theme = t; try { localStorage.setItem("ep.theme", t); } catch (e) {}
     thLabel(); try { if (window.CLISA) window.CLISA.recolor(); } catch (e) {} }
   if (th) { thLabel(); th.addEventListener("click", function(){ thSet(document.documentElement.dataset.theme === "dark" ? "light" : "dark"); }); }
+  addEventListener("storage", function(e){ if (e.key === "ep.theme" && e.newValue) { document.documentElement.dataset.theme = e.newValue; thLabel(); try { if (window.CLISA) window.CLISA.recolor(); } catch (x) {} } });  /* 아카데미·게임 소개 쪽 등 다른 탭에서 바꾸면 이 탭도(2026-11-01) */
   /* 읽기 영역 넓히기 단추를 없앴으므로 늘 넓게 읽는다(전에 좁게 고른 방문자도) */
   try { var ap = document.querySelector(".app"); if (ap && !ap.classList.contains("wide")) { ap.classList.add("wide"); localStorage.setItem("ep.wide", "1"); dispatchEvent(new Event("resize")); } } catch (e) {}
   function all(){ place(); knobs(); CL.forEach(build); }
