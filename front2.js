@@ -1,0 +1,205 @@
+/* 개편 ② 첫 화면 = 전망으로 보기(2026-11-01, 시안 4c). front1101.py가 붙인다. 화면 앱이 세계 정세 화면을 그리면(clisa:overview) 그 자리에 그린다 */
+(function(){
+  "use strict";
+  var EN = document.documentElement.lang === "en", P = EN ? "/en" : "", FD = null, EL = null;
+  var T = EN ? {
+    vt: ["By Forecast", "By Population"], h: "What could happen, and whose lives would it change—and how?",
+    sub: "For each forecast with a resolution date, the cards show how the safety and incomes of five populations would change if the scenario linked to it came about.",
+    nl: "Latest briefings · Select one to see forecasts on that issue",
+    ver: "Track record", verGo: "Forecasts and Track Record →",
+    verT: function(n, h, m){ var w = function(k){ return k < 10 ? ["no","one","two","three","four","five","six","seven","eight","nine"][k] : String(k); };
+      return n === 1 ? "One forecast has resolved so far, and it was " + (h ? "right." : m ? "wrong." : "neither right nor wrong.") : "Of " + w(n) + " resolved forecasts, " + w(h) + (h === 1 ? " was" : " were") + " right" + (m ? " and " + w(m) + " wrong" : "") + "."; },
+    verL: function(s, p, st){ return " Latest result: “" + s + "” (forecast: " + p + " percent) resolved " + (st === "yes" ? "yes" : "no") + ". "; },
+    brier: function(b){ return " Brier score to date: " + b + " (0 is perfect; forecasting 50 percent every time scores 0.25)."; },
+    list: "What could happen",
+    tabs: ["Effects on People", "Testing Strategic Choices", "Other Forecasts"],
+    flt0: "Sorted by resolution date. Gray cells mean life stays about the same for that population.",
+    fltP: "The forecast you selected is at the top; the rest are sorted by resolution date.",
+    fltC: function(c){ return "Showing only forecasts on " + c + ". "; }, all: "Show all",
+    more: function(n){ return "Show " + n + " more"; },
+    etc: "Other issues", due: function(d){ return "Resolves " + d; }, left: function(n){ return n === 1 ? "1 day left" : n + " days left"; }, today: "Resolves today", late: "Result pending",
+    ifR: "If this happens,", same: function(n){ return " the “" + n + "” scenario comes about"; }, up: function(n){ return " the “" + n + "” scenario becomes more likely"; },
+    dn: function(n){ return " the “" + n + "” scenario becomes less likely"; }, also: " · also: ", away: " (less likely)",
+    strat: "The assessment this forecast tests", none: "This forecast falls outside the five issues covered in Strategic Analysis, so its effects on people have not been calculated yet.",
+    noneC: "This forecast is not yet linked to a scenario in the issue analysis, so its effects on people have not been calculated.",
+    pplL: "If that scenario comes about", pplD: "If that scenario comes about (less likely if this happens)", note: function(n){ return " · values for " + n; },
+    na: "Not calculated", sim: "About the same", balt: " (Baltic states only)",
+    GS: {KOR: "South Korea", USA: "United States", NEU: "Nordic and Baltic", SEU: "Southern Europe", WCEU: "Western and Central Europe"},
+    CN: {"개인": "Personal safety", "공동체": "Community", "정치": "Politics", "경제": "Economy"},
+    hist: function(H, d){ return "Probability " + H + " · resolves " + d; }, scLab: function(c){ return "Scenarios and probabilities: " + c; },
+    rel: {same: "same event as this forecast", "+": "more likely if this happens", "-": "less likely if this happens"},
+    fcGo: "Forecast details →", caseGo: function(c){ return "Full analysis: " + c + " →"; },
+    mk: function(s){ return s + " · populations affected"; },
+    ents: "Play and Read", game: "Game", feat: "Feature", g62: "The Cuban Missile Crisis", g14: "The July Crisis",
+    snd: ["Turn sound on", "Turn sound off"],
+    foot: "Clisa Geopolitics analyses are written with the help of AI (Anthropic’s Claude) and reviewed by editors. The effects on each card come from the human security estimates for the linked scenario. For the sudden-upheaval scenario on the Korean Peninsula, the cards use its most likely branch, a localized clash. For the Russia-NATO standoff, the Nordic and Baltic cell uses figures for the three Baltic states.",
+    mon: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+  } : {
+    vt: ["전망으로 보기", "국민별로 보기"], h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
+    sub: "결과 확인 날짜가 정해진 전망마다, 그 일이 실제 발생하면 한국·미국과 유럽 3개 지역 국민의 안전과 소득이 어떻게 달라지는지 함께 보여 드립니다.",
+    nl: "최근 정세 브리핑 · 누르면 그 사안의 전망만 봅니다",
+    ver: "검증", verGo: "전망 검증 →",
+    verT: function(n, h, m){ return "결과가 나온 전망 " + n + "개 가운데 적중 " + h + "개" + (m ? ", 빗나감 " + m + "개" : "") + "."; },
+    verL: function(s, p){ return " 가장 최근 결과는 " + s + "(점수에 쓰인 확률 " + p + "%)로, "; },
+    brier: function(b){ return " 기간 평균 브라이어 점수 " + b + "."; },
+    list: "일어날 수 있는 일",
+    tabs: ["국민 생활과 연결된 전망", "정책 판단을 검증하는 전망", "그 밖의 전망"],
+    flt0: "검증 날짜가 가까운 순서입니다. 회색 칸은 그 국민의 삶이 현재와 비슷하다는 뜻입니다.",
+    fltP: "고른 전망을 맨 위로 올렸습니다. 나머지는 검증 날짜가 가까운 순서입니다.",
+    fltC: function(c){ return c + " 사안의 전망만 보고 있습니다. "; }, all: "모두 보기",
+    more: function(n){ return n + "건 더 보기"; },
+    etc: "기타 사안", due: function(d){ return "검증 " + d; }, left: function(n){ return n + "일 남음"; }, today: "오늘 검증", late: "결과 확인 중",
+    ifR: "이 일이 발생하면", same: function(n){ return "이 일은 <b>‘" + n + "’</b> 전개에 해당합니다"; }, up: function(n){ return " <b>‘" + n + "’</b> 전개의 가능성이 커집니다"; },
+    dn: function(n){ return " <b>‘" + n + "’</b> 전개의 가능성이 줄어듭니다"; }, also: " · 그 밖에 ", away: "(가능성 줄어듦)",
+    strat: "이 전망으로 검증하는 판단", none: "5개 사안 분석에 포함되지 않은 전망이어서, 국민 생활에 대한 영향은 아직 계산하지 않았습니다.",
+    noneC: "사안 분석의 전개 시나리오와 아직 연결하지 않은 전망이어서, 국민 생활에 대한 영향은 계산하지 않았습니다.",
+    pplL: "그 전개가 현실이 되면", pplD: "그 전개가 현실이 될 때의 영향(이 일이 발생하면 가능성이 줄어듦)", note: function(n){ return " · " + n + " 값"; },
+    na: "계산 없음", sim: "현재와 비슷함", balt: " (발트 3국)",
+    GS: {KOR: "한국", USA: "미국", NEU: "북유럽·발트", SEU: "남유럽", WCEU: "서유럽·중유럽"},
+    CN: {"개인": "개인 안전", "공동체": "공동체", "정치": "정치", "경제": "경제"},
+    hist: function(H, d){ return "확률 " + H + " · 검증 " + d; }, scLab: function(c){ return c + " 사안의 전개와 확률"; },
+    rel: {same: "이 전망과 같은 사건", "+": "가능성 커짐", "-": "가능성 줄어듦"},
+    fcGo: "전망 자세히 보기 →", caseGo: function(c){ return c + " 사안 분석 전문 보기 →"; },
+    mk: function(s){ return s + " · 영향을 받는 국민"; },
+    ents: "직접 겪어 보기", game: "게임", feat: "특집", g62: "쿠바 미사일 위기", g14: "1914년 7월 위기",
+    snd: ["소리 켜기", "소리 끄기"],
+    foot: "클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다. 카드의 국민별 변화는 연결된 전개 시나리오에 대한 인간 안보 계산 결과입니다. 한반도 급변 전개는 하위 전개 가운데 가장 가능성이 높은 국지 충돌 값을, 러시아-NATO 사안의 북유럽·발트 칸은 발트 3국 값을 씁니다."
+  };
+  var COL = {same: "#1F4FD8", "+": "#D63A1F", "-": "#0E8A6C", strat: "#7A3FB8", none: "#6B7580"};
+  var ISOS = {KOR: ["KOR"], USA: ["USA"], NEU: ["DNK","FIN","ISL","NOR","SWE","EST","LVA","LTU"], BALT: ["EST","LVA","LTU"], SEU: ["ITA","ESP","PRT","GRC"], WCEU: ["DEU","FRA","GBR","POL"]};
+  var RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var h = function(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); };
+  var todayIso = function(){ return new Date(Date.now() + 9 * 36e5).toISOString().slice(0, 10); };
+  var days = function(d){ return Math.round((Date.parse(d + "T00:00:00Z") - Date.parse(todayIso() + "T00:00:00Z")) / 864e5); };
+  var md = function(d){ return EN ? T.mon[+d.slice(5, 7) - 1] + " " + (+d.slice(8)) : (+d.slice(5, 7)) + "월 " + (+d.slice(8)) + "일"; };
+  var ymd = function(d){ return EN ? md(d) + ", " + d.slice(0, 4) : d.slice(0, 4) + "년 " + md(d); };
+  var L = function(o, k){ return EN ? (o[k + "e"] != null ? o[k + "e"] : o[k]) : o[k]; };
+  /* 소리(기본은 끔. 켜면 전망을 고를 때 짧은 소리가 난다) */
+  var AC = null, SND = false; try { SND = localStorage.getItem("ep.snd") === "on"; } catch (e) {}
+  function thunk(){ if (!SND) return; try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); var c = AC, t = c.currentTime;
+    var o = c.createOscillator(), g = c.createGain(); o.type = "sine"; o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .18);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.45, t + .008); g.gain.exponentialRampToValueAtTime(.0001, t + .26); o.connect(g).connect(c.destination); o.start(t); o.stop(t + .3); } catch (e) {} }
+  /* 전망 → 이어진 전개(같은 사건이 먼저, 그다음 신호) */
+  var prim = function(f){ return f.links.filter(function(l){ return l.rel === "same"; })[0] || f.links.filter(function(l){ return l.rel === "+"; })[0] || f.links[0]; };
+  var scOf = function(f){ var l = f.case && prim(f); return l ? FD.cases[f.case].sc[l.sc] : null; };
+  var colOf = function(f){ return COL[f.kind === "same" ? "same" : f.kind === "sig" ? prim(f).rel : f.kind]; };
+  var hitG = function(f){ var S = scOf(f); return S ? FD.groups.filter(function(g){ var I = S.imp[g.k]; return I && I.vals.length; }) : []; };
+  var TABS = [["ppl", function(f){ return f.kind === "same" || f.kind === "sig"; }], ["strat", function(f){ return f.kind === "strat"; }], ["none", function(f){ return f.kind === "none"; }]];
+  var ALL = [], TAB = "ppl", CF = null, SEL = null, N = 15, marked = false;
+  function caseName(f){ return f.case ? L(FD.cases[f.case], "t") : (f.ct ? L(f, "ct") : T.etc); }
+  function then(f){
+    if (f.kind === "strat") return '<div class="f2-concl"><b>' + T.strat + "</b> · " + h(L(f, "concl")) + "</div>";
+    if (f.kind === "none") return '<p class="f2-then">' + (f.case ? T.noneC : T.none) + "</p>";
+    var C = FD.cases[f.case], l = prim(f), S = C.sc[l.sc], n = h(L(S, "n"));
+    var v = l.rel === "same" ? T.same(n) : l.rel === "+" ? T.up(n) : T.dn(n);
+    var more = f.links.filter(function(x){ return x !== l; }).map(function(x){ return L(C.sc[x.sc], "n") + (x.rel === "-" ? T.away : ""); });
+    return '<p class="f2-then">' + (l.rel === "same" && !EN ? "" : '<span class="ar">' + T.ifR + "</span>") + v + (more.length ? h(T.also + more.join(", ")) : "") + (EN ? "." : "") + "</p>";
+  }
+  function ppl(f){
+    var S = scOf(f); if (!S) return "";
+    var l = prim(f), C = FD.cases[f.case];
+    return '<p class="f2-ml">' + (l.rel === "-" ? T.pplD : T.pplL) + (S.note ? h(T.note(L(S, "note"))) : "") + '</p><div class="f2-ppl">' + FD.groups.map(function(g){
+      var I = S.imp[g.k], nm = T.GS[g.k];
+      if (!I || I.na) return '<div class="f2-pg"><b>' + nm + '</b><span class="z">' + T.na + "</span></div>";
+      if (!I.vals.length) return '<div class="f2-pg"><b>' + nm + '</b><span class="z">' + T.sim + "</span></div>";
+      var m = Math.min.apply(null, I.vals.map(function(v){ return v.d == null ? 0 : v.d; }));
+      return '<div class="f2-pg ' + (m <= -20 ? "hit2" : m > 0 ? "good" : "hit") + '"><b>' + nm + (I.gk !== g.k ? T.balt : "") + "</b>" +
+        I.vals.map(function(v){ var r = EN ? String(v.rawe).replace(/(^|[\s(])-(?=\d)/g, "$1\u2212") : v.raw; return EN && v.c === "경제" && /^Income/.test(r) ? h(r) : "<em>" + h(T.CN[v.c]) + "</em>" + (EN ? ": " : " ") + h(r); }).join("<br>") + "</div>";
+    }).join("") + "</div>" + (/기준/.test(C.split) ? '<p class="f2-ml f2-split">' + h(L(C, "split")) + "</p>" : "");
+  }
+  function det(f){
+    var C = f.case ? FD.cases[f.case] : null, lk = {};
+    f.links.forEach(function(l){ lk[l.sc] = l.rel; });
+    var H = f.h.length ? f.h.map(function(x){ return x[1] + "%"; }).join(" → ") : f.p + "%";
+    var o = '<div class="f2-det"><p class="f2-q">' + h(L(f, "q")) + '</p><p class="f2-hist">' + h(T.hist(H, ymd(f.due))) + "</p>";
+    if (C) o += '<p class="f2-lab">' + h(T.scLab(L(C, "t"))) + '</p><div class="f2-bar">' + C.order.map(function(id){ var s = C.sc[id]; return '<div class="' + (lk[id] ? "on" : "") + '" style="flex:' + Math.max(s.p, 1) + '">' + (s.p >= 6 ? s.p + "%" : "") + "</div>"; }).join("") +
+      '</div><ul class="f2-scl">' + C.order.map(function(id){ var s = C.sc[id], r = lk[id]; return '<li class="' + (r ? "on" : "") + '">' + h(L(s, "n")) + " " + s.p + "%" + (r ? " · " + T.rel[r] : "") + "</li>"; }).join("") + "</ul>";
+    o += '<p class="f2-go"><a href="' + P + "/forecast/" + h(f.id) + '/">' + T.fcGo + "</a>" + (C ? '<a href="' + P + "/case/" + h(f.case) + '/">' + h(T.caseGo(L(C, "t"))) + "</a>" : "") + "</p></div>";
+    return o;
+  }
+  function card(f){
+    var n = days(f.due), on = f === SEL;
+    return '<article class="f2-ev' + (on ? " on" : "") + '" style="--c:' + colOf(f) + '" data-f2="' + h(f.id) + '" tabindex="0" role="button" aria-expanded="' + on + '">' +
+      '<p class="f2-meta"><b>' + h(caseName(f)) + "</b> · " + h(T.due(ymd(f.due))) + " · " + (n > 0 ? T.left(n) : n === 0 ? T.today : T.late) + "</p>" +
+      '<div class="f2-eh"><h4>' + h(L(f, "s")) + '</h4><span class="f2-pp">' + f.p + "%</span></div>" + then(f) + ppl(f) + (on ? det(f) : "") + "</article>";
+  }
+  function list(){ var t = TABS.filter(function(x){ return x[0] === TAB; })[0]; var R = ALL.filter(t[1]).filter(function(f){ return !CF || f.case === CF; });
+    if (SEL && R.indexOf(SEL) >= 0) R = [SEL].concat(R.filter(function(f){ return f !== SEL; })); return R; }
+  function verHtml(){
+    var A = null, R; try { A = window.CLISA; R = A.data().forecasts.filter(function(f){ return f.status === "yes" || f.status === "no"; }); } catch (e) { return ""; }
+    if (!R.length || !A.fcRes) return "";
+    var X = R.map(function(f){ return [f, A.fcRes(f)]; }), hit = X.filter(function(x){ return x[1].r === "hit"; }).length, miss = X.filter(function(x){ return x[1].r === "miss"; }).length;
+    var B = X.map(function(x){ return x[1].b; }).filter(function(b){ return b != null; }), b = B.length ? (B.reduce(function(a, c){ return a + c; }, 0) / B.length).toFixed(2) : null;
+    var last = X.slice().sort(function(a, c){ return String(c[0].resolved || c[0].due).localeCompare(String(a[0].resolved || a[0].due)); })[0];
+    var oc = String(last[0].outcome || ""), om = /^.*?[.\u3002](?=\s|$)/.exec(oc); if (om) oc = om[0];
+    return '<a class="f2-ver" href="' + P + '/forecast/"><span class="f2-vn">' + hit + "<small>/" + R.length + '</small></span><span class="f2-vx"><b>' + T.ver + "</b> · " + h(T.verT(R.length, hit, miss)) +
+      h(T.verL(last[0].s || last[0].q, last[1].pz, last[0].status)) + h(oc) + (b ? h(T.brier(b)) : "") + '</span><span class="f2-vg">' + T.verGo + "</span></a>";
+  }
+  function entsHtml(){
+    var E = [[T.game + " · 1962", T.g62, P + "/play/1962/"], [T.game + " · 1914", T.g14, P + "/play/1914/"]].concat(FD.feats.map(function(x){ return [T.feat + " · " + md(x.d), L(x, "t"), P + "/feature/" + x.id + "/"]; }));
+    return '<section class="sec f2-ents"><h3>' + T.ents + "</h3>" + E.map(function(e){ return '<a href="' + h(e[2]) + '"><span>' + h(e[0]) + "</span>" + h(e[1]) + "</a>"; }).join("") + "</section>";
+  }
+  function draw(el){
+    EL = el;
+    ALL = FD.fcs.slice().sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; });
+    var ft = el.querySelector(":scope > .site-foot");  /* 화면 앱이 붙인 바닥글은 그대로 둔다 */
+    el.innerHTML = '<div class="f2"><section class="f2-who"><nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a class="on" href="' + P + '/" aria-current="page">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + "</a></nav>" +
+      "<h2>" + h(T.h) + '</h2><p class="f2-sub">' + h(T.sub) + '</p><p class="f2-nl">' + h(T.nl) + '</p><div class="f2-news" id="f2news"></div></section>' + verHtml() +
+      '<section class="sec f2-list"><div class="f2-lh"><h3>' + T.list + '</h3><button type="button" class="f2-snd" id="f2snd" aria-pressed="' + SND + '">' + T.snd[SND ? 1 : 0] + '</button></div><div class="f2-tabs" id="f2tabs" role="tablist"></div><p class="f2-flt" id="f2flt"></p><div id="f2list"></div></section>' +
+      entsHtml() + '<p class="note">' + h(T.foot) + "</p></div>";
+    if (ft) el.appendChild(ft);
+    news(); rows(false);
+  }
+  function news(){ var w = EL.querySelector("#f2news"); if (!w) return;
+    w.innerHTML = FD.news.map(function(n){ return '<button type="button" class="f2-nw' + (CF === n.case ? " on" : "") + '" data-f2c="' + h(n.case) + '"><small>' + h(md(n.d)) + " · " + h(L(FD.cases[n.case], "t")) + "</small>" + h(L(n, "h")) + "</button>"; }).join(""); }
+  function rows(animate){
+    var before = {}; if (animate && !RM) EL.querySelectorAll(".f2-ev").forEach(function(e){ before[e.dataset.f2] = e.getBoundingClientRect().top; });
+    EL.querySelector("#f2tabs").innerHTML = TABS.map(function(t, i){ return '<button type="button" role="tab" aria-selected="' + (t[0] === TAB) + '" class="' + (t[0] === TAB ? "on" : "") + '" data-f2t="' + t[0] + '">' + T.tabs[i] + " <span>" + ALL.filter(t[1]).length + "</span></button>"; }).join("");
+    EL.querySelector("#f2flt").innerHTML = CF ? h(T.fltC(L(FD.cases[CF], "t"))) + '<button type="button" data-f2clr="1">' + T.all + "</button>" : SEL ? T.fltP : T.flt0;
+    var R = list(), k = Math.max(N, SEL ? 1 : 0);
+    EL.querySelector("#f2list").innerHTML = R.slice(0, k).map(card).join("") + (R.length > k ? '<button type="button" class="f2-more" data-f2m="1">' + T.more(R.length - k) + "</button>" : "");
+    if (animate && !RM) EL.querySelectorAll(".f2-ev").forEach(function(e){ var b = before[e.dataset.f2], a = e.getBoundingClientRect().top;
+      if (b === undefined) { e.animate([{opacity: 0, transform: "translateY(10px)"}, {opacity: 1, transform: "none"}], {duration: 300}); return; }
+      if (Math.abs(b - a) > 1) e.animate([{transform: "translateY(" + (b - a) + "px)"}, {transform: "none"}], {duration: 480, easing: "cubic-bezier(.2,.8,.2,1)"}); });
+    if (animate && !RM && SEL) { var d = EL.querySelector(".f2-ev.on .f2-det"); if (d) { d.animate([{opacity: 0, transform: "translateY(-4px)"}, {opacity: 1, transform: "none"}], {duration: 320, easing: "ease-out"});
+      d.querySelectorAll(".f2-bar div").forEach(function(x, j){ x.animate([{transform: "scaleX(0)"}, {transform: "scaleX(1)"}], {duration: 460, delay: 120 + j * 50, easing: "cubic-bezier(.2,.8,.2,1)", fill: "backwards"}); }); } }
+  }
+  function focus(f){
+    var A = window.CLISA; if (!A || !A.focus) return;
+    if (!f) { if (marked) { marked = false; try { A.focus(null); } catch (e) {} } return; }
+    var HG = hitG(f), C = f.case ? FD.cases[f.case] : null;
+    try {
+      if (HG.length && C && C.ll) {
+        var I = []; HG.forEach(function(g){ var gk = scOf(f).imp[g.k].gk; (ISOS[gk] || ISOS[g.k]).forEach(function(x){ if (I.indexOf(x) < 0) I.push(x); }); });
+        A.focus({c: C.ll, k: 1.1, isos: I, label: T.mk(L(f, "s")), lon: C.ll[0], lat: C.ll[1], place: caseName(f)});  /* 사건이 일어나는 곳을 가운데에 두고, 영향이 가는 국민의 나라를 칠한다 */
+      } else A.focus({isos: f.isos, label: L(f, "s")});
+      marked = true;
+    } catch (e) {}
+  }
+  function choose(f){
+    if (!f) return;
+    if (SEL === f) { SEL = null; rows(true); focus(null); return; }
+    SEL = f; thunk(); rows(true); focus(f);
+    var c = EL.querySelector(".f2-list"); if (c && c.getBoundingClientRect().top < 0) c.scrollIntoView({block: "start", behavior: RM ? "auto" : "smooth"});
+  }
+  document.addEventListener("click", function(ev){
+    if (!EL || !EL.contains(ev.target)) return;
+    var t;
+    if ((t = ev.target.closest("[data-f2t]"))) { TAB = t.dataset.f2t; CF = null; SEL = null; N = 15; rows(true); focus(null); return; }
+    if ((t = ev.target.closest("[data-f2c]"))) { var c = t.dataset.f2c; TAB = "ppl"; N = 15;
+      if (CF === c) { CF = null; SEL = null; news(); rows(true); focus(null); return; }
+      CF = c; SEL = null; news(); choose(list()[0]); return; }
+    if (ev.target.closest("[data-f2clr]")) { CF = null; SEL = null; news(); rows(true); focus(null); return; }
+    if (ev.target.closest("[data-f2m]")) { N += 30; rows(false); return; }
+    if ((t = ev.target.closest("#f2snd"))) { SND = !SND; try { localStorage.setItem("ep.snd", SND ? "on" : "off"); } catch (e) {} t.textContent = T.snd[SND ? 1 : 0]; t.setAttribute("aria-pressed", SND); thunk(); return; }
+    if (ev.target.closest("a")) return;
+    if ((t = ev.target.closest("[data-f2]"))) { var id = t.dataset.f2; choose(ALL.filter(function(f){ return f.id === id; })[0]); }
+  });
+  document.addEventListener("keydown", function(ev){ if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches(".f2-ev")) { ev.preventDefault(); ev.target.click(); } });
+  var loading = false;
+  function go(el){ if (!el) return; if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
+    fetch(P + "/data/front.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(d){ FD = d; draw(document.getElementById("pane-overview") || el); }).catch(function(){ loading = false; }); }
+  document.addEventListener("clisa:overview", function(ev){ go(ev.detail); });
+  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "overview") focus(null); else if (SEL && FD) focus(SEL); });
+  var po = document.getElementById("pane-overview"); if (po && po.children.length && !po.querySelector(".f2")) go(po);
+})();

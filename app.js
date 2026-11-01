@@ -121,7 +121,7 @@ function srBuild(){
   (((D.methodology || {}).terms) || []).forEach(t => add("분석 방법", Array.isArray(t) ? t[0] : t.t, t, toPane("method")));
   /* v3.52 사이트 메뉴와 글 쪽(운영자 인사말·새 글 알림·사이트 안내), 결정권자 쪽, 특집의 절 */
   const page = u => () => { pageGo(u, true); return "pane-page"; };
-  [["정세 브리핑", "오늘 브리핑 최신 소식 뉴스 아침 매일 주요 사건 동향 정세브리핑", () => { goBrief(); return "pane-brief"; }],
+  [["정세 브리핑", "오늘 브리핑 최신 소식 뉴스 아침 매일 주요 사건 동향 정세브리핑", () => { goBrief("latest"); return "pane-brief"; }],
    ["특집", "특집 기사 깊이 있는 글 주제", () => { switchTab("feature"); return "pane-feature"; }],
    ["세계 정세", "세계 정세 지구본 지도 정세 요약 다가오는 일정 분쟁지 나라", toPane("overview")],
    ["전략 분석", "전략 분석 사안 한반도 대만해협 러-우 전쟁 이란 호르무즈 반도체 판단 시나리오", toPane("strat")],
@@ -817,7 +817,10 @@ function caseView(id){
 }
 /* 지구본에 표시하는 장소·나라(일정, 권력 구조의 나라). label이 있으면 지구본 위 띠에 이름과 '표시 해제'를 보인다 */
 /* v4.58 개편 보조 스크립트(hdr.js·life2.js)가 쓰는 창구: 지구본 표시, 밤·낮 전환 때 다시 칠하기, 화면 상태 읽기 */
-window.CLISA = {markSet: m => markSet(m), recolor: () => { readColors(); requestDraw(true); }, state: () => S, data: () => D};
+window.CLISA = {markSet: m => markSet(m), recolor: () => { readColors(); requestDraw(true); }, state: () => S, data: () => D,
+  /* v4.59 개편 ②: 전망으로 보기(front2.js)가 지구본을 옮기고, 결과가 나온 전망의 적중 여부와 점수를 화면 앱과 같은 계산으로 받는다 */
+  focus: m => { if (!m) { markSet(null); return; } if (m.c) viewGo(m.c[0], m.c[1], m.k || 1, true); else { const v = isoView(m.isos || []); if (v) viewGo(v[0], v[1], v[2], true); } markSet({isos: m.isos || [], label: m.label || "", lon: m.lon, lat: m.lat, place: m.place}); },
+  fcRes: f => { const hm = fcHM(f), z = fcFz(f), e = fcEnd(f); return {r: hm === FCT.hit ? "hit" : hm === FCT.miss ? "miss" : hm === FCT.half ? "half" : "void", b: f.status === "void" ? null : fcBrierT(f, f.status === "yes" ? 1 : 0), pz: fcPAt(f, e < z ? e : z)}; }};
 function markSet(m){
   S.mark = m || null; const b = document.getElementById("markbar");
   if (b) { b.hidden = !(m && m.label); if (m && m.label) document.getElementById("markname").textContent = m.label; }
@@ -894,7 +897,7 @@ function selectFp(id, fromMap){
 }
 /* v3.42 사이트 메뉴의 현재 위치 표시(사안 화면·나라 화면은 '세계 정세'·'전략 분석' 아래로 본다) */
 function navMark(t){
-  const k = t === "detail" || t === "region" || (t === "brief" && S.bdate) ? "overview" : t === "page" ? ((location.pathname.match(/^\/(leader|power|guide|brief|about)/) || [])[1] || "") : t;
+  const k = (t === "brief" && S.bdate) ? "brieftab" : t === "detail" || t === "region" ? "overview" : t === "page" ? ((location.pathname.match(/^\/(leader|power|guide|brief|about)/) || [])[1] || "") : t;
   document.querySelectorAll(".gnav [data-tab],.gnav [data-nav]").forEach(a => { if ((a.dataset.tab || a.dataset.nav) === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   const g = document.querySelector(".gmore"); if (g) g.classList.toggle("cur", !!g.querySelector("[aria-current]"));
 }
@@ -1238,9 +1241,9 @@ function renderBrief(){
   /* v3.92d: 최신 호도 날짜를 골라 들어오면(지난 정보 목록, 검색, /brief/날짜/) 예전 형식 전문으로 보인다. 전문(fact)이 있는 최신 호는 지난 정보 맨 위에 둔다 */
   const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.link));
   if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); document.dispatchEvent(new CustomEvent("clisa:life", {detail: el})); return; }  /* v4.58 개편 ③: life2.js가 이 신호로 국민별로 보기를 그린다 · v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
-  el.innerHTML = (cur === BR.issues[0] ? '<p class="lb-back"><button type="button" class="chip" data-go="overview" data-bgo="1">← 세계 정세의 정세 브리핑</button></p>' : "") + '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
+  el.innerHTML = '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
-    dailyIssue(cur) + "</section>" +
+    dailyIssue(cur) + "</section>" + (cur === BR.issues[0] ? dueHtml() + worldSecHtml() : "") +  /* v4.59 개편 ②: 최신 호 아래에 다가오는 일정·정세 요약·분쟁지 */
     (others.length ? '<section class="sec"><h3>지난 정세 브리핑</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
   el.scrollTop = 0;
 }
@@ -1264,7 +1267,7 @@ function stripGo(x){
     requestAnimationFrame(() => { li.scrollIntoView({block: "center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 3000); }); } return; }
   const fm = x.n && /^feature\/([\w-]+)\/$/.exec(x.n.link || ""); if (fm) { goFeat(fm[1]); return; }
   /* v3.37b(2026-10-01): 일정 띠의 항목은 전망이든 사건이든 첫 화면의 '다가오는 일정' 표에서 그 줄로 간다. 전망의 설명 창과 사안 분석은 표의 줄에서 이어진다 */
-  if (x.e || x.f) { switchTab("overview"); const li = document.getElementById("due-" + (x.f ? "f" + x.f.due : x.e.id)) || document.getElementById("due");
+  if (x.e || x.f) { goBrief("latest"); const li = bId("due-" + (x.f ? "f" + x.f.due : x.e.id)) || bId("due");
     if (li) { li.scrollIntoView({block: "center", behavior: reduceMotion ? "auto" : "smooth"}); li.classList.add("srch-hit"); setTimeout(() => li.classList.add("fade"), 1600); setTimeout(() => li.classList.remove("srch-hit", "fade"), 2400); } return; }
   if (x.n) { const m = /^case\/([\w-]+)\/$/.exec(x.n.link || ""), c = m && (D.strategies || []).find(z => z.id === m[1]);
     if (c) { goCase(c.id); caseFill(c.id); const o = document.getElementById("outlook-" + c.id);
@@ -1272,7 +1275,7 @@ function stripGo(x){
       } 
     else switchTab("forecast");
     return; }
-  switchTab("overview"); const a = document.getElementById("bi-" + x.j) || document.getElementById("brief");
+  goBrief("latest"); const a = bId("bi-" + x.j) || bId("brief");
   if (a) { a.scrollIntoView({block: a.id === "brief" ? "start" : "center", behavior: reduceMotion ? "auto" : "smooth"}); if (a.id !== "brief") { a.classList.add("hl"); setTimeout(() => a.classList.remove("hl"), 2000); } }
 }
 /* v4.41(2026-10-28): 다가오는 일정 띠에서 전망은 머리말 '전망'과 확률 문장(이름 가능성 ○% · 날짜 판가름 · 남은 날)으로 보여 실제 일정('예정')과 구별한다 */
@@ -1347,20 +1350,27 @@ document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기
   const ml = ev.target.closest("[data-ml]"); if (ml) { MLOPEN = MLOPEN === ml.dataset.ml ? null : ml.dataset.ml; LBX = null; const b = document.getElementById("lifeboard"); if (b) { b.innerHTML = lifeRows(); fitTrends(b); } detReveal(MLOPEN && document.getElementById("lbx-" + MLOPEN)); return; }
   const gl = ev.target.closest("[data-golife]"); if (gl) { S.bdate = null; const rows = lbxGroups(), r = rows.find(x => x[4].some(p => p[0].id === gl.dataset.golife)); if (r) { LBX = r[0] + "|" + gl.dataset.golife; LBXM = "t"; MLOPEN = r[0]; } renderBrief(); switchTab("brief"); if (r && isMob()) mGo("lbx-" + r[0]); else requestAnimationFrame(() => { const a = r && document.getElementById("lbx-" + r[0]); if (a) a.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); }); return; }
   const gi = ev.target.closest("[data-goind]"); if (gi) { const [cid, d] = gi.dataset.goind.split("|"); switchTab("industry"); let n = 0; const go = () => { if (!IND) { if (++n < 60) setTimeout(go, 100); return; } indJump(cid, d); }; go(); return; }
-  const g = ev.target.closest("[data-bgo]"); if (g) requestAnimationFrame(() => { const b = document.getElementById("brief"); if (b) b.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
+  const g = ev.target.closest("[data-bgo]"); if (g) requestAnimationFrame(() => { const b = bId("brief"); if (b) b.scrollIntoView({block: "start", behavior: reduceMotion ? "auto" : "smooth"}); });
 });
+/* v4.59 개편 ②: 정세 요약과 분쟁지 목록은 정세 브리핑 탭(최신 호 아래)으로 옮긴다. 세계 정세 화면도 같은 함수를 쓴다 */
+const bId = id => document.querySelector('#pane-brief [id="' + id + '"]') || document.getElementById(id);  /* v4.59 개편 ②: 일정·브리핑 항목은 정세 브리핑 탭에서 먼저 찾는다 */
+function worldSecHtml(){
+  const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
+  return '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><p class="meta" style="margin:-2px 0 8px">매주 갱신 · <a href="/digest/">지난 정세 요약 보기 →</a></p><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + '" title="지구본에서 위치 보기">' + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+    ((!PUB() && D.discuss && D.discuss.threads.length) ? '<section class="sec"><h3>진행 중인 논의</h3>' + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + esc(t.opened) + " 개설 · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
+    '<section class="sec"><h3>분쟁지 · 심각도 순</h3><ul class="list">' + fps.map(fp =>
+      '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(fp.last_major_event?.date || "") + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>";
+}
 function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
   $("#pane-overview").innerHTML = briefHomeHtml() + dueHtml() +
     '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
-    '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><p class="meta" style="margin:-2px 0 8px">매주 갱신 · <a href="/digest/">지난 정세 요약 보기 →</a></p><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + '" title="지구본에서 위치 보기">' + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
-    ((!PUB() && D.discuss && D.discuss.threads.length) ? '<section class="sec"><h3>진행 중인 논의</h3>' + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + esc(t.opened) + " 개설 · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
-    '<section class="sec"><h3>분쟁지 · 심각도 순</h3><ul class="list">' + fps.map(fp =>
-      '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(fp.last_major_event?.date || "") + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>" +
+    worldSecHtml() +
     (PUB() ? "" : '<section class="sec"><h3></h3><ul class="tl">' + D.log.slice().reverse().map(l => '<li><span class="d">' + esc(l.date) + "</span><span><b>" + esc(l.ver) + "</b> " + esc(l.text) + ((l.details || []).length ? '<details class="src" style="margin-top:4px"><summary>수정 전후 ' + l.details.length + '건</summary><ul>' + l.details.map(x => '<li><span class="note">' + esc(x.where) + "</span><br>" + esc(x.before) + "<br>→ " + esc(x.after) + "</li>").join("") + "</ul></details>" : "") /* v3.2 */ + "</span></li>").join("") + "</ul></section>") +
     '<p class="note">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>';
+  document.dispatchEvent(new CustomEvent("clisa:overview", {detail: $("#pane-overview")}));  /* v4.59 개편 ②: front2.js가 이 신호로 전망으로 보기를 그린다 */
 }
 function forecastRow(f, compact){
   const st = !f.status || f.status === "open" ? ["open","검증 전"] : [{[FCT.hit]: "yes", [FCT.miss]: "no"}[fcHM(f)] || "void", fcHM(f)];  /* v4.43 상태는 예측이 맞았는지(적중·빗나감)로 */
@@ -3219,7 +3229,7 @@ function footHtml(noMail){
     "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>" +
     "<p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p>" +
     "<p>이 사이트는 회원 가입이 없습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
-    '<p>© 2026 고재성 · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 알림</a> · <a href="/method/">사이트 안내</a></p>' +
+    '<p>© 2026 고재성 · <a href="/about/#partners">파트너</a> · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 알림</a> · <a href="/method/">사이트 안내</a></p>' +
     "<p>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 '클리사 지오폴리틱스'와 해당 페이지 주소를 출처로 밝혀 주십시오(본문을 40자 이상 복사하면 출처가 자동으로 붙습니다). 전부 또는 상당 부분을 복제·재배포하려면 <a href='mailto:clisageo@clisa.ai'>clisageo@clisa.ai</a>로 먼저 허락을 받아 주십시오.</p></footer>";
 }
 function caseFbHtml(c){
@@ -3244,8 +3254,8 @@ renderIdeas = withFoot(renderIdeas, "pane-ideas");
 renderForecasts = withFoot(renderForecasts, "pane-forecast");
 renderMethod = withFoot(renderMethod, "pane-method");
 /* v3.79 사이트 안내 탭(2026-10-07 결재): 분석 방법(이 탭이 그림) 아래에 이용 안내·운영자 인사말(각 쪽의 글 칸을 받아 옴)을 잇고, 맨 위 단추 3개로 해당 부분에 내려간다 */
-const INFO = [["method", "분석 방법"], ["guide", "이용 안내"], ["about", "운영자 인사말"]];
-const infoUrl = k => "/" + k + "/";
+const INFO = [["method", "분석 방법"], ["guide", "이용 안내"], ["partners", "파트너"], ["about", "운영자 인사말"]];  /* v4.59(2026-11-01): 파트너는 운영자 인사말 쪽(/about/) 맨 위 절 */
+const infoUrl = k => k === "partners" ? "/about/#partners" : "/" + k + "/";
 renderMethod = (f => function(){ f(); infoWrap(); })(renderMethod);
 function infoWrap(){
   const pn = $("#pane-method"); if (pn.querySelector(".info-nav")) return;
@@ -3253,7 +3263,7 @@ function infoWrap(){
   top.innerHTML = '<h2>사이트 안내</h2><div class="chips info-nav">' + INFO.map(([k, t]) => '<a class="chip" href="' + infoUrl(k) + '" data-info="' + k + '">' + t + "</a>").join("") + "</div>";
   const first = pn.firstElementChild; pn.insertBefore(top, first); if (first) first.id = "i-method";
   const foot = pn.querySelector("footer.site-foot");
-  INFO.slice(1).forEach(([k]) => { const x = document.createElement("section"); x.id = "i-" + k; x.className = "info-sec"; pn.insertBefore(x, foot); });
+  INFO.slice(1).filter(([k]) => k !== "partners").forEach(([k]) => { const x = document.createElement("section"); x.id = "i-" + k; x.className = "info-sec"; pn.insertBefore(x, foot); });
 }
 function infoLoad(k){
   const x = document.getElementById("i-" + k); if (!x || x.dataset.ok) return Promise.resolve();
@@ -3265,7 +3275,7 @@ function infoLoad(k){
 }
 function infoGo(k){
   S.info = k; ensureRendered("method"); switchTab("method");
-  Promise.all(["guide", "about"].map(infoLoad)).then(() => { const t = document.getElementById("i-" + k); if (t && k !== "method") t.scrollIntoView({block: "start"}); });
+  Promise.all(["guide", "about"].map(infoLoad)).then(() => { const t = k === "partners" ? document.querySelector("#pane-method #partners") : document.getElementById("i-" + k); if (t && k !== "method") t.scrollIntoView({block: "start"}); });
 }
 renderStrat = withFoot(renderStrat, "pane-strat", () => " ");  /* v3.43 사안별 의견 상자는 각 사안 끝에 있으므로, 꼬리말에는 메일 줄을 다시 넣지 않는다 */
 
@@ -3285,10 +3295,10 @@ function routeOf(){
   const t = S.tab;
   if (t === "overview") return "/";
   if (t === "strat") return "/case/" + (S.scase ? S.scase + "/" : "");
-  if (t === "brief") { if (!BR) return /^\/(brief|life)\//.test(location.pathname) ? location.pathname : "/life/"; const c = briefCur(); return c && BR && S.bdate ? "/brief/" + c.date + "/" : "/life/"; }  /* v3.99: 국민의 삶은 /life/, 날짜별 브리핑 전문은 /brief/날짜/ */
+  if (t === "brief") { if (!BR) return /^\/(brief|life)\//.test(location.pathname) ? location.pathname : "/life/"; const c = briefCur(); return c && BR && S.bdate ? (S.bdate === "latest" ? "/brief/" : "/brief/" + c.date + "/") : "/life/"; }  /* v3.99: 국민의 삶은 /life/, 날짜별 브리핑 전문은 /brief/날짜/ */
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return "/feature/" + (c && c !== L[0] ? c.id + "/" : ""); }
   if (t === "page") return location.pathname;
-  if (t === "method") return "/" + (S.info || "method") + "/";
+  if (t === "method") return S.info === "partners" ? "/about/#partners" : "/" + (S.info || "method") + "/";
   if (t === "forecast" && S.ffc) return "/forecast/" + S.ffc + "/";  /* v4.22 전망별 화면 */
   if (/^(grand|ideas|forecast|industry)$/.test(t)) return "/" + t + "/";
   if (t === "detail") return S.sel && hasPage(S.sel) ? "/country/" + S.sel + "/" : "/";
@@ -3297,7 +3307,7 @@ function routeOf(){
 }
 function routeSync(rep){
   if (!ROUTES || !HASH_READY || !D) return;
-  const r = routeOf(); if (!r || (r === location.pathname && !location.hash && !location.search)) return;
+  const r = routeOf(); if (!r || (r.includes("#") ? r === location.pathname + location.hash && !location.search : r === location.pathname && !location.hash && !location.search)) return;
   try { history[rep ? "replaceState" : "pushState"](null, "", r); } catch(e){}
   document.title = titleOf();
 }
@@ -3312,11 +3322,11 @@ function applyRoute(){
     if (BR && !BR.issues.some(x => x.date === m[1])) { pageGo(p); return true; }
     S.bdate = m[1]; renderBrief(); switchTab("brief"); return true; }
   if (/^\/life\/?$/.test(p)) { S.bdate = null; renderBrief(); switchTab("brief"); return true; }
-  if (/^\/brief\/?$/.test(p)) { switchTab("overview"); requestAnimationFrame(() => { const b = document.getElementById("brief"); if (b) b.scrollIntoView({block: "start"}); }); return true; }  /* v3.99: 정세 브리핑은 세계 정세 맨 위 */
+  if (/^\/brief\/?$/.test(p)) { S.bdate = "latest"; renderBrief(); switchTab("brief"); return true; }  /* v4.59 개편 ②: 정세 브리핑 탭 = 최신 호 */  /* v3.99: 정세 브리핑은 세계 정세 맨 위 */
   if (/^\/industry\/?$/.test(p)) { switchTab("industry"); return true; }
   if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
-  if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
+  if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1] === "about" && location.hash === "#partners" ? "partners" : m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
   if (/^\/(leader|power|subscribe|digest)(\/|$)/.test(p)) { pageGo(p); return true; }
   if ((m = p.match(/^\/forecast\/(f\d+)\/?$/)) && D.forecasts.some(f => f.id === m[1])) { fcOpen(m[1]); return true; }  /* v4.22 */
   if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { if (m[1] === "forecast" && S.ffc) { S.ffc = null; renderForecasts(); } switchTab(m[1]); return true; }

@@ -107,21 +107,25 @@
   function html(){
     var R = (G === "PARTY" ? LF.party : LF.view[G]) || [], gn = (GROUPS.find(function(x){ return x[0] === G; }) || [])[1] || "";
     var who = G === "PARTY" ? T.party : (R[0] ? nm(R[0], "gn", "gne") : gn);
-    return '<div class="sec l2"><div class="l2-who"><p class="l2-eye">' + T.eye + fmtD(LF.asof) + (T.eyeEnd || "") + "</p><h2>" + T.h + '</h2><p class="l2-sub">' + T.sub + '</p><div class="l2-chips" role="group">' +
+    return '<div class="sec l2"><div class="l2-who">' + vtHtml() + '<p class="l2-eye">' + T.eye + fmtD(LF.asof) + (T.eyeEnd || "") + "</p><h2>" + T.h + '</h2><p class="l2-sub">' + T.sub + '</p><div class="l2-chips" role="group">' +
       GROUPS.map(function(g){ return '<button type="button" class="l2-chip' + (g[0] === G ? " on" : "") + '" aria-pressed="' + (g[0] === G) + '" data-l2g="' + g[0] + '">' + h(g[1]) + "</button>"; }).join("") +
       '<span class="l2-chip off" aria-disabled="true">' + T.off + "</span></div></div>" +
       summary(R) + '<section class="l2-fut"><h3>' + T.h3 + '</h3><p class="l2-s">' + h(who) + T.s1 + '</p><div class="l2-lg">' + "xwbs".split("").map(function(k){ return '<span><i style="background:' + LC[k] + '"></i>' + T.LN[k] + "</span>"; }).join("") + "</div>" +
       R.filter(Boolean).map(function(c, i){ return row(c, G + i); }).join("") + '<p class="l2-sm l2-foot">' + T.foot + "</p></section></div>"; }
-  function mark(){ try { markSet({label: G === "PARTY" ? T.party : ((LF.view[G] || [])[0] ? nm(LF.view[G][0], "gn", "gne") : ""), isos: ISOS[G] || []}); } catch (e) {} }
+  function mark(){ try { if (window.CLISA.state().tab !== "brief") return; } catch (e) {} marked = true; try { markSet({label: G === "PARTY" ? T.party : ((LF.view[G] || [])[0] ? nm(LF.view[G][0], "gn", "gne") : ""), isos: ISOS[G] || []}); } catch (e) {} }
   function draw(el){ if (!LF) return;
     el.innerHTML = html(); mark();
     el.querySelectorAll("[data-l2g]").forEach(function(b){ b.onclick = function(){ G = b.dataset.l2g; OPEN = null; try { localStorage.setItem("ep.lifeg", G); } catch (e) {} draw(el); }; });
     el.querySelectorAll(".l2-fr").forEach(function(r){ var tg = function(ev){ if (ev.target.closest("a,button")) return; OPEN = OPEN === r.dataset.key ? null : r.dataset.key; draw(el); var n = el.querySelector('.l2-fr[data-key="' + r.dataset.key + '"]'); if (n && n.scrollIntoView) n.scrollIntoView({block: "nearest"}); };
       r.onclick = tg; r.onkeydown = function(ev){ if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); tg(ev); } }; }); }
+  /* 개편 ②(2026-11-01): 첫 화면(전망으로 보기)이 붙어 있을 때만 보기 전환 단추를 둔다(front2.css에 모양이 있다) */
+  function vtHtml(){ if (!document.querySelector('script[src*="/front2.js"]')) return ""; var P = EN ? "/en" : "";
+    return '<nav class="l2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + (EN ? "By Forecast" : "전망으로 보기") + '</a><a class="on" href="' + P + '/life/" aria-current="page">' + (EN ? "By Population" : "국민별로 보기") + "</a></nav>"; }
   var marked = false, S = {get bdate(){ try { return window.CLISA.state().bdate; } catch (e) { return null; } }};
   function markSet(m){ try { window.CLISA.markSet(m); } catch (e) {} }
-  document.addEventListener("clisa:life", function(ev){ var el = ev.detail; if (!el || S.bdate) return; if (LF) { draw(el); marked = true; } else load(); });
-  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "brief" && marked) { marked = false; markSet(null); } });
-  function load(){ fetch("/data/life.json", {credentials: "same-origin"}).then(function(r){ return r.json(); }).then(function(j){ LF = j; var el = document.getElementById("pane-brief"); if (el && el.querySelector(".lbwrap") && !S.bdate) { draw(el); marked = true; } }).catch(function(){}); }
+  document.addEventListener("clisa:life", function(ev){ var el = ev.detail; if (!el || S.bdate) return; if (LF) draw(el); else load(); });  /* 지구본 표시는 국민의 삶 탭이 열려 있을 때만(E91) */
+  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "brief") { if (marked) { marked = false; markSet(null); } return; }
+    setTimeout(function(){ var el = document.getElementById("pane-brief"); if (LF && el && el.querySelector(".l2") && !S.bdate) mark(); }, 0); });
+  function load(){ fetch("/data/life.json", {credentials: "same-origin"}).then(function(r){ return r.json(); }).then(function(j){ LF = j; var el = document.getElementById("pane-brief"); if (el && el.querySelector(".lbwrap") && !S.bdate) draw(el); }).catch(function(){}); }
   if (/\/life\/?$/.test(location.pathname)) load();  /* 국민의 삶 화면이 아니면 자료를 미리 받지 않는다 */
 })();
