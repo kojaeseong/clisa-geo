@@ -727,7 +727,7 @@ function showTip(h, x, y){
   if (h.usf) { const o = h.usf, P = D.posture, ymd = ymdK;
     if (o.kind) html = '<span class="m num">' + o.no + " · " + ymd(o.date) + "</span> <b>" + esc(o.t) + '</b><br><span class="m">' + esc(o.grade) + " · " + esc(o.src) + "</span>";
     else if (o.vs) html = "<b>" + esc(o.name) + "</b>" + o.vs.map(v => "<br>" + esc(v.name) + ' <span class="m">' + (v.type === "cv" ? "항모" : "상륙전단") + " · 모항 " + esc(v.home) + "</span>" + (v.note ? '<br><span class="m">' + esc(v.note) + "</span>" : "")).join("") + '<br><span class="m">미 해군연구소 함대 추적 · ' + ymd(P.fleet.asof) + "</span>";
-    else html = "<b>" + esc(o.name) + '</b> 상주 미군 <span class="num">' + o.n.toLocaleString("ko-KR") + "</span>명" + (o.prev ? '<br><span class="m">직전 분기 ' + o.prev.toLocaleString("ko-KR") + "명 · " + ((o.n - o.prev) >= 0 ? "+" : "") + (o.n - o.prev).toLocaleString("ko-KR") + "</span>" : "") + '<br><span class="m">미 국방부 인력데이터센터 · ' + ymd(P.res.asof) + " 기준</span>";
+    else html = "<b>" + esc(o.name) + '</b> 상주 미군 <span class="num">' + o.n.toLocaleString("ko-KR") + "</span>명" + (o.prev ? '<br><span class="m">직전 자료 ' + o.prev.toLocaleString("ko-KR") + "명 · " + ((o.n - o.prev) >= 0 ? "+" : "") + (o.n - o.prev).toLocaleString("ko-KR") + "</span>" : "") + '<br><span class="m">미 국방부 인력데이터센터 · ' + ymd(P.res.asof) + " 기준</span>";
   }
   else if (h.fp) html = "<b>" + esc(h.fp.name_ko) + "</b><br>" + pips(h.fp.severity) + ' <span class="m">심각도 ' + h.fp.severity + "/5</span><br><span class=\"m num\">" + esc(h.fp.last_major_event ? h.fp.last_major_event.date : "") + "</span> " + esc(h.fp.last_major_event ? h.fp.last_major_event.text : "");
   else if (h.iso && D.countries[h.iso]) { const c = D.countries[h.iso]; html = "<b>" + esc(c.name_ko) + '</b> <span class="m">' + esc(c.region) + "</span><br>" + (S.layer === "focus" ? '관련 전망 <span class="num">' + (FCN[c.iso] || 0) + "</span>건" : '국방비 <span class="num">' + fmtUsdBn(c.mil && c.mil.spend_usd_bn) + "</span>") + '<br><span class="m">' + esc(shortLeader(c.leader)) + "</span>"; }
@@ -969,12 +969,12 @@ function usfParts(){
   const fl = usfFleet().map(g => "<li><b>" + esc(g.name) + "</b> " + g.vs.map(v => esc(v.name) + (v.fwd ? '<span class="m">(모항 ' + esc(v.home) + ")</span>" : "")).join(", ") + "</li>").join("");
   return {
     deploy: '<div class="usf-card"><p class="note">이 쪽을 여는 동안 지구본에 미군 해외 배치가 보입니다. 원은 상주 인원, 배 모양은 항모·상륙전단, 번호를 붙인 기호는 아래 태세 변화의 증파·감축·법·계획입니다.</p>' +
-      '<h4>상주 인원의 지역별 비중</h4><p class="m">해외 상주 미군 ' + R.total.toLocaleString("ko-KR") + "명(" + ymdK(R.asof) + " 기준), " + q(a.q) + "부터 " + q(z.q) + "까지 6개 분기</p>" +
+      '<h4>상주 인원의 지역별 비중</h4><p class="m">해외 상주 미군 ' + R.total.toLocaleString("ko-KR") + "명(" + ymdK(R.asof) + " 기준), " + q(a.q) + "부터 " + q(z.q) + "까지 6개 시점</p>" +
       '<table class="usf-t">' + row("ip", "인도·태평양") + row("eu", "유럽") + row("me", "중동") + "</table>" +
       '<p class="m">' + esc(R.note) + "</p>" +
-      '<h4>상주 인원이 많은 곳</h4><ul class="usf-top">' + top + '</ul><p class="m">숫자 옆은 직전 분기(' + q(sh[sh.length - 2].q) + ")보다 늘거나 준 인원</p>" +
+      '<h4>상주 인원이 많은 곳</h4><ul class="usf-top">' + top + '</ul><p class="m">숫자 옆은 직전 자료(' + q(sh[sh.length - 2].q) + ")보다 늘거나 준 인원</p>" +
       '<h4>항모·상륙전단</h4><ul class="usf-top">' + fl + '</ul>' +
-      '<p class="m">출처: <a href="' + esc(R.url) + '" target="_blank" rel="noopener">미 국방부 인력데이터센터(DMDC)</a> 분기 통계 · <a href="' + esc(P.fleet.url) + '" target="_blank" rel="noopener">미 해군연구소(USNI) 함대 추적</a> ' + ymdK(P.fleet.asof) + " · 함정 위치는 공개 자료 기준의 대략적 해역입니다. 함정 위치와 태세 변화는 매주, 상주 인원은 국방부 통계가 새로 나오는 분기마다 고칩니다.</p></div>",
+      '<p class="m">출처: <a href="' + esc(R.url) + '" target="_blank" rel="noopener">미 국방부 인력데이터센터(DMDC)</a> 분기 통계 · <a href="' + esc(P.fleet.url) + '" target="_blank" rel="noopener">미 해군연구소(USNI) 함대 추적</a> ' + ymdK(P.fleet.asof) + " · 함정 위치는 공개 자료 기준의 대략적 해역입니다. 함정 위치와 태세 변화는 매주, 상주 인원은 국방부 통계가 새로 나올 때마다 고칩니다.</p></div>",
     changes: '<div class="usf-card"><ul class="usf-ev">' + ev + '</ul><p class="m">등급: 공식(정부 발표), 법(법 조문), 2차(분석 기관이 전한 정부 확인), 보도(익명 당국자 등 언론 보도). 번호는 지구본의 기호 번호와 같습니다.</p></div>'
   };
 }
