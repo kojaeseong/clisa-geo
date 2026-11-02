@@ -3,7 +3,7 @@
   "use strict";
   var EN = document.documentElement.lang === "en", P = EN ? "/en" : "", FD = null, EL = null;
   var T = EN ? {
-    vt: ["By Forecast", "By Population"], h: "What could happen, and whose lives would it change—and how?",
+    vt: ["By Forecast", "By Population", "By Pathway"], h: "What could happen, and whose lives would it change—and how?",
     sub: "For each forecast with a resolution date, the cards show which scenario the event would make more or less likely, and how the safety and incomes of people in South Korea, the U.S. and three European regions would change if that scenario came about.",
     nl: "Latest briefings · Select one to see forecasts on that issue",
     ver: "Track record", verGo: "Forecasts and Track Record →",
@@ -35,7 +35,7 @@
     foot: "Clisa Geopolitics analyses are written with the help of AI (Anthropic’s Claude) and reviewed by editors. The changes shown for each population are not results of the forecast event itself; they are human security estimates for the linked scenario if it comes about. Conflict deaths are shown as the number of people killed per year, scaled to each population’s size. For the sudden-upheaval scenario on the Korean Peninsula, the cards use its most likely branch, a localized clash. For the Russia-NATO standoff, the Nordic and Baltic cell uses figures for the three Baltic states.",
     mon: ["January","February","March","April","May","June","July","August","September","October","November","December"]
   } : {
-    vt: ["전망으로 보기", "국민별로 보기"], h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
+    vt: ["전망으로 보기", "국민별로 보기", "연결 지도로 보기"], h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
     sub: "결과 확인 날짜가 정해진 전망마다, 그 일이 발생하면 가능성이 커지거나 줄어드는 전개와, 그 전개가 현실이 될 때 한국·미국과 유럽 3개 지역 국민의 안전과 소득에 생기는 변화를 함께 보여 드립니다.",
     nl: "최근 정세 브리핑 · 누르면 그 사안의 전망만 봅니다",
     ver: "검증", verGo: "전망 검증 →",
@@ -154,7 +154,7 @@
     EL = el;
     ALL = FD.fcs.slice().sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; });
     var ft = el.querySelector(":scope > .site-foot");  /* 화면 앱이 붙인 바닥글은 그대로 둔다 */
-    el.innerHTML = '<div class="f2"><section class="f2-who"><nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a class="on" href="' + P + '/" aria-current="page">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + "</a></nav>" +
+    el.innerHTML = '<div class="f2"><section class="f2-who"><nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a class="on" href="' + P + '/" aria-current="page">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + '</a><a href="' + P + '/links/">' + T.vt[2] + "</a></nav>" +
       "<h2>" + h(T.h) + '</h2><p class="f2-sub">' + h(T.sub) + '</p><p class="f2-nl">' + h(T.nl) + '</p><div class="f2-news" id="f2news"></div></section>' + verHtml() +
       '<section class="sec f2-list"><div class="f2-lh"><h3>' + T.list + '</h3><button type="button" class="f2-snd" id="f2snd" aria-pressed="' + SND + '">' + T.snd[SND ? 1 : 0] + '</button></div><div class="f2-tabs" id="f2tabs" role="tablist"></div><p class="f2-flt" id="f2flt"></p><div id="f2list"></div></section>' +
       entsHtml() + '<p class="note">' + h(T.foot) + "</p></div>";

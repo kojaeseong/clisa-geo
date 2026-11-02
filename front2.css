@@ -2,7 +2,7 @@
 .f2{padding-top:4px}
 .f2-who{background:linear-gradient(135deg,#1F4FD8,#173A9E);color:#fff;border-radius:16px;padding:18px 22px 18px;margin-bottom:14px}
 :root[data-theme="dark"] .f2-who{background:linear-gradient(135deg,#1C3C9E,#0E2160)}
-.f2-vt,.l2-vt{display:inline-flex;background:rgba(255,255,255,.14);border-radius:999px;padding:4px;margin:0 0 12px}
+.f2-vt,.l2-vt{display:inline-flex;flex-wrap:wrap;background:rgba(255,255,255,.14);border-radius:999px;padding:4px;margin:0 0 12px}
 .f2-vt a,.l2-vt a{padding:6px 14px;border-radius:999px;color:#fff!important;text-decoration:none;font:700 13.5px var(--sans);opacity:.88}
 .f2-vt a.on,.l2-vt a.on{background:#fff;color:#173A9E!important;opacity:1}
 .f2-vt a:not(.on):hover,.l2-vt a:not(.on):hover{opacity:1;background:rgba(255,255,255,.12)}
