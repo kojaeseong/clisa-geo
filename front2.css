@@ -88,3 +88,8 @@
 .f2-imp li{display:contents}
 .f2-imp li b,.f2-imp li span{padding:1px 0}
 @media (max-width:600px){.f2-imp ul{grid-template-columns:1fr;row-gap:0}.f2-imp li b{padding-top:6px}.f2-imp li span{padding-bottom:2px}}
+
+/* 2026-11-02 조건부 확률(판단값) */
+.f2-rg{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.f2-why{font-size:13px;line-height:1.6;color:var(--ink-2);margin:4px 0 8px}
+.f2-sub{font-weight:400!important;font-size:12px!important;color:var(--muted)!important;margin-top:4px!important}

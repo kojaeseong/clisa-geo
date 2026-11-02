@@ -18,6 +18,7 @@
     fltC: function(c){ return "Showing only forecasts on " + c + ". "; }, all: "Show all",
     more: function(n){ return "Show " + n + " more"; },
     etc: "Other issues", due: function(d){ return "Resolves " + d; }, left: function(n){ return n === 1 ? "1 day left" : n + " days left"; }, today: "Resolves today", late: "Result pending",
+    upN: function(n,b,c,lo,hi){ return "If this happens, the odds of the “"+n+"” scenario rise from "+b+"% to "+c+"%"; }, dnN: function(n,b,c,lo,hi){ return "If this happens, the odds of the “"+n+"” scenario fall from "+b+"% to "+c+"%"; }, rng: function(n,b,c,lo,hi){ return "judgment estimate: "+lo+"–"+hi+"%"; }, alsoN: function(n,b,c,lo,hi){ return "also: “"+n+"” "+b+"% → "+c+"%"; }, detLab: "Current probability → probability if this happens (judgment estimate)", whyL: "Reasoning",
     ifR: "If this happens,", same: function(n){ return " the “" + n + "” scenario comes about"; }, up: function(n){ return " the “" + n + "” scenario becomes more likely"; },
     dn: function(n){ return " the “" + n + "” scenario becomes less likely"; }, also: " · also: ", away: " (less likely)",
     strat: "The assessment this forecast tests", none: "This forecast falls outside the five issues covered in Strategic Analysis, so its effects on people have not been calculated yet.",
@@ -49,6 +50,7 @@
     fltC: function(c){ return c + " 사안의 전망만 보고 있습니다. "; }, all: "모두 보기",
     more: function(n){ return n + "건 더 보기"; },
     etc: "기타 사안", due: function(d){ return "검증 " + d; }, left: function(n){ return n + "일 남음"; }, today: "오늘 검증", late: "결과 확인 중",
+    upN: function(n,b,c,lo,hi){ return "이 일이 발생하면 <b>‘"+n+"’</b> 전개의 가능성이 "+b+"%에서 "+c+"%로 커집니다"; }, dnN: function(n,b,c,lo,hi){ return "이 일이 발생하면 <b>‘"+n+"’</b> 전개의 가능성이 "+b+"%에서 "+c+"%로 줄어듭니다"; }, rng: function(n,b,c,lo,hi){ return "판단값 "+lo+"~"+hi+"%"; }, alsoN: function(n,b,c,lo,hi){ return "그 밖에 ‘"+n+"’ "+b+"% → "+c+"%"; }, detLab: "현재 확률 → 이 일이 발생할 때의 확률(판단값)", whyL: "판단 근거",
     ifR: "이 일이 발생하면", same: function(n){ return "이 일은 <b>‘" + n + "’</b> 전개에 해당합니다"; }, up: function(n){ return " <b>‘" + n + "’</b> 전개의 가능성이 커집니다"; },
     dn: function(n){ return " <b>‘" + n + "’</b> 전개의 가능성이 줄어듭니다"; }, also: " · 그 밖에 ", away: "(가능성 줄어듦)",
     strat: "이 전망으로 검증하는 판단", none: "5개 사안 분석에 포함되지 않은 전망이어서, 국민 생활에 대한 영향은 아직 계산하지 않았습니다.",
@@ -91,9 +93,15 @@
     if (f.kind === "strat") return '<div class="f2-concl"><b>' + T.strat + "</b> · " + h(L(f, "concl")) + "</div>";
     if (f.kind === "none") return '<p class="f2-then f2-z">' + (f.case ? T.noneC : T.none) + "</p>";
     var C = FD.cases[f.case], l = prim(f), S = C.sc[l.sc], n = h(L(S, "n"));
+    var ic = l.rel === "+" ? "↑" : l.rel === "-" ? "↓" : "=";
+    if (f.cd && l.rel !== "same") {  /* 2026-11-02 결재: 조건부 확률(판단값) */
+      var g = f.rg[l.sc] || [f.cd[l.sc], f.cd[l.sc]];
+      var v2 = (l.rel === "+" ? T.upN : T.dnN)(n, S.p, f.cd[l.sc]);
+      var mo = f.links.filter(function(x){ return x !== l; }).map(function(x){ return T.alsoN(h(L(C.sc[x.sc], "n")), C.sc[x.sc].p, f.cd[x.sc]); });
+      return '<p class="f2-then"><span class="f2-ic" aria-hidden="true">' + ic + "</span><span>" + v2 + (EN ? "." : "") + ' <span class="f2-rg">' + h(T.rng(0, 0, 0, g[0], g[1])) + "</span>" + (mo.length ? '<span class="f2-more">' + mo.join(" · ") + "</span>" : "") + "</span></p>";
+    }
     var v = l.rel === "same" ? T.same(n) : l.rel === "+" ? T.up(n) : T.dn(n);
     var more = f.links.filter(function(x){ return x !== l; }).map(function(x){ return L(C.sc[x.sc], "n") + (x.rel === "-" ? T.away : ""); });
-    var ic = l.rel === "+" ? "↑" : l.rel === "-" ? "↓" : "=";
     return '<p class="f2-then"><span class="f2-ic" aria-hidden="true">' + ic + "</span><span>" + (l.rel === "same" && !EN ? "" : '<span class="ar">' + T.ifR + "</span> ") + v + (more.length ? '<span class="f2-more">' + h(T.also + more.join(", ")) + "</span>" : "") + (EN ? "." : "") + "</span></p>";
   }
   function val(v){
@@ -124,7 +132,8 @@
     var H = f.h.length ? f.h.map(function(x){ return x[1] + "%"; }).join(" → ") : f.p + "%";
     var o = '<div class="f2-det"><p class="f2-q">' + h(L(f, "q")) + '</p><p class="f2-hist">' + h(T.hist(H, ymd(f.due))) + "</p>";
     if (C) o += '<p class="f2-lab">' + h(T.scLab(L(C, "t"))) + '</p><div class="f2-bar">' + C.order.map(function(id){ var s = C.sc[id]; return '<div class="' + (lk[id] ? "on" : "") + '" style="flex:' + Math.max(s.p, 1) + '">' + (s.p >= 6 ? s.p + "%" : "") + "</div>"; }).join("") +
-      '</div><ul class="f2-scl">' + C.order.map(function(id){ var s = C.sc[id], r = lk[id]; return '<li class="' + (r ? "on" : "") + '">' + h(L(s, "n")) + " " + s.p + "%" + (r ? " · " + T.rel[r] : "") + "</li>"; }).join("") + "</ul>";
+      '</div>' + (f.cd ? '<p class="f2-lab f2-sub">' + h(T.detLab) + "</p>" : "") + '<ul class="f2-scl">' + C.order.map(function(id){ var s = C.sc[id], r = lk[id]; return '<li class="' + (r ? "on" : "") + '">' + h(L(s, "n")) + " " + s.p + "%" + (f.cd ? " → " + f.cd[id] + "%" : "") + (r ? " · " + T.rel[r] : "") + "</li>"; }).join("") + "</ul>" +
+      (f.cd ? '<p class="f2-why"><b>' + h(T.whyL) + "</b> · " + h(L(f, "why")) + "</p>" : "");
     o += '<p class="f2-go"><a href="' + P + "/forecast/" + h(f.id) + '/">' + T.fcGo + "</a>" + (C ? '<a href="' + P + "/case/" + h(f.case) + '/">' + h(T.caseGo(L(C, "t"))) + "</a>" : "") + "</p></div>";
     return o;
   }
