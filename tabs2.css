@@ -1,0 +1,14 @@
+/* v4.67 탭 개편(2026-11-02 결재) */
+header.hd .hd-alias,header.hd nav.gnav a.hd-alias{display:none!important}
+header.hd .hd-sub{display:flex;justify-content:center;gap:4px;padding:6px 12px 8px;border-top:1px solid rgba(210,216,222,.6)}
+header.hd .hd-sub a{padding:5px 14px;border-radius:999px;font:600 13px/1.3 var(--sans);color:var(--ink-2,#2F3842);text-decoration:none;background:var(--panel-2,#F2F4F6)}
+header.hd .hd-sub a[aria-current="page"]{background:var(--ink,#101418);color:#fff}
+:root[data-theme="dark"] header.hd .hd-sub{border-top-color:#222A33}
+:root[data-theme="dark"] header.hd .hd-sub a{background:#1A2129;color:#C9D3E6}
+:root[data-theme="dark"] header.hd .hd-sub a[aria-current="page"]{background:#E8EDF5;color:#0B1120}
+@media (max-width:900px){
+ header.hd .hd-nl{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+ header.hd nav.gnav a{white-space:normal!important;line-height:1.25!important;min-height:42px;display:flex!important;align-items:center;justify-content:center;font-size:12px!important;padding:5px 3px!important;word-break:keep-all}
+ header.hd .hd-sub{border-top:0;padding:0 12px 8px}
+ header.hd .hd-sub a{font-size:12.5px;padding:5px 12px}
+}

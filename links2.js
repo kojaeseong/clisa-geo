@@ -19,7 +19,7 @@
     count: function (n) { return n === 1 ? "1 flashpoint" : n + " flashpoints"; }, none: "No connected flashpoints",
     cellT: function (c) { return "Connected · " + c + " confidence"; }
   } : {
-    vt: ["전망으로 보기", "국민별로 보기", "연결 지도로 보기"],
+    vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"],
     h: "분쟁이 생활로 이어지는 경로",
     sub: "클리사 지오폴리틱스는 분쟁 지점 43곳을 6개 영향 경로와 6개 국민 집단에 하나씩 대조했습니다. 이어진다고 판단한 칸에는 경로와 근거, 출처를 밝히고, 이어지지 않는다고 판단한 칸에도 그 이유를 밝혔습니다.",
     st: [["대조한 칸"], ["이어짐"], ["이어지지 않음"], ["판단 불가(자료 부족)"]],

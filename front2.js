@@ -36,7 +36,7 @@
     foot: "Clisa Geopolitics analyses are written with the help of AI (Anthropic’s Claude) and reviewed by editors. The changes shown for each population are not results of the forecast event itself; they are human security estimates for the linked scenario if it comes about. Conflict deaths are shown as the number of people killed per year, scaled to each population’s size. For the sudden-upheaval scenario on the Korean Peninsula, the cards use its most likely branch, a localized clash. For the Russia-NATO standoff, the Nordic and Baltic cell uses figures for the three Baltic states.",
     mon: ["January","February","March","April","May","June","July","August","September","October","November","December"]
   } : {
-    vt: ["전망으로 보기", "국민별로 보기", "연결 지도로 보기"], h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
+    vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"], h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
     sub: "결과 확인 날짜가 정해진 전망마다, 그 일이 발생하면 가능성이 커지거나 줄어드는 전개와, 그 전개가 현실이 될 때 한국·미국과 유럽 3개 지역 국민의 안전과 소득에 생기는 변화를 함께 보여 드립니다.",
     nl: "최근 정세 브리핑 · 누르면 그 사안의 전망만 봅니다",
     ver: "검증", verGo: "전망 검증 →",
