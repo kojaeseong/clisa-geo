@@ -21,7 +21,7 @@
     upN: function(n,b,c,lo,hi){ return "If this happens, the odds of the “"+n+"” scenario rise from "+b+"% to "+c+"%"; }, dnN: function(n,b,c,lo,hi){ return "If this happens, the odds of the “"+n+"” scenario fall from "+b+"% to "+c+"%"; }, rng: function(n,b,c,lo,hi){ return "judgment estimate: "+lo+"–"+hi+"%"; }, alsoN: function(n,b,c,lo,hi){ return "also: “"+n+"” "+b+"% → "+c+"%"; }, detLab: "Current probability → probability if this happens (judgment estimate)", whyL: "Reasoning",
     ifR: "If this happens,", same: function(n){ return " the “" + n + "” scenario comes about"; }, up: function(n){ return " the “" + n + "” scenario becomes more likely"; },
     dn: function(n){ return " the “" + n + "” scenario becomes less likely"; }, also: " · also: ", away: " (less likely)",
-    strat: "The assessment this forecast tests", none: "This forecast falls outside the five issues covered in Strategic Analysis, so its effects on people have not been calculated yet.",
+    strat: "The assessment this forecast tests", none: "This forecast falls outside the five issues covered in Strategy and Scenarios, so its effects on people have not been calculated yet.",
     noneC: "This forecast is not yet linked to a scenario in the issue analysis, so its effects on people have not been calculated.",
     pplL: function(n){ return "If the \u201c" + n + "\u201d scenario comes about"; }, pplD: function(n){ return "Losses if the \u201c" + n + "\u201d scenario comes about \u00b7 if this event happens, that scenario becomes less likely"; }, note: function(n){ return " · values for " + n; },
     chance: "Chance", na: "Not calculated", sim: "About the same", balt: " (Baltic states only)",

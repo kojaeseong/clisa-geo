@@ -91,12 +91,12 @@ function srBuild(){
   const toPane = (tab, cb) => () => { if (cb) cb(); switchTab(tab); return "pane-" + tab; };
   for (const [iso, c] of Object.entries(D.countries)) add("나라", c.name_ko + (c.leader ? " · " + String(c.leader).split(/[,/(]/)[0].trim() : ""), c, () => { selectCountry(iso, true); return "pane-detail"; });
   D.flashpoints.forEach(fp => add("분쟁 지점", fp.name_ko, fp, () => { selectFp(fp.id); return "pane-detail"; }));
-  (D.strategies || []).forEach(c => add("전략 분석 사안", c.title, c, () => { goCase(c.id); caseFill(c.id); return "case-" + c.id; }));
+  (D.strategies || []).forEach(c => add("전략과 전개 사안", c.title, c, () => { goCase(c.id); caseFill(c.id); return "case-" + c.id; }));
   /* v3.19 여론·의지 항목을 따로 색인 */
   const toCase = (id, tgt) => () => { goCase(id); caseFill(id); return tgt; }, cshort = c => String(c.title).split(":")[0];
   (D.strategies || []).forEach(c => {
-    ((c.publics || {}).items || []).forEach((p, i) => add("전략 분석 사안", cshort(c) + " · 국내 여론 · " + p.who, [p, "여론"], toCase(c.id, "pub-" + c.id + "-" + i)));
-    ((c.deciders || {}).items || []).forEach(d => add("전략 분석 사안", cshort(c) + " · 결정권자 분석 · " + nm(d.iso), [d, "의지"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
+    ((c.publics || {}).items || []).forEach((p, i) => add("전략과 전개 사안", cshort(c) + " · 국내 여론 · " + p.who, [p, "여론"], toCase(c.id, "pub-" + c.id + "-" + i)));
+    ((c.deciders || {}).items || []).forEach(d => add("전략과 전개 사안", cshort(c) + " · 결정권자 분석 · " + nm(d.iso), [d, "의지"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
   });
   for (const [iso, c] of Object.entries(D.countries)) if (c.intent) add("나라", c.name_ko + " · 의지 지표 · 말과 행동", [c.intent, "의지"], () => { selectCountry(iso, true); return "c-intent"; });
   FEATS().forEach(F => add("특집", F.title, F, () => { goFeat(F.id); return "feat-" + F.id; }));
@@ -110,10 +110,10 @@ function srBuild(){
       () => { fcOpen(f.id); return "pane-forecast"; });  /* v4.22 전망별 화면으로 */
   });
   const G = D.grand || {};
-  (G.trends || []).forEach(t => add("국제 질서", t.t, t, toPane("grand")));
-  (G.scenarios || []).forEach(t => add("국제 질서", "시나리오 · " + t.name, t, toPane("grand")));
-  (G.dyads || []).forEach(t => add("국제 질서", ((D.countries[t.a] || {}).name_ko || t.a) + "·" + ((D.countries[t.b] || {}).name_ko || t.b) + " 관계", t, toPane("grand")));
-  (G.tensions || []).forEach(t => add("국제 질서", ((D.countries[t.a] || {}).name_ko || t.a) + "·" + ((D.countries[t.b] || {}).name_ko || t.b) + " · 역사와 구조", t, toPane("grand")));
+  (G.trends || []).forEach(t => add("세계 질서", t.t, t, toPane("grand")));
+  (G.scenarios || []).forEach(t => add("세계 질서", "시나리오 · " + t.name, t, toPane("grand")));
+  (G.dyads || []).forEach(t => add("세계 질서", ((D.countries[t.a] || {}).name_ko || t.a) + "·" + ((D.countries[t.b] || {}).name_ko || t.b) + " 관계", t, toPane("grand")));
+  (G.tensions || []).forEach(t => add("세계 질서", ((D.countries[t.a] || {}).name_ko || t.a) + "·" + ((D.countries[t.b] || {}).name_ko || t.b) + " · 역사와 구조", t, toPane("grand")));
   ((D.history || {}).analogies || []).forEach(a => add("역사와 사상", "역사적 선례 · " + a.now + (a.cases ? " ↔ " + [].concat(a.cases).join(", ") : ""), a, toPane("ideas")));
   ((D.history || {}).laws || []).forEach(l => add("역사와 사상", l.t, l, toPane("ideas")));
   (D.thinkers || []).forEach(t => add("역사와 사상", t.name, t, toPane("ideas")));
@@ -125,7 +125,7 @@ function srBuild(){
    ["특집", "특집 기사 깊이 있는 글 주제", () => { switchTab("feature"); return "pane-feature"; }],
    ["세계 정세", "세계 정세 지구본 지도 정세 요약 다가오는 일정 분쟁지 나라", toPane("overview")],
    ["전략 분석", "전략 분석 사안 한반도 대만해협 러-우 전쟁 이란 호르무즈 반도체 판단 시나리오", toPane("strat")],
-   ["국제 질서", "국제 질서 세계 시나리오 강대국 관계 흐름", toPane("grand")],
+   ["세계 질서", "국제 질서 세계 시나리오 강대국 관계 흐름", toPane("grand")],
    ["전망과 검증", "전망 검증 확률 예측 적중 브라이어 점수 결과", toPane("forecast")],
    ["권력 구조", "권력 구조 결정 구조 결정권자 지도자 대통령 주석 위원장 총리 세계관 결정 방식 권력 구조 헌법 의회 국회 상원 하원 의석 여당 야당 거부권 선거 탄핵 동의 의원 발언", page("/power/")],
    ["역사와 사상", "역사 선례 사상가 고전 반복 유형", toPane("ideas")],
@@ -133,7 +133,7 @@ function srBuild(){
    ["사이트 안내", "사이트 안내 이용 방법 화면 설명 도움말 바로가기", page("/guide/")],
    ["운영자 인사말", "운영자 인사말 만든 사람 고재성 소개 연락 이메일 문의", page("/about/")],
    ["새 글 알림 받기", "새 글 알림 구독 RSS 피드 받아 보기 구독 앱", page("/subscribe/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
-  D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("전략 분석 사안", cshort(c) + " · 의회의 쟁점 · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "의회 국회 상원 하원 동의 표결"], toCase(c.id, "cg-" + c.id + "-" + i))));
+  D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("전략과 전개 사안", cshort(c) + " · 의회의 쟁점 · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "의회 국회 상원 하원 동의 표결"], toCase(c.id, "cg-" + c.id + "-" + i))));
   Object.entries(PLK()).forEach(([i, L]) => { add("권력 구조", L.name + "의 권력 구조", [L.name, L.system || "", "권력 구조 결정 구조 헌법 거부권 선거 탄핵 동의 파병 조약 예산"], page("/power/#" + i));
     if (L.pb) add("권력 구조", L.pb, [L.pb, L.name, "권력기관 의회 국회 의석 여당 야당 의결 정당 위원회 의원 발언 쟁점"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
   Object.entries(LLK()).forEach(([i, L]) => add("결정권자", L.name + " · 세계관과 결정 방식", [L.name, nm(i), "결정권자 지도자 세계관 결정 방식 말과 행동"], page(lurl(i))));
@@ -184,7 +184,7 @@ function srSnip(text, vs){
   for (const [s0, e0] of marks) { if (s0 < c) continue; h += esc(seg.slice(c, s0)) + "<mark>" + esc(seg.slice(s0, e0)) + "</mark>"; c = e0; }
   return (a > 0 ? "…" : "") + h + esc(seg.slice(c)) + (b < text.length ? "…" : "");
 }
-const SR_ORDER = ["사이트 메뉴","권력 구조","결정권자","결정권자 분석","나라","특집","주요 판단","전략 분석 사안","분쟁 지점","세계 정세","전망","정세 브리핑","국제 질서","역사와 사상","분석 방법"];
+const SR_ORDER = ["사이트 메뉴","권력 구조","결정권자","결정권자 분석","나라","특집","주요 판단","전략과 전개 사안","분쟁 지점","세계 정세","전망","정세 브리핑","세계 질서","역사와 사상","분석 방법"];
 const SR_EX = ["한반도 전쟁 가능성","김정은","러우 휴전 가능성","행복 지표","인구","호르무즈","반도체 관세","주한미군"];  /* v3.52 */
 function srRender(){
   const q = $("#srchq").value, box = $("#srchres");
@@ -984,7 +984,7 @@ function usfFill(){  /* 미국의 군 쪽이 글 칸에 있으면 배치·태세
   if (!D.posture) { [a, b].forEach(x => { if (x) x.textContent = "미군 배치 자료를 불러오지 못했습니다. 새로고침해 주세요."; }); return; }
   const x = usfParts(); if (a) { a.innerHTML = x.deploy; a.dataset.done = 1; } if (b) b.innerHTML = x.changes;
 }
-/*ONE{*/ /* v4.08 시안(2026-10-16): 산업별 미래·국민의 삶 카드 맨 위 한 문장, 전략 분석 판단 문장의 주어 구절. 정해 둔 틀 문장에 점 개수만 끼운다 */
+/*ONE{*/ /* v4.08 시안(2026-10-16): 산업별 미래·국민의 삶 카드 맨 위 한 문장, ‘전략과 전개’ 탭 판단 문장의 주어 구절. 정해 둔 틀 문장에 점 개수만 끼운다 */
 const jo = (w, a, b) => { const t = String(w), c = t.slice(-1), h = c.charCodeAt(0) - 0xAC00; return t + ((h >= 0 && h <= 11171) ? (h % 28 ? a : b) : ("013678".indexOf(c) >= 0 ? a : b)); };
 const roOf = w => { const h = String(w).slice(-1).charCodeAt(0) - 0xAC00; return (h >= 0 && h <= 11171 && h % 28 && h % 28 !== 8) ? "으로" : "로"; };
 const oB = (k, t) => '<b class="o-' + k + '">' + t + "</b>";
@@ -1365,7 +1365,7 @@ function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
   $("#pane-overview").innerHTML = briefHomeHtml() + dueHtml() +
-    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 전략 분석에서, 그 배경이 되는 구조는 국제 질서에서 볼 수 있습니다.</p>' +
+    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + '</p><h2 style="margin-top:4px">세계 정세</h2><p class="meta" style="margin-top:4px">분석 기준일 <span class="mono">' + esc(D.meta.asof) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? ' · 동향 점검 <span class="mono">' + esc(BR.issues[0].date) + "</span>" : "") + " · 정세 요약 " + D.digest.length + "건 · 분쟁 지점 " + fps.length + '곳</p><p class="lead" style="margin-top:8px">세계 곳곳의 분쟁 지점과 국제 정세의 주요 흐름을 기준일 현재로 정리합니다. 이 정세에 대한 클리사 지오폴리틱스의 판단은 ‘전략과 전개’ 탭에서, 그 배경이 되는 구조는 ‘세계 질서와 권력’ 탭에서 볼 수 있습니다.</p>' +
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     worldSecHtml() +
     (PUB() ? "" : '<section class="sec"><h3></h3><ul class="tl">' + D.log.slice().reverse().map(l => '<li><span class="d">' + esc(l.date) + "</span><span><b>" + esc(l.ver) + "</b> " + esc(l.text) + ((l.details || []).length ? '<details class="src" style="margin-top:4px"><summary>수정 전후 ' + l.details.length + '건</summary><ul>' + l.details.map(x => '<li><span class="note">' + esc(x.where) + "</span><br>" + esc(x.before) + "<br>→ " + esc(x.after) + "</li>").join("") + "</ul></details>" : "") /* v3.2 */ + "</span></li>").join("") + "</ul></section>") +
@@ -1390,7 +1390,7 @@ function renderDetail(){
       (fp.last_major_event ? '<section class="sec"><h3>최근 주요 사건</h3><ul class="tl"><li><span class="d">' + esc(fp.last_major_event.date) + "</span><span>" + esc(fp.last_major_event.text) + "</span></li></ul></section>" : "") +
       '<section class="sec"><h3>관련국</h3><div class="chips" style="margin:0">' + fp.countries.map(chip).join("") + "</div></section>" +
       (fcs.length ? '<section class="sec"><h3>관련 전망</h3><ul class="list">' + fcs.map(f => forecastRow(f, true)).join("") + "</ul></section>" : "") +
-      ((D.strategies || []).some(c => c.fp === fp.id) ? '<section class="sec"><h3>전략 분석</h3>' + D.strategies.filter(c => c.fp === fp.id).map(c => '<p style="margin-bottom:6px">' + esc(c.title) + '</p><button type="button" class="chip" data-case="' + esc(c.id) + '">전략 분석 보기 · ' + esc(c.title.split(":")[0]) + '</button>').join("") + "</section>" : "") +
+      ((D.strategies || []).some(c => c.fp === fp.id) ? '<section class="sec"><h3>전략과 전개</h3>' + D.strategies.filter(c => c.fp === fp.id).map(c => '<p style="margin-bottom:6px">' + esc(c.title) + '</p><button type="button" class="chip" data-case="' + esc(c.id) + '">전략과 전개 보기 · ' + esc(c.title.split(":")[0]) + '</button>').join("") + "</section>" : "") +
       (exitCase(fp.id) ? '<section class="sec"><h3>각자의 눈과 출구</h3><div class="misread"><b>가장 위험한 오독</b>' + esc(exitCase(fp.id).misread) + '</div><p style="margin-top:8px"><button type="button" class="chip" data-exit="' + esc(fp.id) + '">당사자별 인식과 출구 보기 · ' + esc(fp.name_ko) + '</button></p></section>' : "") +
       (FP_AN[fp.id] ? '<section class="sec"><h3>유사한 역사적 선례</h3>' + analogHtml(D.history.analogies.find(x => x.id === FP_AN[fp.id]), true) + "</section>" : "") +
       '<details class="src"><summary>출처 ' + (fp.sources || []).length + "건</summary><ul>" + (fp.sources || []).map(srcItem).join("") + "</ul></details>";
@@ -1554,7 +1554,7 @@ function countryIntentHtml(c){
   const row = x => '<tr><td><span class="sw ' + x.w + '">' + (x.w === "said" ? "말" : "행동") + '</span></td><td class="mono">' + esc(x.date) + "</td><td>" + esc(x.k) + "</td><td>" + esc(x.t) + (x.url ? ' <a href="' + esc(x.url) + '" target="_blank" rel="noopener">원문</a>' : "") + "</td></tr>";
   const sig = v ? v.signals.slice().sort((a, b) => a.w === b.w ? String(b.date).localeCompare(String(a.date)) : (a.w === "said" ? -1 : 1)) : [];
   return '<section class="sec" id="c-intent"><h3>의지 지표 · 말과 행동</h3>' + (v ? '<p><span class="fit ' + fitCls(v.fit) + '">' + esc(v.fit) + '</span></p><div class="tbl-wrap intent-c"><table class="tbl" style="min-width:480px"><tbody>' + sig.map(row).join("") + '</tbody></table></div><p style="font-size:13px;color:var(--ink)">' + esc(v.read) + "</p>" : "") +
-    (cases.length ? '<p class="note" style="margin-top:6px">이 국가가 결정권자로 등장하는 전략 분석 · ' + cases.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join(" ") + "</p>" : "") + "</section>";
+    (cases.length ? '<p class="note" style="margin-top:6px">이 국가가 결정권자로 등장하는 전략과 전개 · ' + cases.map(k => '<button type="button" class="chip" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join(" ") + "</p>" : "") + "</section>";
 }
 function gsBlock(c){
   const g = c.gs; if (!g) return "";
@@ -1621,7 +1621,7 @@ function renderGrand(){
   const cs = Object.values(D.countries).filter(c => c.drivers).sort((a, b) => order.indexOf(a.drivers.top) - order.indexOf(b.drivers.top) || b.drivers.w[b.drivers.top] - a.drivers.w[a.drivers.top]);
   const cnt = k => cs.filter(c => c.drivers.top === k).length;
   $("#pane-grand").innerHTML =
-    '<div class="sec"><h2>국제 질서</h2><p class="meta" style="margin-top:4px">세계 시나리오 ' + G.scenarios.length + "건 · 구조적 흐름 " + G.trends.length + "건 · 관계 분석 " + G.dyads.length + '건</p><p class="lead" style="margin-top:8px">개별 사안을 넘어 국제 질서 전반을 움직이는 구조를 분석합니다. 2030년까지의 세계 시나리오와 구조적 흐름, 주요 행위자의 대전략과 상호 관계를 다루고, 각 시나리오가 개별 사안의 전개에 미치는 영향을 함께 제시합니다.</p></div>' +
+    '<div class="sec"><h2>세계 질서</h2><p class="meta" style="margin-top:4px">세계 시나리오 ' + G.scenarios.length + "건 · 구조적 흐름 " + G.trends.length + "건 · 관계 분석 " + G.dyads.length + '건</p><p class="lead" style="margin-top:8px">개별 사안을 넘어 국제 질서 전반을 움직이는 구조를 분석합니다. 2030년까지의 세계 시나리오와 구조적 흐름, 주요 행위자의 대전략과 상호 관계를 다루고, 각 시나리오가 개별 사안의 전개에 미치는 영향을 함께 제시합니다.</p></div>' +
     tocHtml([["g-scn","시나리오"],["g-trend","구조적 흐름"],["g-mx","관계 행렬"],["g-drv","대전략의 동인"],["g-ten","역사와 구조"],["g-score","지구본 보기 방식"]]) +
     '<section class="sec" id="g-scn"><h3>2030년까지의 세계 시나리오 · 확률 합계 100% ' + ttsBtn("scn") + '</h3><ul class="list">' + G.scenarios.map(sc => {
       const th = D.thinkers.find(t => t.id === sc.thinker);
@@ -1857,7 +1857,7 @@ function goFeat(id){
 }
 function aiHtml(c){
   const A = c.ai; if (!A) return "";
-  return '<div class="aibox"><div class="aih"><span class="aitag">AI 변수</span><b>' + esc(A.t) + '</b></div><dl class="tw"><dt>쟁점</dt><dd>' + esc(A.stake) + "</dd><dt>영향</dt><dd>" + esc(A.moves) + "</dd><dt>전략 주체가 쥔 것</dt><dd>" + esc(A.lever) + '</dd><dt>선행 신호</dt><dd><ul>' + A.signs.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></dd></dl>' + (A.review ? '<p class="note"><span class="vd ' + (A.review === "통과" ? "ok" : "fix") + '">독립 반론 검토</span> ' + esc(A.review) + '</p>' : '') /* v3.0b */ + aiPrecHtml(A.prec, A.prec_insight) + '<p class="note">AI가 지정학에 미치는 영향 전반은 <button type="button" class="chip" data-go="grand">국제 질서 탭의 구조적 흐름</button>에서 볼 수 있습니다.</p></div>';
+  return '<div class="aibox"><div class="aih"><span class="aitag">AI 변수</span><b>' + esc(A.t) + '</b></div><dl class="tw"><dt>쟁점</dt><dd>' + esc(A.stake) + "</dd><dt>영향</dt><dd>" + esc(A.moves) + "</dd><dt>전략 주체가 쥔 것</dt><dd>" + esc(A.lever) + '</dd><dt>선행 신호</dt><dd><ul>' + A.signs.map(x => "<li>" + esc(x) + "</li>").join("") + '</ul></dd></dl>' + (A.review ? '<p class="note"><span class="vd ' + (A.review === "통과" ? "ok" : "fix") + '">독립 반론 검토</span> ' + esc(A.review) + '</p>' : '') /* v3.0b */ + aiPrecHtml(A.prec, A.prec_insight) + '<p class="note">AI가 지정학에 미치는 영향 전반은 <button type="button" class="chip" data-go="grand">세계 질서와 권력 탭의 구조적 흐름</button>에서 볼 수 있습니다.</p></div>';
 }
 function theoryHtml(c){
   const X = c.theory; if (!X || !(X.links || []).length) return "";
@@ -1909,7 +1909,7 @@ function aiPrecHtml(L, ins){
 function worldHtml(c){
   const W = c.world; if (!W) return "";
   const fn = {}; c.futures.items.forEach(f => fn[f.id] = f.name);
-  return '<h3 style="margin:8px 0 0">세계 시나리오별 전개</h3><p class="note">' + esc(W.note) + ' 세계 시나리오는 <button type="button" class="chip" data-go="grand">국제 질서 탭</button>에서 볼 수 있습니다.</p><div class="tbl-wrap"><table class="tbl ext" style="min-width:560px"><thead><tr><th>세계 시나리오</th><th>확률</th>' + W.order.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span><br>" + esc(fn[k]) + "</th>").join("") + "</tr></thead><tbody>" +
+  return '<h3 style="margin:8px 0 0">세계 시나리오별 전개</h3><p class="note">' + esc(W.note) + ' 세계 시나리오는 <button type="button" class="chip" data-go="grand">세계 질서와 권력 탭</button>에서 볼 수 있습니다.</p><div class="tbl-wrap"><table class="tbl ext" style="min-width:560px"><thead><tr><th>세계 시나리오</th><th>확률</th>' + W.order.map(k => '<th><span style="color:' + fcol(k) + '">' + k + "</span><br>" + esc(fn[k]) + "</th>").join("") + "</tr></thead><tbody>" +
     W.rows.map(r => "<tr><td><b>" + esc(r.id + ". " + r.name) + '</b><br><span class="note">' + esc(r.why) + '</span></td><td class="mono">' + r.p + "%</td>" + r.cond.map(v => '<td class="mono">' + v + "</td>").join("") + "</tr>").join("") +
     '<tr class="base"><td>가중 합 (검사)</td><td class="mono">100%</td>' + W.mix.map((v, i) => '<td class="mono">' + v + '<span class="dd">기준 ' + W.base[i] + "</span></td>").join("") + "</tr></tbody></table></div>";
 }
@@ -2259,8 +2259,8 @@ function cmbCond(s, pd){
   const W = s.world, ord = W.order, ids = s.hs7.scen.map(x => x.id), fam = id => ord.includes(id) ? id : (ord.find(o => id.indexOf(o) === 0) || id);
   const fs = {}; ids.forEach(id => { const f = fam(id); fs[f] = (fs[f] || 0) + (pd[id] || 0); });
   const wp = W.rows.map(r => r.p / 100), tot = wp.reduce((x, y) => x + y, 0); wp.forEach((v, i) => wp[i] = v / tot);
-  /* 국민의 삶의 전개가 전략 분석의 전개와 묶음이 다를 때(한반도: '무장한 정체'에 '체제 유지 승계' 일부 2%p를 넣음) 세계 시나리오 표를 그 묶음에 맞게 옮긴다.
-     옮기는 몫 = 공개 당시 국민의 삶 전개 확률의 묶음 합과 전략 분석 전개 확률(world.base)의 차이 */
+  /* 국민의 삶의 전개가 ‘전략과 전개’ 탭의 전개와 묶음이 다를 때(한반도: '무장한 정체'에 '체제 유지 승계' 일부 2%p를 넣음) 세계 시나리오 표를 그 묶음에 맞게 옮긴다.
+     옮기는 몫 = 공개 당시 국민의 삶 전개 확률의 묶음 합과 ‘전략과 전개’ 탭의 전개 확률(world.base)의 차이 */
   const P0 = {}; s.hs7.scen.forEach(x => P0[x.id] = x.p); const f0 = {}; ids.forEach(id => { const f = fam(id); f0[f] = (f0[f] || 0) + (P0[id] || 0); });
   const dif = ord.map((o, j) => W.base && W.base[j] ? (f0[o] || 0) - W.base[j] : 0), T = dif.reduce((x, y) => x + Math.max(0, y), 0);
   const C2 = W.rows.map(r => { if (!T) return r.cond.slice(); const give = ord.map((o, j) => dif[j] < 0 ? r.cond[j] * (-dif[j] / W.base[j]) : 0), G = give.reduce((x, y) => x + y, 0);
@@ -2416,8 +2416,8 @@ function dotCell(at, name, n, dl, oD, oT, spark, cls){  /* v3.99: 점 그래프 
 }
 function cmbDelta(key){ const t = BR.issues[0].date, a = cmbCount(key, ymdAdd(t, -7)), b = cmbCount(key, t), o = {}; HS_ORD.forEach(k => o[k] = b[k] - a[k]); return o; }
 const CMB_NOTE = {  /* v3.99: 종합 그래프의 계산 설명(짧게) */
-  ind: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 이익 변화를 합쳐 현 추세와 비교한 결과입니다. 한 사안의 손실을 다른 사안의 이득이 메우기도 합니다. 다만 두 사안의 효과가 같은 경로(예: 같은 유럽 방산 조달)를 거치면 영향이 큰 수치 하나만 반영합니다. 공장의 생산 능력 한계는 반영하지 않았습니다. 사안 사이의 연관은 국제 질서 탭의 세계 시나리오로 반영했습니다.",
-  life: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 4개 범주 점수의 변화를 합쳐 현재와 비교한 결과입니다. 사안 사이의 연관은 국제 질서 탭의 세계 시나리오로 반영했습니다."};
+  ind: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 이익 변화를 합쳐 현 추세와 비교한 결과입니다. 한 사안의 손실을 다른 사안의 이득이 메우기도 합니다. 다만 두 사안의 효과가 같은 경로(예: 같은 유럽 방산 조달)를 거치면 영향이 큰 수치 하나만 반영합니다. 공장의 생산 능력 한계는 반영하지 않았습니다. 사안 사이의 연관은 세계 질서와 권력 탭의 세계 시나리오로 반영했습니다.",
+  life: "종합은 5개 사안이 함께 전개되는 미래 100번에서, 사안별로 판단한 4개 범주 점수의 변화를 합쳐 현재와 비교한 결과입니다. 사안 사이의 연관은 세계 질서와 권력 탭의 세계 시나리오로 반영했습니다."};
 function cmbDetail(title, n, kind, key, LAB){  /* 종합 점 그래프를 누르면: 국민의 삶 카드와 같은 형식의 근거, 짧은 계산 설명, 국제 질서 흐름별 점 개수 */
   return '<div class="ind-det lbx-det cmb-det"><p class="lb-lab">' + title + "</p>" + cmbExplain(kind, key, LAB) +
     '<p class="cmb-m1">' + CMB_NOTE[kind] + "</p>" +
@@ -2828,7 +2828,7 @@ function renderStrat(){
   if (STRAT_D === D && pn.querySelector(".case-a")) { caseMark(); return; }
   STRAT_D = D;
   pn.innerHTML =
-    '<div class="sec"><h2>전략 분석</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석합니다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 4개 부분으로 구성됩니다.</p></div>' +
+    '<div class="sec"><h2>전략과 전개</h2><p class="lead" style="margin-top:8px">각 사안을 전략 주체의 관점에서 분석합니다. 분석은 정세 판단(Ⅰ), 전략 평가(Ⅱ), 개인에게 미치는 영향(Ⅲ), 검증(Ⅳ)의 4개 부분으로 구성됩니다.</p></div>' +
     insightsHtml() + upcomingHtml() + leadersRow() +
     '<h3 id="s-case" style="margin:6px 0 0">사안별 분석 <span class="note" style="font-weight:400">· 사안 ' + ss.length + "건</span></h3>" +
     (ss.length > 1 ? '<nav class="case-sw" aria-label="사안 바로 가기">' + ss.map(k => '<button type="button" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</nav>" : "") +
@@ -3341,7 +3341,7 @@ const SITE_T = document.title.split(" | ").pop();
 const PAGE_C = {}; let PAGE_CUR = null, PAGE_SEQ = 0;
 (function(){ const pp = document.querySelector("#pane-page .page-pre"); if (pp) { PAGE_CUR = location.pathname; PAGE_C[PAGE_CUR] = {h: pp.outerHTML, t: document.title}; } })();
 function titleOf(){
-  const t = S.tab, sx = " | " + SITE_T, gl = k => { const a = document.querySelector('.gnav > a[data-tab="' + k + '"]'); return a ? a.textContent.trim() : ""; };
+  const t = S.tab, sx = " | " + SITE_T, gl = k => { const a = document.querySelector('.gnav a[data-tab="' + k + '"]'); return a ? (a.dataset.pt || a.textContent).trim() : ""; };  /* E105(2026-11-02): 새 머리글은 메뉴를 .hd-nl로 감싸 '.gnav > a'가 못 찾아 탭 쪽 제목이 비었음. 쪽 이름은 data-pt(tabs1102) */
   if (t === "page") return (PAGE_C[PAGE_CUR] || {}).t || document.title;
   if (t === "overview" || !D) return SITE_T;
   if (t === "strat") { const c = S.scase && (D.strategies || []).find(x => x.id === S.scase); return (c ? c.title : gl("strat")) + sx; }

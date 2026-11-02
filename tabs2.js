@@ -6,7 +6,7 @@
     ["industry", ["/industry/", "/life/"], EN ? [["Industry Outlook", "/industry/"], ["People\u2019s Lives", "/life/"]] : [["산업별 미래", "/industry/"], ["국민의 삶", "/life/"]]],
     ["strat", ["/case/"]], ["forecast", ["/forecast/"]],
     ["brieftab", ["/brief/", "/feature/", "/digest/"], EN ? [["Briefings", "/brief/"], ["Features", "/feature/"]] : [["정세 브리핑", "/brief/"], ["특집", "/feature/"]]],
-    ["grand", ["/grand/", "/power/", "/leader/"], EN ? [["World Order", "/grand/"], ["Power Structures", "/power/"]] : [["국제 질서", "/grand/"], ["권력 구조", "/power/"]]],
+    ["grand", ["/grand/", "/power/", "/leader/"], EN ? [["World Order", "/grand/"], ["Power Structures", "/power/"]] : [["세계 질서", "/grand/"], ["권력 구조", "/power/"]]],
     ["ideas", ["/ideas/"]]
   ];
   function key(a) { return a.getAttribute("data-tab") || a.getAttribute("data-nav"); }

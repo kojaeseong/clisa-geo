@@ -119,12 +119,12 @@ function srBuild(){
   const toPane = (tab, cb) => () => { if (cb) cb(); switchTab(tab); return "pane-" + tab; };
   for (const [iso, c] of Object.entries(D.countries)) add("Countries", c.name_ko + (c.leader ? " · " + String(c.leader).split(/[,/(]/)[0].trim() : ""), c, () => { selectCountry(iso, true); return "pane-detail"; });
   D.flashpoints.forEach(fp => add("Flashpoints", fp.name_ko, fp, () => { selectFp(fp.id); return "pane-detail"; }));
-  (D.strategies || []).forEach(c => add("Strategic Analysis", c.title, c, () => { goCase(c.id); caseFill(c.id); return "case-" + c.id; }));
+  (D.strategies || []).forEach(c => add("Strategy and Scenarios", c.title, c, () => { goCase(c.id); caseFill(c.id); return "case-" + c.id; }));
   /* v3.19 여론·의지 항목을 따로 색인 */
   const toCase = (id, tgt) => () => { goCase(id); caseFill(id); return tgt; }, cshort = c => String(c.title).split(":")[0];
   (D.strategies || []).forEach(c => {
-    ((c.publics || {}).items || []).forEach((p, i) => add("Strategic Analysis", cshort(c) + " · Domestic opinion · " + p.who, [p, "public opinion"], toCase(c.id, "pub-" + c.id + "-" + i)));
-    ((c.deciders || {}).items || []).forEach(d => add("Strategic Analysis", cshort(c) + " · Decision-maker analysis · " + nm(d.iso), [d, "intent"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
+    ((c.publics || {}).items || []).forEach((p, i) => add("Strategy and Scenarios", cshort(c) + " · Domestic opinion · " + p.who, [p, "public opinion"], toCase(c.id, "pub-" + c.id + "-" + i)));
+    ((c.deciders || {}).items || []).forEach(d => add("Strategy and Scenarios", cshort(c) + " · Decision-maker analysis · " + nm(d.iso), [d, "intent"], toCase(c.id, "dec-" + c.id + "-" + d.iso)));
   });
   for (const [iso, c] of Object.entries(D.countries)) if (c.intent) add("Countries", c.name_ko + " · Intent indicators · words and deeds", [c.intent, "intent"], () => { selectCountry(iso, true); return "c-intent"; });
   FEATS().forEach(F => add("Features", F.title, F, () => { goFeat(F.id); return "feat-" + F.id; }));
@@ -152,7 +152,7 @@ function srBuild(){
   [["Briefings", "briefing today latest news morning daily major events developments briefings", () => { goBrief("latest"); return "pane-brief"; }],
    ["Features", "features articles in-depth essays topics", () => { switchTab("feature"); return "pane-feature"; }],
    ["Global Overview", "global overview globe map summary upcoming events schedule flashpoints conflict zones countries", toPane("overview")],
-   ["Strategic Analysis", "strategic analysis issues Korean Peninsula Taiwan Strait Russia-Ukraine war Iran Hormuz semiconductors chips assessment scenarios", toPane("strat")],
+   ["Strategy and Scenarios", "strategic analysis issues Korean Peninsula Taiwan Strait Russia-Ukraine war Iran Hormuz semiconductors chips assessment scenarios", toPane("strat")],
    ["World Order", "world order world scenarios great powers relations trends", toPane("grand")],
    ["Forecasts and Track Record", "forecasts track record probability prediction accuracy hit rate Brier score results", toPane("forecast")],
    ["Power Structures", "power structures decision-making decision-maker leader president chairman prime minister worldview how decisions are made constitution legislature parliament National Assembly Congress Senate House seats ruling party opposition veto election impeachment consent lawmakers statements", page("/power/")],
@@ -161,7 +161,7 @@ function srBuild(){
    ["Site Guide", "site guide how to use screens explanation help shortcuts", page("/guide/")],
    ["A Note from the Founder", "note from the founder Jae-Seong Ko about contact email inquiries", page("/about/")],
    ["Subscribe to Updates", "new post alerts subscribe RSS feed app updates", page("/subscribe/")]].forEach(([t, b, go]) => add("Site Menu", t, b, go));
-  D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("Strategic Analysis", cshort(c) + " · Issues before the legislature · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "legislature parliament National Assembly Congress Senate House consent vote"], toCase(c.id, "cg-" + c.id + "-" + i))));
+  D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("Strategy and Scenarios", cshort(c) + " · Issues before the legislature · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "legislature parliament National Assembly Congress Senate House consent vote"], toCase(c.id, "cg-" + c.id + "-" + i))));
   Object.entries(PLK()).forEach(([i, L]) => { add("Power Structures", L.name + ": power structure", [L.name, L.system || "", "power structure decision-making constitution veto election impeachment consent troop deployment treaties budget"], page("/power/#" + i));
     if (L.pb) add("Power Structures", L.pb, [L.pb, L.name, "power centers legislature parliament National Assembly seats ruling party opposition votes parties committees lawmakers statements issues"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
   Object.entries(LLK()).forEach(([i, L]) => add("Decision-Makers", L.name + " · Worldview and decision-making", [L.name, nm(i), "decision-maker leader worldview decision-making words and deeds"], page(lurl(i))));
@@ -212,7 +212,7 @@ function srSnip(text, vs){
   for (const [s0, e0] of marks) { if (s0 < c) continue; h += esc(seg.slice(c, s0)) + "<mark>" + esc(seg.slice(s0, e0)) + "</mark>"; c = e0; }
   return (a > 0 ? "…" : "") + h + esc(seg.slice(c)) + (b < text.length ? "…" : "");
 }
-const SR_ORDER = ["Site Menu","Power Structures","Decision-Makers","Decision-Maker Analysis","Countries","Features","Key Assessments","Strategic Analysis","Flashpoints","Global Overview","Forecasts","Briefings","World Order","History and Ideas","Methodology"];
+const SR_ORDER = ["Site Menu","Power Structures","Decision-Makers","Decision-Maker Analysis","Countries","Features","Key Assessments","Strategy and Scenarios","Flashpoints","Global Overview","Forecasts","Briefings","World Order","History and Ideas","Methodology"];
 const SR_EX = ["chance of war in Korea","Kim Jong Un","chance of a Ukraine ceasefire","well-being index","population","Hormuz","chip tariffs","USFK"];  /* v3.52 */
 function srRender(){
   const q = $("#srchq").value, box = $("#srchres");
@@ -1389,7 +1389,7 @@ function renderOverview(){
   if (!D) return;
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
   $("#pane-overview").innerHTML = briefHomeHtml() + dueHtml() +
-    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + "</p><h2 style=\"margin-top:4px\">Global Overview</h2><p class=\"meta\" style=\"margin-top:4px\">Analysis as of <span class=\"mono\">" + esc(enDate(D.meta.asof)) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? " · Latest developments checked <span class=\"mono\">" + esc(enDate(BR.issues[0].date)) + "</span>" : "") + " · " + pl(D.digest.length, "summary", "summaries") + " · " + pl(fps.length, "flashpoint") + "</p><p class=\"lead\" style=\"margin-top:8px\">Flashpoints around the world and the main currents in global affairs, as of the date above. Clisa Geopolitics’ assessments of these developments are in Strategic Analysis; the structural forces behind them are in World Order.</p>" +
+    '<div class="sec"><p class="eyebrow">' + esc(D.meta.scope) + "</p><h2 style=\"margin-top:4px\">Global Overview</h2><p class=\"meta\" style=\"margin-top:4px\">Analysis as of <span class=\"mono\">" + esc(enDate(D.meta.asof)) + "</span>" + (BR && BR.issues[0].date > D.meta.asof ? " · Latest developments checked <span class=\"mono\">" + esc(enDate(BR.issues[0].date)) + "</span>" : "") + " · " + pl(D.digest.length, "summary", "summaries") + " · " + pl(fps.length, "flashpoint") + "</p><p class=\"lead\" style=\"margin-top:8px\">Flashpoints around the world and the main currents in global affairs, as of the date above. Clisa Geopolitics’ assessments of these developments are in Strategy and Scenarios; the structural forces behind them are in World Order.</p>" +
     ((D.insights || []).length ? "<button type=\"button\" class=\"entry\" data-go=\"strat\">View Clisa Geopolitics’ " + pl(D.insights.length, "key assessment") + "<span aria-hidden=\"true\">→</span></button>" : "") + "</div>" +
     worldSecHtml() +
     (PUB() ? "" : '<section class="sec"><h3></h3><ul class="tl">' + D.log.slice().reverse().map(l => '<li><span class="d">' + esc(enDate(l.date)) + "</span><span><b>" + esc(l.ver) + "</b> " + esc(l.text) + ((l.details || []).length ? "<details class=\"src\" style=\"margin-top:4px\"><summary>Changes · " + l.details.length + "</summary><ul>" + l.details.map(x => '<li><span class="note">' + esc(x.where) + "</span><br>" + esc(x.before) + "<br>→ " + esc(x.after) + "</li>").join("") + "</ul></details>" : "") /* v3.2 */ + "</span></li>").join("") + "</ul></section>") +
@@ -1414,7 +1414,7 @@ function renderDetail(){
       (fp.last_major_event ? "<section class=\"sec\"><h3>Latest major event</h3><ul class=\"tl\"><li><span class=\"d\">" + esc(enDate(fp.last_major_event.date)) + "</span><span>" + esc(fp.last_major_event.text) + "</span></li></ul></section>" : "") +
       "<section class=\"sec\"><h3>Countries involved</h3><div class=\"chips\" style=\"margin:0\">" + fp.countries.map(chip).join("") + "</div></section>" +
       (fcs.length ? "<section class=\"sec\"><h3>Related forecasts</h3><ul class=\"list\">" + fcs.map(f => forecastRow(f, true)).join("") + "</ul></section>" : "") +
-      ((D.strategies || []).some(c => c.fp === fp.id) ? "<section class=\"sec\"><h3>Strategic Analysis</h3>" + D.strategies.filter(c => c.fp === fp.id).map(c => '<p style="margin-bottom:6px">' + esc(c.title) + '</p><button type="button" class="chip" data-case="' + esc(c.id) + "\">View Strategic Analysis · " + esc(c.title.split(":")[0]) + '</button>').join("") + "</section>" : "") +
+      ((D.strategies || []).some(c => c.fp === fp.id) ? "<section class=\"sec\"><h3>Strategy and Scenarios</h3>" + D.strategies.filter(c => c.fp === fp.id).map(c => '<p style="margin-bottom:6px">' + esc(c.title) + '</p><button type="button" class="chip" data-case="' + esc(c.id) + "\">View Strategy and Scenarios · " + esc(c.title.split(":")[0]) + '</button>').join("") + "</section>" : "") +
       (exitCase(fp.id) ? "<section class=\"sec\"><h3>How each side sees it, and the way out</h3><div class=\"misread\"><b>Most dangerous misreading</b>" + esc(exitCase(fp.id).misread) + '</div><p style="margin-top:8px"><button type="button" class="chip" data-exit="' + esc(fp.id) + "\">View each side’s perceptions and exits · " + esc(fp.name_ko) + '</button></p></section>' : "") +
       (FP_AN[fp.id] ? "<section class=\"sec\"><h3>Similar historical precedents</h3>" + analogHtml(D.history.analogies.find(x => x.id === FP_AN[fp.id]), true) + "</section>" : "") +
       "<details class=\"src\"><summary>Sources · " + (fp.sources || []).length + "</summary><ul>" + (fp.sources || []).map(srcItem).join("") + "</ul></details>";
@@ -2852,7 +2852,7 @@ function renderStrat(){
   if (STRAT_D === D && pn.querySelector(".case-a")) { caseMark(); return; }
   STRAT_D = D;
   pn.innerHTML =
-    "<div class=\"sec\"><h2>Strategic Analysis</h2><p class=\"lead\" style=\"margin-top:8px\">Each issue is analyzed from the strategic actor’s point of view. The analysis has four parts: situation assessment (Ⅰ), strategy evaluation (Ⅱ), what it means for people (Ⅲ), and verification (Ⅳ).</p></div>" +
+    "<div class=\"sec\"><h2>Strategy and Scenarios</h2><p class=\"lead\" style=\"margin-top:8px\">Each issue is analyzed from the strategic actor’s point of view. The analysis has four parts: situation assessment (Ⅰ), strategy evaluation (Ⅱ), what it means for people (Ⅲ), and verification (Ⅳ).</p></div>" +
     insightsHtml() + upcomingHtml() + leadersRow() +
     "<h3 id=\"s-case\" style=\"margin:6px 0 0\">Analysis by issue <span class=\"note\" style=\"font-weight:400\">· " + pl(ss.length, "issue") + "</span></h3>" +
     (ss.length > 1 ? "<nav class=\"case-sw\" aria-label=\"Jump to an issue\">" + ss.map(k => '<button type="button" data-case="' + esc(k.id) + '">' + esc(k.title.split(":")[0]) + "</button>").join("") + "</nav>" : "") +
@@ -3365,7 +3365,7 @@ const SITE_T = document.title.split(" | ").pop();
 const PAGE_C = {}; let PAGE_CUR = null, PAGE_SEQ = 0;
 (function(){ const pp = document.querySelector("#pane-page .page-pre"); if (pp) { PAGE_CUR = location.pathname; PAGE_C[PAGE_CUR] = {h: pp.outerHTML, t: document.title}; } })();
 function titleOf(){
-  const t = S.tab, sx = " | " + SITE_T, gl = k => { const a = document.querySelector('.gnav > a[data-tab="' + k + '"]'); return a ? a.textContent.trim() : ""; };
+  const t = S.tab, sx = " | " + SITE_T, gl = k => { const a = document.querySelector('.gnav a[data-tab="' + k + '"]'); return a ? (a.dataset.pt || a.textContent).trim() : ""; };  /* E105(2026-11-02): 새 머리글은 메뉴를 .hd-nl로 감싸 '.gnav > a'가 못 찾아 탭 쪽 제목이 비었음. 쪽 이름은 data-pt(tabs1102) */
   if (t === "page") return (PAGE_C[PAGE_CUR] || {}).t || document.title;
   if (t === "overview" || !D) return SITE_T;
   if (t === "strat") { const c = S.scase && (D.strategies || []).find(x => x.id === S.scase); return (c ? c.title : gl("strat")) + sx; }
