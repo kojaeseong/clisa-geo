@@ -1,6 +1,224 @@
 {
  "issues": [
   {
+   "date": "2026-11-02",
+   "items": [
+    {
+     "case": "iran",
+     "h": "미국, 걸프 동맹국에 이르면 4일 대이란 공습 대비 통보 보도…백악관은 논평 거부",
+     "fact": "미국 MS나우 방송은 걸프 아랍국 고위 관리 3명을 인용해 미국이 걸프 동맹국들에 이르면 중간선거 다음 날인 11월 4일 짧지만 강도 높은 대이란 공습이 있을 수 있다고 알렸다고 보도했고, 백악관은 군사 계획에 논평하지 않는다고 했습니다. 트럼프 대통령은 31일 플로리다 마러라고에서 기자들에게 이란의 남은 핵 관련 시설 \"한두 곳\"은 10분이면 처리할 수 있다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/liveblog_entry/report-us-warns-gulf-allies-of-possible-iran-strikes-as-early-as-november-4/",
+      "https://www.foxnews.com/live-news/us-iran-war-trump-israel-strait-hormuz-10-31-26",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란 아락치 \"호르무즈 재개방 이행 기간 이틀로 줄인 제안 마련\"…도하 협상 사흘째",
+     "fact": "아바스 아락치 이란 외무장관은 31일 알자지라 인터뷰에서 카타르 중재단과 호르무즈 해협 재개방의 이행 기간을 이틀로 줄인 제안을 마련했다고 말했습니다. 이란 협상단은 1일까지 사흘째 도하에서 협의했고, 아락치 장관은 아직 최종 결론이 나지 않았다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://tass.com/world/2211373",
+      "https://www.al-monitor.com/originals/2026/11/iran-qatari-mediators-hold-third-day-talks-end-us-iran-war"
+     ],
+     "loc": {
+      "lat": 25.29,
+      "lon": 51.53,
+      "place": "도하(카타르)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "모즈타바 하메네이, 어떤 위협에도 지리적 제한 없이 즉각 대응하라고 군에 지시",
+     "fact": "이란 최고지도자 모즈타바 하메네이는 31일 성명에서 어떤 위협에도 즉각적이고 효과적이며 지리적 제한이 없는 대응을 하라고 군에 지시했다고 AFP가 보도했습니다. 모하마드 아크라미니아 이란군 대변인은 1일 국영 TV에서 새 전쟁은 이전 전쟁보다 길어질 수 있다고 경고했습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/",
+      "https://timesofisrael.com/liveblog-november-1-2026"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디 라스알카프지 앞바다서 유조선 피격…혁명수비대는 해협서 2척 기뢰 폭발 주장",
+     "fact": "영국 해사무역기구(UKMTO)는 2일 새벽(현지 시각) 사우디아라비아 라스알카프지 동쪽 72해리 해상에서 유조선이 정체불명의 발사체 2발에 맞았으나 선원은 모두 소재가 확인됐다고 밝혔습니다. 이란 혁명수비대는 1일 유조선 2척이 승인되지 않은 항로로 호르무즈 해협을 지나다 기뢰에 맞아 폭발했다고 주장했으나, 이 주장은 확인되지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202610312594",
+      "https://www.jpost.com/middle-east/iran-news/article-913514"
+     ],
+     "loc": {
+      "lat": 28.42,
+      "lon": 49.85,
+      "place": "페르시아만 라스알카프지 동쪽 해상(사우디아라비아)",
+      "isos": [
+       "SAU",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 드론 433대로 우크라이나 에너지 시설 공격…수십만 가구 정전",
+     "fact": "우크라이나 공군은 러시아가 10월 31일 오후 6시(현지 시각)부터 드론 433대를 날렸으며 11월 1일 오전 7시 30분 기준 371대를 격추·무력화했다고 밝혔고, 젤렌스키 대통령은 수십만 가구가 전기를 쓰지 못한다고 말했습니다. 러시아 국방부는 1일 오전 8시부터 오후 8시(모스크바 시각)까지 우크라이나 드론 47대를 격추했다고 밝혔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4180165-air-defense-neutralizes-371-of-433-russian-drones-launched-against-ukraine-overnight.html",
+      "https://kyivindependent.com/russian-attacks-kill-1-injure-47-over-past-day-leaving-hundreds-of-thousands-without-electricity/",
+      "https://tass.com/defense/2211577"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "루비오 \"우크라이나에서 협상을 통한 평화가 가능한지 모르겠다\"",
+     "fact": "마코 루비오 미 국무장관은 31일 애틀랜타 G20 외교장관회의 기자회견에서 우크라이나에서 협상을 통한 평화가 가능한지 모르겠고 그것을 알아보는 중이라고 말했습니다. 아부다비에서 열릴 미·러·우 3자 회담은 11월 초로 예상되지만 날짜는 아직 정해지지 않았다고 키이우인디펜던트가 보도했습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/i-dont-know-if-negotiated-peace-is-achievable-rubio-says-as-uncertainty-hangs-over-russia-ukraine-talks/"
+     ],
+     "loc": {
+      "lat": 33.75,
+      "lon": -84.39,
+      "place": "애틀랜타(미국)",
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "라트비아군, 러시아·벨라루스 접경 영공에 미확인 비행체…주민에 실내 대피 권고",
+     "fact": "라트비아군은 1일 남동부 크라슬라바·루자 일대 영공에 정체불명의 비행체가 들어와 위협이 있다며 주민에게 실내에 머물라고 알렸고, 한 시간이 안 돼 상황이 끝났다고 밝혔습니다. 군은 요격 드론을 띄웠다가 러시아·벨라루스 영공 침범을 피하려고 자폭시켰다고 밝혔으며 비행체의 출처는 아직 밝혀지지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/suspicious-object-enters-latvian-airspace-near-belarus-russia-border/"
+     ],
+     "loc": {
+      "lat": 55.9,
+      "lon": 27.17,
+      "place": "크라슬라바(라트비아)",
+      "isos": [
+       "LVA",
+       "RUS",
+       "BLR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "프랑스, 생활비·교육 항의 시위 3주째…당국 집계 32만 명 참가, 290명 체포",
+     "fact": "프랑스 전역에서 31일 생활비와 학교 여건에 항의하는 시위가 3주 연속 주말에 열려 당국 집계로 32만 명(파리 7만 명)이 참가했고, 내무부는 적어도 290명을 체포했다고 밝혔다고 알자지라가 보도했습니다. 주최 측은 50만 명 가까이 참가했다고 주장했고, 경찰은 파리와 리옹에서 최루가스를 쐈습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/31/tension-and-clashes-as-hundreds-of-thousands-protest-again-in-france"
+     ],
+     "loc": {
+      "lat": 48.86,
+      "lon": 2.35,
+      "place": "파리(프랑스)",
+      "isos": [
+       "FRA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "이란 외무부는 1일 최고국가안보회의 결정에 따라 영국 해군과 공군을 테러 조직으로, 해외정보국(MI6)을 적대 단체로 지정했으며, 영국이 7월 국가위협법에 따라 혁명수비대를 지정한 데 대한 상응 조치라고 밝혔습니다.",
+     "src": [
+      "https://www.tehrantimes.com/news/531732/Iran-designates-MI6-Royal-Navy-and-RAF-under-reciprocal-measures",
+      "https://5pillarsuk.com/2026/11/01/iran-designates-british-military-as-terrorist-organisations-in-response-to-irgc-proscription/"
+     ],
+     "case": "iran"
+    },
+    {
+     "t": "미 연방수사국(FBI)은 31일 바이낸스에서 사상 최대 규모인 63억 달러어치의 가상자산을 훔친 해킹을 북한 해커 조직 '트레이더트레이터'의 소행으로 지목했다고 알자지라가 보도했습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/1/fbi-blames-north-korea-for-record-6-3bn-crypto-heist"
+     ],
+     "case": "korea"
+    },
+    {
+     "t": "조선중앙통신은 1일 북한이 31일 전술탄도미사일에 탑재할 집속탄 탄두의 시험을 했다고 보도했으며, 보도에는 김정은 국무위원장의 참관이 언급되지 않았습니다.",
+     "src": [
+      "https://www.dawn.com/news/2041366"
+     ],
+     "case": "korea"
+    },
+    {
+     "t": "유럽연합 집행위원회 대변인은 1일 새 헌법재판관 8명의 임명은 폴란드 하원의 헌법상 권한에 속한다며 폴란드 정부 쪽에 힘을 실었고, 바르샤바 헌법재판소 앞에는 31일 경찰이 저지선을 쳤습니다.",
+     "src": [
+      "https://kyivindependent.com/eu-commission-backs-poland-government-over-constitutional-court-crisis/"
+     ],
+     "case": "poland"
+    },
+    {
+     "t": "레제프 타이이프 에르도안 튀르키예 대통령은 31일 이스탄불에서 젤렌스키 대통령과 회담하고 누가 어떤 명분으로 하든 흑해의 민간 선박에 대한 공격은 어떤 경우에도 받아들일 수 없다고 말했습니다.",
+     "src": [
+      "https://kyivindependent.com/zelensky-arrives-in-istanbul-for-important-talks-with-turkeys-erdogan/"
+     ],
+     "case": "ukraine"
+    }
+   ]
+  },
+  {
    "date": "2026-10-31",
    "items": [
     {
@@ -4832,205 +5050,6 @@
      "t": "중국 해경은 9월 29일 주자젠호 편대가 9월부터 대만섬 동쪽 수역의 통제를 강화해 왔다고 밝혔으며, 선박 승선 검색은 확인되지 않았습니다.",
      "src": [
       "https://english.news.cn/20260929/62256176f6ba4297ab7e16b18c30f56b/c.html"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-09-29",
-   "items": [
-    {
-     "case": "korea",
-     "h": "비무장지대 폭발은 북한 지뢰일 가능성이 매우 높다는 조사 결과가 나왔다",
-     "fact": "합동참모본부는 9월 28일, 9월 21일 서부전선 비무장지대 군사분계선 남쪽에서 장병 3명이 다친 폭발이 북한 지뢰 때문일 가능성이 매우 높다고 발표했습니다. 최종 판단은 유엔군사령부와의 추가 조사 뒤에 내리며, 비슷한 사건은 2015년 8월 목함지뢰 사건 이후 처음입니다.",
-     "link": "남북 군사 통신선이 복원되지 않는다는 전망을 뒷받침하는 사건입니다. 2015년에는 대북 확성기 재개와 포격전 뒤 남북 고위급 접촉으로 8·25 합의가 나왔지만, 현재는 북한이 남북 대화 자체를 거부하고 있어 같은 경로가 열릴 가능성은 낮습니다.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.koreaherald.com/article/10886756",
-      "https://www.stripes.com/theaters/asia_pacific/2026-09-29/north-korea-dmz-landmines-23000457.html"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "h": "북한은 유엔에서 핵보유국 지위를 되돌릴 수 없다고 선언했다",
-     "fact": "김선경 북한 외무성 부상은 9월 28일(뉴욕 시각) 유엔총회 일반토의 연설에서 핵보유국 지위는 어떤 상황에서도 되돌릴 수 없다고 말했습니다. 연설은 한미의 핵추진잠수함 협력을 비난했지만 트럼프 대통령과의 대화는 언급하지 않았고, 이튿날 북한 외무성은 한국의 핵잠 승인을 비난하는 비망록을 냈습니다.",
-     "link": "북한의 최선의 수는 핵보유의 사실상 인정을 받는 북미 직거래라는 판단(한반도 C7)과 맞습니다. 대화 언급이 없었다는 점만으로는 북미 정상회담 전망을 바꿀 신호로 보지 않습니다.",
-     "fc": [
-      {
-       "id": "f05",
-       "e": "none"
-      },
-      {
-       "id": "f22",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.koreatimes.co.kr/world/20260929/senior-nk-diplomat-says-nuclear-status-can-never-be-reversed-in-any-circumstances",
-      "https://www.hankyung.com/article/2026092909407"
-     ],
-     "loc": {
-      "isos": [
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "h": "미국은 이란과의 간접 협의에서 핵 문제를 함께 다룰 것을 요구했다",
-     "fact": "미국과 이란은 뉴욕에서 카타르 중재단을 따로 만나는 간접 협의를 이어 갔습니다. 미국 관리는 어떤 합의든 핵 문제를 다뤄야 한다며, 이란이 유연하다는 뜻을 보였지만 시점에서 입장이 갈린다고 말했습니다. 이란의 협상 대표인 갈리바프 의회 의장은 자국이 석유를 팔지 못하면 누구도 팔지 못할 것이라고 경고했습니다.",
-     "link": "해협 재개방과 봉쇄 해제를 먼저 하고 핵 문제를 다음 단계로 미루는 단계별 합의 전망에는 불리한 요인입니다. 갈리바프의 경고는 한국에 가장 큰 손실이 될 걸프 전체로의 확전(이란 C2) 위험을 높이는 발언입니다.",
-     "fc": [
-      {
-       "id": "f38",
-       "e": "down"
-      },
-      {
-       "id": "f43",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks",
-      "https://www.omanobserver.om/article/1196952/world/region/iran-threatens-to-hit-regional-infrastructure-if-its-security-not-ensured"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "h": "러시아는 2027년 국방비를 개전 이후 가장 큰 폭으로 늘렸다",
-     "fact": "로이터가 입수한 러시아 정부 예산 문서에 따르면 2027년 국방비는 17.1조 루블로, 지난해 계획보다 약 27% 많습니다. 푸틴 대통령은 9월 28일 군 정원을 1만 5,500명 늘리는 대통령령에 서명했으며, 올해 들어 네 번째 증원입니다. 젤렌스키 대통령은 북한이 약 1만 명의 추가 파병을 준비하고 있다고 주장했습니다.",
-     "link": "2030년까지 소모전이 이어질 가능성이 가장 높다는 판단(러-우 C1)을 뒷받침하며, 전면 휴전과 정전 유지 전망에는 불리한 요인입니다. 북한군 추가 파병은 우크라이나 측의 주장이며 독립적으로 확인되지 않았습니다.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      },
-      {
-       "id": "f28",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.defensenews.com/global/europe/2026/09/28/russia-raises-2027-military-spending-by-27-budget-documents-show/",
-      "https://www.themoscowtimes.com/2026/09/28/russia-raises-2027-military-spending-by-27-budget-documents-show-a93810",
-      "https://meduza.io/en/news/2026/09/28/reuters-russia-plans-record-defense-spending-of-17-trillion-rubles-in-2027-27-more-than-previously-budgeted",
-      "https://www.rferl.org/a/zelenskyy-ukraine-drone-russian-mobilization-north-korea/33865993.html",
-      "https://www.ukrinform.net/rubric-ato/4168983-zelensky-russia-has-already-begun-additional-mobilization.html"
-     ],
-     "loc": {
-      "isos": [
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "h": "중국 해경은 대만 동쪽 해역에서 '상시 법 집행 순찰'을 한다고 발표했다",
-     "fact": "중국 해경국은 9월 29일 해경 함정 편대가 대만 동쪽 해역에서 상시화된 법 집행 순찰을 하고 있다고 발표했고, 9월 초부터 진먼 인근 해역에서도 순찰해 왔다고 밝혔습니다. 대만 해순서는 '가짜 법 집행, 진짜 침범'이라며 함정을 보내 감시했습니다.",
-     "link": "중국이 무력을 쓰지 않고 관할권을 주장하는 회색지대 압박을 넓히는 흐름입니다. 다만 선박 승선 검색이나 통항 통제는 아직 확인되지 않아, 관련 전망을 바꿀 단계는 아니고 상향 요인으로만 봅니다.",
-     "fc": [
-      {
-       "id": "f24",
-       "e": "up"
-      },
-      {
-       "id": "f44",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.chinanews.com.cn/gn/2026/09-29/10705536.shtml",
-      "https://www.chinanews.com.cn/gn/2026/09-29/10705460.shtml",
-      "https://www.chinatimes.com/realtimenews/20260929003877-260402",
-      "https://udn.com/news/story/7331/9783599"
-     ],
-     "loc": {
-      "lat": 23.5,
-      "lon": 122.3,
-      "place": "대만 동쪽 해역",
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": "chips",
-     "h": "미중은 관세 휴전의 추가 연장을 계속 논의하기로 했다",
-     "fact": "중국 상무부는 9월 28일 제8차 미중 경제무역 협의 결과를 설명하며, 관세 휴전을 2027년 1월 10일까지 연장한 데 이어 추가 연장도 계속 논의하기로 했다고 밝혔습니다. 양국은 각각 약 300억 달러 규모의 관세 인하 품목표를 공개했습니다.",
-     "link": "2027년 1월 10일까지 휴전을 다시 연장하거나 더 긴 합의로 바꾼다는 전망에 유리한 요인입니다.",
-     "fc": [
-      {
-       "id": "f39",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.chinanews.com.cn/cj/2026/09-28/10704683.shtml",
-      "https://www.news.cn/world/20260928/511ca84fb64c4e2b98a88ecba5c277ec/c.html",
-      "https://www.aljazeera.com/economy/2026/9/28/us-china-list-goods-recommended-for-tariff-cuts-following-trump-xi-summit",
-      "https://www.abc.net.au/news/2026-09-29/us-china-agree-to-tariff-cuts-on-60-billion-of-goods/107206860"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "CHN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "레바논의 살람 총리가 9월 29일 루비오 미 국무장관을 만나 이스라엘군 철수의 시간표와 검증 장치를 요구했습니다.",
-     "src": [
-      "https://www.timesofisrael.com/lebanese-pm-meets-rubio-stresses-need-for-idf-withdrawal-hezbollah-disarmament/"
-     ]
-    },
-    {
-     "t": "10월 27일 이스라엘 총선을 앞둔 여론조사는 어느 진영도 과반(61석)에 못 미치는 교착을 보이고 있습니다.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks"
-     ]
-    },
-    {
-     "t": "사우디아라비아가 9월 10일 드론 공격으로 멈췄던 동서 송유관의 수출 수송을 재개했고, 브렌트유는 배럴당 100달러 위에서 등락했습니다.",
-     "src": [
-      "https://www.zawya.com/en/business/oil-gas/saudi-arabia-resumes-oil-exports-via-east-west-pipeline-after-repairs-1368286"
-     ]
-    },
-    {
-     "t": "왕이 중국 외교부장은 9월 28일 이와야 전 일본 외무상을 만나 다카이치 총리의 대만 발언을 바로잡으라고 요구했습니다.",
-     "src": [
-      "https://www.mfa.gov.cn/zyxw/202609/t20260928_12032785.shtml"
-     ]
-    },
-    {
-     "t": "한국 정부는 우크라이나가 북한군 포로 2명의 한국 이송을 공개한 데 대해 공식 사과와 해명을 요구했습니다.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/28/why-south-korea-is-demanding-an-apology-from-ukraine-over-north-korean-pows"
-     ]
-    },
-    {
-     "t": "에스토니아는 8월 방산업체 건물 방화의 배후로 러시아 정보기관을 공식 지목했고, 크렘린은 이를 부인했습니다.",
-     "src": [
-      "https://www.wsls.com/news/world/2026/09/29/estonia-blames-russia-for-arson-attack-on-defense-company-that-provides-vehicles-to-ukraine/"
      ]
     }
    ]

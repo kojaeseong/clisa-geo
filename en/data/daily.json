@@ -1,6 +1,224 @@
 {
  "issues": [
   {
+   "date": "2026-11-02",
+   "items": [
+    {
+     "case": "iran",
+     "h": "U.S. warns Gulf allies of possible Iran strikes as soon as November 4, report says",
+     "fact": "MS NOW, citing three senior Gulf Arab officials, reported that Washington warned Gulf allies that a brief but intense round of strikes on Iran could come as early as November 4, the day after the midterm elections; the White House said it does not comment on military plans. President Trump told reporters at Mar-a-Lago in Florida on October 31 that one or two of Iran's remaining nuclear-related sites still had to be dealt with, \"but we can do that in 10 minutes.\"",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.timesofisrael.com/liveblog_entry/report-us-warns-gulf-allies-of-possible-iran-strikes-as-early-as-november-4/",
+      "https://www.foxnews.com/live-news/us-iran-war-trump-israel-strait-hormuz-10-31-26",
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Araghchi says new proposal cuts Hormuz reopening to two days as Doha talks hit day three",
+     "fact": "Iranian Foreign Minister Abbas Araghchi told Al Jazeera on October 31 that Iran had drawn up a proposal with Qatari mediators that would shorten the timeline for reopening the Strait of Hormuz to two days. Iran's negotiators held a third straight day of talks with Qatari mediators in Doha on November 1, and Araghchi said no final conclusion had yet been reached.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://tass.com/world/2211373",
+      "https://www.al-monitor.com/originals/2026/11/iran-qatari-mediators-hold-third-day-talks-end-us-iran-war"
+     ],
+     "loc": {
+      "lat": 25.29,
+      "lon": 51.53,
+      "place": "Doha (Qatar)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Mojtaba Khamenei orders forces to answer any threat immediately, without geographic limits",
+     "fact": "Iran's supreme leader, Mojtaba Khamenei, ordered the armed forces in an October 31 statement to meet any threat with an immediate, effective response unrestricted by geography, AFP reported. Army spokesman Mohammad Akraminia warned on state TV on November 1 that a new war could last longer than the last one.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-trump-diplomacy-threat-resume-attacks/",
+      "https://timesofisrael.com/liveblog-november-1-2026"
+     ],
+     "loc": {
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Tanker struck off Saudi coast; Revolutionary Guards claim two tankers hit mines in Hormuz",
+     "fact": "The UK Maritime Trade Operations agency (UKMTO) said a tanker was hit by two unidentified projectiles 72 nautical miles east of Ras al-Khafji, Saudi Arabia, early on November 2 local time, and that all crew were accounted for. Iran's Revolutionary Guards claimed on November 1 that two tankers exploded after hitting mines while crossing the Strait of Hormuz on an unauthorized route; the claim has not been verified.",
+     "fc": [],
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202610312594",
+      "https://www.jpost.com/middle-east/iran-news/article-913514"
+     ],
+     "loc": {
+      "lat": 28.42,
+      "lon": 49.85,
+      "place": "Persian Gulf, east of Ras al-Khafji (Saudi Arabia)",
+      "isos": [
+       "SAU",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia hits Ukraine's energy facilities with 433 drones, leaving hundreds of thousands without power",
+     "fact": "Ukraine's Air Force said Russia launched 433 drones starting at 6 p.m. local time on October 31 and that 371 had been shot down or neutralized as of 7:30 a.m. on November 1; President Zelensky said hundreds of thousands of households were without power. Russia's Defense Ministry said it shot down 47 Ukrainian drones between 8 a.m. and 8 p.m. Moscow time on November 1.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4180165-air-defense-neutralizes-371-of-433-russian-drones-launched-against-ukraine-overnight.html",
+      "https://kyivindependent.com/russian-attacks-kill-1-injure-47-over-past-day-leaving-hundreds-of-thousands-without-electricity/",
+      "https://tass.com/defense/2211577"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Rubio: \"I don't know if negotiated peace is achievable in Ukraine\"",
+     "fact": "Secretary of State Marco Rubio told a press conference at the G20 foreign ministers' meeting in Atlanta on October 31, \"I don't know if negotiated peace is achievable in Ukraine, that's what we're trying to find out.\" The three-way U.S.-Russia-Ukraine talks in Abu Dhabi are expected in early November, but no date has been set, the Kyiv Independent reported.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/i-dont-know-if-negotiated-peace-is-achievable-rubio-says-as-uncertainty-hangs-over-russia-ukraine-talks/"
+     ],
+     "loc": {
+      "lat": 33.75,
+      "lon": -84.39,
+      "place": "Atlanta (U.S.)",
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "Unidentified object enters Latvian airspace near Russia, Belarus; residents told to stay indoors",
+     "fact": "Latvia's military said on November 1 that an unidentified flying object had entered airspace around Kraslava and Ludza in the country's southeast, warning residents to stay indoors, and that the all-clear came within an hour. It said it launched an interceptor drone but had it self-destruct to avoid crossing into Russian or Belarusian airspace; the object's origin has not been determined.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/suspicious-object-enters-latvian-airspace-near-belarus-russia-border/"
+     ],
+     "loc": {
+      "lat": 55.9,
+      "lon": 27.17,
+      "place": "Kraslava (Latvia)",
+      "isos": [
+       "LVA",
+       "RUS",
+       "BLR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "France's cost-of-living protests hit third weekend: 320,000 march, 290 arrested",
+     "fact": "Protests over the cost of living and conditions in schools drew 320,000 people across France on October 31, including 70,000 in Paris, according to authorities, marking a third straight weekend of demonstrations. The Interior Ministry reported at least 290 arrests, Al Jazeera reported; organizers claimed nearly 500,000, and police fired tear gas in Paris and Lyon.",
+     "fc": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/10/31/tension-and-clashes-as-hundreds-of-thousands-protest-again-in-france"
+     ],
+     "loc": {
+      "lat": 48.86,
+      "lon": 2.35,
+      "place": "Paris (France)",
+      "isos": [
+       "FRA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Iran designated Britain's Royal Navy and Royal Air Force as terrorist organizations and MI6 as a hostile group on November 1. The Foreign Ministry said the move, based on a Supreme National Security Council decision, was a reciprocal response to Britain's July designation of the Revolutionary Guards under its State Threats Act.",
+     "src": [
+      "https://www.tehrantimes.com/news/531732/Iran-designates-MI6-Royal-Navy-and-RAF-under-reciprocal-measures",
+      "https://5pillarsuk.com/2026/11/01/iran-designates-british-military-as-terrorist-organisations-in-response-to-irgc-proscription/"
+     ],
+     "case": "iran"
+    },
+    {
+     "t": "The FBI on October 31 blamed TraderTraitor, a North Korean hacking group, for the record $6.3 billion theft of crypto assets from Binance, Al Jazeera reported.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/1/fbi-blames-north-korea-for-record-6-3bn-crypto-heist"
+     ],
+     "case": "korea"
+    },
+    {
+     "t": "North Korea's KCNA reported on November 1 that the country tested a cluster-bomb warhead for tactical ballistic missiles on October 31; the report did not mention Kim Jong Un attending.",
+     "src": [
+      "https://www.dawn.com/news/2041366"
+     ],
+     "case": "korea"
+    },
+    {
+     "t": "A European Commission spokesperson said on November 1 that the appointment of eight new Constitutional Tribunal judges lies within the constitutional power of Poland's Sejm, backing the government's position; on October 31, police formed a cordon outside the tribunal in Warsaw.",
+     "src": [
+      "https://kyivindependent.com/eu-commission-backs-poland-government-over-constitutional-court-crisis/"
+     ],
+     "case": "poland"
+    },
+    {
+     "t": "Turkish President Recep Tayyip Erdogan met President Zelensky in Istanbul on October 31 and said attacks on civilian ships in the Black Sea are unacceptable under any circumstances, regardless of who carries them out or what justification is offered.",
+     "src": [
+      "https://kyivindependent.com/zelensky-arrives-in-istanbul-for-important-talks-with-turkeys-erdogan/"
+     ],
+     "case": "ukraine"
+    }
+   ]
+  },
+  {
    "date": "2026-10-31",
    "items": [
     {
@@ -4832,205 +5050,6 @@
      "t": "The China Coast Guard said on September 29 that a formation led by the Zhujiajian had been tightening control over waters east of Taiwan island since September; no boarding inspections of vessels have been confirmed.",
      "src": [
       "https://english.news.cn/20260929/62256176f6ba4297ab7e16b18c30f56b/c.html"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-09-29",
-   "items": [
-    {
-     "case": "korea",
-     "h": "Investigation finds DMZ blast very likely caused by North Korean mine",
-     "fact": "The Joint Chiefs of Staff announced on September 28 that an explosion on September 21 south of the Military Demarcation Line in the DMZ on the western front, which injured three soldiers, was very likely caused by a North Korean mine. A final determination will follow a further investigation with the United Nations Command; it is the first incident of its kind since the wooden-box mine incident of August 2015.",
-     "link": "The incident supports the forecast that inter-Korean military hotlines will remain unrestored. In 2015, the resumption of loudspeaker broadcasts toward the North and an exchange of artillery fire were followed by high-level inter-Korean talks that produced the August 25 agreement; with the North now rejecting inter-Korean dialogue altogether, the same path is unlikely to open.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.koreaherald.com/article/10886756",
-      "https://www.stripes.com/theaters/asia_pacific/2026-09-29/north-korea-dmz-landmines-23000457.html"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "h": "North Korea declares at the U.N. that its nuclear status is irreversible",
-     "fact": "Speaking in the U.N. General Assembly's general debate on September 28 (New York time), North Korean Vice Foreign Minister Kim Son Gyong said the country's status as a nuclear weapons state could not be reversed under any circumstances. The speech denounced South Korea-U.S. cooperation on nuclear-powered submarines but made no mention of talks with Trump, and the next day North Korea's Foreign Ministry issued a memorandum condemning the approval of nuclear-powered submarines for South Korea.",
-     "link": "The speech fits the assessment that the North's best move is a direct deal with Washington that secures de facto recognition of its nuclear status (Korean Peninsula C7). The absence of any reference to talks is not, on its own, treated as a signal to change the forecast of a Trump-Kim summit.",
-     "fc": [
-      {
-       "id": "f05",
-       "e": "none"
-      },
-      {
-       "id": "f22",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.koreatimes.co.kr/world/20260929/senior-nk-diplomat-says-nuclear-status-can-never-be-reversed-in-any-circumstances",
-      "https://www.hankyung.com/article/2026092909407"
-     ],
-     "loc": {
-      "isos": [
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "h": "U.S. demands that nuclear issue be addressed in indirect talks with Iran",
-     "fact": "The United States and Iran continued indirect talks in New York, each meeting separately with Qatari mediators. A U.S. official said any agreement must address the nuclear issue, adding that Iran had signaled flexibility but the two sides differed over timing. Iran's chief negotiator, parliament speaker Mohammad Bagher Ghalibaf, warned that if Iran cannot sell its oil, no one will.",
-     "link": "That weighs against the forecast of a phased agreement that reopens the strait and lifts the blockade first and defers the nuclear issue to a later stage. Ghalibaf's warning raises the risk of escalation across the entire Gulf (Iran C2), the outcome that would cost South Korea the most.",
-     "fc": [
-      {
-       "id": "f38",
-       "e": "down"
-      },
-      {
-       "id": "f43",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks",
-      "https://www.omanobserver.om/article/1196952/world/region/iran-threatens-to-hit-regional-infrastructure-if-its-security-not-ensured"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "h": "Russia sets its biggest defense spending increase since the invasion for 2027",
-     "fact": "According to Russian government budget documents obtained by Reuters, defense spending in 2027 will total 17.1 trillion rubles, about 27 percent more than planned last year. Putin signed a decree on September 28 increasing the military's authorized strength by 15,500, the fourth increase this year. Zelensky claimed North Korea was preparing to send about 10,000 more troops.",
-     "link": "This supports the assessment that a war of attrition lasting through 2030 is the most likely outcome (Russia-Ukraine C1) and weighs against the forecasts of a full ceasefire taking effect and of a ceasefire holding. The additional North Korean deployment is a Ukrainian claim and has not been independently confirmed.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      },
-      {
-       "id": "f28",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.defensenews.com/global/europe/2026/09/28/russia-raises-2027-military-spending-by-27-budget-documents-show/",
-      "https://www.themoscowtimes.com/2026/09/28/russia-raises-2027-military-spending-by-27-budget-documents-show-a93810",
-      "https://meduza.io/en/news/2026/09/28/reuters-russia-plans-record-defense-spending-of-17-trillion-rubles-in-2027-27-more-than-previously-budgeted",
-      "https://www.rferl.org/a/zelenskyy-ukraine-drone-russian-mobilization-north-korea/33865993.html",
-      "https://www.ukrinform.net/rubric-ato/4168983-zelensky-russia-has-already-begun-additional-mobilization.html"
-     ],
-     "loc": {
-      "isos": [
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "h": "China Coast Guard announces \"routine law-enforcement patrols\" east of Taiwan",
-     "fact": "The China Coast Guard announced on September 29 that a formation of its ships was conducting routine law-enforcement patrols in waters east of Taiwan, and said it had also been patrolling waters near Kinmen since early September. Taiwan's Coast Guard Administration called the patrols \"fake law enforcement, real intrusion\" and sent vessels to monitor them.",
-     "link": "The move extends China's gray-zone pressure, asserting jurisdiction without the use of force. But boarding inspections of vessels and controls on passage have not yet been confirmed, so it is not yet enough to change the related forecasts and is treated only as an upward factor.",
-     "fc": [
-      {
-       "id": "f24",
-       "e": "up"
-      },
-      {
-       "id": "f44",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.chinanews.com.cn/gn/2026/09-29/10705536.shtml",
-      "https://www.chinanews.com.cn/gn/2026/09-29/10705460.shtml",
-      "https://www.chinatimes.com/realtimenews/20260929003877-260402",
-      "https://udn.com/news/story/7331/9783599"
-     ],
-     "loc": {
-      "lat": 23.5,
-      "lon": 122.3,
-      "place": "Waters east of Taiwan",
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": "chips",
-     "h": "U.S. and China agree to keep discussing further extension of tariff truce",
-     "fact": "Briefing on the outcome of the eighth round of U.S.-China economic and trade consultations on September 28, China's Ministry of Commerce said that after extending the tariff truce to January 10, 2027, the two sides had agreed to keep discussing a further extension. Each country published a list of goods worth about $30 billion slated for tariff cuts.",
-     "link": "This favors the forecast that by January 10, 2027, the truce will be extended again or replaced with a longer agreement.",
-     "fc": [
-      {
-       "id": "f39",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.chinanews.com.cn/cj/2026/09-28/10704683.shtml",
-      "https://www.news.cn/world/20260928/511ca84fb64c4e2b98a88ecba5c277ec/c.html",
-      "https://www.aljazeera.com/economy/2026/9/28/us-china-list-goods-recommended-for-tariff-cuts-following-trump-xi-summit",
-      "https://www.abc.net.au/news/2026-09-29/us-china-agree-to-tariff-cuts-on-60-billion-of-goods/107206860"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "CHN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Lebanese Prime Minister Nawaf Salam met U.S. Secretary of State Marco Rubio on September 29 and asked for a timetable and verification mechanism for the withdrawal of Israeli forces.",
-     "src": [
-      "https://www.timesofisrael.com/lebanese-pm-meets-rubio-stresses-need-for-idf-withdrawal-hezbollah-disarmament/"
-     ]
-    },
-    {
-     "t": "Polls ahead of Israel's October 27 election show a deadlock, with neither bloc reaching a majority of 61 seats.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/29/irans-araghchi-meets-qatari-mediators-as-us-insists-on-nuclear-talks"
-     ]
-    },
-    {
-     "t": "Saudi Arabia resumed export shipments through its East-West Pipeline, halted by a drone attack on September 10, and Brent fluctuated above $100 a barrel.",
-     "src": [
-      "https://www.zawya.com/en/business/oil-gas/saudi-arabia-resumes-oil-exports-via-east-west-pipeline-after-repairs-1368286"
-     ]
-    },
-    {
-     "t": "Chinese Foreign Minister Wang Yi met former Japanese Foreign Minister Takeshi Iwaya on September 28 and demanded that Prime Minister Sanae Takaichi's remarks on Taiwan be corrected.",
-     "src": [
-      "https://www.mfa.gov.cn/zyxw/202609/t20260928_12032785.shtml"
-     ]
-    },
-    {
-     "t": "Seoul demanded an official apology and an explanation after Ukraine disclosed that two North Korean prisoners of war had been transferred to South Korea.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/28/why-south-korea-is-demanding-an-apology-from-ukraine-over-north-korean-pows"
-     ]
-    },
-    {
-     "t": "Estonia formally named Russian intelligence as being behind an August arson attack on a defense company's building, and the Kremlin denied it.",
-     "src": [
-      "https://www.wsls.com/news/world/2026/09/29/estonia-blames-russia-for-arson-attack-on-defense-company-that-provides-vehicles-to-ukraine/"
      ]
     }
    ]
