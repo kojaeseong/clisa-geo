@@ -209,11 +209,12 @@
       CF = c; SEL = null; news(); choose(list()[0]); return; }
     if (ev.target.closest("[data-f2clr]")) { CF = null; SEL = null; news(); rows(true); focus(null); return; }
     if (ev.target.closest("[data-f2m]")) { N += 30; rows(false); return; }
-    if ((t = ev.target.closest("#f2snd"))) { SND = !SND; try { localStorage.setItem("ep.snd", SND ? "on" : "off"); } catch (e) {} t.textContent = T.snd[SND ? 1 : 0]; t.setAttribute("aria-pressed", SND); thunk(); return; }
+    if ((t = ev.target.closest("#f2snd"))) { var cur = false; try { cur = localStorage.getItem("ep.snd") === "on"; } catch (e) {} SND = !cur; try { localStorage.setItem("ep.snd", SND ? "on" : "off"); } catch (e) {} t.textContent = T.snd[SND ? 1 : 0]; t.setAttribute("aria-pressed", SND); document.dispatchEvent(new CustomEvent("clisa:snd", {detail: SND})); return; }
     if (ev.target.closest("a")) return;
     if ((t = ev.target.closest("[data-f2]"))) { var id = t.dataset.f2; choose(ALL.filter(function(f){ return f.id === id; })[0]); }
   });
   document.addEventListener("keydown", function(ev){ if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches(".f2-ev")) { ev.preventDefault(); ev.target.click(); } });
+  document.addEventListener("clisa:snd", function(ev){ SND = !!ev.detail; var b = document.getElementById("f2snd"); if (b) { b.textContent = T.snd[SND ? 1 : 0]; b.setAttribute("aria-pressed", SND); } }); /* 머리글 소리 단추와 맞춤(2026-11-03) */
   var loading = false;
   function go(el){ if (!el) return; if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
     fetch(P + "/data/front.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(d){ FD = d; draw(document.getElementById("pane-overview") || el); fresh(); }).catch(function(){ loading = false; }); }

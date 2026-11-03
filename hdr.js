@@ -77,7 +77,24 @@
   var TAP = 'button,a[href],[role="button"],summary,label,select,input[type="checkbox"],input[type="radio"],[onclick],[tabindex="0"]';
   function pointer(el){ for (var i = 0; el && el.nodeType === 1 && i < 4; i++, el = el.parentElement) { try { if (getComputedStyle(el).cursor === "pointer") return true; } catch (e) {} } return false; }
   addEventListener("click", function(ev){ var t = ev.target; if (!t || !t.closest) t = t && t.parentElement; if (!t || !t.closest) return;
-    if (t.closest("#f2snd")) { var will = !on(); if (will) setTimeout(function(){ window.clisaSfx("tap"); }, 0); return; } /* 소리 켜기 단추: 켤 때만 확인음 */
+    if (t.closest("#f2snd, .hd-snd")) { var will = !on(); if (will) setTimeout(function(){ window.clisaSfx("tap"); }, 0); return; } /* 소리 켜기 단추: 켤 때만 확인음 */
     if (t.closest(HIT)) return window.clisaSfx("hit");
     if (t.closest(TAP) || pointer(t)) window.clisaSfx("tap"); }, true);
+})();
+/* 소리 켜기·끄기 단추를 모든 쪽 머리글에(2026-11-03 운영자 결재). 넓은 화면은 밤 화면 단추 옆, 좁은 화면은 검색 단추 옆.
+   첫 화면 목록의 '소리 켜기'(#f2snd)와 같은 값(ep.snd)을 쓰고, 어느 쪽에서 바꾸든 'clisa:snd' 신호로 서로 맞춘다. */
+(function(){
+  var EN = document.documentElement.lang === "en", SV = 'viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  var ICON = '<svg class="i-on" ' + SV + '><path d="M3 8h3l4-3v10l-4-3H3z"/><path d="M13 7.5a3.5 3.5 0 0 1 0 5M15.3 5.3a6.6 6.6 0 0 1 0 9.4"/></svg><svg class="i-off" ' + SV + '><path d="M3 8h3l4-3v10l-4-3H3z"/><path d="M13.5 8l4 4M17.5 8l-4 4"/></svg>';
+  function on(){ try { return localStorage.getItem("ep.snd") === "on"; } catch (e) { return false; } }
+  function lab(b){ var s = on(), t = EN ? (s ? "Turn sound off" : "Turn sound on") : (s ? "소리 끄기" : "소리 켜기"); b.setAttribute("aria-pressed", s ? "true" : "false"); b.title = t; b.setAttribute("aria-label", t); }
+  var BS = [];
+  function mk(where, cls){ var b = document.createElement("button"); b.type = "button"; b.className = "hd-th hd-snd " + cls; b.innerHTML = ICON; lab(b);
+    b.addEventListener("click", function(){ var s = !on(); try { localStorage.setItem("ep.snd", s ? "on" : "off"); } catch (e) {} BS.forEach(lab); document.dispatchEvent(new CustomEvent("clisa:snd", {detail: s})); });
+    where(b); BS.push(b); }
+  var th = document.querySelector("header.hd .hd-th"), so = document.querySelector("header.hd .srch-open");
+  if (th) mk(function(b){ th.parentNode.insertBefore(b, th); }, "d");
+  if (so) mk(function(b){ so.parentNode.insertBefore(b, so.nextSibling); }, "m");
+  document.addEventListener("clisa:snd", function(){ BS.forEach(lab); });
+  addEventListener("storage", function(e){ if (e.key === "ep.snd") BS.forEach(lab); });
 })();

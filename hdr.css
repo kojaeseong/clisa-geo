@@ -132,3 +132,8 @@ html[lang="en"] .pane h2,html[lang="en"] .page-pre h1,html[lang="en"] .page-pre 
 :root[data-theme="dark"] svg [fill="#98A2B3"]{fill:#7B8696}
 :root[data-theme="dark"] svg text[fill="#2a78d6"]{fill:#82B1FF}
 :root[data-theme="dark"] svg [stroke="#2a78d6"]{stroke:#82B1FF}
+/* 2026-11-03 머리글 소리 단추: 넓은 화면은 밤 화면 단추 옆(.d), 좁은 화면은 검색 단추 옆(.m) */
+header.hd .hd-snd{margin-right:6px}header.hd .hd-snd.m{display:none}
+header.hd .hd-snd .i-on{display:none}header.hd .hd-snd[aria-pressed="true"] .i-on{display:block}header.hd .hd-snd[aria-pressed="true"] .i-off{display:none}
+header.hd .hd-snd[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
+@media (max-width:900px){header.hd .hd-snd.d{display:none}header.hd .hd-l{gap:4px!important}header.hd .hd-snd.m{display:inline-flex;margin:0 -4px 0 0}}
