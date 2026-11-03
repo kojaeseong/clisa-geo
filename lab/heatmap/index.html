@@ -82,7 +82,7 @@ header{padding:16px 20px 10px;align-items:center;gap:10px 22px}
 @media (max-width:700px){#legend{flex-wrap:wrap}#board{margin:0 6px 6px}#info,#lead{margin-left:10px;margin-right:10px;padding-left:10px}}
 </style>
 <style>
-#bw{flex:1;min-height:0;display:flex;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}#bw #board{flex:1;min-width:1100px}
+#bw{flex:1;min-height:0;display:flex;overflow:hidden;-webkit-overflow-scrolling:touch}#bw #board{flex:1;min-width:1100px}
 /* 2026-11-03 대통령님: 좁은 화면에서는 설명 문장까지 판 너비로 펼치고 화면 전체를 좌우로 밀어 봄 */
 @media (max-width:1100px){html{overflow-x:auto;overflow-y:hidden}body{min-width:1100px;overflow:visible}#bw{overflow:visible}#bw #board{min-width:0}}
 html.embed header .brand,html.embed #lead{display:none!important}html.embed header{padding-top:10px}html.embed body{background:var(--bg)}
@@ -149,7 +149,7 @@ function lay(secs,render){ const bd=$('#board'); bd.innerHTML=''; const R=bd.get
 function fit(d,fs){ const over=()=>d.scrollHeight>d.clientHeight+1||d.scrollWidth>d.clientWidth+1; let f=fs;
  if(over()){const g=d.querySelector('.sg'); if(g) g.remove()}
  while(over()&&f>9){f-=1;d.style.fontSize=f+'px'}
- if(over()){const g=d.querySelector('.sg'); if(g) g.remove()} if(over()){const c=d.querySelector('.c'); if(c) c.remove()} if(over()){const v=d.querySelector('.v'); if(v) v.remove()} if(over()) d.innerHTML=''; if(d.dataset.sg&&!d.querySelector('.sg')&&d.clientWidth>22&&d.clientHeight>16) d.insertAdjacentHTML('beforeend','<span class="sgc">'+d.dataset.sg+'</span>') }
+ if(over()){const g=d.querySelector('.sg'); if(g) g.remove()} if(over()){const c=d.querySelector('.c'); if(c) c.remove()} /* 2026-11-04: 칸을 비우지 않는다. 이름을 줄여(말줄임) 확률은 끝까지 남긴다 */ { const n=d.querySelector('.n'); for(const L of [4,3,2,1]){ if(!over()||!n) break; Object.assign(n.style,{display:'-webkit-box',webkitBoxOrient:'vertical',webkitLineClamp:String(L),overflow:'hidden'}) } } if(over()){const c=d.querySelector('.c'); if(c) c.remove()} if(over()){ d.style.fontSize='8px' } if(d.dataset.sg&&!d.querySelector('.sg')&&d.clientWidth>22&&d.clientHeight>16) d.insertAdjacentHTML('beforeend','<span class="sgc">'+d.dataset.sg+'</span>') }
 function txt(d,t,fs,name,big,small,badge){ if(t.w>46&&t.h>30) d.innerHTML=(badge?'<span class="nw">'+badge+'</span>':'')+'<div class="n">'+name+'</div><div class="v">'+big+'</div>'+(small?'<div class="c">'+small+'</div>':'');
  else if(t.w>24&&t.h>16) d.innerHTML='<div class="n" style="font-size:'+Math.max(9,fs*0.85)+'px">'+(t.short||name)+'</div><div class="v" style="font-size:'+Math.max(9,fs*0.8)+'px">'+big+'</div>' }
 const wl=()=>T==='scen'?'2026년 10월 2일 이후':'2026년 10월 1일 이후';
