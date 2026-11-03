@@ -93,3 +93,12 @@
 .f2-rg{font-size:11.5px;color:var(--muted);white-space:nowrap}
 .f2-why{font-size:13px;line-height:1.6;color:var(--ink-2);margin:4px 0 8px}
 .f2-sub{font-weight:400!important;font-size:12px!important;color:var(--muted)!important;margin-top:4px!important}
+
+/* 2026-11-03 시황판으로 보기: 지구본을 걷고 판 하나가 폭 전체를 쓴다 */
+html.hm-on .globe-wrap{display:none!important}
+html.hm-on main.stage{grid-template-columns:1fr!important}
+html.hm-on #panel{grid-column:1/-1}
+.hm2 .f2-vt{background:#1d3fa8;margin:0 0 8px}
+.hm2-f{display:block;width:100%;height:600px;border:0;border-radius:10px;padding:0;margin:0;aspect-ratio:auto!important;background:#1c1f26}
+/* 2026-11-03 대통령님: 모바일의 보기 단추 묶음은 둥근 알약 대신 사각형 */
+@media (max-width:700px){.f2-vt,.l2-vt{display:grid!important;grid-template-columns:1fr 1fr;gap:4px;border-radius:10px!important;width:100%}.f2-vt a,.l2-vt a{border-radius:7px!important;text-align:center}}

@@ -4,7 +4,7 @@
   if (!root || root.getAttribute("data-on")) return; root.setAttribute("data-on", "1");
   var EN = root.getAttribute("data-en") === "1", P = EN ? "/en" : "";
   var T = EN ? {
-    vt: ["By Forecast", "By Population", "By Pathway"],
+    vt: ["By Forecast", "By Population", "By Pathway"], hm: "Heat Map",
     h: "How conflicts reach people's lives",
     sub: "Clisa Geopolitics checked each of 43 flashpoints against six channels of impact and six populations, one cell at a time. Cells judged connected show the pathway, the evidence, and the sources; cells judged not connected also give the reason.",
     st: [["cells checked"], ["connected"], ["not connected"], ["undetermined (insufficient data)"]],
@@ -19,7 +19,7 @@
     count: function (n) { return n === 1 ? "1 flashpoint" : n + " flashpoints"; }, none: "No connected flashpoints",
     cellT: function (c) { return "Connected · " + c + " confidence"; }
   } : {
-    vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"],
+    vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"], hm: "시황판으로 보기",
     h: "분쟁이 생활로 이어지는 경로",
     sub: "클리사 지오폴리틱스는 분쟁 지점 43곳을 6개 영향 경로와 6개 국민 집단에 하나씩 대조했습니다. 이어진다고 판단한 칸에는 경로와 근거, 출처를 밝히고, 이어지지 않는다고 판단한 칸에도 그 이유를 밝혔습니다.",
     st: [["대조한 칸"], ["이어짐"], ["이어지지 않음"], ["판단 불가(자료 부족)"]],
@@ -37,7 +37,7 @@
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (m) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]; }); };
   var fmt = function (n) { return n.toLocaleString(EN ? "en-US" : "ko-KR"); };
   var $ = function (s) { return root.querySelector(s); };
-  root.innerHTML = '<section class="lkm-hero"><nav class="lkm-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + '</a><a class="on" href="' + P + '/links/" aria-current="page">' + T.vt[2] + "</a></nav>" +
+  root.innerHTML = '<section class="lkm-hero"><nav class="lkm-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + T.hm + '</a><a href="' + P + '/outlook/">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + '</a><a class="on" href="' + P + '/links/" aria-current="page">' + T.vt[2] + "</a></nav>" +
     "<h1>" + esc(T.h) + "</h1><p>" + esc(T.sub) + '</p><div class="lkm-stats" id="lkm-stats"></div></section>' +
     '<div class="lkm-seg" role="tablist"><button class="on" data-v="fp">' + T.seg[0] + '</button><button data-v="grp">' + T.seg[1] + "</button></div>" +
     '<div id="lkm-vfp"><div class="lkm-pick"><select id="lkm-sel" aria-label="' + esc(T.pick) + '"></select><input id="lkm-q" placeholder="' + esc(T.find) + '" aria-label="' + esc(T.find) + '"></div>' +

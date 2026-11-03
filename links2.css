@@ -67,3 +67,5 @@
 .lkm-vt a{padding:6px 14px;border-radius:999px;color:#fff!important;text-decoration:none;font:700 13.5px var(--sans);opacity:.88}
 .lkm-vt a.on{background:#fff;color:#173A9E!important;opacity:1}
 .lkm-vt a:not(.on):hover{opacity:1;background:rgba(255,255,255,.12)}
+
+@media (max-width:700px){.lkm-vt{display:grid!important;grid-template-columns:1fr 1fr;gap:4px;border-radius:10px!important;width:100%}.lkm-vt a{border-radius:7px!important;text-align:center}}

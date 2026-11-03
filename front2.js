@@ -3,7 +3,7 @@
   "use strict";
   var EN = document.documentElement.lang === "en", P = EN ? "/en" : "", FD = null, EL = null;
   var T = EN ? {
-    vt: ["By Forecast", "By Population", "By Pathway"], h: "What could happen, and whose lives would it change—and how?",
+    vt: ["By Forecast", "By Population", "By Pathway"], hm: "Heat Map", hmT: "Forecast heat map", h: "What could happen, and whose lives would it change—and how?",
     sub: "For each forecast with a resolution date, the cards show which scenario the event would make more or less likely, and how the safety and incomes of people in South Korea, the U.S. and three European regions would change if that scenario came about.",
     nl: "Latest briefings · Select one to see forecasts on that issue",
     ver: "Track record", verGo: "Forecasts and Track Record →",
@@ -36,7 +36,7 @@
     foot: "Clisa Geopolitics analyses are written with the help of AI (Anthropic’s Claude) and reviewed by editors. The changes shown for each population are not results of the forecast event itself; they are human security estimates for the linked scenario if it comes about. Conflict deaths are shown as the number of people killed per year, scaled to each population’s size. For the sudden-upheaval scenario on the Korean Peninsula, the cards use its most likely branch, a localized clash. For the Russia-NATO standoff, the Nordic and Baltic cell uses figures for the three Baltic states.",
     mon: ["January","February","March","April","May","June","July","August","September","October","November","December"]
   } : {
-    vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"], h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
+    vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"], hm: "시황판으로 보기", hmT: "지정학 시황판", h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
     sub: "결과 확인 날짜가 정해진 전망마다, 그 일이 발생하면 가능성이 커지거나 줄어드는 전개와, 그 전개가 현실이 될 때 한국·미국과 유럽 3개 지역 국민의 안전과 소득에 생기는 변화를 함께 보여 드립니다.",
     nl: "최근 정세 브리핑 · 누르면 그 사안의 전망만 봅니다",
     ver: "검증", verGo: "전망 검증 →",
@@ -157,11 +157,27 @@
     var E = [[T.game + " · 1962", T.g62, P + "/play/1962/"], [T.game + " · 1914", T.g14, P + "/play/1914/"]].concat(FD.feats.map(function(x){ return [T.feat + " · " + md(x.d), L(x, "t"), P + "/feature/" + x.id + "/"]; }));
     return '<section class="sec f2-ents"><h3>' + T.ents + "</h3>" + E.map(function(e){ return '<a href="' + h(e[2]) + '"><span>' + h(e[0]) + "</span>" + h(e[1]) + "</a>"; }).join("") + "</section>";
   }
+  /* 2026-11-03 대통령님 승인: 첫 화면(/, /heatmap/)은 시황판으로 보기, 전망으로 보기는 /outlook/ */
+  function VIEW(){ var p = location.pathname.replace(/^\/en(?=\/)/, ""); return /^\/outlook\/?$/.test(p) ? "fc" : "hm"; }
+  function vtNav(on){ return '<nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a' + (on === "hm" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/" data-f2v="hm">' + T.hm +
+      '</a><a' + (on === "fc" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/outlook/" data-f2v="fc">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + '</a><a href="' + P + '/links/">' + T.vt[2] + "</a></nav>"; }
+  function hmSize(){ var f = document.getElementById("hm2f"); if (!f || !f.offsetHeight) return; var r = f.getBoundingClientRect(), z = r.height / f.offsetHeight || 1, pn = document.getElementById("panel");
+    var want = innerWidth < 700 ? 600 : Math.max(480, (pn ? pn.getBoundingClientRect().bottom : innerHeight) - r.top - 2); f.style.height = (want / z) + "px"; }
+  function drawHeat(el){
+    EL = el; if (/^\/(heatmap\/)?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
+    var ft = el.querySelector(":scope > .site-foot");
+    el.innerHTML = '<div class="f2 hm2">' + vtNav("hm") + '<iframe id="hm2f" class="hm2-f" src="' + P + '/lab/heatmap/?embed=1" title="' + T.hmT + '" loading="eager"></iframe></div>';
+    if (ft) el.appendChild(ft);
+    requestAnimationFrame(hmSize); setTimeout(hmSize, 300);
+  }
+  addEventListener("resize", function(){ clearTimeout(window._hm2r); window._hm2r = setTimeout(hmSize, 120); });
   function draw(el){
+    if (VIEW() === "hm") { drawHeat(el); return; }
+    document.documentElement.classList.remove("hm-on");
     EL = el;
     ALL = FD.fcs.slice().sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; });
     var ft = el.querySelector(":scope > .site-foot");  /* 화면 앱이 붙인 바닥글은 그대로 둔다 */
-    el.innerHTML = '<div class="f2"><section class="f2-who"><nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a class="on" href="' + P + '/" aria-current="page">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + '</a><a href="' + P + '/links/">' + T.vt[2] + "</a></nav>" +
+    el.innerHTML = '<div class="f2"><section class="f2-who">' + vtNav("fc") +
       "<h2>" + h(T.h) + '</h2><p class="f2-sub">' + h(T.sub) + '</p><p class="f2-nl">' + h(T.nl) + '</p><div class="f2-news" id="f2news"></div></section>' + verHtml() +
       '<section class="sec f2-list"><div class="f2-lh"><h3>' + T.list + '</h3><button type="button" class="f2-snd" id="f2snd" aria-pressed="' + SND + '">' + T.snd[SND ? 1 : 0] + '</button></div><div class="f2-tabs" id="f2tabs" role="tablist"></div><p class="f2-flt" id="f2flt"></p><div id="f2list"></div></section>' +
       entsHtml() + '<p class="note">' + h(T.foot) + "</p></div>";
@@ -216,13 +232,17 @@
   document.addEventListener("keydown", function(ev){ if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches(".f2-ev")) { ev.preventDefault(); ev.target.click(); } });
   document.addEventListener("clisa:snd", function(ev){ SND = !!ev.detail; var b = document.getElementById("f2snd"); if (b) { b.textContent = T.snd[SND ? 1 : 0]; b.setAttribute("aria-pressed", SND); } }); /* 머리글 소리 단추와 맞춤(2026-11-03) */
   var loading = false;
-  function go(el){ if (!el) return; if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
+  function go(el){ if (!el) return; if (VIEW() === "hm") { drawHeat(document.getElementById("pane-overview") || el); return; } if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
     fetch(P + "/data/front.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(d){ FD = d; draw(document.getElementById("pane-overview") || el); fresh(); }).catch(function(){ loading = false; }); }
   // E111(2026-11-03 결재): 최근 정세 브리핑 카드는 빌드 때의 front.json이 아니라 매일 바뀌는 daily.json의 최근 3개 호에서 읽는다. 읽지 못하면 front.json 값을 그대로 둔다.
   function fresh(){ fetch(P + "/data/daily.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(D){ var out = [];
       (D.issues || []).slice(0, 3).forEach(function(x){ (x.items || []).forEach(function(it){ if (it.case && FD.cases[it.case]) out.push({d: x.date, h: it.h, he: it.h, "case": it.case}); }); });
       if (out.length) { FD.news = out.slice(0, 6); if (EL) news(); } }).catch(function(){}); }
   document.addEventListener("clisa:overview", function(ev){ go(ev.detail); });
-  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "overview") focus(null); else if (SEL && FD) focus(SEL); });
+  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "overview") { document.documentElement.classList.remove("hm-on"); focus(null); } else { if (VIEW() === "hm" && document.getElementById("hm2f")) document.documentElement.classList.add("hm-on"); if (SEL && FD) focus(SEL); } });
+  /* 시황판 ↔ 전망으로 보기: 같은 화면 안에서 바꾸고 주소만 바꾼다(뒤로 가기 지원) */
+  document.addEventListener("click", function(ev){ var a = ev.target.closest && ev.target.closest("a[data-f2v]"); if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return; ev.preventDefault(); ev.stopPropagation();
+    if (a.getAttribute("href") !== location.pathname) history.pushState(null, "", a.getAttribute("href")); var po = document.getElementById("pane-overview"); if (po) go(po); }, true);
+  addEventListener("popstate", function(){ var p = location.pathname.replace(/^\/en(?=\/)/, ""); if (/^\/(outlook\/?)?$|^\/heatmap\/?$/.test(p)) { var po = document.getElementById("pane-overview"); if (po && po.offsetParent !== null) go(po); } });
   var po = document.getElementById("pane-overview"); if (po && po.children.length && !po.querySelector(".f2")) go(po);
 })();

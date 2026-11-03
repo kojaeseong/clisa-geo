@@ -3323,7 +3323,7 @@ const ROUTES = !!document.querySelector('meta[name="app-routes"]'); let ROUTE_FI
 const hasPage = iso => { const c = D && D.countries[iso]; return !!(c && c.tier === 1 && c.situation); };
 function routeOf(){
   const t = S.tab;
-  if (t === "overview") return "/";
+  if (t === "overview") return /^\/(outlook|heatmap)\/$/.test(LOC()) ? LOC() : "/";  /* v4.77 시황판·전망으로 보기 주소 유지 */
   if (t === "strat") return "/case/" + (S.scase ? S.scase + "/" : "");
   if (t === "brief") { if (!BR) return /^\/(brief|life)\//.test(LOC()) ? LOC() : "/life/"; const c = briefCur(); return c && BR && S.bdate ? (S.bdate === "latest" ? "/brief/" : "/brief/" + c.date + "/") : "/life/"; }  /* v3.99: 국민의 삶은 /life/, 날짜별 브리핑 전문은 /brief/날짜/ */
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return "/feature/" + (c && c !== L[0] ? c.id + "/" : ""); }
@@ -3344,6 +3344,7 @@ function routeSync(rep){
 function applyRoute(){
   if (!ROUTES) return false;
   const p = LOC(), ss = D.strategies || []; let m;
+  if (/^\/(outlook|heatmap)\/?$/.test(p)) { switchTab("overview"); return true; }  /* v4.77 */
   if ((m = p.match(/^\/case\/([a-z0-9-]+)\/?$/)) && ss.some(c => c.id === m[1])) { goCase(m[1]); return true; }
   if (/^\/case\/?$/.test(p)) { S.scase = null; switchTab("strat"); return true; }
   if ((m = p.match(/^\/country\/([A-Z]{3})\/?$/)) && D.countries[m[1]]) { selectCountry(m[1], true); return true; }
