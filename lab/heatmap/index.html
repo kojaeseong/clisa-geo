@@ -36,6 +36,8 @@ header{padding:14px 18px 8px;display:flex;flex-wrap:wrap;gap:10px 18px;align-ite
 .t .nw{font-size:10px;padding:0 4px;border-radius:3px;background:#33d1ff;color:#02101f;font-weight:800;margin-bottom:2px}
 .na{background:#161c28!important}
 #tip{position:fixed;z-index:10;width:380px;max-height:calc(100vh - 16px);overflow:auto;max-width:calc(100vw - 16px);background:rgba(11,17,29,.97);border:1px solid #2c3a52;border-radius:6px;padding:10px 12px;font-size:12px;line-height:1.6;display:none;pointer-events:none}
+#tip.pin{pointer-events:auto}#tip table{width:calc(100% - 28px);margin:4px 14px 0;table-layout:fixed}#tip table td:nth-child(2){width:84px}#tip table td.r{width:58px}#tip table td.r:last-child{width:64px}#tip td.nm{max-width:none!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#tip .hs{padding-top:8px}#tip .hint{font-size:11px;color:var(--mute);border-top:1px solid #2c303a;padding-top:6px;margin-top:6px}#tip .mean .nt{display:block;font-size:11.5px;color:var(--mute);margin-top:3px}#tip .mean .df{font-size:12px;color:#c9cfda;margin-top:6px;line-height:1.55}#tip .mean .df b{color:#e0b341;font-weight:600;margin-right:4px}
+#tip .mean{font-size:13px;line-height:1.6;color:#eef1f6;padding-top:8px;padding-bottom:8px;border-bottom:1px solid #2c303a}
 #tip .tt{font-weight:800;font-size:14px}#tip .m{color:var(--mute)}#tip .hs{margin-top:6px;font-variant-numeric:tabular-nums}
 #strip,#sumry{display:none!important}#howp{display:none;padding:0 18px 12px;font-size:12px;color:var(--mute);line-height:1.6}#howp.on{display:block}#howp b{color:var(--ink)}
 .howb{background:none;border:1px solid #3a4457;color:var(--mute);font-size:11px;padding:2px 8px;border-radius:3px;cursor:pointer;margin-right:auto}
@@ -52,7 +54,7 @@ html,body{background:var(--bg);font-family:"IBM Plex Sans KR","Pretendard","Appl
 header{padding:16px 20px 10px;align-items:center;gap:10px 22px}
 .brand .k{font-size:10.5px;letter-spacing:.16em;color:var(--mute);font-weight:500}.brand h1{font-size:21px;font-weight:600;letter-spacing:-.01em;margin-top:3px}
 .brand .draft{font-size:11px;color:#e0b341;margin-top:3px}.brand .lang{color:var(--acc);text-decoration:none;letter-spacing:.04em}
-#bdsel{display:none}
+#bdsel{display:none}#win[hidden],#sz[hidden]{display:none}
 .seg{border:1px solid #333845;border-radius:5px;background:var(--panel)}.seg button{background:transparent;color:var(--mute);padding:6px 12px;font-size:12.5px;font-weight:500}
 .seg button+button{border-left:1px solid #333845}.seg button.on{background:#343a47;color:#fff;font-weight:600}
 #info{padding:0 20px 8px;font-size:12.5px;color:var(--mute)}
@@ -85,9 +87,9 @@ header{padding:16px 20px 10px;align-items:center;gap:10px 22px}
  <div class="brand"><div class="k">CLISA GEOPOLITICS · 미리 보기 · <a class="lang" href="/en/lab/heatmap/">English</a></div><h1>지정학 시황판</h1><div class="draft">사이트에는 아직 연결되지 않음</div></div>
  <div class="ctl">
   <div class="seg main" id="bdsel"><button data-b="prob" class="on">확률판</button><button data-b="fp" hidden>분쟁판</button></div>
-  <div class="seg" id="win"><button data-w="30" class="on">지난 30일</button><button data-w="90">지난 90일</button><button data-w="all">10월 2일부터</button></div>
-  <div class="seg" id="sz"><button data-s="v" class="on">충격과 확률</button><button data-s="eq">같은 크기</button></div>
-  <div class="seg" id="tab"><button data-t="scen">사안별 전개</button><button data-t="ext">바깥 변수</button><button data-t="fc" class="on">열린 전망</button></div>
+  <div class="seg" id="win" hidden><button data-w="30" class="on">지난 30일</button><button data-w="90">지난 90일</button><button data-w="all">10월 2일부터</button></div>
+  <div class="seg" id="sz" hidden><button data-s="v" class="on">충격과 확률</button><button data-s="eq">같은 크기</button></div>
+  <div class="seg" id="tab"><button data-t="scen">사안별 전개</button><button data-t="fc" class="on">열린 전망</button></div>
  </div>
 </header>
 <div id="sumry"></div>
@@ -102,10 +104,10 @@ header{padding:16px 20px 10px;align-items:center;gap:10px 22px}
 function start(){
 const B=window.BD, $=s=>document.querySelector(s); let BD='prob', W='30', T='fc', SZ='v';
 const day=s=>{if(!s)return NaN;const m=s.length===7?s+'-15':s;return new Date(m+'T00:00:00Z').getTime()/864e5}; const today=day(B.asof);
-const ws=()=>W==='all'?-1e9:today-(+W);
+const ST=()=>T==='scen'?'2026-10-02':'2026-10-01'; const ws=()=>day(ST());
 function delta(it){ if(it.h==null) return {na:true,d:0}; if(!it.h.length) return {base:null,d:0};
  const before=it.h.filter(x=>day(x.d)<=ws()); let base=before.length?before[before.length-1].p:(W==='all'?it.h[0].p:null);
- const isNew=W!=='all'&&!before.length; return {base:isNew?null:base,now:it.p,d:isNew?0:it.p-base,isNew}}
+ const isNew=!before.length; return {base:isNew?null:base,now:it.p,d:isNew?0:it.p-base,isNew}}
 const mix=(a,b,t)=>'#'+[0,2,4].map(i=>Math.round(parseInt(a.substr(i+1,2),16)*(1-t)+parseInt(b.substr(i+1,2),16)*t).toString(16).padStart(2,'0')).join('');
 const STOPS=[[-6,'#f63538'],[-4,'#bf4045'],[-2,'#8b444e'],[0,'#414554'],[2,'#35764e'],[4,'#2f9e4f'],[6,'#30cc5a']];
 function colP(d){ d=Math.max(-6,Math.min(6,d||0)); for(let i=1;i<STOPS.length;i++){ const [a,ca]=STOPS[i-1],[b,cb]=STOPS[i]; if(d<=b) return mix(ca,cb,(d-a)/(b-a)) } return STOPS[6][1] }
@@ -116,26 +118,42 @@ function squarify(items,x,y,w,h){ const out=[]; let rest=items.slice(); const to
  while(rest.length){ const len=Math.min(w,h); let row=[rest[0]],i=1; while(i<rest.length&&worst(row.concat(rest[i]),len)<=worst(row,len)){row.push(rest[i]);i++}
   const s=row.reduce((a,b)=>a+b.a,0); if(w>=h){const cw=s/h;let cy=y;row.forEach(r=>{const ch=r.a/cw;out.push({...r,x,y:cy,w:cw,h:ch});cy+=ch});x+=cw;w-=cw}
   else{const ch=s/w;let cx=x;row.forEach(r=>{const cw=r.a/ch;out.push({...r,x:cx,y,w:cw,h:ch});cx+=cw});y+=ch;h-=ch} rest=rest.slice(i)} return out}
-function lay(secs,render){ const bd=$('#board'); bd.innerHTML=''; const R=bd.getBoundingClientRect();
- squarify(secs.filter(s=>s.v>0).sort((a,b)=>b.v-a.v),0,0,R.width,R.height).forEach(S=>{ const el=document.createElement('div'); el.className='sec'; Object.assign(el.style,{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px'});
+// 사안: 바뀐 칸이 많은 순서대로 왼쪽부터 같은 폭의 기둥(좁은 화면은 위부터 같은 높이의 띠)
+function cols(items,W,H){ const G=[['iran'],['ukraine','korea'],['taiwan','poland']], by={}; items.forEach(it=>by[it.id]=it);
+ const gs=G.map(g=>g.map(id=>by[id]).filter(Boolean)).filter(g=>g.length); const all=items.filter(it=>!G.flat().includes(it.id)); if(all.length) gs.push(all);
+ const HD=20, out=[];
+ /* 칸 면적을 모두 같게: 사안 이름 띠(20px)를 먼저 떼고 남은 높이로 기둥 폭을 정함 */
+ if(W>=700){ const wt=gs.map(g=>g.reduce((a,b)=>a+b.v,0)/(H-HD*g.length)), sw=wt.reduce((a,b)=>a+b,0); let x=0;
+  gs.forEach((g,k)=>{ const cw=W*wt[k]/sw, gv=g.reduce((a,b)=>a+b.v,0), uh=H-HD*g.length; let y=0; g.forEach(it=>{ const h=HD+uh*it.v/gv; out.push({...it,x,y,w:cw,h}); y+=h }); x+=cw }) }
+ else { const all2=gs.flat(), tv=all2.reduce((a,b)=>a+b.v,0), uh=H-HD*all2.length; let y=0; all2.forEach(it=>{ const h=HD+uh*it.v/tv; out.push({...it,x:0,y,w:W,h}); y+=h }) }
+ return out }
+// 빈칸 없이, 모든 칸의 면적이 같게: 줄마다 칸 수를 고르게 나누고(차이 최대 1), 줄 높이는 그 줄의 칸 수에 비례
+function grid(items,x,y,w,h){ const n=items.length; if(!n||w<=0||h<=0) return []; let best=null;
+ for(let r=1;r<=n;r++){ const c=Math.ceil(n/r), cw=w/c, ch=h/r, q=Math.max(cw/ch,ch/cw)*(1+(c*r-n)/n*1.5); if(!best||q<best.q) best={r,q} }
+ const r=best.r, base=Math.floor(n/r), extra=n%r, out=[]; let i=0;
+ let yy=y; for(let k=0;k<r;k++){ const cnt=base+(k<extra?1:0), cw=w/cnt, ch=h*cnt/n; for(let j=0;j<cnt;j++,i++) out.push({...items[i],x:x+j*cw,y:yy,w:cw,h:ch}); yy+=ch }
+ return out }
+function lay(secs,render){ const bd=$('#board'); bd.innerHTML=''; const R=bd.getBoundingClientRect(); LAYH=R.height; LAYW=R.width;
+ cols(secs.filter(s=>s.v>0),R.width,R.height).forEach(S=>{ const el=document.createElement('div'); el.className='sec'; Object.assign(el.style,{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px'});
   el.innerHTML='<div class="h">'+S.name+(S.sk?'<span class="sk">'+S.sk+'</span>':'')+'</div>'; bd.appendChild(el); if(S.tip){const h=el.firstChild;h.onmousemove=e=>show(e,S.tip);h.onmouseleave=()=>$('#tip').style.display='none'}
-  squarify(S.tiles.sort((a,b)=>b.v-a.v),0,20,S.w,S.h-20).forEach(t=>{const d=document.createElement('div');d.className='t';Object.assign(d.style,{left:t.x+'px',top:t.y+'px',width:t.w+'px',height:t.h+'px'});
+  grid(S.tiles.sort((a,b)=>(b.ord||0)-(a.ord||0)||b.v-a.v),0,20,S.w,S.h-20).forEach(t=>{const d=document.createElement('div');d.className='t';Object.assign(d.style,{left:t.x+'px',top:t.y+'px',width:t.w+'px',height:t.h+'px'});
    const fs=Math.max(9,Math.min(24,Math.sqrt(t.w*t.h)/6.2)); d.style.fontSize=fs+'px'; render(d,t,fs); d.addEventListener('mouseenter',()=>el.classList.add('hl')); d.addEventListener('mouseleave',()=>el.classList.remove('hl')); el.appendChild(d); fit(d,fs)}) }) }
 // 칸 안의 글자가 넘치면 줄이고, 그래도 넘치면 작은 줄 → 이름 순서로 뺀다
 function fit(d,fs){ const over=()=>d.scrollHeight>d.clientHeight+1||d.scrollWidth>d.clientWidth+1; let f=fs;
- while(over()&&f>8){f-=1;d.style.fontSize=f+'px'}
+ if(over()){const g=d.querySelector('.sg'); if(g) g.remove()}
+ while(over()&&f>9){f-=1;d.style.fontSize=f+'px'}
  if(over()){const g=d.querySelector('.sg'); if(g) g.remove()} if(over()){const c=d.querySelector('.c'); if(c) c.remove()} if(over()){const v=d.querySelector('.v'); if(v) v.remove()} if(over()) d.innerHTML=''; if(d.dataset.sg&&!d.querySelector('.sg')&&d.clientWidth>22&&d.clientHeight>16) d.insertAdjacentHTML('beforeend','<span class="sgc">'+d.dataset.sg+'</span>') }
 function txt(d,t,fs,name,big,small,badge){ if(t.w>46&&t.h>30) d.innerHTML=(badge?'<span class="nw">'+badge+'</span>':'')+'<div class="n">'+name+'</div><div class="v">'+big+'</div>'+(small?'<div class="c">'+small+'</div>':'');
  else if(t.w>24&&t.h>16) d.innerHTML='<div class="n" style="font-size:'+Math.max(9,fs*0.85)+'px">'+(t.short||name)+'</div><div class="v" style="font-size:'+Math.max(9,fs*0.8)+'px">'+big+'</div>' }
-const wl=()=>W==='all'?'기록을 시작한 2026년 10월 2일 이후':'지난 '+W+'일 동안';
+const wl=()=>T==='scen'?'2026년 10월 2일 이후':'2026년 10월 1일 이후';
 // ── 확률판
-function drawProb(){ const nI=B.items.filter(i=>i.kind===T&&B.cases.some(c=>c.id===i.case)).length; $('#info').innerHTML=(T==='fc'?'클리사 지오폴리틱스의 열린 전망 '+nI+'개':T==='scen'?'5개 사안의 전개 판단 '+nI+'개':'5개 사안의 바깥 변수 '+nI+'개')+'를 사안별로 나눴습니다.'+(SZ==='eq'?' 모든 사안과 칸을 같은 크기로 그렸습니다.':' 사안의 넓이는 그 사안이 가장 나쁘게 전개될 때 첫해 세계 GDP가 입을 손실의 추정치이고, 칸의 넓이는 확률입니다.'); const items=B.items.filter(i=>i.kind===T&&B.cases.some(c=>c.id===i.case)); const val=i=>SZ==='eq'?10:Math.max(1.5,i.p);
- const secs=B.cases.map(c=>{const its=items.filter(i=>i.case===c.id),tot=its.reduce((a,i)=>a+val(i),0);return {name:c.name,sk:'세계 GDP 손실 '+c.lab,tip:'<div class="m">사안 칸의 넓이</div><div class="tt">'+c.name+' · 세계 GDP 손실 '+c.lab+'</div><div>'+c.src+'</div>',v:SZ==='eq'?10:c.v,tiles:its.map(i=>({i,v:(SZ==='eq'?10:c.v)*val(i)/tot}))}});
- secs.forEach((S,k)=>{ const c=B.cases[k], nb=(B.citems||[]).filter(x=>x.c===c.id&&day(x.d)>ws()).length; S.sk+=' · 브리핑 '+nb+'건'; S.tip+='<div class="m" style="margin-top:4px">'+wl()+' 정세 브리핑에서 이 사안을 다룬 꼭지 '+nb+'건</div>' });
+function drawProb(){ const nI=B.items.filter(i=>i.kind===T&&B.cases.some(c=>c.id===i.case)).length; B.start=ST(); $('#info').innerHTML=(T==='fc'?'클리사 지오폴리틱스의 열린 전망 '+nI+'개':'5개 사안의 전개 판단 '+nI+'개')+'를 사안별로 나눴습니다. 칸은 모두 같은 크기이고, 사안 안에서는 바뀐 칸부터 앞에 놓았습니다. 사안 이름 옆의 세계 GDP 손실은 그 사안이 가장 나쁘게 전개될 때 첫해 세계 GDP가 입을 손실의 추정치입니다.'+(T==='scen'?' 전개 확률은 공개 사유를 함께 기록하기 시작한 10월 2일부터 셉니다.':''); const items=B.items.filter(i=>i.kind===T&&B.cases.some(c=>c.id===i.case)); const val=i=>10;
+ const secs=B.cases.map(c=>{const its=items.filter(i=>i.case===c.id),tot=its.reduce((a,i)=>a+val(i),0);return {id:c.id,name:c.name,sk:'세계 GDP 손실 '+c.lab,tip:'<div class="m">최악 전개 때 첫해 세계 GDP 손실</div><div class="tt">'+c.name+' · 세계 GDP 손실 '+c.lab+'</div><div>'+c.src+'</div>',v:its.length,ord:its.filter(i=>delta(i).d).length,tiles:its.map(i=>{const q=delta(i);return {i,v:1,ord:Math.abs(q.d)*10+(q.isNew?1:0)}})}});
+ secs.forEach((S,k)=>{ const c=B.cases[k], nb=(B.citems||[]).filter(x=>x.c===c.id&&day(x.d)>=ws()).length; S.sk+=' · 브리핑 '+nb+'건'; S.tip+='<div class="m" style="margin-top:4px">'+wl()+' 정세 브리핑에서 이 사안을 다룬 꼭지 '+nb+'건</div>' });
 
  lay(secs,(d,t,fs)=>{const it=t.i,dd=delta(it); if(dd.na) d.classList.add('na'); else d.style.background=colP(dd.d);
   txt(d,t,fs,it.name,it.p+'%'+(dd.na?'':'<span class="dl">'+dtxt(dd)+'</span>'),'',''); if(T==='fc'){ const g=sig(it); if(g.u||g.n){ if(t.w>46&&t.h>44) d.insertAdjacentHTML('beforeend','<div class="sg">'+stxt(g)+' · ↑'+g.u+' ↓'+g.n+'</div>'); d.dataset.sg=(g.net>0?'+':g.net<0?'−':'±')+Math.abs(g.net); d.dataset.sgc=colS(g.net); } }
-  d.onmousemove=e=>tipP(e,it,dd,items); d.onmouseleave=()=>$('#tip').style.display='none'; d.onclick=e=>tipP(e,it,dd,items)});
+  d.onmousemove=e=>{ if(!PIN) tipP(e,it,dd,items) }; d.onmouseleave=()=>{ if(!PIN) $('#tip').style.display='none' }; d.onclick=e=>{ e.stopPropagation(); PIN=true; tipP(e,it,dd,items); $('#tip').classList.add('pin') }});
  const ds=items.map(i=>({i,dd:delta(i)})); const na=ds.filter(x=>x.dd.na).length; const mv=ds.filter(x=>x.dd.d); const up=mv.filter(x=>x.dd.d>0),dn=mv.filter(x=>x.dd.d<0),nw=ds.filter(x=>x.dd.isNew);
  const tu=up.sort((a,b)=>b.dd.d-a.dd.d)[0], td=dn.sort((a,b)=>a.dd.d-b.dd.d)[0];
  $('#sumry').innerHTML=wl()+(na===items.length?' · 바깥 변수의 확률은 아직 이력 대장에 기록하지 않아 변화를 보여 줄 수 없습니다(빗금)':' · 움직인 판단 <b>'+mv.length+'</b>개(<span class="u">▲ '+up.length+'</span> · <span class="d">▼ '+dn.length+'</span>)'+(nw.length?' · 새로 낸 '+(T==='fc'?'전망':'전개 판단')+' <b>'+nw.length+'</b>개':'')+
@@ -152,16 +170,47 @@ function spark(h,w=74,ht=18){ if(!h||!h.length) return '<span style="color:#5562
  const ps=pts.map(p=>p[1]),lo=Math.min(...ps),hi=Math.max(...ps),sy=v=>hi===lo?ht/2:ht-2-(v-lo)/(hi-lo)*(ht-4),sx=t=>(t-t0)/Math.max(1,t1-t0)*w; let d='';
  pts.forEach((p,i)=>{d+=(i?'H'+sx(p[0]).toFixed(1)+'V':'M'+sx(p[0]).toFixed(1)+' ')+sy(p[1]).toFixed(1)});
  const c=ps[ps.length-1]>ps[0]?'#16c784':ps[ps.length-1]<ps[0]?'#ea3943':'#8b97ab'; return '<svg width="'+w+'" height="'+ht+'"><path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="1.5"/></svg>'}
-const chg=dd=>dd.na?'<span style="color:#55627a">아직 이력 없음</span>':dd.isNew?'<span style="color:#33d1ff">새로 냄</span>':dd.d?'<span style="color:'+(dd.d>0?'#16c784':'#ea3943')+'">'+(dd.d>0?'▲':'▼')+Math.abs(dd.d)+'%p</span>':'<span style="color:#8b97ab">0</span>';
+const chg=dd=>dd.na?'<span style="color:#55627a">아직 이력 없음</span>':dd.isNew?'<span style="color:#33d1ff">새로 냄</span>':dd.d?'<span style="color:'+(dd.d>0?'#16c784':'#ea3943')+'">'+(dd.d>0?'▲':'▼')+Math.abs(dd.d)+'%p</span>':'<span style="color:#8b97ab">±0%p</span>';
 function tipP(e,it,dd,grp){ const cn=it.case==='world'?'세계 질서':(B.cases.find(c=>c.id===it.case)||{}).name, nw=it.case==='world'?B.lead:(B.cnews||{})[it.case];
- const mem=(grp||[]).filter(x=>x.case===it.case&&x.kind===it.kind&&x!==it).sort((a,b)=>b.p-a.p).slice(0,11);
+ const mem=(grp||[]).filter(x=>x.case===it.case&&x.kind===it.kind&&x!==it).sort((a,b)=>b.p-a.p).slice(0,8);
  const row=(x,me)=>{const d2=x===it?dd:delta(x);return '<tr'+(me?' class="me"':'')+'><td class="nm">'+x.name+'</td><td>'+spark(x.h)+'</td><td class="r">'+x.p+'%</td><td class="r">'+chg(d2)+'</td></tr>'};
- show(e,'<div class="grp">'+cn+' · '+KL[it.kind]+(it.due?' · 검증일 '+it.due:'')+'</div>'+(nw?'<div class="nw"><span class="dt">'+fmtD(nw.d)+' 정세 브리핑</span>'+nw.h+'</div>':'<div class="nw m">최근 30호 정세 브리핑에 이 사안의 꼭지가 없습니다</div>')+
-  '<table>'+row(it,true)+mem.map(x=>row(x,false)).join('')+'</table>'+(it.prop?'<div class="pr"><b>11월 3일 갱신안</b> '+it.prop.from+'% → '+it.prop.p+'%<br>'+it.prop.r+'</div>':'')+(it.kind==='fc'?sigHtml(it):'')+(it.q?'<div class="hs m">'+it.q+'</div>':'')) }
+ const one=t=>{ if(!t) return ''; const m=t.match(/^.*?[a-z0-9)\]\u2019\u201d"'가-힣][.!?](?=\s+[A-Z0-9\u201c"'가-힣]|\s*$)/); let x=m?m[0]:t; if(x.length>220) x=x.slice(0,218)+'…'; return x };
+ show(e,'<div class="grp">'+cn+' · '+KL[it.kind]+(it.due?' · 검증일 '+(it.due.length>7?it.due.replace(/^(\d+)-0?(\d+)-0?(\d+)$/,'$1년 $2월 $3일'):it.due.replace(/^(\d+)-0?(\d+)$/,'$1년 $2월')):'')+'</div>'+(it.kind==='fc'&&it.q?(()=>{const L=likeKo(it.q);return '<div class="mean">'+L.h+(L.note?'<span class="nt">('+L.note+')</span>':'')+'</div>'})():it.q?'<div class="mean">'+one(it.q)+(it.def?'<div class="df"><b>정의</b> '+defText(it,'ko')+'</div>':'')+'</div>':'')+
+  '<table>'+row(it,true)+mem.map(x=>row(x,false)).join('')+'</table>'+(it.prop?'<div class="pr"><b>'+it.prop.from+'% → '+it.prop.p+'%</b><br>'+it.prop.r+'</div>':'')+(it.kind==='fc'?sigHtml(it):(nw?'<div class="hs"><b>최근 정세 브리핑</b></div><div class="nw"><span class="dt">'+fmtD(nw.d)+'</span>'+nw.h+'</div>':'<div class="hs m">최근 30호 정세 브리핑에 이 사안의 꼭지가 없습니다</div>'))+(PIN?'':'<div class="hint">누르면 이 상자가 고정되어 내려 볼 수 있습니다. 바깥을 누르면 닫힙니다.</div>')) }
+// 전망 문장 → '…할 가능성' (한국어 끝말 바꾸기)
+function likeKo(q){ if(!q) return {h:'',note:''}; let s=q.trim(), note='';
+ const m=s.match(/^(.*?[다])\s*\(([^()]*)\)\.?$/); if(m){ s=m[1]; note=m[2] }
+ s=s.replace(/\.$/,''); s=s.replace(/^중국은 /,'중국이 '); const i=s.search(/다$/); if(i<0) return {h:q,note:''};
+ const B=s.slice(0,i), p=B.slice(-1), c=p.charCodeAt(0)-0xAC00, jong=c%28, rest=B.slice(0,-1);
+ let o;
+ if(B.endsWith('는')) o=B.slice(0,-1)+'을';                               // 않는다·얻는다·넘는다
+ else if(B.endsWith('이')) o=B.slice(0,-1)+'일';                          // ~이다
+ else if(c<0||c>11171) return {h:q,note:''};
+ else if(jong===4) o=rest+String.fromCharCode(p.charCodeAt(0)-4+8);      // ㄴ받침 → ㄹ받침(된다→될)
+ else if(jong===0) o=B+'일';                                              // 네타냐후다 → 네타냐후일
+ else o=B+'을';                                                           // 없다·있다·많다
+ return {h:o+' 가능성',note} }
+function likeEn(q){ if(!q) return {h:'',note:''}; let s=q.trim(), note=''; const m=s.match(/^(.*?)\s*\(([^()]*)\)\.?$/); if(m){ s=m[1]; note=m[2] }
+ s=s.replace(/\.$/,''); if(/^(A|An|The|By|If|In|On|From|As|Before|No|At)\s/.test(s)) s=s[0].toLowerCase()+s.slice(1); return {h:'Chance that '+s,note} }
+
+
+/* 전개의 정의(판정 기준)를 독자용으로: 기호(F2·T2~T5 등)를 전개 이름으로, 자기 기호는 '이 전개' */
+function defText(it,lang){ let t=it.def||''; if(!t) return ''; const me=it.id.split(':')[1], nm={}; B.items.filter(x=>x.kind==='scen'&&x.case===it.case).forEach(x=>nm[x.id.split(':')[1]]=x.name);
+ const ord=Object.keys(nm).sort(), rng=(a,b)=>ord.filter(k=>k[0]===a[0]&&+k.slice(1)>=+a.slice(1)&&+k.slice(1)<=+b.slice(1)&&k!==me).map(k=>nm[k]);
+ if(lang==='ko'){
+  if(/어느 조건에도 해당하지 않으면/.test(t)) t=t.replace(/^.*?어느 조건에도 해당하지 않으면[^.]*?입니다\./,'다른 전개의 조건에 하나도 해당하지 않으면 이 전개로 봅니다.');
+  t=t.replace(new RegExp('>\\s*'+me+'입니다','g'),'> 이 전개입니다').split(it.name+'('+me+')입니다').join('이 전개로 봅니다'); t=t.replace(new RegExp('(?:\\s*\\('+me+'\\))?'+me+'입니다','g'),'이 전개로 봅니다').replace(new RegExp('\\('+me+'\\)','g'),'');
+ } else {
+  if(/none of the conditions/i.test(t)) t=t.replace(/^.*?none of the conditions[^.]*?\./i,'This path applies if none of the conditions for the other paths is met.');
+  t=t.replace(new RegExp('the outcome is [^.,;]*?\\('+me+'\\)','g'),'the outcome is this path').replace(new RegExp('the outcome is '+me+'\\b','g'),'the outcome is this path').replace(new RegExp('^'+me+' applies','g'),'This path applies').replace(new RegExp('The outcome is '+me+'\\b','g'),'The outcome is this path');
+ }
+ t=t.replace(/\s?\(([A-Z]\d)\)/g,'').replace(/\b([A-Z]\d)\s*(?:~|–|-|through)\s*([A-Z]\d)\b/g,(m,a,b)=>rng(a,b).join(lang==='ko'?'·':', '))
+  .replace(/(?<![A-Za-z])([A-Z]\d)(?!\d)/g,(m,c)=>c===me?(lang==='ko'?'이 전개':'this path'):(nm[c]?(lang==='ko'?'‘'+nm[c]+'’':'“'+nm[c]+'”'):m));
+ return t }
 function sigHtml(it){ const g=sig(it); if(!g.r.length) return '<div class="hs m">이 기간 정세 브리핑에 이 전망과 이어진 꼭지가 없습니다</div>';
  const ic=e=>e==='up'?'<b style="color:#16c784">↑</b>':e==='down'?'<b style="color:#ea3943">↓</b>':'<b style="color:#8b97ab">·</b>';
- return '<div class="hs"><b>관련 정세 브리핑</b> · 상승 신호 '+g.u+' · 하락 신호 '+g.n+' <span class="m">(같은 날 같은 방향은 한 번)</span></div><table>'+g.r.slice(0,8).map(x=>'<tr><td style="width:14px">'+ic(x.e)+'</td><td style="color:#8b97ab;width:44px">'+md(x.d)+'</td><td class="nm" style="max-width:300px;white-space:normal">'+x.h+'</td></tr>').join('')+'</table>'+(g.r.length>8?'<div class="hs m">외 '+(g.r.length-8)+'건</div>':'') }
-function sig(it){ const a=(B.sig||{})[it.id]||[], r=a.filter(x=>day(x.d)>ws()), k={}; r.forEach(x=>{ if(x.e==='up'||x.e==='down') k[x.d+x.e]=x.e });
+ return '<div class="hs"><b>관련 정세 브리핑</b> · 상승 신호 '+g.u+' · 하락 신호 '+g.n+' <span class="m">(같은 날 같은 방향은 한 번)</span></div><table>'+g.r.slice().sort((x,y)=>x.d<y.d?1:-1).slice(0,5).map(x=>'<tr><td style="width:14px">'+ic(x.e)+'</td><td style="color:#8b97ab;width:44px">'+md(x.d)+'</td><td class="nm" style="max-width:300px;white-space:normal">'+x.h+'</td></tr>').join('')+'</table>'+(g.r.length>5?'<div class="hs m">외 '+(g.r.length-5)+'건</div>':'') }
+function sig(it){ const a=(B.sig||{})[it.id]||[], r=a.filter(x=>day(x.d)>=ws()), k={}; r.forEach(x=>{ if(x.e==='up'||x.e==='down') k[x.d+x.e]=x.e });
  const v=Object.values(k), u=v.filter(e=>e==='up').length, n=v.filter(e=>e==='down').length; return {r,u,n,net:u-n} }
 function colS(net){ if(!net) return '#2a3344'; const t=Math.pow(Math.min(Math.abs(net)/8,1),0.7)*0.62; return mix('#2a3344',net>0?'#16c784':'#ea3943',t) }
 const stxt=g=>g.u||g.n?'신호 '+(g.net>0?'+':g.net<0?'−':'±')+Math.abs(g.net):'신호 없음';
@@ -187,10 +236,13 @@ function drawFp(){ $('#strip').innerHTML=''; const A=f=>SZ==='eq'?1:Math.pow(2,f
  const W2=B.fps.map(f=>({f,w:fpw(f)})), hit=W2.filter(x=>x.w.n).sort((a,b)=>b.w.n-a.w.n), tot=W2.reduce((a,x)=>a+x.w.n,0);
  $('#sumry').innerHTML=bwl()+' · 브리핑에 실린 분쟁 지점 <b>'+hit.length+'</b>곳 / 43곳'+(hit.length?' · 가장 많이 실린 곳 '+hit.slice(0,3).map(x=>'<b>'+x.f.name+'</b> '+x.w.n+'건').join(', '):'')+' · <span class="m">'+(43-hit.length)+'곳은 이 기간 브리핑에 실리지 않았습니다</span>';
  $('#legend').innerHTML='브리핑에 실린 횟수 <span class="lgb">'+FC.map((c,i)=>'<span style="background:'+c+'">'+['0','1','2~4','5~14','15~49','50+'][i]+'</span>').join('')+'</span>· 클리사 브리핑에 실린 횟수이며 실제 사건 수가 아닙니다 · 칸 넓이 = 심각도(2~5등급, 한 등급마다 넓이 2배, 순서를 보일 뿐 비율의 뜻은 없음) · 막대 = 날마다 실린 줄 수' }
+let PIN=false; const unpin=()=>{ PIN=false; const T=$('#tip'); T.classList.remove('pin'); T.style.display='none' };
+document.addEventListener('click',e=>{ if(PIN&&!$('#tip').contains(e.target)) unpin() }); document.addEventListener('keydown',e=>{ if(e.key==='Escape') unpin() });
 function show(e,h){const T=$('#tip');T.innerHTML=h;T.style.display='block';const x=Math.max(8,Math.min(e.clientX+14,innerWidth-T.offsetWidth-8)),y=Math.max(8,Math.min(e.clientY+14,innerHeight-T.offsetHeight-8));T.style.left=x+'px';T.style.top=y+'px'}
 function draw(){ const rec=today-day(B.start); document.querySelectorAll('#win button[data-w]').forEach(b=>{ if(b.dataset.w!=='all') b.hidden=+b.dataset.w>=rec }); const L=B.lead; $('#lead').innerHTML=L?'<span class="d">'+fmtD(L.d)+' 정세 브리핑</span><span class="h">'+L.h+'</span><a href="/brief/'+L.d+'/">더 보기 →</a>':''; $('#tab').style.display=BD==='prob'?'flex':'none'; const fn=({prob:drawProb,fp:drawFp})[BD]; const h0=$('#board').clientHeight; fn(); if($('#board').clientHeight!==h0) fn() }
 const seg=(id,key,set)=>$(id).onclick=e=>{const v=e.target.dataset[key];if(!v)return;set(v);document.querySelectorAll(id+' button').forEach(b=>b.classList.toggle('on',b.dataset[key]===v));draw()};
-seg('#bdsel','b',v=>BD=v); seg('#win','w',v=>W=v); seg('#tab','t',v=>T=v); seg('#sz','s',v=>SZ=v);
+seg('#bdsel','b',v=>BD=v); seg('#win','w',v=>W=v); seg('#tab','t',v=>T=v); let LAYH=0, LAYW=0; /* 글꼴이 늦게 실리거나 창 크기가 바뀌어 판의 크기가 달라지면 다시 그림(판 아래 빈 띠 방지) */
+ new ResizeObserver(()=>{ const r=$('#board').getBoundingClientRect(); if(Math.abs(r.height-LAYH)>1||Math.abs(r.width-LAYW)>1){ clearTimeout(window._rz); window._rz=setTimeout(()=>{ if(window.BD) draw() },60) } }).observe($('#board')); if(document.fonts) document.fonts.ready.then(()=>{ if(window.BD) draw() }); seg('#sz','s',v=>SZ=v);
 addEventListener('resize',draw); document.addEventListener('click',e=>{ if(!e.target.closest('.t,.g,.sec .h,#tip')) $('#tip').style.display='none' }); draw();
 }
 
@@ -202,7 +254,7 @@ const today=()=>{const d=new Date(Date.now()+9*3600e3);return d.toISOString().sl
 Promise.all([fetch(P+'/data/eurasia.json',{cache:'no-cache'}).then(r=>r.json()),fetch(P+'/data/daily.json',{cache:'no-cache'}).then(r=>r.json())]).then(([D,Y])=>{
  const H=a=>(a||[]).map(x=>({d:x[0],p:x[1]})), items=[];
  (D.strategies||[]).filter(s=>CFG.CN[s.id]).forEach(s=>{const sh=(D.scen_hist||{})[s.id]||{};
-  ((s.futures||{}).items||[]).forEach(it=>items.push({id:s.id+':'+it.id,kind:'scen',case:s.id,name:it.name,q:it.test||'',p:it.p,h:H(sh[it.id])}));
+  ((s.futures||{}).items||[]).forEach(it=>items.push({id:s.id+':'+it.id,kind:'scen',case:s.id,name:it.name,q:it.story||'',def:it.test||'',p:it.p,h:H(sh[it.id])}));
   ((s.external||{}).items||[]).forEach(x=>items.push({id:s.id+':'+x.id,kind:'ext',case:s.id,name:x.t,q:x.def||'',p:x.p,h:null}))});
  ((D.grand||{}).scenarios||[]).forEach(g=>items.push({id:'g:'+g.id,kind:'world',case:'world',name:g.name,q:g.d||'',p:g.p,h:H((D.grand_hist||{})[g.id])}));
  (D.forecasts||[]).filter(f=>f.status==='open').forEach(f=>items.push({id:f.id,kind:'fc',case:(f.cases||['etc'])[0],name:f.s,q:f.q,p:f.p,due:f.due,h:H((D.fc_hist||{})[f.id])}));
