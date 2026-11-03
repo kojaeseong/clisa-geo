@@ -1142,6 +1142,12 @@ function ttsText(key){
       ((F.events || []).length ? " " + F.events_h + ". " + F.events.map(x => x.when + ". " + t(x.t)).join(" ") : "") + ((F.paths || []).length ? " " + F.paths_h + ". " + t(F.paths_lead) + " " + F.paths.map(x => x.k + ". " + t(x.t)).join(" ") : "") + ((F.falsify || []).length ? " " + F.falsify_h + ". " + t(F.falsify_lead) + " " + F.falsify.map(t).join(" ") : "");  /* v3.44 서술형 특집 듣기: 표는 읽지 않는다 */
     return "Feature. " + F.title + ". " + ((F.summary || []).length ? (F.summary_h || "Summary") + ". " + F.summary.map(t).join(" ") + " " : "") + t(F.lead) + " " + F.flows_h + ". " + F.flows.map(x => t(x.k) + ". " + t(x.t)).join(" ") + " " + F.window_h + ". " + F.window.map(t).join(" ") + " " + F.events_h + ". " + F.events.map(x => x.when + ". " + t(x.t)).join(" ") + " " + F.paths_h + ". " + t(F.paths_lead) + " " + F.paths.map(x => x.k + ". " + t(x.t)).join(" ") + " " + F.falsify_h + ". " + t(F.falsify_lead) + " " + F.falsify.map(t).join(" "); }
   if (k === "country") { const c = D.countries[id]; if (!c) return ""; return c.name_ko + ". " + (c.situation || "") + " " + (c.recent || []).slice(-3).map(r => r.text).join(" "); }
+  if (k === "page") { const P = document.getElementById("pane-page"); if (!P) return ""; /* tts1103: digest pages */
+    const T = n => n ? String([].filter.call(n.childNodes, c => !(c.nodeType === 1 && c.matches("[data-tts]"))).map(c => c.textContent).join("")).replace(/\s+/g, " ").trim() : "";
+    const E = s => s && !/[.?!]$/.test(s) ? s + "." : s;
+    const ey = P.querySelector("p.eyebrow"), head = [ey && ey.querySelector("a") ? ey : null, P.querySelector("h1"), [].find.call(P.querySelectorAll("h2"), h => !h.closest("article"))];
+    const body = [].concat.apply([], [].map.call(P.querySelectorAll("article.bi"), a => [a.querySelector("h2"), a.querySelector("p")]));
+    return head.concat(body).map(T).filter(Boolean).map(E).join(" "); }
   return "";
 }
 /* v3.23 브리핑 듣기: 판단과의 연결은 괄호 속 설명(사안 이름·결론 번호 등)을 빼고 읽는다 */
