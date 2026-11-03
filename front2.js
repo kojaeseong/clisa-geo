@@ -78,9 +78,7 @@
   var L = function(o, k){ return EN ? (o[k + "e"] != null ? o[k + "e"] : o[k]) : o[k]; };
   /* 소리(기본은 끔. 켜면 전망을 고를 때 짧은 소리가 난다) */
   var AC = null, SND = false; try { SND = localStorage.getItem("ep.snd") === "on"; } catch (e) {}
-  function thunk(){ if (!SND) return; try { AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); var c = AC, t = c.currentTime;
-    var o = c.createOscillator(), g = c.createGain(); o.type = "sine"; o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .18);
-    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.45, t + .008); g.gain.exponentialRampToValueAtTime(.0001, t + .26); o.connect(g).connect(c.destination); o.start(t); o.stop(t + .3); } catch (e) {} }
+  function thunk(){} /* 누름 소리는 /hdr.js의 clisaSfx가 모든 단추에서 낸다(2026-11-03). 이 자리는 두 번 울리지 않게 비워 둔다 */
   /* 전망 → 이어진 전개(같은 사건이 먼저, 그다음 신호) */
   var prim = function(f){ return f.links.filter(function(l){ return l.rel === "same"; })[0] || f.links.filter(function(l){ return l.rel === "+"; })[0] || f.links[0]; };
   var scOf = function(f){ var l = f.case && prim(f); return l ? FD.cases[f.case].sc[l.sc] : null; };
@@ -218,7 +216,11 @@
   document.addEventListener("keydown", function(ev){ if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches(".f2-ev")) { ev.preventDefault(); ev.target.click(); } });
   var loading = false;
   function go(el){ if (!el) return; if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
-    fetch(P + "/data/front.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(d){ FD = d; draw(document.getElementById("pane-overview") || el); }).catch(function(){ loading = false; }); }
+    fetch(P + "/data/front.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(d){ FD = d; draw(document.getElementById("pane-overview") || el); fresh(); }).catch(function(){ loading = false; }); }
+  // E111(2026-11-03 결재): 최근 정세 브리핑 카드는 빌드 때의 front.json이 아니라 매일 바뀌는 daily.json의 최근 3개 호에서 읽는다. 읽지 못하면 front.json 값을 그대로 둔다.
+  function fresh(){ fetch(P + "/data/daily.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(D){ var out = [];
+      (D.issues || []).slice(0, 3).forEach(function(x){ (x.items || []).forEach(function(it){ if (it.case && FD.cases[it.case]) out.push({d: x.date, h: it.h, he: it.h, "case": it.case}); }); });
+      if (out.length) { FD.news = out.slice(0, 6); if (EL) news(); } }).catch(function(){}); }
   document.addEventListener("clisa:overview", function(ev){ go(ev.detail); });
   document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "overview") focus(null); else if (SEL && FD) focus(SEL); });
   var po = document.getElementById("pane-overview"); if (po && po.children.length && !po.querySelector(".f2")) go(po);

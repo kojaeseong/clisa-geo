@@ -48,3 +48,36 @@
   function all(){ place(); knobs(); CL.forEach(build); }
   all(); addEventListener("resize", all); addEventListener("load", all); if (document.fonts && document.fonts.ready) document.fonts.ready.then(all);
 })();
+/* 누름 소리(2026-11-03 운영자 지시: 더 명료하고 또렷하며 타격감 있게, 더 많은 단추에). 소리는 방문자가 '소리 켜기'를 고른 때만(ep.snd=on) 난다.
+   창(window)의 포착 단계에서 누름을 받으므로 다른 처리기가 전파를 멈춰도 들린다. 선택하는 누름(전망·브리핑 카드·탭)은 무겁게, 그 밖은 짧게. */
+(function(){
+  var AC = null, BUS = null, LAST = 0;
+  function on(){ try { return localStorage.getItem("ep.snd") === "on"; } catch (e) { return false; } }
+  function ctx(){ try { if (!AC) { AC = new (window.AudioContext || window.webkitAudioContext)();
+        var cp = AC.createDynamicsCompressor(); cp.threshold.value = -14; cp.ratio.value = 8; cp.attack.value = 0.001; cp.release.value = 0.08;
+        BUS = AC.createGain(); BUS.gain.value = 0.8; BUS.connect(cp).connect(AC.destination); }
+      if (AC.state === "suspended") AC.resume(); return AC; } catch (e) { return null; } }
+  function tone(type, f0, f1, dur, vol, dl){ var t = AC.currentTime + (dl || 0), o = AC.createOscillator(), g = AC.createGain(); o.type = type;
+    o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(f1, t + dur); g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.002); g.gain.exponentialRampToValueAtTime(0.0001, t + dur); o.connect(g).connect(BUS); o.start(t); o.stop(t + dur + 0.02); }
+  function noise(dur, vol, ft, f0, f1, q){ var t = AC.currentTime, n = Math.max(1, Math.floor(AC.sampleRate * dur)), b = AC.createBuffer(1, n, AC.sampleRate), d = b.getChannelData(0);
+    for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2);
+    var s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain(); s.buffer = b; f.type = ft; f.Q.value = q || 1.2;
+    f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    s.connect(f).connect(g).connect(BUS); s.start(t); }
+  var KIND = {
+    /* 짧고 또렷한 딸깍: 높은 대역의 잡음 순간음 + 짧은 몸통음 */
+    tap: function(){ noise(0.012, 0.55, "bandpass", 4200, 3000, 1.4); tone("sine", 210, 80, 0.06, 0.42); tone("sine", 2350, 2300, 0.022, 0.05); },
+    /* 선택: 타격감 있는 몸통음 + 잡음 순간음 + 짧은 금속 배음 */
+    hit: function(){ tone("sine", 160, 50, 0.13, 0.62); noise(0.022, 0.6, "bandpass", 3600, 2200, 1.3); noise(0.06, 0.18, "lowpass", 2200, 320);
+      [262, 723, 1415].forEach(function(f, i){ tone("sine", f, f * 0.995, 0.09 / (1 + i * 0.5), 0.05 / (1 + i), 0.003); }); }
+  };
+  window.clisaSfx = function(k){ if (!on()) return; var now = Date.now(); if (now - LAST < 50) return; LAST = now; if (!ctx()) return; try { (KIND[k] || KIND.tap)(); } catch (e) {} };
+  var HIT = '[data-f2],[data-f2c],.f2-ev,.f2-nw,[role="tab"],.hd-nav a,.hd-nav button,nav a';
+  var TAP = 'button,a[href],[role="button"],summary,label,select,input[type="checkbox"],input[type="radio"],[onclick],[tabindex="0"]';
+  function pointer(el){ for (var i = 0; el && el.nodeType === 1 && i < 4; i++, el = el.parentElement) { try { if (getComputedStyle(el).cursor === "pointer") return true; } catch (e) {} } return false; }
+  addEventListener("click", function(ev){ var t = ev.target; if (!t || !t.closest) t = t && t.parentElement; if (!t || !t.closest) return;
+    if (t.closest("#f2snd")) { var will = !on(); if (will) setTimeout(function(){ window.clisaSfx("tap"); }, 0); return; } /* 소리 켜기 단추: 켤 때만 확인음 */
+    if (t.closest(HIT)) return window.clisaSfx("hit");
+    if (t.closest(TAP) || pointer(t)) window.clisaSfx("tap"); }, true);
+})();
