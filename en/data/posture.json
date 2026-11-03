@@ -311,9 +311,9 @@
   ]
  },
  "fleet": {
-  "asof": "2026-10-19",
+  "asof": "2026-11-02",
   "src": "USNI News Fleet Tracker (approximate positions based on Navy and public information)",
-  "url": "https://news.usni.org/2026/10/19/usni-news-fleet-and-marine-tracker-oct-19-2026",
+  "url": "https://news.usni.org/2026/11/02/usni-news-fleet-and-marine-tracker-nov-2-2026",
   "items": [
    {
     "name": "USS George Washington",
@@ -337,30 +337,30 @@
    },
    {
     "name": "USS Boxer amphibious ready group",
-    "g": "Arabian Sea",
+    "g": "Indian Ocean",
     "type": "ar",
     "home": "San Diego",
-    "lat": 16.5,
-    "lon": 63.5,
-    "where": "Arabian Sea"
+    "lat": -10.0,
+    "lon": 75.0,
+    "where": "Indian Ocean"
    },
    {
     "name": "USS Theodore Roosevelt",
-    "g": "Yokosuka",
+    "g": "South China Sea",
     "type": "cv",
     "home": "San Diego",
-    "lat": 35.3,
-    "lon": 139.7,
-    "where": "Yokosuka (Japan) · arrived October 16, departed October 19 (destination not reported)"
+    "lat": 13.0,
+    "lon": 114.0,
+    "where": "South China Sea · underway after the multinational exercise Keen Sword 27, which ended October 29"
    },
    {
     "name": "USS Makin Island amphibious ready group",
-    "g": "Pacific, west of Hawaii",
+    "g": "Yokosuka",
     "type": "ar",
     "home": "San Diego",
-    "lat": 19.0,
-    "lon": 175.0,
-    "where": "Pacific · heading west after a port visit to Hawaii"
+    "lat": 35.3,
+    "lon": 139.7,
+    "where": "Port visit to Yokosuka (Japan)"
    },
    {
     "name": "USS Tripoli amphibious ready group",

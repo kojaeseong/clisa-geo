@@ -1,10 +1,131 @@
 {
  "issues": [
   {
+   "date": "2026-11-03",
+   "items": [
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Russian bombs hit aid-distribution school in Zaporizhzhia region; Ukraine says 26 killed",
+     "fact": "Ukrainian President Volodymyr Zelensky said on November 2 that a school distributing humanitarian aid in Komyshuvakha, in the Zaporizhzhia region, and a shelter inside it were hit one after another by Russian aerial bombs, killing 26 people, and that nine more bombs fell after the first strike. Regional governor Mykhailo Semikin said 27 people were missing.",
+     "fc": [],
+     "src": [
+      "https://www.rferl.org/a/zelenskyy-patriot-missile-russia-refinery-trump/33888449.html",
+      "https://www.kyivpost.com/post/88932"
+     ],
+     "loc": {
+      "lat": 47.72,
+      "lon": 35.52,
+      "place": "Komyshuvakha (Ukraine)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "U.S. plans three-way talks with Russia, Ukraine in Abu Dhabi Nov. 10–11, senior official says",
+     "fact": "A senior U.S. official told Reuters on November 2 that the U.S. will hold three-way talks with Ukrainian and Russian delegations in Abu Dhabi on November 10–11 on postwar security arrangements, de-escalation, humanitarian measures and ending the war. Special envoy Steve Witkoff and Jared Kushner are expected to represent the U.S., the official said.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.yahoo.com/news/politics/articles/us-hold-trilateral-talks-ukraine-230250014.html"
+     ],
+     "loc": {
+      "lat": 24.45,
+      "lon": 54.38,
+      "place": "Abu Dhabi (UAE)",
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS",
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Iranian negotiators leave Doha as draft deal circulates; Iran ties final deal to blockade's end",
+     "fact": "Iranian negotiators left Doha, where they had been meeting Qatari mediators, on November 1, but not because the talks had stalled, an official briefed on the negotiations told Reuters on November 2. A draft deal with the U.S. is circulating and a follow-up meeting is possible, the official said. Foreign Ministry spokesman Esmaeil Baghaei said there will be no final deal and no reopening of the strait until the U.S. naval blockade ends and Iran's demands are met.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://cyprus-mail.com/2026/11/02/iranians-have-left-doha-talks-draft-proposal-for-us-deal-being-circulated-official-says"
+     ],
+     "loc": {
+      "lat": 25.29,
+      "lon": 51.53,
+      "place": "Doha (Qatar)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "A local ceasefire around Oleshky in the Kherson region ended on the night of November 1 after Russia refused to extend it, and Russian forces resumed attacks on the region on November 2, Ukrainian authorities said, according to RFE/RL.",
+     "src": [
+      "https://www.rferl.org/a/zelenskyy-patriot-missile-russia-refinery-trump/33888449.html",
+      "https://www.kyivpost.com/post/88932"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "U.S. Central Command pushed back on Iranian Foreign Minister Abbas Araghchi's claim that Iran has not attacked civilians in neighboring countries, saying Iranian attacks have killed more than 20 civilian mariners in recent months.",
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202610312594",
+      "https://www.rferl.org/a/iran-live-blog-trump-middle-east/33803414.html"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-02",
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "U.S. warns Gulf allies of possible Iran strikes as soon as November 4, report says",
      "fact": "MS NOW, citing three senior Gulf Arab officials, reported that Washington warned Gulf allies that a brief but intense round of strikes on Iran could come as early as November 4, the day after the midterm elections; the White House said it does not comment on military plans. President Trump told reporters at Mar-a-Lago in Florida on October 31 that one or two of Iran's remaining nuclear-related sites still had to be dealt with, \"but we can do that in 10 minutes.\"",
      "fc": [
@@ -27,6 +148,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Araghchi says new proposal cuts Hormuz reopening to two days as Doha talks hit day three",
      "fact": "Iranian Foreign Minister Abbas Araghchi told Al Jazeera on October 31 that Iran had drawn up a proposal with Qatari mediators that would shorten the timeline for reopening the Strait of Hormuz to two days. Iran's negotiators held a third straight day of talks with Qatari mediators in Doha on November 1, and Araghchi said no final conclusion had yet been reached.",
      "fc": [
@@ -60,6 +184,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Mojtaba Khamenei orders forces to answer any threat immediately, without geographic limits",
      "fact": "Iran's supreme leader, Mojtaba Khamenei, ordered the armed forces in an October 31 statement to meet any threat with an immediate, effective response unrestricted by geography, AFP reported. Army spokesman Mohammad Akraminia warned on state TV on November 1 that a new war could last longer than the last one.",
      "fc": [
@@ -80,6 +207,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Tanker struck off Saudi coast; Revolutionary Guards claim two tankers hit mines in Hormuz",
      "fact": "The UK Maritime Trade Operations agency (UKMTO) said a tanker was hit by two unidentified projectiles 72 nautical miles east of Ras al-Khafji, Saudi Arabia, early on November 2 local time, and that all crew were accounted for. Iran's Revolutionary Guards claimed on November 1 that two tankers exploded after hitting mines while crossing the Strait of Hormuz on an unauthorized route; the claim has not been verified.",
      "fc": [],
@@ -99,6 +229,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia hits Ukraine's energy facilities with 433 drones, leaving hundreds of thousands without power",
      "fact": "Ukraine's Air Force said Russia launched 433 drones starting at 6 p.m. local time on October 31 and that 371 had been shot down or neutralized as of 7:30 a.m. on November 1; President Zelensky said hundreds of thousands of households were without power. Russia's Defense Ministry said it shot down 47 Ukrainian drones between 8 a.m. and 8 p.m. Moscow time on November 1.",
      "fc": [],
@@ -116,6 +249,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Rubio: \"I don't know if negotiated peace is achievable in Ukraine\"",
      "fact": "Secretary of State Marco Rubio told a press conference at the G20 foreign ministers' meeting in Atlanta on October 31, \"I don't know if negotiated peace is achievable in Ukraine, that's what we're trying to find out.\" The three-way U.S.-Russia-Ukraine talks in Abu Dhabi are expected in early November, but no date has been set, the Kyiv Independent reported.",
      "fc": [
@@ -144,6 +280,9 @@
     },
     {
      "case": "poland",
+     "fp": [
+      "baltic-kaliningrad-suwalki"
+     ],
      "h": "Unidentified object enters Latvian airspace near Russia, Belarus; residents told to stay indoors",
      "fact": "Latvia's military said on November 1 that an unidentified flying object had entered airspace around Kraslava and Ludza in the country's southeast, warning residents to stay indoors, and that the all-clear came within an hour. It said it launched an interceptor drone but had it self-destruct to avoid crossing into Russian or Belarusian airspace; the object's origin has not been determined.",
      "fc": [],
@@ -163,6 +302,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "France's cost-of-living protests hit third weekend: 320,000 march, 290 arrested",
      "fact": "Protests over the cost of living and conditions in schools drew 320,000 people across France on October 31, including 70,000 in Paris, according to authorities, marking a third straight weekend of demonstrations. The Interior Ministry reported at least 290 arrests, Al Jazeera reported; organizers claimed nearly 500,000, and police fired tear gas in Paris and Lyon.",
      "fc": [],
@@ -186,35 +326,47 @@
       "https://www.tehrantimes.com/news/531732/Iran-designates-MI6-Royal-Navy-and-RAF-under-reciprocal-measures",
       "https://5pillarsuk.com/2026/11/01/iran-designates-british-military-as-terrorist-organisations-in-response-to-irgc-proscription/"
      ],
-     "case": "iran"
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
     },
     {
      "t": "The FBI on October 31 blamed TraderTraitor, a North Korean hacking group, for the record $6.3 billion theft of crypto assets from Binance, Al Jazeera reported.",
      "src": [
       "https://www.aljazeera.com/news/2026/11/1/fbi-blames-north-korea-for-record-6-3bn-crypto-heist"
      ],
-     "case": "korea"
+     "case": "korea",
+     "fp": []
     },
     {
      "t": "North Korea's KCNA reported on November 1 that the country tested a cluster-bomb warhead for tactical ballistic missiles on October 31; the report did not mention Kim Jong Un attending.",
      "src": [
       "https://www.dawn.com/news/2041366"
      ],
-     "case": "korea"
+     "case": "korea",
+     "fp": [
+      "korea"
+     ]
     },
     {
      "t": "A European Commission spokesperson said on November 1 that the appointment of eight new Constitutional Tribunal judges lies within the constitutional power of Poland's Sejm, backing the government's position; on October 31, police formed a cordon outside the tribunal in Warsaw.",
      "src": [
       "https://kyivindependent.com/eu-commission-backs-poland-government-over-constitutional-court-crisis/"
      ],
-     "case": "poland"
+     "case": "poland",
+     "fp": []
     },
     {
      "t": "Turkish President Recep Tayyip Erdogan met President Zelensky in Istanbul on October 31 and said attacks on civilian ships in the Black Sea are unacceptable under any circumstances, regardless of who carries them out or what justification is offered.",
      "src": [
       "https://kyivindependent.com/zelensky-arrives-in-istanbul-for-important-talks-with-turkeys-erdogan/"
      ],
-     "case": "ukraine"
+     "case": "ukraine",
+     "fp": [
+      "black-sea",
+      "rus-ukr"
+     ]
     }
    ]
   },
@@ -223,6 +375,9 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Oman rescues 25 from burning tanker; Revolutionary Guards claim three tankers halted",
      "fact": "Oman's Maritime Security Centre said on October 30 that its navy rescued 25 crew members from the RITI, a Panama-flagged tanker that caught fire after being attacked in the Strait of Hormuz. Iran's Revolutionary Guards claimed the same day that three tankers using unauthorized routes were halted after incidents including mine strikes; the U.S. military has denied the mine claims, and it is unclear whether the RITI is one of the three.",
      "fc": [],
@@ -242,6 +397,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Kremlin opposes truce that gives Ukraine a respite; talks date in works with U.S.",
      "fact": "Kremlin spokesman Dmitry Peskov said on October 30 that Russia opposes a ceasefire that would give Ukraine a respite and has no plans to halt fighting before the three-way talks in Abu Dhabi, TASS reported. Presidential aide Yuri Ushakov said the same day that the talks will be held in November and that coordination on a date with Washington has begun, though no specific date has been set.",
      "fc": [
@@ -271,6 +429,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Qatari mediators return to Tehran; Trump says Iran war will be \"wrapped up soon\"",
      "fact": "Qatari mediators returned to Tehran on October 30 to push for a U.S.-Iran deal in coordination with Washington, an official briefed on the talks told Reuters, while a senior Iranian official called the proposals unacceptable. President Trump told Kansas City radio station KCMO the same day that the war is \"going to get wrapped up soon,\" adding, \"We need a guarantee there'll never be a nuclear weapon.\"",
      "fc": [
@@ -304,6 +465,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Standoff in Poland over bid to suspend top court chief; president turns his plane around",
      "fact": "On October 30, Judge Anna Korwin-Piotrowska, one of the judges President Karol Nawrocki has refused to swear in, ordered the suspension of Constitutional Tribunal head Bogdan Święczkowski and his deputy, Bartłomiej Sochański. The tribunal's leadership rejected the order and called it a \"coup d'état.\" Prime Minister Donald Tusk wrote, \"Restoring the rule of law is our duty.\" Nawrocki, en route to Senegal for a state visit, turned his plane around to return to Poland.",
      "fc": [],
@@ -322,6 +484,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Canada, EU launch Alliance for the Future; Canada aims to be first EU associate member",
      "fact": "Canadian Prime Minister Mark Carney, European Council President António Costa and European Commission President Ursula von der Leyen launched the Alliance for the Future at a summit in Montreal on October 30, with Canada working toward becoming the EU's first associate member, the prime minister's office said. The substance and scope of that status will be worked out over the coming months; the two sides also concluded negotiations on digital trade and competition agreements.",
      "fc": [],
@@ -340,6 +503,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "G20 foreign ministers' meeting opens in Atlanta with Lavrov; group photo scrapped",
      "fact": "A two-day G20 foreign ministers' meeting hosted by Secretary of State Marco Rubio opened in Atlanta on October 30, with Russian Foreign Minister Sergei Lavrov attending and Chinese Foreign Minister Wang Yi sending a representative, AFP reported. A planned group photo was canceled after some European officials balked at appearing alongside Lavrov.",
      "fc": [],
@@ -359,6 +523,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "State Department approves $2.1 billion sale of 500 Patriot missiles to Ukraine",
      "fact": "The State Department said on October 30 it approved the possible sale to Ukraine of 500 Patriot PAC-3 missiles, plus parts and support, for an estimated $2.1 billion. Two people briefed on the decision said the missiles have not yet been built and are not expected to be delivered until the early 2030s, Al Jazeera and Reuters reported.",
      "fc": [],
@@ -379,14 +546,18 @@
      "src": [
       "https://iz.ru/en/node/2193893"
      ],
-     "case": "ukraine"
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
     },
     {
      "t": "Brazil's Foreign Ministry summoned Argentina's chargé d'affaires on October 29 to ask how defeated presidential candidate Sen. Flávio Bolsonaro left for the U.S. via Argentina, Reuters reported, citing sources; Argentina's foreign minister denied receiving a formal request.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/31/brazil-summons-argentinian-diplomat-over-bolsonaros-flight-to-us"
      ],
-     "case": null
+     "case": null,
+     "fp": []
     }
    ]
   },
@@ -395,6 +566,9 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Tankers hit in Strait of Hormuz; Revolutionary Guards claim three struck mines",
      "fact": "Britain's UK Maritime Trade Operations (UKMTO) said a tanker leaving the strait was hit by an unknown projectile near Khasab, Oman, at around 8 p.m. local time on October 29. Iran's Revolutionary Guards navy claimed that over the previous 24 hours three tankers using an unauthorized southern route exploded and caught fire after hitting mines; the claim has not been independently verified.",
      "fc": [],
@@ -415,6 +589,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian drone hits Dnipro train platform, killing 14",
      "fact": "A Russian drone struck a platform at Dnipro station, where a Zaporizhzhia-bound train was waiting, during the day on October 29 local time, killing 14 people and wounding 14, said Oleksandr Hanzha, head of the Dnipropetrovsk regional military administration. Five more people were killed the same day in Chernihiv and Kremenchuk.",
      "fc": [],
@@ -435,6 +612,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran's Tasnim says Tehran received Vance letter but has not replied",
      "fact": "Iran's Tasnim news agency reported on October 29 that Tehran had received a letter from U.S. Vice President JD Vance to Mohsen Rezaei, secretary of the Supreme National Security Council, but had not yet responded, and that its seven conditions still stand. President Trump said the letter was about medical supplies and that he had not ordered talks to resume.",
      "fc": [
@@ -464,6 +644,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Israel finishes count: Netanyahu bloc at 53 seats, Likud largest party with 27",
      "fact": "Likud won 27 seats and Yashar 21 with all votes counted, according to Central Elections Committee results released early on October 30 local time, the Times of Israel reported. By bloc, Netanyahu's has 53 seats, Eisenkot's 48 and Arab parties 19. Official results are slated to go to President Isaac Herzog on November 4.",
      "fc": [
@@ -488,35 +669,49 @@
      "src": [
       "https://www.aljazeera.com/news/2026/10/30/houthi-forces-claim-six-attacks-on-saudi-airports-oil-facilities"
      ],
-     "case": "iran"
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ]
     },
     {
      "t": "South Korean National Security Adviser Wi Sung-lac told lawmakers at a parliamentary audit on October 29 that Seoul is weighing options for a Strait of Hormuz deployment, including maritime patrol aircraft, in consultation with Washington, and that it will not send combat troops, Reuters reported.",
      "src": [
       "https://www.yahoo.com/news/articles/south-korea-says-considering-deployment-064737359.html"
      ],
-     "case": "iran"
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
     },
     {
      "t": "North Korea's KCNA reported on October 30 that Kim Jong Un, chairman of the State Affairs Commission, attended an unmanned aviation technology exhibition on October 29, watched firings by suicide drones, 600mm multiple rocket launchers and other weapons, and called for bringing artificial intelligence into unmanned systems.",
      "src": [
       "https://news.sbs.co.kr/english/article.do?news_id=N1008823075"
      ],
-     "case": "korea"
+     "case": "korea",
+     "fp": [
+      "korea"
+     ]
     },
     {
      "t": "Delcy Rodríguez, who has led Venezuela since Maduro's removal, said on October 29 that elections will be held but gave no date; the same day, at a news conference in Caracas, María Corina Machado called for a presidential election in 2027.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/30/machado-lauds-trump-for-freedom-floodgate-urges-2027-elections"
      ],
-     "case": null
+     "case": null,
+     "fp": [
+      "us-venezuela-transition"
+     ]
     },
     {
      "t": "An Italian CH-47 Chinook helicopter with the EU force in Bosnia (EUFOR) crashed during training in the Brcko area on October 29, killing four Italians and injuring 11.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/30/eu-force-helicopter-crash-kills-four-in-bosnia"
      ],
-     "case": null
+     "case": null,
+     "fp": []
     }
    ]
   },
@@ -525,6 +720,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky eyes Abu Dhabi talks with U.S., Russia November 6–10; Kremlin says Europe excluded",
      "fact": "Ukrainian President Volodymyr Zelensky said at a press conference with Dutch Prime Minister Rob Jetten in The Hague on October 28 that he hopes three-way talks with the U.S. and Russia will take place in Abu Dhabi between November 6 and 10, and that Kyiv is waiting for Washington's answer. Kremlin foreign policy aide Yuri Ushakov told Interfax that European countries will not be included in the talks, Al Jazeera reported the same day.",
      "fc": [
@@ -556,6 +754,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran, mediators discuss speeding up war-ending seven-day plan; official calls Qatari draft \"unacceptable ideas\"",
      "fact": "Iranian Foreign Minister Abbas Araghchi said on X on October 28 that Tehran is \"in close and ongoing contact with intermediaries\" on ways to carry out the seven-day plan \"in even less than a week.\" Reuters reported the same day that Qatari mediators handed Iran a new seven-day draft deal to end the war on October 25, and that a senior Iranian official involved in the talks called it \"unacceptable ideas and not an offer.\"",
      "fc": [
@@ -583,6 +784,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea fires about 10 short-range ballistic missiles into the East Sea from the Wonsan area",
      "fact": "South Korea's Joint Chiefs of Staff said it detected about 10 short-range ballistic missiles North Korea fired from the Wonsan area into the East Sea at around 12:30 p.m. on October 29. The launch came six days after the Ministry of National Defense on October 23 proposed military talks on confirming the location of the Military Demarcation Line and restoring military communication lines, among other items; Pyongyang has not responded.",
      "fc": [
@@ -609,6 +813,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Israel count at 90 percent: Netanyahu bloc 53 seats, Eisenkot's 48, neither with a majority",
      "fact": "With 89.8 percent of votes counted just after 9 p.m. local time on October 28, Central Elections Committee results put Prime Minister Benjamin Netanyahu's bloc at 53 seats, former military chief Gadi Eisenkot's bloc at 48 and Arab-led parties at a record 19, The Times of Israel reported. Roughly 430,000 to 480,000 double-envelope ballots remain, and official results will be published November 4.",
      "fc": [
@@ -629,6 +834,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Putin tells 48 African nations Russian business does not engage in \"neo-colonial exploitation\"",
      "fact": "The third Russia-Africa summit was held in Moscow on October 28 with 48 African countries represented, 22 of them by their leaders, Al Jazeera reported. President Vladimir Putin said, \"Our business does not engage in the predatory, neo-colonial exploitation of natural and human resources,\" and Ethiopian Prime Minister Abiy Ahmed said on X the same day that his country had received 12 Russian Su-35 fighter jets.",
      "fc": [],
@@ -653,14 +859,20 @@
      "src": [
       "https://www.gov.uk/government/news/prime-minister-and-chancellors-call-with-the-president-of-ukraine-28-october-2026"
      ],
-     "case": "ukraine"
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
     },
     {
      "t": "Iraqi Prime Minister Ali al-Zaidi visited Damascus on October 28, the first trip to Syria by an Iraqi prime minister since the fall of the Assad regime, and discussed Iraqi oil exports through the Baniyas pipeline, among other issues, with President Ahmed al-Sharaa.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/28/iraqi-pm-ali-al-zaidi-meets-ahmed-al-sharaa-in-historic-syria-visit"
      ],
-     "case": null
+     "case": null,
+     "fp": [
+      "syria"
+     ]
     }
    ]
   },
@@ -669,6 +881,9 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran's Persian Gulf Strait Authority warns of legal action against Sinokor's entire fleet starting November 1",
      "fact": "Iran's Persian Gulf Strait Authority said on X on October 27 that vessels of South Korea's Sinokor Merchant Marine had committed the most transit violations in the Strait of Hormuz over the past three months, that it had already acted against seven of them, and that it would take legal action against all of the company's ships starting November 1. The Korea Shipowners' Association said on October 28 that the vessels in question are not owned by Sinokor but sub-chartered to an overseas oil company and carry no South Korean crew, Reuters reported.",
      "fc": [
@@ -695,6 +910,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Likud leads partial count in Israel's election as neither bloc secures a majority",
      "fact": "With about 40 percent of ballots counted in Israel's October 27 election, the Central Elections Committee's partial results gave Likud 21.70 percent and Yashar, led by former military chief Gadi Eisenkot, 15.72 percent, the AP reported. Prime Minister Benjamin Netanyahu claimed early on October 28 that the right-wing bloc had won a decisive majority among the Zionist and Jewish public. The final tally is due by October 30, and official results will be published November 4.",
      "fc": [
@@ -716,6 +932,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Finnish and Norwegian leaders relay negotiation messages to Putin ahead of Abu Dhabi talks",
      "fact": "Finnish President Alexander Stubb and Norwegian Prime Minister Jonas Gahr Støre said they spoke with Russian President Vladimir Putin on October 27, in consultation with Ukraine, to convey messages on future negotiations, and that the call was linked to an upcoming meeting in Abu Dhabi. The Kyiv Independent reported that trilateral U.S.-Russia-Ukraine talks are expected in Abu Dhabi sometime in November.",
      "fc": [
@@ -747,6 +966,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IAEA's Grossi tells Security Council Iran is not providing access to verify its highly enriched uranium",
      "fact": "IAEA Director General Rafael Grossi told a UN Security Council meeting on October 27 that Iran has not provided the information and access needed to verify its declared nuclear material, singling out about 440 kilograms of highly enriched uranium as a particular concern. He said the agency had not detected any repair or reconstruction work at the struck facilities since June 2025.",
      "fc": [
@@ -774,6 +996,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Pezeshkian meets Putin in Moscow as Qatar urges Iran to reopen the strait",
      "fact": "Iranian President Masoud Pezeshkian met Russian President Vladimir Putin on October 27 on the sidelines of the Gas Exporting Countries Forum summit in Moscow and said the region can resolve its problems without relying on the United States, AFP reported. Qatar's emir, Sheikh Tamim bin Hamad Al Thani, also met him in Moscow that day, and Qatari foreign ministry official Ibrahim Al-Hashmi said Iran must demonstrate good faith and reopen the Strait of Hormuz.",
      "fc": [
@@ -804,21 +1029,31 @@
      "src": [
       "https://www.yahoo.com/news/world/articles/first-lady-melania-trump-says-161008740.html"
      ],
-     "case": "ukraine"
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
     },
     {
      "t": "Yemen's Houthis claimed a ballistic missile strike on Saudi Arabia's Ras Tanura refinery on October 27; the damage has not been independently verified.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-trump-us-diplomacy-oil-prices-strait-of-hormuz/"
      ],
-     "case": "iran"
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ]
     },
     {
      "t": "North Korea's state news agency KCNA reported on October 28 that Kim Jong Un met on October 27 with participants in the Korean People's Army's Third Conference of Company Commanders and said a company commander's foremost revolutionary task is to complete combat preparations for full wartime readiness.",
      "src": [
       "https://www.hankookilbo.com/news/article/A2026102809220003565"
      ],
-     "case": "korea"
+     "case": "korea",
+     "fp": [
+      "korea"
+     ]
     }
    ]
   },
@@ -827,6 +1062,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia and Ukraine begin local ceasefire around Oleshky, brokered by Melania Trump",
      "fact": "Ukraine's parliamentary human rights commissioner, Dmytro Lubinets, said a ceasefire to allow aid deliveries and civilian evacuations took effect around Oleshky in Kherson Oblast at 3 a.m. Kyiv time on October 27, and Russia's Defense Ministry said its forces stopped firing in the Kherson direction at 4 a.m. Moscow time. The AP reported that the pause is due to last at least through Saturday and that a new round of U.S.-brokered Russia-Ukraine talks is expected next month.",
      "fc": [
@@ -861,6 +1099,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian ballistic missile strike on Kyiv kills one, injures 10 including university dorm students",
      "fact": "A Russian ballistic missile attack on Kyiv late on October 26 killed one person and injured 10, including students in a university dormitory, Mayor Vitali Klitschko said. Ukraine's Air Force had warned that several ballistic missiles launched from the direction of Bryansk were heading for the capital; schools and medical facilities were among the sites damaged.",
      "fc": [],
@@ -880,6 +1121,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Saudi, Turkish and Pakistani security chiefs meet Iran's leaders in Tehran, agree to keep talking",
      "fact": "Saudi Defense Minister Khalid bin Salman, Pakistani army chief Asim Munir and Turkish intelligence chief Ibrahim Kalin met President Masoud Pezeshkian and other Iranian leaders in Tehran on October 26. Iranian state media said the four countries agreed to continue talks on strengthening cooperation; no concrete agreement was announced.",
      "fc": [
@@ -911,6 +1155,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Egypt's parliament authorizes Sisi to help defend Saudi Arabia against Houthi attacks",
      "fact": "Egypt's House of Representatives on October 26 authorized President Abdel Fattah el-Sisi to take the measures needed to support Saudi Arabia, Al-Ahram reported. The authorization is conditional on a request from Riyadh, and Sisi had said earlier that any support would be limited to defending Saudi territory and borders and would not include attacks on Yemen.",
      "fc": [
@@ -936,6 +1184,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran's military chief warns ships that stray from designated routes in southern waters will face damage",
      "fact": "Maj. Gen. Ali Abdollahi, chief of the general staff of Iran's armed forces, said on October 26 during a visit to the Gulf of Oman coast that any vessel that, for any reason, strays from designated routes or ignores Iranian procedures is putting itself at risk and will suffer serious damage, Press TV reported.",
      "fc": [
@@ -955,6 +1206,9 @@
     },
     {
      "case": "poland",
+     "fp": [
+      "russia-hybrid-campaign-western-europe"
+     ],
      "h": "Romanian intelligence blames September fire near Brasov arms plant on Russian-run sabotage network",
      "fact": "The Romanian Intelligence Service (SRI) and anti-organized crime and terrorism prosecutors (DIICOT) said on October 26 that a fire on September 14 near Carfil, a subsidiary of state arms maker Romarm in Brasov, was the work of a Russian-directed sabotage network. Two of the three suspects (two Belarusians and a Ukrainian) were arrested in Germany; no casualties were reported.",
      "fc": [
@@ -979,6 +1233,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "syria"
+     ],
      "h": "Jordan strikes southern Syria after church shooting; Damascus denies prior coordination",
      "fact": "Jordan's armed forces said they struck hideouts of armed groups in southeastern Syria on October 26 in coordination with the Syrian government, but Damascus disputed that, saying there had been no prior coordination or notice. Syria's Civil Defense said at least seven people, including three children, were killed in Daraa and Sweida provinces.",
      "fc": [],
@@ -999,12 +1256,19 @@
      "src": [
       "https://www.aljazeera.com/news/2026/10/27/iran-saudi-turkiye-and-pakistan-agree-to-more-talks-amid-houthi-attacks",
       "https://kuwaittimes.com/article/52459/world/coalition-intercepts-3-houthi-missiles-toward-eastern-province-4-drones/"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     },
     {
      "t": "At a rally in Mississippi on October 26, President Trump said the war with Iran was started by Iran, not the United States.",
      "src": [
       "https://foxnews.com/live-news/iran-war-news-trump-israel-saudi-october-26"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
@@ -1012,13 +1276,17 @@
      "src": [
       "https://www.anews.com.tr/world/2026/10/27/iranian-president-arrives-in-russia-for-gas-exporters-summit",
       "https://www.aa.com.tr/en/world/iranian-president-to-visit-russia-for-gas-summit-meet-putin/4100852"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "South Korea's Joint Chiefs of Staff said on October 27 that it assesses the North Korean self-propelled guns spotted along the coast of Kaepung County in Hwanghae Province to be older models and is closely watching the intent behind their exposure.",
      "src": [
       "https://www.segye.com/newsView/20261027510056",
       "https://www.news1.kr/diplomacy/defense-diplomacy/6333145"
+     ],
+     "fp": [
+      "korea"
      ]
     }
    ]
@@ -1028,6 +1296,7 @@
    "items": [
     {
      "case": "korea",
+     "fp": [],
      "h": "Kim Jong Un makes day trip to China's Dandong, greeted by Wang Huning",
      "fact": "North Korean leader Kim Jong Un crossed the New Yalu River Bridge on October 24 for a one-day visit to Dandong in China's Liaoning province, laying a wreath at the memorial to China's Korean War intervention and touring a car factory, according to Xinhua (October 24) and KCNA (October 25). Wang Huning, chairman of the Chinese People's Political Consultative Conference, received him and saw him off; no meeting with Xi Jinping was reported.",
      "fc": [
@@ -1054,6 +1323,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Kremlin aide Ushakov says U.S.-Russia-Ukraine talks can resume after November 4",
      "fact": "Yuri Ushakov, the Kremlin's foreign policy aide, told Russian TV channel Vesti on October 25 that the next deadline is November 4, a Russian national holiday, and that Moscow is ready to resume talks after that. He said the first meeting would be preliminary, RBC reported.",
      "fc": [
@@ -1081,6 +1353,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump on new Iran strikes: \"maybe tomorrow\" — then \"There will not be a strike today\"",
      "fact": "Asked on October 24 (local time) whether the U.S. would strike Iran again, President Trump told reporters, \"We're thinking about doing it, and maybe tomorrow.\" On October 25, at the White House before leaving for a rally in Michigan, he said, \"There will not be a strike today.\" He did not say whether he had made a decision.",
      "fc": [
@@ -1103,6 +1378,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Houthis claim strikes on Aramco site in Yanbu; Saudi Arabia says it intercepted missiles",
      "fact": "Yemen's Houthis claimed on October 24 that they struck an Aramco facility in Yanbu, the Rabigh refinery and other targets in Saudi Arabia; no damage has been confirmed. The Saudi-led coalition said it intercepted two ballistic missiles aimed at Yanbu and Taif on October 24 and 10 aimed at southern Saudi Arabia on October 25, among others.",
      "fc": [
@@ -1125,6 +1404,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran says it is trading messages with the U.S. through intermediaries",
      "fact": "Foreign Ministry spokesman Esmail Baghaei told a German broadcaster that Iran remains open to diplomacy and is passing messages to the U.S. through intermediaries, but that Iran cannot accept demands for \"complete surrender,\" Iranian state media reported. Foreign Minister Abbas Araghchi said on October 25 that Iran's policies stay the same whether or not there is war.",
      "fc": [
@@ -1146,6 +1428,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea claims to UN Security Council that South staged DMZ mine blast",
      "fact": "North Korea sent a letter on October 25 to the president of the UN Security Council calling the September 21 mine explosion in the DMZ a South Korean fabrication and warning that it would exercise its right of self-defense if its territory or personnel were violated, KCNA reported on October 26. North Korean media have not reported the South Korean Defense Ministry's October 23 proposal for military talks.",
      "fc": [
@@ -1168,6 +1453,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "balkans-serbia-bosnia-kosovo"
+     ],
      "h": "Student movement wins Serbia's election as Vučić concedes defeat",
      "fact": "Former President Aleksandar Vučić conceded defeat in Serbia's October 25 parliamentary election, citing a sample count. He said the Student List would win 135 to 140 of the 250 seats and his own camp about 105.",
      "fc": [],
@@ -1183,6 +1471,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Lula wins a fourth term in Brazil's presidential runoff",
      "fact": "Brazil's Superior Electoral Court declared President Luiz Inácio Lula da Silva the winner of the October 25 runoff with 51.76 percent of the vote against 48.24 percent for Senator Flávio Bolsonaro, a margin of more than 4 million votes.",
      "fc": [],
@@ -1198,6 +1487,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "us-venezuela-transition"
+     ],
      "h": "Machado returns to Venezuela after more than 10 months in exile",
      "fact": "Venezuelan opposition leader María Corina Machado returned home on October 25 after more than 10 months in exile and greeted supporters at a church in Lara state. Secretary of State Marco Rubio said her return was the result of U.S.-backed reconciliation talks.",
      "fc": [],
@@ -1219,6 +1511,9 @@
      "src": [
       "https://www.euronews.com/2026/10/25/russian-strikes-on-ukraine-kill-four-and-injure-28-authorities-say",
       "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
@@ -1226,6 +1521,9 @@
      "src": [
       "https://www.pbs.org/newshour/world/ukraine-disputes-elon-musks-claim-that-its-military-violated-starlinks-terms-of-service",
       "https://kyivindependent.com/ukraine-war-latest-starshield-operations-restored-to-normal-speed-zelensky-confirms-as-elon-musk-claims-ukraine-violated-starlink-terms/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
@@ -1233,12 +1531,18 @@
      "src": [
       "https://www.tasnimnews.ir/en/news/2026/10/25/3731598/iran-downs-us-lucas-drone",
       "https://anewz.tv/middle-east-conflict/news/25883/iran-war-latest-tehran-shoots-down-us-drone/news"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Israeli Prime Minister Benjamin Netanyahu warned on October 25 that Iran or its proxies could attack to disrupt Israel's October 27 general election.",
      "src": [
       "https://fortune.com/2026/10/25/iran-war-messages-us-intermediaries-diplomacy-negotiations/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
@@ -1246,6 +1550,9 @@
      "src": [
       "https://www.kukinews.com/article/view/kuk202610260003",
       "https://news.sbs.co.kr/news/endPage.do?news_id=N1008814071"
+     ],
+     "fp": [
+      "korea"
      ]
     }
    ]
@@ -1255,6 +1562,11 @@
    "items": [
     {
      "case": "poland",
+     "fp": [
+      "black-sea",
+      "rus-ukr",
+      "eastern-flank-airspace-romania-black-sea"
+     ],
      "h": "Cargo ship sinks after drone strike just outside Romanian waters; Romania's president blames Russia",
      "fact": "The Comoros-flagged cargo ship Khoryv sank on October 23 after a drone strike about 13 nautical miles off the Romanian port of Constanta, just beyond Romania's territorial waters. One Ukrainian sailor was killed and three crew members are missing. Romanian President Nicusor Dan called the attack part of Russia's escalation of its war in Ukraine; Russia had not publicly responded.",
      "fc": [
@@ -1281,6 +1593,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump on Iran: \"We may do another little Epic Fury\"",
      "fact": "At a rally in Fort Myers, Florida, on October 23, President Trump said of the Iran war, \"We may do another little Epic Fury, or they'll agree.\" Operation Epic Fury is the U.S. military's name for its campaign against Iran.",
      "fc": [
@@ -1305,6 +1620,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Asked about a weekend strike on Iran, U.S. ambassador Barrack says \"absolutely\"; Trump says he knows nothing about it",
      "fact": "Asked in an interview released October 23 whether a strike could come this weekend, Tom Barrack, the U.S. ambassador to Turkey, answered, \"Absolutely.\" Trump said the same day that he didn't know anything about it. He had said earlier that a strike would not come before the November 3 midterm elections.",
      "fc": [
@@ -1327,6 +1645,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky says technical-level U.S.-Russia-Ukraine talks are planned in Abu Dhabi for the first half of November",
      "fact": "In a video address to the Hudson Institute on October 23, President Zelensky said negotiating teams from the U.S., Russia and Ukraine plan to meet in Abu Dhabi in the first half of November. If the technical-level talks are productive, he said, they should move to a meeting of leaders; an October meeting fell through because Russia cited other reasons.",
      "fc": [
@@ -1348,6 +1669,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Ukraine and Russia agree to a local ceasefire around Oleshky, mediated by Melania Trump",
      "fact": "The White House and Ukraine's human rights ombudsman, Dmytro Lubinets, said on October 23 that first lady Melania Trump had mediated a local ceasefire around Russian-occupied Oleshky in Kherson Oblast. The truce is meant to allow civilian evacuations and aid deliveries. Russia's General Staff said it would begin at 4 a.m. local time on October 27; the White House gave the start date as October 29.",
      "fc": [
@@ -1371,6 +1695,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "State Department cuts embassy staff in Jordan, Lebanon, Qatar and the UAE over Houthi threat",
      "fact": "The State Department said on October 23 that it is reducing staff at its embassies in Jordan, Lebanon, Qatar and the United Arab Emirates, which will remain open, citing concerns about Houthi rocket, missile and drone attacks, CBS reported. Nonessential staff at the U.S. Embassy in Saudi Arabia were ordered to leave earlier in the week.",
      "fc": [],
@@ -1389,6 +1717,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Brent settles at $116.72, its highest close since April 29",
      "fact": "Brent crude futures settled at $116.72 a barrel on October 23, up 3.14 percent, and U.S. West Texas Intermediate closed at $103.27, up 3.8 percent, according to Reuters. Reuters said Houthi attacks on Saudi Arabia stoked fears of supply disruptions.",
      "fc": [
@@ -1403,6 +1735,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Waltz on the prospect of another year of war in Iran: \"One would hope\" Tehran comes to the table first",
      "fact": "Asked by the Financial Times whether the Iran war could last another year, Mike Waltz, the U.S. ambassador to the United Nations, declined to speculate but said, \"One would hope that they'll come to the table in a meaningful way before that.\" He added that the U.S. Navy can maintain the naval blockade of Iran for the foreseeable future.",
      "fc": [
@@ -1427,6 +1762,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Ukraine and Russia swap 270 prisoners each, the first exchange in two months",
      "fact": "President Zelensky said on October 23 that 270 Ukrainian prisoners of war had come home and 270 Russian POWs had been returned to Russia. It was the first swap since August; most of the returning Ukrainians were captured during the 2022 siege of Mariupol.",
      "fc": [],
@@ -1443,6 +1781,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Seoul proposes military talks with North Korea to verify the MDL and restore hotlines",
      "fact": "In a statement on the afternoon of October 23, Kim Hong-cheol, South Korea's deputy minister for national defense policy, formally proposed military talks with the North to jointly verify where the land Military Demarcation Line lies, restore military communication lines and discuss ways to prevent accidental clashes along the border. He said three-way talks including the UN Command were also possible.",
      "fc": [
@@ -1469,6 +1810,9 @@
      "t": "CBS News reported on October 23 that Director of National Intelligence Jay Clayton warned Secretary of State Marco Rubio in a memo that lethal Iranian plots against Americans had \"reached advanced stages.\"",
      "src": [
       "https://www.cbsnews.com/news/iran-target-u-s-personnel/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
@@ -1476,12 +1820,18 @@
      "src": [
       "https://www.arabnews.com/middle-east/iranian-president-to-meet-putin-in-moscow-iran-media-3008004",
       "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "Foreign ministers from Britain, France, Germany, Italy, Turkey, Saudi Arabia, Pakistan and Egypt met in Istanbul on October 23 to discuss the Strait of Hormuz, Yemen and the Russia-Ukraine war, AFP reported.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
+     ],
+     "fp": [
+      "iran-war",
+      "red-sea-bab-el-mandeb",
+      "rus-ukr"
      ]
     },
     {
@@ -1489,12 +1839,18 @@
      "src": [
       "https://www.hankyung.com/article/2026102317681",
       "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739"
+     ],
+     "fp": [
+      "korea"
      ]
     },
     {
      "t": "Moldovan President Maia Sandu said on October 23 that Moldova had declared a Russian embassy staffer persona non grata after a Russian Geran drone came down near homes in central Moldova.",
      "src": [
       "https://kyivindependent.com/moldova-expels-russian-diplomat-after-russian-geran-drone-falls-near-family-homes/"
+     ],
+     "fp": [
+      "eastern-flank-airspace-romania-black-sea"
      ]
     }
    ]
@@ -1504,6 +1860,9 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump on Iran: \"We may do it a little bit further\"",
      "fact": "Speaking to reporters at the White House on October 22 before leaving for a rally in Iowa, President Trump said, \"We've knocked the hell out of them, and we may do it a little bit further.\" He added, \"We can't let Iran have a nuclear weapon.\"",
      "fc": [
@@ -1528,6 +1887,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump claims Iran is \"making up fake hits, mines\" to push up oil prices",
      "fact": "In a Truth Social post on October 22, Trump claimed Iran \"is doing everything they can to drive up the price of Oil prior to the U.S. Midterm Election\" and is \"making up fake hits, mines, and everything else.\" Iran's Islamic Revolutionary Guard Corps (IRGC) claimed the same day that four tankers had been hit and three had struck mines; the claims could not be independently verified.",
      "fc": [],
@@ -1545,6 +1907,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IRGC threatens U.S. bases over Hormuz tanker transits",
      "fact": "The IRGC warned on October 22, in a statement on its Sepah News site, that U.S. help for tankers transiting the strait could widen the war: \"If this trend continues, the conflict will extend to its bases in the region.\" A U.S. Central Command spokesperson, speaking to Al Jazeera on condition of anonymity, called the mine claims incorrect and said 95 percent of vessels are getting through.",
      "fc": [
@@ -1569,6 +1934,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Brent settles at $113, its highest close since early May",
      "fact": "Brent crude rose 4.0 percent on October 22 to settle at $113.17 a barrel, while U.S. West Texas Intermediate crude gained 2.4 percent to $99.47. It was Brent's highest settlement since May 4.",
      "fc": [
@@ -1584,6 +1952,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi airport attack death toll rises to two; coalition intercepts missile aimed at Najran",
      "fact": "Saudi Arabia's civil aviation authority said on October 22 that the death toll from the attack on King Fahd International Airport in Dammam had risen to two. The Saudi-led coalition said the same day it had intercepted a Houthi ballistic missile aimed at Najran, and AFP, citing sources, reported that Aramco told essential staff at its Dhahran headquarters to evacuate.",
      "fc": [],
@@ -1603,6 +1975,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Reuters: U.S. and South Korean officials see little chance of a Trump-Kim meeting this year",
      "fact": "Citing five people familiar with the matter, Reuters reported that U.S. and South Korean officials see little chance of a meeting this year between Trump and North Korean leader Kim Jong Un. The sources said Washington has received no response from Pyongyang on holding one.",
      "fc": [
@@ -1625,6 +2000,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky: Kyiv strike right after talks shows \"no real change\" in Russia's attitude",
      "fact": "Zelensky said on social media on October 22 that Russia fired 21 ballistic missiles at Kyiv in three waves from the evening of October 21 into the early hours of October 22 (local time), and also used three ballistic missiles fitted with cluster warheads. He said 12 regions came under attack and 34 people were wounded, five of them children.",
      "fc": [],
@@ -1645,6 +2023,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Kremlin says Abu Dhabi is the venue under discussion for three-way talks",
      "fact": "Kremlin spokesman Dmitry Peskov said on October 22 that \"at this point, we are talking about Abu Dhabi\" as the venue for talks among Russia, the U.S. and Ukraine. Asked whether Russia's negotiators were preparing documents or proposals, he declined to say, telling reporters not to get ahead of themselves.",
      "fc": [
@@ -1673,30 +2054,43 @@
      "t": "CENTCOM said on October 22 that 100 days had passed since it reinstated its naval blockade of Iran, with no seaborne exports or imports other than humanitarian aid cleared by U.S. forces, and that it had blocked more than $25 billion in Iranian crude exports.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Yemen's Defense Ministry said on October 22 that it would treat Houthi rallies and mobilization events as legitimate military targets and warned residents of Houthi-held areas not to take part.",
      "src": [
       "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb"
      ]
     },
     {
      "t": "Asked on October 22 about Philippine plans to work with Taiwan on undersea cables and gray-zone challenges, Chinese Foreign Ministry spokesperson Mao Ning said, \"There is no gray zone on the Taiwan question,\" and urged Manila to abide by the one-China principle.",
      "src": [
       "https://www.fmprc.gov.cn/mfa_eng/xw/fyrbt/202610/t20261022_12045376.html"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     },
     {
      "t": "French President Emmanuel Macron described last weekend's riots as seditious acts by the \"ultra-left,\" and authorities banned protests on October 22 around the Élysée Palace, parliament and major stations in Paris and in Lyon, Lille and Grenoble. Justice Minister Gérald Darmanin said more than 2,700 people had been detained.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/22/macron-blames-seditious-ultra-left-for-unrest-as-france-bans-protests"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "A government representative in Chad's Wadi Fira province told AFP that a drone of unknown origin struck Bamina, a town on the Sudanese border, this week, killing four people and wounding 14.",
      "src": [
       "https://www.arabnews.com/middle-east/drone-strike-kills-four-in-chad-town-near-sudan-3007793"
+     ],
+     "fp": [
+      "sudan-civil-war"
      ]
     }
    ]
@@ -1706,6 +2100,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Kremlin says it is ready to resume three-way talks around November 10 after Witkoff meeting",
      "fact": "After Putin met U.S. envoy Steve Witkoff in St. Petersburg on October 21, presidential aide Yuri Ushakov said Russia is ready in principle to resume three-way talks with the U.S. and Ukraine around November 10. Russia freed jailed American Stephen Hubbard, 74, as the meeting began.",
      "fc": [
@@ -1732,6 +2129,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky hopes for U.S.-Russia-Ukraine talks by early November",
      "fact": "On his way back to Kyiv from Norway, Zelensky told reporters he believes the three-way talks should take place no later than early November (Al Jazeera, October 21). Ushakov told Russian state TV channel Vesti the talks could be held in Abu Dhabi.",
      "fc": [
@@ -1753,6 +2153,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Netanyahu says toppling Iran's regime is the only way to end its threat",
      "fact": "Speaking at an Israeli military officers' graduation ceremony on October 21, Israeli Prime Minister Benjamin Netanyahu said the only way to remove Iran's threat for good is to overthrow the regime. He said he had issued directives to the military, the Mossad and other security services but did not say what they were.",
      "fc": [],
@@ -1769,6 +2172,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "State Department orders non-emergency staff and families out of Saudi Arabia over Houthi attacks",
      "fact": "State Department spokesperson Tommy Pigott said on X on October 21 that the department had ordered non-emergency employees and their families to leave Saudi Arabia, citing attacks by the Iran-backed Houthis on Saudi airports and infrastructure. Saudi Arabia's civil aviation authority said an attack late on October 21 on King Fahd International Airport in Dammam killed one person and injured eight.",
      "fc": [],
@@ -1789,6 +2196,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IRGC spokesman warns Iran will respond and go on the offensive if attacked",
      "fact": "In an October 21 interview with the Student News Network, IRGC spokesman Hossein Mohebbi said the Guards' doctrine, which had been largely defensive, now includes offensive action, and that any country that attacks Iran will face both a response and an offensive, IranWire reported.",
      "fc": [],
@@ -1803,6 +2213,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Kim Yo Jong says loudspeakers aimed at South Korea will be on standby within days",
      "fact": "In an October 22 statement carried by KCNA, Kim Yo Jong, director of the Workers' Party's General Affairs Department, said North Korea's new means of response will go on mission standby along the entire border and its loudspeakers aimed at South Korea will be on standby within days. In an October 21 statement, she said the loudspeakers would be operating along the entire border sometime in October.",
      "fc": [],
@@ -1820,6 +2233,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian ballistic missiles and drones hit Kyiv overnight October 21–22, injuring 15",
      "fact": "Kyiv Mayor Vitali Klitschko said Russian ballistic missile and drone attacks overnight on October 21–22 (local time) injured 15 people, including two 15-year-olds. Metro infrastructure on the Pivdennyi Bridge and an ambulance station in the Pecherskyi district were damaged.",
      "fc": [],
@@ -1838,6 +2254,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Moscow mayor reports downing drones overnight October 21–22; TASS tallies 630",
      "fact": "Moscow Mayor Sergei Sobyanin reported downing wave after wave of Ukrainian drones headed for Moscow between 8:30 p.m. on October 21 and 4 a.m. on October 22 (Moscow time); TASS, tallying his announcements, put the total at 630. He said 163 were downed as they approached the city, and two people were injured near Voronovo.",
      "fc": [],
@@ -1857,6 +2276,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "us-canada-trade-war"
+     ],
      "h": "U.S. Embassy in Canada accuses Canadian politicians of trying to sway the midterms",
      "fact": "In a fact sheet released October 21, the U.S. Embassy in Canada claimed that Industry Minister Mélanie Joly, Ontario Premier Doug Ford and others are trying to influence the November 3 U.S. midterm elections through their responses to President Donald Trump's tariffs. Joly had denied any interference on October 14, saying her work in the U.S. was aimed at attracting investment.",
      "fc": [],
@@ -1879,18 +2301,29 @@
      "t": "In a joint statement in Doha on October 21, Qatar's Emir Sheikh Tamim bin Hamad Al Thani and French President Emmanuel Macron called for restoring freedom of navigation in the Strait of Hormuz without constraints or fees and for implementing the Gaza ceasefire.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/22/qatar-france-call-for-opening-of-hormuz-and-gaza-ceasefire-implementation"
+     ],
+     "fp": [
+      "iran-war",
+      "levant"
      ]
     },
     {
      "t": "Saudi Arabia's energy ministry said October 21 that debris from a drone intercepted as it headed for the Shaybah oil field in the east killed two people and injured two.",
      "src": [
       "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     },
     {
      "t": "Mexican authorities on October 21 charged former Chihuahua state Attorney General César Jáuregui with treason for allowing U.S. agents to take part in an anti-drug operation.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/21/mexico-charges-prosecutor-with-treason-over-us-involvement-in-drug-raid"
+     ],
+     "fp": [
+      "us-mexico-cartels"
      ]
     }
    ]
@@ -1900,6 +2333,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Witkoff to take Oslo proposals to Russian leaders in St. Petersburg on October 21",
      "fact": "After talks in Oslo on October 20 with Ukrainian President Volodymyr Zelensky, U.S. envoy Steve Witkoff and Finnish President Alexander Stubb, Norwegian Prime Minister Jonas Gahr Støre told reporters that Witkoff would take the Oslo proposals to the Russian side in St. Petersburg on October 21 and try to pave the way for a U.S.-Ukraine-Russia leaders' meeting.",
      "fc": [
@@ -1928,6 +2364,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky says U.S. intelligence is flowing again: \"We are thankful that intelligence works now\"",
      "fact": "At a joint press conference in Oslo on October 20, Zelensky said U.S. early warning of Russian ballistic missile launches is flowing again. He also said the negotiating document contains several kinds of security guarantees, which Witkoff will pass on to Russia.",
      "fc": [],
@@ -1947,6 +2386,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Trump says Zelensky \"has to want to settle this war\" or it will be \"a very bad thing\"",
      "fact": "Speaking at the White House on October 20, President Trump said Russia has an \"unlimited\" supply of manpower and that Zelensky \"has to want to settle this war, and if he doesn't, I think it's going to be a very bad thing.\" On a possible Putin-Zelensky meeting, he cited \"tremendous\" hatred between the two and said, \"I don't care how it's done.\"",
      "fc": [
@@ -1972,6 +2414,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian drones kill one, injure 18 in Kyiv on October 20",
      "fact": "Kyiv Mayor Vitali Klitschko said Russian attacks on the capital on October 20 killed one person and injured 18. The city health department had counted one dead and 12 injured since midnight as of 5:50 p.m. local time.",
      "fc": [],
@@ -1991,6 +2436,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Araghchi says Hormuz reopens only if the U.S. accepts Iran's terms; Rezaei rules out shipping out \"a single gram\" of enriched uranium",
      "fact": "In an interview with Iraq's Al-Ikhbariya on October 20, Foreign Minister Abbas Araghchi said that under Iran's seven-day plan the Strait of Hormuz was to have fully reopened on the sixth day, and that Washington must honor its commitments under the Islamabad memorandum. Mohsen Rezaei, secretary of the Supreme National Security Council, ruled out shipping any enriched uranium out of Iran in a post on X the same day.",
      "fc": [
@@ -2016,6 +2464,9 @@
     },
     {
      "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
      "h": "Chinese coast guard ship goes dark, enters restricted waters off Pratas and faces off with Taiwan",
      "fact": "Taiwan's Coast Guard Administration said on October 20 that a China Coast Guard ship, its automatic identification system (AIS) switched off, entered restricted waters northeast of the Pratas Islands early that day and faced off with the Taiwanese patrol vessel Taichung. The Chinese ship broadcast that \"the so-called Republic of China does not exist.\"",
      "fc": [],
@@ -2034,6 +2485,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
      "h": "Death toll from drone strike on market in disputed Abyei rises to at least 153",
      "fact": "Yohanna Akol Ngor, caretaker information minister for the Abyei administration, said a drone strike around 11 a.m. local time on October 19 on the Amiet market and a nearby fuel depot killed at least 153 people, and blamed Sudan's military. A senior Sudanese officer, speaking anonymously, said the army targeted fuel tankers bound for the Rapid Support Forces (RSF).",
      "fc": [],
@@ -2052,6 +2506,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Nigeria confirms Ebola case in woman from Uganda, traces 44 contacts",
      "fact": "Nigeria's Federal Ministry of Health and Social Welfare said a woman who traveled from Uganda tested positive for Ebola in Abuja, and Health Minister Muhammad Pate said 44 contacts are being traced, Al Jazeera reported on October 20. Congo has recorded more than 9,000 cases since May in an outbreak of the Bundibugyo strain, which has no licensed vaccine.",
      "fc": [],
@@ -2074,24 +2529,33 @@
      "src": [
       "https://news.sbs.co.kr/english/article.do?news_id=N1008806940",
       "https://www.aljazeera.com/news/2026/10/20/south-korea-to-pull-more-embassy-staff-from-ukraine-after-pow-row"
+     ],
+     "fp": [
+      "rus-ukr",
+      "korea"
      ]
     },
     {
      "t": "A spokesperson for the PLA Southern Theater Command Navy said on October 20 that the U.S. littoral combat ship USS Charleston entered waters near Sabina Shoal in the South China Sea without permission and demanded that the U.S. side \"immediately cease such activities.\"",
      "src": [
       "https://dailycaller.com/2026/10/20/china-sends-navy-after-us-warship-taiwan-maritime-standoff/"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "The websites of Rodong Sinmun and the Korean Central News Agency have been unreachable since the evening of October 20 and remained down as of the morning of October 21, according to South Korea's Unification Ministry and others.",
      "src": [
       "https://www.fnnews.com/news/202610211030118854"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "Kharkiv Governor Oleh Syniehubov said a Russian drone attack on the village of Korotych overnight on October 20–21 killed two residents in their 80s.",
      "src": [
       "https://kyivindependent.com/russian-drones-kill-2-in-kharkiv-oblast-strike-university-building-in-kremenchuk/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     }
    ]
@@ -2101,6 +2565,9 @@
    "items": [
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Kim Yo Jong says North's military weighs restarting loudspeakers, adding tactical strike assets",
      "fact": "Kim Yo Jong, director of the Workers' Party's General Affairs Department, said in an October 19 statement carried by state media that the situation on the southern border was very unstable, and claimed South Korean troops issued 2,870 warning broadcasts and fired warning shots 201 times between August 1 and October 17. South Korea's Defense Ministry on October 20 expressed grave concern and vowed a decisive response if Pyongyang uses this as a pretext for further provocations.",
      "fc": [],
@@ -2118,6 +2585,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Hegseth made unannounced Israel trip to meet Netanyahu, Axios reports",
      "fact": "Axios reported October 19, citing two sources, that Defense Secretary Pete Hegseth made an unannounced trip to Israel and met Prime Minister Benjamin Netanyahu; the Pentagon declined to comment. The same day, Netanyahu posted video of a call with President Trump on X in which he said, \"Donald, we have a job to finish,\" invoking Iran.",
      "fc": [
@@ -2140,6 +2610,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb"
+     ],
      "h": "Houthi missile strike on Yemeni government base in Shabwa kills 53",
      "fact": "A spokesperson for Yemeni government forces said the Houthis fired three ballistic missiles on October 19 at the al-Alam base in Shabwa, where new recruits were training; local authorities in Shabwa said 53 people were killed and 200 wounded. The Houthis claimed the attack, saying they targeted a Saudi-backed base.",
      "fc": [],
@@ -2156,6 +2629,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian drone strike on Kharkiv-region park in Nova Vodolaha kills six, including three children",
      "fact": "Oleh Syniehubov, head of the Kharkiv Regional Military Administration, said October 19 that a Russian drone struck a park in central Nova Vodolaha, killing six people, three of them children. President Zelensky called for sanctions on Russia to stay in place as long as the killings continue.",
      "fc": [],
@@ -2175,6 +2651,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky offers 30-day pause on refinery strikes in exchange for Patriot help",
      "fact": "On an October 19 video call with a bipartisan U.S. congressional delegation, Zelensky said Kyiv had offered to stop striking Russian oil refineries for 30 days if the U.S. provided Patriot air-defense support for that period. He also said Russia had rejected a mutual halt to energy strikes and that partners gave no advance warning of recent ballistic missile attacks.",
      "fc": [],
@@ -2191,6 +2670,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Witkoff to hold Oslo talks this week before meeting Putin, Reuters reports",
      "fact": "Reuters reported October 19, citing people familiar with the plans, that envoy Steve Witkoff is expected to meet Zelensky and representatives of Britain, France, Germany, Poland, the EU and NATO in Norway this week before traveling to Russia to see Putin, though the schedule could change.",
      "fc": [],
@@ -2208,6 +2690,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "In Tehran, Lavrov says Russian specialists will return to Bushehr in stages",
      "fact": "Russian Foreign Minister Sergey Lavrov met Foreign Minister Abbas Araghchi and President Masoud Pezeshkian in Tehran on October 19 and said Russian specialists who left the Bushehr nuclear plant during the war would gradually return. Araghchi said the insecurity around the Strait of Hormuz is a direct result of U.S. and Israeli military attacks.",
      "fc": [],
@@ -2227,6 +2712,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Alberta voters reject starting a separation process as 76 percent vote to stay in Canada",
      "fact": "In Alberta's October 19 referendum, with more than 1 million votes counted, about 76 percent chose to remain in Canada and about 23 percent backed starting a process toward a separation vote; CBC projected on October 20 that Alberta would stay.",
      "fc": [],
@@ -2241,6 +2727,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "France orders partial curfews in Paris, Lyon, Nice and Lille after violent protests",
      "fact": "At Prime Minister Sébastien Lecornu's request, prefects on October 19 imposed partial overnight curfews around Place de la République and Les Halles in Paris (11 p.m. October 19 to 6 a.m. October 20) and in Lyon, Nice, Lille and elsewhere, some covering only minors. Lecornu said the government could declare a state of emergency if needed.",
      "fc": [],
@@ -2259,24 +2746,35 @@
      "t": "Egypt's state news agency MENA said October 19 that parliament had postponed until October 26 its vote authorizing the military to defend Saudi Arabia.",
      "src": [
       "https://english.news.cn/20261019/004ceed5632246c69f56cd029ce84be5/c.html"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     },
     {
      "t": "Maha Al Saud, CEO of the FII Institute, said October 19 that the Future Investment Initiative conference in Riyadh, set for October 26–29, will move to 2027.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "Russia's Defense Ministry said it downed 136 Ukrainian fixed-wing drones over 14 regions between 8 p.m. October 19 and 8 a.m. October 20, Moscow time.",
      "src": [
       "https://tass.com/politics/2204447"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Randall Schriver, chair of the U.S.-China Economic and Security Review Commission, told a forum in Taipei on October 20 that Chinese coast guard patrols east of Taiwan would be \"highly destabilizing if they continue to operationalize this law enforcement role.\"",
      "src": [
       "https://www.taipeitimes.com/News/taiwan/archives/2026/10/20/2003866305"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     }
    ]
@@ -2286,6 +2784,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian missiles and drones hit Kyiv and other regions; 1 killed, 8 injured in the capital",
      "fact": "Russia launched 269 drones along with ballistic and cruise missiles overnight on October 18–19, Ukraine's air force said, adding that 243 drones and four missiles were shot down or neutralized and that hits were recorded at 25 locations. Russia's Defense Ministry claimed it struck a data center in Kyiv and a locomotive depot it said was used to store missiles, as well as a cargo ship at sea 130 kilometers southwest of Odesa.",
      "fc": [],
@@ -2306,6 +2807,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "WSJ: Putin proposed a three-way Ukraine summit with Trump and Xi",
      "fact": "The Wall Street Journal reported on October 18 (U.S. time) that Russian President Vladimir Putin proposed discussing an end to the war in Ukraine with President Donald Trump and Chinese President Xi Jinping at the APEC summit in Shenzhen on November 18–19, without Ukrainian President Volodymyr Zelensky. Kremlin spokesman Dmitry Peskov said there was no clear understanding yet about the meeting or its agenda, and a senior U.S. official said Trump had not agreed but might be open to it.",
      "fc": [],
@@ -2324,6 +2828,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky claims U.S. has cleared only some of the Patriot missiles already paid for",
      "fact": "In a Bloomberg interview published October 18, Ukrainian President Volodymyr Zelensky said Washington had approved delivery of only some of the Patriot missiles bought through PURL, the program that uses NATO allies' money to buy U.S. weapons, and that this was not a technical issue. He also claimed that steps had been taken to convince Ukraine to capitulate.",
      "fc": [],
@@ -2340,6 +2847,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Rubio says Ukraine currently has no access to Starshield, denies ordering a speed cap",
      "fact": "Secretary of State Marco Rubio told reporters on October 17 that Ukraine does not currently have access to Starshield, the military version of Starlink, and that its request is under discussion. He called reports that the White House ordered Starlink speeds slowed \"categorically false,\" though Ukrainian defense officials had earlier said Starshield was working again.",
      "fc": [],
@@ -2356,6 +2866,7 @@
     },
     {
      "case": "korea",
+     "fp": [],
      "h": "North Korea-China trade hits $299 million in September, up 18.6 percent year to date",
      "fact": "North Korea-China trade came to about $299 million in September, up from $238 million in August and the year's second-highest monthly total after April, according to China's General Administration of Customs data released October 18 and reported by NK News, a North Korea-focused outlet. By the Sankei Shimbun's count, trade from January through September totaled about $2.27 billion, up 18.6 percent from a year earlier.",
      "fc": [
@@ -2377,6 +2888,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Massive drone attack sets St. Petersburg oil terminal ablaze, killing 1",
      "fact": "St. Petersburg Gov. Alexander Beglov said on October 18 that a \"massive\" drone attack killed one person, injured five and set fire to an oil terminal and a fuel depot, among other sites. Russia's Defense Ministry said it downed 1,015 Ukrainian drones between 8 p.m. on October 17 and 8 a.m. on October 18.",
      "fc": [],
@@ -2396,6 +2910,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Rubio says Trump wants up to 60 days to weigh impact of waived Russia sanctions, tariffs",
      "fact": "Secretary of State Marco Rubio told reporters on October 17 that President Trump plans to spend up to 60 days analyzing the economic effects of the Russia sanctions and tariffs he waived on October 16. The October 16 executive order itself sets no end date for the waiver.",
      "fc": [],
@@ -2411,6 +2928,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky says U.S. proposed three-way talks, but Moscow and Washington have yet to confirm",
      "fact": "Ukrainian President Volodymyr Zelensky told reporters on October 17 that the United States had proposed a trilateral meeting but that neither Russia nor the U.S. had yet confirmed it. He said possible venues include a Middle Eastern country such as the UAE or Saudi Arabia, the U.S. during the G20 summit, or a European country.",
      "fc": [],
@@ -2427,6 +2947,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IRGC claims another 'noncompliant' tanker hit a mine south of Hormuz",
      "fact": "Iran's Revolutionary Guard navy claimed early on October 19, Tehran time, that a tanker leaving the strait by an unauthorized southern route with its navigation systems switched off struck a mine, causing an explosion and fire in its engine room. It did not name the ship, and there was no independent confirmation.",
      "fc": [],
@@ -2442,6 +2965,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Projectile hits residential area in Saudi Arabia's Najran, injuring 6",
      "fact": "Saudi Civil Defense said on October 18 that a projectile fell on a residential area of Najran, injuring six civilians and damaging three homes and three vehicles; Saudi media attributed it to the Houthis. The same day, a Saudi military helicopter crashed in Najran, killing two officers.",
      "fc": [],
@@ -2461,6 +2988,9 @@
     },
     {
      "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
      "h": "Taiwan's coast guard drives off 16 Chinese ships, accuses Beijing of hybrid warfare",
      "fact": "Taiwan's Coast Guard Administration said on October 18 it drove away 16 Chinese vessels, including coast guard ships, research vessels and fishing boats, off the main island's eastern, southern and southwestern coasts and around the Pratas Islands, adding that some had entered restricted waters. It condemned China for waging hybrid warfare at several locations at once to change the status quo unilaterally.",
      "fc": [],
@@ -2477,6 +3007,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump fully endorses Netanyahu nine days before Israel's election",
      "fact": "In an October 18 Truth Social post, President Trump gave Prime Minister Benjamin Netanyahu his \"Complete and Total Endorsement,\" saying the U.S. would soon finish the job unless Iran changes course and that with any other leader it would have to do so itself, which he is not inclined to do. Israel votes on October 27.",
      "fc": [
@@ -2503,6 +3036,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "pak_afg"
+     ],
      "h": "Pakistani troops and Afghan Taliban clash on the border in Kurram",
      "fact": "Pakistani security officials claimed that troops fought Afghan Taliban forces for hours at several points along the border in Khyber Pakhtunkhwa province's Kurram district on October 17 and that artillery-backed units destroyed Taliban posts. The Taliban government had no immediate comment, and there was no confirmed casualty count.",
      "fc": [
@@ -2527,6 +3063,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "French protests spiral into riots and looting, with at least 1,800 arrested",
      "fact": "Protests by about 550,000 people across France on October 17, by the authorities' count, over rising living costs and worsening school conditions descended into arson and looting. At least 1,800 people were arrested, according to a CBS News tally; Al Jazeera, citing the Interior Ministry, put the number at about 2,400. In a televised address on October 18, President Emmanuel Macron said looters would have to pay for the damage.",
      "fc": [],
@@ -2546,30 +3083,45 @@
      "t": "Zelensky said in an NBC interview on October 18 that the U.S. has resumed sharing intelligence on Russian missile launches, and he spoke by phone the same day with U.S. envoys Steve Witkoff and Jared Kushner.",
      "src": [
       "https://kyivindependent.com/a-great-deal-depends-on-americas-position-zelensky-holds-call-with-trumps-peace-envoys-as-us-pivots-to-moscows-side/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Iranian Foreign Minister Abbas Araghchi said in Baghdad on October 18 that Iran's offer to reopen the Strait of Hormuz within seven days is still on the table.",
      "src": [
       "https://www.foxnews.com/live-news/us-iran-war-peace-talks-oil-strait-hormuz-trump-october-18"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Iranian media reported that Russian Foreign Minister Sergei Lavrov will visit Tehran on October 19.",
      "src": [
       "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "Egypt's parliament postponed until October 19 a vote on authorizing military support for Saudi Arabia.",
      "src": [
       "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     },
     {
      "t": "Lithuanian President Gitanas Nauseda said on October 18 that what appeared to be a drone entered Lithuanian airspace and exploded; a Ukrainian Foreign Ministry spokesperson apologized, saying Russian electronic warfare may have pushed a Ukrainian drone off course.",
      "src": [
       "https://kyivindependent.com/nato-jets-scramble-as-drone-explodes-in-lithuanian-airspace/"
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
      ]
     }
    ]
@@ -2579,6 +3131,10 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr",
+      "iran-war"
+     ],
      "h": "Trump waives most tariffs and sanctions under the Graham Russia sanctions law two days before they take effect",
      "fact": "President Trump signed an executive order on October 16 waiving most of the tariffs and sanctions in the Lindsey O. Graham Sanctioning Russia and Iran Act of 2026, which were set to take effect October 18, and certified to Congress that the move serves the national interest. The waiver also covers 100 percent additional tariffs on the five largest importers of Russian oil and gas, and it sets no expiration date.",
      "fc": [],
@@ -2598,6 +3154,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia launches massive attack on Ukraine's energy infrastructure, hitting more than 15 power facilities",
      "fact": "Ukraine's air force said Russia fired 332 drones plus ballistic and cruise missiles between 6 p.m. on October 16 and the morning of October 17, and that 293 were shot down or neutralized; President Volodymyr Zelensky said more than 15 power generation and transmission facilities were attacked. Russia's Defense Ministry said it struck targets including a steel plant in Zaporizhzhia and a transformer factory run by Ukraine's Defense Ministry.",
      "fc": [],
@@ -2615,6 +3174,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Gerasimov claims capture of Dobropillia; Ukraine's General Staff denies it",
      "fact": "Valery Gerasimov, chief of Russia's General Staff, reported to President Vladimir Putin on October 16 that Russian forces had captured Dobropillia in the Donetsk region. Andrii Kovalov, a spokesman for Ukraine's General Staff, said on October 17 that the claim was false and that the town remains under the control of Ukrainian forces.",
      "fc": [],
@@ -2634,6 +3196,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IRGC claims a 'violating' supertanker struck a mine and exploded in the Strait of Hormuz",
      "fact": "The navy of Iran's Islamic Revolutionary Guard Corps claimed on October 17 that a \"violating\" supertanker carrying more than 2 million barrels of crude hit a mine and exploded while crossing the Strait of Hormuz on an \"unauthorized\" route with its location and radar systems switched off. The IRGC did not name the ship or give its exact location.",
      "fc": [],
@@ -2650,6 +3215,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "UKMTO says two tankers were hit off Jubail, Saudi Arabia",
      "fact": "The U.K. Maritime Trade Operations agency (UKMTO) said on October 17 that two tankers were hit on October 16 northeast of Jubail, Saudi Arabia: one about 68 nautical miles out by an unknown projectile, the other about 78 nautical miles out by a rocket-propelled grenade fired from a small boat. All crew members were safe, and it was not clear who carried out the attacks.",
      "fc": [],
@@ -2665,6 +3233,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Egypt's Sisi asks parliament for emergency session to authorize defending Saudi Arabia",
      "fact": "Egyptian President Abdel Fattah el-Sisi, speaking at a military academy graduation on October 17, asked parliament to hold an emergency session to authorize action to protect Saudi Arabia if Riyadh requests it. He said he had no intention of attacking anyone and would only defend Saudi Arabia.",
      "fc": [],
@@ -2683,6 +3255,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea says it tested a new ultra-high-speed precision-guided torpedo using AI",
      "fact": "North Korea's Korean Central News Agency reported on October 17 that a new ultra-high-speed precision-guided torpedo, with AI technology applied to its target detection and guidance functions, was successfully test-fired underwater on October 15.",
      "fc": [],
@@ -2702,30 +3277,45 @@
      "t": "Adm. Brad Cooper, commander of U.S. Central Command, said on October 16 that \"the Strait of Hormuz is controlled by the United States and our regional partners, not Iran.\"",
      "src": [
       "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Iranian President Masoud Pezeshkian said in Yerevan, Armenia, on October 16 that Iran does not seek nuclear weapons and is ready for dialogue.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Indian Shipping Minister Sarbananda Sonowal said the tanker ST 3, with 15 Indian seafarers aboard, was struck by a projectile in the Strait of Hormuz on October 16 and that all crew members were safe.",
      "src": [
       "https://gulfnews.com/world/asia/india/indian-crew-safe-after-tanker-incidents-in-strait-of-hormuz-and-romania-minister-1.500713630"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "European Council President António Costa said after the October 16 summit that leaders had identified the means to cover Ukraine's financing needs for this year and had asked the European Commission for a proposal on its additional needs for 2027.",
      "src": [
       "https://www.consilium.europa.eu/en/press/press-releases/2026/10/16/remarks-by-president-antonio-costa-at-the-press-conference-following-the-european-council-meeting-of-15-16-october-2026/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Rep. Gregory Meeks, the top Democrat on the House Foreign Affairs Committee, introduced bipartisan legislation on October 16 to block the Russian diesel purchase deal proposed by President Trump.",
      "src": [
       "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     }
    ]
@@ -2735,6 +3325,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Ukraine resumes strikes on Russian refineries; fire breaks out at Ryazan plant",
      "fact": "President Volodymyr Zelensky told the Financial Times, in an interview published October 15, that he had lifted the restriction on striking Russian oil refineries. Russia's Defense Ministry said the same day that it shot down four cruise missiles and 69 drones aimed at the Ryazan refinery, and Ryazan Governor Pavel Malkov said the refinery caught fire.",
      "fc": [],
@@ -2755,6 +3348,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky says Russia launched more than 850 drones; three killed in Kirovohrad region",
      "fact": "Zelensky said Russia fired more than 850 attack drones between midnight October 14 and 9 a.m. October 15, hitting dozens of cities and villages. Ukraine's State Emergency Service said a drone attack lasting more than 10 hours killed three people and injured six in the Kirovohrad region.",
      "fc": [],
@@ -2771,6 +3367,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran's military claims Hormuz fully closed; reports fire on 'violating' tanker",
      "fact": "The Iranian army's navy said on October 15 that a \"violating\" oil tanker caught fire while trying to cross a \"forbidden region\" east of the Strait of Hormuz with its tracking system switched off, without naming the ship or the cause of the fire. Habibollah Sayyari, the army's deputy chief of staff for coordination, claimed the same day that the strait was completely closed.",
      "fc": [],
@@ -2787,6 +3386,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Houthis fire missiles at presidential palace in Aden; five killed",
      "fact": "Yemeni Information Minister Moammar al-Eryani said on October 15 that the Houthis fired five missiles at the al-Maashiq presidential palace in Aden, and the health minister said five people were killed and 16 wounded. The Houthis claimed they had targeted a Saudi military operations headquarters in Aden.",
      "fc": [],
@@ -2806,6 +3409,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Lavrov says there will be no ceasefire that lets Ukraine rearm",
      "fact": "Russian Foreign Minister Sergei Lavrov told a news conference in Baku on October 15 that the objectives of the special military operation and Russia's position on the Ukraine conflict had not changed. Russian media reported that he said there would be no ceasefire allowing Ukraine to rearm.",
      "fc": [],
@@ -2825,6 +3431,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Seoul defense spokesperson, speaking personally, says shifting requirements could stall OPCON transfer",
      "fact": "A spokesperson for South Korea's Ministry of National Defense told a regular briefing on October 15 that wartime operational control (OPCON) could not be transferred if the requirements kept changing, adding that this was a personal view. Gen. Xavier Brunson, commander of U.S. Forces Korea, said in Washington on October 14 that the conditions and the plan had changed and new standards had to be met.",
      "fc": [
@@ -2852,31 +3461,44 @@
      "t": "Ukraine's air force said Russia launched 149 drones between 6 p.m. on October 15 and the morning of October 16, that 114 were shot down or neutralized, and that 24 locations were hit.",
      "src": [
       "https://unn.ua/en/news/most-of-the-drones-launched-by-the-russian-federation-overnight-were-jet-powered-air-defense-neutralized-slightly-more-than-half"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Putin claimed at a congress of the business group Delovaya Rossiya on October 15 that Ukraine had struck Wildberries and Ozon warehouses first and that Russia had begun to respond.",
      "src": [
       "https://meduza.io/en/news/2026/10/15/they-started-it-we-re-responding-putin-warns-ukraine-over-strikes-on-energy-facilities-warehouses-and-data-centers"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Ukrainian defense officials said Starshield, the military version of Starlink, was working again on moving terminals after more than a day of restrictions, though Ukraine's top diplomat in Washington said speeds had not fully recovered.",
      "src": [
       "https://www.sofx.com/ukraine-resumes-refinery-strikes-as-starshield-service-returns-rejecting-energy-ceasefire/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "An EU summit in Brussels ended its first day on October 15 without agreement on the next long-term budget; on October 16, the second day, leaders will discuss support for Ukraine with Zelensky.",
      "src": [
       "https://www.euronews.com/2026/10/16/eu-summit-leaders-to-rally-behind-zelenskyy-amid-bitter-row-with-trump"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Chinese Commerce Ministry spokesperson He Yadong said on October 15 that China would keep expediting the review and approval of rare earth export licenses for Europe and hoped the EU would respond by helping resolve dual-use export license issues for Chinese companies.",
      "src": [
       "https://www.globaltimes.cn/page/202610/1372328.shtml"
-     ]
+     ],
+     "fp": []
     }
    ]
   },
@@ -2885,6 +3507,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Ukraine's air force counts 39 Russian missiles and 128 drones; 600,000 lose power",
      "fact": "Ukraine's air force said Russia launched 39 missiles and 128 drones between 6 p.m. on October 13 and the morning of October 14, Kyiv time, and that four missiles and 115 drones were shot down or neutralized. President Volodymyr Zelensky said at least 600,000 people lost power.",
      "fc": [],
@@ -2904,6 +3529,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia's Defense Ministry claims strikes on six power plants around Kyiv and Kharkiv",
      "fact": "Russia's Defense Ministry said on October 14 that its forces had struck the No. 4, 5 and 6 combined heat and power plants and the Trypillia thermal power plant near Kyiv, two plants near Kharkiv, and a data center in Kyiv with ground-launched precision weapons and long-range drones. It claimed the sites supported Ukraine's armed forces and defense industry.",
      "fc": [],
@@ -2919,6 +3547,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea test-fires two types of submarine-launched strategic cruise missiles in the East Sea",
      "fact": "The Korean Central News Agency reported on October 15 that North Korea test-fired two types of submarine-launched strategic cruise missiles in the East Sea on October 14. It said the test was meant to verify the navy's mission capabilities and the reliability of its war deterrent, and claimed it had no negative impact on the security of neighboring countries.",
      "fc": [],
@@ -2933,6 +3564,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Singapore-flagged container ship sinks in Strait of Hormuz after projectile strike",
      "fact": "Singapore's Maritime and Port Authority (MPA) said on October 14 that the Singapore-flagged container ship GFS Pride had sunk in the Strait of Hormuz and that all 21 crew members were evacuated. The ship caught fire after being hit by a projectile on October 13. Iran's Revolutionary Guards claimed a container ship sank after hitting a mine but did not name the vessel.",
      "fc": [],
@@ -2953,6 +3587,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Houthis claim they targeted Riyadh's King Khalid airport; coalition intercepts ballistic missile",
      "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on October 14 that the coalition had intercepted and destroyed a ballistic missile the Houthis fired toward Riyadh. Houthi spokesman Yahya Saree claimed the group had targeted King Khalid International Airport.",
      "fc": [],
@@ -2972,6 +3610,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "U.S. consumer prices rise 3.7 percent in September as gasoline jumps 34.2 percent",
      "fact": "The Bureau of Labor Statistics said on October 14 that consumer prices in September were 3.7 percent higher than a year earlier. Energy prices rose 20.4 percent and gasoline 34.2 percent, while core prices, excluding food and energy, rose 2.6 percent.",
      "fc": [],
@@ -2990,30 +3629,45 @@
      "t": "Russia's Defense Ministry said it shot down 902 Ukrainian drones over several Russian regions, Crimea and the Sea of Azov overnight from October 13 into the morning of October 14.",
      "src": [
       "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Zelensky met British Prime Minister Andy Burnham in London on October 14, and Burnham said Britain would speed up deliveries of British-made air defenses.",
      "src": [
       "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Serhii Beskrestnov, a technology adviser to Zelensky, said SpaceX had imposed a speed limit on Starlink terminals in motion so that military terminals stop working above 160 kilometers per hour, disrupting operations.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/14/massive-russian-attack-on-ukraine-kills-at-least-six-cuts-power-in-kyiv"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Reuters, citing Iranian officials, reported that Iran shifted tactics in its attacks on shipping in the Strait of Hormuz about 10 days ago to keep oil prices high and influence the U.S. midterm elections.",
      "src": [
       "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Israeli Prime Minister Benjamin Netanyahu told Army Radio on October 14 that a preemptive strike on Iran before the October 27 election would not be good for Israel.",
      "src": [
       "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
+     ],
+     "fp": [
+      "iran-war"
      ]
     }
    ]
@@ -3023,6 +3677,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian ballistic missiles hit Kyiv power plant and apartment building, killing two",
      "fact": "Russia struck Kyiv with ballistic missiles at about 10:40 p.m. local time on October 13, hitting an apartment building in the Desnianskyi district and the grounds of the city's Combined Heat and Power Plant No. 4. The Kyiv Post reported early on October 14 that two people had been killed and 21 injured.",
      "fc": [],
@@ -3042,6 +3699,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia says it intercepted 604 Ukrainian drones, 417 of them headed for Moscow",
      "fact": "Russia's Defense Ministry said it intercepted 604 Ukrainian drones over 15 regions and the Sea of Azov between 8 p.m. on October 12 and 8 a.m. on October 13, Moscow time. Moscow Mayor Sergei Sobyanin said 417 of them were flying toward the Moscow area.",
      "fc": [],
@@ -3061,6 +3721,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Trump on whether Russia broke the energy ceasefire: \"I'll let you know about that later\"",
      "fact": "Asked at the White House on October 13 whether Russia had violated the energy ceasefire, President Trump said he would let reporters know later, adding that Ukraine had hit many sites the day before. Ukrainian President Volodymyr Zelensky, he said, should focus on making a deal rather than talking about that.",
      "fc": [],
@@ -3078,6 +3741,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "UKMTO says tanker and container ship hit by unidentified projectiles in Strait of Hormuz",
      "fact": "The U.K. Maritime Trade Operations agency (UKMTO) said on October 13 that a tanker and a container ship had been struck by unidentified projectiles in the Strait of Hormuz. It said the exact time and the extent of the damage were unclear and that authorities were investigating.",
      "fc": [],
@@ -3097,6 +3763,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi Aramco site in Dhahran hit; coalition blames Houthi ballistic missiles",
      "fact": "The Saudi government said an Aramco administrative building in Dhahran, in the Eastern Province, was attacked early on October 14 local time, causing a limited fire and no injuries. The Saudi-led coalition claimed it had intercepted ballistic missiles fired by the Houthis at the province and that debris fell on a residential area of Dhahran.",
      "fc": [],
@@ -3116,6 +3786,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi-led coalition strikes Houthi oil facilities in Sanaa, Dhamar and Saada",
      "fact": "The Saudi-led coalition said it struck oil facilities in Yemen's Sanaa, Dhamar and Saada on October 13, arguing that they sustain the Houthis' war effort. It had earlier warned residents near a fuel facility in Sanaa to evacuate.",
      "fc": [],
@@ -3135,6 +3809,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "IMF nudges its 2026 global growth forecast up 0.1 point to 3.1 percent",
      "fact": "The International Monetary Fund on October 13 raised its forecast for global growth this year to 3.1 percent, 0.1 percentage point above its July estimate, and projected 3.4 percent for next year in the World Economic Outlook released at its annual meetings in Bangkok. It expects oil to average $96 a barrel this year, up nearly 41 percent.",
      "fc": [],
@@ -3145,6 +3820,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Congo's Ebola cases top 9,000, with 4,381 deaths",
      "fact": "Health Ministry data showed 9,066 confirmed Ebola cases and 4,381 deaths in the Democratic Republic of the Congo as of October 13. The outbreak, caused by the Bundibugyo strain, for which there is no approved vaccine, has spread to seven provinces, and an imported case was earlier confirmed in Kenya.",
      "fc": [],
@@ -3164,31 +3840,43 @@
      "t": "Ukraine's Air Force said Russia launched five ballistic missiles, nine missile-drones and 108 attack drones between 6 p.m. on October 12 and the morning of October 13, and that 88 of the drones were shot down or neutralized.",
      "src": [
       "https://en.interfax.com.ua/news/general/1218947.html"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "In his evening address on October 13, Ukrainian President Volodymyr Zelensky said he had sent Trump envoy Steve Witkoff and Jared Kushner a proposal to meet in the coming days.",
      "src": [
       "https://www.president.gov.ua/en/news/budut-horoshi-rishennya-na-pidtrimku-ukrayini-na-comu-tizhni-106873"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Saudi Arabia's civil aviation authority extended the shutdown of Riyadh's King Khalid International Airport through October 17, and the U.S. State Department warned that Saudi airports could be attacked and urged particular caution when using them.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     },
     {
      "t": "Brent crude futures settled down 0.9 percent at $105.69 a barrel on October 13.",
      "src": [
       "https://www.foxnews.com/live-news/us-iran-war-saudi-arabia-trump-houthis-10-13-26"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "The Korean Central News Agency reported on October 13 that North Korean leader Kim Jong Un attended the October 11 dedication of the Second Economic Committee's National Defense Revolution Museum, marking the 81st anniversary of the Workers' Party's founding.",
      "src": [
       "https://koreanewsservice.com/revolutionary-activities/19323/"
-     ]
+     ],
+     "fp": []
     }
    ]
   },
@@ -3197,6 +3885,9 @@
    "items": [
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea fires ballistic missiles; state media says it tested a tactical ballistic missile",
      "fact": "South Korea's Joint Chiefs of Staff said North Korea fired ballistic missiles from the Pyongyang area into the East Sea at about 9:20 a.m. on October 12, and that one of them flew more than 900 kilometers. The state-run Korean Central News Agency reported on October 13 that the Missile Administration had test-fired a tactical ballistic missile.",
      "fc": [],
@@ -3217,6 +3908,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Trump says he \"may\" meet Kim Jong Un on Asia trip",
      "fact": "Asked by a reporter at the White House on October 12 whether he plans to meet Kim Jong Un during next month's trip to the APEC summit in Shenzhen, China, President Trump said, \"I may.\" No meeting has been announced.",
      "fc": [
@@ -3241,6 +3935,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky accuses Russia of violating energy ceasefire; Kremlin says contacts continue",
      "fact": "Ukrainian President Volodymyr Zelensky, addressing the Warsaw Security Forum by video link on October 12, said Russia had violated the energy ceasefire announced by President Trump. Kremlin spokesman Dmitry Peskov said the same day only that contacts were continuing on whether Russia would agree to the truce.",
      "fc": [],
@@ -3257,6 +3954,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Kremlin rejects Zelensky's 60-day election ceasefire offer",
      "fact": "After Zelensky said on October 11 that Ukraine would hold elections if given a 60-day total ceasefire, Peskov said on October 12 that President Vladimir Putin was ready to halt strikes on election day only. He claimed Ukraine would use a truce to regroup and keep fighting.",
      "fc": [
@@ -3278,6 +3978,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IRGC claims it struck a third supertanker in the Strait of Hormuz",
      "fact": "Iran's Revolutionary Guard navy claimed on October 12 that it struck a supertanker that ignored warnings and tried to leave the Strait of Hormuz, the third tanker it said it had hit for violating its rules. It did not name the vessel or its flag, and there has been no independent confirmation.",
      "fc": [],
@@ -3297,6 +4000,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Houthis fire missiles at Riyadh and Khamis Mushait; coalition says it intercepted them",
      "fact": "The Saudi-led coalition said it intercepted a Houthi ballistic missile fired at Riyadh on October 12 and, just after midnight on October 13, two more aimed at Khamis Mushait in southern Saudi Arabia. Houthi politburo member Mohammed al-Bukhaiti warned that if the U.S. joins Saudi airstrikes on Yemen, the group will retaliate against the U.S. and its interests in the region.",
      "fc": [],
@@ -3316,6 +4023,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "russia-hybrid-campaign-western-europe",
+      "iran-war"
+     ],
      "h": "29 nations, including the U.S. and UK, condemn Iran's violent attacks and hybrid activity",
      "fact": "In a joint statement on October 12, foreign ministers from the U.S., the UK, Canada, Australia, New Zealand, Norway, and 23 EU member states condemned \"in the strongest terms\" Iran's violent attacks and hybrid activity. The statement recognized Britain's attribution of Iran's involvement in the September 27 incident at RAF Fairford.",
      "fc": [],
@@ -3332,6 +4043,11 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war",
+      "red-sea-bab-el-mandeb",
+      "rus-ukr"
+     ],
      "h": "Brent rises 1.8 percent to settle at $106.65 a barrel",
      "fact": "Brent crude for December delivery settled at $106.65 a barrel on October 12, up 1.8 percent. Market reports cited the continued shutdown of Riyadh's airport, reports of tankers hit in the Strait of Hormuz, and doubts about the Russia-Ukraine energy ceasefire.",
      "fc": [
@@ -3347,6 +4063,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "EU sanctions 826 Russian defense firms and 743 CEOs in biggest listing since 2022",
      "fact": "The Council of the EU on October 12 added to its sanctions list 826 companies in Russia's military-industrial complex that supply components for missiles, drones, aircraft, and more, along with their 743 chief executives. High Representative Kaja Kallas called it \"the largest round of sanctions listings since 2022.\"",
      "fc": [],
@@ -3365,18 +4084,28 @@
      "t": "South Korea's presidential National Security Office held an emergency security review meeting with the Ministry of National Defense, the Joint Chiefs of Staff, and other agencies on October 12, calling the launch a violation of UN Security Council resolutions and urging the North to stop immediately.",
      "src": [
       "https://news.sbs.co.kr/english/article.do?news_id=N1008793131"
+     ],
+     "fp": [
+      "korea"
      ]
     },
     {
      "t": "President Trump said on October 12 that the Houthis are \"misbehaving very badly,\" but he has not decided whether the U.S. will join airstrikes on Yemen.",
      "src": [
       "https://www.foxnews.com/live-news/iran-war-news-us-trump-houthis-saudi-arabia-october-12"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     },
     {
      "t": "Iranian Foreign Ministry spokesman Esmaeil Baghaei said on October 12 that Tehran is still reviewing the U.S. response and that mediated exchanges are continuing.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
@@ -3384,12 +4113,18 @@
      "src": [
       "https://www.pravda.com.ua/eng/news/2026/10/12/8057541/",
       "https://www.pbs.org/newshour/world/zelenskyy-says-russia-strikes-energy-facilities-despite-trump-claim-of-an-energy-ceasefire"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Taiwan's military said China's live-fire drills in five no-sail zones in the Bohai, Yellow, East China, and South China seas, running October 12-17, are being held off China's own coast rather than around Taiwan.",
      "src": [
       "https://www.taipeitimes.com/News/taiwan/archives/2026/10/12/2003865828"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     }
    ]
@@ -3399,6 +4134,9 @@
    "items": [
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "South Korea's Joint Chiefs: North Korea fires \"unidentified projectile\" into East Sea; specs under analysis",
      "fc": [],
      "src": [
@@ -3416,6 +4154,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Trump declares Russia-Ukraine \"ENERGY CEASEFIRE\" effective immediately, says \"Both parties have agreed\"; Moscow hasn't confirmed",
      "fc": [],
      "src": [
@@ -3434,6 +4175,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Ukraine's presidential office confirms Russian strike on Kharkiv power plant after ceasefire announcement",
      "fc": [],
      "src": [
@@ -3452,6 +4196,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iranian security chief Rezaei on U.S. reply: \"we consider it insufficient\"; Hormuz talks falter",
      "fc": [
       {
@@ -3477,6 +4224,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Riyadh airport hit for second straight day; Saudi aviation authority reports injuries as Houthis claim attack",
      "fc": [],
      "src": [
@@ -3497,6 +4248,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "UKMTO: tanker leaving the Strait of Hormuz hit by unidentified projectile",
      "fact": "The U.K. Maritime Trade Operations center (UKMTO) said on October 11 that an unidentified projectile struck a tanker leaving the Strait of Hormuz, damaging its port side, and that all crew members were safe.",
      "fc": [],
@@ -3512,6 +4266,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "South Korea's Foreign Ministry raises travel alert for all of Saudi Arabia to Level 3, advising citizens to leave",
      "fc": [],
      "src": [
@@ -3528,6 +4286,7 @@
     },
     {
      "case": null,
+     "fp": [],
      "h": "Pakistan's President Zardari declares state of emergency in Khyber Pakhtunkhwa, governed by Imran Khan's party",
      "fc": [],
      "src": [
@@ -3547,18 +4306,27 @@
      "t": "Ukrainian President Volodymyr Zelensky said on October 11 that Ukraine is ready to stop striking Russian energy facilities and is counting on Russia to show the same readiness.",
      "src": [
       "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "A Russian missile struck Pisochyn, on the outskirts of Kharkiv, on October 11, killing at least three people and injuring 25, according to Ukraine's National Police.",
      "src": [
       "https://kyivindependent.com/3-killed-25-injured-in-russian-strike-near-kharkiv/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Russia's Defense Ministry said on October 11 that it had shot down 909 Ukrainian fixed-wing drones and two guided bombs over the past day.",
      "src": [
       "https://tass.com/defense/2200515"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
@@ -3566,6 +4334,10 @@
      "src": [
       "https://www.arabnews.pk/saudi-arabia/saudi-arabia-egypt-pakistan-and-turkiye-condemn-houthi-attacks-on-kingdom-3003867",
       "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
      ]
     }
    ]
@@ -3575,6 +4347,10 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi Arabia: Houthis strike Riyadh airport again, killing 12, including an American, and wounding 309",
      "fc": [],
      "src": [
@@ -3594,6 +4370,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Trump calls attack on Saudi Arabia \"not acceptable,\" says U.S. will \"look at\" joining strikes on Houthis",
      "fc": [],
      "src": [
@@ -3610,6 +4390,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian glide bombs on Zaporizhzhia kill at least 20, including three children",
      "fc": [],
      "src": [
@@ -3628,6 +4411,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Trump says \"time for Ukraine to get a new president,\" blames Zelensky over diesel prices",
      "fc": [],
      "src": [
@@ -3644,6 +4430,9 @@
     },
     {
      "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
      "h": "Lai: Taiwan \"open to exchanges\" but \"will not accept subordination\"; Beijing's Taiwan Affairs Office decries \"separatist thinking\"",
      "fc": [],
      "src": [
@@ -3666,25 +4455,35 @@
      "t": "OFAC General License 135 authorizes the sale, delivery, offloading and importation into the United States of Russian-origin diesel fuel, and remains in effect through April 7, 2027.",
      "src": [
       "https://www.hsfkramer.com/notes/sanctions/2026-posts/ofac-issues-general-license-135-authorizing-transactions-involving-russian-origin-diesel-fuel"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Ukrainian President Volodymyr Zelensky wrote on X that with the Zaporizhzhia strike, Russia had \"expressed its thanks\" for the lifting of sanctions on diesel exports.",
      "src": [
       "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "In his National Day address, Taiwanese President Lai Ching-te said that increased defense investment is meant \"not to provoke\" but \"to deter war.\"",
      "src": [
       "https://focustaiwan.tw/politics/202610100003"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     },
     {
      "t": "North Korea marked the 81st anniversary of the Workers' Party on October 10; Kim Jong Un attended a celebratory performance at the Pyongyang Indoor Stadium but gave no speech or statement, KCNA reported on October 11.",
      "src": [
       "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
-     ]
+     ],
+     "fp": []
     }
    ]
   },
@@ -3693,6 +4492,10 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr",
+      "iran-war"
+     ],
      "h": "After Trump-Putin call, U.S. temporarily eases sanctions to let Russian diesel flow",
      "fact": "After a phone call with Russian President Vladimir Putin on October 9, U.S. time, President Donald Trump wrote on Truth Social that Russia would immediately supply more than 300,000 tons of diesel, another 500,000 tons in November and 1 million tons after that, followed by 3 million more tons within a short period. The same day, the Treasury Department's Office of Foreign Assets Control (OFAC) said it was issuing a temporary general license to allow the supply of Russian diesel to the global market. The Kremlin said the call focused heavily on prospects for settling the Ukraine crisis, also touched on Iran, and that Russia confirmed its readiness to supply oil and petroleum products to U.S. and global markets. Ukrainian President Volodymyr Zelensky wrote on X that easing sanctions on Russia without a clear and lasting de-escalation agreement \"plays into Russia's hands.\"",
      "link": "Conclusion 5 of the Russia-Ukraine war analysis holds that Russia's best move is to keep dealing with Washington while seizing the rest of Donetsk Oblast. Washington's sanctions carve-out for Russia's wartime energy sector is an example of Moscow reaping real gains from those dealings, in line with that assessment.",
@@ -3713,6 +4516,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi-led coalition launches major operation against Houthis, says 136 military targets destroyed",
      "fact": "Saudi Arabia's General Authority of Civil Aviation said on October 9 that Houthi attacks a day earlier on facilities at Riyadh's King Khalid International Airport and on a Saudia aircraft killed three Saudi citizens, including a Saudia captain. Turki al-Maliki, spokesman for the Saudi-led coalition, claimed on X on the night of October 9 that coalition forces had destroyed 136 military targets in Houthi-held areas, and said they were providing round-the-clock air support to the Yemeni government forces' offensive and dismantling the Houthis' ballistic missile system.",
      "link": "Conclusion 2 of the Iran and Hormuz analysis identifies a war that spreads to all the Gulf oil producers as the outcome that would cost South Korea the most. With Saudi Arabia answering the Houthi strike on its capital's airport with a large-scale operation, the war is widening into direct combat between Gulf oil producers and Iran-aligned forces.",
@@ -3731,6 +4538,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Tanker hit off UAE coast catches fire, blaze extinguished",
      "fact": "A vessel was struck by an unknown projectile 13 nautical miles west of Al Jazeera in the United Arab Emirates on October 9, the UK Maritime Trade Operations (UKMTO) said. Maritime security firm Vanguard put the strike at 10:00 GMT (2 p.m. local time) and said a fire broke out and was later extinguished; shipping and security sources told Reuters the ship was the Panama-flagged supertanker GEM NO.2, fully laden with crude. No one has claimed responsibility.",
      "link": "After the attack north of Qatar, tankers keep getting hit in Gulf waters beyond the Strait of Hormuz. The added risk to crude shipments from inside the Gulf weighs against the forecast that Brent will close the year below $90 a barrel.",
@@ -3752,6 +4562,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "horn-tigray-eritrea"
+     ],
      "h": "Ethiopia's foreign minister accuses Eritrea of 'all-out invasion,' invokes self-defense",
      "fact": "In a letter dated October 8 to French Foreign Minister Jean-Noël Barrot, Ethiopian Foreign Minister Gedion Timothewos called \"the all-out invasion of parts of northern Ethiopia by Eritrea\" \"a blatant act of aggression that engages Ethiopia's inherent right to self-defence,\" and demanded the withdrawal of Eritrean troops he said had pushed up to 60 kilometers into Tigray. A senior Ethiopian official said the letter was also sent to the other members of the UN Security Council. Eritrean Information Minister Yemane Gebremeskel hit back on X, saying Ethiopia had waged \"an unprovoked war of aggression against Eritrea\" for more than three years.",
      "link": "The site has no issue analysis on this conflict but tracks it as a flashpoint. With Addis Ababa now invoking self-defense in an official letter, the risk of a direct clash between the two armies has grown. Eritrea claims Ethiopia's target is its Red Sea port of Assab, so the conflict could add to the risks facing Red Sea shipping routes already rattled by Houthi attacks.",
@@ -3774,18 +4587,25 @@
      "src": [
       "https://www.youthdaily.co.kr/news/article.html?no=228160",
       "https://www.spnews.co.kr/news/articleView.html?idxno=111465"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "Ivan Fedorov, co-chair of the Zaporizhzhia Oblast Defense Council, said on October 9 that Russian forces had struck 51 settlements in the region 1,039 times over the previous day, killing two people and injuring 18.",
      "src": [
       "https://kyivindependent.com/russian-attacks-kill-at-least-41-injure-67-across-ukraine-as-glide-bombs-strike-zaporizhzhia/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Citing the Kremlin, Al Jazeera reported that the October 9 Trump-Putin call lasted about an hour and a half and that both leaders expressed interest in attending the Asia-Pacific Economic Cooperation (APEC) summit in China in November.",
      "src": [
       "https://www.aljazeera.com/economy/2026/10/9/trump-announces-russian-diesel-deal-amid-soaring-us-fuel-prices"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     }
    ]
@@ -3795,6 +4615,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian guided bombs hit two buses in Kramatorsk, killing 33",
      "fact": "Russian forces struck two passenger buses in Kramatorsk, in Ukraine's Donetsk Oblast, with guided bombs at around 10 a.m. local time on October 8, killing 33 people and wounding 18, Ukraine's State Emergency Service said. Ukraine's Air Force said in a preliminary tally that Russia launched 142 drones between 6 p.m. on October 7 and 9:30 a.m. on October 8, of which 126 were shot down or neutralized. Moscow had no immediate comment on the Kramatorsk strike; Russia's Defense Ministry claimed it downed 399 Ukrainian drones between 8 p.m. on October 7 and 8 a.m. on October 8, Moscow time.",
      "link": "The attack, a day after the Pryluky strike, marks the second straight day that an attack has killed dozens of civilians. That fits the continuing war of attrition that Conclusion 1 of the Russia-Ukraine war analysis treats as the most likely outcome, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -3822,6 +4645,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump says the U.S. will not attack Iran before the November 3 midterms",
      "fact": "President Donald Trump wrote on Truth Social on October 8, U.S. time, that Washington was having \"productive discussions with the Islamic Republic of Iran\" and that \"we will not be attacking Iran at any time prior to the midterm elections to be held in the United States on November 3rd.\" The New York Times, however, reported that Trump has ordered plans drawn up to resume attacks on Iran, including roughly three days of airstrikes.",
      "link": "By pushing any new strikes past the election, the pledge suggests that the prolonged blockade standoff, which Conclusion 1 of the Iran and Hormuz analysis treats as the most likely outcome, could last at least into early November. Because the forecast that the U.S. will resume strikes on the Iranian mainland runs through the end of the year, the statement lowers its odds, but a resumption after the election remains possible.",
@@ -3839,6 +4665,10 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "rus-ukr",
+      "korea"
+     ],
      "h": "Seoul to recall its ambassador to Ukraine",
      "fact": "South Korea's Foreign Ministry said on October 8 that \"the government has decided to recall the ambassador to Ukraine,\" adding that it would \"continue consultations with the Ukrainian side.\" Seoul says Ukrainian President Volodymyr Zelensky broke a confidentiality agreement when he disclosed in his September 23 speech to the UN General Assembly that two captured North Korean soldiers would go to South Korea, and it has demanded a formal apology; Kyiv says no such agreement existed.",
      "link": "Conclusion 6 of the Korean Peninsula analysis, which weighs outcomes by their effect on individual lives, puts humanitarian issues such as the repatriation of detainees first. A dispute over prisoners of war has now escalated into an ambassadorial recall, which could weaken cooperation between Seoul and Kyiv in future humanitarian talks, including on repatriating POWs.",
@@ -3856,6 +4686,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi-led coalition intercepts Houthi ballistic missiles aimed at Riyadh, debris hits kindergarten",
      "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on October 8 that its forces intercepted and destroyed two ballistic missiles headed for Riyadh and one headed for Khamis Mushait. Saudi Civil Defense said debris from an intercepted missile fell in Riyadh, damaging a kindergarten and a medical facility. The Houthis claimed a strike on Riyadh's King Khalid International Airport, and their military spokesman, Yahya Saree, warned workers at Saudi oil facilities to leave areas the group considers targets.",
      "link": "Conclusion 2 of the Iran and Hormuz analysis identifies a war that spreads to all the Gulf oil producers as the outcome that would cost South Korea the most. The Houthis have now named Saudi oil facilities as targets on top of the capital's airport, a move in that direction.",
@@ -3876,6 +4710,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "horn-tigray-eritrea"
+     ],
      "h": "Accounts mount that Eritrean troops have crossed into Tigray",
      "fact": "Ermiyas Ababu, a commander of the government-allied Tigray Peace Force based in Mekelle, told the Associated Press that Eritrean forces entered Adigrat on October 6 and Idaga Hamus on October 7. The conflict monitor ACLED said Eritrean troops crossed the border at Zalambessa on October 7 and that Ethiopian military drones targeted them at Guada; the AP said it could not independently verify either account. Eritrean Information Minister Yemane Gebremeskel claimed on October 7 that Ethiopia was using \"a fallacious narrative of 'self defence' to rationalise and camouflage its war of aggression.\"",
      "link": "The site has no issue analysis on this conflict but tracks it as a flashpoint. With Ethiopian Prime Minister Abiy Ahmed repeatedly pressing for access to the Red Sea, fears are growing that the two countries could clash directly for the first time since their 1998–2000 border war, which could add to the risks on Red Sea shipping routes already shaken by Houthi attacks.",
@@ -3901,24 +4738,36 @@
      "src": [
       "https://www.jpost.com/international/article-911119",
       "https://tass.com/world/2199585"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Iranian Foreign Minister Abbas Araghchi said on October 8 that Tehran is reviewing Washington's views on Iran's \"seven-day plan\" and will respond within days.",
      "src": [
       "https://www.tasnimnews.ir/en/news/2026/10/08/3717882/iran-to-reply-to-us-proposal-within-days-araqchi"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Russian tech company Yandex told AFP on October 8 that a drone attack sparked a fire at its data center in Ryazan Oblast.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Gen. Jin Yeong-seung, chairman of South Korea's Joint Chiefs of Staff, told the National Assembly's National Defense Committee during its annual parliamentary audit on October 8 that he had never once thought the mine blast in the Demilitarized Zone was anything other than a provocation.",
      "src": [
       "https://www.mt.co.kr/politics/2026/10/08/2026100818430230280"
+     ],
+     "fp": [
+      "korea"
      ]
     }
    ]
@@ -3928,6 +4777,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia pounds Ukraine in nationwide missile and drone strike, killing at least 28",
      "fact": "Russian missiles and drones struck across Ukraine before dawn Kyiv time on October 7, killing at least 28 people, according to Interior Minister Ivan Vyhivskyi. Twenty of the dead, including five children, were in Pryluky, said Chernihiv Oblast Governor Viacheslav Chaus. Ukraine's Air Force said it shot down or neutralized 39 of 48 cruise missiles, 117 of 130 drones and five ballistic missiles, without saying how many ballistic missiles were fired. Russia's Defense Ministry claimed a massive strike on military-industrial sites in Kyiv and six regions, including Chernihiv and Poltava, among them facilities that produce and store Flamingo cruise missiles.",
      "link": "The predawn attack on Kyiv was part of a nationwide barrage, and it follows Ukraine's drone assault on the Moscow area that ran from the night of October 5 into the early hours of October 6, Moscow time, as each side widens its strikes on the other's rear. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -3955,6 +4807,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Tanker hit in the Persian Gulf north of Qatar, with casualties reported",
      "fact": "A tanker was struck by multiple projectiles about 51 nautical miles north of Madinat ash Shamal, on Qatar's northern coast, on October 7, causing casualties, the UK Maritime Trade Operations (UKMTO) center said, without naming an attacker. Recent attacks on shipping have been concentrated in and around the Strait of Hormuz; this one hit deeper inside the Persian Gulf. The same day in Athens, Secretary of State Marco Rubio said Iran had \"lost complete control\" of the strait.",
      "link": "Attacks spreading beyond Hormuz to waters off the Gulf's oil producers point in the direction of the region-wide escalation that Conclusion 2 of the Iran and Hormuz analysis identifies as South Korea's costliest outcome (the attacker has not been identified). That weighs against the forecast that Brent crude will close the year below $90 a barrel.",
@@ -3980,6 +4835,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi aviation authority says Houthi airport attacks killed 3, injured 36",
      "fact": "Saudi Arabia's General Authority of Civil Aviation said on the night of October 7 that in connection with Houthi attacks on October 6 and 7, two people had been killed and 28 injured at Abha International Airport, and one killed and eight injured at King Khalid International Airport in Riyadh. The dead were two women, one Moroccan and one Algerian, and a Sudanese national. Houthi spokesman Yahya Saree claimed the strikes killed or wounded dozens of Saudi soldiers and officers, a claim that could not be verified.",
      "link": "Houthi attacks that have now killed people even at a civilian airport in the Saudi capital show that the path to the Gulf-wide escalation flagged in Conclusion 2 of the Iran and Hormuz analysis now runs onto Saudi soil. The disconfirming signal, large-scale destruction of Gulf oil facilities, has not been confirmed, and the attacks do not move any specific forecast.",
@@ -3997,6 +4856,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "IEA members agree to speed up emergency oil releases, prioritizing diesel",
      "fact": "At a meeting on October 7, International Energy Agency member governments agreed to finish as soon as possible the stock releases pledged under the agency's March 2026 collective action, and to put diesel first where feasible because that market is tight. About 325 million barrels have been released under the March action so far, with roughly 100 million barrels of pledges still outstanding. Member governments hold about 1.1 billion barrels of public emergency stocks, more than 200 million of them diesel, and the IEA said it stands ready to release more if needed.",
      "link": "With the Hormuz crisis dragging on, consuming countries are thickening their supply cushion. That raises the odds that Brent crude will close the year below $90 a barrel.",
@@ -4012,6 +4874,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Unification Minister Chung Dong-young says a U.S.-North Korea summit could take up reconfirming the demarcation line",
      "fact": "At the National Assembly Foreign Affairs and Unification Committee's audit of his ministry, held at the Inter-Korean Talks Headquarters in Seoul on October 7, Unification Minister Chung Dong-young indicated in his answers that a U.S.-North Korea summit could include talks between Washington and Pyongyang on reconfirming the Military Demarcation Line, and that it would not matter if South Korea were left out, Money Today reported. Chung said the mine blast in the Demilitarized Zone (DMZ) could not yet be classified as an attack but acknowledged that North Korea planted the mine and bears responsibility for violating the armistice. He also said the peaceful coexistence policy is incompatible with sanctions on the North.",
      "link": "Conclusion 2 of the Korean Peninsula analysis holds that the realistic risk for South Korea is a deal on North Korea that leaves Seoul's interests out. The minister in charge of inter-Korean affairs saying the inter-Korean boundary can be taken up first by Washington and Pyongyang, or by the U.N. Command and Pyongyang, shows how the government weighs that risk of exclusion; it does not move any specific forecast.",
@@ -4035,19 +4900,26 @@
      "t": "Asked at the same October 7 audit about sending a letter condemning North Korea over the DMZ mine blast to the president of the U.N. Security Council, Unification Minister Chung Dong-young said its effectiveness needed to be weighed but that it was an option that could be discussed.",
      "src": [
       "https://m.inews24.com/v/2012787"
+     ],
+     "fp": [
+      "korea"
      ]
     },
     {
      "t": "Kyiv Mayor Vitali Klitschko said on October 7 that power outages from the strike cut electricity to some water pumping stations, disrupting water supply on the city's west bank of the Dnipro.",
      "src": [
       "https://kyivindependent.com/russia-slams-kyiv-in-mass-missile-drone-attack-on-putins-74th-birthday/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "France's Foreign Ministry summoned Iran's ambassador on October 7 to protest what it called disinformation about French high school protests spread by official Iranian Foreign Ministry accounts. Tehran had summoned France's ambassador the day before over the treatment of protesters.",
      "src": [
       "https://english.aawsat.com/world/5327181-france-summons-iran-ambassador-over-%E2%80%98disinformation-campaign%E2%80%99-school-protests"
-     ]
+     ],
+     "fp": []
     }
    ]
   },
@@ -4056,6 +4928,9 @@
    "items": [
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia hits Kyiv with missiles before dawn on October 7, killing two",
      "fact": "Explosions were heard in Kyiv at about 3:15 a.m. and again at about 5:15 a.m. local time on October 7, after Ukraine's Air Force warned that several Russian Tu-95 bombers were approaching the border. Kyiv Mayor Vitali Klitschko reported strikes on nonresidential areas in the Obolon and Shevchenkivskyi districts and damage to a warehouse in the Podil district, and the Kyiv City Military Administration said two people were killed in a fire at a garage cooperative in the Darnytskyi district. As of publication, Ukraine's Air Force had not released a full tally, and Russia's Defense Ministry had not issued a statement.",
      "link": "The strike came hours after President Volodymyr Zelensky warned on the night of October 6 that Russia was preparing a massive attack, and it follows Ukraine's drone barrage on the Moscow area, as the two sides trade strikes on each other's capitals. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -4083,6 +4958,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea's Foreign Ministry calls Seoul's mine findings a farce, rules out talks with the South on military sovereignty",
      "fact": "In a statement carried by the Korean Central News Agency on October 6, North Korea's Foreign Ministry claimed that the October 5 final findings of South Korea's Joint Chiefs of Staff had exposed the purpose of what it called a farce planned and staged by Seoul. It warned that if South Korean troops, or even a spark from them, crossed even one millimeter into North Korean territory, its border forces would respond immediately and forcefully. The ministry said Pyongyang would under no circumstances discuss the exercise of military sovereignty on its own territory with a hostile state and would defend that territory through force rather than negotiation, reaffirming this as the government's official position.",
      "link": "By restating as official policy that it will not treat South Korea as a negotiating partner on military matters, Pyongyang has moved closer to the formalization condition in the first disconfirming signal of the Korean Peninsula analysis. (The missile-launch-frequency condition is tracked separately in the weekly review.) That is a factor raising the odds of the forecast that inter-Korean military hotlines will not be restored.",
@@ -4105,6 +4983,10 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "black-sea",
+      "rus-ukr"
+     ],
      "h": "Drones hit two merchant ships in Bulgaria's exclusive economic zone, sinking one",
      "fact": "According to Bulgarian broadcaster Nova, the Togo-flagged Alfa Watan and the Palau-flagged Able were struck by drones on October 6 in Bulgaria's exclusive economic zone. The Alfa Watan sank, and all 18 crew members of the Able were rescued. It was not clear who launched the drones. The same day, Odesa Oblast Governor Oleh Kiper said one person was killed aboard a Marshall Islands-flagged ship in a Russian attack.",
      "link": "A day after an attack off Romania on October 5, merchant ships came under attack in the exclusive economic zone of Bulgaria, another NATO member, widening the danger to Black Sea shipping. That is consistent with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -4129,6 +5011,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Ukraine launches mass drone attack on Moscow area; two killed in surrounding region",
      "fact": "Moscow Mayor Sergei Sobyanin said 650 drones headed toward Moscow and the surrounding region from 8:30 p.m. on October 5 to 5 a.m. on October 6, Moscow time, and that most were shot down. Moscow region authorities said two people were killed. TASS, tallying Russian Defense Ministry reports, counted 868 drones downed overnight. The same night, Ukraine's Air Force said Russia had launched 137 drones and that 114 were shot down or neutralized.",
      "link": "Ukraine is stepping up attacks on Russia's capital region, which fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. That weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -4155,6 +5040,10 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "rus-ukr",
+      "korea"
+     ],
      "h": "Foreign Minister Cho Hyun says Ukraine's apology falls somewhat short, weighs recalling ambassador",
      "fact": "Testifying before the National Assembly's Foreign Affairs and Unification Committee during its annual audit on October 6, Foreign Minister Cho Hyun said he had received a message containing an apology from Ukraine's foreign minister over Zelensky's disclosure, in his September 23 speech to the U.N. General Assembly, that two North Korean prisoners of war had been sent to South Korea. \"It falls somewhat short of the level we had in mind, so we intend to take firm measures,\" Cho said, adding that recalling South Korea's ambassador to Ukraine is among the options \"under review.\"",
      "link": "Conclusion 6 of the Korean Peninsula analysis, which takes individual lives as its yardstick, puts humanitarian issues such as the return of detainees first. Here, a humanitarian matter, the transfer of North Korean prisoners of war to the South, has turned into a diplomatic dispute with a third country. It does not move the probability of any specific forecast.",
@@ -4172,6 +5061,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi-led coalition says it intercepted a ballistic missile aimed at Khamis Mushait",
      "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on X on October 6 that coalition forces had intercepted and destroyed a ballistic missile aimed at Khamis Mushait, a city in southern Saudi Arabia that hosts an air base. The announcement came a day after the Houthis claimed attacks on airports and oil refining facilities on the Saudi mainland. Brent crude dipped below $100 a barrel in trading the same day.",
      "link": "There is still no confirmed large-scale destruction of Gulf oil facilities, the disconfirming signal for Conclusion 2 of the Iran and Hormuz analysis. Continued attacks aimed at the Saudi mainland have raised the risk of escalation, yet oil prices fell, so the factors bearing on the forecast that Brent will end the year below $90 a barrel point in both directions.",
@@ -4201,18 +5094,28 @@
      "t": "In a birthday message to Russian President Vladimir Putin on October 7, North Korean leader Kim Jong Un said valuing the comprehensive strategic partnership and alliance with Russia is the firm policy of his government, and reaffirmed his unwavering support, saying he is confident Russia will win its war.",
      "src": [
       "https://koreanewsservice.com/revolutionary-activities/18959/"
+     ],
+     "fp": [
+      "rus-ukr",
+      "korea"
      ]
     },
     {
      "t": "Sixty-two percent of Ukrainians surveyed said they could endure the war for as long as necessary, and 69 percent supported an immediate, complete ceasefire along the current front line on conditions including no legal recognition of the occupied territories, according to a Kyiv International Institute of Sociology (KIIS) survey of 1,002 people conducted September 12–21 and released October 6.",
      "src": [
       "https://kiis.com.ua/?lang=eng&cat=reports&id=1639&page=1"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Lithuania's parliament voted 106–18, with six abstentions, on October 6 to approve in a first reading a constitutional amendment repealing Article 137, which bans weapons of mass destruction and foreign military bases on Lithuanian soil. The final vote cannot be held for at least three months.",
      "src": [
       "https://kyivindependent.com/lithuania-takes-1st-step-to-lift-nuclear-weapons-ban-amid-russian-threat/"
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki"
      ]
     }
    ]
@@ -4222,6 +5125,9 @@
    "items": [
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Joint Chiefs conclude North Korean troops planted DMZ mine, blow up mines in first removal",
      "fact": "Kwon Dae-won, vice chairman of the Joint Chiefs of Staff, told a Ministry of National Defense briefing on October 5, 2026, that the military had reached a final conclusion that the September 21 blast in the demilitarized zone (DMZ), which seriously injured two soldiers and lightly injured a third, was caused by a resin antipersonnel mine North Korean troops had planted about 10 meters south of the Military Demarcation Line (MDL). The United Nations Command assessed that the mine had been deliberately planted within the previous 12 months. At 12:51 p.m. the same day, the military blew up and removed North Korean mines south of the MDL. The Joint Chiefs called on the North to offer a sincere apology and to remove the remaining mines immediately.",
      "link": "The finding squarely rebuts the \"farce\" claim in Kim Yo Jong's September 30 statement. With the two Koreas now at odds over the basic facts, the situation points in the same direction as the Armed stalemate scenario described in Conclusion 1 of the Korean Peninsula analysis. That the military moved to clear the mines itself, with no channel for dialogue, raises the odds of the forecast that inter-Korean military hotlines will remain unrestored.",
@@ -4245,6 +5151,11 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "black-sea",
+      "rus-ukr",
+      "eastern-flank-airspace-romania-black-sea"
+     ],
      "h": "Turkish-owned grain ship sinks after drone attack in Romania's exclusive economic zone",
      "fact": "The Royad Mammadov, a Turkish-owned grain ship flying the flag of Saint Kitts and Nevis, sank on October 5 after a drone attack in Romania's exclusive economic zone, about 20 nautical miles off the Romanian coast. The ship had left Ukraine's port of Izmail bound for Ravenna, Italy. Two people were killed and one is missing; Romanian authorities rescued 11. Ukrainian President Volodymyr Zelensky blamed Moscow, saying, \"Russia consistently chooses terror and sinking civilian ships instead of normal navigation.\" No Russian response has been confirmed.",
      "link": "With the attack reaching into a NATO member's exclusive economic zone, the risk to Black Sea shipping has grown alongside the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. Because Washington has been raising a Black Sea grain corridor as an agenda item for the trilateral talks, the attack lowers the odds of the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -4271,6 +5182,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russian glide bombs kill six, wound 59 in Kharkiv",
      "fact": "Three Russian glide bombs struck industrial facilities and residential areas in Kharkiv's Slobidskyi district on October 5, killing six people and wounding 59, said Oleh Syniehubov, head of the Kharkiv Regional Military Administration. Ukraine's Air Force said Russia launched 205 drones overnight, 172 of which were shot down or neutralized. Russia's Defense Ministry claimed it had shot down 199 Ukrainian drones between 8 p.m. on October 4 and 8 a.m. on October 5, Moscow time.",
      "link": "Both sides keep targeting each other's cities and energy facilities, in line with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. The strike lowers the odds of the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -4297,6 +5211,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Saudi Arabia, Turkey and Pakistan activate \"collective deterrence measures\" over Houthi attacks, deploy forces to Saudi Arabia",
      "fact": "The Mecca defense alliance of Saudi Arabia, Turkey and Pakistan held an emergency meeting in Riyadh on October 5 and decided to rapidly deploy agreed military forces and capabilities to Saudi Arabia. Saudi Defense Minister Khalid bin Salman said that, in response to Houthi missile and drone attacks, the alliance's committee had \"agreed to activate collective deterrence measures, within the framework of the Alliance.\" The joint statement did not mention Iran.",
      "link": "Conclusion 2 of the Iran and Hormuz analysis holds that the future in which South Korea loses most is an escalation that spreads to all of the Gulf oil producers. Large-scale destruction of Gulf producers' facilities, the disconfirming signal, has not yet been confirmed, but with forces from countries outside the Gulf moving into Saudi Arabia, the Yemen front now has room to grow into a wider military standoff. The move lowers the odds of the forecast that Brent will end the year below $90.",
@@ -4320,6 +5238,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Yemeni government forces claim to retake Mocha, launch \"strategic offensive\" toward Sanaa",
      "fact": "Yemeni government forces claimed on October 5, through the government's Saba news agency, that they had retaken Mocha, the Red Sea port city they lost to the Houthis in September, and had seized key positions and supply routes around Dhubab, the area leading to the Bab el-Mandeb Strait. They also said they had launched a \"strategic offensive\" toward the capital, Sanaa. Al Jazeera said it could not independently verify the battlefield claims, and no Houthi response has been confirmed.",
      "link": "As ground fighting around the Bab el-Mandeb Strait widens, shipping through a second maritime chokepoint, after Hormuz, faces greater risk. The fighting is one of the paths to escalation that Conclusion 2 of the Iran and Hormuz analysis warns of, but it does not move the probability of any specific forecast.",
@@ -4343,18 +5265,25 @@
      "t": "U.S. Secretary of State Marco Rubio said on October 5 that Washington has no plans to withdraw its diplomats from Kyiv despite Russian threats, and that it will change its posture if a threat arises that needs to be addressed.",
      "src": [
       "https://kyivindependent.com/us-not-removing-diplomats-from-kyiv-amid-russian-threats-rubio-says/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "Iran's presidential office said on October 4 that President Masoud Pezeshkian had accepted the resignation of Oil Minister Mohsen Paknejad; Hamid Bovard, head of the National Iranian Oil Company, has taken over as acting minister.",
      "src": [
       "https://www.al-monitor.com/originals/2026/10/irans-oil-minister-resigns-personal-reasons-state-media-reports"
-     ]
+     ],
+     "fp": []
     },
     {
      "t": "The FBI on October 4 arrested Wanying Zhang, a California resident, at Los Angeles International Airport on charges of surveilling the family of Taiwanese President Lai Ching-te's son at the direction of Chinese authorities while acting as an unregistered agent of a foreign government.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/5/fbi-arrests-chinese-foreign-agent-for-spying-on-taiwan-presidents-son"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     }
    ]
@@ -4364,6 +5293,9 @@
    "items": [
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "North Korea fires hypersonic intermediate-range missile 13 days after last launch",
      "fact": "North Korea fired a hypersonic intermediate-range missile from the Wonsan area into the East Sea before dawn on October 3, 2026, with Workers' Party General Secretary Kim Jong Un watching. Pyongyang claimed the missile flew about 1,000 km and hit its target; South Korea's Joint Chiefs of Staff tracked it at more than 700 km, and Japan's Defense Ministry at about 680 km, with an altitude of about 90 km. In a statement, Kim Yo Jong claimed the missile changes its flight path at low altitude and incorporates artificial intelligence. South Korea's Ministry of National Defense said on October 4 that South Korean and U.S. defense assets are fully capable of detecting and intercepting it.",
      "link": "The launch came 13 days after the September 20 test and one day after Kim Yo Jong's October 2 statement ruling out any room for ties with South Korea. The two conditions of one disconfirming signal in the Korean Peninsula analysis, North Korea formally shutting out South Korea and launching missiles more often, have now begun to appear together, so the interval between launches remains under watch. Because the AI claim concerns missile guidance, it does not meet the condition for the forecast that North Korea will explicitly state it has applied AI to its nuclear command system.",
@@ -4394,6 +5326,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Zelensky says U.S. has proposed trilateral technical-level talks by end of October",
      "fact": "Ukrainian President Volodymyr Zelensky said at a joint news conference in Kyiv with German Chancellor Friedrich Merz on October 4, 2026, that Washington is proposing a trilateral, technical-level meeting with Ukraine and Russia by the end of October. The United Arab Emirates has been floated as the venue, and Ukraine is ready to take part, he said. At the same news conference, Merz announced €1.46 billion in aid, including interceptor drones and air defense missiles.",
      "link": "The announcement comes from Kyiv; no Russian response has been confirmed. The Abu Dhabi talks reported since late September have now taken shape as a formal U.S. proposal, which raises the odds of the forecast that U.S.-Russia-Ukraine technical-level talks will take place, with a resolution date of October 31.",
@@ -4417,6 +5352,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia strikes Kyiv bridges for fourth straight day",
      "fact": "Russia struck Kyiv's Southern Bridge and Northern Bridge on four consecutive days from October 1 to 4, 2026; a drone attack on October 4 damaged the Northern Bridge's roadway and injured two people. On October 3, Russia's Foreign Ministry renewed its warning to foreigners, including diplomatic staff, not to remain in Ukraine. Russia's Defense Ministry claimed it shot down 559 Ukrainian drones between the night of October 3 and the morning of October 4, and Zelensky said Ukraine would step up strikes on Russian oil refineries.",
      "link": "In the same week that Washington proposed trilateral talks, both sides are escalating attacks on each other's infrastructure. That is in line with Conclusion 5 of the Russia-Ukraine war analysis, under which Moscow keeps dealing with Washington without easing military pressure, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
@@ -4443,6 +5381,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran holds to seven conditions for reopening the strait; Trump: \"the easy way or the hard way\"",
      "fact": "President Donald Trump told reporters at the White House on October 3, 2026, that with a decision on Iran ahead, the only remaining question was whether it would be \"the easy way or the hard way.\" Iranian parliament speaker Mohammad Bagher Ghalibaf said on October 4 that the era of imposing one-sided demands was over and that the Strait of Hormuz would not reopen until Iran's seven conditions, based on the Islamabad Memorandum of Understanding, were met. The same day, Foreign Minister Abbas Araghchi warned diplomats in Tehran that if the United States turned to a military solution again, Iran was better prepared than before.",
      "link": "Iran says it is reviewing the U.S. reply, yet it has again tied reopening the strait to lifting sanctions and the blockade as a single package. That runs against Conclusion 7 of the Iran and Hormuz analysis, which saw room for a deal in a phased agreement, and it lowers the odds of the forecast that the U.S. and Iran will sign a phased agreement while raising the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland.",
@@ -4473,6 +5414,10 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
      "h": "Houthis claim strike on Saudi Aramco sites; Saudi-led coalition calls claim \"misleading\"",
      "fact": "Yahya Saree, spokesman for Yemen's Houthi rebels, claimed on October 4, 2026, that ballistic missiles and drones had struck Saudi Aramco facilities in Riyadh and Khurais and set them on fire. A spokesman for the Saudi-led coalition called the claim of targeting Riyadh \"misleading\" and did not confirm any damage. The coalition said the same day that it had carried out 97 strikes on Houthi reinforcements on the Tor al-Baha front and the Taiz axis.",
      "link": "The claim is the Houthis' own, and no damage has been confirmed. The incident comes close to a disconfirming signal in the Iran and Hormuz analysis, which treats large-scale destruction of Gulf oil producers' facilities as a sign of all-out escalation in the Gulf, but it has not yet met that threshold.",
@@ -4494,18 +5439,27 @@
      "t": "The UK Maritime Trade Operations (UKMTO) said a tanker in the Strait of Hormuz was hit in the engine room by an unidentified projectile on October 4 and that its crew was unharmed. It was the second such strike, after one on October 2.",
      "src": [
       "https://arabnews.com/middle-east/tanker-damaged-after-attack-in-hormuz-maritime-agency-3004546"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "In an address marking the 19th anniversary of the October 4 inter-Korean summit declaration, read on his behalf by the vice minister of unification on October 4, President Lee Jae-myung said, \"Only by breaking the vicious cycle of hostility and confrontation can we create a virtuous cycle of peace and prosperity.\"",
      "src": [
       "https://www.newspim.com/news/view/20261004000089"
+     ],
+     "fp": [
+      "korea"
      ]
     },
     {
      "t": "Taiwan's Coast Guard Administration confirmed on October 3 that it had sent three patrol vessels to monitor three Chinese ships in waters where its exclusive economic zone overlaps with that of the Philippines.",
      "src": [
       "https://focustaiwan.tw/politics/202610030015"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     }
    ]
@@ -4515,6 +5469,9 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "U.S. sends carrier group and Marines to Middle East; Trump says war will end \"right after the election\"",
      "fact": "A U.S. official confirmed on October 1, 2026, that the Theodore Roosevelt carrier strike group and the Makin Island amphibious ready group, carrying about 2,200 Marines, had set out for the Middle East. Once they arrive, three aircraft carriers and two amphibious groups will be massed around Iran by the end of November. In a speech in Denton, Texas, on October 2, Trump said Iran was \"ready to fold up\" and that the war would end \"right after the election\" or \"maybe before the election.\"",
      "link": "A day after Trump raised the prospect of wider strikes after the midterms, a costly movement of forces has followed, a heavier signal than words. The reinforcements will be fully assembled just after the November 3 midterm elections, the timing Trump pointed to. The move raises the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland.",
@@ -4538,6 +5495,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Kim Yo Jong again denies blame for mine blast, rules out \"the slightest space or room\" for ties with Seoul",
      "fact": "In a statement on October 2, 2026, Kim Yo Jong again insisted that North Korea had nothing to do with the mine explosion in the Demilitarized Zone (DMZ), and called the South Korean government's demand for an apology \"really despicable.\" She added, \"We do not allow the slightest space or room for us to go with the ROK.\" The presidential office in Seoul responded the same day that it would establish the facts transparently and that the North should stop its pointless criticism and engage in dialogue.",
      "link": "The statement came a day after President Lee Jae-myung called for restoring dialogue in his Armed Forces Day address. Among the disconfirming signals in the Korean Peninsula analysis, it comes close to North Korea formally declaring that it will not accept South Korea as a negotiating partner. The signal's other condition, more frequent missile launches, has not appeared. The statement raises the odds of the forecast that inter-Korean military hotlines will remain unrestored.",
@@ -4561,6 +5521,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia launches massive strike on Ukraine's energy facilities ahead of winter",
      "fact": "Russia attacked Ukraine's energy facilities with about 190 drones and ballistic missiles from the night of September 30 into October 1, 2026. Seven people were killed, and Kyiv and three surrounding regions imposed emergency power outages for the first time since spring. Ukraine's prime minister said it was the first combined attack on this scale since the end of the last heating season.",
      "link": "The strike came right after a September 29 report that Washington was pushing for talks in Abu Dhabi in October on limited deals such as a halt to attacks on energy facilities. It is in line with Conclusion 5 of the Russia-Ukraine war analysis: Moscow keeps dealing with Washington while seeking further military gains. The forecast that U.S.-Russia-Ukraine technical-level talks will take place, which asks only whether talks are held, does not move.",
@@ -4584,6 +5547,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "G7 agrees to release 100 million barrels of oil reserves",
      "fact": "According to a G7 leaders' joint statement released by the French presidency on October 2, 2026, the G7 agreed to release 100 million barrels of emergency oil reserves through the International Energy Agency over four months, concentrating diesel releases in the first 20 days. The leaders also pledged to refrain from restricting exports of energy products. Brent crude fell to $100.80 a barrel after the announcement.",
      "link": "The move responds to a rise in European diesel prices from €1.59 to €2.24 a liter since the Iran war began on February 28. One hundred million barrels over four months comes to just over 800,000 barrels a day, so it is unlikely to bring prices down much unless traffic through the strait recovers. It slightly raises the odds of the forecast that Brent will end the year below $90.",
@@ -4604,18 +5570,27 @@
      "t": "The UKMTO said on October 2 that a tanker leaving the Strait of Hormuz had been hit by an unidentified projectile, starting a small fire that was put out, with no casualties.",
      "src": [
       "https://www.arabnews.com/middle-east/tanker-struck-in-the-strait-of-hormuz-3004312"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "On October 1, Trump said that if Iran was involved in the September 30 incident in which the co-pilot of an Israel-bound flydubai airliner stabbed the captain, \"they'll be hit very hard.\" Prosecutors in the United Arab Emirates are investigating possible links to terrorism.",
      "src": [
       "https://www.al-monitor.com/originals/2026/10/trump-vows-hit-iran-very-hard-if-linked-flydubai-attack-0"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Taiwan took delivery of the first two of 66 F-16V Block 70 fighters at Chihhang Air Base in Taitung on October 2. Delivery had been delayed by the relocation of the production line and supply chain disruptions.",
      "src": [
       "https://focustaiwan.tw/politics/202610020008"
+     ],
+     "fp": [
+      "taiwan-strait"
      ]
     }
    ]
@@ -4625,6 +5600,9 @@
    "items": [
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Trump says stepping up Iran strikes after midterms is \"possible\"",
      "fact": "In a Time magazine interview published on October 1, 2026, Trump said it was \"possible\" when asked whether he could increase the bombing of Iran after the November midterm elections. The same day, a U.S. official told Axios that Secretary of State Marco Rubio had ordered Iranian Foreign Minister Abbas Araghchi's delegation, then in New York, to leave the country; Iran denied this, saying the delegation had left on a prearranged schedule.",
      "link": "Right after Iran received the U.S. reply, Washington sent its delegation home and raised the prospect of wider strikes, a sign that the phased exchange described in Conclusion 7 of the Iran and Hormuz analysis is unlikely to lead to a signing soon. It raises the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland and lowers the odds of the forecast that the U.S. and Iran will sign a phased agreement.",
@@ -4652,6 +5630,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Lee urges North Korea to restore dialogue in Armed Forces Day speech",
      "fact": "At the Armed Forces Day ceremony on October 1, 2026, President Lee Jae-myung said, \"We will consistently pursue practical measures to lower military tensions between the South and the North,\" adding, \"I hope and urge that the North will now join us on the path to restoring trust and reviving severed dialogue.\" He referred to the soldiers injured in the DMZ explosion only as victims of an unforeseen accident, and pledged to regain wartime operational control (OPCON).",
      "link": "The government has held to its line of restoring dialogue even after the defense minister flatly declared that the North had violated the Armistice Agreement, in effect reaching for the conditions that would change Conclusion 1 of the Korean Peninsula analysis (restored military hotlines and reunions of separated families). With no answering move from the North, the forecast that inter-Korean military hotlines will remain unrestored does not move.",
@@ -4674,6 +5655,10 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
      "h": "Russia warns it would use \"all its arsenal, including nuclear weapons\" if Kaliningrad is blockaded",
      "fact": "In a diplomatic note sent to NATO member states on September 30, 2026, Russia claimed to have information that NATO was preparing an air and naval blockade of Kaliningrad and warned that, if a blockade were imposed, it was ready to use \"all its arsenal, including nuclear weapons.\" At a Valdai Discussion Club meeting in Moscow on October 1, President Vladimir Putin said the warning was not a threat but a response to attempts to intimidate Russia; NATO Secretary-General Mark Rutte countered that Russia must stop its nuclear threats.",
      "link": "After a string of provocations along NATO's eastern flank through September, Moscow has now raised nuclear use in writing. That fits Conclusion 5 of the Russia-Ukraine war analysis, under which Russia keeps dealing with Washington while increasing pressure on Europe. It has no direct bearing on the forecast that U.S.-Russia-Ukraine technical-level talks will take place.",
@@ -4698,6 +5683,9 @@
     },
     {
      "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
      "h": "U.S. officials see Chinese invasion of Taiwan before 2028 as unlikely",
      "fact": "Reuters reported on October 1, 2026, citing four people including current and former U.S. officials, that Washington sees a Chinese invasion of Taiwan before 2028 as increasingly unlikely despite President Xi Jinping's order to be ready for war by 2027. The reasons cited were purges of the military leadership that have left only two of the seven members of the Central Military Commission in office, and the possibility that Beijing will wait for the outcome of Taiwan's 2028 presidential election.",
      "link": "The assessment points in the same direction as Conclusion 6 of the Taiwan Strait analysis: a two-track strategy in which China avoids the use of force through the January 2028 presidential election while trying to influence its outcome. The report did not address blockades or coast guard inspections, however, so the forecasts of no blockade of Taiwan's ports and of China inspecting or detaining Taiwanese vessels do not move.",
@@ -4723,6 +5711,9 @@
     },
     {
      "case": null,
+     "fp": [
+      "pak_afg"
+     ],
      "h": "Pakistan launches airstrikes on Afghanistan's Kunar and Helmand provinces",
      "fact": "Pakistan carried out airstrikes on Afghanistan's Kunar and Helmand provinces on the night of September 30, 2026. Zabihullah Mujahid, spokesman for the Taliban government, said nine people were killed and condemned the strikes as aggression; Pakistan's Ministry of Information and Broadcasting claimed 22 militants were killed; and the U.N. Assistance Mission in Afghanistan said at least 10 civilians, most of them children, were killed.",
      "link": "The strikes follow the September 24 raids on 10 sites including Kandahar, and there is no sign of mediation or ceasefire talks. They lower the odds of the forecast of a formal ceasefire between Pakistan and the Taliban.",
@@ -4748,24 +5739,36 @@
      "t": "The UKMTO said three vessels were hit by unidentified projectiles in the Strait of Hormuz on September 29; the two identified were Liberian-flagged tankers, and no South Korean ships were involved.",
      "src": [
       "https://maritime-executive.com/article/three-vessels-struck-in-strait-of-hormuz-as-iran-s-grip-loosens"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Iranian President Masoud Pezeshkian said on October 1 that the United States must abandon the idea of forcing Iran to submit.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-negotiations-strait-of-hormuz-oil/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Zelensky visited a command post on the Lyman front on September 30, and Ukraine claimed its counteroffensive in that sector had retaken more than 125 square kilometers.",
      "src": [
       "https://kyivindependent.com/zelensky-visits-lyman-sector-says-operation-vivaldi-reclaimed-125-square-kilometers/"
+     ],
+     "fp": [
+      "rus-ukr"
      ]
     },
     {
      "t": "The National Intelligence Service told the National Assembly's Intelligence Committee on September 30 that it viewed Kim Yo Jong's \"farce\" statement as restrained in tone and intended to sever any link between the incident and North Korea.",
      "src": [
       "https://www.ytn.co.kr/_ln/0101_202609301210265265"
+     ],
+     "fp": [
+      "korea"
      ]
     }
    ]
@@ -4775,6 +5778,9 @@
    "items": [
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Defense minister says he believes North Korean troops crossed the MDL to lay mines",
      "fact": "Defense Minister Kang Shin-chul told the National Assembly's National Defense Committee on September 29, 2026, that the DMZ explosion had indeed been caused by a North Korean mine and was indeed a violation of the Armistice Agreement. The same day, the military said it had found another mine about 1 meter from the blast site, indicating that at least four mines had been buried 1 to 2 meters apart, and Kang said it appeared that North Korean troops had crossed the Military Demarcation Line to bury them. Kang believes the mines were laid around the time of North Korea's border fortification work in 2024.",
      "link": "The incident cuts against the conditions that would change Conclusion 1 of the Korean Peninsula analysis (restored military hotlines and reunions of separated families) and raises f15, the forecast that the hotlines will not be restored. The next thing to watch is whether loudspeaker broadcasts toward the North resume, which the government has said it will not rule out.",
@@ -4798,6 +5804,9 @@
     },
     {
      "case": "korea",
+     "fp": [
+      "korea"
+     ],
      "h": "Cabinet approves special bill on nuclear-powered submarines",
      "fact": "A Cabinet meeting chaired by President Lee Jae-myung on September 29, 2026, approved a special bill governing the acquisition, operation and safety management of nuclear-powered submarines. The government said it would set military nuclear safety standards separate from the existing Defense Acquisition Program Act and Nuclear Safety Act in order to keep the confidence of the United States and the International Atomic Energy Agency, and it will submit the bill to the National Assembly with the aim of enacting it this year. The same day, North Korea's Foreign Ministry accused South Korea of pursuing nuclear proliferation.",
      "link": "The step bears on the conditional nuclear latency (A3b) in Conclusion 3 of the Korean Peninsula analysis. Forecast f17, that China will not impose THAAD-style large-scale economic retaliation over South Korea's pursuit of enrichment, reprocessing and nuclear-powered submarines, will not be moved in either direction until Beijing responds officially.",
@@ -4820,6 +5829,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "Iran says it has received U.S. reply to its proposal to end the war",
      "fact": "At a Cabinet meeting on September 30, 2026, Iranian Foreign Minister Abbas Araghchi briefed President Masoud Pezeshkian on the U.S. reply to Iran's proposal to end the war. Pezeshkian said, \"We will make every effort to bring the agreement to fruition,\" and added that any agreement must benefit both sides, but the content of the reply was not disclosed. Trump had rejected as unacceptable Iran's September 23 proposal to reopen the strait within a week if the United States lifted its port blockade, returned frozen assets and waived oil sanctions.",
      "link": "The phased exchange described in Conclusion 7 of the Iran and Hormuz analysis, reopening the strait in return for lifting the blockade and sanctions, is now being traded on paper. Because it is unclear whether the U.S. reply also demands action on the nuclear issue, no direction is set for f38, the phased-agreement forecast, or f03, the ceasefire-and-reopening forecast.",
@@ -4846,6 +5858,9 @@
     },
     {
      "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
      "h": "U.S. completes troop withdrawal from Iraq",
      "fact": "The Pentagon announced on September 30, 2026, that the withdrawal of U.S. troops from Iraq, which had numbered about 2,500, was complete. Pentagon spokesman Sean Parnell called it the success of a 12-year campaign that defeated the Islamic State (ISIS) as an organized military threat, and Trump called the U.S. presence in Iraq a \"quagmire.\" The withdrawal comes as the Iran war enters its seventh month.",
      "link": "Amid the prolonged blockade standoff described in Conclusion 1 of the Iran and Hormuz analysis, the United States has pulled its ground forces out of a country bordering Iran. It does not directly move the forecast that the U.S. will resume airstrikes on Iran's mainland in either direction.",
@@ -4868,6 +5883,9 @@
     },
     {
      "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
      "h": "Russia hits power grid around Kyiv ahead of winter",
      "fact": "Russian missile and drone attacks overnight on September 30, 2026, killed three people in the city of Kyiv and a child in the surrounding Kyiv region. Zelensky said the attacks targeted energy facilities and damaged the power grid; energy facilities in the Zhytomyr, Mykolaiv, Kirovohrad and Rivne regions and the port of Izmail were also hit. Russia's Defense Ministry confirmed the strikes.",
      "link": "The attacks uphold the assessment in Conclusion 1 of the Russia-Ukraine war analysis that the war of attrition will continue. There is no confirmation that Russia has accepted the halt to mutual strikes on energy facilities that Washington is pushing, and no date has been announced for the trilateral technical-level talks in forecast f02, which resolves on October 31.",
@@ -4900,156 +5918,37 @@
      "t": "A vessel transiting the Strait of Hormuz on September 29 was hit by an unidentified projectile, starting a fire that was later put out; the UKMTO said no crew members were injured.",
      "src": [
       "https://www.dawn.com/news/2033522/unknown-projectile-hits-vessel-in-strait-of-hormuz-ukmto"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "Brig. Gen. Akraminia, a spokesman for Iran's army, claimed on September 29 that an Iranian order had been established in the Strait of Hormuz and that this order could not be reversed.",
      "src": [
       "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
+     ],
+     "fp": [
+      "iran-war"
      ]
     },
     {
      "t": "British Prime Minister Andy Burnham said on September 30 that there were strong indications Iran had played a part in an incident near RAF Fairford, an air base used by the U.S. military, in which five people were arrested on September 27; the Iranian Embassy in London denied it as baseless speculation.",
      "src": [
       "https://www.cbsnews.com/news/uk-fairford-air-base-iran-played-part-incident-pm-burnham-says/"
+     ],
+     "fp": [
+      "russia-hybrid-campaign-western-europe",
+      "iran-war"
      ]
     },
     {
      "t": "The National Assembly's National Defense Committee failed on September 29 to adopt a resolution condemning North Korea over the DMZ mine explosion.",
      "src": [
       "https://news.sbs.co.kr/english/article.do?news_id=N1008775767"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-09-30",
-   "items": [
-    {
-     "case": "korea",
-     "h": "Kim Yo Jong claims DMZ mine blast was staged by Seoul",
-     "fact": "On September 29, 2026, the Joint Chiefs of Staff said in a statement issued in the name of its vice chairman, Kwon Dae-won, that debris from the September 21 blast site contained the same components as North Korean mines, that responsibility lay entirely with the North, and that the military would take corresponding measures. On September 30, Kim Yo Jong, department director of the Workers' Party Central Committee, called this \"a clear farce\" in a statement carried by the Korean Central News Agency (KCNA), warning that \"ringleaders of provocation should be prepared for paying price.\"",
-     "link": "With no channel through which the two Koreas could jointly verify the incident, the dispute over responsibility is turning directly into threats. That raises the odds of the forecast that inter-Korean military hotlines will remain unrestored, and it runs opposite to the conditions for managed coexistence (restored hotlines and reunions of separated families under Korean Peninsula C1).",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
      ],
-     "src": [
-      "https://www.koreaherald.com/article/10887051",
-      "https://theprint.in/world/north-korea-says-south-korea-to-pay-a-price-for-shifting-blame-for-mine-blast-kcna-says/3057474/"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "h": "Russian drone strike sets Kyiv's Academy of Sciences ablaze",
-     "fact": "A Russian drone attack on September 29 set fire to the building of the National Academy of Sciences of Ukraine in Kyiv, killing at least two people; Zelensky said nine people were killed nationwide that day. The same day, the Ukrainian outlet LIGA.net, citing The Atlantic, reported that Washington was pushing for U.S.-Russia-Ukraine talks in Abu Dhabi in October and saw a halt to mutual strikes on energy facilities as a possible point of agreement.",
-     "link": "If trilateral talks take place in October, the forecast that U.S.-Russia-Ukraine technical-level talks will be held resolves yes, so the report raises the odds of that forecast. But because the agenda is a partial deal such as a halt to strikes on energy facilities rather than a full ceasefire, the assessment that the war of attrition will continue (Russia-Ukraine C1) stands.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "up"
-      },
-      {
-       "id": "f01",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2",
-      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "Kyiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "h": "U.S. sanctions Iran's arms procurement network even as it talks of renewed negotiations",
-     "fact": "Trump said on September 28 that he expected negotiations with Iran to resume this week, and Iranian Foreign Minister Abbas Araghchi said, \"We stand ready for diplomacy. It is up to President Trump to choose.\" On September 29, the U.S. Treasury Department sanctioned 10 targets in Iran's military procurement network spanning China, Hong Kong, Pakistan, Saudi Arabia, Turkey and Iran.",
-     "link": "Both sides speak of dialogue, but Washington is not easing sanctions, so there is still no basis to conclude that a phased agreement that first trades the reopening of the strait for the lifting of the blockade (Iran C7) is getting closer.",
-     "fc": [
-      {
-       "id": "f38",
-       "e": "none"
-      },
-      {
-       "id": "f03",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/",
-      "https://home.treasury.gov/news/press-releases/sb0637"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "h": "Hormuz traffic rises, but Brent tops $105 a barrel",
-     "fact": "U.S. Energy Secretary Chris Wright said on September 28 that about 13 million barrels of crude a day were passing through the strait. Yet Brent rose for a second straight day on September 29, to $105.91 a barrel. Iran's supreme leader, Mojtaba Khamenei, claimed that U.S. forces had taken hits and could advance no further.",
-     "link": "The picture resembles the incomplete reopening described in Iran C1, in which the strait partly reopens without a formal end to the war. With oil holding above $100, it weighs against the forecast that Brent will end the year below $90.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/28/iran-touts-hormuz-attacks-as-oil-flows-increase-despite-tensions",
-      "https://sharjah24.ae/en/Articles/2026/09/29/Ma2"
-     ],
-     "loc": {
-      "lat": 26.57,
-      "lon": 56.25,
-      "place": "Strait of Hormuz",
-      "isos": [
-       "IRN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Russian strikes on September 29 killed three people in Dnipro and injured 32 in Zaporizhzhia, and Ukrainian Foreign Minister Andrii Sybiha asked allies to expand air defense support.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/29/russian-strike-hits-ukraines-academy-of-sciences-in-kyiv-killing-2"
-     ]
-    },
-    {
-     "t": "With the Strait of Hormuz closed, Iraq has begun importing gasoline through Syria's port of Baniyas, where Iraqi fuel trucks loaded gasoline on September 29.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
-     ]
-    },
-    {
-     "t": "Iran's rial hit a record low of about 2.5 million to the dollar on September 29, and the same day Turkey seized an Iranian aircraft over unpaid debts.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
-     ]
-    },
-    {
-     "t": "The China Coast Guard said on September 29 that a formation led by the Zhujiajian had been tightening control over waters east of Taiwan island since September; no boarding inspections of vessels have been confirmed.",
-     "src": [
-      "https://english.news.cn/20260929/62256176f6ba4297ab7e16b18c30f56b/c.html"
+     "fp": [
+      "korea"
      ]
     }
    ]
