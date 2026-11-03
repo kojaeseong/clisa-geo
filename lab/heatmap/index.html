@@ -89,7 +89,7 @@ header{padding:16px 20px 10px;align-items:center;gap:10px 22px}
   <div class="seg main" id="bdsel"><button data-b="prob" class="on">확률판</button><button data-b="fp" hidden>분쟁판</button></div>
   <div class="seg" id="win" hidden><button data-w="30" class="on">지난 30일</button><button data-w="90">지난 90일</button><button data-w="all">10월 2일부터</button></div>
   <div class="seg" id="sz" hidden><button data-s="v" class="on">충격과 확률</button><button data-s="eq">같은 크기</button></div>
-  <div class="seg" id="tab"><button data-t="scen">사안별 전개</button><button data-t="fc" class="on">열린 전망</button></div>
+  <div class="seg" id="tab"><button data-t="fc" class="on">열린 전망</button><button data-t="scen">사안별 전개</button></div>
  </div>
 </header>
 <div id="sumry"></div>
@@ -135,7 +135,7 @@ function grid(items,x,y,w,h){ const n=items.length; if(!n||w<=0||h<=0) return []
  return out }
 function lay(secs,render){ const bd=$('#board'); bd.innerHTML=''; const R=bd.getBoundingClientRect(); LAYH=R.height; LAYW=R.width;
  cols(secs.filter(s=>s.v>0),R.width,R.height).forEach(S=>{ const el=document.createElement('div'); el.className='sec'; Object.assign(el.style,{left:S.x+'px',top:S.y+'px',width:S.w+'px',height:S.h+'px'});
-  el.innerHTML='<div class="h">'+S.name+(S.sk?'<span class="sk">'+S.sk+'</span>':'')+'</div>'; bd.appendChild(el); if(S.tip){const h=el.firstChild;h.onmousemove=e=>show(e,S.tip);h.onmouseleave=()=>$('#tip').style.display='none'}
+  el.innerHTML='<div class="h">'+S.name+(S.sk?'<span class="sk">'+S.sk+'</span>':'')+'</div>'; bd.appendChild(el); if(S.tip){const h=el.firstChild;h.onmousemove=e=>{window._tipL=RIGHT.includes(S.id);show(e,S.tip)};h.onmouseleave=()=>$('#tip').style.display='none'}
   grid(S.tiles.sort((a,b)=>(b.ord||0)-(a.ord||0)||b.v-a.v),0,20,S.w,S.h-20).forEach(t=>{const d=document.createElement('div');d.className='t';Object.assign(d.style,{left:t.x+'px',top:t.y+'px',width:t.w+'px',height:t.h+'px'});
    const fs=Math.max(9,Math.min(24,Math.sqrt(t.w*t.h)/6.2)); d.style.fontSize=fs+'px'; render(d,t,fs); d.addEventListener('mouseenter',()=>el.classList.add('hl')); d.addEventListener('mouseleave',()=>el.classList.remove('hl')); el.appendChild(d); fit(d,fs)}) }) }
 // 칸 안의 글자가 넘치면 줄이고, 그래도 넘치면 작은 줄 → 이름 순서로 뺀다
@@ -171,7 +171,8 @@ function spark(h,w=74,ht=18){ if(!h||!h.length) return '<span style="color:#5562
  pts.forEach((p,i)=>{d+=(i?'H'+sx(p[0]).toFixed(1)+'V':'M'+sx(p[0]).toFixed(1)+' ')+sy(p[1]).toFixed(1)});
  const c=ps[ps.length-1]>ps[0]?'#16c784':ps[ps.length-1]<ps[0]?'#ea3943':'#8b97ab'; return '<svg width="'+w+'" height="'+ht+'"><path d="'+d+'" fill="none" stroke="'+c+'" stroke-width="1.5"/></svg>'}
 const chg=dd=>dd.na?'<span style="color:#55627a">아직 이력 없음</span>':dd.isNew?'<span style="color:#33d1ff">새로 냄</span>':dd.d?'<span style="color:'+(dd.d>0?'#16c784':'#ea3943')+'">'+(dd.d>0?'▲':'▼')+Math.abs(dd.d)+'%p</span>':'<span style="color:#8b97ab">±0%p</span>';
-function tipP(e,it,dd,grp){ const cn=it.case==='world'?'세계 질서':(B.cases.find(c=>c.id===it.case)||{}).name, nw=it.case==='world'?B.lead:(B.cnews||{})[it.case];
+const RIGHT=['taiwan','poland']; /* 오른쪽 기둥의 사안은 설명 상자를 커서 왼편에 띄워 그 사안의 칸을 가리지 않게 함 */
+function tipP(e,it,dd,grp){ window._tipL=RIGHT.includes(it.case); const cn=it.case==='world'?'세계 질서':(B.cases.find(c=>c.id===it.case)||{}).name, nw=it.case==='world'?B.lead:(B.cnews||{})[it.case];
  const mem=(grp||[]).filter(x=>x.case===it.case&&x.kind===it.kind&&x!==it).sort((a,b)=>b.p-a.p).slice(0,8);
  const row=(x,me)=>{const d2=x===it?dd:delta(x);return '<tr'+(me?' class="me"':'')+'><td class="nm">'+x.name+'</td><td>'+spark(x.h)+'</td><td class="r">'+x.p+'%</td><td class="r">'+chg(d2)+'</td></tr>'};
  const one=t=>{ if(!t) return ''; const m=t.match(/^.*?[a-z0-9)\]\u2019\u201d"'가-힣][.!?](?=\s+[A-Z0-9\u201c"'가-힣]|\s*$)/); let x=m?m[0]:t; if(x.length>220) x=x.slice(0,218)+'…'; return x };
@@ -238,7 +239,7 @@ function drawFp(){ $('#strip').innerHTML=''; const A=f=>SZ==='eq'?1:Math.pow(2,f
  $('#legend').innerHTML='브리핑에 실린 횟수 <span class="lgb">'+FC.map((c,i)=>'<span style="background:'+c+'">'+['0','1','2~4','5~14','15~49','50+'][i]+'</span>').join('')+'</span>· 클리사 브리핑에 실린 횟수이며 실제 사건 수가 아닙니다 · 칸 넓이 = 심각도(2~5등급, 한 등급마다 넓이 2배, 순서를 보일 뿐 비율의 뜻은 없음) · 막대 = 날마다 실린 줄 수' }
 let PIN=false; const unpin=()=>{ PIN=false; const T=$('#tip'); T.classList.remove('pin'); T.style.display='none' };
 document.addEventListener('click',e=>{ if(PIN&&!$('#tip').contains(e.target)) unpin() }); document.addEventListener('keydown',e=>{ if(e.key==='Escape') unpin() });
-function show(e,h){const T=$('#tip');T.innerHTML=h;T.style.display='block';const x=Math.max(8,Math.min(e.clientX+14,innerWidth-T.offsetWidth-8)),y=Math.max(8,Math.min(e.clientY+14,innerHeight-T.offsetHeight-8));T.style.left=x+'px';T.style.top=y+'px'}
+function show(e,h){const T=$('#tip');T.innerHTML=h;T.style.display='block';const x=Math.max(8,Math.min(window._tipL?e.clientX-14-T.offsetWidth:e.clientX+14,innerWidth-T.offsetWidth-8)),y=Math.max(8,Math.min(e.clientY+14,innerHeight-T.offsetHeight-8));T.style.left=x+'px';T.style.top=y+'px'}
 function draw(){ const rec=today-day(B.start); document.querySelectorAll('#win button[data-w]').forEach(b=>{ if(b.dataset.w!=='all') b.hidden=+b.dataset.w>=rec }); const L=B.lead; $('#lead').innerHTML=L?'<span class="d">'+fmtD(L.d)+' 정세 브리핑</span><span class="h">'+L.h+'</span><a href="/brief/'+L.d+'/">더 보기 →</a>':''; $('#tab').style.display=BD==='prob'?'flex':'none'; const fn=({prob:drawProb,fp:drawFp})[BD]; const h0=$('#board').clientHeight; fn(); if($('#board').clientHeight!==h0) fn() }
 const seg=(id,key,set)=>$(id).onclick=e=>{const v=e.target.dataset[key];if(!v)return;set(v);document.querySelectorAll(id+' button').forEach(b=>b.classList.toggle('on',b.dataset[key]===v));draw()};
 seg('#bdsel','b',v=>BD=v); seg('#win','w',v=>W=v); seg('#tab','t',v=>T=v); let LAYH=0, LAYW=0; /* 글꼴이 늦게 실리거나 창 크기가 바뀌어 판의 크기가 달라지면 다시 그림(판 아래 빈 띠 방지) */
