@@ -82,11 +82,11 @@
   <url><loc>https://clisa.ai/region/europe/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://clisa.ai/region/mena/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://clisa.ai/region/south-central-asia/</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://clisa.ai/forecast/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f01/</loc><lastmod>2026-10-12</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f02/</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f03/</loc><lastmod>2026-10-26</lastmod></url>
-  <url><loc>https://clisa.ai/forecast/f04/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f04/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f05/</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f06/</loc><lastmod>2026-09-26</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f07/</loc><lastmod>2026-09-26</lastmod></url>
@@ -139,7 +139,7 @@
   <url><loc>https://clisa.ai/forecast/f55/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f56/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f57/</loc><lastmod>2026-10-01</lastmod></url>
-  <url><loc>https://clisa.ai/forecast/f58/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f58/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f59/</loc><lastmod>2026-10-29</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f60/</loc><lastmod>2026-10-10</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f61/</loc><lastmod>2026-10-10</lastmod></url>
@@ -152,7 +152,7 @@
   <url><loc>https://clisa.ai/forecast/f68/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f69/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f70/</loc><lastmod>2026-10-23</lastmod></url>
-  <url><loc>https://clisa.ai/forecast/f71/</loc><lastmod>2026-10-23</lastmod></url>
+  <url><loc>https://clisa.ai/forecast/f71/</loc><lastmod>2026-11-04</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f72/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f73/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://clisa.ai/forecast/f74/</loc><lastmod>2026-10-23</lastmod></url>
@@ -170,7 +170,6 @@
   <url><loc>https://clisa.ai/feature/2026-10-03-population/</loc><lastmod>2026-10-03</lastmod></url>
   <url><loc>https://clisa.ai/feature/2026-10-01-korea/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://clisa.ai/feature/</loc><lastmod>2026-10-28</lastmod></url>
-  <url><loc>https://clisa.ai/guide/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://clisa.ai/power/CHN/xi-jinping/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://clisa.ai/power/USA/donald-trump/</loc><lastmod>2026-10-02</lastmod></url>
   <url><loc>https://clisa.ai/power/PRK/kim-jong-un/</loc><lastmod>2026-10-02</lastmod></url>
@@ -193,6 +192,7 @@
   <url><loc>https://clisa.ai/power/KOR/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://clisa.ai/power/UKR/military/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://clisa.ai/power/</loc><lastmod>2026-10-10</lastmod></url>
+  <url><loc>https://clisa.ai/guide/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://clisa.ai/about/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://clisa.ai/subscribe/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://clisa.ai/academy/</loc><lastmod>2026-10-16</lastmod></url>
@@ -221,4 +221,4 @@
   <url><loc>https://clisa.ai/digest/2026-10-05/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://clisa.ai/digest/2026-09-28/</loc><lastmod>2026-09-28</lastmod></url>
   <url><loc>https://clisa.ai/links/</loc><lastmod>2026-11-02</lastmod></url>
-</urlset>
+<url><loc>https://clisa.ai/outlook/</loc></url><url><loc>https://clisa.ai/en/outlook/</loc></url></urlset>
