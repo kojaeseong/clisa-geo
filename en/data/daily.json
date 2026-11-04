@@ -1,6 +1,132 @@
 {
  "issues": [
   {
+   "date": "2026-11-04",
+   "items": [
+    {
+     "case": null,
+     "fp": [],
+     "h": "Democrats retake Senate, projected to win House in U.S. midterms",
+     "fact": "Democrats flipped Republican-held Senate seats in North Carolina, Ohio, Texas, Kansas, Iowa and South Carolina in the November 3 midterms, winning control of the chamber, the AP reported. NBC, CNN and others projected that Democrats would also win a House majority, but the AP had not called the House as of late November 3.",
+     "fc": [
+      {
+       "id": "f58",
+       "e": "up"
+      },
+      {
+       "id": "f71",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://www.pbs.org/newshour/politics/democrats-take-control-of-the-senate-after-winning-key-midterm-races",
+      "https://www.forbes.com/sites/saradorn/2026/11/03/midterm-election-results-live-updates-democrats-win-senate-in-stunning-rout/",
+      "https://www.nbcnews.com/politics/2026-elections/house-results"
+     ],
+     "loc": {
+      "isos": [
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Russia pounds Ukraine's grid; Kyiv says drones targeted nuclear-plant substation",
+     "fact": "Ukrainian Energy Minister Denys Shmyhal said Russia hit power plants and substations with 289 drones, 17 ballistic missiles and 59 cruise missiles starting early on November 3, sending three drones toward a substation critical to the stable operation of the Khmelnytskyi nuclear power plant, and that Ukraine had notified the International Atomic Energy Agency (IAEA). Grid operator Ukrenergo imposed emergency blackouts in Kyiv and several other regions.",
+     "fc": [],
+     "src": [
+      "https://www.kyivpost.com/post/89050",
+      "https://news.liga.net/en/politics/news/russia-directed-three-drones-at-critical-substation-serving-khmelnytskyi-nuclear-power-plant-shmyhal-says",
+      "https://kyivindependent.com/ukraine-war-latest-russia-launches-biggest-mass-attack-on-ukraines-energy-infrastructure-this-year/"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Trump confirms strike on Iranian air-defense site, calls it a \"minor attack\"",
+     "fact": "President Donald Trump said in a Fox News interview on November 3 that Iran had built an anti-aircraft facility and that \"as soon as it was completed, we hit it last night,\" calling it a \"minor attack.\" A U.S. official told the AP on November 2 that U.S. forces had struck Iranians who used surface-to-air missiles against them in the Strait of Hormuz, Iranian state media reported explosions on Qeshm Island and elsewhere, and Iranian Deputy Foreign Minister Kazem Gharibabadi said Iran has a legitimate right to self-defense.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.manilatimes.net/2026/11/04/world/americas-emea/trump-confirms-strikes-on-iran-as-tehran-warns-against-return-to-war/2461312",
+      "https://www.clickondetroit.com/news/world/2026/11/03/us-strikes-iranian-targets-in-the-strait-of-hormuz-official-says-leaving-unclear-what-comes-next/"
+     ],
+     "loc": {
+      "lat": 26.8,
+      "lon": 55.9,
+      "place": "Qeshm Island (Iran)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Trump says he and Netanyahu agreed to end U.S. aid to Israel by year's end",
+     "fact": "Trump said in a Fox News interview on November 3 that the U.S. gives Israel $4 billion a year but that he and Prime Minister Benjamin Netanyahu \"made a deal months ago that we're stopping,\" adding that \"by the end of this year we won't be paying Israel.\" The current memorandum of understanding provides about $3.8 billion a year over 10 years starting in 2019; Netanyahu has previously spoken of phasing out aid over a decade, and his office did not immediately comment.",
+     "fc": [],
+     "src": [
+      "https://www.timesofisrael.com/trump-says-us-to-end-4-billion-in-annual-military-aid-to-israel-by-end-of-2026/",
+      "https://www.aljazeera.com/news/2026/11/3/trump-announces-that-us-will-stop-paying-israel-after-year-end"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "ISR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "The White House said on November 3 that first lady Melania Trump will host Russian and Ukrainian representatives on November 5 for an event where she will speak about a localized ceasefire and civilian evacuation operation in Oleshky, in the Kherson region.",
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-russia-launches-biggest-mass-attack-on-ukraines-energy-infrastructure-this-year/",
+      "https://newswav.com/article/ukraine-russia-war-latest-melania-trump-to-host-kyiv-and-moscow-for-extraor-A2611_XDugHd"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "Qatari Foreign Ministry spokesman Majed al-Ansari said, \"We remain hopeful that there is still a chance for a deal\" between the U.S. and Iran, adding that Qatar was working toward an interim agreement.",
+     "src": [
+      "https://www.manilatimes.net/2026/11/04/world/americas-emea/trump-confirms-strikes-on-iran-as-tehran-warns-against-return-to-war/2461312"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-03",
    "items": [
     {
@@ -5766,186 +5892,6 @@
      "t": "The National Intelligence Service told the National Assembly's Intelligence Committee on September 30 that it viewed Kim Yo Jong's \"farce\" statement as restrained in tone and intended to sever any link between the incident and North Korea.",
      "src": [
       "https://www.ytn.co.kr/_ln/0101_202609301210265265"
-     ],
-     "fp": [
-      "korea"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-01",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Defense minister says he believes North Korean troops crossed the MDL to lay mines",
-     "fact": "Defense Minister Kang Shin-chul told the National Assembly's National Defense Committee on September 29, 2026, that the DMZ explosion had indeed been caused by a North Korean mine and was indeed a violation of the Armistice Agreement. The same day, the military said it had found another mine about 1 meter from the blast site, indicating that at least four mines had been buried 1 to 2 meters apart, and Kang said it appeared that North Korean troops had crossed the Military Demarcation Line to bury them. Kang believes the mines were laid around the time of North Korea's border fortification work in 2024.",
-     "link": "The incident cuts against the conditions that would change Conclusion 1 of the Korean Peninsula analysis (restored military hotlines and reunions of separated families) and raises f15, the forecast that the hotlines will not be restored. The next thing to watch is whether loudspeaker broadcasts toward the North resume, which the government has said it will not rule out.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008775696",
-      "https://www.hankyung.com/article/2026093040787",
-      "https://www.dailian.co.kr/news/view/1695916/"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Cabinet approves special bill on nuclear-powered submarines",
-     "fact": "A Cabinet meeting chaired by President Lee Jae-myung on September 29, 2026, approved a special bill governing the acquisition, operation and safety management of nuclear-powered submarines. The government said it would set military nuclear safety standards separate from the existing Defense Acquisition Program Act and Nuclear Safety Act in order to keep the confidence of the United States and the International Atomic Energy Agency, and it will submit the bill to the National Assembly with the aim of enacting it this year. The same day, North Korea's Foreign Ministry accused South Korea of pursuing nuclear proliferation.",
-     "link": "The step bears on the conditional nuclear latency (A3b) in Conclusion 3 of the Korean Peninsula analysis. Forecast f17, that China will not impose THAAD-style large-scale economic retaliation over South Korea's pursuit of enrichment, reprocessing and nuclear-powered submarines, will not be moved in either direction until Beijing responds officially.",
-     "fc": [
-      {
-       "id": "f17",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.ajunews.com/view/20260929164529297",
-      "https://www.newspim.com/news/view/20260929001084",
-      "https://www.aei.org/commentary/korean-peninsula-update-september-30-2026/"
-     ],
-     "loc": {
-      "isos": [
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Iran says it has received U.S. reply to its proposal to end the war",
-     "fact": "At a Cabinet meeting on September 30, 2026, Iranian Foreign Minister Abbas Araghchi briefed President Masoud Pezeshkian on the U.S. reply to Iran's proposal to end the war. Pezeshkian said, \"We will make every effort to bring the agreement to fruition,\" and added that any agreement must benefit both sides, but the content of the reply was not disclosed. Trump had rejected as unacceptable Iran's September 23 proposal to reopen the strait within a week if the United States lifted its port blockade, returned frozen assets and waived oil sanctions.",
-     "link": "The phased exchange described in Conclusion 7 of the Iran and Hormuz analysis, reopening the strait in return for lifting the blockade and sanctions, is now being traded on paper. Because it is unclear whether the U.S. reply also demands action on the nuclear issue, no direction is set for f38, the phased-agreement forecast, or f03, the ceasefire-and-reopening forecast.",
-     "fc": [
-      {
-       "id": "f38",
-       "e": "none"
-      },
-      {
-       "id": "f03",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.bostonglobe.com/2026/09/30/nation/iran-receives-us-response-end-war/",
-      "https://fortune.com/2026/09/30/trump-iran-hormuz-strait-talks/"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "U.S. completes troop withdrawal from Iraq",
-     "fact": "The Pentagon announced on September 30, 2026, that the withdrawal of U.S. troops from Iraq, which had numbered about 2,500, was complete. Pentagon spokesman Sean Parnell called it the success of a 12-year campaign that defeated the Islamic State (ISIS) as an organized military threat, and Trump called the U.S. presence in Iraq a \"quagmire.\" The withdrawal comes as the Iran war enters its seventh month.",
-     "link": "Amid the prolonged blockade standoff described in Conclusion 1 of the Iran and Hormuz analysis, the United States has pulled its ground forces out of a country bordering Iran. It does not directly move the forecast that the U.S. will resume airstrikes on Iran's mainland in either direction.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.cp24.com/news/world/2026/09/30/the-us-military-says-its-withdrawal-of-troops-from-iraq-is-complete/",
-      "https://abcnews.com/International/us-troops-expected-leave-iraq-wednesday-12-year/story?id=136871869"
-     ],
-     "loc": {
-      "isos": [
-       "IRQ",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russia hits power grid around Kyiv ahead of winter",
-     "fact": "Russian missile and drone attacks overnight on September 30, 2026, killed three people in the city of Kyiv and a child in the surrounding Kyiv region. Zelensky said the attacks targeted energy facilities and damaged the power grid; energy facilities in the Zhytomyr, Mykolaiv, Kirovohrad and Rivne regions and the port of Izmail were also hit. Russia's Defense Ministry confirmed the strikes.",
-     "link": "The attacks uphold the assessment in Conclusion 1 of the Russia-Ukraine war analysis that the war of attrition will continue. There is no confirmation that Russia has accepted the halt to mutual strikes on energy facilities that Washington is pushing, and no date has been announced for the trilateral technical-level talks in forecast f02, which resolves on October 31.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "none"
-      },
-      {
-       "id": "f01",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/30/russian-attacks-on-ukraines-kyiv-region-kill-four-target-power-grid"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "Kyiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "A vessel transiting the Strait of Hormuz on September 29 was hit by an unidentified projectile, starting a fire that was later put out; the UKMTO said no crew members were injured.",
-     "src": [
-      "https://www.dawn.com/news/2033522/unknown-projectile-hits-vessel-in-strait-of-hormuz-ukmto"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Brig. Gen. Akraminia, a spokesman for Iran's army, claimed on September 29 that an Iranian order had been established in the Strait of Hormuz and that this order could not be reversed.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-strait-of-hormuz/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "British Prime Minister Andy Burnham said on September 30 that there were strong indications Iran had played a part in an incident near RAF Fairford, an air base used by the U.S. military, in which five people were arrested on September 27; the Iranian Embassy in London denied it as baseless speculation.",
-     "src": [
-      "https://www.cbsnews.com/news/uk-fairford-air-base-iran-played-part-incident-pm-burnham-says/"
-     ],
-     "fp": [
-      "russia-hybrid-campaign-western-europe",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "The National Assembly's National Defense Committee failed on September 29 to adopt a resolution condemning North Korea over the DMZ mine explosion.",
-     "src": [
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008775767"
      ],
      "fp": [
       "korea"
