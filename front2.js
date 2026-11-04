@@ -162,7 +162,8 @@
   function vtNav(on){ return '<nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a' + (on === "hm" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/" data-f2v="hm">' + T.hm +
       '</a><a' + (on === "fc" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/outlook/" data-f2v="fc">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + '</a><a href="' + P + '/links/">' + T.vt[2] + "</a></nav>"; }
   function hmSize(){ var f = document.getElementById("hm2f"); if (!f || !f.offsetHeight) return; var r = f.getBoundingClientRect(), z = r.height / f.offsetHeight || 1, pn = document.getElementById("panel");
-    var want = innerWidth < 700 ? 600 : Math.max(480, (pn ? pn.getBoundingClientRect().bottom : innerHeight) - r.top - 2); f.style.height = (want / z) + "px"; }
+    var want = HMH || (innerWidth < 700 ? 600 : Math.max(480, (pn ? pn.getBoundingClientRect().bottom : innerHeight) - r.top - 2)); f.style.height = (HMH ? HMH : want / z) + "px"; }  /* v4.79f: 시황판이 알려 준 높이(판 1.6:1)를 씀 */
+  var HMH = 0; addEventListener("message", function(e){ if (e.data && e.data.hmH && e.origin === location.origin) { HMH = e.data.hmH; hmSize(); } });
   function drawHeat(el){
     EL = el; if (/^\/(heatmap\/)?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
     var ft = el.querySelector(":scope > .site-foot");
