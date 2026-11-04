@@ -3,10 +3,10 @@
   var EN = /^\/en\//.test(location.pathname), B = EN ? "/en/" : "/";
   var T = EN ? {
     h: "Get updates by email",
-    d: "Every week we send the Weekly Situation Summary and the Geopolitical Heat Map. We also send new feature articles and announcements as they come out.",
+    d: "The Weekly Situation Summary and the Geopolitical Heat Map arrive every week, along with new feature articles and announcements as they come out.",
     ph: "Email address", b: "Subscribe",
     n: "Each email is written in both English and Korean. Your subscription starts when you click the button in the confirmation email. You can unsubscribe at any time. By subscribing, you agree to the ",
-    c: "We send the Weekly Situation Summary and the Geopolitical Heat Map every week, each email in both English and Korean. By subscribing, you agree to the ",
+    c: "The Weekly Situation Summary and the Geopolitical Heat Map arrive every week, each email in both English and Korean. By subscribing, you agree to the ",
     pv: "Privacy Policy", more: /More features/, acct: /no user accounts/,
     foot: " Addresses received through newsletter sign-ups are handled as described in the "
   } : {
