@@ -160,7 +160,7 @@ function srBuild(){
    ["Methodology", "methodology procedures rules well-being index judgment estimate method", toPane("method")],
    ["Site Guide", "site guide how to use screens explanation help shortcuts", page("/guide/")],
    ["A Note from the Founder", "note from the founder Jae-Seong Ko about contact email inquiries", page("/about/")],
-   ["Subscribe to Updates", "new post alerts subscribe RSS feed app updates", page("/subscribe/")]].forEach(([t, b, go]) => add("Site Menu", t, b, go));
+   ["Subscribe to Updates", "subscribe updates email newsletter alerts RSS feed reader app", page("/subscribe/")]].forEach(([t, b, go]) => add("Site Menu", t, b, go));
   D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("Strategy and Scenarios", cshort(c) + " · Issues before the legislature · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "legislature parliament National Assembly Congress Senate House consent vote"], toCase(c.id, "cg-" + c.id + "-" + i))));
   Object.entries(PLK()).forEach(([i, L]) => { add("Power Structures", L.name + ": power structure", [L.name, L.system || "", "power structure decision-making constitution veto election impeachment consent troop deployment treaties budget"], page("/power/#" + i));
     if (L.pb) add("Power Structures", L.pb, [L.pb, L.name, "power centers legislature parliament National Assembly seats ruling party opposition votes parties committees lawmakers statements issues"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
@@ -3358,7 +3358,7 @@ function applyRoute(){
   if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
   if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1] === "about" && location.hash === "#partners" ? "partners" : m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
-  if (/^\/(leader|power|subscribe|digest|links)(\/|$)/.test(p)) { pageGo(enAdd(p)); return true; }
+  if (/^\/(leader|power|subscribe|digest|links|privacy)(\/|$)/.test(p)) { pageGo(enAdd(p)); return true; }
   if ((m = p.match(/^\/forecast\/(f\d+)\/?$/)) && D.forecasts.some(f => f.id === m[1])) { fcOpen(m[1]); return true; }  /* v4.22 */
   if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { if (m[1] === "forecast" && S.ffc) { S.ffc = null; renderForecasts(); } switchTab(m[1]); return true; }
   if (p === "/" && !location.hash) { switchTab("overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
@@ -3383,7 +3383,7 @@ function titleOf(){
   if (t === "forecast" && S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) return FCT.title(F.s || F.q) + sx; }  /* v4.22 */
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
-const isPagePath = p => { if (/^\/(leader|power|subscribe|digest|links)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
+const isPagePath = p => { if (/^\/(leader|power|subscribe|digest|links|privacy)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
 function pageShow(p, x){
   ttsStop(); try { speechSynthesis.cancel(); } catch(e){}
   const pn = document.getElementById("pane-page"); pn.innerHTML = x.h;
@@ -3411,7 +3411,7 @@ function pageGo(url, push, after){
   }).catch(() => { if (seq === PAGE_SEQ) location.href = u.href; }).finally(() => document.documentElement.classList.remove("pg-wait"));
 }
 /* 사이트 안의 링크(a href)를 화면 안에서 옮긴다. 새 창·수정 키·다른 사이트·파일은 브라우저에 맡긴다 */
-const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|digest|grand|ideas|method|forecast)(?:\/|$))/;  /* /links/는 빼 둔다: 연결 지도 쪽은 links2.js를 읽어야 하므로 새로 연다(2026-11-02) */
+const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|digest|privacy|grand|ideas|method|forecast)(?:\/|$))/;  /* /links/는 빼 둔다: 연결 지도 쪽은 links2.js를 읽어야 하므로 새로 연다(2026-11-02) */
 document.addEventListener("click", ev => {
   if (!ROUTES || !D || ev.defaultPrevented || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
   const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
@@ -3592,3 +3592,5 @@ document.addEventListener("click", ev => {
   let t = 0; new MutationObserver(() => { clearTimeout(t); t = setTimeout(sync, 150); }).observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"]});
   sync(); })();
 
+
+;(function(){try{var v="e21d9cd85a",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */

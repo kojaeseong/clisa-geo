@@ -132,7 +132,7 @@ function srBuild(){
    ["분석 방법", "분석 방법 절차 규칙 행복 지표 판단값 방법론", toPane("method")],
    ["사이트 안내", "사이트 안내 이용 방법 화면 설명 도움말 바로가기", page("/guide/")],
    ["운영자 인사말", "운영자 인사말 만든 사람 고재성 소개 연락 이메일 문의", page("/about/")],
-   ["새 글 알림 받기", "새 글 알림 구독 RSS 피드 받아 보기 구독 앱", page("/subscribe/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
+   ["새 글 구독", "새 글 구독 메일 받아 보기 뉴스레터 알림 RSS 피드 구독 앱", page("/subscribe/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
   D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("전략과 전개 사안", cshort(c) + " · 의회의 쟁점 · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "의회 국회 상원 하원 동의 표결"], toCase(c.id, "cg-" + c.id + "-" + i))));
   Object.entries(PLK()).forEach(([i, L]) => { add("권력 구조", L.name + "의 권력 구조", [L.name, L.system || "", "권력 구조 결정 구조 헌법 거부권 선거 탄핵 동의 파병 조약 예산"], page("/power/#" + i));
     if (L.pb) add("권력 구조", L.pb, [L.pb, L.name, "권력기관 의회 국회 의석 여당 야당 의결 정당 위원회 의원 발언 쟁점"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
@@ -2909,7 +2909,7 @@ const FCT = {
   yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
   nLow: p => p + "%로 낮게 본 대로 일어나지 않은 것입니다.", nHigh: p => p + "%로 높게 본 일이 일어나지 않은 것이므로 「빗나간 전망」에 오릅니다.",
   ocFirst: (p, a, b) => "처음 확률 " + p + "%를 그대로 뒀을 때의 점수 · 실현되면 " + a + ", 실현되지 않으면 " + b,
-  sibH: "같은 사안의 전망", shareH: "공유", shareX: "X에 공유", copy: "주소 복사", sub: "새 글 알림 받기",
+  sibH: "같은 사안의 전망", shareH: "공유", shareX: "X에 공유", copy: "주소 복사", sub: "새 글 구독",
   calH: "언제 무엇이 판가름 나는가", calNote: "점 하나가 전망 하나입니다. 진할수록 일어날 확률이 높다고 본 전망이고, 누르면 그 전망으로 갑니다.",
   calM: (y, m, first) => (first ? y + "년<br>" : "") + m + "월", calRest: (y, m0) => y + "년 " + (m0 === 7 ? "하반기" : m0 + "~12월"), calY: y => y + "년",
   legP: "확률", legB: ["20% 이하", "21~40%", "41~60%", "61~80%", "81% 이상"],
@@ -3235,7 +3235,7 @@ function footHtml(noMail){
     "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>" +
     "<p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p>" +
     "<p>이 사이트는 회원 가입이 없습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
-    '<p>© 2026 고재성 · <a href="/about/#partners">파트너</a> · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 알림</a> · <a href="/method/">사이트 안내</a></p>' +
+    '<p>© 2026 고재성 · <a href="/about/#partners">파트너</a> · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 구독</a> · <a href="/method/">사이트 안내</a></p>' +
     "<p>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 '클리사 지오폴리틱스'와 해당 페이지 주소를 출처로 밝혀 주십시오(본문을 40자 이상 복사하면 출처가 자동으로 붙습니다). 전부 또는 상당 부분을 복제·재배포하려면 <a href='mailto:clisageo@clisa.ai'>clisageo@clisa.ai</a>로 먼저 허락을 받아 주십시오.</p></footer>";
 }
 function caseFbHtml(c){
@@ -3334,7 +3334,7 @@ function applyRoute(){
   if ((m = p.match(/^\/feature\/([\w-]+)\/?$/)) && FEATS().some(F => F.id === m[1])) { goFeat(m[1]); return true; }
   if (/^\/feature\/?$/.test(p)) { goFeat(null); return true; }
   if ((m = p.match(/^\/(method|guide|about)\/?$/))) { infoGo(m[1] === "about" && location.hash === "#partners" ? "partners" : m[1]); return true; }  /* v3.79 사이트 안내 탭 하나에 3개 부분 */
-  if (/^\/(leader|power|subscribe|digest|links)(\/|$)/.test(p)) { pageGo(p); return true; }
+  if (/^\/(leader|power|subscribe|digest|links|privacy)(\/|$)/.test(p)) { pageGo(p); return true; }
   if ((m = p.match(/^\/forecast\/(f\d+)\/?$/)) && D.forecasts.some(f => f.id === m[1])) { fcOpen(m[1]); return true; }  /* v4.22 */
   if ((m = p.match(/^\/(grand|ideas|forecast)\/?$/))) { if (m[1] === "forecast" && S.ffc) { S.ffc = null; renderForecasts(); } switchTab(m[1]); return true; }
   if (p === "/" && !location.hash) { switchTab("overview"); return true; }  /* 처음 들어온 '/'는 정세 브리핑, 화면 안에서 돌아온 '/'는 세계 정세 */
@@ -3359,7 +3359,7 @@ function titleOf(){
   if (t === "forecast" && S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) return FCT.title(F.s || F.q) + sx; }  /* v4.22 */
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
-const isPagePath = p => { if (/^\/(leader|power|subscribe|digest|links)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
+const isPagePath = p => { if (/^\/(leader|power|subscribe|digest|links|privacy)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };
 function pageShow(p, x){
   ttsStop(); try { speechSynthesis.cancel(); } catch(e){}
   const pn = document.getElementById("pane-page"); pn.innerHTML = x.h;
@@ -3387,7 +3387,7 @@ function pageGo(url, push, after){
   }).catch(() => { if (seq === PAGE_SEQ) location.href = u.href; }).finally(() => document.documentElement.classList.remove("pg-wait"));
 }
 /* 사이트 안의 링크(a href)를 화면 안에서 옮긴다. 새 창·수정 키·다른 사이트·파일은 브라우저에 맡긴다 */
-const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|digest|grand|ideas|method|forecast)(?:\/|$))/;  /* /links/는 빼 둔다: 연결 지도 쪽은 links2.js를 읽어야 하므로 새로 연다(2026-11-02) */
+const SOFT_RE = /^\/(?:$|(?:case|country|region|brief|life|industry|feature|leader|power|guide|about|subscribe|digest|privacy|grand|ideas|method|forecast)(?:\/|$))/;  /* /links/는 빼 둔다: 연결 지도 쪽은 links2.js를 읽어야 하므로 새로 연다(2026-11-02) */
 document.addEventListener("click", ev => {
   if (!ROUTES || !D || ev.defaultPrevented || ev.button || ev.ctrlKey || ev.metaKey || ev.shiftKey || ev.altKey) return;
   const a = ev.target.closest("a[href]"); if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
@@ -3570,3 +3570,5 @@ document.addEventListener("click", ev => {
 /*langsw-ko*/(function(){ const EN_PENDING = ["/case/poland/", "/power/POL/"]; const upd = () => { const a = document.getElementById("langsw"); if (a) a.setAttribute("href", EN_PENDING.some(x => location.pathname.startsWith(x)) ? "/en/" : "/en" + location.pathname + location.search + location.hash); };
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
   addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/
+
+;(function(){try{var v="e21d9cd85a",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */

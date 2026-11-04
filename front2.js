@@ -3,7 +3,7 @@
   "use strict";
   var EN = document.documentElement.lang === "en", P = EN ? "/en" : "", FD = null, EL = null;
   var T = EN ? {
-    vt: ["By Forecast", "By Population", "By Pathway"], hm: "Heat Map", hmT: "Forecast heat map", h: "What could happen, and whose lives would it change—and how?",
+    vt: ["By Forecast", "By Population", "By Pathway"], hm: "Heat Map", hmT: "Geopolitical Heat Map", h: "What could happen, and whose lives would it change—and how?",
     sub: "For each forecast with a resolution date, the cards show which scenario the event would make more or less likely, and how the safety and incomes of people in South Korea, the U.S. and three European regions would change if that scenario came about.",
     nl: "Latest briefings · Select one to see forecasts on that issue",
     ver: "Track record", verGo: "Forecasts and Track Record →",
