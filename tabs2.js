@@ -5,7 +5,7 @@
     ["links", ["/links/"]],
     ["industry", ["/industry/", "/life/"], EN ? [["Industry Outlook", "/industry/"], ["People\u2019s Lives", "/life/"]] : [["산업별 미래", "/industry/"], ["국민의 삶", "/life/"]]],
     ["strat", ["/case/"]], ["forecast", ["/forecast/"]],
-    ["brieftab", ["/brief/", "/feature/", "/digest/"], EN ? [["Briefings", "/brief/"], ["Features", "/feature/"]] : [["정세 브리핑", "/brief/"], ["특집", "/feature/"]]],
+    ["brieftab", ["/brief/", "/feature/", "/digest/"], EN ? [["Briefings", "/brief/"], ["Weekly Summary", "/digest/"], ["Features", "/feature/"]] : [["정세 브리핑", "/brief/"], ["주간 정세 요약", "/digest/"], ["특집", "/feature/"]]],
     ["grand", ["/grand/", "/power/", "/leader/"], EN ? [["World Order", "/grand/"], ["Power Structures", "/power/"]] : [["세계 질서", "/grand/"], ["권력 구조", "/power/"]]],
     ["ideas", ["/ideas/"]]
   ];

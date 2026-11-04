@@ -132,7 +132,8 @@ function srBuild(){
    ["분석 방법", "분석 방법 절차 규칙 행복 지표 판단값 방법론", toPane("method")],
    ["사이트 안내", "사이트 안내 이용 방법 화면 설명 도움말 바로가기", page("/guide/")],
    ["운영자 인사말", "운영자 인사말 만든 사람 고재성 소개 연락 이메일 문의", page("/about/")],
-   ["새 글 구독", "새 글 구독 메일 받아 보기 뉴스레터 알림 RSS 피드 구독 앱", page("/subscribe/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
+   ["새 글 구독", "새 글 구독 메일 받아 보기 뉴스레터 알림 RSS 피드 구독 앱", page("/subscribe/")],
+   ["주간 정세 요약", "주간 정세 요약 주간 요약 매주 이번 주 정세 지난 판", page("/digest/")]].forEach(([t, b, go]) => add("사이트 메뉴", t, b, go));
   D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("전략과 전개 사안", cshort(c) + " · 의회의 쟁점 · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "의회 국회 상원 하원 동의 표결"], toCase(c.id, "cg-" + c.id + "-" + i))));
   Object.entries(PLK()).forEach(([i, L]) => { add("권력 구조", L.name + "의 권력 구조", [L.name, L.system || "", "권력 구조 결정 구조 헌법 거부권 선거 탄핵 동의 파병 조약 예산"], page("/power/#" + i));
     if (L.pb) add("권력 구조", L.pb, [L.pb, L.name, "권력기관 의회 국회 의석 여당 야당 의결 정당 위원회 의원 발언 쟁점"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
@@ -1362,7 +1363,7 @@ document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기
 const bId = id => document.querySelector('#pane-brief [id="' + id + '"]') || document.getElementById(id);  /* v4.59 개편 ②: 일정·브리핑 항목은 정세 브리핑 탭에서 먼저 찾는다 */
 function worldSecHtml(){
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  return '<section class="sec"><h3>정세 요약 ' + ttsBtn("digest") + '</h3><p class="meta" style="margin:-2px 0 8px">매주 갱신 · <a href="/digest/">지난 정세 요약 보기 →</a></p><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + '" title="지구본에서 위치 보기">' + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+  return '<section class="sec"><h3>주간 정세 요약 ' + ttsBtn("digest") + '</h3><p class="meta" style="margin:-2px 0 8px">매주 갱신 · <a class="dgo" href="/digest/" style="display:inline-block;margin-left:2px;padding:2px 10px;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-weight:600">주간 정세 요약 전체 보기 →</a></p><div class="digest">' + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + '" title="지구본에서 위치 보기">' + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? '<section class="sec"><h3>진행 중인 논의</h3>' + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + esc(t.opened) + " 개설 · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
     '<section class="sec"><h3>분쟁지 · 심각도 순</h3><ul class="list">' + fps.map(fp =>
       '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(fp.last_major_event?.date || "") + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>";
@@ -3571,4 +3572,4 @@ document.addEventListener("click", ev => {
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
   addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/
 
-;(function(){try{var v="e21d9cd85a",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */
+;(function(){try{var v="ccb1ce5116",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */

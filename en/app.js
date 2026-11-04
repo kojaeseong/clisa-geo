@@ -160,7 +160,8 @@ function srBuild(){
    ["Methodology", "methodology procedures rules well-being index judgment estimate method", toPane("method")],
    ["Site Guide", "site guide how to use screens explanation help shortcuts", page("/guide/")],
    ["A Note from the Founder", "note from the founder Jae-Seong Ko about contact email inquiries", page("/about/")],
-   ["Subscribe to Updates", "subscribe updates email newsletter alerts RSS feed reader app", page("/subscribe/")]].forEach(([t, b, go]) => add("Site Menu", t, b, go));
+   ["Subscribe to Updates", "subscribe updates email newsletter alerts RSS feed reader app", page("/subscribe/")],
+   ["Weekly Situation Summary", "weekly situation summary week digest this week past editions", page("/digest/")]].forEach(([t, b, go]) => add("Site Menu", t, b, go));
   D.strategies.forEach(c => (c.congress || []).forEach((x, i) => add("Strategy and Scenarios", cshort(c) + " · Issues before the legislature · " + x.t, [x.t, x.stage, x.power, x.votes || "", x.sides || "", nm(x.iso), "legislature parliament National Assembly Congress Senate House consent vote"], toCase(c.id, "cg-" + c.id + "-" + i))));
   Object.entries(PLK()).forEach(([i, L]) => { add("Power Structures", L.name + ": power structure", [L.name, L.system || "", "power structure decision-making constitution veto election impeachment consent troop deployment treaties budget"], page("/power/#" + i));
     if (L.pb) add("Power Structures", L.pb, [L.pb, L.name, "power centers legislature parliament National Assembly seats ruling party opposition votes parties committees lawmakers statements issues"], page("/power/" + i + "/")); });  /* v3.62 나라 기본 내용은 첫 쪽, 권력기관은 나라별 쪽 */
@@ -1386,7 +1387,7 @@ document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기
 const bId = id => document.querySelector('#pane-brief [id="' + id + '"]') || document.getElementById(id);  /* v4.59 개편 ②: 일정·브리핑 항목은 정세 브리핑 탭에서 먼저 찾는다 */
 function worldSecHtml(){
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  return "<section class=\"sec\"><h3>Situation summaries " + ttsBtn("digest") + "</h3><p class=\"meta\" style=\"margin:-2px 0 8px\">Updated weekly · <a href=\"/en/digest/\">Past summaries →</a></p><div class=\"digest\">" + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+  return "<section class=\"sec\"><h3>Weekly Situation Summary " + ttsBtn("digest") + "</h3><p class=\"meta\" style=\"margin:-2px 0 8px\">Updated weekly · <a class=\"dgo\" href=\"/en/digest/\" style=\"display:inline-block;margin-left:2px;padding:2px 10px;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-weight:600\">See all weekly summaries →</a></p><div class=\"digest\">" + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? "<section class=\"sec\"><h3>Ongoing discussions</h3>" + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + "Opened " + esc(enDate(t.opened)) + " · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
     "<section class=\"sec\"><h3>Flashpoints by severity</h3><ul class=\"list\">" + fps.map(fp =>
       '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(enDate(fp.last_major_event?.date || "")) + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>";
@@ -3593,4 +3594,4 @@ document.addEventListener("click", ev => {
   sync(); })();
 
 
-;(function(){try{var v="e21d9cd85a",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */
+;(function(){try{var v="ccb1ce5116",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */
