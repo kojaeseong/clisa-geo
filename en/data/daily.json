@@ -1,6 +1,172 @@
 {
  "issues": [
   {
+   "date": "2026-11-05",
+   "items": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Oil plunges more than 8 percent after U.S. midterms; Brent at $94",
+     "fact": "Brent fell 8.6 percent to $94.66 a barrel as of 1:06 p.m. ET on November 4, with WTI at $88.08, according to OilPrice.com. With Democrats now controlling both chambers of Congress, markets are trying to gauge where the U.S.-Iran war is headed, The National reported.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "up"
+      }
+     ],
+     "src": [
+      "https://oilprice.com/Latest-Energy-News/World-News/Oil-Crashes-9-as-Trump-and-Vance-Blame-Iran-War-for-Midterm-Rout.html",
+      "https://www.thenationalnews.com/business/energy/2026/11/04/brent-oil-slides-to-94-on-iran-uncertainty-after-us-midterms/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Vance blames Iran war for GOP midterm losses",
+     "fact": "Vice President JD Vance wrote on X that the Iran war cost Republicans in the midterms and that \"any honest conversation about where we go from here must start there,\" OilPrice.com reported on November 4.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://oilprice.com/Latest-Energy-News/World-News/Oil-Crashes-9-as-Trump-and-Vance-Blame-Iran-War-for-Midterm-Rout.html"
+     ],
+     "loc": {
+      "isos": [
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Zelensky tells Witkoff, Kushner postwar guarantees must be ironclad",
+     "fact": "Ukrainian President Volodymyr Zelensky said he spoke for about 90 minutes on November 4 with U.S. envoys Steve Witkoff and Jared Kushner about Patriot interceptors and postwar security guarantees. In Brussels the same day, the U.S., Ukraine, NATO, Germany, France and the U.K. coordinated positions ahead of trilateral talks in Abu Dhabi on November 10–11.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/security-guarantees-must-be-ironclad-zelensky-speaks-to-trumps-envoys-ahead-of-trilateral-peace-talks/",
+      "https://kyivindependent.com/ukraine-partners-coordinate-peace-efforts-ahead-of-abu-dhabi-talks-with-russia-2/"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Indonesia's military mobilizes thousands in capital after presidential wiretap case",
+     "fact": "Indonesia's military said it was mobilizing thousands of troops to tighten security in the capital after President Prabowo Subianto on November 4 fired his chief of staff, Listyo Sigit Prabowo, who had been arrested on suspicion of illegally wiretapping the president and others, Reuters reported. A presidential spokesman said the conduct could border on treason.",
+     "fc": [],
+     "src": [
+      "https://www.thestar.com.my/news/world/2026/11/04/indonesia-president-sacks-his-chief-of-staff-for-alleged-wiretapping",
+      "https://www.brecorder.com/news/40447486/troops-deployed-in-indonesia-as-president-sacks-aide-accused-of-wiretapping"
+     ],
+     "loc": {
+      "lat": -6.21,
+      "lon": 106.85,
+      "place": "Jakarta (Indonesia)",
+      "isos": [
+       "IDN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "h": "South Korea's Defense Ministry seeks to widen Cheonghae Unit zone south of Oman",
+     "fact": "A revised Defense Ministry motion extending the Cheonghae Unit's deployment cleared a vice-ministerial meeting on November 5, SBS reported. It widens the unit's zone from the Gulf of Aden to south of Oman's port of Duqm and adds a P-8 maritime patrol aircraft, an explosive ordnance disposal team and unmanned mine-countermeasure systems. A ministry official said direct detection of the Strait of Hormuz or Iranian territory would be limited, Financial News reported.",
+     "fc": [
+      {
+       "id": "f31",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008832070",
+      "https://www.fnnews.com/news/202611051004049719",
+      "https://www.newspim.com/news/view/20261105000562"
+     ],
+     "loc": {
+      "isos": [
+       "KOR",
+       "OMN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Iran's supreme leader, Mojtaba Khamenei, was quoted as saying that anyone expecting a shift in U.S. policy after the midterms is badly mistaken, The National reported on November 4.",
+     "src": [
+      "https://www.thenationalnews.com/business/energy/2026/11/04/brent-oil-slides-to-94-on-iran-uncertainty-after-us-midterms/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "The death toll from the November 2 bombing of a school used as an aid-distribution point in Komyshuvakha, Zaporizhzhia region, rose to 40, local officials said on November 4. Zelensky said more than 30 people may be trapped under the rubble.",
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-kyiv-suffers-worst-water-outage-of-full-scale-war-after-mass-russian-assault/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "Kyiv's water utility said Russia's November 3 strikes on energy infrastructure effectively cut off the city's water supply. Experts and sources called it the worst outage since the full-scale war began.",
+     "src": [
+      "https://kyivindependent.com/russian-strikes-cause-kyivs-worst-water-outage-of-full-scale-war/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "KCNA reported on November 5 that North Korea had tested a surface-to-air missile with a new guidance system and a cruise missile that drops cluster munitions on runways the previous day, NK News said.",
+     "src": [
+      "https://www.nknews.org/2026/11/north-korea-tests-anti-aircraft-missiles-conducts-attack-drill-on-airport-kcna/"
+     ],
+     "case": "korea",
+     "fp": [
+      "korea"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-04",
    "items": [
     {
@@ -11,13 +177,11 @@
      "fc": [
       {
        "id": "f58",
-       "e": "up",
-       "p": 80
+       "e": "up"
       },
       {
        "id": "f71",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -61,18 +225,15 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 65
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f70",
-       "e": "none",
-       "p": 22
+       "e": "none"
       }
      ],
      "src": [
@@ -166,13 +327,11 @@
      "fc": [
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       },
       {
        "id": "f28",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -200,18 +359,15 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       },
       {
        "id": "f70",
-       "e": "none",
-       "p": 22
+       "e": "none"
       }
      ],
      "src": [
@@ -267,8 +423,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 65
+       "e": "up"
       }
      ],
      "src": [
@@ -293,18 +448,15 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       },
       {
        "id": "f70",
-       "e": "none",
-       "p": 22
+       "e": "none"
       }
      ],
      "src": [
@@ -332,8 +484,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 65
+       "e": "none"
       }
      ],
      "src": [
@@ -398,13 +549,11 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 8
+       "e": "down"
       },
       {
        "id": "f28",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -548,13 +697,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 3
+       "e": "down"
       },
       {
        "id": "f01",
-       "e": "down",
-       "p": 8
+       "e": "down"
       }
      ],
      "src": [
@@ -582,18 +729,15 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       },
       {
        "id": "f04",
-       "e": "none",
-       "p": 65
+       "e": "none"
       }
      ],
      "src": [
@@ -768,18 +912,15 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 65
+       "e": "none"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -801,8 +942,7 @@
      "fc": [
       {
        "id": "f59",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -880,13 +1020,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 3
+       "e": "down"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       }
      ],
      "src": [
@@ -916,13 +1054,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -948,8 +1084,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -976,8 +1111,7 @@
      "fc": [
       {
        "id": "f59",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -1047,13 +1181,11 @@
      "fc": [
       {
        "id": "f37",
-       "e": "down",
-       "p": 67
+       "e": "down"
       },
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       }
      ],
      "src": [
@@ -1076,8 +1208,7 @@
      "fc": [
       {
        "id": "f59",
-       "e": "up",
-       "p": 20
+       "e": "up"
       }
      ],
      "src": [
@@ -1101,13 +1232,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 3
+       "e": "down"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       }
      ],
      "src": [
@@ -1137,13 +1266,11 @@
      "fc": [
       {
        "id": "f68",
-       "e": "down",
-       "p": 10
+       "e": "down"
       },
       {
        "id": "f33",
-       "e": "none",
-       "p": 6
+       "e": "none"
       }
      ],
      "src": [
@@ -1169,8 +1296,7 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       }
      ],
      "src": [
@@ -1236,18 +1362,15 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 3
+       "e": "down"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       },
       {
        "id": "f28",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -1298,13 +1421,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -1335,8 +1456,7 @@
      "fc": [
       {
        "id": "f75",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -1364,8 +1484,7 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 15
+       "e": "none"
       }
      ],
      "src": [
@@ -1387,8 +1506,7 @@
      "fc": [
       {
        "id": "f62",
-       "e": "none",
-       "p": 15
+       "e": "none"
       }
      ],
      "src": [
@@ -1476,8 +1594,7 @@
      "fc": [
       {
        "id": "f23",
-       "e": "up",
-       "p": 80
+       "e": "up"
       }
      ],
      "src": [
@@ -1506,13 +1623,11 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       },
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       }
      ],
      "src": [
@@ -1538,8 +1653,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -1565,8 +1679,7 @@
      "fc": [
       {
        "id": "f75",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -1591,8 +1704,7 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -1616,8 +1728,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 90
+       "e": "none"
       }
      ],
      "src": [
@@ -1753,8 +1864,7 @@
      "fc": [
       {
        "id": "f62",
-       "e": "up",
-       "p": 12
+       "e": "up"
       }
      ],
      "src": [
@@ -1783,8 +1893,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -1811,8 +1920,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -1837,8 +1945,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -1862,8 +1969,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "none",
-       "p": 8
+       "e": "none"
       }
      ],
      "src": [
@@ -1912,8 +2018,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -1930,13 +2035,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 20
+       "e": "down"
       },
       {
        "id": "f70",
-       "e": "down",
-       "p": 22
+       "e": "down"
       }
      ],
      "src": [
@@ -1978,8 +2081,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "none",
-       "p": 90
+       "e": "none"
       }
      ],
      "src": [
@@ -2058,8 +2160,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -2106,8 +2207,7 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -2134,8 +2234,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -2176,8 +2275,7 @@
      "fc": [
       {
        "id": "f05",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -2225,8 +2323,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -2303,8 +2400,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -2333,8 +2429,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -2538,8 +2633,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 20
+       "e": "up"
       }
      ],
      "src": [
@@ -2592,8 +2686,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 20
+       "e": "none"
       }
      ],
      "src": [
@@ -2643,13 +2736,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "none",
-       "p": 20
+       "e": "none"
       },
       {
        "id": "f38",
-       "e": "none",
-       "p": 25
+       "e": "none"
       }
      ],
      "src": [
@@ -2794,8 +2885,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -3074,8 +3164,7 @@
      "fc": [
       {
        "id": "f23",
-       "e": "up",
-       "p": 80
+       "e": "up"
       }
      ],
      "src": [
@@ -3218,13 +3307,11 @@
      "fc": [
       {
        "id": "f59",
-       "e": "up",
-       "p": 20
+       "e": "up"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -3249,8 +3336,7 @@
      "fc": [
       {
        "id": "f10",
-       "e": "down",
-       "p": 20
+       "e": "down"
       }
      ],
      "src": [
@@ -3645,8 +3731,7 @@
      "fc": [
       {
        "id": "f55",
-       "e": "down",
-       "p": 50
+       "e": "down"
       }
      ],
      "src": [
@@ -4123,13 +4208,11 @@
      "fc": [
       {
        "id": "f05",
-       "e": "up",
-       "p": 25
+       "e": "up"
       },
       {
        "id": "f22",
-       "e": "up",
-       "p": 35
+       "e": "up"
       }
      ],
      "src": [
@@ -4171,8 +4254,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 8
+       "e": "down"
       }
      ],
      "src": [
@@ -4263,8 +4345,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -4414,13 +4495,11 @@
      "fc": [
       {
        "id": "f03",
-       "e": "down",
-       "p": 25
+       "e": "down"
       },
       {
        "id": "f38",
-       "e": "down",
-       "p": 25
+       "e": "down"
       }
      ],
      "src": [
@@ -4760,8 +4839,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -4838,8 +4916,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -4869,8 +4946,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "down",
-       "p": 50
+       "e": "down"
       }
      ],
      "src": [
@@ -5002,8 +5078,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5033,8 +5108,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -5083,8 +5157,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -5156,8 +5229,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5187,8 +5259,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -5214,8 +5285,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5242,8 +5312,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5294,8 +5363,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "none",
-       "p": 30
+       "e": "none"
       }
      ],
      "src": [
@@ -5358,8 +5426,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 90
+       "e": "up"
       }
      ],
      "src": [
@@ -5387,8 +5454,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5417,8 +5483,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5448,8 +5513,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "down",
-       "p": 30
+       "e": "down"
       }
      ],
      "src": [
@@ -5530,13 +5594,11 @@
      "fc": [
       {
        "id": "f42",
-       "e": "none",
-       "p": 13
+       "e": "none"
       },
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -5565,8 +5627,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "up",
-       "p": 50
+       "e": "up"
       }
      ],
      "src": [
@@ -5592,8 +5653,7 @@
      "fc": [
       {
        "id": "f01",
-       "e": "down",
-       "p": 10
+       "e": "down"
       }
      ],
      "src": [
@@ -5622,13 +5682,11 @@
      "fc": [
       {
        "id": "f38",
-       "e": "down",
-       "p": 30
+       "e": "down"
       },
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -5712,8 +5770,7 @@
      "fc": [
       {
        "id": "f04",
-       "e": "up",
-       "p": 45
+       "e": "up"
       }
      ],
      "src": [
@@ -5739,8 +5796,7 @@
      "fc": [
       {
        "id": "f15",
-       "e": "up",
-       "p": 85
+       "e": "up"
       }
      ],
      "src": [
@@ -5766,8 +5822,7 @@
      "fc": [
       {
        "id": "f02",
-       "e": "none",
-       "p": 50
+       "e": "none"
       }
      ],
      "src": [
@@ -5793,8 +5848,7 @@
      "fc": [
       {
        "id": "f13",
-       "e": "up",
-       "p": 30
+       "e": "up"
       }
      ],
      "src": [
@@ -5829,191 +5883,6 @@
      ],
      "fp": [
       "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-02",
-   "items": [
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Trump says stepping up Iran strikes after midterms is \"possible\"",
-     "fact": "In a Time magazine interview published on October 1, 2026, Trump said it was \"possible\" when asked whether he could increase the bombing of Iran after the November midterm elections. The same day, a U.S. official told Axios that Secretary of State Marco Rubio had ordered Iranian Foreign Minister Abbas Araghchi's delegation, then in New York, to leave the country; Iran denied this, saying the delegation had left on a prearranged schedule.",
-     "link": "Right after Iran received the U.S. reply, Washington sent its delegation home and raised the prospect of wider strikes, a sign that the phased exchange described in Conclusion 7 of the Iran and Hormuz analysis is unlikely to lead to a signing soon. It raises the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland and lowers the odds of the forecast that the U.S. and Iran will sign a phased agreement.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "up",
-       "p": 45
-      },
-      {
-       "id": "f38",
-       "e": "down",
-       "p": 30
-      }
-     ],
-     "src": [
-      "https://www.axios.com/2026/10/01/trump-time-interview-iran-democrats-ai-netanyahu",
-      "https://www.axios.com/2026/10/01/rubio-iran-unga-delegation-kicked-out",
-      "https://www.foxnews.com/politics/iranian-negotiators-kicked-out-us-talks-stall-trump-lays-possible-timeline-more-strikes"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Lee urges North Korea to restore dialogue in Armed Forces Day speech",
-     "fact": "At the Armed Forces Day ceremony on October 1, 2026, President Lee Jae-myung said, \"We will consistently pursue practical measures to lower military tensions between the South and the North,\" adding, \"I hope and urge that the North will now join us on the path to restoring trust and reviving severed dialogue.\" He referred to the soldiers injured in the DMZ explosion only as victims of an unforeseen accident, and pledged to regain wartime operational control (OPCON).",
-     "link": "The government has held to its line of restoring dialogue even after the defense minister flatly declared that the North had violated the Armistice Agreement, in effect reaching for the conditions that would change Conclusion 1 of the Korean Peninsula analysis (restored military hotlines and reunions of separated families). With no answering move from the North, the forecast that inter-Korean military hotlines will remain unrestored does not move.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "none",
-       "p": 85
-      }
-     ],
-     "src": [
-      "http://inews24.com/view/2010880",
-      "https://www.seoul.co.kr/news/politics/president/2026/10/02/20261002005004"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "baltic-kaliningrad-suwalki",
-      "rus-ukr"
-     ],
-     "h": "Russia warns it would use \"all its arsenal, including nuclear weapons\" if Kaliningrad is blockaded",
-     "fact": "In a diplomatic note sent to NATO member states on September 30, 2026, Russia claimed to have information that NATO was preparing an air and naval blockade of Kaliningrad and warned that, if a blockade were imposed, it was ready to use \"all its arsenal, including nuclear weapons.\" At a Valdai Discussion Club meeting in Moscow on October 1, President Vladimir Putin said the warning was not a threat but a response to attempts to intimidate Russia; NATO Secretary-General Mark Rutte countered that Russia must stop its nuclear threats.",
-     "link": "After a string of provocations along NATO's eastern flank through September, Moscow has now raised nuclear use in writing. That fits Conclusion 5 of the Russia-Ukraine war analysis, under which Russia keeps dealing with Washington while increasing pressure on Europe. It has no direct bearing on the forecast that U.S.-Russia-Ukraine technical-level talks will take place.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "none",
-       "p": 50
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/9/30/russia-warns-nato-of-possible-nuclear-response-if-kaliningrad-is-cut-off",
-      "https://abcnews.com/International/wireStory/putin-warns-weapons-arsenal-russia-territory-attacked-136930888"
-     ],
-     "loc": {
-      "lat": 54.71,
-      "lon": 20.51,
-      "place": "Kaliningrad (Russia)",
-      "isos": [
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "fp": [
-      "taiwan-strait"
-     ],
-     "h": "U.S. officials see Chinese invasion of Taiwan before 2028 as unlikely",
-     "fact": "Reuters reported on October 1, 2026, citing four people including current and former U.S. officials, that Washington sees a Chinese invasion of Taiwan before 2028 as increasingly unlikely despite President Xi Jinping's order to be ready for war by 2027. The reasons cited were purges of the military leadership that have left only two of the seven members of the Central Military Commission in office, and the possibility that Beijing will wait for the outcome of Taiwan's 2028 presidential election.",
-     "link": "The assessment points in the same direction as Conclusion 6 of the Taiwan Strait analysis: a two-track strategy in which China avoids the use of force through the January 2028 presidential election while trying to influence its outcome. The report did not address blockades or coast guard inspections, however, so the forecasts of no blockade of Taiwan's ports and of China inspecting or detaining Taiwanese vessels do not move.",
-     "fc": [
-      {
-       "id": "f36",
-       "e": "none",
-       "p": 92
-      },
-      {
-       "id": "f24",
-       "e": "none",
-       "p": 25
-      }
-     ],
-     "src": [
-      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/01/exclusive-us-sees-chinese-invasion-of-taiwan-unlikely-next-year-despite-2027-timeline-sources-say"
-     ],
-     "loc": {
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "pak_afg"
-     ],
-     "h": "Pakistan launches airstrikes on Afghanistan's Kunar and Helmand provinces",
-     "fact": "Pakistan carried out airstrikes on Afghanistan's Kunar and Helmand provinces on the night of September 30, 2026. Zabihullah Mujahid, spokesman for the Taliban government, said nine people were killed and condemned the strikes as aggression; Pakistan's Ministry of Information and Broadcasting claimed 22 militants were killed; and the U.N. Assistance Mission in Afghanistan said at least 10 civilians, most of them children, were killed.",
-     "link": "The strikes follow the September 24 raids on 10 sites including Kandahar, and there is no sign of mediation or ceasefire talks. They lower the odds of the forecast of a formal ceasefire between Pakistan and the Taliban.",
-     "fc": [
-      {
-       "id": "f10",
-       "e": "down",
-       "p": 20
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/1/afghanistan-says-nine-killed-in-pakistani-air-raids-on-kunar-helmand"
-     ],
-     "loc": {
-      "isos": [
-       "PAK",
-       "AFG"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "The UKMTO said three vessels were hit by unidentified projectiles in the Strait of Hormuz on September 29; the two identified were Liberian-flagged tankers, and no South Korean ships were involved.",
-     "src": [
-      "https://maritime-executive.com/article/three-vessels-struck-in-strait-of-hormuz-as-iran-s-grip-loosens"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Iranian President Masoud Pezeshkian said on October 1 that the United States must abandon the idea of forcing Iran to submit.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-negotiations-strait-of-hormuz-oil/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Zelensky visited a command post on the Lyman front on September 30, and Ukraine claimed its counteroffensive in that sector had retaken more than 125 square kilometers.",
-     "src": [
-      "https://kyivindependent.com/zelensky-visits-lyman-sector-says-operation-vivaldi-reclaimed-125-square-kilometers/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "The National Intelligence Service told the National Assembly's Intelligence Committee on September 30 that it viewed Kim Yo Jong's \"farce\" statement as restrained in tone and intended to sever any link between the incident and North Korea.",
-     "src": [
-      "https://www.ytn.co.kr/_ln/0101_202609301210265265"
-     ],
-     "fp": [
-      "korea"
      ]
     }
    ]
