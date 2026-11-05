@@ -102,3 +102,9 @@ html.hm-on #panel{grid-column:1/-1}
 .hm2-f{display:block;width:100%;height:600px;border:0;border-radius:10px;padding:0;margin:0;aspect-ratio:auto!important;background:#1c1f26}
 /* 2026-11-03 대통령님: 모바일의 보기 단추 묶음은 둥근 알약 대신 사각형 */
 @media (max-width:700px){.f2-vt,.l2-vt{display:grid!important;grid-template-columns:1fr 1fr;gap:4px;border-radius:10px!important;width:100%}.f2-vt a,.l2-vt a{border-radius:7px!important;text-align:center}}
+
+.rp2-f{background:#05080f;min-height:600px}  /* 2026-11-06 나비효과로 보기 */
+
+/* 2026-11-06 결재: 화면 폭을 다 쓰는 시황판·나비효과·국민별·나비효과 지도 쪽은 보기 단추 줄을 오른쪽 끝에(전망으로 보기 쪽은 그대로). 좁은 화면은 2줄 격자 */
+@media (min-width:701px){.hm2 .f2-vt,.l2-vt,.lkm-vt{display:flex!important;width:fit-content;margin-left:auto!important}}
+.f2-who h2{text-wrap:pretty!important}  /* 2026-11-06: balance가 넓은 칸에서도 일찍 줄을 바꾸던 것 */

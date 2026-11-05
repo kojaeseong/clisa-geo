@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>현재 정세와 나비효과 | 클리사 지오폴리틱스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<script>if(/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embed')</script>
+<style>
+:root{--bg:#05080f;--panel:#0b111d;--ink:#e9eef7;--mute:#8b97ab;--line:#1b2536;--up:#16c784;--down:#ea3943;--acc:#33d1ff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR","Noto Sans CJK KR",sans-serif;-webkit-text-size-adjust:100%}
+.top{max-width:1380px;margin:0 auto;padding:20px 20px 0}
+h1{font-size:25px;margin:0 0 6px;font-weight:700;word-break:keep-all}
+.lede{color:#c9cfda;font-size:14px;line-height:1.65;margin:0 0 12px;max-width:920px;word-break:keep-all}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}.tabs button{background:#0b111d;border:1px solid #2a3650;color:#c9cfda;font:inherit;font-size:13px;padding:6px 12px;border-radius:5px;cursor:pointer}
+.tabs button.on{background:#16233a;color:#fff;border-color:var(--acc)}
+.opt{font-size:12px;color:var(--mute);display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.opt label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+#fsb{margin-left:auto;display:inline-flex;align-items:center;gap:6px;background:#22262f;border:1px solid #333845;border-radius:5px;color:#c9cfda;font:inherit;font-size:12.5px;padding:6px 12px;cursor:pointer}#fsb:hover{color:#fff;border-color:#4a5163}
+.lg{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:11.5px;color:var(--mute);margin:0 0 12px;align-items:center}.lg span{display:inline-flex;align-items:center;gap:7px}
+.hint{display:none;font-size:12px;color:var(--acc);margin:0 0 8px}
+#sc{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 20px 20px}
+#g{position:relative;display:grid;grid-template-columns:1.12fr 60px 1fr 64px .9fr 120px 1.05fr;max-width:1380px;margin:0 auto;min-width:1250px}
+#g .ch{font-size:12px;color:var(--mute);font-weight:600;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.col{display:flex;flex-direction:column;gap:10px;justify-content:center}.rows{display:grid;grid-template-columns:1.12fr 60px 1fr;row-gap:12px;align-items:center;align-content:center}
+.col.c2{justify-content:space-evenly;gap:34px;padding:10px 0}.col.c3{justify-content:space-evenly;gap:16px;padding:6px 0}
+.n{position:relative;z-index:2;background:var(--panel);border:1px solid #23304a;border-radius:7px;padding:8px 10px;cursor:pointer;transition:border-color .15s,opacity .15s}
+.n:hover,.n.on{border-color:var(--acc)}.n .t{font-size:13.5px;font-weight:700;line-height:1.38;word-break:keep-all;display:flex;align-items:flex-start;gap:8px}.n .t .tt{flex:1;min-width:0}.n .t .pp{flex:none;margin-left:auto;color:#8b97ab;font-weight:500;font-variant-numeric:tabular-nums;padding-left:6px}
+.n .s{font-size:11.5px;color:var(--mute);margin-top:2px;line-height:1.45;word-break:keep-all}
+.n .ev{margin:5px 0 0;padding:0;list-style:none;font-size:11.5px;line-height:1.5;color:#c9cfda}.n .ev li{display:flex;gap:8px}.n .ev li+li{margin-top:2px}.n .ev b{color:var(--mute);font-weight:500;white-space:nowrap;flex:none;width:var(--dw,46px)}
+.n .pr{display:flex;align-items:baseline;gap:8px;margin-top:3px;font-variant-numeric:tabular-nums;flex-wrap:wrap}.n .pr .v{font-size:19px;font-weight:700}.n .pr .w{font-size:11.5px;color:var(--mute)}.n .pr .d{font-size:13px;font-weight:700}
+.up{color:var(--up)}.dn{color:var(--down)}.eq{color:var(--mute)}
+.n.p{border-left:3px solid #3a4a66}
+.who{flex:none;width:var(--ww,52px);text-align:center;font-size:10.5px;color:var(--mute);border:1px solid #2c3a52;border-radius:3px;padding:1px 0;margin-top:1px;font-weight:500;line-height:1.4}.who.w-l{color:#cfe6ff;border-color:#2f4a6a}.who.w-i{color:#e6d9b8;border-color:#5a4a2a}
+.n .cs{font-size:10.5px;color:#9fb3d1;margin-bottom:2px}
+.dim .n:not(.hl){opacity:.3}
+svg#ed{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}svg#ed path{fill:none}svg#ed path.hit{stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:pointer}
+.dim svg#ed path.vis:not(.hl){opacity:.06}.dim svg#ed path.vis.hl{stroke-opacity:1}
+.empty{grid-column:1/-1;font-size:13.5px;color:#c9cfda;background:var(--panel);border:1px dashed #2c3a52;border-radius:8px;padding:12px 14px;line-height:1.7;margin-bottom:14px}
+#info{position:fixed;right:16px;bottom:16px;width:400px;max-width:calc(100vw - 32px);max-height:60vh;overflow:auto;background:rgba(11,17,29,.98);border:1px solid #2c3a52;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.65;color:#c9cfda;z-index:20;display:none;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#info h3{margin:0 0 4px;font-size:14px;color:var(--ink);padding-right:30px}#info .k{font-size:10.5px;color:var(--mute);border:1px solid #2c3a52;border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap}
+#info .it{border-top:1px solid #1b2536;padding-top:7px;margin-top:7px}#info a{color:var(--acc);text-decoration:none}#info .x{position:absolute;right:8px;top:8px;width:28px;height:28px;border-radius:14px;border:1px solid #3a4457;background:#2a2f3a;color:#fff;font-size:17px;line-height:24px;cursor:pointer}
+#info .go{display:inline-block;margin-top:8px}#info .mp{color:#9fb3d1}#info .nm{color:#cfe6ff}
+.more{max-width:1380px;margin:0 auto;padding:0 20px 6px;font-size:12.5px}.more a{color:var(--acc);text-decoration:none}
+.foot{max-width:1380px;margin:0 auto;padding:0 20px 30px;font-size:11.5px;color:var(--mute);line-height:1.6;word-break:keep-all}
+.load{padding:40px 20px;color:var(--mute);font-size:13px;text-align:center}
+html.fs h1,html.fs .lede,html.fs .foot,html.fs .more,html.fs .hint{display:none}html.fs .top{padding-top:10px}html.fs #sc{height:calc(100vh - var(--ctl,140px));overflow:auto}
+html.embed .top{padding-top:12px}
+@media (max-width:1100px){.hint{display:block}h1{font-size:21px}.top{padding:16px 16px 0}#sc{padding:0 16px 16px}.more,.foot{padding-left:16px;padding-right:16px}
+ #info{left:0;right:0;bottom:0;width:auto;max-width:none;max-height:45vh;border-radius:10px 10px 0 0}}
+</style></head><body>
+<div class="top">
+<h1 id="h1"></h1>
+<p class="lede" id="lede"></p>
+<div class="tabs" id="tabs"></div>
+<div class="opt"><label><input type="checkbox" id="low"> <span id="lowL"></span></label><span id="cnt"></span><button id="fsb" type="button"><span class="ic">⤢</span><span class="lb"></span></button></div>
+<div class="lg" id="lg"></div>
+<div class="hint" id="hint"></div>
+</div>
+<div id="sc"><div id="g"><div class="load" id="ld"></div></div></div>
+<p class="more" id="more"></p>
+<p class="foot" id="foot"></p>
+<div id="info"></div>
+<script>
+(function(){
+const LANG='ko', EN=LANG==='en', P=EN?'/en':'', SINCE='2026-10-01';
+const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const md=s=>{const [y,m,d]=s.split('-').map(Number); return EN?MON[m-1]+' '+d:m+'월 '+d+'일'};
+const T={
+ title:'현재 정세와 나비효과',
+ lede:(a,b)=>a+'부터 '+b+'까지 어떤 사건이 어떤 전망의 확률을 움직였는지, 그 전망이 다루는 일이 유가·환율·무기 재고 같은 변수들을 거쳐 누구의 생활과 산업, 어느 사안으로 번지는지를 한 장에 담았습니다. 칸이나 연결선을 클릭하면 근거와 내용이 나옵니다.',
+ low:'확신도 낮은 연결도 보기', cnt:(n,e)=>'칸 '+n+'개 · 연결 '+e+'개', fs:'전체 화면', fsOff:'전체 화면 닫기',
+ lgRec:'기록: 정세 브리핑 꼭지가 이 전망의 신호로 연결되어, 클리사가 확률을 바꾼 기록',
+ lgJ:'판단: 클리사가 이은 경로선 · 선이 두꺼울수록 확신도가 높음',
+ lgM:'같은 대상: 전망이 이 변수 자체를 다룬 것',
+ hint:'옆으로 밀어 전체를 보십시오. 칸을 누르면 이어진 길만 밝게 남습니다.',
+ cols:['사건 · 정세 브리핑','확률이 움직인 전망','거쳐 가는 변수','생활 · 산업 · 다른 사안'],
+ evT:n=>'정세 브리핑 '+n+'건', evS:(u,d)=>'확률을 높이는 쪽 '+u+' · 낮추는 쪽 '+d, lowSide:' (낮추는 쪽)', highSide:' (높이는 쪽)',
+ noSig:'정세 브리핑 신호 없이 바꾼 확률입니다. 근거는 전망 기록에 있습니다.',
+ from:(d,a)=>d+' '+a+'%',
+ recWhy:(u,d,h)=>'높이는 쪽 신호 '+u+'건, 낮추는 쪽 '+d+'건이 붙었습니다.'+(h.length?' 클리사는 확률을 '+h.map(x=>x[0]+' '+x[1]+'%').join(', ')+'로 바꿨습니다.':''),
+ via:(f,n)=>'이 전망을 ‘'+n+'’의 신호로 보고 이었습니다.',
+ empty:(c,ib,lo)=>'이 기간에 '+c+' 사안에서는 확률이 움직이면서 연쇄 고리로 이어진 전망이 없습니다.'+(ib?' 아래는 다른 사안에서 이 사안으로 들어오는 길입니다.':(lo?'':' 확신도 낮은 연결까지 보면 다른 사안에서 들어오는 길이 나올 수 있습니다.')),
+ kRec:'기록', kMeas:'같은 대상', kJ:'판단', confL:'확신도', conf:{},
+ kSc:'전개', kX:'바깥 변수', kLife:'생활', kInd:'산업', kFc:'전망', kr:'한국 ', us:'미국 ',
+ go:'이 쪽으로 가기 →', close:'닫기', all:'전체',
+ cases:{iran:'이란 전쟁',ukraine:'러-우 전쟁',korea:'한반도',taiwan:'대만해협',poland:'러시아-NATO'}, caseOrder:['iran','ukraine','korea','taiwan','poland'],
+ more:'분쟁 지점별 전체 경로는 나비효과 지도에서 보실 수 있습니다 →',
+ foot:'출처: 클리사 지오폴리틱스 정세 브리핑과 전망 확률 변경 기록, 사안 간 연쇄 고리 112개(2026년 11월 3일과 6일 결재). 전망과 연쇄 고리를 잇는 대응(같은 사건·같은 대상·선행 조건·신호)은 클리사의 판단이며 별도 검토자의 독립 검토를 거쳤습니다.',
+ load:'불러오는 중입니다…', err:'자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오.'
+};
+const $=id=>document.getElementById(id), g=$('g'), info=$('info'), tabs=$('tabs'), low=$('low');
+document.documentElement.style.setProperty('--dw',EN?'52px':'46px'); document.documentElement.style.setProperty('--ww',EN?'76px':'52px');
+$('lowL').textContent=T.low; $('fsb').querySelector('.lb').textContent=T.fs; $('hint').textContent=T.hint; $('ld').textContent=T.load; $('h1').textContent=T.title;
+$('lg').innerHTML='<span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#f2f5fa" stroke-width="2"/></svg>'+T.lgRec+'</span><span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#ffd23f" stroke-width="2.6"/></svg>'+T.lgJ+'</span><span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#33d1ff" stroke-width="2"/></svg>'+T.lgM+'</span>';
+$('more').innerHTML='<a href="'+P+'/links/" target="_top">'+T.more+'</a>'; $('foot').textContent=T.foot;
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+const J=u=>fetch(P+u,{cache:'no-cache'}).then(r=>r.json());
+let VIEWS={}, ORDER=[], V='all', N=[], E=[], byId={};
+Promise.all([J('/data/eurasia.json'),J('/data/daily.json'),J('/data/chains.json'),J('/data/fcmap.json')]).then(([D,DL,C,FMr])=>{ try{ build(D,DL,C,FMr); start() }catch(e){ $('ld').textContent=T.err; console.error(e) } }).catch(e=>{ $('ld').textContent=T.err; console.error(e) });
+
+function build(D,DL,C,FMr){
+ const FM={}; FMr.forEach(m=>FM[m.id]=m); const FC={}; (D.forecasts||[]).forEach(f=>FC[f.id]=f);
+ const SC={}; (D.strategies||[]).forEach(s=>{ ((s.futures||{}).items||[]).forEach(it=>SC[s.id+':'+it.id]={n:it.name,p:it.p,k:T.kSc}); ((s.external||{}).items||[]).forEach(it=>SC[s.id+':'+it.id]={n:it.t,p:it.p,k:T.kX}) });
+ const OUT={}; C.links.forEach(l=>(OUT[l.f]=OUT[l.f]||[]).push(l));
+ const CN=T.cases; const fh=D.fc_hist||{};
+ const sig={}; let last=SINCE; (DL.issues||[]).forEach(iss=>{ if(iss.date>last) last=iss.date; if(iss.date<SINCE) return; (iss.items||[]).forEach(x=>(x.fc||[]).forEach(s=>{ if(s.e==='up'||s.e==='down') (sig[s.id]=sig[s.id]||[]).push([iss.date,s.e,x.h]) })) });
+ $('lede').textContent=T.lede(md(SINCE),md(last));
+ const nname=n=>C.M[n]||(n.startsWith('ind:')?((n.split(':')[1]==='kr'?T.kr:T.us)+(C.ind[n.slice(4)]||n)):n.startsWith('grp:')?(C.grp[n.slice(4)]||n):n.startsWith('fp:')?(C.fp[n.slice(3)]||n):SC[n]?(CN[n.split(':')[0]]+' · '+SC[n].n):FC[n]?FC[n].s:n);
+ const who=n=>n.startsWith('grp:')||n==='M05'?[T.kLife,'l']:n.startsWith('ind:')?[T.kInd,'i']:SC[n]?[SC[n].k,'s']:FC[n]?[T.kFc,'f']:null;
+ const href=n=>n.startsWith('ind:')?P+'/industry/':n.startsWith('grp:')?P+'/life/':n.startsWith('fp:')?P+'/links/':SC[n]?P+'/case/'+n.split(':')[0]+'/':FC[n]?P+'/forecast/':null;
+ const ncol=n=>C.M[n]?2:3;
+ const base=(h,s)=>{const b=h.filter(x=>x[0]<=s).map(x=>x[1]); return b.length?b[b.length-1]:h[0][1]};
+ function one(cs){ const nodes={}, edges=[]; const add=(id,o)=>{ if(!nodes[id]) nodes[id]=Object.assign({id},o); return id };
+  const addT=to=>{ const w=who(to); add(to,{col:ncol(to),t:nname(to),href:href(to),who:w,p:SC[to]?SC[to].p:FC[to]?FC[to].p:null}) };
+  const items=[];
+  (D.forecasts||[]).forEach(f=>{ if(f.status!=='open'||!(f.cases||[]).includes(cs)) return; const m=FM[f.id]; if(!m) return;
+   let tgt=null; for(const c of [m].concat(m.alt?[m.alt]:[])){ if(c&&c.node&&c.rel!=='none'&&(OUT[c.node]||C.M[c.node])){ tgt=c; break } } if(!tgt) return;
+   const h=fh[f.id]||[[last,f.p]]; const a=base(h,SINCE), dd=Math.round((f.p-a)*10)/10; if(!dd) return; items.push([Math.abs(dd),f,a,tgt,m]) });
+  items.sort((x,y)=>y[0]-x[0]);
+  items.slice(0,6).forEach(([_,f,a,tgt,m])=>{ const ss=sig[f.id]||[];
+   const fid=add('F:'+f.id,{col:1,t:f.s,a,b:f.p,href:P+'/forecast/',case:cs,sub:ss.length?null:T.noSig});
+   if(ss.length){ const up=ss.filter(x=>x[1]==='up').length, dn=ss.length-up; const ev=ss.slice().sort((x,y)=>x[0]<y[0]?1:-1).slice(0,2);
+    const eid=add('E:'+f.id,{col:0,case:cs,t:T.evT(ss.length),sub:T.evS(up,dn),ev:ev.map(x=>[md(x[0]),x[2]+(x[1]==='down'&&up>=dn?T.lowSide:x[1]==='up'&&dn>up?T.highSide:'')]),href:P+'/brief/'+ev[0][0]+'/'});
+    const hist=(fh[f.id]||[]).filter(x=>x[0]>SINCE);
+    edges.push({f:eid,t:fid,k:'rec',why:T.recWhy(up,dn,hist.map(x=>[md(x[0]),x[1]]))}) }
+   if(tgt.rel==='measure'||C.M[tgt.node]){ add(tgt.node,{col:2,t:nname(tgt.node),who:who(tgt.node)}); edges.push({f:fid,t:tgt.node,k:'measure',why:tgt===m?m.why:T.via(f.s,nname(tgt.node))}) }
+   else (OUT[tgt.node]||[]).forEach(l=>{ addT(l.t); edges.push({f:fid,t:l.t,k:'judge',conf:l.conf,map:tgt===m?m.why:T.via(f.s,nname(tgt.node)),mech:l.mech,src:l.src,num:l.num}) }) });
+  for(let pass=0;pass<2;pass++) Object.values(nodes).filter(n=>n.col===2).forEach(n=>(OUT[n.id]||[]).forEach(l=>{ if(edges.some(e=>e.f===n.id&&e.t===l.t)) return; addT(l.t); edges.push({f:n.id,t:l.t,k:'judge',conf:l.conf,mech:l.mech,src:l.src,num:l.num}) }));
+  return {nodes:Object.values(nodes),edges} }
+ const al={}, ae=[]; ORDER=['all']; T.caseOrder.forEach(cs=>{ const v=one(cs); VIEWS[cs]=Object.assign(v,{name:CN[cs]}); ORDER.push(cs); v.nodes.forEach(n=>{ if(!al[n.id]) al[n.id]=n }); v.edges.forEach(e=>{ if(!ae.some(y=>y.f===e.f&&y.t===e.t)) ae.push(e) }) });
+ VIEWS.all={name:T.all,nodes:Object.values(al),edges:ae}; VIEWS._CN=CN;
+}
+const CONF=c=>T.conf[c]||c;
+function pick(view){ const v=VIEWS[view]; let es=v.edges.filter(e=>low.checked||e.conf!=='낮음');
+ let keep=new Set(v.nodes.filter(n=>n.col<=1).map(n=>n.id)), ch=true;
+ while(ch){ch=false; es.forEach(e=>{ if(keep.has(e.f)&&!keep.has(e.t)){keep.add(e.t);ch=true} })}
+ es=es.filter(e=>keep.has(e.f)&&keep.has(e.t)); return {nodes:v.nodes.filter(n=>keep.has(n.id)), edges:es} }
+function inbound(cs){ const v=pick('all'); const tg=new Set(v.nodes.filter(n=>n.id.startsWith(cs+':')).map(n=>n.id)); if(!tg.size) return null;
+ const need=new Set(tg); let ch=true; while(ch){ch=false; v.edges.forEach(e=>{ if(need.has(e.t)&&!need.has(e.f)){need.add(e.f);ch=true} })}
+ return {nodes:v.nodes.filter(n=>need.has(n.id)), edges:v.edges.filter(e=>need.has(e.f)&&need.has(e.t))} }
+function order(nodes,edges){ const pos={}; const cols=[0,1,2,3].map(c=>nodes.filter(n=>n.col===c));
+ cols[1].forEach((n,i)=>pos[n.id]=i); cols[0].forEach(n=>pos[n.id]=pos['F:'+n.id.slice(2)]??0);
+ for(const c of [2,3]){ for(let pass=0;pass<2;pass++){ cols[c].forEach(n=>{ const ins=edges.filter(e=>e.t===n.id&&pos[e.f]!=null).map(e=>pos[e.f]); n._b=ins.length?ins.reduce((a,b)=>a+b,0)/ins.length:99 }); cols[c].sort((a,b)=>a._b-b._b); cols[c].forEach((n,i)=>pos[n.id]=i*(cols[1].length/Math.max(1,cols[c].length))) } }
+ return cols }
+function card(n){const d=document.createElement('div'); d.className='n'+(n.col===1?' p':''); d.dataset.id=n.id; let h='';
+ if(V==='all'&&n.case&&n.col<=1) h+='<div class="cs">'+esc(VIEWS._CN[n.case])+'</div>';
+ h+='<div class="t">'+(n.who?'<span class="who w-'+n.who[1]+'">'+esc(n.who[0])+'</span>':'')+'<span class="tt">'+esc(n.t)+'</span>'+(n.p!=null&&n.col===3?'<span class="pp">'+n.p+'%</span>':'')+'</div>';
+ if(n.col===1){const dd=Math.round((n.b-n.a)*10)/10; h+='<div class="pr"><span class="v">'+n.b+'%</span><span class="d '+(dd>0?'up':dd<0?'dn':'eq')+'">'+(dd>0?'▲':dd<0?'▼':'±')+Math.abs(dd)+(EN?' pp':'%p')+'</span><span class="w">'+T.from(md(SINCE),n.a)+'</span></div>'}
+ if(n.sub) h+='<div class="s">'+esc(n.sub)+'</div>';
+ if(n.ev) h+='<ul class="ev">'+n.ev.map(e=>'<li><b>'+e[0]+'</b><span>'+esc(e[1])+'</span></li>').join('')+'</ul>';
+ d.innerHTML=h; d.onclick=ev=>{ev.stopPropagation(); showNode(n.id)}; return d}
+function render(){ g.innerHTML=''; info.style.display='none'; g.classList.remove('dim');
+ let v=pick(V), note=null;
+ if(V!=='all'&&!v.nodes.some(n=>n.col===1)){ const ib=inbound(V); note=T.empty(VIEWS._CN[V],!!ib,low.checked); if(ib) v=ib }
+ N=v.nodes; E=v.edges; byId={}; N.forEach(n=>byId[n.id]=n);
+ $('cnt').textContent=T.cnt(N.length,E.length);
+ if(note){const e=document.createElement('div'); e.className='empty'; e.textContent=note; g.appendChild(e)}
+ T.cols.forEach((c,ci)=>{const h=document.createElement('div');h.className='ch';h.textContent=c;h.style.gridColumn=String(2*ci+1);g.appendChild(h)});
+ const OC=order(N,E); const rows=document.createElement('div'); rows.className='rows'; rows.style.gridColumn='1 / 4';
+ OC[1].forEach(f=>{ const ev=OC[0].find(x=>x.id==='E:'+f.id.slice(2)); const a=ev?card(ev):document.createElement('div'); a.style.gridColumn='1'; const b=card(f); b.style.gridColumn='3'; rows.appendChild(a); rows.appendChild(b) });
+ g.appendChild(rows);
+ [2,3].forEach(ci=>{const col=document.createElement('div'); col.className='col c'+ci; col.style.gridColumn=String(2*ci+1); OC[ci].forEach(n=>col.appendChild(card(n))); g.appendChild(col)});
+ const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{draw(); tell()}) }
+function rect(id){const e=g.querySelector('.n[data-id="'+CSS.escape(id)+'"]'), gr=g.getBoundingClientRect(), r=e.getBoundingClientRect(); return {l:r.left-gr.left,r:r.right-gr.left,t:r.top-gr.top,b:r.bottom-gr.top,cy:(r.top+r.bottom)/2-gr.top}}
+function draw(){const s=g.querySelector('#ed'); if(!s) return; s.innerHTML='';
+ E.forEach((e,i)=>{ if(!byId[e.f]||!byId[e.t]) return; const a=rect(e.f), b=rect(e.t); let d;
+  if(byId[e.f].col===byId[e.t].col){const x=a.r, off=30+Math.min(40,Math.abs(b.cy-a.cy)/8); d='M'+x+','+a.cy+' C'+(x+off)+','+a.cy+' '+(x+off)+','+b.cy+' '+x+','+b.cy}
+  else{const x1=a.r,y1=a.cy,x2=b.l,y2=b.cy,k=(x2-x1)*.5; d='M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2}
+  const w=e.k==='rec'||e.k==='measure'?2:(e.conf==='높음'?2.6:e.conf==='중간'?1.6:1);
+  const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',d); p.setAttribute('class','vis'); p.dataset.i=i;
+  p.setAttribute('stroke',e.k==='rec'?'#f2f5fa':e.k==='measure'?'#33d1ff':'#ffd23f'); p.setAttribute('stroke-width',w); p.setAttribute('stroke-opacity',e.k==='judge'?(e.conf==='높음'?.9:e.conf==='중간'?.7:.5):1);
+  const h=document.createElementNS('http://www.w3.org/2000/svg','path'); h.setAttribute('d',d); h.setAttribute('class','hit'); h.onclick=ev=>{ev.stopPropagation(); showEdge(i)};
+  s.appendChild(p); s.appendChild(h) })}
+function kindL(e){return e.k==='rec'?T.kRec:e.k==='measure'?T.kMeas:T.kJ+' · '+T.confL+' '+CONF(e.conf)}
+function edgeHtml(e){let h='<div class="it"><b>'+esc(byId[e.f].t)+' → '+esc(byId[e.t].t)+'</b> <span class="k">'+kindL(e)+'</span><br>';
+ if(e.map) h+='<span class="mp">'+esc(e.map)+'</span><br>'; h+=esc(e.why||e.mech||'');
+ if(e.num) h+='<br><span class="nm">'+esc(e.num)+'</span>';
+ if(e.src&&e.src.length) h+='<br>'+e.src.filter((u,i,a)=>a.findIndex(v=>v.split('/')[2]===u.split('/')[2])===i).map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join(' · ');
+ return h+'</div>'}
+function hl(ids,eis){g.classList.add('dim'); g.querySelectorAll('.n').forEach(n=>n.classList.toggle('hl',ids.has(n.dataset.id))); g.querySelectorAll('path.vis').forEach(p=>p.classList.toggle('hl',eis.has(+p.dataset.i)))}
+function chain(id){ const ids=new Set([id]), eis=new Set(); let ch=true;
+ const down=new Set([id]); while(ch){ch=false; E.forEach(e=>{ if(down.has(e.f)&&!down.has(e.t)){down.add(e.t);ch=true} })}
+ const up=new Set([id]); ch=true; while(ch){ch=false; E.forEach(e=>{ if(up.has(e.t)&&!up.has(e.f)){up.add(e.f);ch=true} })}
+ E.forEach((e,i)=>{ if((down.has(e.f)&&down.has(e.t))||(up.has(e.f)&&up.has(e.t))){eis.add(i);ids.add(e.f);ids.add(e.t)} }); return [ids,eis] }
+/* 설명 상자: 시황판 안(iframe)에 실릴 때는 바깥 화면에서 보이는 아래쪽에 띄운다 */
+function placeInfo(){ if(info.style.display==='none') return; const fe=window.frameElement; if(!fe||document.documentElement.classList.contains('fs')){ info.style.top=''; info.style.bottom=''; return }
+ try{ const r=fe.getBoundingClientRect(), z=(r.height/fe.offsetHeight)||1, vb=Math.min(innerHeight,(parent.innerHeight-r.top)/z), vt=Math.max(0,-r.top/z); const h=info.offsetHeight; info.style.bottom='auto'; info.style.top=Math.max(vt+8,vb-h-(innerWidth<=1100?0:16))+'px' }catch(_){} }
+function open(html){info.innerHTML='<button class="x" aria-label="'+T.close+'">×</button>'+html; info.style.display='block'; info.scrollTop=0; info.querySelector('.x').onclick=ev=>{ev.stopPropagation(); info.style.display='none'; g.classList.remove('dim')}; placeInfo()}
+function showNode(id){const n=byId[id]; const [ids,eis]=chain(id); hl(ids,eis); const es=E.filter(e=>e.f===id||e.t===id);
+ open('<h3>'+esc(n.t)+'</h3>'+es.map(edgeHtml).join('')+(n.href?'<a class="go" href="'+n.href+'" target="_top">'+T.go+'</a>':''))}
+function showEdge(i){const e=E[i]; hl(new Set([e.f,e.t]),new Set([i])); open(edgeHtml(e).replace('class="it"',''))}
+function tell(){ try{ if(window.frameElement&&!document.documentElement.classList.contains('fs')) parent.postMessage({rpH:Math.ceil(document.body.getBoundingClientRect().height)+2},location.origin) }catch(_){} }
+function start(){
+ ORDER.forEach(k=>{const b=document.createElement('button'); b.type='button'; b.textContent=VIEWS[k].name; b.onclick=ev=>{ev.stopPropagation(); V=k; tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); render()}; if(k===V) b.classList.add('on'); tabs.appendChild(b)});
+ low.onchange=render; render();
+}
+info.addEventListener('click',ev=>ev.stopPropagation());
+document.addEventListener('click',()=>{g.classList.remove('dim'); info.style.display='none'});
+try{ if(window.frameElement){ parent.addEventListener('scroll',placeInfo,{passive:true}); parent.addEventListener('resize',placeInfo) } }catch(_){}
+/* 전체 화면(시황판과 같은 방식): 시황판 안에 실릴 때는 바깥 틀을 화면 가득 키운다 */
+const fsb=$('fsb'); let FSV=null;
+function fsSet(on){ const D=document.documentElement, fe=window.frameElement; if(on===D.classList.contains('fs')) return; D.classList.toggle('fs',on); fsb.querySelector('.lb').textContent=on?T.fsOff:T.fs; fsb.querySelector('.ic').textContent=on?'⤡':'⤢';
+ try{ if(fe){ const pd=parent.document; if(on){ const pz=(fe.getBoundingClientRect().width/fe.offsetWidth)||1; FSV=fe.style.cssText; Object.assign(fe.style,{position:'fixed',left:'0',top:'0',margin:'0',borderRadius:'0',zIndex:'2147483000',width:(parent.innerWidth/pz)+'px',height:(parent.innerHeight/pz)+'px'}); pd.documentElement.style.overflow='hidden'; const r=fe.requestFullscreen&&fe.requestFullscreen(); r&&r.catch&&r.catch(()=>{}) } else { fe.style.cssText=FSV||''; pd.documentElement.style.overflow=''; if(pd.fullscreenElement) pd.exitFullscreen() } }
+  else { if(on&&D.requestFullscreen) D.requestFullscreen().catch(()=>{}); else if(!on&&document.fullscreenElement) document.exitFullscreen() } }catch(_){}
+ setTimeout(()=>{ D.style.setProperty('--ctl',($('sc').getBoundingClientRect().top+8)+'px'); draw(); if(!on) tell() },100) }
+fsb.onclick=ev=>{ev.stopPropagation(); fsSet(!document.documentElement.classList.contains('fs'))};
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') fsSet(false) });
+try{ const pd=window.frameElement?parent.document:document; pd.addEventListener('fullscreenchange',()=>{ if(!pd.fullscreenElement&&document.documentElement.classList.contains('fs')&&FSN) fsSet(false); FSN=!!pd.fullscreenElement }) }catch(_){} let FSN=false;
+let rt; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(()=>{draw(); tell(); placeInfo()},120)}); document.fonts&&document.fonts.ready.then(()=>{draw(); tell()});
+})();
+</script></body></html>

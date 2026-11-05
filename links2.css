@@ -69,3 +69,5 @@
 .lkm-vt a:not(.on):hover{opacity:1;background:rgba(255,255,255,.12)}
 
 @media (max-width:700px){.lkm-vt{display:grid!important;grid-template-columns:1fr 1fr;gap:4px;border-radius:10px!important;width:100%}.lkm-vt a{border-radius:7px!important;text-align:center}}
+
+@media (min-width:701px){.lkm-vt{display:flex!important;width:fit-content;margin-left:auto!important}}  /* 2026-11-06 */
