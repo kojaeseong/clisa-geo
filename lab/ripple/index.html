@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>현재 정세와 나비효과 | 클리사 지오폴리틱스</title>
+<title>지정학 신경망 | 클리사 지오폴리틱스</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <script>if(/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embed')</script>
 <style>
@@ -67,7 +67,7 @@ const LANG='ko', EN=LANG==='en', P=EN?'/en':'', SINCE='2026-10-01';
 const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const md=s=>{const [y,m,d]=s.split('-').map(Number); return EN?MON[m-1]+' '+d:m+'월 '+d+'일'};
 const T={
- title:'현재 정세와 나비효과',
+ title:'지정학 신경망',
  lede:(a,b)=>a+'부터 '+b+'까지 어떤 사건이 어떤 전망의 확률을 움직였는지, 그 전망이 다루는 일이 유가·환율·무기 재고 같은 변수들을 거쳐 누구의 생활과 산업, 어느 사안으로 번지는지를 한 장에 담았습니다. 칸이나 연결선을 클릭하면 근거와 내용이 나옵니다.',
  low:'확신도 낮은 연결도 보기', cnt:(n,e)=>'칸 '+n+'개 · 연결 '+e+'개', fs:'전체 화면', fsOff:'전체 화면 닫기',
  lgRec:'기록: 정세 브리핑 꼭지가 이 전망의 신호로 연결되어, 클리사가 확률을 바꾼 기록',
@@ -92,7 +92,7 @@ const T={
  load:'불러오는 중입니다…', err:'자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오.'
 };
 const $=id=>document.getElementById(id), g=$('g'), info=$('info'), tabs=$('tabs'), low=$('low');
-document.documentElement.style.setProperty('--dw',EN?'52px':'46px'); document.documentElement.style.setProperty('--ww',EN?'76px':'52px');
+document.documentElement.style.setProperty('--dw',EN?'86px':'46px'); document.documentElement.style.setProperty('--ww',EN?'76px':'52px');
 $('lowL').textContent=T.low; $('fsb').querySelector('.lb').textContent=T.fs; $('hint').textContent=T.hint; $('ld').textContent=T.load; $('h1').textContent=T.title;
 $('lg').innerHTML='<span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#f2f5fa" stroke-width="2"/></svg>'+T.lgRec+'</span><span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#ffd23f" stroke-width="2.6"/></svg>'+T.lgJ+'</span><span><svg width="30" height="8"><line x1="0" y1="4" x2="30" y2="4" stroke="#33d1ff" stroke-width="2"/></svg>'+T.lgM+'</span>';
 $('more').innerHTML='<a href="'+P+'/links/" target="_top">'+T.more+'</a>'; $('foot').textContent=T.foot;

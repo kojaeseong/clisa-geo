@@ -4,7 +4,7 @@
 (function(){
   var EN = /^\/en\//.test(location.pathname), P = EN ? "/en" : "";
   var KEY = "rpfrom", RET = "rpret";
-  var T = EN ? {back: "← Back to Chain Reactions"} : {back: "← 나비효과로 돌아가기"};
+  var T = EN ? {back: "← Back to Chain Reactions"} : {back: "← 지정학 신경망으로 돌아가기"};
   var home = /^\/(en\/)?(ripple\/)?$/.test(location.pathname);
   function get(){ try { var s = JSON.parse(sessionStorage.getItem(KEY) || "null"); return s && Date.now() - s.t < 3 * 3600 * 1000 ? s : null; } catch(e){ return null; } }
   /* ① 돌아가기 단추 */

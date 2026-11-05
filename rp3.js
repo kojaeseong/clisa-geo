@@ -4,7 +4,7 @@
 (function(){
   var EN = /^\/en\//.test(location.pathname), P = EN ? "/en" : "";
   if (/\/(lab\/)?ripple\//.test(location.pathname)) return;
-  var TXT = EN ? "See chain reactions →" : "나비효과로 보기 →";
+  var TXT = EN ? "See chain reactions →" : "지정학 신경망 보기 →";
   var OUT = null, FM = null, DLY = null, busy = false;
   function J(u){ return fetch(P + u, {cache: "no-cache"}).then(function(r){ return r.json(); }); }
   function css(){ if (document.getElementById("rp3css")) return; var s = document.createElement("style"); s.id = "rp3css";

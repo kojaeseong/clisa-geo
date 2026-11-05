@@ -285,5 +285,5 @@ Promise.all([fetch(P+'/data/eurasia.json',{cache:'no-cache'}).then(r=>r.json()),
  window.BD={citems,sig:sigm,lead,cnews,asof:today(),start:'2026-10-02',bstart:iss.length?iss[iss.length-1].date:today(),cases:Object.entries(CFG.CN).map(([id,name])=>({id,name,...CFG.STAKE[id]})).concat([{id:'etc',name:'Other forecasts'}]),items,fps,regions:Object.keys(CFG.REG).concat(fps.some(f=>f.region==='기타')?['기타']:[])};
  items.forEach(i=>i.sn=(i.kind==='fc'&&SHORT[i.id])||i.name); start(); }).catch(e=>{document.getElementById('info').textContent='Could not load data: '+e});
 </script>
-<script src="/rp3.js?v=fdef361412" defer></script></body>
+<script src="/rp3.js?v=6e2cc8942a" defer></script></body>
 </html>
