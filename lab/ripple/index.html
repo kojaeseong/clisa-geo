@@ -18,6 +18,7 @@ h1{font-size:25px;margin:0 0 6px;font-weight:700;word-break:keep-all}
 .hint{display:none;font-size:12px;color:var(--acc);margin:0 0 8px}
 #sc{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 20px 20px}
 #g{position:relative;display:grid;grid-template-columns:1.12fr 60px 1fr 64px .9fr 120px 1.05fr;max-width:1380px;margin:0 auto;min-width:1250px}
+#gw{position:relative}.n.fo{outline:3px solid #ffb020;outline-offset:3px}.empty.fbn{border-color:#ffb020;color:#f2f5fa;margin:10px 0 0}.empty.fbn[hidden]{display:none}#g.zm{transform-origin:0 0}
 #g .ch{font-size:12px;color:var(--mute);font-weight:600;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:10px}
 .col{display:flex;flex-direction:column;gap:10px;justify-content:center}.rows{display:grid;grid-template-columns:1.12fr 60px 1fr;row-gap:12px;align-items:center;align-content:center}
 .col.c2{justify-content:space-evenly;gap:34px;padding:10px 0}.col.c3{justify-content:space-evenly;gap:16px;padding:6px 0}
@@ -44,6 +45,7 @@ svg#ed{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events
 html.fs h1,html.fs .lede,html.fs .foot,html.fs .more,html.fs .hint{display:none}html.fs .top{padding-top:10px}html.fs #sc{height:calc(100vh - var(--ctl,140px));overflow:auto}
 html.embed .top{padding-top:12px}
 @media (max-width:1100px){.hint{display:block}h1{font-size:21px}.top{padding:16px 16px 0}#sc{padding:0 16px 16px}.more,.foot{padding-left:16px;padding-right:16px}
+ #sc{touch-action:pan-x pan-y}
  #info{left:0;right:0;bottom:0;width:auto;max-width:none;max-height:45vh;border-radius:10px 10px 0 0}}
 </style></head><body>
 <div class="top">
@@ -53,8 +55,9 @@ html.embed .top{padding-top:12px}
 <div class="opt"><label><input type="checkbox" id="low"> <span id="lowL"></span></label><span id="cnt"></span><button id="fsb" type="button"><span class="ic">⤢</span><span class="lb"></span></button></div>
 <div class="lg" id="lg"></div>
 <div class="hint" id="hint"></div>
+<div class="empty fbn" id="fbn" hidden></div>
 </div>
-<div id="sc"><div id="g"><div class="load" id="ld"></div></div></div>
+<div id="sc"><div id="gw"><div id="g"><div class="load" id="ld"></div></div></div></div>
 <p class="more" id="more"></p>
 <p class="foot" id="foot"></p>
 <div id="info"></div>
@@ -71,6 +74,8 @@ const T={
  lgJ:'판단: 클리사가 이은 경로선 · 선이 두꺼울수록 확신도가 높음',
  lgM:'같은 대상: 전망이 이 변수 자체를 다룬 것',
  hint:'옆으로 밀어 전체를 보십시오. 칸을 누르면 이어진 길만 밝게 남습니다.',
+ colF1:'전망',
+ focus:'이 항목으로 들어오고 나가는 길입니다. 이번 기간에 확률이 움직였는지와 관계없이 결재된 연쇄 고리를 따라 그렸습니다.',
  cols:['사건 · 정세 브리핑','확률이 움직인 전망','거쳐 가는 변수','생활 · 산업 · 다른 사안'],
  evT:n=>'정세 브리핑 '+n+'건', evS:(u,d)=>'확률을 높이는 쪽 '+u+' · 낮추는 쪽 '+d, lowSide:' (낮추는 쪽)', highSide:' (높이는 쪽)',
  noSig:'정세 브리핑 신호 없이 바꾼 확률입니다. 근거는 전망 기록에 있습니다.',
@@ -93,7 +98,7 @@ $('lg').innerHTML='<span><svg width="30" height="8"><line x1="0" y1="4" x2="30" 
 $('more').innerHTML='<a href="'+P+'/links/" target="_top">'+T.more+'</a>'; $('foot').textContent=T.foot;
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 const J=u=>fetch(P+u,{cache:'no-cache'}).then(r=>r.json());
-let VIEWS={}, ORDER=[], V='all', N=[], E=[], byId={};
+let VIEWS={}, ORDER=[], V='all', N=[], E=[], byId={}, Z=1;
 Promise.all([J('/data/eurasia.json'),J('/data/daily.json'),J('/data/chains.json'),J('/data/fcmap.json')]).then(([D,DL,C,FMr])=>{ try{ build(D,DL,C,FMr); start() }catch(e){ $('ld').textContent=T.err; console.error(e) } }).catch(e=>{ $('ld').textContent=T.err; console.error(e) });
 
 function build(D,DL,C,FMr){
@@ -129,10 +134,38 @@ function build(D,DL,C,FMr){
   return {nodes:Object.values(nodes),edges} }
  const al={}, ae=[]; ORDER=['all']; T.caseOrder.forEach(cs=>{ const v=one(cs); VIEWS[cs]=Object.assign(v,{name:CN[cs]}); ORDER.push(cs); v.nodes.forEach(n=>{ if(!al[n.id]) al[n.id]=n }); v.edges.forEach(e=>{ if(!ae.some(y=>y.f===e.f&&y.t===e.t)) ae.push(e) }) });
  VIEWS.all={name:T.all,nodes:Object.values(al),edges:ae}; VIEWS._CN=CN;
+
+ /* 2단계 시안(2026-11-06): 한 항목 보기 — 다른 쪽의 '나비효과로 보기 →'가 남긴 rpfocus {s:[전망 id 또는 연쇄 칸 id], t} */
+ const IN={}; C.links.forEach(l=>(IN[l.t]=IN[l.t]||[]).push(l));
+ const tgtOf=f=>{ const m=FM[f.id]; if(!m) return null; for(const c of [m].concat(m.alt?[m.alt]:[])){ if(c&&c.node&&c.rel!=='none'&&(OUT[c.node]||C.M[c.node])) return [c,m] } return null };
+ function focus(S){ const nodes={}, edges=[], fo=new Set(); const add=(id,o)=>{ if(!nodes[id]) nodes[id]=Object.assign({id},o); return id };
+  const addT=to=>{ add(to,{col:ncol(to),t:nname(to),href:href(to),go:goq(to),who:who(to),p:SC[to]?SC[to].p:FC[to]?FC[to].p:null}) };
+  const has=(a,b)=>edges.some(e=>e.f===a&&e.t===b);
+  const lk=l=>{ if(!has(l.f,l.t)) edges.push({f:l.f,t:l.t,k:'judge',conf:l.conf,mech:l.mech,src:l.src,num:l.num}) };
+  const down=(n,d)=>{ if(d<=0) return; (OUT[n]||[]).forEach(l=>{ addT(l.t); lk(l); down(l.t,d-1) }) };
+  const fcCard=f=>{ const ss=sig[f.id]||[], cs=(f.cases||[])[0]; const h=fh[f.id]||[[last,f.p]], a=base(h,SINCE);
+   const fid=add('F:'+f.id,{col:1,t:f.s,a,b:f.p,href:P+'/forecast/'+f.id+'/',case:cs,sub:ss.length||Math.round((f.p-a)*10)/10===0?null:T.noSig});
+   if(ss.length&&!nodes['E:'+f.id]){ const up=ss.filter(x=>x[1]==='up').length, dn=ss.length-up; const ev=ss.slice().sort((x,y)=>x[0]<y[0]?1:-1).slice(0,2);
+    const eid=add('E:'+f.id,{col:0,case:cs,t:T.evT(ss.length),sub:T.evS(up,dn),ev:ev.map(x=>[md(x[0]),x[2]+(x[1]==='down'&&up>=dn?T.lowSide:x[1]==='up'&&dn>up?T.highSide:'')]),href:P+'/brief/'+ev[0][0]+'/',go:['h',ev[0][2].slice(0,40)]});
+    edges.push({f:eid,t:fid,k:'rec',why:T.recWhy(up,dn,(fh[f.id]||[]).filter(x=>x[0]>SINCE).map(x=>[md(x[0]),x[1]]))}) }
+   return fid };
+  S.forEach(x=>{ const f=FC[x];
+   if(f){ const tm=tgtOf(f); if(!tm) return; const [c,m]=tm, fid=fcCard(f); fo.add(fid); const why=c===m?m.why:T.via(f.s,nname(c.node));
+    if(c.rel==='measure'||C.M[c.node]){ add(c.node,{col:2,t:nname(c.node),who:who(c.node)}); if(!has(fid,c.node)) edges.push({f:fid,t:c.node,k:'measure',why}); down(c.node,2) }
+    else (OUT[c.node]||[]).forEach(l=>{ addT(l.t); if(!has(fid,l.t)) edges.push({f:fid,t:l.t,k:'judge',conf:l.conf,map:why,mech:l.mech,src:l.src,num:l.num}); down(l.t,1) });
+    return }
+   if(!(OUT[x]||IN[x]||C.M[x])) return; if(C.M[x]) add(x,{col:2,t:nname(x),who:who(x)}); else addT(x); fo.add(x); down(x,2);
+   const U=new Set([x]); let fr=[x]; for(let d=0;d<2;d++){ const nx=[]; fr.forEach(n=>(IN[n]||[]).forEach(l=>{ if(FC[l.f]) return; if(C.M[l.f]) add(l.f,{col:2,t:nname(l.f),who:who(l.f)}); else addT(l.f); lk(l); if(!U.has(l.f)){U.add(l.f); nx.push(l.f)} })); fr=nx }
+   const fl=[]; (D.forecasts||[]).forEach(f=>{ if(f.status!=='open') return; const tm=tgtOf(f); if(!tm||!U.has(tm[0].node)) return; const h=fh[f.id]||[[last,f.p]]; fl.push([Math.abs(f.p-base(h,SINCE)),f,tm]) });
+   fl.sort((a,b)=>b[0]-a[0]).slice(0,8).forEach(([_,f,[c,m]])=>{ const fid=fcCard(f); const why=c===m?m.why:T.via(f.s,nname(c.node));
+    if(!has(fid,c.node)) edges.push(c.rel==='measure'||C.M[c.node]?{f:fid,t:c.node,k:'measure',why}:{f:fid,t:c.node,k:'judge',conf:null,map:why}) }) });
+  return {nodes:Object.values(nodes),edges,fo} }
+ let FO=null; try{ const x=JSON.parse(sessionStorage.getItem('rpfocus')||'null'); if(x&&Date.now()-x.t<60000&&x.s&&x.s.length) FO=x.s; sessionStorage.removeItem('rpfocus') }catch(_){}
+ if(FO){ const v=focus(FO); if(v.nodes.length){ VIEWS.focus=Object.assign(v,{name:''}); V='focus' } }
 }
 const CONF=c=>T.conf[c]||c;
 function pick(view){ const v=VIEWS[view]; let es=v.edges.filter(e=>low.checked||e.conf!=='낮음');
- let keep=new Set(v.nodes.filter(n=>n.col<=1).map(n=>n.id)), ch=true;
+ let keep=new Set(v.nodes.filter(n=>n.col<=1||(v.fo&&(v.fo.has(n.id)||!v.edges.some(e=>e.t===n.id)))).map(n=>n.id)), ch=true;
  while(ch){ch=false; es.forEach(e=>{ if(keep.has(e.f)&&!keep.has(e.t)){keep.add(e.t);ch=true} })}
  es=es.filter(e=>keep.has(e.f)&&keep.has(e.t)); return {nodes:v.nodes.filter(n=>keep.has(n.id)), edges:es} }
 function inbound(cs){ const v=pick('all'); const tg=new Set(v.nodes.filter(n=>n.id.startsWith(cs+':')).map(n=>n.id)); if(!tg.size) return null;
@@ -140,10 +173,10 @@ function inbound(cs){ const v=pick('all'); const tg=new Set(v.nodes.filter(n=>n.
  return {nodes:v.nodes.filter(n=>need.has(n.id)), edges:v.edges.filter(e=>need.has(e.f)&&need.has(e.t))} }
 function order(nodes,edges){ const pos={}; const cols=[0,1,2,3].map(c=>nodes.filter(n=>n.col===c));
  cols[1].forEach((n,i)=>pos[n.id]=i); cols[0].forEach(n=>pos[n.id]=pos['F:'+n.id.slice(2)]??0);
- for(const c of [2,3]){ for(let pass=0;pass<2;pass++){ cols[c].forEach(n=>{ const ins=edges.filter(e=>e.t===n.id&&pos[e.f]!=null).map(e=>pos[e.f]); n._b=ins.length?ins.reduce((a,b)=>a+b,0)/ins.length:99 }); cols[c].sort((a,b)=>a._b-b._b); cols[c].forEach((n,i)=>pos[n.id]=i*(cols[1].length/Math.max(1,cols[c].length))) } }
+ for(const c of [2,3]){ for(let pass=0;pass<2;pass++){ cols[c].forEach(n=>{ const ins=edges.filter(e=>e.t===n.id&&pos[e.f]!=null).map(e=>pos[e.f]); const ou=ins.length?[]:edges.filter(e=>e.f===n.id&&pos[e.t]!=null).map(e=>pos[e.t]), q=ins.length?ins:ou; n._b=q.length?q.reduce((a,b)=>a+b,0)/q.length-(ins.length?0:.01):99 }); cols[c].sort((a,b)=>a._b-b._b); cols[c].forEach((n,i)=>pos[n.id]=i*(cols[1].length/Math.max(1,cols[c].length))) } }
  return cols }
-function card(n){const d=document.createElement('div'); d.className='n'+(n.col===1?' p':''); d.dataset.id=n.id; let h='';
- if(V==='all'&&n.case&&n.col<=1) h+='<div class="cs">'+esc(VIEWS._CN[n.case])+'</div>';
+function card(n){const d=document.createElement('div'); d.className='n'+(n.col===1?' p':'')+(V==='focus'&&VIEWS.focus.fo.has(n.id)?' fo':''); d.dataset.id=n.id; let h='';
+ if((V==='all'||V==='focus')&&n.case&&n.col<=1&&VIEWS._CN[n.case]) h+='<div class="cs">'+esc(VIEWS._CN[n.case])+'</div>';
  h+='<div class="t">'+(n.who?'<span class="who w-'+n.who[1]+'">'+esc(n.who[0])+'</span>':'')+'<span class="tt">'+esc(n.t)+'</span>'+(n.p!=null&&n.col===3?'<span class="pp">'+n.p+'%</span>':'')+'</div>';
  if(n.col===1){const dd=Math.round((n.b-n.a)*10)/10; h+='<div class="pr"><span class="v">'+n.b+'%</span><span class="d '+(dd>0?'up':dd<0?'dn':'eq')+'">'+(dd>0?'▲':dd<0?'▼':'±')+Math.abs(dd)+(EN?' pp':'%p')+'</span><span class="w">'+T.from(md(SINCE),n.a)+'</span></div>'}
  if(n.sub) h+='<div class="s">'+esc(n.sub)+'</div>';
@@ -151,27 +184,31 @@ function card(n){const d=document.createElement('div'); d.className='n'+(n.col==
  d.innerHTML=h; d.onclick=ev=>{ev.stopPropagation(); showNode(n.id)}; return d}
 function render(){ g.innerHTML=''; info.style.display='none'; g.classList.remove('dim');
  let v=pick(V), note=null;
- if(V!=='all'&&!v.nodes.some(n=>n.col===1)){ const ib=inbound(V); note=T.empty(VIEWS._CN[V],!!ib,low.checked); if(ib) v=ib }
+ $('fbn').hidden=V!=='focus'; if(V==='focus') $('fbn').textContent=T.focus; else if(V!=='all'&&!v.nodes.some(n=>n.col===1)){ const ib=inbound(V); note=T.empty(VIEWS._CN[V],!!ib,low.checked); if(ib) v=ib }
  N=v.nodes; E=v.edges; byId={}; N.forEach(n=>byId[n.id]=n);
  $('cnt').textContent=T.cnt(N.length,E.length);
  if(note){const e=document.createElement('div'); e.className='empty'; e.textContent=note; g.appendChild(e)}
- T.cols.forEach((c,ci)=>{const h=document.createElement('div');h.className='ch';h.textContent=c;h.style.gridColumn=String(2*ci+1);g.appendChild(h)});
+ T.cols.forEach((c,ci)=>{const h=document.createElement('div');h.className='ch';h.textContent=V==='focus'&&ci===1?T.colF1:c;h.style.gridColumn=String(2*ci+1);g.appendChild(h)});
  const OC=order(N,E); const rows=document.createElement('div'); rows.className='rows'; rows.style.gridColumn='1 / 4';
  OC[1].forEach(f=>{ const ev=OC[0].find(x=>x.id==='E:'+f.id.slice(2)); const a=ev?card(ev):document.createElement('div'); a.style.gridColumn='1'; const b=card(f); b.style.gridColumn='3'; rows.appendChild(a); rows.appendChild(b) });
  g.appendChild(rows);
  [2,3].forEach(ci=>{const col=document.createElement('div'); col.className='col c'+ci; col.style.gridColumn=String(2*ci+1); OC[ci].forEach(n=>col.appendChild(card(n))); g.appendChild(col)});
- const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{draw(); tell()}) }
-function rect(id){const e=g.querySelector('.n[data-id="'+CSS.escape(id)+'"]'), gr=g.getBoundingClientRect(), r=e.getBoundingClientRect(); return {l:r.left-gr.left,r:r.right-gr.left,t:r.top-gr.top,b:r.bottom-gr.top,cy:(r.top+r.bottom)/2-gr.top}}
+ const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{applyZ(); draw(); tell()}) }
+function rect(id){const e=g.querySelector('.n[data-id="'+CSS.escape(id)+'"]'), gr=g.getBoundingClientRect(), r=e.getBoundingClientRect(); return {l:(r.left-gr.left)/Z,r:(r.right-gr.left)/Z,t:(r.top-gr.top)/Z,b:(r.bottom-gr.top)/Z,cy:((r.top+r.bottom)/2-gr.top)/Z}}
 function draw(){const s=g.querySelector('#ed'); if(!s) return; s.innerHTML='';
- E.forEach((e,i)=>{ if(!byId[e.f]||!byId[e.t]) return; const a=rect(e.f), b=rect(e.t); let d;
+ E.forEach((e,i)=>{ if(!byId[e.f]||!byId[e.t]) return; const a=rect(e.f), b=rect(e.t); let d; const odd=byId[e.f].col>=byId[e.t].col;
   if(byId[e.f].col===byId[e.t].col){const x=a.r, off=30+Math.min(40,Math.abs(b.cy-a.cy)/8); d='M'+x+','+a.cy+' C'+(x+off)+','+a.cy+' '+(x+off)+','+b.cy+' '+x+','+b.cy}
-  else{const x1=a.r,y1=a.cy,x2=b.l,y2=b.cy,k=(x2-x1)*.5; d='M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2}
-  const w=e.k==='rec'||e.k==='measure'?2:(e.conf==='높음'?2.6:e.conf==='중간'?1.6:1);
+  else{const bk=byId[e.f].col>byId[e.t].col, x1=bk?a.l:a.r,y1=a.cy,x2=bk?b.r:b.l,y2=b.cy,k=(x2-x1)*.5; d='M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2}
+  const w=e.k==='rec'||e.k==='measure'?2:(e.conf==='높음'?2.6:e.conf==='중간'||!e.conf?1.6:1);
   const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',d); p.setAttribute('class','vis'); p.dataset.i=i;
-  p.setAttribute('stroke',e.k==='rec'?'#f2f5fa':e.k==='measure'?'#33d1ff':'#ffd23f'); p.setAttribute('stroke-width',w); p.setAttribute('stroke-opacity',e.k==='judge'?(e.conf==='높음'?.9:e.conf==='중간'?.7:.5):1);
+  p.setAttribute('stroke',e.k==='rec'?'#f2f5fa':e.k==='measure'?'#33d1ff':'#ffd23f'); p.setAttribute('stroke-width',w); p.setAttribute('stroke-opacity',e.k==='judge'?(e.conf==='높음'?.9:e.conf==='중간'||!e.conf?.7:.5):1);
   const h=document.createElementNS('http://www.w3.org/2000/svg','path'); h.setAttribute('d',d); h.setAttribute('class','hit'); h.onclick=ev=>{ev.stopPropagation(); showEdge(i)};
-  s.appendChild(p); s.appendChild(h) })}
-function kindL(e){return e.k==='rec'?T.kRec:e.k==='measure'?T.kMeas:T.kJ+' · '+T.confL+' '+CONF(e.conf)}
+  s.appendChild(p); s.appendChild(h);
+  /* 2026-11-06 대통령님: 거꾸로(오른쪽→왼쪽) 가거나 같은 열 안에서 도는 선에는 방향 화살표를 넣는다 */
+  if(odd){ const L=p.getTotalLength(), col=p.getAttribute('stroke'), op=p.getAttribute('stroke-opacity'); (L>160?[.3,.55,.8]:[.55]).forEach(t=>{ const q=p.getPointAtLength(t*L), r=p.getPointAtLength(Math.min(L,t*L+2)), an=Math.atan2(r.y-q.y,r.x-q.x), c=Math.cos(an), sn=Math.sin(an), k=7, w=4.2;
+   const tip=[q.x+c*k,q.y+sn*k], l=[q.x-c*k-sn*w,q.y-sn*k+c*w], rr=[q.x-c*k+sn*w,q.y-sn*k-c*w];
+   const ar=document.createElementNS('http://www.w3.org/2000/svg','path'); ar.setAttribute('d','M'+tip+' L'+l+' L'+rr+' Z'); ar.setAttribute('class','vis ar'); ar.dataset.i=i; ar.style.fill=col; ar.style.fillOpacity=Math.max(.75,+op||1); s.insertBefore(ar,h) }) } })}
+function kindL(e){return e.k==='rec'?T.kRec:e.k==='measure'?T.kMeas:T.kJ+(e.conf?' · '+T.confL+' '+CONF(e.conf):'')}
 function edgeHtml(e){let h='<div class="it"><b>'+esc(byId[e.f].t)+' → '+esc(byId[e.t].t)+'</b> <span class="k">'+kindL(e)+'</span><br>';
  if(e.map) h+='<span class="mp">'+esc(e.map)+'</span><br>'; h+=esc(e.why||e.mech||'');
  if(e.num) h+='<br><span class="nm">'+esc(e.num)+'</span>';
@@ -190,9 +227,24 @@ function showNode(id){const n=byId[id]; const [ids,eis]=chain(id); hl(ids,eis); 
  open('<h3>'+esc(n.t)+'</h3>'+es.map(edgeHtml).join('')+(n.href?'<a class="go" href="'+n.href+'" target="_top" data-n="'+esc(id)+'">'+T.go+'</a>':''))}
 function showEdge(i){const e=E[i]; hl(new Set([e.f,e.t]),new Set([i])); open(edgeHtml(e).replace('class="it"',''))}
 function tell(){ try{ if(window.frameElement&&!document.documentElement.classList.contains('fs')) parent.postMessage({rpH:Math.ceil(document.body.getBoundingClientRect().height)+2},location.origin) }catch(_){} }
+
+/* 손가락 확대·축소(시안 2026-11-06): 그림 틀 안에서만. 가장 작게는 화면 폭에 그림 전체, 가장 크게는 처음 크기(2026-11-06 대통령님: 줄이기만, 안내 문구 없음) */
+const sc=$('sc'), gw=$('gw'); let PZ=null;
+const zmin=()=>{ const w=g.offsetWidth; return w?Math.min(1,(sc.clientWidth-parseFloat(getComputedStyle(sc).paddingLeft)*2)/w):1 };
+function applyZ(){ if(Z>=0.999&&Z<=1.001){ Z=1; g.classList.remove('zm'); g.style.transform=''; gw.style.width=''; gw.style.height=''; gw.style.overflow=''; return }
+ g.classList.add('zm'); g.style.transform='scale('+Z+')'; gw.style.overflow='hidden'; gw.style.width=(g.offsetWidth*Z)+'px'; gw.style.height=(g.offsetHeight*Z)+'px' }
+const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+sc.addEventListener('touchstart',e=>{ if(e.touches.length!==2) return; const t=e.touches, r=sc.getBoundingClientRect(), gr=g.getBoundingClientRect();
+ const mx=(t[0].clientX+t[1].clientX)/2, my=(t[0].clientY+t[1].clientY)/2; PZ={d:dist(t),z:Z,cx:(mx-gr.left)/Z,cy:(my-gr.top)/Z,mx,my} },{passive:true});
+sc.addEventListener('touchmove',e=>{ if(!PZ||e.touches.length!==2) return; e.preventDefault();
+ Z=Math.max(zmin(),Math.min(1,PZ.z*dist(e.touches)/PZ.d)); applyZ();
+ const gr=g.getBoundingClientRect(); sc.scrollLeft+= (gr.left+PZ.cx*Z)-PZ.mx; const dy=(gr.top+PZ.cy*Z)-PZ.my;
+ if(Math.abs(dy)>1){ if(document.documentElement.classList.contains('fs')||sc.scrollHeight>sc.clientHeight+2) sc.scrollTop+=dy; else if(!window.frameElement) scrollBy(0,dy) } },{passive:false});
+sc.addEventListener('touchend',e=>{ if(PZ&&e.touches.length<2){ PZ=null; tell() } });
 function start(){
  ORDER.forEach(k=>{const b=document.createElement('button'); b.type='button'; b.textContent=VIEWS[k].name; b.onclick=ev=>{ev.stopPropagation(); V=k; tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); render()}; if(k===V) b.classList.add('on'); tabs.appendChild(b)});
  low.onchange=render; render();
+ if(V==='focus') setTimeout(()=>{ const el=g.querySelector('.n.fo'); if(el){ const r=el.getBoundingClientRect(), sr=sc.getBoundingClientRect(); sc.scrollLeft+=r.left-sr.left-(sr.width-r.width)/2 } },300);
  /* 돌아온 경우: 보던 사안 단추와 칸을 다시 연다 */
  try{ const rt=+sessionStorage.getItem('rpret')||0; if(rt&&Date.now()-rt<20000){ const s=JSON.parse(sessionStorage.getItem('rpfrom')||'null'); if(s&&VIEWS[s.v]){ V=s.v; tabs.querySelectorAll('button').forEach((x,i)=>x.classList.toggle('on',ORDER[i]===V)); render(); setTimeout(()=>{ if(byId[s.n]){ showNode(s.n); const el=g.querySelector('.n[data-id="'+CSS.escape(s.n)+'"]'); el&&el.scrollIntoView({block:'center'}) } },250) } } }catch(_){}
 }
@@ -208,6 +260,6 @@ function fsSet(on){ const D=document.documentElement, fe=window.frameElement; if
 fsb.onclick=ev=>{ev.stopPropagation(); fsSet(!document.documentElement.classList.contains('fs'))};
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') fsSet(false) });
 try{ const pd=window.frameElement?parent.document:document; pd.addEventListener('fullscreenchange',()=>{ if(!pd.fullscreenElement&&document.documentElement.classList.contains('fs')&&FSN) fsSet(false); FSN=!!pd.fullscreenElement }) }catch(_){} let FSN=false;
-let rt; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(()=>{draw(); tell(); placeInfo()},120)}); document.fonts&&document.fonts.ready.then(()=>{draw(); tell()});
+let rt; addEventListener('resize',()=>{clearTimeout(rt); rt=setTimeout(()=>{ if(Z<1){ Z=Math.max(zmin(),Z); applyZ() } draw(); tell(); placeInfo()},120)}); document.fonts&&document.fonts.ready.then(()=>{draw(); tell()});
 })();
 </script></body></html>
