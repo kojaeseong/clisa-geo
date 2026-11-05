@@ -3239,6 +3239,7 @@ function footHtml(noMail){
     '<p>© 2026 고재성 · <a href="/about/#partners">파트너</a> · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 구독</a> · <a href="/method/">사이트 안내</a></p>' +
     "<p>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 '클리사 지오폴리틱스'와 해당 페이지 주소를 출처로 밝혀 주십시오(본문을 40자 이상 복사하면 출처가 자동으로 붙습니다). 전부 또는 상당 부분을 복제·재배포하려면 <a href='mailto:clisageo@clisa.ai'>clisageo@clisa.ai</a>로 먼저 허락을 받아 주십시오.</p></footer>";
 }
+window.CLISA_FOOT = footHtml;  /* v4.84 (2026-11-05): sub2.js adds this footer to tabs that lacked it (briefing, features, industry, region) */
 function caseFbHtml(c){
   const name = String(c.title || "").split(":")[0];
   return '<div class="case-fb"><b>이 분석에 대한 의견</b><span>' + esc(name) + " 분석의 사실 오류나 반대 근거, 빠진 선례가 있으면 알려 주십시오. 제목에 사안 이름을 적어 주시면 확인이 빠릅니다.</span>" + mailRow("[클리사 지오폴리틱스] " + name + " 분석 의견") + "</div>";
@@ -3572,4 +3573,4 @@ document.addEventListener("click", ev => {
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
   addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/
 
-;(function(){try{var v="8e91ed6526",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */
+;(function(){try{var v="efa93903ab",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */

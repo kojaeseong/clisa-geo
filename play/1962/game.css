@@ -564,3 +564,14 @@ html[lang^="en"] .telegram .strip{text-transform:uppercase;letter-spacing:.02em}
 
 /* 2026-10-29 좁은 화면에서 위쪽 메뉴 줄(게임·언어·자리 바꾸기·소리)이 화면 밖으로 밀려 가로 스크롤이 생기던 문제: 줄바꿈을 허용한다 */
 @media (max-width:520px){.brandbar{flex-wrap:wrap;row-gap:6px}.brandbar .bb-r{flex-wrap:wrap;justify-content:flex-end;gap:6px 8px;min-width:0}}
+
+/* 2026-11-05 background cards */
+.bgbox{border-left:4px solid var(--red);background:var(--card);padding:10px 12px 6px;margin:14px 0}
+.bgbox .lab{font:500 11px var(--mono);letter-spacing:.14em;color:var(--red);display:block;margin-bottom:6px}
+.bgc{border-top:1px solid var(--rule-2);padding:2px 0}
+.bgc summary{cursor:pointer;font-weight:700;font-size:15px;padding:8px 0;list-style:none}
+.bgc summary::-webkit-details-marker{display:none}
+.bgc summary::before{content:"▸ ";color:var(--red)}
+.bgc[open] summary::before{content:"▾ "}
+.bgc p{margin:0 0 8px;font-size:15px;line-height:1.85;color:var(--ink)}
+.bgc p.bgsrc{font-size:12.5px;color:var(--muted);line-height:1.6}

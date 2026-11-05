@@ -384,17 +384,24 @@ function scenePages(n){
   return pages;
 }
 function voicesHtml(n){ return '<div class="voices">'+(n.voices||[]).map(function(v){var me=/당신|^You\b/.test(v.who); return '<div class="voice'+(me?' me':'')+'"><div class="w">'+esc(v.who)+(v.kind==='quote'?'<i class="q">'+T('기록','On record')+'</i>':'<i>'+T('요지','In substance')+'</i>')+'</div><div class="t">'+(v.kind==='quote'?'“'+tx(v.text)+'”':tx(v.text))+'</div></div>';}).join('')+'</div>'; }
+/* 2026-11-05 operator decision: background cards (Good to know). Only what this role could know at that hour, shown before the choice, each card once per play */
+function bgSeen(){ var s={}; (S.hist||[]).forEach(function(h){ if(h.id===S.node) return; var m=R.nodes[h.id]; ((m&&m.bg)||[]).forEach(function(k){ s[k]=1; }); }); return s; }
+function bgBox(n){
+  var cards=C.bgcards||{}, seen=bgSeen(), list=(n.bg||[]).filter(function(k){ return cards[k]&&!seen[k]; });
+  if(!list.length) return '';
+  return '<div class="bgbox"><span class="lab">'+T('알아 두기','Good to know')+'</span>'+list.map(function(k){ var c=cards[k]; return '<details class="bgc"><summary>'+esc(c.title)+'</summary><p>'+tx(c.text)+'</p>'+(c.src?'<p class="bgsrc">'+T('출처: ','Source: ')+esc(c.src)+'</p>':'')+'</details>'; }).join('')+'</div>';
+}
 function scenePage(n,pages,p){
   VIEW=function(){ var m=R.nodes[S.node], pg=scenePages(m); scenePage(m,pg,Math.min(p,pg.length-1)); };  /* the page count can differ by language */
   var kind=pages[p], body='';
   if(kind==='brief'){
     body=(n.event?'<div class="event"><span class="lab">'+(R.fog?T('당신이 아는 것','What you know'):T('그사이','Meanwhile'))+'</span>'+tx(n.event)+'</div>':'')+
       (n.telegram?docHtml(n.telegram,S.node):'')+
-      mapBox(n.map);
+      mapBox(n.map)+bgBox(n);
   } else if(kind==='room'){
-    body='<div class="paper wm">'+(function(){var e=(ROLES.filter(function(r){return r.id===R.id;})[0]||{}).emblem;return e&&EMBLEM[e]?'<span class="wmk" aria-hidden="true">'+EMBLEM[e]+'</span>':'';})()+portrait(n.img)+'<p class="prose" style="margin:0 0 14px">'+tx(n.scene)+'</p>'+voicesHtml(n)+'</div>';
+    body=(pages.indexOf('brief')<0?bgBox(n):'')+'<div class="paper wm">'+(function(){var e=(ROLES.filter(function(r){return r.id===R.id;})[0]||{}).emblem;return e&&EMBLEM[e]?'<span class="wmk" aria-hidden="true">'+EMBLEM[e]+'</span>':'';})()+portrait(n.img)+'<p class="prose" style="margin:0 0 14px">'+tx(n.scene)+'</p>'+voicesHtml(n)+'</div>';
   } else if(kind==='room0'){
-    body='<div class="paper wm">'+(function(){var e=(ROLES.filter(function(r){return r.id===R.id;})[0]||{}).emblem;return e&&EMBLEM[e]?'<span class="wmk" aria-hidden="true">'+EMBLEM[e]+'</span>':'';})()+portrait(n.img)+'<p class="prose" style="margin:0">'+tx(n.scene)+'</p></div>';
+    body=(pages.indexOf('brief')<0?bgBox(n):'')+'<div class="paper wm">'+(function(){var e=(ROLES.filter(function(r){return r.id===R.id;})[0]||{}).emblem;return e&&EMBLEM[e]?'<span class="wmk" aria-hidden="true">'+EMBLEM[e]+'</span>':'';})()+portrait(n.img)+'<p class="prose" style="margin:0">'+tx(n.scene)+'</p></div>';
   } else if(kind==='voices'){
     var lead=clean(n.scene||'').split(/(?<=[.다요!?])\s+/)[0];
     body='<div class="paper"><p class="vlead">'+esc(lead)+'</p><h3 class="vh">'+T('방 안의 목소리','Voices in the room')+'</h3>'+voicesHtml(n)+'</div>';

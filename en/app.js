@@ -3263,6 +3263,7 @@ function footHtml(noMail){
     "<p>© 2026 Jae-Seong Ko · <a href=\"/en/about/#partners\">Partners</a> · <a href=\"/en/about/\">A Note from the Founder</a> · <a href=\"/en/subscribe/\">Subscribe</a> · <a href=\"/method/\">Site Guide</a></p>" +
     "<p>The design, text, and data compilations of Clisa Geopolitics are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Geopolitics” and the page address as the source (copying 40 or more characters of text adds the source automatically). To reproduce or redistribute all or a substantial part, please ask for permission first at <a href='mailto:clisageo@clisa.ai'>clisageo@clisa.ai</a>.</p></footer>";
 }
+window.CLISA_FOOT = footHtml;  /* v4.84 (2026-11-05): sub2.js adds this footer to tabs that lacked it (briefing, features, industry, region) */
 function caseFbHtml(c){
   const name = String(c.title || "").split(":")[0];
   return "<div class=\"case-fb\"><b>Feedback on this analysis</b><span>" + esc(name) + " analysis: please report any factual errors, contrary evidence, or missing precedents. Putting the issue name in the subject line speeds up review.</span>" + mailRow("[Clisa Geopolitics] " + name + " analysis: feedback") + "</div>";
@@ -3594,4 +3595,4 @@ document.addEventListener("click", ev => {
   sync(); })();
 
 
-;(function(){try{var v="8e91ed6526",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */
+;(function(){try{var v="efa93903ab",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */
