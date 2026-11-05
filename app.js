@@ -3573,4 +3573,6 @@ document.addEventListener("click", ev => {
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
   addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/
 
+;(function(){try{var s=document.createElement("script");s.src="/rp2.js?v=b4c8b3a377";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp1106 ripple back */
+
 ;(function(){try{var v="efa93903ab",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */

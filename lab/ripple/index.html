@@ -80,7 +80,7 @@ const T={
  empty:(c,ib,lo)=>'이 기간에 '+c+' 사안에서는 확률이 움직이면서 연쇄 고리로 이어진 전망이 없습니다.'+(ib?' 아래는 다른 사안에서 이 사안으로 들어오는 길입니다.':(lo?'':' 확신도 낮은 연결까지 보면 다른 사안에서 들어오는 길이 나올 수 있습니다.')),
  kRec:'기록', kMeas:'같은 대상', kJ:'판단', confL:'확신도', conf:{},
  kSc:'전개', kX:'바깥 변수', kLife:'생활', kInd:'산업', kFc:'전망', kr:'한국 ', us:'미국 ',
- go:'이 쪽으로 가기 →', close:'닫기', all:'전체',
+ go:'이 페이지로 가기 →', close:'닫기', all:'전체',
  cases:{iran:'이란 전쟁',ukraine:'러-우 전쟁',korea:'한반도',taiwan:'대만해협',poland:'러시아-NATO'}, caseOrder:['iran','ukraine','korea','taiwan','poland'],
  more:'분쟁 지점별 전체 경로는 나비효과 지도에서 보실 수 있습니다 →',
  foot:'출처: 클리사 지오폴리틱스 정세 브리핑과 전망 확률 변경 기록, 사안 간 연쇄 고리 112개(2026년 11월 3일과 6일 결재). 전망과 연쇄 고리를 잇는 대응(같은 사건·같은 대상·선행 조건·신호)은 클리사의 판단이며 별도 검토자의 독립 검토를 거쳤습니다.',
@@ -105,20 +105,22 @@ function build(D,DL,C,FMr){
  $('lede').textContent=T.lede(md(SINCE),md(last));
  const nname=n=>C.M[n]||(n.startsWith('ind:')?((n.split(':')[1]==='kr'?T.kr:T.us)+(C.ind[n.slice(4)]||n)):n.startsWith('grp:')?(C.grp[n.slice(4)]||n):n.startsWith('fp:')?(C.fp[n.slice(3)]||n):SC[n]?(CN[n.split(':')[0]]+' · '+SC[n].n):FC[n]?FC[n].s:n);
  const who=n=>n.startsWith('grp:')||n==='M05'?[T.kLife,'l']:n.startsWith('ind:')?[T.kInd,'i']:SC[n]?[SC[n].k,'s']:FC[n]?[T.kFc,'f']:null;
- const href=n=>n.startsWith('ind:')?P+'/industry/':n.startsWith('grp:')?P+'/life/':n.startsWith('fp:')?P+'/links/':SC[n]?P+'/case/'+n.split(':')[0]+'/':FC[n]?P+'/forecast/':null;
+ /* 2026-11-06 결재: '이 페이지로 가기'는 그 칸이 보이는 자리로 */
+ const href=n=>n.startsWith('ind:')?P+'/industry/':n.startsWith('grp:')?P+'/life/':n.startsWith('fp:')?P+'/links/':SC[n]?P+'/case/'+n.split(':')[0]+'/':FC[n]?P+'/forecast/'+n+'/':null;
+ const goq=n=>n.startsWith('ind:')?['ind','ind-'+n.slice(4)]:n.startsWith('grp:')?['g',n.slice(4)]:n.startsWith('fp:')?['fp',n.slice(3)]:SC[n]?['sc',n.split(':')[1]]:null;
  const ncol=n=>C.M[n]?2:3;
  const base=(h,s)=>{const b=h.filter(x=>x[0]<=s).map(x=>x[1]); return b.length?b[b.length-1]:h[0][1]};
  function one(cs){ const nodes={}, edges=[]; const add=(id,o)=>{ if(!nodes[id]) nodes[id]=Object.assign({id},o); return id };
-  const addT=to=>{ const w=who(to); add(to,{col:ncol(to),t:nname(to),href:href(to),who:w,p:SC[to]?SC[to].p:FC[to]?FC[to].p:null}) };
+  const addT=to=>{ const w=who(to); add(to,{col:ncol(to),t:nname(to),href:href(to),go:goq(to),who:w,p:SC[to]?SC[to].p:FC[to]?FC[to].p:null}) };
   const items=[];
   (D.forecasts||[]).forEach(f=>{ if(f.status!=='open'||!(f.cases||[]).includes(cs)) return; const m=FM[f.id]; if(!m) return;
    let tgt=null; for(const c of [m].concat(m.alt?[m.alt]:[])){ if(c&&c.node&&c.rel!=='none'&&(OUT[c.node]||C.M[c.node])){ tgt=c; break } } if(!tgt) return;
    const h=fh[f.id]||[[last,f.p]]; const a=base(h,SINCE), dd=Math.round((f.p-a)*10)/10; if(!dd) return; items.push([Math.abs(dd),f,a,tgt,m]) });
   items.sort((x,y)=>y[0]-x[0]);
   items.slice(0,6).forEach(([_,f,a,tgt,m])=>{ const ss=sig[f.id]||[];
-   const fid=add('F:'+f.id,{col:1,t:f.s,a,b:f.p,href:P+'/forecast/',case:cs,sub:ss.length?null:T.noSig});
+   const fid=add('F:'+f.id,{col:1,t:f.s,a,b:f.p,href:P+'/forecast/'+f.id+'/',case:cs,sub:ss.length?null:T.noSig});
    if(ss.length){ const up=ss.filter(x=>x[1]==='up').length, dn=ss.length-up; const ev=ss.slice().sort((x,y)=>x[0]<y[0]?1:-1).slice(0,2);
-    const eid=add('E:'+f.id,{col:0,case:cs,t:T.evT(ss.length),sub:T.evS(up,dn),ev:ev.map(x=>[md(x[0]),x[2]+(x[1]==='down'&&up>=dn?T.lowSide:x[1]==='up'&&dn>up?T.highSide:'')]),href:P+'/brief/'+ev[0][0]+'/'});
+    const eid=add('E:'+f.id,{col:0,case:cs,t:T.evT(ss.length),sub:T.evS(up,dn),ev:ev.map(x=>[md(x[0]),x[2]+(x[1]==='down'&&up>=dn?T.lowSide:x[1]==='up'&&dn>up?T.highSide:'')]),href:P+'/brief/'+ev[0][0]+'/',go:['h',ev[0][2].slice(0,40)]});
     const hist=(fh[f.id]||[]).filter(x=>x[0]>SINCE);
     edges.push({f:eid,t:fid,k:'rec',why:T.recWhy(up,dn,hist.map(x=>[md(x[0]),x[1]]))}) }
    if(tgt.rel==='measure'||C.M[tgt.node]){ add(tgt.node,{col:2,t:nname(tgt.node),who:who(tgt.node)}); edges.push({f:fid,t:tgt.node,k:'measure',why:tgt===m?m.why:T.via(f.s,nname(tgt.node))}) }
@@ -185,14 +187,16 @@ function placeInfo(){ if(info.style.display==='none') return; const fe=window.fr
  try{ const r=fe.getBoundingClientRect(), z=(r.height/fe.offsetHeight)||1, vb=Math.min(innerHeight,(parent.innerHeight-r.top)/z), vt=Math.max(0,-r.top/z); const h=info.offsetHeight; info.style.bottom='auto'; info.style.top=Math.max(vt+8,vb-h-(innerWidth<=1100?0:16))+'px' }catch(_){} }
 function open(html){info.innerHTML='<button class="x" aria-label="'+T.close+'">×</button>'+html; info.style.display='block'; info.scrollTop=0; info.querySelector('.x').onclick=ev=>{ev.stopPropagation(); info.style.display='none'; g.classList.remove('dim')}; placeInfo()}
 function showNode(id){const n=byId[id]; const [ids,eis]=chain(id); hl(ids,eis); const es=E.filter(e=>e.f===id||e.t===id);
- open('<h3>'+esc(n.t)+'</h3>'+es.map(edgeHtml).join('')+(n.href?'<a class="go" href="'+n.href+'" target="_top">'+T.go+'</a>':''))}
+ open('<h3>'+esc(n.t)+'</h3>'+es.map(edgeHtml).join('')+(n.href?'<a class="go" href="'+n.href+'" target="_top" data-n="'+esc(id)+'">'+T.go+'</a>':''))}
 function showEdge(i){const e=E[i]; hl(new Set([e.f,e.t]),new Set([i])); open(edgeHtml(e).replace('class="it"',''))}
 function tell(){ try{ if(window.frameElement&&!document.documentElement.classList.contains('fs')) parent.postMessage({rpH:Math.ceil(document.body.getBoundingClientRect().height)+2},location.origin) }catch(_){} }
 function start(){
  ORDER.forEach(k=>{const b=document.createElement('button'); b.type='button'; b.textContent=VIEWS[k].name; b.onclick=ev=>{ev.stopPropagation(); V=k; tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); render()}; if(k===V) b.classList.add('on'); tabs.appendChild(b)});
  low.onchange=render; render();
+ /* 돌아온 경우: 보던 사안 단추와 칸을 다시 연다 */
+ try{ const rt=+sessionStorage.getItem('rpret')||0; if(rt&&Date.now()-rt<20000){ const s=JSON.parse(sessionStorage.getItem('rpfrom')||'null'); if(s&&VIEWS[s.v]){ V=s.v; tabs.querySelectorAll('button').forEach((x,i)=>x.classList.toggle('on',ORDER[i]===V)); render(); setTimeout(()=>{ if(byId[s.n]){ showNode(s.n); const el=g.querySelector('.n[data-id="'+CSS.escape(s.n)+'"]'); el&&el.scrollIntoView({block:'center'}) } },250) } } }catch(_){}
 }
-info.addEventListener('click',ev=>ev.stopPropagation());
+info.addEventListener('click',ev=>{ const a=ev.target.closest&&ev.target.closest('a.go'); if(a){ const n=byId[a.dataset.n]; try{ sessionStorage.setItem('rpfrom',JSON.stringify({v:V,n:a.dataset.n,t:Date.now()})); if(n&&n.go){ sessionStorage.setItem('rpgo',JSON.stringify({k:n.go[0],q:n.go[1],p:n.href,t:Date.now()})); if(n.go[0]==='g') localStorage.setItem('ep.lifeg',n.go[1]) } }catch(_){} } ev.stopPropagation() });
 document.addEventListener('click',()=>{g.classList.remove('dim'); info.style.display='none'});
 try{ if(window.frameElement){ parent.addEventListener('scroll',placeInfo,{passive:true}); parent.addEventListener('resize',placeInfo) } }catch(_){}
 /* 전체 화면(시황판과 같은 방식): 시황판 안에 실릴 때는 바깥 틀을 화면 가득 키운다 */
