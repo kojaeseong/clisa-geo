@@ -137,3 +137,18 @@ header.hd .hd-snd{margin-right:6px}header.hd .hd-snd.m{display:none}
 header.hd .hd-snd .i-on{display:none}header.hd .hd-snd[aria-pressed="true"] .i-on{display:block}header.hd .hd-snd[aria-pressed="true"] .i-off{display:none}
 header.hd .hd-snd[aria-pressed="true"]{color:var(--accent);border-color:var(--accent)}
 @media (max-width:900px){header.hd .hd-snd.d{display:none}header.hd .hd-l{gap:4px!important}header.hd .hd-snd.m{display:inline-flex;margin:0 -4px 0 0}}
+/* 2026-11-07 시안(대통령님): 띠를 메뉴 위로(메뉴가 본문 바로 위), 넓은 화면의 머리 3개 줄을 낮춘다 */
+header.hd{display:flex;flex-direction:column}header.hd>.hd-r1{order:0}header.hd>.hd-sw{order:1}header.hd>.hd-strips{order:2}header.hd>nav.gnav{order:3!important}
+@media (min-width:901px){
+ header.hd .hd-r1{padding:7px 24px 5px}
+ header.hd .brand .logo{width:30px!important;height:30px!important}
+ header.hd .brand :is(h1,.bh1,b){font-size:22px!important}
+ header.hd .brand .tag{margin-top:3px;font-size:12px!important}
+ header.hd .srch-open,header.hd .lang-sw{height:34px!important}header.hd .asw{height:34px}header.hd .asw a{height:28px}
+ header.hd nav.gnav a{padding:8px 13px 9px!important}
+ header.hd nav.gnav .sep{margin:10px 8px}
+ header.hd .hd-strips{padding:5px 24px 6px}
+ header.hd .strips .bstrip{height:32px}
+}
+@media (min-width:901px) and (max-width:1180px){header.hd nav.gnav a{padding:8px 9px 9px!important}header.hd .brand :is(h1,.bh1,b){font-size:20px!important}}
+@media (max-width:900px){header.hd nav.gnav{padding:10px 12px 12px!important}header.hd .hd-strips{border-top:0;padding:0 12px 4px;background:var(--panel,#fff)}}

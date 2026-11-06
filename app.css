@@ -194,9 +194,18 @@ details.src ul{margin:8px 0 0; padding-left:18px; font-size:12px; display:grid; 
 .fh-rc{} /* 다음 결과 카드와 같은 파랑 바탕(2026-11-01 결재) */ .fh-rc .fh-cd b{font:800 44px/1.05 var(--sans); letter-spacing:-.02em} .fh-rc .fh-cd b.k0{color:#FFD400} .fh-rc .fh-cd b.k1{color:#FFB3B5} .fh-rc .fh-cd b.k2{color:#E3E7F0} .fh-rc .fh-p .o{display:block; font-size:14px; font-weight:600; margin-top:6px} html[lang="en"] .fh-rc .fh-cd b{font-size:30px}
 .fh-next{display:block; width:100%; margin:8px 0 0; padding:10px 16px; border:1px solid var(--line); border-radius:10px; background:var(--panel); color:var(--ink); font-size:14px; text-align:left; cursor:pointer} .fh-next:hover{border-color:var(--accent); color:var(--accent)}
 .fh-st{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px}
-.fh-st span{background:var(--panel-2); border-radius:999px; padding:6px 13px; font-size:13.5px; color:var(--ink-2)} .fh-st b{font:600 13.5px var(--mono); color:var(--ink); margin-right:4px}
+.fh-st button{background:linear-gradient(180deg,#fff,var(--panel-2)); border:1px solid var(--line); border-radius:999px; padding:7px 14px; font:inherit; font-size:13.5px; color:var(--ink-2); cursor:pointer; box-shadow:0 1px 2px rgba(16,20,24,.08); min-height:0}
+.fh-st button:hover{border-color:var(--ink-2); color:var(--ink)} .fh-st button.on{background:var(--ink); color:#fff; border-color:var(--ink)} .fh-st button.on b{color:#fff} .fh-st b{font:600 13.5px var(--mono); color:var(--ink); margin-right:5px}
+html[data-theme="dark"] .fh-st button{background:var(--panel-2)}
+.fon{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 8px; font-size:13.5px; color:var(--ink-2)}
+.frec{list-style:none; margin:10px 0 0; padding:0} .frec li{border-top:1px solid var(--line)} .frec li button{display:flex; gap:12px; justify-content:space-between; align-items:center; width:100%; text-align:left; background:none; border:0; padding:10px 2px; font:inherit; color:var(--ink); cursor:pointer}
+.frec .rq{flex:1; min-width:0; font-weight:600; line-height:1.45} .frec .rq small{display:block; font-weight:400; color:var(--muted); font-size:12.5px; margin-top:2px}
+.frec .rr{display:flex; flex-direction:column; align-items:flex-end; gap:2px; font-size:12.5px; color:var(--ink-2); text-align:right; flex:none} .rec-sum{font-weight:600; margin:2px 0 4px}
+@media (max-width:600px){ .frec li button{flex-direction:column; align-items:flex-start} .frec .rr{align-items:flex-start; text-align:left} }
 .fcal{display:grid; gap:4px; align-items:end; padding:10px 4px 0; border-bottom:1px solid var(--line); margin-top:4px}
-.fcal .fc-c{display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0}
+.fcal .fc-c{display:flex; flex-direction:column; align-items:center; gap:4px; min-width:0; background:none; border:0; border-radius:8px; padding:4px 0; font:inherit; cursor:pointer; min-height:0}
+.fcal .fc-c:disabled{cursor:default} .fcal .fc-c:not(:disabled):hover{background:var(--panel-2)} .fcal .fc-c.on{background:var(--panel-2); box-shadow:inset 0 0 0 2px var(--accent,#2b50d8)}
+.fcal .fc-s i{width:13px; height:13px; border-radius:50%; display:block; background:var(--accent); opacity:.6; border:2px solid var(--panel)}
 .fcal .fc-s{display:flex; flex-wrap:wrap-reverse; justify-content:center; gap:4px; max-width:44px}
 .fcal .fc-d{width:17px; height:17px; min-width:0; min-height:0; flex:none; margin:0; border-radius:50%; display:block; padding:0; border:2px solid var(--panel); box-shadow:0 0 0 1px rgba(16,20,24,.14); cursor:pointer; transition:transform .12s}
 .fcal .fc-d:hover,.fcal .fc-d:focus-visible{transform:scale(1.35); box-shadow:0 0 0 2px var(--ink); outline:none}
@@ -1005,7 +1014,7 @@ details.fw ul{list-style:none; margin:8px 0 0; padding:0; display:grid; gap:10px
 .toc button{flex:none; border:1px solid var(--line); background:var(--panel); border-radius:999px; padding:3px 11px; font-size:12.5px; color:var(--ink-2); cursor:pointer; white-space:nowrap}
 .toc button:hover{border-color:var(--accent); color:var(--accent)}
 #pane-grand section[id], #pane-ideas section[id], #s-case, #s-ins, #f-all, .dec, .dv, #c-intent{scroll-margin-top:52px}
-.fcf .chip.on{background:var(--ink); color:var(--panel); border-color:var(--ink)}
+.fcf .chip.on,.fcm .chip.on{background:var(--ink); color:var(--panel); border-color:var(--ink)}
 .tabs.more{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent); mask-image:linear-gradient(90deg,#000 85%,transparent)}
 @media (max-width: 960px){ .toc{top:env(safe-area-inset-top, 0px)} #pane-strat > .case-sw{top:env(safe-area-inset-top, 0px); flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none} .pane .toc{top:env(safe-area-inset-top, 0px)} .case-a{scroll-margin-top:64px} #pane-grand section[id], #pane-ideas section[id], #s-case, #s-ins, #f-all, .dec, .dv, #c-intent{scroll-margin-top:100px} }
 /* v3.25 반응 속도: 화면 밖의 단락은 보일 때 그린다(탭 전환 때 긴 탭 전체를 한 번에 배치하지 않음) */

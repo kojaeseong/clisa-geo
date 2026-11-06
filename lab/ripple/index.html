@@ -47,6 +47,20 @@ html.embed .top{padding-top:12px}
 @media (max-width:1100px){.hint{display:block}h1{font-size:21px}.top{padding:16px 16px 0}#sc{padding:0 16px 16px}.more,.foot{padding-left:16px;padding-right:16px}
  #sc{touch-action:pan-x pan-y}
  #info{left:0;right:0;bottom:0;width:auto;max-width:none;max-height:45vh;border-radius:10px 10px 0 0}}
+/* 2026-11-07 시안: 휴대전화 첫 화면은 한 갈래 이야기(사건→전망→변수→생활·산업), 전체 그림은 단추로 */
+#st,#stb{display:none}
+@media (max-width:700px){html.stm #sc,html.stm .lg,html.stm .hint,html.stm .opt{display:none}html.stm #st{display:block}
+ #stb{display:inline-block;margin:0 0 10px;background:#16233a;border:1px solid #2a3650;color:#e9eef7;font:inherit;font-size:13px;padding:7px 12px;border-radius:6px;cursor:pointer}html.stm #stb,html.nost #stb{display:none}}
+#st{padding:0 16px 16px}#st .sh{font-size:15.5px;font-weight:700;margin:2px 0 3px;word-break:keep-all}#st .sx{font-size:12.5px;color:var(--mute);line-height:1.6;margin:0 0 12px;word-break:keep-all}
+#st .sl{font-size:11.5px;color:var(--mute);font-weight:600;margin:0 0 6px;letter-spacing:.01em}#st .sp{display:flex;flex-direction:column;gap:8px}#st .sp .n{cursor:pointer}
+#st .ar{display:flex;align-items:center;gap:10px;margin:4px 0 4px 18px;height:34px;font-size:11.5px;color:var(--mute)}#st .ar i{position:relative;display:block;width:2px;height:100%;background:var(--c,#ffd23f);border-radius:1px;overflow:visible}
+#st .ar i:after{content:'';position:absolute;left:-4px;bottom:-2px;border:5px solid transparent;border-top:6px solid var(--c,#ffd23f);border-bottom:0}
+#st .ar i:before{content:'';position:absolute;left:-2px;top:0;width:6px;height:6px;border-radius:3px;background:#fff;animation:stdot 1.4s linear infinite}@keyframes stdot{from{top:-2px;opacity:1}to{top:26px;opacity:.2}}@media (prefers-reduced-motion:reduce){#st .ar i:before{display:none}}
+#st .tr{margin-top:14px}#st .br{position:relative;margin:8px 0 0;padding-left:16px;border-left:2px solid var(--c,#ffd23f)}#st .tr>.br{margin-left:6px}#st .br .br{margin-left:4px}
+#st .bk{font-size:11px;color:var(--mute);margin:0 0 4px}#st .n .al{color:#9fb3d1;margin-top:4px}
+#st .sm{font-size:12px;color:var(--mute);margin:2px 0 0;word-break:keep-all}#st .oth{margin:18px 0 0;border-top:1px solid var(--line);padding-top:12px}#st .oth .bs{display:flex;flex-wrap:wrap;gap:6px}
+#st .oth button{background:#0b111d;border:1px solid #2a3650;color:#c9cfda;font:inherit;font-size:12.5px;padding:6px 10px;border-radius:5px;cursor:pointer;text-align:left;line-height:1.4;word-break:keep-all}#st .oth button.on{border-color:var(--acc);color:#fff}#st .oth button b{font-weight:700;font-variant-numeric:tabular-nums;margin-left:6px}
+#st .all{display:block;width:100%;margin:16px 0 0;background:#16233a;border:1px solid var(--acc);color:#fff;font:inherit;font-size:14px;font-weight:600;padding:11px 12px;border-radius:7px;cursor:pointer}
 /* 2026-11-07: 전체 화면 단추를 시황판처럼 판의 오른쪽 위(제목 줄)에 둔다(넓은 화면) */
 @media (min-width:701px){.top{position:relative}#fsb{position:absolute;top:2px;right:0;margin-left:0}#h1{padding-right:150px}}
 </style></head><body>
@@ -58,7 +72,9 @@ html.embed .top{padding-top:12px}
 <div class="lg" id="lg"></div>
 <div class="hint" id="hint"></div>
 <div class="empty fbn" id="fbn" hidden></div>
+<button id="stb" type="button"></button>
 </div>
+<div id="st"></div>
 <div id="sc"><div id="gw"><div id="g"><div class="load" id="ld"></div></div></div></div>
 <p class="more" id="more"></p>
 <p class="foot" id="foot"></p>
@@ -69,6 +85,11 @@ const LANG='ko', EN=LANG==='en', P=EN?'/en':'', SINCE='2026-10-01';
 const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const md=s=>{const [y,m,d]=s.split('-').map(Number); return EN?MON[m-1]+' '+d:m+'월 '+d+'일'};
 const T={
+ stPath:'전망에서 이어지는 길 (거쳐 가는 변수 → 생활 · 산업 · 다른 사안)', stAlso:x=>x.join('·')+'에서도 이어집니다.',
+ stH:'이번 기간에 가장 크게 번진 길', stH2:'이 전망이 번진 길',
+ stS:'확률이 크게 움직이고 멀리 번진 전망을 골라 사건부터 생활·산업까지 차례로 놓았습니다. 칸을 누르면 근거가 나옵니다.',
+ stOth:'다른 전망의 길 보기', 
+ stAll:(n,e)=>'전체 연결 보기 (칸 '+n+'개 · 연결 '+e+'개)', stBack:'← 한 갈래로 보기',
  title:'지정학 신경망',
  lede:(a,b)=>a+'부터 '+b+'까지 어떤 사건이 어떤 전망의 확률을 움직였는지, 그 전망이 다루는 일이 유가·환율·무기 재고 같은 변수들을 거쳐 누구의 생활과 산업, 어느 사안으로 번지는지를 한 장에 담았습니다. 칸이나 연결선을 클릭하면 근거와 내용이 나옵니다.',
  low:'확신도 낮은 연결도 보기', cnt:(n,e)=>'칸 '+n+'개 · 연결 '+e+'개', fs:'전체 화면', fsOff:'전체 화면 닫기',
@@ -195,7 +216,7 @@ function render(){ g.innerHTML=''; info.style.display='none'; g.classList.remove
  OC[1].forEach(f=>{ const ev=OC[0].find(x=>x.id==='E:'+f.id.slice(2)); const a=ev?card(ev):document.createElement('div'); a.style.gridColumn='1'; const b=card(f); b.style.gridColumn='3'; rows.appendChild(a); rows.appendChild(b) });
  g.appendChild(rows);
  [2,3].forEach(ci=>{const col=document.createElement('div'); col.className='col c'+ci; col.style.gridColumn=String(2*ci+1); OC[ci].forEach(n=>col.appendChild(card(n))); g.appendChild(col)});
- const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{applyZ(); draw(); story(); tell()}) }
+ const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{applyZ(); draw(); story(); stRender(); tell()}) }
 function rect(id){const e=g.querySelector('.n[data-id="'+CSS.escape(id)+'"]'), gr=g.getBoundingClientRect(), r=e.getBoundingClientRect(); return {l:(r.left-gr.left)/Z,r:(r.right-gr.left)/Z,t:(r.top-gr.top)/Z,b:(r.bottom-gr.top)/Z,cy:((r.top+r.bottom)/2-gr.top)/Z}}
 function draw(){const s=g.querySelector('#ed'); if(!s) return; s.innerHTML='';
  E.forEach((e,i)=>{ if(!byId[e.f]||!byId[e.t]) return; const a=rect(e.f), b=rect(e.t); let d; const odd=byId[e.f].col>=byId[e.t].col;
@@ -226,6 +247,35 @@ function chain(id){ const ids=new Set([id]), eis=new Set(); let ch=true;
  const down=new Set([id]); while(ch){ch=false; E.forEach(e=>{ if(down.has(e.f)&&!down.has(e.t)){down.add(e.t);ch=true} })}
  const up=new Set([id]); ch=true; while(ch){ch=false; E.forEach(e=>{ if(up.has(e.t)&&!up.has(e.f)){up.add(e.f);ch=true} })}
  E.forEach((e,i)=>{ if((down.has(e.f)&&down.has(e.t))||(up.has(e.f)&&up.has(e.t))){eis.add(i);ids.add(e.f);ids.add(e.t)} }); return [ids,eis] }
+/* 2026-11-07 시안: 휴대전화 한 갈래 이야기 */
+const MQ=matchMedia('(max-width:700px)'); let MODE='story', SID=null; const st=$('st'), stb=$('stb');
+const CR={'높음':0,'중간':1,'낮음':2};
+function cands(){ let c=N.filter(n=>n.col===1); if(V==='focus') c=c.filter(n=>VIEWS.focus.fo.has(n.id)); return c.map(n=>[Math.abs(n.b-n.a)*chain(n.id)[0].size,n]).sort((a,b)=>b[0]-a[0]).map(x=>x[1]) }
+function stRender(){ const D=document.documentElement, cs=cands(); D.classList.toggle('nost',!cs.length);
+ if(!MQ.matches||!cs.length){ D.classList.remove('stm'); st.innerHTML=''; return }
+ D.classList.toggle('stm',MODE==='story'); stb.textContent=T.stBack; if(MODE!=='story') return;
+ if(!SID||!byId[SID]||!cs.includes(byId[SID])) SID=cs[0].id; const f=byId[SID];
+ const dn=new Map([[SID,null]]); let fr=[SID]; while(fr.length){ const nx=[]; fr.forEach(a=>E.forEach(e=>{ if(e.f===a&&!dn.has(e.t)&&byId[e.t]&&byId[e.t].col>=2){ dn.set(e.t,e); nx.push(e.t) } })); fr=nx }
+ const ev=E.find(e=>e.t===SID&&e.k==='rec'&&byId[e.f]);
+ const kids={}; dn.forEach((e,k)=>{ if(e) (kids[e.f]=kids[e.f]||[]).push(k) });
+ const desc=k=>(kids[k]||[]).reduce((t,c)=>t+1+desc(c),0);
+ const also=k=>E.filter(e=>e.t===k&&dn.has(e.f)&&e!==dn.get(k)).map(e=>byId[e.f].t);
+ const ar=(k)=>{ const c=k==='rec'?'#f2f5fa':k==='measure'?'#33d1ff':'#ffd23f'; const a=document.createElement('div'); a.className='ar'; a.style.setProperty('--c',c); a.innerHTML='<i></i><span>'+esc(k==='rec'?T.kRec:k==='measure'?T.kMeas:T.kJ)+'</span>'; return a };
+ const step=(lab,ids)=>{ const w=document.createElement('div'); w.innerHTML='<div class="sl">'+esc(lab)+'</div>'; const sp=document.createElement('div'); sp.className='sp'; ids.forEach(id=>sp.appendChild(card(byId[id]))); w.appendChild(sp); return w };
+ const sortK=a=>a.slice().sort((x,y)=>(byId[x].col-byId[y].col)||(desc(y)-desc(x))||((CR[dn.get(x).conf]??1)-(CR[dn.get(y).conf]??1)));
+ const branch=k=>{ const w=document.createElement('div'); w.className='br'; const e=dn.get(k); w.style.setProperty('--c',e.k==='measure'?'#33d1ff':'#ffd23f');
+  w.innerHTML='<div class="bk">'+esc(kindL(e))+'</div>'; const c=card(byId[k]); const al=also(k); if(al.length){ const m=document.createElement('div'); m.className='s al'; m.textContent=T.stAlso(al); c.appendChild(m) } w.appendChild(c);
+  sortK(kids[k]||[]).forEach(x=>w.appendChild(branch(x))); return w };
+ st.innerHTML='<div class="sh">'+esc(SID===cs[0].id?T.stH:T.stH2)+'</div><p class="sx">'+esc(T.stS)+'</p>';
+ if(ev){ st.appendChild(step(T.cols[0],[ev.f])); st.appendChild(ar('rec')) }
+ st.appendChild(step(T.cols[1],[SID]));
+ const top=sortK(kids[SID]||[]);
+ if(top.length){ const w=document.createElement('div'); w.className='tr'; w.innerHTML='<div class="sl">'+esc(T.stPath)+'</div>'; top.forEach(k=>w.appendChild(branch(k))); st.appendChild(w) }
+ if(cs.length>1){ const o=document.createElement('div'); o.className='oth'; o.innerHTML='<div class="sl">'+esc(T.stOth)+'</div>'; const bs=document.createElement('div'); bs.className='bs';
+  cs.slice(0,8).forEach(n=>{ const b=document.createElement('button'); b.type='button'; if(n.id===SID) b.className='on'; const dd=Math.round((n.b-n.a)*10)/10; b.innerHTML=esc(n.t)+'<b class="'+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+(EN?' pp':'%p')+'</b>'; b.onclick=ev=>{ ev.stopPropagation(); SID=n.id; info.style.display='none'; stRender(); st.scrollIntoView({block:'start'}); tell() }; bs.appendChild(b) }); o.appendChild(bs); st.appendChild(o) }
+ const all=document.createElement('button'); all.type='button'; all.className='all'; all.textContent=T.stAll(N.length,E.length); all.onclick=ev=>{ ev.stopPropagation(); MODE='full'; info.style.display='none'; stRender(); requestAnimationFrame(()=>{ draw(); story(); tell(); $('tabs').scrollIntoView({block:'start'}) }) }; st.appendChild(all) }
+stb.onclick=ev=>{ ev.stopPropagation(); MODE='story'; info.style.display='none'; unhl(); stRender(); tell() };
+MQ.addEventListener&&MQ.addEventListener('change',()=>{ stRender(); requestAnimationFrame(()=>{ draw(); if(!document.documentElement.classList.contains('stm')) story(); tell() }) });
 /* 설명 상자: 시황판 안(iframe)에 실릴 때는 바깥 화면에서 보이는 아래쪽에 띄운다 */
 function placeInfo(){ if(info.style.display==='none') return; const fe=window.frameElement; if(!fe||document.documentElement.classList.contains('fs')){ info.style.top=''; info.style.bottom=''; return }
  try{ const r=fe.getBoundingClientRect(), z=(r.height/fe.offsetHeight)||1, vb=Math.min(innerHeight,(parent.innerHeight-r.top)/z), vt=Math.max(0,-r.top/z); const h=info.offsetHeight; info.style.bottom='auto'; info.style.top=Math.max(vt+8,vb-h-(innerWidth<=1100?0:16))+'px' }catch(_){} }
@@ -258,7 +308,7 @@ addEventListener('mousemove',e=>{ if(!DG) return; const dx=e.screenX-DG.x, dy=e.
  if(!DG.pe) sc.scrollTop=DG.t-dy; else { let z=1; try{ const fe=window.frameElement; if(fe) z=(fe.getBoundingClientRect().height/fe.offsetHeight)||1 }catch(_){} DG.pe.scrollTop=DG.py-dy*z } });
 addEventListener('mouseup',()=>{ if(!DG) return; const m=DG.m; DG=null; sc.classList.remove('drag'); if(m){ DRAGGED=true; setTimeout(()=>{DRAGGED=false},0) } });
 function start(){
- ORDER.forEach(k=>{const b=document.createElement('button'); b.type='button'; b.textContent=VIEWS[k].name; b.onclick=ev=>{ev.stopPropagation(); V=k; tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); render()}; if(k===V) b.classList.add('on'); tabs.appendChild(b)});
+ ORDER.forEach(k=>{const b=document.createElement('button'); b.type='button'; b.textContent=VIEWS[k].name; b.onclick=ev=>{ev.stopPropagation(); V=k; SID=null; tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b)); render()}; if(k===V) b.classList.add('on'); tabs.appendChild(b)});
  low.onchange=render; render();
  if(V==='focus') setTimeout(()=>{ const el=g.querySelector('.n.fo'); if(el){ const r=el.getBoundingClientRect(), sr=sc.getBoundingClientRect(); sc.scrollLeft+=r.left-sr.left-(sr.width-r.width)/2 } },300);
  /* 돌아온 경우: 보던 사안 단추와 칸을 다시 연다 */

@@ -698,6 +698,9 @@ function setupInteraction(){
     if (fcc) { try { navigator.clipboard.writeText(fcc.dataset.fccopy); fcc.textContent = FCT.copied; } catch(e){} return; }
     const ff = ev.target.closest("[data-fcf]");
     if (ff) { S.fcf = ff.dataset.fcf; renderForecasts(); const a = document.getElementById("f-all"); if (a) a.scrollIntoView({block:"start"}); return; }
+    const fq = ev.target.closest("[data-fcq],[data-fcm],[data-fcx]");  /* v4.94 시안: 성적 줄 단추·달 거르기·거르기 풀기 */
+    if (fq) { if (fq.dataset.fcx) { S.fcq = null; S.fcm = null; } else if (fq.dataset.fcm) S.fcm = S.fcm === fq.dataset.fcm ? null : fq.dataset.fcm; else if (fq.dataset.fcq === "open") { S.fcq = null; S.fcm = null; S.fcf = "all"; } else S.fcq = S.fcq === fq.dataset.fcq ? null : fq.dataset.fcq;
+      const pn = $("#pane-forecast"); renderForecasts(); const a = document.getElementById("f-all"); if (a) a.scrollIntoView({block:"start"}); return; }
     const jb = ev.target.closest("[data-jump]");
     if (jb) { const t = document.getElementById(jb.dataset.jump); if (t) t.scrollIntoView({block:"start", behavior: reduceMotion ? "auto" : "smooth"}); return; }
     const x = ev.target.closest("[data-exit]");
@@ -2916,7 +2919,14 @@ const FCT = {
   legP: "확률", legB: ["20% 이하", "21~40%", "41~60%", "61~80%", "81% 이상"],
   hDays: done => done ? "일 뒤 다음 결과" : "일 뒤 첫 결과", hToday: "오늘 판가름", hK: (d, c) => d + " 판가름 · " + c, hNote: "결과가 나오면 이 자리에 맞았는지 틀렸는지 표시합니다.", hStart: d => d + " 처음",
   rcBig: ["적중", "빗나감", "중립"], rcFz: "점수에 쓰인 확률", rcK: (d, c) => d + " 결정 · " + c, rcNext: (n, x) => n + "일 뒤 다음 결과 · " + x, rcNextT: x => "오늘 다음 결과 · " + x,
-  stOpen: "진행 중", stChg: "확률을 바꾼 전망", stDone: "결과 확인", stVoid: "무효",
+  stOpen: "진행 중", stChg: "확률이 바뀐 전망",
+  calNote2: "점 하나가 전망 하나입니다. 달을 누르면 아래 목록에 그달 판가름 날 전망만 남고, 한 번 더 누르면 모두 보입니다.", calMT: (y, m) => y + "년 " + m + "월", calMS: m => m + "월", calAria: (l, n) => l + " 판가름 " + n + "건",
+  listH: "진행 중인 전망 · 판가름 날 순", listHc: "진행 중인 전망 · 전개별", fChg: "확률이 바뀐 전망만", fM: l => l + "에 판가름 날 전망만", fX: "모두 보기", fNone: "조건에 맞는 진행 중인 전망이 없습니다.",
+  recH: "검증 이력", recD: d => d + " 결과", recO: (o, p) => o + " · 점수에 쓰인 확률 " + p + "%", recB: b => "브라이어 점수 " + b,
+  recSum: (n, h, m, k, b) => "결과가 나온 전망 " + n + "건 · 예측 적중 " + h + "건 · 예측 빗나감 " + m + "건 · 예측 중립 " + k + "건 · 평균 브라이어 점수 " + b,
+  recBase: "브라이어 점수는 0에 가까울수록 정확하며, 모든 전망에 50%라고 답하면 0.250입니다.",
+  recSmall: (n, m, d) => "결과가 나온 전망이 아직 " + n + "건이라 이 점수만으로 정확도를 말하기는 이릅니다." + (m ? " " + d + "까지 결과가 나올 전망이 " + m + "건 있습니다." : ""),
+  recNone: "아직 결과가 나온 전망이 없습니다.", stDone: "결과 확인", stVoid: "무효",
   rel: n => "관련 꼭지 " + n + "건", later: n => "그 뒤의 전망 " + n + "건 · 전체 목록에서 보기 ↓",
   accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 확률은 검증 시점 직전까지 고칠 수 있지만, 검증 시점까지의 마지막 7일 동안 고친 확률은 점수에 넣지 않고 그 기간은 바로 앞 날의 확률로 계산합니다(공개 기간이 짧은 전망은 이 기간이 공개일부터 검증 시점까지의 4분의 1을 넘지 않습니다). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
   href: p => p,
@@ -2977,22 +2987,38 @@ function fcRecentHtml(op, done, t){
     '<div class="fh-p"><b>' + ps + "%</b><span>" + FCT.rcFz + "</span><span class=\"o\">" + (y ? FCT.yes : FCT.no) + "</span></div></button>" +
     (nx ? '<button type="button" class="fh-next" data-fcd="' + esc(nx.id) + '">' + esc(n > 0 ? FCT.rcNext(n, nx.s || nx.q) : FCT.rcNextT(nx.s || nx.q)) + " →</button>" : "");
 }
-function fcStatsHtml(fs, op, done, brier){
-  const chg = op.filter(f => fcHistOf(f)[0][1] !== f.p).length, vd = fs.filter(f => f.status === "void").length;
-  return '<div class="fh-st"><span><b>' + op.length + "</b>" + FCT.stOpen + "</span><span><b>" + chg + "</b>" + FCT.stChg + "</span><span><b>" + done.length + "</b>" + FCT.stDone + "</span>" + (vd ? "<span><b>" + vd + "</b>" + FCT.stVoid + "</span>" : "") + (done.length ? "<span><b>" + brier + "</b>" + FCT.acc + "</span>" : "") + "</div>";
+function fcStatsHtml(fs, op, done, brier){  /* v4.94 시안(2026-11-07 대통령님): 숫자를 누르면 그 목록으로 */
+  const chg = op.filter(f => fcHistOf(f)[0][1] !== f.p).length, vd = fs.filter(f => f.status === "void").length, q = S.fcq;
+  const b = (attr, n, l, on) => '<button type="button" ' + attr + (on ? ' class="on" aria-pressed="true"' : "") + "><b>" + n + "</b>" + l + "</button>";
+  return '<div class="fh-st">' + b('data-fcq="open"', op.length, FCT.stOpen, !q && !S.fcm) + b('data-fcq="chg"', chg, FCT.stChg, q === "chg") + b('data-jump="f-rec"', done.length + vd, FCT.stDone) + (done.length ? b('data-jump="f-rec"', brier, FCT.acc) : "") + "</div>";
 }
-function fcCalHtml(op, t){
-  const y0 = +t.slice(0, 4), m0 = +t.slice(5, 7), cols = [];
-  for (let i = 0; i < 9; i++) { const k = m0 - 1 + i, y = y0 + Math.floor(k / 12), m = k % 12 + 1; cols.push({l: FCT.calM(y, m, i === 0 && false), now: i === 0, t: f => +f.due.slice(0, 4) === y && +f.due.slice(5, 7) === m, y, m}); }
+function fcCols(op, t){
+  const y0 = +t.slice(0, 4), m0 = +t.slice(5, 7), cols = [], two = m => (m < 10 ? "0" : "") + m;
+  for (let i = 0; i < 9; i++) { const k = m0 - 1 + i, y = y0 + Math.floor(k / 12), m = k % 12 + 1; cols.push({k: "m" + y + two(m), l: FCT.calM(y, m, false), lt: FCT.calMT(y, m), now: i === 0, t: f => +f.due.slice(0, 4) === y && +f.due.slice(5, 7) === m, y, m}); }
   cols.forEach((c, i) => { if (c.m === 1 && i) c.l = FCT.calM(c.y, c.m, true); });
   const last = cols[cols.length - 1], rm = last.m + 1;
-  if (rm <= 12 && op.some(f => +f.due.slice(0, 4) === last.y && +f.due.slice(5, 7) >= rm)) cols.push({l: FCT.calRest(last.y, rm), t: f => +f.due.slice(0, 4) === last.y && +f.due.slice(5, 7) >= rm});
-  const ys = [...new Set(op.map(f => +f.due.slice(0, 4)).filter(y => y > last.y))].sort();
-  ys.forEach(y => cols.push({l: FCT.calY(y), t: f => +f.due.slice(0, 4) === y}));
-  const past = op.filter(f => f.due < t); if (past.length) cols[0].t = (g => f => g(f) || f.due < t)(cols[0].t);
-  return '<section class="sec" id="f-cal"><h3>' + FCT.calH + '</h3><p class="note" style="margin-bottom:4px">' + FCT.calNote + '</p><div class="fcal" style="grid-template-columns:repeat(' + cols.length + ',minmax(0,1fr))">' +
-    cols.map(c => { const xs = op.filter(c.t).sort((a, b) => b.p - a.p); return '<div class="fc-c' + (c.now ? " now" : "") + '"><div class="fc-s">' + xs.map(f => '<button type="button" class="fc-d" data-fcd="' + esc(f.id) + '" data-tip="' + esc(f.s || f.q) + '" data-tm="' + esc(fcCaseName(f) + " · " + FCT.ymd(f.due)) + '" data-tp="' + f.p + '" aria-label="' + esc((f.s || f.q) + " " + f.p + "%") + '" style="background:' + fcCol(f.p) + '"></button>').join("") + '</div><div class="fc-n">' + (xs.length || "") + '</div><div class="fc-m">' + c.l + "</div></div>"; }).join("") +
-    '</div><div class="fcal-lg">' + FCT.legP + " " + FCT.legB.map((b, i) => '<span><i style="background:' + FC_RAMP[i] + '"></i>' + b + "</span>").join("") + "</div></section>";
+  if (rm <= 12 && op.some(f => +f.due.slice(0, 4) === last.y && +f.due.slice(5, 7) >= rm)) cols.push({k: "r" + last.y + two(rm), l: FCT.calRest(last.y, rm), lt: FCT.calRest(last.y, rm), t: f => +f.due.slice(0, 4) === last.y && +f.due.slice(5, 7) >= rm});
+  [...new Set(op.map(f => +f.due.slice(0, 4)).filter(y => y > last.y))].sort().forEach(y => cols.push({k: "y" + y, l: FCT.calY(y), lt: FCT.calY(y), t: f => +f.due.slice(0, 4) === y}));
+  if (op.some(f => f.due < t)) cols[0].t = (g => f => g(f) || f.due < t)(cols[0].t);
+  return cols;
+}
+function fcCalHtml(op, t){  /* v4.94 시안: 확률 색을 빼고(질문을 어느 쪽으로 썼느냐에 따라 바뀌는 값이라), 달을 누르면 목록을 거른다 */
+  const cols = fcCols(op, t);
+  return '<section class="sec" id="f-cal"><h3>' + FCT.calH + '</h3><p class="note" style="margin-bottom:4px">' + FCT.calNote2 + '</p><div class="fcal" style="grid-template-columns:repeat(' + cols.length + ',minmax(0,1fr))">' +
+    cols.map(c => { const n = op.filter(c.t).length; return '<button type="button" class="fc-c' + (c.now ? " now" : "") + (S.fcm === c.k ? " on" : "") + '" data-fcm="' + c.k + '"' + (n ? "" : " disabled") + ' aria-pressed="' + (S.fcm === c.k) + '" aria-label="' + esc(FCT.calAria(c.lt, n)) + '"><span class="fc-s">' + '<i></i>'.repeat(n) + '</span><span class="fc-n">' + (n || "") + '</span><span class="fc-m">' + c.l + "</span></button>"; }).join("") +
+    "</div></section>";
+}
+/* v4.94 시안: 검증 이력(결과가 나온 전망 전부를 한곳에) */
+function fcRecHtml(fs, op, done, brier, t){
+  const vd = fs.filter(f => f.status === "void"), all = done.concat(vd).sort((a, b) => (b.resolved || b.due).localeCompare(a.resolved || a.due));
+  const k = {h: 0, m: 0, n: 0}; done.forEach(f => { const x = fcHM(f); if (x === FCT.hit) k.h++; else if (x === FCT.miss) k.m++; else k.n++; });
+  const ye = t.slice(0, 4) + "-12-31", soon = op.filter(f => f.due <= ye).length;
+  const row = f => { const v = f.status === "void", y = f.status === "yes", z = fcFz(f), ps = v ? null : fcPAt(f, fcEnd(f) < z ? fcEnd(f) : z), hm = fcHM(f), c = hm === FCT.hit ? "w" : hm === FCT.miss ? "m" : "h";
+    return '<li><button type="button" data-fcd="' + esc(f.id) + '"><span class="rq">' + esc(f.s || f.q) + "<small>" + esc(fcCaseName(f)) + " · " + FCT.recD(FCT.ymd(f.resolved || f.due)) + '</small></span><span class="rr">' + (v ? '<b class="fd-hm h">' + FCT.voidL + "</b>" :
+      '<b class="fd-hm ' + c + '">' + hm + "</b><span>" + FCT.recO(y ? FCT.yes : FCT.no, ps) + '</span><span>' + FCT.recB(fcBrierT(f, y ? 1 : 0).toFixed(3)) + "</span>") + "</span></button></li>"; };
+  return '<section class="sec" id="f-rec"><h3>' + FCT.recH + "</h3>" +
+    (done.length ? '<p class="rec-sum">' + FCT.recSum(done.length, k.h, k.m, k.n, brier) + '</p><p class="note">' + FCT.recBase + " " + FCT.recSmall(done.length, soon, FCT.ymd(ye)) + "</p>" : '<p class="note">' + FCT.recNone + "</p>") +
+    (all.length ? '<ul class="frec">' + all.map(row).join("") + "</ul>" : "") + "</section>";
 }
 function fcCalTip(){
   const pn = $("#pane-forecast"); if (!pn || pn.dataset.tip) return; pn.dataset.tip = "1";
@@ -3103,18 +3129,22 @@ function renderForecasts(){
   const t0 = fcToday(), op0 = fs.filter(f => f.status === "open").sort((a, b) => a.due.localeCompare(b.due) || b.p - a.p), nx = op0[0];
   $("#pane-forecast").innerHTML =
     '<div class="sec"><h2>전망과 검증</h2><p class="lead" style="margin-top:8px">모든 전망에는 발생 확률과 검증 시점을 명시하며, 검증 시점에 실제 발생 여부를 점검하고 그 결과도 공개합니다.</p><p class="ydnote">' + esc(FCT.ydNote) + "</p></div>" +
-    (fcRecentHtml(op0, done, t0) || fcHeroHtml(op0, done, t0)) + fcStatsHtml(fs, op0, done, brier) +  /* v4.23 다음 결과 카드와 숫자 꼬리표(성적표 3칸을 대신함) */
-    fcCalHtml(op0, t0) +  /* v4.23 판가름 달력 */
-    fcSoonHtml(t0) +  /* v4.22 판가름 목록 */
-    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
+    fcRecentHtml(op0, done, t0) + fcStatsHtml(fs, op0, done, brier) +  /* v4.94 시안(2026-11-07): 성적 줄 → 달 거르기 → 진행 중인 전망 → 검증 이력 → 주간 점검 → 계산법 → 판단 변경 공지 */
+    (() => {  /* v4.94b(2026-11-07 대통령님): 점 그래프 대신 목록 위 달 단추 한 줄 */ const cs = D.strategies || [], cf = f => { const c = fcCase(f); return c ? c.id : "etc"; };
+      const cols = fcCols(op0, t0), mc = cols.find(c => c.k === S.fcm); if (S.fcm && !mc) S.fcm = null;
+      let base = op0; if (S.fcq === "chg") base = base.filter(f => fcHistOf(f)[0][1] !== f.p); const mb = (S.fcf && S.fcf !== "all") ? base.filter(f => cf(f) === S.fcf) : base; if (mc) base = base.filter(mc.t);
+      const opts = [["all", "전체", base.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], base.filter(f => cf(f) === c.id).length]), [["etc", "그 밖의 분쟁", base.filter(f => cf(f) === "etc").length]]);
+      const sel = S.fcf || "all", shown = sel === "all" ? base : base.filter(f => cf(f) === sel);
+      const cc = cs.find(c => c.id === sel), on = [S.fcq === "chg" ? FCT.fChg : "", mc ? FCT.fM(mc.lt) : ""].filter(Boolean);
+      return '<section class="sec" id="f-all"><h3>' + (cc ? esc(cc.title.split(":")[0]) + " · " + FCT.listHc : FCT.listH) + '</h3>' +
+        (on.length ? '<p class="fon">' + esc(on.join(" · ")) + ' <button type="button" class="chip" data-fcx="1">' + FCT.fX + "</button></p>" : "") +
+        '<div class="chips fcm" role="group" aria-label="' + FCT.calH + '" style="margin:0 0 6px">' + cols.map(c => { const n = mb.filter(c.t).length; return n || S.fcm === c.k ? '<button type="button" class="chip' + (S.fcm === c.k ? " on" : "") + '" data-fcm="' + c.k + '" aria-pressed="' + (S.fcm === c.k) + '" aria-label="' + esc(FCT.calAria(c.lt, n)) + '">' + esc(c.y && c.y !== +t0.slice(0, 4) && c.m ? FCT.calMT(c.y, c.m) : c.m ? FCT.calMS(c.m) : c.lt) + ' <span class="mono">' + n + "</span></button>" : ""; }).join("") + "</div>" +
+        '<div class="chips fcf" role="group" aria-label="사안별 전망 거르기" style="margin:0 0 8px">' + opts.filter(o => o[2] || o[0] === sel).map(o => '<button type="button" class="chip' + (o[0] === sel ? " on" : "") + '" data-fcf="' + o[0] + '" aria-pressed="' + (o[0] === sel) + '">' + esc(o[1]) + ' <span class="mono">' + o[2] + "</span></button>").join("") + "</div>" +
+        (!shown.length ? '<p class="note">' + FCT.fNone + "</p>" : cc ? '<p class="note" style="margin:0 0 4px">사안의 가능한 전개마다, 성립 조건과 이어진 전망과 그 전개 쪽(또는 반대쪽)으로 기울게 하는 신호 전망을 묶었습니다. 전개의 확률은 사안 분석의 값이며, 같은 전망이 여러 전개에 나올 수 있습니다.</p>' + fcByBranch(cc, shown) : '<ul class="fsoon">' + shown.map(f => fcSoonRow(f, t0)).join("") + "</ul>") + "</section>"; })() +
+    fcRecHtml(fs, op0, done, brier, t0) +
     (FCR().length ? '<section class="sec" id="f-week"><h3>주간 전망 점검</h3><p class="note" style="margin-bottom:8px">매주 월요일, 지난 한 주의 사건을 반영해 전망의 확률을 다시 봅니다. 조정한 전망과 그대로 둔 전망을 이유와 함께 밝힙니다.</p>' + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
-    '<section class="sec"><h3>빗나간 전망</h3><p class="note" style="margin-bottom:8px">점수에 쓰인 확률이 53% 이상인 전망이 일어나지 않았거나, 37% 이하인 전망이 일어난 경우입니다. ‘가능성 있음’(38~52%)으로 본 전망은 예측 적중에도 예측 빗나감에도 넣지 않습니다.</p>' + (miss.length ? '<ul class="list">' + miss.map(f => forecastRow(f, false)).join("") + "</ul>" : '<p class="note">빗나간 전망은 아직 없습니다.</p>') + "</section>" +
-    ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + '">사안 분석 보기 · ' + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "") +
-    (() => { const cs = D.strategies || [], cf = f => { const c = fcCase(f); return c ? c.id : "etc"; };
-      const opts = [["all", "전체", fs.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], fs.filter(f => cf(f) === c.id).length]), [["etc", "그 밖의 분쟁", fs.filter(f => cf(f) === "etc").length]]);
-      const sel = S.fcf || "all", shown = sel === "all" ? fs : fs.filter(f => cf(f) === sel);
-      const cc = cs.find(c => c.id === sel);
-      return '<section class="sec" id="f-all"><h3>' + (cc ? esc(cc.title.split(":")[0]) + " · 전개별 전망" : "전체 전망 · 검증 시점 순") + '</h3><div class="chips fcf" role="group" aria-label="사안별 전망 거르기" style="margin:0 0 8px">' + opts.filter(o => o[2]).map(o => '<button type="button" class="chip' + (o[0] === sel ? " on" : "") + '" data-fcf="' + o[0] + '" aria-pressed="' + (o[0] === sel) + '">' + esc(o[1]) + ' <span class="mono">' + o[2] + "</span></button>").join("") + '</div>' + (cc ? '<p class="note" style="margin:0 0 4px">사안의 가능한 전개마다, 성립 조건과 이어진 전망과 그 전개 쪽(또는 반대쪽)으로 기울게 하는 신호 전망을 묶었습니다. 전개의 확률은 사안 분석의 값이며, 같은 전망이 여러 전개에 나올 수 있습니다.</p>' + fcByBranch(cc, fs) : '<ul class="list">' + shown.map(f => forecastRow(f, false)).join("") + "</ul>") + "</section>"; })();
+    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
+    ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + '">사안 분석 보기 · ' + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "");
   fcCalTip();  /* v4.23 */
 }
 
