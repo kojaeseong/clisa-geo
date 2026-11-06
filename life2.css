@@ -43,3 +43,20 @@
 }
 .l2-fut h3{color:var(--ink)!important}
 .l2-one{margin:0 0 16px;padding:12px 16px;border-radius:10px;background:var(--panel-2);font-size:14.5px;line-height:1.6;color:var(--ink)}.l2-one b.s{color:var(--accent)}.l2-one b.w{color:#E8890C}
+
+/* v4.92 (2026-11-07 대통령님 '승인한다'): 보기 쪽 머리 상자를 다른 쪽처럼 흰 바탕 제목으로. 보기 단추 줄은 시황판·지정학 신경망과 같은 파란 띠 */
+.l2-who,:root[data-theme="dark"] .l2-who{background:none!important;color:var(--ink)!important;border-radius:0!important;padding:0 0 6px!important;box-shadow:none!important}
+div.l2-who h2{color:var(--ink)!important}
+.l2-who .l2-sub,.l2-who .l2-eye{color:var(--ink-2)!important}
+.l2-who .l2-eye{color:var(--muted)!important}
+.l2-who .l2-vt{background:#1d3fa8!important}
+.l2-who .l2-chip{color:var(--ink)!important;border-color:var(--line)!important;background:transparent!important}
+.l2-who .l2-chip.on{background:#1F4FD8!important;border-color:#1F4FD8!important;color:#fff!important}
+.l2-who .l2-chip.off{color:var(--muted)!important}
+
+/* v4.92 (2026-11-07 대통령님): 보기 단추 줄을 입체적으로 — 띠에 위아래 명암과 그림자, 고른 단추는 떠 있는 흰 알약 */
+.f2-vt,.l2-vt,.lkm-vt,.f2-who .f2-vt,.lkm-hero .lkm-vt,.l2-who .l2-vt,.hm2 .f2-vt{background:linear-gradient(180deg,#2B55D1 0%,#1D3FA8 55%,#17348E 100%)!important;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 -1px 0 rgba(0,0,0,.18) inset,0 3px 0 #122a73,0 8px 18px rgba(23,52,142,.28)!important}
+.f2-vt a,.l2-vt a,.lkm-vt a{transition:transform .15s,box-shadow .15s,background .15s}
+.f2-vt a:not(.on):hover,.l2-vt a:not(.on):hover,.lkm-vt a:not(.on):hover{background:rgba(255,255,255,.16)!important;transform:translateY(-1px)}
+.f2-vt a.on,.l2-vt a.on,.lkm-vt a.on{background:linear-gradient(180deg,#FFFFFF,#E9EEFB)!important;box-shadow:0 1px 0 #fff inset,0 2px 0 rgba(10,30,90,.35),0 4px 10px rgba(10,30,90,.35)!important}
+@media (prefers-reduced-motion:reduce){.f2-vt a,.l2-vt a,.lkm-vt a{transition:none}.f2-vt a:hover,.l2-vt a:hover,.lkm-vt a:hover{transform:none}}

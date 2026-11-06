@@ -108,3 +108,21 @@ html.hm-on #panel{grid-column:1/-1}
 /* 2026-11-06 결재: 화면 폭을 다 쓰는 시황판·나비효과·국민별·나비효과 지도 쪽은 보기 단추 줄을 오른쪽 끝에(전망으로 보기 쪽은 그대로). 좁은 화면은 2줄 격자 */
 @media (min-width:701px){.hm2 .f2-vt,.l2-vt,.lkm-vt{display:flex!important;width:fit-content;margin-left:auto!important}}
 .f2-who h2{text-wrap:pretty!important}  /* 2026-11-06: balance가 넓은 칸에서도 일찍 줄을 바꾸던 것 */
+
+/* v4.92 (2026-11-07 대통령님 '승인한다'): 보기 쪽 머리 상자를 다른 쪽처럼 흰 바탕 제목으로. 보기 단추 줄은 시황판·지정학 신경망과 같은 파란 띠 */
+.f2-who,:root[data-theme="dark"] .f2-who{background:none!important;color:var(--ink)!important;border-radius:0!important;padding:0 0 6px!important;box-shadow:none!important}
+section.f2-who h2{color:var(--ink)!important}
+.f2-who .f2-nl{color:var(--ink-2)!important}
+.f2-who .f2-vt{background:#1d3fa8!important}
+.f2-who .f2-news,.f2-who .f2-news small{color:var(--ink)!important}
+.f2-who .f2-nw{background:var(--accent-soft,rgba(31,79,216,.06))!important;border-color:var(--line)!important;color:var(--ink)!important}
+.f2-who .f2-nw small{color:var(--muted)!important}
+/* v4.92 (2026-11-07 대통령님): 전망으로 보기 쪽의 보기 단추 줄도 다른 보기 쪽처럼 오른쪽 끝에 */
+@media (min-width:701px){.f2-who .f2-vt{display:flex!important;width:fit-content;margin-left:auto!important}}
+
+/* v4.92 (2026-11-07 대통령님): 보기 단추 줄을 입체적으로 — 띠에 위아래 명암과 그림자, 고른 단추는 떠 있는 흰 알약 */
+.f2-vt,.l2-vt,.lkm-vt,.f2-who .f2-vt,.lkm-hero .lkm-vt,.l2-who .l2-vt,.hm2 .f2-vt{background:linear-gradient(180deg,#2B55D1 0%,#1D3FA8 55%,#17348E 100%)!important;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 -1px 0 rgba(0,0,0,.18) inset,0 3px 0 #122a73,0 8px 18px rgba(23,52,142,.28)!important}
+.f2-vt a,.l2-vt a,.lkm-vt a{transition:transform .15s,box-shadow .15s,background .15s}
+.f2-vt a:not(.on):hover,.l2-vt a:not(.on):hover,.lkm-vt a:not(.on):hover{background:rgba(255,255,255,.16)!important;transform:translateY(-1px)}
+.f2-vt a.on,.l2-vt a.on,.lkm-vt a.on{background:linear-gradient(180deg,#FFFFFF,#E9EEFB)!important;box-shadow:0 1px 0 #fff inset,0 2px 0 rgba(10,30,90,.35),0 4px 10px rgba(10,30,90,.35)!important}
+@media (prefers-reduced-motion:reduce){.f2-vt a,.l2-vt a,.lkm-vt a{transition:none}.f2-vt a:hover,.l2-vt a:hover,.lkm-vt a:hover{transform:none}}

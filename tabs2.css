@@ -12,3 +12,11 @@ header.hd .hd-sub a[aria-current="page"]{background:var(--ink,#101418);color:#ff
  header.hd .hd-sub{border-top:0;padding:0 12px 8px}
  header.hd .hd-sub a{font-size:12.5px;padding:5px 12px}
 }
+
+/* v4.92 (2026-11-07 대통령님): 탭 아래 이동 단추(정세 브리핑·주간 정세 요약·특집 등)를 입체적으로 */
+.hd-sub a{background:linear-gradient(180deg,#FFFFFF,#EDF0F4)!important;border:1px solid #D3D9E0;box-shadow:0 1px 0 #fff inset,0 2px 0 #C9D0D9,0 3px 6px rgba(16,20,24,.08);transition:transform .15s,box-shadow .15s}
+.hd-sub a:hover{transform:translateY(-1px);box-shadow:0 1px 0 #fff inset,0 3px 0 #C3CAD4,0 6px 12px rgba(16,20,24,.12)}
+.hd-sub a[aria-current="page"]{background:linear-gradient(180deg,#333B46,#101418)!important;color:#fff!important;border-color:#101418;box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 2px 0 #000,0 4px 10px rgba(16,20,24,.3)}
+:root[data-theme="dark"] .hd-sub a{background:linear-gradient(180deg,#252D37,#1A2129)!important;border-color:#2E3742;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 2px 0 #0B0F14,0 3px 6px rgba(0,0,0,.35)}
+:root[data-theme="dark"] .hd-sub a[aria-current="page"]{background:linear-gradient(180deg,#F4F7FC,#DCE3EE)!important;color:#0B1120!important;border-color:#DCE3EE;box-shadow:0 1px 0 #fff inset,0 2px 0 #8C97A6,0 4px 10px rgba(0,0,0,.45)}
+@media (prefers-reduced-motion:reduce){.hd-sub a{transition:none}.hd-sub a:hover{transform:none}}
