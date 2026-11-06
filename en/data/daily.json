@@ -1,6 +1,166 @@
 {
  "issues": [
   {
+   "date": "2026-11-06",
+   "items": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Iran's Rezaei: no Hormuz reopening, no talks until U.S. meets seven conditions",
+     "fact": "Iran has sent the U.S. a nuclear proposal through Qatar but will discuss it only after Washington meets seven demands, including lifting sanctions, returning frozen assets and paying war reparations, a senior Iranian official told Reuters on November 5. Mohsen Rezaei, Iran's top security official, made the same point while visiting Russia.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.al-monitor.com/originals/2026/11/iran-sent-nuclear-proposal-us-qatar-senior-iranian-official-tells-reuters",
+      "https://www.yahoo.com/news/articles/iran-sent-nuclear-proposal-us-052102769.html"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA",
+       "QAT"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Nasdaq plunges 5.5 percent into correction on fears of Democratic AI curbs",
+     "fact": "The Nasdaq Composite fell 5.52 percent to close at 24,315.00 on November 5, entering correction territory, while the S&P 500 lost 4.36 percent, the Seoul Economic Daily reported. The selloff was blamed on fears that Democrats, after winning control of Congress, will tighten rules on AI and data centers.",
+     "fc": [],
+     "src": [
+      "https://en.sedaily.com/international/2026/11/06/nasdaq-plunges-55-percent-into-correction-on-ai-regulation",
+      "https://www.thenationalnews.com/business/markets/2026/11/05/ai-fears-overtake-democratic-sweep-as-nasdaq-enters-correction-territory/"
+     ],
+     "loc": {
+      "lat": 40.71,
+      "lon": -74.01,
+      "place": "New York (U.S.)",
+      "isos": [
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Iran claims a string of tankers hit mines near Hormuz",
+     "fact": "Iran's military and the Revolutionary Guards said on November 5 that tankers and a tugboat caught fire after mine strikes and other incidents in waters south and east of the Strait of Hormuz. Taken together, the Iranian statements claim at least five tankers and one tug; none of the claims has been independently verified. January Brent futures settled up 3.88 percent at $98.29 a barrel that day, according to the Seoul Economic Daily.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/5/iran-says-tankers-struck-in-hormuz-amid-fears-of-new-us-attack",
+      "https://en.sedaily.com/international/2026/11/06/nasdaq-plunges-55-percent-into-correction-on-ai-regulation"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "Strait of Hormuz",
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Melania Trump hosts Russian, Ukrainian officials: \"something more enduring than a temporary ceasefire\"",
+     "fact": "Melania Trump met Kirill Dmitriev, President Vladimir Putin's special envoy, and Dmytro Lubinets, Ukraine's parliamentary human rights commissioner, among others, at the White House on November 5 to mark a six-day truce in Oleshky, in the Kherson region, that ended November 1, and the evacuation of nearly 800 residents. President Donald Trump told reporters it would be \"a big agreement\" that \"might involve all of Europe.\"",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.whitehouse.gov/briefings-statements/2026/11/first-lady-melania-trump-unites-russia-and-ukraine-at-the-white-house-following-historic-ceasefire/",
+      "https://www.aljazeera.com/news/2026/11/5/melania-trump-calls-for-peace-at-meeting-with-russia-ukraine-officials",
+      "https://www.opb.org/article/2026/11/05/melania-trump-touts-rare-agreement-she-brokered-between-russia-and-ukraine/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "Washington (U.S.)",
+      "isos": [
+       "USA",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [
+      "somalia-somaliland"
+     ],
+     "h": "Somalia's top court rules term extension unlawful; president announces chief justice's dismissal",
+     "fact": "Somalia's Supreme Court ruled on November 5 that President Hassan Sheikh Mohamud's term extension was unlawful and ordered a new agreement among political parties within 30 days and elections within 90, AFP reported. Before the ruling was published, the presidency announced it was dismissing Chief Justice Bashe Yusuf Ahmed.",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.com/world/chaos-in-somalia-as-president-accused-of-arresting-chief-justice-over-adverse-ruling-3009974"
+     ],
+     "loc": {
+      "lat": 2.05,
+      "lon": 45.32,
+      "place": "Mogadishu (Somalia)",
+      "isos": [
+       "SOM"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "case": null,
+     "fp": [],
+     "t": "Paraguayan President Santiago Peña resigned on November 5 amid the bankruptcy of digital bank Ueno; the Chamber of Deputies voted unanimously to impeach him, and Vice President Pedro Alliana will succeed him, Euronews reported.",
+     "src": [
+      "https://www.euronews.com/2026/11/05/paraguayan-president-resigns-amid-bank-collapse-leaving-3m-people-without-access-to-bank-a"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [],
+     "t": "Hoax bomb threats targeted at least 27 European passenger flights from Ireland to Bulgaria on November 5, the second such wave this week, and some made unscheduled landings, Hong Kong's The Standard reported.",
+     "src": [
+      "https://thestandard.com.hk/news/article/347704/Morning-Recap-November-6-2026"
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "t": "The U.K. Maritime Trade Operations agency (UKMTO) said on November 5 that a tanker was struck by two projectiles about 50 nautical miles north of Madinat ash-Shamal, Qatar, at 11:20 p.m. GMT on November 4 (2:20 a.m. November 5 local time).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/5/iran-says-tankers-struck-in-hormuz-amid-fears-of-new-us-attack"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-05",
    "items": [
     {
@@ -5749,137 +5909,6 @@
      "t": "Taiwan's Coast Guard Administration confirmed on October 3 that it had sent three patrol vessels to monitor three Chinese ships in waters where its exclusive economic zone overlaps with that of the Philippines.",
      "src": [
       "https://focustaiwan.tw/politics/202610030015"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-03",
-   "items": [
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "U.S. sends carrier group and Marines to Middle East; Trump says war will end \"right after the election\"",
-     "fact": "A U.S. official confirmed on October 1, 2026, that the Theodore Roosevelt carrier strike group and the Makin Island amphibious ready group, carrying about 2,200 Marines, had set out for the Middle East. Once they arrive, three aircraft carriers and two amphibious groups will be massed around Iran by the end of November. In a speech in Denton, Texas, on October 2, Trump said Iran was \"ready to fold up\" and that the war would end \"right after the election\" or \"maybe before the election.\"",
-     "link": "A day after Trump raised the prospect of wider strikes after the midterms, a costly movement of forces has followed, a heavier signal than words. The reinforcements will be fully assembled just after the November 3 midterm elections, the timing Trump pointed to. The move raises the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/pentagon-deploys-thousands-more-marines-another-aircraft-carrier-mideast",
-      "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
-      "https://www.cbsnews.com/live-updates/trump-iran-war-us-midterm-elections-troops-deployment/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Kim Yo Jong again denies blame for mine blast, rules out \"the slightest space or room\" for ties with Seoul",
-     "fact": "In a statement on October 2, 2026, Kim Yo Jong again insisted that North Korea had nothing to do with the mine explosion in the Demilitarized Zone (DMZ), and called the South Korean government's demand for an apology \"really despicable.\" She added, \"We do not allow the slightest space or room for us to go with the ROK.\" The presidential office in Seoul responded the same day that it would establish the facts transparently and that the North should stop its pointless criticism and engage in dialogue.",
-     "link": "The statement came a day after President Lee Jae-myung called for restoring dialogue in his Armed Forces Day address. Among the disconfirming signals in the Korean Peninsula analysis, it comes close to North Korea formally declaring that it will not accept South Korea as a negotiating partner. The signal's other condition, more frequent missile launches, has not appeared. The statement raises the odds of the forecast that inter-Korean military hotlines will remain unrestored.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.newspim.com/news/view/20261002001241",
-      "https://www.seoul.co.kr/news/politics/2026/10/02/20261002500298",
-      "https://www.upi.com/Top_News/World-News/2026/10/02/Kim-Yo-Jong-rejects-blame-DMZ-blast-mocks-Seoul/2221790940855/"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russia launches massive strike on Ukraine's energy facilities ahead of winter",
-     "fact": "Russia attacked Ukraine's energy facilities with about 190 drones and ballistic missiles from the night of September 30 into October 1, 2026. Seven people were killed, and Kyiv and three surrounding regions imposed emergency power outages for the first time since spring. Ukraine's prime minister said it was the first combined attack on this scale since the end of the last heating season.",
-     "link": "The strike came right after a September 29 report that Washington was pushing for talks in Abu Dhabi in October on limited deals such as a halt to attacks on energy facilities. It is in line with Conclusion 5 of the Russia-Ukraine war analysis: Moscow keeps dealing with Washington while seeking further military gains. The forecast that U.S.-Russia-Ukraine technical-level talks will take place, which asks only whether talks are held, does not move.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.abc.net.au/news/2026-10-01/russia-hits-ukrainian-energy-grid/107214710",
-      "https://eaworldview.com/2026/10/ukraine-war-energy-kyiv-russia-attacks/",
-      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "G7 agrees to release 100 million barrels of oil reserves",
-     "fact": "According to a G7 leaders' joint statement released by the French presidency on October 2, 2026, the G7 agreed to release 100 million barrels of emergency oil reserves through the International Energy Agency over four months, concentrating diesel releases in the first 20 days. The leaders also pledged to refrain from restricting exports of energy products. Brent crude fell to $100.80 a barrel after the announcement.",
-     "link": "The move responds to a rise in European diesel prices from €1.59 to €2.24 a liter since the Iran war began on February 28. One hundred million barrels over four months comes to just over 800,000 barrels a day, so it is unlikely to bring prices down much unless traffic through the strait recovers. It slightly raises the odds of the forecast that Brent will end the year below $90.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.thenationalnews.com/business/energy/2026/10/02/g7-members-agree-to-release-100-million-barrels-of-diesel-and-other-reserves/",
-      "https://www.washingtonpost.com/business/2026/10/02/g-7-agrees-release-oil-reserves-counter-fuel-prices-after-us-pressure/"
-     ]
-    }
-   ],
-   "more": [
-    {
-     "t": "The UKMTO said on October 2 that a tanker leaving the Strait of Hormuz had been hit by an unidentified projectile, starting a small fire that was put out, with no casualties.",
-     "src": [
-      "https://www.arabnews.com/middle-east/tanker-struck-in-the-strait-of-hormuz-3004312"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "On October 1, Trump said that if Iran was involved in the September 30 incident in which the co-pilot of an Israel-bound flydubai airliner stabbed the captain, \"they'll be hit very hard.\" Prosecutors in the United Arab Emirates are investigating possible links to terrorism.",
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/trump-vows-hit-iran-very-hard-if-linked-flydubai-attack-0"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Taiwan took delivery of the first two of 66 F-16V Block 70 fighters at Chihhang Air Base in Taitung on October 2. Delivery had been delayed by the relocation of the production line and supply chain disruptions.",
-     "src": [
-      "https://focustaiwan.tw/politics/202610020008"
      ],
      "fp": [
       "taiwan-strait"

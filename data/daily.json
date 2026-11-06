@@ -1,6 +1,166 @@
 {
  "issues": [
   {
+   "date": "2026-11-06",
+   "items": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "이란 레자이 \"7개 조건 이행하지 않는 한 호르무즈 개방도 협상도 없다\"",
+     "fact": "이란 고위 당국자는 5일 이란이 카타르를 통해 미국에 핵 제안을 보냈으며, 미국이 제재 해제·동결 자산 반환·전쟁 배상 등 7개 요구를 먼저 들어줘야 논의한다고 로이터에 말했습니다. 러시아를 방문한 이란 최고위 안보 당국자 모흐센 레자이도 같은 취지로 말했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.al-monitor.com/originals/2026/11/iran-sent-nuclear-proposal-us-qatar-senior-iranian-official-tells-reuters",
+      "https://www.yahoo.com/news/articles/iran-sent-nuclear-proposal-us-052102769.html"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA",
+       "QAT"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "미 나스닥 5.5% 급락…민주당 AI 규제 우려에 조정 국면",
+     "fact": "5일 뉴욕 증시에서 나스닥 종합지수는 5.52% 내린 24,315.00에 마감해 조정 국면에 들어갔고 S&P500은 4.36% 떨어졌다고 서울경제가 보도했습니다. 민주당의 의회 장악 뒤 AI·데이터센터 규제가 강화될 것이라는 우려가 원인으로 꼽혔습니다.",
+     "fc": [],
+     "src": [
+      "https://en.sedaily.com/international/2026/11/06/nasdaq-plunges-55-percent-into-correction-on-ai-regulation",
+      "https://www.thenationalnews.com/business/markets/2026/11/05/ai-fears-overtake-democratic-sweep-as-nasdaq-enters-correction-territory/"
+     ],
+     "loc": {
+      "lat": 40.71,
+      "lon": -74.01,
+      "place": "뉴욕(미국)",
+      "isos": [
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "이란군, 호르무즈서 유조선 잇단 기뢰 피격 주장",
+     "fact": "이란군과 혁명수비대는 5일 호르무즈 해협 남쪽과 동쪽 수역에서 유조선과 예인선이 기뢰 피격 등으로 불탔다고 주장했으며, 이란 측 발표를 합치면 유조선 최소 5척과 예인선 1척이고 독립 확인은 되지 않았습니다. 서울경제에 따르면 같은 날 브렌트유 1월물은 3.88% 오른 배럴당 98.29달러로 마감했습니다.",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/5/iran-says-tankers-struck-in-hormuz-amid-fears-of-new-us-attack",
+      "https://en.sedaily.com/international/2026/11/06/nasdaq-plunges-55-percent-into-correction-on-ai-regulation"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "멜라니아 트럼프, 러-우 대표 백악관 초청…\"일시 휴전보다 오래가는 것 만들 수 있다\"",
+     "fact": "멜라니아 트럼프 여사는 5일 백악관에서 키릴 드미트리예프 러시아 대통령 특사와 드미트로 루비네츠 우크라이나 의회 인권감독관 등을 만나 1일 끝난 헤르손주 올레시키의 엿새 휴전과 800명 가까운 주민의 대피를 기렸습니다. 트럼프 대통령은 기자들에게 유럽 전체가 관련될 수도 있는 '큰 합의'가 될 것이라고 말했습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.whitehouse.gov/briefings-statements/2026/11/first-lady-melania-trump-unites-russia-and-ukraine-at-the-white-house-following-historic-ceasefire/",
+      "https://www.aljazeera.com/news/2026/11/5/melania-trump-calls-for-peace-at-meeting-with-russia-ukraine-officials",
+      "https://www.opb.org/article/2026/11/05/melania-trump-touts-rare-agreement-she-brokered-between-russia-and-ukraine/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "워싱턴(미국)",
+      "isos": [
+       "USA",
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [
+      "somalia-somaliland"
+     ],
+     "h": "소말리아 대법원 \"대통령 임기 연장은 위법\"…대통령은 대법원 수장 해임 발표",
+     "fact": "소말리아 대법원은 5일 하산 셰이크 모하무드 대통령의 임기 연장이 위법하다며 30일 안에 정당 간 새 합의를, 90일 안에 선거를 하라고 판결했다고 AFP가 보도했습니다. 대통령실은 판결 공개 전 대법원 수장인 바셰 유수프 아흐메드의 해임을 발표했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.arabnews.com/world/chaos-in-somalia-as-president-accused-of-arresting-chief-justice-over-adverse-ruling-3009974"
+     ],
+     "loc": {
+      "lat": 2.05,
+      "lon": 45.32,
+      "place": "모가디슈(소말리아)",
+      "isos": [
+       "SOM"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "case": null,
+     "fp": [],
+     "t": "산티아고 페냐 파라과이 대통령은 5일 디지털 은행 우에노 파산 사태 속에 사임했고, 하원은 만장일치로 탄핵안을 의결했으며 페드로 알리아나 부통령이 직을 잇는다고 유로뉴스가 보도했습니다.",
+     "src": [
+      "https://www.euronews.com/2026/11/05/paraguayan-president-resigns-amid-bank-collapse-leaving-3m-people-without-access-to-bank-a"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [],
+     "t": "5일 아일랜드에서 불가리아까지 유럽 여객기 최소 27편에 허위 폭탄 위협이 잇따랐고 일부는 예정에 없던 착륙을 했으며, 이번 주 들어 두 번째 물결이라고 홍콩 더스탠더드가 보도했습니다.",
+     "src": [
+      "https://thestandard.com.hk/news/article/347704/Morning-Recap-November-6-2026"
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "t": "영국 해사무역작전센터(UKMTO)는 5일, 4일 오후 11시 20분(그리니치 표준시, 카타르 현지 시각 5일 오전 2시 20분) 카타르 마디낫 알샤말 북쪽 약 50해리에서 유조선 한 척이 발사체 두 발에 맞았다고 밝혔습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/5/iran-says-tankers-struck-in-hormuz-amid-fears-of-new-us-attack"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-05",
    "items": [
     {
@@ -5749,137 +5909,6 @@
      "t": "대만 해순서는 10월 3일 필리핀과 배타적경제수역이 겹치는 해역에 순시선 3척을 보내 중국 선박 3척을 감시하고 있다고 확인했습니다.",
      "src": [
       "https://focustaiwan.tw/politics/202610030015"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-03",
-   "items": [
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "미국, 항모전단·해병대 중동 증파…트럼프 \"선거 직후 끝날 것\"",
-     "fact": "미국 관리는 2026년 10월 1일 시어도어 루스벨트 항모전단과 해병대 약 2,200명을 태운 마킨아일랜드 상륙전단이 중동으로 출발했다고 확인했습니다. 이들이 도착하면 11월 말까지 이란 주변에 항공모함 3척과 상륙전단 2개가 모이게 됩니다. 트럼프 대통령은 10월 2일 텍사스주 덴턴 연설에서 이란이 \"접을 준비가 됐다\"며 전쟁이 \"선거 직후, 어쩌면 선거 전에\" 끝날 것이라고 말했습니다.",
-     "link": "전날 중간선거 뒤 공습 확대를 거론한 데 이어 비용이 드는 전력 이동이 뒤따른 것으로, 말보다 무거운 신호입니다. 증원 전력이 다 모이는 시점은 트럼프 대통령이 말한 11월 3일 중간선거 뒤와 맞물립니다. '미국의 이란 본토 공습 재개' 전망을 높일 요인입니다.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/pentagon-deploys-thousands-more-marines-another-aircraft-carrier-mideast",
-      "https://www.aljazeera.com/news/2026/10/2/us-to-send-third-aircraft-carrier-towards-iran-us-official-to-al-jazeera",
-      "https://www.cbsnews.com/live-updates/trump-iran-war-us-midterm-elections-troops-deployment/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "김여정, 지뢰 책임 거듭 부인…\"한국과 엮일 여지 허용 않는다\"",
-     "fact": "김여정은 2026년 10월 2일 담화에서 비무장지대 지뢰 폭발이 북한과 무관하다고 거듭 주장하고, 사과를 요구한 한국 정부를 두고 \"한심하기 짝이 없는 것들\"이라고 했습니다. 이어 \"어떤 형식으로든 한국과 엮이거나 상종할 수 있는 사소한 공간이나 여지도 허용하지 않는다\"고 밝혔습니다. 청와대는 같은 날 진상을 투명하게 밝히겠다며 북한이 소모적인 비판을 멈추고 대화에 나서야 한다고 반응했습니다.",
-     "link": "이재명 대통령이 국군의날 기념사에서 대화 복원을 촉구한 다음 날 나온 담화로, 한반도 사안의 반증 신호 가운데 '북한이 한국을 협상 상대로 받아들이지 않는다고 공식화'하는 쪽에 가깝습니다. 같은 신호의 다른 조건인 미사일 발사 빈도 증가는 보이지 않습니다. '남북 군사 통신선 미복원' 전망을 높일 요인입니다.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.newspim.com/news/view/20261002001241",
-      "https://www.seoul.co.kr/news/politics/2026/10/02/20261002500298",
-      "https://www.upi.com/Top_News/World-News/2026/10/02/Kim-Yo-Jong-rejects-blame-DMZ-blast-mocks-Seoul/2221790940855/"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아, 겨울 앞두고 우크라이나 에너지 시설 대규모 공습",
-     "fact": "러시아는 2026년 9월 30일 밤부터 10월 1일까지 드론과 탄도미사일 약 190기로 우크라이나 에너지 시설을 공격했습니다. 7명이 숨졌고, 키이우와 주변 3개 주에는 봄 이후 처음으로 비상 정전이 시행됐습니다. 우크라이나 총리는 이 정도 규모의 복합 공격은 지난 난방철이 끝난 뒤 처음이라고 말했습니다.",
-     "link": "미국이 10월 중 아부다비에서 에너지 시설 공격 중단 같은 제한적 합의를 다루는 협의를 추진한다는 보도(9월 29일) 직후의 공격입니다. 미국과의 거래를 이어 가면서 군사적으로 더 얻으려 한다는 러-우 사안 결론 5와 같은 방향입니다. 협의가 열리느냐를 묻는 '미·러·우 3자 기술급 협의 개최' 전망은 움직이지 않습니다.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.abc.net.au/news/2026-10-01/russia-hits-ukrainian-energy-grid/107214710",
-      "https://eaworldview.com/2026/10/ukraine-war-energy-kyiv-russia-attacks/",
-      "https://news.liga.net/en/war/news/the-atlantic-us-seeks-to-organize-talks-with-ukraine-and-russia-in-abu-dhabi-in-october"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "G7, 비축유 1억 배럴 방출 합의",
-     "fact": "2026년 10월 2일 프랑스 대통령실이 공개한 G7 정상 공동성명에 따르면, G7은 국제에너지기구를 통해 넉 달 동안 비축유 1억 배럴을 방출하고 처음 20일 안에 경유를 집중적으로 풀기로 했습니다. 정상들은 에너지 제품의 수출 제한을 삼가겠다고도 밝혔습니다. 발표 뒤 브렌트유는 배럴당 100.8달러로 내렸습니다.",
-     "link": "이란 전쟁이 시작된 2월 28일 이후 유럽 경유 가격이 리터당 1.59유로에서 2.24유로로 오른 데 대한 대응입니다. 넉 달에 1억 배럴은 하루 80만 배럴 남짓이어서, 해협 통항이 회복되지 않는 한 가격을 크게 끌어내리기는 어렵습니다. '브렌트유 연말 90달러 아래' 전망을 조금 높일 요인입니다.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.thenationalnews.com/business/energy/2026/10/02/g7-members-agree-to-release-100-million-barrels-of-diesel-and-other-reserves/",
-      "https://www.washingtonpost.com/business/2026/10/02/g-7-agrees-release-oil-reserves-counter-fuel-prices-after-us-pressure/"
-     ]
-    }
-   ],
-   "more": [
-    {
-     "t": "영국 해사무역기구(UKMTO)는 10월 2일 호르무즈 해협을 빠져나가던 유조선 한 척이 정체불명의 발사체에 맞아 작은 불이 났다가 꺼졌고 인명 피해는 없었다고 밝혔습니다.",
-     "src": [
-      "https://www.arabnews.com/middle-east/tanker-struck-in-the-strait-of-hormuz-3004312"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "트럼프 대통령은 10월 1일, 9월 30일 이스라엘행 플라이두바이 여객기에서 부기장이 기장을 흉기로 공격한 사건에 이란이 연루됐다면 \"아주 세게 맞을 것\"이라고 말했고, 아랍에미리트 검찰은 테러 연관성을 수사하고 있습니다.",
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/trump-vows-hit-iran-very-hard-if-linked-flydubai-attack-0"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "대만은 10월 2일 타이둥 즈항 기지에서 F-16V 블록 70 전투기 66대 가운데 첫 2대를 인수했습니다. 생산라인 이전과 공급망 차질로 인도가 늦어졌습니다.",
-     "src": [
-      "https://focustaiwan.tw/politics/202610020008"
      ],
      "fp": [
       "taiwan-strait"
