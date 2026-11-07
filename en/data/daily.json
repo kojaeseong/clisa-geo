@@ -1,6 +1,150 @@
 {
  "issues": [
   {
+   "date": "2026-11-07",
+   "items": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Trump says U.S. knocked out Iranian anti-aircraft device \"in about 15 minutes, maybe five\" in first strike since midterms",
+     "fact": "President Donald Trump said on November 6 local time that U.S. forces had hit an anti-aircraft device Iran built, calling the strike \"minor.\" Iranian state media reported the sound of two explosions in the Suza area of Qeshm Island. The AP said it was the first U.S. strike since the midterms; the extent of the damage was unclear.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.wishtv.com/news/politics/trump-says-us-carried-out-new-limited-strikes-on-iran/",
+      "https://gulfnews.com/world/mena/us-military-carries-out-new-targeted-strikes-on-iran-as-tehrans-leaders-weigh-mediators-proposals-1.500739074"
+     ],
+     "loc": {
+      "lat": 26.78,
+      "lon": 56.06,
+      "place": "Suza, Qeshm Island (Iran)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Qatar proposes two-day bridge deal; Iran reviewing it, Mideast officials say",
+     "fact": "Two Middle East officials told the AP on November 6 that Qatar has proposed a plan under which, on day one, the U.S. would lift its naval blockade and return some of Iran's frozen funds and Iran would allow IAEA inspections of bombed facilities, and on day two Iran would reopen the Strait of Hormuz. They said Iran is reviewing the plan. The White House declined to comment.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "up"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.wsls.com/news/politics/2026/11/06/iran-is-reviewing-proposals-focusing-on-tehrans-nuclear-program-officials-say/"
+     ],
+     "loc": {
+      "isos": [
+       "QAT",
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Russia hits Kyiv with ballistic missiles; Northern Bridge damaged, five injured",
+     "fact": "Ukraine's air force said Russia attacked across Ukraine with missiles, including ballistic missiles, and 172 Shahed-type drones starting at 6 p.m. local time on November 6. As of 9 a.m. on November 7, it had shot down or neutralized four missiles and 149 drones, and the attack was continuing. Kyiv Mayor Vitali Klitschko said the Northern Bridge was damaged and closed to traffic in both directions, and that five people, including a 14-year-old girl, were injured.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/russian-ballistic-missiles-slam-kyiv-after-zelensky-warns-of-mass-attack/",
+      "https://www.ukrinform.net/rubric-ato/4182328-northern-bridge-in-kyiv-damaged-in-russian-attack.html",
+      "https://unn.ua/en/news/4-missiles-were-neutralized-during-russias-massive-ballistic-attack-using-zircon-missiles"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "New Zealand early count puts National-led governing coalition on track for majority",
+     "fact": "With 10 percent of the vote counted in New Zealand's November 7 election, National had 31.2 percent, Labour 28.3 percent, ACT 11.3 percent and NZ First 9.7 percent, with the Greens at 12.7 percent, putting the governing coalition on track for a majority, AAP reported. Official results are due by November 27.",
+     "fc": [],
+     "src": [
+      "https://www.canberratimes.com.au/story/9387400/national-coalition-start-well-in-new-zealand-election/",
+      "https://www.abc.net.au/news/2026-11-07/nz-election-2026-live-blog/107355448"
+     ],
+     "loc": {
+      "isos": [
+       "NZL"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "t": "A crew member was killed in an explosion aboard the Marshall Islands-flagged tanker Velos Sapphire on November 5; the operator suspects a missile strike, but the cause has not been confirmed, Reuters reported on November 6. The International Maritime Organization said at least 25 seafarers have been killed in the Strait of Hormuz in the conflict.",
+     "src": [
+      "https://gulfnews.com/uae/middle-east-war-5-things-uae-residents-need-to-know-today-nov-7-2026-1.500739193",
+      "https://www.trend.az/world/us/4243983.html"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [],
+     "t": "At least 30 people were killed in an attack on a market in Yemen's Taiz province on November 6, Houthi health officials told the AP. The Houthis blamed Saudi Arabia; authorities aligned with the Saudi-backed government blamed the Houthis.",
+     "src": [
+      "https://gulfnews.com/uae/middle-east-war-5-things-uae-residents-need-to-know-today-nov-7-2026-1.500739193"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "t": "David Arakhamia, the ruling party's parliamentary leader, confirmed on November 6 that Rustem Umerov will lead Ukraine's delegation at upcoming trilateral U.S.-Russia-Ukraine peace talks in Abu Dhabi.",
+     "src": [
+      "https://kyivindependent.com/umerov-to-lead-ukraine-delegation-in-abu-dhabi-peace-talks-despite-media-confusion-top-official-confirms/"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "t": "Elon Musk on November 5 reposted on X, without comment, another user's post saying it was a mistake for SpaceX to give Ukraine thousands of Starlink terminals and service for free, the Kyiv Independent reported on November 7.",
+     "src": [
+      "https://kyivindependent.com/musk-reposts-tweet-calling-starlink-service-for-ukraine-mistake/"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-06",
    "items": [
     {
@@ -5733,182 +5877,6 @@
      "t": "The FBI on October 4 arrested Wanying Zhang, a California resident, at Los Angeles International Airport on charges of surveilling the family of Taiwanese President Lai Ching-te's son at the direction of Chinese authorities while acting as an unregistered agent of a foreign government.",
      "src": [
       "https://www.aljazeera.com/news/2026/10/5/fbi-arrests-chinese-foreign-agent-for-spying-on-taiwan-presidents-son"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-05",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "North Korea fires hypersonic intermediate-range missile 13 days after last launch",
-     "fact": "North Korea fired a hypersonic intermediate-range missile from the Wonsan area into the East Sea before dawn on October 3, 2026, with Workers' Party General Secretary Kim Jong Un watching. Pyongyang claimed the missile flew about 1,000 km and hit its target; South Korea's Joint Chiefs of Staff tracked it at more than 700 km, and Japan's Defense Ministry at about 680 km, with an altitude of about 90 km. In a statement, Kim Yo Jong claimed the missile changes its flight path at low altitude and incorporates artificial intelligence. South Korea's Ministry of National Defense said on October 4 that South Korean and U.S. defense assets are fully capable of detecting and intercepting it.",
-     "link": "The launch came 13 days after the September 20 test and one day after Kim Yo Jong's October 2 statement ruling out any room for ties with South Korea. The two conditions of one disconfirming signal in the Korean Peninsula analysis, North Korea formally shutting out South Korea and launching missiles more often, have now begun to appear together, so the interval between launches remains under watch. Because the AI claim concerns missile guidance, it does not meet the condition for the forecast that North Korea will explicitly state it has applied AI to its nuclear command system.",
-     "fc": [
-      {
-       "id": "f42",
-       "e": "none"
-      },
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.nknews.org/2026/10/north-korea-says-hypersonic-missile-flew-1000km-exceeding-seoul-tokyo-reports/",
-      "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003272544",
-      "https://www.kmib.co.kr/article/view.asp?arcid=9000019712",
-      "https://www.asiatoday.co.kr/kn/view.php?key=20261004010000901"
-     ],
-     "loc": {
-      "lat": 39.15,
-      "lon": 127.44,
-      "place": "Wonsan (North Korea)",
-      "isos": [
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Zelensky says U.S. has proposed trilateral technical-level talks by end of October",
-     "fact": "Ukrainian President Volodymyr Zelensky said at a joint news conference in Kyiv with German Chancellor Friedrich Merz on October 4, 2026, that Washington is proposing a trilateral, technical-level meeting with Ukraine and Russia by the end of October. The United Arab Emirates has been floated as the venue, and Ukraine is ready to take part, he said. At the same news conference, Merz announced €1.46 billion in aid, including interceptor drones and air defense missiles.",
-     "link": "The announcement comes from Kyiv; no Russian response has been confirmed. The Abu Dhabi talks reported since late September have now taken shape as a formal U.S. proposal, which raises the odds of the forecast that U.S.-Russia-Ukraine technical-level talks will take place, with a resolution date of October 31.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/us-proposes-trilateral-talks-with-russia-ukraine-by-end-of-october-zelensky-says/",
-      "https://www.pravda.com.ua/eng/news/2026/10/04/8056421/"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russia strikes Kyiv bridges for fourth straight day",
-     "fact": "Russia struck Kyiv's Southern Bridge and Northern Bridge on four consecutive days from October 1 to 4, 2026; a drone attack on October 4 damaged the Northern Bridge's roadway and injured two people. On October 3, Russia's Foreign Ministry renewed its warning to foreigners, including diplomatic staff, not to remain in Ukraine. Russia's Defense Ministry claimed it shot down 559 Ukrainian drones between the night of October 3 and the morning of October 4, and Zelensky said Ukraine would step up strikes on Russian oil refineries.",
-     "link": "In the same week that Washington proposed trilateral talks, both sides are escalating attacks on each other's infrastructure. That is in line with Conclusion 5 of the Russia-Ukraine war analysis, under which Moscow keeps dealing with Washington without easing military pressure, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/russia-targets-kyiv-bridges-for-fourth-consecutive-day-hits-northern-bridge/",
-      "https://tass.com/politics/2197123",
-      "https://www.933thedrive.com/2026/10/04/russia-says-it-hit-kyiv-bridge-two-vessels-in-black-sea/"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "Kyiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Iran holds to seven conditions for reopening the strait; Trump: \"the easy way or the hard way\"",
-     "fact": "President Donald Trump told reporters at the White House on October 3, 2026, that with a decision on Iran ahead, the only remaining question was whether it would be \"the easy way or the hard way.\" Iranian parliament speaker Mohammad Bagher Ghalibaf said on October 4 that the era of imposing one-sided demands was over and that the Strait of Hormuz would not reopen until Iran's seven conditions, based on the Islamabad Memorandum of Understanding, were met. The same day, Foreign Minister Abbas Araghchi warned diplomats in Tehran that if the United States turned to a military solution again, Iran was better prepared than before.",
-     "link": "Iran says it is reviewing the U.S. reply, yet it has again tied reopening the strait to lifting sanctions and the blockade as a single package. That runs against Conclusion 7 of the Iran and Hormuz analysis, which saw room for a deal in a phased agreement, and it lowers the odds of the forecast that the U.S. and Iran will sign a phased agreement while raising the odds of the forecast that the U.S. will resume airstrikes on Iran's mainland.",
-     "fc": [
-      {
-       "id": "f38",
-       "e": "down"
-      },
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.arabnews.com/middle-east/iran-says-strait-of-hormuz-will-not-reopen-until-conditions-are-met-3004533",
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008782420",
-      "https://www.iranintl.com/en/202610047470"
-     ],
-     "loc": {
-      "lat": 26.57,
-      "lon": 56.25,
-      "place": "Strait of Hormuz",
-      "isos": [
-       "IRN",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Houthis claim strike on Saudi Aramco sites; Saudi-led coalition calls claim \"misleading\"",
-     "fact": "Yahya Saree, spokesman for Yemen's Houthi rebels, claimed on October 4, 2026, that ballistic missiles and drones had struck Saudi Aramco facilities in Riyadh and Khurais and set them on fire. A spokesman for the Saudi-led coalition called the claim of targeting Riyadh \"misleading\" and did not confirm any damage. The coalition said the same day that it had carried out 97 strikes on Houthi reinforcements on the Tor al-Baha front and the Taiz axis.",
-     "link": "The claim is the Houthis' own, and no damage has been confirmed. The incident comes close to a disconfirming signal in the Iran and Hormuz analysis, which treats large-scale destruction of Gulf oil producers' facilities as a sign of all-out escalation in the Gulf, but it has not yet met that threshold.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/4/houthis-claim-strike-on-saudi-energy-facility-as-yemen-fighting-intensifies",
-      "https://www.dawn.com/news/2034733/yemens-houthis-say-they-struck-saudi-aramco-sites-in-riyadh-khurais"
-     ],
-     "loc": {
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "The UK Maritime Trade Operations (UKMTO) said a tanker in the Strait of Hormuz was hit in the engine room by an unidentified projectile on October 4 and that its crew was unharmed. It was the second such strike, after one on October 2.",
-     "src": [
-      "https://arabnews.com/middle-east/tanker-damaged-after-attack-in-hormuz-maritime-agency-3004546"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "In an address marking the 19th anniversary of the October 4 inter-Korean summit declaration, read on his behalf by the vice minister of unification on October 4, President Lee Jae-myung said, \"Only by breaking the vicious cycle of hostility and confrontation can we create a virtuous cycle of peace and prosperity.\"",
-     "src": [
-      "https://www.newspim.com/news/view/20261004000089"
-     ],
-     "fp": [
-      "korea"
-     ]
-    },
-    {
-     "t": "Taiwan's Coast Guard Administration confirmed on October 3 that it had sent three patrol vessels to monitor three Chinese ships in waters where its exclusive economic zone overlaps with that of the Philippines.",
-     "src": [
-      "https://focustaiwan.tw/politics/202610030015"
      ],
      "fp": [
       "taiwan-strait"
