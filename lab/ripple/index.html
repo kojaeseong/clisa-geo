@@ -38,7 +38,7 @@ svg#ed{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events
 #info{position:fixed;right:16px;bottom:16px;width:400px;max-width:calc(100vw - 32px);max-height:60vh;overflow:auto;background:rgba(11,17,29,.98);border:1px solid #2c3a52;border-radius:8px;padding:12px 14px;font-size:12.5px;line-height:1.65;color:#c9cfda;z-index:20;display:none;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 #info h3{margin:0 0 4px;font-size:14px;color:var(--ink);padding-right:30px}#info .k{font-size:10.5px;color:var(--mute);border:1px solid #2c3a52;border-radius:3px;padding:0 5px;margin-left:6px;white-space:nowrap}
 #info .it{border-top:1px solid #1b2536;padding-top:7px;margin-top:7px}#info a{color:var(--acc);text-decoration:none}#info .x{position:absolute;right:8px;top:8px;width:28px;height:28px;border-radius:14px;border:1px solid #3a4457;background:#2a2f3a;color:#fff;font-size:17px;line-height:24px;cursor:pointer}
-#info .go{display:inline-block;margin-top:8px}#info .mp{color:#9fb3d1}#info .nm{color:#cfe6ff}
+#info .go{display:inline-block;margin-top:8px}#info a.lmgo{display:inline-block;margin-top:4px;color:#9fd8ff}#info .mp{color:#9fb3d1}#info .nm{color:#cfe6ff}
 .more{max-width:1380px;margin:0 auto;padding:0 20px 6px;font-size:12.5px}.more a{color:var(--acc);text-decoration:none}
 .foot{max-width:1380px;margin:0 auto;padding:0 20px 30px;font-size:11.5px;color:var(--mute);line-height:1.6;word-break:keep-all}
 .load{padding:40px 20px;color:var(--mute);font-size:13px;text-align:center}
@@ -85,6 +85,7 @@ const LANG='ko', EN=LANG==='en', P=EN?'/en':'', SINCE='2026-10-01';
 const MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const md=s=>{const [y,m,d]=s.split('-').map(Number); return EN?MON[m-1]+' '+d:m+'월 '+d+'일'};
 const T={
+ lmGo:(f,p)=>'나비효과 지도의 근거 칸 보기: '+f+' · '+p+' →',
  stPath:'전망에서 이어지는 길 (거쳐 가는 변수 → 생활 · 산업 · 다른 사안)', stAlso:x=>x.join('·')+'에서도 이어집니다.',
  stH:'이번 기간에 가장 크게 번진 길', stH2:'이 전망이 번진 길',
  stS:'확률이 크게 움직이고 멀리 번진 전망을 골라 사건부터 생활·산업까지 차례로 놓았습니다. 칸을 누르면 근거가 나옵니다.',
@@ -121,13 +122,13 @@ $('lg').innerHTML='<span><svg width="30" height="8"><line x1="0" y1="4" x2="30" 
 $('more').innerHTML='<a href="'+P+'/links/" target="_top">'+T.more+'</a>'; $('foot').textContent=T.foot;
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 const J=u=>fetch(P+u,{cache:'no-cache'}).then(r=>r.json());
-let VIEWS={}, ORDER=[], V='all', N=[], E=[], byId={}, Z=1;
+let LMN={fp:{},paths:[]}, VIEWS={}, ORDER=[], V='all', N=[], E=[], byId={}, Z=1;
 Promise.all([J('/data/eurasia.json'),J('/data/daily.json'),J('/data/chains.json'),J('/data/fcmap.json')]).then(([D,DL,C,FMr])=>{ try{ build(D,DL,C,FMr); start() }catch(e){ $('ld').textContent=T.err; console.error(e) } }).catch(e=>{ $('ld').textContent=T.err; console.error(e) });
 
 function build(D,DL,C,FMr){
  const FM={}; FMr.forEach(m=>FM[m.id]=m); const FC={}; (D.forecasts||[]).forEach(f=>FC[f.id]=f);
  const SC={}; (D.strategies||[]).forEach(s=>{ ((s.futures||{}).items||[]).forEach(it=>SC[s.id+':'+it.id]={n:it.name,p:it.p,k:T.kSc}); ((s.external||{}).items||[]).forEach(it=>SC[s.id+':'+it.id]={n:it.t,p:it.p,k:T.kX}) });
- const OUT={}; C.links.forEach(l=>(OUT[l.f]=OUT[l.f]||[]).push(l));
+ LMN={fp:C.fp,paths:C.paths||[]}; const OUT={}; C.links.forEach(l=>(OUT[l.f]=OUT[l.f]||[]).push(l));
  const CN=T.cases; const fh=D.fc_hist||{};
  const sig={}; let last=SINCE; (DL.issues||[]).forEach(iss=>{ if(iss.date>last) last=iss.date; if(iss.date<SINCE) return; (iss.items||[]).forEach(x=>(x.fc||[]).forEach(s=>{ if(s.e==='up'||s.e==='down') (sig[s.id]=sig[s.id]||[]).push([iss.date,s.e,x.h]) })) });
  $('lede').textContent=T.lede(md(SINCE),md(last));
@@ -152,8 +153,8 @@ function build(D,DL,C,FMr){
     const hist=(fh[f.id]||[]).filter(x=>x[0]>SINCE);
     edges.push({f:eid,t:fid,k:'rec',why:T.recWhy(up,dn,hist.map(x=>[md(x[0]),x[1]]))}) }
    if(tgt.rel==='measure'||C.M[tgt.node]){ add(tgt.node,{col:2,t:nname(tgt.node),who:who(tgt.node)}); edges.push({f:fid,t:tgt.node,k:'measure',why:tgt===m?m.why:T.via(f.s,nname(tgt.node))}) }
-   else (OUT[tgt.node]||[]).forEach(l=>{ addT(l.t); edges.push({f:fid,t:l.t,k:'judge',conf:l.conf,map:tgt===m?m.why:T.via(f.s,nname(tgt.node)),mech:l.mech,src:l.src,num:l.num}) }) });
-  for(let pass=0;pass<2;pass++) Object.values(nodes).filter(n=>n.col===2).forEach(n=>(OUT[n.id]||[]).forEach(l=>{ if(edges.some(e=>e.f===n.id&&e.t===l.t)) return; addT(l.t); edges.push({f:n.id,t:l.t,k:'judge',conf:l.conf,mech:l.mech,src:l.src,num:l.num}) }));
+   else (OUT[tgt.node]||[]).forEach(l=>{ addT(l.t); edges.push({f:fid,t:l.t,k:'judge',conf:l.conf,map:tgt===m?m.why:T.via(f.s,nname(tgt.node)),mech:l.mech,lm:l.lm,src:l.src,num:l.num}) }) });
+  for(let pass=0;pass<2;pass++) Object.values(nodes).filter(n=>n.col===2).forEach(n=>(OUT[n.id]||[]).forEach(l=>{ if(edges.some(e=>e.f===n.id&&e.t===l.t)) return; addT(l.t); edges.push({f:n.id,t:l.t,k:'judge',conf:l.conf,mech:l.mech,lm:l.lm,src:l.src,num:l.num}) }));
   return {nodes:Object.values(nodes),edges} }
  const al={}, ae=[]; ORDER=['all']; T.caseOrder.forEach(cs=>{ const v=one(cs); VIEWS[cs]=Object.assign(v,{name:CN[cs]}); ORDER.push(cs); v.nodes.forEach(n=>{ if(!al[n.id]) al[n.id]=n }); v.edges.forEach(e=>{ if(!ae.some(y=>y.f===e.f&&y.t===e.t)) ae.push(e) }) });
  VIEWS.all={name:T.all,nodes:Object.values(al),edges:ae}; VIEWS._CN=CN;
@@ -164,7 +165,7 @@ function build(D,DL,C,FMr){
  function focus(S){ const nodes={}, edges=[], fo=new Set(); const add=(id,o)=>{ if(!nodes[id]) nodes[id]=Object.assign({id},o); return id };
   const addT=to=>{ add(to,{col:ncol(to),t:nname(to),href:href(to),go:goq(to),who:who(to),p:SC[to]?SC[to].p:FC[to]?FC[to].p:null}) };
   const has=(a,b)=>edges.some(e=>e.f===a&&e.t===b);
-  const lk=l=>{ if(!has(l.f,l.t)) edges.push({f:l.f,t:l.t,k:'judge',conf:l.conf,mech:l.mech,src:l.src,num:l.num}) };
+  const lk=l=>{ if(!has(l.f,l.t)) edges.push({f:l.f,t:l.t,k:'judge',conf:l.conf,mech:l.mech,lm:l.lm,src:l.src,num:l.num}) };
   const down=(n,d)=>{ if(d<=0) return; (OUT[n]||[]).forEach(l=>{ addT(l.t); lk(l); down(l.t,d-1) }) };
   const fcCard=f=>{ const ss=sig[f.id]||[], cs=(f.cases||[])[0]; const h=fh[f.id]||[[last,f.p]], a=base(h,SINCE);
    const fid=add('F:'+f.id,{col:1,t:f.s,a,b:f.p,href:P+'/forecast/'+f.id+'/',case:cs,sub:ss.length||Math.round((f.p-a)*10)/10===0?null:T.noSig});
@@ -175,7 +176,7 @@ function build(D,DL,C,FMr){
   S.forEach(x=>{ const f=FC[x];
    if(f){ const tm=tgtOf(f); if(!tm) return; const [c,m]=tm, fid=fcCard(f); fo.add(fid); const why=c===m?m.why:T.via(f.s,nname(c.node));
     if(c.rel==='measure'||C.M[c.node]){ add(c.node,{col:2,t:nname(c.node),who:who(c.node)}); if(!has(fid,c.node)) edges.push({f:fid,t:c.node,k:'measure',why}); down(c.node,2) }
-    else (OUT[c.node]||[]).forEach(l=>{ addT(l.t); if(!has(fid,l.t)) edges.push({f:fid,t:l.t,k:'judge',conf:l.conf,map:why,mech:l.mech,src:l.src,num:l.num}); down(l.t,1) });
+    else (OUT[c.node]||[]).forEach(l=>{ addT(l.t); if(!has(fid,l.t)) edges.push({f:fid,t:l.t,k:'judge',conf:l.conf,map:why,mech:l.mech,lm:l.lm,src:l.src,num:l.num}); down(l.t,1) });
     return }
    if(!(OUT[x]||IN[x]||C.M[x])) return; if(C.M[x]) add(x,{col:2,t:nname(x),who:who(x)}); else addT(x); fo.add(x); down(x,2);
    const U=new Set([x]); let fr=[x]; for(let d=0;d<2;d++){ const nx=[]; fr.forEach(n=>(IN[n]||[]).forEach(l=>{ if(FC[l.f]) return; if(C.M[l.f]) add(l.f,{col:2,t:nname(l.f),who:who(l.f)}); else addT(l.f); lk(l); if(!U.has(l.f)){U.add(l.f); nx.push(l.f)} })); fr=nx }
@@ -235,6 +236,7 @@ function kindL(e){return e.k==='rec'?T.kRec:e.k==='measure'?T.kMeas:T.kJ+(e.conf
 function edgeHtml(e){let h='<div class="it"><b>'+esc(byId[e.f].t)+' → '+esc(byId[e.t].t)+'</b> <span class="k">'+kindL(e)+'</span><br>';
  if(e.map) h+='<span class="mp">'+esc(e.map)+'</span><br>'; h+=esc(e.why||e.mech||'');
  if(e.num) h+='<br><span class="nm">'+esc(e.num)+'</span>';
+ if(e.lm&&e.lm.length) h+=e.lm.map(m=>'<br><a class="lmgo" href="'+P+'/links/" target="_top" data-lm="'+esc(m.join('|'))+'" data-n="'+esc(e.t)+'">'+esc(T.lmGo(LMN.fp[m[0]]||m[0],LMN.paths[m[1]]||''))+'</a>').join('');
  if(e.src&&e.src.length) h+='<br>'+e.src.filter((u,i,a)=>a.findIndex(v=>v.split('/')[2]===u.split('/')[2])===i).map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join(' · ');
  return h+'</div>'}
 let HL=null; /* 2026-11-06 시안(아퀼라 피드백): 밝힌 길의 선 위로 흐르는 점(흐름 방향 표시) */
@@ -314,7 +316,8 @@ function start(){
  /* 돌아온 경우: 보던 사안 단추와 칸을 다시 연다 */
  try{ const rt=+sessionStorage.getItem('rpret')||0; if(rt&&Date.now()-rt<20000){ const s=JSON.parse(sessionStorage.getItem('rpfrom')||'null'); if(s&&VIEWS[s.v]){ V=s.v; tabs.querySelectorAll('button').forEach((x,i)=>x.classList.toggle('on',ORDER[i]===V)); render(); setTimeout(()=>{ if(byId[s.n]){ showNode(s.n); const el=g.querySelector('.n[data-id="'+CSS.escape(s.n)+'"]'); el&&el.scrollIntoView({block:'center'}) } },250) } } }catch(_){}
 }
-info.addEventListener('click',ev=>{ const a=ev.target.closest&&ev.target.closest('a.go'); if(a){ const n=byId[a.dataset.n]; try{ sessionStorage.setItem('rpfrom',JSON.stringify({v:V,n:a.dataset.n,t:Date.now()})); if(n&&n.go){ sessionStorage.setItem('rpgo',JSON.stringify({k:n.go[0],q:n.go[1],p:n.href,t:Date.now()})); if(n.go[0]==='g') localStorage.setItem('ep.lifeg',n.go[1]) } }catch(_){} } ev.stopPropagation() });
+info.addEventListener('click',ev=>{ const lm=ev.target.closest&&ev.target.closest('a.lmgo'); if(lm){ try{ sessionStorage.setItem('rpfrom',JSON.stringify({v:V,n:lm.dataset.n,t:Date.now()})); sessionStorage.setItem('rpgo',JSON.stringify({k:'cell',q:lm.dataset.lm,p:lm.getAttribute('href'),t:Date.now()})) }catch(_){} ev.stopPropagation(); return }
+ const a=ev.target.closest&&ev.target.closest('a.go'); if(a){ const n=byId[a.dataset.n]; try{ sessionStorage.setItem('rpfrom',JSON.stringify({v:V,n:a.dataset.n,t:Date.now()})); if(n&&n.go){ sessionStorage.setItem('rpgo',JSON.stringify({k:n.go[0],q:n.go[1],p:n.href,t:Date.now()})); if(n.go[0]==='g') localStorage.setItem('ep.lifeg',n.go[1]) } }catch(_){} } ev.stopPropagation() });
 document.addEventListener('click',()=>{ if(DRAGGED) return; unhl(); info.style.display='none'});
 try{ if(window.frameElement){ parent.addEventListener('scroll',placeInfo,{passive:true}); parent.addEventListener('resize',placeInfo) } }catch(_){}
 /* 전체 화면(시황판과 같은 방식): 시황판 안에 실릴 때는 바깥 틀을 화면 가득 키운다 */

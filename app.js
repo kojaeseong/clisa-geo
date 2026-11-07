@@ -3603,7 +3603,7 @@ document.addEventListener("click", ev => {
   ["pushState", "replaceState"].forEach(k => { const o = history[k]; history[k] = function(){ const r = o.apply(this, arguments); upd(); return r; }; });
   addEventListener("popstate", upd); addEventListener("hashchange", upd); upd(); })();/*/langsw-ko*/
 
-;(function(){try{var s=document.createElement("script");s.src="/rp2.js?v=da7616704d";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp1106 ripple back */
+;(function(){try{var s=document.createElement("script");s.src="/rp2.js?v=ef2be7a69b";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp1106 ripple back */
 
 ;(function(){try{var s=document.createElement("script");s.src="/rp3.js?v=6e2cc8942a";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp3_1106 ripple chips */
 

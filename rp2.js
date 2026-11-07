@@ -25,6 +25,8 @@
   function mark(el){ el.setAttribute("data-rpmark", "1"); el.scrollIntoView({block: "center", behavior: "smooth"}); var o = el.style.outline, oo = el.style.outlineOffset; el.style.outline = "3px solid #ffb020"; el.style.outlineOffset = "3px"; setTimeout(function(){ el.style.outline = o; el.style.outlineOffset = oo; }, 3500); }
   function find(){
     if (G.k === "ind") return document.getElementById(q);
+    if (G.k === "cell") { var c = q.split("|"), vb = document.querySelector('.lkm-seg button[data-v="fp"]'); if (vb && !vb.classList.contains("on")) vb.click(); var s2 = document.getElementById("lkm-sel"); if (!s2 || !s2.options.length) return null; if (s2.value !== c[0]) { s2.value = c[0]; s2.dispatchEvent(new Event("change")); }
+      var gi = ["KOR","USA","NEU","SEU","WCEU","PARTY"].indexOf(c[2]), td = document.querySelector('#lkm-mx td[data-k="' + c[1] + "-" + gi + '"]'); if (!td) return null; td.click(); return td; }
     if (G.k === "fp") { var sel = document.getElementById("lkm-sel"); if (!sel || !sel.options.length) return null; if (sel.value !== q) { sel.value = q; sel.dispatchEvent(new Event("change")); } return document.getElementById("lkm-vfp") || sel; }
     if (G.k === "h") { var arts = document.querySelectorAll("article.bi"); for (var i = 0; i < arts.length; i++) if (arts[i].textContent.indexOf(q) >= 0) return arts[i]; return null; }
     /* 사안 전개(I2·F3 등): 사안 쪽의 전개 칩(전개 기호와 확률). 바깥 변수(X1 등)는 사안마다 기호가 겹쳐 사안 쪽을 여는 데서 그친다 */

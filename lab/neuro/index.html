@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>지정학 신경망과 나비효과 지도(시안) | 클리사 지오폴리틱스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{--bg:#060a12;--panel:#0d1424;--panel2:#111a2d;--line:#1b2539;--line2:#24304a;--ink:#edf1f8;--ink2:#c3cbda;--mute:#8590a6;--faint:#5b6680;
+ --lit:#ffb020;--lit2:#ffcf6b;--litbg:rgba(255,176,32,.16);--up:#22c58b;--dn:#f0545e;--acc:#7fb4ff;--rec:#e8eef8;
+ --sans:"IBM Plex Sans KR","Pretendard","Noto Sans CJK KR",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-text-size-adjust:100%}
+body{background:radial-gradient(1200px 600px at 70% -10%,rgba(61,99,201,.14),transparent 60%),var(--bg)}
+.top{padding:18px 22px 0;max-width:none}
+.row1{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;color:var(--mute);font-weight:600;margin:0 0 6px}
+h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01em;word-break:keep-all}
+.draft{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;color:#1a1204;background:var(--lit);border-radius:6px;padding:3px 7px;vertical-align:middle}
+.seg{display:inline-flex;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:4px;gap:2px}
+.seg a,.seg button{appearance:none;border:0;background:transparent;color:var(--ink2);font:600 13px/1 var(--sans);padding:9px 14px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.seg .on{background:linear-gradient(180deg,#1d2a45,#16213a);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 6px 14px rgba(0,0,0,.35)}
+.lede{margin:8px 0 12px;color:var(--ink2);font-size:13.5px;line-height:1.65;max-width:1100px;word-break:keep-all}
+.row2{display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;margin:0 0 12px}
+.groups{display:flex;flex-wrap:wrap;gap:7px}
+.groups button{appearance:none;border:1px solid var(--line2);background:var(--panel);color:var(--ink2);font:600 13px/1 var(--sans);padding:9px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.groups button .n{font:600 11px/1 var(--mono);color:var(--mute);background:rgba(255,255,255,.05);border-radius:999px;padding:4px 7px}.groups button .n.l{color:#1a1204;background:var(--lit)}
+.groups button:hover{border-color:#3a4a6c;color:#fff}.groups button.on{background:#eaf0fb;color:#0a1020;border-color:#eaf0fb}.groups button.on .n{background:rgba(10,16,32,.08);color:#33405c}
+.kpi{display:flex;gap:16px;margin-left:auto;font-size:12px;color:var(--mute);align-items:baseline;flex-wrap:wrap}.kpi b{font:600 18px/1 var(--mono);color:var(--ink);margin-right:5px}.kpi .l b{color:var(--lit2)}
+.lowt{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--mute);cursor:pointer}.lowt input{accent-color:var(--lit)}
+/* 한 화면 판 */
+#vp{position:relative;margin:0 22px 14px;height:640px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(17,26,45,.75),rgba(10,16,30,.9));box-shadow:0 20px 50px rgba(0,0,0,.35);touch-action:none;cursor:grab}
+#vp.drag{cursor:grabbing}
+#stage{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform;display:grid;grid-template-columns:230px 210px 140px auto;column-gap:56px;padding:18px 22px 22px}
+#stage.anim{transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.colh{font-size:11.5px;color:var(--mute);font-weight:700;letter-spacing:.02em;height:46px;display:flex;align-items:center;border-bottom:1px solid var(--line);margin:0 0 6px}
+.col{display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:6px 0}
+.ev{position:relative;border:1px solid #2b3650;background:#0f1729;border-radius:10px;padding:8px 10px;cursor:pointer;transition:opacity .2s,border-color .15s}
+.ev .d{font:600 10.5px/1 var(--mono);color:var(--mute)}.ev .h{font-size:12px;line-height:1.45;margin-top:4px;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink2)}
+.ev .s{font-size:10.5px;margin-top:4px}.ev .s.up{color:var(--up)}.ev .s.dn{color:var(--dn)}
+.fn{position:relative;border:1px solid rgba(255,176,32,.35);background:linear-gradient(180deg,rgba(255,176,32,.09),rgba(255,176,32,.03));border-radius:11px;padding:9px 11px;cursor:pointer;transition:border-color .15s,opacity .2s,box-shadow .2s}
+.fn .q{font-size:12.5px;font-weight:600;line-height:1.4;word-break:keep-all}.fn .m{display:flex;gap:6px;align-items:baseline;margin-top:4px;font-family:var(--mono)}.fn .m b{font-size:15px}.fn .m span{font-size:11px;font-weight:600}.fn .cs{font-size:10.5px;color:var(--mute);margin-top:2px}
+.vn{position:relative;border:1px solid #3a4664;background:#111a2d;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:600;line-height:1.35;word-break:keep-all;color:var(--ink2);cursor:pointer;transition:border-color .15s,opacity .2s}
+.dim .ev:not(.hl),.dim .fn:not(.hl),.dim .vn:not(.hl){opacity:.38}.fn.hl{border-color:var(--lit);box-shadow:0 0 18px rgba(255,176,32,.25)}.vn.hl{border-color:#c9a24a;color:#fff}.ev.hl{border-color:#9fb0cc}
+.none2{font-size:12px;color:var(--faint);line-height:1.6;padding:16px 4px;word-break:keep-all}
+/* 나비효과 지도 표 */
+.tb{min-width:620px}
+.mxh,.mxr{display:grid;grid-template-columns:200px repeat(6,64px);gap:6px;align-items:center}
+.mxh{height:46px;border-bottom:1px solid var(--line);margin:0 0 6px}.mxh div{font-size:11px;color:var(--mute);font-weight:700;text-align:center;line-height:1.3;word-break:keep-all}.mxh div:first-child{text-align:left}
+.mxr{padding:4px 0;border-radius:10px}.mxr.has{background:rgba(255,176,32,.035)}
+.fpn{position:relative;min-width:0;display:flex;flex-direction:column;gap:3px;padding:0 4px 0 10px}
+.fpn b{font-size:13px;font-weight:600;line-height:1.35;word-break:keep-all}.mxr.hl .fpn b{color:var(--lit2)}
+.sev{display:inline-flex;gap:2px}.sev u{width:5px;height:5px;border-radius:3px;background:#2a3550;display:block}.sev u.on{background:#d9634f}
+.fpn .dot{position:absolute;left:-4px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:4px;background:var(--lit);box-shadow:0 0 8px rgba(255,176,32,.8)}
+.c{position:relative;height:40px;border-radius:9px;border:1px solid transparent;display:flex;align-items:center;justify-content:center;font:600 11px/1 var(--mono);cursor:pointer;transition:transform .12s,box-shadow .15s,border-color .15s}
+.c.v0{cursor:default}.c.v0:after{content:'';width:4px;height:4px;border-radius:2px;background:#26304a}
+.c.v2{border:1px dashed #3a4664;color:var(--faint);cursor:default}
+.c.o3{background:linear-gradient(180deg,#4169cf,#3254b2);border-color:#5478d8}.c.o2{background:linear-gradient(180deg,#2e4b95,#273f7d)}.c.o1{background:linear-gradient(180deg,#203466,#1b2c55)}
+.c.o1:hover,.c.o2:hover,.c.o3:hover{border-color:#9db8ff}
+.c.lit{background:radial-gradient(120% 140% at 50% 0%,rgba(255,207,107,.35),rgba(255,176,32,.12) 55%,rgba(255,176,32,.06)),linear-gradient(180deg,#3a2c0e,#241a07);border:1px solid var(--lit);color:var(--lit2);box-shadow:0 0 0 1px rgba(255,176,32,.25),0 0 22px rgba(255,176,32,.28)}
+.c.lit .pulse{position:absolute;inset:-1px;border-radius:9px;border:1px solid var(--lit);animation:pl 2.4s ease-out infinite;pointer-events:none}
+@keyframes pl{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
+.c.sel{outline:2px solid #fff;outline-offset:2px}
+svg#lk{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+svg#lk path{fill:none;transition:opacity .2s}svg#lk path.a{stroke:rgba(255,176,32,.55);stroke-width:1.6}svg#lk path.r{stroke:rgba(232,238,248,.45);stroke-width:1.4}
+.dim svg#lk path.base:not(.hl){opacity:.18}svg#lk path.a.hl{stroke:#ffc04d;stroke-width:2.3}svg#lk path.r.hl{stroke:#f2f5fa;stroke-width:2}
+svg#lk path.fl{stroke:#fff3d0;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1.5 14;animation:fl 1.2s linear infinite;opacity:.95}
+@keyframes fl{from{stroke-dashoffset:15.5}to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){svg#lk path.fl,.c.lit .pulse{display:none}#stage.anim{transition:none}}
+/* 확대 단추 · 미니맵 안내 */
+.zc{position:absolute;left:14px;bottom:14px;z-index:5;display:flex;gap:6px;align-items:center}
+.zc button{appearance:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--line2);background:rgba(13,20,36,.92);color:var(--ink);font:600 16px/1 var(--sans);cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.4)}
+.zc button.w{width:auto;padding:0 12px;font-size:12.5px}.zc button:hover{border-color:#5a6a8e}
+.zc .pct{font:600 11.5px/1 var(--mono);color:var(--mute);margin-left:4px;min-width:40px}
+.hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:4;font-size:11.5px;color:var(--mute);background:rgba(6,10,18,.75);border:1px solid var(--line);border-radius:999px;padding:7px 12px;pointer-events:none;white-space:nowrap;transition:opacity .5s}
+/* 설명 상자(판 위에 뜸) */
+#dp{position:absolute;right:14px;top:14px;bottom:14px;width:380px;z-index:6;background:rgba(11,17,31,.97);border:1px solid var(--line2);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.55);display:flex;flex-direction:column;transition:transform .3s,opacity .3s}
+#dp.off{transform:translateX(30px);opacity:0;pointer-events:none}
+#dp .x{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:15px;border:1px solid #3a4457;background:#1c2333;color:#fff;font-size:17px;line-height:26px;cursor:pointer;z-index:1}
+#det{overflow:auto;padding:18px 18px 20px;flex:1}
+#det .k{font-size:11px;color:var(--mute);font-weight:600;letter-spacing:.04em;margin:0 0 8px}
+#det h2{font-size:17px;line-height:1.4;margin:0 0 10px;padding-right:30px;font-weight:700;word-break:keep-all}#det h2 .ar{color:var(--faint);margin:0 4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.chip{font-size:11px;color:var(--ink2);border:1px solid var(--line2);border-radius:999px;padding:4px 9px}.chip.lit{border-color:rgba(255,176,32,.6);color:var(--lit2);background:var(--litbg)}
+.sec{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.sec:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.sec h3{font-size:12px;margin:0 0 10px;color:var(--ink2);font-weight:700;display:flex;align-items:center;gap:8px}.sec h3 i{width:10px;height:10px;border-radius:3px;display:inline-block}.sec h3 i.b{background:#3d63c9}.sec h3 i.a{background:var(--lit);box-shadow:0 0 8px rgba(255,176,32,.6)}
+.steps{list-style:none;margin:0 0 10px;padding:0}.steps li{position:relative;padding:0 0 10px 20px;font-size:13px;line-height:1.55;word-break:keep-all}
+.steps li:before{content:'';position:absolute;left:4px;top:7px;width:7px;height:7px;border-radius:4px;background:#5478d8}.steps li:not(:last-child):after{content:'';position:absolute;left:7px;top:16px;bottom:0;width:1px;background:#2c3a5a}
+.basis{font-size:12px;line-height:1.7;color:var(--ink2);margin:0 0 8px;word-break:keep-all}.src{font-size:11.5px;display:flex;flex-wrap:wrap;gap:6px 10px}.src a{color:var(--acc);text-decoration:none}
+.mv{margin:0;padding:0;list-style:none}.mv li{border:1px solid rgba(255,176,32,.28);background:linear-gradient(180deg,rgba(255,176,32,.07),rgba(255,176,32,.02));border-radius:12px;padding:11px 12px;margin:0 0 10px}
+.mv .fc{display:flex;gap:10px;align-items:flex-start}.mv .fc .q{flex:1;min-width:0;font-weight:600;font-size:13px;line-height:1.45;word-break:keep-all}.mv .fc .p{flex:none;text-align:right;font-family:var(--mono)}.mv .fc .p b{font-size:17px;display:block}.mv .fc .p .dd{font-size:11.5px;font-weight:600}
+.up{color:var(--up)}.dn{color:var(--dn)}.mv .via{margin:7px 0 0;font-size:11.5px;color:var(--mute);line-height:1.6;word-break:keep-all}.mv .via b{color:var(--ink2);font-weight:600}
+.mv .why{margin:6px 0 0;font-size:12px;line-height:1.65;color:var(--ink2);word-break:keep-all}.mv a{color:var(--acc);text-decoration:none;font-size:11.5px}
+.none{font-size:12.5px;color:var(--mute);line-height:1.7;margin:0;word-break:keep-all}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 22px 8px;font-size:11.5px;color:var(--mute);line-height:1.5}
+.legend span{display:inline-flex;align-items:center;gap:7px}.legend i{width:16px;height:11px;border-radius:3px;display:inline-block}
+.legend .k3{background:#3d63c9}.legend .k2{background:#2c4890}.legend .k1{background:#1f3263}.legend .kl{background:#3a2c0e;border:1px solid var(--lit);box-shadow:0 0 8px rgba(255,176,32,.5)}.legend .k0{border:1px solid #26304a}.legend .ku{border:1px dashed #3a4664}
+.legend .lr{width:22px;height:2px;background:rgba(232,238,248,.7);border-radius:1px}.legend .la{width:22px;height:2px;background:#ffb020;border-radius:1px}
+.foot{margin:6px 22px 24px;font-size:11.5px;color:var(--faint);line-height:1.7;word-break:keep-all}
+.load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:13px}
+@media (max-width:900px){.top{padding:14px 14px 0}h1{font-size:19px}.lede{font-size:12.5px}.row1{align-items:flex-start}.seg{width:100%;overflow-x:auto}.seg a,.seg button{padding:8px 10px;font-size:12px}
+ .groups{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}.groups button{flex:none;font-size:12.5px}.kpi{margin-left:0}
+ #vp{margin:0 0 10px;border-radius:0;border-left:0;border-right:0}
+ #dp{left:0;right:0;top:auto;bottom:0;width:auto;max-height:58%;border-radius:14px 14px 0 0}#dp.off{transform:translateY(30px)}
+ .zc{left:auto;right:10px;bottom:auto;top:10px}.hint{bottom:10px;font-size:11px;white-space:normal;text-align:center;width:calc(100% - 24px);border-radius:12px}.legend,.foot{margin-left:14px;margin-right:14px}}
+</style></head><body>
+<div class="top">
+ <div class="row1"><div><p class="eyebrow">클리사 지오폴리틱스 <span class="draft">시안</span></p><h1>지정학 신경망과 나비효과 지도</h1></div>
+  <nav class="seg" aria-label="보기"><button class="on" type="button">국민에서 보기</button><a href="/links/" target="_top">분쟁에서 보기</a><a href="/lab/ripple/" target="_top">전체 연결 보기</a></nav></div>
+ <p class="lede" id="lede"></p>
+ <div class="row2"><div class="groups" id="groups" role="tablist" aria-label="국민 집단"></div><div class="kpi" id="kpi"></div><label class="lowt"><input type="checkbox" id="low"> 확신도 낮은 연결도 보기</label></div>
+</div>
+<div id="vp"><div id="stage"></div><div class="load" id="ld">불러오는 중입니다…</div>
+ <div class="zc"><button type="button" id="zo" aria-label="축소">−</button><button type="button" id="zi" aria-label="확대">+</button><button type="button" class="w" id="zf">전체 보기</button><span class="pct" id="zp"></span></div>
+ <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 길로 다가갑니다.</div>
+ <aside id="dp" class="off" aria-live="polite"><button type="button" class="x" id="dpx" aria-label="닫기">×</button><div id="det"></div></aside>
+</div>
+<div class="legend"><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 길</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 길(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
+<p class="foot">열려 있는 길은 나비효과 지도가 분쟁 지점마다 경로와 국민 집단별로 판단한 칸입니다. 불이 켜진 칸은 10월 1일 이후 확률이 움직인 전망이 지정학 신경망의 연결을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
+<script>
+(function(){
+const SINCE='2026-10-01', P='';
+const OLDLM={"A10": [["iran-war", 1, "KOR"], ["red-sea-bab-el-mandeb", 1, "KOR"], ["suez-canal", 2, "KOR"]], "A12": [["iran-war", 1, "WCEU"]], "A13": [["rus-ukr", 1, "SEU"], ["iran-war", 1, "SEU"]], "B03": [["rus-ukr", 0, "PARTY"]], "B07": [["rus-ukr", 0, "NEU"], ["baltic-kaliningrad-suwalki", 0, "NEU"]], "B24": [["rus-ukr", 0, "KOR"], ["korea", 0, "KOR"]], "B28": [["rus-ukr", 5, "WCEU"], ["sudan-civil-war", 5, "WCEU"]], "B30": [["rus-ukr", 1, "KOR"], ["malacca", 1, "KOR"]], "K01": [["korea", 0, "KOR"], ["korea", 5, "KOR"]], "K04": [["korea", 0, "KOR"]]};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const md=s=>{const [y,m,d]=s.split('-').map(Number); return m+'월 '+d+'일'};
+const J=u=>fetch(P+u,{cache:'no-cache'}).then(r=>r.json());
+const CASES=['iran','ukraine','korea','taiwan','poland'], CN={iran:'이란 전쟁',ukraine:'러-우 전쟁',korea:'한반도',taiwan:'대만해협',poland:'러시아-NATO'};
+const PSHORT=['군사 위협','에너지·식량','무역·기술','하이브리드·초국가 범죄','핵','인구 이동'];
+let D,DL,C,FMr,L, VIEW=null, G='KOR', SEL=null, LOW=false, SEGS=[];
+try{ const q=new URLSearchParams(location.search).get('g'); if(q) G=q }catch(_){}
+Promise.all([J('/data/eurasia.json'),J('/data/daily.json'),J('/data/chains.json'),J('/data/fcmap.json'),J('/data/links.json')]).then(r=>{[D,DL,C,FMr,L]=r; init()}).catch(e=>{$('ld').textContent='자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오.'; console.error(e)});
+function compute(){
+ const FM={}; FMr.forEach(m=>FM[m.id]=m); const FC={}; D.forecasts.forEach(f=>FC[f.id]=f);
+ const OUT={}; C.links.forEach(l=>{ if(!l.lm&&OLDLM[l.id]) l.lm=OLDLM[l.id]; (OUT[l.f]=OUT[l.f]||[]).push(l) });
+ const fh=D.fc_hist||{}; let last=SINCE; const sig={};
+ (DL.issues||[]).forEach(iss=>{ if(iss.date>last) last=iss.date; if(iss.date<SINCE) return; (iss.items||[]).forEach(x=>(x.fc||[]).forEach(s=>{ if(s.e==='up'||s.e==='down') (sig[s.id]=sig[s.id]||[]).push([iss.date,s.e,x.h]) })) });
+ const base=(h,s)=>{const b=h.filter(x=>x[0]<=s).map(x=>x[1]); return b.length?b[b.length-1]:h[0][1]};
+ const nodes={}, edges=[]; const add=(id,o)=>{ if(!nodes[id]) nodes[id]=Object.assign({id},o) };
+ const has=(a,b)=>edges.some(e=>e.f===a&&e.t===b);
+ CASES.forEach(cs=>{ const items=[];
+  D.forecasts.forEach(f=>{ if(f.status!=='open'||!(f.cases||[]).includes(cs)) return; const m=FM[f.id]; if(!m) return;
+   let tgt=null; for(const c of [m].concat(m.alt?[m.alt]:[])){ if(c&&c.node&&c.rel!=='none'&&(OUT[c.node]||C.M[c.node])){ tgt=c; break } } if(!tgt) return;
+   const h=fh[f.id]||[[last,f.p]], a=base(h,SINCE), dd=Math.round((f.p-a)*10)/10; if(!dd) return; items.push([Math.abs(dd),f,a,tgt]) });
+  items.sort((x,y)=>y[0]-x[0]).slice(0,6).forEach(([_,f,a,tgt])=>{ const fid='F:'+f.id; add(fid,{fc:f,a,b:f.p,cs,sig:(sig[f.id]||[]).length,ev:(sig[f.id]||[]).slice().sort((x,y)=>x[0]<y[0]?1:-1).slice(0,2)});
+   if(tgt.rel==='measure'||C.M[tgt.node]){ add(tgt.node,{}); if(!has(fid,tgt.node)) edges.push({f:fid,t:tgt.node,k:'measure'}) }
+   else (OUT[tgt.node]||[]).forEach(l=>{ add(l.t,{}); if(!has(fid,l.t)) edges.push({f:fid,t:l.t,k:'judge',id:l.id,conf:l.conf,mech:l.mech,lm:l.lm,via:tgt.node}) }) });
+  for(let pass=0;pass<2;pass++) Object.keys(nodes).filter(n=>C.M[n]).forEach(n=>(OUT[n]||[]).forEach(l=>{ if(has(n,l.t)) return; add(l.t,{}); edges.push({f:n,t:l.t,k:'judge',id:l.id,conf:l.conf,mech:l.mech,lm:l.lm}) })) });
+ return {nodes,edges,last};
+}
+const nname=n=>C.M[n]||(n.startsWith('grp:')?C.grp[n.slice(4)]:n.startsWith('ind:')?((n.split(':')[1]==='kr'?'한국 ':'미국 ')+(C.ind[n.slice(4)]||n)):n.startsWith('F:')?(VIEW.nodes[n].fc.s||VIEW.nodes[n].fc.q):scName(n)||n);
+function scName(n){ const [s,i]=n.split(':'); const st=(D.strategies||[]).find(x=>x.id===s); if(!st) return null; const it=((st.futures||{}).items||[]).concat((st.external||{}).items||[]).find(x=>x.id===i); return it?(CN[s]+' · '+(it.name||it.t)):null }
+
+/* 칸마다 불이 켜졌는지: 집단에 이르는 고리(확신도 낮음은 고를 때만) 가운데 근거 칸(lm)이 있는 것 */
+function litMap(g){
+ const out={}; const es=VIEW.edges.filter(e=>LOW||e.conf!=='낮음');
+ const IN={}; es.forEach(e=>(IN[e.t]=IN[e.t]||[]).push(e));
+ es.forEach(e=>{ if(e.t!=='grp:'+g||!e.lm) return;
+  /* 이 고리로 들어오는 전망: 거꾸로 따라가 전망에 이르는 길 하나씩 */
+  const paths=[]; const seen=new Set();
+  (function back(n,trail){ if(n.startsWith('F:')){ if(!seen.has(n)){ seen.add(n); paths.push([n].concat(trail)) } return } (IN[n]||[]).forEach(x=>{ if(trail.indexOf(x.f)<0&&trail.length<6) back(x.f,[n].concat(trail)) }) })(e.f,[]);
+  if(!paths.length) return;  /* 확률이 움직인 전망에서 이 고리까지 이어진 길이 없으면 불을 켜지 않는다 */
+  e.lm.forEach(m=>{ if(m[2]!==g) return; const k=m[0]+'|'+m[1]; (out[k]=out[k]||[]).push({e,paths}) }) });
+ return out;
+}
+
+function viaNames(pt){ const out=[]; const e0=VIEW.edges.find(e=>e.f===pt[0]&&e.t===(pt[1]||null)); if(e0&&e0.via){ const v=scName(e0.via)||nname(e0.via); if(v) out.push(v) } pt.slice(1).forEach(x=>out.push(nname(x))); if(!out.length){ const e1=VIEW.edges.find(e=>e.f===pt[0]&&e.t==='grp:'+G); if(e1&&e1.via) out.push(scName(e1.via)||e1.via) } return out }
+function detail(k,lit,byFp,fpById){
+ const el=$('det'); if(!k||!byFp){ el.innerHTML='<p class="none">칸을 고르십시오.</p>'; return }
+ const [f,p]=k.split('|'), c=byFp[f][+p], fp=fpById[f]||{n:f}, L1=lit[k];
+ let h='<p class="k">'+esc(PSHORT[+p])+' 경로</p><h2>'+esc(fp.n)+'<span class="ar">→</span>'+esc(L.L.gl[G])+'</h2>';
+ h+='<div class="chips">'+(L1?'<span class="chip lit">이번 기간 움직임</span>':'')+'<span class="chip">확신도 '+esc(L.L.conf[c.c])+'</span>'+(c.l!=null?'<span class="chip">걸리는 시간 '+esc(L.L.lag[c.l])+'</span>':'')+((c.k||[]).length?'<span class="chip">영향 범주 '+esc(c.k.map(i=>L.L.cat[i]).join('·'))+'</span>':'')+'</div>';
+ h+='<div class="sec"><h3><i class="b"></i>열려 있는 길 · 나비효과 지도의 판단</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+'</div>';
+ h+='<div class="sec"><h3><i class="a"></i>이번 기간 이 칸으로 들어온 길 · 지정학 신경망</h3>';
+ if(!L1) h+='<p class="none">'+md(SINCE)+' 이후 확률이 움직인 전망 가운데 이 칸으로 이어진 것은 없습니다.</p>';
+ else { const items=[]; L1.forEach(x=>x.paths.forEach(pt=>items.push([pt,x.e])));
+  items.sort((a,b)=>{ const A=VIEW.nodes[a[0][0]],B=VIEW.nodes[b[0][0]]; return Math.abs(B.b-B.a)-Math.abs(A.b-A.a) });
+  const seen=new Set();
+  h+='<ul class="mv">'+items.filter(([pt])=>{ const k=pt.join('>'); if(seen.has(k)) return false; seen.add(k); return true }).slice(0,6).map(([pt,e])=>{ const n=VIEW.nodes[pt[0]], dd=Math.round((n.b-n.a)*10)/10;
+   return '<li><div class="fc"><div class="q">'+esc(n.fc.s||n.fc.q)+'<div class="via">'+esc(CN[n.cs]||'')+'</div></div><div class="p"><b>'+n.b+'%</b><span class="dd '+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+'%p</span></div></div>'+
+    '<p class="via">거쳐 가는 길 <b>'+viaNames(pt).map(esc).join(' → ')+' → '+esc(L.L.gl[G])+'</b></p>'+(e.mech?'<p class="why">'+esc(e.mech)+'</p>':'')+
+    '<a href="/forecast/'+esc(n.fc.id)+'/" target="_top">전망 기록 보기 →</a></li>' }).join('')+'</ul>' }
+ h+='</div>'; el.innerHTML=h;
+}
+
+const vp=$('vp'), st=$('stage'), dp=$('dp');
+let Z=1,TX=0,TY=0,FITZ=1, LIT={}, BYFP={}, FPBY={};
+function init(){ VIEW=compute(); $('ld').remove();
+ $('lede').textContent='사건이 전망의 확률을 움직이고, 그 움직임이 지정학 신경망의 연결을 거쳐 나비효과 지도의 어느 칸(분쟁 지점 × 경로)에 이르는지를 한 판에 담았습니다. '+md(SINCE)+'부터 '+md(VIEW.last)+'까지의 움직임입니다. 집단을 고르고, 칸이나 카드를 누르면 그 길로 다가가 근거가 열립니다.';
+ $('low').onchange=e=>{ LOW=e.target.checked; render(true) };
+ $('dpx').onclick=()=>{ dp.classList.add('off'); SEL=null; hilite(); fit(true) };
+ $('zi').onclick=()=>zoomAt(Z*1.3); $('zo').onclick=()=>zoomAt(Z/1.3); $('zf').onclick=()=>fit(true);
+ sizeVp(); addEventListener('resize',()=>{ sizeVp(); fit(false) }); render(true) }
+function sizeVp(){ const t=vp.getBoundingClientRect().top+scrollY; vp.style.height=Math.max(520,innerHeight-Math.min(t,260)-60)+'px' }
+const wide=()=>innerWidth>900;
+function avail(){ const w=vp.clientWidth-(wide()&&!dp.classList.contains('off')?394:0), h=vp.clientHeight-(wide()?0:(dp.classList.contains('off')?0:vp.clientHeight*.58)); return [Math.max(200,w),Math.max(200,h-(wide()?48:52))] }
+function apply(){ st.style.transform='translate('+TX+'px,'+TY+'px) scale('+Z+')'; $('zp').textContent=Math.round(Z*100)+'%' }
+function fit(anim){ const [w,h]=avail(), sw=st.offsetWidth, sh=st.offsetHeight; FITZ=Math.min(w/sw,h/sh,1.15); Z=FITZ; TX=(w-sw*Z)/2; TY=Math.max(0,(h-sh*Z)/2); st.classList.toggle('anim',!!anim); apply(); if(anim) setTimeout(()=>st.classList.remove('anim'),600) }
+function zoomAt(nz,px,py){ const [w,h]=avail(); px=px==null?w/2:px; py=py==null?h/2:py; nz=Math.max(FITZ*.6,Math.min(2.6,nz)); TX=px-(px-TX)*nz/Z; TY=py-(py-TY)*nz/Z; Z=nz; st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600); hideHint() }
+function zoomTo(box,minZ){ const [w,h]=avail(), pad=36; let nz=Math.min((w-pad*2)/box.w,(h-pad*2)/box.h); nz=Math.max(FITZ,minZ||0,Math.min(1.35,nz)); Z=nz; TX=(w-box.w*Z)/2-box.x*Z; TY=(h-box.h*Z)/2-box.y*Z; st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600) }
+function hideHint(){ const h=$('hint'); if(h) h.style.opacity='0' }
+/* 끌어 옮기기 · 휠 · 두 손가락 */
+const PT=new Map(); let DRG=null, PIN=null, MOVED=false;
+vp.addEventListener('pointerdown',e=>{ if(e.target.closest('#dp,.zc')) return; PT.set(e.pointerId,[e.clientX,e.clientY]); MOVED=false;
+ if(PT.size===1) DRG={x:e.clientX,y:e.clientY,tx:TX,ty:TY}; else if(PT.size===2){ try{ [...PT.keys()].forEach(id=>vp.setPointerCapture(id)) }catch(_){} const [a,b]=[...PT.values()]; PIN={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:Z,cx:(a[0]+b[0])/2,cy:(a[1]+b[1])/2}; DRG=null } });
+vp.addEventListener('pointermove',e=>{ if(!PT.has(e.pointerId)) return; PT.set(e.pointerId,[e.clientX,e.clientY]); const R=vp.getBoundingClientRect();
+ if(PIN&&PT.size===2){ const [a,b]=[...PT.values()], d=Math.hypot(a[0]-b[0],a[1]-b[1]); const nz=Math.max(FITZ*.6,Math.min(2.6,PIN.z*d/PIN.d)), px=PIN.cx-R.left, py=PIN.cy-R.top; TX=px-(px-TX)*nz/Z; TY=py-(py-TY)*nz/Z; Z=nz; apply(); MOVED=true; hideHint(); return }
+ if(DRG){ const dx=e.clientX-DRG.x, dy=e.clientY-DRG.y; if(!MOVED&&Math.hypot(dx,dy)<5) return; if(!MOVED){ try{ vp.setPointerCapture(e.pointerId) }catch(_){} } MOVED=true; vp.classList.add('drag'); TX=DRG.tx+dx; TY=DRG.ty+dy; apply(); hideHint() } });
+const up=e=>{ PT.delete(e.pointerId); if(PT.size<2) PIN=null; if(!PT.size){ DRG=null; vp.classList.remove('drag') } };
+vp.addEventListener('pointerup',up); vp.addEventListener('pointercancel',up);
+vp.addEventListener('wheel',e=>{ if(e.target.closest('#dp')) return; e.preventDefault(); const R=vp.getBoundingClientRect(); const nz=Math.max(FITZ*.6,Math.min(2.6,Z*Math.exp(-e.deltaY*.0018))); const px=e.clientX-R.left, py=e.clientY-R.top; TX=px-(px-TX)*nz/Z; TY=py-(py-TY)*nz/Z; Z=nz; apply(); hideHint() },{passive:false});
+vp.addEventListener('click',e=>{ if(MOVED){ e.stopPropagation(); return } const t=e.target.closest('[data-k],[data-n]'); if(!t) return;
+ if(t.dataset.k) return select(t.dataset.k,true);
+ const ks=SEGS.filter(s=>s.a===t.dataset.n||s.b===t.dataset.n).flatMap(s=>[...s.cells]); if(!ks.length) return;
+ const best=[...new Set(ks)].sort((a,b)=>mag(b)-mag(a))[0]; select(best,true) },true);
+const mag=k=>{ const a=LIT[k]; if(!a) return 0; return Math.max(...a.flatMap(x=>x.paths).map(p=>{ const n=VIEW.nodes[p[0]]; return Math.abs(n.b-n.a) })) };
+/* 판 그리기 */
+function render(refit){
+ const gi=L.groups.indexOf(G); LIT=litMap(G);
+ $('groups').innerHTML=L.groups.map(g=>{ const n=L.cells.filter(c=>c.g===L.groups.indexOf(g)&&c.v===1).length, ln=Object.keys(litMap(g)).length; return '<button type="button" role="tab" data-g="'+g+'" class="'+(g===G?'on':'')+'" aria-selected="'+(g===G)+'">'+esc(L.L.gl[g])+'<span class="n'+(ln?' l':'')+'">'+(ln?ln+' / ':'')+n+'</span></button>' }).join('');
+ $('groups').querySelectorAll('button').forEach(b=>b.onclick=()=>{ G=b.dataset.g; SEL=null; render(true) });
+ const cells=L.cells.filter(c=>c.g===gi), open=cells.filter(c=>c.v===1);
+ FPBY={}; L.fps.forEach(f=>FPBY[f.id]=f); BYFP={}; cells.forEach(c=>(BYFP[c.f]=BYFP[c.f]||[])[c.p]=c);
+ const rows=Object.keys(BYFP).filter(f=>BYFP[f].some(c=>c&&c.v===1)).map(f=>({f,ln:PSHORT.filter((_,p)=>LIT[f+'|'+p]).length,sc:BYFP[f].reduce((s,c)=>s+(c&&c.v===1?c.c:0),0),sev:(FPBY[f]||{}).sev||0})).sort((a,b)=>b.ln-a.ln||b.sc-a.sc||b.sev-a.sev);
+ const rowIdx={}; rows.forEach((r,i)=>rowIdx[r.f]=i);
+ /* 길: 사건 → 전망 → 변수 → 분쟁 지점 줄 */
+ const seg={}, fc={}, vv={}; const addSeg=(a,b,k,kind)=>{ const key=a+'>'+b; (seg[key]=seg[key]||{a,b,kind,cells:new Set()}).cells.add(k) };
+ Object.entries(LIT).forEach(([k,arr])=>{ const fp=k.split('|')[0];
+  arr.forEach(x=>x.paths.forEach(pt=>{ const ch=pt.concat(['row:'+fp]); (fc[pt[0]]=fc[pt[0]]||new Set()).add(rowIdx[fp]);
+   ch.forEach((n,i)=>{ if(i&&!n.startsWith('row:')) (vv[n]=vv[n]||new Set()).add(rowIdx[fp]); if(i) addSeg(ch[i-1],n,k,'a') });
+   (VIEW.nodes[pt[0]].ev||[]).forEach((e,j)=>addSeg('E:'+pt[0].slice(2)+':'+j,pt[0],k,'r')) })) });
+ SEGS=Object.values(seg);
+ const avg=s=>[...s].reduce((a,b)=>a+b,0)/s.size;
+ const F=Object.keys(fc).sort((a,b)=>avg(fc[a])-avg(fc[b])), V=Object.keys(vv).sort((a,b)=>avg(vv[a])-avg(vv[b]));
+ const fcs=new Set(F);
+ $('kpi').innerHTML='<span><b>'+open.length+'</b>열려 있는 길</span><span class="l"><b>'+Object.keys(LIT).length+'</b>불이 켜진 칸</span><span><b>'+fcs.size+'</b>확률이 움직인 전망</span>';
+ const evH=F.map(id=>(VIEW.nodes[id].ev||[]).map((e,j)=>'<div class="ev" data-n="E:'+esc(id.slice(2))+':'+j+'"><div class="d">'+md(e[0])+'</div><div class="h">'+esc(e[2])+'</div><div class="s '+(e[1]==='up'?'up':'dn')+'">'+(e[1]==='up'?'확률을 높이는 쪽':'확률을 낮추는 쪽')+'</div></div>').join('')).join('');
+ const fcH=F.map(id=>{ const n=VIEW.nodes[id], dd=Math.round((n.b-n.a)*10)/10; return '<div class="fn" data-n="'+esc(id)+'"><div class="q">'+esc(n.fc.s||n.fc.q)+'</div><div class="m"><b>'+n.b+'%</b><span class="'+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+'%p</span></div><div class="cs">'+esc(CN[n.cs]||'')+(n.sig?' · 정세 브리핑 '+n.sig+'건':'')+'</div></div>' }).join('');
+ const vH=V.map(id=>'<div class="vn" data-n="'+esc(id)+'">'+esc(nname(id))+'</div>').join('');
+ let tb='<div class="mxh"><div>분쟁 지점 → '+esc(L.L.gl[G])+'</div>'+PSHORT.map(p=>'<div>'+esc(p)+'</div>').join('')+'</div>';
+ rows.forEach(r=>{ const f=FPBY[r.f]||{n:r.f,sev:0};
+  tb+='<div class="mxr'+(r.ln?' has':'')+'" data-row="'+esc(r.f)+'"><div class="fpn" data-rown="row:'+esc(r.f)+'">'+(SEGS.some(s=>s.b==='row:'+r.f)?'<span class="dot"></span>':'')+'<b>'+esc(f.n)+'</b><span class="sev" aria-label="심각도 '+f.sev+'">'+[1,2,3,4,5].map(k=>'<u class="'+(k<=f.sev?'on':'')+'"></u>').join('')+'</span></div>'+
+   PSHORT.map((_,p)=>{ const c=BYFP[r.f][p], k=r.f+'|'+p, L1=LIT[k];
+    if(!c||c.v===0) return '<div class="c v0"></div>'; if(c.v===2) return '<div class="c v2">?</div>';
+    if(L1) return '<div class="c lit" data-k="'+k+'" role="button" tabindex="0"><span class="pulse"></span>'+mag(k).toFixed(0)+'%p</div>';
+    return '<div class="c o'+c.c+'" data-k="'+k+'" role="button" tabindex="0"></div>' }).join('')+'</div>' });
+ const emp='<div class="none2">이번 기간에 이 집단의 칸으로 이어진 움직임이 아직 없습니다.</div>';
+ st.innerHTML='<div><div class="colh">사건 · 정세 브리핑</div><div class="col">'+(evH||emp)+'</div></div><div><div class="colh">확률이 움직인 전망</div><div class="col">'+(fcH||'')+'</div></div><div><div class="colh">거쳐 가는 변수</div><div class="col">'+(vH||'')+'</div></div><div class="tb">'+tb+'</div><svg id="lk" aria-hidden="true"></svg>';
+ st.querySelectorAll('#stage > div:not(.tb)').forEach(d=>{ d.style.display='flex'; d.style.flexDirection='column' }); st.querySelectorAll('#stage .col').forEach(c=>c.style.flex='1');
+ st.querySelectorAll('.c[data-k]').forEach(el=>el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(el.dataset.k,true) } });
+ draw();
+ const k0=SEL&&st.querySelector('.c[data-k="'+SEL+'"]')?SEL:Object.keys(LIT).sort((a,b)=>mag(b)-mag(a))[0];
+ if(refit){ dp.classList.toggle('off',!(k0&&wide())); fit(false) }
+ if(k0) select(k0,false); else { hilite(); detail(null) }
+}
+function rel(el){ let x=0,y=0; while(el&&el!==st){ x+=el.offsetLeft; y+=el.offsetTop; el=el.offsetParent } return [x,y] }
+function box(n){ const el=n.startsWith('row:')?st.querySelector('[data-rown="'+CSS.escape(n)+'"]'):st.querySelector('[data-n="'+CSS.escape(n)+'"]'); if(!el) return null; const [x,y]=rel(el); return {x,y,w:el.offsetWidth,h:el.offsetHeight} }
+function draw(){ const sv=$('lk'); sv.setAttribute('width',st.offsetWidth); sv.setAttribute('height',st.offsetHeight); let h='';
+ SEGS.forEach((s,i)=>{ const a=box(s.a), b=box(s.b); if(!a||!b) return; const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, k=(x2-x1)*.5; s.d='M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2;
+  h+='<path class="base '+s.kind+'" data-i="'+i+'" d="'+s.d+'"/>' }); sv.innerHTML=h }
+function hilite(){ const on=new Set(), sv=$('lk'); sv.querySelectorAll('path.fl').forEach(p=>p.remove());
+ SEGS.forEach((s,i)=>{ const hl=!!SEL&&s.cells.has(SEL); const p=sv.querySelector('path[data-i="'+i+'"]'); if(p) p.classList.toggle('hl',hl); if(hl){ on.add(s.a); on.add(s.b); if(p){ const f=document.createElementNS('http://www.w3.org/2000/svg','path'); f.setAttribute('d',s.d); f.setAttribute('class','fl'); sv.appendChild(f) } } });
+ st.classList.toggle('dim',on.size>0); st.querySelectorAll('[data-n]').forEach(el=>el.classList.toggle('hl',on.has(el.dataset.n)));
+ st.querySelectorAll('.mxr').forEach(r=>r.classList.toggle('hl',on.has('row:'+r.dataset.row))); st.querySelectorAll('.c.sel').forEach(c=>c.classList.remove('sel')); if(SEL){ const c=st.querySelector('.c[data-k="'+SEL+'"]'); if(c) c.classList.add('sel') }
+ return on }
+function select(k,focus){ SEL=k; const on=hilite(); detail(k,LIT,BYFP,FPBY); if(focus||wide()) dp.classList.remove('off');
+ if(focus){ const bs=[...on].map(box).filter(Boolean); const c=st.querySelector('.c[data-k="'+k+'"]'); if(c){ const [x,y]=rel(c); bs.push({x,y,w:c.offsetWidth,h:c.offsetHeight}); const r=c.closest('.mxr'); if(r){ const [rx,ry]=rel(r); bs.push({x:rx,y:ry,w:r.offsetWidth,h:r.offsetHeight}) } }
+  /* 읽을 수 있는 크기(약 85%)로 다가가지 못하면, 표 쪽 끝(변수 → 그 줄)부터 보여 준다 */
+  const U=a=>{ const x0=Math.min(...a.map(b=>b.x)), y0=Math.min(...a.map(b=>b.y)), x1=Math.max(...a.map(b=>b.x+b.w)), y1=Math.max(...a.map(b=>b.y+b.h)); return {x:x0,y:y0,w:x1-x0,h:y1-y0} };
+  const [aw,ah]=avail(), need=bx=>Math.min((aw-72)/bx.w,(ah-72)/bx.h);
+  if(bs.length){ const TH=wide()?.68:.85; let bx=U(bs); if(need(bx)<TH){ const tail=[...on].filter(n=>VIEW.nodes[n]===undefined||!n.startsWith('F:')).filter(n=>!n.startsWith('E:')&&!n.startsWith('F:')).map(box).filter(Boolean).concat(bs.slice(-2)); bx=U(tail); if(need(bx)<TH) bx=U(bs.slice(-2)) }
+   zoomTo(bx,TH) } hideHint() } }
+document.fonts&&document.fonts.ready.then(()=>{ draw(); hilite(); if(!SEL) fit(false) });
+
+})();
+</script></body></html>
