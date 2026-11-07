@@ -120,7 +120,7 @@
       r.onclick = tg; r.onkeydown = function(ev){ if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); tg(ev); } }; }); }
   /* 개편 ②(2026-11-01): 첫 화면(전망으로 보기)이 붙어 있을 때만 보기 전환 단추를 둔다(front2.css에 모양이 있다) */
   function vtHtml(){ if (!document.querySelector('script[src*="/front2.js"]')) return ""; var P = EN ? "/en" : "";
-    return '<nav class="l2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + (EN ? "Chain Reactions" : "지정학 신경망 보기") + '</a><a href="' + P + '/heatmap/">' + (EN ? "Heat Map" : "시황판으로 보기") + '</a><a href="' + P + '/outlook/">' + (EN ? "By Forecast" : "전망으로 보기") + '</a><a class="on" href="' + P + '/life/" aria-current="page">' + (EN ? "By Population" : "국민별로 보기") + "</a></nav>"; }  /* 2026-11-06 결재: 첫 화면 단추 줄과 같은 순서 */
+    return '<nav class="l2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + (EN ? "Chain Reactions" : "통합 신경망 보기") + '</a><a href="' + P + '/heatmap/">' + (EN ? "Heat Map" : "시황판으로 보기") + '</a><a href="' + P + '/outlook/">' + (EN ? "By Forecast" : "전망으로 보기") + '</a><a class="on" href="' + P + '/life/" aria-current="page">' + (EN ? "By Population" : "국민별로 보기") + "</a></nav>"; }  /* 2026-11-06 결재: 첫 화면 단추 줄과 같은 순서 */
   var marked = false, S = {get bdate(){ try { return window.CLISA.state().bdate; } catch (e) { return null; } }};
   function markSet(m){ try { window.CLISA.markSet(m); } catch (e) {} }
   document.addEventListener("clisa:life", function(ev){ var el = ev.detail; if (!el || S.bdate) return; if (LF) draw(el); else load(); });  /* 지구본 표시는 국민의 삶 탭이 열려 있을 때만(E91) */

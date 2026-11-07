@@ -39,7 +39,7 @@
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (m) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]; }); };
   var fmt = function (n) { return n.toLocaleString(EN ? "en-US" : "ko-KR"); };
   var $ = function (s) { return root.querySelector(s); };
-  root.innerHTML = '<section class="lkm-hero"><nav class="lkm-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + (EN ? "Chain Reactions" : "지정학 신경망 보기") + '</a><a href="' + P + '/heatmap/">' + T.hm + '</a><a href="' + P + '/outlook/">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + "</a></nav>" +  /* 2026-11-06 결재 */
+  root.innerHTML = '<section class="lkm-hero"><nav class="lkm-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a href="' + P + '/">' + (EN ? "Chain Reactions" : "통합 신경망 보기") + '</a><a href="' + P + '/heatmap/">' + T.hm + '</a><a href="' + P + '/outlook/">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + "</a></nav>" +  /* 2026-11-06 결재 */
     "<h1>" + esc(T.h) + "</h1><p>" + esc(T.sub) + '</p><div class="lkm-stats" id="lkm-stats"></div></section>' +
     '<div class="lkm-seg" role="tablist"><button class="on" data-v="fp">' + T.seg[0] + '</button><button data-v="grp">' + T.seg[1] + "</button></div>" +
     '<div id="lkm-vfp"><div class="lkm-pick"><select id="lkm-sel" aria-label="' + esc(T.pick) + '"></select><input id="lkm-q" placeholder="' + esc(T.find) + '" aria-label="' + esc(T.find) + '"></div>' +
