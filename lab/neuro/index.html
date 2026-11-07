@@ -10,7 +10,7 @@
  --sans:"IBM Plex Sans KR","Pretendard","Noto Sans CJK KR",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-text-size-adjust:100%}
 body{background:radial-gradient(1200px 600px at 70% -10%,rgba(61,99,201,.14),transparent 60%),var(--bg)}
-.top{padding:18px 22px 0;max-width:none}
+.top{padding:14px 22px 0;max-width:none}
 .row1{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .eyebrow{font-size:11.5px;letter-spacing:.08em;color:var(--mute);font-weight:600;margin:0 0 6px}
 h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01em;word-break:keep-all}
@@ -18,13 +18,13 @@ h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01e
 .seg{display:inline-flex;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:4px;gap:2px}
 .seg a,.seg button{appearance:none;border:0;background:transparent;color:var(--ink2);font:600 13px/1 var(--sans);padding:9px 14px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap}
 .seg .on{background:linear-gradient(180deg,#1d2a45,#16213a);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 6px 14px rgba(0,0,0,.35)}
-.lede{margin:8px 0 12px;color:var(--ink2);font-size:13.5px;line-height:1.65;max-width:1100px;word-break:keep-all}
-.row2{display:flex;align-items:center;gap:10px 16px;flex-wrap:wrap;margin:0 0 12px}
-.groups{display:flex;flex-wrap:wrap;gap:7px}
-.groups button{appearance:none;border:1px solid var(--line2);background:var(--panel);color:var(--ink2);font:600 13px/1 var(--sans);padding:9px 13px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-.groups button .n{font:600 11px/1 var(--mono);color:var(--mute);background:rgba(255,255,255,.05);border-radius:999px;padding:4px 7px}.groups button .n.l{color:#1a1204;background:var(--lit)}
+.lede{margin:6px 0 8px;color:var(--ink2);font-size:13.5px;line-height:1.65;max-width:1100px;word-break:keep-all}
+.row2{display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;margin:0 0 8px}
+.groups{display:flex;flex-wrap:wrap;gap:6px}
+.groups button{appearance:none;border:1px solid var(--line2);background:var(--panel);color:var(--ink2);font:600 12.5px/1 var(--sans);padding:5px 11px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.groups button .n{font:600 11px/1 var(--mono);color:var(--mute);background:rgba(255,255,255,.05);border-radius:999px;padding:2px 6px}.groups button .n.l{color:#1a1204;background:var(--lit)}
 .groups button:hover{border-color:#3a4a6c;color:#fff}.groups button.on{background:#eaf0fb;color:#0a1020;border-color:#eaf0fb}.groups button.on .n{background:rgba(10,16,32,.08);color:#33405c}
-.kpi{display:flex;gap:16px;margin-left:auto;font-size:12px;color:var(--mute);align-items:baseline;flex-wrap:wrap}.kpi b{font:600 18px/1 var(--mono);color:var(--ink);margin-right:5px}.kpi .l b{color:var(--lit2)}
+.kpi{display:flex;gap:16px;margin-left:auto;font-size:12px;color:var(--mute);align-items:baseline;flex-wrap:wrap}.kpi b{font:600 15px/1 var(--mono);color:var(--ink);margin-right:5px}.kpi .l b{color:var(--lit2)}
 .lowt{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--mute);cursor:pointer}.lowt input{accent-color:var(--lit)}
 /* 한 화면 판 */
 #vp{position:relative;margin:0 22px 14px;height:640px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:linear-gradient(180deg,rgba(17,26,45,.75),rgba(10,16,30,.9));box-shadow:0 20px 50px rgba(0,0,0,.35);touch-action:none;cursor:grab}
@@ -36,7 +36,7 @@ h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01e
 .col{display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:6px 0}
 .ev{position:relative;border:1px solid #2b3650;background:#0f1729;border-radius:10px;padding:8px 10px;cursor:pointer;transition:opacity .2s,border-color .15s}
 .ev .d{font:600 10.5px/1 var(--mono);color:var(--mute)}.ev .h{font-size:12px;line-height:1.45;margin-top:4px;word-break:keep-all;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink2)}
-.ev .s{font-size:10.5px;margin-top:4px}.ev .s.up{color:var(--up)}.ev .s.dn{color:var(--dn)}
+.ev .s{font-size:11.5px;margin-left:4px}.legend .ud .up,.legend .ud .dn{font-size:10px}.ev .s.up{color:var(--up)}.ev .s.dn{color:var(--dn)}
 .fn{position:relative;border:1px solid rgba(255,176,32,.35);background:linear-gradient(180deg,rgba(255,176,32,.09),rgba(255,176,32,.03));border-radius:11px;padding:9px 11px;cursor:pointer;transition:border-color .15s,opacity .2s,box-shadow .2s}
 .fn .q{font-size:12.5px;font-weight:600;line-height:1.4;word-break:keep-all}.fn .m{display:flex;gap:6px;align-items:baseline;margin-top:4px;font-family:var(--mono)}.fn .m b{font-size:15px}.fn .m span{font-size:11px;font-weight:600}.fn .cs{font-size:10.5px;color:var(--mute);margin-top:2px}
 .vn{position:relative;border:1px solid #3a4664;background:#111a2d;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:600;line-height:1.35;word-break:keep-all;color:var(--ink2);cursor:pointer;transition:border-color .15s,opacity .2s}
@@ -76,13 +76,13 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 .zc .pct{font:600 11.5px/1 var(--mono);color:var(--mute);margin-left:4px;min-width:40px}
 .hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:4;font-size:11.5px;color:var(--mute);background:rgba(6,10,18,.75);border:1px solid var(--line);border-radius:999px;padding:7px 12px;pointer-events:none;white-space:nowrap;transition:opacity .5s}
 /* 설명 상자(판 위에 뜸) */
-#dp{position:absolute;right:14px;top:14px;bottom:14px;width:380px;z-index:6;background:rgba(11,17,31,.97);border:1px solid var(--line2);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.55);display:flex;flex-direction:column;transition:transform .3s,opacity .3s}
+#dp{position:absolute;right:14px;top:14px;bottom:14px;width:500px;z-index:6;background:rgba(11,17,31,.97);border:1px solid var(--line2);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.55);display:flex;flex-direction:column;transition:transform .3s,opacity .3s}
 #dp.off{transform:translateX(30px);opacity:0;pointer-events:none}
 #dp .x{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:15px;border:1px solid #3a4457;background:#1c2333;color:#fff;font-size:17px;line-height:26px;cursor:pointer;z-index:1}
 #det{overflow:auto;padding:18px 18px 20px;flex:1}
 #det .k{font-size:11px;color:var(--mute);font-weight:600;letter-spacing:.04em;margin:0 0 8px}
 #det h2{font-size:17px;line-height:1.4;margin:0 0 10px;padding-right:30px;font-weight:700;word-break:keep-all}#det h2 .ar{color:var(--faint);margin:0 4px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}.chip{font-size:11px;color:var(--ink2);border:1px solid var(--line2);border-radius:999px;padding:4px 9px}.chip.lit{border-color:rgba(255,176,32,.6);color:var(--lit2);background:var(--litbg)}
+.chips{display:flex;flex-wrap:wrap;gap:2px 0;margin:0 0 14px;font-size:12px;line-height:1.6;color:var(--mute)}.chip+.chip::before{content:'·';margin:0 7px;color:var(--line2)}.chip{color:var(--ink2)}.chip.lit{color:var(--lit2);font-weight:600}
 .sec{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.sec:first-of-type{border-top:0;padding-top:0;margin-top:0}
 .sec h3{font-size:12px;margin:0 0 10px;color:var(--ink2);font-weight:700;display:flex;align-items:center;gap:8px}.sec h3 i{width:10px;height:10px;border-radius:3px;display:inline-block}.sec h3 i.b{background:#3d63c9}.sec h3 i.a{background:var(--lit);box-shadow:0 0 8px rgba(255,176,32,.6)}
 .steps{list-style:none;margin:0 0 10px;padding:0}.steps li{position:relative;padding:0 0 10px 20px;font-size:13px;line-height:1.55;word-break:keep-all}
@@ -102,9 +102,9 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 @media (max-width:900px){.top{padding:14px 14px 0}h1{font-size:19px}.lede{font-size:12.5px}.row1{align-items:flex-start}.seg{width:100%;overflow-x:auto}.seg a,.seg button{padding:8px 10px;font-size:12px}
  .groups{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}.groups button{flex:none;font-size:12.5px}.kpi{margin-left:0}
  #vp{margin:0 0 10px;border-radius:0;border-left:0;border-right:0}
- #dp{left:0;right:0;top:auto;bottom:0;width:auto;max-height:58%;border-radius:14px 14px 0 0}#dp.off{transform:translateY(30px)}
+ #dp{left:0;right:0;top:auto;bottom:0;width:auto;max-height:72%;border-radius:14px 14px 0 0}#dp .x{width:38px;height:38px;border-radius:19px;font-size:20px;line-height:34px;right:8px;top:8px}#dp.off{transform:translateY(30px)}
  .zc{left:auto;right:10px;bottom:auto;top:10px}.hint{bottom:10px;font-size:11px;white-space:normal;text-align:center;width:calc(100% - 24px);border-radius:12px}.legend,.foot{margin-left:14px;margin-right:14px}}
-html.embed .eyebrow{display:none}html.embed .top{padding-top:16px}
+html.embed .eyebrow{display:none}html.embed .top{padding-top:12px}
 .fpn{cursor:pointer}.fpn.sel b{color:var(--lit2)}.fpn:hover b{text-decoration:underline;text-underline-offset:3px}
 .lowt+.lowt{margin-left:14px}
 #det .asof{font-size:11px;color:var(--faint);margin:8px 0 0}
@@ -131,7 +131,7 @@ html.embed .eyebrow{display:none}html.embed .top{padding-top:16px}
  <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 길만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
  <aside id="dp" class="off" aria-live="polite"><button type="button" class="x" id="dpx" aria-label="닫기">×</button><div id="det"></div></aside>
 </div>
-<div class="legend"><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 길 · 선이 두꺼울수록 확신도가 높음</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 길(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
+<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 길 · 선이 두꺼울수록 확신도가 높음</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 길(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
 <p class="foot">열려 있는 길은 나비효과가 분쟁 지점마다 경로와 국민 집단별로 판단한 칸입니다. 불이 켜진 칸은 10월 1일 이후 확률이 움직인 전망이 신경망의 연결을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
 <script>
 (function(){
@@ -218,12 +218,12 @@ function detailRow(f){
 const vp=$('vp'), st=$('stage'), dp=$('dp');
 let Z=1,TX=0,TY=0,FITZ=1, LIT={}, BYFP={}, FPBY={};
 function init(){ VIEW=compute(); $('ld').remove();
- $('lede').textContent='최근 사건이 전망을 움직이고, 그 움직임이 어떤 변수를 거쳐 각 나라 국민의 안전과 생활에 이르는지를 한 화면에 담았습니다. 오른쪽 나비효과 표는 분쟁 지점과 경로별로 판단한 결과입니다. '+md(SINCE)+'부터 '+md(VIEW.last)+'까지의 움직임입니다.';  /* 2026-11-07 대통령님 문구 */
+ $('lede').textContent='최근 사건이 전망을 움직이고, 그 움직임이 어떤 변수를 거쳐 각 나라 국민의 안전과 생활에 이르는지를 한 화면에 담았습니다. '+md(SINCE)+'부터 '+md(VIEW.last)+'까지의 움직임입니다.';  /* 2026-11-07 대통령님 문구 */
  $('low').onchange=e=>{ LOW=e.target.checked; render(true) };
  $('allfp').onchange=e=>{ ALLFP=e.target.checked; render(true) };  /* 2026-11-07: 이어지는 칸이 없는 분쟁 지점까지 43곳 모두 */
  $('det').addEventListener('click',e=>{ const td=e.target.closest('td[data-gk]'); if(!td) return; const [g,f,p]=td.dataset.gk.split('|'); if(g!==G){ G=g; SEL=null; SELN=null; render(true) } if(!st.querySelector('.c[data-k="'+f+'|'+p+'"]')){ ALLFP=true; $('allfp').checked=true; render(true) } select(f+'|'+p,true) });
- $('dpx').onclick=()=>clearSel();
- $('zi').onclick=()=>zoomAt(Z*1.3); $('zo').onclick=()=>zoomAt(Z/1.3); $('zf').onclick=()=>fit(true);
+ tapBtn('dpx',()=>clearSel());
+ tapBtn('zi',()=>zoomAt(Z*1.3)); tapBtn('zo',()=>zoomAt(Z/1.3)); tapBtn('zf',()=>fit(true));
  sizeVp(); addEventListener('resize',()=>{ sizeVp(); spread(); fit(false); post() }); render(true); deep(); post();
  try{ new ResizeObserver(post).observe(document.body) }catch(_){} }
 /* 첫 화면에 끼워 넣었을 때(embed): 바깥 화면 높이에 맞추고, 바깥에 높이를 알린다 */
@@ -236,7 +236,7 @@ function deep(){ let q=null; try{ q=new URLSearchParams(location.search).get('fp
  if(q){ if(!st.querySelector('[data-rown="row:'+q+'"]')){ ALLFP=true; $('allfp').checked=true; render(true) } if(st.querySelector('[data-rown="row:'+q+'"]')) select('row:'+q,true) } }
 function sizeVp(){ const t=vp.getBoundingClientRect().top+scrollY; if(document.documentElement.classList.contains('embed')&&window.parent!==window){ let H=innerHeight; try{ H=parent.innerHeight }catch(_){} vp.style.height=Math.max(460,H-200-t)+'px'; return } vp.style.height=Math.max(520,innerHeight-Math.min(t,260)-60)+'px' }
 const wide=()=>innerWidth>900;
-function avail(){ const w=vp.clientWidth-(wide()&&!dp.classList.contains('off')?394:0), h=vp.clientHeight-(wide()?0:(dp.classList.contains('off')?0:vp.clientHeight*.58)); return [Math.max(200,w),Math.max(200,h-(wide()?48:52))] }
+function avail(){ const w=vp.clientWidth-(wide()&&!dp.classList.contains('off')?514:0), h=vp.clientHeight-(wide()?0:(dp.classList.contains('off')?0:vp.clientHeight*.72)); return [Math.max(200,w),Math.max(200,h-(wide()?48:52))] }
 function clampT(){ const [w,h]=avail(), sw=st.offsetWidth*Z, sh=st.offsetHeight*Z; TX=sw<=w?(w-sw)/2:Math.min(0,Math.max(w-sw,TX)); TY=sh<=h?Math.max(0,(h-sh)/2):Math.min(0,Math.max(h-sh,TY)) }
 function apply(){ st.style.transform='translate('+TX+'px,'+TY+'px) scale('+Z+')'; $('zp').textContent=Math.round(Z*100)+'%' }
 /* 판이 화면보다 납작하면(높이로 배율이 정해지면) 열 사이와 칸을 넓혀 좌우 빈 곳을 채운다 */
@@ -250,6 +250,9 @@ function zoomTo(box,minZ){ const [w,h]=avail(), pad=36; let nz=Math.min((w-pad*2
 function hideHint(){ const h=$('hint'); if(h) h.style.opacity='0' }
 /* 끌어 옮기기 · 휠 · 두 손가락 */
 const PT=new Map(); let DRG=null, PIN=null, MOVED=false;
+/* 2026-11-07: 판을 끌거나 두 손가락으로 만진 뒤 닫기(×)·전체 보기 단추가 듣지 않던 것. 단추를 누르는 순간 끌기 상태를 지우고, 단추는 손을 뗄 때 바로 작동한다 */
+addEventListener('pointerdown',e=>{ if(e.target.closest&&e.target.closest('#dp,.zc')){ MOVED=false; DRG=null; PIN=null; PT.clear(); vp.classList.remove('drag') } },true);
+let BTNT=0; const tapBtn=(id,fn)=>{ const b=$(id); let t=0; b.addEventListener('pointerup',e=>{ if(e.pointerType==='mouse') return; t=BTNT=Date.now(); e.preventDefault(); fn() }); b.addEventListener('click',e=>{ if(Date.now()-t<700) return; fn() }) };
 vp.addEventListener('pointerdown',e=>{ if(e.target.closest('#dp,.zc')) return; PT.set(e.pointerId,[e.clientX,e.clientY]); MOVED=false;
  if(PT.size===1) DRG={x:e.clientX,y:e.clientY,tx:TX,ty:TY}; else if(PT.size===2){ try{ [...PT.keys()].forEach(id=>vp.setPointerCapture(id)) }catch(_){} const [a,b]=[...PT.values()]; PIN={d:Math.hypot(a[0]-b[0],a[1]-b[1]),z:Z,cx:(a[0]+b[0])/2,cy:(a[1]+b[1])/2}; DRG=null } });
 vp.addEventListener('pointermove',e=>{ if(!PT.has(e.pointerId)) return; PT.set(e.pointerId,[e.clientX,e.clientY]); const R=vp.getBoundingClientRect();
@@ -258,7 +261,7 @@ vp.addEventListener('pointermove',e=>{ if(!PT.has(e.pointerId)) return; PT.set(e
 const up=e=>{ PT.delete(e.pointerId); if(PT.size<2) PIN=null; if(!PT.size){ DRG=null; vp.classList.remove('drag') } };
 vp.addEventListener('pointerup',up); vp.addEventListener('pointercancel',up);
 vp.addEventListener('wheel',e=>{ if(e.target.closest('#dp')) return; e.preventDefault(); const R=vp.getBoundingClientRect(); const nz=Math.max(FITZ*.6,Math.min(2.6,Z*Math.exp(-e.deltaY*.0018))); const px=e.clientX-R.left, py=e.clientY-R.top; TX=px-(px-TX)*nz/Z; TY=py-(py-TY)*nz/Z; Z=nz; apply(); hideHint() },{passive:false});
-vp.addEventListener('click',e=>{ if(MOVED){ e.stopPropagation(); return } if(e.target.closest('#dp,.zc')) return; const t=e.target.closest('[data-k],[data-n],[data-rown]'); if(!t){ if(SEL) clearSel(); return }
+vp.addEventListener('click',e=>{ if(Date.now()-BTNT<700){ e.stopPropagation(); return } /* 단추를 누른 손가락이 닫힌 칸 아래의 칸을 다시 누르지 않도록 */ if(e.target.closest('#dp,.zc')) return; if(MOVED){ MOVED=false; e.stopPropagation(); return } const t=e.target.closest('[data-k],[data-n],[data-rown]'); if(!t){ if(SEL) clearSel(); return }
  if(t.dataset.k) return select(t.dataset.k,true,t);
  if(t.dataset.rown) return select(t.dataset.rown,true,t);
  const ks=SEGS.filter(s=>s.a===t.dataset.n||s.b===t.dataset.n).flatMap(s=>[...s.cells]); if(!ks.length) return;
@@ -286,7 +289,7 @@ function render(refit){
  const F=Object.keys(fc).sort((a,b)=>avg(fc[a])-avg(fc[b])), V=Object.keys(vv).sort((a,b)=>avg(vv[a])-avg(vv[b]));
  const fcs=new Set(F);
  $('kpi').innerHTML='<span><b>'+open.length+'</b>열려 있는 길</span><span class="l"><b>'+Object.keys(LIT).length+'</b>불이 켜진 칸</span><span><b>'+fcs.size+'</b>확률이 움직인 전망</span>';
- const evH=F.map(id=>(VIEW.nodes[id].ev||[]).map((e,j)=>'<div class="ev" data-n="E:'+esc(id.slice(2))+':'+j+'"><div class="d">'+md(e[0])+'</div><div class="h">'+esc(e[2])+'</div><div class="s '+(e[1]==='up'?'up':'dn')+'">'+(e[1]==='up'?'확률을 높이는 쪽':'확률을 낮추는 쪽')+'</div></div>').join('')).join('');
+ const evH=F.map(id=>(VIEW.nodes[id].ev||[]).map((e,j)=>'<div class="ev" data-n="E:'+esc(id.slice(2))+':'+j+'"><div class="d">'+md(e[0])+' <span class="s '+(e[1]==='up'?'up':'dn')+'" role="img" aria-label="'+(e[1]==='up'?'전망의 가능성을 키우는 소식':'전망의 가능성을 줄이는 소식')+'">'+(e[1]==='up'?'▲':'▼')+'</span></div><div class="h">'+esc(e[2])+'</div></div>').join('')).join('');
  const fcH=F.map(id=>{ const n=VIEW.nodes[id], dd=Math.round((n.b-n.a)*10)/10; return '<div class="fn" data-n="'+esc(id)+'"><div class="q">'+esc(n.fc.s||n.fc.q)+'</div><div class="m"><b>'+n.b+'%</b><span class="'+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+'%p</span></div><div class="cs">'+esc(CN[n.cs]||'')+(n.sig?' · 정세 브리핑 '+n.sig+'건':'')+'</div></div>' }).join('');
  const vH=V.map(id=>'<div class="vn" data-n="'+esc(id)+'">'+esc(nname(id))+'</div>').join('');
  let tb='<div class="mxh"><div>분쟁 지점 → '+esc(L.L.gl[G])+'</div>'+PSHORT.map(p=>'<div>'+esc(p)+'</div>').join('')+'</div>';

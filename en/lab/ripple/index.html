@@ -237,7 +237,7 @@ function render(){ g.innerHTML=''; info.style.display='none'; g.classList.remove
  OC[1].forEach(f=>{ const ev=OC[0].find(x=>x.id==='E:'+f.id.slice(2)); const a=ev?card(ev):document.createElement('div'); a.style.gridColumn='1'; const b=card(f); b.style.gridColumn='3'; rows.appendChild(a); rows.appendChild(b) });
  g.appendChild(rows);
  [2,3].forEach(ci=>{const col=document.createElement('div'); col.className='col c'+ci; col.style.gridColumn=String(2*ci+1); OC[ci].forEach(n=>col.appendChild(card(n))); g.appendChild(col)});
- const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{applyZ(); draw(); story(); stRender(); tell()}) }
+ const s=document.createElementNS('http://www.w3.org/2000/svg','svg'); s.id='ed'; g.appendChild(s); requestAnimationFrame(()=>{applyZ(); draw(); stRender(); tell()}) }  /* 2026-11-07 대통령님: '모두'를 누르면 길이 모두 켜져야 한다. 처음에 가장 크게 움직인 길만 켜던 것(story)을 뺌. 통합 신경망(1107m)과 같은 방식 */
 function rect(id){const e=g.querySelector('.n[data-id="'+CSS.escape(id)+'"]'), gr=g.getBoundingClientRect(), r=e.getBoundingClientRect(); return {l:(r.left-gr.left)/Z,r:(r.right-gr.left)/Z,t:(r.top-gr.top)/Z,b:(r.bottom-gr.top)/Z,cy:((r.top+r.bottom)/2-gr.top)/Z}}
 function draw(){const s=g.querySelector('#ed'); if(!s) return; s.innerHTML='';
  E.forEach((e,i)=>{ if(!byId[e.f]||!byId[e.t]) return; const a=rect(e.f), b=rect(e.t); let d; const odd=byId[e.f].col>=byId[e.t].col;
@@ -297,7 +297,7 @@ function stRender(){ const D=document.documentElement, cs=cands(); D.classList.t
   cs.slice(0,8).forEach(n=>{ const b=document.createElement('button'); b.type='button'; if(n.id===SID) b.className='on'; const dd=Math.round((n.b-n.a)*10)/10; b.innerHTML=esc(n.t)+'<b class="'+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+(EN?' pp':'%p')+'</b>'; b.onclick=ev=>{ ev.stopPropagation(); SID=n.id; info.style.display='none'; stRender(); st.scrollIntoView({block:'start'}); tell() }; bs.appendChild(b) }); o.appendChild(bs); st.appendChild(o) }
  const all=document.createElement('button'); all.type='button'; all.className='all'; all.textContent=T.stAll(N.length,E.length); all.onclick=ev=>{ ev.stopPropagation(); MODE='full'; info.style.display='none'; stRender(); requestAnimationFrame(()=>{ draw(); story(); tell(); $('tabs').scrollIntoView({block:'start'}) }) }; st.appendChild(all) }
 stb.onclick=ev=>{ ev.stopPropagation(); MODE='story'; info.style.display='none'; unhl(); stRender(); tell() };
-MQ.addEventListener&&MQ.addEventListener('change',()=>{ stRender(); requestAnimationFrame(()=>{ draw(); if(!document.documentElement.classList.contains('stm')) story(); tell() }) });
+MQ.addEventListener&&MQ.addEventListener('change',()=>{ stRender(); requestAnimationFrame(()=>{ draw(); tell() }) });
 /* 설명 상자: 시황판 안(iframe)에 실릴 때는 바깥 화면에서 보이는 아래쪽에 띄운다 */
 function placeInfo(){ if(info.style.display==='none') return; const fe=window.frameElement; if(!fe||document.documentElement.classList.contains('fs')){ info.style.top=''; info.style.bottom=''; return }
  try{ const r=fe.getBoundingClientRect(), z=(r.height/fe.offsetHeight)||1, vb=Math.min(innerHeight,(parent.innerHeight-r.top)/z), vt=Math.max(0,-r.top/z); const h=info.offsetHeight; info.style.bottom='auto'; info.style.top=Math.max(vt+8,vb-h-(innerWidth<=1100?0:16))+'px' }catch(_){} }
