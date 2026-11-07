@@ -167,6 +167,9 @@
   var HMH = 0; addEventListener("message", function(e){ if (e.data && e.data.hmH && e.origin === location.origin) { HMH = e.data.hmH; hmSize(); } });
   var RPH = 0; function rpSize(){ var f = document.getElementById("rp2f"); if (!f) return; f.style.height = (RPH || 900) + "px"; }
   addEventListener("message", function(e){ if (e.data && e.data.rpH && e.origin === location.origin) { RPH = e.data.rpH; rpSize(); } });
+  /* 2026-11-07 대통령님: 통합 신경망의 전체 화면 단추를 제목 줄의 보기 단추 4개 바로 왼쪽에 둔다. 보기 단추 줄이 판 위에 얹혀 있으면(넓은 화면) 그 폭을 판에 알린다 */
+  function vtW(){ var f = document.getElementById("rp2f"), n = f && f.parentNode.querySelector(":scope > .f2-vt"); if (!f || !n || !f.contentWindow) return; var w = getComputedStyle(n).position === "absolute" ? Math.max(0, n.offsetWidth + 14 + 10 - 22) : 0; try { f.contentWindow.postMessage({vtW: w}, location.origin); } catch (_) {} }
+  addEventListener("message", function(e){ if (e.data && e.data.rpH && e.origin === location.origin) vtW(); }); addEventListener("resize", vtW);
   function drawRipple(el){ EL = el; if (/^\/(ripple\/)?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on"); var ft = el.querySelector(":scope > .site-foot");
     /* 2026-11-07 대통령님 결재: 국문 첫 화면은 지정학 신경망과 나비효과 지도의 통합판. 영문은 영문 통합판이 나올 때까지 옛 신경망.
        칩에서 '한 항목 보기'로 들어오거나(rpfocus) 옛 신경망에서 돌아올 때(rpret)는 옛 신경망을 연다. 옛 나비효과 지도 주소(?fp=…)는 통합판의 그 분쟁 지점으로 넘긴다 */
