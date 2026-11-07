@@ -5,7 +5,7 @@
   var T = EN ? {
     eye: "People's Lives \u00b7 as of ", h: "Whose lives would you like to see?",
     sub: "Choose a population to see how the five conflicts could change its people's lives through 2030, shown as 100 possible futures. The dot counts are Clisa Geopolitics' judgment estimates.",
-    off: "Other countries · coming soon", h3: "If you lived through to 2030 a hundred times",
+    off: "Other countries · coming soon", h3: "If you lived to 2030 a hundred times over",
     s1: ": 100 possible futures through 2030, shown as dots for each issue. Select a row to see the reasoning.",
     party: "People in the countries directly involved (both warring sides in the Russia-Ukraine war)",
     LN: {x: "Much worse", w: "Worse", b: "Better", s: "About the same"}, tr: "Daily dot counts", today: "Today", rev: " revision · ",

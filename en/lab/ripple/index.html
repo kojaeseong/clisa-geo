@@ -106,7 +106,7 @@ const T={
  focus:"These are the paths leading into and out of this item. They follow the reviewed chain links, whether or not any probability moved in this period.",
  cols:["Events: Geopolitical Briefing","Forecasts that moved","Variables in between","Lives, industries, and other issues"],
  evT:n=>{const w=['One','Two','Three','Four','Five','Six','Seven','Eight','Nine'];return (n>=1&&n<=9?w[n-1]:n)+' Briefing '+(n===1?'item':'items')},
- evS:(u,d)=>'Raising: '+u+' · Lowering: '+d,
+ evS:(u,d)=>''+u+' pointing higher · '+d+' pointing lower,
  lowSide:" (points lower)",
  highSide:" (points higher)",
  noSig:"This probability changed without a signal from the Geopolitical Briefing. The reasoning is in the forecast record.",
