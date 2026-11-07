@@ -161,7 +161,7 @@
   function VIEW(){ var p = location.pathname.replace(/^\/en(?=\/)/, ""); return /^\/outlook\/?$/.test(p) ? "fc" : /^\/heatmap\/?$/.test(p) ? "hm" : "rp"; }  /* 2026-11-06 대통령님 결재: 첫 화면(/, /ripple/) = 나비효과로 보기, /heatmap/ = 시황판, /outlook/ = 전망 */
   function vtNav(on){ return '<nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a' + (on === "rp" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/" data-f2v="rp">' + T.rp +
       '</a><a' + (on === "hm" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/heatmap/" data-f2v="hm">' + T.hm +
-      '</a><a' + (on === "fc" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/outlook/" data-f2v="fc">' + T.vt[0] + '</a><a href="' + P + '/life/">' + T.vt[1] + "</a></nav>"; }  /* 2026-11-06 결재: 나비효과 지도로 보기는 단추 줄에서 빼고 메뉴 탭으로 */
+      '</a><a' + (on === "fc" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/outlook/" data-f2v="fc">' + T.vt[0] + "</a></nav>"; }  /* 2026-11-06 결재: 나비효과 지도로 보기는 단추 줄에서 빼고 메뉴 탭으로. 2026-11-08 대통령님: '국민별로 보기'도 뺌(메뉴의 산업과 국민 탭과 겹침, 단추 줄 가로 줄이기) */
   function hmSize(){ var f = document.getElementById("hm2f"); if (!f || !f.offsetHeight) return; var r = f.getBoundingClientRect(), z = r.height / f.offsetHeight || 1, pn = document.getElementById("panel");
     var want = HMH || (innerWidth < 700 ? 600 : Math.max(480, (pn ? pn.getBoundingClientRect().bottom : innerHeight) - r.top - 2)); f.style.height = (HMH ? HMH : want / z) + "px"; }  /* v4.79f: 시황판이 알려 준 높이(판 1.6:1)를 씀 */
   var HMH = 0; addEventListener("message", function(e){ if (e.data && e.data.hmH && e.origin === location.origin) { HMH = e.data.hmH; hmSize(); } });

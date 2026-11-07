@@ -20,9 +20,9 @@ h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01e
 .seg .on{background:linear-gradient(180deg,#1d2a45,#16213a);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 6px 14px rgba(0,0,0,.35)}
 .lede{margin:6px 0 8px;color:var(--ink2);font-size:13.5px;line-height:1.65;max-width:none;word-break:keep-all}
 .row2{display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;margin:0 0 8px}
-.groups{display:flex;flex-wrap:wrap;gap:6px}
-.groups button{appearance:none;border:1px solid var(--line2);background:var(--panel);color:var(--ink2);font:600 12.5px/1 var(--sans);padding:5px 11px;border-radius:999px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
-.groups button .n{font:600 11px/1 var(--mono);color:var(--mute);background:rgba(255,255,255,.05);border-radius:999px;padding:2px 6px}.groups button .n.l{color:#1a1204;background:var(--lit)}
+.groups{display:flex;flex-wrap:wrap;gap:4px}
+.groups button{appearance:none;border:1px solid var(--line2);background:var(--panel);color:var(--ink2);font:600 12.5px/1 var(--sans);padding:5px 8px;border-radius:0;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.groups button .n{font:600 11px/1 var(--mono);color:var(--mute);background:rgba(255,255,255,.05);border-radius:0;padding:2px 4px}.groups button .n.l{color:#1a1204;background:var(--lit)}
 .groups button:hover{border-color:#3a4a6c;color:#fff}.groups button.on{background:#eaf0fb;color:#0a1020;border-color:#eaf0fb}.groups button.on .n{background:rgba(10,16,32,.08);color:#33405c}
 .kpi{display:flex;gap:16px;margin-left:auto;font-size:12px;color:var(--mute);align-items:baseline;flex-wrap:wrap}.kpi b{font:600 15px/1 var(--mono);color:var(--ink);margin-right:5px}.kpi .l b{color:var(--lit2)}
 .lowt{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--mute);cursor:pointer}.lowt input{accent-color:var(--lit)}
@@ -188,7 +188,7 @@ function detail(k,lit,byFp,fpById){
  let h='<p class="k">'+esc(PSHORT[+p])+' 경로</p><h2>'+esc(fp.n)+'<span class="ar">→</span>'+esc(L.L.gl[G])+'</h2>';
  /* 2026-11-07: '이어지지 않음'·'판단 불가' 칸도 나비효과 지도의 판단과 이유를 보인다(1,548칸 모두 통합판에서) */
  if(c&&c.v!==1){ h+='<div class="chips"><span class="chip">'+(c.v===0?'이어지지 않음':'판단 불가')+'</span></div><div class="sec"><h3><i class="b"></i>나비효과의 판단</h3><p class="vno">'+esc(c.r||'')+'</p>'+ASOF()+'</div>'; el.innerHTML=h; return }
- h+='<div class="chips">'+(L1?'<span class="chip lit">이번 기간 움직임</span>':'')+'<span class="chip">확신도 '+esc(L.L.conf[c.c])+'</span>'+(c.l!=null?'<span class="chip">걸리는 시간 '+esc(L.L.lag[c.l])+'</span>':'')+((c.k||[]).length?'<span class="chip">영향 범주 '+esc(c.k.map(i=>L.L.cat[i]).join('·'))+'</span>':'')+'</div>';
+ h+='<div class="chips">'+(L1?'<span class="chip lit">이번 기간 움직임</span>':'')+'<span class="chip">확신도: '+esc(L.L.conf[c.c])+'</span>'+(c.l!=null?'<span class="chip">걸리는 시간: '+esc(L.L.lag[c.l])+'</span>':'')+((c.k||[]).length?'<span class="chip">영향 범주: '+esc(c.k.map(i=>L.L.cat[i]).join('·'))+'</span>':'')+'</div>';
  h+='<div class="sec"><h3><i class="b"></i>열려 있는 길 · 나비효과의 판단</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF()+'</div>';
  h+='<div class="sec"><h3><i class="a"></i>이번 기간 이 칸으로 들어온 길 · 신경망</h3>';
  if(!L1) h+='<p class="none">'+md(SINCE)+' 이후 확률이 움직인 전망 가운데 이 칸으로 이어진 것은 없습니다.</p>';
@@ -280,7 +280,7 @@ const mag=k=>{ const a=LIT[k]; if(!a) return 0; return Math.max(...a.flatMap(x=>
 /* 판 그리기 */
 function render(refit){
  const gi=L.groups.indexOf(G); LIT=litMap(G);
- $('groups').innerHTML=L.groups.map(g=>{ const n=L.cells.filter(c=>c.g===L.groups.indexOf(g)&&c.v===1).length, ln=Object.keys(litMap(g)).length; return '<button type="button" role="tab" data-g="'+g+'" class="'+(g===G?'on':'')+'" aria-selected="'+(g===G)+'">'+esc(L.L.gl[g])+'<span class="n'+(ln?' l':'')+'">'+(ln?ln+' / ':'')+n+'</span></button>' }).join('');
+ $('groups').innerHTML=L.groups.map(g=>{ const n=L.cells.filter(c=>c.g===L.groups.indexOf(g)&&c.v===1).length, ln=Object.keys(litMap(g)).length; return '<button type="button" role="tab" data-g="'+g+'" class="'+(g===G?'on':'')+'" aria-selected="'+(g===G)+'">'+esc(L.L.gl[g])+'<span class="n'+(ln?' l':'')+'">'+(ln?ln+'/':'')+n+'</span></button>' }).join('');
  $('groups').querySelectorAll('button').forEach(b=>b.onclick=()=>{ G=b.dataset.g; SEL=null; SELN=null; render(true) });
  const cells=L.cells.filter(c=>c.g===gi), open=cells.filter(c=>c.v===1);
  FPBY={}; L.fps.forEach(f=>FPBY[f.id]=f); BYFP={}; cells.forEach(c=>(BYFP[c.f]=BYFP[c.f]||[])[c.p]=c);
