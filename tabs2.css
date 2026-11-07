@@ -20,3 +20,6 @@ header.hd .hd-sub a[aria-current="page"]{background:var(--ink,#101418);color:#ff
 :root[data-theme="dark"] .hd-sub a{background:linear-gradient(180deg,#252D37,#1A2129)!important;border-color:#2E3742;box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 2px 0 #0B0F14,0 3px 6px rgba(0,0,0,.35)}
 :root[data-theme="dark"] .hd-sub a[aria-current="page"]{background:linear-gradient(180deg,#F4F7FC,#DCE3EE)!important;color:#0B1120!important;border-color:#DCE3EE;box-shadow:0 1px 0 #fff inset,0 2px 0 #8C97A6,0 4px 10px rgba(0,0,0,.45)}
 @media (prefers-reduced-motion:reduce){.hd-sub a{transition:none}.hd-sub a:hover{transform:none}}
+/* 2026-11-07 시안(대통령님): 갈래 단추 줄을 낮춘다 */
+@media (min-width:901px){header.hd>nav.hd-sub{padding:2px 12px 4px!important}header.hd .hd-sub a{padding:3px 13px;font-size:12.5px;line-height:1.3}}
+@media (max-width:900px){header.hd nav.gnav a{min-height:35px}header.hd .hd-sub{padding:0 12px 6px}header.hd .hd-sub a{padding:3px 12px;font-size:12px}}

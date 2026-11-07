@@ -155,3 +155,27 @@ header.hd{display:flex;flex-direction:column}header.hd>.hd-r1{order:0}header.hd>
 /* 2026-11-07 E137 고침: 갈래 단추 줄(.hd-sub, tabs2.js가 메뉴 뒤에 넣음)이 띠 위로 올라가던 것 — 메뉴 바로 아래로 */
 header.hd>*{order:5}header.hd>.hd-r1{order:0}header.hd>.hd-sw{order:1}header.hd>.hd-strips{order:2}header.hd>.hd-sub{order:4}
 @media (min-width:901px){header.hd>nav.hd-sub{padding:4px 12px 5px}}
+/* 2026-11-07 시안(대통령님): 본문 자리를 넓히려고 머리글 줄을 한 번 더 낮춘다 */
+@media (min-width:901px){
+ header.hd .hd-r1{padding:4px 24px 3px}
+ header.hd .brand .logo{width:26px!important;height:26px!important}
+ header.hd .brand :is(h1,.bh1,b){font-size:20px!important}
+ header.hd .brand .tag{margin-top:2px;font-size:11.5px!important}
+ header.hd .srch-open,header.hd .lang-sw{height:30px!important}header.hd .asw{height:30px}header.hd .asw a{height:24px}
+ header.hd .hd-r :is(.hd-th,.hd-snd,.snd,button){height:30px!important;width:30px!important}
+ header.hd .hd-strips{padding:3px 24px 4px}
+ header.hd .strips .bstrip{height:27px}
+ header.hd nav.gnav a{padding:6px 13px 7px!important}
+ header.hd nav.gnav .sep{margin:8px 8px}
+}
+@media (min-width:901px) and (max-width:1180px){header.hd nav.gnav a{padding:6px 9px 7px!important}header.hd .brand :is(h1,.bh1,b){font-size:19px!important}}
+@media (max-width:900px){
+ header.hd .hd-r1{padding:8px 12px 5px}
+ header.hd .srch-open{width:34px!important;height:34px!important}header.hd .lang-sw{height:34px!important}
+ header.hd .hd-sw{padding:0 14px 5px}
+ header.hd .hd-sw .hd-clk-m,header.hd .hd-clk-m .g{height:28px}
+ header.hd nav.gnav{padding:4px 12px 8px!important}
+ header.hd .hd-strips{padding:0 12px 4px}
+ header.hd .strips{gap:4px}
+ header.hd .strips .bstrip{height:30px}
+}
