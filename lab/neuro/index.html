@@ -123,7 +123,7 @@ const md=s=>{const [y,m,d]=s.split('-').map(Number); return m+'월 '+d+'일'};
 const J=u=>fetch(P+u,{cache:'no-cache'}).then(r=>r.json());
 const CASES=['iran','ukraine','korea','taiwan','poland'], CN={iran:'이란 전쟁',ukraine:'러-우 전쟁',korea:'한반도',taiwan:'대만해협',poland:'러시아-NATO'};
 const PSHORT=['군사 위협','에너지·식량','무역·기술','하이브리드·초국가 범죄','핵','인구 이동'];
-let D,DL,C,FMr,L, VIEW=null, G='KOR', SEL=null, LOW=false, SEGS=[];
+let D,DL,C,FMr,L, VIEW=null, G='KOR', SEL=null, SELN=null, PATHS=[], LOW=false, SEGS=[];
 try{ const q=new URLSearchParams(location.search).get('g'); if(q) G=q }catch(_){}
 Promise.all([J('/data/eurasia.json'),J('/data/daily.json'),J('/data/chains.json'),J('/data/fcmap.json'),J('/data/links.json')]).then(r=>{[D,DL,C,FMr,L]=r; init()}).catch(e=>{$('ld').textContent='자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오.'; console.error(e)});
 function compute(){
@@ -213,23 +213,23 @@ vp.addEventListener('wheel',e=>{ if(e.target.closest('#dp')) return; e.preventDe
 vp.addEventListener('click',e=>{ if(MOVED){ e.stopPropagation(); return } if(e.target.closest('#dp,.zc')) return; const t=e.target.closest('[data-k],[data-n]'); if(!t){ if(SEL) clearSel(); return }
  if(t.dataset.k) return select(t.dataset.k,true,t);
  const ks=SEGS.filter(s=>s.a===t.dataset.n||s.b===t.dataset.n).flatMap(s=>[...s.cells]); if(!ks.length) return;
- const best=[...new Set(ks)].sort((a,b)=>mag(b)-mag(a))[0]; select(best,true,t) },true);
+ const best=[...new Set(ks)].sort((a,b)=>mag(b)-mag(a))[0]; select(best,true,t,t.dataset.n) },true);
 const mag=k=>{ const a=LIT[k]; if(!a) return 0; return Math.max(...a.flatMap(x=>x.paths).map(p=>{ const n=VIEW.nodes[p[0]]; return Math.abs(n.b-n.a) })) };
 /* 판 그리기 */
 function render(refit){
  const gi=L.groups.indexOf(G); LIT=litMap(G);
  $('groups').innerHTML=L.groups.map(g=>{ const n=L.cells.filter(c=>c.g===L.groups.indexOf(g)&&c.v===1).length, ln=Object.keys(litMap(g)).length; return '<button type="button" role="tab" data-g="'+g+'" class="'+(g===G?'on':'')+'" aria-selected="'+(g===G)+'">'+esc(L.L.gl[g])+'<span class="n'+(ln?' l':'')+'">'+(ln?ln+' / ':'')+n+'</span></button>' }).join('');
- $('groups').querySelectorAll('button').forEach(b=>b.onclick=()=>{ G=b.dataset.g; SEL=null; render(true) });
+ $('groups').querySelectorAll('button').forEach(b=>b.onclick=()=>{ G=b.dataset.g; SEL=null; SELN=null; render(true) });
  const cells=L.cells.filter(c=>c.g===gi), open=cells.filter(c=>c.v===1);
  FPBY={}; L.fps.forEach(f=>FPBY[f.id]=f); BYFP={}; cells.forEach(c=>(BYFP[c.f]=BYFP[c.f]||[])[c.p]=c);
  const rows=Object.keys(BYFP).filter(f=>BYFP[f].some(c=>c&&c.v===1)).map(f=>({f,ln:PSHORT.filter((_,p)=>LIT[f+'|'+p]).length,sc:BYFP[f].reduce((s,c)=>s+(c&&c.v===1?c.c:0),0),sev:(FPBY[f]||{}).sev||0})).sort((a,b)=>b.ln-a.ln||b.sc-a.sc||b.sev-a.sev);
  const rowIdx={}; rows.forEach((r,i)=>rowIdx[r.f]=i);
  /* 길: 사건 → 전망 → 변수 → 분쟁 지점 줄 */
- const seg={}, fc={}, vv={}; const addSeg=(a,b,k,kind)=>{ const key=a+'>'+b; (seg[key]=seg[key]||{a,b,kind,cells:new Set()}).cells.add(k) };
+ const seg={}, fc={}, vv={}; PATHS=[]; const addSeg=(a,b,k,kind,pid)=>{ const key=a+'>'+b; const S=(seg[key]=seg[key]||{a,b,kind,cells:new Set(),pids:new Set()}); S.cells.add(k); S.pids.add(pid) };
  Object.entries(LIT).forEach(([k,arr])=>{ const fp=k.split('|')[0];
-  arr.forEach(x=>x.paths.forEach(pt=>{ const ch=pt.concat(['row:'+fp]); (fc[pt[0]]=fc[pt[0]]||new Set()).add(rowIdx[fp]);
-   ch.forEach((n,i)=>{ if(i&&!n.startsWith('row:')) (vv[n]=vv[n]||new Set()).add(rowIdx[fp]); if(i) addSeg(ch[i-1],n,k,'a') });
-   (VIEW.nodes[pt[0]].ev||[]).forEach((e,j)=>addSeg('E:'+pt[0].slice(2)+':'+j,pt[0],k,'r')) })) });
+  arr.forEach(x=>x.paths.forEach(pt=>{ const ch=pt.concat(['row:'+fp]), pid=PATHS.push(ch)-1; (fc[pt[0]]=fc[pt[0]]||new Set()).add(rowIdx[fp]);
+   ch.forEach((n,i)=>{ if(i&&!n.startsWith('row:')) (vv[n]=vv[n]||new Set()).add(rowIdx[fp]); if(i) addSeg(ch[i-1],n,k,'a',pid) });
+   (VIEW.nodes[pt[0]].ev||[]).forEach((e,j)=>addSeg('E:'+pt[0].slice(2)+':'+j,pt[0],k,'r',pid)) })) });
  SEGS=Object.values(seg);
  const avg=s=>[...s].reduce((a,b)=>a+b,0)/s.size;
  const F=Object.keys(fc).sort((a,b)=>avg(fc[a])-avg(fc[b])), V=Object.keys(vv).sort((a,b)=>avg(vv[a])-avg(vv[b]));
@@ -251,22 +251,28 @@ function render(refit){
  st.querySelectorAll('.c[data-k]').forEach(el=>el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(el.dataset.k,true,el) } });
  draw();
  /* 2026-11-07 대통령님: 처음에는 불이 켜진 길을 모두 켜 두고, 고른 뒤에만 그 길만 남긴다 */
- if(SEL&&!st.querySelector('.c[data-k="'+SEL+'"]')) SEL=null;
+ if(SEL&&!st.querySelector('.c[data-k="'+SEL+'"]')) SEL=null; if(!SEL) SELN=null;
  if(refit){ if(!SEL) dp.classList.add('off'); spread(); fit(false) }
- if(SEL) select(SEL,false); else { hilite(); detail(null) }
+ if(SEL) select(SEL,false,null,SELN); else { hilite(); detail(null) }
 }
 function rel(el){ let x=0,y=0; while(el&&el!==st){ x+=el.offsetLeft; y+=el.offsetTop; el=el.offsetParent } return [x,y] }
-function box(n){ const el=n.startsWith('row:')?st.querySelector('[data-rown="'+CSS.escape(n)+'"]'):st.querySelector('[data-n="'+CSS.escape(n)+'"]'); if(!el) return null; const [x,y]=rel(el); return {x,y,w:el.offsetWidth,h:el.offsetHeight} }
+function box(n){ const el=n.startsWith('row:')?st.querySelector('[data-rown="'+CSS.escape(n)+'"]'):st.querySelector('[data-n="'+CSS.escape(n)+'"]'); if(!el) return null; const [x,y]=rel(el); return {x,y,w:el.offsetWidth,h:el.offsetHeight,el} }
+function lane(a,b){ const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, down=b.y>a.y, sib=down?b.el.previousElementSibling:b.el.nextElementSibling;
+ let gy; if(down){ const t=sib?rel(sib)[1]+sib.offsetHeight:b.y-12; gy=(t+b.y)/2 } else { const t=sib?rel(sib)[1]:b.y+b.h+12; gy=(b.y+b.h+t)/2 }
+ const xm=(x1+x2)/2, c=44;
+ return 'M'+x1+','+y1+' C'+(x1+c)+','+y1+' '+(x1+c)+','+gy+' '+xm+','+gy+' C'+(x2-c)+','+gy+' '+(x2-c)+','+y2+' '+x2+','+y2 }
 function draw(){ const sv=$('lk'); sv.setAttribute('width',st.offsetWidth); sv.setAttribute('height',st.offsetHeight); let h='';
- SEGS.forEach((s,i)=>{ const a=box(s.a), b=box(s.b); if(!a||!b) return; const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, k=(x2-x1)*.5; s.d='M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2;
+ SEGS.forEach((s,i)=>{ const a=box(s.a), b=box(s.b); if(!a||!b) return; const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, k=(x2-x1)*.5; s.d=x2<x1+20?lane(a,b):'M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2;
   h+='<path class="base '+s.kind+'" data-i="'+i+'" d="'+s.d+'"/>' }); sv.innerHTML=h }
 function hilite(){ const on=new Set(), sv=$('lk'); sv.querySelectorAll('path.fl').forEach(p=>p.remove());
- SEGS.forEach((s,i)=>{ const hl=!SEL||s.cells.has(SEL); const p=sv.querySelector('path[data-i="'+i+'"]'); if(p) p.classList.toggle('hl',hl); if(hl){ on.add(s.a); on.add(s.b); if(p){ const f=document.createElementNS('http://www.w3.org/2000/svg','path'); f.setAttribute('d',s.d); f.setAttribute('class','fl'); sv.appendChild(f) } } });
+ /* 2026-11-07 대통령님: 카드를 누르면 그 카드를 지나는 길만 켠다(칸을 누르면 그 칸으로 들어오는 길 전부) */
+ const isE=SELN&&SELN.startsWith('E:'), SP=new Set(); if(SELN){ if(isE) SEGS.forEach(s=>{ if(s.a===SELN) s.pids.forEach(p=>SP.add(p)) }); else PATHS.forEach((ch,p)=>{ if(ch.includes(SELN)) SP.add(p) }) }
+ SEGS.forEach((s,i)=>{ const hl=!SEL||(SELN?([...s.pids].some(p=>SP.has(p))&&(!isE||s.kind!=='r'||s.a===SELN)):s.cells.has(SEL)); const p=sv.querySelector('path[data-i="'+i+'"]'); if(p) p.classList.toggle('hl',hl); if(hl){ on.add(s.a); on.add(s.b); if(p){ const f=document.createElementNS('http://www.w3.org/2000/svg','path'); f.setAttribute('d',s.d); f.setAttribute('class','fl'); sv.appendChild(f) } } });
  st.classList.toggle('dim',!!SEL&&on.size>0); st.querySelectorAll('[data-n]').forEach(el=>el.classList.toggle('hl',on.has(el.dataset.n)));
  st.querySelectorAll('.mxr').forEach(r=>r.classList.toggle('hl',on.has('row:'+r.dataset.row))); st.querySelectorAll('.c.sel').forEach(c=>c.classList.remove('sel')); if(SEL){ const c=st.querySelector('.c[data-k="'+SEL+'"]'); if(c) c.classList.add('sel') }
  return on }
-function clearSel(){ SEL=null; dp.classList.add('off'); hilite(); spread(); fit(true) }
-function select(k,focus,el){ SEL=k; hilite(); detail(k,LIT,BYFP,FPBY); if(focus||wide()) dp.classList.remove('off');
+function clearSel(){ SEL=null; SELN=null; dp.classList.add('off'); hilite(); spread(); fit(true) }
+function select(k,focus,el,node){ SEL=k; SELN=node||null; hilite(); detail(k,LIT,BYFP,FPBY); if(focus||wide()) dp.classList.remove('off');
  if(focus){ el=el&&el.closest?el.closest('[data-k],[data-n]'):null; el=el||st.querySelector('.c[data-k="'+k+'"]'); if(!el) return; const [x,y]=rel(el), cx=x+el.offsetWidth/2, cy=y+el.offsetHeight/2;
   const [w,h]=avail(); Z=Math.min(2.6,Math.max(Z,1)); TX=w/2-cx*Z; TY=h/2-cy*Z; st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600); hideHint() } }
 document.fonts&&document.fonts.ready.then(()=>{ spread(); hilite(); fit(false) });
