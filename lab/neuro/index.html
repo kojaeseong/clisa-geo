@@ -190,6 +190,7 @@ function init(){ VIEW=compute(); $('ld').remove();
 function sizeVp(){ const t=vp.getBoundingClientRect().top+scrollY; vp.style.height=Math.max(520,innerHeight-Math.min(t,260)-60)+'px' }
 const wide=()=>innerWidth>900;
 function avail(){ const w=vp.clientWidth-(wide()&&!dp.classList.contains('off')?394:0), h=vp.clientHeight-(wide()?0:(dp.classList.contains('off')?0:vp.clientHeight*.58)); return [Math.max(200,w),Math.max(200,h-(wide()?48:52))] }
+function clampT(){ const [w,h]=avail(), sw=st.offsetWidth*Z, sh=st.offsetHeight*Z; TX=sw<=w?(w-sw)/2:Math.min(0,Math.max(w-sw,TX)); TY=sh<=h?Math.max(0,(h-sh)/2):Math.min(0,Math.max(h-sh,TY)) }
 function apply(){ st.style.transform='translate('+TX+'px,'+TY+'px) scale('+Z+')'; $('zp').textContent=Math.round(Z*100)+'%' }
 /* 판이 화면보다 납작하면(높이로 배율이 정해지면) 열 사이와 칸을 넓혀 좌우 빈 곳을 채운다 */
 function spread(){ ['--ew','--fw','--vw','--g','--nw','--cw'].forEach(v=>st.style.removeProperty(v));
@@ -198,7 +199,7 @@ function spread(){ ['--ew','--fw','--vw','--g','--nw','--cw'].forEach(v=>st.styl
  add('--g',56,extra*.30/3,160); add('--cw',64,extra*.30/6,70); add('--nw',200,extra*.10,90); add('--ew',230,extra*.15,110); add('--fw',210,extra*.10,90); add('--vw',140,extra*.05,50); draw(); hilite() }
 function fit(anim){ const [w,h]=avail(), sw=st.offsetWidth, sh=st.offsetHeight; FITZ=Math.min(w/sw,h/sh,1.15); Z=FITZ; TX=(w-sw*Z)/2; TY=Math.max(0,(h-sh*Z)/2); st.classList.toggle('anim',!!anim); apply(); if(anim) setTimeout(()=>st.classList.remove('anim'),600) }
 function zoomAt(nz,px,py){ const [w,h]=avail(); px=px==null?w/2:px; py=py==null?h/2:py; nz=Math.max(FITZ*.6,Math.min(2.6,nz)); TX=px-(px-TX)*nz/Z; TY=py-(py-TY)*nz/Z; Z=nz; st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600); hideHint() }
-function zoomTo(box,minZ){ const [w,h]=avail(), pad=36; let nz=Math.min((w-pad*2)/box.w,(h-pad*2)/box.h); nz=Math.max(FITZ,minZ||0,Math.min(1.35,nz)); Z=nz; TX=(w-box.w*Z)/2-box.x*Z; TY=(h-box.h*Z)/2-box.y*Z; st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600) }
+function zoomTo(box,minZ){ const [w,h]=avail(), pad=36; let nz=Math.min((w-pad*2)/box.w,(h-pad*2)/box.h); nz=Math.max(FITZ,minZ||0,Math.min(1.35,nz)); Z=nz; TX=(w-box.w*Z)/2-box.x*Z; TY=(h-box.h*Z)/2-box.y*Z; clampT(); st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600) }
 function hideHint(){ const h=$('hint'); if(h) h.style.opacity='0' }
 /* 끌어 옮기기 · 휠 · 두 손가락 */
 const PT=new Map(); let DRG=null, PIN=null, MOVED=false;
@@ -274,7 +275,7 @@ function hilite(){ const on=new Set(), sv=$('lk'); sv.querySelectorAll('path.fl'
 function clearSel(){ SEL=null; SELN=null; dp.classList.add('off'); hilite(); spread(); fit(true) }
 function select(k,focus,el,node){ SEL=k; SELN=node||null; hilite(); detail(k,LIT,BYFP,FPBY); if(focus||wide()) dp.classList.remove('off');
  if(focus){ el=el&&el.closest?el.closest('[data-k],[data-n]'):null; el=el||st.querySelector('.c[data-k="'+k+'"]'); if(!el) return; const [x,y]=rel(el), cx=x+el.offsetWidth/2, cy=y+el.offsetHeight/2;
-  const [w,h]=avail(); Z=Math.min(2.6,Math.max(Z,1)); TX=w/2-cx*Z; TY=h/2-cy*Z; st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600); hideHint() } }
+  const [w,h]=avail(); Z=Math.min(2.6,Math.max(Z,1)); TX=w/2-cx*Z; TY=h/2-cy*Z; clampT(); st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600); hideHint() } }
 document.fonts&&document.fonts.ready.then(()=>{ spread(); hilite(); fit(false) });
 
 })();
