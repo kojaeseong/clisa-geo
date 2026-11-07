@@ -3605,6 +3605,6 @@ document.addEventListener("click", ev => {
 
 ;(function(){try{var s=document.createElement("script");s.src="/rp2.js?v=ef2be7a69b";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp1106 ripple back */
 
-;(function(){try{var s=document.createElement("script");s.src="/rp3.js?v=6e2cc8942a";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp3_1106 ripple chips */
+;(function(){try{var s=document.createElement("script");s.src="/rp3.js?v=cb2269725d";s.defer=true;document.head.appendChild(s);}catch(e){}})();  /* rp3_1106 ripple chips */
 
 ;(function(){try{var v="efa93903ab",d=document,l=d.createElement("link");l.rel="stylesheet";l.href="/sub2.css?v="+v;d.head.appendChild(l);var s=d.createElement("script");s.src="/sub2.js?v="+v;s.defer=true;d.head.appendChild(s);}catch(e){}})();  /* sub1105 newsletter */

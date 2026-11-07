@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>
 :root{--bg:#060a12;--panel:#0d1424;--panel2:#111a2d;--line:#1b2539;--line2:#24304a;--ink:#edf1f8;--ink2:#c3cbda;--mute:#8590a6;--faint:#5b6680;
- --lit:#ffb020;--lit2:#ffcf6b;--litbg:rgba(255,176,32,.16);--up:#22c58b;--dn:#f0545e;--acc:#7fb4ff;--rec:#e8eef8;
+ --lit:#ffb020;--lit2:#ffcf6b;--litbg:rgba(255,176,32,.16);--var:#ff7a3d;--up:#22c58b;--dn:#f0545e;--acc:#7fb4ff;--rec:#e8eef8;
  --sans:"IBM Plex Sans KR","Pretendard","Noto Sans CJK KR",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-text-size-adjust:100%}
 body{background:radial-gradient(1200px 600px at 70% -10%,rgba(61,99,201,.14),transparent 60%),var(--bg)}
@@ -39,8 +39,8 @@ h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01e
 .ev .s{font-size:11.5px;margin-left:4px}.legend .ud .up,.legend .ud .dn{font-size:10px}.ev .s.up{color:var(--up)}.ev .s.dn{color:var(--dn)}
 .fn{position:relative;border:1px solid rgba(255,176,32,.35);background:linear-gradient(180deg,rgba(255,176,32,.09),rgba(255,176,32,.03));border-radius:11px;padding:9px 11px;cursor:pointer;transition:border-color .15s,opacity .2s,box-shadow .2s}
 .fn .q{font-size:12.5px;font-weight:600;line-height:1.4;word-break:keep-all}.fn .m{display:flex;gap:6px;align-items:baseline;margin-top:4px;font-family:var(--mono)}.fn .m b{font-size:15px}.fn .m span{font-size:11px;font-weight:600}.fn .cs{font-size:10.5px;color:var(--mute);margin-top:2px}
-.vn{position:relative;border:1px solid #3a4664;background:#111a2d;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:600;line-height:1.35;word-break:keep-all;color:var(--ink2);cursor:pointer;transition:border-color .15s,opacity .2s}
-.dim .ev:not(.hl),.dim .fn:not(.hl),.dim .vn:not(.hl){opacity:.38}.fn.hl{border-color:var(--lit);box-shadow:0 0 18px rgba(255,176,32,.25)}.vn.hl{border-color:#c9a24a;color:#fff}.ev.hl{border-color:#9fb0cc}
+.vn{position:relative;border:1px solid rgba(255,122,61,.42);background:linear-gradient(180deg,rgba(255,122,61,.10),rgba(255,122,61,.03));border-radius:9px;padding:8px 10px;font-size:12px;font-weight:600;line-height:1.35;word-break:keep-all;color:var(--ink2);cursor:pointer;transition:border-color .15s,opacity .2s}
+.dim .ev:not(.hl),.dim .fn:not(.hl),.dim .vn:not(.hl){opacity:.38}.fn.hl{border-color:var(--lit);box-shadow:0 0 18px rgba(255,176,32,.25)}.vn.hl{border-color:var(--var);color:#fff;box-shadow:0 0 18px rgba(255,122,61,.25)}svg#lk path.a.vo{stroke:rgba(255,122,61,.55)}svg#lk path.a.vo.hl{stroke:var(--var)}.legend .lv{display:inline-block;width:26px;height:3px;border-radius:2px;background:var(--var);vertical-align:middle;margin-right:6px}/* 2026-11-07 대통령님: 거쳐 가는 변수 칸과 그 칸에서 오른쪽으로 나가는 길은 주황(전망 칸의 노랑과 구별) */.ev.hl{border-color:#9fb0cc}
 .none2{font-size:12px;color:var(--faint);line-height:1.6;padding:16px 4px;word-break:keep-all}
 /* 나비효과 지도 표 */
 .tb{min-width:620px}
@@ -120,9 +120,10 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 .rg td.na{cursor:default}
 .rg tr.cur th.g{color:var(--lit2)}
 #det .rgn{font-size:11.5px;color:var(--mute);margin:8px 0 0;line-height:1.6}
+#fsb .ic{display:inline-flex;align-items:center}/* 2026-11-07 대통령님: 닫기 단추는 화살표가 안쪽을 향하게(열기는 바깥, 닫기는 안쪽 모서리) */
 </style></head><body>
 <div class="top">
- <div class="row1"><div><p class="eyebrow">클리사 지오폴리틱스</p><h1>통합 신경망</h1></div><div class="zc"><button type="button" id="zo" aria-label="축소">−</button><button type="button" id="zi" aria-label="확대">+</button><button type="button" class="w" id="zf">전체 보기</button><span class="pct" id="zp"></span></div><button type="button" id="fsb"><span class="ic">⤢</span> <span class="lb">전체 화면</span></button></div>
+ <div class="row1"><div><p class="eyebrow">클리사 지오폴리틱스</p><h1>통합 신경망</h1></div><div class="zc"><button type="button" id="zo" aria-label="축소">−</button><button type="button" id="zi" aria-label="확대">+</button><button type="button" class="w" id="zf">전체 보기</button><span class="pct" id="zp"></span></div><button type="button" id="fsb"><span class="ic"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></span> <span class="lb">전체 화면</span></button></div>
  <p class="lede" id="lede"></p>
  <div class="row2"><div class="groups" id="groups" role="tablist" aria-label="국민 집단"></div><div class="kpi" id="kpi"></div><label class="lowt"><input type="checkbox" id="allfp"> 모든 분쟁 지점 보기</label><label class="lowt"><input type="checkbox" id="low"> 확신도 낮은 연결도 보기</label></div>
 </div>
@@ -130,7 +131,7 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
  <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 길만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
  <aside id="dp" class="off" aria-live="polite"><button type="button" class="x" id="dpx" aria-label="닫기">×</button><div id="det"></div></aside>
 </div>
-<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 길 · 선이 두꺼울수록 확신도가 높음</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 길(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
+<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 길 · 선이 두꺼울수록 확신도가 높음</span><span><i class="lv"></i>판단: 거쳐 가는 변수에서 나비효과로 이어지는 길</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 길(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
 <p class="foot">열려 있는 길은 나비효과가 분쟁 지점마다 경로와 국민 집단별로 판단한 칸입니다. 불이 켜진 칸은 10월 1일 이후 확률이 움직인 전망이 신경망의 연결을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
 <script>
 (function(){
@@ -223,7 +224,7 @@ function init(){ VIEW=compute(); $('ld').remove();
  $('det').addEventListener('click',e=>{ const td=e.target.closest('td[data-gk]'); if(!td) return; const [g,f,p]=td.dataset.gk.split('|'); if(g!==G){ G=g; SEL=null; SELN=null; render(true) } if(!st.querySelector('.c[data-k="'+f+'|'+p+'"]')){ ALLFP=true; $('allfp').checked=true; render(true) } select(f+'|'+p,true) });
  tapBtn('dpx',()=>clearSel());
  /* 2026-11-07 대통령님: 시황판처럼 전체 화면(사이트 안에 실렸으면 그 칸을 화면 전체로, 단독 쪽이면 브라우저 전체 화면) */
- let FSV='', FSN=false; const fsSet=on=>{ const D=document.documentElement, fe=window.frameElement, b=$('fsb'); if(on===D.classList.contains('fs')) return; D.classList.toggle('fs',on); b.querySelector('.lb').textContent=on?'전체 화면 닫기':'전체 화면'; b.querySelector('.ic').textContent=on?'⤡':'⤢';
+ let FSV='', FSN=false; const fsSet=on=>{ const D=document.documentElement, fe=window.frameElement, b=$('fsb'); if(on===D.classList.contains('fs')) return; D.classList.toggle('fs',on); b.querySelector('.lb').textContent=on?'전체 화면 닫기':'전체 화면'; b.querySelector('.ic').innerHTML=on?'<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2v4H2M10 2v4h4M14 10h-4v4M2 10h4v4"/></svg>':'<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>';
   if(fe){ const pd=parent.document; if(on){ const pz=(fe.getBoundingClientRect().width/fe.offsetWidth)||1; FSV=fe.style.cssText; Object.assign(fe.style,{position:'fixed',left:'0',top:'0',margin:'0',borderRadius:'0',zIndex:'2147483000',width:(parent.innerWidth/pz)+'px',height:(parent.innerHeight/pz)+'px'}); pd.documentElement.style.overflow='hidden'; try{ const r=fe.requestFullscreen&&fe.requestFullscreen(); r&&r.catch&&r.catch(()=>{}) }catch(_){} } else { fe.style.cssText=FSV||''; pd.documentElement.style.overflow=''; try{ if(pd.fullscreenElement) pd.exitFullscreen() }catch(_){} } }
   else { try{ if(on&&D.requestFullscreen) D.requestFullscreen().catch(()=>{}); else if(!on&&document.fullscreenElement) document.exitFullscreen() }catch(_){} }
   setTimeout(()=>{ sizeVp(); spread(); fit(false); if(!on) post() },80) };
@@ -326,7 +327,7 @@ function lane(a,b){ const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, down=b
  return 'M'+x1+','+y1+' C'+(x1+c)+','+y1+' '+(x1+c)+','+gy+' '+xm+','+gy+' C'+(x2-c)+','+gy+' '+(x2-c)+','+y2+' '+x2+','+y2 }
 function draw(){ const sv=$('lk'); if(!sv) return; sv.setAttribute('width',st.offsetWidth); sv.setAttribute('height',st.offsetHeight); let h='';
  SEGS.forEach((s,i)=>{ const a=box(s.a), b=box(s.b); if(!a||!b) return; const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, k=(x2-x1)*.5; s.d=x2<x1+20?lane(a,b):'M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2;
-  h+='<path class="base '+s.kind+(s.kind==='a'?' w'+(s.cf||2):'')+'" data-i="'+i+'" d="'+s.d+'"/>' }); sv.innerHTML=h }
+  h+='<path class="base '+s.kind+(s.kind==='a'?' w'+(s.cf||2)+(/^(F:|E:)/.test(s.a)?'':' vo'):'')+'" data-i="'+i+'" d="'+s.d+'"/>' }); sv.innerHTML=h }
 function hilite(){ const on=new Set(), sv=$('lk'); if(!sv) return on; sv.querySelectorAll('path.fl').forEach(p=>p.remove());
  /* 2026-11-07 대통령님: 카드를 누르면 그 카드를 지나는 길만 켠다(칸을 누르면 그 칸으로 들어오는 길 전부) */
  const isE=SELN&&SELN.startsWith('E:'), SP=new Set(); if(SELN){ if(isE) SEGS.forEach(s=>{ if(s.a===SELN) s.pids.forEach(p=>SP.add(p)) }); else PATHS.forEach((ch,p)=>{ if(ch.includes(SELN)) SP.add(p) }) }

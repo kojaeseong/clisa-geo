@@ -64,12 +64,13 @@ html.embed .top{padding-top:12px}
 /* 2026-11-07: 전체 화면 단추를 시황판처럼 판의 오른쪽 위(제목 줄)에 둔다(넓은 화면) */
 @media (min-width:701px){.top{position:relative}#fsb{position:absolute;top:2px;right:0;margin-left:0}#h1{padding-right:150px}}
 html.embed #fsb{position:static;margin-left:14px}/* 2026-11-07 결재: 사이트 안에서는 제목 옆으로(오른쪽 위는 보기 단추 줄 자리) */
+#fsb .ic{display:inline-flex;align-items:center}/* 2026-11-07 대통령님: 닫기 단추는 화살표가 안쪽을 향하게(열기는 바깥, 닫기는 안쪽 모서리) */
 </style></head><body>
 <div class="top">
 <h1 id="h1"></h1>
 <p class="lede" id="lede"></p>
 <div class="tabs" id="tabs"></div>
-<div class="opt"><label><input type="checkbox" id="low"> <span id="lowL"></span></label><span id="cnt"></span><button id="fsb" type="button"><span class="ic">⤢</span><span class="lb"></span></button></div>
+<div class="opt"><label><input type="checkbox" id="low"> <span id="lowL"></span></label><span id="cnt"></span><button id="fsb" type="button"><span class="ic"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></span><span class="lb"></span></button></div>
 <div class="lg" id="lg"></div>
 <div class="hint" id="hint"></div>
 <div class="empty fbn" id="fbn" hidden></div>
@@ -343,7 +344,7 @@ document.addEventListener('click',()=>{ if(DRAGGED) return; unhl(); info.style.d
 try{ if(window.frameElement){ parent.addEventListener('scroll',placeInfo,{passive:true}); parent.addEventListener('resize',placeInfo) } }catch(_){}
 /* 전체 화면(시황판과 같은 방식): 시황판 안에 실릴 때는 바깥 틀을 화면 가득 키운다 */
 const fsb=$('fsb'); let FSV=null;
-function fsSet(on){ const D=document.documentElement, fe=window.frameElement; if(on===D.classList.contains('fs')) return; D.classList.toggle('fs',on); fsb.querySelector('.lb').textContent=on?T.fsOff:T.fs; fsb.querySelector('.ic').textContent=on?'⤡':'⤢';
+function fsSet(on){ const D=document.documentElement, fe=window.frameElement; if(on===D.classList.contains('fs')) return; D.classList.toggle('fs',on); fsb.querySelector('.lb').textContent=on?T.fsOff:T.fs; fsb.querySelector('.ic').innerHTML=on?'<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2v4H2M10 2v4h4M14 10h-4v4M2 10h4v4"/></svg>':'<svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>';
  try{ if(fe){ const pd=parent.document; if(on){ const pz=(fe.getBoundingClientRect().width/fe.offsetWidth)||1; FSV=fe.style.cssText; Object.assign(fe.style,{position:'fixed',left:'0',top:'0',margin:'0',borderRadius:'0',zIndex:'2147483000',width:(parent.innerWidth/pz)+'px',height:(parent.innerHeight/pz)+'px'}); pd.documentElement.style.overflow='hidden'; const r=fe.requestFullscreen&&fe.requestFullscreen(); r&&r.catch&&r.catch(()=>{}) } else { fe.style.cssText=FSV||''; pd.documentElement.style.overflow=''; if(pd.fullscreenElement) pd.exitFullscreen() } }
   else { if(on&&D.requestFullscreen) D.requestFullscreen().catch(()=>{}); else if(!on&&document.fullscreenElement) document.exitFullscreen() } }catch(_){}
  setTimeout(()=>{ D.style.setProperty('--ctl',($('sc').getBoundingClientRect().top+8)+'px'); draw(); if(!on) tell() },100) }
