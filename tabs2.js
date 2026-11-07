@@ -2,7 +2,7 @@
 (function () {
   var EN = document.documentElement.lang === "en", P = EN ? "/en" : "";
   var G = [
-    EN ? ["links", ["/links/"]] : ["overview", ["/links/", "/ripple/"]],  /* 2026-11-07: 국문 메뉴에서 나비효과 지도를 빼고 세계 정세에 합침 */
+    ["overview", ["/links/", "/ripple/"]],  /* 2026-11-07: 국문에 이어 영문 메뉴에서도 나비효과 지도를 빼고 세계 정세에 합침 */  /* 2026-11-07: 국문 메뉴에서 나비효과 지도를 빼고 세계 정세에 합침 */
     ["industry", ["/industry/", "/life/"], EN ? [["Industry Outlook", "/industry/"], ["People\u2019s Lives", "/life/"]] : [["산업별 미래", "/industry/"], ["국민의 삶", "/life/"]]],
     ["strat", ["/case/"]], ["forecast", ["/forecast/"]],
     ["brieftab", ["/brief/", "/feature/", "/digest/"], EN ? [["Briefings", "/brief/"], ["Weekly Summary", "/digest/"], ["Features", "/feature/"]] : [["정세 브리핑", "/brief/"], ["주간 정세 요약", "/digest/"], ["특집", "/feature/"]]],

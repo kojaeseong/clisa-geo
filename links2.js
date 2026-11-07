@@ -4,7 +4,7 @@
   if (!root || root.getAttribute("data-on")) return; root.setAttribute("data-on", "1");
   var EN = root.getAttribute("data-en") === "1", P = EN ? "/en" : "";
   /* 2026-11-07 대통령님 결재: 국문 나비효과 지도는 세계 정세 첫 화면의 통합판(지정학 신경망과 나비효과 지도)으로 합쳤다. 옛 주소로 오면 그리로 넘긴다(분쟁 지점 #id는 이어 줌) */
-  if (!EN && /^\/links\/?$/.test(location.pathname)) { var hh = (location.hash || "").slice(1); if (/^[a-z0-9-]+$/.test(hh)) try { sessionStorage.setItem("nrgo", JSON.stringify({fp: hh, t: Date.now()})); } catch (_) {} location.replace("/"); return; }
+  if (/^\/(en\/)?links\/?$/.test(location.pathname)) { var hh = (location.hash || "").slice(1); if (/^[a-z0-9-]+$/.test(hh)) try { sessionStorage.setItem("nrgo", JSON.stringify({fp: hh, t: Date.now()})); } catch (_) {} location.replace(P + "/"); return; }
   var T = EN ? {
     vt: ["By Forecast", "By Population", "By Pathway"], hm: "Heat Map",
     h: "How conflicts reach people's lives",

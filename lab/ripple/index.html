@@ -9,7 +9,7 @@
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans KR","Noto Sans CJK KR",sans-serif;-webkit-text-size-adjust:100%}
 .top{max-width:1380px;margin:0 auto;padding:20px 20px 0}
 h1{font-size:25px;margin:0 0 6px;font-weight:700;word-break:keep-all}
-.lede{color:#c9cfda;font-size:14px;line-height:1.65;margin:0 0 12px;max-width:920px;word-break:keep-all}
+.lede{color:#c9cfda;font-size:14px;line-height:1.65;margin:0 0 12px;max-width:none;word-break:keep-all}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}.tabs button{background:#0b111d;border:1px solid #2a3650;color:#c9cfda;font:inherit;font-size:13px;padding:6px 12px;border-radius:5px;cursor:pointer}
 .tabs button.on{background:#16233a;color:#fff;border-color:var(--acc)}
 .opt{font-size:12px;color:var(--mute);display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.opt label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
@@ -63,6 +63,7 @@ html.embed .top{padding-top:12px}
 #st .all{display:block;width:100%;margin:16px 0 0;background:#16233a;border:1px solid var(--acc);color:#fff;font:inherit;font-size:14px;font-weight:600;padding:11px 12px;border-radius:7px;cursor:pointer}
 /* 2026-11-07: 전체 화면 단추를 시황판처럼 판의 오른쪽 위(제목 줄)에 둔다(넓은 화면) */
 @media (min-width:701px){.top{position:relative}#fsb{position:absolute;top:2px;right:0;margin-left:0}#h1{padding-right:150px}}
+html.embed #fsb{position:static;margin-left:14px}/* 2026-11-07 결재: 사이트 안에서는 제목 옆으로(오른쪽 위는 보기 단추 줄 자리) */
 </style></head><body>
 <div class="top">
 <h1 id="h1"></h1>

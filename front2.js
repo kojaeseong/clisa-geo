@@ -172,8 +172,8 @@
        칩에서 '한 항목 보기'로 들어오거나(rpfocus) 옛 신경망에서 돌아올 때(rpret)는 옛 신경망을 연다. 옛 나비효과 지도 주소(?fp=…)는 통합판의 그 분쟁 지점으로 넘긴다 */
     var old = false; try { var fo = JSON.parse(sessionStorage.getItem("rpfocus") || "null"), rt = +sessionStorage.getItem("rpret") || 0; old = !!(fo && Date.now() - fo.t < 60000) || (rt && Date.now() - rt < 20000); } catch (_) {}
     var fp = (location.search.match(/[?&]fp=([a-z0-9-]+)/) || [])[1];
-    var src = (EN || old) ? P + "/lab/ripple/?embed=1" : "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "");
-    el.innerHTML = '<div class="f2 hm2">' + vtNav("rp") + '<iframe id="rp2f" class="hm2-f rp2-f' + ((EN || old) ? "" : " nr2-f") + '" src="' + src + '" title="' + T.rpT + '" loading="eager"></iframe></div>';
+    var src = old ? P + "/lab/ripple/?embed=1" : P + "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "");  /* 2026-11-07 결재: 영문도 통합판(Chain Reactions) */
+    el.innerHTML = '<div class="f2 hm2">' + vtNav("rp") + '<iframe id="rp2f" class="hm2-f rp2-f' + (old ? "" : " nr2-f") + '" src="' + src + '" title="' + T.rpT + '" loading="eager"></iframe></div>';
     if (ft) el.appendChild(ft); rpSize(); }
   function drawHeat(el){
     EL = el; if (/^\/heatmap\/?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
