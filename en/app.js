@@ -1464,7 +1464,7 @@ function renderDetail(){
 /* v4.36(2026-10-27 결재) 나라 카드의 '클리사 지오폴리틱스에서 보기' · v4.37(같은 날 결재) 콘텐츠를 한곳에 · v4.38 권역 페이지도 같은 함수(lkHtml) */
 const LK_GAME = {"1914": "The July Crisis before the First World War", "1962": "The Cuban Missile Crisis"};
 const LK_STEP = {br: 10, fc: 5}, LKZ_STEP = {br: 10, fc: 10};
-const LK_H = "Issues|Flashpoints|Forecasts|Briefings|Briefing digest|Features|Calendar|History games".split("|");  /* 줄 머리 이름표(영문판은 이 한 줄을 통째로 옮김) */
+const LK_H = "Issues|Flashpoints|Forecasts|Briefings|Situation summary|Features|Calendar|History games".split("|");  /* 줄 머리 이름표(영문판은 이 한 줄을 통째로 옮김) */
 const LKZ_H = "Countries|Extra-regional powers".split("|");
 function lkState(kind, key, step){ S.lk = S.lk || {}; const o = S.lk[kind]; if (!o || o.key !== key) S.lk[kind] = {key: key, br: step.br, fc: step.fc, step: step}; return S.lk[kind]; }
 function linksHtml(c){ return '<div id="c-links-w">' + linksBody(c) + "</div>"; }
@@ -1898,7 +1898,7 @@ function theoryHtml(c){
   const vc = v => v === "지지" || v === "부합" ? "ok" : v === "반박" || v === "상충" ? "no" : "fix";
   const byC = {}; X.links.forEach(l => (byC[l.claim] = byC[l.claim] || []).push(l));
   const ct = id => { const k = (c.conclusions || []).find(x => x.id === id); return k ? k.t : ""; };
-  return "<details class=\"src theo\"><summary>Judgments tested against theory and the classics · comparisons: " + X.links.length + "</summary>" +
+  return "<details class=\"src theo\"><summary>Judgments tested against theory and the classics · " + X.links.length + (X.links.length === 1 ? " comparison" : " comparisons") + "</summary>" +
     (X.status && !PUB() ? '<p class="note" style="margin-top:6px"><span class="vd fix">' + esc(X.status) + "</span></p>" : "") +
     "<p class=\"note\" style=\"margin:6px 0 8px\">Key conclusions are compared with classic works and research on the same structural problem. The classics and theories are themselves open to testing: each entry states whether the work supports the judgment, qualifies it, or contradicts it, and where the theory has been wrong.</p><div class=\"aiprec\">" +
     Object.keys(byC).map(id => '<article class="dv"><div class="hd"><span class="id">' + esc(id) + '</span><span class="note">' + esc(ct(id)) + "</span></div><ul class=\"list\" style=\"margin-top:6px\">" +
@@ -1922,12 +1922,12 @@ function countryPublicsHtml(c){
     if (who.includes(c.iso)) L.push({p, k, i});
   }));
   if (!L.length) return "";
-  return "<section class=\"sec\" id=\"c-pub\"><h3>Domestic opinion · surveys: " + L.length + "</h3>" +
+  return "<section class=\"sec\" id=\"c-pub\"><h3>Domestic opinion · " + L.length + (L.length === 1 ? " survey" : " surveys") + "</h3>" +
     L.map(x => pubArticle(x.p, "", '<button type="button" class="chip" data-case="' + esc(x.k.id) + '" style="margin-left:auto">' + esc(String(x.k.title).split(":")[0]) + "</button>")).join("") + "</section>";
 }
 function publicsHtml(c){
   const X = c.publics; if (!X || !(X.items || []).length) return "";
-  return '<details class="src theo pub" id="pub-' + esc(c.id) + "\"><summary>Domestic opinion and room to negotiate · surveys: " + X.items.length + "</summary>" +
+  return '<details class="src theo pub" id="pub-' + esc(c.id) + "\"><summary>Domestic opinion and room to negotiate · " + X.items.length + (X.items.length === 1 ? " survey" : " surveys") + "</summary>" +
     "<p class=\"note\" style=\"margin:6px 0 8px\">Strategy evaluations are measured against the government’s objectives, but domestic opinion determines how wide a range of options the government can actually choose from. Polls in each country with decision-making power are checked against the pollsters’ original releases to show where they diverge from the assessment and which signals would change it. Because question wording differs across pollsters, different surveys are not stitched into a single time series.</p><div class=\"aiprec\">" +
     X.items.map((p, i) => pubArticle(p, "pub-" + c.id + "-" + i)).join("") +
     "<div class=\"lesson-box\"><b>How opinion sets the room to negotiate</b>" + esc(X.read) + (X.watch ? "<p class=\"tl-w\" style=\"margin-top:6px\">Signals that would change the assessment · " + esc(X.watch) + "</p>" : "") + "</div></div></details>";
@@ -2693,7 +2693,7 @@ function briefHtml(c){
   return '<section class="brief"><dl class="tw">' +
     (B.q ? "<dt>The question</dt><dd>" + esc(B.q) + "</dd>" : "") +
     (B.a ? "<dt>Assessment</dt><dd class=\"ba\">" + esc(B.a) + "</dd>" : "") +
-    "<dt>Most likely scenario</dt><dd><button type=\"button\" class=\"futlink\" " + fb(top) + '><span class="mono" style="color:' + fcol(top.id) + '">' + top.id + "</span> " + esc(top.name) + ' <span class="mono">' + top.p + "%</span>" + (top.rng ? ' <span class="rng">(' + top.rng[0] + "~" + top.rng[1] + ")</span>" : "") + ' <span class="note">→</span></button>' +
+    "<dt>Most likely scenario</dt><dd><button type=\"button\" class=\"futlink\" " + fb(top) + '><span class="mono" style="color:' + fcol(top.id) + '">' + top.id + "</span> " + esc(top.name) + ' <span class="mono">' + top.p + "%</span>" + (top.rng ? ' <span class="rng">(' + top.rng[0] + "–" + top.rng[1] + "%)</span>" : "") + ' <span class="note">→</span></button>' +
       "<div class=\"pbar pmini\" role=\"group\" aria-label=\"Probability by scenario\">" + c.futures.items.map(f => '<button type="button" ' + fb(f) + ' style="flex:' + f.p + ' 0 0;background:' + fcol(f.id) + '" title="' + esc(f.id + " " + f.name + " " + f.p + "%") + '"' + (f.p < 15 ? ' class="sm"' : "") + ">" + f.id + "<span>" + f.p + "%</span></button>").join("") + "</div></dd>" +
     (W ? "<dt>The other side’s best move</dt><dd><b>" + esc(enShort(W.name)) + "</b> · " + esc(W.ranked[0].t) + "</dd>" : "") +
     (B.eq ? "<dt>The likely outcome</dt><dd>" + esc(B.eq) + "</dd>" : "") +
@@ -2788,7 +2788,7 @@ function s2Html(c){
     step(7, "Strategic actor and objectives", "<p><b>" + esc(nmS) + "</b> · Priority order: <span class=\"mono\">" + esc(X.client.order) + '</span></p><ul class="list goals">' + G.map(g => '<li class="rv"><span><b class="mono" style="color:var(--accent)">' + g.id + "</b> <b>" + esc(g.t) + "</b></span><p>" + esc(g.d) + "<br><span class=\"note\">Source · " + esc(g.src) + "</span></p></li>").join("") + '</ul><p class="note">' + esc(X.client.note) + "</p>") +
     step(8, "Evaluating options against objectives", '<p class="note">' + esc(X.eval.base) + '</p><ul class="s2ev">' + evMain.map(evCard).join("") + "</ul><h4 class=\"s2sub\">Supporting measures</h4><ul class=\"s2ev\">" + evAux.map(evCard).join("") + "</ul>") +
     step(9, "Ranking by the strategic actor’s standard", '<p class="note">' + esc(X.rule) + "</p><div class=\"s2r1\"><p class=\"s2r1-k\">Top option</p><h4>" + esc(R1.name) + '</h4><p class="s2path">' + esc(R1.id) + "</p><p>" + esc(R1.t) + '</p></div><ol class="s2rk" start="2">' + X.ranked.slice(1).map(r => "<li><div><b>" + esc(r.name) + "</b>" + code(r.id) + "</div><p>" + esc(r.t) + "</p></li>").join("") + "</ol>" +
-      "<div class=\"s2p\"><p class=\"s2p-h\">Scenario probabilities if this course is followed</p><table><thead><tr><th>Scenario</th><th>Now</th><th>Under the top option</th><th></th></tr></thead><tbody>" + F.map(f => "<tr><td>" + esc(f.name) + '</td><td class="mono">' + f.p + '%</td><td class="mono">' + rec.p[f.id] + "% <small>(" + rec.rng[f.id][0] + (rec.rng[f.id][1] !== rec.rng[f.id][0] ? "~" + rec.rng[f.id][1] : "") + ")</small></td><td>" + dlt(f) + "</td></tr>").join("") + '</tbody></table><p class="note">' + esc(rec.basis) + "</p></div>" +
+      "<div class=\"s2p\"><p class=\"s2p-h\">Scenario probabilities if this course is followed</p><table><thead><tr><th>Scenario</th><th>Now</th><th>Under the top option</th><th></th></tr></thead><tbody>" + F.map(f => "<tr><td>" + esc(f.name) + '</td><td class="mono">' + f.p + '%</td><td class="mono">' + rec.p[f.id] + "% <small>(" + rec.rng[f.id][0] + (rec.rng[f.id][1] !== rec.rng[f.id][0] ? "–" + rec.rng[f.id][1] : "") + ")</small></td><td>" + dlt(f) + "</td></tr>").join("") + '</tbody></table><p class="note">' + esc(rec.basis) + "</p></div>" +
       "<details class=\"src\"><summary>Precedent check · " + X.prec.length + "</summary><ul>" + X.prec.map(x => "<li>" + esc(x) + "</li>").join("") + "</ul></details>") +
     step(10, "Who is affected", '<dl class="s2ppl">' + X.people.map(r => "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>").join("") + "</dl>") +
     step(11, "Where the Clisa Geopolitics assessment differs", '<p class="note">' + esc(X.diff.note) + "</p><div class=\"tbl-wrap\"><table class=\"tbl s2df\"><thead><tr><th>Option</th><th>" + esc(nmS) + " ranking</th><th>People-centered</th><th>Why</th></tr></thead><tbody>" + X.diff.rows.map(r => '<tr' + (r[1] !== r[2] ? ' class="ne"' : "") + "><td><b>" + esc(r[0]) + '</b></td><td class="mono">' + r[1] + "</td><td class=\"mono\">" + r[2] + "</td><td>" + esc(r[3]) + "</td></tr>").join("") + "</tbody></table></div><div class=\"lesson-box\"><b>What is paid and what is gained</b>" + esc(X.diff.pay) + "</div><div class=\"lesson-box\"><b>Do the two strategic actors’ choices fit together?</b>" + esc(X.fit) + "</div>") +
@@ -2900,7 +2900,7 @@ function sigHtml(f){
 function fcByBranch(c, fs){
   const byId = id => fs.find(f => f.id === id), used = new Set(), sub = (t, ids) => { const xs = ids.map(byId).filter(Boolean); xs.forEach(f => used.add(f.id)); return xs.length ? '<p class="note" style="margin:10px 0 4px">' + t + '</p><ul class="list">' + xs.map(f => forecastRow(f, false)).join("") + "</ul>" : ""; };
   const its = c.futures.items.slice().sort((a, b) => b.p - a.p);
-  let h = its.map(it => '<div class="fbr" style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0"><span class="mono" style="color:' + fcol(it.id) + '">' + esc(it.id) + "</span> " + esc(it.name) + ' <span class="mono">' + it.p + "%</span>" + (it.rng ? ' <span class="rng">(' + it.rng[0] + "~" + it.rng[1] + ")</span>" : "") + "</h4><p class=\"note\" style=\"margin:2px 0 0\">Resolution criteria · " + esc(it.test) + "</p>" +
+  let h = its.map(it => '<div class="fbr" style="border-top:1px solid var(--line);padding-top:10px;margin-top:14px"><h4 style="margin:0"><span class="mono" style="color:' + fcol(it.id) + '">' + esc(it.id) + "</span> " + esc(it.name) + ' <span class="mono">' + it.p + "%</span>" + (it.rng ? ' <span class="rng">(' + it.rng[0] + "–" + it.rng[1] + "%)</span>" : "") + "</h4><p class=\"note\" style=\"margin:2px 0 0\">Resolution criteria · " + esc(it.test) + "</p>" +
     sub("Forecasts tied to the resolution criteria", it.fc ? [it.fc] : []) + sub("Forecasts that tilt toward this scenario", (it.sig || []).filter(g => g.dir === "+").map(g => g.id)) + sub("Forecasts that tilt away from it", (it.sig || []).filter(g => g.dir === "-").map(g => g.id)) +
     (!it.fc && !(it.sig || []).length ? "<p class=\"note\" style=\"margin:6px 0 0\">No forecasts are linked to this scenario yet. It will be checked against its resolution criteria at the end of 2030.</p>" : "") + "</div>").join("");
   const cf = f => fcIn(f, c), expo = (D.fc_expo || []).map(byId).filter(f => f && cf(f) && !used.has(f.id));
@@ -2934,8 +2934,8 @@ const FCT = {
   ocNoteF: (d, p, fd) => "Resolves " + d + ". Because changes in the final days do not count, those days are scored at the " + p + "% probability that stood on " + fd + "; on that basis, the scores for each outcome are shown below. Closer to 0 is better.",
   ocH: "When the result comes in", ocNote: (d, p) => "Resolves by " + d + ". If the probability stays at " + p + " percent until then, its score for each outcome would be as shown below (the average of its daily Brier scores; closer to 0 is better).",
   ocY: "If it happens", ocN: "If it does not",
-  yLow: p => "At " + p + " percent, the forecast treats this as unlikely, so it would count as a wrong call.", yHigh: p => "At " + p + " percent, the forecast treats this as likely, so it would count as a right call.",
-  nLow: p => "At " + p + " percent, the forecast treats this as unlikely, so it would count as a right call.", nHigh: p => "At " + p + " percent, the forecast treats this as likely, so it would count as a wrong call.",
+  yLow: p => "At " + p + " percent, the forecast treats this as less likely than not, so it would count as a wrong call.", yHigh: p => "At " + p + " percent, the forecast treats this as more likely than not, so it would count as a right call.",
+  nLow: p => "At " + p + " percent, the forecast treats this as less likely than not, so it would count as a right call.", nHigh: p => "At " + p + " percent, the forecast treats this as more likely than not, so it would count as a wrong call.",
   ocFirst: (p, a, b) => "Scores had it stayed at its starting " + p + " percent: " + a + " if it happens, " + b + " if it does not",
   sibH: "Other forecasts on this issue", shareH: "Share", shareX: "Share on X", copy: "Copy link", sub: "Subscribe to Updates",
   calH: "What resolves when", calNote: "Each dot is one forecast. Darker dots are forecasts judged more likely; click one to open it.",
