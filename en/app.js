@@ -1276,7 +1276,7 @@ function renderBrief(){
   const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.link));
   if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); document.dispatchEvent(new CustomEvent("clisa:life", {detail: el})); return; }  /* v4.58 개편 ③: life2.js가 이 신호로 국민별로 보기를 그린다 · v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
   el.innerHTML = "<section class=\"sec dbrief\" id=\"brief\"><div class=\"bh\"><h2>Briefing</h2><span class=\"bd\">" + enDate(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
-    "<p class=\"note\">Major recent events and how they bear on Clisa Geopolitics’ assessments and forecasts. The arrows (↑·↓) show whether an event makes a forecast more or less likely to come true. Forecast probabilities are reviewed and revised every week.</p>" +
+    "<p class=\"note\">Major recent events and how they bear on Clisa Geopolitics’ assessments and forecasts. The arrows (↑·↓) show whether an event makes a forecast more or less likely to come true. Forecast probabilities are reviewed every week and revised when needed.</p>" +
     dailyIssue(cur) + "</section>" + (cur === BR.issues[0] ? dueHtml() + worldSecHtml() : "") +  /* v4.59 개편 ②: 최신 호 아래에 다가오는 일정·정세 요약·분쟁지 */
     (others.length ? "<section class=\"sec\"><h3>Past briefings</h3><ul class=\"list blist\">" + others.map(o => '<li><a class="row-btn" href="/en/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
   el.scrollTop = 0;
@@ -1286,7 +1286,7 @@ function dailyHtml(){
   if (!BR || !(BR.issues || []).length) return "";
   const cur = BR.issues[0], old = BR.issues.slice(1);
   return "<section class=\"sec dbrief\" id=\"brief\"><div class=\"bh\"><h2>Briefing</h2><span class=\"bd\">" + enDate(cur.date) + '</span>' + ttsBtn("brief") + '</div>' +
-    "<p class=\"note\">Major recent events and how they bear on Clisa Geopolitics’ assessments and forecasts. The arrows (↑·↓) show whether an event makes a forecast more or less likely to come true. Forecast probabilities are reviewed and revised every week.</p>" +
+    "<p class=\"note\">Major recent events and how they bear on Clisa Geopolitics’ assessments and forecasts. The arrows (↑·↓) show whether an event makes a forecast more or less likely to come true. Forecast probabilities are reviewed every week and revised when needed.</p>" +
     dailyIssue(cur) +
     (old.length ? "<details class=\"bold\"><summary>Past briefings · " + old.length + "</summary>" + old.map(o => '<details class="bo"><summary>' + fmtKD(o.date) + " · " + esc((o.items[0] || {}).h || "") + "</summary>" + dailyIssue(o) + "</details>").join("") + "</details>" : "") +
     "</section>";
@@ -2918,7 +2918,7 @@ const FCT = {
   tk: s => EN_MON[+s.slice(5, 7) - 1].slice(0, 3) + " " + (+s.slice(8, 10)), left: n => pl(n, "day") + " left", late: n => "Past due", dd: n => pl(n, "day"), cnt: n => pl(n, "forecast"), more: n => "Show " + n + " more",
   today: "Today", checking: "Result pending", firstRes: "First result", acc: "Accuracy (Brier score)", detail: "Details →", copied: "Copied", title: s => s + " · Forecast",
   late_h: "Forecasts awaiting their result", s30: "Resolving within 30 days", s30none: "No forecast reaches its resolution date in the next 30 days.", s90: "Resolving within 90 days",
-  due: d => "Resolves " + d, etc: "Other conflicts", back: "← All forecasts", eyebrow: (id, c) => "Forecast " + id + " · " + c,
+  due: d => "Resolves by " + d, etc: "Other forecasts", back: "← All forecasts", eyebrow: (id, c) => "Forecast " + id + " · " + c,
   pNow: "Current probability", pThen: "Probability at the time", caseGo: c => c + " analysis →", dueAt: "Resolution date", made: "First published", madeV: (d, p) => d + " · started at " + p + "%", rs: "Resolution source",
   resH: "Result", resD: d => " · confirmed " + d, voidL: "Voided", yes: "Happened", no: "Did not happen", resSub: (p, b) => "Probability at the time " + p + "% · Brier score " + b, hit: "Right call", miss: "Wrong call", half: "No verdict", resHalf: "Rated a realistic possibility (38–52 percent), so it is neither a right nor a wrong call.",
   resMsg: (v, p, hi, miss, y) => "The forecast put the chance at " + (hi ? "" : "only ") + p + " percent, " + (miss ? "but" : "and") + " it " + (y ? "happened." : "did not happen."), resVerb: "",
@@ -3158,7 +3158,7 @@ function renderForecasts(){
     (() => {  /* v4.94b(2026-11-07 대통령님): 점 그래프 대신 목록 위 달 단추 한 줄 */ const cs = D.strategies || [], cf = f => { const c = fcCase(f); return c ? c.id : "etc"; };
       const cols = fcCols(op0, t0), mc = cols.find(c => c.k === S.fcm); if (S.fcm && !mc) S.fcm = null;
       let base = op0; if (S.fcq === "chg") base = base.filter(f => fcHistOf(f)[0][1] !== f.p); const mb = (S.fcf && S.fcf !== "all") ? base.filter(f => cf(f) === S.fcf) : base; if (mc) base = base.filter(mc.t);
-      const opts = [["all", "All", base.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], base.filter(f => cf(f) === c.id).length]), [["etc", "Other conflicts", base.filter(f => cf(f) === "etc").length]]);
+      const opts = [["all", "All", base.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], base.filter(f => cf(f) === c.id).length]), [["etc", "Other forecasts", base.filter(f => cf(f) === "etc").length]]);
       const sel = S.fcf || "all", shown = sel === "all" ? base : base.filter(f => cf(f) === sel);
       const cc = cs.find(c => c.id === sel), on = [S.fcq === "chg" ? FCT.fChg : "", mc ? FCT.fM(mc.lt) : ""].filter(Boolean);
       return '<section class="sec" id="f-all"><h3>' + (cc ? esc(cc.title.split(":")[0]) + " · " + FCT.listHc : FCT.listH) + '</h3>' +

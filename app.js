@@ -2894,7 +2894,7 @@ const FCT = {
   tk: s => FCT.md(s), left: n => n + "일 남음", late: n => n + "일 지남", dd: n => n + "일", cnt: n => n + "건", more: n => n + "건 더 보기",
   today: "오늘", checking: "결과 확인 중", firstRes: "첫 결과", acc: "정확도(브라이어 점수)", detail: "자세히 보기 →", copied: "복사했습니다", title: s => s + " · 전망",
   late_h: "결과를 확인하고 있는 전망", s30: "30일 내 판가름 날 전망", s30none: "30일 안에 검증 시점이 오는 전망은 없습니다.", s90: "90일 내 판가름 날 전망",
-  due: d => "검증 " + d, etc: "그 밖의 분쟁", back: "← 전망 목록", eyebrow: (id, c) => "전망 " + id + " · " + c,
+  due: d => "검증 " + d, etc: "그 밖의 전망", back: "← 전망 목록", eyebrow: (id, c) => "전망 " + id + " · " + c,
   pNow: "현재 확률", pThen: "당시 확률", caseGo: c => c + " 사안 →", dueAt: "검증 시점", made: "만든 날", madeV: (d, p) => d + " · 처음 확률 " + p + "%", rs: "결과 확인",
   resH: "검증 결과", resD: d => " · " + d + " 확정", voidL: "무효", yes: "일어남", no: "일어나지 않음", resSub: (p, b) => "당시 확률 " + p + "% · 브라이어 점수 " + b, hit: "예측 적중", miss: "예측 빗나감", half: "예측 중립", resHalf: "확률을 38~52%(가능성 있음)로 둔 전망이라 예측 적중과 예측 빗나감 어느 쪽에도 넣지 않습니다.", resYes: "예측대로 되었습니다.", resNo: "예측과 달랐습니다.",
   resMsg: (v, p, hi, miss, y) => v + " 가능성을 " + p + "%로 " + (hi ? "높게" : "낮게") + " 예측했" + (miss ? "으나, " + v + (y ? "되었습니다." : "되지 않았습니다.") : "으며, 예측대로 되었습니다."), resVerb: "실현",
@@ -3133,7 +3133,7 @@ function renderForecasts(){
     (() => {  /* v4.94b(2026-11-07 대통령님): 점 그래프 대신 목록 위 달 단추 한 줄 */ const cs = D.strategies || [], cf = f => { const c = fcCase(f); return c ? c.id : "etc"; };
       const cols = fcCols(op0, t0), mc = cols.find(c => c.k === S.fcm); if (S.fcm && !mc) S.fcm = null;
       let base = op0; if (S.fcq === "chg") base = base.filter(f => fcHistOf(f)[0][1] !== f.p); const mb = (S.fcf && S.fcf !== "all") ? base.filter(f => cf(f) === S.fcf) : base; if (mc) base = base.filter(mc.t);
-      const opts = [["all", "전체", base.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], base.filter(f => cf(f) === c.id).length]), [["etc", "그 밖의 분쟁", base.filter(f => cf(f) === "etc").length]]);
+      const opts = [["all", "전체", base.length]].concat(cs.map(c => [c.id, c.title.split(":")[0], base.filter(f => cf(f) === c.id).length]), [["etc", "그 밖의 전망", base.filter(f => cf(f) === "etc").length]]);
       const sel = S.fcf || "all", shown = sel === "all" ? base : base.filter(f => cf(f) === sel);
       const cc = cs.find(c => c.id === sel), on = [S.fcq === "chg" ? FCT.fChg : "", mc ? FCT.fM(mc.lt) : ""].filter(Boolean);
       return '<section class="sec" id="f-all"><h3>' + (cc ? esc(cc.title.split(":")[0]) + " · " + FCT.listHc : FCT.listH) + '</h3>' +
