@@ -181,3 +181,9 @@ header.hd>*{order:5}header.hd>.hd-r1{order:0}header.hd>.hd-sw{order:1}header.hd>
 }
 /* 2026-11-07 시안: 띠 제목을 찍는 동안 끝에 커서를 보인다 */
 header.hd .bstrip .bs-t.tw-on::after{content:"";display:inline-block;flex:none;width:2px;height:1.05em;margin-left:2px;vertical-align:-2px;background:currentColor;opacity:.75}
+/* 2026-11-07 대통령님: 보기 단추 줄(지정학 신경망·시황판·전망·국민별 보기)을 낮추고 위로 올려 아래 판의 자리를 넓힌다 */
+.pane:has(.f2-vt,.l2-vt,.lkm-vt){padding-top:4px!important}
+.f2-vt,.l2-vt,.lkm-vt{padding:3px!important;margin-bottom:6px!important}
+.f2-who>.f2-vt,.l2-who>.l2-vt,.lkm-hero>.lkm-vt{margin-bottom:8px!important}
+.f2-vt a,.l2-vt a,.lkm-vt a{padding:3px 13px!important;font-size:13px!important;line-height:1.3!important}
+@media (max-width:700px){.f2-vt,.l2-vt,.lkm-vt{gap:3px!important}.f2-vt a,.l2-vt a,.lkm-vt a{padding:3px 6px!important;font-size:12.5px!important}}

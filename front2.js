@@ -39,7 +39,7 @@
     vt: ["전망으로 보기", "국민별로 보기", "나비효과 지도로 보기"], hm: "시황판으로 보기", hmT: "지정학 시황판", rp: "지정학 신경망 보기", rpT: "지정학 신경망", h: "어떤 일이 일어날 수 있으며, 그 일이 누구의 삶을 어떻게 바꾸는가?",
     sub: "결과 확인 날짜가 정해진 전망마다, 그 일이 발생하면 가능성이 커지거나 줄어드는 전개와, 그 전개가 현실이 될 때 한국·미국과 유럽 3개 지역 국민의 안전과 소득에 생기는 변화를 함께 보여 드립니다.",
     nl: "최근 정세 브리핑 · 누르면 그 사안의 전망만 봅니다",
-    ver: "검증", verGo: "전망 검증 →",
+    ver: "검증", verGo: "전망과 검증 →",
     verT: function(n, h, m){ return "결과가 나온 전망 " + n + "개 가운데 적중 " + h + "개" + (m ? ", 빗나감 " + m + "개" : "") + "."; },
     verL: function(s, p){ return " 가장 최근 결과는 " + s + "(점수에 쓰인 확률 " + p + "%)로, "; },
     brier: function(b){ return " 기간 평균 브라이어 점수 " + b + "."; },
@@ -168,7 +168,12 @@
   var RPH = 0; function rpSize(){ var f = document.getElementById("rp2f"); if (!f) return; f.style.height = (RPH || 900) + "px"; }
   addEventListener("message", function(e){ if (e.data && e.data.rpH && e.origin === location.origin) { RPH = e.data.rpH; rpSize(); } });
   function drawRipple(el){ EL = el; if (/^\/(ripple\/)?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on"); var ft = el.querySelector(":scope > .site-foot");
-    el.innerHTML = '<div class="f2 hm2">' + vtNav("rp") + '<iframe id="rp2f" class="hm2-f rp2-f" src="' + P + '/lab/ripple/?embed=1" title="' + T.rpT + '" loading="eager"></iframe></div>';
+    /* 2026-11-07 대통령님 결재: 국문 첫 화면은 지정학 신경망과 나비효과 지도의 통합판. 영문은 영문 통합판이 나올 때까지 옛 신경망.
+       칩에서 '한 항목 보기'로 들어오거나(rpfocus) 옛 신경망에서 돌아올 때(rpret)는 옛 신경망을 연다. 옛 나비효과 지도 주소(?fp=…)는 통합판의 그 분쟁 지점으로 넘긴다 */
+    var old = false; try { var fo = JSON.parse(sessionStorage.getItem("rpfocus") || "null"), rt = +sessionStorage.getItem("rpret") || 0; old = !!(fo && Date.now() - fo.t < 60000) || (rt && Date.now() - rt < 20000); } catch (_) {}
+    var fp = (location.search.match(/[?&]fp=([a-z0-9-]+)/) || [])[1];
+    var src = (EN || old) ? P + "/lab/ripple/?embed=1" : "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "");
+    el.innerHTML = '<div class="f2 hm2">' + vtNav("rp") + '<iframe id="rp2f" class="hm2-f rp2-f' + ((EN || old) ? "" : " nr2-f") + '" src="' + src + '" title="' + T.rpT + '" loading="eager"></iframe></div>';
     if (ft) el.appendChild(ft); rpSize(); }
   function drawHeat(el){
     EL = el; if (/^\/heatmap\/?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
