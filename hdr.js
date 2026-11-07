@@ -110,3 +110,30 @@
   put(); addEventListener("load", put);
   try { new MutationObserver(put).observe(document.body, {childList: true, subtree: true}); } catch (e) {}
 })();
+/* 2026-11-07 시안(대통령님): 띠 제목을 1914 게임의 전문처럼 왼쪽에서 오른쪽으로 빠르게 찍어 보인다.
+   분류·날짜·순번은 바로 보이고 제목(.bs-t)만 찍는다. 움직임 줄이기 설정이면 하지 않는다. 화면 낭독기는 띠의 aria-label로 제목 전체를 읽는다. */
+(function(){
+  try { if (matchMedia("(prefers-reduced-motion: reduce)").matches) return; } catch (e) {}
+  function textNodes(el){ var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), a = [], n; while ((n = w.nextNode())) a.push(n); return a; }
+  function hook(st){
+    var bt = st.querySelector(".bs-t"); if (!bt || bt.dataset.tw) return; bt.dataset.tw = "1";
+    var last = "", tm = null, mo = new MutationObserver(function(){ run(); });
+    var watch = function(){ mo.observe(bt, {childList: true, subtree: true, characterData: true}); };
+    function run(){
+      var full = bt.textContent; if (!full || full === last) return; last = full;
+      var lab = [".bs-k", ".bs-d"].map(function(q){ var e = st.querySelector(q); return e ? e.textContent : ""; }).concat([full]).filter(Boolean).join(" ");
+      st.setAttribute("aria-label", lab);
+      var ns = textNodes(bt), fs = ns.map(function(n){ return n.nodeValue; });
+      mo.disconnect(); clearTimeout(tm); ns.forEach(function(n){ n.nodeValue = ""; }); bt.classList.add("tw-on");
+      var k = 0, i = 0;
+      (function step(){
+        if (k >= ns.length || !bt.contains(ns[k])) { bt.classList.remove("tw-on"); ns.forEach(function(n, j){ n.nodeValue = fs[j]; }); watch(); if (bt.textContent !== last) run(); return; }
+        i += 2; ns[k].nodeValue = fs[k].slice(0, i); if (i >= fs[k].length) { k++; i = 0; }
+        tm = setTimeout(step, 24);
+      })();
+    }
+    watch(); run();
+  }
+  function init(){ document.querySelectorAll(".bstrip").forEach(hook); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();

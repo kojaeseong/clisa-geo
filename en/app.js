@@ -349,7 +349,7 @@ function init(d){
   setupSearch();
   ttsSetup();
   loadBrief();
-  runStrip($("#astrip"), () => frsItems().concat(agendaItems().filter(x => x.f && x.dl <= 60)));  /* v4.41(2026-10-28 결재): 붉은 띠는 전망만(전망 조정 + 60일 안에 판가름 나는 전망). 예정 행사는 파란 띠로 */
+  runStrip($("#astrip"), () => frsItems().concat(agendaItems().filter(x => x.f && x.dl <= 60)), 2000);  /* v4.41(2026-10-28 결재): 붉은 띠는 전망만(전망 조정 + 60일 안에 판가름 나는 전망). 예정 행사는 파란 띠로 */
   loop();
 }
 
@@ -1318,15 +1318,15 @@ function frsItems(){ const d = new Date(Date.now() - 2 * 864e5), lim3 = d.getFul
   return FCR().filter(r => r.date >= lim3).flatMap(r => r.items.filter(it => it.from !== it.to).map(it => { const F = D.forecasts.find(z => z.id === it.id);
       return {k: "Forecast revised", d: r.date, t: (F && F.s ? F.s : it.id) + " " + it.from + "% → " + it.to + "%", w: {date: r.date, id: it.id}}; })); }
 function dueStripHtml(f){ return '<span class="bs-nm">' + esc(f.s || f.id) + '</span><span class="bs-pr">: <b class="bs-p">' + f.p + "%</b> chance" + '<span class="bs-x"> · resolves ' + enDate(f.due, String(f.due).slice(0, 4) === String(new Date().getFullYear())) + " · " + esc(daysText(daysLeft(f.due))) + "</span></span>"; }
-function runStrip(st, list){
+function runStrip(st, list, lag){  /* 2026-11-07 시안: lag(ms) — 붉은 띠는 2초 늦게 넘겨 두 띠가 엇갈리게 */
   const bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d");
   let k = 0, hold = false;
   const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.w)); st.hidden = false; };  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만 붉게, 예정 행사는 파랗게 */
   show();
-  if (!reduceMotion) setInterval(() => {
+  if (!reduceMotion) setTimeout(() => setInterval(() => {
     if (hold || document.visibilityState !== "visible" || list().length < 2) return;
     bt.classList.add("fade"); setTimeout(() => { k = (k + 1) % Math.max(1, list().length); show(); bt.classList.remove("fade"); }, 350);
-  }, 4000);
+  }, 4000), lag || 0);
   addEventListener("resize", show);
   st.addEventListener("mouseenter", () => hold = true); st.addEventListener("mouseleave", () => hold = false);
   st.addEventListener("focus", () => hold = true); st.addEventListener("blur", () => hold = false);

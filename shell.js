@@ -43,14 +43,14 @@
   var esc = function(t){ return String(t).replace(/[&<>"]/g, function(c){ return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); };
   /* v4.41(2026-10-28 결재): 전망은 머리말 '전망'과 확률 문장(이름 가능성 ○% · 날짜 판가름 · 남은 날)으로 보인다 */
   function dueStripHtml(f){ return '<span class="bs-nm">' + esc(f.s || f.id) + '</span><span class="bs-pr"> 가능성 <b class="bs-p">' + f.p + "%</b>" + '<span class="bs-x"> · ' + fmtKD(f.due) + " 판가름 · " + esc(daysText(daysLeft(f.due))) + "</span></span>"; }
-  function runStrip(st, list){
+  function runStrip(st, list, lag){  /* 2026-11-07 시안: 붉은 띠는 2초 늦게 넘긴다 */
     var bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d"), k = 0, hold = false;
     var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/"; st.classList.toggle("bs-due", !!x.a); st.hidden = false; };  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만(a) */
     show();
-    if (!reduceMotion) setInterval(function(){
+    if (!reduceMotion) setTimeout(function(){ setInterval(function(){
       if (hold || document.visibilityState !== "visible" || list().length < 2) return;
       bt.classList.add("fade"); setTimeout(function(){ k = (k + 1) % Math.max(1, list().length); show(); bt.classList.remove("fade"); }, 350);
-    }, 4000);
+    }, 4000); }, lag || 0);
     addEventListener("resize", show);
     st.addEventListener("mouseenter", function(){ hold = true; }); st.addEventListener("mouseleave", function(){ hold = false; });
     st.addEventListener("focus", function(){ hold = true; }); st.addEventListener("blur", function(){ hold = false; });
@@ -77,6 +77,6 @@
     }
     /* v4.41(2026-10-28 결재): 파란 띠는 공지·브리핑·60일 안의 예정 행사, 붉은 띠는 전망 조정과 60일 안의 전망. 좁은 화면도 같은 두 띠를 위아래로 둔다 */
     runStrip(bs, function(){ return NS.concat(BRS, agendaItems().filter(function(x){ return x.e && x.dl <= 60; })); });
-    if (as) runStrip(as, function(){ return FRS.concat(agendaItems().filter(function(x){ return x.f && x.dl <= 60; })); });
+    if (as) runStrip(as, function(){ return FRS.concat(agendaItems().filter(function(x){ return x.f && x.dl <= 60; })); }, 2000);
   });
 })();

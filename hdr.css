@@ -179,3 +179,5 @@ header.hd>*{order:5}header.hd>.hd-r1{order:0}header.hd>.hd-sw{order:1}header.hd>
  header.hd .strips{gap:4px}
  header.hd .strips .bstrip{height:30px}
 }
+/* 2026-11-07 시안: 띠 제목을 찍는 동안 끝에 커서를 보인다 */
+header.hd .bstrip .bs-t.tw-on::after{content:"";display:inline-block;flex:none;width:2px;height:1.05em;margin-left:2px;vertical-align:-2px;background:currentColor;opacity:.75}
