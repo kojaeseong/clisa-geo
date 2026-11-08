@@ -213,6 +213,9 @@ header.hd .bstrip .bs-t.tw-on::after{content:"";display:inline-block;flex:none;w
  .pane:has(> .f2.hm2) > .site-foot{padding-left:14px;padding-right:14px}
  .hm2-f{border-radius:4px!important}
 }
+/* 2026-11-09 대통령님: 영문 메뉴는 넓은 화면에서 휴대전화용 줄임 이름을 쓰지 않는다. History and Ideas는 데스크톱(901px 이상) 전부에서, 나머지 긴 이름은 7개가 한 줄에 들어가는 1366px 이상에서 */
+@media (min-width:901px){html[lang="en"] header.hd nav.gnav a[data-tab="ideas"] .gl{display:inline}html[lang="en"] header.hd nav.gnav a[data-tab="ideas"] .gs{display:none}}
+@media (min-width:1366px){html[lang="en"] header.hd nav.gnav .gl{display:inline}html[lang="en"] header.hd nav.gnav .gs{display:none}}
 
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
 .bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
