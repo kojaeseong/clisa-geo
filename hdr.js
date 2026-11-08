@@ -101,9 +101,9 @@
 /* 주간 정세 요약 쪽 듣기 단추(2026-11-03 운영자 지시): 판 날짜 제목 옆에 브리핑과 같은 듣기 단추를 붙인다.
    읽는 글과 듣기 엔진은 app.js의 'page' 열쇠(tts1103.py)가 맡는다. 한국어(영문판은 영어) 음성이 없는 기기에서는 단추가 보이지 않는다(.tts-ok). */
 (function(){
-  if (!/^\/(en\/)?digest\//.test(location.pathname)) return;
+  /* 2026-11-08 대통령님 지적: 다른 쪽에서 화면 안 단추로 옮겨 오면 듣기 단추가 붙지 않던 것(처음 연 주소만 보고 그만두었음) → 옮길 때마다 주소를 다시 본다 */
   var EN = document.documentElement.lang === "en";
-  function put(){ var P = document.getElementById("pane-page"); if (!P || P.querySelector('[data-tts="page"]')) return;
+  function put(){ if (!/^\/(en\/)?digest\//.test(location.pathname)) return; var P = document.getElementById("pane-page"); if (!P || P.querySelector('[data-tts="page"]')) return;
     var h = [].filter.call(P.querySelectorAll("h2"), function(x){ return !x.closest("article"); })[0] || P.querySelector("h1"); if (!h || !P.querySelector("article.bi")) return;
     var b = document.createElement("button"); b.type = "button"; b.className = "tts"; b.dataset.tts = "page"; b.setAttribute("aria-pressed", "false");
     b.style.marginLeft = "10px"; b.textContent = EN ? "▶ Listen" : "▶ 듣기"; h.appendChild(b); }

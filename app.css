@@ -248,6 +248,7 @@ details.more>summary{cursor:pointer; font-size:13px; color:var(--accent); paddin
 .fd-leg{display:flex; flex-wrap:wrap; gap:4px 12px; font-size:11.5px; color:var(--muted); margin:6px 0}
 .fd-leg i{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:-1px; border:2px solid var(--accent)}
 .fd-leg i.f{background:var(--accent)} .fd-leg i.o{background:var(--panel)} .fd-leg i.u{background:#E6EDFC} .fd-leg i.d{border-color:var(--conflict); background:#FBE9E5}
+.fd-leg i.u,.fd-leg i.d,.fd-leg i.n{width:15px; height:15px; border-width:1.5px; font:700 10.5px/12px var(--sans); text-align:center; vertical-align:-3px; color:var(--accent)} .fd-leg i.d{color:var(--conflict)} .fd-leg i.n{border-color:var(--line); background:var(--panel-2); color:var(--muted)}  /* 2026-11-08 */
 .fd-tl{list-style:none; margin:0; padding:0; display:grid; gap:14px}
 .fd-tl li{display:grid; grid-template-columns:58px 1fr; gap:10px}
 .fd-tl .d{font-size:13px; color:var(--muted); white-space:nowrap}
@@ -404,8 +405,9 @@ details.dy .dyad{margin-top:8px; border:0; padding:0}
 .lesson p{font-size:13px; color:var(--ink-2)}
 .an{display:grid; gap:10px}
 .an h4{margin:0; font:700 17px/1.35 var(--serif)}
-.an .tags{display:flex; flex-wrap:wrap; gap:6px}
-.an .tag{font-size:11px; border:1px solid var(--accent); color:var(--accent); border-radius:4px; padding:1px 8px}
+.an .tags{display:flex; flex-wrap:wrap; gap:2px 0}
+.an .tag{font-size:12.5px; font-weight:600; color:var(--ink-2)}  /* 2026-11-08 대통령님 지적: 누를 수 없는 선례 이름이 단추처럼 보이던 테두리를 뺌. 이름 사이는 가운뎃점 */
+.an .tag+.tag::before{content:"·"; margin:0 8px; color:var(--muted); font-weight:400}
 .an dl{margin:0; display:grid; gap:8px}
 .an dt{font-size:11px; font-weight:600; color:var(--muted); letter-spacing:.03em}
 .an dd{margin:0; font-size:13px; color:var(--ink-2)}

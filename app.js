@@ -2903,7 +2903,7 @@ const FCT = {
   resExpl: b => "기간 평균 브라이어 점수 " + b + " · 0에 가까울수록 정확합니다(모두 50%로 예측하면 0.25)",
   chartH: "일자별 확률 변화", span: "기간", w30: "최근 30일", wAll: "전체 기간", aria: s => s + " 일자별 확률 변화", ev: "사건",
   revT: (d, x) => d + " 주간 전망 점검 · " + x, keep: p => p + "% 유지", chg: (a, b) => a + "% → " + b + "%",
-  legF: "확률을 바꾼 주간 점검", legO: "그대로 둔 주간 점검", legU: "정세 브리핑 · 확률 상승 요인", legD: "정세 브리핑 · 확률 하락 요인",
+  legF: "확률을 바꾼 주간 점검", legO: "그대로 둔 주간 점검", legU: "정세 브리핑 · 확률 상승 요인", legD: "정세 브리핑 · 확률 하락 요인", legN: "정세 브리핑 · 변화 없음",
   chartNote: "확률은 매주 월요일 주간 전망 점검에서 다시 보며, 그래프의 값은 그날 공개판에 실렸던 확률 그대로입니다.", futNote: " 점선은 검증 시점까지 남은 기간입니다.",
   whyH: "변동·유지 이유", week: "주간 전망 점검", first: p => "처음 확률 " + p + "%", firstD: "전망을 만든 날",
   evH: "관련 사건", evNote: "정세 브리핑에서 이 전망과 연결한 사건입니다. 화살표는 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다.", evGo: "그날의 정세 브리핑 →",
@@ -3108,7 +3108,7 @@ function fcDetailHtml(f){
         ((f.outcome_src || []).length ? '<p class="note">' + f.outcome_src.map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]) + "</a>").join(" · ") + "</p>" : "")) + "</section>" : "") +
     '<section class="sec"><div class="fd-ht"><h3>' + FCT.chartH + '</h3><div class="fd-seg" role="group" aria-label="' + FCT.span + '"><button type="button" data-fcw="30" aria-pressed="' + (S.fcw !== "all") + '">' + FCT.w30 + '</button><button type="button" data-fcw="all" aria-pressed="' + (S.fcw === "all") + '">' + FCT.wAll + "</button></div></div>" +
       fcChart(f, t) +
-      '<div class="fd-leg"><span><i class="f"></i>' + FCT.legF + '</span><span><i class="o"></i>' + FCT.legO + '</span><span><i class="u"></i>' + FCT.legU + '</span><span><i class="d"></i>' + FCT.legD + "</span></div>" +
+      '<div class="fd-leg"><span><i class="f"></i>' + FCT.legF + '</span><span><i class="o"></i>' + FCT.legO + '</span><span><i class="u">↑</i>' + FCT.legU + '</span><span><i class="d">↓</i>' + FCT.legD + '</span><span><i class="n">–</i>' + FCT.legN + "</span></div>" +  /* 2026-11-08 대통령님 지적: 범례를 그래프의 사건 표시(↑·↓·– 동그라미)와 같게 */
       '<p class="note">' + FCT.chartNote + (open ? FCT.futNote : "") + "</p></section>" +
     '<section class="sec"><h3>' + FCT.whyH + '</h3><ul class="fd-tl">' +
       rv.map(([dt, it]) => '<li><span class="d">' + FCT.md(dt) + "</span><div><b>" + fcPP(it) + '</b> <span class="note">' + FCT.week + "</span><p>" + esc(it.why) + "</p></div></li>").join("") +

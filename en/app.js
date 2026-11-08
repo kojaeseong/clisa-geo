@@ -2927,7 +2927,7 @@ const FCT = {
   resExpl: b => "Brier score " + b + " (average of daily scores) · 0 is perfect; a forecast held at 50% throughout scores 0.25",
   chartH: "Probability over time", span: "Period", w30: "Last 30 days", wAll: "All time", aria: s => s + ": probability over time", ev: "Events",
   revT: (d, x) => d + " weekly review · " + x, keep: p => p + "%, unchanged", chg: (a, b) => a + "% → " + b + "%",
-  legF: "Weekly review that changed it", legO: "Weekly review that kept it", legU: "Briefing · raises the probability", legD: "Briefing · lowers the probability",
+  legF: "Weekly review that changed it", legO: "Weekly review that kept it", legU: "Briefing · raises the probability", legD: "Briefing · lowers the probability", legN: "Briefing · no change",
   chartNote: "Probabilities are revisited every Monday in the weekly forecast review. Each value in the chart is the probability as published that day.", futNote: " The dotted line shows the time left until the resolution date.",
   whyH: "Why it changed or held", week: "Weekly forecast review", first: p => "Started at " + p + "%", firstD: "Forecast made",
   evH: "Related events", evNote: "Events the daily briefing linked to this forecast. The arrows show whether an event makes the outcome more or less likely.", evGo: "That day's briefing →",
@@ -3133,7 +3133,7 @@ function fcDetailHtml(f){
         ((f.outcome_src || []).length ? '<p class="note">' + f.outcome_src.map(u => '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0]) + "</a>").join(" · ") + "</p>" : "")) + "</section>" : "") +
     '<section class="sec"><div class="fd-ht"><h3>' + FCT.chartH + '</h3><div class="fd-seg" role="group" aria-label="' + FCT.span + '"><button type="button" data-fcw="30" aria-pressed="' + (S.fcw !== "all") + '">' + FCT.w30 + '</button><button type="button" data-fcw="all" aria-pressed="' + (S.fcw === "all") + '">' + FCT.wAll + "</button></div></div>" +
       fcChart(f, t) +
-      '<div class="fd-leg"><span><i class="f"></i>' + FCT.legF + '</span><span><i class="o"></i>' + FCT.legO + '</span><span><i class="u"></i>' + FCT.legU + '</span><span><i class="d"></i>' + FCT.legD + "</span></div>" +
+      '<div class="fd-leg"><span><i class="f"></i>' + FCT.legF + '</span><span><i class="o"></i>' + FCT.legO + '</span><span><i class="u">↑</i>' + FCT.legU + '</span><span><i class="d">↓</i>' + FCT.legD + '</span><span><i class="n">–</i>' + FCT.legN + "</span></div>" +  /* 2026-11-08 대통령님 지적: 범례를 그래프의 사건 표시(↑·↓·– 동그라미)와 같게 */
       '<p class="note">' + FCT.chartNote + (open ? FCT.futNote : "") + "</p></section>" +
     '<section class="sec"><h3>' + FCT.whyH + '</h3><ul class="fd-tl">' +
       rv.map(([dt, it]) => '<li><span class="d">' + FCT.md(dt) + "</span><div><b>" + fcPP(it) + '</b> <span class="note">' + FCT.week + "</span><p>" + esc(it.why) + "</p></div></li>").join("") +
