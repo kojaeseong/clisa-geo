@@ -1329,7 +1329,9 @@ function runStrip(st, list, lag){  /* 2026-11-07 시안: lag(ms) — 붉은 띠�
   }, 4000), lag || 0);
   addEventListener("resize", show);
   st.addEventListener("mouseenter", () => hold = true); st.addEventListener("mouseleave", () => hold = false);
-  st.addEventListener("focus", () => hold = true); st.addEventListener("blur", () => hold = false);
+  st.addEventListener("focus", () => hold = st.matches(":focus-visible")); st.addEventListener("blur", () => hold = false);  /* 2026-11-08: 마우스로 누른 뒤의 초점은 멈추지 않음 */
+  const unhold = () => { hold = st.matches(":hover") || st.matches(":focus-visible"); };  /* 2026-11-08 대통령님 지적: 다른 창에 갔다 오면 띠가 멈춰 있던 것(창을 떠날 때 mouseleave·blur가 오지 않아 멈춤이 풀리지 않음) */
+  addEventListener("blur", () => { hold = false; }); addEventListener("focus", unhold); document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") unhold(); });
   st.addEventListener("pointerdown", () => hold = true); st.addEventListener("pointercancel", () => hold = false);
   st.onclick = () => { hold = false; const L = list(); if (L.length) stripGo(L[k % L.length]); };
 }

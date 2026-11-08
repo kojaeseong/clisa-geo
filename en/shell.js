@@ -56,7 +56,9 @@
     }, 4000); }, lag || 0);
     addEventListener("resize", show);
     st.addEventListener("mouseenter", function(){ hold = true; }); st.addEventListener("mouseleave", function(){ hold = false; });
-    st.addEventListener("focus", function(){ hold = true; }); st.addEventListener("blur", function(){ hold = false; });
+    st.addEventListener("focus", function(){ hold = st.matches(":focus-visible"); }); st.addEventListener("blur", function(){ hold = false; });  /* 2026-11-08: 마우스로 누른 뒤의 초점은 멈추지 않음 */
+    var unhold = function(){ hold = st.matches(":hover") || st.matches(":focus-visible"); };  /* 2026-11-08 대통령님 지적: 다른 창에 갔다 오면 띠가 멈춰 있던 것 */
+    addEventListener("blur", function(){ hold = false; }); addEventListener("focus", unhold); document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "visible") unhold(); });
   }
   var J = function(u){ return fetch(u, {cache: "no-cache"}).then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; }); };
   Promise.all([J("/en/data/daily.json"), J("/en/data/shell.json")]).then(function(r){

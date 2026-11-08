@@ -113,7 +113,7 @@
 /* 띠 타자 효과는 2026-11-08 strips_c.js로 옮김(아카데미·게임 첫 화면과 함께 씀). header1101.py가 hdr.js 끝에 붙인다 */
 
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스 모든 쪽(header1101.py가 hdr.js 끝에 붙임)과 아카데미·게임 첫 화면(stripc1108.py가 /strips_c.js로)에서 함께 쓴다.
-   전망 띠: 확률 막대·확률·변화폭(처음 공개 확률 대비, 전망 조정은 조정 폭)·남은 날. 띠 아래 가는 선은 다음 소식으로 넘어갈 때까지 찬다. 휴대전화는 막대·남은 날을 빼고 숫자만.
+   전망 띠: 확률 막대·확률·변화폭(처음 공개 확률 대비, 전망 조정은 조정 폭)·남은 날. 휴대전화는 막대·남은 날을 빼고 숫자만.
    화면 앱(app.js)과 글 쪽(shell.js)의 띠가 소식을 바꿀 때마다 clStripM(띠, {p, c, due})를 부른다. 이 파일이 늦게 읽히면 띠에 남겨 둔 _m으로 다시 그린다. */
 (function(){
   "use strict";
@@ -123,8 +123,7 @@
     var n = Math.round((Date.UTC(+m[1], +m[2] - 1, +m[3]) - a) / 864e5);
     return EN ? (n > 1 ? n + " days left" : n === 1 ? "1 day left" : n === 0 ? "Resolves today" : "Awaiting resolution") : (n > 0 ? n + "일 남음" : n === 0 ? "오늘 검증" : "검증 대기"); }
   function draw(st){
-    var m = st._m || null, bm = st.querySelector(".bs-m"), bn = st.querySelector(".bs-n");
-    st.classList.remove("bs-run"); if (!RM && bn && bn.textContent) { void st.offsetWidth; st.classList.add("bs-run"); }
+    var m = st._m || null, bm = st.querySelector(".bs-m");
     if (!m || m.p == null) { st.classList.remove("c-m"); if (bm) bm.innerHTML = ""; return; }
     if (!bm) { var bt = st.querySelector(".bs-t"); if (!bt) return; bm = document.createElement("span"); bm.className = "bs-m"; bm.setAttribute("aria-hidden", "true"); bt.parentNode.insertBefore(bm, bt.nextSibling); }
     var c = m.c, h = '<span class="bs-bar"><i style="width:' + Math.max(2, Math.min(100, m.p)) + '%"></i></span><b class="bs-pc">' + m.p + "%</b>";

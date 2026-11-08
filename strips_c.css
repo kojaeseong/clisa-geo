@@ -15,11 +15,6 @@
 .bstrip .bs-ch.up{color:#1f9e5f}.bstrip .bs-ch.dn{color:#d93a40}
 :root[data-theme="dark"] .bstrip .bs-ch.up{color:#4cc98a}:root[data-theme="dark"] .bstrip .bs-ch.dn{color:#ff7b7f}
 .bstrip .bs-dl{font:500 12px/1 "IBM Plex Mono",ui-monospace,monospace;opacity:.7}
-.bstrip::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--sc);opacity:.85;pointer-events:none}
-.bstrip.bs-run::after{animation:bs-prog 4.35s linear forwards}
-.bstrip:hover::after,.bstrip:focus::after{animation-play-state:paused}
-@keyframes bs-prog{from{width:0}to{width:100%}}
-@media (prefers-reduced-motion: reduce){.bstrip::after{display:none}}
 @media (max-width:1279px){html[lang="en"] .bstrip .bs-bar{display:none}}  /* 2026-11-08: 띠를 넓힌 뒤 영문도 1280px 이상에서는 확률 막대(1300px에서 전망 이름 5개 모두 잘리지 않음 확인), 그보다 좁으면 숫자만 */
 @media (max-width:1499px){html[lang="en"] .bstrip .bs-dl{display:none}}  /* 영문은 넓은 화면에서만 남은 날 */
 @media (max-width:700px){.bstrip .bs-bar,.bstrip .bs-dl{display:none}.bstrip .bs-k{padding:2px 5px;font-size:11.5px!important}}
@@ -41,3 +36,6 @@ header.ac-top{padding-top:8px!important;padding-bottom:8px!important}
 /* 2026-11-08 대통령님: 띠 줄을 머리글·아래 판의 좌우 끝에 맞춰 넓힘(좌우 빈 곳 없앰) */
 header.hd .hd-strips{padding-left:0!important;padding-right:0!important}
 header.hd .strips{gap:6px!important}
+
+/* 2026-11-08 대통령님: 시간 막대 삭제. 전신타자 효과가 흐려졌다 나타나기(0.35초)와 겹쳐 앞 글자가 보이지 않던 것 — 찍는 동안은 흐림 없이 바로 보이게 */
+.bstrip .bs-t.tw-on{opacity:1!important;transition:none!important}
