@@ -193,6 +193,7 @@ function srRender(){
   if (!q.trim()) { box.innerHTML = '<div class="srch-empty"><span>찾아볼 만한 말</span><div class="chips">' + SR_EX.map(x => '<button type="button" class="chip" data-srq="' + esc(x) + '">' + esc(x) + "</button>").join("") + "</div></div>"; return; }
   let R = srSearch(q), part = false;
   if (!R.length && q.trim().split(/\s+/).length > 1) { R = srSearch(q, true); part = R.length > 0; }  /* v3.52 */
+  srLogNote(q, R.length);  /* v4.124 */
   if (!R.length) { box.innerHTML = '<div class="srch-empty">‘' + esc(q) + '’에 맞는 내용이 없습니다. 더 짧은 낱말이나 다른 이름으로 찾아 보십시오.<div class="chips" style="margin-top:10px">' + SR_EX.map(x => '<button type="button" class="chip" data-srq="' + esc(x) + '">' + esc(x) + "</button>").join("") + "</div></div>"; return; }
   let h = part ? '<div class="srch-note">찾는 말이 모두 들어 있는 내용은 없어, 일부 낱말이 맞는 내용을 보여 줍니다.</div>' : "";
   /* v3.19 제목이 맞은 묶음을 먼저 보인다. 점수가 같으면 SR_ORDER 순서 */
@@ -228,14 +229,28 @@ function srLand(paneId, vs, from){
 function srOpen(){
   if (!SR.LD && !SR.ldw) { SR.ldw = 1; fetch("/data/search_leaders.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : Promise.reject()).then(j => { SR.LD = j; SR.idx = null; if (!$("#srch").hidden) { srBuild(); srRender(); } }).catch(() => { SR.ldw = 0; }); }
   if (!SR.idx) srBuild(); $("#srch").hidden = false; const i = $("#srchq"); i.focus(); i.select(); srRender(); }
-function srClose(){ $("#srch").hidden = true; $("#srchopen").focus({preventScroll:true}); }
+function srClose(){ srLogFlush(); $("#srch").hidden = true; $("#srchopen").focus({preventScroll:true}); }
 function srGo(i){
   const r = SR.items[i]; if (!r) return;
+  srLogFlush(1);  /* v4.124 */
   srClose();
   const pane = r.e.go(r.vs);
   if (narrow()) $("#panel").scrollIntoView({behavior: reduceMotion ? "auto" : "smooth", block:"start"});
   if (pane) setTimeout(() => srLand(pane, r.vs), 60);  /* 글 쪽을 받아 오는 항목은 스스로 자리를 찾는다(null) */
 }
+/* v4.124 검색어 기록(2026-11-09 지시): 검색창에 넣은 말과 결과 수를 api.clisa.ai/search로 보낸다(IP·쿠키·기기 정보 없음, 보관 1년). 이메일 주소·전화번호처럼 보이는 말은 보내지 않는다. 치는 도중의 앞부분은 보내지 않고, 결과를 누르거나 검색 창을 닫거나 다른 말로 바꾸거나 화면을 떠날 때 마지막 말 하나만 보낸다. 브라우저가 추적 거부(GPC·DNT)를 알리면 보내지 않는다. clisa.ai 밖(시험판)에서는 보내지 않는다 */
+const SRLOG = {p: null, last: ""};
+function srLogSend(o){
+  if (!o || !o.q || /@\S+\.[a-z]{2,}/i.test(o.q) || /\d[\d\s.-]{8,}\d/.test(o.q) || (o.re && !o.go)) return; const k = o.q + "|" + o.go;  /* 이메일·전화번호처럼 보이는 말은 브라우저에서 걸러 보내지 않는다 */ if (k === SRLOG.last) return; SRLOG.last = k; SRLOG.lq = o.q;
+  if (navigator.globalPrivacyControl || navigator.doNotTrack === "1" || !/^(www\.|geo\.)?clisa\.ai$/.test(location.hostname)) return;
+  const b = JSON.stringify({q: o.q, n: o.n, go: o.go ? 1 : 0, lang: document.documentElement.lang === "en" ? "en" : "ko", path: location.pathname});
+  try { if (navigator.sendBeacon && navigator.sendBeacon("https://api.clisa.ai/search", new Blob([b], {type: "text/plain"}))) return; } catch(e){}
+  try { fetch("https://api.clisa.ai/search", {method: "POST", body: b, mode: "no-cors", keepalive: true}).catch(() => {}); } catch(e){}
+}
+function srLogNote(q, n){ q = String(q || "").trim(); if (!q) return; const p = SRLOG.p; if (p && p.q !== q && !q.startsWith(p.q) && !p.q.startsWith(q)) srLogSend(p); SRLOG.p = {q, n, go: 0, re: q === SRLOG.lq ? 1 : 0}; }  /* 다시 연 검색 창에 남아 있던 직전 검색어는 결과를 누를 때만 다시 보낸다 */
+function srLogFlush(go){ const p = SRLOG.p; if (!p) return; if (go) p.go = 1; srLogSend(p); SRLOG.p = null; }
+addEventListener("pagehide", () => srLogFlush());
+document.addEventListener("visibilitychange", () => { if (document.hidden) srLogFlush(); });
 function setupSearch(){
   let tm = null;
   $("#srchopen").onclick = srOpen;
