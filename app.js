@@ -1292,12 +1292,12 @@ function stripGo(x){
 /* v3.52b 전망 조정(주간 전망 점검에서 확률을 바꾼 전망)은 점검한 날부터 사흘 동안 돌린다(2026-10-05). v4.41부터 붉은 띠(모바일은 한 띠에서 붉게) */
 function frsItems(){ const d = new Date(Date.now() - 2 * 864e5), lim3 = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
   return FCR().filter(r => r.date >= lim3).flatMap(r => r.items.filter(it => it.from !== it.to).map(it => { const F = D.forecasts.find(z => z.id === it.id);
-      return {k: "전망 조정", d: r.date, t: (F && F.s ? F.s : it.id) + " " + it.from + "% → " + it.to + "%", w: {date: r.date, id: it.id}}; })); }
+      return {k: "전망 조정", d: r.date, t: (F && F.s ? F.s : it.id), w: {date: r.date, id: it.id, from: it.from, to: it.to}}; })); }
 function dueStripHtml(f){ return '<span class="bs-nm">' + esc(f.s || f.id) + '</span><span class="bs-pr"> 가능성 <b class="bs-p">' + f.p + "%</b>" + '<span class="bs-x"> · ' + fmtKD(f.due) + " 판가름 · " + esc(daysText(daysLeft(f.due))) + "</span></span>"; }
 function runStrip(st, list, lag){  /* 2026-11-07 시안: lag(ms) — 붉은 띠는 2초 늦게 넘겨 두 띠가 엇갈리게 */
   const bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d");
   let k = 0, hold = false;
-  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.w)); st.hidden = false; };  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만 붉게, 예정 행사는 파랗게 */
+  const show = () => { const L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; const x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.classList.toggle("bs-due", !!(x.f || x.w)); st.hidden = false; const m = x.f ? {p: x.f.p, c: x.f.p - fcHistOf(x.f)[0][1], due: x.f.due} : x.w && x.w.to != null ? {p: x.w.to, c: x.w.to - x.w.from} : null; if (window.clStripM) clStripM(st, m); else st._m = m; };  /* 2026-11-08 띠 C안 */  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만 붉게, 예정 행사는 파랗게 */
   show();
   if (!reduceMotion) setTimeout(() => setInterval(() => {
     if (hold || document.visibilityState !== "visible" || list().length < 2) return;

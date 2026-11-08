@@ -45,7 +45,7 @@
   function dueStripHtml(f){ return '<span class="bs-nm">' + esc(f.s || f.id) + '</span><span class="bs-pr"> 가능성 <b class="bs-p">' + f.p + "%</b>" + '<span class="bs-x"> · ' + fmtKD(f.due) + " 판가름 · " + esc(daysText(daysLeft(f.due))) + "</span></span>"; }
   function runStrip(st, list, lag){  /* 2026-11-07 시안: 붉은 띠는 2초 늦게 넘긴다 */
     var bt = st.querySelector(".bs-t"), bn = st.querySelector(".bs-n"), bk = st.querySelector(".bs-k"), bd = st.querySelector(".bs-d"), k = 0, hold = false;
-    var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/"; st.classList.toggle("bs-due", !!x.a); st.hidden = false; };  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만(a) */
+    var show = function(){ var L = list(), N = L.length; if (!N) { st.hidden = true; return; } k = k % N; var x = L[k]; if (x.f) bt.innerHTML = dueStripHtml(x.f); else bt.textContent = x.t || ""; bt.classList.toggle("bs-fc", !!x.f); bk.textContent = x.k || ""; bd.textContent = x.d ? fmtKD(x.d) : ""; bn.textContent = N > 1 ? (k + 1) + "/" + N : ""; st.href = x.go || "/"; st.classList.toggle("bs-due", !!x.a); st.hidden = false; var m = x.f ? {p: x.f.p, c: x.f.p0 != null ? x.f.p - x.f.p0 : 0, due: x.f.due} : x.w ? {p: x.w.to, c: x.w.to - x.w.from} : null; if (window.clStripM) clStripM(st, m); else st._m = m; };  /* 2026-11-08 띠 C안 */  /* v4.24 좁은 화면에서 띠의 왼쪽 선을 붉게 · v4.41 전망과 전망 조정만(a) */
     show();
     if (!reduceMotion) setTimeout(function(){ setInterval(function(){
       if (hold || document.visibilityState !== "visible" || list().length < 2) return;
@@ -65,14 +65,14 @@
         .concat((s.events || []).filter(function(e){ var n = daysLeft(e.date.length === 7 ? e.date + "-01" : e.date); return n != null && n <= days && (e.date.length === 7 ? daysLeft(e.date + "-28") >= 0 : (e.end ? daysLeft(e.end) : n) >= 0); }).map(function(e){ return {k: evKey(e), e: e}; }));
       return L.sort(function(a, c){ return a.k.localeCompare(c.k); });
     };
-    var agendaItems = function(){ return agenda(90).map(function(x){ return x.f ? {a: 1, k: "전망", d: "", f: x.f, go: "/forecast/#" + x.f.id, soon: daysLeft(x.f.due) <= 30, dl: daysLeft(x.f.due)}
+    var agendaItems = function(){ return agenda(90).map(function(x){ return x.f ? {a: 1, k: "전망", d: "", f: x.f, go: "/forecast/" + x.f.id + "/", soon: daysLeft(x.f.due) <= 30, dl: daysLeft(x.f.due)}
       : {e: 1, k: "예정", d: x.e.date.length === 7 ? "" : x.e.date, t: x.e.t + " · " + (x.e.date.length === 7 ? evDate(x.e) : evDays(x.e)), go: "/", soon: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date) <= 30, dl: daysLeft(x.e.date.length === 7 ? x.e.date + "-01" : x.e.date)}; }); };
     var NS = [], FRS = [], BRS = [];
     if (b && (b.issues || []).length) {
       var cur = b.issues[0], d7 = new Date(Date.now() - 7 * 864e5), lim = d7.getFullYear() + "-" + String(d7.getMonth() + 1).padStart(2, "0") + "-" + String(d7.getDate()).padStart(2, "0"); var d3 = new Date(Date.now() - 2 * 864e5), lim3 = d3.getFullYear() + "-" + String(d3.getMonth() + 1).padStart(2, "0") + "-" + String(d3.getDate()).padStart(2, "0");
       NS = (s.notices || []).filter(function(n){ return n.date >= lim; }).sort(function(a, c){ return c.date.localeCompare(a.date); })
         .map(function(n){ return {k: n.k || "분석 갱신", d: n.date, t: n.h, go: n.link ? "/" + n.link : "/"}; });
-      FRS = (s.fcr || []).filter(function(r){ return r.date >= lim3; }).map(function(r){ return {a: 1, k: "전망 조정", d: r.date, t: r.s + " " + r.from + "% → " + r.to + "%", go: "/forecast/#fw-" + r.date}; });
+      FRS = (s.fcr || []).filter(function(r){ return r.date >= lim3; }).map(function(r){ return {a: 1, k: "전망 조정", d: r.date, t: r.s, w: {from: r.from, to: r.to}, go: "/forecast/" + r.id + "/"}; });
       BRS = cur.items.map(function(i){ return {k: "정세 브리핑", d: cur.date, t: i.h, go: "/brief/" + cur.date + "/"}; });
     }
     /* v4.41(2026-10-28 결재): 파란 띠는 공지·브리핑·60일 안의 예정 행사, 붉은 띠는 전망 조정과 60일 안의 전망. 좁은 화면도 같은 두 띠를 위아래로 둔다 */

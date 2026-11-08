@@ -195,3 +195,47 @@ header.hd .bstrip .bs-t.tw-on::after{content:"";display:inline-block;flex:none;w
  .l2-who>.l2-vt{position:absolute;top:0;right:0;z-index:4;margin:0!important}  /* 전망으로 보기(지구본 옆 좁은 칸)는 제목과 겹치므로 그대로 */
  .pane:has(.f2-vt,.l2-vt,.lkm-vt){padding-top:12px!important}
 }
+
+/* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
+.bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
+.bstrip.astrip,.bstrip.bs-due{--sc:#d93a40;background-image:linear-gradient(90deg,rgba(217,58,64,.10),rgba(217,58,64,0) 62%)!important}
+:root[data-theme="dark"] .bstrip{--sc:#4c7dff}
+:root[data-theme="dark"] .bstrip.astrip,:root[data-theme="dark"] .bstrip.bs-due{--sc:#ef5a5f}
+.bstrip .bs-k{background:var(--sc)!important;color:#fff!important;border-radius:0;padding:3px 6px;font-size:12px!important;line-height:1.25;font-weight:700;flex:none}
+.bstrip .bs-go{color:var(--sc)!important}
+.bstrip .bs-m{display:none}
+.bstrip.c-m .bs-pr{display:none}
+.bstrip.c-m .bs-m{display:inline-flex;align-items:center;gap:6px;flex:none;white-space:nowrap}
+.bstrip .bs-bar{width:54px;height:6px;border-radius:3px;background:rgba(128,140,160,.28);overflow:hidden}
+.bstrip .bs-bar i{display:block;height:100%;background:var(--sc)}
+.bstrip .bs-pc{font:700 14px/1 "IBM Plex Mono",ui-monospace,monospace}
+.bstrip .bs-ch{font:600 11.5px/1 "IBM Plex Mono",ui-monospace,monospace}
+.bstrip .bs-ch.up{color:#1f9e5f}.bstrip .bs-ch.dn{color:#d93a40}
+:root[data-theme="dark"] .bstrip .bs-ch.up{color:#4cc98a}:root[data-theme="dark"] .bstrip .bs-ch.dn{color:#ff7b7f}
+.bstrip .bs-dl{font:500 12px/1 "IBM Plex Mono",ui-monospace,monospace;opacity:.7}
+.bstrip::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--sc);opacity:.85;pointer-events:none}
+.bstrip.bs-run::after{animation:bs-prog 4.35s linear forwards}
+.bstrip:hover::after,.bstrip:focus::after{animation-play-state:paused}
+@keyframes bs-prog{from{width:0}to{width:100%}}
+@media (prefers-reduced-motion: reduce){.bstrip::after{display:none}}
+@media (max-width:1279px){html[lang="en"] .bstrip .bs-bar{display:none}}  /* 2026-11-08: 띠를 넓힌 뒤 영문도 1280px 이상에서는 확률 막대(1300px에서 전망 이름 5개 모두 잘리지 않음 확인), 그보다 좁으면 숫자만 */
+@media (max-width:1499px){html[lang="en"] .bstrip .bs-dl{display:none}}  /* 영문은 넓은 화면에서만 남은 날 */
+@media (max-width:700px){.bstrip .bs-bar,.bstrip .bs-dl{display:none}.bstrip .bs-k{padding:2px 5px;font-size:11.5px!important}}
+/* 아카데미·게임 첫 화면: 머리글 아래 띠 줄, 머리글 높이 줄이기 */
+header.ac-top{padding-top:8px!important;padding-bottom:8px!important}
+.ac-strips{padding:8px 20px;border-bottom:1px solid rgba(128,140,160,.25)}
+.ac-strips .strips{display:flex!important;flex-direction:row;gap:10px;order:0}
+.ac-strips .bstrip:not([hidden]),.ac-strips #astrip:not([hidden]){display:flex!important}
+.ac-strips .bstrip{order:0!important;flex:1 1 0!important;min-width:0;height:34px;display:flex;align-items:center;gap:10px;padding:0 12px;border:1px solid rgba(128,140,160,.3);border-radius:9px;text-decoration:none;color:inherit;font-size:14px;white-space:nowrap;background-color:transparent}
+.ac-strips .bstrip .bs-d{font:500 12px "IBM Plex Mono",ui-monospace,monospace;opacity:.65;white-space:nowrap}
+.ac-strips .bstrip .bs-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.ac-strips .bstrip .bs-n{font:500 11.5px "IBM Plex Mono",ui-monospace,monospace;opacity:.6}
+.ac-strips .bstrip .bs-t.tw-on::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-2px;background:currentColor;opacity:.75}
+@media (max-width:700px){.ac-strips{padding:6px 14px}.ac-strips .strips{flex-direction:column;gap:6px}.ac-strips .bstrip{flex:none!important;height:32px;padding:0 10px;gap:8px;font-size:13px}.ac-strips .bstrip .bs-d{display:none}}
+@media (max-width:600px){header.ac-top{padding-top:7px!important;padding-bottom:7px!important;row-gap:6px!important}header.ac-top .asw{height:34px}header.ac-top .asw a{height:26px}}
+/* 2026-11-08 대통령님: 띠 테두리도 각진 직사각형, 띠 안 좌우 여백·간격을 줄여 가로 공간을 최대한 */
+.bstrip{border-radius:0!important;padding-left:8px!important;padding-right:8px!important;column-gap:7px!important;gap:7px!important}
+.bstrip .bs-m{gap:5px}
+/* 2026-11-08 대통령님: 띠 줄을 머리글·아래 판의 좌우 끝에 맞춰 넓힘(좌우 빈 곳 없앰) */
+header.hd .hd-strips{padding-left:0!important;padding-right:0!important}
+header.hd .strips{gap:6px!important}
