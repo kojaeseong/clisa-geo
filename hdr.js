@@ -111,6 +111,13 @@
   try { new MutationObserver(put).observe(document.body, {childList: true, subtree: true}); } catch (e) {}
 })();
 /* 띠 타자 효과는 2026-11-08 strips_c.js로 옮김(아카데미·게임 첫 화면과 함께 씀). header1101.py가 hdr.js 끝에 붙인다 */
+/* 2026-11-09 대통령님 결재: 머리글에 '처음 오신 분께'(/start/) 링크. 넓은 화면은 메뉴 줄 오른쪽 끝(오른쪽 단추 줄에 넣으면 1300px에서 제호와 겹쳐 옮김), 휴대전화는 메뉴 칸의 마지막 */
+(function(){
+  var H = document.getElementById("hdr"); if (!H || H.querySelector(".hd-start")) return;
+  var EN = document.documentElement.lang === "en", href = EN ? "/en/start/" : "/start/", t = EN ? "Start here" : "처음 오신 분께", here = location.pathname === href;
+  function mk(c){ var a = document.createElement("a"); a.className = "hd-start " + c; a.href = href; a.textContent = t; if (here) a.classList.add("here"); return a; }
+  var nl = H.querySelector(".hd-nl"); if (nl) nl.insertBefore(mk("m"), nl.querySelector(".bar"));  /* 넓은 화면에서는 메뉴 줄 오른쪽 끝, 휴대전화는 메뉴 칸의 마지막 */
+})();
 
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스 모든 쪽(header1101.py가 hdr.js 끝에 붙임)과 아카데미·게임 첫 화면(stripc1108.py가 /strips_c.js로)에서 함께 쓴다.
    전망 띠: 확률 막대·확률·변화폭(처음 공개 확률 대비, 전망 조정은 조정 폭)·남은 날. 휴대전화는 막대·남은 날을 빼고 숫자만.
