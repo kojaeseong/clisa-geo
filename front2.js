@@ -165,6 +165,8 @@
   function hmSize(){ var f = document.getElementById("hm2f"); if (!f || !f.offsetHeight) return; var r = f.getBoundingClientRect(), z = r.height / f.offsetHeight || 1, pn = document.getElementById("panel");
     var want = HMH || (innerWidth < 700 ? 600 : Math.max(480, (pn ? pn.getBoundingClientRect().bottom : innerHeight) - r.top - 2)); f.style.height = (HMH ? HMH : want / z) + "px"; }  /* v4.79f: 시황판이 알려 준 높이(판 1.6:1)를 씀 */
   var HMH = 0; addEventListener("message", function(e){ if (e.data && e.data.hmH && e.origin === location.origin) { HMH = e.data.hmH; hmSize(); } });
+  /* 2026-11-09: 판이 바뀌면 신경망·시황판 화면도 새로 받게(휴대전화 브라우저가 옛 판을 보이던 것). 화면 판 표시와 이 스크립트의 판 번호를 주소에 붙인다 */
+  function BV(){ try { var a = (document.querySelector('meta[name="clisa-build"]') || {}).content || "", m = (document.querySelector('script[src*="/front2.js?v="]') || {}).src || "", b = (m.match(/v=([0-9a-f]+)/) || [])[1] || ""; return (a || b) ? "&v=" + a + b : ""; } catch (_) { return ""; } }
   var RPH = 0; function rpSize(){ var f = document.getElementById("rp2f"); if (!f) return; f.style.height = (RPH || 900) + "px"; }
   addEventListener("message", function(e){ if (e.data && e.data.rpH && e.origin === location.origin) { RPH = e.data.rpH; rpSize(); } });
   /* 2026-11-07 대통령님: 통합 신경망의 전체 화면 단추를 제목 줄의 보기 단추 4개 바로 왼쪽에 둔다. 보기 단추 줄이 판 위에 얹혀 있으면(넓은 화면) 그 폭을 판에 알린다 */
@@ -175,13 +177,14 @@
        칩에서 '한 항목 보기'로 들어오거나(rpfocus) 옛 신경망에서 돌아올 때(rpret)는 옛 신경망을 연다. 옛 나비효과 지도 주소(?fp=…)는 통합판의 그 분쟁 지점으로 넘긴다 */
     var old = false; try { var fo = JSON.parse(sessionStorage.getItem("rpfocus") || "null"), rt = +sessionStorage.getItem("rpret") || 0; old = !!(fo && Date.now() - fo.t < 60000) || (rt && Date.now() - rt < 20000); } catch (_) {}
     var fp = (location.search.match(/[?&]fp=([a-z0-9-]+)/) || [])[1];
-    var src = old ? P + "/lab/ripple/?embed=1" : P + "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "");  /* 2026-11-07 결재: 영문도 통합판(Chain Reactions) */
+    var src = old ? P + "/lab/ripple/?embed=1" : P + "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "");
+    src += BV();  /* 2026-11-09: 판이 바뀌면 신경망 화면도 새로 받게(휴대전화 브라우저가 옛 판을 보이던 것) */  /* 2026-11-07 결재: 영문도 통합판(Chain Reactions) */
     el.innerHTML = '<div class="f2 hm2">' + vtNav("rp") + '<iframe id="rp2f" class="hm2-f rp2-f' + (old ? "" : " nr2-f") + '" src="' + src + '" title="' + T.rpT + '" loading="eager"></iframe></div>';
     if (ft) el.appendChild(ft); rpSize(); }
   function drawHeat(el){
     EL = el; if (/^\/heatmap\/?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
     var ft = el.querySelector(":scope > .site-foot");
-    el.innerHTML = '<div class="f2 hm2">' + vtNav("hm") + '<iframe id="hm2f" class="hm2-f" src="' + P + '/lab/heatmap/?embed=1" title="' + T.hmT + '" loading="eager"></iframe></div>';
+    el.innerHTML = '<div class="f2 hm2">' + vtNav("hm") + '<iframe id="hm2f" class="hm2-f" src="' + P + '/lab/heatmap/?embed=1' + BV() + '" title="' + T.hmT + '" loading="eager"></iframe></div>';
     if (ft) el.appendChild(ft);
     requestAnimationFrame(hmSize); setTimeout(hmSize, 300);
   }
