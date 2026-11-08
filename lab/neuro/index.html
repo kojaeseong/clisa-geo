@@ -121,11 +121,25 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 .rg tr.cur th.g{color:var(--lit2)}
 #det .rgn{font-size:11.5px;color:var(--mute);margin:8px 0 0;line-height:1.6}
 #fsb .ic{display:inline-flex;align-items:center}/* 2026-11-07 대통령님: 닫기 단추는 화살표가 안쪽을 향하게(열기는 바깥, 닫기는 안쪽 모서리) */
+
+/* 2026-11-09 대통령님(휴대전화): 축소·확대·전체 보기·전체 화면 단추를 판 바로 위 한 줄(row3)로 옮겨 판을 보면서 크기를 맞추게 한다. 전체 화면에서도 이 줄을 남겨 '전체 화면 닫기'를 늘 누를 수 있게 한다. 좌우 여백을 줄인다 */
+.row3{display:none}
+@media (max-width:900px){
+ .top{padding:10px 8px 0!important}
+ .row3{display:flex;align-items:center;gap:5px;margin:0 0 6px}
+ .row3 .zc{position:static!important;top:auto!important;margin:0!important;left:auto;bottom:auto}
+ .row3 .zc button{width:32px;height:30px;border-radius:4px}.row3 .zc button.w{width:auto}
+ .row3 #fsb{position:static!important;top:auto!important;margin:0 0 0 auto!important;border-radius:4px;height:30px}
+ .row3 button{white-space:nowrap}.row3 .zc button.w{padding:0 8px;font-size:12px}.row3 .zc .pct{min-width:0;margin-left:2px}.row3 #fsb{padding:0 8px}
+ .groups button,.row3 button{border-radius:4px}
+ html.fs .top{padding-top:8px!important}
+}
 </style></head><body>
 <div class="top">
  <div class="row1"><div><p class="eyebrow">클리사 지오폴리틱스</p><h1>통합 신경망</h1></div><div class="zc"><button type="button" id="zo" aria-label="축소">−</button><button type="button" id="zi" aria-label="확대">+</button><button type="button" class="w" id="zf">전체 보기</button><span class="pct" id="zp"></span></div><button type="button" id="fsb"><span class="ic"><svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></span> <span class="lb">전체 화면</span></button></div>
  <p class="lede" id="lede"></p>
  <div class="row2"><div class="groups" id="groups" role="tablist" aria-label="국민 집단"></div><div class="kpi" id="kpi"></div><label class="lowt"><input type="checkbox" id="allfp"> 모든 분쟁 지점 보기</label><label class="lowt"><input type="checkbox" id="low"> 확신도 낮은 연결도 보기</label></div>
+<div class="row3" id="row3"></div><script>/* 2026-11-09 휴대전화: 단추 줄 옮기기 */(function(){var mq=matchMedia("(max-width:900px)"),r1=document.querySelector(".row1"),r3=document.getElementById("row3"),zc=r1&&r1.querySelector(".zc"),fb=document.getElementById("fsb");if(!r1||!r3||!zc||!fb)return;function mv(){var t=mq.matches?r3:r1;t.appendChild(zc);t.appendChild(fb);}mv();mq.addEventListener?mq.addEventListener("change",mv):mq.addListener(mv);})();</script>
 </div>
 <div id="vp"><div id="stage"></div><div class="load" id="ld">불러오는 중입니다…</div>
  <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 길만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
@@ -244,7 +258,7 @@ function deep(){ let q=null; try{ q=new URLSearchParams(location.search).get('fp
  let go=null; try{ const x=JSON.parse(sessionStorage.getItem('rpgo')||'null'); if(x&&x.k==='cell'&&Date.now()-x.t<60000){ go=x.q; sessionStorage.removeItem('rpgo') } }catch(_){}
  if(go){ const [f,p,g]=String(go).split('|'); if(g&&L.groups.includes(g)&&g!==G){ G=g; render(true) } if(!st.querySelector('.c[data-k="'+f+'|'+p+'"]')){ ALLFP=true; $('allfp').checked=true; render(true) } if(st.querySelector('.c[data-k="'+f+'|'+p+'"]')) select(f+'|'+p,true); return }
  if(q){ if(!st.querySelector('[data-rown="row:'+q+'"]')){ ALLFP=true; $('allfp').checked=true; render(true) } if(st.querySelector('[data-rown="row:'+q+'"]')) select('row:'+q,true) } }
-function sizeVp(){ const t=vp.getBoundingClientRect().top+scrollY; if(document.documentElement.classList.contains('fs')){ vp.style.height=Math.max(360,innerHeight-vp.getBoundingClientRect().top-14)+'px'; return }  /* 2026-11-07: 전체 화면이면 판이 화면 끝까지 */ if(document.documentElement.classList.contains('embed')&&window.parent!==window){ let H=innerHeight; try{ H=parent.innerHeight }catch(_){} vp.style.height=Math.max(460,H-200-t)+'px'; return } vp.style.height=Math.max(520,innerHeight-Math.min(t,260)-60)+'px' }
+function sizeVp(){ const t=vp.getBoundingClientRect().top+scrollY; if(document.documentElement.classList.contains('fs')){ vp.style.height=Math.max(360,innerHeight-vp.getBoundingClientRect().top-14)+'px'; return }  /* 2026-11-07: 전체 화면이면 판이 화면 끝까지 */ if(document.documentElement.classList.contains('embed')&&window.parent!==window){ let H=innerHeight; try{ H=parent.innerHeight }catch(_){} let VH=Math.max(460,H-200-t); if(!wide()&&st&&st.offsetWidth){ const need=Math.ceil(st.offsetHeight*(vp.clientWidth/st.offsetWidth))+76; VH=Math.max(360,Math.min(VH,need)) }  /* 2026-11-09 대통령님(휴대전화): 판 높이를 내용에 맞춰 위아래 빈 곳을 줄인다 */ vp.style.height=VH+'px'; return } vp.style.height=Math.max(520,innerHeight-Math.min(t,260)-60)+'px' }
 const wide=()=>innerWidth>900;
 function avail(){ const w=vp.clientWidth-(wide()&&!dp.classList.contains('off')?514:0), h=vp.clientHeight-(wide()?0:(dp.classList.contains('off')?0:vp.clientHeight*.72)); return [Math.max(200,w),Math.max(200,h-(wide()?48:52))] }
 function clampT(){ const [w,h]=avail(), sw=st.offsetWidth*Z, sh=st.offsetHeight*Z; TX=sw<=w?(w-sw)/2:Math.min(0,Math.max(w-sw,TX)); TY=sh<=h?Math.max(0,(h-sh)/2):Math.min(0,Math.max(h-sh,TY)) }
@@ -316,7 +330,7 @@ function render(refit){
  draw();
  /* 2026-11-07 대통령님: 처음에는 불이 켜진 길을 모두 켜 두고, 고른 뒤에만 그 길만 남긴다 */
  if(SEL&&!st.querySelector(SEL.startsWith('row:')?'[data-rown="'+SEL+'"]':'.c[data-k="'+SEL+'"]')) SEL=null; if(!SEL) SELN=null;
- if(refit){ if(!SEL) dp.classList.add('off'); spread(); fit(false) }
+ if(refit){ if(!SEL) dp.classList.add('off'); spread(); sizeVp(); fit(false); post() }
  if(SEL) select(SEL,false,null,SELN); else { hilite(); detail(null) }
 }
 function rel(el){ let x=0,y=0; while(el&&el!==st){ x+=el.offsetLeft; y+=el.offsetTop; el=el.offsetParent } return [x,y] }
@@ -339,6 +353,6 @@ function clearSel(){ SEL=null; SELN=null; st.querySelectorAll('.fpn.sel').forEac
 function select(k,focus,el,node){ SEL=k; SELN=node||(k.startsWith('row:')?k:null); hilite(); if(k.startsWith('row:')){ detailRow(k.slice(4)); st.querySelectorAll('.fpn.sel').forEach(x=>x.classList.remove('sel')); const rl=st.querySelector('[data-rown="'+k+'"]'); if(rl) rl.classList.add('sel'); if(!el) el=rl } else detail(k,LIT,BYFP,FPBY); if(focus||wide()) dp.classList.remove('off');
  if(focus){ el=el&&el.closest?el.closest('[data-k],[data-n],[data-rown]'):null; el=el||st.querySelector('.c[data-k="'+k+'"]'); if(!el) return; const [x,y]=rel(el), cx=x+el.offsetWidth/2, cy=y+el.offsetHeight/2;
   const [w,h]=avail(); Z=Math.min(2.6,Math.max(Z,1)); TX=w/2-cx*Z; TY=h/2-cy*Z; clampT(); st.classList.add('anim'); apply(); setTimeout(()=>st.classList.remove('anim'),600); hideHint() } }
-document.fonts&&document.fonts.ready.then(()=>{ if(!$('lk')) return; spread(); hilite(); fit(false) });  /* 2026-11-07: 자료보다 글꼴이 먼저 준비되면 판이 없어 오류가 나던 것 */
+document.fonts&&document.fonts.ready.then(()=>{ if(!$('lk')) return; spread(); hilite(); sizeVp(); fit(false); post() });  /* 2026-11-07: 자료보다 글꼴이 먼저 준비되면 판이 없어 오류가 나던 것 */
 })();
 </script></body></html>

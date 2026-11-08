@@ -195,6 +195,24 @@ header.hd .bstrip .bs-t.tw-on::after{content:"";display:inline-block;flex:none;w
  .l2-who>.l2-vt{position:absolute;top:0;right:0;z-index:4;margin:0!important}  /* 전망으로 보기(지구본 옆 좁은 칸)는 제목과 겹치므로 그대로 */
  .pane:has(.f2-vt,.l2-vt,.lkm-vt){padding-top:12px!important}
 }
+/* 2026-11-09 대통령님(휴대전화): 단추를 사각형으로 하고 좌우 빈 곳을 줄인다.
+ ① 갈래 단추(지오폴리틱스·아카데미·게임)와 둘레를 사각형으로, 왼쪽 끝에 붙여 세계 시각이 잘리지 않게
+ ② 보기 단추(통합 신경망·시황판·전망 등)를 사각형 한 줄로
+ ③ 통합 신경망·시황판 판을 좌우로 넓힘(흰 카드 안쪽 여백 18px → 4px) */
+@media (max-width:900px){
+ header.hd .hd-sw{padding:0 6px 5px!important;gap:6px!important}
+ header.hd .hd-sw .asw{border-radius:4px!important;padding:2px!important}
+ header.hd .hd-sw .asw a,header.hd .hd-sw .asw .asw-k{border-radius:3px!important}
+ header.hd .hd-sw .asw a{padding:0 8px!important}
+ header.hd .hd-clk-m .g{gap:8px!important}
+}
+@media (max-width:700px){
+ .f2-vt,.l2-vt,.lkm-vt{display:flex!important;flex-wrap:nowrap!important;width:100%!important;border-radius:4px!important;gap:2px!important;padding:2px!important}
+ .f2-vt a,.l2-vt a,.lkm-vt a{flex:1 1 0;min-width:0;border-radius:3px!important;padding:6px 2px!important;font-size:12px!important;line-height:1.25!important;text-align:center;word-break:keep-all;display:flex!important;align-items:center;justify-content:center}
+ .pane:has(> .f2.hm2){padding-left:4px!important;padding-right:4px!important}
+ .pane:has(> .f2.hm2) > .site-foot{padding-left:14px;padding-right:14px}
+ .hm2-f{border-radius:4px!important}
+}
 
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
 .bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
