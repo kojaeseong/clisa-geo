@@ -191,7 +191,7 @@
     if (VIEW() === "rp") { drawRipple(el); return; }
     document.documentElement.classList.remove("hm-on");
     EL = el;
-    ALL = FD.fcs.slice().sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; });
+    ALL = FD.fcs.filter(function(f){ return !(EN && f.ko); }).sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; });  /* 2026-11-08 ru1108: 국문만 낸 전망(ko)은 영문 첫 화면에서 뺀다 */
     var ft = el.querySelector(":scope > .site-foot");  /* 화면 앱이 붙인 바닥글은 그대로 둔다 */
     el.innerHTML = '<div class="f2"><section class="f2-who">' + vtNav("fc") +
       "<h2>" + h(T.h) + '</h2><p class="f2-sub">' + h(T.sub) + '</p><p class="f2-nl">' + h(T.nl) + '</p><div class="f2-news" id="f2news"></div></section>' + verHtml() +

@@ -266,6 +266,10 @@ details.more>summary{cursor:pointer; font-size:13px; color:var(--accent); paddin
 .fd-share{display:flex; flex-wrap:wrap; gap:6px}
 @media (max-width: 600px){ .fd-oc{grid-template-columns:1fr} .fsoon li button{grid-template-columns:56px 1fr 38px} .fsoon .pb{display:none} .fd-q{font-size:17px} .fd-p b{font-size:32px} }
 /* v4.29 둘째 전략 주체 */
+details.party{border-top:3px solid var(--line); padding-top:14px; word-break:keep-all; overflow-wrap:anywhere}
+details.party>summary{cursor:pointer; font:700 19px var(--serif); color:var(--ink)}
+details.party>.note{margin:8px 0 0}
+.party-b{display:grid; gap:22px; margin-top:18px} .party-b > *{min-width:0}
 .s2box{word-break:keep-all; overflow-wrap:anywhere; display:grid; gap:26px; margin-top:6px; padding-top:22px; border-top:3px solid var(--accent)}
 .s2h{display:grid; gap:6px; padding:16px 18px; border:1px solid var(--line); border-radius:10px; background:var(--panel-2)}
 .s2h .eyebrow{margin:0}
