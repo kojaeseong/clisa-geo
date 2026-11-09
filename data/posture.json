@@ -524,6 +524,20 @@
     "f04"
    ],
    "fp": "iran-war"
+  },
+  {
+   "date": "2026-11-03",
+   "s": "베네수엘라 주둔 협정 추진",
+   "kind": "plan",
+   "lat": 7.0,
+   "lon": -66.0,
+   "t": "미국이 베네수엘라 과도정부와 장기 주둔의 토대가 될 주둔군지위협정을 협상하고 있다고 11월 3일 보도됨(병력 규모와 장소는 뒤의 협정으로 미룸). 루비오 국무장관은 5일 미군이 베네수엘라군과 함께 활동할 수 있도록 법적 보호를 담은 주둔 협정을 원한다고 말함",
+   "grade": "보도",
+   "src": "익명의 미 당국자(뉴욕타임스 보도, 필라델피아인콰이어러 게재), 루비오 국무장관의 뉴욕타임스 인터뷰(라파티야 인용)",
+   "url": "https://www.inquirer.com/news/nation-world/venezuela-us-military-presence-long-term-trump-rodriguez-rubio-machado-maduro-drug-boats-20261103.html",
+   "case": null,
+   "fc": [],
+   "fp": "us-venezuela-transition"
   }
  ]
 }

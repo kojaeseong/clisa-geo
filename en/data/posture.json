@@ -524,6 +524,20 @@
     "f04"
    ],
    "fp": "iran-war"
+  },
+  {
+   "date": "2026-11-03",
+   "s": "Venezuela presence pact",
+   "kind": "plan",
+   "lat": 7.0,
+   "lon": -66.0,
+   "t": "The United States is negotiating a status-of-forces agreement with Venezuela's interim government that could lay the groundwork for a long-term military presence, according to a November 3 report (troop numbers and locations left to later agreements). On November 5, Secretary of State Rubio said Washington wants a presence agreement giving U.S. troops legal protection to operate alongside Venezuelan forces",
+   "grade": "Reported",
+   "src": "Anonymous U.S. officials (The New York Times, republished by The Philadelphia Inquirer); Secretary of State Rubio's interview with The New York Times (cited by La Patilla)",
+   "url": "https://www.inquirer.com/news/nation-world/venezuela-us-military-presence-long-term-trump-rodriguez-rubio-machado-maduro-drug-boats-20261103.html",
+   "case": null,
+   "fc": [],
+   "fp": "us-venezuela-transition"
   }
  ]
 }
