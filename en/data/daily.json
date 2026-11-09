@@ -1,6 +1,316 @@
 {
  "issues": [
   {
+   "date": "2026-11-09",
+   "items": [
+    {
+     "case": null,
+     "fp": [],
+     "h": "Herzog taps Eisenkot to form Israel's next government; 46 lawmakers backed Netanyahu",
+     "fact": "Israeli President Isaac Herzog formally tasked Gadi Eisenkot with forming a new government on November 8 at the President's Residence in Jerusalem. Sixty-seven lawmakers recommended Eisenkot and 46 recommended Prime Minister Benjamin Netanyahu. Eisenkot has 28 days, which can be extended by 14.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.jpost.com/israel-election-2026/article-914236",
+      "https://www.pbs.org/newshour/world/israels-president-formally-gives-eisenkot-the-first-chance-to-form-the-next-government",
+      "https://www.aljazeera.com/news/2026/11/7/israels-president-picks-eisenkot-over-netanyahu-to-form-next-government"
+     ],
+     "loc": {
+      "lat": 31.77,
+      "lon": 35.21,
+      "place": "Jerusalem (Israel)",
+      "isos": [
+       "ISR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Rubio calls Iran's demands \"outrageous\"; Araghchi says \"it is the White House's turn to choose\"",
+     "fact": "Iranian Foreign Minister Abbas Araghchi on November 8 pointed to Iran's two-day plan, under which the U.S. would carry out agreed measures on the first day and Iran would reopen the Strait of Hormuz on the second. \"American voters have made their choice. Now it is the White House's turn to choose,\" he said. Secretary of State Marco Rubio said the same day that he would not say the two sides were on the verge of a breakthrough, calling Iran's demands outrageous and unrealistic.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://wanaen.com/araghchi-white-house-must-choose-between-deal-and-war/",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "CENTCOM launches \"Iron Gate\" task force to block Iran's land and Caspian trade",
+     "fact": "U.S. Central Command said on November 7 it had launched Task Force Iron Gate to cut off advanced weapons, dual-use technology, sanctioned materials and illicit revenue moving across Iran's land borders and the Caspian Sea. CENTCOM also said U.S. aircraft struck and stopped the cargo ship Huda in the Gulf of Oman the same day after it ignored warnings.",
+     "fc": [
+      {
+       "id": "f70",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/8/us-launches-task-force-to-disrupt-irans-land-based-supply-routes",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Trump says Ukraine will likely \"end up with a little bit different shape\" ahead of Abu Dhabi talks",
+     "fact": "In a CBS \"60 Minutes\" interview that aired on November 8, President Donald Trump said Ukraine would likely \"end up with a little bit different shape\" after the war and that a deal was very close. The Kremlin had earlier said three-way talks among the U.S., Russia and Ukraine would be held in Abu Dhabi on November 10–11.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/ukraine-will-likely-end-up-with-a-little-bit-different-shape-after-war-trump-tells-60-minutes/",
+      "https://wghn.com/2026/11/08/60-minutes-transcript-trump-the-2026-post-midterms-interview/",
+      "https://tass.com/world/2214549"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr",
+      "black-sea"
+     ],
+     "h": "Russia strikes Ukraine's grid, Black Sea ports; more than 600,000 lose power in Dnipropetrovsk",
+     "fact": "Ukraine's air force said Russia launched 164 drones and three missiles between 6 p.m. on November 7 and 8 a.m. on November 8 local time, and that 137 drones were shot down or neutralized. DTEK said more than 600,000 residents in the Dnipropetrovsk region lost power, and Russia's Defense Ministry claimed it hit three cargo ships around Odesa, a claim that could not be verified.",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/amp/rubric-ato/4182552-adf-neutralises-137-of-164-russian-drones-overnight.html",
+      "https://www.rte.ie/news/2026/1108/1598404-ukraine-russia/",
+      "https://gcaptain.com/russia-says-it-hit-three-cargo-ships-in-black-sea/"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Japan seeks equal treatment for Takaichi at APEC; formal summit with China unlikely, Bloomberg says",
+     "fact": "Bloomberg reported on November 9, citing people familiar with the matter, that Japan has asked China to confirm Prime Minister Sanae Takaichi will be treated like other leaders at the Asia-Pacific Economic Cooperation summit in Shenzhen on November 18–19. A formal Japan-China summit is unlikely, with no more than a handshake expected, the report said.",
+     "fc": [
+      {
+       "id": "f12",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/11/09/japan-works-to-shield-takaichi-from-any-xi-snub-at-china039s-apec-summit"
+     ],
+     "loc": {
+      "isos": [
+       "JPN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "China's factory-gate prices rise 5.7 percent in October; consumer prices up 0.7 percent",
+     "fact": "China's National Bureau of Statistics said on November 9 that the producer price index rose 5.7 percent in October from a year earlier and the consumer price index rose 0.7 percent. Investing.com said the producer price increase was the fastest since June 2022.",
+     "fc": [],
+     "src": [
+      "https://english.news.cn/20261109/afda6ffee5f34853820eb2f9e4f8caaa/c.html",
+      "https://english.news.cn/20261109/8cba51c016304f11a089bb1d290bf020/c.html",
+      "https://www.investing.com/news/economic-indicators/china-cpi-inflation-misses-forecasts-in-oct-factorygate-prices-accelerate-5010405"
+     ],
+     "loc": {
+      "isos": [
+       "CHN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "t": "Houthi rebels fired missiles at Riyadh on the morning of November 8, and an Aramco building in the King Abdullah Financial District was damaged; Saudi Arabia's Energy Ministry said falling debris caused minor damage and there were no casualties.",
+     "src": [
+      "https://www.turkiyetoday.com/region/aramco-tower-in-riyadh-financial-district-damaged-as-houthi-missiles-fly-3231959",
+      "https://www.timesofisrael.com/liveblog-november-08-2026/"
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "t": "IRGC spokesman Hossein Mohebbi said on November 7 that Iran has lifted its self-imposed 2,000-kilometer limit on missile range.",
+     "src": [
+      "https://www.arabnews.com/middle-east/iran-says-it-has-lifted-its-self-imposed-limit-on-missile-ranges-3010423",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [],
+     "t": "A drone attack on the Khor Mor gas field in Iraq's Kurdistan region at 11 p.m. local time on November 8 cut gas supplies to power plants; a Kurdistan Regional Government electricity spokesman said 2,500 to 2,800 megawatts of generating capacity was lost. No group has claimed responsibility.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/9/drone-attack-suspends-production-at-iraqs-khor-mor-gasfield",
+      "https://www.arabnews.com/middle-east/drone-attack-targets-iraqs-khor-mor-gas-field-sources-say-3010589"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "t": "Ukrainian drones reportedly struck the Kirishi refinery in Russia's Leningrad region overnight on November 8–9; Governor Alexander Drozdenko said 113 drones were downed and that the Kirishi industrial zone was hit.",
+     "src": [
+      "https://kyivindependent.com/ukrainian-forces-reportedly-strike-russias-second-largest-oil-refinery-in-overnight-drone-attack/",
+      "https://tass.com/politics/2214565"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "t": "The Russian-installed management of the Zaporizhzhia nuclear plant said on November 8 that the plant lost its external power line and is running on diesel generators; Ukraine's nuclear operator Energoatom said it was the plant's 16th loss of off-site power this year.",
+     "src": [
+      "https://www.rte.ie/news/2026/1108/1598404-ukraine-russia/",
+      "https://newsukraine.rbc.ua/news/zaporizhzhia-nuclear-plant-suffers-16th-blackout-1794128692.html"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "us-cuba-blockade"
+     ],
+     "t": "The State Department on November 5 sanctioned two individuals, eight entities including two Chinese companies, and five vessels over the Cuban regime's foreign military support and illicit revenue networks; China's Commerce Ministry objected on November 7.",
+     "src": [
+      "https://www.state.gov/releases/office-of-the-spokesman/2026/11/further-sanctions-on-the-cuban-regimes-foreign-military-support-and-illicit-revenue-networks-fact-sheet/",
+      "https://news.rthk.hk/rthk/en/component/k2/1876928-20261107.htm"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "us-mexico-cartels"
+     ],
+     "t": "Mexico's navy said it arrested Rafael Álvarez, the alleged leader of the Jalisco New Generation Cartel cell \"Los Rs,\" in Zapopan, Jalisco, on November 8, using intelligence from the U.S. Drug Enforcement Administration.",
+     "src": [
+      "https://aljazeera.com/news/2026/11/9/mexico-arrests-major-leader-of-jalisco-cartel"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "t": "Military sources told Anadolu that Sudan's army and the Joint Force took Ayyal Bakhit in West Kordofan on November 7.",
+     "src": [
+      "https://www.middleeastmonitor.com/20261108-sudanese-army-takes-control-of-key-area-in-west-kordofan/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "eastern-drc-m23"
+     ],
+     "t": "Citing local sources, the U.N. Office for the Coordination of Humanitarian Affairs said at least 30 civilians were killed in an attack in the Beni area of the Democratic Republic of the Congo overnight on November 5–6; local authorities blamed the Allied Democratic Forces (ADF).",
+     "src": [
+      "https://news.un.org/en/story/2026/11/1168757"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "haiti-gang-crisis"
+     ],
+     "t": "Haitian police said Mathias Saintil, leader of the Boston gang in Cité Soleil, was neutralized by gunfire, while a Haitian rights group said he died on November 6 after a drone strike the night before.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/7/one-less-gang-leader-haitis-prime-minister-celebrates-police-operation",
+      "https://www.yahoo.com/news/world/articles/haiti-gang-leader-killed-drone-223037822.html"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "s-caucasus"
+     ],
+     "t": "Armenian Prime Minister Nikol Pashinyan said on November 6 that Armenia's interest in the Collective Security Treaty Organization has run its course.",
+     "src": [
+      "https://oc-media.org/friday-6-november-2026/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "somalia-somaliland"
+     ],
+     "t": "In Somalia, Ibrahim Idle Suleiman was sworn in as the new head of the Supreme Court at the presidential palace on November 7; the opposition Somali Future Council called it a \"coup\" on November 8.",
+     "src": [
+      "https://somaliatoday.com/politics/somali-opposition-calls-chief-justices-dismissal-a-coup-2026-11-08/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "levant",
+      "syria"
+     ],
+     "t": "Israeli Defense Minister Israel Katz said on November 8 that Israel will not withdraw from its security zones in Gaza, Lebanon and Syria, according to AFP.",
+     "src": [
+      "https://www.freemalaysiatoday.com/category/world/2026/11/08/israeli-defence-minister-says-mission-not-complete-on-iran"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-07",
    "items": [
     {
@@ -5712,174 +6022,6 @@
      ],
      "fp": [
       "baltic-kaliningrad-suwalki"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-06",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Joint Chiefs conclude North Korean troops planted DMZ mine, blow up mines in first removal",
-     "fact": "Kwon Dae-won, vice chairman of the Joint Chiefs of Staff, told a Ministry of National Defense briefing on October 5, 2026, that the military had reached a final conclusion that the September 21 blast in the demilitarized zone (DMZ), which seriously injured two soldiers and lightly injured a third, was caused by a resin antipersonnel mine North Korean troops had planted about 10 meters south of the Military Demarcation Line (MDL). The United Nations Command assessed that the mine had been deliberately planted within the previous 12 months. At 12:51 p.m. the same day, the military blew up and removed North Korean mines south of the MDL. The Joint Chiefs called on the North to offer a sincere apology and to remove the remaining mines immediately.",
-     "link": "The finding squarely rebuts the \"farce\" claim in Kim Yo Jong's September 30 statement. With the two Koreas now at odds over the basic facts, the situation points in the same direction as the Armed stalemate scenario described in Conclusion 1 of the Korean Peninsula analysis. That the military moved to clear the mines itself, with no channel for dialogue, raises the odds of the forecast that inter-Korean military hotlines will remain unrestored.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://news.tf.co.kr/read/ptoday/2373009.htm",
-      "https://mt.co.kr/politics/2026/10/05/2026100518182310932",
-      "https://www.fnnews.com/news/202610051644570465"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "black-sea",
-      "rus-ukr",
-      "eastern-flank-airspace-romania-black-sea"
-     ],
-     "h": "Turkish-owned grain ship sinks after drone attack in Romania's exclusive economic zone",
-     "fact": "The Royad Mammadov, a Turkish-owned grain ship flying the flag of Saint Kitts and Nevis, sank on October 5 after a drone attack in Romania's exclusive economic zone, about 20 nautical miles off the Romanian coast. The ship had left Ukraine's port of Izmail bound for Ravenna, Italy. Two people were killed and one is missing; Romanian authorities rescued 11. Ukrainian President Volodymyr Zelensky blamed Moscow, saying, \"Russia consistently chooses terror and sinking civilian ships instead of normal navigation.\" No Russian response has been confirmed.",
-     "link": "With the attack reaching into a NATO member's exclusive economic zone, the risk to Black Sea shipping has grown alongside the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. Because Washington has been raising a Black Sea grain corridor as an agenda item for the trilateral talks, the attack lowers the odds of the forecast that a full Russia-Ukraine ceasefire will take effect.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/russian-drones-strike-cargo-ship-in-black-sea-kill-captain-zelensky-says/",
-      "https://www.euronews.com/2026/10/05/drone-reportedly-hits-ship-in-black-sea-killing-two-and-injuring-11"
-     ],
-     "loc": {
-      "lat": 44.4,
-      "lon": 29.3,
-      "place": "Black Sea (Romania's EEZ)",
-      "isos": [
-       "ROU",
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russian glide bombs kill six, wound 59 in Kharkiv",
-     "fact": "Three Russian glide bombs struck industrial facilities and residential areas in Kharkiv's Slobidskyi district on October 5, killing six people and wounding 59, said Oleh Syniehubov, head of the Kharkiv Regional Military Administration. Ukraine's Air Force said Russia launched 205 drones overnight, 172 of which were shot down or neutralized. Russia's Defense Ministry claimed it had shot down 199 Ukrainian drones between 8 p.m. on October 4 and 8 a.m. on October 5, Moscow time.",
-     "link": "Both sides keep targeting each other's cities and energy facilities, in line with the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis. The strike lowers the odds of the forecast that a full Russia-Ukraine ceasefire will take effect.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.kyivpost.com/post/86168",
-      "https://ua.news/en/war-vs-rf/protiagom-nochi-5-zhovtnia-rosiia-zapustila-po-ukrayini-ponad-200-droniv-povitriani-sili",
-      "https://tass.com/emergencies/2197521"
-     ],
-     "loc": {
-      "lat": 49.99,
-      "lon": 36.23,
-      "place": "Kharkiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi Arabia, Turkey and Pakistan activate \"collective deterrence measures\" over Houthi attacks, deploy forces to Saudi Arabia",
-     "fact": "The Mecca defense alliance of Saudi Arabia, Turkey and Pakistan held an emergency meeting in Riyadh on October 5 and decided to rapidly deploy agreed military forces and capabilities to Saudi Arabia. Saudi Defense Minister Khalid bin Salman said that, in response to Houthi missile and drone attacks, the alliance's committee had \"agreed to activate collective deterrence measures, within the framework of the Alliance.\" The joint statement did not mention Iran.",
-     "link": "Conclusion 2 of the Iran and Hormuz analysis holds that the future in which South Korea loses most is an escalation that spreads to all of the Gulf oil producers. Large-scale destruction of Gulf producers' facilities, the disconfirming signal, has not yet been confirmed, but with forces from countries outside the Gulf moving into Saudi Arabia, the Yemen front now has room to grow into a wider military standoff. The move lowers the odds of the forecast that Brent will end the year below $90.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/5/mecca-alliance-agrees-to-activate-collective-deterrence-measures",
-      "https://www.tribuneindia.com/news/collective-defence/mecca-pact-invoked-amid-houthi-attacks-turkiye-pakistan-agree-to-swiftly-deploy-forces-military-capabilities-in-saudi-arabia"
-     ],
-     "loc": {
-      "isos": [
-       "SAU",
-       "TUR",
-       "PAK"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Yemeni government forces claim to retake Mocha, launch \"strategic offensive\" toward Sanaa",
-     "fact": "Yemeni government forces claimed on October 5, through the government's Saba news agency, that they had retaken Mocha, the Red Sea port city they lost to the Houthis in September, and had seized key positions and supply routes around Dhubab, the area leading to the Bab el-Mandeb Strait. They also said they had launched a \"strategic offensive\" toward the capital, Sanaa. Al Jazeera said it could not independently verify the battlefield claims, and no Houthi response has been confirmed.",
-     "link": "As ground fighting around the Bab el-Mandeb Strait widens, shipping through a second maritime chokepoint, after Hormuz, faces greater risk. The fighting is one of the paths to escalation that Conclusion 2 of the Iran and Hormuz analysis warns of, but it does not move the probability of any specific forecast.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/5/yemen-forces-claim-to-seize-dhubab-sites-near-bab-al-mandeb-from-houthis",
-      "https://www.dawn.com/news/2034961/yemeni-forces-recapture-mokha-from-houthis-state-media"
-     ],
-     "loc": {
-      "lat": 13.32,
-      "lon": 43.25,
-      "place": "Mocha (Yemen)",
-      "isos": [
-       "YEM"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "U.S. Secretary of State Marco Rubio said on October 5 that Washington has no plans to withdraw its diplomats from Kyiv despite Russian threats, and that it will change its posture if a threat arises that needs to be addressed.",
-     "src": [
-      "https://kyivindependent.com/us-not-removing-diplomats-from-kyiv-amid-russian-threats-rubio-says/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Iran's presidential office said on October 4 that President Masoud Pezeshkian had accepted the resignation of Oil Minister Mohsen Paknejad; Hamid Bovard, head of the National Iranian Oil Company, has taken over as acting minister.",
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/irans-oil-minister-resigns-personal-reasons-state-media-reports"
-     ],
-     "fp": []
-    },
-    {
-     "t": "The FBI on October 4 arrested Wanying Zhang, a California resident, at Los Angeles International Airport on charges of surveilling the family of Taiwanese President Lai Ching-te's son at the direction of Chinese authorities while acting as an unregistered agent of a foreign government.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/5/fbi-arrests-chinese-foreign-agent-for-spying-on-taiwan-presidents-son"
-     ],
-     "fp": [
-      "taiwan-strait"
      ]
     }
    ]

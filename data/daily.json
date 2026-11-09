@@ -1,6 +1,316 @@
 {
  "issues": [
   {
+   "date": "2026-11-09",
+   "items": [
+    {
+     "case": null,
+     "fp": [],
+     "h": "헤르초그 대통령, 아이젠코트에 정부 구성 위임…네타냐후 추천은 46명",
+     "fact": "이츠하크 헤르초그 이스라엘 대통령은 8일 예루살렘 대통령 관저에서 가디 아이젠코트에게 새 정부 구성을 공식 위임했습니다. 의원 67명이 아이젠코트를, 46명이 베냐민 네타냐후 총리를 추천했으며 구성 시한은 28일이고 14일 연장할 수 있습니다.",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.jpost.com/israel-election-2026/article-914236",
+      "https://www.pbs.org/newshour/world/israels-president-formally-gives-eisenkot-the-first-chance-to-form-the-next-government",
+      "https://www.aljazeera.com/news/2026/11/7/israels-president-picks-eisenkot-over-netanyahu-to-form-next-government"
+     ],
+     "loc": {
+      "lat": 31.77,
+      "lon": 35.21,
+      "place": "예루살렘(이스라엘)",
+      "isos": [
+       "ISR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "루비오 \"이란 요구는 터무니없다\"…아락치 \"이제 백악관이 선택할 차례\"",
+     "fact": "아바스 아락치 이란 외무장관은 8일 첫날 미국이 합의된 조치를 이행하고 이튿날 호르무즈 해협을 다시 여는 이란의 이틀짜리 안을 거론하며 미국 유권자는 선택했고 이제 백악관이 선택할 차례라고 말했습니다. 마코 루비오 미 국무장관은 같은 날 돌파구 직전이라고 말하지는 않겠다며 이란의 요구가 터무니없고 비현실적이라고 말했습니다.",
+     "fc": [
+      {
+       "id": "f38",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://wanaen.com/araghchi-white-house-must-choose-between-deal-and-war/",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "미 중부사령부, 이란 육로·카스피해 교역 막는 '아이언 게이트' 기동부대 출범",
+     "fact": "미 중부사령부는 7일 이란의 육상 국경과 카스피해를 오가는 첨단 무기·이중용도 기술·제재 물자와 불법 수입을 막을 '아이언 게이트' 기동부대를 출범했다고 밝혔습니다. 같은 날 미군 항공기가 경고를 무시한 화물선 후다호를 오만만에서 공격해 멈춰 세웠다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f70",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/8/us-launches-task-force-to-disrupt-irans-land-based-supply-routes",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "트럼프 \"우크라이나, 조금 다른 모양으로 끝날 것\"…아부다비 3자 회담 앞둬",
+     "fact": "트럼프 대통령은 8일 방송된 CBS '60분' 인터뷰에서 전쟁 뒤 우크라이나가 '조금 다른 모양'이 될 것 같다며 합의에 매우 가까워졌다고 말했습니다. 크렘린은 앞서 미국·러시아·우크라이나 3자 회담이 10~11일 아랍에미리트 아부다비에서 열린다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/ukraine-will-likely-end-up-with-a-little-bit-different-shape-after-war-trump-tells-60-minutes/",
+      "https://wghn.com/2026/11/08/60-minutes-transcript-trump-the-2026-post-midterms-interview/",
+      "https://tass.com/world/2214549"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "UKR",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr",
+      "black-sea"
+     ],
+     "h": "러시아, 우크라이나 전력망·흑해 항구 공격…드니프로페트로우스크주 60만여 명 정전",
+     "fact": "우크라이나 공군은 러시아가 7일 오후 6시부터 8일 오전 8시(현지 시각)까지 드론 164대와 미사일 3발을 쏘았고 드론 137대를 격추·무력화했다고 밝혔습니다. DTEK는 드니프로페트로우스크주 주민 60만 명 넘게 전기가 끊겼다고 밝혔고, 러시아 국방부는 오데사 일대 화물선 3척을 타격했다고 주장했습니다(미확인).",
+     "fc": [],
+     "src": [
+      "https://www.ukrinform.net/amp/rubric-ato/4182552-adf-neutralises-137-of-164-russian-drones-overnight.html",
+      "https://www.rte.ie/news/2026/1108/1598404-ukraine-russia/",
+      "https://gcaptain.com/russia-says-it-hit-three-cargo-ships-in-black-sea/"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "일본, APEC서 다카이치 동등 대우 요청…정식 중일 회담은 어려울 듯(블룸버그)",
+     "fact": "블룸버그는 9일 일본 정부가 18~19일 중국 선전에서 열리는 아시아태평양경제협력체(APEC) 정상회의에서 다카이치 사나에 총리가 다른 정상과 같은 대우를 받도록 확인해 달라고 중국에 요청했으며, 정식 중일 정상회담은 어렵고 악수 정도가 예상된다고 소식통을 인용해 보도했습니다.",
+     "fc": [
+      {
+       "id": "f12",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/11/09/japan-works-to-shield-takaichi-from-any-xi-snub-at-china039s-apec-summit"
+     ],
+     "loc": {
+      "isos": [
+       "JPN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "중국 10월 생산자물가 5.7% 상승…소비자물가는 0.7%",
+     "fact": "중국 국가통계국은 9일 10월 생산자물가지수가 1년 전보다 5.7%, 소비자물가지수가 0.7% 올랐다고 발표했습니다. 인베스팅닷컴은 생산자물가 상승률이 2022년 6월 이후 가장 높다고 전했습니다.",
+     "fc": [],
+     "src": [
+      "https://english.news.cn/20261109/afda6ffee5f34853820eb2f9e4f8caaa/c.html",
+      "https://english.news.cn/20261109/8cba51c016304f11a089bb1d290bf020/c.html",
+      "https://www.investing.com/news/economic-indicators/china-cpi-inflation-misses-forecasts-in-oct-factorygate-prices-accelerate-5010405"
+     ],
+     "loc": {
+      "isos": [
+       "CHN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "t": "후티 반군은 8일 오전 사우디아라비아 리야드를 미사일로 공격했고 킹압둘라 금융지구의 아람코 건물이 파손됐으며, 사우디 에너지부는 떨어진 파편으로 경미한 피해가 났고 사상자는 없다고 밝혔습니다.",
+     "src": [
+      "https://www.turkiyetoday.com/region/aramco-tower-in-riyadh-financial-district-damaged-as-houthi-missiles-fly-3231959",
+      "https://www.timesofisrael.com/liveblog-november-08-2026/"
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "t": "혁명수비대 대변인 호세인 모헤비는 7일 이란이 스스로 정해 둔 미사일 사거리 2,000km 제한을 풀었다고 말했습니다.",
+     "src": [
+      "https://www.arabnews.com/middle-east/iran-says-it-has-lifted-its-self-imposed-limit-on-missile-ranges-3010423",
+      "https://www.cbsnews.com/live-updates/iran-war-trump-us-strait-hormuz-persian-gulf/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [],
+     "t": "이라크 쿠르드 지역의 코르모르 가스전이 8일 밤 11시(현지 시각) 드론 공격을 받아 발전소로 가는 가스 공급이 끊겼고, 쿠르드 지역정부 전력 대변인은 발전 용량 2,500~2,800MW가 줄었다고 밝혔으며 공격을 자처한 세력은 없습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/9/drone-attack-suspends-production-at-iraqs-khor-mor-gasfield",
+      "https://www.arabnews.com/middle-east/drone-attack-targets-iraqs-khor-mor-gas-field-sources-say-3010589"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "t": "우크라이나 드론이 8일 밤부터 9일 아침 사이 러시아 레닌그라드주의 키리시 정유소를 공격했다는 보도가 나왔고, 알렉산드르 드로즈덴코 주지사는 드론 113대를 격추했으며 키리시 산업지대가 공격받았다고 밝혔습니다.",
+     "src": [
+      "https://kyivindependent.com/ukrainian-forces-reportedly-strike-russias-second-largest-oil-refinery-in-overnight-drone-attack/",
+      "https://tass.com/politics/2214565"
+     ]
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "t": "러시아가 임명한 자포리자 원자력발전소 측은 8일 외부 전력선이 끊겨 디젤 발전기로 가동한다고 밝혔으며, 우크라이나 원전 공사 에네르고아톰에 따르면 올해 16번째 외부 전원 상실입니다.",
+     "src": [
+      "https://www.rte.ie/news/2026/1108/1598404-ukraine-russia/",
+      "https://newsukraine.rbc.ua/news/zaporizhzhia-nuclear-plant-suffers-16th-blackout-1794128692.html"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "us-cuba-blockade"
+     ],
+     "t": "미 국무부는 5일 쿠바 정권의 해외 군사 지원과 불법 수입망을 겨냥해 개인 2명, 중국 기업 2곳을 포함한 기관 8곳, 선박 5척을 제재했고, 중국 상무부는 7일 이에 반대했습니다.",
+     "src": [
+      "https://www.state.gov/releases/office-of-the-spokesman/2026/11/further-sanctions-on-the-cuban-regimes-foreign-military-support-and-illicit-revenue-networks-fact-sheet/",
+      "https://news.rthk.hk/rthk/en/component/k2/1876928-20261107.htm"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "us-mexico-cartels"
+     ],
+     "t": "멕시코 해군은 8일 할리스코주 사포판에서 할리스코 신세대 카르텔(CJNG) 조직 '로스 에레스'의 우두머리로 지목된 라파엘 알바레스를 체포했으며, 미 마약단속국(DEA)의 정보를 활용했다고 밝혔습니다.",
+     "src": [
+      "https://aljazeera.com/news/2026/11/9/mexico-arrests-major-leader-of-jalisco-cartel"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "t": "군 소식통들은 아나돌루 통신에 수단군과 합동군이 7일 서코르도판주의 아얄 바히트를 장악했다고 말했습니다.",
+     "src": [
+      "https://www.middleeastmonitor.com/20261108-sudanese-army-takes-control-of-key-area-in-west-kordofan/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "eastern-drc-m23"
+     ],
+     "t": "유엔 인도주의업무조정국(OCHA)은 현지 소식통을 인용해 5일 밤부터 6일 사이 콩고민주공화국 베니 지역의 공격으로 민간인 최소 30명이 숨졌다고 밝혔고, 현지 당국은 민주군사동맹(ADF)을 지목했습니다.",
+     "src": [
+      "https://news.un.org/en/story/2026/11/1168757"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "haiti-gang-crisis"
+     ],
+     "t": "아이티 경찰은 시테솔레이의 갱단 '보스턴' 두목 마티아스 생틸이 총탄을 맞고 제거됐다고 밝혔고, 아이티 인권단체는 5일 밤 드론 공격을 받은 그가 6일 숨졌다고 밝혔습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/7/one-less-gang-leader-haitis-prime-minister-celebrates-police-operation",
+      "https://www.yahoo.com/news/world/articles/haiti-gang-leader-killed-drone-223037822.html"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "s-caucasus"
+     ],
+     "t": "니콜 파시냔 아르메니아 총리는 6일 아르메니아의 집단안보조약기구(CSTO)에 대한 관심은 끝났다고 말했습니다.",
+     "src": [
+      "https://oc-media.org/friday-6-november-2026/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "somalia-somaliland"
+     ],
+     "t": "소말리아에서는 7일 대통령궁에서 이브라힘 이들레 술레이만이 새 대법원 수장으로 취임 선서를 했고, 야당 연합 소말리아미래위원회는 8일 이를 '쿠데타'라고 비판했습니다.",
+     "src": [
+      "https://somaliatoday.com/politics/somali-opposition-calls-chief-justices-dismissal-a-coup-2026-11-08/"
+     ]
+    },
+    {
+     "case": null,
+     "fp": [
+      "levant",
+      "syria"
+     ],
+     "t": "이스라엘 카츠 국방장관은 8일 가자지구·레바논·시리아의 안보 구역에서 철수하지 않겠다고 말했습니다(AFP).",
+     "src": [
+      "https://www.freemalaysiatoday.com/category/world/2026/11/08/israeli-defence-minister-says-mission-not-complete-on-iran"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-07",
    "items": [
     {
@@ -5712,174 +6022,6 @@
      ],
      "fp": [
       "baltic-kaliningrad-suwalki"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-06",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "합참, 비무장지대 폭발은 북한군 매설 지뢰로 최종 판단…첫 폭파 제거",
-     "fact": "권대원 합동참모본부 차장은 2026년 10월 5일 국방부 브리핑에서 9월 21일 비무장지대 폭발(장병 2명 중상, 1명 경상)의 원인을 군사분계선 남쪽 약 10m에 북한군이 묻은 수지 반보병지뢰로 최종 판단했다고 밝혔습니다. 유엔군사령부는 이 지뢰가 12개월 안에 인위적으로 매설됐다고 평가했고, 군은 같은 날 낮 12시 51분 군사분계선 이남의 북한군 지뢰를 폭파해 제거했습니다. 합참은 북한에 진심 어린 사과와 남은 지뢰의 즉시 제거를 촉구했습니다.",
-     "link": "9월 30일 김여정 담화의 '자작극' 주장을 정면으로 반박한 결과로, 남북이 사실관계부터 맞서는 구도는 한반도 결론 1의 '무장한 정체'와 같은 방향입니다. 대화 창구 없이 군이 직접 지뢰 제거에 나섰다는 점에서 '남북 군사 통신선 미복원' 전망을 높일 요인입니다.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://news.tf.co.kr/read/ptoday/2373009.htm",
-      "https://mt.co.kr/politics/2026/10/05/2026100518182310932",
-      "https://www.fnnews.com/news/202610051644570465"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "black-sea",
-      "rus-ukr",
-      "eastern-flank-airspace-romania-black-sea"
-     ],
-     "h": "튀르키예 곡물선, 루마니아 배타적경제수역서 드론 공격받고 침몰",
-     "fact": "우크라이나 이즈마일항을 떠나 이탈리아 라벤나로 가던 튀르키예 소유 곡물선 로야드 맘마도프호(세인트키츠네비스 선적)가 10월 5일 루마니아 해안에서 약 20해리 떨어진 루마니아 배타적경제수역에서 드론 공격을 받고 침몰했습니다. 2명이 숨지고 1명이 실종됐으며 루마니아 당국이 11명을 구조했습니다. 젤렌스키 대통령은 \"러시아는 정상적인 항행 대신 테러와 민간 선박 격침을 일관되게 택하고 있다\"며 러시아를 지목했고, 러시아 측 반응은 확인되지 않았습니다.",
-     "link": "공격이 나토 회원국의 배타적경제수역까지 미쳤다는 점에서 러-우 결론 1의 소모전 지속과 함께 흑해 항로의 위험이 커졌습니다. 미국이 3자 회의 의제로 흑해 곡물 회랑을 거론해 온 만큼 '러-우 전면 휴전 발효' 전망을 낮출 요인입니다.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/russian-drones-strike-cargo-ship-in-black-sea-kill-captain-zelensky-says/",
-      "https://www.euronews.com/2026/10/05/drone-reportedly-hits-ship-in-black-sea-killing-two-and-injuring-11"
-     ],
-     "loc": {
-      "lat": 44.4,
-      "lon": 29.3,
-      "place": "흑해(루마니아 배타적경제수역)",
-      "isos": [
-       "ROU",
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아, 하르키우에 활공폭탄 공격…6명 사망·59명 부상",
-     "fact": "올레흐 시녜후보우 하르키우주 군정청장은 10월 5일 러시아군의 활공폭탄 3발이 하르키우 슬로비드스키 구역의 산업 시설과 주거지에 떨어져 6명이 숨지고 59명이 다쳤다고 밝혔습니다. 우크라이나 공군은 같은 날 밤사이 러시아가 드론 205대를 날려 보냈고 그 가운데 172대를 격추하거나 무력화했다고 발표했습니다. 러시아 국방부는 10월 4일 20시부터 5일 8시(모스크바 시각)까지 우크라이나 드론 199대를 격추했다고 주장했습니다.",
-     "link": "양측이 도시와 에너지 시설을 서로 겨냥하는 공방이 이어지고 있어 러-우 결론 1의 소모전 지속에 해당합니다. '러-우 전면 휴전 발효' 전망을 낮출 요인입니다.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.kyivpost.com/post/86168",
-      "https://ua.news/en/war-vs-rf/protiagom-nochi-5-zhovtnia-rosiia-zapustila-po-ukrayini-ponad-200-droniv-povitriani-sili",
-      "https://tass.com/emergencies/2197521"
-     ],
-     "loc": {
-      "lat": 49.99,
-      "lon": 36.23,
-      "place": "하르키우(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "사우디·튀르키예·파키스탄, 후티 공격에 \"집단 억지 조치\" 발동…사우디에 병력 배치",
-     "fact": "사우디아라비아·튀르키예·파키스탄의 메카 방위동맹은 10월 5일 리야드에서 긴급회의를 열어 합의된 군사력과 역량을 사우디아라비아에 신속히 배치하기로 결정했습니다. 칼리드 빈 살만 사우디 국방장관은 후티의 미사일·드론 공격에 대응해 \"동맹의 틀 안에서 집단 억지 조치를 발동하기로 합의했다\"고 밝혔습니다. 공동성명에는 이란이 언급되지 않았습니다.",
-     "link": "이란 결론 2는 한국이 가장 크게 잃는 미래를 걸프 산유국 전체로 번지는 확전으로 봅니다. 반증 신호인 걸프 산유국 시설의 대규모 파괴는 아직 확인되지 않았지만, 걸프 밖 국가의 병력이 사우디에 들어가면서 예멘 전선이 더 큰 군사 대치로 커질 여지가 생겼습니다. '브렌트유 연말 90달러 아래' 전망을 낮출 요인입니다.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/5/mecca-alliance-agrees-to-activate-collective-deterrence-measures",
-      "https://www.tribuneindia.com/news/collective-defence/mecca-pact-invoked-amid-houthi-attacks-turkiye-pakistan-agree-to-swiftly-deploy-forces-military-capabilities-in-saudi-arabia"
-     ],
-     "loc": {
-      "isos": [
-       "SAU",
-       "TUR",
-       "PAK"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "예멘 정부군, 모카 탈환 주장…사나 향한 \"전략적 공세\" 개시",
-     "fact": "예멘 정부군은 10월 5일 정부 측 사바 통신을 통해, 9월 후티에 빼앗겼던 홍해 항구 도시 모카를 되찾고 바브엘만데브 해협으로 이어지는 두바브 일대의 요충지와 보급로를 장악했다고 주장했습니다. 정부군은 수도 사나를 향한 \"전략적 공세\"도 시작했다고 밝혔습니다. 알자지라는 전장 발표를 독자적으로 확인하지 못했다고 전했고, 후티의 반응은 확인되지 않았습니다.",
-     "link": "바브엘만데브 해협 주변의 지상전이 커지면서 호르무즈에 이어 두 번째 해상 요충지의 통항 위험이 높아졌습니다. 이란 결론 2가 경계하는 확전의 경로 가운데 하나이지만, 특정 전망의 확률을 움직이는 사건은 아닙니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/5/yemen-forces-claim-to-seize-dhubab-sites-near-bab-al-mandeb-from-houthis",
-      "https://www.dawn.com/news/2034961/yemeni-forces-recapture-mokha-from-houthis-state-media"
-     ],
-     "loc": {
-      "lat": 13.32,
-      "lon": 43.25,
-      "place": "모카(예멘)",
-      "isos": [
-       "YEM"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "마코 루비오 미국 국무장관은 10월 5일 러시아의 위협에도 키이우 주재 외교관을 철수할 계획이 없으며, 대응이 필요한 위협이 생기면 태세를 바꾸겠다고 말했습니다.",
-     "src": [
-      "https://kyivindependent.com/us-not-removing-diplomats-from-kyiv-amid-russian-threats-rubio-says/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "이란 대통령실은 10월 4일 페제시키안 대통령이 모흐센 파크네자드 석유장관의 사임을 수리했다고 밝혔고, 하미드 보바르드 국영석유회사 사장이 장관 직무대행을 맡았습니다.",
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/irans-oil-minister-resigns-personal-reasons-state-media-reports"
-     ],
-     "fp": []
-    },
-    {
-     "t": "미국 연방수사국(FBI)은 10월 4일 중국 당국의 지시로 라이칭더 대만 총통의 아들 가족을 감시하며 신고하지 않은 채 외국 정부 요원으로 활동한 혐의로 캘리포니아 주민 장완잉을 로스앤젤레스 공항에서 체포했습니다.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/5/fbi-arrests-chinese-foreign-agent-for-spying-on-taiwan-presidents-son"
-     ],
-     "fp": [
-      "taiwan-strait"
      ]
     }
    ]
