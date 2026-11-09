@@ -61,6 +61,7 @@ a{color:inherit;text-decoration:none}
 .dock .app span{font-size:11px}
 /* 판(설정·폴더·검색) */
 .dim{position:fixed;inset:0;background:rgba(10,14,24,.42);z-index:10;display:none}
+.dock{z-index:8!important}
 .dim.on{display:block}
 .dim.blur{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .pane{position:fixed;z-index:11;display:none}
@@ -84,6 +85,15 @@ a{color:inherit;text-decoration:none}
 .sr ul{list-style:none;margin:8px 0 0;padding:0}
 .sr li a{display:flex;justify-content:space-between;gap:10px;padding:9px 6px;border-bottom:1px solid var(--chip);font-size:13.5px}
 .sr li a em{font-style:normal;color:var(--ink2);font-size:12px;flex:none}
+/* 앱 화면(2026-11-10 시제품): 쪽을 그대로 띄우고 머리글 대신 얇은 윗줄 */
+.av{position:fixed;inset:0;z-index:7;background:var(--bg1);display:none;flex-direction:column}
+.av.on{display:flex}
+@media (min-width:600px){.av{left:50%;right:auto;width:430px;transform:translateX(-50%)}}
+.ab{flex:none;height:calc(48px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 10px 0;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;background:var(--card);border-bottom:1px solid var(--chip)}
+.ab button{height:34px;border:0;border-radius:10px;background:var(--chip);color:var(--ink);font:600 13px "Pretendard Variable";padding:0 11px;display:flex;align-items:center;gap:4px;cursor:pointer}
+.ab b{font-size:15px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ab svg{width:17px;height:17px}
+.av iframe{flex:1;width:100%;border:0;background:var(--bg1)}
 .sr .all{display:block;margin-top:10px;text-align:center;font-size:12.5px;color:var(--acc);font-weight:600}
 </style>
 </head>
@@ -111,6 +121,7 @@ a{color:inherit;text-decoration:none}
   </nav>
 </div>
 
+<div class="av" id="av" role="dialog" aria-labelledby="avt"><div class="ab"><button type="button" id="avh" aria-label="첫 화면으로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>홈</button><b id="avt"></b><button type="button" id="avs" aria-label="검색 열기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5" stroke-linecap="round"/></svg></button></div><iframe id="avf" title="앱 화면"></iframe></div>
 <div class="dim" id="dim"></div>
 <div class="pane cc" id="cc" role="dialog" aria-label="설정">
   <h4>설정</h4>
@@ -148,7 +159,7 @@ var HM='<span class="ic" style="background:linear-gradient(145deg,#F2F4F8,#DDE3E
 var NR='<span class="ic" style="background:linear-gradient(145deg,#1A2140,#0A0E1A)"><svg viewBox="0 0 32 32" fill="none" stroke="#7FA3FF" stroke-width="1.6"><path d="M8 9l8 7 8-7M8 23l8-7 8 7M8 9v14M24 9v14"/><g fill="#fff" stroke="none"><circle cx="8" cy="9" r="2.4"/><circle cx="24" cy="9" r="2.4"/><circle cx="16" cy="16" r="2.8"/><circle cx="8" cy="23" r="2.4"/><circle cx="24" cy="23" r="2.4"/></g></svg></span>';
 var CS=[["한반도","/case/korea/","#1F4FD8"],["대만해협","/case/taiwan/","#0EA5A4"],["러-우 전쟁","/case/ukraine/","#F59E0B"],["이란·호르무즈","/case/iran/","#C8102E"],["러시아-NATO 대치","/case/poland/","#6B4FD8"],["전략과 전개 전체","/case/","#4E5A66"]];
 var FOLD='<span class="ic fold">'+CS.map(function(c){return '<i style="background:'+c[2]+'"></i>'}).join("")+'</span>';
-var APPS=[["주간 요약","/digest/",ic("dig")],["특집","/feature/",ic("feat")],["히트맵","/heatmap/",HM],["통합신경망","/ripple/",NR],["사안별 분석",null,FOLD],["산업과 국민","/industry/",ic("ind")],["세계 질서","/grand/",ic("grand")],["역사와 사상","/ideas/",ic("ideas")],["아카데미","/academy/",ic("acad")],["1914 게임","/play/1914/",ic("game")],["처음 오신 분께","/start/",ic("start")],["구독","/subscribe/",ic("sub")]];
+var APPS=[["주간 요약","/digest/",ic("dig")],["특집","/feature/",ic("feat")],["히트맵","/heatmap/",HM],["통합신경망","/ripple/",NR],["사안별 분석",null,FOLD],["산업과 국민","/industry/",ic("ind")],["세계 질서","/grand/",ic("grand")],["역사와 사상","/ideas/",ic("ideas")],["아카데미","/academy/",ic("acad")],["게임","/play/",ic("game")],["처음 오신 분께","/start/",ic("start")],["구독","/subscribe/",ic("sub")]];
 $("apps").innerHTML=APPS.map(function(a){return a[1]?'<a class="app" href="'+a[1]+'">'+a[2]+'<span>'+a[0]+'</span></a>':'<button type="button" class="app" id="fdb" aria-haspopup="dialog">'+a[2]+'<span>'+a[0]+'</span></button>'}).join("");
 $("fda").innerHTML=CS.map(function(c){return '<a class="app" href="'+c[1]+'"><span class="ic" style="background:'+c[2]+'"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2"><circle cx="16" cy="14" r="5"/><path d="M16 19v7"/></svg></span><span>'+c[0]+'</span></a>'}).join("");
 /* 판 열고 닫기 */
@@ -159,7 +170,7 @@ $("gear").onclick=function(){ OPEN==="cc"?hide():show("cc"); };
 $("fdb").onclick=function(){ show("fd",true); };
 $("srb").onclick=function(){ show("sr"); };
 $("dim").onclick=hide;
-addEventListener("keydown",function(e){ if(e.key==="Escape")hide(); });
+addEventListener("keydown",function(e){ if(e.key==="Escape"){ if(OPEN)hide(); else if($("av").classList.contains("on"))avClose(); } });
 /* 설정: 사이트와 같은 저장값(ep.snd, ep.theme)을 쓴다 */
 function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
@@ -189,6 +200,24 @@ fetch("/data/shell.json").then(function(r){return r.json()}).then(function(S){
   $("hm").innerHTML=byM.slice(0,24).map(function(f){var d=f.p-(f.p0==null?f.p:f.p0),a=Math.min(1,.25+Math.abs(d)/25);return '<i style="'+(d?"background:"+(d>0?"rgba(14,138,75,"+a+")":"rgba(200,16,46,"+a+")"):"")+'"></i>'}).join("");
   open.forEach(function(f){SRCH.push({t:f.s,u:"/forecast/"+f.id+"/",k:f.p+"%"})});
 }).catch(function(){});
+/* 앱 화면 시제품: 정세 브리핑·히트맵·한반도 3개만 앱 화면으로 연다(나머지는 종전처럼 그 쪽으로 간다) */
+var AV={brief:["정세 브리핑","/brief/","html:not(.locshow) #wrap{display:none!important}html.locshow #wrap{position:fixed!important;left:0;right:0;top:0;height:48vh!important;z-index:60;margin:0!important;border-radius:0 0 18px 18px;box-shadow:0 8px 24px rgba(0,0,0,.28)}#locx{display:none;position:fixed;z-index:61;top:12px;left:50%;transform:translateX(-50%);height:34px;padding:0 12px;border:0;border-radius:10px;background:rgba(16,20,24,.78);color:#fff;font:600 13px Pretendard Variable,sans-serif}html.locshow #locx{display:block}",1],heat:["히트맵","/lab/heatmap/?embed=1",""],korea:["한반도","/case/korea/",""]};  /* 셋째 값: 그 앱 화면에서만 더 숨길 것(정세 브리핑은 지구본을 숨겨 글이 바로 보이게) */
+var CUR=null;
+var CSS='header.hd,#hdr,.hd-strips{display:none!important}body{padding-bottom:110px!important}';
+function avOpen(k,u,push){ var a=AV[k]; if(!a)return false; hide(); CUR=a; $("avt").textContent=a[0]; var o=$("avf"), f=document.createElement("iframe"); f.id="avf"; f.title=a[0]; f.src=u||a[1]; f.addEventListener("load",inj); o.parentNode.replaceChild(f,o); $("av").classList.add("on"); document.body.style.overflow="hidden"; return true; }
+/* 시제품에서는 앱 화면을 첫 화면 위에 띄우므로 '← 홈'으로 닫는다(실제 적용 때는 쪽마다 주소가 있어 뒤로 가기도 된다) */
+function avClose(){ $("av").classList.remove("on"); var o=$("avf"), f=document.createElement("iframe"); f.id="avf"; f.title="앱 화면"; o.parentNode.replaceChild(f,o); document.body.style.overflow=""; }
+function inj(){ try{ var d=this.contentDocument, w=this.contentWindow; if(!d||!d.head)return; var st=d.createElement("style"); st.textContent=CSS+(CUR&&CUR[2]||""); d.head.appendChild(st);
+  /* 정세 브리핑 앱: 꼭지의 장소(제목 옆 표시)를 누를 때만 지구본이 위에서 내려오고, '지도 닫기'로 접는다 */
+  if(CUR&&CUR[3]){ var x=d.createElement("button"); x.type="button"; x.id="locx"; x.textContent="지도 닫기"; d.body.appendChild(x);
+    x.addEventListener("click",function(){ d.documentElement.classList.remove("locshow"); });
+    d.addEventListener("click",function(e){ if(e.target.closest&&e.target.closest(".bh[data-bloc],.bh[data-dg]")){ if(!d.documentElement.classList.contains("locshow")){ d.documentElement.classList.add("locshow"); try{ w.dispatchEvent(new w.Event("resize")) }catch(_){} } } },true); }
+}catch(e){} }
+$("avh").onclick=avClose;
+$("avs").onclick=function(){ show("sr"); };
+function hook(sel,k,uf){ document.querySelectorAll(sel).forEach(function(el){ el.addEventListener("click",function(ev){ if(ev.metaKey||ev.ctrlKey)return; ev.preventDefault(); avOpen(k,uf?uf(el):null); }); }); }
+hook('.dock a[href="/brief/"]',"brief"); hook('#wbr',"brief",function(el){return el.getAttribute("href")}); hook('.apps a[href="/heatmap/"], .row2 a[href="/heatmap/"]',"heat"); hook('#fda a[href="/case/korea/"]',"korea");
+if(location.hash&&AV[location.hash.slice(1)]) avOpen(location.hash.slice(1));
 /* 검색: 화면 이름·사안·진행 중인 전망·오늘의 꼭지 */
 $("sq").oninput=function(){ var q=this.value.trim(); if(!q){$("sl").innerHTML="";return}
   var r=SRCH.filter(function(s){return s.t.indexOf(q)>=0}).slice(0,12);
