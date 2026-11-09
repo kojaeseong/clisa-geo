@@ -228,6 +228,9 @@ html[lang="en"] header.hd nav.gnav a[data-tab="ideas"] .gl{display:inline}html[l
  header.hd nav.gnav a.hd-start.m{border:1px solid var(--accent,#1F4FD8);color:var(--accent,#1F4FD8)!important;background:transparent!important;font-weight:700}
 }
 
+/* 2026-11-09 메뉴 밑줄: 탭이 아닌 쪽(처음 오신 분께·개인정보 처리방침 등)에서는 밑줄을 없앤다. app.css의 .bar{min-width:96px}(막대 그래프용)가 메뉴 밑줄에도 걸려 width:0이 듣지 않고 직전 탭 아래 96px로 남던 것을 고친다 */
+header.hd nav.gnav .bar{min-width:0;padding:0;border:0;gap:0}
+
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
 .bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
 .bstrip.astrip,.bstrip.bs-due{--sc:#d93a40;background-image:linear-gradient(90deg,rgba(217,58,64,.10),rgba(217,58,64,0) 62%)!important}
