@@ -189,7 +189,7 @@
       if (found.length) return found.sort(function(x, y){ return y.w - x.w || x.links.length - y.links.length; }).slice(0, 6); } }
     return []; }
   function tdPathHtml(){ var D = TDD, g = tdG(), gn = D.C.grp[g], PS = tdPath(g), p = PS[TDI % (PS.length || 1)], x = '<h3>' + h(TT.path(gn)) + '</h3><div class="td-gs" role="group" aria-label="' + h(TT.pathFor) + '">' +
-      Object.keys(D.C.grp).map(function(k){ return '<button type="button" data-tdg="' + k + '"' + (k === g ? ' class="on" aria-pressed="true"' : ' aria-pressed="false"') + ">" + h(TDGN[k] || D.C.grp[k]) + "</button>"; }).join("") + "</div>";
+      Object.keys(D.C.grp).map(function(k){ return '<button type="button" data-tdg="' + k + '"' + (k === g ? ' class="on" aria-pressed="true"' : ' aria-pressed="false"') + ' title="' + h(D.C.grp[k]) + '">' + h(TDGN[k] || D.C.grp[k]) + "</button>"; }).join("") + "</div>";
     if (!p) return x + '<p class="td-none">' + h(TT.none(gn)) + '</p><a class="td-go" href="' + P + "/ripple/?g=" + g + '" data-f2v="rp">' + TT.goAll + "</a>";
     var down = p.c.to < p.c.from, weak = (p.dir === "-") ? !down : down;
     x += '<div class="td-st"><div><small>' + TT.s1 + " · " + tdDate(p.d) + "</small><b>" + h(p.it.h) + "</b></div><div><small>" + TT.s2 + '</small><b><a href="' + P + "/forecast/" + p.c.id + '/">' + h(p.c.s) + "</a> " + tdV(p.c.from, p.c.to) + "</b><p>" + (weak ? TT.weak : TT.strong) + "</p></div>";
