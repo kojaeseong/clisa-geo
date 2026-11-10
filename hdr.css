@@ -232,7 +232,8 @@ html[lang="en"] header.hd nav.gnav a[data-tab="ideas"] .gl{display:inline}html[l
 header.hd nav.gnav .bar{min-width:0;padding:0;border:0;gap:0}
 
 /* 2026-11-10 대통령님 결재: 휴대전화 앱 화면(mapp). 시험을 켠 기기(html.mapp)의 900px 이하에서만: 머리글 대신 얇은 윗줄(‹ 홈·화면 이름·검색), 아래 고정 칸 4개, 지구본은 세계 정세·나라·권역 화면에서만 보이고 다른 화면에서는 장소를 누를 때만 위에서 내려온다 */
-.mab,.mdock,.mloc-x{display:none}
+.mab,.mdock,.mloc-x,.mglobe-tip{display:none}
+.mglobe-tip.off{opacity:0}
 @media (max-width:900px){
 html.mapp header.hd > :not(.mab):not(#hd-sub){display:none!important}
 html.mapp header.hd{position:sticky!important;top:0;z-index:50!important;padding:0!important;border-bottom:0}
@@ -252,6 +253,9 @@ html.mapp .mdock{display:grid;grid-template-columns:repeat(4,1fr);position:fixed
 html.mapp .mdock a,html.mapp .mdock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:none;padding:0;font:600 10.5px/1 var(--sans);color:var(--ink-2,#4A5560);text-decoration:none;cursor:pointer}
 html.mapp .mdock svg{width:23px;height:23px}
 html.mapp .mdock [aria-current="page"]{color:var(--accent,#1F4FD8)}
+html.mapp.mapp-globe .globe-wrap{display:block!important;height:calc(100vh - 110px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;height:calc(100dvh - 110px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;margin:0!important;border-radius:0!important}
+html.mapp.mapp-globe #panel{display:none!important}
+html.mapp.mapp-globe .mglobe-tip{display:block;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(128px + env(safe-area-inset-bottom));z-index:54;transition:opacity .4s;padding:7px 14px;border-radius:16px;background:rgba(16,20,24,.78);color:#fff;font:600 12px/1.2 var(--sans);white-space:nowrap;pointer-events:none}
 html.mapp body{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
 html.mapp .totop,html.mapp .navback{bottom:calc(72px + env(safe-area-inset-bottom,0px))!important}
 :root[data-theme="dark"].mapp .mdock{background:rgba(16,21,28,.94)}

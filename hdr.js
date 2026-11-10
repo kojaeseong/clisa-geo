@@ -144,25 +144,30 @@
     '<button type="button" data-k="s"><svg ' + SV + '><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg>' + (EN ? "Search" : "검색") + '</button>';
   document.body.appendChild(dk); dk.querySelector("button").addEventListener("click", srch);
   var x = document.createElement("button"); x.type = "button"; x.className = "mloc-x"; x.textContent = EN ? "Close map" : "지도 닫기"; document.body.appendChild(x);
-  x.addEventListener("click", function(){ D.classList.remove("locshow"); });
+  x.addEventListener("click", function(){ D.classList.remove("locshow"); });  /* (지도 내려 보기는 2026-11-10 대통령님 지시로 쓰지 않는다. 단추만 남아 있고 보이지 않는다) */
+  var tip = document.createElement("div"); tip.className = "mglobe-tip"; tip.textContent = EN ? "Tap a country or a flashpoint for its analysis" : "나라나 분쟁 지점을 누르면 분석이 열립니다"; document.body.appendChild(tip);
   var MAPT = {overview: 1, detail: 1, region: 1}, SITE_T = EN ? "Clisa Geopolitics" : "클리사 지오폴리틱스", tt = bar.querySelector(".mab-t"), CUR = null;
   function title(){ var t = (document.title || "").split(" | ")[0].trim();
     var p0 = location.pathname.replace(/^\/en(?=\/)/, "");
     if (/^\/heatmap\//.test(p0)) t = EN ? "Heat Map" : "히트맵"; else if (/^\/ripple\//.test(p0)) t = EN ? "Chain Reactions" : "통합신경망";
-    else if (CUR === "overview") t = EN ? "World" : "세계 정세"; else if (!t) t = SITE_T;
+    else if (CUR === "overview" || (MAPT[CUR] && (!t || t === SITE_T))) t = EN ? "World" : "세계 정세"; else if (!t) t = SITE_T;
     tt.textContent = t;
+    var g = CUR === "overview" && /^\/(en\/)?$/.test(location.pathname), was = D.classList.contains("mapp-globe"); D.classList.toggle("mapp-globe", g);
+    if (g && !was) setTimeout(function(){ try { dispatchEvent(new Event("resize")); } catch (e) {} }, 30);
     var p = location.pathname.replace(/^\/en(?=\/)/, ""), k = /^\/(brief|digest|feature)\//.test(p) ? "brief" : /^\/forecast\//.test(p) ? "fc" : MAPT[CUR] ? "world" : "";
     [].forEach.call(dk.querySelectorAll("[data-k]"), function(a){ if (a.dataset.k === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); }); }
   function tab(t){ var was = D.classList.contains("mapp-map"), m = !!MAPT[t]; CUR = t; D.classList.toggle("mapp-map", m); D.classList.remove("locshow");
     if (m && !was) setTimeout(function(){ try { dispatchEvent(new Event("resize")); } catch (e) {} }, 30);
     setTimeout(title, 60); }
   document.addEventListener("clisa:tab", function(e){ tab(e.detail); });
+  /* 탭은 그대로인데 주소만 바뀌는 이동(보기 단추, 뒤로 가기)에도 화면 이름과 지구본 화면 여부를 맞춘다 */
+  ["pushState", "replaceState"].forEach(function(k){ var o = history[k]; history[k] = function(){ var r = o.apply(this, arguments); setTimeout(title, 80); return r; }; });
+  addEventListener("popstate", function(){ setTimeout(title, 80); });
+  document.addEventListener("pointerdown", function(){ tip.classList.add("off"); }, {once: true, capture: true});
   var pn = document.querySelector(".pane:not([hidden])"); tab(pn && pn.id ? pn.id.replace(/^pane-/, "") : "overview");
   try { var te = document.querySelector("title"); if (te) new MutationObserver(title).observe(te, {childList: true, characterData: true, subtree: true}); } catch (e) {}
-  /* 장소 표시 띠(#markbar)가 뜨면 지구본을 내리고, 표시를 풀면 접는다 */
-  var mb = document.getElementById("markbar");
-  if (mb) { try { new MutationObserver(function(){ if (!mq.matches || D.classList.contains("mapp-map")) return;
-      if (!mb.hidden) { if (!D.classList.contains("locshow")) { D.classList.add("locshow"); try { dispatchEvent(new Event("resize")); } catch (e) {} } } else D.classList.remove("locshow"); }).observe(mb, {attributes: true, attributeFilter: ["hidden"]}); } catch (e) {} }
+  /* 세계 정세 화면('/')은 지구본을 화면 가득 보인다(나라·분쟁 지점을 누르면 그 설명 화면으로). 통합신경망은 /ripple/, 히트맵은 /heatmap/ 앱으로 연다 */
+  document.addEventListener("click", function(e){ var a = e.target.closest && e.target.closest('.f2-vt a[data-f2v="rp"]'); if (a && mq.matches) { e.preventDefault(); e.stopPropagation(); location.href = P + "/ripple/"; } }, true);
 })();
 
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스 모든 쪽(header1101.py가 hdr.js 끝에 붙임)과 아카데미·게임 첫 화면(stripc1108.py가 /strips_c.js로)에서 함께 쓴다.
