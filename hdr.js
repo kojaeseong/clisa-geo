@@ -118,18 +118,18 @@
   function mk(c){ var a = document.createElement("a"); a.className = "hd-start " + c; a.href = href; a.textContent = t; if (here) a.classList.add("here"); return a; }
   var nl = H.querySelector(".hd-nl"); if (nl) nl.insertBefore(mk("m"), nl.querySelector(".bar"));  /* 넓은 화면에서는 메뉴 줄 오른쪽 끝, 휴대전화는 메뉴 칸의 마지막 */
 })();
-/* 2026-11-10 대통령님 결재: 휴대전화 앱 화면(mapp). 시험을 켠 기기(localStorage ep.mapp=1)에서만 작동한다(공개 결재 뒤 기본값을 켠다).
+/* 2026-11-10 대통령님 결재: 휴대전화 앱 화면(mapp). 2026-11-10 공개 결재로 기본으로 켜져 있고, /lab/home/에서 끈 기기(localStorage ep.mapp=0)만 예전 화면을 본다.
    머리글 대신 윗줄(‹ 홈·화면 이름·검색)과 아래 고정 칸 4개를 붙이고, 지구본은 세계 정세·나라·권역 화면에서만 보인다. 다른 화면에서 장소를 누르면(표시 띠가 뜨면) 지구본이 위에서 내려온다.
    휴대전화로 사이트 첫 주소('/')에 밖에서 들어오면 첫 화면(/home/)으로 보낸다. 첫 화면이나 아래 고정 칸에서 '세계 정세'를 누른 때는 지구본을 보인다. */
 (function(){
   var D = document.documentElement, H = document.getElementById("hdr"), on = false;
-  try { on = localStorage.getItem("ep.mapp") === "1"; } catch (e) {}
+  try { on = localStorage.getItem("ep.mapp") !== "0"; } catch (e) { on = true; }  /* 2026-11-10 대통령님 공개 결재: 기본으로 켠다. /lab/home/에서 이 기기만 끌 수 있다 */
   if (!on || !H) { D.classList.remove("mapp"); return; }
   D.classList.add("mapp");
   var EN = D.lang === "en", P = EN ? "/en" : "", HOME = P + "/home/", mq = matchMedia("(max-width:900px)");
   if (mq.matches && (location.pathname === "/" || location.pathname === "/en/") && !location.hash && !location.search) {
     var ro = ""; try { ro = document.referrer ? new URL(document.referrer).origin : ""; } catch (e) {}
-    if (ro !== location.origin) { location.replace(HOME); return; }
+    if (ro !== location.origin && !/bot|crawl|spider|slurp|lighthouse|pagespeed|headless/i.test(navigator.userAgent)) { location.replace(HOME); return; }  /* 검색 로봇은 보내지 않는다(첫 주소의 색인 유지) */
   }
   var SV = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
   var bar = document.createElement("div"); bar.className = "mab";

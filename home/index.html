@@ -22,8 +22,8 @@ a{color:inherit;text-decoration:none}
   .wrap{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);border-radius:36px;min-height:860px;margin:26px auto 40px;box-shadow:0 0 0 9px #15181C,0 20px 40px rgba(0,0,0,.25);overflow:hidden}
   .dock{position:absolute!important}}
 .sb{position:sticky;top:0;z-index:5;height:calc(50px + env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top) 14px 0 18px;background:linear-gradient(var(--bg1) 70%,transparent)}
-.clk{display:flex;gap:11px;font:600 12px/1.1 "IBM Plex Mono",monospace}
-.clk span{display:flex;flex-direction:column}.clk i{font:500 10px/1.25 "Pretendard Variable";font-style:normal;color:var(--ink2)}
+.clk{transition:opacity .2s;display:flex;gap:10px;font:600 12px/1.1 "IBM Plex Mono",monospace}
+.clk span{display:flex;flex-direction:column;white-space:nowrap}.clk i{font:500 10px/1.25 "Pretendard Variable";font-style:normal;color:var(--ink2)}
 .gear{width:36px;height:36px;border-radius:10px;border:0;background:var(--chip);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
 .gear svg{width:18px;height:18px}
 .wg{display:block;margin:10px 12px 0;background:var(--card);border-radius:22px;padding:13px 15px;box-shadow:var(--shade)}
@@ -41,9 +41,21 @@ a{color:inherit;text-decoration:none}
 .app{display:flex;flex-direction:column;align-items:center;gap:5px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;min-width:0}
 .ic{width:60px;height:60px;border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(16,30,70,.14);transition:transform .12s}
 .app:active .ic{transform:scale(.92)}
-.ic svg{width:32px;height:32px}
+.ic svg{width:34px;height:34px;position:relative}.ic{position:relative;overflow:hidden}.ic::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.24),rgba(255,255,255,0) 58%);pointer-events:none}
 .app>span:last-child{font-size:11.5px;font-weight:600;text-align:center;line-height:1.15;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 html[lang="en"] .app>span:last-child{font-size:10.5px;letter-spacing:-.01em}
+.app{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.tedit{width:100%;margin-top:8px;height:38px;border:0;border-radius:12px;background:var(--chip);color:var(--ink);font:600 12.5px "Pretendard Variable";cursor:pointer}
+.ebar{display:flex;align-items:center;gap:8px;margin:12px 14px -6px;font-size:12.5px;color:var(--ink2)}
+.ebar[hidden]{display:none}.ebar span{flex:1}
+.ebar button{height:32px;padding:0 14px;border:0;border-radius:16px;background:var(--chip);color:var(--ink);font:600 12.5px "Pretendard Variable";cursor:pointer}
+.ebar #edone{background:var(--acc);color:#fff}
+body.edit #apps{touch-action:none}
+body.edit #apps .app{animation:jig .28s ease-in-out infinite alternate}
+body.edit #apps .app:nth-child(2n){animation-delay:-.14s}
+body.edit #apps .app.drag{animation:none;z-index:4;position:relative}
+@keyframes jig{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+@media (prefers-reduced-motion:reduce){body.edit #apps .app{animation:none}}
 .fold{background:var(--soft);display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:9px}
 .fold i{width:12px;height:12px;border-radius:3.5px;display:block}
 .dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:calc(100% - 24px);max-width:406px;height:88px;border-radius:30px;background:var(--dock);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:0 8px;z-index:6}
@@ -81,6 +93,7 @@ html[lang="en"] .app>span:last-child{font-size:10.5px;letter-spacing:-.01em}
     <button type="button" class="gear" id="gear" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></div>
   <a class="wg" id="wbr"><div class="wh"><b id="wbt"></b><em id="wbd"></em></div><ul class="wb" id="wbl"></ul><div class="wmore" id="wbm"></div></a>
   <div class="wg fc"><div class="wh"><b id="wft"></b><em id="wfn"></em></div><div id="wfc"></div></div>
+  <div class="ebar" id="ebar" hidden><span id="etip"></span><button type="button" id="ereset"></button><button type="button" id="edone"></button></div>
   <div class="apps" id="apps"></div>
   <nav class="dock" id="dock"></nav>
 </div>
@@ -90,6 +103,7 @@ html[lang="en"] .app>span:last-child{font-size:10.5px;letter-spacing:-.01em}
     <button type="button" id="tsnd" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg><span></span><em></em></button>
     <button type="button" id="tth" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg><span></span><em></em></button>
   </div>
+  <button type="button" class="tedit" id="tedit"></button>
   <div class="seg" id="slang"></div><div class="seg" id="sarea"></div>
 </div>
 <div class="pane fd" id="fd" role="dialog"><h4 id="fdt"></h4><div class="apps" id="fda"></div></div>
@@ -98,47 +112,54 @@ html[lang="en"] .app>span:last-child{font-size:10.5px;letter-spacing:-.01em}
 (function(){
 var $=function(i){return document.getElementById(i)}, EN=document.documentElement.lang==="en", P=EN?"/en":"";
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var T=EN?{set:"Settings",snd:"Tap sounds",th:"Dark mode",on:"On",off:"Off",br:"Today's briefing",n:function(k){return k+(k===1?" item":" items")},more:function(k){return "+"+k+" more"},fc:"Forecasts that moved",cases:"Issues",ph:"Search forecasts, issues, pages",none:"No results",all:"Search the whole site from the World tab",fail:"Couldn't load the briefing",pg:"Page",cs:"Issue",gear:"Open settings",srch:"Search",open:function(k){return k+" open"}}
- :{set:"설정",snd:"누름 소리",th:"밤 화면",on:"켜짐",off:"꺼짐",br:"오늘의 정세 브리핑",n:function(k){return k+"건"},more:function(k){return "그 밖에 "+k+"건 더 보기"},fc:"바뀐 전망",cases:"사안별 분석",ph:"전망·사안·화면 이름",none:"찾은 것이 없습니다",all:"사이트 전체 검색은 세계 정세 화면에서",fail:"브리핑을 불러오지 못했습니다",pg:"화면",cs:"사안",gear:"설정 열기",srch:"검색",open:function(k){return "진행 중 "+k+"건"}};
+var T=EN?{set:"Settings",snd:"Tap sounds",th:"Dark mode",on:"On",off:"Off",br:"Today's briefing",n:function(k){return k+(k===1?" item":" items")},more:function(k){return "+"+k+" more"},fc:"Forecasts that moved",cases:"Issues",ph:"Search forecasts, issues, pages",none:"No results",all:"Search the whole site from the World tab",fail:"Couldn't load the briefing",pg:"Page",cs:"Issue",gear:"Open settings",edit:"Rearrange apps",done:"Done",reset:"Reset",tip:"Drag an app to move it",srch:"Search",open:function(k){return k+" open"}}
+ :{set:"설정",snd:"누름 소리",th:"밤 화면",on:"켜짐",off:"꺼짐",br:"오늘의 정세 브리핑",n:function(k){return k+"건"},more:function(k){return "그 밖에 "+k+"건 더 보기"},fc:"바뀐 전망",cases:"사안별 분석",ph:"전망·사안·화면 이름",none:"찾은 것이 없습니다",all:"사이트 전체 검색은 세계 정세 화면에서",fail:"브리핑을 불러오지 못했습니다",pg:"화면",cs:"사안",gear:"설정 열기",edit:"앱 위치 바꾸기",done:"완료",reset:"처음 순서로",tip:"앱을 끌어 자리를 옮기십시오",srch:"검색",open:function(k){return "진행 중 "+k+"건"}};
 $("gear").setAttribute("aria-label",T.gear); $("cct").textContent=T.set; $("cc").setAttribute("aria-label",T.set); $("wbt").textContent=T.br; $("wft").textContent=T.fc; $("fdt").textContent=T.cases; $("fd").setAttribute("aria-label",T.cases); $("sr").setAttribute("aria-label",T.srch); $("sq").placeholder=T.ph; $("sall").textContent=T.all; $("sall").href=P+"/"; $("wbr").href=P+"/brief/";
+$("tedit").textContent=T.edit; $("edone").textContent=T.done; $("ereset").textContent=T.reset; $("etip").textContent=T.tip;
 $("tsnd").querySelector("span").textContent=T.snd; $("tth").querySelector("span").textContent=T.th;
 $("slang").innerHTML='<a'+(EN?'':' class="on"')+' href="/home/" lang="ko">한국어</a><a'+(EN?' class="on"':'')+' href="/en/home/" lang="en">English</a>';
 $("sarea").innerHTML=(EN?[["Geopolitics","/en/",1],["Academy","/en/academy/"],["Games","/en/play/"]]:[["지오폴리틱스","/",1],["아카데미","/academy/"],["게임","/play/"]]).map(function(a){return '<a'+(a[2]?' class="on"':'')+' href="'+a[1]+'">'+a[0]+'</a>'}).join("");
 /* 세계 시각 */
-var CL=EN?[["Seoul","Asia/Seoul"],["Washington","America/New_York"],["London","Europe/London"],["Kyiv","Europe/Kyiv"]]:[["서울","Asia/Seoul"],["워싱턴","America/New_York"],["런던","Europe/London"],["키이우","Europe/Kyiv"]];
-function tick(){ $("clk").innerHTML=CL.map(function(c){return "<span>"+new Intl.DateTimeFormat("en-GB",{timeZone:c[1],hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date())+"<i>"+c[0]+"</i></span>"}).join(""); }
-tick(); setInterval(tick,20000);
+/* 세계 시각 8곳(사이트 머리글과 같은 곳): 4곳씩 4초마다 번갈아 보인다. 움직임 줄이기를 켠 기기는 8초마다 */
+var CL=EN?[["Seoul/Tokyo","Asia/Seoul"],["Beijing/Taipei","Asia/Shanghai"],["Tehran","Asia/Tehran"],["Moscow","Europe/Moscow"],["Kyiv","Europe/Kyiv"],["Brussels","Europe/Brussels"],["London","Europe/London"],["DC/NYC","America/New_York"]]
+ :[["서울·도쿄","Asia/Seoul"],["베이징·타이베이","Asia/Shanghai"],["테헤란","Asia/Tehran"],["모스크바","Europe/Moscow"],["키이우","Europe/Kyiv"],["브뤼셀","Europe/Brussels"],["런던","Europe/London"],["워싱턴·뉴욕","America/New_York"]];
+var CG=0, RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function tick(){ $("clk").innerHTML=CL.slice(CG*4,CG*4+4).map(function(c){return "<span>"+new Intl.DateTimeFormat("en-GB",{timeZone:c[1],hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date())+"<i>"+c[0]+"</i></span>"}).join(""); }
+tick(); setInterval(function(){ var k=$("clk"); k.style.opacity="0"; setTimeout(function(){ CG=1-CG; tick(); k.style.opacity="1"; },RM?0:220); },RM?8000:4000);
 /* 앱 그림 */
 function sv(bg,body,st){return '<span class="ic" style="background:'+bg+'"><svg viewBox="0 0 32 32" fill="none" stroke="'+(st||"#fff")+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+body+'</svg></span>'}
 var I={
- dig:sv('linear-gradient(145deg,#3B6CF0,#1F4FD8)','<rect x="7" y="6" width="18" height="21" rx="2"/><path d="M11 12h10M11 16h10M11 20h6"/>'),
- feat:sv('linear-gradient(145deg,#2B3A55,#101418)','<path d="M8 25V9l8-3 8 3v16"/><path d="M12 14h8M12 18h8"/>'),
+ dig:sv('linear-gradient(145deg,#3B6CF0,#1F4FD8)','<rect x="6" y="8" width="20" height="18" rx="3" fill="#fff" fill-opacity=".38" stroke="none"/><rect x="6" y="8" width="20" height="18" rx="3"/><path d="M6 13.5h20M11 5.5v5M21 5.5v5"/><path d="M10.5 18h5M10.5 22h9" />'),
+ feat:sv('linear-gradient(145deg,#2B3A55,#101418)','<path d="M9 5h14a1 1 0 0 1 1 1v21l-8-5-8 5V6a1 1 0 0 1 1-1z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M9 5h14a1 1 0 0 1 1 1v21l-8-5-8 5V6a1 1 0 0 1 1-1z"/><path d="M16 9.5l1.5 3 3.3.4-2.4 2.3.6 3.3-3-1.6-3 1.6.6-3.3-2.4-2.3 3.3-.4z" fill="#fff" stroke="none"/>'),
  hm:'<span class="ic" style="background:linear-gradient(145deg,#F2F4F8,#DDE3EC)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="6" width="9" height="8" rx="1.5" fill="#C8102E"/><rect x="15.5" y="6" width="11.5" height="8" rx="1.5" fill="#F59E0B"/><rect x="5" y="15.5" width="13" height="10" rx="1.5" fill="#1F4FD8"/><rect x="19.5" y="15.5" width="7.5" height="10" rx="1.5" fill="#0EA5A4"/></svg></span>',
  nr:'<span class="ic" style="background:linear-gradient(145deg,#1A2140,#0A0E1A)"><svg viewBox="0 0 32 32" fill="none" stroke="#7FA3FF" stroke-width="1.6" aria-hidden="true"><path d="M8 9l8 7 8-7M8 23l8-7 8 7M8 9v14M24 9v14"/><g fill="#fff" stroke="none"><circle cx="8" cy="9" r="2.4"/><circle cx="24" cy="9" r="2.4"/><circle cx="16" cy="16" r="2.8"/><circle cx="8" cy="23" r="2.4"/><circle cx="24" cy="23" r="2.4"/></g></svg></span>',
- ind:sv('linear-gradient(145deg,#12A57A,#0E7A5B)','<path d="M6 25h20M9 25V15l5 3v-6l5 3v-6l5 3v13"/>'),
- grand:sv('linear-gradient(145deg,#5A3FC8,#3B2A8E)','<circle cx="16" cy="16" r="10"/><path d="M6 16h20M16 6c3 3 4.5 6.5 4.5 10S19 23 16 26c-3-3-4.5-6.5-4.5-10S13 9 16 6z"/>'),
- ideas:sv('linear-gradient(145deg,#B9854A,#8A5A2B)','<path d="M7 8h7a3 3 0 0 1 3 3v15a2 2 0 0 0-2-2H7zM25 8h-7a3 3 0 0 0-3 3"/><path d="M25 8v16h-8"/>'),
- acad:sv('linear-gradient(145deg,#2E5BE0,#0B2A86)','<path d="M4 13l12-6 12 6-12 6z"/><path d="M9 16v6c4 3 10 3 14 0v-6"/>'),
- game:sv('linear-gradient(145deg,#6B6B6B,#2E2E2E)','<path d="M10 26h12M12 26v-4l-2-9h12l-2 9v4M13 13V8h6v5"/>'),
- start:sv('linear-gradient(145deg,#F08A3C,#c2570c)','<circle cx="16" cy="16" r="10"/><path d="M16 14.5v7M16 10.5v.5"/>'),
- sub:sv('linear-gradient(145deg,#4E5A66,#2F3842)','<rect x="6" y="9" width="20" height="14" rx="2"/><path d="M6 11l10 7 10-7"/>'),
- brief:sv('linear-gradient(145deg,#3B6CF0,#1F4FD8)','<rect x="6" y="7" width="20" height="18" rx="2"/><path d="M10 12h12M10 16h12M10 20h8"/>'),
+ ind:sv('linear-gradient(145deg,#12A57A,#0E7A5B)','<path d="M5 26V15l6 3.5V15l6 3.5V8h4l1 18z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M5 26V15l6 3.5V15l6 3.5V8h4l1 18"/><path d="M4 26h24"/><circle cx="25.5" cy="7" r="1.6" fill="#fff" stroke="none"/><path d="M9 22h2M14 22h2"/>'),
+ grand:sv('linear-gradient(145deg,#5A3FC8,#3B2A8E)','<path d="M16 6v20M10 26h12M7 10h18"/><path d="M7 10l-3.5 8a3.6 3.6 0 0 0 7 0zM25 10l-3.5 8a3.6 3.6 0 0 0 7 0z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M7 10l-3.5 8a3.6 3.6 0 0 0 7 0zM25 10l-3.5 8a3.6 3.6 0 0 0 7 0z"/><circle cx="16" cy="6" r="1.7" fill="#fff" stroke="none"/>'),
+ ideas:sv('linear-gradient(145deg,#B9854A,#8A5A2B)','<path d="M11 11h10v12H11z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M8 7h16M9 7c0 2.5 1 4 2 4M23 7c0 2.5-1 4-2 4M11 11v12M21 11v12M14.3 11v12M17.7 11v12M8.5 23h15M7 26.5h18"/>'),
+ acad:sv('linear-gradient(145deg,#2E5BE0,#0B2A86)','<path d="M3.5 13L16 7l12.5 6L16 19z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M3.5 13L16 7l12.5 6L16 19z"/><path d="M9 16v5.5c4 3.2 10 3.2 14 0V16M28.5 13v7"/><circle cx="28.5" cy="21.5" r="1.4" fill="#fff" stroke="none"/>'),
+ game:sv('linear-gradient(145deg,#6B6B6B,#2E2E2E)','<path d="M11 26l1.5-11h7L21 26z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M9 26.5h14M11 26l1.5-11h7L21 26M10 15h12M10 15V7h3v3h1.8V7h2.4v3H19V7h3v8"/>'),
+ start:sv('linear-gradient(145deg,#F08A3C,#c2570c)','<circle cx="16" cy="16" r="10.5"/><path d="M20.5 11.5l-2.6 6.4-6.4 2.6 2.6-6.4z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M20.5 11.5l-2.6 6.4-6.4 2.6 2.6-6.4z"/><circle cx="16" cy="16" r="1.3" fill="#fff" stroke="none"/>'),
+ sub:sv('linear-gradient(145deg,#4E5A66,#2F3842)','<rect x="5" y="8.5" width="22" height="15.5" rx="3" fill="#fff" fill-opacity=".38" stroke="none"/><rect x="5" y="8.5" width="22" height="15.5" rx="3"/><path d="M5.5 11l10.5 7.5L26.5 11"/>'),
+ brief:sv('linear-gradient(145deg,#3B6CF0,#1F4FD8)','<rect x="6" y="5.5" width="20" height="21" rx="3" fill="#fff" fill-opacity=".38" stroke="none"/><rect x="6" y="5.5" width="20" height="21" rx="3"/><path d="M10.5 11h11" stroke-width="2.6"/><path d="M10.5 16h11M10.5 20.5h7"/>'),
  world:'<span class="ic" style="background:radial-gradient(circle at 34% 30%,#5B8BFF,#1F4FD8 55%,#0B2A86)"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.6" opacity=".9" aria-hidden="true"><circle cx="16" cy="16" r="10"/><ellipse cx="16" cy="16" rx="4.5" ry="10"/><path d="M6.5 13h19M6.5 19h19"/></svg></span>',
- fcst:sv('linear-gradient(145deg,#E2453A,#B3261E)','<path d="M6 24l6-7 5 4 9-11"/><path d="M20 10h6v6"/>'),
+ fcst:sv('linear-gradient(145deg,#E2453A,#B3261E)','<path d="M5 25l6.5-7.5 5 4L26 10v15z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M5 25l6.5-7.5 5 4L26 10"/><path d="M20 9.5h6.5V16"/>'),
  srch:sv('#fff','<circle cx="14" cy="14" r="7"/><path d="M19.5 19.5L26 26"/>','#101418'),
  /* 사안: 한반도(갈라진 원), 대만해협(섬과 물결), 러-우 전쟁(맞선 전선), 이란·호르무즈(기름방울과 해협), 러시아-NATO 대치(방패), 전체(격자) */
- korea:'<circle cx="16" cy="16" r="9"/><path d="M7 16c3-4 6-4 9 0s6 4 9 0"/>',
- taiwan:'<path d="M5 11c2-2 4-2 6 0s4 2 6 0M5 21c2-2 4-2 6 0s4 2 6 0"/><ellipse cx="23" cy="16" rx="3" ry="5.5"/>',
- ukraine:'<path d="M16 5l-3 5 6 4-6 4 6 4-3 5"/><path d="M5 16h5M27 16h-5"/><path d="M8 13l3 3-3 3M24 13l-3 3 3 3"/>',
- iran:'<path d="M16 6c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/><path d="M5 26h22"/>',
- poland:'<path d="M16 5l9 3v7c0 6-4 10-9 12-5-2-9-6-9-12V8z"/><path d="M12 16l3 3 5-6"/>',
- allc:'<rect x="7" y="7" width="7.5" height="7.5" rx="1.5"/><rect x="17.5" y="7" width="7.5" height="7.5" rx="1.5"/><rect x="7" y="17.5" width="7.5" height="7.5" rx="1.5"/><rect x="17.5" y="17.5" width="7.5" height="7.5" rx="1.5"/>'};
+ korea:'<path d="M6.5 16c3.2-4.4 6.3-4.4 9.5 0s6.3 4.4 9.5 0A9.5 9.5 0 0 1 6.5 16z" fill="#fff" fill-opacity=".38" stroke="none"/><circle cx="16" cy="16" r="9.5"/><path d="M6.5 16c3.2-4.4 6.3-4.4 9.5 0s6.3 4.4 9.5 0" stroke-width="2.4" stroke-dasharray="3.2 2.6"/>',
+ taiwan:'<path d="M5 5h6c2 4-1 7 1 11s-1 7 0 11H5z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M11 5c2 4-1 7 1 11s-1 7 0 11"/><path d="M23.5 9c2.2 1.2 3 4 2.6 7.5-.4 3.4-1.6 6-3.3 6.5-1.7-.6-2.6-3.3-2.4-6.8C20.6 13 21.7 10 23.5 9z" fill="#fff" stroke="none"/><path d="M15 12.5c1-.9 2-.9 3 0M15 19.5c1-.9 2-.9 3 0"/>',
+ ukraine:'<path d="M5 6h12l-3.5 5 5 5-5 5 3.5 5H5z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M17 6l-3.5 5 5 5-5 5 3.5 5" stroke-width="2.4"/><path d="M27 12l-4 4 4 4M5.5 16h4.5M7.5 13.5L10 16l-2.5 2.5"/>',
+ iran:'<path d="M4 5h15c-1 4-4 6-8 6.5S5 14 4 17z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M28 27H13c1-4 4-6 8-6.5s6-2.5 7-5.5z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M19 5c-1 4-4 6-8 6.5S5 14 4 17M13 27c1-4 4-6 8-6.5s6-2.5 7-5.5"/><path d="M12.5 17.5l7-3.5 1.5 2.5-6 3.5z" fill="#fff" stroke="none"/>',
+ poland:'<path d="M16 4.5l9.5 3.2v7.3c0 6-4 10.3-9.5 12.5z" fill="#fff" fill-opacity=".38" stroke="none"/><path d="M16 4.5l9.5 3.2v7.3c0 6-4 10.3-9.5 12.5-5.5-2.2-9.5-6.5-9.5-12.5V7.7z"/><path d="M16 4.5v23"/><path d="M9.5 13h3.5M9.5 17.5h3.5"/>',
+ allc:'<rect x="6.5" y="6.5" width="8" height="8" rx="2" fill="#fff" stroke="none"/><rect x="17.5" y="6.5" width="8" height="8" rx="2" fill="#fff" fill-opacity=".38" stroke="none"/><rect x="6.5" y="17.5" width="8" height="8" rx="2" fill="#fff" fill-opacity=".38" stroke="none"/><rect x="17.5" y="17.5" width="8" height="8" rx="2" fill="#fff" stroke="none"/>'};
 var CS=EN?[["Korean Peninsula","/case/korea/","#1F4FD8","korea"],["Taiwan Strait","/case/taiwan/","#0EA5A4","taiwan"],["Russia-Ukraine","/case/ukraine/","#D98A07","ukraine"],["Iran and Hormuz","/case/iran/","#C8102E","iran"],["Russia-NATO","/case/poland/","#6B4FD8","poland"],["All issues","/case/","#4E5A66","allc"]]
  :[["한반도","/case/korea/","#1F4FD8","korea"],["대만해협","/case/taiwan/","#0EA5A4","taiwan"],["러-우 전쟁","/case/ukraine/","#D98A07","ukraine"],["이란·호르무즈","/case/iran/","#C8102E","iran"],["러시아-NATO 대치","/case/poland/","#6B4FD8","poland"],["전략과 전개 전체","/case/","#4E5A66","allc"]];
 var FOLD='<span class="ic fold">'+CS.map(function(c){return '<i style="background:'+c[2]+'"></i>'}).join("")+'</span>';
 var APPS=EN?[["Weekly Summary","/digest/","dig"],["Features","/feature/","feat"],["Heat Map","/heatmap/","hm"],["Chain Reactions","/ripple/","nr"],["Issues",null,FOLD],["Industries","/industry/","ind"],["World Order","/grand/","grand"],["History & Ideas","/ideas/","ideas"],["Academy","/academy/","acad"],["Games","/play/","game"],["Start here","/start/","start"],["Subscribe","/subscribe/","sub"]]
  :[["주간 요약","/digest/","dig"],["특집","/feature/","feat"],["히트맵","/heatmap/","hm"],["통합신경망","/ripple/","nr"],["사안별 분석",null,FOLD],["산업과 국민","/industry/","ind"],["세계 질서","/grand/","grand"],["역사와 사상","/ideas/","ideas"],["아카데미","/academy/","acad"],["게임","/play/","game"],["처음 오신 분께","/start/","start"],["구독","/subscribe/","sub"]];
-$("apps").innerHTML=APPS.map(function(a){return a[1]?'<a class="app" href="'+P+a[1]+'">'+I[a[2]]+'<span>'+a[0]+'</span></a>':'<button type="button" class="app" id="fdb" aria-haspopup="dialog">'+a[2]+'<span>'+a[0]+'</span></button>'}).join("");
+/* 앱 순서: 방문자가 바꾼 순서를 이 기기에 저장한다(ep.apps). 새로 생긴 앱은 끝에 붙는다 */
+APPS.forEach(function(a){ a.k=a[1]?a[2]:"fold"; });
+(function(){ var o=null; try{o=JSON.parse(localStorage.getItem("ep.apps")||"null")}catch(e){} if(!o||!o.length)return; APPS.sort(function(x,y){ var i=o.indexOf(x.k), j=o.indexOf(y.k); return (i<0?99:i)-(j<0?99:j); }); })();
+$("apps").innerHTML=APPS.map(function(a){return a[1]?'<a class="app" data-k="'+a.k+'" href="'+P+a[1]+'" draggable="false">'+I[a[2]]+'<span>'+a[0]+'</span></a>':'<button type="button" class="app" data-k="fold" id="fdb" aria-haspopup="dialog">'+a[2]+'<span>'+a[0]+'</span></button>'}).join("");
 $("fda").innerHTML=CS.map(function(c){return '<a class="app" href="'+P+c[1]+'">'+sv(c[2],I[c[3]])+'<span>'+c[0]+'</span></a>'}).join("");
 var DK=EN?[["Briefing","/brief/","brief"],["World","/","world"],["Forecasts","/forecast/","fcst"]]:[["정세 브리핑","/brief/","brief"],["세계 정세","/","world"],["전망과 검증","/forecast/","fcst"]];
 $("dock").innerHTML=DK.map(function(a){return '<a class="app" href="'+P+a[1]+'">'+I[a[2]]+'<span>'+a[0]+'</span></a>'}).join("")+'<button type="button" class="app" id="srb">'+I.srch+'<span>'+T.srch+'</span></button>';
@@ -147,7 +168,27 @@ var OPEN=null;
 function show(id,blur){ hide(); OPEN=id; $("dim").className="dim on"+(blur?" blur":""); $(id).classList.add("on"); if(id==="cc")$("gear").setAttribute("aria-expanded","true"); if(id==="sr")setTimeout(function(){$("sq").focus()},30); }
 function hide(){ if(!OPEN)return; $(OPEN).classList.remove("on"); $("dim").className="dim"; $("gear").setAttribute("aria-expanded","false"); OPEN=null; }
 $("gear").onclick=function(){ OPEN==="cc"?hide():show("cc"); };
-$("fdb").onclick=function(){ show("fd",true); };
+$("fdb").onclick=function(){ if(!EDIT) show("fd",true); };
+/* 앱 위치 바꾸기: 앱을 길게 누르거나 설정의 '앱 위치 바꾸기'를 누르면 앱이 흔들리고, 끌어서 자리를 옮긴다. '완료'로 끝낸다 */
+var EDIT=false, G=$("apps"), DR=null, LP=null, SX=0, SY=0;
+function edit(on){ EDIT=on; document.body.classList.toggle("edit",on); $("ebar").hidden=!on; if(on){ hide(); try{navigator.vibrate&&navigator.vibrate(12)}catch(e){} } else save(); }
+function save(){ try{localStorage.setItem("ep.apps",JSON.stringify([].map.call(G.children,function(c){return c.dataset.k})))}catch(e){} }
+function base(el){ var t=el.style.transform; el.style.transform="none"; var r=el.getBoundingClientRect(); el.style.transform=t; return {x:r.left+r.width/2,y:r.top+r.height/2}; }
+G.addEventListener("pointerdown",function(e){ var a=e.target.closest(".app"); if(!a)return; SX=e.clientX; SY=e.clientY;
+  if(!EDIT){ clearTimeout(LP); LP=setTimeout(function(){ LP=null; edit(true); },480); return; }
+  e.preventDefault(); DR={el:a,id:e.pointerId}; a.classList.add("drag"); try{G.setPointerCapture(e.pointerId)}catch(_){} });
+G.addEventListener("pointermove",function(e){ if(LP&&(Math.abs(e.clientX-SX)>8||Math.abs(e.clientY-SY)>8)){clearTimeout(LP);LP=null}
+  if(!DR||e.pointerId!==DR.id)return; e.preventDefault(); var el=DR.el, kids=[].slice.call(G.children), hit=null;
+  for(var i=0;i<kids.length;i++){ if(kids[i]===el)continue; var r=kids[i].getBoundingClientRect(); if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){hit=kids[i];break} }
+  if(hit){ var before=kids.indexOf(hit)<kids.indexOf(el); G.insertBefore(el,before?hit:hit.nextSibling); }
+  var b=base(el); el.style.transform="translate("+(e.clientX-b.x)+"px,"+(e.clientY-b.y)+"px) scale(1.08)"; });
+function drop(e){ clearTimeout(LP); LP=null; if(!DR)return; DR.el.classList.remove("drag"); DR.el.style.transform=""; DR=null; save(); }
+G.addEventListener("pointerup",drop); G.addEventListener("pointercancel",drop);
+G.addEventListener("click",function(e){ if(EDIT){ e.preventDefault(); e.stopPropagation(); } },true);
+G.addEventListener("contextmenu",function(e){ e.preventDefault(); });
+$("edone").onclick=function(){ edit(false); };
+$("ereset").onclick=function(){ try{localStorage.removeItem("ep.apps")}catch(e){} location.reload(); };
+$("tedit").onclick=function(){ edit(true); };
 $("srb").onclick=function(){ show("sr"); };
 $("dim").onclick=hide;
 addEventListener("keydown",function(e){ if(e.key==="Escape")hide(); });

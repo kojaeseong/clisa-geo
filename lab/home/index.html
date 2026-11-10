@@ -1,8 +1,8 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>휴대전화 앱 화면 시험 | 클리사 지오폴리틱스</title>
 <style>body{font-family:-apple-system,"Pretendard Variable",sans-serif;margin:0;padding:28px 20px;line-height:1.6;color:#101418;background:#F6F8FC}a{display:block;margin:14px 0;padding:14px 16px;border-radius:14px;background:#1F4FD8;color:#fff;text-decoration:none;font-weight:700;text-align:center}a.off{background:#E1E5EA;color:#101418}p{font-size:14px;color:#4A5560}b{color:#101418}</style></head><body>
-<h1 style="font-size:20px;margin:0 0 6px">휴대전화 앱 화면 시험</h1>
-<p>이 기기에서만 켜고 끕니다. 켜면 휴대전화 폭(900px 이하)에서 사이트가 앱 화면으로 바뀝니다. 현재: <b id="st"></b></p>
+<h1 style="font-size:20px;margin:0 0 6px">휴대전화 앱 화면 켜고 끄기</h1>
+<p>휴대전화 폭(900px 이하)에서는 사이트가 앱 화면으로 나옵니다. 이 기기에서만 끄고 켤 수 있습니다. 현재: <b id="st"></b></p>
 <a href="#" id="on">켜고 첫 화면으로 가기</a><a href="#" id="en">켜고 영문 첫 화면으로 가기</a><a href="#" class="off" id="off">끄고 사이트로 돌아가기</a>
-<script>function g(){try{return localStorage.getItem("ep.mapp")==="1"}catch(e){return false}}function s(v){try{v?localStorage.setItem("ep.mapp","1"):localStorage.removeItem("ep.mapp")}catch(e){}}
+<script>function g(){try{return localStorage.getItem("ep.mapp")!=="0"}catch(e){return true}}function s(v){try{v?localStorage.removeItem("ep.mapp"):localStorage.setItem("ep.mapp","0")}catch(e){}}
 document.getElementById("st").textContent=g()?"켜짐":"꺼짐";
 document.getElementById("on").onclick=function(e){e.preventDefault();s(1);location.href="/home/"};document.getElementById("en").onclick=function(e){e.preventDefault();s(1);location.href="/en/home/"};document.getElementById("off").onclick=function(e){e.preventDefault();s(0);location.href="/"};</script></body></html>
