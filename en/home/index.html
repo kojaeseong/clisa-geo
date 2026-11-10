@@ -31,7 +31,7 @@ a{color:inherit;text-decoration:none}
 .wg{display:block;margin:9px 12px 0;background:var(--card);border-radius:20px;padding:11px 15px;box-shadow:var(--shade)}
 .wh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;gap:8px}
 .wh b{font-size:13px;color:var(--acc)}.wh em{font:500 11px "IBM Plex Mono";font-style:normal;color:var(--ink2);white-space:nowrap}
-.wb{margin:0;padding:0 0 0 14px}.wb li{font-size:13.5px;line-height:1.38;margin:0 0 5px;font-weight:600}.wb li::marker{color:var(--acc)}
+.wb{margin:0;padding:0 0 0 14px}.wb li{font-size:13.5px;line-height:1.38;margin:0 0 5px;font-weight:600}.wb li::marker{color:var(--acc)}.wb li.wbx{font-weight:500;max-height:2.76em;overflow:hidden}.wmore{padding:6px 0 2px;margin-bottom:-2px;font-weight:600}
 .wmore{font-size:11.5px;color:var(--ink2);margin-top:2px}
 .fc a{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13px;line-height:1.3;padding:5px 0;border-top:1px solid var(--chip)}
 .fc a:first-of-type{border-top:0;padding-top:0}
@@ -114,8 +114,8 @@ body.edit #apps .app.drag{animation:none;z-index:4;position:relative}
 (function(){
 var $=function(i){return document.getElementById(i)}, EN=document.documentElement.lang==="en", P=EN?"/en":"";
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var T=EN?{set:"Settings",snd:"Tap sounds",th:"Dark mode",on:"On",off:"Off",br:"Today's briefing",n:function(k){return k+(k===1?" item":" items")},more:function(k){return "+"+k+" more"},fc:"Forecasts that moved",cases:"Issues",ph:"Search forecasts, issues, pages",none:"No results",all:"Search the whole site from the World tab",fail:"Couldn't load the briefing",pg:"Page",cs:"Issue",gear:"Open settings",edit:"Rearrange apps",done:"Done",reset:"Reset",tip:"Drag an app to move it",srch:"Search",open:function(k){return k+" open"}}
- :{set:"설정",snd:"누름 소리",th:"밤 화면",on:"켜짐",off:"꺼짐",br:"오늘의 정세 브리핑",n:function(k){return k+"건"},more:function(k){return "그 밖에 "+k+"건 더 보기"},fc:"바뀐 전망",cases:"사안별 분석",ph:"전망·사안·화면 이름",none:"찾은 것이 없습니다",all:"사이트 전체 검색은 세계 정세 화면에서",fail:"브리핑을 불러오지 못했습니다",pg:"화면",cs:"사안",gear:"설정 열기",edit:"앱 위치 바꾸기",done:"완료",reset:"처음 순서로",tip:"앱을 끌어 자리를 옮기십시오",srch:"검색",open:function(k){return "진행 중 "+k+"건"}};
+var T=EN?{set:"Settings",snd:"Tap sounds",th:"Dark mode",on:"On",off:"Off",br:"Today's briefing",n:function(k){return k+(k===1?" item":" items")},more:function(k){return "+"+k+" more ▾"},full:"Read the full briefing →",fc:"Forecasts that moved",cases:"Issues",ph:"Search forecasts, issues, pages",none:"No results",all:"Search the whole site from the World tab",fail:"Couldn't load the briefing",pg:"Page",cs:"Issue",gear:"Open settings",edit:"Rearrange apps",done:"Done",reset:"Reset",tip:"Drag an app to move it",srch:"Search",open:function(k){return k+" open"}}
+ :{set:"설정",snd:"누름 소리",th:"밤 화면",on:"켜짐",off:"꺼짐",br:"오늘의 정세 브리핑",n:function(k){return k+"건"},more:function(k){return "그 밖에 "+k+"건 더 보기 ▾"},full:"브리핑 전체 보기 →",fc:"바뀐 전망",cases:"사안별 분석",ph:"전망·사안·화면 이름",none:"찾은 것이 없습니다",all:"사이트 전체 검색은 세계 정세 화면에서",fail:"브리핑을 불러오지 못했습니다",pg:"화면",cs:"사안",gear:"설정 열기",edit:"앱 위치 바꾸기",done:"완료",reset:"처음 순서로",tip:"앱을 끌어 자리를 옮기십시오",srch:"검색",open:function(k){return "진행 중 "+k+"건"}};
 $("gear").setAttribute("aria-label",T.gear); $("cct").textContent=T.set; $("cc").setAttribute("aria-label",T.set); $("wbt").textContent=T.br; $("wft").textContent=T.fc; $("fdt").textContent=T.cases; $("fd").setAttribute("aria-label",T.cases); $("sr").setAttribute("aria-label",T.srch); $("sq").placeholder=T.ph; $("sall").textContent=T.all; $("sall").href=P+"/"; $("wbr").href=P+"/brief/";
 $("tedit").textContent=T.edit; $("edone").textContent=T.done; $("ereset").textContent=T.reset; $("etip").textContent=T.tip;
 $("tsnd").querySelector("span").textContent=T.snd; $("tth").querySelector("span").textContent=T.th;
@@ -212,6 +212,9 @@ fetch(P+"/data/daily.json",{cache:"no-cache"}).then(function(r){return r.json()}
   $("wbr").href=P+"/brief/"+x.date+"/"; $("wbd").textContent=kd(x.date)+" · "+T.n(it.length);
   $("wbl").innerHTML=it.slice(0,2).map(function(i){return "<li>"+esc(i.h)+"</li>"}).join("");
   var more=it.length-2+((x.more||[]).length); $("wbm").textContent=more>0?T.more(more):"";
+  /* 2026-11-10 파트너 의견·대통령님 승인: '그 밖에 N건'을 누르면 그 자리에서 펼친다(다시 누르면 브리핑 쪽으로) */
+  if(more>0) $("wbm").addEventListener("click",function(ev){ if(this.dataset.open)return; ev.preventDefault(); ev.stopPropagation(); this.dataset.open="1";
+    $("wbl").innerHTML=it.map(function(i){return "<li>"+esc(i.h)+"</li>"}).join("")+(x.more||[]).map(function(m){return '<li class="wbx">'+esc(m.t)+"</li>"}).join(""); this.textContent=T.full; });
   it.forEach(function(i){SRCH.push({t:i.h,u:P+"/brief/"+x.date+"/",k:kd(x.date)})});
 }).catch(function(){ $("wbl").innerHTML="<li>"+T.fail+"</li>"; });
 fetch(P+"/data/shell.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(S){
