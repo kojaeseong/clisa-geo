@@ -158,10 +158,62 @@
     return '<section class="sec f2-ents"><h3>' + T.ents + "</h3>" + E.map(function(e){ return '<a href="' + h(e[2]) + '"><span>' + h(e[0]) + "</span>" + h(e[1]) + "</a>"; }).join("") + "</section>";
   }
   /* 2026-11-03 대통령님 승인: 첫 화면(/, /heatmap/)은 시황판으로 보기, 전망으로 보기는 /outlook/ */
-  function VIEW(){ var p = location.pathname.replace(/^\/en(?=\/)/, ""); return /^\/outlook\/?$/.test(p) ? "fc" : /^\/heatmap\/?$/.test(p) ? "hm" : "rp"; }  /* 2026-11-06 대통령님 결재: 첫 화면(/, /ripple/) = 나비효과로 보기, /heatmap/ = 시황판, /outlook/ = 전망 */
-  function vtNav(on){ return '<nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '"><a' + (on === "rp" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/" data-f2v="rp">' + T.rp +
+  function VIEW(){ var p = location.pathname.replace(/^\/en(?=\/)/, ""); return /^\/outlook\/?$/.test(p) ? "fc" : /^\/heatmap\/?$/.test(p) ? "hm" : (p === "/" && TD()) ? "td" : "rp"; }  /* 2026-11-06 대통령님 결재: 첫 화면(/, /ripple/) = 나비효과로 보기, /heatmap/ = 시황판, /outlook/ = 전망 */
+  function vtNav(on){ var td = TD(); return '<nav class="f2-vt" aria-label="' + (EN ? "View" : "보기 방식") + '">' + (td ? '<a' + (on === "td" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/" data-f2v="td">' + TT.v + "</a>" : "") + '<a' + (on === "rp" ? ' class="on" aria-current="page"' : "") + ' href="' + P + (td ? "/ripple/" : "/") + '" data-f2v="rp">' + T.rp +
       '</a><a' + (on === "hm" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/heatmap/" data-f2v="hm">' + T.hm +
       '</a><a' + (on === "fc" ? ' class="on" aria-current="page"' : "") + ' href="' + P + '/outlook/" data-f2v="fc">' + T.vt[0] + "</a></nav>"; }  /* 2026-11-06 결재: 나비효과 지도로 보기는 단추 줄에서 빼고 메뉴 탭으로. 2026-11-08 대통령님: '국민별로 보기'도 뺌(메뉴의 산업과 국민 탭과 겹침, 단추 줄 가로 줄이기) */
+  /* ── 2026-11-10 대통령님 결재(CEO결정 1110b): 데스크톱 첫 화면 = '오늘' 보기. 브리핑 · 바뀐 전망 · 오늘의 소식이 국민의 생활에 이르는 길. 통합 신경망은 /ripple/ ── */
+  function TD(){ try { return matchMedia("(min-width:901px)").matches; } catch (_) { return false; } }
+  var TT = EN ? { v: "Today", h: "Today in world affairs", br: "Today's briefing", n: function(n){ return n + (n === 1 ? " story" : " stories"); }, more: function(n){ return n + " more in the full briefing →"; }, brAll: "Read the full briefing →",
+      nofc: "Related forecasts unchanged", ch: "Forecasts that moved", open: function(n){ return n + " open"; }, chAll: "All forecasts and track record →", soon: "Resolving soon", by: function(d){ return "by " + d; },
+      path: function(g){ return "What today's news means for " + g; }, pathFor: "Show for", s1: "News", s2: "Forecast", s3: "Through", weak: "The probability fell, so the effects below became less likely.", strong: "The probability rose, so the effects below became more likely.",
+      none: function(g){ return "No recent news affects " + g + " through a forecast that moved."; }, nx: function(n){ return n + " more " + (n === 1 ? "path" : "paths") + " · Show next →"; }, go: "See this path in Chain Reactions →", goAll: "Open Chain Reactions →", cs: "Analysis by issue", fail: "Couldn't load today's data. Try again in a moment." }
+    : { v: "오늘 보기", h: "오늘의 세계 정세", br: "오늘의 정세 브리핑", n: function(n){ return n + "건"; }, more: function(n){ return "그 밖에 " + n + "건 · 브리핑 전체 보기 →"; }, brAll: "브리핑 전체 보기 →",
+      nofc: "관련 전망의 확률 변동 없음", ch: "바뀐 전망", open: function(n){ return "진행 중 " + n + "개"; }, chAll: "전망 전체와 검증 결과 보기 →", soon: "곧 결과가 나오는 전망", by: function(d){ return d + "까지"; },
+      path: function(g){ return "오늘의 소식이 " + g + "의 생활에 이르는 경로"; }, pathFor: "누구의 생활로 볼지", s1: "소식", s2: "전망", s3: "거쳐 가는 변수", weak: "확률이 내렸으므로 아래 영향이 나타날 가능성도 그만큼 줄었습니다.", strong: "확률이 올랐으므로 아래 영향이 나타날 가능성도 그만큼 커졌습니다.",
+      none: function(g){ return "최근 소식 가운데 확률이 움직인 전망을 거쳐 " + g + "의 생활로 이어지는 경로는 없습니다."; }, nx: function(n){ return "이 밖에 경로 " + n + "개 · 다음 경로 보기 →"; }, go: "통합 신경망에서 이 경로 보기 →", goAll: "통합 신경망 열기 →", cs: "사안별 분석", fail: "오늘의 자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오." };
+  var TDC = EN ? [["Korean Peninsula","korea"],["Taiwan Strait","taiwan"],["Russia-Ukraine","ukraine"],["Iran and Hormuz","iran"],["Russia-NATO","poland"],["All issues",""]] : [["한반도","korea"],["대만해협","taiwan"],["러-우 전쟁","ukraine"],["이란·호르무즈","iran"],["러시아-나토","poland"],["사안 전체",""]];
+  var TDGN = EN ? {KOR: "South Korea", USA: "U.S.", NEU: "Nordic-Baltic", SEU: "Southern Europe", WCEU: "Rest of Europe", PARTY: "Conflict countries"} : {KOR: "한국", USA: "미국", NEU: "북유럽·발트", SEU: "남유럽", WCEU: "서·중·동유럽", PARTY: "당사국"};
+  var TDD = null, TDG = null, TDI = 0;
+  function tdG(){ if (TDG) return TDG; var g = null; try { g = localStorage.getItem("ep.grp"); } catch (_) {} return TDG = (g && /^(KOR|USA|NEU|SEU|WCEU|PARTY)$/.test(g)) ? g : (EN ? "USA" : "KOR"); }
+  function tdDate(d){ var p = d.split("-"); return EN ? new Intl.DateTimeFormat("en-US", {month: "short", day: "numeric", timeZone: "UTC"}).format(new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]))).replace(/^(Jan|Feb|Aug|Sep|Oct|Nov|Dec) /, function(m, a){ return (a === "Sep" ? "Sept" : a) + ". "; }) : (+p[1]) + "월 " + (+p[2]) + "일"; }
+  function tdV(a, b){ var up = b > a; return '<span class="td-v ' + (up ? "u" : "d") + '"><i>' + a + "→</i>" + b + "%" + (up ? "▲" : "▼") + "</span>"; }
+  /* 소식 → 확률이 움직인 전망 → (fcmap의 칸) → 변수 … → 국민 집단. 가장 짧은 길 하나. 문장은 연쇄 고리에 결재된 문장을 그대로 쓴다 */
+  function tdPath(g){ var D = TDD, OUT = {}, FM = {}, CHG = {}; D.C.links.forEach(function(l){ if (l.conf !== "낮음") (OUT[l.f] = OUT[l.f] || []).push(l); }); D.M.forEach(function(m){ FM[m.id] = m; });
+    D.ch.forEach(function(c){ CHG[c.id] = c; }); var goal = "grp:" + g, iss = (D.DL.issues || []).slice(0, 5), W = function(tr){ return tr.reduce(function(a, l){ return Math.min(a, l.conf === "높음" ? 2 : 1); }, 2); };
+    for (var a = 0; a < iss.length; a++) { var its = iss[a].items || []; for (var b = 0; b < its.length; b++) { var found = [], keys = {}, fcs = (its[b].fc || []).filter(function(s){ return (s.e === "up" || s.e === "down") && CHG[s.id] && FM[s.id]; });
+      fcs.forEach(function(fc){ var m = FM[fc.id]; [m].concat(m.alt ? [m.alt] : []).filter(function(x){ return x && x.node && x.rel !== "none"; }).forEach(function(st){
+        (function walk(n, tr, seen){ if (tr.length > 3) return; (OUT[n] || []).forEach(function(l){ if (seen[l.t]) return; var t2 = tr.concat([l]);
+          if (l.t === goal) { var k = fc.id + "|" + t2.map(function(x){ return x.t; }).join(">"); if (!keys[k]) { keys[k] = 1; found.push({d: iss[a].date, it: its[b], c: CHG[fc.id], dir: (m.dir || "+"), links: t2, w: W(t2)}); } }
+          else if (D.C.M[l.t]) { var s2 = {}; for (var q in seen) s2[q] = 1; s2[l.t] = 1; walk(l.t, t2, s2); } }); })(st.node, [], (function(){ var o = {}; o[st.node] = 1; return o; })()); }); });
+      if (found.length) return found.sort(function(x, y){ return y.w - x.w || x.links.length - y.links.length; }).slice(0, 6); } }
+    return []; }
+  function tdPathHtml(){ var D = TDD, g = tdG(), gn = D.C.grp[g], PS = tdPath(g), p = PS[TDI % (PS.length || 1)], x = '<h3>' + h(TT.path(gn)) + '</h3><div class="td-gs" role="group" aria-label="' + h(TT.pathFor) + '">' +
+      Object.keys(D.C.grp).map(function(k){ return '<button type="button" data-tdg="' + k + '"' + (k === g ? ' class="on" aria-pressed="true"' : ' aria-pressed="false"') + ">" + h(TDGN[k] || D.C.grp[k]) + "</button>"; }).join("") + "</div>";
+    if (!p) return x + '<p class="td-none">' + h(TT.none(gn)) + '</p><a class="td-go" href="' + P + "/ripple/?g=" + g + '" data-f2v="rp">' + TT.goAll + "</a>";
+    var down = p.c.to < p.c.from, weak = (p.dir === "-") ? !down : down;
+    x += '<div class="td-st"><div><small>' + TT.s1 + " · " + tdDate(p.d) + "</small><b>" + h(p.it.h) + "</b></div><div><small>" + TT.s2 + '</small><b><a href="' + P + "/forecast/" + p.c.id + '/">' + h(p.c.s) + "</a> " + tdV(p.c.from, p.c.to) + "</b><p>" + (weak ? TT.weak : TT.strong) + "</p></div>";
+    p.links.forEach(function(l, i){ var last = i === p.links.length - 1; x += "<div><small>" + (last ? h(gn) : TT.s3) + "</small>" + (last ? '<p class="td-lp">' + h(l.mech) + "</p>" : '<b title="' + h(l.mech) + '">' + h(D.C.M[l.t] || "") + "</b>") + "</div>"; });
+    if (PS.length > 1) x += '</div><button type="button" class="td-nx" data-tdnx="1">' + h(TT.nx(PS.length - 1)) + "</button><div>";
+    return x + '</div><a class="td-go" href="' + P + "/ripple/?g=" + g + '" data-f2v="rp">' + TT.go + "</a>"; }
+  function tdRender(){ var el = document.getElementById("td2"); if (!el || !TDD) return; var D = TDD, x = (D.DL.issues || [])[0] || {items: []}, it = x.items || [], F = {};
+    D.S.forecasts.forEach(function(f){ F[f.id] = f; }); var CHG = {}; D.ch.forEach(function(c){ CHG[c.id] = c; });
+    var nmore = Math.max(0, it.length - 3) + (x.more || []).length, bu = P + "/brief/" + x.date + "/";
+    var A = '<section class="td-c td-br"><h3>' + TT.br + "<em>" + (x.date ? tdDate(x.date) + " · " + TT.n(it.length) : "") + '</em></h3><ol>' + it.slice(0, 3).map(function(i){
+        var m = (i.fc || []).filter(function(s){ return CHG[s.id] && CHG[s.id].date === x.date; }).slice(0, 2).map(function(s){ var c = CHG[s.id]; return h(c.s) + " " + tdV(c.from, c.to); }).join(" · ");
+        return '<li><a href="' + bu + '"><b>' + h(i.h) + "</b><span>" + (m || ((i.fc || []).length ? TT.nofc : "")) + "</span></a></li>"; }).join("") + '</ol><a class="td-more" href="' + bu + '">' + (nmore ? TT.more(nmore) : TT.brAll) + "</a></section>";
+    var open = D.S.forecasts.filter(function(f){ return f.status === "open"; }), soon = open.slice().sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; }).filter(function(f){ return !CHG[f.id] || D.ch.indexOf(CHG[f.id]) > 3; }).slice(0, 3);
+    var B = '<section class="td-c td-fc"><h3>' + TT.ch + "<em>" + TT.open(open.length) + "</em></h3>" + D.ch.slice(0, 4).map(function(c){ var up = c.to > c.from;
+        return '<a href="' + P + "/forecast/" + c.id + '/"><b>' + h(c.s) + "</b>" + tdV(c.from, c.to) + '<span class="td-bar"><u style="width:' + c.to + '%"></u><s style="left:' + c.from + '%"></s><s class="' + (up ? "u" : "d") + '" style="left:' + c.to + '%"></s></span></a>'; }).join("") +
+      '<h3 class="td-h2">' + TT.soon + "</h3>" + soon.map(function(f){ return '<a class="td-sn" href="' + P + "/forecast/" + f.id + '/"><b>' + h(f.s) + "</b><span><i>" + h(TT.by(tdDate(f.due))) + "</i>" + f.p + "%</span></a>"; }).join("") + '<a class="td-more" href="' + P + '/forecast/">' + TT.chAll + "</a></section>";
+    el.innerHTML = '<div class="td-g">' + A + B + '<section class="td-c td-pa" id="tdpa">' + tdPathHtml() + '</section></div><nav class="td-cs" aria-label="' + TT.cs + '"><b>' + TT.cs + "</b>" + TDC.map(function(c){ return '<a href="' + P + "/case/" + (c[1] ? c[1] + "/" : "") + '">' + c[0] + "</a>"; }).join("") + "</nav>"; }
+  document.addEventListener("click", function(ev){ var b = ev.target.closest && ev.target.closest("button[data-tdg]"); var nx = ev.target.closest && ev.target.closest("button[data-tdnx]"); if (nx) { TDI++; var pn = document.getElementById("tdpa"); if (pn) pn.innerHTML = tdPathHtml(); return; } if (!b) return; TDI = 0; TDG = b.getAttribute("data-tdg"); try { localStorage.setItem("ep.grp", TDG); } catch (_) {} var pa = document.getElementById("tdpa"); if (pa) pa.innerHTML = tdPathHtml(); });
+  function drawToday(el){ EL = el; document.documentElement.classList.add("hm-on", "td-on"); var ft = el.querySelector(":scope > .site-foot");
+    el.innerHTML = '<div class="f2 td2"><div class="td-hd"><h2>' + TT.h + "</h2>" + vtNav("td") + '</div><div id="td2"><p class="td-ld"></p></div></div>'; if (ft) el.appendChild(ft);
+    if (TDD) { tdRender(); return; } var J = function(u){ return fetch(P + u, {cache: "no-cache"}).then(function(r){ return r.json(); }); };
+    Promise.all([J("/data/daily.json"), J("/data/shell.json"), J("/data/chains.json"), J("/data/fcmap.json")]).then(function(r){ var S = r[1], F = {}, seen = {}; S.forecasts.forEach(function(f){ F[f.id] = f; });
+      var ch = (S.fcr || []).filter(function(c){ if (seen[c.id] || !F[c.id] || F[c.id].status !== "open" || c.from === c.to) return false; seen[c.id] = 1; return true; });
+      TDD = {DL: r[0], S: S, C: r[2], M: r[3], ch: ch}; tdRender(); }).catch(function(){ var e = document.getElementById("td2"); if (e) e.innerHTML = '<p class="td-none">' + TT.fail + "</p>"; }); }
   function hmSize(){ var f = document.getElementById("hm2f"); if (!f || !f.offsetHeight) return; var r = f.getBoundingClientRect(), z = r.height / f.offsetHeight || 1, pn = document.getElementById("panel");
     var want = HMH || (innerWidth < 700 ? 600 : Math.max(480, (pn ? pn.getBoundingClientRect().bottom : innerHeight) - r.top - 2)); f.style.height = (HMH ? HMH : want / z) + "px"; }  /* v4.79f: 시황판이 알려 준 높이(판 1.6:1)를 씀 */
   var HMH = 0; addEventListener("message", function(e){ if (e.data && e.data.hmH && e.origin === location.origin) { HMH = e.data.hmH; hmSize(); } });
@@ -172,17 +224,17 @@
   /* 2026-11-07 대통령님: 통합 신경망의 전체 화면 단추를 제목 줄의 보기 단추 4개 바로 왼쪽에 둔다. 보기 단추 줄이 판 위에 얹혀 있으면(넓은 화면) 그 폭을 판에 알린다 */
   function vtW(){ var f = document.getElementById("rp2f"), n = f && f.parentNode.querySelector(":scope > .f2-vt"); if (!f || !n || !f.contentWindow) return; var w = getComputedStyle(n).position === "absolute" ? Math.max(0, n.offsetWidth + 14 + 10 - 22) : 0; try { f.contentWindow.postMessage({vtW: w}, location.origin); } catch (_) {} }
   addEventListener("message", function(e){ if (e.data && e.data.rpH && e.origin === location.origin) vtW(); }); addEventListener("resize", vtW);
-  function drawRipple(el){ EL = el; if (/^\/(ripple\/)?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on"); var ft = el.querySelector(":scope > .site-foot");
+  function drawRipple(el){ EL = el; document.documentElement.classList.remove("td-on"); if (/^\/(ripple\/)?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on"); var ft = el.querySelector(":scope > .site-foot");
     /* 2026-11-07 대통령님 결재: 국문 첫 화면은 지정학 신경망과 나비효과 지도의 통합판. 영문은 영문 통합판이 나올 때까지 옛 신경망.
        칩에서 '한 항목 보기'로 들어오거나(rpfocus) 옛 신경망에서 돌아올 때(rpret)는 옛 신경망을 연다. 옛 나비효과 지도 주소(?fp=…)는 통합판의 그 분쟁 지점으로 넘긴다 */
     var old = false; try { var fo = JSON.parse(sessionStorage.getItem("rpfocus") || "null"), rt = +sessionStorage.getItem("rpret") || 0; old = !!(fo && Date.now() - fo.t < 60000) || (rt && Date.now() - rt < 20000); } catch (_) {}
-    var fp = (location.search.match(/[?&]fp=([a-z0-9-]+)/) || [])[1];
-    var src = old ? P + "/lab/ripple/?embed=1" : P + "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "");
+    var fp = (location.search.match(/[?&]fp=([a-z0-9-]+)/) || [])[1], gq = (location.search.match(/[?&]g=([A-Z]+)/) || [])[1];
+    var src = old ? P + "/lab/ripple/?embed=1" : P + "/lab/neuro/?embed=1" + (fp ? "&fp=" + fp : "") + (gq ? "&g=" + gq : "");
     src += BV();  /* 2026-11-09: 판이 바뀌면 신경망 화면도 새로 받게(휴대전화 브라우저가 옛 판을 보이던 것) */  /* 2026-11-07 결재: 영문도 통합판(Chain Reactions) */
     el.innerHTML = '<div class="f2 hm2">' + vtNav("rp") + '<iframe id="rp2f" class="hm2-f rp2-f' + (old ? "" : " nr2-f") + '" src="' + src + '" title="' + T.rpT + '" loading="eager"></iframe></div>';
     if (ft) el.appendChild(ft); rpSize(); }
   function drawHeat(el){
-    EL = el; if (/^\/heatmap\/?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
+    EL = el; document.documentElement.classList.remove("td-on"); if (/^\/heatmap\/?$/.test(location.pathname.replace(/^\/en(?=\/)/, ""))) document.documentElement.classList.add("hm-on");  /* 다른 쪽(/life/·/links/ 등)에서 뒤에 그려 둘 때는 지구본을 그대로 둔다 */
     var ft = el.querySelector(":scope > .site-foot");
     el.innerHTML = '<div class="f2 hm2">' + vtNav("hm") + '<iframe id="hm2f" class="hm2-f" src="' + P + '/lab/heatmap/?embed=1' + BV() + '" title="' + T.hmT + '" loading="eager"></iframe></div>';
     if (ft) el.appendChild(ft);
@@ -192,7 +244,8 @@
   function draw(el){
     if (VIEW() === "hm") { drawHeat(el); return; }
     if (VIEW() === "rp") { drawRipple(el); return; }
-    document.documentElement.classList.remove("hm-on");
+    if (VIEW() === "td") { drawToday(el); return; }
+    document.documentElement.classList.remove("hm-on", "td-on");
     EL = el;
     ALL = FD.fcs.filter(function(f){ return !(EN && f.ko); }).sort(function(a, b){ return a.due.localeCompare(b.due) || b.p - a.p; });  /* 2026-11-08 ru1108: 국문만 낸 전망(ko)은 영문 첫 화면에서 뺀다 */
     var ft = el.querySelector(":scope > .site-foot");  /* 화면 앱이 붙인 바닥글은 그대로 둔다 */
@@ -251,14 +304,16 @@
   document.addEventListener("keydown", function(ev){ if ((ev.key === "Enter" || ev.key === " ") && ev.target.matches && ev.target.matches(".f2-ev")) { ev.preventDefault(); ev.target.click(); } });
   document.addEventListener("clisa:snd", function(ev){ SND = !!ev.detail; var b = document.getElementById("f2snd"); if (b) { b.textContent = T.snd[SND ? 1 : 0]; b.setAttribute("aria-pressed", SND); } }); /* 머리글 소리 단추와 맞춤(2026-11-03) */
   var loading = false;
-  function go(el){ if (!el) return; if (VIEW() === "hm") { drawHeat(document.getElementById("pane-overview") || el); return; } if (VIEW() === "rp") { drawRipple(document.getElementById("pane-overview") || el); return; } if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
+  function go(el){ if (!el) return; if (VIEW() === "td") { drawToday(document.getElementById("pane-overview") || el); return; } if (VIEW() === "hm") { drawHeat(document.getElementById("pane-overview") || el); return; } if (VIEW() === "rp") { drawRipple(document.getElementById("pane-overview") || el); return; } if (FD) { draw(el); if (SEL) focus(SEL); return; } if (loading) return; loading = true;
     fetch(P + "/data/front.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(d){ FD = d; draw(document.getElementById("pane-overview") || el); fresh(); }).catch(function(){ loading = false; }); }
   // E111(2026-11-03 결재): 최근 정세 브리핑 카드는 빌드 때의 front.json이 아니라 매일 바뀌는 daily.json의 최근 3개 호에서 읽는다. 읽지 못하면 front.json 값을 그대로 둔다.
   function fresh(){ fetch(P + "/data/daily.json", {cache: "no-cache"}).then(function(r){ return r.json(); }).then(function(D){ var out = [];
       (D.issues || []).slice(0, 3).forEach(function(x){ (x.items || []).forEach(function(it){ if (it.case && FD.cases[it.case]) out.push({d: x.date, h: it.h, he: it.h, "case": it.case}); }); });
       if (out.length) { FD.news = out.slice(0, 6); if (EL) news(); } }).catch(function(){}); }
   document.addEventListener("clisa:overview", function(ev){ go(ev.detail); });
-  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "overview") { document.documentElement.classList.remove("hm-on"); focus(null); } else { var po2 = document.getElementById("pane-overview"); if (po2 && ((VIEW() === "hm" && !document.getElementById("hm2f")) || (VIEW() === "rp" && !document.getElementById("rp2f")))) { go(po2); if ((VIEW() === "hm" && document.getElementById("hm2f")) || (VIEW() === "rp" && document.getElementById("rp2f"))) document.documentElement.classList.add("hm-on"); return; }  /* 2026-11-07: 다른 탭에서 '세계 정세'로 돌아오면 주소(/)와 다른 보기(시황판)가 남아 지구본과 함께 보이던 것 — 주소에 맞는 보기로 다시 그린다 */
+  function tdFix(){ var po = document.getElementById("pane-overview"); if (po && po.offsetParent !== null && VIEW() === "td" && !document.getElementById("td2")) go(po); }  /* 다른 탭에서 돌아올 때 주소가 바뀌기 전에 그려져 통합 신경망이 남던 것 */
+  document.addEventListener("clisa:tab", function(ev){ if (ev.detail === "overview") { setTimeout(tdFix, 60); setTimeout(tdFix, 500); } });
+  document.addEventListener("clisa:tab", function(ev){ if (ev.detail !== "overview") { document.documentElement.classList.remove("hm-on", "td-on"); focus(null); } else { var po2 = document.getElementById("pane-overview"); if (po2 && VIEW() === "td") { if (!document.getElementById("td2")) go(po2); document.documentElement.classList.add("hm-on", "td-on"); return; } if (po2 && ((VIEW() === "hm" && !document.getElementById("hm2f")) || (VIEW() === "rp" && !document.getElementById("rp2f")))) { go(po2); if ((VIEW() === "hm" && document.getElementById("hm2f")) || (VIEW() === "rp" && document.getElementById("rp2f"))) document.documentElement.classList.add("hm-on"); return; }  /* 2026-11-07: 다른 탭에서 '세계 정세'로 돌아오면 주소(/)와 다른 보기(시황판)가 남아 지구본과 함께 보이던 것 — 주소에 맞는 보기로 다시 그린다 */
       if ((VIEW() === "hm" && document.getElementById("hm2f")) || (VIEW() === "rp" && document.getElementById("rp2f"))) document.documentElement.classList.add("hm-on"); if (SEL && FD) focus(SEL); } });
   /* 시황판 ↔ 전망으로 보기: 같은 화면 안에서 바꾸고 주소만 바꾼다(뒤로 가기 지원) */
   document.addEventListener("click", function(ev){ var a = ev.target.closest && ev.target.closest("a[data-f2v]"); if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return; ev.preventDefault(); ev.stopPropagation();

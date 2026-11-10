@@ -126,3 +126,68 @@ section.f2-who h2{color:var(--ink)!important}
 .f2-vt a:not(.on):hover,.l2-vt a:not(.on):hover,.lkm-vt a:not(.on):hover{background:rgba(255,255,255,.16)!important;transform:translateY(-1px)}
 .f2-vt a.on,.l2-vt a.on,.lkm-vt a.on{background:linear-gradient(180deg,#FFFFFF,#E9EEFB)!important;box-shadow:0 1px 0 #fff inset,0 2px 0 rgba(10,30,90,.35),0 4px 10px rgba(10,30,90,.35)!important}
 @media (prefers-reduced-motion:reduce){.f2-vt a,.l2-vt a,.lkm-vt a{transition:none}.f2-vt a:hover,.l2-vt a:hover,.lkm-vt a:hover{transform:none}}
+
+/* ── 2026-11-10 데스크톱 첫 화면 '오늘 보기'(CEO결정 1110b) ── */
+@media (min-width:901px){ html.td-on .hd-strips{display:none} }
+.td2{display:flex;flex-direction:column;background:var(--card,#fff);border-radius:14px;padding:6px 26px 16px;box-sizing:border-box;color:var(--ink,#111827)}
+.td2 .td-hd{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.td2 .td-hd h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em}
+.td2 .td-hd .f2-vt{position:static!important;margin:0}
+.td2 #td2{flex:1;display:flex;flex-direction:column;min-height:0}
+.td-g{flex:1;display:grid;grid-template-columns:1.22fr 1fr 1.05fr;gap:0 26px;border-top:1px solid var(--line,#e5e7eb);padding-top:18px}
+.td-c{min-width:0;display:flex;flex-direction:column}
+.td-c + .td-c{border-left:1px solid var(--line,#e5e7eb);padding-left:26px}
+.td-c h3{margin:0 0 2px;font-size:13.5px;font-weight:800;color:var(--acc,#1d4ed8);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.td-c h3 em{font-style:normal;font-weight:500;font-size:12.5px;color:var(--ink2,#6b7280);white-space:nowrap}
+.td-c a{color:inherit;text-decoration:none}
+.td-br ol{list-style:none;margin:6px 0 0;padding:0;counter-reset:n}
+.td-br li{counter-increment:n;border-bottom:1px solid var(--line2,#eef0f3)}
+.td-br li a{display:grid;grid-template-columns:26px minmax(0,1fr);padding:14px 0}
+.td-br li a:before{content:counter(n);font:800 20px/1.25 Archivo,sans-serif;color:#c7cdd8;grid-row:1/3}
+.td-br li b{font-size:18px;line-height:1.42;font-weight:700;letter-spacing:-.01em}
+.td-br li:first-child b{font-size:22.5px;line-height:1.36}
+.td-br li a:hover b{text-decoration:underline}
+.td-br li span{grid-column:2;margin-top:6px;font-size:13px;line-height:1.45;color:var(--ink2,#6b7280)}
+.td-v{font:800 1em/1 Archivo,sans-serif;white-space:nowrap}
+.td-v i{font-style:normal;font-weight:500;color:#9ca3af;margin-right:2px}
+.td-v.u,.td-bar s.u{color:#0f8a4f}.td-v.d,.td-bar s.d{color:#d0342c}
+.td-br li span .td-v{font-size:13px}.td-br li span .td-v i{color:inherit;font-weight:700}
+.td-more{margin-top:14px;font-size:13.5px;font-weight:600;color:var(--acc,#1d4ed8)!important;align-self:flex-start}
+.td-more:hover{text-decoration:underline}
+.td-fc > a:not(.td-more){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 12px;padding:12px 0;border-bottom:1px solid var(--line2,#eef0f3);align-items:center}
+.td-fc > a b{font-size:15.5px;font-weight:650;line-height:1.35}
+.td-fc > a:hover b{text-decoration:underline}
+.td-fc .td-v{font-size:18px}
+.td-bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--line2,#eef0f3);position:relative}
+.td-bar u{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:#cbd5e1}
+.td-bar s{position:absolute;top:-3px;width:3px;height:10px;border-radius:2px;background:#9ca3af;margin-left:-1px}
+.td-bar s.u,.td-bar s.d{background:currentColor}
+.td-c h3.td-h2{margin-top:20px}
+.td-fc > a.td-sn span{font:800 16px/1 Archivo,sans-serif;white-space:nowrap}
+.td-fc > a.td-sn span i{font-family:Pretendard Variable,Pretendard,sans-serif;font-weight:500;font-size:12.5px;font-style:normal;color:var(--ink2,#6b7280);margin-right:8px}
+.td-gs{display:flex;flex-wrap:wrap;gap:3px;margin:10px 0 2px}
+html[lang="en"] .td-gs{display:grid;grid-template-columns:repeat(3,1fr)}
+.td-gs button{flex:1 1 auto;font:600 12px/1 inherit;padding:7px 3px;border-radius:3px;min-width:0;border:1px solid var(--line,#e5e7eb);background:transparent;color:var(--ink2,#4b5563);cursor:pointer;white-space:nowrap}
+.td-gs button.on{background:#0b1220;border-color:#0b1220;color:#fff}
+.td-st{margin-top:14px;position:relative;padding-left:22px}
+.td-st:before{content:"";position:absolute;left:6px;top:8px;bottom:30px;width:2px;background:linear-gradient(#f59e0b,#f97316)}
+.td-st > div{position:relative;padding-bottom:14px}
+.td-st > div:before{content:"";position:absolute;left:-21px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--card,#fff);border:3px solid #f59e0b;box-sizing:border-box}
+.td-st small{display:block;font-size:11.5px;font-weight:700;color:#b45309;margin-bottom:4px}
+.td-st b{font-size:15px;font-weight:650;line-height:1.4}
+.td-st b a:hover{text-decoration:underline}
+.td-st p{margin:4px 0 0;font-size:13px;line-height:1.5;color:var(--ink2,#4b5563)}
+.td-none{margin:16px 0;font-size:14px;line-height:1.6;color:var(--ink2,#4b5563)}
+.td-go{margin-top:auto;align-self:flex-start;background:#0b1220;color:#fff!important;border-radius:9px;padding:11px 15px;font-size:13.5px;font-weight:650}
+.td-cs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-top:1px solid var(--line,#e5e7eb);margin-top:16px;padding-top:14px}
+.td-cs b{font-size:13px;font-weight:800;color:var(--ink2,#6b7280);margin-right:6px}
+.td-cs a{font-size:13.5px;font-weight:600;padding:8px 13px;border:1px solid var(--line,#e5e7eb);border-radius:9px;color:inherit;text-decoration:none}
+.td-cs a:hover{border-color:#0b1220}
+:root[data-theme="dark"] .td2{background:#0f1626;color:#e6e9ef}
+:root[data-theme="dark"] .td-gs button.on,:root[data-theme="dark"] .td-go{background:#e6e9ef;color:#0b1220!important;border-color:#e6e9ef}
+:root[data-theme="dark"] .td-st > div:before{background:#0f1626}
+.td-st p.td-lp{margin-top:0;font-size:14.5px;font-weight:600;color:inherit}
+@media (max-width:1150px){ html[lang="en"] .td-gs{grid-template-columns:repeat(2,1fr)} .td-g{gap:0 18px} .td-c + .td-c{padding-left:18px} }
+.td-gs button{overflow:hidden;text-overflow:ellipsis}
+.td-nx{margin:2px 0 12px 22px;align-self:flex-start;background:none;border:0;padding:0;font:600 13px/1.3 inherit;color:var(--acc,#1d4ed8);cursor:pointer;text-align:left}
+.td-nx:hover{text-decoration:underline}

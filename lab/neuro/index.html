@@ -40,7 +40,7 @@ h1{font-size:23px;line-height:1.25;margin:0;font-weight:700;letter-spacing:-.01e
 .fn{position:relative;border:1px solid rgba(255,176,32,.35);background:linear-gradient(180deg,rgba(255,176,32,.09),rgba(255,176,32,.03));border-radius:11px;padding:9px 11px;cursor:pointer;transition:border-color .15s,opacity .2s,box-shadow .2s}
 .fn .q{font-size:12.5px;font-weight:600;line-height:1.4;word-break:keep-all}.fn .m{display:flex;gap:6px;align-items:baseline;margin-top:4px;font-family:var(--mono)}.fn .m b{font-size:15px}.fn .m span{font-size:11px;font-weight:600}.fn .cs{font-size:10.5px;color:var(--mute);margin-top:2px}
 .vn{position:relative;border:1px solid rgba(255,122,61,.42);background:linear-gradient(180deg,rgba(255,122,61,.10),rgba(255,122,61,.03));border-radius:9px;padding:8px 10px;font-size:12px;font-weight:600;line-height:1.35;word-break:keep-all;color:var(--ink2);cursor:pointer;transition:border-color .15s,opacity .2s}
-.dim .ev:not(.hl),.dim .fn:not(.hl),.dim .vn:not(.hl){opacity:.38}.fn.hl{border-color:var(--lit);box-shadow:0 0 18px rgba(255,176,32,.25)}.vn.hl{border-color:var(--var);color:#fff;box-shadow:0 0 18px rgba(255,122,61,.25)}svg#lk path.a.vo{stroke:rgba(255,122,61,.55)}svg#lk path.a.vo.hl{stroke:var(--var)}.legend .lv{display:inline-block;width:26px;height:3px;border-radius:2px;background:var(--var);vertical-align:middle;margin-right:6px}/* 2026-11-07 대통령님: 거쳐 가는 변수 칸과 그 칸에서 오른쪽으로 나가는 길은 주황(전망 칸의 노랑과 구별) */.ev.hl{border-color:#9fb0cc}
+.dim .ev:not(.hl),.dim .fn:not(.hl),.dim .vn:not(.hl){opacity:.38}.fn.hl{border-color:var(--lit);box-shadow:0 0 18px rgba(255,176,32,.25)}.vn.hl{border-color:var(--var);color:#fff;box-shadow:0 0 18px rgba(255,122,61,.25)}svg#lk path.a.vo{stroke:rgba(255,122,61,.55)}svg#lk path.a.vo.hl{stroke:var(--var)}.legend .lv{display:inline-block;width:26px;height:3px;border-radius:2px;background:var(--var);vertical-align:middle;margin-right:6px}/* 2026-11-07 대통령님: 거쳐 가는 변수 칸과 그 칸에서 오른쪽으로 나가는 경로는 주황(전망 칸의 노랑과 구별) */.ev.hl{border-color:#9fb0cc}
 .none2{font-size:12px;color:var(--faint);line-height:1.6;padding:16px 4px;word-break:keep-all}
 /* 나비효과 지도 표 */
 .tb{min-width:620px}
@@ -146,11 +146,11 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 <div class="row3" id="row3"></div><script>/* 2026-11-09 휴대전화: 단추 줄 옮기기 */(function(){var mq=matchMedia("(max-width:900px)"),r1=document.querySelector(".row1"),r3=document.getElementById("row3"),zc=r1&&r1.querySelector(".zc"),fb=document.getElementById("fsb");if(!r1||!r3||!zc||!fb)return;function mv(){var t=mq.matches?r3:r1;t.appendChild(zc);t.appendChild(fb);}mv();mq.addEventListener?mq.addEventListener("change",mv):mq.addListener(mv);})();</script>
 </div>
 <div id="vp"><div id="stage"></div><div class="load" id="ld">불러오는 중입니다…</div>
- <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 길만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
+ <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 경로만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
  <aside id="dp" class="off" aria-live="polite"><button type="button" class="x" id="dpx" aria-label="닫기">×</button><div id="det"></div></aside>
 </div>
-<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 길 · 선이 두꺼울수록 확신도가 높음</span><span><i class="lv"></i>판단: 거쳐 가는 변수에서 나비효과로 이어지는 길</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 길(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
-<p class="foot">열려 있는 길은 나비효과가 분쟁 지점마다 경로와 국민 집단별로 판단한 칸입니다. 불이 켜진 칸은 10월 1일 이후 확률이 움직인 전망이 신경망의 연결을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
+<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 경로 · 선이 두꺼울수록 확신도가 높음</span><span><i class="lv"></i>판단: 거쳐 가는 변수에서 나비효과로 이어지는 경로</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 경로(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
+<p class="foot">열려 있는 경로는 나비효과가 분쟁 지점마다 경로와 국민 집단별로 판단한 칸입니다. 불이 켜진 칸은 10월 1일 이후 확률이 움직인 전망이 신경망의 연결을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
 <script>
 (function(){
 const SINCE='2026-10-01', P='';
@@ -190,10 +190,10 @@ function litMap(g){
  const out={}; const es=VIEW.edges.filter(e=>LOW||e.conf!=='낮음');
  const IN={}; es.forEach(e=>(IN[e.t]=IN[e.t]||[]).push(e));
  es.forEach(e=>{ if(e.t!=='grp:'+g||!e.lm) return;
-  /* 이 고리로 들어오는 전망: 거꾸로 따라가 전망에 이르는 길 하나씩 */
+  /* 이 고리로 들어오는 전망: 거꾸로 따라가 전망에 이르는 경로 하나씩 */
   const paths=[]; const seen=new Set();
   (function back(n,trail){ if(n.startsWith('F:')){ if(!seen.has(n)){ seen.add(n); paths.push([n].concat(trail)) } return } (IN[n]||[]).forEach(x=>{ if(trail.indexOf(x.f)<0&&trail.length<6) back(x.f,[n].concat(trail)) }) })(e.f,[]);
-  if(!paths.length) return;  /* 확률이 움직인 전망에서 이 고리까지 이어진 길이 없으면 불을 켜지 않는다 */
+  if(!paths.length) return;  /* 확률이 움직인 전망에서 이 고리까지 이어진 경로가 없으면 불을 켜지 않는다 */
   e.lm.forEach(m=>{ if(m[2]!==g) return; const k=m[0]+'|'+m[1]; (out[k]=out[k]||[]).push({e,paths}) }) });
  return out;
 }
@@ -207,15 +207,15 @@ function detail(k,lit,byFp,fpById){
  /* 2026-11-07: '이어지지 않음'·'판단 불가' 칸도 나비효과 지도의 판단과 이유를 보인다(1,548칸 모두 통합판에서) */
  if(c&&c.v!==1){ h+='<div class="chips"><span class="chip">'+(c.v===0?'이어지지 않음':'판단 불가')+'</span></div><div class="sec"><h3><i class="b"></i>나비효과의 판단</h3><p class="vno">'+esc(c.r||'')+'</p>'+ASOF()+'</div>'; el.innerHTML=h; return }
  h+='<div class="chips">'+(L1?'<span class="chip lit">이번 기간 움직임</span>':'')+'<span class="chip">확신도: '+esc(L.L.conf[c.c])+'</span>'+(c.l!=null?'<span class="chip">걸리는 시간: '+esc(L.L.lag[c.l])+'</span>':'')+((c.k||[]).length?'<span class="chip">영향 범주: '+esc(c.k.map(i=>L.L.cat[i]).join('·'))+'</span>':'')+'</div>';
- h+='<div class="sec"><h3><i class="b"></i>열려 있는 길 · 나비효과의 판단</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF()+'</div>';
- h+='<div class="sec"><h3><i class="a"></i>이번 기간 이 칸으로 들어온 길 · 신경망</h3>';
+ h+='<div class="sec"><h3><i class="b"></i>열려 있는 경로 · 나비효과의 판단</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF()+'</div>';
+ h+='<div class="sec"><h3><i class="a"></i>이번 기간 이 칸으로 들어온 경로 · 신경망</h3>';
  if(!L1) h+='<p class="none">'+md(SINCE)+' 이후 확률이 움직인 전망 가운데 이 칸으로 이어진 것은 없습니다.</p>';
  else { const items=[]; L1.forEach(x=>x.paths.forEach(pt=>items.push([pt,x.e])));
   items.sort((a,b)=>{ const A=VIEW.nodes[a[0][0]],B=VIEW.nodes[b[0][0]]; return Math.abs(B.b-B.a)-Math.abs(A.b-A.a) });
   const seen=new Set();
   h+='<ul class="mv">'+items.filter(([pt])=>{ const k=pt.join('>'); if(seen.has(k)) return false; seen.add(k); return true }).slice(0,6).map(([pt,e])=>{ const n=VIEW.nodes[pt[0]], dd=Math.round((n.b-n.a)*10)/10;
    return '<li><div class="fc"><div class="q">'+esc(n.fc.s||n.fc.q)+'<div class="via">'+esc(CN[n.cs]||'')+'</div></div><div class="p"><b>'+n.b+'%</b><span class="dd '+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+'%p</span></div></div>'+
-    '<p class="via">거쳐 가는 길 <b>'+viaNames(pt).map(esc).join(' → ')+' → '+esc(L.L.gl[G])+'</b></p>'+(e.mech?'<p class="why">'+esc(e.mech)+'</p>':'')+
+    '<p class="via">거쳐 가는 경로 <b>'+viaNames(pt).map(esc).join(' → ')+' → '+esc(L.L.gl[G])+'</b></p>'+(e.mech?'<p class="why">'+esc(e.mech)+'</p>':'')+
     '<a href="/forecast/'+esc(n.fc.id)+'/" target="_top">전망 기록 보기 →</a></li>' }).join('')+'</ul>' }
  h+='</div>'; el.innerHTML=h;
 }
@@ -316,7 +316,7 @@ function render(refit){
  const avg=s=>[...s].reduce((a,b)=>a+b,0)/s.size;
  const F=Object.keys(fc).sort((a,b)=>avg(fc[a])-avg(fc[b])), V=Object.keys(vv).sort((a,b)=>avg(vv[a])-avg(vv[b]));
  const fcs=new Set(F);
- $('kpi').innerHTML='<span><b>'+open.length+'</b>열려 있는 길</span><span class="l"><b>'+Object.keys(LIT).length+'</b>불이 켜진 칸</span><span><b>'+fcs.size+'</b>확률이 움직인 전망</span>';
+ $('kpi').innerHTML='<span><b>'+open.length+'</b>열려 있는 경로</span><span class="l"><b>'+Object.keys(LIT).length+'</b>불이 켜진 칸</span><span><b>'+fcs.size+'</b>확률이 움직인 전망</span>';
  const evH=F.map(id=>(VIEW.nodes[id].ev||[]).map((e,j)=>'<div class="ev" data-n="E:'+esc(id.slice(2))+':'+j+'"><div class="d">'+md(e[0])+' <span class="s '+(e[1]==='up'?'up':'dn')+'" role="img" aria-label="'+(e[1]==='up'?'전망의 가능성을 키우는 소식':'전망의 가능성을 줄이는 소식')+'">'+(e[1]==='up'?'▲':'▼')+'</span></div><div class="h">'+esc(e[2])+'</div></div>').join('')).join('');
  const fcH=F.map(id=>{ const n=VIEW.nodes[id], dd=Math.round((n.b-n.a)*10)/10; return '<div class="fn" data-n="'+esc(id)+'"><div class="q">'+esc(n.fc.s||n.fc.q)+'</div><div class="m"><b>'+n.b+'%</b><span class="'+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+'%p</span></div><div class="cs">'+esc(CN[n.cs]||'')+(n.sig?' · 정세 브리핑 '+n.sig+'건':'')+'</div></div>' }).join('');
  const vH=V.map(id=>'<div class="vn" data-n="'+esc(id)+'">'+esc(nname(id))+'</div>').join('');
@@ -332,7 +332,7 @@ function render(refit){
  st.querySelectorAll('#stage > div:not(.tb):not(.part)').forEach(d=>{ d.style.display='flex'; d.style.flexDirection='column' }); st.querySelectorAll('#stage .col').forEach(c=>c.style.flex='1');
  st.querySelectorAll('.c[data-k]').forEach(el=>el.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); select(el.dataset.k,true,el) } });
  draw();
- /* 2026-11-07 대통령님: 처음에는 불이 켜진 길을 모두 켜 두고, 고른 뒤에만 그 길만 남긴다 */
+ /* 2026-11-07 대통령님: 처음에는 불이 켜진 경로를 모두 켜 두고, 고른 뒤에만 그 경로만 남긴다 */
  if(SEL&&!st.querySelector(SEL.startsWith('row:')?'[data-rown="'+SEL+'"]':'.c[data-k="'+SEL+'"]')) SEL=null; if(!SEL) SELN=null;
  if(refit){ if(!SEL) dp.classList.add('off'); spread(); sizeVp(); fit(false); post() }
  if(SEL) select(SEL,false,null,SELN); else { hilite(); detail(null) }
@@ -347,7 +347,7 @@ function draw(){ const sv=$('lk'); if(!sv) return; sv.setAttribute('width',st.of
  SEGS.forEach((s,i)=>{ const a=box(s.a), b=box(s.b); if(!a||!b) return; const x1=a.x+a.w, y1=a.y+a.h/2, x2=b.x, y2=b.y+b.h/2, k=(x2-x1)*.5; s.d=x2<x1+20?lane(a,b):'M'+x1+','+y1+' C'+(x1+k)+','+y1+' '+(x2-k)+','+y2+' '+x2+','+y2;
   h+='<path class="base '+s.kind+(s.kind==='a'?' w'+(s.cf||2)+(/^(F:|E:)/.test(s.a)?'':' vo'):'')+'" data-i="'+i+'" d="'+s.d+'"/>' }); sv.innerHTML=h }
 function hilite(){ const on=new Set(), sv=$('lk'); if(!sv) return on; sv.querySelectorAll('path.fl').forEach(p=>p.remove());
- /* 2026-11-07 대통령님: 카드를 누르면 그 카드를 지나는 길만 켠다(칸을 누르면 그 칸으로 들어오는 길 전부) */
+ /* 2026-11-07 대통령님: 카드를 누르면 그 카드를 지나는 경로만 켠다(칸을 누르면 그 칸으로 들어오는 경로 전부) */
  const isE=SELN&&SELN.startsWith('E:'), SP=new Set(); if(SELN){ if(isE) SEGS.forEach(s=>{ if(s.a===SELN) s.pids.forEach(p=>SP.add(p)) }); else PATHS.forEach((ch,p)=>{ if(ch.includes(SELN)) SP.add(p) }) }
  SEGS.forEach((s,i)=>{ const hl=!SEL||(SELN?([...s.pids].some(p=>SP.has(p))&&(!isE||s.kind!=='r'||s.a===SELN)):s.cells.has(SEL)); const p=sv.querySelector('path[data-i="'+i+'"]'); if(p) p.classList.toggle('hl',hl); if(hl){ on.add(s.a); on.add(s.b); if(p){ const f=document.createElementNS('http://www.w3.org/2000/svg','path'); f.setAttribute('d',s.d); f.setAttribute('class','fl '+s.kind); sv.appendChild(f) } } });
  st.classList.toggle('dim',!!SEL&&on.size>0); st.querySelectorAll('[data-n]').forEach(el=>el.classList.toggle('hl',on.has(el.dataset.n)));
