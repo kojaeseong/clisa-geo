@@ -249,6 +249,9 @@ html.mapp.locshow:not(.mapp-map) .mloc-x{display:block;position:fixed;z-index:61
 /* 2026-11-10 대통령님 지시: 휴대전화 앱 화면에서는 정세 브리핑·정세 요약 제목의 지도 보기(위치 표시와 누르면 지구본)를 없앤다. 넓은 화면은 그대로 */
 html.mapp .bh[data-bloc],html.mapp .bh[data-dg]{pointer-events:none;cursor:default}
 html.mapp .bh[data-bloc] > svg,html.mapp .bh[data-dg] > svg{display:none}
+/* 2026-11-10 대통령님 결재: 앱 화면에서는 세계 정세 밖의 화면에 보기 단추 줄(통합 신경망·시황판·전망으로 보기)을 두지 않고, 다가오는 일정의 위치 표시도 뺀다(지도를 보이지 않으므로) */
+html.mapp:not(.mapp-map) :is(.f2-vt,.l2-vt,.lkm-vt){display:none!important}
+html.mapp .fcl > svg{display:none}
 html.mapp .mdock{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:55;height:calc(58px + env(safe-area-inset-bottom));padding:0 6px env(safe-area-inset-bottom);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line,#D2D8DE)}
 html.mapp .mdock a,html.mapp .mdock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:none;padding:0;font:600 10.5px/1 var(--sans);color:var(--ink-2,#4A5560);text-decoration:none;cursor:pointer}
 html.mapp .mdock svg{width:23px;height:23px}
