@@ -146,11 +146,11 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 <div class="row3" id="row3"></div><script>/* 2026-11-09 휴대전화: 단추 줄 옮기기 */(function(){var mq=matchMedia("(max-width:900px)"),r1=document.querySelector(".row1"),r3=document.getElementById("row3"),zc=r1&&r1.querySelector(".zc"),fb=document.getElementById("fsb");if(!r1||!r3||!zc||!fb)return;function mv(){var t=mq.matches?r3:r1;t.appendChild(zc);t.appendChild(fb);}mv();mq.addEventListener?mq.addEventListener("change",mv):mq.addListener(mv);})();</script>
 </div>
 <div id="vp"><div id="stage"></div><div class="load" id="ld">불러오는 중입니다…</div>
- <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 경로만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
+ <div class="hint" id="hint">끌어서 옮기고, 휠이나 두 손가락으로 확대합니다. 칸이나 카드를 누르면 그 연결선만 남고, 빈 곳을 누르면 모두 켜집니다.</div>
  <aside id="dp" class="off" aria-live="polite"><button type="button" class="x" id="dpx" aria-label="닫기">×</button><div id="det"></div></aside>
 </div>
-<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 경로 · 선이 두꺼울수록 확신도가 높음</span><span><i class="lv"></i>판단: 거쳐 가는 변수에서 나비효과로 이어지는 경로</span><span><i class="kl"></i>이번 기간 불이 켜진 칸(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>열려 있는 경로(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
-<p class="foot">열려 있는 경로는 나비효과가 분쟁 지점마다 경로와 국민 집단별로 판단한 칸입니다. 불이 켜진 칸은 10월 1일 이후 확률이 움직인 전망이 신경망의 연결을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
+<div class="legend"><span class="ud"><b class="up">▲</b> <b class="dn">▼</b> 소식이 선으로 이어진 전망의 가능성을 키우는지 줄이는지</span><span><i class="lr"></i>기록: 정세 브리핑 꼭지가 전망 확률을 움직임</span><span><i class="la"></i>판단: 클리사가 이은 연결선 · 선이 두꺼울수록 확신도가 높음</span><span><i class="lv"></i>판단: 거쳐 가는 변수에서 나비효과로 이어지는 연결선</span><span><i class="kl"></i>최근 변화가 전해진 영향(숫자는 가장 크게 움직인 확률의 폭)</span><span><i class="k3"></i><i class="k2"></i><i class="k1"></i>국민에게 이어지는 영향(진할수록 확신도가 높음)</span><span><i class="k0"></i>이어지지 않음</span><span><i class="ku"></i>판단 불가</span></div>
+<p class="foot">국민에게 이어지는 영향은 나비효과가 분쟁 지점마다 경로와 국민 집단별로 판단한 것입니다. 최근 변화가 전해진 영향은 10월 1일 이후 확률이 움직인 전망이 신경망의 연결선을 거쳐 그 칸에 이른 경우입니다. 연결선마다 근거와 출처가 있습니다. 사건과 확률 변화는 클리사의 기록이고, 나머지 연결은 클리사의 판단이며 별도 검토자의 검토를 거쳤습니다.</p>
 <script>
 (function(){
 const SINCE='2026-10-01', P='';
@@ -207,7 +207,7 @@ function detail(k,lit,byFp,fpById){
  /* 2026-11-07: '이어지지 않음'·'판단 불가' 칸도 나비효과 지도의 판단과 이유를 보인다(1,548칸 모두 통합판에서) */
  if(c&&c.v!==1){ h+='<div class="chips"><span class="chip">'+(c.v===0?'이어지지 않음':'판단 불가')+'</span></div><div class="sec"><h3><i class="b"></i>나비효과의 판단</h3><p class="vno">'+esc(c.r||'')+'</p>'+ASOF()+'</div>'; el.innerHTML=h; return }
  h+='<div class="chips">'+(L1?'<span class="chip lit">이번 기간 움직임</span>':'')+'<span class="chip">확신도: '+esc(L.L.conf[c.c])+'</span>'+(c.l!=null?'<span class="chip">걸리는 시간: '+esc(L.L.lag[c.l])+'</span>':'')+((c.k||[]).length?'<span class="chip">영향 범주: '+esc(c.k.map(i=>L.L.cat[i]).join('·'))+'</span>':'')+'</div>';
- h+='<div class="sec"><h3><i class="b"></i>열려 있는 경로 · 나비효과의 판단</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF()+'</div>';
+ h+='<div class="sec"><h3><i class="b"></i>국민에게 이어지는 영향 · 나비효과의 판단</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF()+'</div>';
  h+='<div class="sec"><h3><i class="a"></i>이번 기간 이 칸으로 들어온 경로 · 신경망</h3>';
  if(!L1) h+='<p class="none">'+md(SINCE)+' 이후 확률이 움직인 전망 가운데 이 칸으로 이어진 것은 없습니다.</p>';
  else { const items=[]; L1.forEach(x=>x.paths.forEach(pt=>items.push([pt,x.e])));
@@ -230,7 +230,7 @@ function detailRow(f){
    cnt[c.v]++; const k=f+'|'+p, gk=g+'|'+k;
    if(c.v===1){ const l=lm[k]; return '<td class="'+(l?'lit':'o'+c.c)+'" data-gk="'+esc(gk)+'" title="'+esc(L.L.gl[g]+' · '+PSHORT[p])+'">'+(l?'●':'')+'</td>' }
    return '<td class="v'+c.v+'" data-gk="'+esc(gk)+'" title="'+esc(L.L.gl[g]+' · '+PSHORT[p])+'">'+(c.v===2?'?':'')+'</td>' }).join('')+'</tr>' });
- h+='</tbody></table><p class="rgn">이어짐 '+cnt[1]+'칸 · 이어지지 않음 '+cnt[0]+'칸 · 판단 불가 '+cnt[2]+'칸. ●는 이번 기간 불이 켜진 칸입니다. 칸을 누르면 그 국민 집단의 표로 가서 판단과 근거가 열립니다.</p>';
+ h+='</tbody></table><p class="rgn">이어짐 '+cnt[1]+'칸 · 이어지지 않음 '+cnt[0]+'칸 · 판단 불가 '+cnt[2]+'칸. ●는 최근 변화가 전해진 영향입니다. 칸을 누르면 그 국민 집단의 표로 가서 판단과 근거가 열립니다.</p>';
  el.innerHTML=h;
 }
 const vp=$('vp'), st=$('stage'), dp=$('dp');
@@ -316,7 +316,7 @@ function render(refit){
  const avg=s=>[...s].reduce((a,b)=>a+b,0)/s.size;
  const F=Object.keys(fc).sort((a,b)=>avg(fc[a])-avg(fc[b])), V=Object.keys(vv).sort((a,b)=>avg(vv[a])-avg(vv[b]));
  const fcs=new Set(F);
- $('kpi').innerHTML='<span><b>'+open.length+'</b>열려 있는 경로</span><span class="l"><b>'+Object.keys(LIT).length+'</b>불이 켜진 칸</span><span><b>'+fcs.size+'</b>확률이 움직인 전망</span>';
+ $('kpi').innerHTML='<span><b>'+open.length+'</b>'+esc(L.L.gl[G])+'에게 이어지는 영향</span><span class="l"><b>'+Object.keys(LIT).length+'</b>그 가운데 최근 변화가 전해진 영향</span><span><b>'+fcs.size+'</b>확률이 움직인 전망</span>';
  const evH=F.map(id=>(VIEW.nodes[id].ev||[]).map((e,j)=>'<div class="ev" data-n="E:'+esc(id.slice(2))+':'+j+'"><div class="d">'+md(e[0])+' <span class="s '+(e[1]==='up'?'up':'dn')+'" role="img" aria-label="'+(e[1]==='up'?'전망의 가능성을 키우는 소식':'전망의 가능성을 줄이는 소식')+'">'+(e[1]==='up'?'▲':'▼')+'</span></div><div class="h">'+esc(e[2])+'</div></div>').join('')).join('');
  const fcH=F.map(id=>{ const n=VIEW.nodes[id], dd=Math.round((n.b-n.a)*10)/10; return '<div class="fn" data-n="'+esc(id)+'"><div class="q">'+esc(n.fc.s||n.fc.q)+'</div><div class="m"><b>'+n.b+'%</b><span class="'+(dd>0?'up':'dn')+'">'+(dd>0?'▲':'▼')+Math.abs(dd)+'%p</span></div><div class="cs">'+esc(CN[n.cs]||'')+(n.sig?' · 정세 브리핑 '+n.sig+'건':'')+'</div></div>' }).join('');
  const vH=V.map(id=>'<div class="vn" data-n="'+esc(id)+'">'+esc(nname(id))+'</div>').join('');
