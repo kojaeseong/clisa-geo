@@ -2958,6 +2958,7 @@ const FCT = {
   recSmall: (n, m, d) => "결과가 나온 전망이 아직 " + n + "건이라 이 점수만으로 정확도를 말하기는 이릅니다." + (m ? " " + d + "까지 결과가 나올 전망이 " + m + "건 있습니다." : ""),
   recNone: "아직 결과가 나온 전망이 없습니다.", stDone: "결과 확인", stVoid: "무효",
   rel: n => "관련 꼭지 " + n + "건", later: n => "그 뒤의 전망 " + n + "건 · 전체 목록에서 보기 ↓",
+  accR: "전망의 실현 여부는 질문의 문구가 아니라, 그 전망이 묻는 사건이 실제로 발생했는지로 판단합니다. 전망의 실현 여부에 대해 판단이 다를 수 있는 경우에는 그 이유를 밝히고, 클리사의 적중으로 보지 않습니다.",
   accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 확률은 검증 시점 직전까지 고칠 수 있지만, 검증 시점까지의 마지막 7일 동안 고친 확률은 점수에 넣지 않고 그 기간은 바로 앞 날의 확률로 계산합니다(공개 기간이 짧은 전망은 이 기간이 공개일부터 검증 시점까지의 4분의 1을 넘지 않습니다). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
   href: p => p,
   tweet: (q, p, d) => "「" + q + "」 클리사 지오폴리틱스의 전망 " + p + "% · 검증 시점 " + d,
@@ -3174,7 +3175,7 @@ function renderForecasts(){
         (!shown.length ? '<p class="note">' + FCT.fNone + "</p>" : cc ? '<p class="note" style="margin:0 0 4px">사안의 가능한 전개마다, 성립 조건과 이어진 전망과 그 전개 쪽(또는 반대쪽)으로 기울게 하는 신호 전망을 묶었습니다. 전개의 확률은 사안 분석의 값이며, 같은 전망이 여러 전개에 나올 수 있습니다.</p>' + fcByBranch(cc, shown) : '<ul class="fsoon">' + shown.map(f => fcSoonRow(f, t0)).join("") + "</ul>") + "</section>"; })() +
     fcRecHtml(fs, op0, done, brier, t0) +
     (FCR().length ? '<section class="sec" id="f-week"><h3>주간 전망 점검</h3><p class="note" style="margin-bottom:8px">매주 월요일, 지난 한 주의 사건을 반영해 전망의 확률을 다시 봅니다. 조정한 전망과 그대로 둔 전망을 이유와 함께 밝힙니다.</p>' + FCR().map((r, i) => weekHtml(r, i === 0)).join("") + "</section>" : "") +
-    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + '</p><p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
+    '<details class="facc"><summary>' + FCT.accH + "</summary><p>" + FCT.accP(done.length || !nx ? "" : FCT.md(nx.due)) + "</p>" + (FCT.accR ? "<p>" + FCT.accR + "</p>" : "") + '<p><button type="button" class="chip" data-go="method">' + FCT.accGo + "</button></p></details>" +
     ((PUB() && (D.notices || []).length) ? '<section class="sec"><h3>판단 변경 공지</h3><ul class="tl">' + D.notices.slice().reverse().map(l => { const m = /^case\/([\w-]+)\/$/.exec(l.link || ""), k = m && (D.strategies || []).find(x => x.id === m[1]), fm = /^feature\/([\w-]+)\/$/.exec(l.link || ""), F = fm && FEATS().find(x => x.id === fm[1]); return '<li><span class="d">' + esc(l.date) + "</span><span>" + esc(l.text) + (F ? " " + featBtn(F) : "") + (k ? ' <button type="button" class="chip" data-case="' + esc(k.id) + '">사안 분석 보기 · ' + esc(k.title.split(":")[0]) + "</button>" : "") + "</span></li>"; }).join("") + "</ul></section>" : "");
   fcCalTip();  /* v4.23 */
 }

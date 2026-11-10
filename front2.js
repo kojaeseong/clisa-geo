@@ -166,14 +166,18 @@
   function TD(){ try { return matchMedia("(min-width:901px)").matches; } catch (_) { return false; } }
   var TT = EN ? { v: "Today", h: "Today in world affairs", br: "Today's briefing", n: function(n){ return n + (n === 1 ? " story" : " stories"); }, more: function(n){ return n + " more in the full briefing →"; }, brAll: "Read the full briefing →",
       nofc: "Related forecasts unchanged", ch: "Forecasts that moved", open: function(n){ return n + " open"; }, chAll: "All forecasts and track record →", soon: "Resolving soon", by: function(d){ return "by " + d; },
-      path: function(g){ return "What today's news means for " + g; }, pathFor: "Show for", s1: "News", s2: "Forecast", s3: "Through", weak: "The probability fell, so the effects below became less likely.", strong: "The probability rose, so the effects below became more likely.",
+      path: function(g){ return "What today's news means for " + g; }, pathFor: "Show for", s1: "News", s2: "Forecast", s3: "Through", weak: "This is now less likely.", strong: "This is now more likely.", ifY: "What follows if it happens", ifN: "What follows if it doesn't", ind: function(c){ return (c === "kr" ? "South Korean" : "U.S.") + " industries also affected"; }, indAll: "All industry effects →",
       none: function(g){ return "No recent news affects " + g + " through a forecast that moved."; }, nx: function(n){ return n + " more " + (n === 1 ? "path" : "paths") + " · Show next →"; }, go: "See this path in Chain Reactions →", goAll: "Open Chain Reactions →", cs: "Analysis by issue", fail: "Couldn't load today's data. Try again in a moment." }
     : { v: "오늘 보기", h: "오늘의 세계 정세", br: "오늘의 정세 브리핑", n: function(n){ return n + "건"; }, more: function(n){ return "그 밖에 " + n + "건 · 브리핑 전체 보기 →"; }, brAll: "브리핑 전체 보기 →",
       nofc: "관련 전망의 확률 변동 없음", ch: "바뀐 전망", open: function(n){ return "진행 중 " + n + "개"; }, chAll: "전망 전체와 검증 결과 보기 →", soon: "곧 결과가 나오는 전망", by: function(d){ return d + "까지"; },
-      path: function(g){ return "오늘의 소식이 " + g + "의 생활에 이르는 경로"; }, pathFor: "누구의 생활로 볼지", s1: "소식", s2: "전망", s3: "거쳐 가는 변수", weak: "확률이 내렸으므로 아래 영향이 나타날 가능성도 그만큼 줄었습니다.", strong: "확률이 올랐으므로 아래 영향이 나타날 가능성도 그만큼 커졌습니다.",
+      path: function(g){ return "오늘의 소식이 " + g + "의 생활에 이르는 경로"; }, pathFor: "누구의 생활로 볼지", s1: "소식", s2: "전망", s3: "거쳐 가는 변수", weak: "이 전망이 실현될 가능성이 낮아졌습니다.", strong: "이 전망이 실현될 가능성이 높아졌습니다.", ifY: "이 전망이 실현되면 이어지는 영향", ifN: "이 전망이 실현되지 않으면 이어지는 영향", ind: function(c){ return "함께 영향을 받는 " + (c === "kr" ? "한국" : "미국") + " 산업"; }, indAll: "산업별 영향 전체 보기 →",
       none: function(g){ return "최근 소식 가운데 확률이 움직인 전망을 거쳐 " + g + "의 생활로 이어지는 경로는 없습니다."; }, nx: function(n){ return "이 밖에 경로 " + n + "개 · 다음 경로 보기 →"; }, go: "통합 신경망에서 이 경로 보기 →", goAll: "통합 신경망 열기 →", cs: "사안별 분석", fail: "오늘의 자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오." };
   var TDC = EN ? [["Korean Peninsula","korea"],["Taiwan Strait","taiwan"],["Russia-Ukraine","ukraine"],["Iran and Hormuz","iran"],["Russia-NATO","poland"],["All issues",""]] : [["한반도","korea"],["대만해협","taiwan"],["러-우 전쟁","ukraine"],["이란·호르무즈","iran"],["러시아-나토","poland"],["사안 전체",""]];
   var TDGN = EN ? {KOR: "South Korea", USA: "U.S.", NEU: "Nordic-Baltic", SEU: "Southern Europe", WCEU: "Rest of Europe", PARTY: "Conflict countries"} : {KOR: "한국", USA: "미국", NEU: "북유럽·발트", SEU: "남유럽", WCEU: "서·중·동유럽", PARTY: "당사국"};
+  /* 첫 고리가 변수를 뒤 문장들이 전제한 방향과 반대로 움직이는 고리(작업자 판단, 2026-11-11). 전체 124개 고리의 방향 표는 검증부채 */
+  var TDOPP = {A03: 1, B23: 1, S05: 1, R07: 1, R11: 1, R16: 1, C16: 1};
+  function tdNeg(dir, l0){ var n = (dir === "-" || dir === "\u2212"); return (l0 && TDOPP[l0.id]) ? !n : n; }
+  function tdS1(t){ var m = /^.*?(다\.|[a-z\)]\.)(?=\s|$)/.exec(t); return m ? m[0] : t; }
   var TDD = null, TDG = null, TDI = 0;
   function tdG(){ if (TDG) return TDG; var g = null; try { g = localStorage.getItem("ep.grp"); } catch (_) {} return TDG = (g && /^(KOR|USA|NEU|SEU|WCEU|PARTY)$/.test(g)) ? g : (EN ? "USA" : "KOR"); }
   function tdDate(d){ var p = d.split("-"); return EN ? new Intl.DateTimeFormat("en-US", {month: "short", day: "numeric", timeZone: "UTC"}).format(new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]))).replace(/^(Jan|Feb|Aug|Sep|Oct|Nov|Dec) /, function(m, a){ return (a === "Sep" ? "Sept" : a) + ". "; }) : (+p[1]) + "월 " + (+p[2]) + "일"; }
@@ -182,18 +186,25 @@
   function tdPath(g){ var D = TDD, OUT = {}, FM = {}, CHG = {}; D.C.links.forEach(function(l){ if (l.conf !== "낮음") (OUT[l.f] = OUT[l.f] || []).push(l); }); D.M.forEach(function(m){ FM[m.id] = m; });
     D.ch.forEach(function(c){ CHG[c.id] = c; }); var goal = "grp:" + g, iss = (D.DL.issues || []).slice(0, 5), W = function(tr){ return tr.reduce(function(a, l){ return Math.min(a, l.conf === "높음" ? 2 : 1); }, 2); };
     for (var a = 0; a < iss.length; a++) { var its = iss[a].items || []; for (var b = 0; b < its.length; b++) { var found = [], keys = {}, fcs = (its[b].fc || []).filter(function(s){ return (s.e === "up" || s.e === "down") && CHG[s.id] && FM[s.id]; });
-      fcs.forEach(function(fc){ var m = FM[fc.id]; [m].concat(m.alt ? [m.alt] : []).filter(function(x){ return x && x.node && x.rel !== "none"; }).forEach(function(st){
+      fcs.forEach(function(fc){ var m = FM[fc.id]; [m].filter(function(x){ return x && x.node && x.rel !== "none"; }).forEach(function(st){
         (function walk(n, tr, seen){ if (tr.length > 3) return; (OUT[n] || []).forEach(function(l){ if (seen[l.t]) return; var t2 = tr.concat([l]);
           if (l.t === goal) { var k = fc.id + "|" + t2.map(function(x){ return x.t; }).join(">"); if (!keys[k]) { keys[k] = 1; found.push({d: iss[a].date, it: its[b], c: CHG[fc.id], dir: (m.dir || "+"), links: t2, w: W(t2)}); } }
           else if (D.C.M[l.t]) { var s2 = {}; for (var q in seen) s2[q] = 1; s2[l.t] = 1; walk(l.t, t2, s2); } }); })(st.node, [], (function(){ var o = {}; o[st.node] = 1; return o; })()); }); });
       if (found.length) return found.sort(function(x, y){ return y.w - x.w || x.links.length - y.links.length; }).slice(0, 6); } }
     return []; }
+  /* 같은 전망에서 그 나라 산업으로 이어지는 고리(한국·미국만 자료가 있음). 산업마다 가장 짧은 것 하나, 최대 4개 */
+  function tdInd(g, p){ var cc = g === "KOR" ? "kr" : g === "USA" ? "us" : null; if (!cc || !p) return []; var D = TDD, OUT = {}, m = null; D.M.forEach(function(x){ if (x.id === p.c.id) m = x; }); if (!m) return [];
+    D.C.links.forEach(function(l){ if (l.conf !== "낮음") (OUT[l.f] = OUT[l.f] || []).push(l); }); var pre = "ind:" + cc + ":", got = {}, out = [], q = [], seen = {};
+    [m].forEach(function(st){ if (st && st.node && st.rel !== "none" && !seen[st.node]) { seen[st.node] = 1; q.push([st.node, 0, null]); } });
+    while (q.length) { var cur = q.shift(); (OUT[cur[0]] || []).forEach(function(l){ if (l.t.indexOf(pre) === 0) { if (!got[l.t]) { got[l.t] = 1; out.push({cc: cc, n: D.C.ind[l.t.slice(4)] || l.t, l: l, d: cur[1], f0: cur[2] || l}); } } else if (D.C.M[l.t] && !seen[l.t] && cur[1] < 3) { seen[l.t] = 1; q.push([l.t, cur[1] + 1, cur[2] || l]); } }); }
+    return out; }
   function tdPathHtml(){ var D = TDD, g = tdG(), gn = D.C.grp[g], PS = tdPath(g), p = PS[TDI % (PS.length || 1)], x = '<h3>' + h(TT.path(gn)) + '</h3><div class="td-gs" role="group" aria-label="' + h(TT.pathFor) + '">' +
       Object.keys(D.C.grp).map(function(k){ return '<button type="button" data-tdg="' + k + '"' + (k === g ? ' class="on" aria-pressed="true"' : ' aria-pressed="false"') + ' title="' + h(D.C.grp[k]) + '">' + h(TDGN[k] || D.C.grp[k]) + "</button>"; }).join("") + "</div>";
     if (!p) return x + '<p class="td-none">' + h(TT.none(gn)) + '</p><a class="td-go" href="' + P + "/ripple/?g=" + g + '" data-f2v="rp">' + TT.goAll + "</a>";
-    var down = p.c.to < p.c.from, weak = (p.dir === "-") ? !down : down;
-    x += '<div class="td-st"><div><small>' + TT.s1 + " · " + tdDate(p.d) + "</small><b>" + h(p.it.h) + "</b></div><div><small>" + TT.s2 + '</small><b><a href="' + P + "/forecast/" + p.c.id + '/">' + h(p.c.s) + "</a> " + tdV(p.c.from, p.c.to) + "</b><p>" + (weak ? TT.weak : TT.strong) + "</p></div>";
+    var down = p.c.to < p.c.from, neg = tdNeg(p.dir, p.links[0]);
+    x += '<div class="td-st"><div><small>' + TT.s1 + " · " + tdDate(p.d) + "</small><b>" + h(p.it.h) + "</b></div><div><small>" + TT.s2 + '</small><b><a href="' + P + "/forecast/" + p.c.id + '/">' + h(p.c.s) + "</a> " + tdV(p.c.from, p.c.to) + "</b><p>" + (down ? TT.weak : TT.strong) + '</p></div><div class="td-if">' + (neg ? TT.ifN : TT.ifY) + "</div>";
     p.links.forEach(function(l, i){ var last = i === p.links.length - 1; x += "<div><small>" + (last ? h(gn) : TT.s3) + "</small>" + (last ? '<p class="td-lp">' + h(l.mech) + "</p>" : '<b title="' + h(l.mech) + '">' + h(D.C.M[l.t] || "") + "</b>") + "</div>"; });
+    var IN = tdInd(g, p).filter(function(i){ return tdNeg(p.dir, i.f0) === neg; }).slice(0, 3); if (IN.length) x += '<div class="td-ind"><small>' + h(TT.ind(IN[0].cc)) + "</small>" + IN.map(function(i){ return "<p><b>" + h(i.n) + "</b>" + h(tdS1(i.l.mech)) + "</p>"; }).join("") + '<a href="' + P + '/industry/">' + TT.indAll + "</a></div>";
     if (PS.length > 1) x += '</div><button type="button" class="td-nx" data-tdnx="1">' + h(TT.nx(PS.length - 1)) + "</button><div>";
     return x + '</div><a class="td-go" href="' + P + "/ripple/?g=" + g + '" data-f2v="rp">' + TT.go + "</a>"; }
   function tdRender(){ var el = document.getElementById("td2"); if (!el || !TDD) return; var D = TDD, x = (D.DL.issues || [])[0] || {items: []}, it = x.items || [], F = {};

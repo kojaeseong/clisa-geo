@@ -200,3 +200,13 @@ html[lang="en"] .td-gs{display:grid;grid-template-columns:repeat(2,1fr)}
 :root[data-theme="dark"] .td-bar s.u{background:#34c77b}:root[data-theme="dark"] .td-bar s.d{background:#f06a62}
 :root[data-theme="dark"] .td-gs button{color:#c3cad6;border-color:rgba(255,255,255,.16)}
 .td-bar u{background:#b8c6ee}
+
+/* 2026-11-11 조건문 틀 · 산업 */
+.td-st > div.td-if{padding:2px 0 10px;font-size:12px;font-weight:800;color:var(--ink,#111827);letter-spacing:.01em}
+.td-st > div.td-if:before{display:none}
+.td-ind{margin:0 0 12px 22px;padding:10px 12px;border:1px solid var(--line,#e5e7eb);border-radius:8px}
+.td-ind small{display:block;font-size:11.5px;font-weight:800;color:#b45309;margin-bottom:6px}
+.td-ind p{margin:0 0 7px;font-size:13px;line-height:1.5;color:var(--ink2,#4b5563)}
+.td-ind p b{color:var(--ink,#111827);font-weight:700;margin-right:6px}
+.td-ind a{font-size:12.5px;font-weight:600;color:var(--acc,#1d4ed8)!important}
+:root[data-theme="dark"] .td-st > div.td-if,:root[data-theme="dark"] .td-ind p b{color:#e6e9ef}
