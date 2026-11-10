@@ -231,6 +231,30 @@ html[lang="en"] header.hd nav.gnav a[data-tab="ideas"] .gl{display:inline}html[l
 /* 2026-11-09 메뉴 밑줄: 탭이 아닌 쪽(처음 오신 분께·개인정보 처리방침 등)에서는 밑줄을 없앤다. app.css의 .bar{min-width:96px}(막대 그래프용)가 메뉴 밑줄에도 걸려 width:0이 듣지 않고 직전 탭 아래 96px로 남던 것을 고친다 */
 header.hd nav.gnav .bar{min-width:0;padding:0;border:0;gap:0}
 
+/* 2026-11-10 대통령님 결재: 휴대전화 앱 화면(mapp). 시험을 켠 기기(html.mapp)의 900px 이하에서만: 머리글 대신 얇은 윗줄(‹ 홈·화면 이름·검색), 아래 고정 칸 4개, 지구본은 세계 정세·나라·권역 화면에서만 보이고 다른 화면에서는 장소를 누를 때만 위에서 내려온다 */
+.mab,.mdock,.mloc-x{display:none}
+@media (max-width:900px){
+html.mapp header.hd > :not(.mab):not(#hd-sub){display:none!important}
+html.mapp header.hd{position:sticky!important;top:0;z-index:50!important;padding:0!important;border-bottom:0}
+html.mapp .mab{order:-99;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;height:calc(48px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 10px 0;background:var(--panel,#fff);border-bottom:1px solid var(--line,#D2D8DE)}
+html.mapp .mab a,html.mapp .mab button{height:34px;min-width:34px;border:0;border-radius:10px;background:var(--panel-2,#F2F4F6);color:var(--ink,#101418);font:600 13px/1 var(--sans);padding:0 11px 0 7px;display:flex;align-items:center;gap:2px;text-decoration:none;cursor:pointer}
+html.mapp .mab button{padding:0 8px}
+html.mapp .mab svg{width:18px;height:18px;flex:none}
+html.mapp .mab b{font:700 15px/1.2 var(--sans);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink,#101418)}
+html.mapp header.hd #hd-sub{border-bottom:1px solid var(--line,#D2D8DE);padding-top:8px}
+html.mapp:not(.mapp-map):not(.locshow) #wrap{display:none!important}
+html.mapp.locshow:not(.mapp-map) #wrap{position:fixed!important;left:0;right:0;top:0;height:48vh!important;z-index:60;margin:0!important;border-radius:0 0 18px 18px;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+html.mapp.locshow:not(.mapp-map) .mloc-x{display:block;position:fixed;z-index:61;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);height:34px;padding:0 14px;border:0;border-radius:10px;background:rgba(16,20,24,.8);color:#fff;font:600 13px/1 var(--sans)}
+html.mapp .mdock{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:55;height:calc(58px + env(safe-area-inset-bottom));padding:0 6px env(safe-area-inset-bottom);background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line,#D2D8DE)}
+html.mapp .mdock a,html.mapp .mdock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:none;padding:0;font:600 10.5px/1 var(--sans);color:var(--ink-2,#4A5560);text-decoration:none;cursor:pointer}
+html.mapp .mdock svg{width:23px;height:23px}
+html.mapp .mdock [aria-current="page"]{color:var(--accent,#1F4FD8)}
+html.mapp body{padding-bottom:calc(62px + env(safe-area-inset-bottom))}
+html.mapp .totop,html.mapp .navback{bottom:calc(72px + env(safe-area-inset-bottom,0px))!important}
+:root[data-theme="dark"].mapp .mdock{background:rgba(16,21,28,.94)}
+:root[data-theme="dark"].mapp .mdock [aria-current="page"]{color:#82B1FF}
+}
+
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
 .bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
 .bstrip.astrip,.bstrip.bs-due{--sc:#d93a40;background-image:linear-gradient(90deg,rgba(217,58,64,.10),rgba(217,58,64,0) 62%)!important}

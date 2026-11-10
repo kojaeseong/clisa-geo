@@ -118,6 +118,52 @@
   function mk(c){ var a = document.createElement("a"); a.className = "hd-start " + c; a.href = href; a.textContent = t; if (here) a.classList.add("here"); return a; }
   var nl = H.querySelector(".hd-nl"); if (nl) nl.insertBefore(mk("m"), nl.querySelector(".bar"));  /* 넓은 화면에서는 메뉴 줄 오른쪽 끝, 휴대전화는 메뉴 칸의 마지막 */
 })();
+/* 2026-11-10 대통령님 결재: 휴대전화 앱 화면(mapp). 시험을 켠 기기(localStorage ep.mapp=1)에서만 작동한다(공개 결재 뒤 기본값을 켠다).
+   머리글 대신 윗줄(‹ 홈·화면 이름·검색)과 아래 고정 칸 4개를 붙이고, 지구본은 세계 정세·나라·권역 화면에서만 보인다. 다른 화면에서 장소를 누르면(표시 띠가 뜨면) 지구본이 위에서 내려온다.
+   휴대전화로 사이트 첫 주소('/')에 밖에서 들어오면 첫 화면(/home/)으로 보낸다. 첫 화면이나 아래 고정 칸에서 '세계 정세'를 누른 때는 지구본을 보인다. */
+(function(){
+  var D = document.documentElement, H = document.getElementById("hdr"), on = false;
+  try { on = localStorage.getItem("ep.mapp") === "1"; } catch (e) {}
+  if (!on || !H) { D.classList.remove("mapp"); return; }
+  D.classList.add("mapp");
+  var EN = D.lang === "en", P = EN ? "/en" : "", HOME = P + "/home/", mq = matchMedia("(max-width:900px)");
+  if (mq.matches && (location.pathname === "/" || location.pathname === "/en/") && !location.hash && !location.search) {
+    var ro = ""; try { ro = document.referrer ? new URL(document.referrer).origin : ""; } catch (e) {}
+    if (ro !== location.origin) { location.replace(HOME); return; }
+  }
+  var SV = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  var bar = document.createElement("div"); bar.className = "mab";
+  bar.innerHTML = '<a class="mab-h" href="' + HOME + '"><svg ' + SV + '><path d="M15 5l-7 7 7 7"/></svg>' + (EN ? "Home" : "홈") + '</a><b class="mab-t"></b><button type="button" class="mab-s" aria-label="' + (EN ? "Search" : "검색") + '"><svg ' + SV + '><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg></button>';
+  H.insertBefore(bar, H.firstChild);
+  function srch(){ var b = document.getElementById("srchopen"); if (b) b.click(); }
+  bar.querySelector(".mab-s").addEventListener("click", srch);
+  var dk = document.createElement("nav"); dk.className = "mdock"; dk.setAttribute("aria-label", EN ? "Main screens" : "자주 쓰는 화면");
+  dk.innerHTML = '<a data-k="brief" href="' + P + '/brief/"><svg ' + SV + '><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 12h8M8 15h5"/></svg>' + (EN ? "Briefing" : "정세 브리핑") + '</a>' +
+    '<a data-k="world" href="' + P + '/"><svg ' + SV + '><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 3.5 5 3.5 8s-1 5.5-3.5 8c-2.5-2.5-3.5-5-3.5-8s1-5.5 3.5-8z"/></svg>' + (EN ? "World" : "세계 정세") + '</a>' +
+    '<a data-k="fc" href="' + P + '/forecast/"><svg ' + SV + '><path d="M4 18l5-6 4 3 7-8"/><path d="M15 7h5v5"/></svg>' + (EN ? "Forecasts" : "전망과 검증") + '</a>' +
+    '<button type="button" data-k="s"><svg ' + SV + '><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg>' + (EN ? "Search" : "검색") + '</button>';
+  document.body.appendChild(dk); dk.querySelector("button").addEventListener("click", srch);
+  var x = document.createElement("button"); x.type = "button"; x.className = "mloc-x"; x.textContent = EN ? "Close map" : "지도 닫기"; document.body.appendChild(x);
+  x.addEventListener("click", function(){ D.classList.remove("locshow"); });
+  var MAPT = {overview: 1, detail: 1, region: 1}, SITE_T = EN ? "Clisa Geopolitics" : "클리사 지오폴리틱스", tt = bar.querySelector(".mab-t"), CUR = null;
+  function title(){ var t = (document.title || "").split(" | ")[0].trim();
+    var p0 = location.pathname.replace(/^\/en(?=\/)/, "");
+    if (/^\/heatmap\//.test(p0)) t = EN ? "Heat Map" : "히트맵"; else if (/^\/ripple\//.test(p0)) t = EN ? "Chain Reactions" : "통합신경망";
+    else if (CUR === "overview") t = EN ? "World" : "세계 정세"; else if (!t) t = SITE_T;
+    tt.textContent = t;
+    var p = location.pathname.replace(/^\/en(?=\/)/, ""), k = /^\/(brief|digest|feature)\//.test(p) ? "brief" : /^\/forecast\//.test(p) ? "fc" : MAPT[CUR] ? "world" : "";
+    [].forEach.call(dk.querySelectorAll("[data-k]"), function(a){ if (a.dataset.k === k) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); }); }
+  function tab(t){ var was = D.classList.contains("mapp-map"), m = !!MAPT[t]; CUR = t; D.classList.toggle("mapp-map", m); D.classList.remove("locshow");
+    if (m && !was) setTimeout(function(){ try { dispatchEvent(new Event("resize")); } catch (e) {} }, 30);
+    setTimeout(title, 60); }
+  document.addEventListener("clisa:tab", function(e){ tab(e.detail); });
+  var pn = document.querySelector(".pane:not([hidden])"); tab(pn && pn.id ? pn.id.replace(/^pane-/, "") : "overview");
+  try { var te = document.querySelector("title"); if (te) new MutationObserver(title).observe(te, {childList: true, characterData: true, subtree: true}); } catch (e) {}
+  /* 장소 표시 띠(#markbar)가 뜨면 지구본을 내리고, 표시를 풀면 접는다 */
+  var mb = document.getElementById("markbar");
+  if (mb) { try { new MutationObserver(function(){ if (!mq.matches || D.classList.contains("mapp-map")) return;
+      if (!mb.hidden) { if (!D.classList.contains("locshow")) { D.classList.add("locshow"); try { dispatchEvent(new Event("resize")); } catch (e) {} } } else D.classList.remove("locshow"); }).observe(mb, {attributes: true, attributeFilter: ["hidden"]}); } catch (e) {} }
+})();
 
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스 모든 쪽(header1101.py가 hdr.js 끝에 붙임)과 아카데미·게임 첫 화면(stripc1108.py가 /strips_c.js로)에서 함께 쓴다.
    전망 띠: 확률 막대·확률·변화폭(처음 공개 확률 대비, 전망 조정은 조정 폭)·남은 날. 휴대전화는 막대·남은 날을 빼고 숫자만.

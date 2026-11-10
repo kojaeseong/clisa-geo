@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>첫 화면 | 클리사 지오폴리틱스</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap">
+<script>(function(){var t;try{t=localStorage.getItem("ep.theme")}catch(e){}if(!t)t=matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t})();</script>
+<style>
+/* 2026-11-10 대통령님 결재: 휴대전화 첫 화면(위젯·앱·아래 고정 칸·설정 판). 국문 /home/, 영문 /en/home/. home1110.py가 만든다 */
+:root{--acc:#1F4FD8;--ink:#101418;--ink2:#4A5560;--bg1:#F6F8FC;--bg2:#E7EDF7;--card:#fff;--soft:rgba(255,255,255,.75);--chip:#F1F4F9;--up:#0E8A4B;--dn:#C8102E;--dock:rgba(255,255,255,.66);--shade:0 2px 10px rgba(16,30,70,.07)}
+:root[data-theme="dark"]{--acc:#6E95FF;--ink:#E8ECF2;--ink2:#A3ADB9;--bg1:#0E1320;--bg2:#141B2C;--card:#1B2336;--soft:rgba(27,35,54,.85);--chip:#253049;--up:#3CCB7F;--dn:#FF6B6B;--dock:rgba(27,35,54,.72);--shade:0 2px 10px rgba(0,0,0,.35)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%) fixed;font-family:"Pretendard Variable",Pretendard,-apple-system,sans-serif;color:var(--ink);word-break:keep-all}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:430px;margin:0 auto;padding:0 0 124px;min-height:100vh;position:relative}
+@media (min-width:600px){body{background:#C9CFD8}:root[data-theme="dark"] body{background:#05070C}
+  .wrap{background:linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);border-radius:36px;min-height:860px;margin:26px auto 40px;box-shadow:0 0 0 9px #15181C,0 20px 40px rgba(0,0,0,.25);overflow:hidden}
+  .dock{position:absolute!important}}
+.sb{position:sticky;top:0;z-index:5;height:calc(50px + env(safe-area-inset-top));display:flex;align-items:center;justify-content:space-between;padding:env(safe-area-inset-top) 14px 0 18px;background:linear-gradient(var(--bg1) 70%,transparent)}
+.clk{display:flex;gap:11px;font:600 12px/1.1 "IBM Plex Mono",monospace}
+.clk span{display:flex;flex-direction:column}.clk i{font:500 10px/1.25 "Pretendard Variable";font-style:normal;color:var(--ink2)}
+.gear{width:36px;height:36px;border-radius:10px;border:0;background:var(--chip);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+.gear svg{width:18px;height:18px}
+.wg{display:block;margin:10px 12px 0;background:var(--card);border-radius:22px;padding:13px 15px;box-shadow:var(--shade)}
+.wh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;gap:8px}
+.wh b{font-size:13px;color:var(--acc)}.wh em{font:500 11px "IBM Plex Mono";font-style:normal;color:var(--ink2);white-space:nowrap}
+.wb{margin:0;padding:0 0 0 14px}.wb li{font-size:13.5px;line-height:1.38;margin:0 0 5px;font-weight:600}.wb li{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;display:list-item}.wb li::marker{color:var(--acc)}
+.wmore{font-size:11.5px;color:var(--ink2);margin-top:2px}
+.fc a{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13px;line-height:1.3;padding:5px 0;border-top:1px solid var(--chip)}
+.fc a:first-of-type{border-top:0;padding-top:0}
+.fc a span:first-child{font-weight:600}
+.fc a span:last-child{flex:none;font:600 12px "IBM Plex Mono";white-space:nowrap}
+.fc a i{font-style:normal;color:var(--ink2);font-weight:500}
+.u{color:var(--up)}.d{color:var(--dn)}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);row-gap:14px;margin:18px 10px 0}
+.app{display:flex;flex-direction:column;align-items:center;gap:5px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;min-width:0}
+.ic{width:60px;height:60px;border-radius:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(16,30,70,.14);transition:transform .12s}
+.app:active .ic{transform:scale(.92)}
+.ic svg{width:32px;height:32px}
+.app>span:last-child{font-size:11.5px;font-weight:600;text-align:center;line-height:1.15;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html[lang="en"] .app>span:last-child{font-size:10.5px;letter-spacing:-.01em}
+.fold{background:var(--soft);display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:9px}
+.fold i{width:12px;height:12px;border-radius:3.5px;display:block}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom));width:calc(100% - 24px);max-width:406px;height:88px;border-radius:30px;background:var(--dock);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:0 8px;z-index:6}
+.dim{position:fixed;inset:0;background:rgba(10,14,24,.42);z-index:10;display:none}
+.dim.on{display:block}
+.dim.blur{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pane{position:fixed;z-index:11;display:none}
+.pane.on{display:block}
+.cc{top:calc(56px + env(safe-area-inset-top));right:max(12px,calc(50% - 203px));width:262px;background:var(--card);border-radius:22px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.28)}
+.cc h4{margin:0 0 10px;font-size:13px;color:var(--ink2);font-weight:600}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tg button{background:var(--chip);border:0;border-radius:14px;padding:10px;font:600 12.5px "Pretendard Variable";color:var(--ink);display:flex;flex-direction:column;align-items:flex-start;gap:6px;cursor:pointer;text-align:left}
+.tg svg{width:22px;height:22px}
+.tg button[aria-pressed="true"]{background:var(--acc);color:#fff}
+:root[data-theme="dark"] .tg button[aria-pressed="true"]{color:#0B1120}
+.tg em{font-style:normal;font-weight:500;font-size:11px;opacity:.75}
+.seg{margin-top:10px;display:flex;background:var(--chip);border-radius:12px;padding:3px}
+.seg a{flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:8px 0;border-radius:9px;color:var(--ink2)}
+.seg a.on{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.fd{left:50%;transform:translateX(-50%);top:22vh;width:min(330px,calc(100% - 48px));background:var(--card);border-radius:30px;padding:18px 12px 20px;box-shadow:0 12px 30px rgba(0,0,0,.28)}
+.fd h4{margin:0 0 14px 8px;font-size:17px}
+.fd .apps{grid-template-columns:repeat(3,1fr);margin:0;row-gap:16px}
+.fd .app>span:last-child{white-space:normal}
+.sr{left:50%;transform:translateX(-50%);top:calc(56px + env(safe-area-inset-top));width:min(406px,calc(100% - 24px));background:var(--card);border-radius:22px;padding:12px;box-shadow:0 12px 30px rgba(0,0,0,.28);max-height:70vh;overflow:auto}
+.sr input{width:100%;height:42px;border-radius:12px;border:0;background:var(--chip);padding:0 12px;font:500 16px "Pretendard Variable";color:var(--ink);outline:none}
+.sr ul{list-style:none;margin:8px 0 0;padding:0}
+.sr li a{display:flex;justify-content:space-between;gap:10px;padding:10px 6px;border-bottom:1px solid var(--chip);font-size:13.5px}
+.sr li a em{font-style:normal;color:var(--ink2);font-size:12px;flex:none}
+.sr .all{display:block;margin-top:10px;text-align:center;font-size:12.5px;color:var(--acc);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sb"><div class="clk" id="clk"></div>
+    <button type="button" class="gear" id="gear" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></div>
+  <a class="wg" id="wbr"><div class="wh"><b id="wbt"></b><em id="wbd"></em></div><ul class="wb" id="wbl"></ul><div class="wmore" id="wbm"></div></a>
+  <div class="wg fc"><div class="wh"><b id="wft"></b><em id="wfn"></em></div><div id="wfc"></div></div>
+  <div class="apps" id="apps"></div>
+  <nav class="dock" id="dock"></nav>
+</div>
+<div class="dim" id="dim"></div>
+<div class="pane cc" id="cc" role="dialog"><h4 id="cct"></h4>
+  <div class="tg">
+    <button type="button" id="tsnd" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg><span></span><em></em></button>
+    <button type="button" id="tth" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/></svg><span></span><em></em></button>
+  </div>
+  <div class="seg" id="slang"></div><div class="seg" id="sarea"></div>
+</div>
+<div class="pane fd" id="fd" role="dialog"><h4 id="fdt"></h4><div class="apps" id="fda"></div></div>
+<div class="pane sr" id="sr" role="dialog"><input id="sq" type="search" autocomplete="off"><ul id="sl"></ul><a class="all" id="sall"></a></div>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)}, EN=document.documentElement.lang==="en", P=EN?"/en":"";
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var T=EN?{set:"Settings",snd:"Tap sounds",th:"Dark mode",on:"On",off:"Off",br:"Today's briefing",n:function(k){return k+(k===1?" item":" items")},more:function(k){return "+"+k+" more"},fc:"Forecasts that moved",cases:"Issues",ph:"Search forecasts, issues, pages",none:"No results",all:"Search the whole site from the World tab",fail:"Couldn't load the briefing",pg:"Page",cs:"Issue",gear:"Open settings",srch:"Search",open:function(k){return k+" open"}}
+ :{set:"설정",snd:"누름 소리",th:"밤 화면",on:"켜짐",off:"꺼짐",br:"오늘의 정세 브리핑",n:function(k){return k+"건"},more:function(k){return "그 밖에 "+k+"건 더 보기"},fc:"바뀐 전망",cases:"사안별 분석",ph:"전망·사안·화면 이름",none:"찾은 것이 없습니다",all:"사이트 전체 검색은 세계 정세 화면에서",fail:"브리핑을 불러오지 못했습니다",pg:"화면",cs:"사안",gear:"설정 열기",srch:"검색",open:function(k){return "진행 중 "+k+"건"}};
+$("gear").setAttribute("aria-label",T.gear); $("cct").textContent=T.set; $("cc").setAttribute("aria-label",T.set); $("wbt").textContent=T.br; $("wft").textContent=T.fc; $("fdt").textContent=T.cases; $("fd").setAttribute("aria-label",T.cases); $("sr").setAttribute("aria-label",T.srch); $("sq").placeholder=T.ph; $("sall").textContent=T.all; $("sall").href=P+"/"; $("wbr").href=P+"/brief/";
+$("tsnd").querySelector("span").textContent=T.snd; $("tth").querySelector("span").textContent=T.th;
+$("slang").innerHTML='<a'+(EN?'':' class="on"')+' href="/home/" lang="ko">한국어</a><a'+(EN?' class="on"':'')+' href="/en/home/" lang="en">English</a>';
+$("sarea").innerHTML=(EN?[["Geopolitics","/en/",1],["Academy","/en/academy/"],["Games","/en/play/"]]:[["지오폴리틱스","/",1],["아카데미","/academy/"],["게임","/play/"]]).map(function(a){return '<a'+(a[2]?' class="on"':'')+' href="'+a[1]+'">'+a[0]+'</a>'}).join("");
+/* 세계 시각 */
+var CL=EN?[["Seoul","Asia/Seoul"],["Washington","America/New_York"],["London","Europe/London"],["Kyiv","Europe/Kyiv"]]:[["서울","Asia/Seoul"],["워싱턴","America/New_York"],["런던","Europe/London"],["키이우","Europe/Kyiv"]];
+function tick(){ $("clk").innerHTML=CL.map(function(c){return "<span>"+new Intl.DateTimeFormat("en-GB",{timeZone:c[1],hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date())+"<i>"+c[0]+"</i></span>"}).join(""); }
+tick(); setInterval(tick,20000);
+/* 앱 그림 */
+function sv(bg,body,st){return '<span class="ic" style="background:'+bg+'"><svg viewBox="0 0 32 32" fill="none" stroke="'+(st||"#fff")+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+body+'</svg></span>'}
+var I={
+ dig:sv('linear-gradient(145deg,#3B6CF0,#1F4FD8)','<rect x="7" y="6" width="18" height="21" rx="2"/><path d="M11 12h10M11 16h10M11 20h6"/>'),
+ feat:sv('linear-gradient(145deg,#2B3A55,#101418)','<path d="M8 25V9l8-3 8 3v16"/><path d="M12 14h8M12 18h8"/>'),
+ hm:'<span class="ic" style="background:linear-gradient(145deg,#F2F4F8,#DDE3EC)"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="6" width="9" height="8" rx="1.5" fill="#C8102E"/><rect x="15.5" y="6" width="11.5" height="8" rx="1.5" fill="#F59E0B"/><rect x="5" y="15.5" width="13" height="10" rx="1.5" fill="#1F4FD8"/><rect x="19.5" y="15.5" width="7.5" height="10" rx="1.5" fill="#0EA5A4"/></svg></span>',
+ nr:'<span class="ic" style="background:linear-gradient(145deg,#1A2140,#0A0E1A)"><svg viewBox="0 0 32 32" fill="none" stroke="#7FA3FF" stroke-width="1.6" aria-hidden="true"><path d="M8 9l8 7 8-7M8 23l8-7 8 7M8 9v14M24 9v14"/><g fill="#fff" stroke="none"><circle cx="8" cy="9" r="2.4"/><circle cx="24" cy="9" r="2.4"/><circle cx="16" cy="16" r="2.8"/><circle cx="8" cy="23" r="2.4"/><circle cx="24" cy="23" r="2.4"/></g></svg></span>',
+ ind:sv('linear-gradient(145deg,#12A57A,#0E7A5B)','<path d="M6 25h20M9 25V15l5 3v-6l5 3v-6l5 3v13"/>'),
+ grand:sv('linear-gradient(145deg,#5A3FC8,#3B2A8E)','<circle cx="16" cy="16" r="10"/><path d="M6 16h20M16 6c3 3 4.5 6.5 4.5 10S19 23 16 26c-3-3-4.5-6.5-4.5-10S13 9 16 6z"/>'),
+ ideas:sv('linear-gradient(145deg,#B9854A,#8A5A2B)','<path d="M7 8h7a3 3 0 0 1 3 3v15a2 2 0 0 0-2-2H7zM25 8h-7a3 3 0 0 0-3 3"/><path d="M25 8v16h-8"/>'),
+ acad:sv('linear-gradient(145deg,#2E5BE0,#0B2A86)','<path d="M4 13l12-6 12 6-12 6z"/><path d="M9 16v6c4 3 10 3 14 0v-6"/>'),
+ game:sv('linear-gradient(145deg,#6B6B6B,#2E2E2E)','<path d="M10 26h12M12 26v-4l-2-9h12l-2 9v4M13 13V8h6v5"/>'),
+ start:sv('linear-gradient(145deg,#F08A3C,#c2570c)','<circle cx="16" cy="16" r="10"/><path d="M16 14.5v7M16 10.5v.5"/>'),
+ sub:sv('linear-gradient(145deg,#4E5A66,#2F3842)','<rect x="6" y="9" width="20" height="14" rx="2"/><path d="M6 11l10 7 10-7"/>'),
+ brief:sv('linear-gradient(145deg,#3B6CF0,#1F4FD8)','<rect x="6" y="7" width="20" height="18" rx="2"/><path d="M10 12h12M10 16h12M10 20h8"/>'),
+ world:'<span class="ic" style="background:radial-gradient(circle at 34% 30%,#5B8BFF,#1F4FD8 55%,#0B2A86)"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.6" opacity=".9" aria-hidden="true"><circle cx="16" cy="16" r="10"/><ellipse cx="16" cy="16" rx="4.5" ry="10"/><path d="M6.5 13h19M6.5 19h19"/></svg></span>',
+ fcst:sv('linear-gradient(145deg,#E2453A,#B3261E)','<path d="M6 24l6-7 5 4 9-11"/><path d="M20 10h6v6"/>'),
+ srch:sv('#fff','<circle cx="14" cy="14" r="7"/><path d="M19.5 19.5L26 26"/>','#101418'),
+ /* 사안: 한반도(갈라진 원), 대만해협(섬과 물결), 러-우 전쟁(맞선 전선), 이란·호르무즈(기름방울과 해협), 러시아-NATO 대치(방패), 전체(격자) */
+ korea:'<circle cx="16" cy="16" r="9"/><path d="M7 16c3-4 6-4 9 0s6 4 9 0"/>',
+ taiwan:'<path d="M5 11c2-2 4-2 6 0s4 2 6 0M5 21c2-2 4-2 6 0s4 2 6 0"/><ellipse cx="23" cy="16" rx="3" ry="5.5"/>',
+ ukraine:'<path d="M16 5l-3 5 6 4-6 4 6 4-3 5"/><path d="M5 16h5M27 16h-5"/><path d="M8 13l3 3-3 3M24 13l-3 3 3 3"/>',
+ iran:'<path d="M16 6c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/><path d="M5 26h22"/>',
+ poland:'<path d="M16 5l9 3v7c0 6-4 10-9 12-5-2-9-6-9-12V8z"/><path d="M12 16l3 3 5-6"/>',
+ allc:'<rect x="7" y="7" width="7.5" height="7.5" rx="1.5"/><rect x="17.5" y="7" width="7.5" height="7.5" rx="1.5"/><rect x="7" y="17.5" width="7.5" height="7.5" rx="1.5"/><rect x="17.5" y="17.5" width="7.5" height="7.5" rx="1.5"/>'};
+var CS=EN?[["Korean Peninsula","/case/korea/","#1F4FD8","korea"],["Taiwan Strait","/case/taiwan/","#0EA5A4","taiwan"],["Russia-Ukraine","/case/ukraine/","#D98A07","ukraine"],["Iran and Hormuz","/case/iran/","#C8102E","iran"],["Russia-NATO","/case/poland/","#6B4FD8","poland"],["All issues","/case/","#4E5A66","allc"]]
+ :[["한반도","/case/korea/","#1F4FD8","korea"],["대만해협","/case/taiwan/","#0EA5A4","taiwan"],["러-우 전쟁","/case/ukraine/","#D98A07","ukraine"],["이란·호르무즈","/case/iran/","#C8102E","iran"],["러시아-NATO 대치","/case/poland/","#6B4FD8","poland"],["전략과 전개 전체","/case/","#4E5A66","allc"]];
+var FOLD='<span class="ic fold">'+CS.map(function(c){return '<i style="background:'+c[2]+'"></i>'}).join("")+'</span>';
+var APPS=EN?[["Weekly Summary","/digest/","dig"],["Features","/feature/","feat"],["Heat Map","/heatmap/","hm"],["Chain Reactions","/ripple/","nr"],["Issues",null,FOLD],["Industries","/industry/","ind"],["World Order","/grand/","grand"],["History & Ideas","/ideas/","ideas"],["Academy","/academy/","acad"],["Games","/play/","game"],["Start here","/start/","start"],["Subscribe","/subscribe/","sub"]]
+ :[["주간 요약","/digest/","dig"],["특집","/feature/","feat"],["히트맵","/heatmap/","hm"],["통합신경망","/ripple/","nr"],["사안별 분석",null,FOLD],["산업과 국민","/industry/","ind"],["세계 질서","/grand/","grand"],["역사와 사상","/ideas/","ideas"],["아카데미","/academy/","acad"],["게임","/play/","game"],["처음 오신 분께","/start/","start"],["구독","/subscribe/","sub"]];
+$("apps").innerHTML=APPS.map(function(a){return a[1]?'<a class="app" href="'+P+a[1]+'">'+I[a[2]]+'<span>'+a[0]+'</span></a>':'<button type="button" class="app" id="fdb" aria-haspopup="dialog">'+a[2]+'<span>'+a[0]+'</span></button>'}).join("");
+$("fda").innerHTML=CS.map(function(c){return '<a class="app" href="'+P+c[1]+'">'+sv(c[2],I[c[3]])+'<span>'+c[0]+'</span></a>'}).join("");
+var DK=EN?[["Briefing","/brief/","brief"],["World","/","world"],["Forecasts","/forecast/","fcst"]]:[["정세 브리핑","/brief/","brief"],["세계 정세","/","world"],["전망과 검증","/forecast/","fcst"]];
+$("dock").innerHTML=DK.map(function(a){return '<a class="app" href="'+P+a[1]+'">'+I[a[2]]+'<span>'+a[0]+'</span></a>'}).join("")+'<button type="button" class="app" id="srb">'+I.srch+'<span>'+T.srch+'</span></button>';
+/* 판 열고 닫기 */
+var OPEN=null;
+function show(id,blur){ hide(); OPEN=id; $("dim").className="dim on"+(blur?" blur":""); $(id).classList.add("on"); if(id==="cc")$("gear").setAttribute("aria-expanded","true"); if(id==="sr")setTimeout(function(){$("sq").focus()},30); }
+function hide(){ if(!OPEN)return; $(OPEN).classList.remove("on"); $("dim").className="dim"; $("gear").setAttribute("aria-expanded","false"); OPEN=null; }
+$("gear").onclick=function(){ OPEN==="cc"?hide():show("cc"); };
+$("fdb").onclick=function(){ show("fd",true); };
+$("srb").onclick=function(){ show("sr"); };
+$("dim").onclick=hide;
+addEventListener("keydown",function(e){ if(e.key==="Escape")hide(); });
+addEventListener("pageshow",function(e){ if(e.persisted)hide(); });
+/* 설정: 사이트와 같은 저장값(ep.snd, ep.theme) */
+function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function lab(){ var s=get("ep.snd")==="on", d=document.documentElement.dataset.theme==="dark";
+  $("tsnd").setAttribute("aria-pressed",s); $("tsnd").querySelector("em").textContent=s?T.on:T.off;
+  $("tth").setAttribute("aria-pressed",d); $("tth").querySelector("em").textContent=d?T.on:T.off; }
+$("tsnd").onclick=function(){ set("ep.snd",get("ep.snd")==="on"?"off":"on"); lab(); };
+$("tth").onclick=function(){ var t=document.documentElement.dataset.theme==="dark"?"light":"dark"; document.documentElement.dataset.theme=t; set("ep.theme",t); lab(); };
+lab();
+/* 자료 */
+var SRCH=APPS.filter(function(a){return a[1]}).concat(DK).map(function(a){return {t:a[0],u:P+a[1],k:T.pg}}).concat(CS.map(function(c){return {t:c[0],u:P+c[1],k:T.cs}}));
+function kd(d){ var p=d.split("-"); return EN?new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(+p[0],+p[1]-1,+p[2]))).replace(/^(Jan|Feb|Aug|Sep|Oct|Nov|Dec) /,function(m,a){return (a==="Sep"?"Sept":a)+". "}):(+p[1])+"월 "+(+p[2])+"일"; }
+fetch(P+"/data/daily.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(D){
+  var x=(D.issues||[])[0]; if(!x)return; var it=x.items||[];
+  $("wbr").href=P+"/brief/"+x.date+"/"; $("wbd").textContent=kd(x.date)+" · "+T.n(it.length);
+  $("wbl").innerHTML=it.slice(0,2).map(function(i){return "<li>"+esc(i.h)+"</li>"}).join("");
+  var more=it.length-2+((x.more||[]).length); $("wbm").textContent=more>0?T.more(more):"";
+  it.forEach(function(i){SRCH.push({t:i.h,u:P+"/brief/"+x.date+"/",k:kd(x.date)})});
+}).catch(function(){ $("wbl").innerHTML="<li>"+T.fail+"</li>"; });
+fetch(P+"/data/shell.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(S){
+  var F={},open=[]; (S.forecasts||[]).forEach(function(f){F[f.id]=f; if(f.status==="open")open.push(f)});
+  var seen={},ch=(S.fcr||[]).filter(function(c){ if(seen[c.id]||!F[c.id]||F[c.id].status!=="open"||c.from===c.to)return false; seen[c.id]=1; return true; });
+  $("wfn").textContent=T.open(open.length);
+  $("wfc").innerHTML=ch.slice(0,3).map(function(c){var up=c.to>c.from;return '<a href="'+P+'/forecast/'+c.id+'/"><span>'+esc(c.s)+'</span><span class="'+(up?"u":"d")+'"><i>'+c.from+"→</i>"+c.to+"%"+(up?"▲":"▼")+"</span></a>"}).join("");
+  open.forEach(function(f){SRCH.push({t:f.s,u:P+"/forecast/"+f.id+"/",k:f.p+"%"})});
+}).catch(function(){});
+$("sq").oninput=function(){ var q=this.value.trim().toLowerCase(); if(!q){$("sl").innerHTML="";return}
+  var r=SRCH.filter(function(s){return s.t.toLowerCase().indexOf(q)>=0}).slice(0,12);
+  $("sl").innerHTML=r.length?r.map(function(s){return '<li><a href="'+s.u+'"><span>'+esc(s.t)+'</span><em>'+esc(s.k)+'</em></a></li>'}).join(""):'<li style="padding:10px 6px;font-size:13px;color:var(--ink2)">'+T.none+'</li>'; };
+})();
+</script>
+</body>
+</html>
