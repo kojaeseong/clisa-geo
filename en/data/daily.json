@@ -1,6 +1,156 @@
 {
  "issues": [
   {
+   "date": "2026-11-11",
+   "items": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Rubio says strikes on Iran are unnecessary if economic pressure achieves the same goal; Iran's Rezaei denies talks",
+     "fact": "Secretary of State Marco Rubio, speaking in Paris on November 10 after a G7 foreign ministers' meeting, said there was no need to strike Iran: “We don't need to conduct military strikes if we're achieving the same objective through economic means and economic pressure.” The same day, Mohsen Rezaei, secretary of Iran's Supreme National Security Council, called reports of talks with Washington “complete lies” in a broadcast interview and said the Strait of Hormuz would stay closed until all seven of Iran's conditions were met, according to Anadolu.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://english.aawsat.com/world/5339816-rubio-says-no-need-major-combat-operations-against-iran-given-us-economic-campaign",
+      "https://www.middleeastmonitor.com/20261110-iran-denies-ongoing-talks-with-us-planned-meeting-in-qatar/"
+     ],
+     "loc": {
+      "lat": 48.86,
+      "lon": 2.35,
+      "place": "Paris (France)",
+      "isos": [
+       "USA",
+       "IRN",
+       "FRA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "U.S.-brokered Russia-Ukraine talks in Abu Dhabi run about four hours on day one; Rubio says they appear to have been “very productive”",
+     "fact": "Russian and Ukrainian delegations met for about four hours in Abu Dhabi on November 10 in talks mediated by the United States, with a second day set for November 11, the AP reported. Ukrainian President Volodymyr Zelenskyy called the session constructive and quite substantive and said it covered prisoner exchanges, the return of detained civilians and of children deported from Ukraine, and security guarantees.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.pbs.org/newshour/world/russia-and-ukraine-hold-nearly-4-hours-of-u-s-mediated-talks-in-abu-dhabi",
+      "https://www.npr.org/2026/11/10/g-s1-152773/russia-ukraine-war-talks"
+     ],
+     "loc": {
+      "lat": 24.45,
+      "lon": 54.38,
+      "place": "Abu Dhabi (United Arab Emirates)",
+      "isos": [
+       "USA",
+       "RUS",
+       "UKR",
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Tanker struck northeast of Lima, Oman; ship attacks around Hormuz hit a wartime monthly high of 37 in October",
+     "fact": "The United Kingdom Maritime Trade Operations center (UKMTO) said a tanker was struck by an unidentified projectile in waters northeast of Lima, Oman, on November 10 but did not say who was responsible. Reuters reported that, according to the Washington Institute for Near East Policy, 37 ships were attacked in and around the Strait of Hormuz in October, the most in any month since the war began, and that 10 more attacks had been recorded so far in November.",
+     "fc": [],
+     "src": [
+      "https://boereport.com/2026/11/10/tankers-continue-to-burn-in-the-middle-east-despite-hopes-for-de-escalation/",
+      "https://www.aa.com.tr/en/middle-east/tanker-struck-by-unidentified-projectile-off-oman-uk-maritime-agency/4119386",
+      "https://www.adomonline.com/oil-rises-from-two-month-low-as-hormuz-shipping-attacks-offset-iran-truce-hopes/"
+     ],
+     "loc": {
+      "lat": 25.95,
+      "lon": 56.42,
+      "place": "Waters northeast of Lima (Oman)",
+      "isos": [
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Indonesian Vice President Gibran offers his resignation to Prabowo",
+     "fact": "State Secretary Prasetyo Hadi said on November 10 that Vice President Gibran Rakabuming Raka had offered his resignation during a meeting of more than two hours with President Prabowo Subianto. It was not disclosed whether Prabowo had accepted it. Gibran has been under pressure since a court found that his educational documents did not meet the eligibility requirements to run in the election.",
+     "fc": [],
+     "src": [
+      "https://www.kpbs.org/news/international/2026/11/10/indonesias-vp-offers-resignation-as-questions-mount-over-his-eligibility"
+     ],
+     "loc": {
+      "lat": -6.17,
+      "lon": 106.83,
+      "place": "Jakarta (Indonesia)",
+      "isos": [
+       "IDN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Russia launched 163 drones and one Kh-59/69 guided missile at Ukraine between 6 p.m. on November 10 and 8 a.m. on November 11, local time, Ukraine's air force said, adding that 144 drones were shot down or suppressed and 17 locations were hit.",
+     "src": [
+      "https://www.ukrinform.net/rubric-ato/4183607-air-defense-neutralizes-14-banderol-missiles-130-russian-drones-overnight.html"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "Russia's oil refining capacity has fallen by about 30 percent since late October because of renewed Ukrainian drone attacks, Reuters reported, citing industry sources.",
+     "src": [
+      "https://www.adomonline.com/oil-rises-from-two-month-low-as-hormuz-shipping-attacks-offset-iran-truce-hopes/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "Qatar's Foreign Ministry said at a press briefing in Doha on November 10 that it was receiving positive responses from both Washington and Tehran on a diplomatic solution and that negotiations were making progress, though it could not assess how close a deal was.",
+     "src": [
+      "https://www.turkiyetoday.com/region/qatar-sees-progress-in-us-iran-talks-cites-positive-signals-from-both-sides-3232133"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-10",
    "items": [
     {
@@ -5838,157 +5988,6 @@
      "fp": [
       "korea"
      ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-08",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russia pounds Ukraine in nationwide missile and drone strike, killing at least 28",
-     "fact": "Russian missiles and drones struck across Ukraine before dawn Kyiv time on October 7, killing at least 28 people, according to Interior Minister Ivan Vyhivskyi. Twenty of the dead, including five children, were in Pryluky, said Chernihiv Oblast Governor Viacheslav Chaus. Ukraine's Air Force said it shot down or neutralized 39 of 48 cruise missiles, 117 of 130 drones and five ballistic missiles, without saying how many ballistic missiles were fired. Russia's Defense Ministry claimed a massive strike on military-industrial sites in Kyiv and six regions, including Chernihiv and Poltava, among them facilities that produce and store Flamingo cruise missiles.",
-     "link": "The predawn attack on Kyiv was part of a nationwide barrage, and it follows Ukraine's drone assault on the Moscow area that ran from the night of October 5 into the early hours of October 6, Moscow time, as each side widens its strikes on the other's rear. That fits the continuing war of attrition described in Conclusion 1 of the Russia-Ukraine war analysis and weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/russia-slams-kyiv-in-mass-missile-drone-attack-on-putins-74th-birthday/",
-      "https://gvwire.com/2026/10/07/at-least-28-killed-in-ukraine-zelenskiy-condemns-one-of-russias-most-vile-strikes/",
-      "https://tass.com/politics/2198659",
-      "https://tass.com/emergencies/2197897"
-     ],
-     "loc": {
-      "lat": 50.59,
-      "lon": 32.39,
-      "place": "Pryluky (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Tanker hit in the Persian Gulf north of Qatar, with casualties reported",
-     "fact": "A tanker was struck by multiple projectiles about 51 nautical miles north of Madinat ash Shamal, on Qatar's northern coast, on October 7, causing casualties, the UK Maritime Trade Operations (UKMTO) center said, without naming an attacker. Recent attacks on shipping have been concentrated in and around the Strait of Hormuz; this one hit deeper inside the Persian Gulf. The same day in Athens, Secretary of State Marco Rubio said Iran had \"lost complete control\" of the strait.",
-     "link": "Attacks spreading beyond Hormuz to waters off the Gulf's oil producers point in the direction of the region-wide escalation that Conclusion 2 of the Iran and Hormuz analysis identifies as South Korea's costliest outcome (the attacker has not been identified). That weighs against the forecast that Brent crude will close the year below $90 a barrel.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://english.news.cn/europe/20261008/146cb21d959c426ea9609a0a50667245/c.html",
-      "https://gulfnews.com/world/gulf/qatar/tanker-off-qatar-reports-hits-from-multiple-projectiles-maritime-agency-1.500702379",
-      "https://www.cbsnews.com/live-updates/iran-war-nuclear-donald-trump-vance-rubio-strait-of-hormuz/"
-     ],
-     "loc": {
-      "lat": 26.98,
-      "lon": 51.2,
-      "place": "Persian Gulf (off northern Qatar)",
-      "isos": [
-       "QAT"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi aviation authority says Houthi airport attacks killed 3, injured 36",
-     "fact": "Saudi Arabia's General Authority of Civil Aviation said on the night of October 7 that in connection with Houthi attacks on October 6 and 7, two people had been killed and 28 injured at Abha International Airport, and one killed and eight injured at King Khalid International Airport in Riyadh. The dead were two women, one Moroccan and one Algerian, and a Sudanese national. Houthi spokesman Yahya Saree claimed the strikes killed or wounded dozens of Saudi soldiers and officers, a claim that could not be verified.",
-     "link": "Houthi attacks that have now killed people even at a civilian airport in the Saudi capital show that the path to the Gulf-wide escalation flagged in Conclusion 2 of the Iran and Hormuz analysis now runs onto Saudi soil. The disconfirming signal, large-scale destruction of Gulf oil facilities, has not been confirmed, and the attacks do not move any specific forecast.",
-     "fc": [],
-     "src": [
-      "https://www.thenationalnews.com/news/gulf/2026/10/07/houthis-claim-dawn-drone-and-missile-strikes-on-saudi-and-yemeni-airports/",
-      "https://www.tribuneindia.com/news/abha-airport/3-killed-36-injured-in-houthi-attacks-on-abha-king-khalid-airports-saudi-gaca"
-     ],
-     "loc": {
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "IEA members agree to speed up emergency oil releases, prioritizing diesel",
-     "fact": "At a meeting on October 7, International Energy Agency member governments agreed to finish as soon as possible the stock releases pledged under the agency's March 2026 collective action, and to put diesel first where feasible because that market is tight. About 325 million barrels have been released under the March action so far, with roughly 100 million barrels of pledges still outstanding. Member governments hold about 1.1 billion barrels of public emergency stocks, more than 200 million of them diesel, and the IEA said it stands ready to release more if needed.",
-     "link": "With the Hormuz crisis dragging on, consuming countries are thickening their supply cushion. That raises the odds that Brent crude will close the year below $90 a barrel.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.iea.org/news/statement-by-iea-executive-director-on-meeting-of-iea-member-governments-on-7-october-2026"
-     ]
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Unification Minister Chung Dong-young says a U.S.-North Korea summit could take up reconfirming the demarcation line",
-     "fact": "At the National Assembly Foreign Affairs and Unification Committee's audit of his ministry, held at the Inter-Korean Talks Headquarters in Seoul on October 7, Unification Minister Chung Dong-young indicated in his answers that a U.S.-North Korea summit could include talks between Washington and Pyongyang on reconfirming the Military Demarcation Line, and that it would not matter if South Korea were left out, Money Today reported. Chung said the mine blast in the Demilitarized Zone (DMZ) could not yet be classified as an attack but acknowledged that North Korea planted the mine and bears responsibility for violating the armistice. He also said the peaceful coexistence policy is incompatible with sanctions on the North.",
-     "link": "Conclusion 2 of the Korean Peninsula analysis holds that the realistic risk for South Korea is a deal on North Korea that leaves Seoul's interests out. The minister in charge of inter-Korean affairs saying the inter-Korean boundary can be taken up first by Washington and Pyongyang, or by the U.N. Command and Pyongyang, shows how the government weighs that risk of exclusion; it does not move any specific forecast.",
-     "fc": [],
-     "src": [
-      "https://www.mt.co.kr/politics/2026/10/07/2026100720194016339",
-      "https://www.kmib.co.kr/article/view.asp?arcid=9000020784&code=11121400&sid1=pol",
-      "https://www.dailian.co.kr/news/view/1699099/2026-%EA%B5%AD%EA%B0%90-%EC%97%AC%EC%95%BC-%E5%8C%97%EC%A7%80%EB%A2%B0-%EC%B1%85%EC%9E%84%EB%A1%A0-%ED%95%9C-2026"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK",
-       "USA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Asked at the same October 7 audit about sending a letter condemning North Korea over the DMZ mine blast to the president of the U.N. Security Council, Unification Minister Chung Dong-young said its effectiveness needed to be weighed but that it was an option that could be discussed.",
-     "src": [
-      "https://m.inews24.com/v/2012787"
-     ],
-     "fp": [
-      "korea"
-     ]
-    },
-    {
-     "t": "Kyiv Mayor Vitali Klitschko said on October 7 that power outages from the strike cut electricity to some water pumping stations, disrupting water supply on the city's west bank of the Dnipro.",
-     "src": [
-      "https://kyivindependent.com/russia-slams-kyiv-in-mass-missile-drone-attack-on-putins-74th-birthday/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "France's Foreign Ministry summoned Iran's ambassador on October 7 to protest what it called disinformation about French high school protests spread by official Iranian Foreign Ministry accounts. Tehran had summoned France's ambassador the day before over the treatment of protesters.",
-     "src": [
-      "https://english.aawsat.com/world/5327181-france-summons-iran-ambassador-over-%E2%80%98disinformation-campaign%E2%80%99-school-protests"
-     ],
-     "fp": []
     }
    ]
   }
