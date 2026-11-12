@@ -1,6 +1,225 @@
 {
  "issues": [
   {
+   "date": "2026-11-12",
+   "items": [
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "미·러·우 아부다비 회담 종료…\"대규모 포로 교환 원칙 합의\", 종전 돌파구는 없어",
+     "fact": "11일(현지 시각) 이틀간의 아부다비 회담이 끝난 뒤 우크라이나 수석대표인 루스템 우메로프 대외정보국장과 러시아 측 블라디미르 메딘스키 대통령 보좌관은 대규모 포로 교환에 원칙적으로 합의했다고 밝혔습니다. 종전을 향한 큰 진전은 없었으며, 미국의 위트코프 특사와 트럼프 대통령의 사위 쿠슈너는 12일 모스크바에서 푸틴 대통령을 만날 예정입니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-large-scale-prisoner-exchange-agreed-as-2nd-day-of-abu-dhabi-talks-concludes-umerov-says/",
+      "https://en.interfax.com.ua/news/general/1235062.html",
+      "https://www.wkrg.com/news/ap-russia-and-ukraine-hold-a-second-day-of-us-brokered-talks-in-abu-dhabi/amp/"
+     ],
+     "loc": {
+      "lat": 24.45,
+      "lon": 54.38,
+      "place": "아부다비(아랍에미리트)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA",
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "갈리바프 \"호르무즈는 연안 두 나라의 법이 규율\"…밴스 대면 회담 검토 보도도",
+     "fact": "이란의 모하마드바게르 갈리바프 의회 의장은 11일 공개된 알자지라 인터뷰에서 호르무즈 해협은 연안 두 나라(이란·오만)의 법이 규율한다며 봉쇄·제재 해제 등 조건을 협상의 전제로 다시 내세웠습니다. 같은 날 월스트리트저널은 밴스 미국 부통령이 레자이 최고국가안보회의 서기와의 대면 회담을 검토하고 있으며 논의는 초기 단계라고 보도했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/11/strait-of-hormuz-will-never-return-to-pre-war-status-ghalibaf",
+      "https://www.israelhayom.com/2026/11/11/report-vance-considers-face-to-face-meeting-with-irans-national-security-chief/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "트럼프 \"93% 승리가 아니라 완전한 승리 원한다\"…\"언제 끝낼지의 문제\"",
+     "fact": "도널드 트럼프 미국 대통령은 11일 알링턴 국립묘지의 재향군인의 날 연설에서 이란 전쟁에서 \"이겼다\"며 \"언제 끝내고 싶으냐의 문제일 뿐\"이라고 말하고, \"93% 승리가 아니라 완전한 승리\"를 원한다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "http://www.jpost.com/american-politics/article-914616",
+      "https://www.middleeasteye.net/live-blog/live-blog-update/trump-vows-total-victory-against-iran"
+     ],
+     "loc": {
+      "lat": 38.88,
+      "lon": -77.07,
+      "place": "알링턴 국립묘지(미국)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "아이젠코트, 네타냐후에 서한 \"새 정부까지 미룰 수 있는 위험한 조치 자제하라\"",
+     "fact": "이스라엘 정부 구성을 위임받은 가디 아이젠코트는 11일 과도정부의 네타냐후 총리에게 보낸 서한에서 새 정부 출범까지 미룰 수 있는 위험한 조치를 자제하라고 요구했습니다. 걸프뉴스는 이스라엘 언론을 인용해 네타냐후 총리가 자미르 참모총장의 반대에도 대이란 행동을 추진했다고 전했습니다(미확인).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://gulfnews.com/world/mena/us-israel-iran-war-tehran-threatens-american-bases-from-middle-east-to-europe-houthi-missile-debris-lands-in-makkah-eisenkot-cautions-netanyahu-1.500744472"
+     ],
+     "loc": {
+      "isos": [
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
+     "h": "대만 국방부장 \"중국, 랴오닝 항모 전단으로 서태평양서 지역 거부 훈련\"",
+     "fact": "구리슝 대만 국방부장은 10일 입법원에서 중국이 랴오닝 항모 전단 등과 함께 서태평양에서 '지역 거부' 훈련을 했다고 확인했습니다(로이터). 앞서 조지프 우 국가안전회의 비서장은 3일 기준 서태평양 일대에 중국 해군·해경 선박 100척 이상이 배치돼 있다고 밝혔으며, 중국은 훈련을 공식 선포하지 않았습니다.",
+     "fc": [
+      {
+       "id": "f07",
+       "e": "none"
+      },
+      {
+       "id": "f24",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.taipeitimes.com/News/front/archives/2026/11/10/2003867493",
+      "https://www.taiwannews.com.tw/en/news/6471672"
+     ],
+     "loc": {
+      "lat": 25.04,
+      "lon": 121.56,
+      "place": "타이베이(대만)",
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "인도네시아 기브란 부통령, 국민협의회에 사퇴서 전달…하원은 탄핵 절차 발의",
+     "fact": "기브란 라카부밍 라카 인도네시아 부통령은 12일 오전(현지 시각) 자카르타 국회 단지에서 국민협의회(MPR) 지도부에 사퇴서를 전달했습니다(안타라 통신). 전날 하원의 모든 교섭단체는 탄핵 절차 개시를 위한 의견표명권 발의안을 제출했습니다.",
+     "fc": [],
+     "src": [
+      "https://en.antaranews.com/news/441971/gibran-conveys-vp-resignation-letter-to-mpr-leaders",
+      "https://en.antaranews.com/news/441795/all-house-factions-submit-proposal-to-impeach-vp-gibran"
+     ],
+     "loc": {
+      "lat": -6.21,
+      "lon": 106.8,
+      "place": "자카르타(인도네시아)",
+      "isos": [
+       "IDN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "러시아는 아부다비 회담이 끝난 지 몇 시간 뒤인 12일 새벽 1시 직후(키이우 시각) 키이우를 탄도미사일로 공격했습니다(키이우포스트).",
+     "src": [
+      "https://kyivindependent.com/russia-attacks-kyiv-with-ballistic-missiles-hours-after-peace-talks-end/",
+      "https://www.kyivpost.com/post/89855"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "사우디 주도 연합군은 11일 후티가 리야드와 서부·남부 지역 등을 향해 쏜 미사일 5발과 드론 2대를 요격했다고 밝혔고, 사우디 민방위청은 탄도미사일 파편이 메카주 사부하 마을에 떨어졌다고 밝혔습니다(걸프뉴스).",
+     "src": [
+      "https://english.news.cn/20261112/437f12a56b8e40b58459a23a66e872c4/c.html",
+      "https://gulfnews.com/world/mena/us-israel-iran-war-tehran-threatens-american-bases-from-middle-east-to-europe-houthi-missile-debris-lands-in-makkah-eisenkot-cautions-netanyahu-1.500744472"
+     ],
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ]
+    },
+    {
+     "t": "알자지라는 11일 이란 혁명수비대가 호르무즈 해협 동부의 '비인가 항로'에서 유조선 3척이 기뢰에 맞아 불탔다고 주장했다고 전했습니다(미확인).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/11/iran-denies-talks-with-us-says-hormuz-will-stay-shut-until-demands-are-met"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "유엔 기후변화협약 제31차 당사국총회(COP31)의 정상회의가 11일 튀르키예 안탈리아에서 이틀 일정으로 열려 70명 넘는 정상과 고위 인사가 연설에 나섭니다(AP).",
+     "src": [
+      "https://www.koreatimes.co.kr/world/20261112/world-leaders-urge-stronger-and-faster-action-at-un-climate-talks-over-inadequate-response"
+     ],
+     "case": null,
+     "fp": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-11",
    "items": [
     {
@@ -5825,168 +6044,6 @@
      ],
      "fp": [
       "rus-ukr"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-09",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아, 크라마토르스크 버스 2대에 유도폭탄…33명 사망",
-     "fact": "우크라이나 국가비상사태청은 10월 8일 오전 10시쯤(현지 시각) 러시아군이 도네츠크주 크라마토르스크에서 승객이 탄 버스 2대를 유도폭탄으로 공격해 33명이 숨지고 18명이 다쳤다고 밝혔습니다. 우크라이나 공군은 7일 오후 6시부터 8일 오전 9시 30분까지 러시아가 드론 142대를 날려 126대를 격추하거나 무력화했다는 잠정 집계를 발표했습니다. 러시아 측은 크라마토르스크 공격에 대해 즉각 언급하지 않았고, 러시아 국방부는 7일 오후 8시부터 8일 오전 8시(모스크바 시각)까지 우크라이나 드론 399대를 격추했다고 주장했습니다.",
-     "link": "7일 프릴루키 공습에 이어 이틀 연달아 민간인 수십 명이 숨진 공격으로, 러-우 전쟁 결론 1이 가장 가능성 높은 미래로 보는 소모전 지속에 부합합니다. '러-우 전면 휴전 발효' 전망을 낮출 요인입니다.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4172298-death-toll-from-russian-strike-on-two-buses-in-kramatorsk-rises-to-33-18-injured.html",
-      "https://mezha.net/eng/news/22f4017d_ukraine_intercepts_126/",
-      "https://www.nampa.org/text/23034246",
-      "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
-     ],
-     "loc": {
-      "lat": 48.74,
-      "lon": 37.58,
-      "place": "크라마토르스크(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "트럼프 \"11월 3일 중간선거 전에는 이란 공격 안 해\"",
-     "fact": "도널드 트럼프 미국 대통령은 10월 8일(미국 시각) 트루스소셜에 이란과 \"생산적인 논의\"를 하고 있다며 \"11월 3일 미국에서 치러질 중간선거 전에는 어느 때에도 이란을 공격하지 않을 것\"이라고 썼습니다. 한편 뉴욕타임스는 트럼프 대통령이 사흘가량의 공습을 포함한 이란 공격 재개 계획을 마련하도록 지시했다고 보도했습니다.",
-     "link": "공습 재개를 선거 뒤로 미룬 발언으로, 이란 결론 1이 가장 가능성 높은 미래로 보는 장기 봉쇄 대치가 적어도 11월 초까지는 이어질 가능성을 보여 줍니다. '미국의 이란 본토 공습 재개' 전망은 연말까지를 대상으로 하므로 이 발언은 확률을 낮출 요인이지만, 선거 뒤 재개 가능성은 남아 있습니다.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.timesofisrael.com/liveblog-october-08-2026/",
-      "https://www.axios.com/2026/10/08/trump-iran-strikes-midterm-elections",
-      "https://www.middleeasteye.net/news/trump-rules-out-new-attack-iran-until-after-midterms-oil-prices-spike"
-     ]
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "rus-ukr",
-      "korea"
-     ],
-     "h": "정부, 주우크라이나 대사 본국 소환 결정",
-     "fact": "외교부는 10월 8일 \"정부는 주우크라이나 대사를 본국으로 소환하기로 결정했다\"며 \"우크라이나 측과의 협의를 지속해 나갈 것\"이라고 밝혔습니다. 한국 정부는 젤렌스키 우크라이나 대통령이 9월 23일 유엔총회 연설에서 북한군 포로 2명의 한국행을 공개한 것이 비공개 합의를 어긴 것이라며 공식 사과를 요구해 왔고, 우크라이나는 그런 합의가 없었다는 입장입니다.",
-     "link": "한반도 결론 6은 개인의 삶을 기준으로 억류자 송환 같은 인도적 사안을 앞에 둡니다. 포로 문제가 대사 소환이라는 외교 조치로 번진 것으로, 앞으로 포로 송환 같은 인도적 협의에서 한국과 우크라이나의 공조가 약해질 수 있습니다.",
-     "fc": [],
-     "src": [
-      "https://nocutnews.co.kr/news/6589170",
-      "https://www.seoul.co.kr/news/politics/2026/10/09/20261009003003"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "사우디 연합군, 리야드 겨냥 후티 탄도미사일 요격…파편에 유치원 피해",
-     "fact": "투르키 알말리키 사우디 주도 연합군 대변인은 10월 8일 리야드로 향하던 탄도미사일 2발과 카미스무샤이트로 향하던 1발을 요격해 파괴했다고 밝혔습니다. 사우디 민방위청은 요격된 미사일의 파편이 리야드에 떨어져 유치원과 의료 시설이 피해를 입었다고 밝혔습니다. 후티 측은 리야드 킹칼리드 국제공항을 공격했다고 주장했고, 야흐야 사레아 후티 군 대변인은 사우디 석유 시설 근무자들에게 후티군의 표적 구역에서 떠나라고 경고했습니다.",
-     "link": "이란 결론 2는 한국이 가장 크게 잃는 미래로 전쟁이 걸프 산유국 전체로 번지는 확전을 꼽습니다. 후티가 사우디의 수도 공항에 이어 석유 시설까지 표적으로 거론한 것은 그 방향의 움직임입니다.",
-     "fc": [],
-     "src": [
-      "https://english.news.cn/20261009/025e163d7ba54a0cacd813f0fcf041b7/c.html",
-      "https://www.euronews.com/2026/10/08/houthis-claim-missile-strike-on-riyadh-airport-as-explosions-heard-in-saudi-capital"
-     ],
-     "loc": {
-      "lat": 24.71,
-      "lon": 46.68,
-      "place": "리야드(사우디아라비아)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "horn-tigray-eritrea"
-     ],
-     "h": "에리트레아군, 티그라이 국경 넘어 진입했다는 증언 잇따라",
-     "fact": "메켈레에 주둔한 티그라이평화군(에티오피아 정부 편)의 지휘관 에르미야스 아바부는 에리트레아 병력이 10월 6일 아디그라트, 7일 이다가하무스에 들어왔다고 AP통신에 말했습니다. 분쟁 감시기관 ACLED는 에리트레아군이 7일 잘람베사에서 국경을 넘었고 에티오피아군 드론이 구아다에서 이들을 겨냥했다고 밝혔으며, AP는 두 주장을 독자적으로 확인하지 못했다고 전했습니다. 예마네 게브레메스켈 에리트레아 공보장관은 7일 에티오피아가 '자위'라는 허구의 서사로 침략 전쟁을 가리고 있다고 주장했습니다.",
-     "link": "사이트에 사안은 없지만 분쟁 지점으로 다루는 지역입니다. 아비 아머드 에티오피아 총리가 홍해 접근권을 거듭 요구하는 가운데 두 나라가 1998~2000년 국경 전쟁 이후 다시 직접 충돌할 우려가 커지고 있으며, 후티 공격으로 이미 흔들리는 홍해 항로의 위험을 더할 수 있습니다.",
-     "fc": [],
-     "src": [
-      "https://www.clickorlando.com/news/world/2026/10/08/eritrean-soldiers-entered-northern-ethiopian-towns-government-allied-commander-says/",
-      "https://www.thenationalnews.com/news/mena/2026/10/08/ethiopia-and-eritrea-edge-closer-to-direct-conflict-as-troops-enter-tigray/"
-     ],
-     "loc": {
-      "lat": 14.28,
-      "lon": 39.46,
-      "place": "아디그라트(에티오피아)",
-      "isos": [
-       "ETH",
-       "ERI"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "드미트리 페스코프 크렘린 대변인은 10월 8일 전쟁이 교착 상태라는 마코 루비오 미국 국무장관의 평가에 동의한다고 말했습니다. 로이터는 스티브 위트코프 특사와 재러드 쿠슈너가 9일(미국 시각) 마이애미에서 우크라이나 대표단을 만난다고 보도했습니다.",
-     "src": [
-      "https://www.jpost.com/international/article-911119",
-      "https://tass.com/world/2199585"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "아바스 아라그치 이란 외무장관은 10월 8일 이란이 내놓은 '7일 계획'에 대한 미국 측 견해를 검토하고 있으며 며칠 안에 답하겠다고 말했습니다.",
-     "src": [
-      "https://www.tasnimnews.ir/en/news/2026/10/08/3717882/iran-to-reply-to-us-proposal-within-days-araqchi"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "러시아 기업 얀덱스는 10월 8일 랴잔주의 자사 데이터센터가 드론 공격을 받아 불이 났다고 AFP통신에 밝혔습니다.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "진영승 합참의장은 10월 8일 국회 국방위원회 국정감사에서 비무장지대 지뢰 폭발과 관련해 \"도발이 아니라는 생각은 하나도 없었다\"고 말했습니다.",
-     "src": [
-      "https://www.mt.co.kr/politics/2026/10/08/2026100818430230280"
-     ],
-     "fp": [
-      "korea"
      ]
     }
    ]

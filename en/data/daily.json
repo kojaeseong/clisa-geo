@@ -1,6 +1,225 @@
 {
  "issues": [
   {
+   "date": "2026-11-12",
+   "items": [
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "U.S.-brokered Abu Dhabi talks yield a deal in principle on a prisoner swap, no breakthrough",
+     "fact": "Two days of U.S.-brokered talks in Abu Dhabi ended November 11 with Ukraine's chief negotiator, foreign intelligence chief Rustem Umerov, and Russian presidential aide Vladimir Medinsky saying the sides had agreed in principle on a large-scale prisoner exchange. There was no major progress toward ending the war, and U.S. special envoy Steve Witkoff and Jared Kushner (President Donald Trump's son-in-law) are set to meet President Vladimir Putin in Moscow on November 12.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-large-scale-prisoner-exchange-agreed-as-2nd-day-of-abu-dhabi-talks-concludes-umerov-says/",
+      "https://en.interfax.com.ua/news/general/1235062.html",
+      "https://www.wkrg.com/news/ap-russia-and-ukraine-hold-a-second-day-of-us-brokered-talks-in-abu-dhabi/amp/"
+     ],
+     "loc": {
+      "lat": 24.45,
+      "lon": 54.38,
+      "place": "Abu Dhabi (UAE)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "USA",
+       "ARE"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Ghalibaf says Iran and Oman set the rules in Hormuz; Vance reported to weigh meeting Rezaei",
+     "fact": "Iranian parliament speaker Mohammad Bagher Ghalibaf told Al Jazeera in an interview published November 11 that the Strait of Hormuz is “governed by the laws of the two littoral states that border it,” Iran and Oman, and repeated that the U.S. must lift its blockade and sanctions, among other conditions, before talks can begin. The same day, The Wall Street Journal reported that Vice President JD Vance was considering a face-to-face meeting with Mohsen Rezaei, secretary of Iran's Supreme National Security Council, and that the discussions were preliminary.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "none"
+      },
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/11/strait-of-hormuz-will-never-return-to-pre-war-status-ghalibaf",
+      "https://www.israelhayom.com/2026/11/11/report-vance-considers-face-to-face-meeting-with-irans-national-security-chief/"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Trump says he wants “a total victory, not a 93 percent victory” in Iran, says ending the war is “just a question of when”",
+     "fact": "Speaking at Arlington National Cemetery on Veterans Day, November 11, President Donald Trump said of the Iran war, “We won,” and that it was “just a question of when we want to end it.” He added: “We want to make sure we have a total victory, not a 93 percent victory.”",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "http://www.jpost.com/american-politics/article-914616",
+      "https://www.middleeasteye.net/live-blog/live-blog-update/trump-vows-total-victory-against-iran"
+     ],
+     "loc": {
+      "lat": 38.88,
+      "lon": -77.07,
+      "place": "Arlington National Cemetery (U.S.)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Eisenkot urges Netanyahu in a letter to hold off on “dangerous moves” until a new government is in place",
+     "fact": "Gadi Eisenkot, who has been tasked with forming Israel's next government, wrote to caretaker Prime Minister Benjamin Netanyahu on November 11 urging him to refrain from dangerous moves that can wait until a new government is sworn in. Gulf News, citing Israeli media, reported that Netanyahu had pushed for action against Iran despite objections from IDF Chief of Staff Eyal Zamir, a claim that has not been confirmed.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://gulfnews.com/world/mena/us-israel-iran-war-tehran-threatens-american-bases-from-middle-east-to-europe-houthi-missile-debris-lands-in-makkah-eisenkot-cautions-netanyahu-1.500744472"
+     ],
+     "loc": {
+      "isos": [
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
+     "h": "Taiwan's defense minister says China ran “area denial drills” in the western Pacific with the Liaoning carrier group",
+     "fact": "Taiwanese Defense Minister Wellington Koo told reporters at the Legislative Yuan in Taipei on November 10 that China “has indeed conducted area denial drills in the Western Pacific” with the Liaoning carrier group and other formations, Reuters reported. National Security Council Secretary-General Joseph Wu had said that as of November 3 more than 100 Chinese navy and coast guard vessels were deployed across the western Pacific. China has not formally announced the drills.",
+     "fc": [
+      {
+       "id": "f07",
+       "e": "none"
+      },
+      {
+       "id": "f24",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.taipeitimes.com/News/front/archives/2026/11/10/2003867493",
+      "https://www.taiwannews.com.tw/en/news/6471672"
+     ],
+     "loc": {
+      "lat": 25.04,
+      "lon": 121.56,
+      "place": "Taipei (Taiwan)",
+      "isos": [
+       "TWN",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Indonesian Vice President Gibran hands his resignation to the MPR a day after House factions moved to impeach him",
+     "fact": "Indonesian Vice President Gibran Rakabuming Raka delivered his resignation to leaders of the People's Consultative Assembly (MPR) at the parliament complex in Jakarta on the morning of November 12, local time, Antara reported. A day earlier, every faction in the House of Representatives had submitted a motion invoking the House's right to express an opinion, the first step toward impeachment.",
+     "fc": [],
+     "src": [
+      "https://en.antaranews.com/news/441971/gibran-conveys-vp-resignation-letter-to-mpr-leaders",
+      "https://en.antaranews.com/news/441795/all-house-factions-submit-proposal-to-impeach-vp-gibran"
+     ],
+     "loc": {
+      "lat": -6.21,
+      "lon": 106.8,
+      "place": "Jakarta (Indonesia)",
+      "isos": [
+       "IDN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Russia struck Kyiv with ballistic missiles shortly after 1 a.m. local time on November 12, hours after the Abu Dhabi talks ended, according to the Kyiv Post.",
+     "src": [
+      "https://kyivindependent.com/russia-attacks-kyiv-with-ballistic-missiles-hours-after-peace-talks-end/",
+      "https://www.kyivpost.com/post/89855"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    },
+    {
+     "t": "The Saudi-led coalition said November 11 that it intercepted five missiles and two drones fired by the Houthis toward Riyadh and the kingdom's western and southern regions. Saudi civil defense said debris from ballistic missiles fell on the village of Sabuhah in the Mecca region, Gulf News reported.",
+     "src": [
+      "https://english.news.cn/20261112/437f12a56b8e40b58459a23a66e872c4/c.html",
+      "https://gulfnews.com/world/mena/us-israel-iran-war-tehran-threatens-american-bases-from-middle-east-to-europe-houthi-missile-debris-lands-in-makkah-eisenkot-cautions-netanyahu-1.500744472"
+     ],
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ]
+    },
+    {
+     "t": "Al Jazeera reported November 11 that Iran's Islamic Revolutionary Guard Corps claimed three tankers caught fire after hitting mines on an “unauthorized route” in the eastern Strait of Hormuz; the claim could not be independently verified.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/11/iran-denies-talks-with-us-says-hormuz-will-stay-shut-until-demands-are-met"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "The leaders' segment of the UN climate conference, COP31, opened a two-day run in Antalya, Turkey, on November 11, with more than 70 world leaders and senior officials scheduled to speak, AP reported.",
+     "src": [
+      "https://www.koreatimes.co.kr/world/20261112/world-leaders-urge-stronger-and-faster-action-at-un-climate-talks-over-inadequate-response"
+     ],
+     "case": null,
+     "fp": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-11",
    "items": [
     {
@@ -5825,168 +6044,6 @@
      ],
      "fp": [
       "rus-ukr"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-09",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russian guided bombs hit two buses in Kramatorsk, killing 33",
-     "fact": "Russian forces struck two passenger buses in Kramatorsk, in Ukraine's Donetsk Oblast, with guided bombs at around 10 a.m. local time on October 8, killing 33 people and wounding 18, Ukraine's State Emergency Service said. Ukraine's Air Force said in a preliminary tally that Russia launched 142 drones between 6 p.m. on October 7 and 9:30 a.m. on October 8, of which 126 were shot down or neutralized. Moscow had no immediate comment on the Kramatorsk strike; Russia's Defense Ministry claimed it downed 399 Ukrainian drones between 8 p.m. on October 7 and 8 a.m. on October 8, Moscow time.",
-     "link": "The attack, a day after the Pryluky strike, marks the second straight day that an attack has killed dozens of civilians. That fits the continuing war of attrition that Conclusion 1 of the Russia-Ukraine war analysis treats as the most likely outcome, and it weighs against the forecast that a full Russia-Ukraine ceasefire will take effect.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4172298-death-toll-from-russian-strike-on-two-buses-in-kramatorsk-rises-to-33-18-injured.html",
-      "https://mezha.net/eng/news/22f4017d_ukraine_intercepts_126/",
-      "https://www.nampa.org/text/23034246",
-      "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
-     ],
-     "loc": {
-      "lat": 48.74,
-      "lon": 37.58,
-      "place": "Kramatorsk (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Trump says the U.S. will not attack Iran before the November 3 midterms",
-     "fact": "President Donald Trump wrote on Truth Social on October 8, U.S. time, that Washington was having \"productive discussions with the Islamic Republic of Iran\" and that \"we will not be attacking Iran at any time prior to the midterm elections to be held in the United States on November 3rd.\" The New York Times, however, reported that Trump has ordered plans drawn up to resume attacks on Iran, including roughly three days of airstrikes.",
-     "link": "By pushing any new strikes past the election, the pledge suggests that the prolonged blockade standoff, which Conclusion 1 of the Iran and Hormuz analysis treats as the most likely outcome, could last at least into early November. Because the forecast that the U.S. will resume strikes on the Iranian mainland runs through the end of the year, the statement lowers its odds, but a resumption after the election remains possible.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.timesofisrael.com/liveblog-october-08-2026/",
-      "https://www.axios.com/2026/10/08/trump-iran-strikes-midterm-elections",
-      "https://www.middleeasteye.net/news/trump-rules-out-new-attack-iran-until-after-midterms-oil-prices-spike"
-     ]
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "rus-ukr",
-      "korea"
-     ],
-     "h": "Seoul to recall its ambassador to Ukraine",
-     "fact": "South Korea's Foreign Ministry said on October 8 that \"the government has decided to recall the ambassador to Ukraine,\" adding that it would \"continue consultations with the Ukrainian side.\" Seoul says Ukrainian President Volodymyr Zelensky broke a confidentiality agreement when he disclosed in his September 23 speech to the UN General Assembly that two captured North Korean soldiers would go to South Korea, and it has demanded a formal apology; Kyiv says no such agreement existed.",
-     "link": "Conclusion 6 of the Korean Peninsula analysis, which weighs outcomes by their effect on individual lives, puts humanitarian issues such as the repatriation of detainees first. A dispute over prisoners of war has now escalated into an ambassadorial recall, which could weaken cooperation between Seoul and Kyiv in future humanitarian talks, including on repatriating POWs.",
-     "fc": [],
-     "src": [
-      "https://nocutnews.co.kr/news/6589170",
-      "https://www.seoul.co.kr/news/politics/2026/10/09/20261009003003"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi-led coalition intercepts Houthi ballistic missiles aimed at Riyadh, debris hits kindergarten",
-     "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on October 8 that its forces intercepted and destroyed two ballistic missiles headed for Riyadh and one headed for Khamis Mushait. Saudi Civil Defense said debris from an intercepted missile fell in Riyadh, damaging a kindergarten and a medical facility. The Houthis claimed a strike on Riyadh's King Khalid International Airport, and their military spokesman, Yahya Saree, warned workers at Saudi oil facilities to leave areas the group considers targets.",
-     "link": "Conclusion 2 of the Iran and Hormuz analysis identifies a war that spreads to all the Gulf oil producers as the outcome that would cost South Korea the most. The Houthis have now named Saudi oil facilities as targets on top of the capital's airport, a move in that direction.",
-     "fc": [],
-     "src": [
-      "https://english.news.cn/20261009/025e163d7ba54a0cacd813f0fcf041b7/c.html",
-      "https://www.euronews.com/2026/10/08/houthis-claim-missile-strike-on-riyadh-airport-as-explosions-heard-in-saudi-capital"
-     ],
-     "loc": {
-      "lat": 24.71,
-      "lon": 46.68,
-      "place": "Riyadh (Saudi Arabia)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "horn-tigray-eritrea"
-     ],
-     "h": "Accounts mount that Eritrean troops have crossed into Tigray",
-     "fact": "Ermiyas Ababu, a commander of the government-allied Tigray Peace Force based in Mekelle, told the Associated Press that Eritrean forces entered Adigrat on October 6 and Idaga Hamus on October 7. The conflict monitor ACLED said Eritrean troops crossed the border at Zalambessa on October 7 and that Ethiopian military drones targeted them at Guada; the AP said it could not independently verify either account. Eritrean Information Minister Yemane Gebremeskel claimed on October 7 that Ethiopia was using \"a fallacious narrative of 'self defence' to rationalise and camouflage its war of aggression.\"",
-     "link": "The site has no issue analysis on this conflict but tracks it as a flashpoint. With Ethiopian Prime Minister Abiy Ahmed repeatedly pressing for access to the Red Sea, fears are growing that the two countries could clash directly for the first time since their 1998–2000 border war, which could add to the risks on Red Sea shipping routes already shaken by Houthi attacks.",
-     "fc": [],
-     "src": [
-      "https://www.clickorlando.com/news/world/2026/10/08/eritrean-soldiers-entered-northern-ethiopian-towns-government-allied-commander-says/",
-      "https://www.thenationalnews.com/news/mena/2026/10/08/ethiopia-and-eritrea-edge-closer-to-direct-conflict-as-troops-enter-tigray/"
-     ],
-     "loc": {
-      "lat": 14.28,
-      "lon": 39.46,
-      "place": "Adigrat (Ethiopia)",
-      "isos": [
-       "ETH",
-       "ERI"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Kremlin spokesman Dmitry Peskov said on October 8 that he agreed with Secretary of State Marco Rubio's assessment that the war is at a stalemate. Reuters reported that special envoy Steve Witkoff and Jared Kushner would meet a Ukrainian delegation in Miami on October 9, U.S. time.",
-     "src": [
-      "https://www.jpost.com/international/article-911119",
-      "https://tass.com/world/2199585"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Iranian Foreign Minister Abbas Araghchi said on October 8 that Tehran is reviewing Washington's views on Iran's \"seven-day plan\" and will respond within days.",
-     "src": [
-      "https://www.tasnimnews.ir/en/news/2026/10/08/3717882/iran-to-reply-to-us-proposal-within-days-araqchi"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Russian tech company Yandex told AFP on October 8 that a drone attack sparked a fire at its data center in Ryazan Oblast.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/8/russia-attack-in-ukraines-kramatorsk-kills-12"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Gen. Jin Yeong-seung, chairman of South Korea's Joint Chiefs of Staff, told the National Assembly's National Defense Committee during its annual parliamentary audit on October 8 that he had never once thought the mine blast in the Demilitarized Zone was anything other than a provocation.",
-     "src": [
-      "https://www.mt.co.kr/politics/2026/10/08/2026100818430230280"
-     ],
-     "fp": [
-      "korea"
      ]
     }
    ]
