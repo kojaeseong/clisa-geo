@@ -160,10 +160,43 @@ header.top .logo{display:flex;align-items:center;gap:10px;background:none;border
 .wkl2 .ic2{width:28px;height:28px;border-radius:8px;color:#fff;font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}.wkl2 b{display:block;font-size:12px;color:var(--mut)}.wkl2 div span{display:block;font-size:14.5px;font-weight:700;line-height:1.4}
 .sep{display:flex;align-items:center;gap:10px;margin:26px 0 6px;color:var(--mut);font-size:12.5px;font-weight:800}.sep::before,.sep::after{content:'';flex:1;height:1px;background:var(--line)}
 .home-q h3 .h3a{float:right;font-size:12px;color:var(--acc);text-decoration:none}
-</style></head><body><div class="wrap" id="v"></div>
+.bar h1{flex:1}.bar .blogo{padding:0;margin-left:auto;flex:none}.bar .blogo img{width:28px;height:28px;border-radius:8px;display:block}
+/* 기본기(2026-11-14 운영자 "누르는 느낌"): 누를 수 있는 것은 모두 눌림 표시, 화면은 바뀔 때 살짝 나타남, 알림 띠 */
+a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.rw2,.btn,.lk,.nq a,.fcd,.pc,.fc,.chip,.tabs a,.gchips a,.wkl2 a,.widget li,.more2,.mo,.lnk,.bar button,.logo,.blogo,.ap .ic,.pill,.seg button{transition:transform .08s ease,background-color .08s ease,opacity .08s ease,box-shadow .08s ease}
+.rw2:active,.nq a:active,.fcd:active,.pc:active,.fc:active,.lk:active,.wkl2 a:active{transform:scale(.98);background-color:var(--chip)}
+.btn:active{transform:scale(.96);filter:brightness(.92)}.tabs a:active,.gchips a:active,.chip:active{transform:scale(.95);opacity:.8}
+.widget li:active{opacity:.7}.more2:active,.mo:active,.lnk:active{opacity:.55}
+.ap:active .ic{transform:scale(.92);filter:brightness(.9)}
+.bar button:active{opacity:.5;transform:scale(.88)}
+.logo:active img,.blogo:active img{transform:scale(.86)}.logo img,.blogo img{transition:transform .1s ease}.logo:active .nm{opacity:.6}
+.lnk{padding:4px 0!important;display:inline}.left{line-height:2.1}
+#v.in{animation:vin .16s ease-out}@keyframes vin{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#v.in{animation:none}.rw2:active,.fcd:active,.btn:active{transform:none}}
+.sec2.in2{animation:vin .2s ease-out}.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#141A26;color:#fff;font-size:13.5px;line-height:1.4;padding:10px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}.toast.on{opacity:1}
+.splash{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:70vh;color:var(--mut);font-size:13.5px}.splash img{width:64px;height:64px;border-radius:16px;animation:pulse 1.2s ease-in-out infinite}@keyframes pulse{50%{opacity:.5;transform:scale(.94)}}
+.navl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0 4px;padding-top:12px;border-top:1px solid var(--line);font-size:13px}.navl span{color:var(--mut);font-weight:700}.navl a{color:var(--acc);font-weight:700;text-decoration:none;padding:6px 0}.navl a:active{opacity:.55}
+/* 다듬기(2026-11-14 운영자 "간단하면서도 편리하고 세련되게"): 선택지는 한 묶음 목록으로, 탭은 한 줄 분절 단추, 머리는 반투명 고정, 간격과 글자 크기 정리 */
+.rw2{margin:0;border-radius:0;border-width:0 1px 1px;box-shadow:none;padding:13px 14px}
+:not(.rw2)+.rw2,.rw2:first-child{border-top-width:1px;border-top-left-radius:14px;border-top-right-radius:14px;margin-top:8px}
+.rw2:not(:has(+.rw2)){border-bottom-left-radius:14px;border-bottom-right-radius:14px;margin-bottom:10px}
+.rw2 .t b{font-size:15px;line-height:1.4}.rw2 .t small{font-size:12.5px;color:var(--mut);margin-top:3px}.rw2 .ar{font-size:18px;color:var(--mut)}.menu .rw2 .ar{color:var(--acc)}
+.st h1,.home-q h1{font-size:21px;line-height:1.38;letter-spacing:-.3px;margin:4px 0 6px}.st h3,.home-q h3{font-size:12.5px;font-weight:800;color:var(--mut);margin:18px 2px 0;letter-spacing:.2px}
+.q{font-size:11.5px;letter-spacing:.4px}.sub{color:var(--mut)!important}
+.tabs{gap:0;background:var(--chip);border-radius:12px;padding:3px;margin:2px 0 12px}.tabs a{border:0;background:transparent;border-radius:9px;padding:8px 4px;font-size:13.5px}.tabs a.on{background:var(--card);color:var(--acc);box-shadow:0 1px 3px rgba(16,24,40,.12)}
+.bar{background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);margin:0 -16px;padding:10px 16px;border-bottom:1px solid transparent}
+.bar h1{font-size:17px;letter-spacing:-.2px}.bar .ic{width:32px;height:32px;border-radius:9px;font-size:9.5px}
+.tabs{top:56px}
+.card{border-radius:16px;box-shadow:none}.ans,.fcd{box-shadow:none}
+.menu{margin:20px 0 4px}.menu>.q{margin-bottom:0}.sec2>.q{margin:18px 2px 6px}
+.lead{font-size:14px;color:var(--sub)}.lead b{color:var(--ink)}
+.navl{border-top:0;margin-top:22px;justify-content:center;gap:4px 18px}.navl span{display:none}
+.nq h2{font-size:12px;letter-spacing:.2px}.nq a{border-radius:0;margin:0;border-width:0 1px 1px}.nq h2+a{border-top-width:1px;border-top-left-radius:12px;border-top-right-radius:12px;margin-top:8px}.nq a:not(:has(+a)){border-bottom-left-radius:12px;border-bottom-right-radius:12px}
+.sep{margin:30px 0 8px}
+</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/lab/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='de196ab6b8';
+var DATA=null,V=document.getElementById('v'),PV='0d41aa441f';
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></button></header>'}
 function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
 function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}}
@@ -225,7 +258,7 @@ function home(){
   h+='<p class="note">시험판입니다. 내용은 클리사 지오폴리틱스의 공개 자료(정세 브리핑·정세 요약·전망·사안 분석)를 그대로 보여 줍니다. <a href="/">클리사 지오폴리틱스 홈페이지 ↗</a></p>';
   V.innerHTML=h;window.scrollTo(0,0);ntCard();
 }
-function bar(ic,col,t){return '<div class="bar"><button data-go="home" aria-label="뒤로">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1></div>'}
+function bar(ic,col,t){return '<div class="bar"><button data-back aria-label="이전 화면으로">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1><button class="blogo" data-go="home" aria-label="클리사 첫 화면으로"><img src="/lab/app/app-192.png" alt=""></button></div>'}
 function msgs(list,key,hl){
   var st=start(),sn=seen(key),h='',last='';
   if(!list.length)return '<p class="empty">최근 3주 동안의 소식이 없습니다.</p>';
@@ -245,6 +278,8 @@ function fcList(list,limit){
 }
 // 보고를 한 토막씩: 첫 토막만 보이고, 나머지는 "무엇을 더 보고드릴까요?"에서 고를 때마다 하나씩 펼친다(2026-11-13 운영자: 질문 없이 쏟아내지 않기)
 var OPEN={};
+// 질문은 화면마다 하나: 단계 질문이 남아 있는 동안에는 다른 곳으로 가는 길을 한 줄로만
+function navLine(){return '<div class="navl"><span>다른 곳으로</span><a href="#" data-back>이전 화면</a><a href="#">첫 화면</a><a href="#ask/1">다른 사안이나 지역</a></div>'}
 function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)return tail||'';secs.forEach(function(s,i){if(s.st==null)s.st=i?1:0});
   var o=OPEN[key]||(OPEN[key]=[secs[0].k]),by={};secs.forEach(function(s){by[s.k]=s});
   var h=o.map(function(k,i){var s=by[k];return s?'<div id="sec-'+k+'" class="sec2">'+(i>0?'<div class="q">'+e(s.q)+'</div>':'')+s.html+'</div>':''}).join('');
@@ -252,9 +287,10 @@ function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)
   var later=un.filter(function(s){return s.st>mx}),nst=later.length?Math.min.apply(null,later.map(function(s){return s.st})):0,nx=later.filter(function(s){return s.st===nst}),lf=un.filter(function(s){return s.st<=mx});
   var qs=typeof menuQ==='string'?[menuQ]:menuQ,Q=qs[Math.max(0,Math.min((nst||1)-1,qs.length-1))];
   var btn=function(s){return '<button class="rw2" data-sec="'+key+'|'+s.k+'"><span class="t"><b>'+e(s.q)+'</b>'+(s.sub?'<small>'+e(s.sub)+'</small>':'')+'</span><span class="ar">＋</span></button>'};
-  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(lf.length?'<div class="left">앞에서 고르지 않은 것 · '+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
+  var ah=later.filter(function(s){return s.st>nst});
+  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(ah.length?'<div class="left">뒤에 이어질 질문 · '+ah.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+(lf.length?'<div class="left">앞에서 고르지 않은 것 · '+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
   else if(lf.length)h+='<div class="menu"><div class="q">앞에서 고르지 않은 것도 보고드릴까요?</div>'+lf.map(btn).join('')+'</div>';
-  if(tail)h+=(nx.length||lf.length)?'<button class="more2 nxt" data-fold>여기까지 보고, 다른 것을 보고드릴까요? ▾</button><div class="fold" hidden>'+tail+'</div>':tail;
+  if(tail)h+=(nx.length||lf.length)?navLine():tail;
   return h}
 function issue(id,arg,sub){
   var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||draft())&&C.L),dl=C&&!C.ok?'<span class="draft">결재 전 시안</span>':'';
@@ -326,7 +362,7 @@ function issue(id,arg,sub){
   var w7=wk7(),show=hl?list.length:5;
   h+='<div class="q">판단의 근거가 된 소식</div><p class="lead"><b>'+e(a[1])+'</b>에 대한 최근 21일간의 정세 브리핑입니다. '+list.length+'건이며, 최근 것부터 보고드립니다.</p>'+msgs(list.slice(0,show),key,hl)+
     (list.length>show?'<button class="more2" data-fold>'+(list.length-show)+'건 더 보기 ▾</button><div class="fold" hidden>'+msgs(list.slice(show),key,hl)+'</div>':'');
-  h+='<button class="more2 nxt" data-fold>다음에 무엇을 보고드릴까요? ▾</button><div class="fold" hidden>'+nextQ([B?['이 소식들로 판은 어느 쪽으로 기울었나?',L2('pan')]:null,GQ,['앞으로 무엇이 실현될까?',L2('fc')]],'i:'+id)+'</div>';
+  h+=nextQ([B?['이 소식들로 판은 어느 쪽으로 기울었나?',L2('pan')]:null,GQ,['앞으로 무엇이 실현될까?',L2('fc')]],'i:'+id);
   V.innerHTML=h;markRead(key,list);
   if(hl){var m=document.getElementById('m-'+hl);if(m)m.scrollIntoView({block:'center'})}else window.scrollTo(0,0);
 }
@@ -344,7 +380,7 @@ function region(id,sub){
   if(sub==='pan'){h+='<div class="q">이 지역의 판은 어디로 가고 있나</div><p class="lead"><b>'+e(r[1])+'</b>의 소식이 많은 사안부터 이번 주 판세를 보고드립니다.</p><div class="card">'+RI.slice(0,4).map(function(k){var a=app(k);return a?'<a class="fc" href="#ask/i/'+k+'"><span class="q"><b>'+e(a[1])+'</b><br><small style="color:var(--sub)">'+e(issueLine(k))+'</small></span></a>':''}).join('')+'</div>'}
   else if(sub==='fc'){h+='<div class="q">이 지역에서 앞으로 무엇이 실현될까</div><p class="lead"><b>'+e(r[1])+'</b> 소식에 연결된 전망 '+FL.length+'개입니다. 최근 확률이 바뀐 것부터 보고드립니다.</p><div class="card">'+fcList(FL,4)+(FL.length>4?'<button class="more2" data-fold>'+(FL.length-4)+'개 더 보기 ▾</button><div class="fold" hidden>'+fcList(FL.slice(4),100)+'</div>':'')+'</div>'}
   else{h+='<div class="q">이 지역에서 무슨 일이 있었나</div><p class="lead"><b>'+e(r[1])+'</b>에 대한 최근 21일간의 정세 브리핑입니다. '+list.length+'건이며, 최근 것부터 보고드립니다.</p>'+msgs(list.slice(0,5),key)+(list.length>5?'<button class="more2" data-fold>'+(list.length-5)+'건 더 보기 ▾</button><div class="fold" hidden>'+msgs(list.slice(5),key)+'</div>':'')}
-  h+='<button class="more2 nxt" data-fold>다음에 무엇을 보고드릴까요? ▾</button><div class="fold" hidden>'+tail+'</div>';
+  h+=tail;
   V.innerHTML=h;if(sub==='news')markRead(key,list);window.scrollTo(0,0);
 }
 function fcs(){
@@ -367,7 +403,7 @@ function dgs(){
   var D=DATA.digest,h=bar('요약','#2C3E66','주간 정세 요약');
   var card=function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a?a[1]:'')+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button></div>'};
   h+='<div class="q">이번 주 세계는 어떻게 흘러왔나</div><p class="lead">이번 주 정세 요약은 '+D.length+'개 사안입니다. 앞의 3개부터 보고드립니다.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+'개 사안 더 보기 ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
-  h+='<button class="more2 nxt" data-fold>다음에 무엇을 보고드릴까요? ▾</button><div class="fold" hidden>'+nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · 이 흐름으로 판은 어디로 기울었나?','#i/'+d.a+'/pan']:null}),'dg')+'</div>';
+  h+=nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · 이 흐름으로 판은 어디로 기울었나?','#i/'+d.a+'/pan']:null}),'dg');
   V.innerHTML=h;window.scrollTo(0,0);
 }
 var API='https://api.clisa.ai',CTX='첫 화면',OPENED=Date.now(),OTH=0;
@@ -612,20 +648,29 @@ document.addEventListener('visibilitychange',function(){if(document.visibilitySt
 function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
   if(r[0]==='i'&&app(r[1]))issue(r[1],r[2],r[3]);else if(r[0]==='r'&&reg(r[1]))region(r[1],r[2]);else if(r[0]==='ppl'){var gk=(DATA.kimp.groups||[]).map(function(g){return g[0]});if(gk.indexOf(r[1])>=0)pplView(r[1],r[2]||'all');else pplView(ls('grp','KOR'),r[1]||'all')}else if(r[0]==='ind'&&r[1])indView(decodeURIComponent(r[1]));else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='start')startView(r[1],r[2]);else if(r[0]==='ask')startView(r[1],r[2],true);else if(r[0]==='f'&&r[1])fcView(r[1]);else if(r[0]==='b')briefView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start'&&r[0]!=='ask')CTX=ctxOf(r);
   var js=ls('justsaved',null);if(js&&r[0]!=='start'){try{localStorage.removeItem('clisa.justsaved')}catch(x){};var bb=V.querySelector('.bar');var nt='<div class="saved">관심사로 저장했습니다 · '+e(js)+' · 다음부터 이 보고를 첫 화면 맨 앞에 올려 드립니다 <a href="#start/4">관심사 보기</a></div>';if(bb)bb.insertAdjacentHTML('afterend',nt);else V.insertAdjacentHTML('afterbegin',nt)}}
+function toast(t){var el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.className='toast';document.body.appendChild(el)}el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('on')},1800)}
+var STACK=[],SCR={};
+function anim(){V.classList.remove('in');void V.offsetWidth;V.classList.add('in')}
+function refresh(){toast('최신 보고를 받는 중입니다…');return fetch('/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){location.reload();return}DATA=d;
+  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){if(!DATA)return;route();anim();var t=new Date();toast(md(DATA.asof)+' 정세 브리핑까지 받았습니다 · '+('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2))}).catch(function(){toast('받지 못했습니다. 연결을 확인해 주십시오.')})}
 function go(h){var cur=location.hash.replace(/^#/,'');if(cur===h)route();else location.hash=h}
 V.addEventListener('click',function(ev){var bk=ev.target.closest('[data-back]');if(bk){ev.preventDefault();if(history.length>1)history.back();else go('');return}var t=ev.target.closest('[data-open],[data-go],[data-mode],[data-item],[data-more],[data-fold],[data-ans],[data-rm],[data-skip],[data-addint],[data-sec]');if(!t)return;
   if(t.hasAttribute('data-fold')){ev.preventDefault();var f=t.nextElementSibling;f.hidden=!f.hidden;t.textContent=t.textContent.replace(f.hidden?'▴':'▾',f.hidden?'▾':'▴');return}
   if(t.hasAttribute('data-more')){var p=t.previousElementSibling;if(p){p.classList.toggle('clamp');t.textContent=p.classList.contains('clamp')?'더 보기':'접기'}return}
   if(t.dataset.mode){ss('mode',t.dataset.mode);OTH=1;home();return}
-  if(t.dataset.sec){var sp=t.dataset.sec.split('|');(OPEN[sp[0]]=OPEN[sp[0]]||[]).push(sp[1]);route();var el=document.getElementById('sec-'+sp[1]);if(el)el.scrollIntoView({block:'start'});window.scrollBy(0,-64);return}
+  if(t.dataset.sec){var sp=t.dataset.sec.split('|');(OPEN[sp[0]]=OPEN[sp[0]]||[]).push(sp[1]);route();var ns=document.getElementById('sec-'+sp[1]);if(ns){ns.classList.add('in2')}var el=document.getElementById('sec-'+sp[1]);if(el)el.scrollIntoView({block:'start'});window.scrollBy(0,-64);return}
   if(t.dataset.ans){var q=t.dataset.ans.split(':');answer(q[0],q.slice(1).join(':'));return}
   if(t.dataset.rm!=null){var I0=ints();I0.splice(+t.dataset.rm,1);ss('prof',{ints:I0,at:DATA.asof});startView('4');return}
   if(t.hasAttribute('data-skip')){ss('skip',1);go('');return}
   if(t.dataset.addint){var q2=t.dataset.addint.split(':'),it={ax:q2[0],k:q2[1],w:q2[0]==='i'?((DATA.boards||{})[q2[1]]?'pan':'news'):'news'};saveInt(it);try{localStorage.removeItem('clisa.justsaved')}catch(x){};t.outerHTML='<p class="saved">관심사에 더했습니다 · '+e(intLabel(it))+' · 다음부터 첫 화면 맨 앞에 올려 드립니다</p>';return}
   if(t.dataset.item){go('i/'+t.dataset.app+'/'+t.dataset.item);return}
-  if(t.dataset.go){go(t.dataset.go==='home'?'':t.dataset.go);return}
+  if(t.dataset.go){if(t.dataset.go==='home'){OTH=0;OPEN={};var here=location.hash.replace(/^#/,'');if(here===''){if(window.scrollY>40){window.scrollTo({top:0,behavior:'smooth'})}else refresh();return}}go(t.dataset.go==='home'?'':t.dataset.go);return}
   var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens'||o==='msg')go(o);else go(o.replace(':','/'))});
-addEventListener('hashchange',function(){OPEN={};route()});
+addEventListener('scroll',function(){SCR[location.hash||'#']=window.scrollY},{passive:true});
+addEventListener('hashchange',function(ev){OPEN={};var nh=location.hash;
+  var back=STACK.length>1&&STACK[STACK.length-2]===nh,y=SCR[nh||'#'];if(back)STACK.pop();else STACK.push(nh);route();anim();
+  if(back&&y!=null)setTimeout(function(){window.scrollTo(0,y)},30)});
+try{history.scrollRestoration='manual'}catch(x){}
 function build(daily){var R=DATA.rule,out=[];
   function near(lon,lat){var b=null,bd=1e9;R.capReg.forEach(function(c){var d=(c[0]-lon)*(c[0]-lon)+(c[1]-lat)*(c[1]-lat);if(d<bd){bd=d;b=c[2]}});return b}
   daily.issues.slice(0,21).forEach(function(iss){iss.items.forEach(function(it,i){
@@ -641,7 +686,7 @@ fetch('/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()})
   // 화면이 옛 판이면(자료의 pv와 다르면) 한 번만 새로 불러온다
   if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){var k='clisa.rl.'+d.pv,done=null;try{done=sessionStorage.getItem(k);sessionStorage.setItem(k,'1')}catch(x){}if(!done){location.reload();return new Promise(function(){})}}
   DATA=d;
-  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){route()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
+  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){STACK=[location.hash];route();anim()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
 if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/lab/app/sw.js',{scope:'/lab/app/'}).catch(function(){})});
 })();
 </script></body></html>
