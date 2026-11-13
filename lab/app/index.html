@@ -196,7 +196,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/lab/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='0d41aa441f';
+var DATA=null,V=document.getElementById('v'),PV='a98e842267';
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></button></header>'}
 function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
 function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}}
@@ -470,7 +470,7 @@ function suggest(cur){var ci=cur&&cur.indexOf('i:')===0?cur.slice(2):'',out=rela
   var gm=(DATA.games||[]).filter(function(g){return !ci||g.cases.indexOf(ci)<0})[0];
   if(gm)out.push([gm.q,gm.url,'게임 · '+gm.t+EXT]);
   var seen={};return out.filter(function(x){if(seen[x[1]])return false;seen[x[1]]=1;return true}).slice(0,5)}
-function saveInt(it,label){var I=ints().filter(function(x){return intKey(x)!==intKey(it)});I.unshift(it);ss('prof',{ints:I,at:DATA.asof});ss('justsaved',label||intLabel(it))}
+function saveInt(it,label){var I=ints().filter(function(x){return intKey(x)!==intKey(it)});I.unshift(it);ss('prof',{ints:I,at:DATA.asof});ss('justsaved',label||intLabel(it));syncTopics()}
 function isInt(it){return ints().some(function(x){return intKey(x)===intKey(it)})}
 function row(ans,title,sub,extra,href){var inner='<span class="t"><b>'+e(title)+'</b>'+(sub?'<small>'+e(sub)+'</small>':'')+'</span>'+(extra||'')+'<span class="ar">›</span>';
   return href?'<a class="rw2" href="'+href+'">'+inner+'</a>':'<button class="rw2" data-ans="'+ans+'">'+inner+'</button>'}
@@ -630,17 +630,21 @@ function msgView(){
 // 새 소식 알림(시험판): 구독은 서버에 기기의 알림 주소만 남긴다
 function b64k(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';var r=atob(s),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
 function post(path,o){return fetch(API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).then(function(x){return x.json()})}
+// 알림 받을 사안(2026-11-14 운영자 결재): 관심사 사안, 지역은 그 지역의 사안들. 관심사가 없으면 빈 목록 = 모든 새 소식
+function pushTopics(){var T=[];ints().forEach(function(it){var L=it.ax==='i'?[it.k]:it.ax==='r'?relIssues(it.k):[];L.forEach(function(k){if(T.indexOf(k)<0)T.push(k)})});return T}
+function topicText(){var T=pushTopics();return T.length?T.map(function(k){var a=app(k);return a?a[1]:k}).join('·')+'의 ':''}
+function syncTopics(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription()}).then(function(sub){if(sub)post('/push/sub',{sub:sub.toJSON(),topics:pushTopics()}).catch(function(){})}).catch(function(){})}
 function ntCard(){var el=document.getElementById('nt');if(!el)return;
   navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription().then(function(sub){
     var den=Notification.permission==='denied';
-    if(sub){el.innerHTML='<b>새 소식 알림을 받고 있습니다</b><p>정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜹니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.</p><div class="rw"><button class="btn s" id="nt-t">시험 알림 보내기</button><button class="btn s" id="nt-x">알림 끄기</button></div><p id="nt-r"></p>';
+    if(sub){post('/push/sub',{sub:sub.toJSON(),topics:pushTopics()}).catch(function(){});el.innerHTML='<b>새 소식 알림을 받고 있습니다</b><p>'+(pushTopics().length?'관심사('+e(pushTopics().map(function(k){var a=app(k);return a?a[1]:k}).join(' · '))+')의 소식만 보내 드립니다. 관심사를 바꾸면 알림도 함께 바뀝니다. ':'관심사를 정하지 않으셔서 모든 새 소식을 보내 드립니다. ')+'정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜹니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.</p><div class="rw"><button class="btn s" id="nt-t">시험 알림 보내기</button><button class="btn s" id="nt-x">알림 끄기</button></div><p id="nt-r"></p>';
       document.getElementById('nt-t').onclick=function(){var b=this,r=document.getElementById('nt-r');b.disabled=true;r.textContent='보내는 중입니다…';post('/push/test',{endpoint:sub.endpoint}).then(function(d){r.textContent=d.ok?'보냈습니다. 몇 초 안에 알림이 뜹니다.':d.error==='rate'?'시험 알림은 10분에 한 번 보낼 수 있습니다.':'보내지 못했습니다.';if(d.error==='not_subscribed'){sub.unsubscribe().then(ntCard)}}).catch(function(){r.textContent='보내지 못했습니다. 연결을 확인해 주십시오.'}).then(function(){b.disabled=false})};
       document.getElementById('nt-x').onclick=function(){post('/push/unsub',{endpoint:sub.endpoint}).catch(function(){}).then(function(){return sub.unsubscribe()}).then(ntCard)};
-    }else{el.innerHTML='<b>새 소식이 나오면 알려 드릴까요?</b><p>'+(den?'이 기기에서 클리사 알림이 꺼져 있습니다. 휴대전화 설정의 앱 알림에서 클리사를 허용한 뒤 다시 눌러 주십시오.':'정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜨고, 앱 아이콘에 새 소식 표시가 붙습니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.')+'</p><div class="rw"><button class="btn" id="nt-on"'+(den?' disabled':'')+'>알림 받기</button></div><p id="nt-r"></p>';
+    }else{el.innerHTML='<b>새 소식이 나오면 알려 드릴까요?</b><p>'+(den?'이 기기에서 클리사 알림이 꺼져 있습니다. 휴대전화 설정의 앱 알림에서 클리사를 허용한 뒤 다시 눌러 주십시오.':(pushTopics().length?'관심사('+e(pushTopics().map(function(k){var a=app(k);return a?a[1]:k}).join(' · '))+')의 ':'')+'정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜨고, 앱 아이콘에 새 소식 표시가 붙습니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.')+'</p><div class="rw"><button class="btn" id="nt-on"'+(den?' disabled':'')+'>알림 받기</button></div><p id="nt-r"></p>';
       var on=document.getElementById('nt-on');on.onclick=function(){var r=document.getElementById('nt-r');on.disabled=true;
         Notification.requestPermission().then(function(pm){if(pm!=='granted')throw 'perm';return fetch(API+'/push/key').then(function(x){return x.json()})})
         .then(function(k){return reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64k(k.key)})})
-        .then(function(s){return post('/push/sub',{sub:s.toJSON()})}).then(function(d){if(!d.ok)throw 'srv';ntCard()})
+        .then(function(s){return post('/push/sub',{sub:s.toJSON(),topics:pushTopics()})}).then(function(d){if(!d.ok)throw 'srv';ntCard()})
         .catch(function(x){on.disabled=false;r.textContent=x==='perm'?'알림이 허용되지 않았습니다.':'알림을 켜지 못했습니다. 잠시 뒤에 다시 눌러 주십시오.'})};
     }})}).catch(function(){el.remove()})}
 function clearNotes(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.getNotifications?reg.getNotifications():[]}).then(function(ns){ns.forEach(function(n){n.close()})}).catch(function(){});if(navigator.clearAppBadge)navigator.clearAppBadge().catch(function(){})}
@@ -660,7 +664,7 @@ V.addEventListener('click',function(ev){var bk=ev.target.closest('[data-back]');
   if(t.dataset.mode){ss('mode',t.dataset.mode);OTH=1;home();return}
   if(t.dataset.sec){var sp=t.dataset.sec.split('|');(OPEN[sp[0]]=OPEN[sp[0]]||[]).push(sp[1]);route();var ns=document.getElementById('sec-'+sp[1]);if(ns){ns.classList.add('in2')}var el=document.getElementById('sec-'+sp[1]);if(el)el.scrollIntoView({block:'start'});window.scrollBy(0,-64);return}
   if(t.dataset.ans){var q=t.dataset.ans.split(':');answer(q[0],q.slice(1).join(':'));return}
-  if(t.dataset.rm!=null){var I0=ints();I0.splice(+t.dataset.rm,1);ss('prof',{ints:I0,at:DATA.asof});startView('4');return}
+  if(t.dataset.rm!=null){var I0=ints();I0.splice(+t.dataset.rm,1);ss('prof',{ints:I0,at:DATA.asof});syncTopics();startView('4');return}
   if(t.hasAttribute('data-skip')){ss('skip',1);go('');return}
   if(t.dataset.addint){var q2=t.dataset.addint.split(':'),it={ax:q2[0],k:q2[1],w:q2[0]==='i'?((DATA.boards||{})[q2[1]]?'pan':'news'):'news'};saveInt(it);try{localStorage.removeItem('clisa.justsaved')}catch(x){};t.outerHTML='<p class="saved">관심사에 더했습니다 · '+e(intLabel(it))+' · 다음부터 첫 화면 맨 앞에 올려 드립니다</p>';return}
   if(t.dataset.item){go('i/'+t.dataset.app+'/'+t.dataset.item);return}
