@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Clisa</title>
+<meta name="theme-color" content="#0B2A86">
+<link rel="manifest" href="/en/lab/app/manifest.webmanifest">
+<link rel="icon" href="/en/lab/app/app-192.png">
+<link rel="apple-touch-icon" href="/en/lab/app/app-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--bg:#F4F6F9;--card:#FFFFFF;--ink:#141A26;--sub:#4A5366;--mut:#7A8396;--line:#E2E6EE;--brand:#0B2A86;--acc:#1F4FD8;--red:#E5322D;--up:#B4441F;--dn:#1E7A5A;--chip:#EEF2FA}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1320;--card:#161D2E;--ink:#E8ECF3;--sub:#B6BED0;--mut:#8C95A8;--line:#28324A;--brand:#6F93FF;--acc:#7EA2FF;--red:#FF5A52;--up:#FF8A65;--dn:#5CC79A;--chip:#1F2940}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;word-break:keep-all;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh}.wrap{max-width:520px;margin:0 auto;padding:12px 16px calc(28px + env(safe-area-inset-bottom))}
+header.top{display:flex;align-items:center;gap:10px;padding:6px 0 12px}header.top img{width:30px;height:30px;border-radius:8px}
+header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .sp{flex:1}
+.pill{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--sub);border-radius:999px;padding:6px 12px;cursor:pointer}
+.widget{background:var(--brand);color:#fff;border-radius:20px;padding:16px 16px 10px;box-shadow:0 6px 18px rgba(11,42,134,.18)}
+@media (prefers-color-scheme:dark){.widget{background:#1B2C66}}
+.widget .k{font-size:12px;opacity:.8;letter-spacing:.3px}.widget .flow{font-size:14px;line-height:1.5;margin:6px 0 10px;opacity:.95}
+.widget .flow b{font-weight:700}.widget ul{list-style:none;margin:0;padding:0}
+.widget li{padding:10px 0;border-top:1px solid rgba(255,255,255,.18);font-size:15px;line-height:1.45;font-weight:600;cursor:pointer;display:flex;gap:8px}
+.widget li .tg{flex:none;font-size:11px;font-weight:700;background:rgba(255,255,255,.18);border-radius:6px;padding:2px 6px;height:fit-content;margin-top:2px}
+.widget .more{display:block;text-align:right;color:#fff;opacity:.85;font-size:13px;padding:8px 0 4px;text-decoration:none}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;margin:18px 0 12px}
+.seg button{flex:1;font:inherit;font-size:14px;font-weight:600;border:0;background:none;color:var(--mut);padding:8px;border-radius:9px;cursor:pointer}
+.seg button.on{background:var(--acc);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px}
+.ap{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;font:inherit;color:var(--ink);cursor:pointer;padding:0}
+.ap .ic{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.ap .lb{font-size:12px;line-height:1.25;text-align:center;color:var(--sub);max-width:76px}
+.ap .bd{position:absolute;top:-6px;right:calc(50% - 38px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.ap.off{opacity:.45;cursor:default}
+.sec{margin:26px 0 8px;font-size:13px;font-weight:700;color:var(--mut)}
+.note{font-size:12px;color:var(--mut);line-height:1.6;margin-top:28px}.note a{color:var(--mut)}
+
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:10px;padding:10px 0}
+.bar button{font:inherit;font-size:22px;line-height:1;border:0;background:none;color:var(--ink);cursor:pointer;padding:4px 8px 4px 0}
+.bar .ic{width:38px;height:38px;border-radius:10px;color:#fff;font-weight:800;font-size:10px;letter-spacing:-.3px;display:flex;align-items:center;justify-content:center;flex:none}
+.bar h1{font-size:18px;margin:0;line-height:1.3}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card h2{font-size:13px;color:var(--mut);margin:0 0 8px;font-weight:700}
+.dg b{display:block;font-size:16px;line-height:1.45;margin-bottom:6px}.dg p{margin:0;font-size:14px;line-height:1.7;color:var(--sub)}
+.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mo{font:inherit;font-size:13px;color:var(--acc);background:none;border:0;padding:6px 0 0;cursor:pointer}
+.fc{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.fc:first-of-type{border-top:0}.fc .q{flex:1;font-size:14px;line-height:1.5}
+.fc .pv{flex:none;text-align:right;min-width:62px}.fc .pv b{font-size:18px}.fc .pv small{display:block;font-size:12px;color:var(--mut)}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.day{text-align:center;margin:18px 0 6px}.day span{font-size:12px;color:var(--mut);background:var(--chip);border-radius:999px;padding:4px 12px}
+.msg{background:var(--card);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:12px 14px;margin:8px 0;position:relative}
+.msg.nw{border-color:var(--acc)}.msg.nw::before{content:'New';position:absolute;top:-9px;left:12px;font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:1px 6px}
+.msg .h{font-size:15px;font-weight:700;line-height:1.45}.msg .t{font-size:14px;line-height:1.7;color:var(--sub);margin-top:6px}
+.msg .mt{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.chip{font-size:12px;background:var(--chip);border-radius:8px;padding:3px 8px;color:var(--sub);text-decoration:none}
+.msg .src{font-size:12px;color:var(--mut)}
+.msg.hl{box-shadow:0 0 0 3px var(--acc)}
+.cell{padding:10px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.6}.cell:first-of-type{border-top:0}.cell b{display:block;font-size:14px}
+.cty button{font:inherit;font-size:16px;font-weight:700;padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-align:left}
+.cty button small{display:block;font-size:12px;font-weight:500;color:var(--mut);margin-top:2px}.cty button:disabled{opacity:.5;cursor:default}
+.empty{color:var(--mut);font-size:14px;padding:8px 0}
+.world{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:12px}
+.world h2{font-size:15px;margin:0 0 2px}.world .sm{font-size:12px;color:var(--mut);margin-bottom:10px}
+.wr{display:flex;align-items:center;gap:8px;padding:6px 0;text-decoration:none;color:inherit}.wn{width:46%;display:flex;flex-direction:column}.wn b{font-size:14px}.wn small{font-size:11.5px;color:var(--mut)}.wbar{flex:1;height:8px;background:var(--chip);border-radius:4px;overflow:hidden}.wbar i{display:block;height:100%;border-radius:4px}.wp{width:38px;text-align:right;font-size:14px}
+.wb{display:flex;gap:3px;height:64px}.wb a{border-radius:10px;color:#fff;text-decoration:none;padding:6px;display:flex;flex-direction:column;justify-content:space-between;min-width:0;overflow:hidden}
+.wb b{font-size:12px;line-height:1.25}.wb span{font-size:11px;opacity:.9}.wtr{font-size:13px;line-height:1.55;margin-top:10px;color:var(--sub)}.wtr b{color:var(--ink)}
+.tl{font-size:11px;line-height:1.3;font-weight:700;margin-top:-2px;max-width:80px;text-align:center}.tl.u{color:var(--up)}.tl.d{color:var(--dn)}
+.fu{padding:8px 0;border-top:1px solid var(--line)}.fu:first-of-type{border-top:0}.fu .r{display:flex;align-items:center;gap:8px;font-size:14px}.fu .r .n{flex:1}.fu .fbar{height:7px;background:var(--chip);border-radius:4px;margin-top:5px;overflow:hidden}.fu .fbar i{display:block;height:100%;background:var(--acc)}
+.fu .mv{font-size:12px;font-weight:700}.fu .wy{font-size:12px;color:var(--mut);line-height:1.5;margin-top:4px}
+.ac{padding:9px 0;border-top:1px solid var(--line)}.ac:first-of-type{border-top:0}.ac b{display:block;font-size:14px;margin-bottom:3px}.ac p{margin:2px 0;font-size:13px;line-height:1.55}
+.tg2{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:0 5px;margin-right:5px}.tw{background:#E0E7FF;color:#3730A3}.tr{background:#FEE2E2;color:#B91C1C}
+.ls{padding:10px 0;border-top:1px solid var(--line)}.ls:first-of-type{border-top:0}.ls .ln{font-weight:800;font-size:14px}.ls .lt{font-size:12px;color:var(--mut);font-weight:600;margin-left:4px}.ls p{margin:4px 0;font-size:13px;line-height:1.55}
+.k1{background:#E0E7FF;color:#3730A3}.k2{background:#DCFCE7;color:#166534}.k3{background:#FEE2E2;color:#B91C1C}.k4{background:#F3E8FF;color:#6B21A8}
+.lean{font-size:13px;line-height:1.6;background:#FFFBEB;border:1px solid #FDE68A;color:#141A26;border-radius:10px;padding:9px 11px;margin-top:8px}
+.clash{background:#FFF7ED;border-color:#FED7AA}.clash p{margin:0;font-size:14px;line-height:1.65;color:#141A26}
+.wt{font-size:13px;line-height:1.55;padding:7px 0;border-top:1px solid var(--line)}.wt:first-of-type{border-top:0}.wt .tg{display:inline-block;font-size:11px;font-weight:800;border-radius:5px;padding:1px 6px;margin-right:6px;color:#fff}.wt .a{background:#B91C1C}.wt .b{background:#047857}.wt .c{background:#6D28D9}
+.lk{display:block;font-size:13px;font-weight:700;color:var(--acc);background:var(--chip);border-radius:10px;padding:9px 11px;margin-top:6px;text-decoration:none}
+.th{padding:12px 0;border-top:1px solid var(--line)}.th:first-of-type{border-top:0}.th b{font-size:15px}.th small{color:var(--mut);font-size:12px;margin-left:6px}.th p{font-size:13px;line-height:1.65;color:var(--sub);margin:5px 0 0}.th h4{font-size:12px;margin:8px 0 0;color:var(--mut)}
+.tug .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tug .ch{font-size:12px;font-weight:700;margin-bottom:6px}.tug .ch.g{color:var(--dn)}.tug .ch.r{color:var(--up);text-align:right}
+.fz{margin:0 0 10px}.fz .ar{border-radius:3px;margin-bottom:5px}.fz.g .ar{background:var(--dn)}.fz.r .ar{background:var(--up)}.fz b{display:block;font-size:13px;line-height:1.35}.fz span{display:block;font-size:12px;color:var(--mut);line-height:1.4}.fz.r{text-align:right}
+.band{display:flex;gap:3px;height:46px;margin:10px 0 6px;font-size:11px;font-weight:700;color:#fff;text-align:center}.band div{border-radius:10px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12);min-width:58px;padding:0 3px;display:flex;align-items:center;justify-content:center;line-height:1.25}
+.band .g{background:linear-gradient(180deg,#2A9A70,var(--dn))}.band .m{background:linear-gradient(180deg,#A3ABBB,#7F889A)}.band .r{background:linear-gradient(180deg,#D25A33,var(--up))}.tug .cap{font-size:11.5px;color:var(--mut);line-height:1.5}.tug .why{margin-top:12px;font-size:14px;line-height:1.65}.tug .why b{display:block;font-size:13px;margin-bottom:2px}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pc{position:relative;background:var(--card);box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.05);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:7px;min-height:118px}
+.pc{border-top:3px solid var(--acc2,var(--line))}
+.pc .hd{display:flex;align-items:center;gap:8px}.pc .ic2{width:30px;height:30px;border-radius:9px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}.pc .nm2{font-size:13.5px;font-weight:700;line-height:1.3}
+.pc .bd{position:absolute;top:-8px;right:-6px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}.pc .rd{font-size:12px;line-height:1.45;color:var(--sub)}.pc .rd b{color:var(--ink)}
+.mini{position:relative;height:18px}.mini .ln{position:absolute;left:0;right:0;top:7px;height:5px;border-radius:999px;background:repeating-linear-gradient(115deg,#B88A44 0 4px,#8E6527 4px 6px);opacity:.85}
+.mini .k,.rope .k{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink);border:2px solid var(--card)}.mini .k0,.rope .k0{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--mut);opacity:.35}
+.tabs{display:flex;gap:6px;margin:4px 0 10px;position:sticky;top:58px;z-index:4;background:var(--bg);padding:4px 0}.tabs a{flex:1;text-align:center;font-size:14px;font-weight:700;padding:9px;border-radius:10px;background:var(--card);border:1px solid var(--line);color:var(--mut);text-decoration:none}.tabs a.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.asof2{text-align:center;font-size:12px;color:var(--mut);margin:0 0 8px}
+.arw{display:flex;align-items:center;margin:0 0 6px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.12))}.arw svg{flex:none;display:block}.arw i{display:block;flex:1}
+.arw.g i{background:linear-gradient(90deg,var(--dn),color-mix(in srgb,var(--dn) 35%,transparent));border-radius:0 999px 999px 0;transform-origin:left center}
+.arw.r i{background:linear-gradient(270deg,var(--up),color-mix(in srgb,var(--up) 35%,transparent));border-radius:999px 0 0 999px;transform-origin:right center}
+@media (prefers-reduced-motion:no-preference){.arw i{animation:grow .7s cubic-bezier(.2,.8,.2,1) both}.arw svg{animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
+ .rope .k{animation:tug 1.6s ease-in-out .35s both}@keyframes grow{from{transform:scaleX(.15);opacity:.2}to{transform:none;opacity:1}}@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+ @keyframes tug{0%{transform:translateX(0)}25%{transform:translateX(var(--pull,0))}55%{transform:translateX(calc(var(--pull,0) * -.4))}100%{transform:translateX(0)}}}
+.fz .pw{display:inline-block;font-size:10.5px;font-weight:800;color:var(--mut);margin-left:4px;letter-spacing:.3px}.fz .td{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:var(--red);border-radius:999px;padding:0 6px;margin-left:5px;vertical-align:1px}
+.rope{position:relative;height:26px;margin:16px 0 6px}.rope .ln{position:absolute;left:0;right:0;top:9px;height:8px;border-radius:999px;background:repeating-linear-gradient(115deg,#B88A44 0 6px,#8E6527 6px 9px);box-shadow:inset 0 -1px 0 rgba(0,0,0,.25),0 1px 2px rgba(0,0,0,.15)}
+.rope .k,.rope .k0{top:1px;width:24px;height:24px;margin-left:-12px}.rope .k{background:radial-gradient(circle at 35% 30%,#4A3A26,#1C140B);border:3px solid var(--card);box-shadow:0 0 0 2px #8E6527,0 3px 6px rgba(0,0,0,.25)}
+.rope .ctr{position:absolute;left:50%;top:-2px;bottom:-2px;width:0;border-left:2px dashed var(--line)}
+.read2{font-size:14.5px;line-height:1.65;background:#F1F5FF;border-radius:12px;padding:11px 13px;color:#141A26}.read2 b{font-weight:800}
+.ev{font-size:12.5px;color:var(--mut);line-height:1.6;margin-top:8px}.ev b{color:var(--sub)}
+.chg2{margin:0;padding-left:18px}.chg2 li{font-size:14px;line-height:1.65;margin:4px 0}
+.more2{display:block;font:inherit;font-size:13px;font-weight:700;color:var(--acc);background:none;border:0;padding:8px 0 0;cursor:pointer}
+.q{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.2px;margin:2px 0 8px}.q.w{color:rgba(255,255,255,.85)}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:12px}.wk h2{font-size:17px;line-height:1.4;margin:0 0 6px}.wk p{margin:0;font-size:14.5px;line-height:1.7}
+.wkl{list-style:none;margin:0 0 8px;padding:0}.wkl li{display:flex;flex-direction:column;padding:7px 0;border-top:1px solid var(--line)}.wkl li:first-child{border-top:0}.wkl b{font-size:13px;color:var(--mut)}.wkl span{font-size:15px;font-weight:700;line-height:1.45}
+.wfold{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
+.draft{font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:1px 6px;margin-left:6px}
+
+.nt{display:flex;flex-direction:column;gap:6px}.nt b{font-size:15px}.nt p{margin:0;font-size:13px;line-height:1.6;color:var(--sub)}.nt .rw{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.btn{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:999px;padding:9px 16px;background:var(--acc);color:#fff;cursor:pointer}.btn.s{background:var(--chip);color:var(--ink)}.btn:disabled{opacity:.5;cursor:default}
+.fm label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:12px 0 4px}.fm textarea,.fm input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px}.fm textarea{min-height:150px;resize:vertical}
+.fm .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.fm .ctx{font-size:12.5px;color:var(--mut)}.fm .rs{font-size:14px;margin-top:10px;line-height:1.6}.fm .rs.er{color:var(--red)}
+.st h1{font-size:21px;line-height:1.4;margin:6px 0 4px}.st .sub{font-size:13.5px;color:var(--sub);line-height:1.6;margin:0 0 14px}.st h3{font-size:12.5px;color:var(--mut);margin:16px 0 8px}
+.ops{display:flex;flex-wrap:wrap;gap:8px}.op{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 14px;cursor:pointer}.op.on{border-color:var(--acc);background:var(--acc);color:#fff}
+.wn2{display:flex;flex-direction:column;gap:8px}.wn2 button{font:inherit;text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:13px 14px;cursor:pointer}.wn2 button b{display:block;font-size:15.5px}.wn2 button span{display:block;font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.5}
+.st .ft{display:flex;gap:8px;margin-top:18px;align-items:center}.st .skip{font:inherit;font-size:13px;color:var(--mut);background:none;border:0;cursor:pointer;margin-left:auto}
+.dots{display:flex;gap:6px;margin:4px 0 0}.dots i{width:22px;height:4px;border-radius:2px;background:var(--line)}.dots i.on{background:var(--acc)}
+.nq{margin:18px 0 6px}.nq h2{font-size:13px;color:var(--mut);margin:0 0 8px}.nq a{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:700;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-top:7px;text-decoration:none}.nq a::after{content:'›';margin-left:auto;color:var(--acc);font-size:18px}
+.pf{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);margin:-4px 0 10px}.pf a{color:var(--acc);font-weight:700;text-decoration:none;margin-left:auto}
+.pc.fav{box-shadow:0 0 0 2px var(--acc)}.pc .fv{font-size:10.5px;font-weight:800;color:var(--acc)}
+.hb{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:6px 0 4px;font-size:11px;font-weight:700;color:#fff}.hb i{display:flex;align-items:center;justify-content:center;font-style:normal;min-width:0;white-space:nowrap}
+.hb .x{background:#B91C1C}.hb .w{background:var(--up)}.hb .b{background:var(--dn)}.hb .s{background:#A3ABBB}.hbl{font-size:12px;color:var(--mut);line-height:1.5}
+.ir{padding:10px 0;border-top:1px solid var(--line)}.ir:first-of-type{border-top:0}.ir .t{display:flex;align-items:baseline;gap:8px}.ir .t b{font-size:14.5px}.ir .t small{margin-left:auto;font-size:12px;color:var(--mut)}.ir p{margin:4px 0 0;font-size:12.5px;line-height:1.55;color:var(--sub)}
+.pth{display:inline-block;font-size:11px;font-weight:800;border-radius:5px;padding:1px 6px;margin-right:6px;background:var(--chip);color:var(--sub)}
+.fo{margin:0 0 6px}.fcd{display:block;position:relative;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--acc2,var(--acc));border-radius:16px;padding:12px 14px;margin:0 0 10px;text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.05)}
+.fcd .fh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.fcd .fh b{font-size:15px}.fcd .fh small{font-size:11px;font-weight:800;color:var(--acc);background:var(--chip);border-radius:6px;padding:1px 6px}.fcd .bd{position:static;margin-left:auto;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.fcd ul{list-style:none;margin:0;padding:0}.fcd li{font-size:14px;line-height:1.5;padding:6px 0;border-top:1px solid var(--line);display:flex;gap:8px}.fcd li:first-child{border-top:0}.fcd li span{flex:none;font-size:12px;font-weight:800;color:var(--mut);min-width:38px;padding-top:1px}
+.fcd .go{font-size:13px;font-weight:700;color:var(--acc);margin-top:8px;text-align:right}.rd2{font-size:14px;line-height:1.5;margin:0}.sm2{font-size:12.5px;color:var(--mut);line-height:1.55;margin:4px 0 0}
+.fcd .ic2{width:30px;height:30px;border-radius:9px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}.pf a{white-space:nowrap}.more2.oth{margin:8px 0 4px;font-size:14px}.nq h2{margin-top:2px}
+.pk{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:13px 14px;margin:0 0 10px;cursor:pointer;box-shadow:0 1px 2px rgba(16,24,40,.05)}.pk:active{border-color:var(--acc)}
+.pk>b{display:block;font-size:16px}.pk>small{display:block;font-size:12.5px;color:var(--mut);margin:2px 0 6px}.pk .go{display:block;text-align:right;font-size:13px;font-weight:700;color:var(--acc);margin-top:6px}
+.pv{list-style:none;margin:4px 0 0;padding:0}.pv li{display:flex;gap:8px;font-size:13.5px;line-height:1.5;padding:4px 0;border-top:1px solid var(--line)}.pv li:first-child{border-top:0}.pv li span{flex:none;font-size:11.5px;font-weight:800;color:var(--mut);min-width:40px;padding-top:1px}
+.pvl{font-size:14px;line-height:1.5;margin:4px 0 0;font-weight:600}.pvp{font-size:12.5px;line-height:1.55;color:var(--mut);margin:4px 0 0}
+.irow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.irow:first-child{border-top:0}.irow span{font-size:12px;font-weight:800;color:var(--acc)}.irow b{flex:1;font-size:14.5px}.irow button{font:inherit;border:0;background:var(--chip);color:var(--sub);border-radius:8px;width:30px;height:30px;cursor:pointer}
+.cell .pth{margin-left:6px}
+.rw2{text-decoration:none;display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px;margin:0 0 8px;cursor:pointer}.rw2:active{border-color:var(--acc)}
+.rw2 .t{flex:1;min-width:0}.rw2 .t b{display:block;font-size:15px}.rw2 .t small{display:block;font-size:12.5px;color:var(--sub);line-height:1.45;margin-top:2px}.rw2 .ar{color:var(--acc);font-size:20px;flex:none}
+.rw2 .nb{flex:none;min-width:22px;height:22px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 6px}.rw2 .cnt{flex:none;font-size:11.5px;font-weight:800;color:var(--mut)}.rw2 .mr{flex:none;width:64px}
+.or{display:flex;align-items:center;gap:10px;margin:18px 0 6px;color:var(--acc);font-weight:800;font-size:14px}.or::before,.or::after{content:'';flex:1;height:1px;background:var(--line)}.or span{background:var(--chip);border-radius:999px;padding:4px 14px}
+.ans{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--acc2,var(--acc));border-radius:16px;padding:12px 14px;margin:8px 0 0}.ans .fh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.ans .fh b{font-size:16px}.ans .fh small{font-size:11px;font-weight:800;color:var(--acc);background:var(--chip);border-radius:6px;padding:1px 6px}
+.ans .ic2{width:30px;height:30px;border-radius:9px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.bk{display:inline-block;font-size:13px;font-weight:700;color:var(--acc);text-decoration:none;margin:2px 0 4px}.tg3{font-style:normal;font-size:10.5px;font-weight:800;color:var(--mut);background:var(--chip);border-radius:5px;padding:0 5px;margin-left:4px}
+.saved{font-size:12.5px;line-height:1.55;background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0;border-radius:10px;padding:8px 11px;margin:0 0 8px}.saved a{color:#065F46;font-weight:800;margin-left:4px}
+.irow a{flex:1;color:inherit;text-decoration:none}
+.lead{font-size:14px;line-height:1.6;margin:2px 0 6px;color:var(--ink)}.nq a .t2{display:flex;flex-direction:column;min-width:0}.nq a .t2 small{font-size:12px;font-weight:500;color:var(--mut);margin-top:2px;line-height:1.45}
+.ans .lk{margin-top:10px}
+header.top .inb{font-weight:700;color:var(--acc);border-color:var(--acc);padding:5px 12px}header.top .inx{font:inherit;font-size:13px;border:0;background:none;color:var(--mut);padding:6px 4px 6px 8px;cursor:pointer}
+header.top .logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.fcp{display:flex;align-items:baseline;gap:10px;margin:10px 0 4px}.fcp b{font-size:34px;color:var(--acc)}.fcp span{font-size:12.5px;color:var(--mut)}
+.home-q{margin-top:16px}.home-q h1{font-size:19px;line-height:1.4;margin:2px 0 4px}.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px;margin-top:18px}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}.gchips a{font-size:12.5px;font-weight:700;text-decoration:none;color:var(--sub);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 11px}.gchips a.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.ir .t small{font-size:12px;color:var(--mut);margin-left:6px}
+.menu{margin:16px 0 4px}.menu .rw2 .ar{font-size:18px;font-weight:800}.sec2{margin-top:6px}.sec2>.q{margin-top:14px}.more2.nxt{margin-top:14px;font-size:14px}
+.left{font-size:12.5px;color:var(--mut);line-height:1.8;margin-top:6px}.left .lnk{font:inherit;font-size:12.5px;color:var(--acc);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.wkl2{list-style:none;margin:4px 0 6px;padding:0}.wkl2 li{border-top:1px solid var(--line)}.wkl2 li:first-child{border-top:0}.wkl2 li>a,.wkl2 li>span{display:flex}.wkl2 a,.wkl2 li{color:inherit;text-decoration:none}
+.wkl2 li a,.wkl2 li{}.wkl2 a{display:flex;gap:10px;align-items:center;padding:7px 0}.wkl2 li:not(:has(a)){display:flex;gap:10px;align-items:center;padding:7px 0}
+.wkl2 .ic2{width:28px;height:28px;border-radius:8px;color:#fff;font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}.wkl2 b{display:block;font-size:12px;color:var(--mut)}.wkl2 div span{display:block;font-size:14.5px;font-weight:700;line-height:1.4}
+.sep{display:flex;align-items:center;gap:10px;margin:26px 0 6px;color:var(--mut);font-size:12.5px;font-weight:800}.sep::before,.sep::after{content:'';flex:1;height:1px;background:var(--line)}
+.home-q h3 .h3a{float:right;font-size:12px;color:var(--acc);text-decoration:none}
+.bar h1{flex:1}.bar .blogo{padding:0;margin-left:auto;flex:none}.bar .blogo img{width:28px;height:28px;border-radius:8px;display:block}
+
+a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.rw2,.btn,.lk,.nq a,.fcd,.pc,.fc,.chip,.tabs a,.gchips a,.wkl2 a,.widget li,.more2,.mo,.lnk,.bar button,.logo,.blogo,.ap .ic,.pill,.seg button{transition:transform .08s ease,background-color .08s ease,opacity .08s ease,box-shadow .08s ease}
+.rw2:active,.nq a:active,.fcd:active,.pc:active,.fc:active,.lk:active,.wkl2 a:active{transform:scale(.98);background-color:var(--chip)}
+.btn:active{transform:scale(.96);filter:brightness(.92)}.tabs a:active,.gchips a:active,.chip:active{transform:scale(.95);opacity:.8}
+.widget li:active{opacity:.7}.more2:active,.mo:active,.lnk:active{opacity:.55}
+.ap:active .ic{transform:scale(.92);filter:brightness(.9)}
+.bar button:active{opacity:.5;transform:scale(.88)}
+.logo:active img,.blogo:active img{transform:scale(.86)}.logo img,.blogo img{transition:transform .1s ease}.logo:active .nm{opacity:.6}
+.lnk{padding:4px 0!important;display:inline}.left{line-height:2.1}
+#v.in{animation:vin .16s ease-out}@keyframes vin{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#v.in{animation:none}.rw2:active,.fcd:active,.btn:active{transform:none}}
+.sec2.in2{animation:vin .2s ease-out}.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#141A26;color:#fff;font-size:13.5px;line-height:1.4;padding:10px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}.toast.on{opacity:1}
+.splash{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:70vh;color:var(--mut);font-size:13.5px}.splash img{width:64px;height:64px;border-radius:16px;animation:pulse 1.2s ease-in-out infinite}@keyframes pulse{50%{opacity:.5;transform:scale(.94)}}
+.navl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0 4px;padding-top:12px;border-top:1px solid var(--line);font-size:13px}.navl span{color:var(--mut);font-weight:700}.navl a{color:var(--acc);font-weight:700;text-decoration:none;padding:6px 0}.navl a:active{opacity:.55}
+
+.rw2{margin:0;border-radius:0;border-width:0 1px 1px;box-shadow:none;padding:13px 14px}
+:not(.rw2)+.rw2,.rw2:first-child{border-top-width:1px;border-top-left-radius:14px;border-top-right-radius:14px;margin-top:8px}
+.rw2:not(:has(+.rw2)){border-bottom-left-radius:14px;border-bottom-right-radius:14px;margin-bottom:10px}
+.rw2 .t b{font-size:15px;line-height:1.4}.rw2 .t small{font-size:12.5px;color:var(--mut);margin-top:3px}.rw2 .ar{font-size:18px;color:var(--mut)}.menu .rw2 .ar{color:var(--acc)}
+.st h1,.home-q h1{font-size:21px;line-height:1.38;letter-spacing:-.3px;margin:4px 0 6px}.st h3,.home-q h3{font-size:12.5px;font-weight:800;color:var(--mut);margin:18px 2px 0;letter-spacing:.2px}
+.q{font-size:11.5px;letter-spacing:.4px}.sub{color:var(--mut)!important}
+.tabs{gap:0;background:var(--chip);border-radius:12px;padding:3px;margin:2px 0 12px}.tabs a{border:0;background:transparent;border-radius:9px;padding:8px 4px;font-size:13.5px}.tabs a.on{background:var(--card);color:var(--acc);box-shadow:0 1px 3px rgba(16,24,40,.12)}
+.bar{background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);margin:0 -16px;padding:10px 16px;border-bottom:1px solid transparent}
+.bar h1{font-size:17px;letter-spacing:-.2px}.bar .ic{width:32px;height:32px;border-radius:9px;font-size:9.5px}
+.tabs{top:56px}
+.card{border-radius:16px;box-shadow:none}.ans,.fcd{box-shadow:none}
+.menu{margin:20px 0 4px}.menu>.q{margin-bottom:0}.sec2>.q{margin:18px 2px 6px}
+.lead{font-size:14px;color:var(--sub)}.lead b{color:var(--ink)}
+.navl{border-top:0;margin-top:22px;justify-content:center;gap:4px 18px}.navl span{display:none}
+.nq h2{font-size:12px;letter-spacing:.2px}.nq a{border-radius:0;margin:0;border-width:0 1px 1px}.nq h2+a{border-top-width:1px;border-top-left-radius:12px;border-top-right-radius:12px;margin-top:8px}.nq a:not(:has(+a)){border-bottom-left-radius:12px;border-bottom-right-radius:12px}
+.sep{margin:30px 0 8px}
+.bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/lab/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
+<script>
+(function(){
+var DATA=null,V=document.getElementById('v'),PV='babf2f9f1c',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/lab/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
+var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
+function instUI(){var el=document.getElementById('inst');if(!el)return;if(standalone()||ls('instx',0)||!(DP||IOS)){el.innerHTML='';return}
+  el.innerHTML='<button class="pill inb" data-inst>Install app</button><button class="inx" data-instx aria-label="Close">✕</button>'}
+addEventListener('beforeinstallprompt',function(ev){ev.preventDefault();DP=ev;instUI()});
+addEventListener('appinstalled',function(){DP=null;instUI()});
+function ls(k,d){try{var x=localStorage.getItem('clisa.en.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
+function ss(k,v){try{localStorage.setItem('clisa.en.'+k,JSON.stringify(v))}catch(e){}}
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function md(d){var p=d.split('-');return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][p[1]-1]+' '+(+p[2])}
+function app(id){for(var i=0;i<DATA.apps.length;i++)if(DATA.apps[i][0]===id)return DATA.apps[i]}
+function reg(id){for(var i=0;i<DATA.regions.length;i++)if(DATA.regions[i][0]===id)return DATA.regions[i]}
+function start(){var s=ls('start',null);if(!s){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d)<0)ds.push(x.d)});s=ds[Math.min(1,ds.length-1)];ss('start',s)}return s}
+function seen(k){return ls('seen.'+k,[])}
+function unread(k,list){var st=start(),sn=seen(k);return list.filter(function(x){return x.d>=st&&sn.indexOf(x.id)<0})}
+function markRead(k,list){var sn=seen(k);list.forEach(function(x){if(sn.indexOf(x.id)<0)sn.push(x.id)});ss('seen.'+k,sn.slice(-600))}
+function issueItems(id){return DATA.items.filter(function(x){return x.a.indexOf(id)>=0})}
+function regItems(id){return DATA.items.filter(function(x){return x.r===id})}
+function fcLast(f){return f.h.length?f.h[f.h.length-1][0]:''}
+function fcChanged(){var since=ls('fcseen',null);if(!since){var d=new Date(DATA.asof);d.setDate(d.getDate()-3);since=d.toISOString().slice(0,10);ss('fcseen',since)}
+  return DATA.fc.filter(function(f){return f.h.length>1&&fcLast(f)>since})}
+function thinker(id){var T=DATA.thinkers||[];for(var i=0;i<T.length;i++)if(T[i].id===id)return T[i]}
+function tilt(id){var b=(DATA.boards||{})[id];if(!b)return null;var m=null;b.fut.forEach(function(f){if(f.v&&(!m||Math.abs(f.v)>Math.abs(m.v)))m=f});return m}
+function draft(){return location.search.indexOf('draft')>=0||location.pathname.indexOf('/en/lab/app/')===0}
+function pulls(id,side,name){var t=0,w=0,wk=new Date(DATA.asof);wk.setDate(wk.getDate()-6);wk=wk.toISOString().slice(0,10);
+  (DATA.items||[]).forEach(function(x){(x.pull||[]).forEach(function(p){if(p[0]===id&&p[1]===side&&p[2]===name){if(x.d===DATA.asof)t++;if(x.d>=wk)w++}})});return {today:t,week:w}}
+function badge(n){return n>0?'<span class="bd">'+(n>99?'99+':n)+'</span>':''}
+function delta(f){if(f.h.length<2)return '';var a=f.h[f.h.length-2][1],b=f.h[f.h.length-1][1];if(a===b)return '';return '<small class="'+(b>a?'up':'dn')+'">'+(b>a?'▲':'▼')+Math.abs(b-a)+' · '+md(f.h[f.h.length-1][0])+'</small>'}
+function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)return DATA.fc[i]}
+
+function briefRow(){var n=DATA.items.filter(function(x){return x.d===DATA.asof}).length,u=DATA.items.filter(function(x){return x.d===DATA.asof&&seen('b.'+x.d).indexOf(x.id)<0}).length,top=DATA.items.filter(function(x){return x.d===DATA.asof})[0];
+  return row('','Start with today’s briefing?',md(DATA.asof)+' · '+n+(n===1?' item':' items')+(top?' · '+top.h:''),u?'<span class="nb">'+u+'</span>':'','#b/'+DATA.asof)}
+function weekBlock(link){var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'],F0=favs();
+  var reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a,C.short]:null}).filter(Boolean);
+  var h='<section class="wk"><div class="q">Which way the world moved this week</div>';
+  h+=reads.length?'<ul class="wkl2">'+reads.map(function(r){var inner='<span class="ic2" style="background:'+r[0][3]+'">'+e(r[0][2])+'</span><div><b>'+e(r[0][1])+'</b><span>'+e(r[1])+'</span></div>';return '<li>'+(link?'<a href="#ask/i/'+r[0][0]+'">'+inner+'</a>':inner)+'</li>'}).join('')+'</ul>':'<p>This week’s assessment is updated every Monday.</p>';
+  if(W)h+='<div class="wfold"><button class="more2" data-fold style="padding:0">Five futures for the world and the lens behind each (as of '+md(W.asof)+') ▾</button><div class="fold" hidden>'+W.scen.map(function(x,i){var t=thinker(x[3]);return '<a class="wr" href="#lens"><span class="wn"><b>'+e(x[1])+'</b><small>'+e(t?t.n+'’s lens':'')+'</small></span><span class="wbar"><i style="width:'+(x[2]/W.scen[0][2]*100)+'%;background:'+TC[i%5]+'"></i></span><b class="wp">'+x[2]+'%</b></a>'}).join('')+'</div></div>';
+  return h+'</section>'}
+function briefWidget(){var latest=DATA.items.filter(function(x){return x.d===DATA.asof}),dg=DATA.digest[0];
+  var h='<section class="widget" style="margin-top:12px"><div class="q w">What happened</div><div class="k">'+md(DATA.asof)+' briefing · '+latest.length+(latest.length===1?' item':' items')+'</div>';
+  if(dg)h+='<div class="flow"><b>This week</b> · '+e(dg.t)+'</div>';
+  h+='<ul>'+latest.slice(0,3).map(function(x){var a=app(x.a[0]);return '<li data-item="'+x.id+'" data-app="'+x.a[0]+'"><span class="tg">'+e(a[2])+'</span><span>'+e(x.h)+'</span></li>'}).join('')+'</ul>';
+  return h+'<a class="more" href="#b/'+DATA.asof+'">See the full briefing ›</a></section>'}
+function intRow(it){var x=it.ax==='i'?app(it.k):it.ax==='r'?reg(it.k):null,sub='';
+  if(it.ax==='i'&&x){var t=tabFor(it.k,it.w);sub=t==='pan'?issueLine(it.k):t==='imp'?(function(){var I=impOf(it.k);if(!I)return '';var G=impG(I,it.g),wl=worstLife(I,G);return gName(it.k,G)+(wl!=null?' · worse off in '+wl+' of 100 futures':'')})():t==='fc'?(issueFc(it.k)[0]?issueFc(it.k)[0].q+' '+issueFc(it.k)[0].p+'%':''):((issueItems(it.k)[0]||{}).h||'');
+    var u=unread('i.'+it.k,issueItems(it.k)).length;return row('',intLabel(it),sub,u?'<span class="nb">'+u+'</span>':'',intLink(it))}
+  if(it.ax==='r'&&x){var L=regItems(it.k);return row('',intLabel(it),(L[0]||{}).h||'','',intLink(it))}
+  return row('',intLabel(it),'','',intLink(it))}
+function home(){
+  var I=ints(),FOC=draft()&&I.length>0,h=topHead();
+  h+='<section class="home-q" style="margin-top:4px"><div class="q">Question</div><h1>'+(FOC?'What would you like to start with today?':'What would you like to be briefed on?')+'</h1>';
+  if(FOC)h+='<h3>Your interests<a class="h3a" href="#start/4">Edit</a></h3>'+I.map(intRow).join('')+'<h3>New today</h3>'+briefRow()+'<button class="more2 oth" data-fold>Other issues and regions '+(OTH?'▴':'▾')+'</button><div class="fold"'+(OTH?'':' hidden')+'>'+pickList(true)+'</div>';
+  else h+='<p class="sub">Start with today’s briefing, or choose one issue <b>or</b> one region.</p>'+briefRow()+pickList(true)+(draft()?'<div class="pf" style="margin-top:12px">Choose the issues or regions you follow, and their briefings will come first on this screen.<a href="#start/1">Choose</a></div>':'');
+  h+='</section><div class="sep"><span>More</span></div>';
+  h+='<div class="tools">';
+  h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">%</span><span class="lb">Changed forecasts</span>'+badge(fcChanged().length)+'</button>';
+  h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">Lens</span><span class="lb">Lenses on the world</span></button>';
+  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">Week</span><span class="lb">Weekly summary</span></button>';
+  h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">Note</span><span class="lb">Send feedback</span></button></div>';
+  if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
+  h+='<p class="note">This app shows Clisa Geopolitics’ published work, unchanged. <a href="/en/">Clisa Geopolitics website ↗</a></p><p class="note" style="margin-top:6px">© 2026 Jae-Seong Ko · For information only, not investment advice · <button class="lnk" data-fold style="font-size:12px;color:var(--mut)">Copyright ▾</button><span class="fold" hidden style="display:block;margin-top:6px">The design, text and data compilations of Clisa Geopolitics are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Geopolitics” and the page address as the source. To reproduce or redistribute all or a substantial part, please ask for permission first at clisageo@clisa.ai.</span></p>';
+  V.innerHTML=h;window.scrollTo(0,0);ntCard();
+}
+function bar(ic,col,t){return '<div class="bar"><button data-back aria-label="Back">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1><button class="blogo" data-go="home" aria-label="Clisa home"><img src="/en/lab/app/app-192.png" alt=""></button></div>'}
+function msgs(list,key,hl){
+  var st=start(),sn=seen(key),h='',last='';
+  if(!list.length)return '<p class="empty">No news in the past three weeks.</p>';
+  list.forEach(function(x){if(x.d!==last){h+='<div class="day"><span>'+md(x.d)+'</span></div>';last=x.d}
+    var nw=x.d>=st&&sn.indexOf(x.id)<0;
+    h+='<div class="msg'+(nw?' nw':'')+(x.id===hl?' hl':'')+'" id="m-'+x.id+'"><div class="h">'+e(x.h)+'</div><div class="t clamp">'+e(x.t)+'</div><button class="mo" data-more>More</button><div class="mt">';
+    x.fc.forEach(function(c){var f=fpById(c[0]);if(f)h+='<a class="chip" href="#f/'+c[0]+'">'+e((function(q){q=q.replace(/^By [^,]+, /,'');q=q.charAt(0).toUpperCase()+q.slice(1);return q.length>38?q.slice(0,38)+'…':q})(f.q))+' '+f.p+'%'+(c[1]==='up'?' ↑':c[1]==='down'?' ↓':'')+'</a>'});
+    if(x.pl)h+='<span class="chip">'+e(x.pl)+'</span>';
+    if(x.s[0])h+='<a class="src" href="'+e(x.s[0])+'" target="_blank" rel="noopener">Source ↗</a>';
+    h+='</div></div>'});
+  return h;
+}
+function fcList(list,limit){
+  list=list.slice().sort(function(a,b){return fcLast(b)<fcLast(a)?-1:fcLast(b)>fcLast(a)?1:0});
+  var h=list.slice(0,limit).map(function(f){return '<a class="fc" href="#f/'+f.id+'"><span class="q">'+e(f.q)+'</span><span class="pv"><b>'+f.p+'%</b>'+delta(f)+'</span></a>'}).join('');
+  return h||'<p class="empty">No linked forecasts.</p>';
+}
+var OPEN={};
+function navLine(){return '<div class="navl"><span>Go to</span><a href="#" data-back>Back</a><a href="#">Home</a><a href="#ask/1">Other issues and regions</a></div>'}
+function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)return tail||'';secs.forEach(function(s,i){if(s.st==null)s.st=i?1:0});
+  var o=OPEN[key]||(OPEN[key]=[secs[0].k]),by={};secs.forEach(function(s){by[s.k]=s});
+  var h=o.map(function(k,i){var s=by[k];return s?'<div id="sec-'+k+'" class="sec2">'+(i>0?'<div class="q">'+e(s.q)+'</div>':'')+s.html+'</div>':''}).join('');
+  var mx=Math.max.apply(null,o.map(function(k){return by[k]?by[k].st:0})),un=secs.filter(function(s){return o.indexOf(s.k)<0});
+  var later=un.filter(function(s){return s.st>mx}),nst=later.length?Math.min.apply(null,later.map(function(s){return s.st})):0,nx=later.filter(function(s){return s.st===nst}),lf=un.filter(function(s){return s.st<=mx});
+  var qs=typeof menuQ==='string'?[menuQ]:menuQ,Q=qs[Math.max(0,Math.min((nst||1)-1,qs.length-1))];
+  var btn=function(s){return '<button class="rw2" data-sec="'+key+'|'+s.k+'"><span class="t"><b>'+e(s.q)+'</b>'+(s.sub?'<small>'+e(s.sub)+'</small>':'')+'</span><span class="ar">＋</span></button>'};
+  var ah=later.filter(function(s){return s.st>nst});
+  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(ah.length?'<div class="left">Coming up · '+ah.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+(lf.length?'<div class="left">Skipped earlier · '+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
+  else if(lf.length)h+='<div class="menu"><div class="q">Would you like to see what you skipped?</div>'+lf.map(btn).join('')+'</div>';
+  if(tail)h+=(nx.length||lf.length)?navLine():tail;
+  return h}
+function issue(id,arg,sub){
+  var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||draft())&&C.L),dl=C&&!C.ok?'<span class="draft">Draft</span>':'';
+  var I=impOf(id),TB={news:1,fc:1,pan:1,imp:1};
+  var tab=TB[arg]?arg:(arg?'news':(wantTab(id)||(B?'pan':'news'))),hl=(arg&&!TB[arg])?arg:null;if(tab==='imp'&&!I)tab='news';if(tab==='pan'&&!B)tab='news';
+  if(tab==='imp'&&!sub){var it0=ints().filter(function(x){return x.ax==='i'&&x.k===id&&x.w==='imp'&&x.g})[0];if(it0)sub=it0.g;else{startView('g',id,true);return}}
+  var h=bar(a[2],a[3],a[1]),q=location.search||'';
+  var tb=[];if(B)tb.push(['pan','Overview']);if(I)tb.push(['imp','Impact']);tb.push(['fc','Forecasts']);tb.push(['news','News']);
+  var L2=function(t){return q+'#i/'+id+'/'+t},GQ=I?['Whose lives and industries does this change?','#ask/g/'+id]:null;
+  h+='<div class="tabs">'+tb.map(function(t){return '<a href="'+q+'#i/'+id+'/'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+(t[0]==='news'?(function(){var n=unread(key,list).length;return n?' '+n:''})():'')+'</a>'}).join('')+'</div>';
+  if(tab==='pan'){
+    h+='<div class="q">Where this is heading</div>';
+    if(cok)h+='<div class="asof2">As of '+md(C.asof)+' · updated Mondays · Clisa Geopolitics’ assessment</div>';
+    var S=[];
+    if(cok){
+      var side=function(L,c){return L.map(function(f){var t=Math.round(3+f[2]*1.2),hh=Math.max(14,t*2),hw=Math.round(hh*0.75),col=c==='g'?'var(--dn)':'var(--up)',
+        hd=c==='g'?'<svg width="'+hw+'" height="'+hh+'" viewBox="0 0 10 10" preserveAspectRatio="none"><path d="M0 5 L10 0 L8 5 L10 10 Z" fill="'+col+'"/></svg>':'<svg width="'+hw+'" height="'+hh+'" viewBox="0 0 10 10" preserveAspectRatio="none"><path d="M10 5 L0 0 L2 5 L0 10 Z" fill="'+col+'"/></svg>';
+        var n=pulls(id,c==='g'?'L':'R',f[0]);
+        return '<div class="fz '+c+'"><div class="arw '+c+'">'+(c==='g'?hd:'')+'<i style="height:'+t+'px"></i>'+(c==='r'?hd:'')+'</div><b>'+e(f[0])+'<span class="pw">pull '+f[2]+'</span>'+(n.today?'<span class="td">today +'+n.today+'</span>':n.week?'<span class="td" style="background:var(--mut)">this week +'+n.week+'</span>':'')+'</b><span>'+e(f[1])+'</span></div>'}).join('')};
+      var tug='<div class="card tug"><h2>Forces pulling each way'+dl+'</h2><div class="cols"><div><div class="ch g">← '+e(C.left)+'</div>'+side(C.L,'g')+'</div><div><div class="ch r">'+e(C.right)+' →</div>'+side(C.R,'r')+'</div></div>'+
+        '<div class="rope" style="--pull:'+((C.kn-50)*3)+'px"><div class="ln"></div><div class="ctr"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+
+        '<div class="band">'+C.bands.map(function(x){return '<div class="'+x[2]+'" style="flex:'+Math.max(x[1],8)+'">'+e(x[0])+'<br>'+x[1]+'%</div>'}).join('')+'</div>'+
+        '<button class="more2" data-fold>How to read this, and the '+B.fut.length+' scenarios ▾</button><div class="fold" hidden><div class="cap" style="margin-bottom:8px">The knot marks the center of gravity of the scenario probabilities through '+(B.horizon||'')+' (Clisa Geopolitics issue analysis)'+(Math.abs(C.kn-C.kn0)>=1?' · the faded knot shows last week’s position':' · same place as last week')+'<br>'+e(C.cap)+' · arrow thickness reflects Clisa Geopolitics’ assessment</div>'+futs(B)+'</div></div>';
+      S.push({k:'tug',q:'Forces pulling each way',html:'<div class="read2" style="margin-bottom:8px"><b>This week</b> · '+e(C.short)+'</div>'+tug});
+      S.push({k:'read',st:1,q:'Which way did the balance tilt this week, and why?',sub:'Forecasts and forces that changed this week',html:'<div class="card"><div class="read2">'+e(C.reading)+'</div>'+evid(B)+(C.changes?'<ul class="chg2" style="margin-top:8px">'+C.changes.map(function(x){return '<li>'+e(x)+'</li>'}).join('')+'</ul>':'')+'</div>'});
+      if(C.why)S.push({k:'why',st:1,q:'Why neither side can break the deadlock',html:'<div class="card"><p style="margin:0;font-size:14.5px;line-height:1.7">'+e(C.why)+'</p></div>'});
+    }else S.push({k:'fut',q:'Where the balance is tilting',html:'<div class="card"><h2>Where the balance is tilting · scenario probabilities through '+(B.horizon||'')+'</h2>'+futs(B)+evid(B)+'</div>'});
+    var acts=cok&&C.actors?C.actors:B.acts;
+    S.push({k:'act',st:2,q:'What each decision-maker wants, and where they won’t give ground',sub:acts.map(function(x){return x[0]}).join(' · '),html:'<div class="card">'+acts.map(function(x){return '<div class="ac"><b>'+e(x[0])+'</b><p><span class="tg2 tw">Wants</span>'+e(x[1])+'</p><p><span class="tg2 tr">Red lines</span>'+e(x[2])+'</p></div>'}).join('')+(cok&&C.note?'<p class="note" style="margin-top:8px">'+e(C.note)+'</p>':'')+'</div>'});
+    if(cok&&(C.forces||C.clash))S.push({k:'frc',st:2,q:'The larger forces at work, and where they collide',html:(C.forces?'<div class="card">'+C.forces.map(function(f){return '<div class="ac"><b>'+e(f[0])+'</b><p>'+e(f[1])+'</p></div>'}).join('')+'</div>':'')+(C.clash?'<div class="card clash"><h2 style="color:#C2410C">Where they collide</h2><p>'+e(C.clash)+'</p></div>':'')});
+    if(cok&&C.lenses)S.push({k:'lens',st:3,q:'Which lenses explain this?',sub:C.lenses.map(function(x){return x[0]}).join(' · '),html:'<div class="card">'+C.lenses.map(function(x){return '<div class="ls"><div class="ln">'+e(x[0])+'<span class="lt">'+e(x[1])+'</span></div><p><span class="tg2 k1">The view</span>'+e(x[3])+'</p><p><span class="tg2 k2">What fits</span>'+e(x[4])+'</p><p><span class="tg2 k3">What doesn’t</span>'+e(x[5])+'</p><p><span class="tg2 k4">If this lens is right</span>'+e(x[6])+'</p></div>'}).join('')+(C.lean?'<div class="lean">'+e(C.lean)+'</div>':'')+
+      '<div class="ac" style="margin-top:6px"><b>Which lens fit this week?</b><p>'+((C.score&&C.score.length)?C.score.map(function(x){return e(x)}).join('<br>'):'A one-line entry is added after each Monday review, starting November 16.')+'</p></div></div>'});
+    else if(B.thinkers.length)S.push({k:'lens',st:3,q:'How major thinkers see this',html:'<div class="card">'+B.thinkers.map(function(tid){var t=thinker(tid);return t?'<div class="th"><b>'+e(t.n)+'</b><small>'+e(t.role)+'</small><p class="clamp">'+e(t.now)+'</p><button class="mo" data-more>More</button></div>':''}).join('')+'</div>'});
+    if(cok&&C.watch)S.push({k:'watch',st:3,q:'What news would mean things have changed?',sub:'Signals that the assessment may be wrong',html:'<div class="card">'+C.watch.map(function(w){return '<div class="wt"><span class="tg '+w[1]+'">'+e(w[0])+'</span>'+e(w[2])+'</div>'}).join('')+'</div>'});
+    if(cok&&C.learn&&C.learn.t)S.push({k:'learn',st:3,q:C.learn.t,sub:'Background for understanding this',html:'<div class="card"><p style="margin:0;font-size:14px;line-height:1.7">'+e(C.learn.d)+'</p>'+C.learn.links.map(function(l){var t=(DATA.acad||{})[l[1]];return '<a class="lk" href="'+l[1]+'">'+e(t?t[0]+' · '+t[1]:l[0])+' <small style="font-weight:500">Opens on the website ↗</small></a>'}).join('')+'</div>'});
+    h+=stepped('pan:'+id,S,['What would you like to see first this week?','Shall I show you who and what is driving this?','Shall I show you what to watch from here?'],nextQ([GQ,['What is likely to happen next?',L2('fc')],['The news behind the assessment',L2('news')]],'i:'+id));
+    V.innerHTML=h;window.scrollTo(0,0);return;
+  }
+  if(tab==='imp'){
+    var G=impG(I,sub),gn=gName(id,G),LF=lifeFor(I,G),PP=pplFor(I,G),IND=indFor(I,G);ss('grp',G);
+    h+='<div class="q">How this changes life'+(IND?' and business':'')+' for '+e(gn)+'</div>';
+    h+='<div class="pf" style="margin:0 0 8px">'+'Showing the impact on '+e(gn)+'.<a href="#ask/g/'+id+'">Choose another group</a></div>';
+    var S2=[];
+    var lifeH=LF.map(function(L1){return '<div class="card"><h2>Daily life for '+e(L1.gn||gn)+' · 100 futures through 2030</h2>'+hbar(L1.now)+
+      (L1.bad.length?'<p style="font-size:13px;line-height:1.6;margin:8px 0 0">Scenarios that leave people worse off · <b>'+e(L1.bad.map(function(x){return x[0]+' ('+x[1]+'%)'}).join(', '))+'</b></p>':'<p style="font-size:13px;line-height:1.6;margin:8px 0 0">No scenario leaves daily life worse than it is now.</p>')+
+      '<div class="hbl" style="margin-top:6px">Clisa Geopolitics’ scenario probabilities, shown as 100 possible futures. People’s Lives, as of '+md(I.asof.life)+'</div></div>'}).join('');
+    var pathH=PP.length?'<div class="card">'+PP.map(function(c){return '<div class="cell"><span class="pth">'+e(c[0])+'</span><small style="color:var(--mut)">confidence: '+e(c[2])+'</small><div style="margin-top:4px">'+e(c[1])+'</div></div>'}).join('')+'<div class="hbl" style="margin-top:6px">Chain Reactions, as of '+md(I.asof.links)+'</div></div>':'<div class="card"><p class="empty" style="padding:0">'+'Clisa Geopolitics has identified no path by which this conflict reaches '+e(gn)+' (Chain Reactions, as of '+md(I.asof.links)+').</p></div>';
+    if(lifeH)S2.push({k:'life',q:'Daily life',html:lifeH});
+    S2.push({k:'path',q:'How does it reach '+gn+'?',sub:PP.length?PP.map(function(c){return c[0]}).filter(function(v,i,A){return A.indexOf(v)===i}).join(' · '):'',html:pathH});
+    if(IND&&IND.length){var ir=function(r){return '<div class="ir"><div class="t"><b>'+e(r.n)+'</b></div>'+hbar(r.d)+(r.bad?'<p><span class="tg2 tr">Worse in</span>'+e(r.bad[0])+' ('+r.bad[1]+'%) · '+e(r.bad[2])+'</p>':'')+(r.good?'<p><span class="tg2 tw">Better in</span>'+e(r.good[0])+' ('+r.good[1]+'%) · '+e(r.good[2])+'</p>':'')+'</div>'};
+      var mv=IND.filter(function(r){return r.d.s<100}),st=IND.filter(function(r){return r.d.s>=100}),cn=G==='USA'?'U.S.':'South Korean';
+      S2.push({k:'ind',q:'How operating profits change in '+cn+' industries',sub:mv.slice(0,3).map(function(r){return r.n}).join(' · '),html:'<div class="card">'+(mv.length?mv.slice(0,3).map(ir).join(''):'<p class="empty">No industry’s operating profit moves more than 10 percent from normal in any scenario.</p>')+
+        (mv.length>3?'<button class="more2" data-fold>'+(mv.length-3)+' more industr'+(mv.length===4?'y':'ies')+' ▾</button><div class="fold" hidden>'+mv.slice(3).map(ir).join('')+'</div>':'')+
+        (st.length&&mv.length?'<div class="hbl" style="margin-top:8px">Little change in any scenario: '+e(st.map(function(r){return r.n}).join(', '))+'</div>':'')+
+        '<div class="hbl" style="margin-top:6px">“Worse” and “better” mean operating profit falls or rises more than 10% from normal (the industry’s 10-year median operating margin); “much worse” means a fall of more than 30% or an industry-wide loss. Industry Outlook, as of '+md(I.asof.ind)+'</div></div>'})}
+    var tI=(IND||[]).filter(function(r){return r.d.s<100})[0];
+    h+=stepped('imp:'+id+':'+G,S2,'What else would you like to see for '+gn+'?',nextQ([['How does it affect people elsewhere?','#ask/g/'+id],B?['Why this assessment · forces pulling each way',L2('pan')]:null,(kby(G)&&kby(G).life.length)?['Daily life for '+gn+' across all conflicts','#ppl/'+G+'/all']:null,tI?[tI.n+' ('+(G==='USA'?'U.S.':'South Korea')+') in other conflicts','#ind/'+encodeURIComponent(tI.k)]:null],'i:'+id)+(G!=='KOR'&&G!=='USA'?'<p class="hbl" style="margin:8px 2px 0">Operating-profit assessments cover U.S. and South Korean industries only.</p>':''));
+    V.innerHTML=h;window.scrollTo(0,0);return;
+  }
+  if(tab==='fc'){
+    h+='<div class="q">What is likely to happen</div>';
+    var FL=DATA.fc.filter(function(f){return f.a.indexOf(id)>=0}),dg=DATA.digest.filter(function(d){return d.a===id}),S3=[];
+    S3.push({k:'list',q:'Forecasts',html:'<p class="lead"><b>'+e(a[1])+'</b> · '+FL.length+(FL.length===1?' forecast':' forecasts')+', each with a deadline and a probability, most recently changed first.</p><div class="card">'+fcList(FL,4)+(FL.length>4?'<button class="more2" data-fold>'+(FL.length-4)+' more ▾</button><div class="fold" hidden>'+fcList(FL.slice().sort(function(x,y){return fcLast(y)<fcLast(x)?-1:fcLast(y)>fcLast(x)?1:0}).slice(4),100)+'</div>':'')+'</div>'});
+    if(cok&&C.watch)S3.push({k:'watch',q:'What news would mean things have changed?',sub:'Signals that the assessment may be wrong',html:'<div class="card">'+C.watch.map(function(w){return '<div class="wt"><span class="tg '+w[1]+'">'+e(w[0])+'</span>'+e(w[2])+'</div>'}).join('')+'</div>'});
+    if(dg.length)S3.push({k:'dg',q:'How this issue has developed in recent weeks',sub:'Weekly summary',html:'<div class="card dg">'+dg.map(function(d){return '<b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>More</button>'}).join('<div style="height:12px"></div>')+'</div>'});
+    h+=stepped('fc:'+id,S3,'What else would you like to see on these forecasts?',nextQ([B?['Where do these forecasts point?',L2('pan')]:null,GQ,['The news behind the assessment',L2('news')]],'i:'+id));
+    V.innerHTML=h;window.scrollTo(0,0);return;
+  }
+  var w7=wk7(),show=hl?list.length:5;
+  h+='<div class="q">The news behind the assessment</div><p class="lead"><b>'+e(a[1])+'</b> · '+list.length+(list.length===1?' briefing item':' briefing items')+' from the past three weeks, most recent first.</p>'+msgs(list.slice(0,show),key,hl)+
+    (list.length>show?'<button class="more2" data-fold>'+(list.length-show)+' more ▾</button><div class="fold" hidden>'+msgs(list.slice(show),key,hl)+'</div>':'');
+  h+=nextQ([B?['Which way did this news tip the balance?',L2('pan')]:null,GQ,['What is likely to happen next?',L2('fc')]],'i:'+id);
+  V.innerHTML=h;markRead(key,list);
+  if(hl){var m=document.getElementById('m-'+hl);if(m)m.scrollIntoView({block:'center'})}else window.scrollTo(0,0);
+}
+function futs(B){var mx=Math.max.apply(null,B.fut.map(function(f){return f.p}));
+  return B.fut.slice().sort(function(x,y){return y.p-x.p}).map(function(f){return '<div class="fu"><div class="r"><span class="n">'+e(f.n)+'</span>'+(f.v?'<span class="mv '+(f.v>0?'up':'dn')+'">'+(f.v>0?'signals ↗':'signals ↘')+'</span>':'')+'<b>'+f.p+'%</b></div><div class="fbar"><i style="width:'+(f.p/mx*100)+'%"></i></div></div>'}).join('')}
+function evid(B){var seenq={},rows=[];B.fut.forEach(function(f){f.why.forEach(function(w){if(!seenq[w[0]]){seenq[w[0]]=1;rows.push(w)}})});
+  if(!rows.length)return '<div class="ev">None of the signal forecasts for this issue changed in the past 7 days.</div>';
+  var ln=function(w){return '· '+e(w[1])+' <b>'+w[2]+'→'+w[3]+'%</b> ('+md(w[4])+')'};
+  return '<div class="ev"><b>Forecast changes behind this (past 7 days)</b><br>'+rows.slice(0,4).map(ln).join('<br>')+(rows.length>4?'<button class="more2" data-fold style="font-size:12px">'+(rows.length-4)+' more ▾</button><div class="fold" hidden>'+rows.slice(4).map(ln).join('<br>')+'</div>':'')+'</div>'}
+function region(id,sub){
+  var r=reg(id),key='r.'+id,list=regItems(id),FL=regFc(id),RI=relIssues(id);sub=sub==='pan'||sub==='fc'?sub:'news';
+  var h=bar(r[2],r[3],r[1]);
+  h+='<div class="tabs">'+[['news','News'],['pan','Overview'],['fc','Forecasts']].filter(function(t){return t[0]!=='pan'||RI.length}).map(function(t){return '<a href="#r/'+id+'/'+t[0]+'" class="'+(sub===t[0]?'on':'')+'">'+t[1]+'</a>'}).join('')+'</div>';
+  var tail=nextQ([sub!=='news'?['What happened in this region?','#r/'+id+'/news']:null,sub!=='pan'&&RI.length?['Where are this region’s issues heading?','#r/'+id+'/pan']:null,sub!=='fc'?['What is likely to happen next?','#r/'+id+'/fc']:null].concat(RI.slice(0,2).map(function(k){var a=app(k);return a?[a[1]+' · full overview','#ask/i/'+k]:null})),'r:'+id);
+  if(sub==='pan'){h+='<div class="q">Where this region is heading</div><p class="lead">This week’s overview for issues in <b>'+e(r[1])+'</b>, those with the most news first.</p><div class="card">'+RI.slice(0,4).map(function(k){var a=app(k);return a?'<a class="fc" href="#ask/i/'+k+'"><span class="q"><b>'+e(a[1])+'</b><br><small style="color:var(--sub)">'+e(issueLine(k))+'</small></span></a>':''}).join('')+'</div>'}
+  else if(sub==='fc'){h+='<div class="q">What is likely to happen in this region</div><p class="lead"><b>'+e(r[1])+'</b> · '+FL.length+(FL.length===1?' forecast':' forecasts')+' linked to news from this region, most recently changed first.</p><div class="card">'+fcList(FL,4)+(FL.length>4?'<button class="more2" data-fold>'+(FL.length-4)+' more ▾</button><div class="fold" hidden>'+fcList(FL.slice(4),100)+'</div>':'')+'</div>'}
+  else{h+='<div class="q">What happened in this region</div><p class="lead"><b>'+e(r[1])+'</b> · '+list.length+(list.length===1?' briefing item':' briefing items')+' from the past three weeks, most recent first.</p>'+msgs(list.slice(0,5),key)+(list.length>5?'<button class="more2" data-fold>'+(list.length-5)+' more ▾</button><div class="fold" hidden>'+msgs(list.slice(5),key)+'</div>':'')}
+  h+=tail;
+  V.innerHTML=h;if(sub==='news')markRead(key,list);window.scrollTo(0,0);
+}
+function fcs(){
+  var ch=fcChanged(),h=bar('%','#0B2A86','Changed forecasts');
+  h+='<div class="q">What changed since your last visit</div>';
+  h+=stepped('fcs',[{k:'ch',q:'Changed forecasts',html:''+(ch.length?'<p class="lead">Forecasts whose probability has changed since your last visit, most recent first.</p>':'')+'<div class="card">'+(ch.length?fcList(ch,5)+(ch.length>5?'<button class="more2" data-fold>'+(ch.length-5)+' more ▾</button><div class="fold" hidden>'+fcList(ch.slice().sort(function(x,y){return fcLast(y)<fcLast(x)?-1:fcLast(y)>fcLast(x)?1:0}).slice(5),100)+'</div>':''):'<p class="empty">No forecasts have changed.</p>')+'</div>'},
+    {k:'all',q:'Shall I show all active forecasts?',sub:DATA.fc.length+' forecasts · most recently changed first',html:'<div class="card">'+fcList(DATA.fc,100)+'</div>'}],'What else would you like to see?',
+    nextQ(ch.slice(0,2).map(function(f){var a=app(f.a[0]);return a?[a[1]+' · where does this forecast point?','#i/'+f.a[0]+'/'+((DATA.boards||{})[f.a[0]]?'pan':'news')]:null}),'fc'));
+  V.innerHTML=h;ss('fcseen',DATA.asof);window.scrollTo(0,0);
+}
+function lenses(){
+  var W=DATA.world,h=bar('Lens','#6B4E2E','Lenses on the world')+'<div class="q">How to read situations like these</div>',S=[];
+  if(W){S.push({k:'scen',q:'Futures for the world',html:'<p class="lead">Five futures for the world as assessed by Clisa Geopolitics on '+md(W.asof)+', and the lens that best explains each.</p><div class="card">'+W.scen.map(function(x){var t=thinker(x[3]);return '<div class="th"><b>'+e(x[1])+' '+x[2]+'%</b><small>'+e(t?t.n+'’s lens':'')+'</small><p class="clamp">'+e(x[4])+'</p><button class="mo" data-more>More</button></div>'}).join('')+'</div>'});
+    S.push({k:'tr',q:'The big trends moving the world',sub:W.trends.slice(0,3).map(function(x){return x[0]}).join(' · '),html:'<div class="card">'+W.trends.map(function(x){return '<div class="th"><b>'+e(x[0])+'</b><p class="clamp">'+e(x[1])+'</p><button class="mo" data-more>More</button></div>'}).join('')+'</div>'})}
+  S.push({k:'th',q:'How major thinkers see today’s world',sub:(DATA.thinkers||[]).slice(0,4).map(function(t){return t.n}).join(' · ')+' and others · '+(DATA.thinkers||[]).length+' thinkers',html:'<div class="card">'+(DATA.thinkers||[]).map(function(t){return '<div class="th"><b>'+e(t.n)+'</b><small>'+e(t.life)+' · '+e(t.role)+'</small><h4>Core argument</h4><p class="clamp">'+e(t.claim)+'</p><button class="mo" data-more>More</button><h4>Applied to today</h4><p class="clamp">'+e(t.now)+'</p><button class="mo" data-more>More</button></div>'}).join('')+'</div>'});
+  h+=stepped('lens',S,'What else would you like to see here?',nextQ([['Learn international relations from the ground up · Clisa Academy','/en/academy/','Opens on the website ↗']],'lens'));
+  V.innerHTML=h;window.scrollTo(0,0);
+}
+function dgs(){
+  var D=DATA.digest,h=bar('Week','#2C3E66','Weekly summary');
+  var card=function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a?a[1]:'')+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>More</button></div>'};
+  h+='<div class="q">How the world moved this week</div><p class="lead">This week’s summary covers '+D.length+' issues. Here are the first three.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+' more issues ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
+  h+=nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · where did this push the balance?','#i/'+d.a+'/pan']:null}),'dg');
+  V.innerHTML=h;window.scrollTo(0,0);
+}
+var API='https://api.clisa.ai',CTX='Home',OPENED=Date.now(),OTH=0;
+function prof(){var P=ls('prof',null);if(P&&!P.ints&&P.sel)P={ints:P.sel.map(function(k){return {ax:k[0],k:k.slice(2),w:k[0]==='i'?(P.want||''):'news'}})};return P}
+function ints(){var P=prof();return P&&P.ints?P.ints:[]}
+function favs(){return ints().filter(function(x){return x.ax==='i'||x.ax==='r'}).map(function(x){return x.ax+':'+x.k})}
+function impOf(id){var I=(DATA.impact||{})[id];return I&&I.by&&Object.keys(I.by).length?I:null}
+function lifeFor(I,G){return ((I.by||{})[G]||{}).life||[]}
+function pplFor(I,G){return ((I.by||{})[G]||{}).ppl||[]}
+function indFor(I,G){return G==='KOR'?I.ind.kr:G==='USA'?I.ind.us:null}
+function impG(I,sub){var G=sub||ls('grp',DG);if(!I.by[G])G=I.by[DG]?DG:I.by.KOR?'KOR':Object.keys(I.by)[0];return G}
+function gName(id,G){var I=impOf(id),L=I?lifeFor(I,G):[];if(G==='PARTY'&&L.length)return L.map(function(x){return x.gn}).join(', ');if(L.length===1&&L[0].gn)return L[0].gn;return kgName(G)}
+function gShort(id,G){return G!=='PARTY'&&GS[G]?GS[G]:gName(id,G)}
+function worstLife(I,G){var L=lifeFor(I,G);return L.length?Math.max.apply(null,L.map(function(x){return worse(x.now)})):null}
+function hbar(d){var L={x:'Much worse',w:'Worse',b:'Better',s:'About the same'};return '<div class="hb">'+['x','w','b','s'].filter(function(k){return d[k]>0}).map(function(k){return '<i class="'+k+'" style="flex:'+d[k]+'">'+(d[k]>=9?d[k]:'')+'</i>'}).join('')+'</div><div class="hbl">'+['x','w','b','s'].filter(function(k){return d[k]>0}).map(function(k){return L[k]+' '+d[k]}).join(' · ')+'</div>'}
+var TABN={pan:'Overview',imp:'Impact',news:'News',fc:'Forecasts'},RW={news:'News',pan:'Overview',fc:'Forecasts'};
+function tabFor(id,w){var B=(DATA.boards||{})[id];if(w==='pan'&&B)return 'pan';if(w==='imp'&&impOf(id))return 'imp';if(w==='fc')return 'fc';if(w==='news')return 'news';return B?'pan':'news'}
+function wantTab(id){var it=ints().filter(function(x){return x.ax==='i'&&x.k===id})[0];return it?tabFor(id,it.w):null}
+function intKey(it){return it.ax+':'+it.k+(it.ax==='p'?':'+it.w:'')}
+function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabFor(it.k,it.w);return a[1]+' · '+TABN[t]+(t==='imp'?' ('+gShort(it.k,it.g||DG)+')':'')}if(it.ax==='r'){var r=reg(it.k);return r?r[1]+' · '+(RW[it.w]||'News'):''}
+  if(it.k==='ppl')return 'Daily life for '+kgName(DG)+(it.w!=='all'&&DATA.kimp.paths[it.w]?' · “'+DATA.kimp.paths[it.w]+'” path':'');var k2=it.w.indexOf(':')<0?'kr:'+it.w:it.w;return inm(k2)+' ('+cnm(k2)+')'}
+function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
+function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
+function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||draft()))return 'This week: '+C.short;var it=issueItems(id)[0];return it?it.h:''}
+function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'}
+function worse(d){return d.x+d.w}
+function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
+function cnm(k){return k.indexOf('us:')===0?'U.S.':'South Korea'}
+function lifeRank(G){var B=kby(G||DG);return B?B.life.slice().sort(function(a,b){return worse(b.now)-worse(a.now)}):[]}
+function indRank(c){c=c||'kr';var K=DATA.kimp.ind,out=[];Object.keys(K).filter(function(k){return k.indexOf(c+':')===0}).forEach(function(k){var b=K[k].slice().sort(function(x,y){return (2*y.d.x+y.d.w)-(2*x.d.x+x.d.w)})[0];out.push({k:k,n:inm(k),c:b})});return out.sort(function(a,b){return (2*b.c.d.x+b.c.d.w)-(2*a.c.d.x+a.c.d.w)})}
+function dcnt(d){return ['x','w','b'].filter(function(c){return d[c]>0}).map(function(c){return {x:'Much worse',w:'Worse',b:'Better'}[c]+' '+d[c]}).join(' · ')||'About the same'}
+function heads(L,n){return L.length?'<ul class="pv">'+L.slice(0,n).map(function(x){return '<li><span>'+md(x.d)+'</span>'+e(x.h)+'</li>'}).join('')+'</ul>':'<p class="pvp">No news in the past three weeks.</p>'}
+function relIssues(id){var ca={};regItems(id).forEach(function(x){x.a.forEach(function(k){if(k!=='world')ca[k]=(ca[k]||0)+1})});return Object.keys(ca).sort(function(a,b){return ca[b]-ca[a]})}
+function regFc(id){var ids=[];regItems(id).forEach(function(x){x.fc.forEach(function(c){if(ids.indexOf(c[0])<0)ids.push(c[0])})});return DATA.fc.filter(function(f){return ids.indexOf(f.id)>=0}).sort(function(x,y){return fcLast(y)<fcLast(x)?-1:fcLast(y)>fcLast(x)?1:0})}
+function issueFc(id){return DATA.fc.filter(function(f){return f.a.indexOf(id)>=0}).sort(function(x,y){return fcLast(y)<fcLast(x)?-1:fcLast(y)>fcLast(x)?1:0})}
+function fcPv(L){return '<ul class="pv">'+L.slice(0,2).map(function(f){return '<li><span>'+f.p+'%</span>'+e(f.q)+'</li>'}).join('')+'</ul>'}
+function briefBlock(name,L,allHref,nofold,show){show=show||3;var w7=wk7(),W=L.filter(function(x){return x.d>=w7}),days=7;if(!W.length){W=L;days=21}
+  if(!W.length)return '<p class="lead">No briefing items in the past three weeks.</p>';
+  var tagged=allHref&&allHref.indexOf('#r/')===0;
+  var li=function(x){var a=app(x.a[0]);return '<li><span>'+md(x.d)+'</span><div>'+e(x.h)+(tagged&&a&&x.a[0]!=='world'?' <em class="tg3">'+e(a[2])+'</em>':'')+'</div></li>'};
+  var rest=W.slice(show),lk=allHref?'<a class="lk" href="'+allHref+'">See all items with sources ›</a>':'';
+  return '<p class="lead"><b>'+e(name)+'</b> · '+W.length+(W.length===1?' briefing item':' briefing items')+' from the '+(days===7?'past 7 days':'past three weeks')+'.</p><ul class="pv">'+W.slice(0,show).map(li).join('')+'</ul>'+
+    (nofold?'':(rest.length?'<button class="more2" data-fold>'+rest.length+' more ▾</button><div class="fold" hidden><ul class="pv">'+rest.map(li).join('')+'</ul>'+lk+'</div>':lk))}
+var EXT=' · Opens on the website ↗';
+function deeper(id){var B=(DATA.boards||{})[id],C=B&&B.cur,L=(C&&C.learn)||{},out=[];
+  (L.links||[]).forEach(function(l){var t=(DATA.acad||{})[l[1]];out.push([t?t[0]+' · '+t[1]:l[0],l[1],(L.t?'Background · '+L.t:'Clisa Academy')+EXT])});
+  (DATA.games||[]).forEach(function(g){if(g.cases.indexOf(id)>=0)out.push([g.q,g.url,'Game · '+g.t+' · '+g.why+EXT])});return out}
+function related(ci){if(!ci)return [];var reg0=(DATA.rule.caseR||{})[ci]||null,out=[];if(!reg0)DATA.regions.forEach(function(r){if(!reg0&&relIssues(r[0])[0]===ci)reg0=r[0]});
+  if(reg0)relIssues(reg0).filter(function(k){return k!==ci&&app(k)}).slice(0,2).forEach(function(k){out.push([app(k)[1]+' · another issue in the region','#ask/i/'+k,issueLine(k)])});
+  var I=impOf(ci),G=ls('grp',null);if(I&&!G)out.push(['Whose lives and industries does this change?','#ask/g/'+ci,'Choose from: countries in the conflict, the U.S., Europe or Northeast Asia']);
+  if(I&&G){if(!I.by[G])G=impG(I);var IND=indFor(I,G),t=(IND||[]).filter(function(r){return r.d.s<100})[0],cn=G==='USA'?'U.S.':'South Korea';
+    if(t)out.push([t.n+' ('+cn+') · across all conflicts','#ind/'+encodeURIComponent(t.k),'In this issue, out of 100 futures: '+dcnt(t.d)]);
+    var wl=worstLife(I,G);if(wl!=null&&kby(G))out.push(['Daily life for '+gName(ci,G)+' · all conflicts combined','#ppl/'+G+'/all','In this issue, worse off in '+wl+' of 100 futures'])}
+  return out}
+function suggest(cur){var ci=cur&&cur.indexOf('i:')===0?cur.slice(2):'',out=related(ci),w7=wk7(),I=ints();
+  var mv=Object.keys(DATA.boards||{}).filter(function(k){var C=DATA.boards[k].cur;return k!==ci&&C&&C.kn!=null&&C.kn0!=null&&app(k)}).sort(function(a,b){return Math.abs(DATA.boards[b].cur.kn-DATA.boards[b].cur.kn0)-Math.abs(DATA.boards[a].cur.kn-DATA.boards[a].cur.kn0)})[0];
+  if(mv){var C=DATA.boards[mv].cur;if(Math.abs(C.kn-C.kn0)>=1)out.push(['Biggest shift this week · '+app(mv)[1],'#ask/i/'+mv,'This week: '+C.short])}
+  var fb=DATA.fc.filter(function(f){return f.h.length>1&&fcLast(f)>=w7&&f.a.indexOf(ci)<0}).sort(function(a,b){var da=Math.abs(a.h[a.h.length-1][1]-a.h[a.h.length-2][1]),db=Math.abs(b.h[b.h.length-1][1]-b.h[b.h.length-2][1]);return db-da})[0];
+  if(fb){var h2=fb.h;out.push(['Biggest forecast change this week','#f/'+fb.id,fb.q+' '+h2[h2.length-2][1]+'→'+h2[h2.length-1][1]+'%'])}
+  var un=DATA.apps.map(function(a){return [a,unread('i.'+a[0],issueItems(a[0])).length]}).filter(function(x){return x[1]>0&&x[0][0]!==ci&&!I.some(function(it){return it.ax==='i'&&it.k===x[0][0]})}).sort(function(a,b){return b[1]-a[1]})[0];
+  if(un)out.push([un[0][1]+' · '+un[1]+' unread','#ask/i/'+un[0][0],issueLine(un[0][0])]);
+  var gm=(DATA.games||[]).filter(function(g){return !ci||g.cases.indexOf(ci)<0})[0];
+  if(gm)out.push([gm.q,gm.url,'Game · '+gm.t+EXT]);
+  var seen={};return out.filter(function(x){if(seen[x[1]])return false;seen[x[1]]=1;return true}).slice(0,5)}
+function saveInt(it,label){var I=ints().filter(function(x){return intKey(x)!==intKey(it)});I.unshift(it);ss('prof',{ints:I,at:DATA.asof});ss('justsaved',label||intLabel(it));syncTopics()}
+function isInt(it){return ints().some(function(x){return intKey(x)===intKey(it)})}
+function row(ans,title,sub,extra,href){var inner='<span class="t"><b>'+e(title)+'</b>'+(sub?'<small>'+e(sub)+'</small>':'')+'</span>'+(extra||'')+'<span class="ar">›</span>';
+  return href?'<a class="rw2" href="'+href+'">'+inner+'</a>':'<button class="rw2" data-ans="'+ans+'">'+inner+'</button>'}
+function pickList(browse){var w7=wk7(),cnt=function(L){return L.filter(function(x){return x.d>=w7}).length};
+  var A=DATA.apps.map(function(a){return [a,cnt(issueItems(a[0]))]}).sort(function(x,y){return y[1]-x[1]}),R=DATA.regions.map(function(r){return [r,cnt(regItems(r[0]))]}).sort(function(x,y){return y[1]-x[1]});
+  var h='<h3>By issue</h3>'+A.map(function(x){var a=x[0],u=unread('i.'+a[0],issueItems(a[0])).length;return row('i:'+a[0],a[1],issueLine(a[0]),u?'<span class="nb">'+u+'</span>':'<span class="cnt">'+x[1]+' this week</span>',browse?'#ask/i/'+a[0]:'')}).join('');
+  h+='<div class="or"><span>or</span></div><h3>By region</h3>'+R.map(function(x){var r=x[0],L=regItems(r[0]);return row('r:'+r[0],r[1],L[0]?L[0].h:'No recent news','<span class="cnt">'+x[1]+' this week</span>',browse?'#ask/r/'+r[0]:'')}).join('');
+  return h}
+function startView(step,arg,browse){
+  var h=topHead()+'<section class="st">',I=ints(),base=browse?'#ask/':'#start/';
+  if(step==='i'&&app(arg)){var id=arg,a=app(id),B=(DATA.boards||{})[id],C=B&&B.cur,IM=impOf(id),L=issueItems(id),FL=issueFc(id),fromR=ls('fromreg',null),W=C&&C.watch;
+    h+='<a class="bk" href="'+base+(fromR?'r/'+fromR:'1')+'">‹ '+(fromR?e(reg(fromR)[1]):(browse?'Issues and regions':'First question'))+'</a>';
+    h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>This week</small></div>';
+    if(C&&C.short)h+=miniRope(id)+'<p class="rd2"><b>This week:</b> '+e(C.short)+'</p><div style="height:8px"></div>';
+    h+=briefBlock(a[1],L,'#i/'+id+'/news',0,2)+'</div>';
+    h+='<div class="q" style="margin-top:14px">Question '+(fromR?3:2)+'</div><h1>What else would you like to know about this issue?</h1>';
+    var go=function(t){return browse?'#i/'+id+'/'+t:''};
+    if(B&&C)h+=row('w:pan','Where this is heading, and why','Scenarios and probabilities · forces pulling each way · what decision-makers want and their red lines','',go('pan'));
+    if(IM)h+=row('','How it affects people’s lives and industries','Choose from: countries in the conflict, the U.S., Europe or Northeast Asia','',base+'g/'+id);
+    h+=row('w:fc','What is likely next, and how the assessment will be checked',FL.length+(FL.length===1?' forecast':' forecasts')+' with deadlines and probabilities'+(W&&W.length?' · '+W.length+(W.length===1?' signal':' signals')+' of a shift':''),'',go('fc'));
+    h+=row('w:news','The news behind the assessment',L.length+(L.length===1?' news item':' news items')+', with sources','',go('news'));
+    var DP=deeper(id);if(DP.length)h+='<h3>Go deeper</h3>'+DP.map(function(x){return '<a class="rw2" href="'+x[1]+'"><span class="t"><b>'+e(x[0])+'</b><small>'+e(x[2])+'</small></span><span class="ar">↗</span></a>'}).join('');
+    if(browse){var it0={ax:'i',k:id,w:B?'pan':'news'};h+=isInt(it0)?'<p class="note">This issue is in your interests.</p>':'<button class="btn s" style="margin-top:10px" data-addint="i:'+id+'">☆ Add this issue to your interests</button>'}
+    else h+='<p class="note" style="margin-top:12px">Your choice is saved as an interest, and that briefing will come first on your home screen.</p>';
+  }else if((step==='g'||step==='ge')&&impOf(arg)){var id=arg,a=app(id),I=impOf(id),last=ls('grp',null),EU=['NEU','SEU','WCEU'].filter(function(g){return I.by[g]}),qn=(ls('fromreg',null)?4:3)+(step==='ge'?1:0);
+    var line=function(gs){var ws=gs.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null}),pp=gs.reduce(function(s,g){return s+pplFor(I,g).length},0);return (ws.length?'worse off in '+Math.max.apply(null,ws)+' of 100 futures · ':'')+pp+(pp===1?' path':' paths')};
+    h+='<a class="bk" href="'+base+(step==='ge'?'g/':'i/')+id+'">‹ '+(step==='ge'?'Groups':e(a[1]))+'</a>';
+    if(step==='g'){
+      var OM={};if(I.by.PARTY)OM.PARTY={t:'Countries in the conflict',s:gName(id,'PARTY'),g:['PARTY']};if(I.by.KOR)OM.KOR={t:'Northeast Asia',s:'South Koreans',g:['KOR']};if(I.by.USA)OM.USA={t:'United States',s:'Americans',g:['USA']};if(EU.length)OM.EU={t:'Europe',s:EU.map(function(g){return gName(id,g)}).join(' · '),g:EU,eu:1};var O=GORD.map(function(k){return OM[k]}).filter(Boolean);
+      h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>Impact</small></div><p class="lead">First, the effect on people’s lives in each region: in how many of 100 futures through 2030 people end up worse off than today.</p><ul class="pv">'+O.map(function(o){var ws=o.g.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null});return ws.length?'<li><span>'+Math.max.apply(null,ws)+'/100</span><div>'+e(o.t)+' · '+e(o.s)+'</div></li>':''}).join('')+'</ul></div>';
+      h+='<div class="q" style="margin-top:14px">Question '+qn+'</div><h1>Whose lives would you like to look at?</h1>';
+      h+=O.map(function(o){var mark=last&&o.g.indexOf(last)>=0?'<span class="cnt">Last chosen</span>':'';return o.eu?row('',o.t,o.s+' · '+line(o.g),mark,base+'ge/'+id):row('g:'+o.g[0],o.t,o.s+' · '+line(o.g)+(o.g[0]==='KOR'||o.g[0]==='USA'?' · with industry outlook':''),mark,browse?'#i/'+id+'/imp/'+o.g[0]:'')}).join('');
+      h+='<p class="note" style="margin-top:10px">These are the groups Clisa Geopolitics assesses in Chain Reactions and People’s Lives. Operating-profit assessments cover U.S. and South Korean industries only.</p>';
+    }else{
+      h+='<div class="q" style="margin-top:6px">Question '+qn+'</div><h1>Which part of Europe?</h1><p class="sub">The effect on people’s lives varies across Europe.</p>';
+      h+=EU.map(function(g){return row('g:'+g,gName(id,g),line([g]),last===g?'<span class="cnt">Last chosen</span>':'',browse?'#i/'+id+'/imp/'+g:'')}).join('');
+    }
+  }else if(step==='r'&&reg(arg)){var r=reg(arg),RL=regItems(arg),RI=relIssues(arg);ss('fromreg',arg);
+    h+='<a class="bk" href="'+(browse?'#':'#start/1')+'">‹ '+(browse?'Home':'First question')+'</a>';
+    h+='<div class="ans" style="--acc2:'+r[3]+'"><div class="fh"><span class="ic2" style="background:'+r[3]+'">'+e(r[2])+'</span><b>'+e(r[1])+'</b><small>Briefing</small></div>'+briefBlock(r[1],RL,'#r/'+arg+'/news',0,2)+'</div>';
+    h+='<div class="q" style="margin-top:14px">Question 2</div><h1>What else would you like to know about '+e(r[1])+'?</h1>';
+    if(RI.length)h+='<h3>Issues in this region</h3>'+RI.slice(0,5).map(function(k){var a=app(k);return a?row('i:'+k,a[1],issueLine(k),miniRope(k)?'<span class="mr">'+miniRope(k)+'</span>':'',browse?'#ask/i/'+k:''):''}).join('');
+    h+='<h3>The whole region</h3>'+row('rw:news','All news from this region',RL.length+' in the past three weeks','',browse?'#r/'+arg+'/news':'')+row('rw:fc','Forecasts linked to this region’s news',regFc(arg).length+(regFc(arg).length===1?' forecast':' forecasts'),'',browse?'#r/'+arg+'/fc':'');
+    if(browse){var it1={ax:'r',k:arg,w:'news'};h+=isInt(it1)?'':'<button class="btn s" style="margin-top:10px" data-addint="r:'+arg+'">☆ Add this region to your interests</button>'}
+  }else if(step==='4'){
+    h+='<a class="bk" href="#">‹ Home</a><h1>Your interests</h1><p class="sub">They appear on your home screen in this order.</p>';
+    h+=I.length?'<div class="card" style="padding:4px 14px">'+I.map(function(it,i){return '<div class="irow"><span>'+(i+1)+'</span><a href="'+intLink(it)+'"><b>'+e(intLabel(it))+'</b></a><button data-rm="'+i+'" aria-label="Remove">✕</button></div>'}).join('')+'</div>':'<p class="empty">No interests chosen yet.</p>';
+    h+='<div class="ft"><button class="btn" data-go="start/1">Add an interest</button><button class="btn s" data-go="home">Home</button></div>'+nextQ([],'');
+  }else{try{localStorage.removeItem('clisa.en.fromreg')}catch(x){}
+    h+='<div class="q" style="margin-top:6px">'+(I.length?'Add an interest':'Question 1')+'</div><h1>Where would you like to start?</h1><p class="sub">Choose one issue <b>or</b> one region. You’ll get this week’s picture first, then choose what to see next.</p>';
+    h+=briefRow()+pickList(false);
+    h+='<div class="ft"><button class="btn s" data-ans="ax:all">Skip and browse everything</button>'+(I.length?'':'<button class="skip" data-skip>Skip</button>')+'</div>';
+  }
+  h+='<p class="note">Your interests are stored on this device. If you turn on notifications, only the names of the issues you follow are sent to Clisa, so the right alerts reach you.</p></section>';
+  V.innerHTML=h;window.scrollTo(0,0)}
+function answer(f,v){
+  if(f==='ax'){if(!ints().length)ss('prof',{ints:[],at:DATA.asof});go('');return}
+  if(f==='i'||f==='r'){go('start/'+f+'/'+v);return}
+  var c=(location.hash||'').slice(1).split('/');
+  if(f==='w'&&c[1]==='i'){var it={ax:'i',k:c[2],w:v};saveInt(it);try{localStorage.removeItem('clisa.en.fromreg')}catch(x){};go(intLink(it).slice(1));return}
+  if(f==='g'&&(c[1]==='g'||c[1]==='ge')){var it3={ax:'i',k:c[2],w:'imp',g:v};ss('grp',v);saveInt(it3);go(intLink(it3).slice(1));return}
+  if(f==='rw'&&c[1]==='r'){var it2={ax:'r',k:c[2],w:v};saveInt(it2);try{localStorage.removeItem('clisa.en.fromreg')}catch(x){};go(intLink(it2).slice(1));return}}
+function nextQ(list,cur){list=list.filter(Boolean);var I=ints(),G=[],more=[];
+  var a=function(x){return '<a href="'+x[1]+'">'+(x[2]?'<span class="t2"><b>'+e(x[0])+'</b><small>'+e(x[2])+'</small></span>':e(x[0]))+'</a>'};
+  var grp=function(t,L,keep){L=L.filter(Boolean);if(!L.length)return;keep=keep||2;G.push('<h2>'+t+'</h2>'+L.slice(0,keep).map(a).join(''));L.slice(keep).forEach(function(x){more.push(x)})};
+  grp('More here',list);
+  if(cur&&cur.indexOf('i:')===0)grp('Go deeper',deeper(cur.slice(2)));
+  grp('Your other interests',I.filter(function(it){return intKey(it).indexOf(cur)!==0}).slice(0,3).map(function(it){return [intLabel(it),intLink(it)]}));
+  grp('Also worth a look',suggest(cur));
+  grp('Go back',[['Previous screen','#back'],[I.length?'Your home screen':'Home','#'],['Browse other issues and regions','#ask/1'],I.length?['View or remove interests','#start/4']:['Choose issues or regions to follow','#start/1']]);
+  var h=G.join('').replace(/<h2>/g,'<h2 style="margin-top:14px">').replace('<h2 style="margin-top:14px">','<h2>');
+  if(more.length)h+='<button class="more2" data-fold>'+more.length+' more options ▾</button><div class="fold" hidden>'+more.map(a).join('')+'</div>';
+  var fb=location.hash.indexOf('#msg')===0?'':'<a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">Send feedback ›</a>';
+  return '<div class="nq"><div class="q">What would you like next?</div>'+h.replace('href="#back"','href="#" data-back')+'</div>'+fb}
+function fcView(id){var f0=fpById(id);V.innerHTML=bar('%','#0B2A86','Forecast')+'<p class="empty">Loading…</p>';
+  fetch('/en/lab/app/fc/'+id+'.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(F){
+    var a=f0&&f0.a[0]?app(f0.a[0]):null,H=F.h||[],h=bar('%',a?a[3]:'#0B2A86',a?a[1]+' · forecast':'Forecast');
+    h+='<div class="q">What is likely to happen, and how the assessment will be checked</div><div class="card"><b style="display:block;font-size:17px;line-height:1.5">'+e(F.q)+'</b>';
+    h+='<div class="fcp"><b>'+e(F.p)+'%</b><span>Clisa Geopolitics’ current assessment</span></div><div class="hbl">Deadline '+e(F.due?md(F.due)+', '+F.due.slice(0,4):'')+' · first published '+e(F.made?md(F.made)+', '+F.made.slice(0,4):'')+'</div></div>';
+    var S4=[{k:'now',q:'Current assessment',html:''}];
+    if(H.length>1){var W=300,Hh=110,x=function(i){return 16+i*(W-32)/(H.length-1)},y=function(v){return 10+(100-v)*(Hh-30)/100};
+      S4.push({k:'hist',st:1,q:'How the probability has changed',sub:'From '+H[0][1]+'% at first publication · '+H.length+' entries',html:'<div class="card"><svg viewBox="0 0 '+W+' '+Hh+'" style="width:100%;height:auto;display:block" role="img" aria-label="Probability over time">'+
+        [0,50,100].map(function(v){return '<line x1="16" x2="'+(W-16)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)" stroke-width="1"/><text x="2" y="'+(y(v)+4)+'" font-size="9" fill="var(--mut)">'+v+'</text>'}).join('')+
+        '<polyline fill="none" stroke="var(--acc)" stroke-width="2" points="'+H.map(function(p,i){return x(i)+','+y(p[1])}).join(' ')+'"/>'+H.map(function(p,i){return '<circle cx="'+x(i)+'" cy="'+y(p[1])+'" r="4" fill="var(--acc)" stroke="var(--card)" stroke-width="2"/>'}).join('')+'</svg>'+
+        '<ul class="pv">'+H.slice().reverse().map(function(p){return '<li><span>'+md(p[0])+'</span><div>'+p[1]+'%</div></li>'}).join('')+'</ul></div>'})}
+    if(F.basis)S4.push({k:'basis',st:1,q:'Why this assessment',html:'<div class="card"><p style="margin:0;font-size:14px;line-height:1.7">'+e(F.basis)+'</p></div>'});
+    if(F.rs)S4.push({k:'rs',st:2,q:'How it will be judged right or wrong',sub:'Resolution criteria',html:'<div class="card"><p style="margin:0;font-size:14px;line-height:1.7">'+e(F.rs)+'</p><div class="hbl" style="margin-top:6px">After the deadline, the outcome is decided by these criteria. Every change since the first probability stays on the record.</div></div>'});
+    var sib=f0?issueFc(f0.a[0]).filter(function(g){return g.id!==id}).slice(0,2).map(function(g){return [g.q+' '+g.p+'%','#f/'+g.id]}):[];
+    h+=stepped('f:'+id,S4,['What would you like to see first on this forecast?','Shall I show how this forecast will be judged?'],nextQ([a&&(DATA.boards||{})[f0.a[0]]?['Where is the situation behind this forecast heading?','#i/'+f0.a[0]+'/pan']:null].concat(sib),f0&&f0.a[0]?'i:'+f0.a[0]:''));
+    V.innerHTML=h;window.scrollTo(0,0)}).catch(function(){V.innerHTML=bar('%','#0B2A86','Forecast')+'<p class="empty">Couldn’t load this forecast.</p>'+nextQ([],'')})}
+function briefView(d){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d)<0)ds.push(x.d)});ds.sort().reverse();if(ds.indexOf(d)<0)d=ds[0];
+  var L=DATA.items.filter(function(x){return x.d===d}),i=ds.indexOf(d),h=bar('Brief','#0B2A86','Briefing, '+md(d));
+  h+='<div class="q">The '+md(d)+' briefing · '+L.length+(L.length===1?' item':' items')+'</div>'+msgs(L,'b.'+d);
+  h+=nextQ([ds[i+1]?['Previous briefing ('+md(ds[i+1])+')',"#b/"+ds[i+1]]:null,i>0?['Next briefing ('+md(ds[i-1])+')','#b/'+ds[i-1]]:null],'');
+  V.innerHTML=h;markRead('b.'+d,L);window.scrollTo(0,0)}
+function focusHome(){var h='<section class="fo"><div class="q">Today on your interests</div>';
+  ints().forEach(function(it){var b='',hd='',lk=intLink(it),go2='';
+    if(it.ax==='i'){var id=it.k,a=app(id);if(!a)return;var t=tabFor(id,it.w),C=((DATA.boards||{})[id]||{}).cur,I=impOf(id),L=issueItems(id),n=unread('i.'+id,L).length;
+      hd='<span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>'+TABN[t]+'</small>'+badge(n);go2='See more ›';
+      if(t==='pan'&&C)b=miniRope(id)+'<p class="rd2"><b>This week:</b> '+e(C.short)+'</p><p class="sm2 clamp">'+e(C.reading||'')+'</p>';
+      else if(t==='imp'&&I){var G=impG(I,it.g),L0=lifeFor(I,G),IND=indFor(I,G);hd=hd.replace('<small>Impact</small>','<small>Impact · '+e(gShort(id,G))+'</small>');L0.forEach(function(x){b+='<p class="sm2" style="margin-top:2px">'+'Daily life for '+e(x.gn)+' · 100 futures through 2030</p>'+hbar(x.now)});var mv=(IND||[]).filter(function(r){return r.d.s<100}).slice(0,2);if(mv.length)b+='<p class="sm2" style="margin-top:8px">Industries most affected ('+(G==='USA'?'U.S.':'South Korea')+')</p>'+mv.map(function(r){return '<p class="rd2" style="margin:3px 0 0">'+e(r.n)+' · '+dcnt(r.d)+'</p>'}).join('');else if(!L0.length&&pplFor(I,G).length)b+='<p class="rd2">'+e(pplFor(I,G)[0][1])+'</p>'}
+      else if(t==='fc')b='<ul>'+issueFc(id).slice(0,3).map(function(f){return '<li><span>'+f.p+'%</span>'+e(f.q)+'</li>'}).join('')+'</ul>';
+      else b=briefBlock(a[1],L,'',1)}
+    else if(it.ax==='r'){var r=reg(it.k);if(!r)return;var RL=regItems(r[0]),rn=unread('r.'+r[0],RL).length;
+      hd='<span class="ic2" style="background:'+r[3]+'">'+e(r[2])+'</span><b>'+e(r[1])+'</b><small>'+(RW[it.w]||'News')+'</small>'+badge(rn);go2='See this region ›';
+      if(it.w==='pan')b='<ul>'+relIssues(r[0]).slice(0,3).map(function(k){var x=app(k);return x?'<li><span>'+e(x[2])+'</span>'+e(issueLine(k))+'</li>':''}).join('')+'</ul>';
+      else if(it.w==='fc')b='<ul>'+regFc(r[0]).slice(0,3).map(function(f){return '<li><span>'+f.p+'%</span>'+e(f.q)+'</li>'}).join('')+'</ul>';
+      else b=briefBlock(r[1],RL,'',1)}
+    else if(it.k==='ppl'){hd='<span class="ic2" style="background:#9A3412">Life</span><b>'+e(intLabel(it))+'</b><small>Impact</small>';go2='See more ›';
+      b='<p class="sm2" style="margin-top:0">Futures, out of 100, in which people end up worse off</p><ul>'+lifeRank().map(function(x){return '<li><span>'+worse(x.now)+'/100</span>'+e(x.t)+'</li>'}).join('')+'</ul>'}
+    else{var K=(DATA.kimp.ind[it.w.indexOf(':')<0?'kr:'+it.w:it.w]||[]).slice().sort(function(x,y){return (2*y.d.x+y.d.w+y.d.b)-(2*x.d.x+x.d.w+x.d.b)});hd='<span class="ic2" style="background:#7C2D12">Sector</span><b>'+e(intLabel(it))+'</b><small>Impact</small>';go2='See more ›';
+      b='<p class="sm2" style="margin-top:0">By issue · 100 futures through 2030</p><ul>'+K.map(function(x){return '<li><span>'+e((app(x.case)||[])[2]||x.t)+'</span>'+dcnt(x.d)+'</li>'}).join('')+'</ul>'}
+    h+='<a class="fcd" href="'+lk+'"><div class="fh">'+hd+'</div>'+b+'<div class="go">'+go2+'</div></a>'});
+  return h+'</section>'}
+function kby(G){return (DATA.kimp.by||{})[G]}
+function kgName(G){var g=(DATA.kimp.groups||[]).filter(function(x){return x[0]===G})[0];return g?g[1]:G}
+function pplView(G,w){var K=DATA.kimp,B2=kby(G)||kby(DG),gn=kgName(G),pi=(w==='all'||w==null)?-1:+w,h=bar('Life','#9A3412','Daily life: '+gn);ss('grp',G);
+  h+='<div class="q">How these conflicts change daily life for '+e(gn)+'</div>';
+  h+='<div class="gchips">'+K.groups.map(function(g){return '<a href="#ppl/'+g[0]+'/'+(w||'all')+'" class="'+(g[0]===G?'on':'')+'">'+e(GS[g[0]]||g[1])+'</a>'}).join('')+'</div>';
+  var LR=lifeRank(G);
+  h+=LR.length?'<div class="card"><h2>By issue · 100 futures through 2030</h2>'+LR.map(function(x){return '<div class="ir"><div class="t"><b>'+e(x.t)+'</b>'+(x.gn&&G==='PARTY'?'<small>'+e(x.gn)+'</small>':'')+'</div>'+hbar(x.now)+(x.bad.length?'<p>Scenarios that leave people worse off · '+e(x.bad.map(function(y){return y[0]+' ('+y[1]+'%)'}).join(', '))+'</p>':'')+'</div>'}).join('')+'<div class="hbl" style="margin-top:6px">Clisa Geopolitics’ scenario probabilities, shown as 100 possible futures. People’s Lives, as of '+md(K.asof.life)+'</div></div>':'';
+  var L=B2.ppl.filter(function(x){return pi<0||x[2]===pi}),lifeHTML=h.slice(h.indexOf('<div class="card"><h2>By issue')>=0?h.indexOf('<div class="card"><h2>By issue'):h.length);h=h.slice(0,h.length-lifeHTML.length);var pathHTML='';
+  pathHTML+='<div class="card"><h2>'+(pi<0?L.length+(L.length===1?' path':' paths')+' to '+e(gn):L.length+(L.length===1?' conflict reaches ':' conflicts reach ')+e(gn)+' through “'+e(K.paths[pi])+'”')+'</h2>'+L.map(function(x){return '<div class="cell"><b>'+e(x[1])+'</b><span class="pth">'+e(K.paths[x[2]])+'</span><small style="color:var(--mut)">confidence: '+e(x[4])+'</small><div style="margin-top:4px">'+e(x[3])+'</div>'+(x[5]?'<a class="src" style="font-size:12.5px;color:var(--acc);text-decoration:none" href="#i/'+x[5]+'/imp/'+G+'">See this issue ›</a>':'')+'</div>'}).join('')+'<div class="hbl" style="margin-top:6px">Chain Reactions, as of '+md(K.asof.links)+'</div></div>';
+  var op=K.paths.map(function(nm,i){return i!==pi&&B2.ppl.some(function(x){return x[2]===i})?['See the “'+nm+'” path','#ppl/'+G+'/'+i]:null});if(pi>=0)op.unshift(['See all paths at once','#ppl/'+G+'/all']);
+  var ir0=(G==='KOR'||G==='USA')?indRank(G==='USA'?'us':'kr')[0]:null;
+  h+=stepped('ppl:'+G+':'+w,[lifeHTML?{k:'life',q:'Daily life',html:lifeHTML}:null,{k:'path',q:(pi<0?'How conflicts reach '+gn:'Which conflicts reach '+gn+' through “'+K.paths[pi]+'”'),sub:L.length+(L.length===1?' path':' paths'),html:pathHTML}],'What else would you like to see for '+gn+'?',nextQ(op.filter(Boolean).slice(0,3).concat([ir0?['And '+(G==='USA'?'U.S.':'South Korean')+' industries? · '+ir0.n,'#ind/'+encodeURIComponent(ir0.k)]:null]),'p:ppl:'+G+':'+(pi<0?'all':pi)));
+  V.innerHTML=h;window.scrollTo(0,0)}
+function indView(key){var K=DATA.kimp;if(key.indexOf(':')<0)key='kr:'+key;var R=(K.ind[key]||[]).slice().sort(function(x,y){return (2*y.d.x+y.d.w+y.d.b)-(2*x.d.x+x.d.w+x.d.b)}),c=key.slice(0,2),nm=inm(key),cn=c==='us'?'U.S.':'South Korea',h=bar('Sector','#7C2D12',nm+' ('+cn+')');
+  h+='<div class="q">How this industry’s operating profit changes, issue by issue</div>';
+  var sum='<p class="lead">How this industry’s operating profit changes in each issue, across 100 futures through 2030.</p><div class="card">'+R.map(function(r){return '<div class="ir"><div class="t"><b>'+e(r.t)+'</b></div>'+hbar(r.d)+'</div>'}).join('')+'<div class="hbl" style="margin-top:6px">“Worse” and “better” mean operating profit falls or rises more than 10% from normal (the industry’s 10-year median operating margin); “much worse” means a fall of more than 30% or an industry-wide loss. Industry Outlook, as of '+md(K.asof.ind)+'</div></div>';
+  var why='<div class="card">'+R.filter(function(r){return r.bad||r.good}).map(function(r){return '<div class="ir"><div class="t"><b>'+e(r.t)+'</b></div>'+(r.bad?'<p><span class="tg2 tr">Worse in</span>'+e(r.bad[0])+' ('+r.bad[1]+'%) · '+e(r.bad[2])+'</p>':'')+(r.good?'<p><span class="tg2 tw">Better in</span>'+e(r.good[0])+' ('+r.good[1]+'%) · '+e(r.good[2])+'</p>':'')+'<a class="src" style="font-size:12.5px;color:var(--acc);text-decoration:none" href="#ask/i/'+r.case+'">See this issue ›</a></div>'}).join('')+'</div>';
+  var oth=indRank(c).filter(function(x){return x.k!==key}).slice(0,2).map(function(x){return ['What about '+x.n.charAt(0).toLowerCase()+x.n.slice(1)+' ('+cn+')?','#ind/'+encodeURIComponent(x.k)]});
+  h+=stepped('ind:'+key,[{k:'sum',q:'By issue',html:sum},R.some(function(r){return r.bad||r.good})?{k:'why',q:'Which scenarios make it worse or better, and why',sub:'Reasons',html:why}:null],'What else would you like to know about this industry?',nextQ(oth.concat([['And daily life for '+(c==='us'?'Americans':'South Koreans')+'?','#ppl/'+(c==='us'?'USA':'KOR')+'/all']]),'p:ind:'+key));
+  V.innerHTML=h;window.scrollTo(0,0)}
+function ctxOf(r){if(r[0]==='f'){var f1=fpById(r[1]);return 'Forecast: '+(f1?f1.q.slice(0,60):'')}if(r[0]==='b')return 'Briefing '+(r[1]||'');if(r[0]==='ppl')return 'Daily life: '+kgName(r[1]);if(r[0]==='ind'){var k3=decodeURIComponent(r[1]||'');if(k3.indexOf(':')<0)k3='kr:'+k3;return inm(k3)+' ('+cnm(k3)+')'}if(r[0]==='i'&&app(r[1]))return app(r[1])[1]+' · '+({pan:'Overview',fc:'Forecasts'}[r[2]]||'News');if(r[0]==='r'&&reg(r[1]))return reg(r[1])[1];return {fc:'Changed forecasts',dg:'Weekly summary',lens:'Lenses on the world'}[r[0]]||'Home'}
+function msgView(){
+  var h=bar('Note','#3D5A80','Send feedback')+'<div class="q">A note to the editor of Clisa Geopolitics</div>';
+  h+='<div class="card fm"><p style="margin:0;font-size:14px;line-height:1.65">Tell us what you think of an assessment, point out a factual error, or suggest an issue to cover. Notes are not published; only the editor reads them.</p>';
+  h+='<div class="ctx" style="margin-top:8px">You were viewing: '+e(CTX)+'</div>';
+  h+='<label for="mb">Your note</label><textarea id="mb" maxlength="3000"></textarea>';
+  h+='<label for="me">Email, if you’d like a reply (optional)</label><input id="me" type="email" autocomplete="email" maxlength="200">';
+  h+='<input class="hp" id="mh" tabindex="-1" autocomplete="off" aria-hidden="true">';
+  h+='<div class="rw" style="margin-top:12px"><button class="btn" id="ms">Send</button></div><div class="rs" id="mr" aria-live="polite"></div>';
+  h+='<p class="note" style="margin-top:12px">Your email address is used only to reply to you. It is kept with your note for one year, then deleted.</p></div>';
+  V.innerHTML=h;window.scrollTo(0,0);var t0=Date.now();
+  document.getElementById('ms').onclick=function(){var b=this,r=document.getElementById('mr'),body=document.getElementById('mb').value.trim(),em=document.getElementById('me').value.trim();
+    r.className='rs';if(body.length<5){r.className='rs er';r.textContent='Please write at least 5 characters.';return}
+    b.disabled=true;r.textContent='Sending…';
+    fetch(API+'/msg',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({body:body,email:em,ctx:CTX,lang:LANG,hp:document.getElementById('mh').value,t:Date.now()-t0})}).then(function(x){return x.json()}).then(function(d){
+      if(d.ok){r.textContent='Sent. Thank you.';document.getElementById('mb').value='';V.insertAdjacentHTML('beforeend',nextQ([],''))}
+      else{b.disabled=false;r.className='rs er';r.textContent={email:'That email address doesn’t look right.',rate:'Please try again in a moment.',body:'Please write at least 5 characters.'}[d.error]||'Couldn’t send. Please try again in a moment.'}}).catch(function(){b.disabled=false;r.className='rs er';r.textContent='Couldn’t send. Please check your connection.'})}}
+function b64k(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';var r=atob(s),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+function post(path,o){return fetch(API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).then(function(x){return x.json()})}
+function pushTopics(){var T=[];ints().forEach(function(it){var L=it.ax==='i'?[it.k]:it.ax==='r'?relIssues(it.k):[];L.forEach(function(k){if(T.indexOf(k)<0)T.push(k)})});return T}
+function topicText(){var T=pushTopics();return T.length?T.map(function(k){var a=app(k);return a?a[1]:k}).join(', ')+': ':''}
+function syncTopics(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription()}).then(function(sub){if(sub)post('/push/sub',{sub:sub.toJSON(),topics:pushTopics(),lang:LANG,tz:new Date().getTimezoneOffset()}).catch(function(){})}).catch(function(){})}
+function ntCard(){var el=document.getElementById('nt');if(!el)return;
+  navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription().then(function(sub){
+    var den=Notification.permission==='denied';
+    if(sub){post('/push/sub',{sub:sub.toJSON(),topics:pushTopics(),lang:LANG,tz:new Date().getTimezoneOffset()}).catch(function(){});el.innerHTML='<b>Notifications are on</b><p>'+(pushTopics().length?'You’ll get updates only on your interests ('+e(pushTopics().map(function(k){var a=app(k);return a?a[1]:k}).join(' · '))+'). Change your interests and your notifications change with them. ':'You haven’t chosen any interests, so you’ll get every new update. ')+'You’ll be notified when a new briefing, a forecast change or a weekly summary comes out. Nothing is sent between 10 p.m. and 7 a.m. your time.</p><div class="rw"><button class="btn s" id="nt-t">Send a test notification</button><button class="btn s" id="nt-x">Turn off</button></div><p id="nt-r"></p>';
+      document.getElementById('nt-t').onclick=function(){var b=this,r=document.getElementById('nt-r');b.disabled=true;r.textContent='Sending…';post('/push/test',{endpoint:sub.endpoint}).then(function(d){r.textContent=d.ok?'Sent. It should arrive in a few seconds.':d.error==='rate'?'You can send one test every 10 minutes.':'Couldn’t send.';if(d.error==='not_subscribed'){sub.unsubscribe().then(ntCard)}}).catch(function(){r.textContent='Couldn’t send. Please check your connection.'}).then(function(){b.disabled=false})};
+      document.getElementById('nt-x').onclick=function(){post('/push/unsub',{endpoint:sub.endpoint}).catch(function(){}).then(function(){return sub.unsubscribe()}).then(ntCard)};
+    }else{el.innerHTML='<b>Get notified when there’s news?</b><p>'+(den?'Clisa notifications are blocked on this device. Allow them in your phone’s notification settings, then reopen the app.':(pushTopics().length?'For your interests ('+e(pushTopics().map(function(k){var a=app(k);return a?a[1]:k}).join(' · '))+'), new':'New')+' briefings, forecast changes and weekly summaries appear as notifications, and the app icon shows a badge. Nothing is sent between 10 p.m. and 7 a.m. your time.')+'</p><div class="rw"><button class="btn" id="nt-on"'+(den?' disabled':'')+'>Turn on</button></div><p id="nt-r"></p>';
+      var on=document.getElementById('nt-on');on.onclick=function(){var r=document.getElementById('nt-r');on.disabled=true;
+        Notification.requestPermission().then(function(pm){if(pm!=='granted')throw 'perm';return fetch(API+'/push/key').then(function(x){return x.json()})})
+        .then(function(k){return reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64k(k.key)})})
+        .then(function(s){return post('/push/sub',{sub:s.toJSON(),topics:pushTopics(),lang:LANG,tz:new Date().getTimezoneOffset()})}).then(function(d){if(!d.ok)throw 'srv';ntCard()})
+        .catch(function(x){on.disabled=false;r.textContent=x==='perm'?'Notifications weren’t allowed.':'Couldn’t turn on notifications. Please try again in a moment.'})};
+    }})}).catch(function(){el.remove()})}
+function clearNotes(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.getNotifications?reg.getNotifications():[]}).then(function(ns){ns.forEach(function(n){n.close()})}).catch(function(){});if(navigator.clearAppBadge)navigator.clearAppBadge().catch(function(){})}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clearNotes()});clearNotes();
+function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
+  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2],r[3]);else if(r[0]==='r'&&reg(r[1]))region(r[1],r[2]);else if(r[0]==='ppl'){var gk=(DATA.kimp.groups||[]).map(function(g){return g[0]});if(gk.indexOf(r[1])>=0)pplView(r[1],r[2]||'all');else pplView(ls('grp',DG),r[1]||'all')}else if(r[0]==='ind'&&r[1])indView(decodeURIComponent(r[1]));else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='start')startView(r[1],r[2]);else if(r[0]==='ask')startView(r[1],r[2],true);else if(r[0]==='f'&&r[1])fcView(r[1]);else if(r[0]==='b')briefView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start'&&r[0]!=='ask')CTX=ctxOf(r);
+  instUI();
+  var js=ls('justsaved',null);if(js&&r[0]!=='start'){try{localStorage.removeItem('clisa.en.justsaved')}catch(x){};var bb=V.querySelector('.bar');var nt='<div class="saved">Saved to your interests · '+e(js)+' · it will appear first on your home screen <a href="#start/4">View interests</a></div>';if(bb)bb.insertAdjacentHTML('afterend',nt);else V.insertAdjacentHTML('afterbegin',nt)}}
+function toast(t){var el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.className='toast';document.body.appendChild(el)}el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('on')},1800)}
+var STACK=[],SCR={};
+function anim(){V.classList.remove('in');void V.offsetWidth;V.classList.add('in')}
+function refresh(){toast('Getting the latest…');return fetch('/en/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){location.reload();return}DATA=d;
+  return fetch('/en/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){if(!DATA)return;route();anim();var t=new Date();toast('Up to date through the '+md(DATA.asof)+' briefing · '+('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2))}).catch(function(){toast('Couldn’t update. Please check your connection.')})}
+function go(h){var cur=location.hash.replace(/^#/,'');if(cur===h)route();else location.hash=h}
+V.addEventListener('click',function(ev){var ib=ev.target.closest('[data-inst],[data-instx]');if(ib){ev.preventDefault();
+    if(ib.hasAttribute('data-instx')){ss('instx',1);instUI();var n0=document.getElementById('insn');if(n0)n0.remove();return}
+    if(DP){DP.prompt();DP.userChoice.then(function(){DP=null;instUI()}).catch(function(){});return}
+    if(!document.getElementById('insn')){var hd=V.querySelector('header.top');if(hd)hd.insertAdjacentHTML('afterend','<p class="saved" id="insn">Tap the Share button (□↑), then choose “Add to Home Screen.”</p>')}return}
+  var bk=ev.target.closest('[data-back]');if(bk){ev.preventDefault();if(history.length>1)history.back();else go('');return}var t=ev.target.closest('[data-open],[data-go],[data-mode],[data-item],[data-more],[data-fold],[data-ans],[data-rm],[data-skip],[data-addint],[data-sec]');if(!t)return;
+  if(t.hasAttribute('data-fold')){ev.preventDefault();var f=t.nextElementSibling;f.hidden=!f.hidden;t.textContent=t.textContent.replace(f.hidden?'▴':'▾',f.hidden?'▾':'▴');return}
+  if(t.hasAttribute('data-more')){var p=t.previousElementSibling;if(p){p.classList.toggle('clamp');t.textContent=p.classList.contains('clamp')?'More':'Less'}return}
+  if(t.dataset.mode){ss('mode',t.dataset.mode);OTH=1;home();return}
+  if(t.dataset.sec){var sp=t.dataset.sec.split('|');(OPEN[sp[0]]=OPEN[sp[0]]||[]).push(sp[1]);route();var ns=document.getElementById('sec-'+sp[1]);if(ns){ns.classList.add('in2')}var el=document.getElementById('sec-'+sp[1]);if(el)el.scrollIntoView({block:'start'});window.scrollBy(0,-64);return}
+  if(t.dataset.ans){var q=t.dataset.ans.split(':');answer(q[0],q.slice(1).join(':'));return}
+  if(t.dataset.rm!=null){var I0=ints();I0.splice(+t.dataset.rm,1);ss('prof',{ints:I0,at:DATA.asof});syncTopics();startView('4');return}
+  if(t.hasAttribute('data-skip')){ss('skip',1);go('');return}
+  if(t.dataset.addint){var q2=t.dataset.addint.split(':'),it={ax:q2[0],k:q2[1],w:q2[0]==='i'?((DATA.boards||{})[q2[1]]?'pan':'news'):'news'};saveInt(it);try{localStorage.removeItem('clisa.en.justsaved')}catch(x){};t.outerHTML='<p class="saved">Added to your interests · '+e(intLabel(it))+' · it will appear first on your home screen</p>';return}
+  if(t.dataset.item){go('i/'+t.dataset.app+'/'+t.dataset.item);return}
+  if(t.dataset.go){if(t.dataset.go==='home'){OTH=0;OPEN={};var here=location.hash.replace(/^#/,'');if(here===''){if(window.scrollY>40){window.scrollTo({top:0,behavior:'smooth'})}else refresh();return}}go(t.dataset.go==='home'?'':t.dataset.go);return}
+  var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens'||o==='msg')go(o);else go(o.replace(':','/'))});
+addEventListener('scroll',function(){SCR[location.hash||'#']=window.scrollY},{passive:true});
+addEventListener('hashchange',function(ev){OPEN={};var nh=location.hash;
+  var back=STACK.length>1&&STACK[STACK.length-2]===nh,y=SCR[nh||'#'];if(back)STACK.pop();else STACK.push(nh);route();anim();
+  if(back&&y!=null)setTimeout(function(){window.scrollTo(0,y)},30)});
+try{history.scrollRestoration='manual'}catch(x){}
+function build(daily){var R=DATA.rule,out=[];
+  function near(lon,lat){var b=null,bd=1e9;R.capReg.forEach(function(c){var d=(c[0]-lon)*(c[0]-lon)+(c[1]-lat)*(c[1]-lat);if(d<bd){bd=d;b=c[2]}});return b}
+  daily.issues.slice(0,21).forEach(function(iss){iss.items.forEach(function(it,i){
+    var a=[];if(it.case)a.push(it.case);(it.fc||[]).forEach(function(c){(R.fcases[c.id]||[]).forEach(function(x){if(a.indexOf(x)<0)a.push(x)})});
+    if((it.fp||[]).indexOf('chips-fabs')>=0&&a.indexOf('trade')<0)a.push('trade');if(!a.length)a.push('world');
+    var l=it.loc||{},r=null;(it.fp||[]).some(function(f){if(R.fpReg[f]){r=R.fpReg[f];return true}});
+    if(!r&&R.caseR[it.case])r=R.caseR[it.case];
+    if(!r&&l.lat!=null&&l.lon!=null)r=near(+l.lon,+l.lat);
+    if(!r){var is=(l.isos||[]).filter(function(x){return x!=='USA'}).concat((l.isos||[]).filter(function(x){return x==='USA'}));is.some(function(x){if(R.isoReg[x]){r=R.isoReg[x];return true}})}
+    out.push({id:iss.date+'-'+i,d:iss.date,h:it.h,t:it.fact||'',a:a.sort(),fp:it.fp||[],fc:(it.fc||[]).map(function(c){return [c.id,c.e]}),s:(it.src||[]).slice(0,1),pl:l.place||'',r:r,pull:it.pull||[]})})});
+  return out}
+fetch('/en/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
+  if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){var k='clisa.en.rl.'+d.pv,done=null;try{done=sessionStorage.getItem(k);sessionStorage.setItem(k,'1')}catch(x){}if(!done){location.reload();return new Promise(function(){})}}
+  DATA=d;
+  return fetch('/en/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){STACK=[location.hash];route();anim()}).catch(function(){V.innerHTML='<p class="empty">Couldn’t load the data. Check your connection, then reopen the app.</p>'});
+if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/en/lab/app/sw.js',{scope:'/en/lab/app/'}).catch(function(){})});
+})();
+</script></body></html>
