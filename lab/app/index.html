@@ -79,24 +79,34 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .th{padding:12px 0;border-top:1px solid var(--line)}.th:first-of-type{border-top:0}.th b{font-size:15px}.th small{color:var(--mut);font-size:12px;margin-left:6px}.th p{font-size:13px;line-height:1.65;color:var(--sub);margin:5px 0 0}.th h4{font-size:12px;margin:8px 0 0;color:var(--mut)}
 .tug .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tug .ch{font-size:12px;font-weight:700;margin-bottom:6px}.tug .ch.g{color:var(--dn)}.tug .ch.r{color:var(--up);text-align:right}
 .fz{margin:0 0 10px}.fz .ar{border-radius:3px;margin-bottom:5px}.fz.g .ar{background:var(--dn)}.fz.r .ar{background:var(--up)}.fz b{display:block;font-size:13px;line-height:1.35}.fz span{display:block;font-size:12px;color:var(--mut);line-height:1.4}.fz.r{text-align:right}
-.band{display:flex;height:44px;border-radius:10px;overflow:hidden;margin:10px 0 6px;font-size:11px;font-weight:700;color:#fff;text-align:center}.band div{display:flex;align-items:center;justify-content:center;line-height:1.25}
-.band .g{background:var(--dn)}.band .m{background:#8C95A8}.band .r{background:var(--up)}.tug .cap{font-size:11.5px;color:var(--mut);line-height:1.5}.tug .why{margin-top:12px;font-size:14px;line-height:1.65}.tug .why b{display:block;font-size:13px;margin-bottom:2px}
+.band{display:flex;gap:3px;height:46px;margin:10px 0 6px;font-size:11px;font-weight:700;color:#fff;text-align:center}.band div{border-radius:10px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12);min-width:58px;padding:0 3px;display:flex;align-items:center;justify-content:center;line-height:1.25}
+.band .g{background:linear-gradient(180deg,#2A9A70,var(--dn))}.band .m{background:linear-gradient(180deg,#A3ABBB,#7F889A)}.band .r{background:linear-gradient(180deg,#D25A33,var(--up))}.tug .cap{font-size:11.5px;color:var(--mut);line-height:1.5}.tug .why{margin-top:12px;font-size:14px;line-height:1.65}.tug .why b{display:block;font-size:13px;margin-bottom:2px}
 .cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.pc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:7px;min-height:118px}
+.pc{position:relative;background:var(--card);box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 12px rgba(16,24,40,.05);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:left;font:inherit;color:inherit;cursor:pointer;display:flex;flex-direction:column;gap:7px;min-height:118px}
+.pc{border-top:3px solid var(--acc2,var(--line))}
 .pc .hd{display:flex;align-items:center;gap:8px}.pc .ic2{width:30px;height:30px;border-radius:9px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}.pc .nm2{font-size:13.5px;font-weight:700;line-height:1.3}
 .pc .bd{position:absolute;top:-8px;right:-6px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}.pc .rd{font-size:12px;line-height:1.45;color:var(--sub)}.pc .rd b{color:var(--ink)}
-.mini{position:relative;height:16px}.mini .ln{position:absolute;left:0;right:0;top:7px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--dn),#8C95A8 50%,var(--up))}
+.mini{position:relative;height:18px}.mini .ln{position:absolute;left:0;right:0;top:7px;height:5px;border-radius:999px;background:repeating-linear-gradient(115deg,#B88A44 0 4px,#8E6527 4px 6px);opacity:.85}
 .mini .k,.rope .k{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink);border:2px solid var(--card)}.mini .k0,.rope .k0{position:absolute;top:2px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--mut);opacity:.35}
 .tabs{display:flex;gap:6px;margin:4px 0 10px;position:sticky;top:58px;z-index:4;background:var(--bg);padding:4px 0}.tabs a{flex:1;text-align:center;font-size:14px;font-weight:700;padding:9px;border-radius:10px;background:var(--card);border:1px solid var(--line);color:var(--mut);text-decoration:none}.tabs a.on{background:var(--acc);color:#fff;border-color:var(--acc)}
 .asof2{text-align:center;font-size:12px;color:var(--mut);margin:0 0 8px}
-.arw{display:flex;align-items:center;margin:0 0 4px}.arw i{display:block;flex:1;border-radius:2px}.arw.g i{background:var(--dn)}.arw.r i{background:var(--up)}.arw.g::before{content:'';border:7px solid transparent;border-right:9px solid var(--dn);border-left:0}.arw.r::after{content:'';border:7px solid transparent;border-left:9px solid var(--up);border-right:0}
-.rope{position:relative;height:18px;margin:14px 0 4px}.rope .ln{position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:#9C6B1E}.rope .k,.rope .k0{top:1px;width:16px;height:16px;margin-left:-8px}
+.arw{display:flex;align-items:center;margin:0 0 6px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.12))}.arw svg{flex:none;display:block}.arw i{display:block;flex:1}
+.arw.g i{background:linear-gradient(90deg,var(--dn),color-mix(in srgb,var(--dn) 35%,transparent));border-radius:0 999px 999px 0;transform-origin:left center}
+.arw.r i{background:linear-gradient(270deg,var(--up),color-mix(in srgb,var(--up) 35%,transparent));border-radius:999px 0 0 999px;transform-origin:right center}
+@media (prefers-reduced-motion:no-preference){.arw i{animation:grow .7s cubic-bezier(.2,.8,.2,1) both}.arw svg{animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
+ .rope .k{animation:tug 1.6s ease-in-out .35s both}@keyframes grow{from{transform:scaleX(.15);opacity:.2}to{transform:none;opacity:1}}@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+ @keyframes tug{0%{transform:translateX(0)}25%{transform:translateX(var(--pull,0))}55%{transform:translateX(calc(var(--pull,0) * -.4))}100%{transform:translateX(0)}}}
+.fz .pw{display:inline-block;font-size:10.5px;font-weight:800;color:var(--mut);margin-left:4px;letter-spacing:.3px}.fz .td{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:var(--red);border-radius:999px;padding:0 6px;margin-left:5px;vertical-align:1px}
+.rope{position:relative;height:26px;margin:16px 0 6px}.rope .ln{position:absolute;left:0;right:0;top:9px;height:8px;border-radius:999px;background:repeating-linear-gradient(115deg,#B88A44 0 6px,#8E6527 6px 9px);box-shadow:inset 0 -1px 0 rgba(0,0,0,.25),0 1px 2px rgba(0,0,0,.15)}
+.rope .k,.rope .k0{top:1px;width:24px;height:24px;margin-left:-12px}.rope .k{background:radial-gradient(circle at 35% 30%,#4A3A26,#1C140B);border:3px solid var(--card);box-shadow:0 0 0 2px #8E6527,0 3px 6px rgba(0,0,0,.25)}
+.rope .ctr{position:absolute;left:50%;top:-2px;bottom:-2px;width:0;border-left:2px dashed var(--line)}
 .read2{font-size:14.5px;line-height:1.65;background:#F1F5FF;border-radius:12px;padding:11px 13px;color:#141A26}.read2 b{font-weight:800}
 .ev{font-size:12.5px;color:var(--mut);line-height:1.6;margin-top:8px}.ev b{color:var(--sub)}
 .chg2{margin:0;padding-left:18px}.chg2 li{font-size:14px;line-height:1.65;margin:4px 0}
 .more2{display:block;font:inherit;font-size:13px;font-weight:700;color:var(--acc);background:none;border:0;padding:8px 0 0;cursor:pointer}
 .q{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.2px;margin:2px 0 8px}.q.w{color:rgba(255,255,255,.85)}
 .wk{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:12px}.wk h2{font-size:17px;line-height:1.4;margin:0 0 6px}.wk p{margin:0;font-size:14.5px;line-height:1.7}
+.wkl{list-style:none;margin:0 0 8px;padding:0}.wkl li{display:flex;flex-direction:column;padding:7px 0;border-top:1px solid var(--line)}.wkl li:first-child{border-top:0}.wkl b{font-size:13px;color:var(--mut)}.wkl span{font-size:15px;font-weight:700;line-height:1.45}
 .wfold{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 .draft{font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:1px 6px;margin-left:6px}
 
@@ -123,6 +133,9 @@ function fcChanged(){var since=ls('fcseen',null);if(!since){var d=new Date(DATA.
 function thinker(id){var T=DATA.thinkers||[];for(var i=0;i<T.length;i++)if(T[i].id===id)return T[i]}
 function tilt(id){var b=(DATA.boards||{})[id];if(!b)return null;var m=null;b.fut.forEach(function(f){if(f.v&&(!m||Math.abs(f.v)>Math.abs(m.v)))m=f});return m}
 function draft(){return location.search.indexOf('draft')>=0||location.pathname.indexOf('/lab/app/')===0}
+// 매일 브리핑 소식의 pull 표시([[사안, "L"|"R", 힘 이름], ...])를 세어 힘에 '오늘 +n' 불을 켠다
+function pulls(id,side,name){var t=0,w=0,wk=new Date(DATA.asof);wk.setDate(wk.getDate()-6);wk=wk.toISOString().slice(0,10);
+  (DATA.items||[]).forEach(function(x){(x.pull||[]).forEach(function(p){if(p[0]===id&&p[1]===side&&p[2]===name){if(x.d===DATA.asof)t++;if(x.d>=wk)w++}})});return {today:t,week:w}}
 function badge(n){return n>0?'<span class="bd">'+(n>99?'99+':n)+'</span>':''}
 function delta(f){if(f.h.length<2)return '';var a=f.h[f.h.length-2][1],b=f.h[f.h.length-1][1];if(a===b)return '';return '<small class="'+(b>a?'up':'dn')+'">'+(b>a?'▲':'▼')+Math.abs(b-a)+' · '+md(f.h[f.h.length-1][0])+'</small>'}
 function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)return DATA.fc[i]}
@@ -134,7 +147,7 @@ function home(){
   var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'];
   var reads=DATA.apps.map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a[1],C.short,C.ok]:null}).filter(Boolean);
   h+='<section class="wk"><div class="q">오늘 세계에서 무엇이 어느 쪽으로 움직였나</div><h2>이번 주 세계</h2>';
-  h+=reads.length?'<p>'+reads.map(function(r){var c=r[0].charCodeAt(r[0].length-1),j=(c>=0xAC00&&c<=0xD7A3&&(c-0xAC00)%28)?'은':'는';return '<b>'+e(r[0])+'</b>'+j+' '+e(r[1])+'으로'}).join(', ')+' 기울었습니다.'+(reads.some(function(r){return !r[2]})?' <span class="draft">결재 전 시안</span>':'')+'</p>':'<p>이번 주 판의 읽기는 매주 월요일에 고칩니다.</p>';
+  h+=reads.length?'<ul class="wkl">'+reads.map(function(r){return '<li><b>'+e(r[0])+'</b><span>'+e(r[1])+'으로</span></li>'}).join('')+'</ul>'+(reads.some(function(r){return !r[2]})?'<span class="draft" style="margin:0">결재 전 시안</span>':''):'<p>이번 주 판의 읽기는 매주 월요일에 고칩니다.</p>';
   if(W){h+='<div class="wfold"><button class="more2" data-fold style="padding:0">세계의 앞날 5가지와 그 틀 ('+md(W.asof)+' 판단) ▾</button><div class="fold" hidden>'+W.scen.map(function(x,i){var t=thinker(x[3]);return '<a class="wr" href="#lens"><span class="wn"><b>'+e(x[1])+'</b><small>'+e(t?t.n+'의 틀':'')+'</small></span><span class="wbar"><i style="width:'+(x[2]/W.scen[0][2]*100)+'%;background:'+TC[i%5]+'"></i></span><b class="wp">'+x[2]+'%</b></a>'}).join('')+
     (W.trends[0]?'<div class="wtr"><b>큰 흐름 · </b>'+e(W.trends.slice(0,3).map(function(x){return x[0]}).join(' / '))+'</div>':'')+'</div></div>'}
   h+='</section>';
@@ -148,7 +161,7 @@ function home(){
     h+='<div class="cards">'+DATA.apps.map(function(a){var n=unread('i.'+a[0],issueItems(a[0])).length,B=(DATA.boards||{})[a[0]],C=B&&B.cur,ok=C&&C.kn!=null&&(C.ok||draft()),body='';
       if(ok)body='<div class="mini"><div class="ln"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div><div class="rd"><b>이번 주</b> '+e(C.short)+(C.ok?'':' <span class="draft">시안</span>')+'</div>';
       else{var tl=tilt(a[0]);if(tl)body='<div class="rd"><b>이번 주 전망 신호</b> '+(tl.v>0?'↗ ':'↘ ')+e(tl.n)+(tl.v>0?' 쪽':'에서 멀어짐')+'</div>';else{var it=issueItems(a[0])[0];if(it)body='<div class="rd">'+e(it.h)+'</div>'}}
-      return '<button class="pc" data-open="i:'+a[0]+'"><div class="hd"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><span class="nm2">'+e(a[1])+'</span></div>'+body+badge(n)+'</button>'}).join('')+'</div>'+wg+'<div class="grid" style="margin-top:18px">';
+      return '<button class="pc" style="--acc2:'+a[3]+'" data-open="i:'+a[0]+'"><div class="hd"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><span class="nm2">'+e(a[1])+'</span></div>'+body+badge(n)+'</button>'}).join('')+'</div>'+wg+'<div class="grid" style="margin-top:18px">';
   }else{h+=wg+'<div class="grid" style="margin-top:14px">';
     DATA.regions.forEach(function(r){var n=unread('r.'+r[0],regItems(r[0])).length;
       h+='<button class="ap" data-open="r:'+r[0]+'"><span class="ic" style="background:'+r[3]+';font-size:'+(r[2].length>3?12:15)+'px">'+e(r[2])+'</span><span class="lb">'+e(r[1])+'</span>'+badge(n)+'</button>'});
@@ -187,9 +200,13 @@ function issue(id,arg){
     h+='<div class="q">이 판은 어디로 가고 있고, 왜 그런가</div>';
     if(cok)h+='<div class="asof2">'+md(C.asof)+' 기준 · 매주 월요일 고침 · 클리사 지오폴리틱스의 판단</div>';
     if(cok){
-      var side=function(L,c){return L.map(function(f){return '<div class="fz '+c+'"><div class="arw '+c+'"><i style="height:'+(3+f[2]*1.2)+'px"></i></div><b>'+e(f[0])+'</b><span>'+e(f[1])+'</span></div>'}).join('')};
+      // 화살머리는 몸통 굵기에 맞춰 커진다(몸통의 2배 높이, 최소 14px)
+      var side=function(L,c){return L.map(function(f){var t=Math.round(3+f[2]*1.2),hh=Math.max(14,t*2),hw=Math.round(hh*0.75),col=c==='g'?'var(--dn)':'var(--up)',
+        hd=c==='g'?'<svg width="'+hw+'" height="'+hh+'" viewBox="0 0 10 10" preserveAspectRatio="none"><path d="M0 5 L10 0 L8 5 L10 10 Z" fill="'+col+'"/></svg>':'<svg width="'+hw+'" height="'+hh+'" viewBox="0 0 10 10" preserveAspectRatio="none"><path d="M10 5 L0 0 L2 5 L0 10 Z" fill="'+col+'"/></svg>';
+        var n=pulls(id,c==='g'?'L':'R',f[0]);
+        return '<div class="fz '+c+'"><div class="arw '+c+'">'+(c==='g'?hd:'')+'<i style="height:'+t+'px"></i>'+(c==='r'?hd:'')+'</div><b>'+e(f[0])+'<span class="pw">힘 '+f[2]+'</span>'+(n.today?'<span class="td">오늘 +'+n.today+'</span>':n.week?'<span class="td" style="background:var(--mut)">이번 주 +'+n.week+'</span>':'')+'</b><span>'+e(f[1])+'</span></div>'}).join('')};
       h+='<div class="card tug"><h2>판을 당기는 힘'+dl+'</h2><div class="cols"><div><div class="ch g">← '+e(C.left)+'</div>'+side(C.L,'g')+'</div><div><div class="ch r">'+e(C.right)+' →</div>'+side(C.R,'r')+'</div></div>';
-      h+='<div class="rope"><div class="ln"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>';
+      h+='<div class="rope" style="--pull:'+((C.kn-50)*3)+'px"><div class="ln"></div><div class="ctr"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>';
       h+='<div class="band">'+C.bands.map(function(x){return '<div class="'+x[2]+'" style="flex:'+Math.max(x[1],8)+'">'+e(x[0])+'<br>'+x[1]+'%</div>'}).join('')+'</div>';
       h+='<div class="cap">매듭 = '+(B.horizon||'')+'년까지 전개별 확률(클리사 지오폴리틱스 사안 분석)의 무게중심'+(Math.abs(C.kn-C.kn0)>=1?' · 흐린 매듭은 지난주':' · 지난주와 같은 자리')+'<br>'+e(C.cap)+' · 화살표 굵기는 클리사의 판단</div>';
       h+='<button class="more2" data-fold>전개 '+B.fut.length+'가지 자세히 ▾</button><div class="fold" hidden>'+futs(B)+'</div>';
@@ -225,7 +242,8 @@ function futs(B){var mx=Math.max.apply(null,B.fut.map(function(f){return f.p}));
   return B.fut.slice().sort(function(x,y){return y.p-x.p}).map(function(f){return '<div class="fu"><div class="r"><span class="n">'+e(f.n)+'</span>'+(f.v?'<span class="mv '+(f.v>0?'up':'dn')+'">'+(f.v>0?'신호 ↗':'신호 ↘')+'</span>':'')+'<b>'+f.p+'%</b></div><div class="fbar"><i style="width:'+(f.p/mx*100)+'%"></i></div></div>'}).join('')}
 function evid(B){var seenq={},rows=[];B.fut.forEach(function(f){f.why.forEach(function(w){if(!seenq[w[0]]){seenq[w[0]]=1;rows.push(w)}})});
   if(!rows.length)return '<div class="ev">지난 7일 동안 이 판의 신호가 된 전망은 바뀌지 않았습니다.</div>';
-  return '<div class="ev"><b>근거가 된 전망 변화(지난 7일)</b><br>'+rows.map(function(w){return '· '+e(w[1])+' <b>'+w[2]+'→'+w[3]+'%</b> ('+md(w[4])+')'}).join('<br>')+'</div>'}
+  var ln=function(w){return '· '+e(w[1])+' <b>'+w[2]+'→'+w[3]+'%</b> ('+md(w[4])+')'};
+  return '<div class="ev"><b>근거가 된 전망 변화(지난 7일)</b><br>'+rows.slice(0,4).map(ln).join('<br>')+(rows.length>4?'<button class="more2" data-fold style="font-size:12px">나머지 '+(rows.length-4)+'건 ▾</button><div class="fold" hidden>'+rows.slice(4).map(ln).join('<br>')+'</div>':'')+'</div>'}
 function region(id){
   var r=reg(id),key='r.'+id,list=regItems(id),ids=[];
   list.forEach(function(x){x.fc.forEach(function(c){if(ids.indexOf(c[0])<0)ids.push(c[0])})});
@@ -272,7 +290,7 @@ function build(daily){var R=DATA.rule,out=[];
     if(!r&&R.caseR[it.case])r=R.caseR[it.case];
     if(!r&&l.lat!=null&&l.lon!=null)r=near(+l.lon,+l.lat);
     if(!r){var is=(l.isos||[]).filter(function(x){return x!=='USA'}).concat((l.isos||[]).filter(function(x){return x==='USA'}));is.some(function(x){if(R.isoReg[x]){r=R.isoReg[x];return true}})}
-    out.push({id:iss.date+'-'+i,d:iss.date,h:it.h,t:it.fact||'',a:a.sort(),fp:it.fp||[],fc:(it.fc||[]).map(function(c){return [c.id,c.e]}),s:(it.src||[]).slice(0,1),pl:l.place||'',r:r})})});
+    out.push({id:iss.date+'-'+i,d:iss.date,h:it.h,t:it.fact||'',a:a.sort(),fp:it.fp||[],fc:(it.fc||[]).map(function(c){return [c.id,c.e]}),s:(it.src||[]).slice(0,1),pl:l.place||'',r:r,pull:it.pull||[]})})});
   return out}
 fetch('/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){DATA=d;
   return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){route()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
