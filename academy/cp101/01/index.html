@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ko">
+<head><script>try{var t=localStorage.getItem("ep.theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나라와 나라를 비교하는 방법 | 클리사 아카데미</title>
+<meta name="description" content=" 2026년 2월 말 시작된 이란 전쟁과 호르무즈 해협 봉쇄는 아시아의 원유 수입국들에 같은 충격을 주었습니다. 그러나 각국이 찾은 대안은 달랐습니다. 한국에서는 중동산 원유의 비중이 줄고 미국·캐나다·호주산이 늘었습니다. 인도에서는 러시아산 원유가 6월 원유 수입의 ">
+<link rel="canonical" href="https://clisa.ai/academy/cp101/01/">
+<link rel="alternate" hreflang="ko" href="https://clisa.ai/academy/cp101/01/">
+<link rel="alternate" hreflang="en" href="https://clisa.ai/en/academy/cp101/01/">
+<link rel="alternate" hreflang="x-default" href="https://clisa.ai/academy/cp101/01/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='f_s' cx='34%25' cy='30%25' r='78%25'%3E%3Cstop offset='0' stop-color='%235B8BFF'/%3E%3Cstop offset='.55' stop-color='%231F4FD8'/%3E%3Cstop offset='1' stop-color='%230B2A86'/%3E%3C/radialGradient%3E%3CradialGradient id='f_h' cx='32%25' cy='26%25' r='38%25'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='.55'/%3E%3Cstop offset='1' stop-color='%23fff' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f_d' cx='38%25' cy='34%25' r='72%25'%3E%3Cstop offset='.45' stop-color='%23061a5c' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23061a5c' stop-opacity='.38'/%3E%3C/radialGradient%3E%3C/defs%3E%3CclipPath id='f_c'%3E%3Ccircle cx='16' cy='16' r='13.24'/%3E%3C/clipPath%3E%3Ccircle cx='16' cy='16' r='13.44' fill='url(%23f_s)'/%3E%3Cg clip-path='url(%23f_c)'%3E%3Cpath d='M11.6 3.72 L13.03 3.91 L14.07 4.14 L16.92 5 L15.89 6.26 L15.17 7.3 L13.78 9.73 L11.59 9.03 L10.11 8.63 L8.3 8.25 L6.93 8.09 L7.7 7 L8.79 5.77 L10.01 4.72 L10.92 4.1 L11.6 3.72Z' fill='%23C8102E'/%3E%3Cpath d='M6.93 8.09 L8.3 8.25 L10.11 8.63 L11.59 9.03 L13.78 9.73 L13.05 11.24 L12.38 12.83 L11.71 14.64 L11.23 16.15 L8.07 15.18 L6.45 14.81 L4.7 14.58 L4.98 12.85 L5.4 11.33 L6.11 9.57 L6.93 8.09Z' fill='%23F59E0B'/%3E%3Cpath d='M4.7 14.58 L6.45 14.81 L8.07 15.18 L11.23 16.15 L10.81 17.65 L10.4 19.45 L10.15 20.87 L9.96 22.52 L7.45 21.77 L6.39 21.55 L5.49 21.45 L4.93 19.46 L4.67 17.74 L4.61 15.81 L4.7 14.58Z' fill='%230EA5A4'/%3E%3Cpath d='M5.49 21.45 L6.39 21.55 L7.45 21.77 L9.96 22.52 L9.89 24.5 L10.05 26.17 L10.39 27.36 L10.78 28.07 L9.58 27.26 L9.1 26.86 L8.48 26.28 L7.63 25.32 L7.11 24.62 L6.41 23.5 L5.91 22.5 L5.49 21.45Z' fill='%23D3D8DE'/%3E%3Ccircle cx='16' cy='16' r='13.44' fill='url(%23f_d)'/%3E%3Cpath d='M12.71 23.59 L14.35 24.34 L16.12 25.26 L17.84 26.31 L18.69 26.93 L19.44 27.6 L19.87 28.17 L19.96 28.48 L19.93 28.67 L19.81 28.83 L19.52 28.97M4.13 22.31 L4.04 22 L4.07 21.81 L4.39 21.54 L4.92 21.44 L6.19 21.52 L7.45 21.77 L9.43 22.34 L11.33 23.02 L12.71 23.59M15.26 17.72 L17.25 18.62 L19.52 19.77 L21.56 20.93 L23.53 22.24 L24.6 23.1 L25.56 24.15 L25.84 24.76 L25.81 25.14 L25.7 25.3M2.58 15.29 L2.72 14.95 L2.88 14.82 L3.22 14.68 L3.68 14.59 L4.25 14.56 L5.19 14.62 L6.6 14.84 L8.6 15.32 L10.45 15.88 L12.42 16.57 L15.26 17.72M18 11.38 L20.09 12.33 L22.47 13.53 L24.61 14.75 L26.13 15.74 L27.38 16.67 L28.45 17.68 L28.96 18.39 L29.1 18.97M4.87 8.48 L5.38 8.19 L6.47 8.07 L7.45 8.13 L9.59 8.51 L11.02 8.87 L13.37 9.59 L15.87 10.5 L18 11.38M20.21 6.28 L22.78 7.48 L23.98 8.11 L25.84 9.21 L27.14 10.11 L27.82 10.67 L28.44 11.3 L28.78 11.84M10.29 3.84 L10.77 3.73 L11.6 3.72 L12.43 3.81 L13.93 4.11 L15.67 4.59 L17.24 5.11 L20.21 6.28M10.78 28.07 L11.67 27.83 L12.55 27.37 L13.13 26.97 L14.49 25.8 L15.64 24.58 L17.19 22.62 L18.32 20.96 L19.51 18.97 L20.59 16.89 L21.7 14.37 L22.5 12.11 L22.98 10.37 L23.33 8.44 L23.41 6.78 L23.34 6.01 L23.22 5.46 L23.04 4.98 L22.81 4.59 L22.59 4.34 L22.27 4.11M10.78 28.07 L12.6 28.44 L13.44 28.51 L14.72 28.5 L16.02 28.35 L17.1 28.12 L19.01 27.48 L20.05 27 L21.06 26.44 L22.76 25.23 L23.98 24.13 L24.46 23.62 L25.91 21.78 L26.95 19.97 L27.33 19.13 L27.79 17.85 L28.21 16.1 L28.35 15.01 L28.39 13.71 L28.24 12.02 L28.02 11 L27.64 9.83 L27.22 8.9 L26.72 8.03 L26.14 7.22 L25.34 6.34M10.78 28.07 L11.84 28.52 L13.38 28.99 L14.73 29.24 L16.09 29.34 L17.68 29.28 L19.02 29.07 L20.55 28.64 L21.8 28.12M10.78 28.07 L11.81 28.7 L12.79 29.05M10.78 28.07 L10.66 28.33M10.78 28.07 L9.75 27.8 L8.68 27.27M10.78 28.07 L9.52 27.5 L8.52 26.93 L7.22 25.99 L6.21 25.07 L5.03 23.68 L4.4 22.74 L3.67 21.34 L3.19 20.07M10.78 28.07 L9.58 27.26 L9.1 26.86 L8.48 26.28 L7.63 25.32 L7.11 24.62 L6.41 23.5 L5.91 22.5 L5.49 21.45 L4.93 19.46 L4.64 17.39 L4.65 15.04 L4.79 13.88 L5.06 12.51 L5.38 11.39 L5.78 10.31 L6.26 9.27 L6.81 8.28 L7.57 7.17 L8.12 6.49 L9.51 5.12 L11.05 4.02 L12.15 3.45 L13.1 3.08 L14.07 2.81 L15.06 2.64 L16.65 2.58M10.78 28.07 L10.52 27.65 L10.23 26.92 L9.95 25.45 L9.89 23.81 L9.99 22.13 L10.28 20.09 L10.74 17.92 L11.58 15.03 L12.38 12.83 L13.29 10.73 L14.18 8.97 L15.43 6.9 L16.39 5.61 L17.45 4.47 L18.16 3.88 L18.65 3.57 L19.03 3.39 L19.57 3.24 L19.9 3.21 L20.37 3.29' fill='none' stroke='%23fff' stroke-width='1.00' opacity='.9' stroke-linecap='round'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='13.44' fill='url(%23f_h)' opacity='.45'/%3E%3Ccircle cx='16' cy='16' r='13.44' fill='none' stroke='%230B2A86' stroke-opacity='.35' stroke-width='0.25'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="클리사 지오폴리틱스">
+<meta property="og:title" content="나라와 나라를 비교하는 방법">
+<meta property="og:description" content=" 2026년 2월 말 시작된 이란 전쟁과 호르무즈 해협 봉쇄는 아시아의 원유 수입국들에 같은 충격을 주었습니다. 그러나 각국이 찾은 대안은 달랐습니다. 한국에서는 중동산 원유의 비중이 줄고 미국·캐나다·호주산이 늘었습니다. 인도에서는 러시아산 원유가 6월 원유 수입의 ">
+<meta property="og:url" content="https://clisa.ai/academy/cp101/01/">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://clisa.ai/academy/card.png?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://clisa.ai/academy/card.png?v=1">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>:root{--bg:#E9ECEF;--panel:#fff;--panel-2:#F2F4F6;--ink:#101418;--ink-2:#2F3842;--muted:#6B7580;--line:#D2D8DE;--accent:#1F4FD8;--accent-soft:rgba(31,79,216,.09);--coop:#0E8A6C;--conflict:#D63A1F;
+--sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:light}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 var(--sans);word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--accent)}.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:14px 16px 0}.brand{display:flex;align-items:center;gap:10px 12px;text-decoration:none;color:var(--ink);margin-right:auto;min-height:36px}
+.brand svg{width:28px;height:28px;flex:none}.brand b{font:800 21px/1 "Archivo",var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}.brand span{font:800 12.5px var(--sans);color:var(--ink);letter-spacing:.18em;margin-left:2px}
+@media(max-width:600px){.brand b{font-size:18px}.brand svg{width:24px;height:24px}.brand span{display:none}}
+@media(max-width:560px){.brand svg{order:1}.brand b{order:2;flex:1 1 calc(100% - 44px);min-width:0;font-size:min(18px,4.6vw)}}
+.top>nav:not(.gnav){display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px;padding-bottom:10px}.top>nav:not(.gnav) a{text-decoration:none}
+main.wrap{background:var(--panel);margin:16px auto;border:1px solid var(--line);border-radius:6px;padding:20px 16px 8px}
+@media(min-width:600px){main.wrap{padding:28px 32px 12px}}
+.eyebrow{margin:0;font:500 13px var(--sans);color:var(--accent)}h1{font-size:25px;line-height:1.4;margin:4px 0 8px}h2{font-size:19px;line-height:1.45;margin:28px 0 8px}
+h3{font-size:16px;margin:20px 0 6px;color:var(--ink-2)}.meta,.note{color:var(--muted);font-size:14px}.lead{font-size:17px}
+.go{display:inline-block;margin:6px 0 14px;padding:8px 14px;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-size:15px;background:var(--accent-soft)}
+article.bi{border-top:1px solid var(--line);padding:6px 0 10px}article.bi:first-of-type{border-top:0}
+.bl{background:var(--panel-2);border-left:3px solid var(--accent);padding:8px 12px;border-radius:0 4px 4px 0}.bl b{display:block;font-size:13px;color:var(--accent)}
+dl.tw dt{font-weight:600;color:var(--ink-2);margin-top:14px}dl.tw dd{margin:2px 0 0}
+ul.fcs{list-style:none;padding:0;margin:6px 0}ul.fcs li{border:1px solid var(--line);border-radius:4px;padding:10px 12px;margin:8px 0}
+.fq{font-weight:500}.fp{font:500 15px var(--mono);color:var(--accent);white-space:nowrap}.fm{font-size:13px;color:var(--muted)}.fe-up{color:var(--conflict)}.fe-down{color:var(--coop)}
+.fb{font-size:15px;color:var(--ink-2);margin-top:4px}.chips a{display:inline-block;margin:2px 6px 2px 0;padding:2px 10px;border:1px solid var(--line);border-radius:14px;font-size:14px;text-decoration:none}
+details.src{font-size:14px;color:var(--muted);margin:6px 0}details.src ul{margin:4px 0;padding-left:20px}
+.gs3{display:grid;gap:10px}@media(min-width:600px){.gs3{grid-template-columns:1fr 1fr}.gs3 .wide{grid-column:1/-1}}.gs3 div{background:var(--panel-2);border-radius:4px;padding:8px 12px}.gs3 h4{margin:0;font-size:14px}.gs3 ul{margin:4px 0;padding-left:18px}
+ul.tl{list-style:none;padding:0}ul.tl li{display:grid;grid-template-columns:92px 1fr;gap:8px;padding:5px 0;border-top:1px solid var(--line)}ul.tl .d{font:13px var(--mono);color:var(--muted)}
+.pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
+ul.idx{padding-left:0;list-style:none}ul.idx li{padding:8px 0;border-top:1px solid var(--line)}ul.idx .d{font:13px var(--mono);color:var(--muted);display:block}
+.bw{background:var(--panel-2);border-radius:4px;padding:8px 14px;margin:14px 0}.bw h2{margin-top:6px}.bw1{border-top:1px solid var(--line);padding-top:10px;margin-top:14px}.fch{color:var(--muted)}.fw{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:8px 0}.fw summary{cursor:pointer}.fw ul{list-style:none;padding:0}.fw li{margin:8px 0}.fw .pp{font:600 13px var(--mono);color:var(--accent)}
+footer{max-width:760px;margin:0 auto 32px;padding:0 16px;font-size:13px;color:var(--muted)}footer p{margin:6px 0}
+.gnav{order:10; flex:1 1 100%; display:flex; flex-wrap:wrap; align-items:flex-end; gap:0 2px; border-bottom:1px solid var(--line); margin-top:-6px}
+.gnav>a,.gmore>summary{display:block; padding:8px 10px 7px; font:500 14px/1.4 var(--sans); color:var(--ink-2); text-decoration:none; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap; cursor:pointer; list-style:none}
+.gmore>summary::-webkit-details-marker{display:none} .gmore>summary::after{content:"\25BE"; font-size:10px; margin-left:4px; color:var(--muted)}
+.gnav>a:hover,.gmore>summary:hover{color:var(--accent)}
+.gnav>a[],.gmore.cur>summary{color:var(--ink); border-bottom-color:var(--accent); font-weight:600}
+.gmore{position:relative}
+.gmore-m{position:absolute; left:0; top:calc(100% + 2px); z-index:60; background:var(--panel); border:1px solid var(--line); border-radius:8px; box-shadow:0 8px 24px rgba(14,23,38,.12); padding:6px; min-width:168px; display:flex; flex-direction:column}
+.gmore-m a{padding:8px 10px; border-radius:6px; color:var(--ink-2); text-decoration:none; font-size:14px; white-space:nowrap}
+.gmore-m a:hover{background:var(--panel-2)} .gmore-m a[]{color:var(--accent); font-weight:600}
+.gnav .wide-btn{margin-left:auto; border:0; background:none; color:var(--muted); cursor:pointer; padding:8px 6px; font-size:15px; line-height:1}
+.gnav .wide-btn[aria-pressed="true"]{color:var(--accent); font-weight:600}
+@media (max-width:960px){ .gnav .wide-btn{display:none} .gnav>.gx{display:none} }
+@media (min-width:961px){ .gmore{display:none} }
+@media (max-width:600px){ .gnav{margin-top:-4px} .gnav>a,.gmore>summary{padding:8px 6px 7px; font-size:13px} .gmore-m{left:auto; right:0} .gmore{margin-left:auto} }
+/* v3.43e 좁은 화면(폭 375px 이하, 글자 크기를 키운 휴대전화): 메뉴가 한 줄을 넘으면 간격부터, 그다음 글자를 줄인다(gnavFit). 그래도 넘치면 '더 보기'는 오른쪽 끝에 두어 펼친 목록이 화면 안에 들어오게 한다 */
+.gnav.t1>a,.gnav.t1 .gmore>summary{padding-left:4px; padding-right:4px}
+.gnav.t2>a,.gnav.t2 .gmore>summary{padding-left:3px; padding-right:3px; font-size:12px; letter-spacing:-.2px}
+.gnav.t2 .gmore>summary::after{margin-left:2px}
+/* 머리글 윗줄(세계 시각·검색창·띠): 아래는 위쪽 규칙을 그대로 옮겨 둔 사본. 글 쪽도 같은 모양을 쓰도록(고칠 때는 양쪽을 함께) */
+.toggles{display:flex; gap:8px}
+.clocks{display:none; grid-template-columns:repeat(4, auto); grid-template-rows:repeat(2, auto); grid-auto-flow:column; gap:2px 10px; margin:0 6px 0 auto; align-self:center; flex:none}
+@supports (grid-template-columns: subgrid){ .clocks{grid-template-columns:repeat(4, auto auto auto); column-gap:6px} .clocks .clk{display:grid; grid-column:span 3; grid-template-columns:subgrid; align-items:baseline} .clocks .clk .d{min-width:6px} .top.snug .clocks{column-gap:5px} }  /* v3.43h 도시 이름·시각을 열에 맞춘다(한 칸 = 이름|시각|날짜차) */
+.toggles{flex:0 1 auto; min-width:0}
+.clk .t b{font-weight:inherit} .clk .t b.off{opacity:0} @media (prefers-reduced-motion: reduce){ .clk .t b.off{opacity:1} }
+@media (min-width: 1200px){ .clocks:not([hidden]){display:grid} } .clocks.tight{display:none !important}
+.top.snug .brand .ko{letter-spacing:.1em; font-size:12px} .top.snug .srch-open{flex-basis:240px; width:240px} .top.snug .clocks{gap:2px 8px} .top.snug .clk .t{font-size:13px} .top.snug .clk .c{font-size:10.5px}
+.clk{display:flex; align-items:baseline; gap:6px; white-space:nowrap} .clk .c{font:600 11px var(--sans); color:var(--muted)} .clk .t{font:500 14px var(--mono); color:var(--ink); font-variant-numeric:tabular-nums} .clk .d{font:500 10px var(--mono); color:var(--conflict)}
+@media (max-width: 960px){ #astrip{display:none !important} }
+.srch-open{display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border:1px solid var(--line); border-radius:999px; background:var(--panel); color:var(--ink-2); font-size:13px; cursor:pointer}
+.srch-open:hover{border-color:var(--ink-2)}
+.srch-open svg{width:14px; height:14px}
+.srch-open kbd{font:11px var(--mono); color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:0 4px}
+@media (max-width: 560px){ .srch-open span, .srch-open kbd{display:none} .srch-open{padding:6px 9px} .srch{padding:calc(12px + env(safe-area-inset-top,0px)) 8px 8px} .srch-box{max-height:calc(100svh - 24px)} .srch-hint{display:none} }
+.srch-open{width:320px; min-width:240px; flex:0 1 320px; height:40px; font-size:14px; padding:0 10px 0 12px; border-radius:8px; justify-content:flex-start; color:var(--muted); box-shadow:inset 0 1px 2px rgba(0,0,0,.04)}
+.srch-open span{flex:1; text-align:left}
+.srch-open svg{width:15px; height:15px; color:var(--ink-2)}
+@media (max-width: 560px){
+  .toggles{width:100%}
+  .srch-open{flex:1; min-width:0; height:40px; padding:0 12px}
+  .srch-open span{display:inline!important}
+  .srch-open kbd{display:none}
+}
+@media (max-width: 560px){
+  .top{gap:8px 10px}
+  .brand{display:contents}
+  .brand .logo{order:1}
+  .brand h1{order:2; flex:1 1 calc(100% - 44px); min-width:0; font-size:min(18px, 4.6vw); white-space:nowrap}
+  .brand .edtag{order:3}
+  .brand .asof{order:4; flex:none; white-space:nowrap; font-size:11px}
+  .toggles{order:5; flex:1; width:auto; min-width:0}
+  .top:not(:has(.asof)) .toggles{flex:1 1 100%} /* v3.20d 공개판은 기준일이 없으므로 검색창이 한 줄을 다 쓴다 */
+}
+.bstrip{order:9; flex:1 1 100%; display:flex; align-items:center; gap:10px; min-width:0; text-align:left; cursor:pointer; background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px; padding:7px 12px; color:var(--ink); font:500 13px var(--sans)}
+.bstrip:hover{border-color:var(--accent)}
+.bstrip .bs-k{font-weight:700; color:var(--accent); white-space:nowrap}
+.bstrip .bs-d{font:500 12px var(--mono); color:var(--muted); white-space:nowrap}
+.bstrip .bs-t{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.bstrip .bs-go{color:var(--accent); font-weight:700}
+.bstrip .bs-t{transition:opacity .35s ease} .bstrip .bs-t.fade{opacity:0}
+.bstrip .bs-n{font:500 11.5px var(--mono); color:var(--muted); white-space:nowrap}
+@media (max-width: 560px){ .bstrip{order:9; font-size:12.5px; padding:6px 10px; gap:8px} .bstrip .bs-d{display:none} }
+.strips{order:9; flex:1 1 100%; display:flex; gap:12px; min-width:0} .strips .bstrip{order:0; flex:1 1 0; min-width:0} .astrip{border-left-color:var(--conflict)} .astrip .bs-k{color:var(--conflict)}
+@media (min-width: 961px){ .bstrip{font-size:14.5px} }
+a.bstrip,a.srch-open{text-decoration:none}
+
+.ac-sign{margin-top:28px;font-weight:600;text-align:right}.ac-h1 .ac-brand{margin:0}.ac-h1 .ac-brand b{font-size:26px}.ac-h1 .ac-brand svg{width:40px;height:40px}
+.ac-brand{display:flex;align-items:center;gap:10px;margin:0 0 14px;text-decoration:none;color:var(--ink)}
+.ac-brand svg{width:30px;height:30px}.ac-brand b{font:800 18px var(--sans);letter-spacing:.02em}.ac-brand span{font:600 12px var(--mono);color:var(--muted);letter-spacing:.08em}
+.note-art{font-size:17px;line-height:1.9}
+.note-art p,.note-art li{margin:0 0 1.05em}
+.note-art h1{font-size:26px;line-height:1.45;margin:6px 0 12px}
+.note-art h2{font-size:20.5px;line-height:1.5;margin:2.2em 0 .7em;padding-top:.6em;border-top:1px solid var(--line)}
+.note-art h2:first-of-type{border-top:0}
+.note-art h3{font-size:18px;line-height:1.5;margin:1.9em 0 .6em;color:#16307F}.note-art h4{font-size:16.5px;line-height:1.5;margin:1.6em 0 .5em;padding-top:.6em;border-top:1px dashed var(--line)}
+.note-art .byline{font-size:14px;line-height:1.7;color:var(--muted);margin:0 0 4px}
+.note-art blockquote{margin:1em 0;padding:4px 16px;border-left:3px solid var(--accent);background:var(--panel-2)}
+.note-art table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.6;margin:1em 0}
+.note-art th,.note-art td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+.note-art th{background:var(--panel-2);font-weight:600}
+.tbl-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ac-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 18px}
+.ac-btn{font:600 14px var(--sans);border:1px solid var(--accent);color:var(--accent);background:var(--accent-soft);border-radius:18px;padding:6px 14px;cursor:pointer}
+.ac-btn[aria-pressed=true]{background:var(--accent);color:#fff}
+details.ac-toc{border:1px solid var(--line);border-radius:6px;padding:8px 14px;margin:0 0 18px;font-size:15px;line-height:1.7}
+details.ac-toc summary{cursor:pointer;font-weight:600}details.ac-toc ol{margin:6px 0 4px;padding-left:20px}
+figure.afig{margin:1.6em 0;padding:14px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.afig-svg{width:100%;height:auto;display:block;font-family:var(--sans)}
+.afo{font:13.5px/1.5 var(--sans);color:#2F3842}.afo b{color:#101418}
+figure.afig figcaption{font-size:14px;line-height:1.65;color:var(--ink-2);margin-top:10px}figure.afig figcaption b{display:block;color:var(--ink);font-size:15px}figure.afig figcaption span{color:var(--muted)}
+.pays{display:grid;gap:14px}@media(min-width:620px){.pays{grid-template-columns:1fr 1fr}}
+.pay-t{font-weight:700;margin:0 0 6px!important}.pay table{width:100%;border-collapse:collapse;font-size:14.5px;margin:0}
+.pay th,.pay td{border:1px solid var(--line);padding:8px;text-align:center}.pay td.eq{font-weight:800;background:rgba(31,79,216,.10);color:var(--accent)}
+table.jv{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.5;margin:0}table.jv th,table.jv td{border:1px solid #fff;padding:12px 10px;vertical-align:middle}
+table.jv th{background:var(--panel-2);font-weight:600;font-size:13.5px}table.jv td{font-weight:600}.jn{display:block;font-size:18px;line-height:1.2}
+.ac-report{margin:28px 0 8px;padding:12px 14px;border-radius:6px;background:var(--panel-2);font-size:14.5px;line-height:1.7}
+details.ac-fold{margin:1.2em 0;border-top:1px solid var(--line);padding-top:8px}details.ac-fold>summary{cursor:pointer;font:700 19px/1.5 var(--sans);margin:.6em 0}
+details.ac-fold ul{font-size:15px;line-height:1.75}details.ac-sol{margin:1.2em 0;border:1px solid var(--line);border-radius:8px;padding:6px 14px;background:#FAFBFC}details.ac-sol>summary{cursor:pointer;font-weight:700;color:#16307F;padding:6px 0}details.ac-sol[open]>summary{margin-bottom:6px;border-bottom:1px dashed var(--line)}.ac-refs ul{font-size:15px;line-height:1.75}.ac-refs{margin-top:2.2em;border-top:1px solid var(--line)}.note-art .ac-refs h2{margin-top:.3em}
+.ac-pn{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font-size:15px}
+.ac-list{list-style:none;padding:0;margin:8px 0}.ac-list li{margin:0!important;display:grid;grid-template-columns:70px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:16px}
+.ac-list .n{font:500 13px var(--mono);color:var(--muted);padding-top:3px}.ac-list .soon{color:var(--muted)}.ac-list .soon em{font-style:normal;font-size:13px;margin-left:6px;border:1px solid var(--line);border-radius:10px;padding:0 8px}
+.ac-card{border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:14px 0}.ac-card h2{margin:0 0 4px;border:0;padding:0}
+.ac-dept{display:grid;gap:12px}@media(min-width:620px){.ac-dept{grid-template-columns:1fr 1fr}}.ac-dept div{background:var(--panel-2);border-radius:6px;padding:10px 14px}.ac-dept h3{margin:0 0 4px}
+.ac-dept ul{margin:4px 0;padding-left:18px;font-size:15px}
+.afl{display:flex;flex-direction:column;gap:6px;align-items:stretch}@media(min-width:720px){.afl{flex-direction:row;align-items:stretch}}.afl-b{flex:1;border:1px solid #9DB4F0;border-radius:8px;padding:10px 12px;background:#F4F7FE}.afl-b b{display:block;font-size:15.5px;color:#16307F}.afl-b p{margin:4px 0 0!important;font-size:13.5px;line-height:1.55;color:#2F3842}.afl-b i{color:#6B7580;font-style:normal}.afl-n{font-size:16px;color:#1F4FD8;margin-right:4px}.afl-a{align-self:center;color:#1F4FD8;font-size:20px;line-height:1}@media(max-width:719px){.afl-a{transform:rotate(90deg)}}.afl-back{margin:10px 0 0!important;font-size:13.5px;color:#2F3842;border-top:1px dashed #9DB4F0;padding-top:8px}.afig-tw{overflow-x:auto;-webkit-overflow-scrolling:touch}table.atb{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;line-height:1.5;margin:0}table.atb th,table.atb td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}table.atb tr:first-child th{background:var(--panel-2);font-size:13px}table.atb tr th:first-child{white-space:nowrap;font-weight:700}table.atb-2x2 td{width:44%;line-height:1.6}table.atb-2x2 td i{color:#6B7580;font-style:normal;font-size:13px}@media(max-width:600px){table.atb{min-width:0}table.atb,table.atb tbody,table.atb tr,table.atb th,table.atb td{display:block}table.atb tr:first-child{display:none}table.atb tr{border-bottom:1px solid var(--line);padding:8px 0}table.atb th,table.atb td{border:0;padding:3px 0}table.atb td::before{content:attr(data-l);display:block;font-size:12px;color:var(--muted)}}.afig-tl{min-width:640px}.afig-hint{display:none;margin:0 0 6px!important;font-size:12.5px;color:var(--muted);text-align:center}@media(max-width:699px){.afig-hint{display:block}}.amap-leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:#2F3842;margin-top:10px}.amap-leg i{display:inline-block;width:18px;height:11px;border-radius:2px;margin-right:6px;vertical-align:middle}.amap-l{columns:2;font-size:13.5px;margin:10px 0 0!important;padding-left:22px}.amap-l li{margin:0 0 2px!important}@media(min-width:620px){.amap-l{columns:4}}.afig-lvw{display:grid;gap:14px;align-items:center}@media(min-width:620px){.afig-lvw{grid-template-columns:260px 1fr}}.afig-lv{width:100%;max-width:260px;margin:0 auto;display:block;font-family:var(--sans)}
+.afig-lvl{margin:0!important;padding-left:0;list-style:none;font-size:15px;line-height:1.6}.afig-lvl li{margin:0 0 10px!important;padding-left:12px;border-left:3px solid #9DB4F0}.afig-lvl b{display:block}
+.ac-dept li{margin:2px 0!important;line-height:1.6}.ac-dept .core{grid-column:1/-1}
+.lang-sw{display:inline-flex;align-items:center;flex:none;height:40px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink-2);font-size:14px;text-decoration:none;white-space:nowrap}
+.toggles{display:flex;gap:8px;align-items:center}
+.ac-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;padding:14px 20px;background:var(--panel);border-bottom:1px solid var(--line)}
+.ac-tbrand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}.ac-tbrand svg{width:32px;height:32px}.ac-tbrand b{font:800 20px var(--sans)}.ac-tbrand span{font:600 11.5px var(--mono);color:var(--muted);letter-spacing:.08em}
+.ac-tnav{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:15px;margin-right:auto}.ac-tnav a{color:var(--ink-2);text-decoration:none}.ac-tnav a:hover{color:var(--accent)}
+.ac-tside{display:flex;align-items:center;gap:10px}.ac-sw{display:inline-flex;align-items:center;gap:9px;height:40px;padding:0 14px 0 6px;border:1px solid #D2D8DE;border-radius:999px;background:#fff;color:#101418;text-decoration:none;white-space:nowrap;flex:none;transition:border-color .15s,box-shadow .15s}.ac-sw:hover{border-color:#1F4FD8;box-shadow:0 1px 6px rgba(31,79,216,.15)}.ac-sw-ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#EAF0FD;color:#1F4FD8;flex:none}.ac-sw-tx{display:flex;flex-direction:column;line-height:1.15}.ac-sw b{font-size:13.5px;font-weight:700}.ac-sw small{font-size:11px;font-weight:500;color:#6B7580}@media(max-width:600px){.ac-sw small{display:none}.ac-sw{padding:0 12px 0 5px;gap:7px}}
+@media(max-width:600px){.ac-top{padding:12px 16px}.ac-tnav{order:3;flex:1 1 100%;font-size:14px}.ac-tside{margin-left:auto}.ac-tbrand b{font-size:18px}.ac-tbrand span{display:none}}
+.speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}
+.asw{display:inline-flex;align-items:center;height:40px;padding:4px;border-radius:999px;background:#E6E9EE;box-shadow:inset 0 1.5px 3px rgba(16,20,24,.14),inset 0 -1px 0 rgba(255,255,255,.7);flex:none;position:relative;white-space:nowrap}.asw a{position:relative;z-index:1;display:inline-flex;align-items:center;height:32px;padding:0 15px;border-radius:999px;font-size:13.5px;font-weight:700;color:#5B6572;text-decoration:none;letter-spacing:-.01em;transition:color .15s}.asw a:hover{color:#101418}.asw a.on{color:#fff}.asw .asw-k{position:absolute;top:4px;bottom:4px;border-radius:999px;background:linear-gradient(180deg,#3E6BF0 0%,#1F4FD8 100%);box-shadow:0 1px 2px rgba(11,42,134,.45),0 3px 8px rgba(31,79,216,.35),inset 0 1px 0 rgba(255,255,255,.28);z-index:0;transition:left .22s cubic-bezier(.4,0,.2,1),width .22s cubic-bezier(.4,0,.2,1)}@media(max-width:600px){.asw a{padding:0 10px;font-size:13px;flex:1;justify-content:center}.toggles{flex-wrap:wrap}.toggles .asw{order:3;width:100%;margin:0}}.srch-open span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}@media(max-width:600px){.ac-tside{display:contents}.ac-top .asw{order:5;width:100%}.ac-top .ac-tnav{order:6}}</style>
+<link rel="stylesheet" href="/theme_ac.css?v=09b917e9c0">
+</head>
+<body>
+<header class="ac-top"><a class="ac-tbrand" href="/academy/"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="ach_s" cx="34%" cy="30%" r="78%"><stop offset="0" stop-color="#5B8BFF"/><stop offset=".55" stop-color="#1F4FD8"/><stop offset="1" stop-color="#0B2A86"/></radialGradient><radialGradient id="ach_h" cx="32%" cy="26%" r="38%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><radialGradient id="ach_d" cx="38%" cy="34%" r="72%"><stop offset=".45" stop-color="#061a5c" stop-opacity="0"/><stop offset="1" stop-color="#061a5c" stop-opacity=".38"/></radialGradient></defs><clipPath id="ach_c"><circle cx="16" cy="16" r="13.24"/></clipPath><circle cx="16" cy="16" r="13.44" fill="url(#ach_s)"/><g clip-path="url(#ach_c)"><path d="M11.6 3.72 L13.03 3.91 L14.07 4.14 L16.92 5 L15.89 6.26 L15.17 7.3 L13.78 9.73 L11.59 9.03 L10.11 8.63 L8.3 8.25 L6.93 8.09 L7.7 7 L8.79 5.77 L10.01 4.72 L10.92 4.1 L11.6 3.72Z" fill="#C8102E"/><path d="M6.93 8.09 L8.3 8.25 L10.11 8.63 L11.59 9.03 L13.78 9.73 L13.05 11.24 L12.38 12.83 L11.71 14.64 L11.23 16.15 L8.07 15.18 L6.45 14.81 L4.7 14.58 L4.98 12.85 L5.4 11.33 L6.11 9.57 L6.93 8.09Z" fill="#F59E0B"/><path d="M4.7 14.58 L6.45 14.81 L8.07 15.18 L11.23 16.15 L10.81 17.65 L10.4 19.45 L10.15 20.87 L9.96 22.52 L7.45 21.77 L6.39 21.55 L5.49 21.45 L4.93 19.46 L4.67 17.74 L4.61 15.81 L4.7 14.58Z" fill="#0EA5A4"/><path d="M5.49 21.45 L6.39 21.55 L7.45 21.77 L9.96 22.52 L9.89 24.5 L10.05 26.17 L10.39 27.36 L10.78 28.07 L9.58 27.26 L9.1 26.86 L8.48 26.28 L7.63 25.32 L7.11 24.62 L6.41 23.5 L5.91 22.5 L5.49 21.45Z" fill="#D3D8DE"/><circle cx="16" cy="16" r="13.44" fill="url(#ach_d)"/><path d="M12.71 23.59 L14.35 24.34 L16.12 25.26 L17.84 26.31 L18.69 26.93 L19.44 27.6 L19.87 28.17 L19.96 28.48 L19.93 28.67 L19.81 28.83 L19.52 28.97M4.13 22.31 L4.04 22 L4.07 21.81 L4.39 21.54 L4.92 21.44 L6.19 21.52 L7.45 21.77 L9.43 22.34 L11.33 23.02 L12.71 23.59M15.26 17.72 L17.25 18.62 L19.52 19.77 L21.56 20.93 L23.53 22.24 L24.6 23.1 L25.56 24.15 L25.84 24.76 L25.81 25.14 L25.7 25.3M2.58 15.29 L2.72 14.95 L2.88 14.82 L3.22 14.68 L3.68 14.59 L4.25 14.56 L5.19 14.62 L6.6 14.84 L8.6 15.32 L10.45 15.88 L12.42 16.57 L15.26 17.72M18 11.38 L20.09 12.33 L22.47 13.53 L24.61 14.75 L26.13 15.74 L27.38 16.67 L28.45 17.68 L28.96 18.39 L29.1 18.97M4.87 8.48 L5.38 8.19 L6.47 8.07 L7.45 8.13 L9.59 8.51 L11.02 8.87 L13.37 9.59 L15.87 10.5 L18 11.38M20.21 6.28 L22.78 7.48 L23.98 8.11 L25.84 9.21 L27.14 10.11 L27.82 10.67 L28.44 11.3 L28.78 11.84M10.29 3.84 L10.77 3.73 L11.6 3.72 L12.43 3.81 L13.93 4.11 L15.67 4.59 L17.24 5.11 L20.21 6.28M10.78 28.07 L11.67 27.83 L12.55 27.37 L13.13 26.97 L14.49 25.8 L15.64 24.58 L17.19 22.62 L18.32 20.96 L19.51 18.97 L20.59 16.89 L21.7 14.37 L22.5 12.11 L22.98 10.37 L23.33 8.44 L23.41 6.78 L23.34 6.01 L23.22 5.46 L23.04 4.98 L22.81 4.59 L22.59 4.34 L22.27 4.11M10.78 28.07 L12.6 28.44 L13.44 28.51 L14.72 28.5 L16.02 28.35 L17.1 28.12 L19.01 27.48 L20.05 27 L21.06 26.44 L22.76 25.23 L23.98 24.13 L24.46 23.62 L25.91 21.78 L26.95 19.97 L27.33 19.13 L27.79 17.85 L28.21 16.1 L28.35 15.01 L28.39 13.71 L28.24 12.02 L28.02 11 L27.64 9.83 L27.22 8.9 L26.72 8.03 L26.14 7.22 L25.34 6.34M10.78 28.07 L11.84 28.52 L13.38 28.99 L14.73 29.24 L16.09 29.34 L17.68 29.28 L19.02 29.07 L20.55 28.64 L21.8 28.12M10.78 28.07 L11.81 28.7 L12.79 29.05M10.78 28.07 L10.66 28.33M10.78 28.07 L9.75 27.8 L8.68 27.27M10.78 28.07 L9.52 27.5 L8.52 26.93 L7.22 25.99 L6.21 25.07 L5.03 23.68 L4.4 22.74 L3.67 21.34 L3.19 20.07M10.78 28.07 L9.58 27.26 L9.1 26.86 L8.48 26.28 L7.63 25.32 L7.11 24.62 L6.41 23.5 L5.91 22.5 L5.49 21.45 L4.93 19.46 L4.64 17.39 L4.65 15.04 L4.79 13.88 L5.06 12.51 L5.38 11.39 L5.78 10.31 L6.26 9.27 L6.81 8.28 L7.57 7.17 L8.12 6.49 L9.51 5.12 L11.05 4.02 L12.15 3.45 L13.1 3.08 L14.07 2.81 L15.06 2.64 L16.65 2.58M10.78 28.07 L10.52 27.65 L10.23 26.92 L9.95 25.45 L9.89 23.81 L9.99 22.13 L10.28 20.09 L10.74 17.92 L11.58 15.03 L12.38 12.83 L13.29 10.73 L14.18 8.97 L15.43 6.9 L16.39 5.61 L17.45 4.47 L18.16 3.88 L18.65 3.57 L19.03 3.39 L19.57 3.24 L19.9 3.21 L20.37 3.29" fill="none" stroke="#fff" stroke-width="0.60" opacity=".9" stroke-linecap="round"/></g><circle cx="16" cy="16" r="13.44" fill="url(#ach_h)" opacity=".45"/><circle cx="16" cy="16" r="13.44" fill="none" stroke="#0B2A86" stroke-opacity=".35" stroke-width="0.25"/></svg><b>클리사 아카데미</b><span>CLISA ACADEMY</span></a><nav class="ac-tnav"><a href="/academy/">학과와 강좌</a><a href="/academy/ir101/">국제정치 입문</a><a href="/academy/pp101/">정치사상 입문</a><a href="/academy/cp101/">비교정치 입문</a></nav><div class="ac-tside"><nav class="asw" aria-label="클리사 영역"><a href="/">지오폴리틱스</a><a href="/academy/" class="on" aria-current="page">아카데미</a><a href="/play/">게임</a><span class="asw-k"></span></nav><button type="button" class="ac-th" aria-pressed="false" aria-label="밤 화면으로 보기" title="밤 화면으로 보기"><svg class="i-moon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M16.5 12.2A7 7 0 0 1 7.8 3.5a7 7 0 1 0 8.7 8.7Z"/></svg><svg class="i-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="3.6"/><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7"/></svg></button><a class="lang-sw" id="langsw" href="/en/academy/cp101/01/" hreflang="en" lang="en" title="View in English">English</a></div></header>
+<main class="wrap">
+<article class="note-art"><a class="ac-brand" href="/academy/"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><radialGradient id="acg_s" cx="34%" cy="30%" r="78%"><stop offset="0" stop-color="#5B8BFF"/><stop offset=".55" stop-color="#1F4FD8"/><stop offset="1" stop-color="#0B2A86"/></radialGradient><radialGradient id="acg_h" cx="32%" cy="26%" r="38%"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><radialGradient id="acg_d" cx="38%" cy="34%" r="72%"><stop offset=".45" stop-color="#061a5c" stop-opacity="0"/><stop offset="1" stop-color="#061a5c" stop-opacity=".38"/></radialGradient></defs><clipPath id="acg_c"><circle cx="16" cy="16" r="13.24"/></clipPath><circle cx="16" cy="16" r="13.44" fill="url(#acg_s)"/><g clip-path="url(#acg_c)"><path d="M11.6 3.72 L13.03 3.91 L14.07 4.14 L16.92 5 L15.89 6.26 L15.17 7.3 L13.78 9.73 L11.59 9.03 L10.11 8.63 L8.3 8.25 L6.93 8.09 L7.7 7 L8.79 5.77 L10.01 4.72 L10.92 4.1 L11.6 3.72Z" fill="#C8102E"/><path d="M6.93 8.09 L8.3 8.25 L10.11 8.63 L11.59 9.03 L13.78 9.73 L13.05 11.24 L12.38 12.83 L11.71 14.64 L11.23 16.15 L8.07 15.18 L6.45 14.81 L4.7 14.58 L4.98 12.85 L5.4 11.33 L6.11 9.57 L6.93 8.09Z" fill="#F59E0B"/><path d="M4.7 14.58 L6.45 14.81 L8.07 15.18 L11.23 16.15 L10.81 17.65 L10.4 19.45 L10.15 20.87 L9.96 22.52 L7.45 21.77 L6.39 21.55 L5.49 21.45 L4.93 19.46 L4.67 17.74 L4.61 15.81 L4.7 14.58Z" fill="#0EA5A4"/><path d="M5.49 21.45 L6.39 21.55 L7.45 21.77 L9.96 22.52 L9.89 24.5 L10.05 26.17 L10.39 27.36 L10.78 28.07 L9.58 27.26 L9.1 26.86 L8.48 26.28 L7.63 25.32 L7.11 24.62 L6.41 23.5 L5.91 22.5 L5.49 21.45Z" fill="#D3D8DE"/><circle cx="16" cy="16" r="13.44" fill="url(#acg_d)"/><path d="M12.71 23.59 L14.35 24.34 L16.12 25.26 L17.84 26.31 L18.69 26.93 L19.44 27.6 L19.87 28.17 L19.96 28.48 L19.93 28.67 L19.81 28.83 L19.52 28.97M4.13 22.31 L4.04 22 L4.07 21.81 L4.39 21.54 L4.92 21.44 L6.19 21.52 L7.45 21.77 L9.43 22.34 L11.33 23.02 L12.71 23.59M15.26 17.72 L17.25 18.62 L19.52 19.77 L21.56 20.93 L23.53 22.24 L24.6 23.1 L25.56 24.15 L25.84 24.76 L25.81 25.14 L25.7 25.3M2.58 15.29 L2.72 14.95 L2.88 14.82 L3.22 14.68 L3.68 14.59 L4.25 14.56 L5.19 14.62 L6.6 14.84 L8.6 15.32 L10.45 15.88 L12.42 16.57 L15.26 17.72M18 11.38 L20.09 12.33 L22.47 13.53 L24.61 14.75 L26.13 15.74 L27.38 16.67 L28.45 17.68 L28.96 18.39 L29.1 18.97M4.87 8.48 L5.38 8.19 L6.47 8.07 L7.45 8.13 L9.59 8.51 L11.02 8.87 L13.37 9.59 L15.87 10.5 L18 11.38M20.21 6.28 L22.78 7.48 L23.98 8.11 L25.84 9.21 L27.14 10.11 L27.82 10.67 L28.44 11.3 L28.78 11.84M10.29 3.84 L10.77 3.73 L11.6 3.72 L12.43 3.81 L13.93 4.11 L15.67 4.59 L17.24 5.11 L20.21 6.28M10.78 28.07 L11.67 27.83 L12.55 27.37 L13.13 26.97 L14.49 25.8 L15.64 24.58 L17.19 22.62 L18.32 20.96 L19.51 18.97 L20.59 16.89 L21.7 14.37 L22.5 12.11 L22.98 10.37 L23.33 8.44 L23.41 6.78 L23.34 6.01 L23.22 5.46 L23.04 4.98 L22.81 4.59 L22.59 4.34 L22.27 4.11M10.78 28.07 L12.6 28.44 L13.44 28.51 L14.72 28.5 L16.02 28.35 L17.1 28.12 L19.01 27.48 L20.05 27 L21.06 26.44 L22.76 25.23 L23.98 24.13 L24.46 23.62 L25.91 21.78 L26.95 19.97 L27.33 19.13 L27.79 17.85 L28.21 16.1 L28.35 15.01 L28.39 13.71 L28.24 12.02 L28.02 11 L27.64 9.83 L27.22 8.9 L26.72 8.03 L26.14 7.22 L25.34 6.34M10.78 28.07 L11.84 28.52 L13.38 28.99 L14.73 29.24 L16.09 29.34 L17.68 29.28 L19.02 29.07 L20.55 28.64 L21.8 28.12M10.78 28.07 L11.81 28.7 L12.79 29.05M10.78 28.07 L10.66 28.33M10.78 28.07 L9.75 27.8 L8.68 27.27M10.78 28.07 L9.52 27.5 L8.52 26.93 L7.22 25.99 L6.21 25.07 L5.03 23.68 L4.4 22.74 L3.67 21.34 L3.19 20.07M10.78 28.07 L9.58 27.26 L9.1 26.86 L8.48 26.28 L7.63 25.32 L7.11 24.62 L6.41 23.5 L5.91 22.5 L5.49 21.45 L4.93 19.46 L4.64 17.39 L4.65 15.04 L4.79 13.88 L5.06 12.51 L5.38 11.39 L5.78 10.31 L6.26 9.27 L6.81 8.28 L7.57 7.17 L8.12 6.49 L9.51 5.12 L11.05 4.02 L12.15 3.45 L13.1 3.08 L14.07 2.81 L15.06 2.64 L16.65 2.58M10.78 28.07 L10.52 27.65 L10.23 26.92 L9.95 25.45 L9.89 23.81 L9.99 22.13 L10.28 20.09 L10.74 17.92 L11.58 15.03 L12.38 12.83 L13.29 10.73 L14.18 8.97 L15.43 6.9 L16.39 5.61 L17.45 4.47 L18.16 3.88 L18.65 3.57 L19.03 3.39 L19.57 3.24 L19.9 3.21 L20.37 3.29" fill="none" stroke="#fff" stroke-width="0.60" opacity=".9" stroke-linecap="round"/></g><circle cx="16" cy="16" r="13.44" fill="url(#acg_h)" opacity=".45"/><circle cx="16" cy="16" r="13.44" fill="none" stroke="#0B2A86" stroke-opacity=".35" stroke-width="0.25"/></svg><b>클리사 아카데미</b><span>CLISA ACADEMY</span></a><h1>비교정치 입문 1회차 — 비교정치란 무엇인가: 나라와 나라를 비교하는 방법</h1><p class="byline">지은이 클리사 아카데미(AI 작성·AI와 운영자 검토) · 발행 책임 고재성 · 2026년 11월 초안</p><p class="byline">본보기 강좌: 하버드대 GOV 20 「비교정치의 기초」(스티븐 레비츠키, 2025년 가을), MIT 17.50 「비교정치 입문」(채펠 로슨, 2022년 가을) 1회차 「도입」(주제 1 「국가와 정부」)</p><div class="ac-tools"><button type="button" class="ac-btn" id="acListen" aria-pressed="false" data-l="▶ 듣기" data-s="■ 멈춤">▶ 듣기</button></div><details class="ac-toc" open><summary>이 회차의 차례</summary><ol><li><a href="#s1">이번 회차의 질문</a></li><li><a href="#s2">1. 비교정치는 무엇을 연구하는가</a></li><li><a href="#s3">2. 왜 비교하는가: 실험할 수 없는 학문의 실험</a></li><li><a href="#s4">3. 밀의 일치법과 차이법</a></li><li><a href="#s5">4. 가장 비슷한 사례와 가장 다른 사례: 연구 설계와 자연 실험</a></li><li><a href="#s6">5. 사례는 적고 변수는 많다: 사례 연구, 대규모 통계, 선택 편향</a></li><li><a href="#s7">6. 고전과 이론: 이 강좌의 지도, 5가지 접근</a></li><li><a href="#s8">7. 2026년에 대입하기: 같은 호르무즈 충격에 한국과 인도는 왜 다른 원유를 샀는가</a></li><li><a href="#s9">확인 문제</a></li><li><a href="#s10">토론 질문</a></li><li><a href="#s11">심화</a></li><li><a href="#s12">읽을거리</a></li><li><a href="#s13">출처와 개정 기록</a></li></ol></details><h2 id="s1">이번 회차의 질문</h2>
+<p>2026년 2월 말 시작된 이란 전쟁과 호르무즈 해협 봉쇄는 아시아의 원유 수입국들에 같은 충격을 주었습니다. 그러나 각국이 찾은 대안은 달랐습니다. 한국에서는 중동산 원유의 비중이 줄고 미국·캐나다·호주산이 늘었습니다. 인도에서는 러시아산 원유가 6월 원유 수입의 절반을 넘었습니다. 같은 충격을 받은 두 나라가 왜 서로 다른 길을 택했을까요?</p>
+<p>답하려면 두 나라를 나란히 놓고 무엇이 같고 무엇이 다른지 가려낸 뒤, 그 차이 가운데 어느 것이 결과를 바꾸었는지 판단할 방법이 있어야 합니다. 이것이 비교정치의 기본 작업입니다. 영국 작가 러디어드 키플링(Rudyard Kipling)은 1891년 시 「영국 국기」에서 "영국만 아는 사람이 영국에 대해 무엇을 알겠는가?"라고 물었습니다. 한 나라만 보아서는 그 나라의 무엇이 특별하고 무엇이 흔한지조차 알 수 없다는 뜻으로 읽을 수 있습니다.</p>
+<p>이번 회차는 나라를 비교해 원인을 찾는 방법과 그 한계를 다루고, 이 강좌가 사용할 5가지 접근을 소개한 뒤, 처음의 물음에 차이법을 적용해 봅니다.</p>
+<h2 id="s2">1. 비교정치는 무엇을 연구하는가</h2>
+<p>국제정치가 나라와 나라 사이의 전쟁과 동맹, 무역과 국제기구를 다룬다면(국제정치 입문), 비교정치는 나라 안의 정치를 다룹니다. 중심 영역은 4개입니다. 어떤 나라는 민주주의이고 어떤 나라는 권위주의인 이유(정치체제), 어떤 국가는 국경 안 구석구석에 법을 집행하고 어떤 국가는 수도 밖에서 힘을 쓰지 못하는 이유(국가), 대통령제와 선거제도, 정당이 정치인과 유권자의 행동을 바꾸는 방식(제도), 그리고 경제 발전과 내전, 부패와 혁명이 나라마다 다르게 나타나는 이유(결과)입니다.</p>
+<p>비교정치는 대상만이 아니라 방법으로도 정의됩니다. 한국 정치만 연구하는 학자도 "한국은 왜 대통령제를 유지하는가"에 답하려면 대통령제를 버린 나라, 처음부터 의원내각제를 택한 나라와 견주어 보아야 합니다. 비교의 단위가 꼭 나라일 필요도 없습니다. 한 나라 안의 지역, 같은 나라의 서로 다른 시기, 여러 나라의 정당을 비교할 수도 있습니다.</p>
+<p>두 분야는 서로 만납니다. 국제정치 입문 6회차가 나라 안의 정치가 대외정책을 바꾸는 경로를 다루었고, 같은 강좌 3회차가 호르무즈 해협을 미국과 이란의 상호작용으로 보았다면, 이번 회차 7절은 같은 외부 충격이 각 수입국의 제도와 이해관계를 거쳐 서로 다른 선택으로 이어진 과정을 봅니다.</p>
+<h2 id="s3">2. 왜 비교하는가: 실험할 수 없는 학문의 실험</h2>
+<p>자연과학자는 무작위로 나눈 두 집단 가운데 한쪽에만 약을 주는 실험으로 원인을 찾습니다. 정치학자는 대부분의 물음에서 이렇게 할 수 없습니다. 어떤 나라에 대통령제를 무작위로 정해 줄 수는 없기 때문입니다.</p>
+<p>아렌드 레이프하트(Arend Lijphart)는 1971년 「비교정치와 비교 방법」에서 과학적 방법을 실험 방법, 통계 방법, 비교 방법으로 나누고, 사례 연구를 비교 방법과 가까운 방법으로 다루었습니다. 세 방법은 모두 다른 조건을 같게 둔 채 변수들 사이의 일반적 관계를 찾으려 합니다. 실험 방법은 조건을 직접 통제하고, 통계 방법은 많은 사례로 다른 변수의 영향을 수학적으로 걸러 내며, 비교 방법은 사례가 많지 않아 통계적 통제가 어려울 때 사례를 신중하게 골라 비교합니다.</p>
+<p>비교는 3가지 일을 합니다. 첫째, 기준선을 줍니다. 2025년 4월 한국의 원유 수입에서 중동산 비중이 65%였다는 사실은 다른 수입국과 견줄 때 비로소 높은지 낮은지 알 수 있습니다. 둘째, 설명을 시험합니다. "동맹국은 제재 대상국의 원유를 사지 않는다"는 설명이 옳다면 동맹국과 비동맹국의 행동이 실제로 달라야 합니다. 셋째, 반사실의 물음을 다른 나라의 경험으로 대신합니다. "한국이 미국의 동맹국이 아니었다면"이라는 물음은 역사를 다시 돌려 볼 수 없지만, 처지가 비슷한 비동맹국의 선택은 관찰할 수 있습니다. 그 나라가 한국과 얼마나 비슷한지가 이 대체의 신뢰도를 정합니다.</p>
+<h2 id="s4">3. 밀의 일치법과 차이법</h2>
+<p>비교로 원인을 찾는 논리를 처음 체계적으로 정리한 사람은 영국의 철학자 존 스튜어트 밀(John Stuart Mill)입니다. 그는 1843년 『논리학 체계』 3권 8장 「실험적 탐구의 4가지 방법」에서 원인을 가려내는 가장 단순한 방법이 2가지라고 했습니다. 어떤 현상이 나타난 여러 사례를 서로 비교하는 일치법(method of agreement), 그리고 그 현상이 나타난 사례를 다른 점에서는 비슷하지만 나타나지 않은 사례와 비교하는 차이법(method of difference)입니다. 밀은 각각의 규칙을 이렇게 정리했습니다.</p>
+<blockquote>
+<p>탐구하는 현상이 나타난 2개 이상의 사례에 공통된 조건이 단 하나뿐이라면, 모든 사례가 일치하는 그 유일한 조건이 그 현상의 원인(또는 결과)이다.(3권 8장 1절, 첫째 규칙)</p>
+<p>탐구하는 현상이 나타난 사례와 나타나지 않은 사례가 단 하나를 빼고 모든 조건이 같고, 그 하나가 앞의 사례에만 있다면, 두 사례가 다른 그 유일한 조건이 그 현상의 결과이거나 원인이거나, 원인에 꼭 필요한 부분이다.(3권 8장 2절, 둘째 규칙)</p>
+</blockquote>
+<p>조건 A~G와 결과 y로 표를 만들면 차이가 분명합니다.</p>
+<div class="tbl-x"><table>
+<thead>
+<tr>
+<th>방법</th>
+<th>사례 1</th>
+<th>사례 2</th>
+<th>사례 3</th>
+<th>결론</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>일치법</td>
+<td>A, B, C → y</td>
+<td>A, D, E → y</td>
+<td>A, F, G → y</td>
+<td>공통된 것은 A뿐이므로 A가 원인 후보</td>
+</tr>
+<tr>
+<td>차이법</td>
+<td>A, B, C → y</td>
+<td>B, C → y 없음</td>
+<td></td>
+<td>A 하나만 다르므로 A가 원인 후보</td>
+</tr>
+</tbody>
+</table></div>
+<p>밀은 차이법을 "더 강력한 도구"로 보았습니다. 일치법은 원인일 수 없는 조건을 지워 나가지만, 공통 조건이 정말 하나뿐인지 확인할 길이 없습니다. 차이법은 한 조건만 다른 두 사례를 요구하며, 그런 사례를 가장 확실하게 만드는 길이 실험입니다. 그래서 밀은 차이법을 인공적 실험의 방법으로, 일치법을 실험이 불가능할 때 쓰는 방법으로 구분했습니다.</p>
+<p>비교정치는 밀의 방법을 사례 비교에 옮겨 씁니다. 그런데 밀 자신은 이 방법들을 사회 현상에 쓰는 데 매우 회의적이었습니다. 『논리학 체계』 6권 7장에서 그는 무역 정책 하나만 다르고 모든 점에서 같은 두 나라를 찾는다는 가정이 "명백히 터무니없다"고 썼습니다. 그 이유는 심화의 원전 읽기에서 봅니다.</p>
+<h2 id="s5">4. 가장 비슷한 사례와 가장 다른 사례: 연구 설계와 자연 실험</h2>
+<p>아담 쉐보르스키(Adam Przeworski)와 헨리 튠(Henry Teune)은 1970년 『비교 사회 연구의 논리』에서 비교 연구의 설계를 2가지로 나누었습니다.</p>
+<p><strong>가장 비슷한 사례 설계.</strong> 역사·문화·경제 수준 같은 많은 조건이 비슷한 나라들을 고릅니다. 공통 조건은 결과의 차이를 설명할 수 없으므로 지워지고, 남은 소수의 차이가 원인 후보가 됩니다. 차이법을 현실에 옮긴 설계입니다. 약점은 비슷한 나라끼리도 차이가 여럿이어서 어느 차이가 결과를 낳았는지 가리기 어렵다는 것입니다.</p>
+<p><strong>가장 다른 사례 설계.</strong> 쉐보르스키와 튠이 더 권한 설계입니다. 서로 매우 다른 나라들을 고른 뒤, 각 나라 안의 개인이나 집단 수준에서 변수들의 관계를 살핍니다. 어떤 관계가 문화와 제도가 전혀 다른 여러 나라에서 똑같이 나타난다면 나라의 특성은 그 관계를 설명하는 데 필요하지 않고, 나라마다 다르다면 나라 수준의 요인이 작동한다는 뜻입니다. 일치법의 발상을 잇되, 사례 안의 관찰을 늘려 사례가 적은 문제를 피하려는 설계입니다.</p>
+<p><strong>자연 실험.</strong> 역사의 우연이 실험과 비슷한 상황을 만들어 줄 때가 있습니다. 대니얼 포스너(Daniel N. Posner)의 2004년 연구가 대표적입니다. 잠비아와 말라위 사이 국경은 1891년 영국 남아프리카회사가 행정 구역을 나누려고 그은 선으로, 종족 분포를 전혀 고려하지 않았습니다. 그 결과 체와족과 툼부카족이 국경 양쪽으로 나뉘었습니다. 포스너는 국경 양쪽 마을의 조사로, 두 종족의 객관적인 문화 차이는 양쪽에서 같지만 말라위에서는 정치적 적대 관계이고 잠비아에서는 동맹 관계라는 것을 보였습니다.</p>
+<p>그의 설명은 집단의 크기입니다. 말라위에서 체와족은 인구의 28%, 툼부카족은 12%로 전국 정치에서 연합의 기반이 될 만큼 크지만, 잠비아에서는 각각 7%와 4%에 그칩니다. 문화 차이가 정치적 균열이 되는지는 나뉜 집단이 정치 경쟁에 쓸모 있을 만큼 큰지에 달려 있다는 것입니다(10회차). 포스너는 이에 앞서 식민지 시기 선교회 학교의 교육 격차, 조사 시점의 선거 일정, 두 나라 초대 대통령의 종족 정책 같은 경쟁 설명을 하나씩 검토해, 이것들이 결과의 차이를 설명하지 못한다고 보았습니다. 같은 선교회들이 국경 양쪽에 학교를 세웠고 교육 격차도 양쪽에서 거의 같았다는 식입니다. 자연 실험도 다른 설명을 배제하는 작업 없이는 결론을 주지 못합니다.</p>
+<p><strong>한반도라는 사례.</strong> 한국 독자에게 가장 가까운 자연 실험은 남북 분단입니다. 대런 애쓰모글루(Daron Acemoglu)와 제임스 로빈슨(James A. Robinson)은 『국가는 왜 실패하는가』(2012) 3장에서, 1945년 이전까지 언어·역사·문화를 함께한 한반도의 두 지역이 분단 뒤 다른 제도를 택하면서 경제적 운명이 크게 달라졌다고 보고, 그 차이를 만든 것은 문화나 지리가 아니라 제도라고 결론지었습니다. 강력한 사례이지만 3가지를 함께 보아야 합니다. 첫째, 일제는 제철·화학 같은 중공업과 수력 발전 설비를 주로 북쪽에 두었습니다(미국 의회도서관 국가 연구 『한국』). 이 조건은 오히려 북쪽에 유리했으므로 제도 설명을 약하게 하지는 않지만, 모든 조건이 같았다는 가정은 성립하지 않습니다. 둘째, 제도는 미국과 소련이라는 점령국이 가져온 것이고, 동맹·원조·안보 환경도 함께 달라졌습니다. 셋째, 사례가 한 쌍뿐이어서 제도 가운데 무엇이 얼마나 중요했는지 쪼개기 어렵습니다(11회차).</p>
+<h2 id="s6">5. 사례는 적고 변수는 많다: 사례 연구, 대규모 통계, 선택 편향</h2>
+<p><strong>사례 수의 문제.</strong> 레이프하트는 비교 방법의 핵심 문제를 변수는 많은데 사례는 적다는 것으로 요약했습니다. 혁명이나 민주화를 겪은 나라는 많지 않은데 결과에 영향을 줄 수 있는 조건은 셀 수 없이 많아서, 어떤 설명도 자료와 맞아떨어지게 만들 수 있고 따라서 어떤 설명도 제대로 시험할 수 없습니다. 그의 처방은 4가지입니다. 사례 수를 늘리는 것, 비슷한 변수를 합쳐 변수의 수를 줄이는 것, 많은 조건이 비슷한 비교 가능한 사례에 집중하는 것, 이론적으로 핵심적인 변수에 집중하는 것입니다. 그는 사례 연구도 6가지로 나누고, 특히 이론에서 벗어난 일탈 사례를 들여다보면 이론이 놓친 변수를 찾을 수 있다고 보았습니다.</p>
+<p><strong>사례 연구와 대규모 통계.</strong> 많은 나라의 자료를 통계로 분석하면 결론을 일반화하고 다른 변수를 통제할 수 있지만 관계가 생기는 과정은 잘 보여 주지 못합니다. 소수 사례를 깊이 연구하면 원인이 결과로 이어지는 과정을 추적할 수 있지만 결론이 다른 나라에도 통하는지 알기 어렵습니다. 정치사상 입문 3회차의 립셋(1959)과 쉐보르스키·리몽기(1997)는 앞의 예이고(이 강좌 3회차에서 더 깊이 다룹니다), 포스너는 뒤의 예입니다. 많은 연구가 두 전략을 섞습니다.</p>
+<p><strong>선택 편향.</strong> 바버라 게디스(Barbara Geddes)는 1990년 「고른 사례가 답을 바꾸는 방식」에서 가장 흔한 실수 하나를 지적했습니다. 설명하려는 결과가 나타난 사례만 골라 연구하는 것입니다. 그의 예는 노동 탄압과 경제 성장입니다. 동아시아와 브라질·멕시코 같은 고성장 국가를 연구한 학자들은 이 나라들이 노동운동을 억눌렀다는 공통점을 찾아 노동 탄압이 고성장의 조건이라고 주장했습니다. 그러나 노동을 억누르고도 성장하지 못한 나라를 보지 않았다면 이 주장은 근거가 없습니다. 게디스는 비교정치의 유명한 연구 3개를 다시 검토해, 결과와 상관없이 고른 사례로 시험하면 원래 결론과 다른 결과가 나온다는 것을 보였습니다. 결과가 나타난 사례만 비교하는 일치법은 이 함정에 특히 취약하며, 처방은 결과가 다양하게 나타나도록 사례를 고르는 것입니다.</p>
+<h2 id="s7">6. 고전과 이론: 이 강좌의 지도, 5가지 접근</h2>
+<p>하버드대 GOV 20의 공개 강좌 소개는 이 강좌가 평가하는 이론적 접근으로 "근대화, 마르크스주의, 문화, 제도주의, 지도자 중심 접근"을 듭니다. 이 강좌도 같은 5가지 접근을 지도로 삼습니다. 각 접근은 원인을 서로 다른 곳에서 찾습니다.</p>
+<div class="tbl-x"><table>
+<thead>
+<tr>
+<th>접근</th>
+<th>원인을 찾는 곳</th>
+<th>대표 고전</th>
+<th>이 강좌의 회차</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>근대화 접근</td>
+<td>경제 발전, 교육, 도시화 같은 사회 변화</td>
+<td>립셋, 「민주주의의 사회적 요건」(1959)</td>
+<td>3회차, 11회차</td>
+</tr>
+<tr>
+<td>마르크스주의 접근</td>
+<td>계급 구조와 계급 사이의 연합·갈등</td>
+<td>배링턴 무어, 『독재와 민주주의의 사회적 기원』(1966)</td>
+<td>4회차, 12회차</td>
+</tr>
+<tr>
+<td>문화 접근</td>
+<td>가치관, 신뢰, 종교, 정체성</td>
+<td>로버트 퍼트넘, 『Making Democracy Work』(1993)</td>
+<td>9회차, 10회차</td>
+</tr>
+<tr>
+<td>제도주의 접근</td>
+<td>헌법, 선거제도, 정당, 관료제 같은 규칙</td>
+<td>레이프하트, 『민주주의의 유형』(1999)</td>
+<td>2회차, 7·8회차, 11회차</td>
+</tr>
+<tr>
+<td>지도자 중심 접근</td>
+<td>정치 지도자의 선택과 전략</td>
+<td>후안 린스, 『민주주의 체제의 붕괴』(1978)</td>
+<td>4~6회차</td>
+</tr>
+</tbody>
+</table></div>
+<p>이 접근들은 서로 배타적이지 않습니다. 포스너의 연구에서 집단의 크기는 사회 구조의 변수이지만, 정치적 의미를 갖는 것은 선거 제도와 정치인의 전략을 거쳐서입니다. 강좌 전체에서 같은 현상에 여러 접근을 대어 보고, 어느 설명이 자료와 더 잘 맞는지를 이번 회차의 비교 방법으로 판단합니다.</p>
+<h2 id="s8">7. 2026년에 대입하기: 같은 호르무즈 충격에 한국과 인도는 왜 다른 원유를 샀는가</h2>
+<p><strong>사실.</strong> 2026년 2월 28일 미국과 이스라엘의 이란 공습으로 전쟁이 시작되었고, 이란은 상선 공격과 기뢰로 호르무즈 해협의 통항을 제한했으며, 미국은 7월 14일 이란에 대한 해상봉쇄를 재개했습니다(클리사 지오폴리틱스 이란 사안 분석). 브렌트유는 10월 23일 배럴당 116.72달러에 마감했습니다(클리사 지오폴리틱스 정세 브리핑, 2026년 10월 24일). 두 나라의 처지와 선택은 다음과 같습니다.</p>
+<div class="tbl-x"><table>
+<thead>
+<tr>
+<th>비교 항목</th>
+<th>한국</th>
+<th>인도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>충격의 크기</td>
+<td>원유 수입의 70%가 호르무즈 해협을 지납니다</td>
+<td>이라크산 원유 도입이 1월 하루 약 100만 배럴에서 6월 6만 7천 배럴로, 사우디산이 2월 약 100만 배럴에서 6월 33만 배럴로 줄었습니다</td>
+</tr>
+<tr>
+<td>미국과의 관계</td>
+<td>동맹국. 텍사스 에너지 사업에 200억 달러 투자를 약속했습니다</td>
+<td>'전략적 자율' 노선. 2026년 2월 미국과의 무역합의에서 러시아산 원유 수입 중단에 합의했습니다</td>
+</tr>
+<tr>
+<td>이란의 선박 대우</td>
+<td>3월 '비적대국'으로 부르며 사전 조율을 조건으로 통항을 허용하겠다고 밝혔습니다</td>
+<td>조율이나 통행료를 거쳐 통과시키는 '우호국'에 들어갑니다</td>
+</tr>
+<tr>
+<td>전쟁 전 러시아산 원유</td>
+<td>이 강의가 확인하지 못했습니다</td>
+<td>2024년 1월 이후 대체로 원유 수입의 약 3분의 1, 2025년 12월~2026년 2월에는 25% 아래</td>
+</tr>
+<tr>
+<td>결과</td>
+<td>중동산 비중이 1년 전 65.2%에서 2026년 4월 53.1%로 떨어지고 미국·캐나다·호주산이 늘었습니다</td>
+<td>6월 러시아산 비중이 약 52%로, 러시아산이 처음으로 인도 원유 수입의 절반을 넘었습니다</td>
+</tr>
+</tbody>
+</table></div>
+<p>출처: 클리사 지오폴리틱스 이란 사안 분석·러-우 전쟁 사안 분석, 인도 언론 더프린트(ThePrint)가 선박 추적업체 Kpler 자료로 보도한 기사(2026년 3월 9일, 7월 1일).</p>
+<p><strong>차이법으로 보면.</strong> 두 나라는 원인 쪽 조건, 곧 호르무즈 봉쇄라는 충격을 공유하고 결과가 다르므로 차이법을 적용할 수 있는 모양입니다. 먼저 지울 수 있는 조건이 있습니다. 3월 유가가 오르자 미국은 러시아산 원유 거래를 한시적으로 허용했습니다(클리사 지오폴리틱스 러-우 전쟁 사안 분석). 3월 5일의 첫 허가(일반 허가 133호)는 인도로 가는 화물에만 적용되었지만, 3월 12일의 일반 허가 134호는 이미 선적된 러시아산 원유와 석유제품의 판매·운송을 목적지 제한 없이 허용했습니다(미국 재무부 해외자산통제실). 그 뒤로는 미국 법의 허용 여부가 두 나라에 같은 조건이었으므로 그것만으로는 차이를 설명할 수 없습니다. 2월에 러시아산 수입 중단에 합의한 인도가 6월에는 절반 넘게 러시아산을 들여왔다는 사실도 이를 뒷받침합니다.</p>
+<p>남는 차이는 최소한 3개입니다. 미국과의 동맹 관계, 이란이 각국 선박을 대하는 방식, 그리고 인도에는 2022년 이후 이미 열려 있던 러시아산 원유 도입 경로가 있었다는 점입니다(한국 쪽 사정은 이 강의가 확인하지 못했습니다). 다른 조건이 여럿이므로 차이법은 원인 후보를 좁혀 줄 뿐 하나를 확정하지 못합니다.</p>
+<p><strong>사례 안을 들여다보면.</strong> 이럴 때는 한 사례 안에서 결정의 과정을 추적합니다. 아시아경제는 2026년 3월 24일, 미국이 이미 바다에 떠 있는 러시아·이란산 원유의 제재를 한시적으로 풀었지만 국내 정유업계는 실익이 없다고 본다고 보도했습니다. 업계가 든 이유는 정유 설비 대부분이 중동산 원유에 맞춰져 있다는 점, 이익의 대부분을 내는 제품 수출에서 제재 대상국 원유로 만든 제품은 구매자가 꺼리거나 유럽 시장에서 제한을 받을 수 있다는 점, 러시아가 국제 결제망(SWIFT) 제재를 받아 결제가 어렵다는 점이었습니다. 이 증언은 '법적으로 허용되었는가'보다 '한국의 수출 시장과 결제망이 어디에 연결되어 있는가'가 선택을 제약했다는 해석을 뒷받침합니다(이 강의의 해석).</p>
+<p><strong>한계.</strong> 이 해석에도 밀의 경고가 적용됩니다. 동맹 관계, 수출 시장, 결제망은 서로 떨어진 조건이 아니라 한국이 수십 년 동안 미국 중심의 경제 질서에 편입되어 온 결과로 함께 생긴 것이어서, 밀의 말대로 "앞선 원인들의 결과"이며 하나씩 떼어 효과를 잴 수 없습니다(이 강의의 해석). 한국의 수치는 한국무역협회의 4월 통계, 인도의 수치는 6월 선박 추적 자료로 시점과 출처가 다르다는 측정 문제도 있습니다. 무엇보다 사례가 2개뿐입니다. 미국과 안보 관계가 깊으면서 원유를 거의 모두 수입하는 일본과 대만, 러시아산 의존을 늘린 것으로 정리된 중국(클리사 지오폴리틱스 '세계 질서' 분석)을 더하면 두 설명을 가르는 데 도움이 됩니다. 같은 나라의 시기 비교도 방법이며, 아래 전망들이 그 기회를 줍니다.</p>
+<p><strong>검증표.</strong> 표의 확률은 이 강의를 쓸 때의 값이며, 현재 확률은 '전망과 검증' 탭에서 보실 수 있습니다. 아래 전망은 클리사 지오폴리틱스의 '전망과 검증' 탭에 실린 것입니다. 한국의 선택을 제약한 조건은 그 조건이 바뀔 때 선택이 따라 바뀌는지를 보아야 확인할 수 있습니다.</p>
+<div class="tbl-x"><table>
+<thead>
+<tr>
+<th>전망</th>
+<th>기한</th>
+<th>확률</th>
+<th>이 틀에서 보는 의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2027년 한 해 한국의 원유 수입에서 중동산 비중이 60% 아래로 내려간다(f32)</td>
+<td>2028년 2월 28일</td>
+<td>55%</td>
+<td>같은 나라의 시기 비교. 충격이 지나간 뒤에도 다변화가 남는지를 봅니다. 클리사 지오폴리틱스는 1973년 석유 금수 뒤의 일본과 한국을 들어 "충격은 끝나도 정책은 남았습니다"라는 규칙성을 정리해 두었습니다</td>
+</tr>
+<tr>
+<td>2027년 4월 7일까지 미국 재무부가 러시아산 경유에 대한 일반 허가 135호의 유효 기간을 늘리거나, 허가 대상을 러시아산 원유나 다른 석유제품으로 넓힌다(f67)</td>
+<td>2027년 4월 7일</td>
+<td>35%</td>
+<td>차이법에 가까운 상황. 허가가 원유로 넓어지면 미국의 법적 허용이라는 조건 하나가 바뀝니다. 그래도 한국의 러시아산 도입이 늘지 않는다면 수출 시장과 결제망이라는 설명에 무게가 실립니다</td>
+</tr>
+<tr>
+<td>브렌트유가 연말 종가 기준 배럴당 90달러 아래로 내려간다(f13)</td>
+<td>2026년 12월 31일</td>
+<td>35%</td>
+<td>충격의 강도라는 조건. 클리사 지오폴리틱스는 중간선거 무렵의 유가 급락을 반영해 11월 7일 확률을 15%에서 35%로 올렸습니다. f32와 함께 보면 다변화가 고유가에 대한 일시적 대응이었는지 가리는 데 도움이 됩니다</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="s9">확인 문제</h2>
+<ol>
+<li>비교정치와 국제정치는 연구 대상에서 어떻게 다르며, 두 분야는 어디에서 만납니까?</li>
+<li>밀의 일치법과 차이법의 규칙을 각각 설명하고, 밀이 차이법을 더 강력하다고 본 이유를 쓰십시오.</li>
+<li>가장 비슷한 사례 설계와 가장 다른 사례 설계는 각각 어떤 사례를 고르며, 어떤 논리로 원인 후보를 지웁니까?</li>
+<li>결과가 나타난 사례만 골라 연구하면 왜 잘못된 결론에 이를 수 있습니까? 게디스가 든 노동 탄압과 경제 성장의 예로 설명하십시오.</li>
+</ol>
+<h2 id="s10">토론 질문</h2>
+<ol>
+<li>남북한 비교는 '제도가 경제적 운명을 바꾼다'는 주장의 증거로 자주 쓰입니다. 제도 말고 어떤 차이가 결과에 영향을 주었을 수 있으며, 그것을 가려내려면 어떤 사례를 더 비교해야 합니까?</li>
+<li>한국 정치의 어떤 특징(예: 대통령 단임제, 지역주의 투표)을 이해하려면 어느 나라와 비교하는 것이 가장 좋겠습니까? 2가지 설계 가운데 어느 쪽을 쓰겠습니까?</li>
+<li>7절의 비교에 일본을 더한다면, 일본의 2026년 원유 도입 변화가 어떻게 나타날 때 동맹 관계라는 설명이 강해지고, 어떻게 나타날 때 약해집니까?</li>
+</ol>
+<h2 id="s11">심화</h2>
+<p>본문보다 한 걸음 더 들어가려는 독자를 위한 절입니다. 밀의 원문을 읽고, 작은 진리표에 일치법과 차이법을 직접 적용해 보고, 밀의 방법을 소수 사례 비교에 쓰는 데 대한 비판과 반론을 봅니다.</p>
+<h3>원전 읽기</h3>
+<p>아래 번역은 『논리학 체계』 제8판(1882년 하퍼 앤드 브러더스판, 프로젝트 구텐베르크 eBook 27942)을 이 강의가 한국어로 옮긴 것입니다. 초판은 1843년에 나왔고, 판에 따라 문구가 조금씩 다를 수 있습니다.</p>
+<p><strong>대목 1. 총상의 예(3권 8장 2절)</strong></p>
+<blockquote>
+<p>사람이 심장에 총을 맞았을 때, 그를 죽인 것이 총상이라는 것을 아는 것은 이 방법(차이법)에 의해서다. 그는 바로 직전까지 생명이 가득했고, 상처 말고는 모든 조건이 같았기 때문이다.</p>
+</blockquote>
+<p><em>해설.</em> 밀은 원인을 찾는 일을 '지우기'로 봅니다. 같은 사람의 직전과 직후를 비교하는 총상의 예는 차이법의 가장 깨끗한 형태이며, 7절에서 같은 나라의 시기 비교를 권한 것도 이 때문입니다. 다만 나라는 사람과 달리 '직전과 직후' 사이에도 많은 조건이 함께 바뀝니다.</p>
+<p><strong>대목 2. 사회과학에서 차이법은 불가능하다(6권 7장 3절)</strong></p>
+<blockquote>
+<p>실험적 탐구의 방법 가운데 가장 완전한 차이법을 이 문제에 적용하려면, 탐구 대상인 한 가지를 빼고는 모든 점에서 일치하는 두 사례를 찾아야 한다. 자연의 이점과 불리함이 모두 같고, 국민이 신체적·도덕적 자질에서 서로 닮았으며, 관습과 의견과 법률과 제도가 모든 면에서 같은데, 한 나라가 더 보호주의적인 관세를 두고 있는 두 나라를 찾을 수 있다면 … 그러나 그런 두 사례를 만날 수 있다는 가정은 명백히 터무니없다. … 상업 정책 말고 모든 것이 일치하는 두 나라라면 상업 정책에서도 일치할 것이다. 입법의 차이는 고유하고 궁극적인 다양성이 아니다. … 그것은 앞선 원인들의 결과다.</p>
+</blockquote>
+<p><em>해설.</em> 이번 회차에서 가장 중요한 대목입니다. 정책이나 제도의 차이는 하늘에서 떨어진 것이 아니라 두 나라의 다른 차이에서 생긴 것이므로, 그 차이만 떼어 낸 두 나라는 존재할 수 없다는 것입니다. 같은 장 4절에서 밀은 일치법에도 회의적입니다. 사회 현상은 한 결과에 여러 원인이 있을 수 있어서(원인의 복수성), 어떤 조건 없이 결과가 나타난 사례가 있다고 해서 그 조건이 다른 사례에서 원인이 아니었다고 할 수 없기 때문입니다. 밀은 대신 개인의 행동 법칙에서 사회 현상을 연역하는 방법을 권했습니다.</p>
+<h3>직접 풀어 보기</h3>
+<p><strong>문제 1. 진리표로 원인 찾기.</strong> 가상의 5개 나라(갑·을·병·정·무)가 같은 에너지 충격을 받았습니다. 결과 Y는 '충격 뒤 6개월 안에 특정 제재 대상국의 원유 비중이 크게 늘었다'입니다. 조건은 A(원유 수입 의존이 높음), B(제재 대상국 원유의 도입 경로가 이미 있음), C(제재를 주도하는 나라와 동맹 관계), D(국가가 주요 정유사의 지분을 가짐)입니다. 1은 해당, 0은 해당하지 않음입니다.</p>
+<div class="tbl-x"><table>
+<thead>
+<tr>
+<th>나라</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>Y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>갑</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>을</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>병</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>정</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>무</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<p>(1) 결과가 나타난 갑·을·병에 일치법을 적용하면 어떤 조건이 원인 후보로 남습니까? (2) 한 조건만 다르고 결과가 다른 두 나라를 찾아 차이법을 적용하십시오. 갑과 정의 비교로는 왜 결론을 내릴 수 없습니까? (3) 표 전체를 설명하는 가장 간단한 규칙은 무엇입니까? 조건 4개로 가능한 조합 가운데 이 표가 관찰한 것은 몇 개이며, 이것이 결론에 어떤 한계를 줍니까?</p>
+<p><strong>문제 2. 선택 편향의 산술.</strong> 같은 유가 충격을 받은 가상의 12개 나라 가운데 8개 나라는 휘발유 가격이 30% 넘게 올랐고, 4개 나라는 덜 올랐습니다. 30% 넘게 오른 8개 나라 가운데 4개 나라에서, 덜 오른 4개 나라 가운데 2개 나라에서 집권 세력이 다음 선거에서 패배했습니다. (1) 집권 세력이 패배한 나라만 골라 보면, 그 가운데 휘발유 가격이 30% 넘게 오른 나라의 비율은 얼마입니까? (2) 가격 상승 폭별 패배율을 구하십시오. (3) "패배한 나라 대부분에서 휘발유값이 급등했으므로 급등이 패배를 낳는다"는 결론은 무엇이 잘못입니까?</p>
+<details class="ac-sol"><summary>풀이 보기</summary>
+<p><strong>문제 1.</strong></p>
+<ol>
+<li>갑·을·병에 공통된 조건은 B가 있음과 C가 없음입니다. A는 병에, D는 을에 없으므로 지워집니다. 일치법은 2개 후보 가운데 어느 것이 원인인지 가리지 못합니다.</li>
+<li>을(1, 1, 0, 0)과 무(1, 1, 1, 0)는 C 하나만 다르고 결과가 다르므로, 차이법에 따르면 C(동맹 관계)가 결과를 막는 조건이거나 그 일부입니다. 갑(1, 1, 0, 1)과 정(1, 0, 1, 1)은 B와 C가 함께 달라서 결과의 차이를 어느 쪽 탓으로 돌릴지 정할 수 없습니다. 7절의 한국·인도 비교가 이런 모양입니다.</li>
+<li>표 전체는 'B가 있고 C가 없을 때 Y가 나타난다'는 규칙으로 설명됩니다. 무는 B만으로는 충분하지 않다는 것을 보여 주며, 원인이 조건의 조합이라는 점이 중요합니다. 가능한 조합은 2⁴ = 16개인데 표는 5개만 관찰했습니다. B도 C도 없는 나라에서 결과가 나타날지는 알 수 없고, 표에 없는 조건이 실제 원인일 가능성도 배제할 수 없습니다. 현실이 모든 조합을 보여 주지 않는다는 것이 소수 사례 비교의 근본적인 한계입니다.</li>
+</ol>
+<p><strong>문제 2.</strong></p>
+<ol>
+<li>패배한 나라는 4 + 2 = 6개이고, 그 가운데 휘발유 가격이 30% 넘게 오른 나라는 4개이므로 약 67%입니다.</li>
+<li>30% 넘게 오른 나라의 패배율은 4 ÷ 8 = 50%, 덜 오른 나라는 2 ÷ 4 = 50%로 같습니다.</li>
+<li>패배한 나라의 67%에서 휘발유값이 급등한 것은 애초에 12개 나라의 67%(8개)에서 급등했기 때문입니다. 결과가 나타난 사례만 보면 흔한 조건이 원인처럼 두드러질 뿐이며, 모든 나라를 넣어 비교하면 패배율에 차이가 없습니다. 게디스가 지적한 선택 편향의 구조입니다.</li>
+</ol>
+</details><h3>실증 연구와 반론</h3>
+<p><strong>리버슨(1991): 작은 사례 수와 큰 결론.</strong> 사회학자 스탠리 리버슨(Stanley Lieberson)은 「작은 N과 큰 결론」에서 밀의 방법을 소수 사례 비교에 쓰는 연구들이 강한 가정을 암묵적으로 깔고 있다고 지적했습니다. 원인이 확률적이 아니라 결정적으로 작동한다는 가정, 측정에 오류가 없다는 가정, 원인이 하나뿐이라는 가정, 원인들 사이에 상호작용이 없다는 가정입니다. 그는 이 가정들을 엄격하게 정당화하지 않는 한 소수 사례에 밀의 방법을 써서는 안 된다고 보았습니다.</p>
+<p><strong>킹·코헤인·버바(1994): 하나의 추론 논리.</strong> 게리 킹(Gary King), 로버트 코헤인(Robert O. Keohane), 시드니 버바(Sidney Verba)는 『사회 연구의 설계』에서 질적 연구도 양적 연구와 같은 추론의 논리를 따라야 한다며, 결과가 나타난 사례만 고르지 말고, 사례가 많지 않다면 한 사례 안에서 이론이 예측하는 관찰을 여러 개 찾아 관찰의 수를 늘리라고 권했습니다. 7절에서 한국 정유업계의 증언을 찾아본 것도 같은 발상입니다.</p>
+<p><strong>반론: 사례 연구는 통계의 열등한 대용품이 아니다.</strong> 찰스 레이긴(Charles C. Ragin)은 『비교 방법』(1987)에서 사회 현상의 원인은 흔히 여러 조건의 조합으로 작동하고 같은 결과에 이르는 조합이 여럿일 수 있다고 보고, 불(Boole) 대수로 사례들의 조건 조합을 비교하는 방법(이후 질적 비교 분석, QCA)을 제시했습니다. 문제 1의 'B가 있고 C가 없을 때'라는 답이 이런 조합적 인과의 예입니다. 헨리 브래디(Henry E. Brady)와 데이비드 콜리어(David Collier)가 엮은 『사회 연구 다시 생각하기』(2004)는 킹·코헤인·버바를 비판하며, 사례 안에서 원인이 결과로 이어지는 과정을 보여 주는 관찰은 통계의 관찰과 성격이 다르고 사례 수가 많지 않아도 강한 추론을 가능하게 한다고 주장했습니다. 밀의 방법을 명시적으로 쓴 테다 스카치폴(Theda Skocpol)의 『국가와 사회혁명』(1979)은 이 논쟁에서 가장 자주 거론되는 연구입니다(12회차). 오늘날 비교정치는 자연 실험, 대규모 통계, 사례 안의 과정 추적을 함께 써서 서로의 약점을 보완하는 쪽으로 움직여 왔습니다.</p>
+<section class="ac-refs"><h2 id="s12">읽을거리</h2>
+<ul>
+<li>John Stuart Mill, <em>A System of Logic, Ratiocinative and Inductive</em> (1843; 8th ed., Harper &amp; Brothers, 1882; Project Gutenberg eBook 27942), 3권 8장, 6권 7장</li>
+<li>Adam Przeworski and Henry Teune, <em>The Logic of Comparative Social Inquiry</em> (Wiley-Interscience, 1970)</li>
+<li>Arend Lijphart, "Comparative Politics and the Comparative Method," <em>American Political Science Review</em> 65, no. 3 (1971): 682–693</li>
+<li>Barbara Geddes, "How the Cases You Choose Affect the Answers You Get: Selection Bias in Comparative Politics," <em>Political Analysis</em> 2 (1990): 131–150</li>
+<li>Daniel N. Posner, "The Political Salience of Cultural Difference: Why Chewas and Tumbukas Are Allies in Zambia and Adversaries in Malawi," <em>American Political Science Review</em> 98, no. 4 (2004): 529–545</li>
+<li>Daron Acemoglu and James A. Robinson, <em>Why Nations Fail</em> (Crown, 2012), 3장(한국어 번역 『국가는 왜 실패하는가』)</li>
+<li>Stanley Lieberson, "Small N's and Big Conclusions: An Examination of the Reasoning in Comparative Studies Based on a Small Number of Cases," <em>Social Forces</em> 70, no. 2 (1991): 307–320(심화)</li>
+<li>Gary King, Robert O. Keohane, and Sidney Verba, <em>Designing Social Inquiry</em> (Princeton University Press, 1994)(심화)</li>
+<li>Charles C. Ragin, <em>The Comparative Method</em> (University of California Press, 1987)(심화)</li>
+<li>Henry E. Brady and David Collier, eds., <em>Rethinking Social Inquiry</em> (Rowman &amp; Littlefield, 2004)(심화)</li>
+</ul>
+</section><section class="ac-refs"><h2 id="s13">출처와 개정 기록</h2>
+<ul>
+<li>밀 『논리학 체계』 인용: 프로젝트 구텐베르크 eBook 27942(제8판, 1882)의 3권 8장 1~2절, 6권 7장 3절과 대조해 이 강의가 한국어로 옮겼습니다. 1843년 초판과는 대조하지 못했습니다.</li>
+<li>키플링의 시구: 키플링 협회 웹사이트의 본문과 대조했습니다(1891년 4월 첫 발표).</li>
+<li>본보기 강좌: 하버드대 GOV 20 강좌 소개(레비츠키 교수 웹사이트, 2025년 가을; 5가지 접근의 문구를 원문과 대조), MIT OCW 17.50(2022년 가을) 강의 일정의 1회차. 하버드 강좌 소개에는 주제별 일정이 없어 회차를 밝히지 않았습니다.</li>
+<li>레이프하트(1971), 게디스(1990): 권호·쪽수와 초록은 케임브리지 대학 출판부 웹사이트에서 확인했습니다. 레이프하트의 방법 분류·요약·처방·사례 연구 유형과 게디스의 노동 탄압 예는 초록과 2차 요약에 따른 것으로 원문과 대조하지 못했습니다. 쉐보르스키·튠(1970)의 두 설계 설명도 원문과 대조하지 못했습니다(서지는 도서관 목록으로 확인).</li>
+<li>포스너(2004): 원문(JSTOR 판)과 대조했습니다(1891년 국경 획정, 인구 비율, 경쟁 설명의 검토).</li>
+<li>애쓰모글루·로빈슨(2012) 3장: 2차 요약에 따른 것으로 원문과 대조하지 못했습니다. 일제강점기 중공업과 수력 발전의 북쪽 집중: 미국 의회도서관 국가 연구 『한국(South Korea: A Country Study)』.</li>
+<li>리버슨(1991): 권호·쪽수는 DOI(10.2307/2580241)로, 4가지 가정은 초록 요약으로 확인했습니다. 리버슨 본문, 킹·코헤인·버바(1994), 레이긴(1987), 브래디·콜리어(2004), 스카치폴(1979), 6절 표의 대표 고전은 원문과 대조하지 못했습니다.</li>
+<li>2026년 사실: 클리사 지오폴리틱스 이란·러-우 전쟁 사안 분석(2026년 11월 9일 기준), '세계 질서' 분석, 역사 자료, 정세 브리핑 2026년 10월 24일. 인도의 원유 도입 수치: 더프린트 2026년 3월 9일·7월 1일 기사(대부분 Kpler 자료; 6월 약 52%라는 수치의 출처는 기사에 따로 밝혀져 있지 않습니다). 한국의 중동산 비중(2026년 4월 53.1%, 1년 전 65.2%): 클리사 지오폴리틱스 이란 사안 분석(원자료는 한국무역협회가 2026년 5월 24일 발표한 통계). 한국 정유업계의 판단: 아시아경제 영문판 2026년 3월 24일 기사. 미국의 일반 허가 133호(3월 5일, 인도행 화물)·134호(3월 12일, 목적지 제한 없음): 미국 재무부 해외자산통제실 2026년 3월 12일 발표와 법률사무소 스텝토(Steptoe)의 2026년 3월 16일 제재 동향 정리.</li>
+<li>전망 f32·f67·f13: 클리사 지오폴리틱스 공개 자료(2026년 11월 13일 조회).</li>
+<li>개정 기록: 2026년 11월 13일 초안.</li>
+<li>2026년 11월 13일 독립 검토 6건 반영(인도 6월 러시아산 비중을 '한 공급국의 첫 과반'에서 '러시아산의 첫 과반'으로 바로잡음, 미국의 러시아산 원유 허가가 3월 5일에는 인도행 화물에만 적용되었고 3월 12일 일반 허가 134호부터 목적지 제한이 없었음을 밝힘, 한국 수치의 출처를 '관세 통계'에서 한국무역협회 통계로 바로잡음, 65%의 기준 시점(2025년 4월)을 밝힘, 7절 한계 단락에 '이 강의의 해석' 표시, 일본·대만의 원유 수입 의존 표현을 영문판과 맞춤).</li>
+</ul></section><p class="ac-report">잘못된 내용을 발견하시면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 알려 주십시오. 수정한 내용은 개정 기록에 남깁니다.</p></article><nav class="ac-pn"><span></span><a href="/academy/cp101/">강좌 목록</a><span><a href="/academy/cp101/02/">다음 회차 →</a></span></nav><script>(function(){var b=document.getElementById('acListen');if(!b)return;var S=window.speechSynthesis;if(!S){b.hidden=true;return}
+var L=document.documentElement.lang==='en'?'en-US':'ko-KR',SEL='.note-art h1,.note-art h2,.note-art h3,.note-art h4,.note-art>p,.note-art>blockquote,.note-art>ul>li,.note-art>ol>li,.note-art figcaption,.ac-sol>p,.ac-sol>ol>li,.ac-sol>ul>li',
+SKIP='a,button,summary,input,select,textarea,label',RM=matchMedia('(prefers-reduced-motion: reduce)').matches,q=null,pos=0,on=false,used=false,cur=null,gen=0,hold=0;
+var EN_=/^\s*(?:[\uac00-\ud7a3]|\d{1,2}|[A-Za-z]|[ivxIVX]{1,4}|[①-⑳])\s*$/;function cl(x){x=x.replace(/\s+/g,' ');for(var k=0;k<3;k++)x=x.replace(/\(([^()]*)\)|（[^（）]*）|\[[^\[\]]*\]/g,function(m,y){return y!==undefined&&EN_.test(y)?y.trim()+',':''});x=x.replace(/\b((?:[A-Z]\.){2,})/g,function(m){return m.replace(/\./g,'')}).replace(/\b(e\.g|i\.e|etc|vs|Mr|Mrs|Ms|Dr|St|No|pp?|vol|eds?|Jr|Sr)\./g,'$1').replace(/\b([A-Z])\.\s(?=[A-Z])/g,'$1 ');return x.replace(/\s+([,.;:!?。、])/g,'$1').replace(/\s+/g,' ').trim()}
+var wl=null,wp=false;function wake(x){try{if(x){if(!wl&&!wp&&navigator.wakeLock){wp=true;navigator.wakeLock.request('screen').then(function(w){wp=false;if(!on){w.release();return}wl=w;w.addEventListener('release',function(){wl=null})}).catch(function(){wp=false})}}else if(wl){wl.release();wl=null}}catch(e){}}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&on)wake(true)});
+var SPL=null;try{SPL=new RegExp('(?<=[.!?。])\\s+')}catch(e){}
+function build(){q=[];document.querySelectorAll(SEL).forEach(function(el){if(el.closest('.ac-refs')||el.classList.contains('byline')||el.classList.contains('ac-report'))return;
+var t=cl(el.closest('.ac-sol')?el.textContent:el.innerText);if(!t)return;(SPL?t.split(SPL):(t.match(/[^.!?。]+[.!?。]?/g)||[t])).forEach(function(x){x=x.trim();if(x)q.push({t:x,el:el})})})}
+function mark(el,f){if(cur===el&&!f)return;if(cur&&cur!==el)cur.classList.remove('speaking');cur=el;if(!el)return;el.classList.add('speaking');
+if(Date.now()<hold||!el.offsetParent)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:RM?'auto':'smooth'})}
+function ui(x){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?b.dataset.s:b.dataset.l}
+function stop(keep){gen++;on=false;wake(false);S.cancel();ui(false);if(!keep){mark(null);}}
+function play(i){if(!q)build();while(i<q.length&&q[i].el.closest('details:not([open])'))i++;if(i>=q.length){stop();pos=0;return}var g=++gen,f=!on;on=true;used=true;ui(true);wake(true);pos=i;mark(q[i].el,f);
+var u=new SpeechSynthesisUtterance(q[i].t);u.lang=L;u.rate=1;u.onend=u.onerror=function(){if(g===gen&&on)play(i+1)};S.cancel();S.speak(u)}
+b.addEventListener('click',function(){if(on){stop(true);return}play(pos)});
+document.addEventListener('click',function(e){if(!used||e.target.closest(SKIP)||String(getSelection?getSelection():'').length)return;
+var el=e.target.closest(SEL);if(!el)return;if(!q)build();for(var i=0;i<q.length;i++)if(q[i].el===el){hold=0;play(i);return}});
+var h=function(){if(on)hold=Date.now()+10000};addEventListener('wheel',h,{passive:true});addEventListener('touchmove',h,{passive:true});
+addEventListener('keydown',function(e){if(/^(PageUp|PageDown|ArrowUp|ArrowDown|Home|End| )$/.test(e.key))h()});
+addEventListener('pagehide',function(){stop()})})();</script>
+</main>
+<footer><p>클리사 아카데미의 강의 노트는 AI(Anthropic의 Claude)가 쓰고, 다른 AI와 운영자가 사실과 인용을 독립적으로 검토합니다. 다만 이 검토는 완벽한 검수가 아니어서 잘못된 내용이 남아 있을 수 있습니다.</p><p>강의 노트는 학습을 위한 자료이며 투자·법률·정책 자문이 아닙니다. 2026년 사안에 대입한 부분의 확률 전망은 클리사 지오폴리틱스가 판단 근거와 함께 제시한 추정치입니다.</p><p>© 2026 고재성 · <a href="/academy/about/">대표 인사말</a> · <a href="/">클리사 지오폴리틱스</a></p><p>클리사 아카데미의 화면·강의 노트와 도표는 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 '클리사 아카데미'와 해당 페이지 주소를 출처로 밝혀 주십시오(본문을 40자 이상 복사하면 출처가 자동으로 붙습니다). 전부 또는 상당 부분을 복제·재배포하려면 <a href="mailto:academy@clisa.ai">academy@clisa.ai</a>로 먼저 허락을 받아 주십시오.</p><p><a href="mailto:academy@clisa.ai">academy@clisa.ai</a></p></footer>
+<script>(function(){try{var m=location.search.match(/[?&]nostat=([01])/);if(m){if(m[1]==='1')localStorage.setItem('clisa_nostat','1');else localStorage.removeItem('clisa_nostat');}if(localStorage.getItem('clisa_nostat'))return;}catch(e){}var s=document.createElement('script');s.defer=true;s.src='https://static.cloudflareinsights.com/beacon.min.js';s.setAttribute('data-cf-beacon','{"token": "58e343ace23448bcb4d24c4bde3a2dd9"}');document.head.appendChild(s);})();</script>
+<script>document.addEventListener("copy",function(e){var s=window.getSelection&&getSelection();if(!s||s.isCollapsed||!e.clipboardData)return;
+var a=document.activeElement;if(a&&(a.tagName==="INPUT"||a.tagName==="TEXTAREA"||a.isContentEditable))return;var t=s.toString();if(t.replace(/\s+/g,"").length<40)return;
+var u=location.origin+location.pathname+location.hash,b=document.createElement("div"),q=function(x){return x.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+for(var i=0;i<s.rangeCount;i++)b.appendChild(s.getRangeAt(i).cloneContents());
+e.clipboardData.setData("text/plain",t.replace(/\s+$/,"")+"\n\n출처: 클리사 아카데미("+u+")");e.clipboardData.setData("text/html",b.innerHTML+'<p>출처: <a href="'+q(u)+'">클리사 아카데미</a>('+q(u)+")</p>");e.preventDefault()});</script>
+<script>(function(){var n=document.querySelector(".asw");if(!n)return;var o=n.querySelector("a.on"),k=n.querySelector(".asw-k");function f(){k.style.left=o.offsetLeft+"px";k.style.width=o.offsetWidth+"px"}f();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(f);addEventListener("resize",f);addEventListener("load",f);if(window.ResizeObserver)new ResizeObserver(f).observe(n)})();</script>
+<script defer src="/theme_ac.js?v=09b917e9c0"></script>
+</body>
+</html>
