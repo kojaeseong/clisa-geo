@@ -1,9 +1,9 @@
-/* 클리사 앱 시험판 서비스 워커: 언제나 네트워크 먼저, 끊겼을 때만 저장본 · 새 소식 알림(2026-11-13) */
-const C='clisa-lab-app-2',API='https://api.clisa.ai';
+/* 클리사 앱 시험판 서비스 워커: 언제나 네트워크 먼저(브라우저 저장본도 거치지 않고 서버에 확인), 끊겼을 때만 저장본 · 새 소식 알림(2026-11-13) */
+const C='clisa-lab-app-3',API='https://api.clisa.ai';
 self.addEventListener('install',e=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.startsWith('clisa-lab-app-')&&k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url);if(r.method!=='GET'||u.origin!==location.origin||!u.pathname.startsWith('/lab/app/'))return;
-e.respondWith(fetch(r).then(res=>{if(res.ok){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp));}return res;}).catch(()=>caches.match(r)));});
+e.respondWith(fetch(r,{cache:'no-cache'}).then(res=>{if(res.ok){const cp=res.clone();caches.open(C).then(c=>c.put(r,cp));}return res;}).catch(()=>caches.match(r)));});
 /* 서버는 내용 없이 깨우기만 보낸다. 문구는 /push/last에서 받아 띄운다 */
 self.addEventListener('push',e=>{e.waitUntil(self.registration.pushManager.getSubscription()
  .then(s=>fetch(API+'/push/last',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:s?s.endpoint:''})}).then(r=>r.json()))

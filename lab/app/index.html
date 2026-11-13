@@ -148,10 +148,12 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .irow a{flex:1;color:inherit;text-decoration:none}
 .lead{font-size:14px;line-height:1.6;margin:2px 0 6px;color:var(--ink)}.nq a .t2{display:flex;flex-direction:column;min-width:0}.nq a .t2 small{font-size:12px;font-weight:500;color:var(--mut);margin-top:2px;line-height:1.45}
 .ans .lk{margin-top:10px}
+header.top .logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
 </style></head><body><div class="wrap" id="v"></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v');
+var DATA=null,V=document.getElementById('v'),PV='8f8220621d';
+function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></button></header>'}
 function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
 function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}}
 function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -181,7 +183,7 @@ function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)retur
 function home(){
   var latest=DATA.items.filter(function(x){return x.d===DATA.asof}).slice(0,3);
   var dg=DATA.digest[0];
-  var h='<header class="top"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></header>';
+  var h=topHead();
   var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'];
   var F0=favs(),reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a[1],C.short,C.ok]:null}).filter(Boolean);
   h+='<section class="wk"><div class="q">오늘 세계에서 무엇이 어느 쪽으로 움직였나</div><h2>이번 주 세계</h2>';
@@ -400,7 +402,7 @@ function suggest(cur){var ci=cur&&cur.indexOf('i:')===0?cur.slice(2):'',out=rela
 function saveInt(it,label){var I=ints().filter(function(x){return intKey(x)!==intKey(it)});I.unshift(it);ss('prof',{ints:I,at:DATA.asof});ss('justsaved',label||intLabel(it))}
 function row(ans,title,sub,extra){return '<button class="rw2" data-ans="'+ans+'"><span class="t"><b>'+e(title)+'</b>'+(sub?'<small>'+e(sub)+'</small>':'')+'</span>'+(extra||'')+'<span class="ar">›</span></button>'}
 function startView(step,arg){
-  var h='<section class="st">',I=ints();
+  var h=topHead()+'<section class="st">',I=ints();
   if(step==='i'&&app(arg)){var id=arg,a=app(id),B=(DATA.boards||{})[id],C=B&&B.cur,IM=impOf(id),L=issueItems(id),FL=issueFc(id),fromR=ls('fromreg',null);
     h+='<a class="bk" href="#start/'+(fromR?'r/'+fromR:'1')+'">‹ '+(fromR?e(reg(fromR)[1])+'로':'처음 질문으로')+'</a>';
     h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>이번 주</small></div>';
@@ -545,7 +547,10 @@ function build(daily){var R=DATA.rule,out=[];
     if(!r){var is=(l.isos||[]).filter(function(x){return x!=='USA'}).concat((l.isos||[]).filter(function(x){return x==='USA'}));is.some(function(x){if(R.isoReg[x]){r=R.isoReg[x];return true}})}
     out.push({id:iss.date+'-'+i,d:iss.date,h:it.h,t:it.fact||'',a:a.sort(),fp:it.fp||[],fc:(it.fc||[]).map(function(c){return [c.id,c.e]}),s:(it.src||[]).slice(0,1),pl:l.place||'',r:r,pull:it.pull||[]})})});
   return out}
-fetch('/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){DATA=d;
+fetch('/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){
+  // 화면이 옛 판이면(자료의 pv와 다르면) 한 번만 새로 불러온다
+  if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){var k='clisa.rl.'+d.pv,done=null;try{done=sessionStorage.getItem(k);sessionStorage.setItem(k,'1')}catch(x){}if(!done){location.reload();return new Promise(function(){})}}
+  DATA=d;
   return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){route()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
 if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/lab/app/sw.js',{scope:'/lab/app/'}).catch(function(){})});
 })();
