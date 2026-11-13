@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>클리사 (시험판)</title>
+<meta name="theme-color" content="#0B2A86">
+<link rel="manifest" href="/lab/app/manifest.webmanifest">
+<link rel="icon" href="/lab/app/app-192.png">
+<link rel="apple-touch-icon" href="/lab/app/app-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{--bg:#F4F6F9;--card:#FFFFFF;--ink:#141A26;--sub:#4A5366;--mut:#7A8396;--line:#E2E6EE;--brand:#0B2A86;--acc:#1F4FD8;--red:#E5322D;--up:#B4441F;--dn:#1E7A5A;--chip:#EEF2FA}
+@media (prefers-color-scheme:dark){:root{--bg:#0E1320;--card:#161D2E;--ink:#E8ECF3;--sub:#B6BED0;--mut:#8C95A8;--line:#28324A;--brand:#6F93FF;--acc:#7EA2FF;--red:#FF5A52;--up:#FF8A65;--dn:#5CC79A;--chip:#1F2940}}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;word-break:keep-all;-webkit-tap-highlight-color:transparent}
+body{min-height:100vh}.wrap{max-width:520px;margin:0 auto;padding:12px 16px calc(28px + env(safe-area-inset-bottom))}
+header.top{display:flex;align-items:center;gap:10px;padding:6px 0 12px}header.top img{width:30px;height:30px;border-radius:8px}
+header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .sp{flex:1}
+.pill{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--sub);border-radius:999px;padding:6px 12px;cursor:pointer}
+.widget{background:var(--brand);color:#fff;border-radius:20px;padding:16px 16px 10px;box-shadow:0 6px 18px rgba(11,42,134,.18)}
+@media (prefers-color-scheme:dark){.widget{background:#1B2C66}}
+.widget .k{font-size:12px;opacity:.8;letter-spacing:.3px}.widget .flow{font-size:14px;line-height:1.5;margin:6px 0 10px;opacity:.95}
+.widget .flow b{font-weight:700}.widget ul{list-style:none;margin:0;padding:0}
+.widget li{padding:10px 0;border-top:1px solid rgba(255,255,255,.18);font-size:15px;line-height:1.45;font-weight:600;cursor:pointer;display:flex;gap:8px}
+.widget li .tg{flex:none;font-size:11px;font-weight:700;background:rgba(255,255,255,.18);border-radius:6px;padding:2px 6px;height:fit-content;margin-top:2px}
+.widget .more{display:block;text-align:right;color:#fff;opacity:.85;font-size:13px;padding:8px 0 4px;text-decoration:none}
+.seg{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;margin:18px 0 12px}
+.seg button{flex:1;font:inherit;font-size:14px;font-weight:600;border:0;background:none;color:var(--mut);padding:8px;border-radius:9px;cursor:pointer}
+.seg button.on{background:var(--acc);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px}
+.ap{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;font:inherit;color:var(--ink);cursor:pointer;padding:0}
+.ap .ic{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.ap .lb{font-size:12px;line-height:1.25;text-align:center;color:var(--sub);max-width:76px}
+.ap .bd{position:absolute;top:-6px;right:calc(50% - 38px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
+.ap.off{opacity:.45;cursor:default}
+.sec{margin:26px 0 8px;font-size:13px;font-weight:700;color:var(--mut)}
+.note{font-size:12px;color:var(--mut);line-height:1.6;margin-top:28px}.note a{color:var(--mut)}
+/* 사안 화면 */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;align-items:center;gap:10px;padding:10px 0}
+.bar button{font:inherit;font-size:22px;line-height:1;border:0;background:none;color:var(--ink);cursor:pointer;padding:4px 8px 4px 0}
+.bar .ic{width:38px;height:38px;border-radius:10px;color:#fff;font-weight:800;font-size:10px;letter-spacing:-.3px;display:flex;align-items:center;justify-content:center;flex:none}
+.bar h1{font-size:18px;margin:0;line-height:1.3}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card h2{font-size:13px;color:var(--mut);margin:0 0 8px;font-weight:700}
+.dg b{display:block;font-size:16px;line-height:1.45;margin-bottom:6px}.dg p{margin:0;font-size:14px;line-height:1.7;color:var(--sub)}
+.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.mo{font:inherit;font-size:13px;color:var(--acc);background:none;border:0;padding:6px 0 0;cursor:pointer}
+.fc{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.fc:first-of-type{border-top:0}.fc .q{flex:1;font-size:14px;line-height:1.5}
+.fc .pv{flex:none;text-align:right;min-width:62px}.fc .pv b{font-size:18px}.fc .pv small{display:block;font-size:12px;color:var(--mut)}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.day{text-align:center;margin:18px 0 6px}.day span{font-size:12px;color:var(--mut);background:var(--chip);border-radius:999px;padding:4px 12px}
+.msg{background:var(--card);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:12px 14px;margin:8px 0;position:relative}
+.msg.nw{border-color:var(--acc)}.msg.nw::before{content:'새 소식';position:absolute;top:-9px;left:12px;font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:1px 6px}
+.msg .h{font-size:15px;font-weight:700;line-height:1.45}.msg .t{font-size:14px;line-height:1.7;color:var(--sub);margin-top:6px}
+.msg .mt{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+.chip{font-size:12px;background:var(--chip);border-radius:8px;padding:3px 8px;color:var(--sub);text-decoration:none}
+.msg .src{font-size:12px;color:var(--mut)}
+.msg.hl{box-shadow:0 0 0 3px var(--acc)}
+.cell{padding:10px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.6}.cell:first-of-type{border-top:0}.cell b{display:block;font-size:14px}
+.cty button{font:inherit;font-size:16px;font-weight:700;padding:16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-align:left}
+.cty button small{display:block;font-size:12px;font-weight:500;color:var(--mut);margin-top:2px}.cty button:disabled{opacity:.5;cursor:default}
+.empty{color:var(--mut);font-size:14px;padding:8px 0}
+</style></head><body><div class="wrap" id="v"></div>
+<script>
+(function(){
+var DATA=null,V=document.getElementById('v');
+function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
+function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}}
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function md(d){var p=d.split('-');return (+p[1])+'월 '+(+p[2])+'일'}
+function app(id){for(var i=0;i<DATA.apps.length;i++)if(DATA.apps[i][0]===id)return DATA.apps[i]}
+function reg(id){for(var i=0;i<DATA.regions.length;i++)if(DATA.regions[i][0]===id)return DATA.regions[i]}
+// 읽음: 앱마다 따로(문자 앱처럼). 처음 쓰는 날에는 최근 2회분 브리핑만 '새 소식'
+function start(){var s=ls('start',null);if(!s){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d)<0)ds.push(x.d)});s=ds[Math.min(1,ds.length-1)];ss('start',s)}return s}
+function seen(k){return ls('seen.'+k,[])}
+function unread(k,list){var st=start(),sn=seen(k);return list.filter(function(x){return x.d>=st&&sn.indexOf(x.id)<0})}
+function markRead(k,list){var sn=seen(k);list.forEach(function(x){if(sn.indexOf(x.id)<0)sn.push(x.id)});ss('seen.'+k,sn.slice(-600))}
+function issueItems(id){return DATA.items.filter(function(x){return x.a.indexOf(id)>=0})}
+function regItems(id){return DATA.items.filter(function(x){return x.r===id})}
+function fcLast(f){return f.h.length?f.h[f.h.length-1][0]:''}
+function fcChanged(){var since=ls('fcseen',null);if(!since){var d=new Date(DATA.asof);d.setDate(d.getDate()-3);since=d.toISOString().slice(0,10);ss('fcseen',since)}
+  return DATA.fc.filter(function(f){return f.h.length>1&&fcLast(f)>since})}
+function badge(n){return n>0?'<span class="bd">'+(n>99?'99+':n)+'</span>':''}
+function delta(f){if(f.h.length<2)return '';var a=f.h[f.h.length-2][1],b=f.h[f.h.length-1][1];if(a===b)return '';return '<small class="'+(b>a?'up':'dn')+'">'+(b>a?'▲':'▼')+Math.abs(b-a)+' · '+md(f.h[f.h.length-1][0])+'</small>'}
+function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)return DATA.fc[i]}
+
+function home(){
+  var latest=DATA.items.filter(function(x){return x.d===DATA.asof}).slice(0,3);
+  var dg=DATA.digest[0];
+  var h='<header class="top"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></header>';
+  h+='<section class="widget"><div class="k">'+md(DATA.asof)+' 정세 브리핑</div>';
+  if(dg)h+='<div class="flow"><b>이번 주 흐름</b> · '+e(dg.t)+'</div>';
+  h+='<ul>'+latest.map(function(x){var a=app(x.a[0]);return '<li data-item="'+x.id+'" data-app="'+x.a[0]+'"><span class="tg">'+e(a[2])+'</span><span>'+e(x.h)+'</span></li>'}).join('')+'</ul>';
+  h+='<a class="more" href="/brief/'+DATA.asof+'/">정세 브리핑 전체 보기 ›</a></section>';
+  var mode=ls('mode','issue');if(mode!=='issue'&&mode!=='region')mode='issue';
+  h+='<div class="seg"><button data-mode="issue" class="'+(mode==='issue'?'on':'')+'">사안별</button><button data-mode="region" class="'+(mode==='region'?'on':'')+'">지역별</button></div><div class="grid">';
+  if(mode==='issue'){
+    DATA.apps.forEach(function(a){var n=unread('i.'+a[0],issueItems(a[0])).length;
+      h+='<button class="ap" data-open="i:'+a[0]+'"><span class="ic" style="background:'+a[3]+'">'+e(a[2])+'</span><span class="lb">'+e(a[1])+'</span>'+badge(n)+'</button>'});
+  }else{
+    DATA.regions.forEach(function(r){var n=unread('r.'+r[0],regItems(r[0])).length;
+      h+='<button class="ap" data-open="r:'+r[0]+'"><span class="ic" style="background:'+r[3]+';font-size:'+(r[2].length>3?12:15)+'px">'+e(r[2])+'</span><span class="lb">'+e(r[1])+'</span>'+badge(n)+'</button>'});
+  }
+  h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">전망</span><span class="lb">바뀐 전망</span>'+badge(fcChanged().length)+'</button>';
+  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span></button></div>';
+  h+='<p class="note">시험판입니다. 내용은 클리사 지오폴리틱스의 공개 자료(정세 브리핑·정세 요약·전망)를 그대로 보여 줍니다. <a href="/">클리사 지오폴리틱스로 가기</a></p>';
+  V.innerHTML=h;window.scrollTo(0,0);
+}
+function bar(ic,col,t){return '<div class="bar"><button data-go="home" aria-label="뒤로">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1></div>'}
+function msgs(list,key,hl){
+  var st=start(),sn=seen(key),h='',last='';
+  if(!list.length)return '<p class="empty">최근 3주 동안의 소식이 없습니다.</p>';
+  list.forEach(function(x){if(x.d!==last){h+='<div class="day"><span>'+md(x.d)+'</span></div>';last=x.d}
+    var nw=x.d>=st&&sn.indexOf(x.id)<0;
+    h+='<div class="msg'+(nw?' nw':'')+(x.id===hl?' hl':'')+'" id="m-'+x.id+'"><div class="h">'+e(x.h)+'</div><div class="t clamp">'+e(x.t)+'</div><button class="mo" data-more>더 보기</button><div class="mt">';
+    x.fc.forEach(function(c){var f=fpById(c[0]);if(f)h+='<a class="chip" href="/forecast/'+c[0]+'/">'+e(f.q.length>22?f.q.slice(0,22)+'…':f.q)+' '+f.p+'%'+(c[1]==='up'?' ↑':c[1]==='down'?' ↓':'')+'</a>'});
+    if(x.pl)h+='<span class="chip">'+e(x.pl)+'</span>';
+    if(x.s[0])h+='<a class="src" href="'+e(x.s[0])+'" target="_blank" rel="noopener">출처</a>';
+    h+='</div></div>'});
+  return h;
+}
+function fcList(list,limit){
+  list=list.slice().sort(function(a,b){return fcLast(b)<fcLast(a)?-1:fcLast(b)>fcLast(a)?1:0});
+  var h=list.slice(0,limit).map(function(f){return '<a class="fc" href="/forecast/'+f.id+'/"><span class="q">'+e(f.q)+'</span><span class="pv"><b>'+f.p+'%</b>'+delta(f)+'</span></a>'}).join('');
+  return h||'<p class="empty">연결된 전망이 없습니다.</p>';
+}
+function issue(id,hl){
+  var a=app(id),list=issueItems(id),key='i.'+id;
+  var h=bar(a[2],a[3],a[1]);
+  var dg=DATA.digest.filter(function(d){return d.a===id});
+  if(dg.length)h+='<div class="card dg"><h2>이 사안의 흐름 · 주간 정세 요약</h2>'+dg.map(function(d){return '<b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button>'}).join('<div style="height:12px"></div>')+'</div>';
+  h+='<div class="card"><h2>이 사안의 전망 · 최근 바뀐 순</h2>'+fcList(DATA.fc.filter(function(f){return f.a.indexOf(id)>=0}),6)+'</div>';
+  h+='<div class="sec">소식</div>'+msgs(list,key,hl);
+  V.innerHTML=h;markRead(key,list);
+  if(hl){var m=document.getElementById('m-'+hl);if(m)m.scrollIntoView({block:'center'})}else window.scrollTo(0,0);
+}
+function region(id){
+  var r=reg(id),key='r.'+id,list=regItems(id),ids=[];
+  list.forEach(function(x){x.fc.forEach(function(c){if(ids.indexOf(c[0])<0)ids.push(c[0])})});
+  var h=bar(r[2],r[3],r[1]);
+  h+='<div class="card"><h2>이 지역 소식에 연결된 전망 · 최근 바뀐 순</h2>'+fcList(DATA.fc.filter(function(f){return ids.indexOf(f.id)>=0}),6)+'</div>';
+  h+='<div class="sec">소식 · 다루는 분쟁과 사건의 지역 기준</div>'+msgs(list,key);
+  V.innerHTML=h;markRead(key,list);window.scrollTo(0,0);
+}
+function fcs(){
+  var ch=fcChanged(),h=bar('전망','#0B2A86','바뀐 전망');
+  h+='<div class="card"><h2>지난번에 보신 뒤 확률이 바뀐 전망</h2>'+(ch.length?fcList(ch,50):'<p class="empty">새로 바뀐 전망이 없습니다.</p>')+'</div>';
+  h+='<div class="card"><h2>모든 진행 중 전망 · 최근 바뀐 순</h2>'+fcList(DATA.fc,100)+'</div>';
+  V.innerHTML=h;ss('fcseen',DATA.asof);window.scrollTo(0,0);
+}
+function dgs(){
+  var h=bar('요약','#2C3E66','주간 정세 요약');
+  h+=DATA.digest.map(function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a[1])+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button></div>'}).join('');
+  V.innerHTML=h;window.scrollTo(0,0);
+}
+function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
+  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2]);else if(r[0]==='r'&&reg(r[1]))region(r[1]);else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else home()}
+function go(h){var cur=location.hash.replace(/^#/,'');if(cur===h)route();else location.hash=h}
+V.addEventListener('click',function(ev){var t=ev.target.closest('[data-open],[data-go],[data-mode],[data-item],[data-more]');if(!t)return;
+  if(t.hasAttribute('data-more')){var p=t.previousElementSibling;if(p){p.classList.toggle('clamp');t.textContent=p.classList.contains('clamp')?'더 보기':'접기'}return}
+  if(t.dataset.mode){ss('mode',t.dataset.mode);home();return}
+  if(t.dataset.item){go('i/'+t.dataset.app+'/'+t.dataset.item);return}
+  if(t.dataset.go){go(t.dataset.go==='home'?'':t.dataset.go);return}
+  var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg')go(o);else go(o.replace(':','/'))});
+addEventListener('hashchange',route);
+function build(daily){var R=DATA.rule,out=[];
+  function near(lon,lat){var b=null,bd=1e9;R.capReg.forEach(function(c){var d=(c[0]-lon)*(c[0]-lon)+(c[1]-lat)*(c[1]-lat);if(d<bd){bd=d;b=c[2]}});return b}
+  daily.issues.slice(0,21).forEach(function(iss){iss.items.forEach(function(it,i){
+    var a=[];if(it.case)a.push(it.case);(it.fc||[]).forEach(function(c){(R.fcases[c.id]||[]).forEach(function(x){if(a.indexOf(x)<0)a.push(x)})});
+    if((it.fp||[]).indexOf('chips-fabs')>=0&&a.indexOf('trade')<0)a.push('trade');if(!a.length)a.push('world');
+    var l=it.loc||{},r=null;(it.fp||[]).some(function(f){if(R.fpReg[f]){r=R.fpReg[f];return true}});
+    if(!r&&R.caseR[it.case])r=R.caseR[it.case];
+    if(!r&&l.lat!=null&&l.lon!=null)r=near(+l.lon,+l.lat);
+    if(!r){var is=(l.isos||[]).filter(function(x){return x!=='USA'}).concat((l.isos||[]).filter(function(x){return x==='USA'}));is.some(function(x){if(R.isoReg[x]){r=R.isoReg[x];return true}})}
+    out.push({id:iss.date+'-'+i,d:iss.date,h:it.h,t:it.fact||'',a:a.sort(),fp:it.fp||[],fc:(it.fc||[]).map(function(c){return [c.id,c.e]}),s:(it.src||[]).slice(0,1),pl:l.place||'',r:r})})});
+  return out}
+fetch('/lab/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){DATA=d;
+  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){route()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
+if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/lab/app/sw.js',{scope:'/lab/app/'}).catch(function(){})});
+})();
+</script></body></html>
