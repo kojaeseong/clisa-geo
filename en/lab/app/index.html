@@ -149,6 +149,7 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .lead{font-size:14px;line-height:1.6;margin:2px 0 6px;color:var(--ink)}.nq a .t2{display:flex;flex-direction:column;min-width:0}.nq a .t2 small{font-size:12px;font-weight:500;color:var(--mut);margin-top:2px;line-height:1.45}
 .ans .lk{margin-top:10px}
 header.top .inb{font-weight:700;color:var(--acc);border-color:var(--acc);padding:5px 12px}header.top .inx{font:inherit;font-size:13px;border:0;background:none;color:var(--mut);padding:6px 4px 6px 8px;cursor:pointer}
+.foot{margin-top:20px;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.5;color:var(--mut)}.foot p{margin:0 0 4px}.foot p:last-child{margin-bottom:0}.foot a,.foot .fl{font:inherit;color:var(--mut);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}.foot .fold:not([hidden]){display:block;margin-top:6px}
 header.top .logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
 .fcp{display:flex;align-items:baseline;gap:10px;margin:10px 0 4px}.fcp b{font-size:34px;color:var(--acc)}.fcp span{font-size:12.5px;color:var(--mut)}
 .home-q{margin-top:16px}.home-q h1{font-size:19px;line-height:1.4;margin:2px 0 4px}.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px;margin-top:18px}
@@ -171,7 +172,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .ap:active .ic{transform:scale(.92);filter:brightness(.9)}
 .bar button:active{opacity:.5;transform:scale(.88)}
 .logo:active img,.blogo:active img{transform:scale(.86)}.logo img,.blogo img{transition:transform .1s ease}.logo:active .nm{opacity:.6}
-.lnk{padding:4px 0!important;display:inline}.left{line-height:2.1}
+.lnk{padding:4px 0!important;display:inline;text-align:left}.foot .fl{text-align:left}.left{line-height:2.1}
 #v.in{animation:vin .16s ease-out}@keyframes vin{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){#v.in{animation:none}.rw2:active,.fcd:active,.btn:active{transform:none}}
 .sec2.in2{animation:vin .2s ease-out}.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#141A26;color:#fff;font-size:13.5px;line-height:1.4;padding:10px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}.toast.on{opacity:1}
@@ -194,10 +195,12 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .navl{border-top:0;margin-top:22px;justify-content:center;gap:4px 18px}.navl span{display:none}
 .nq h2{font-size:12px;letter-spacing:.2px}.nq a{border-radius:0;margin:0;border-width:0 1px 1px}.nq h2+a{border-top-width:1px;border-top-left-radius:12px;border-top-right-radius:12px;margin-top:8px}.nq a:not(:has(+a)){border-bottom-left-radius:12px;border-bottom-right-radius:12px}
 .sep{margin:30px 0 8px}
+
+.left{display:flex;flex-direction:column;align-items:flex-start;line-height:1.5;margin-top:12px}.left b{font-size:12px;font-weight:800;color:var(--mut);margin-bottom:2px}.left>span{display:none}.left .lnk{display:block;padding:5px 0!important;text-align:left;line-height:1.45}
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/lab/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='babf2f9f1c',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='4c65654799',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/lab/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -259,9 +262,10 @@ function home(){
   h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">Week</span><span class="lb">Weekly summary</span></button>';
   h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">Note</span><span class="lb">Send feedback</span></button></div>';
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
-  h+='<p class="note">This app shows Clisa Geopolitics’ published work, unchanged. <a href="/en/">Clisa Geopolitics website ↗</a></p><p class="note" style="margin-top:6px">© 2026 Jae-Seong Ko · For information only, not investment advice · <button class="lnk" data-fold style="font-size:12px;color:var(--mut)">Copyright ▾</button><span class="fold" hidden style="display:block;margin-top:6px">The design, text and data compilations of Clisa Geopolitics are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Geopolitics” and the page address as the source. To reproduce or redistribute all or a substantial part, please ask for permission first at clisageo@clisa.ai.</span></p>';
+  h+=foot([]);
   V.innerHTML=h;window.scrollTo(0,0);ntCard();
 }
+function foot(L){return '<div class="foot">'+(L||[]).map(function(x){return '<p>'+e(x)+'</p>'}).join('')+'<p>This app shows Clisa Geopolitics’ published work, unchanged. <a href="/en/">Clisa Geopolitics website ↗</a> © 2026 Jae-Seong Ko · For information only, not investment advice · <button class="fl" data-fold>Copyright ▾</button><span class="fold" hidden>The design, text and data compilations of Clisa Geopolitics are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Geopolitics” and the page address as the source. To reproduce or redistribute all or a substantial part, please ask for permission first at clisageo@clisa.ai.</span></p></div>'}
 function bar(ic,col,t){return '<div class="bar"><button data-back aria-label="Back">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1><button class="blogo" data-go="home" aria-label="Clisa home"><img src="/en/lab/app/app-192.png" alt=""></button></div>'}
 function msgs(list,key,hl){
   var st=start(),sn=seen(key),h='',last='';
@@ -290,7 +294,7 @@ function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)
   var qs=typeof menuQ==='string'?[menuQ]:menuQ,Q=qs[Math.max(0,Math.min((nst||1)-1,qs.length-1))];
   var btn=function(s){return '<button class="rw2" data-sec="'+key+'|'+s.k+'"><span class="t"><b>'+e(s.q)+'</b>'+(s.sub?'<small>'+e(s.sub)+'</small>':'')+'</span><span class="ar">＋</span></button>'};
   var ah=later.filter(function(s){return s.st>nst});
-  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(ah.length?'<div class="left">Coming up · '+ah.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+(lf.length?'<div class="left">Skipped earlier · '+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
+  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(ah.length?'<div class="left"><b>Coming up</b>'+ah.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+(lf.length?'<div class="left"><b>Skipped earlier</b>'+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
   else if(lf.length)h+='<div class="menu"><div class="q">Would you like to see what you skipped?</div>'+lf.map(btn).join('')+'</div>';
   if(tail)h+=(nx.length||lf.length)?navLine():tail;
   return h}
@@ -480,7 +484,7 @@ function pickList(browse){var w7=wk7(),cnt=function(L){return L.filter(function(
   h+='<div class="or"><span>or</span></div><h3>By region</h3>'+R.map(function(x){var r=x[0],L=regItems(r[0]);return row('r:'+r[0],r[1],L[0]?L[0].h:'No recent news','<span class="cnt">'+x[1]+' this week</span>',browse?'#ask/r/'+r[0]:'')}).join('');
   return h}
 function startView(step,arg,browse){
-  var h=topHead()+'<section class="st">',I=ints(),base=browse?'#ask/':'#start/';
+  var h=topHead()+'<section class="st">',I=ints(),base=browse?'#ask/':'#start/',FN=[];
   if(step==='i'&&app(arg)){var id=arg,a=app(id),B=(DATA.boards||{})[id],C=B&&B.cur,IM=impOf(id),L=issueItems(id),FL=issueFc(id),fromR=ls('fromreg',null),W=C&&C.watch;
     h+='<a class="bk" href="'+base+(fromR?'r/'+fromR:'1')+'">‹ '+(fromR?e(reg(fromR)[1]):(browse?'Issues and regions':'First question'))+'</a>';
     h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>This week</small></div>';
@@ -494,7 +498,7 @@ function startView(step,arg,browse){
     h+=row('w:news','The news behind the assessment',L.length+(L.length===1?' news item':' news items')+', with sources','',go('news'));
     var DP=deeper(id);if(DP.length)h+='<h3>Go deeper</h3>'+DP.map(function(x){return '<a class="rw2" href="'+x[1]+'"><span class="t"><b>'+e(x[0])+'</b><small>'+e(x[2])+'</small></span><span class="ar">↗</span></a>'}).join('');
     if(browse){var it0={ax:'i',k:id,w:B?'pan':'news'};h+=isInt(it0)?'<p class="note">This issue is in your interests.</p>':'<button class="btn s" style="margin-top:10px" data-addint="i:'+id+'">☆ Add this issue to your interests</button>'}
-    else h+='<p class="note" style="margin-top:12px">Your choice is saved as an interest, and that briefing will come first on your home screen.</p>';
+    else FN.push('Your choice is saved as an interest, and its briefing will come first on your home screen. Interests are stored only on this device; if you turn on notifications, only the titles of the issues you follow are sent to Clisa.');
   }else if((step==='g'||step==='ge')&&impOf(arg)){var id=arg,a=app(id),I=impOf(id),last=ls('grp',null),EU=['NEU','SEU','WCEU'].filter(function(g){return I.by[g]}),qn=(ls('fromreg',null)?4:3)+(step==='ge'?1:0);
     var line=function(gs){var ws=gs.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null}),pp=gs.reduce(function(s,g){return s+pplFor(I,g).length},0);return (ws.length?'worse off in '+Math.max.apply(null,ws)+' of 100 futures · ':'')+pp+(pp===1?' path':' paths')};
     h+='<a class="bk" href="'+base+(step==='ge'?'g/':'i/')+id+'">‹ '+(step==='ge'?'Groups':e(a[1]))+'</a>';
@@ -524,7 +528,7 @@ function startView(step,arg,browse){
     h+=briefRow()+pickList(false);
     h+='<div class="ft"><button class="btn s" data-ans="ax:all">Skip and browse everything</button>'+(I.length?'':'<button class="skip" data-skip>Skip</button>')+'</div>';
   }
-  h+='<p class="note">Your interests are stored on this device. If you turn on notifications, only the names of the issues you follow are sent to Clisa, so the right alerts reach you.</p></section>';
+  h+='</section>'+foot(FN.length?FN:(['Your interests are stored on this device. If you turn on notifications, only the titles of the issues you follow are sent to Clisa, so the right alerts reach you.']));
   V.innerHTML=h;window.scrollTo(0,0)}
 function answer(f,v){
   if(f==='ax'){if(!ints().length)ss('prof',{ints:[],at:DATA.asof});go('');return}

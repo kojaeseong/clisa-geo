@@ -149,6 +149,7 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .lead{font-size:14px;line-height:1.6;margin:2px 0 6px;color:var(--ink)}.nq a .t2{display:flex;flex-direction:column;min-width:0}.nq a .t2 small{font-size:12px;font-weight:500;color:var(--mut);margin-top:2px;line-height:1.45}
 .ans .lk{margin-top:10px}
 header.top .inb{font-weight:700;color:var(--acc);border-color:var(--acc);padding:5px 12px}header.top .inx{font:inherit;font-size:13px;border:0;background:none;color:var(--mut);padding:6px 4px 6px 8px;cursor:pointer}
+.foot{margin-top:20px;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;line-height:1.5;color:var(--mut)}.foot p{margin:0 0 4px}.foot p:last-child{margin-bottom:0}.foot a,.foot .fl{font:inherit;color:var(--mut);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}.foot .fold:not([hidden]){display:block;margin-top:6px}
 header.top .logo{display:flex;align-items:center;gap:10px;background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
 .fcp{display:flex;align-items:baseline;gap:10px;margin:10px 0 4px}.fcp b{font-size:34px;color:var(--acc)}.fcp span{font-size:12.5px;color:var(--mut)}
 .home-q{margin-top:16px}.home-q h1{font-size:19px;line-height:1.4;margin:2px 0 4px}.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 8px;margin-top:18px}
@@ -171,7 +172,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .ap:active .ic{transform:scale(.92);filter:brightness(.9)}
 .bar button:active{opacity:.5;transform:scale(.88)}
 .logo:active img,.blogo:active img{transform:scale(.86)}.logo img,.blogo img{transition:transform .1s ease}.logo:active .nm{opacity:.6}
-.lnk{padding:4px 0!important;display:inline}.left{line-height:2.1}
+.lnk{padding:4px 0!important;display:inline;text-align:left}.foot .fl{text-align:left}.left{line-height:2.1}
 #v.in{animation:vin .16s ease-out}@keyframes vin{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){#v.in{animation:none}.rw2:active,.fcd:active,.btn:active{transform:none}}
 .sec2.in2{animation:vin .2s ease-out}.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#141A26;color:#fff;font-size:13.5px;line-height:1.4;padding:10px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.25);z-index:50;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}.toast.on{opacity:1}
@@ -194,10 +195,12 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .navl{border-top:0;margin-top:22px;justify-content:center;gap:4px 18px}.navl span{display:none}
 .nq h2{font-size:12px;letter-spacing:.2px}.nq a{border-radius:0;margin:0;border-width:0 1px 1px}.nq h2+a{border-top-width:1px;border-top-left-radius:12px;border-top-right-radius:12px;margin-top:8px}.nq a:not(:has(+a)){border-bottom-left-radius:12px;border-bottom-right-radius:12px}
 .sep{margin:30px 0 8px}
+/* 뒤에 이어질 질문(2026-11-14 운영자 "중간 맞춤 된 거야?"): 제목 한 줄, 질문은 한 줄씩 왼쪽 정렬, 구분점 없음 */
+.left{display:flex;flex-direction:column;align-items:flex-start;line-height:1.5;margin-top:12px}.left b{font-size:12px;font-weight:800;color:var(--mut);margin-bottom:2px}.left>span{display:none}.left .lnk{display:block;padding:5px 0!important;text-align:left;line-height:1.45}
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/lab/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='c994a2bb3b',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='4a9cd7dfe3',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -263,9 +266,11 @@ function home(){
   h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span></button>';
   h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">의견</span><span class="lb">운영자에게 보내기</span></button></div>';
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
-  h+='<p class="note">이 앱은 클리사 지오폴리틱스의 공개 자료를 그대로 보여 줍니다. <a href="/">클리사 지오폴리틱스 홈페이지 ↗</a></p><p class="note" style="margin-top:6px">© 2026 고재성 · 정보 제공만을 위한 분석이며 투자 자문이 아닙니다 · <button class="lnk" data-fold style="font-size:12px;color:var(--mut)">저작권 안내 ▾</button><span class="fold" hidden style="display:block;margin-top:6px">클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 \'클리사 지오폴리틱스\'와 해당 페이지 주소를 출처로 밝혀 주십시오. 전부 또는 상당 부분을 복제·재배포하려면 clisageo@clisa.ai 로 먼저 허락을 받아 주십시오.</span></p>';
+  h+=foot([]);
   V.innerHTML=h;window.scrollTo(0,0);ntCard();
 }
+// 화면 맨 아래 안내(2026-11-14 운영자: 정렬·줄 간격 정리, 첫 질문 화면에도 저작권 줄): 한 묶음, 같은 간격
+function foot(L){return '<div class="foot">'+(L||[]).map(function(x){return '<p>'+e(x)+'</p>'}).join('')+'<p>이 앱은 클리사 지오폴리틱스의 공개 자료를 그대로 보여 줍니다. <a href="/">클리사 지오폴리틱스 홈페이지 ↗</a> © 2026 고재성 · 정보 제공만을 위한 분석이며 투자 자문이 아닙니다 · <button class="fl" data-fold>저작권 안내 ▾</button><span class="fold" hidden>클리사 지오폴리틱스의 화면·문안과 자료 편집물은 저작권법의 보호를 받습니다. 링크 공유와 부분 인용은 가능하며, 인용할 때는 \'클리사 지오폴리틱스\'와 해당 페이지 주소를 출처로 밝혀 주십시오. 전부 또는 상당 부분을 복제·재배포하려면 clisageo@clisa.ai 로 먼저 허락을 받아 주십시오.</span></p></div>'}
 function bar(ic,col,t){return '<div class="bar"><button data-back aria-label="이전 화면으로">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1><button class="blogo" data-go="home" aria-label="클리사 첫 화면으로"><img src="/lab/app/app-192.png" alt=""></button></div>'}
 function msgs(list,key,hl){
   var st=start(),sn=seen(key),h='',last='';
@@ -296,7 +301,7 @@ function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)
   var qs=typeof menuQ==='string'?[menuQ]:menuQ,Q=qs[Math.max(0,Math.min((nst||1)-1,qs.length-1))];
   var btn=function(s){return '<button class="rw2" data-sec="'+key+'|'+s.k+'"><span class="t"><b>'+e(s.q)+'</b>'+(s.sub?'<small>'+e(s.sub)+'</small>':'')+'</span><span class="ar">＋</span></button>'};
   var ah=later.filter(function(s){return s.st>nst});
-  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(ah.length?'<div class="left">뒤에 이어질 질문 · '+ah.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+(lf.length?'<div class="left">앞에서 고르지 않은 것 · '+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
+  if(nx.length)h+='<div class="menu"><div class="q">'+e(Q)+'</div>'+nx.map(btn).join('')+(ah.length?'<div class="left"><b>뒤에 이어질 질문</b>'+ah.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+(lf.length?'<div class="left"><b>앞에서 고르지 않은 것</b>'+lf.map(function(s){return '<button class="lnk" data-sec="'+key+'|'+s.k+'">'+e(s.q)+'</button>'}).join('<span> · </span>')+'</div>':'')+'</div>';
   else if(lf.length)h+='<div class="menu"><div class="q">앞에서 고르지 않은 것도 보고드릴까요?</div>'+lf.map(btn).join('')+'</div>';
   if(tail)h+=(nx.length||lf.length)?navLine():tail;
   return h}
@@ -492,7 +497,7 @@ function pickList(browse){var w7=wk7(),cnt=function(L){return L.filter(function(
   return h}
 // 질문 화면. browse = 둘러보기(#ask): 골라도 관심사로 저장하지 않고, '관심사에 더하기'를 따로 둔다
 function startView(step,arg,browse){
-  var h=topHead()+'<section class="st">',I=ints(),base=browse?'#ask/':'#start/';
+  var h=topHead()+'<section class="st">',I=ints(),base=browse?'#ask/':'#start/',FN=[];
   if(step==='i'&&app(arg)){var id=arg,a=app(id),B=(DATA.boards||{})[id],C=B&&B.cur,IM=impOf(id),L=issueItems(id),FL=issueFc(id),fromR=ls('fromreg',null),W=C&&C.watch;
     h+='<a class="bk" href="'+base+(fromR?'r/'+fromR:'1')+'">‹ '+(fromR?e(reg(fromR)[1])+'로':(browse?'사안·지역 목록으로':'처음 질문으로'))+'</a>';
     h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>이번 주</small></div>';
@@ -506,7 +511,7 @@ function startView(step,arg,browse){
     h+=row('w:news','판단의 근거가 된 소식','이 사안의 소식 '+L.length+'건 · 원문 출처','',go('news'));
     var DP=deeper(id);if(DP.length)h+='<h3>더 깊이 알아보기</h3>'+DP.map(function(x){return '<a class="rw2" href="'+x[1]+'"><span class="t"><b>'+e(x[0])+'</b><small>'+e(x[2])+'</small></span><span class="ar">↗</span></a>'}).join('');
     if(browse){var it0={ax:'i',k:id,w:B?'pan':'news'};h+=isInt(it0)?'<p class="note">이 사안은 관심사에 들어 있습니다.</p>':'<button class="btn s" style="margin-top:10px" data-addint="i:'+id+'">☆ 이 사안을 관심사에 더하기</button>'}
-    else h+='<p class="note" style="margin-top:12px">고르시면 관심사로 저장되어, 다음부터 그 보고를 첫 화면 맨 앞에 올려 드립니다.</p>';
+    else FN.push('고르시면 관심사로 저장되어, 다음부터 그 보고를 첫 화면 맨 앞에 올려 드립니다. 관심사는 이 기기에만 저장되며, 알림을 받으시면 선택하신 사안의 제목만 클리사 서버로 보냅니다.');
   }else if((step==='g'||step==='ge')&&impOf(arg)){var id=arg,a=app(id),I=impOf(id),last=ls('grp',null),EU=['NEU','SEU','WCEU'].filter(function(g){return I.by[g]}),qn=(ls('fromreg',null)?4:3)+(step==='ge'?1:0);
     var line=function(gs){var ws=gs.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null}),pp=gs.reduce(function(s,g){return s+pplFor(I,g).length},0);return (ws.length?'현재보다 나쁜 삶 100번 중 '+Math.max.apply(null,ws)+'번 · ':'')+'이어지는 길 '+pp+'개'};
     h+='<a class="bk" href="'+base+(step==='ge'?'g/':'i/')+id+'">‹ '+(step==='ge'?'지역 고르기로':e(a[1])+'로')+'</a>';
@@ -536,7 +541,7 @@ function startView(step,arg,browse){
     h+=briefRow()+pickList(false);
     h+='<div class="ft"><button class="btn s" data-ans="ax:all">고르지 않고 전부 훑어보기</button>'+(I.length?'':'<button class="skip" data-skip>건너뛰기</button>')+'</div>';
   }
-  h+='<p class="note">고르신 관심사는 이 기기에 저장됩니다. 알림을 받으시면 알맞은 알림을 보내 드리기 위해 고르신 사안의 이름만 클리사 서버로 보냅니다.</p></section>';
+  h+='</section>'+foot(FN.length?FN:(['고르신 관심사는 이 기기에 저장됩니다. 알림을 받으시면 알맞은 알림을 보내 드리기 위해 선택하신 사안의 제목만 클리사 서버로 보냅니다.']));
   V.innerHTML=h;window.scrollTo(0,0)}
 function answer(f,v){
   if(f==='ax'){if(!ints().length)ss('prof',{ints:[],at:DATA.asof});go('');return}
