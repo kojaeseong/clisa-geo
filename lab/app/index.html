@@ -114,6 +114,18 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .btn{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:999px;padding:9px 16px;background:var(--acc);color:#fff;cursor:pointer}.btn.s{background:var(--chip);color:var(--ink)}.btn:disabled{opacity:.5;cursor:default}
 .fm label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:12px 0 4px}.fm textarea,.fm input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px}.fm textarea{min-height:150px;resize:vertical}
 .fm .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.fm .ctx{font-size:12.5px;color:var(--mut)}.fm .rs{font-size:14px;margin-top:10px;line-height:1.6}.fm .rs.er{color:var(--red)}
+.st h1{font-size:21px;line-height:1.4;margin:6px 0 4px}.st .sub{font-size:13.5px;color:var(--sub);line-height:1.6;margin:0 0 14px}.st h3{font-size:12.5px;color:var(--mut);margin:16px 0 8px}
+.ops{display:flex;flex-wrap:wrap;gap:8px}.op{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 14px;cursor:pointer}.op.on{border-color:var(--acc);background:var(--acc);color:#fff}
+.wn2{display:flex;flex-direction:column;gap:8px}.wn2 button{font:inherit;text-align:left;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:13px 14px;cursor:pointer}.wn2 button b{display:block;font-size:15.5px}.wn2 button span{display:block;font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.5}
+.st .ft{display:flex;gap:8px;margin-top:18px;align-items:center}.st .skip{font:inherit;font-size:13px;color:var(--mut);background:none;border:0;cursor:pointer;margin-left:auto}
+.dots{display:flex;gap:6px;margin:4px 0 0}.dots i{width:22px;height:4px;border-radius:2px;background:var(--line)}.dots i.on{background:var(--acc)}
+.nq{margin:18px 0 6px}.nq h2{font-size:13px;color:var(--mut);margin:0 0 8px}.nq a{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:700;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-top:7px;text-decoration:none}.nq a::after{content:'›';margin-left:auto;color:var(--acc);font-size:18px}
+.pf{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--sub);margin:-4px 0 10px}.pf a{color:var(--acc);font-weight:700;text-decoration:none;margin-left:auto}
+.pc.fav{box-shadow:0 0 0 2px var(--acc)}.pc .fv{font-size:10.5px;font-weight:800;color:var(--acc)}
+.hb{display:flex;height:26px;border-radius:8px;overflow:hidden;margin:6px 0 4px;font-size:11px;font-weight:700;color:#fff}.hb i{display:flex;align-items:center;justify-content:center;font-style:normal;min-width:0;white-space:nowrap}
+.hb .x{background:#B91C1C}.hb .w{background:var(--up)}.hb .b{background:var(--dn)}.hb .s{background:#A3ABBB}.hbl{font-size:12px;color:var(--mut);line-height:1.5}
+.ir{padding:10px 0;border-top:1px solid var(--line)}.ir:first-of-type{border-top:0}.ir .t{display:flex;align-items:baseline;gap:8px}.ir .t b{font-size:14.5px}.ir .t small{margin-left:auto;font-size:12px;color:var(--mut)}.ir p{margin:4px 0 0;font-size:12.5px;line-height:1.55;color:var(--sub)}
+.pth{display:inline-block;font-size:11px;font-weight:800;border-radius:5px;padding:1px 6px;margin-right:6px;background:var(--chip);color:var(--sub)}
 </style></head><body><div class="wrap" id="v"></div>
 <script>
 (function(){
@@ -149,7 +161,7 @@ function home(){
   var dg=DATA.digest[0];
   var h='<header class="top"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></header>';
   var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'];
-  var reads=DATA.apps.map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a[1],C.short,C.ok]:null}).filter(Boolean);
+  var F0=favs(),reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a[1],C.short,C.ok]:null}).filter(Boolean);
   h+='<section class="wk"><div class="q">오늘 세계에서 무엇이 어느 쪽으로 움직였나</div><h2>이번 주 세계</h2>';
   h+=reads.length?'<ul class="wkl">'+reads.map(function(r){return '<li><b>'+e(r[0])+'</b><span>'+e(r[1])+'으로</span></li>'}).join('')+'</ul>'+(reads.some(function(r){return !r[2]})?'<span class="draft" style="margin:0">결재 전 시안</span>':''):'<p>이번 주 판의 읽기는 매주 월요일에 고칩니다.</p>';
   if(W){h+='<div class="wfold"><button class="more2" data-fold style="padding:0">세계의 앞날 5가지와 그 틀 ('+md(W.asof)+' 판단) ▾</button><div class="fold" hidden>'+W.scen.map(function(x,i){var t=thinker(x[3]);return '<a class="wr" href="#lens"><span class="wn"><b>'+e(x[1])+'</b><small>'+e(t?t.n+'의 틀':'')+'</small></span><span class="wbar"><i style="width:'+(x[2]/W.scen[0][2]*100)+'%;background:'+TC[i%5]+'"></i></span><b class="wp">'+x[2]+'%</b></a>'}).join('')+
@@ -160,14 +172,18 @@ function home(){
   wg+='<ul>'+latest.map(function(x){var a=app(x.a[0]);return '<li data-item="'+x.id+'" data-app="'+x.a[0]+'"><span class="tg">'+e(a[2])+'</span><span>'+e(x.h)+'</span></li>'}).join('')+'</ul>';
   wg+='<a class="more" href="/brief/'+DATA.asof+'/">정세 브리핑 전체 보기 ›</a></section>';
   var mode=ls('mode','issue');if(mode!=='issue'&&mode!=='region')mode='issue';
+  var F=favs(),P=prof();
+  if(draft()){if(P&&F.length)h+='<div class="pf">관심: '+e(F.map(function(k){var x=k[0]==='i'?app(k.slice(2)):reg(k.slice(2));return x?x[1]:''}).filter(Boolean).join(' · '))+'<a href="#start/1">관심사 바꾸기</a></div>';
+    else h+='<div class="pf">'+(P?'모든 사안을 같은 순서로 보여 드립니다.':'관심 있는 사안을 고르면 첫 화면을 그에 맞춰 드립니다.')+'<a href="#start/1">'+(P?'관심사 바꾸기':'고르기')+'</a></div>'}
+  var ord=function(L,pre){return L.slice().sort(function(a,b){return (F.indexOf(pre+b[0])>=0)-(F.indexOf(pre+a[0])>=0)})};
   h+='<div class="seg"><button data-mode="issue" class="'+(mode==='issue'?'on':'')+'">사안별</button><button data-mode="region" class="'+(mode==='region'?'on':'')+'">지역별</button></div>';
   if(mode==='issue'){
-    h+='<div class="cards">'+DATA.apps.map(function(a){var n=unread('i.'+a[0],issueItems(a[0])).length,B=(DATA.boards||{})[a[0]],C=B&&B.cur,ok=C&&C.kn!=null&&(C.ok||draft()),body='';
+    h+='<div class="cards">'+ord(DATA.apps,'i:').map(function(a){var n=unread('i.'+a[0],issueItems(a[0])).length,B=(DATA.boards||{})[a[0]],C=B&&B.cur,ok=C&&C.kn!=null&&(C.ok||draft()),body='';
       if(ok)body='<div class="mini"><div class="ln"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div><div class="rd"><b>이번 주</b> '+e(C.short)+(C.ok?'':' <span class="draft">시안</span>')+'</div>';
       else{var tl=tilt(a[0]);if(tl)body='<div class="rd"><b>이번 주 전망 신호</b> '+(tl.v>0?'↗ ':'↘ ')+e(tl.n)+(tl.v>0?' 쪽':'에서 멀어짐')+'</div>';else{var it=issueItems(a[0])[0];if(it)body='<div class="rd">'+e(it.h)+'</div>'}}
-      return '<button class="pc" style="--acc2:'+a[3]+'" data-open="i:'+a[0]+'"><div class="hd"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><span class="nm2">'+e(a[1])+'</span></div>'+body+badge(n)+'</button>'}).join('')+'</div>'+wg+'<div class="grid" style="margin-top:18px">';
+      return '<button class="pc'+(F.indexOf('i:'+a[0])>=0?' fav':'')+'" style="--acc2:'+a[3]+'" data-open="i:'+a[0]+'"><div class="hd"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><span class="nm2">'+e(a[1])+'</span></div>'+body+badge(n)+'</button>'}).join('')+'</div>'+wg+'<div class="grid" style="margin-top:18px">';
   }else{h+=wg+'<div class="grid" style="margin-top:14px">';
-    DATA.regions.forEach(function(r){var n=unread('r.'+r[0],regItems(r[0])).length;
+    ord(DATA.regions,'r:').forEach(function(r){var n=unread('r.'+r[0],regItems(r[0])).length;
       h+='<button class="ap" data-open="r:'+r[0]+'"><span class="ic" style="background:'+r[3]+';font-size:'+(r[2].length>3?12:15)+'px">'+e(r[2])+'</span><span class="lb">'+e(r[1])+'</span>'+badge(n)+'</button>'});
   }
   h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">전망</span><span class="lb">바뀐 전망</span>'+badge(fcChanged().length)+'</button>';
@@ -198,9 +214,11 @@ function fcList(list,limit){
 }
 function issue(id,arg){
   var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||draft())&&C.L),dl=C&&!C.ok?'<span class="draft">결재 전 시안</span>':'';
-  var tab=(arg==='news'||arg==='fc'||arg==='pan')?arg:(arg?'news':(B?'pan':'news')),hl=(arg&&arg!=='news'&&arg!=='fc'&&arg!=='pan')?arg:null;
+  var I=impOf(id),TB={news:1,fc:1,pan:1,imp:1};
+  var tab=TB[arg]?arg:(arg?'news':(wantTab(id)||(B?'pan':'news'))),hl=(arg&&!TB[arg])?arg:null;if(tab==='imp'&&!I)tab='news';if(tab==='pan'&&!B)tab='news';
   var h=bar(a[2],a[3],a[1]),q=location.search||'';
-  var tb=[];if(B)tb.push(['pan','판세']);tb.push(['news','소식']);tb.push(['fc','전망']);
+  var tb=[];if(B)tb.push(['pan','판세']);if(I)tb.push(['imp','영향']);tb.push(['news','소식']);tb.push(['fc','전망']);
+  var L2=function(t){return q+'#i/'+id+'/'+t};
   h+='<div class="tabs">'+tb.map(function(t){return '<a href="'+q+'#i/'+id+'/'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+(t[0]==='news'?(function(){var n=unread(key,list).length;return n?' '+n:''})():'')+'</a>'}).join('')+'</div>';
   if(tab==='pan'){
     h+='<div class="q">이 판은 어디로 가고 있고, 왜 그런가</div>';
@@ -231,7 +249,23 @@ function issue(id,arg){
     else if(B.thinkers.length){h+='<div class="card"><h2>이 판을 보는 틀 · 사상가는 이렇게 봅니다</h2>'+B.thinkers.map(function(tid){var t=thinker(tid);return t?'<div class="th"><b>'+e(t.n)+'</b><small>'+e(t.role)+'</small><p class="clamp">'+e(t.now)+'</p><button class="mo" data-more>더 보기</button></div>':''}).join('')+'<a class="lk" href="#lens">세계를 보는 틀 모두 보기 ›</a></div>'}
     if(cok&&C.watch)h+='<div class="card"><h2>이런 소식이 나오면 판이 바뀐 것입니다'+dl+'</h2>'+C.watch.map(function(w){return '<div class="wt"><span class="tg '+w[1]+'">'+e(w[0])+'</span>'+e(w[2])+'</div>'}).join('')+'</div>';
     if(cok&&C.learn)h+='<div class="card"><h2>이 판세를 이해하는 배움'+dl+'</h2>'+(C.learn.t?'<div class="ac"><b>'+e(C.learn.t)+'</b><p>'+e(C.learn.d)+'</p></div>':'')+C.learn.links.map(function(l){return '<a class="lk" href="'+l[1]+'">'+e(l[0])+' ›</a>'}).join('')+'<a class="lk" href="'+q+'#i/'+id+'/fc">이 사안의 전망 '+DATA.fc.filter(function(f){return f.a.indexOf(id)>=0}).length+'개 ›</a></div>';
+    h+=nextQ([I?['이 판이 한국 국민과 산업에 주는 영향은?',L2('imp')]:null,['최근 이 사안에서 무슨 일이 있었나?',L2('news')],['앞으로 무엇이 실현될까?',L2('fc')],['이 판을 다르게 보는 틀은?','#lens']]);
     h+='<a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">이 판세에 대한 의견을 운영자에게 보내기 ›</a>';
+    V.innerHTML=h;window.scrollTo(0,0);return;
+  }
+  if(tab==='imp'){
+    h+='<div class="q">이 판이 한국 국민과 산업에 무엇을 바꾸나</div>';
+    if(I.life){h+='<div class="card"><h2>한국 국민의 생활 · 2030년까지 100번의 미래</h2>'+hbar(I.life.now)+
+      (I.life.bad.length?'<p style="font-size:13px;line-height:1.6;margin:8px 0 0">현재보다 나쁜 삶이 되는 전개 · <b>'+e(I.life.bad.map(function(x){return x[0]+'('+x[1]+'%)'}).join(', '))+'</b></p>':'<p style="font-size:13px;line-height:1.6;margin:8px 0 0">어느 전개에서도 한국 국민의 생활이 현재와 크게 달라지지 않는다고 판단합니다.</p>')+
+      '<div class="hbl" style="margin-top:6px">클리사 지오폴리틱스가 판단한 전개 확률을 100번의 미래로 바꾼 것입니다. 국민의 삶 '+md(I.asof.life)+' 기준</div><a class="lk" href="/life/">국민의 삶 전체 보기 ›</a></div>'}
+    if(I.ppl.length)h+='<div class="card"><h2>어떤 길로 한국 국민에게 이어지나 · '+e(I.fp)+'</h2>'+I.ppl.map(function(c){return '<div class="cell"><span class="pth">'+e(c[0])+'</span><small style="color:var(--mut)">확신도 '+e(c[2])+'</small><div style="margin-top:4px">'+e(c[1])+'</div></div>'}).join('')+'<div class="hbl" style="margin-top:6px">통합신경망 '+md(I.asof.links)+' 기준 판단</div><a class="lk" href="/links/">통합신경망에서 보기 ›</a></div>';
+    if(I.ind.length){var ir=function(r){return '<div class="ir"><div class="t"><b>'+e(r.n)+'</b></div>'+hbar(r.d)+(r.bad?'<p><span class="tg2 tr">악화되는 경우</span>'+e(r.bad[0])+'('+r.bad[1]+'%) · '+e(r.bad[2])+'</p>':'')+(r.good?'<p><span class="tg2 tw">개선되는 경우</span>'+e(r.good[0])+'('+r.good[1]+'%) · '+e(r.good[2])+'</p>':'')+'</div>'};
+      var mv=I.ind.filter(function(r){return r.d.s<100}),st=I.ind.filter(function(r){return r.d.s>=100});
+      h+='<div class="card"><h2>한국 업종의 영업이익 · 2030년까지 100번의 미래</h2>'+(mv.length?mv.slice(0,4).map(ir).join(''):'<p class="empty">어느 업종도 정상 영업이익에서 10% 넘게 달라지지 않는다고 판단합니다.</p>')+
+        (mv.length>4?'<button class="more2" data-fold>나머지 '+(mv.length-4)+'개 업종 ▾</button><div class="fold" hidden>'+mv.slice(4).map(ir).join('')+'</div>':'')+
+        (st.length&&mv.length?'<div class="hbl" style="margin-top:8px">어느 전개에서도 비슷한 업종: '+e(st.map(function(r){return r.n}).join(', '))+'</div>':'')+
+        '<div class="hbl" style="margin-top:6px">악화됨·개선됨은 정상 영업이익(10년 영업이익률 중앙값 기준)보다 10% 넘게 줄거나 늘어나는 경우, 크게 악화됨은 30% 넘게 줄거나 업종이 적자가 되는 경우입니다. 산업별 영향 '+md(I.asof.ind)+' 판단</div><a class="lk" href="/industry/">산업별 영향 전체 보기 ›</a></div>'}
+    h+=nextQ([B?['왜 이렇게 판단하나 · 판을 당기는 힘',L2('pan')]:null,['앞으로 무엇이 실현될까?',L2('fc')],['이 판을 다르게 보는 틀은?','#lens']]);
     V.innerHTML=h;window.scrollTo(0,0);return;
   }
   if(tab==='fc'){
@@ -239,9 +273,11 @@ function issue(id,arg){
     var dg=DATA.digest.filter(function(d){return d.a===id});
     h+='<div class="card"><h2>이 사안의 전망 · 최근 바뀐 순</h2>'+fcList(DATA.fc.filter(function(f){return f.a.indexOf(id)>=0}),100)+'</div>';
     if(dg.length)h+='<div class="card dg"><h2>이 사안의 흐름 · 주간 정세 요약</h2>'+dg.map(function(d){return '<b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button>'}).join('<div style="height:12px"></div>')+'</div>';
+    h+=nextQ([B?['이 전망들이 가리키는 판의 방향은?',L2('pan')]:null,I?['실현되면 한국에는 어떤 영향이 있나?',L2('imp')]:null,['최근 무슨 일이 있었나?',L2('news')]]);
     V.innerHTML=h;window.scrollTo(0,0);return;
   }
   h+='<div class="q">무슨 일이 있었나 · 이 사안의 소식</div>'+msgs(list,key,hl);
+  h+=nextQ([B?['이 소식들로 판은 어느 쪽으로 기울었나?',L2('pan')]:null,I?['한국 국민과 산업에는 어떤 영향이 있나?',L2('imp')]:null,['앞으로 무엇이 실현될까?',L2('fc')]]);
   V.innerHTML=h;markRead(key,list);
   if(hl){var m=document.getElementById('m-'+hl);if(m)m.scrollIntoView({block:'center'})}else window.scrollTo(0,0);
 }
@@ -257,6 +293,8 @@ function region(id){
   var h=bar(r[2],r[3],r[1]);
   h+='<div class="card"><h2>이 지역 소식에 연결된 전망 · 최근 바뀐 순</h2>'+fcList(DATA.fc.filter(function(f){return ids.indexOf(f.id)>=0}),6)+'</div>';
   h+='<div class="sec">소식 · 다루는 분쟁과 사건의 지역 기준</div>'+msgs(list,key);
+  var ca={};list.forEach(function(x){x.a.forEach(function(k){if(k!=='world')ca[k]=(ca[k]||0)+1})});
+  h+=nextQ(Object.keys(ca).sort(function(a,b){return ca[b]-ca[a]}).slice(0,3).map(function(k){var a=app(k);return a?[a[1]+' · 판은 어디로 가고 있나?','#i/'+k+'/'+((DATA.boards||{})[k]?'pan':'news')]:null}));
   V.innerHTML=h;markRead(key,list);window.scrollTo(0,0);
 }
 function fcs(){
@@ -278,6 +316,29 @@ function dgs(){
   V.innerHTML=h;window.scrollTo(0,0);
 }
 var API='https://api.clisa.ai',CTX='첫 화면',OPENED=Date.now();
+// 관심사: 이 기기에만 저장(clisa.prof). sel = 고른 사안·지역('i:iran','r:neasia'), 비면 전부. want = 먼저 볼 것
+function prof(){return ls('prof',null)}
+var WANT=[['news','무슨 일이 있었나','매일의 정세 브리핑 소식'],['pan','판이 어디로 가고 있고, 왜 그런가','판을 당기는 힘과 클리사 지오폴리틱스의 판단'],['imp','한국 국민과 산업에 어떤 영향을 주나','국민의 생활과 업종별 영업이익이 어떻게 달라지나'],['fc','앞으로 무엇이 실현될까','기한과 확률을 밝힌 전망']];
+function startView(step){
+  var P=prof()||{sel:[],want:''},T=ls('tmpsel',null);if(!T){T=P.sel.slice();ss('tmpsel',T)}
+  var h='<section class="st">';
+  if(step!=='2'){
+    h+='<div class="dots"><i class="on"></i><i></i></div><div class="q" style="margin-top:12px">처음 오셨다면 두 가지만 묻겠습니다</div><h1>어떤 소식이 궁금하십니까?</h1><p class="sub">여러 개를 고르실 수 있습니다. 고른 사안과 지역이 첫 화면 맨 앞에 옵니다.</p>';
+    h+='<h3>사안</h3><div class="ops">'+DATA.apps.map(function(a){var k='i:'+a[0];return '<button class="op'+(T.indexOf(k)>=0?' on':'')+'" data-pick="'+k+'">'+e(a[1])+'</button>'}).join('')+'</div>';
+    h+='<h3>지역</h3><div class="ops">'+DATA.regions.map(function(r){var k='r:'+r[0];return '<button class="op'+(T.indexOf(k)>=0?' on':'')+'" data-pick="'+k+'">'+e(r[1])+'</button>'}).join('')+'</div>';
+    h+='<div class="ft"><button class="btn" data-step="2">'+(T.length?'다음':'전부 보겠습니다 · 다음')+'</button><button class="skip" data-skip>건너뛰기</button></div>';
+  }else{
+    h+='<div class="dots"><i class="on"></i><i class="on"></i></div><div class="q" style="margin-top:12px">두 번째 질문</div><h1>무엇이 가장 궁금하십니까?</h1><p class="sub">사안을 열면 고르신 것부터 보여 드립니다. 다른 것도 화면 위 탭에서 언제든 보실 수 있습니다.</p>';
+    h+='<div class="wn2">'+WANT.map(function(w){return '<button data-want="'+w[0]+'"'+(P.want===w[0]?' style="border-color:var(--acc)"':'')+'><b>'+e(w[1])+'</b><span>'+e(w[2])+'</span></button>'}).join('')+'</div>';
+    h+='<div class="ft"><button class="btn s" data-step="1">‹ 이전 질문</button><button class="skip" data-skip>건너뛰기</button></div>';
+  }
+  h+='<p class="note">고르신 내용은 이 기기에만 저장되고 클리사 서버로 보내지 않습니다. 첫 화면 아래 \'관심사 바꾸기\'에서 언제든 바꾸실 수 있습니다.</p></section>';
+  V.innerHTML=h;window.scrollTo(0,0)}
+function favs(){var P=prof();return P&&P.sel?P.sel:[]}
+function wantTab(id){var P=prof(),w=P&&P.want,B=(DATA.boards||{})[id],I=impOf(id);if(w==='pan'&&B)return 'pan';if(w==='imp'&&I)return 'imp';if(w==='fc')return 'fc';if(w==='news')return 'news';return null}
+function impOf(id){var I=(DATA.impact||{})[id];return I&&(I.ppl.length||I.ind.length||I.life)?I:null}
+function hbar(d){var L={x:'크게 악화됨',w:'악화됨',b:'개선됨',s:'현재와 비슷함'};return '<div class="hb">'+['x','w','b','s'].filter(function(k){return d[k]>0}).map(function(k){return '<i class="'+k+'" style="flex:'+d[k]+'">'+(d[k]>=9?d[k]:'')+'</i>'}).join('')+'</div><div class="hbl">'+['x','w','b','s'].filter(function(k){return d[k]>0}).map(function(k){return L[k]+' '+d[k]}).join(' · ')+'</div>'}
+function nextQ(list){list=list.filter(Boolean);if(!list.length)return '';return '<div class="nq"><h2>다음에 물어볼 것</h2>'+list.map(function(x){return '<a href="'+x[1]+'">'+e(x[0])+'</a>'}).join('')+'</div>'}
 function ctxOf(r){if(r[0]==='i'&&app(r[1]))return app(r[1])[1]+' · '+({pan:'판세',fc:'전망'}[r[2]]||'소식');if(r[0]==='r'&&reg(r[1]))return reg(r[1])[1];return {fc:'바뀐 전망',dg:'주간 정세 요약',lens:'세계를 보는 틀'}[r[0]]||'첫 화면'}
 function msgView(){
   var h=bar('의견','#3D5A80','운영자에게 보내기')+'<div class="q">클리사 지오폴리틱스 운영자에게 보내는 글</div>';
@@ -314,12 +375,16 @@ function ntCard(){var el=document.getElementById('nt');if(!el)return;
 function clearNotes(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.getNotifications?reg.getNotifications():[]}).then(function(ns){ns.forEach(function(n){n.close()})}).catch(function(){});if(navigator.clearAppBadge)navigator.clearAppBadge().catch(function(){})}
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clearNotes()});clearNotes();
 function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
-  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2]);else if(r[0]==='r'&&reg(r[1]))region(r[1]);else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else home();if(r[0]!=='msg')CTX=ctxOf(r)}
+  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2]);else if(r[0]==='r'&&reg(r[1]))region(r[1]);else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='start')startView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start')CTX=ctxOf(r)}
 function go(h){var cur=location.hash.replace(/^#/,'');if(cur===h)route();else location.hash=h}
-V.addEventListener('click',function(ev){var t=ev.target.closest('[data-open],[data-go],[data-mode],[data-item],[data-more],[data-fold]');if(!t)return;
+V.addEventListener('click',function(ev){var t=ev.target.closest('[data-open],[data-go],[data-mode],[data-item],[data-more],[data-fold],[data-pick],[data-step],[data-want],[data-skip]');if(!t)return;
   if(t.hasAttribute('data-fold')){var f=t.nextElementSibling;f.hidden=!f.hidden;t.textContent=t.textContent.replace(f.hidden?'▴':'▾',f.hidden?'▾':'▴');return}
   if(t.hasAttribute('data-more')){var p=t.previousElementSibling;if(p){p.classList.toggle('clamp');t.textContent=p.classList.contains('clamp')?'더 보기':'접기'}return}
   if(t.dataset.mode){ss('mode',t.dataset.mode);home();return}
+  if(t.dataset.pick){var T=ls('tmpsel',[]),k=t.dataset.pick,i=T.indexOf(k);if(i>=0)T.splice(i,1);else T.push(k);ss('tmpsel',T);startView('1');return}
+  if(t.dataset.step){go('start/'+t.dataset.step);return}
+  if(t.dataset.want){ss('prof',{sel:ls('tmpsel',[]),want:t.dataset.want,at:DATA.asof});try{localStorage.removeItem('clisa.tmpsel')}catch(x){};if(favs().some(function(k){return k.indexOf('r:')===0})&&!favs().some(function(k){return k.indexOf('i:')===0}))ss('mode','region');go('');return}
+  if(t.hasAttribute('data-skip')){ss('skip',1);try{localStorage.removeItem('clisa.tmpsel')}catch(x){};go('');return}
   if(t.dataset.item){go('i/'+t.dataset.app+'/'+t.dataset.item);return}
   if(t.dataset.go){go(t.dataset.go==='home'?'':t.dataset.go);return}
   var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens'||o==='msg')go(o);else go(o.replace(':','/'))});
