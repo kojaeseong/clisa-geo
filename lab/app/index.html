@@ -197,10 +197,12 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .sep{margin:30px 0 8px}
 /* 뒤에 이어질 질문(2026-11-14 운영자 "중간 맞춤 된 거야?"): 제목 한 줄, 질문은 한 줄씩 왼쪽 정렬, 구분점 없음 */
 .left{display:flex;flex-direction:column;align-items:flex-start;line-height:1.5;margin-top:12px}.left b{font-size:12px;font-weight:800;color:var(--mut);margin-bottom:2px}.left>span{display:none}.left .lnk{display:block;padding:5px 0!important;text-align:left;line-height:1.45}
+/* 끈 끝 이름(2026-11-14 운영자 승인): 작은 끈에도 양쪽 끝이 무엇인지 */
+.mlab{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;font-weight:700;line-height:1.25;color:var(--mut);margin:-9px 0 8px}.mlab span:last-child{text-align:right}.mlab2{font-size:11px;color:var(--mut);margin:-3px 0 6px;text-align:center}
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/lab/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='4a9cd7dfe3',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='8a8edf3830',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -443,7 +445,7 @@ function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabF
 function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
 function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
 function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||draft()))return '이번 주 '+C.short;var it=issueItems(id)[0];return it?it.h:''}
-function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'}
+function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">흐린 점은 지난주</div>':''):'')}
 function worse(d){return d.x+d.w}
 function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
 function cnm(k){return k.indexOf('us:')===0?'미국':'한국'}
@@ -529,7 +531,7 @@ function startView(step,arg,browse){
     h+='<a class="bk" href="'+(browse?'#':'#start/1')+'">‹ '+(browse?'첫 화면으로':'처음 질문으로')+'</a>';
     h+='<div class="ans" style="--acc2:'+r[3]+'"><div class="fh"><span class="ic2" style="background:'+r[3]+'">'+e(r[2])+'</span><b>'+e(r[1])+'</b><small>정세 브리핑</small></div>'+briefBlock(r[1],RL,'#r/'+arg+'/news',0,2)+'</div>';
     h+='<div class="q" style="margin-top:14px">질문 2</div><h1>'+e(r[1])+'에서 무엇을 더 보고드릴까요?</h1>';
-    if(RI.length)h+='<h3>이 지역의 사안</h3>'+RI.slice(0,5).map(function(k){var a=app(k);return a?row('i:'+k,a[1],issueLine(k),miniRope(k)?'<span class="mr">'+miniRope(k)+'</span>':'',browse?'#ask/i/'+k:''):''}).join('');
+    if(RI.length)h+='<h3>이 지역의 사안</h3>'+RI.slice(0,5).map(function(k){var a=app(k);return a?row('i:'+k,a[1],issueLine(k),'',browse?'#ask/i/'+k:''):''}).join('');
     h+='<h3>이 지역 전체</h3>'+row('rw:news','이 지역 소식 모두 보기','최근 3주 '+RL.length+'건','',browse?'#r/'+arg+'/news':'')+row('rw:fc','이 지역 소식에 연결된 전망','전망 '+regFc(arg).length+'개','',browse?'#r/'+arg+'/fc':'');
     if(browse){var it1={ax:'r',k:arg,w:'news'};h+=isInt(it1)?'':'<button class="btn s" style="margin-top:10px" data-addint="r:'+arg+'">☆ 이 지역을 관심사에 더하기</button>'}
   }else if(step==='4'){

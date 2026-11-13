@@ -197,10 +197,12 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .sep{margin:30px 0 8px}
 
 .left{display:flex;flex-direction:column;align-items:flex-start;line-height:1.5;margin-top:12px}.left b{font-size:12px;font-weight:800;color:var(--mut);margin-bottom:2px}.left>span{display:none}.left .lnk{display:block;padding:5px 0!important;text-align:left;line-height:1.45}
+
+.mlab{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;font-weight:700;line-height:1.25;color:var(--mut);margin:-9px 0 8px}.mlab span:last-child{text-align:right}.mlab2{font-size:11px;color:var(--mut);margin:-3px 0 6px;text-align:center}
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/lab/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='4c65654799',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='6819945dac',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/lab/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -434,7 +436,7 @@ function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabF
 function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
 function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
 function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||draft()))return 'This week: '+C.short;var it=issueItems(id)[0];return it?it.h:''}
-function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'}
+function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">Faded dot: last week</div>':''):'')}
 function worse(d){return d.x+d.w}
 function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
 function cnm(k){return k.indexOf('us:')===0?'U.S.':'South Korea'}
@@ -516,7 +518,7 @@ function startView(step,arg,browse){
     h+='<a class="bk" href="'+(browse?'#':'#start/1')+'">‹ '+(browse?'Home':'First question')+'</a>';
     h+='<div class="ans" style="--acc2:'+r[3]+'"><div class="fh"><span class="ic2" style="background:'+r[3]+'">'+e(r[2])+'</span><b>'+e(r[1])+'</b><small>Briefing</small></div>'+briefBlock(r[1],RL,'#r/'+arg+'/news',0,2)+'</div>';
     h+='<div class="q" style="margin-top:14px">Question 2</div><h1>What else would you like to know about '+e(r[1])+'?</h1>';
-    if(RI.length)h+='<h3>Issues in this region</h3>'+RI.slice(0,5).map(function(k){var a=app(k);return a?row('i:'+k,a[1],issueLine(k),miniRope(k)?'<span class="mr">'+miniRope(k)+'</span>':'',browse?'#ask/i/'+k:''):''}).join('');
+    if(RI.length)h+='<h3>Issues in this region</h3>'+RI.slice(0,5).map(function(k){var a=app(k);return a?row('i:'+k,a[1],issueLine(k),'',browse?'#ask/i/'+k:''):''}).join('');
     h+='<h3>The whole region</h3>'+row('rw:news','All news from this region',RL.length+' in the past three weeks','',browse?'#r/'+arg+'/news':'')+row('rw:fc','Forecasts linked to this region’s news',regFc(arg).length+(regFc(arg).length===1?' forecast':' forecasts'),'',browse?'#r/'+arg+'/fc':'');
     if(browse){var it1={ax:'r',k:arg,w:'news'};h+=isInt(it1)?'':'<button class="btn s" style="margin-top:10px" data-addint="r:'+arg+'">☆ Add this region to your interests</button>'}
   }else if(step==='4'){
