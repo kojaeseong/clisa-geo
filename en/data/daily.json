@@ -1,6 +1,177 @@
 {
  "issues": [
   {
+   "date": "2026-11-13",
+   "items": [
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Putin meets U.S. envoys; Kremlin says what could be a record prisoner swap is in the works",
+     "fact": "After Russian President Vladimir Putin met U.S. special envoy Steve Witkoff and Jared Kushner at the Kremlin on November 12, presidential aide Yuri Ushakov said the talks would continue and that the terms of what would likely be the largest prisoner exchange to date are being finalized. Witkoff said, “We’ve set a new meeting.”",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "http://en.kremlin.ru/events/president/news/81252",
+      "https://www.ukrinform.net/rubric-polytics/4184078-witkoff-kushner-hope-europe-will-join-next-round-of-peace-talks-after-meeting-with-putin.html",
+      "https://www.themoscowtimes.com/2026/11/12/kremlin-says-putins-talks-with-us-envoys-were-useful-ukraine-peace-talks-to-continue-a94236"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "RUS",
+       "USA",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Zelensky says Starshield speed cap is back; SpaceX official says “this is false”",
+     "fact": "Ukrainian President Volodymyr Zelensky said on November 12 that the Starshield satellite terminals used by Ukraine’s military are being systematically capped at 161 km/h (100 mph), making Russian jet-powered drones far harder to intercept. A SpaceX official told the U.S. outlet TWZ, “This is false,” and “There has been no change.”",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/starshield-speed-restrictions-return-hampering-efforts-to-intercept-russian-drones-zelensky-says/",
+      "https://www.ukrinform.net/rubric-polytics/4183889-zelensky-on-starshield-restrictions-some-in-us-treat-our-territory-as-though-it-were-not-ukrainian.html",
+      "https://www.twz.com/news-features/ukraine-says-starshield-disruptions-are-back-as-u-s-negotiators-meet-with-putin"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Trump says the U.S. doesn’t need an Iran deal; on force, “it’s possible I would do it right now”",
+     "fact": "President Donald Trump posted on social media on November 12 (U.S. time): “We don’t need a deal with Iran. Those days have long since passed.” The same day, asked by a Salem News Channel host what he would do if Iran threatened U.S. allies and ships, he said that if he saw things going the other way he would act, and “it’s possible I would do it right now.”",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "down"
+      },
+      {
+       "id": "f70",
+       "e": "down"
+      },
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.visiontimes.com/2026/11/12/trump-says-us-no-longer-needs-iran-deal-as-talks-stall-fears-of-further-conflict-grow.html",
+      "https://www.aa.com.tr/en/us-israel-iran-war/trump-says-he-may-use-force-against-iran-right-now-if-us-allies-and-ships-are-threatened/4123516"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "CENTCOM dismisses report it advised Israel to prepare for renewed Iran operations",
+     "fact": "Israeli public broadcaster KAN, citing a U.S. official, reported that U.S. Central Command advised Israel to prepare for a possible resumption of military operations against Iran in the near future. In comments to Anadolu Agency published November 13, a CENTCOM official dismissed the account as “pure speculation” and said there had been no change to the U.S. force posture in the region.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aa.com.tr/en/us-israel-iran-war/centcom-calls-israeli-media-report-of-possible-iran-war-resumption-pure-speculation-/4123553"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Kremlin points to first-ever three-way summit China is planning in Shenzhen",
+     "fact": "Presidential aide Yuri Ushakov said on November 12 that a meeting between Russian President Vladimir Putin and President Donald Trump is planned on the sidelines of the APEC summit in Shenzhen, and that he hopes the trilateral summit China is organizing there, the first of its kind, will help stabilize the international situation. The Kremlin did not name the three parties; Secretary of State Marco Rubio said on November 10 that a U.S.-China-Russia leaders’ meeting on the APEC sidelines “should be possible” (Reuters).",
+     "fc": [],
+     "src": [
+      "http://en.kremlin.ru/events/president/news/81252",
+      "https://www.businessday.co.za/world/2026-11-12-xi-and-trump-may-meet-putin-at-asia-pacific-summit-for-nuclear-talks/",
+      "https://theprint.in/world/chinas-foreign-minister-says-call-with-rubio-was-positive-and-constructive/3096473/"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "Shenzhen (China)",
+      "isos": [
+       "CHN",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Nvidia’s Jensen Huang resigns as CEO; CFO Colette Kress named interim chief",
+     "fact": "Nvidia announced on November 12 (U.S. time) that Jensen Huang had resigned as president, CEO and board member, effective immediately, and that CFO Colette Kress will serve as interim CEO while keeping her current role. The company gave no reason, and the board has begun a search for a permanent CEO.",
+     "fc": [],
+     "src": [
+      "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"
+     ],
+     "loc": {
+      "lat": 37.35,
+      "lon": -121.95,
+      "place": "Santa Clara (U.S.)",
+      "isos": [
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "The ninth European Political Community summit met in Dublin on November 12. Speaking there, Ukrainian President Volodymyr Zelensky said Ukraine is trying to get details on the Starshield limits from the American side, “but so far, we know very little” (Ukrinform).",
+     "src": [
+      "https://irish-presidency.consilium.europa.eu/en/events/meeting-of-the-european-political-community-epc/",
+      "https://www.ukrinform.net/rubric-polytics/4183889-zelensky-on-starshield-restrictions-some-in-us-treat-our-territory-as-though-it-were-not-ukrainian.html"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-12",
    "items": [
     {
@@ -268,7 +439,7 @@
       "rus-ukr"
      ],
      "h": "U.S.-brokered Russia-Ukraine talks in Abu Dhabi run about four hours on day one; Rubio says they appear to have been “very productive”",
-     "fact": "Russian and Ukrainian delegations met for about four hours in Abu Dhabi on November 10 in talks mediated by the United States, with a second day set for November 11, the AP reported. Ukrainian President Volodymyr Zelenskyy called the session constructive and quite substantive and said it covered prisoner exchanges, the return of detained civilians and of children deported from Ukraine, and security guarantees.",
+     "fact": "Russian and Ukrainian delegations met for about four hours in Abu Dhabi on November 10 in talks mediated by the United States, with a second day set for November 11, the AP reported. Ukrainian President Volodymyr Zelensky called the session constructive and quite substantive and said it covered prisoner exchanges, the return of detained civilians and of children deported from Ukraine, and security guarantees.",
      "fc": [
       {
        "id": "f01",
@@ -5922,129 +6093,6 @@
       "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
      ],
      "fp": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-10",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr",
-      "iran-war"
-     ],
-     "h": "After Trump-Putin call, U.S. temporarily eases sanctions to let Russian diesel flow",
-     "fact": "After a phone call with Russian President Vladimir Putin on October 9, U.S. time, President Donald Trump wrote on Truth Social that Russia would immediately supply more than 300,000 tons of diesel, another 500,000 tons in November and 1 million tons after that, followed by 3 million more tons within a short period. The same day, the Treasury Department's Office of Foreign Assets Control (OFAC) said it was issuing a temporary general license to allow the supply of Russian diesel to the global market. The Kremlin said the call focused heavily on prospects for settling the Ukraine crisis, also touched on Iran, and that Russia confirmed its readiness to supply oil and petroleum products to U.S. and global markets. Ukrainian President Volodymyr Zelensky wrote on X that easing sanctions on Russia without a clear and lasting de-escalation agreement \"plays into Russia's hands.\"",
-     "link": "Conclusion 5 of the Russia-Ukraine war analysis holds that Russia's best move is to keep dealing with Washington while seizing the rest of Donetsk Oblast. Washington's sanctions carve-out for Russia's wartime energy sector is an example of Moscow reaping real gains from those dealings, in line with that assessment.",
-     "fc": [],
-     "src": [
-      "http://en.kremlin.ru/events/president/news/80960",
-      "https://x.com/USTreasury/status/2108630834169385310",
-      "https://www.cbsnews.com/news/trump-russia-release-diesel-oil-iran-skyrocketing-costs/",
-      "https://www.mediaite.com/online/zelensky-warns-trump-his-diesel-deal-with-putin-plays-into-russias-hands/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi-led coalition launches major operation against Houthis, says 136 military targets destroyed",
-     "fact": "Saudi Arabia's General Authority of Civil Aviation said on October 9 that Houthi attacks a day earlier on facilities at Riyadh's King Khalid International Airport and on a Saudia aircraft killed three Saudi citizens, including a Saudia captain. Turki al-Maliki, spokesman for the Saudi-led coalition, claimed on X on the night of October 9 that coalition forces had destroyed 136 military targets in Houthi-held areas, and said they were providing round-the-clock air support to the Yemeni government forces' offensive and dismantling the Houthis' ballistic missile system.",
-     "link": "Conclusion 2 of the Iran and Hormuz analysis identifies a war that spreads to all the Gulf oil producers as the outcome that would cost South Korea the most. With Saudi Arabia answering the Houthi strike on its capital's airport with a large-scale operation, the war is widening into direct combat between Gulf oil producers and Iran-aligned forces.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/9/saudi-arabia-reopens-riyadh-airport-after-houthi-attack-kills-three",
-      "https://www.theweek.in/news/middle-east/2026/10/09/saudi-arabia-pilot-among-three-killed-in-houthi-attack-at-riyadh-airport.html",
-      "https://www.aa.com.tr/en/middle-east/saudi-led-coalition-announces-large-scale-operation-against-houthis-in-yemen-says-136-military-targets-destroyed/4084119"
-     ],
-     "loc": {
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Tanker hit off UAE coast catches fire, blaze extinguished",
-     "fact": "A vessel was struck by an unknown projectile 13 nautical miles west of Al Jazeera in the United Arab Emirates on October 9, the UK Maritime Trade Operations (UKMTO) said. Maritime security firm Vanguard put the strike at 10:00 GMT (2 p.m. local time) and said a fire broke out and was later extinguished; shipping and security sources told Reuters the ship was the Panama-flagged supertanker GEM NO.2, fully laden with crude. No one has claimed responsibility.",
-     "link": "After the attack north of Qatar, tankers keep getting hit in Gulf waters beyond the Strait of Hormuz. The added risk to crude shipments from inside the Gulf weighs against the forecast that Brent will close the year below $90 a barrel.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://gcaptain.com/vessel-struck-by-unknown-projectile-off-uae-coast-amid-surge-in-attacks-ukmto-says/",
-      "https://english.alarabiya.net/News/gulf/2026/10/09/vessel-struck-by-unknown-projectile-off-uae-coast-ukmto-says"
-     ],
-     "loc": {
-      "isos": [
-       "ARE"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "horn-tigray-eritrea"
-     ],
-     "h": "Ethiopia's foreign minister accuses Eritrea of 'all-out invasion,' invokes self-defense",
-     "fact": "In a letter dated October 8 to French Foreign Minister Jean-Noël Barrot, Ethiopian Foreign Minister Gedion Timothewos called \"the all-out invasion of parts of northern Ethiopia by Eritrea\" \"a blatant act of aggression that engages Ethiopia's inherent right to self-defence,\" and demanded the withdrawal of Eritrean troops he said had pushed up to 60 kilometers into Tigray. A senior Ethiopian official said the letter was also sent to the other members of the UN Security Council. Eritrean Information Minister Yemane Gebremeskel hit back on X, saying Ethiopia had waged \"an unprovoked war of aggression against Eritrea\" for more than three years.",
-     "link": "The site has no issue analysis on this conflict but tracks it as a flashpoint. With Addis Ababa now invoking self-defense in an official letter, the risk of a direct clash between the two armies has grown. Eritrea claims Ethiopia's target is its Red Sea port of Assab, so the conflict could add to the risks facing Red Sea shipping routes already rattled by Houthi attacks.",
-     "fc": [],
-     "src": [
-      "https://www.cnbcafrica.com/2026/ethiopia-calls-for-immediate-withdrawal-of-eritrean-troops-in-letter-to-un",
-      "https://www.aljazeera.com/news/2026/10/9/ethiopia-and-eritrea-accuse-one-another-of-launching-war"
-     ],
-     "loc": {
-      "isos": [
-       "ETH",
-       "ERI"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "In an October 10 front-page commentary marking the 81st anniversary of the Workers' Party's founding, Rodong Sinmun said North Korea's dignity and might had reached \"the highest level.\" Senior officials, including members of the Politburo Presidium, paid respects at the Kumsusan Palace of the Sun on October 9; no visit by General Secretary Kim Jong Un was reported (via secondary reports).",
-     "src": [
-      "https://www.youthdaily.co.kr/news/article.html?no=228160",
-      "https://www.spnews.co.kr/news/articleView.html?idxno=111465"
-     ],
-     "fp": []
-    },
-    {
-     "t": "Ivan Fedorov, co-chair of the Zaporizhzhia Oblast Defense Council, said on October 9 that Russian forces had struck 51 settlements in the region 1,039 times over the previous day, killing two people and injuring 18.",
-     "src": [
-      "https://kyivindependent.com/russian-attacks-kill-at-least-41-injure-67-across-ukraine-as-glide-bombs-strike-zaporizhzhia/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Citing the Kremlin, Al Jazeera reported that the October 9 Trump-Putin call lasted about an hour and a half and that both leaders expressed interest in attending the Asia-Pacific Economic Cooperation (APEC) summit in China in November.",
-     "src": [
-      "https://www.aljazeera.com/economy/2026/10/9/trump-announces-russian-diesel-deal-amid-soaring-us-fuel-prices"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
     }
    ]
   }

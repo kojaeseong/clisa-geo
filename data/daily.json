@@ -1,6 +1,177 @@
 {
  "issues": [
   {
+   "date": "2026-11-13",
+   "items": [
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "푸틴, 미 특사들과 회담…크렘린, 사상 최대 규모 될 포로 교환 조율",
+     "fact": "12일 푸틴 대통령이 크렘린에서 위트코프 특사·쿠슈너와 회담한 뒤 우샤코프 보좌관은 협상을 이어 가기로 했고, 사상 최대가 될 것으로 보이는 포로 교환의 조건을 마무리하고 있다고 밝혔습니다. 위트코프 특사는 \"새 회의 일정을 잡았다\"고 말했습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      },
+      {
+       "id": "f28",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "http://en.kremlin.ru/events/president/news/81252",
+      "https://www.ukrinform.net/rubric-polytics/4184078-witkoff-kushner-hope-europe-will-join-next-round-of-peace-talks-after-meeting-with-putin.html",
+      "https://www.themoscowtimes.com/2026/11/12/kremlin-says-putins-talks-with-us-envoys-were-useful-ukraine-peace-talks-to-continue-a94236"
+     ],
+     "loc": {
+      "lat": 55.75,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "RUS",
+       "USA",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "젤렌스키 \"스타실드 속도 다시 제한\"…스페이스X 측은 \"사실 아니다\"",
+     "fact": "젤렌스키 대통령은 12일 우크라이나군이 쓰는 스타실드 위성통신 단말기의 운용 속도가 시속 161km로 체계적으로 제한되고 있어 러시아 제트 드론 요격이 크게 어려워졌다고 밝혔습니다. 미국 매체 TWZ는 스페이스X 관계자가 \"사실이 아니다\", \"바뀐 것이 없다\"고 부인했다고 전했습니다.",
+     "fc": [],
+     "src": [
+      "https://kyivindependent.com/starshield-speed-restrictions-return-hampering-efforts-to-intercept-russian-drones-zelensky-says/",
+      "https://www.ukrinform.net/rubric-polytics/4183889-zelensky-on-starshield-restrictions-some-in-us-treat-our-territory-as-though-it-were-not-ukrainian.html",
+      "https://www.twz.com/news-features/ukraine-says-starshield-disruptions-are-back-as-u-s-negotiators-meet-with-putin"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "트럼프 \"이란과의 합의 필요 없다\"…무력 사용 질문엔 \"당장 할 수도\"",
+     "fact": "트럼프 대통령은 12일(미국 시각) 소셜미디어에 \"이란과의 합의는 필요 없다, 그런 시절은 오래전에 지났다\"고 썼습니다. 같은 날 세일럼뉴스채널 인터뷰에서는 이란이 미국의 동맹과 선박을 위협하는 상황을 전제로 한 진행자 질문에 \"상황이 다른 방향으로 간다고 보면 하겠다, 당장 할 수도 있다\"고 답했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "down"
+      },
+      {
+       "id": "f70",
+       "e": "down"
+      },
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.visiontimes.com/2026/11/12/trump-says-us-no-longer-needs-iran-deal-as-talks-stall-fears-of-further-conflict-grow.html",
+      "https://www.aa.com.tr/en/us-israel-iran-war/trump-says-he-may-use-force-against-iran-right-now-if-us-allies-and-ships-are-threatened/4123516"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "미 중부사령부, \"이스라엘에 대이란 작전 재개 대비 권고\" 보도에 \"순전한 추측\"",
+     "fact": "이스라엘 공영방송 칸(KAN)은 미국 관리를 인용해 미 중부사령부가 이스라엘에 가까운 시일 안의 대이란 군사 작전 재개 가능성에 대비하라고 권고했다고 보도했습니다. 중부사령부 관계자는 아나돌루통신(13일 보도)에 이를 \"순전한 추측\"이라며 역내 미군 태세에 바뀐 것이 없다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aa.com.tr/en/us-israel-iran-war/centcom-calls-israeli-media-report-of-possible-iran-war-resumption-pure-speculation-/4123553"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "ISR",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "크렘린, 중국이 선전서 준비하는 사상 첫 3자 정상회의 거론",
+     "fact": "우샤코프 보좌관은 12일 선전 APEC 정상회의 때 푸틴-트럼프 회담을 계획하고 있으며, 중국이 준비하는 3자 정상회의가 이런 형식의 사상 첫 회의로서 국제 정세를 안정시키기를 바란다고 밝혔습니다. 크렘린은 3자의 구성을 밝히지 않았고, 루비오 국무장관은 10일 APEC 계기 미·중·러 정상의 3자 회동이 \"가능할 것으로 본다\"고 말했습니다(로이터).",
+     "fc": [],
+     "src": [
+      "http://en.kremlin.ru/events/president/news/81252",
+      "https://www.businessday.co.za/world/2026-11-12-xi-and-trump-may-meet-putin-at-asia-pacific-summit-for-nuclear-talks/",
+      "https://theprint.in/world/chinas-foreign-minister-says-call-with-rubio-was-positive-and-constructive/3096473/"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "CHN",
+       "RUS",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "엔비디아 젠슨 황, 최고경영자 사임…크레스 재무책임자가 임시 대행",
+     "fact": "엔비디아는 12일(미국 시각) 젠슨 황이 사장·최고경영자·이사직에서 즉시 물러났으며 콜렛 크레스 최고재무책임자가 그 직을 유지하며 임시 최고경영자를 맡는다고 발표했습니다. 회사는 사임 이유를 밝히지 않았고, 이사회는 후임 최고경영자 물색에 들어갔습니다.",
+     "fc": [],
+     "src": [
+      "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm"
+     ],
+     "loc": {
+      "lat": 37.35,
+      "lon": -121.95,
+      "place": "샌타클래라(미국)",
+      "isos": [
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "유럽정치공동체 제9차 정상회의가 12일 아일랜드 더블린에서 열렸고, 젤렌스키 대통령은 이 자리에서 스타실드 제한에 관해 미국 측에 경위를 묻고 있으나 아는 것이 거의 없다고 말했습니다(우크린포름).",
+     "src": [
+      "https://irish-presidency.consilium.europa.eu/en/events/meeting-of-the-european-political-community-epc/",
+      "https://www.ukrinform.net/rubric-polytics/4183889-zelensky-on-starshield-restrictions-some-in-us-treat-our-territory-as-though-it-were-not-ukrainian.html"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-12",
    "items": [
     {
@@ -5922,129 +6093,6 @@
       "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
      ],
      "fp": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-10",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr",
-      "iran-war"
-     ],
-     "h": "트럼프·푸틴 통화…미국, 러시아산 경유 공급 위해 제재 일시 완화",
-     "fact": "도널드 트럼프 미국 대통령은 10월 9일(미국 시각) 블라디미르 푸틴 러시아 대통령과 통화한 뒤 트루스소셜에 러시아가 경유 30만t 이상을 즉시, 11월에 50만t, 이어 100만t을 공급하고 그 뒤 단기간에 300만t을 더 공급할 것이라고 썼고, 같은 날 미국 재무부 해외자산통제실(OFAC)은 러시아산 경유의 세계 시장 공급을 허용하는 일시 일반 허가를 발급한다고 밝혔습니다. 크렘린은 통화에서 우크라이나 위기 해결 전망을 비중 있게 논의하고 이란 문제도 다뤘으며, 러시아가 미국과 세계 시장에 석유와 석유제품을 공급할 준비가 돼 있음을 확인했다고 발표했습니다. 젤렌스키 우크라이나 대통령은 X에 분명하고 지속적인 긴장 완화 합의 없는 대러 제재 완화는 \"러시아에 유리하게 작용한다\"고 썼습니다.",
-     "link": "러-우 전쟁 결론 5는 러시아의 최선의 수를 미국과의 거래를 이어 가면서 도네츠크주의 남은 지역까지 차지하는 것으로 봅니다. 전쟁 중인 러시아의 에너지 부문에 미국이 제재 예외를 연 것은 러시아가 미국과의 거래에서 실익을 얻는 사례로, 그 판단에 부합합니다.",
-     "fc": [],
-     "src": [
-      "http://en.kremlin.ru/events/president/news/80960",
-      "https://x.com/USTreasury/status/2108630834169385310",
-      "https://www.cbsnews.com/news/trump-russia-release-diesel-oil-iran-skyrocketing-costs/",
-      "https://www.mediaite.com/online/zelensky-warns-trump-his-diesel-deal-with-putin-plays-into-russias-hands/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "사우디 주도 연합군, 후티 상대 대규모 작전…\"군사 목표 136곳 파괴\"",
-     "fact": "사우디 민간항공청은 10월 9일, 하루 전 후티가 리야드 킹칼리드 국제공항의 시설과 사우디아항공 항공기를 잇따라 공격해 이 항공사 기장을 포함한 사우디 국민 3명이 숨졌다고 발표했습니다. 투르키 알말리키 사우디 주도 연합군 대변인은 9일 밤 X에서 후티 장악 지역의 군사 목표 136곳을 파괴했다고 주장하고, 예멘 정부군의 공세를 밤낮으로 공중 지원하며 후티의 탄도미사일 체계를 해체하고 있다고 밝혔습니다.",
-     "link": "이란 결론 2는 한국이 가장 크게 잃는 미래로 전쟁이 걸프 산유국 전체로 번지는 확전을 꼽습니다. 후티의 사우디 수도 공항 공격에 사우디가 대규모 작전으로 맞서면서 이 전쟁은 걸프 산유국과 친이란 세력의 직접 교전으로 넓어지고 있습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/9/saudi-arabia-reopens-riyadh-airport-after-houthi-attack-kills-three",
-      "https://www.theweek.in/news/middle-east/2026/10/09/saudi-arabia-pilot-among-three-killed-in-houthi-attack-at-riyadh-airport.html",
-      "https://www.aa.com.tr/en/middle-east/saudi-led-coalition-announces-large-scale-operation-against-houthis-in-yemen-says-136-military-targets-destroyed/4084119"
-     ],
-     "loc": {
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "아랍에미리트 앞바다서 유조선 피격…불났다 꺼져",
-     "fact": "영국 해사무역작전센터(UKMTO)는 10월 9일 아랍에미리트 알자지라에서 서쪽으로 13해리 떨어진 해상에서 선박 한 척이 정체불명의 발사체에 맞았다고 밝혔습니다. 해상 보안업체 뱅가드는 피격 시각을 그리니치 표준시 오전 10시(현지 시각 오후 2시)로 전하며 불이 났다가 꺼졌다고 했고, 해운·보안 소식통들은 이 배가 원유를 가득 실은 파나마 선적 초대형 유조선 GEM NO.2라고 로이터에 말했습니다. 공격했다고 나선 쪽은 없습니다.",
-     "link": "카타르 북쪽 해상에 이어 호르무즈 해협 안쪽 걸프 해역에서 유조선 공격이 이어지고 있습니다. 걸프 안쪽 원유 수송의 위험을 높이는 일로, '브렌트유 연말 90달러 아래' 전망을 낮출 요인입니다.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://gcaptain.com/vessel-struck-by-unknown-projectile-off-uae-coast-amid-surge-in-attacks-ukmto-says/",
-      "https://english.alarabiya.net/News/gulf/2026/10/09/vessel-struck-by-unknown-projectile-off-uae-coast-ukmto-says"
-     ],
-     "loc": {
-      "isos": [
-       "ARE"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "horn-tigray-eritrea"
-     ],
-     "h": "에티오피아 외교장관 \"에리트레아의 전면 침공\"…자위권 거론",
-     "fact": "게디온 티모테오스 에티오피아 외교장관은 장노엘 바로 프랑스 외교장관에게 보낸 10월 8일 자 서한에서 에리트레아의 북부 에티오피아 \"전면 침공\"을 \"에티오피아의 고유한 자위권에 해당하는 노골적인 침략 행위\"라고 규정하고, 에리트레아군이 티그라이 안으로 60km까지 들어왔다며 철수를 요구했습니다. 에티오피아 고위 관리는 이 서한을 유엔 안전보장이사회의 다른 이사국들에도 보냈다고 밝혔습니다. 예마네 게브레메스켈 에리트레아 공보장관은 X에서 에티오피아가 3년 넘게 \"도발받지 않은 침략 전쟁\"을 벌여 왔다고 반박했습니다.",
-     "link": "사이트에 사안은 없지만 분쟁 지점으로 다루는 지역입니다. 에티오피아 정부가 공식 서한에서 자위권을 거론하면서 두 나라 정규군이 직접 충돌할 가능성이 커졌고, 에리트레아는 에티오피아의 목표가 홍해 연안 아사브 항이라고 주장하고 있어 후티 공격으로 흔들리는 홍해 항로의 위험을 더할 수 있습니다.",
-     "fc": [],
-     "src": [
-      "https://www.cnbcafrica.com/2026/ethiopia-calls-for-immediate-withdrawal-of-eritrean-troops-in-letter-to-un",
-      "https://www.aljazeera.com/news/2026/10/9/ethiopia-and-eritrea-accuse-one-another-of-launching-war"
-     ],
-     "loc": {
-      "isos": [
-       "ETH",
-       "ERI"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "노동신문은 10월 10일 노동당 창건 81주년 1면 정론에서 북한의 존엄과 위용이 \"최고의 경지\"를 이루고 있다고 썼습니다. 9일에는 당 정치국 상무위원 등 간부들이 금수산태양궁전을 참배했으며, 김정은 총비서의 참배는 보도되지 않았습니다(보도 재인용).",
-     "src": [
-      "https://www.youthdaily.co.kr/news/article.html?no=228160",
-      "https://www.spnews.co.kr/news/articleView.html?idxno=111465"
-     ],
-     "fp": []
-    },
-    {
-     "t": "이반 페도로우 자포리자주 방위위원회 공동의장은 10월 9일 지난 하루 러시아군이 주 안의 51개 마을을 1,039차례 공격해 2명이 숨지고 18명이 다쳤다고 밝혔습니다.",
-     "src": [
-      "https://kyivindependent.com/russian-attacks-kill-at-least-41-injure-67-across-ukraine-as-glide-bombs-strike-zaporizhzhia/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "알자지라는 크렘린을 인용해 트럼프 대통령과 푸틴 대통령의 9일 통화가 1시간 30분가량 이어졌고, 두 정상 모두 11월 중국에서 열리는 아시아태평양경제협력체(APEC) 정상회의 참석에 관심을 보였다고 보도했습니다.",
-     "src": [
-      "https://www.aljazeera.com/economy/2026/10/9/trump-announces-russian-diesel-deal-amid-soaring-us-fuel-prices"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
     }
    ]
   }
