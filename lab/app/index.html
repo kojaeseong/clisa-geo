@@ -110,6 +110,10 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .wfold{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 .draft{font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:1px 6px;margin-left:6px}
 
+.nt{display:flex;flex-direction:column;gap:6px}.nt b{font-size:15px}.nt p{margin:0;font-size:13px;line-height:1.6;color:var(--sub)}.nt .rw{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.btn{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:999px;padding:9px 16px;background:var(--acc);color:#fff;cursor:pointer}.btn.s{background:var(--chip);color:var(--ink)}.btn:disabled{opacity:.5;cursor:default}
+.fm label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:12px 0 4px}.fm textarea,.fm input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px}.fm textarea{min-height:150px;resize:vertical}
+.fm .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.fm .ctx{font-size:12.5px;color:var(--mut)}.fm .rs{font-size:14px;margin-top:10px;line-height:1.6}.fm .rs.er{color:var(--red)}
 </style></head><body><div class="wrap" id="v"></div>
 <script>
 (function(){
@@ -168,9 +172,11 @@ function home(){
   }
   h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">전망</span><span class="lb">바뀐 전망</span>'+badge(fcChanged().length)+'</button>';
   h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">틀</span><span class="lb">세계를 보는 틀</span></button>';
-  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span></button></div>';
+  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span></button>';
+  h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">의견</span><span class="lb">운영자에게 보내기</span></button></div>';
+  if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
   h+='<p class="note">시험판입니다. 내용은 클리사 지오폴리틱스의 공개 자료(정세 브리핑·정세 요약·전망)를 그대로 보여 줍니다. <a href="/">클리사 지오폴리틱스로 가기</a></p>';
-  V.innerHTML=h;window.scrollTo(0,0);
+  V.innerHTML=h;window.scrollTo(0,0);ntCard();
 }
 function bar(ic,col,t){return '<div class="bar"><button data-go="home" aria-label="뒤로">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1></div>'}
 function msgs(list,key,hl){
@@ -225,6 +231,7 @@ function issue(id,arg){
     else if(B.thinkers.length){h+='<div class="card"><h2>이 판을 보는 틀 · 사상가는 이렇게 봅니다</h2>'+B.thinkers.map(function(tid){var t=thinker(tid);return t?'<div class="th"><b>'+e(t.n)+'</b><small>'+e(t.role)+'</small><p class="clamp">'+e(t.now)+'</p><button class="mo" data-more>더 보기</button></div>':''}).join('')+'<a class="lk" href="#lens">세계를 보는 틀 모두 보기 ›</a></div>'}
     if(cok&&C.watch)h+='<div class="card"><h2>이런 소식이 나오면 판이 바뀐 것입니다'+dl+'</h2>'+C.watch.map(function(w){return '<div class="wt"><span class="tg '+w[1]+'">'+e(w[0])+'</span>'+e(w[2])+'</div>'}).join('')+'</div>';
     if(cok&&C.learn)h+='<div class="card"><h2>이 판세를 이해하는 배움'+dl+'</h2>'+(C.learn.t?'<div class="ac"><b>'+e(C.learn.t)+'</b><p>'+e(C.learn.d)+'</p></div>':'')+C.learn.links.map(function(l){return '<a class="lk" href="'+l[1]+'">'+e(l[0])+' ›</a>'}).join('')+'<a class="lk" href="'+q+'#i/'+id+'/fc">이 사안의 전망 '+DATA.fc.filter(function(f){return f.a.indexOf(id)>=0}).length+'개 ›</a></div>';
+    h+='<a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">이 판세에 대한 의견을 운영자에게 보내기 ›</a>';
     V.innerHTML=h;window.scrollTo(0,0);return;
   }
   if(tab==='fc'){
@@ -270,8 +277,44 @@ function dgs(){
   h+=DATA.digest.map(function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a[1])+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button></div>'}).join('');
   V.innerHTML=h;window.scrollTo(0,0);
 }
+var API='https://api.clisa.ai',CTX='첫 화면',OPENED=Date.now();
+function ctxOf(r){if(r[0]==='i'&&app(r[1]))return app(r[1])[1]+' · '+({pan:'판세',fc:'전망'}[r[2]]||'소식');if(r[0]==='r'&&reg(r[1]))return reg(r[1])[1];return {fc:'바뀐 전망',dg:'주간 정세 요약',lens:'세계를 보는 틀'}[r[0]]||'첫 화면'}
+function msgView(){
+  var h=bar('의견','#3D5A80','운영자에게 보내기')+'<div class="q">클리사 지오폴리틱스 운영자에게 보내는 글</div>';
+  h+='<div class="card fm"><p style="margin:0;font-size:14px;line-height:1.65">판세 판단에 대한 의견, 틀린 사실, 다루어 주었으면 하는 사안을 보내 주십시오. 보낸 글은 공개되지 않고 운영자만 읽습니다.</p>';
+  h+='<div class="ctx" style="margin-top:8px">보던 화면: '+e(CTX)+'</div>';
+  h+='<label for="mb">보낼 내용</label><textarea id="mb" maxlength="3000"></textarea>';
+  h+='<label for="me">답장을 받으려면 이메일 (선택)</label><input id="me" type="email" autocomplete="email" maxlength="200">';
+  h+='<input class="hp" id="mh" tabindex="-1" autocomplete="off" aria-hidden="true">';
+  h+='<div class="rw" style="margin-top:12px"><button class="btn" id="ms">보내기</button></div><div class="rs" id="mr" aria-live="polite"></div>';
+  h+='<p class="note" style="margin-top:12px">이메일은 답장에만 쓰며, 보낸 글과 함께 1년 동안 보관한 뒤 지웁니다.</p></div>';
+  V.innerHTML=h;window.scrollTo(0,0);var t0=Date.now();
+  document.getElementById('ms').onclick=function(){var b=this,r=document.getElementById('mr'),body=document.getElementById('mb').value.trim(),em=document.getElementById('me').value.trim();
+    r.className='rs';if(body.length<5){r.className='rs er';r.textContent='내용을 5자 이상 적어 주십시오.';return}
+    b.disabled=true;r.textContent='보내는 중입니다…';
+    fetch(API+'/msg',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({body:body,email:em,ctx:CTX,hp:document.getElementById('mh').value,t:Date.now()-t0})}).then(function(x){return x.json()}).then(function(d){
+      if(d.ok){r.textContent='보냈습니다. 고맙습니다.';document.getElementById('mb').value=''}
+      else{b.disabled=false;r.className='rs er';r.textContent={email:'이메일 형식이 맞지 않습니다.',rate:'잠시 뒤에 다시 보내 주십시오.',body:'내용을 5자 이상 적어 주십시오.'}[d.error]||'보내지 못했습니다. 잠시 뒤에 다시 시도해 주십시오.'}}).catch(function(){b.disabled=false;r.className='rs er';r.textContent='보내지 못했습니다. 연결을 확인해 주십시오.'})}}
+// 새 소식 알림(시험판): 구독은 서버에 기기의 알림 주소만 남긴다
+function b64k(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';var r=atob(s),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+function post(path,o){return fetch(API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).then(function(x){return x.json()})}
+function ntCard(){var el=document.getElementById('nt');if(!el)return;
+  navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription().then(function(sub){
+    var den=Notification.permission==='denied';
+    if(sub){el.innerHTML='<b>새 소식 알림을 받고 있습니다</b><p>정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜹니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.</p><div class="rw"><button class="btn s" id="nt-t">시험 알림 보내기</button><button class="btn s" id="nt-x">알림 끄기</button></div><p id="nt-r"></p>';
+      document.getElementById('nt-t').onclick=function(){var b=this,r=document.getElementById('nt-r');b.disabled=true;r.textContent='보내는 중입니다…';post('/push/test',{endpoint:sub.endpoint}).then(function(d){r.textContent=d.ok?'보냈습니다. 몇 초 안에 알림이 뜹니다.':d.error==='rate'?'시험 알림은 10분에 한 번 보낼 수 있습니다.':'보내지 못했습니다.';if(d.error==='not_subscribed'){sub.unsubscribe().then(ntCard)}}).catch(function(){r.textContent='보내지 못했습니다. 연결을 확인해 주십시오.'}).then(function(){b.disabled=false})};
+      document.getElementById('nt-x').onclick=function(){post('/push/unsub',{endpoint:sub.endpoint}).catch(function(){}).then(function(){return sub.unsubscribe()}).then(ntCard)};
+    }else{el.innerHTML='<b>새 소식이 나오면 알려 드릴까요?</b><p>'+(den?'이 기기에서 클리사 알림이 꺼져 있습니다. 휴대전화 설정의 앱 알림에서 클리사를 허용한 뒤 다시 눌러 주십시오.':'정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜨고, 앱 아이콘에 새 소식 표시가 붙습니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.')+'</p><div class="rw"><button class="btn" id="nt-on"'+(den?' disabled':'')+'>알림 받기</button></div><p id="nt-r"></p>';
+      var on=document.getElementById('nt-on');on.onclick=function(){var r=document.getElementById('nt-r');on.disabled=true;
+        Notification.requestPermission().then(function(pm){if(pm!=='granted')throw 'perm';return fetch(API+'/push/key').then(function(x){return x.json()})})
+        .then(function(k){return reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64k(k.key)})})
+        .then(function(s){return post('/push/sub',{sub:s.toJSON()})}).then(function(d){if(!d.ok)throw 'srv';ntCard()})
+        .catch(function(x){on.disabled=false;r.textContent=x==='perm'?'알림이 허용되지 않았습니다.':'알림을 켜지 못했습니다. 잠시 뒤에 다시 눌러 주십시오.'})};
+    }})}).catch(function(){el.remove()})}
+function clearNotes(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.getNotifications?reg.getNotifications():[]}).then(function(ns){ns.forEach(function(n){n.close()})}).catch(function(){});if(navigator.clearAppBadge)navigator.clearAppBadge().catch(function(){})}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clearNotes()});clearNotes();
 function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
-  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2]);else if(r[0]==='r'&&reg(r[1]))region(r[1]);else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else home()}
+  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2]);else if(r[0]==='r'&&reg(r[1]))region(r[1]);else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else home();if(r[0]!=='msg')CTX=ctxOf(r)}
 function go(h){var cur=location.hash.replace(/^#/,'');if(cur===h)route();else location.hash=h}
 V.addEventListener('click',function(ev){var t=ev.target.closest('[data-open],[data-go],[data-mode],[data-item],[data-more],[data-fold]');if(!t)return;
   if(t.hasAttribute('data-fold')){var f=t.nextElementSibling;f.hidden=!f.hidden;t.textContent=t.textContent.replace(f.hidden?'▴':'▾',f.hidden?'▾':'▴');return}
@@ -279,7 +322,7 @@ V.addEventListener('click',function(ev){var t=ev.target.closest('[data-open],[da
   if(t.dataset.mode){ss('mode',t.dataset.mode);home();return}
   if(t.dataset.item){go('i/'+t.dataset.app+'/'+t.dataset.item);return}
   if(t.dataset.go){go(t.dataset.go==='home'?'':t.dataset.go);return}
-  var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens')go(o);else go(o.replace(':','/'))});
+  var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens'||o==='msg')go(o);else go(o.replace(':','/'))});
 addEventListener('hashchange',route);
 function build(daily){var R=DATA.rule,out=[];
   function near(lon,lat){var b=null,bd=1e9;R.capReg.forEach(function(c){var d=(c[0]-lon)*(c[0]-lon)+(c[1]-lat)*(c[1]-lat);if(d<bd){bd=d;b=c[2]}});return b}
