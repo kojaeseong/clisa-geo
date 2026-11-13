@@ -202,7 +202,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/lab/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='6819945dac',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='9be606151f',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/lab/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -675,7 +675,7 @@ V.addEventListener('click',function(ev){var ib=ev.target.closest('[data-inst],[d
   if(t.dataset.go){if(t.dataset.go==='home'){OTH=0;OPEN={};var here=location.hash.replace(/^#/,'');if(here===''){if(window.scrollY>40){window.scrollTo({top:0,behavior:'smooth'})}else refresh();return}}go(t.dataset.go==='home'?'':t.dataset.go);return}
   var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens'||o==='msg')go(o);else go(o.replace(':','/'))});
 addEventListener('scroll',function(){SCR[location.hash||'#']=window.scrollY},{passive:true});
-addEventListener('hashchange',function(ev){OPEN={};var nh=location.hash;
+addEventListener('hashchange',function(ev){if(!DATA)return;OPEN={};var nh=location.hash;
   var back=STACK.length>1&&STACK[STACK.length-2]===nh,y=SCR[nh||'#'];if(back)STACK.pop();else STACK.push(nh);route();anim();
   if(back&&y!=null)setTimeout(function(){window.scrollTo(0,y)},30)});
 try{history.scrollRestoration='manual'}catch(x){}

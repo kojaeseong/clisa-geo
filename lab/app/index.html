@@ -202,7 +202,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/lab/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='8a8edf3830',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='497737346a',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/lab/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -695,7 +695,7 @@ V.addEventListener('click',function(ev){var ib=ev.target.closest('[data-inst],[d
   if(t.dataset.go){if(t.dataset.go==='home'){OTH=0;OPEN={};var here=location.hash.replace(/^#/,'');if(here===''){if(window.scrollY>40){window.scrollTo({top:0,behavior:'smooth'})}else refresh();return}}go(t.dataset.go==='home'?'':t.dataset.go);return}
   var o=t.dataset.open;if(!o)return;if(o==='fc'||o==='dg'||o==='lens'||o==='msg')go(o);else go(o.replace(':','/'))});
 addEventListener('scroll',function(){SCR[location.hash||'#']=window.scrollY},{passive:true});
-addEventListener('hashchange',function(ev){OPEN={};var nh=location.hash;
+addEventListener('hashchange',function(ev){if(!DATA)return;OPEN={};var nh=location.hash;
   var back=STACK.length>1&&STACK[STACK.length-2]===nh,y=SCR[nh||'#'];if(back)STACK.pop();else STACK.push(nh);route();anim();
   if(back&&y!=null)setTimeout(function(){window.scrollTo(0,y)},30)});
 try{history.scrollRestoration='manual'}catch(x){}
