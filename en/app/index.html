@@ -53,7 +53,7 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .mo{font:inherit;font-size:13px;color:var(--acc);background:none;border:0;padding:6px 0 0;cursor:pointer}
 .fc{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit}
 .fc:first-of-type{border-top:0}.fc .q{flex:1;font-size:14px;line-height:1.5}
-.fc .pv{flex:none;text-align:right;min-width:62px}.fc .pv b{font-size:18px}.fc .pv small{display:block;font-size:12px;color:var(--mut)}
+.fc .pv{flex:none;text-align:right;min-width:62px}.fc .pv b.ch{white-space:nowrap}.fc .pv .p0{color:var(--mut);font-size:15px;font-weight:700}.fc .pv .dl{font-weight:800}.fc .pv b{font-size:18px}.fc .pv small{display:block;font-size:12px;color:var(--mut)}
 .up{color:var(--up)}.dn{color:var(--dn)}
 .pu,.fc .pv small.pu{color:var(--dn)}.pd,.fc .pv small.pd{color:var(--up)}
 .day{text-align:center;margin:18px 0 6px}.day span{font-size:12px;color:var(--mut);background:var(--chip);border-radius:999px;padding:4px 12px}
@@ -178,6 +178,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .btn:active{transform:scale(.96);filter:brightness(.92)}.tabs a:active,.gchips a:active,.chip:active{transform:scale(.95);opacity:.8}
 .widget li:active{opacity:.7}.more2:active,.mo:active,.lnk:active{opacity:.55}
 .ap:active .ic{transform:scale(.92);filter:brightness(.9)}
+.ap .ic.one{font-size:28px}.bar .ic.one{font-size:17px}
 .bar button:active{opacity:.5;transform:scale(.88)}
 .logo:active img,.blogo:active img{transform:scale(.86)}.logo img,.blogo img{transition:transform .1s ease}.logo:active .nm{opacity:.6}
 .lnk{padding:4px 0!important;display:inline;text-align:left}.foot .fl{text-align:left}.left{line-height:2.1}
@@ -210,7 +211,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='8a53739d2f',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='e962b89592',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -240,6 +241,9 @@ function pulls(id,side,name){var t=0,w=0,wk=new Date(DATA.asof);wk.setDate(wk.ge
   (DATA.items||[]).forEach(function(x){(x.pull||[]).forEach(function(p){if(p[0]===id&&p[1]===side&&p[2]===name){if(x.d===DATA.asof)t++;if(x.d>=wk)w++}})});return {today:t,week:w}}
 function badge(n){return n>0?'<span class="bd">'+(n>99?'99+':n)+'</span>':''}
 function delta(f){if(f.h.length<2)return '';var a=f.h[f.h.length-2][1],b=f.h[f.h.length-1][1];if(a===b)return '';return '<small class="'+(b>a?'pu':'pd')+'">'+(b>a?'▲':'▼')+Math.abs(b-a)+' · '+md(f.h[f.h.length-1][0])+'</small>'}
+
+function pvb(f){var H=f.h,n=H.length;if(n<2||H[n-2][1]===H[n-1][1])return '<b>'+f.p+'%</b>';var a=H[n-2][1],b=H[n-1][1],c=b>a?'pu':'pd';
+  return '<b class="ch"><span class="p0">'+a+'→</span><span class="'+c+'">'+b+'%</span></b><small><span class="'+c+' dl">'+(b>a?'▲':'▼')+Math.abs(b-a)+'</span> · '+md(H[n-1][0])+'</small>'}
 function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)return DATA.fc[i]}
 
 function briefRow(){var n=DATA.items.filter(function(x){return x.d===DATA.asof}).length,u=DATA.items.filter(function(x){return x.d===DATA.asof&&seen('b.'+x.d).indexOf(x.id)<0}).length,top=DATA.items.filter(function(x){return x.d===DATA.asof})[0];
@@ -267,7 +271,7 @@ function home(){
   else h+='<p class="sub">Start with today’s briefing, or choose one issue <b>or</b> one region.</p>'+briefRow()+pickList(true)+(draft()?'<div class="pf" style="margin-top:12px">Choose the issues or regions you follow, and their briefings will come first on this screen.<a href="#start/1">Choose</a></div>':'');
   h+='</section><div class="sep"><span>More</span></div>';
   h+='<div class="tools">';
-  h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">%</span><span class="lb">Changed forecasts</span>'+badge(fcChanged().length)+'</button>';
+  h+='<button class="ap" data-open="fc"><span class="ic one" style="background:#0B2A86">%</span><span class="lb">Changed forecasts</span>'+badge(fcChanged().length)+'</button>';
   h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">Lens</span><span class="lb">Lenses on the world</span></button>';
   h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">Week</span><span class="lb">Weekly summary</span></button>';
   h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">Note</span><span class="lb">Send feedback</span></button></div>';
@@ -276,7 +280,7 @@ function home(){
   V.innerHTML=h;window.scrollTo(0,0);ntCard();
 }
 function foot(L){return '<div class="foot">'+(L||[]).map(function(x){return '<p>'+e(x)+'</p>'}).join('')+'<p>This app shows Clisa Geopolitics’ published work, unchanged. <a href="/en/">Clisa Geopolitics website ↗</a> © 2026 Jae-Seong Ko · For information only, not investment advice · <button class="fl" data-fold>Copyright ▾</button><span class="fold" hidden>The design, text and data compilations of Clisa Geopolitics are protected by copyright. Sharing links and quoting parts are permitted; when quoting, please cite “Clisa Geopolitics” and the page address as the source. To reproduce or redistribute all or a substantial part, please ask for permission first at clisageo@clisa.ai.</span></p></div>'}
-function bar(ic,col,t){return '<div class="bar"><button data-back aria-label="Back">‹</button><span class="ic" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1><button class="blogo" data-go="home" aria-label="Clisa home"><img src="/en/app/app-192.png" alt=""></button></div>'}
+function bar(ic,col,t){return '<div class="bar"><button data-back aria-label="Back">‹</button><span class="ic'+(ic.length<2?' one':'')+'" style="background:'+col+'">'+e(ic)+'</span><h1>'+e(t)+'</h1><button class="blogo" data-go="home" aria-label="Clisa home"><img src="/en/app/app-192.png" alt=""></button></div>'}
 function msgs(list,key,hl){
   var st=start(),sn=seen(key),h='',last='';
   if(!list.length)return '<p class="empty">No news in the past three weeks.</p>';
@@ -291,7 +295,7 @@ function msgs(list,key,hl){
 }
 function fcList(list,limit){
   list=list.slice().sort(function(a,b){return fcLast(b)<fcLast(a)?-1:fcLast(b)>fcLast(a)?1:0});
-  var h=list.slice(0,limit).map(function(f){return '<a class="fc" href="#f/'+f.id+'"><span class="q">'+e(f.q)+'</span><span class="pv"><b>'+f.p+'%</b>'+delta(f)+'</span></a>'}).join('');
+  var h=list.slice(0,limit).map(function(f){return '<a class="fc" href="#f/'+f.id+'"><span class="q">'+e(f.q)+'</span><span class="pv">'+pvb(f)+'</span></a>'}).join('');
   return h||'<p class="empty">No linked forecasts.</p>';
 }
 var OPEN={};

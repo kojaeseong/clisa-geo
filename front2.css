@@ -210,3 +210,6 @@ html[lang="en"] .td-gs{display:grid;grid-template-columns:repeat(2,1fr)}
 .td-ind p b{color:var(--ink,#111827);font-weight:700;margin-right:6px}
 .td-ind a{font-size:12.5px;font-weight:600;color:var(--acc,#1d4ed8)!important}
 :root[data-theme="dark"] .td-st > div.td-if,:root[data-theme="dark"] .td-ind p b{color:#e6e9ef}
+
+/* 2026-11-14 확률이 바뀐 전망 목록: 두 줄(위 '18→5%', 아래 '▼13') */
+.td-v2{display:inline-flex;flex-direction:column;align-items:flex-end;gap:5px}.td-v2 small{font:800 13.5px/1 Archivo,sans-serif}
