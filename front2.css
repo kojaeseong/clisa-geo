@@ -213,3 +213,23 @@ html[lang="en"] .td-gs{display:grid;grid-template-columns:repeat(2,1fr)}
 
 /* 2026-11-14 확률이 바뀐 전망 목록: 두 줄(위 '18→5%', 아래 '▼13') */
 .td-v2{display:inline-flex;flex-direction:column;align-items:flex-end;gap:5px}.td-v2 small{font:800 13.5px/1 Archivo,sans-serif}
+
+/* 2026-11-14 운영자 결재: '최근 소식이 국민의 생활에 이르는 경로'의 집단 단추 6개를 작고 연한 글자 단추로(보기 단추 가안과 같은 색) */
+html body .td-gs:not(#_z){display:flex!important;flex-wrap:wrap;gap:4px 4px;margin:10px 0 4px}
+html body .td-gs:not(#_z) button{flex:none!important;font:600 12.5px/1 var(--sans,inherit)!important;padding:6px 10px!important;border-radius:999px!important;border:0!important;background:#EEF1F6!important;color:#4A5366!important}
+html body .td-gs:not(#_z) button:hover{color:#141A26!important}
+html body .td-gs:not(#_z) button.on{background:#1F4FD8!important;color:#fff!important}
+html[data-theme="dark"] body .td-gs:not(#_z) button{background:#1B222B!important;color:#A8B0BA!important}
+html[data-theme="dark"] body .td-gs:not(#_z) button.on{background:#1F4FD8!important;color:#fff!important}
+
+/* 2026-11-14 운영자: 경로의 위→아래 흐름 — 줄 위를 내려가는 점, 마디 사이 아래 화살표, 끝의 '정리하면' */
+.td-st > div:not(.td-if):not(.td-sum):not(.td-ind):not(:last-of-type):after{content:"";position:absolute;left:-18px;bottom:1px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #f97316}
+.td-st > div.td-sum{margin:2px 0 12px;padding:10px 12px 11px;border-radius:10px;background:#FFF4E5}
+.td-st > div.td-sum:before{background:#f97316!important;border-color:#f97316!important;left:-21px;top:13px}
+.td-st > div.td-sum small{margin-bottom:3px}
+.td-st > div.td-sum p{margin:0;font-size:14px;line-height:1.5;font-weight:700;color:var(--ink,#111827)}
+:root[data-theme="dark"] .td-st > div.td-sum{background:rgba(249,115,22,.14)}
+:root[data-theme="dark"] .td-st > div.td-sum p{color:#e6e9ef}
+.td-st .td-flow{position:absolute;left:3px;top:6px;width:8px;height:8px;border-radius:50%;background:#f97316;box-shadow:0 0 0 4px rgba(249,115,22,.22);opacity:0;animation:tdflow 3.6s cubic-bezier(.45,0,.55,1) .6s infinite;pointer-events:none}
+@keyframes tdflow{0%{top:6px;opacity:0}8%{opacity:1}82%{opacity:1}100%{top:calc(100% - 34px);opacity:0}}
+@media (prefers-reduced-motion: reduce){.td-st .td-flow{display:none}}

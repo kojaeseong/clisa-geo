@@ -119,7 +119,7 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .wfold{margin-top:10px;border-top:1px solid var(--line);padding-top:8px}
 .draft{font-size:11px;font-weight:700;color:#fff;background:var(--red);border-radius:6px;padding:1px 6px;margin-left:6px}
 
-.nt{display:flex;flex-direction:column;gap:6px}.nt b{font-size:15px}.nt p{margin:0;font-size:13px;line-height:1.6;color:var(--sub)}.nt .rw{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.nt{display:flex;flex-direction:column;gap:6px}.nt{position:relative}.nt .ntc{position:absolute;top:8px;right:8px;width:32px;height:32px;border:0;background:none;color:var(--mut);font-size:16px;cursor:pointer;border-radius:8px}.nt .ntc:hover{background:var(--chip)}.nt>b{padding-right:30px}.nt.min{padding-top:12px!important;padding-bottom:12px!important}.ntm{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;border:0;background:none;padding:0;font:inherit;text-align:left;cursor:pointer;color:var(--ink)}.ntm span{flex:none;font-size:12.5px;font-weight:600;color:var(--acc)}.nt b{font-size:15px}.nt p{margin:0;font-size:13px;line-height:1.6;color:var(--sub)}.nt .rw{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .btn{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:999px;padding:9px 16px;background:var(--acc);color:#fff;cursor:pointer}.btn.s{background:var(--chip);color:var(--ink)}.btn:disabled{opacity:.5;cursor:default}
 .fm label{display:block;font-size:13px;font-weight:700;color:var(--sub);margin:12px 0 4px}.fm textarea,.fm input{width:100%;box-sizing:border-box;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px}.fm textarea{min-height:150px;resize:vertical}
 .fm .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.fm .ctx{font-size:12.5px;color:var(--mut)}.fm .rs{font-size:14px;margin-top:10px;line-height:1.6}.fm .rs.er{color:var(--red)}
@@ -212,7 +212,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='67f9e5b3ef',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='eb6f2c7bfe',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -675,6 +675,9 @@ function ntCard(){var el=document.getElementById('nt');if(!el)return;
   navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription().then(function(sub){
     var den=Notification.permission==='denied';
     if(sub){post('/push/sub',{sub:sub.toJSON(),topics:pushTopics(),lang:LANG,tz:new Date().getTimezoneOffset()}).catch(function(){});el.innerHTML='<b>새 소식 알림을 받고 있습니다</b><p>'+(pushTopics().length?'관심사('+e(pushTopics().map(function(k){var a=app(k);return a?a[1]:k}).join(' · '))+')의 소식만 보내 드립니다. 관심사를 바꾸면 알림도 함께 바뀝니다. ':'관심사를 정하지 않으셔서 모든 새 소식을 보내 드립니다. ')+'정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜹니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.</p><div class="rw"><button class="btn s" id="nt-t">시험 알림 보내기</button><button class="btn s" id="nt-x">알림 끄기</button></div><p id="nt-r"></p>';
+      /* 알림을 받는 중이면 ✕로 한 줄만 남기고 접어 둘 수 있게(2026-11-14 운영자), 접은 상태는 이 기기에 기억 */
+      if(ls('ntmin',0)){el.classList.add('min');el.innerHTML='<button class="ntm" id="nt-m"><b>새 소식 알림을 받고 있습니다</b><span>펼치기 ▾</span></button>';document.getElementById('nt-m').onclick=function(){ss('ntmin',0);ntCard()};return}
+      el.classList.remove('min');el.insertAdjacentHTML('afterbegin','<button class="ntc" id="nt-c" aria-label="접기">✕</button>');document.getElementById('nt-c').onclick=function(){ss('ntmin',1);ntCard()};
       document.getElementById('nt-t').onclick=function(){var b=this,r=document.getElementById('nt-r');b.disabled=true;r.textContent='보내는 중입니다…';post('/push/test',{endpoint:sub.endpoint}).then(function(d){r.textContent=d.ok?'보냈습니다. 몇 초 안에 알림이 뜹니다.':d.error==='rate'?'시험 알림은 10분에 한 번 보낼 수 있습니다.':'보내지 못했습니다.';if(d.error==='not_subscribed'){sub.unsubscribe().then(ntCard)}}).catch(function(){r.textContent='보내지 못했습니다. 연결을 확인해 주십시오.'}).then(function(){b.disabled=false})};
       document.getElementById('nt-x').onclick=function(){post('/push/unsub',{endpoint:sub.endpoint}).catch(function(){}).then(function(){return sub.unsubscribe()}).then(ntCard)};
     }else{el.innerHTML='<b>새 소식이 나오면 알려 드릴까요?</b><p>'+(den?'이 기기에서 클리사 알림이 꺼져 있습니다. 휴대전화 설정의 앱 알림에서 클리사를 허용한 뒤 다시 눌러 주십시오.':(pushTopics().length?'관심사('+e(pushTopics().map(function(k){var a=app(k);return a?a[1]:k}).join(' · '))+')의 ':'')+'정세 브리핑, 확률이 바뀐 전망, 주간 정세 요약이 새로 나오면 휴대전화 위쪽에 알림이 뜨고, 앱 아이콘에 새 소식 표시가 붙습니다. 밤 10시부터 아침 7시까지는 보내지 않습니다.')+'</p><div class="rw"><button class="btn" id="nt-on"'+(den?' disabled':'')+'>알림 받기</button></div><p id="nt-r"></p>';
