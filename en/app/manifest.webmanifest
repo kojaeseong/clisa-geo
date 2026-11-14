@@ -2,7 +2,7 @@
  "name": "Clisa",
  "short_name": "Clisa",
  "lang": "en",
- "start_url": "/en/app/",
+ "start_url": "/en/app/pwa/",
  "scope": "/en/app/",
  "id": "/en/app/",
  "display": "standalone",

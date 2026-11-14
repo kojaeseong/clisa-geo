@@ -2,6 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
+<script>(function(){try{var m=location.search.match(/[?&]nostat=([01])/);if(m){if(m[1]==='1')localStorage.setItem('clisa_nostat','1');else localStorage.removeItem('clisa_nostat');}if(localStorage.getItem('clisa_nostat'))return;}catch(e){}var s=document.createElement('script');s.defer=true;s.src='https://static.cloudflareinsights.com/beacon.min.js';s.setAttribute('data-cf-beacon','{"token": "58e343ace23448bcb4d24c4bde3a2dd9"}');document.head.appendChild(s);})();</script>
 <title>Clisa</title>
 <meta name="description" content="Pick the conflict or region you follow and see this week’s developments, step by step. Get alerts only when there’s news on your topics.">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Clisa"><meta property="og:locale" content="en_US">
@@ -211,7 +212,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='5aa6009960',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='253b032a4a',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -236,6 +237,7 @@ function fcChanged(){var since=ls('fcseen',null);if(!since){var d=new Date(DATA.
   return DATA.fc.filter(function(f){return f.h.length>1&&fcLast(f)>since})}
 function thinker(id){var T=DATA.thinkers||[];for(var i=0;i<T.length;i++)if(T[i].id===id)return T[i]}
 function tilt(id){var b=(DATA.boards||{})[id];if(!b)return null;var m=null;b.fut.forEach(function(f){if(f.v&&(!m||Math.abs(f.v)>Math.abs(m.v)))m=f});return m}
+function pvw(){return location.search.indexOf('draft')>=0}
 function draft(){return location.search.indexOf('draft')>=0||location.pathname.indexOf('/en/app/')===0}
 function pulls(id,side,name){var t=0,w=0,wk=new Date(DATA.asof);wk.setDate(wk.getDate()-6);wk=wk.toISOString().slice(0,10);
   (DATA.items||[]).forEach(function(x){(x.pull||[]).forEach(function(p){if(p[0]===id&&p[1]===side&&p[2]===name){if(x.d===DATA.asof)t++;if(x.d>=wk)w++}})});return {today:t,week:w}}
@@ -249,7 +251,7 @@ function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)retur
 function briefRow(){var n=DATA.items.filter(function(x){return x.d===DATA.asof}).length,u=DATA.items.filter(function(x){return x.d===DATA.asof&&seen('b.'+x.d).indexOf(x.id)<0}).length,top=DATA.items.filter(function(x){return x.d===DATA.asof})[0];
   return row('','Start with today’s briefing?',md(DATA.asof)+' · '+n+(n===1?' item':' items')+(top?' · '+top.h:''),u?'<span class="nb">'+u+'</span>':'','#b/'+DATA.asof)}
 function weekBlock(link){var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'],F0=favs();
-  var reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a,C.short]:null}).filter(Boolean);
+  var reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||pvw())?[a,C.short]:null}).filter(Boolean);
   var h='<section class="wk"><div class="q">Which way the world moved this week</div>';
   h+=reads.length?'<ul class="wkl2">'+reads.map(function(r){var inner='<span class="ic2" style="background:'+r[0][3]+'">'+e(r[0][2])+'</span><div><b>'+e(r[0][1])+'</b><span>'+e(r[1])+'</span></div>';return '<li>'+(link?'<a href="#ask/i/'+r[0][0]+'">'+inner+'</a>':inner)+'</li>'}).join('')+'</ul>':'<p>This week’s assessment is updated every Monday.</p>';
   if(W)h+='<div class="wfold"><button class="more2" data-fold style="padding:0">Five futures for the world and the lens behind each (as of '+md(W.asof)+') ▾</button><div class="fold" hidden>'+W.scen.map(function(x,i){var t=thinker(x[3]);return '<a class="wr" href="#lens"><span class="wn"><b>'+e(x[1])+'</b><small>'+e(t?t.n+'’s lens':'')+'</small></span><span class="wbar"><i style="width:'+(x[2]/W.scen[0][2]*100)+'%;background:'+TC[i%5]+'"></i></span><b class="wp">'+x[2]+'%</b></a>'}).join('')+'</div></div>';
@@ -315,7 +317,7 @@ function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)
   if(tail)h+=(nx.length||lf.length)?navLine():tail;
   return h}
 function issue(id,arg,sub){
-  var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||draft())&&C.L),dl=C&&!C.ok?'<span class="draft">Draft</span>':'';
+  var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||pvw())&&C.L),dl=C&&!C.ok?'<span class="draft">Draft</span>':'';
   var I=impOf(id),TB={news:1,fc:1,pan:1,imp:1};
   var tab=TB[arg]?arg:(arg?'news':(wantTab(id)||(B?'pan':'news'))),hl=(arg&&!TB[arg])?arg:null;if(tab==='imp'&&!I)tab='news';if(tab==='pan'&&!B)tab='news';
   if(tab==='imp'&&!sub){var it0=ints().filter(function(x){return x.ax==='i'&&x.k===id&&x.w==='imp'&&x.g})[0];if(it0)sub=it0.g;else{startView('g',id,true);return}}
@@ -449,8 +451,8 @@ function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabF
   if(it.k==='ppl')return 'Daily life for '+kgName(DG)+(it.w!=='all'&&DATA.kimp.paths[it.w]?' · “'+DATA.kimp.paths[it.w]+'” path':'');var k2=it.w.indexOf(':')<0?'kr:'+it.w:it.w;return inm(k2)+' ('+cnm(k2)+')'}
 function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
 function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
-function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||draft()))return 'This week: '+C.short;var it=issueItems(id)[0];return it?it.h:''}
-function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">Faded dot: last week</div>':''):'')}
+function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||pvw()))return 'This week: '+C.short;var it=issueItems(id)[0];return it?it.h:''}
+function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||pvw())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">Faded dot: last week</div>':''):'')}
 function worse(d){return d.x+d.w}
 function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
 function cnm(k){return k.indexOf('us:')===0?'U.S.':'South Korea'}

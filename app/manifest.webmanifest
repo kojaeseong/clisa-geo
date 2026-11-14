@@ -2,7 +2,7 @@
  "name": "클리사",
  "short_name": "클리사",
  "lang": "ko",
- "start_url": "/app/",
+ "start_url": "/app/pwa/",
  "scope": "/app/",
  "id": "/app/",
  "display": "standalone",

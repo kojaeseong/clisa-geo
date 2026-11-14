@@ -2,6 +2,7 @@
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
+<script>(function(){try{var m=location.search.match(/[?&]nostat=([01])/);if(m){if(m[1]==='1')localStorage.setItem('clisa_nostat','1');else localStorage.removeItem('clisa_nostat');}if(localStorage.getItem('clisa_nostat'))return;}catch(e){}var s=document.createElement('script');s.defer=true;s.src='https://static.cloudflareinsights.com/beacon.min.js';s.setAttribute('data-cf-beacon','{"token": "58e343ace23448bcb4d24c4bde3a2dd9"}');document.head.appendChild(s);})();</script>
 <title>클리사</title>
 <meta name="description" content="궁금한 분쟁이나 지역을 고르면 이번 주 흐름부터 차례로 보여 드립니다. 관심사에 새 소식이 나올 때만 알림을 보냅니다.">
 <meta property="og:type" content="website"><meta property="og:site_name" content="클리사"><meta property="og:locale" content="ko_KR">
@@ -211,7 +212,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='ed036b2bc6',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='67f9e5b3ef',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -238,6 +239,7 @@ function fcChanged(){var since=ls('fcseen',null);if(!since){var d=new Date(DATA.
   return DATA.fc.filter(function(f){return f.h.length>1&&fcLast(f)>since})}
 function thinker(id){var T=DATA.thinkers||[];for(var i=0;i<T.length;i++)if(T[i].id===id)return T[i]}
 function tilt(id){var b=(DATA.boards||{})[id];if(!b)return null;var m=null;b.fut.forEach(function(f){if(f.v&&(!m||Math.abs(f.v)>Math.abs(m.v)))m=f});return m}
+function pvw(){return location.search.indexOf('draft')>=0}
 function draft(){return location.search.indexOf('draft')>=0||location.pathname.indexOf('/app/')===0}
 // 매일 브리핑 소식의 pull 표시([[사안, "L"|"R", 힘 이름], ...])를 세어 힘에 '오늘 +n' 불을 켠다
 function pulls(id,side,name){var t=0,w=0,wk=new Date(DATA.asof);wk.setDate(wk.getDate()-6);wk=wk.toISOString().slice(0,10);
@@ -253,7 +255,7 @@ function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)retur
 function briefRow(){var n=DATA.items.filter(function(x){return x.d===DATA.asof}).length,u=DATA.items.filter(function(x){return x.d===DATA.asof&&seen('b.'+x.d).indexOf(x.id)<0}).length,top=DATA.items.filter(function(x){return x.d===DATA.asof})[0];
   return row('','오늘의 정세 브리핑부터 보고드릴까요?',md(DATA.asof)+' · '+n+'건'+(top?' · '+top.h:''),u?'<span class="nb">'+u+'</span>':'','#b/'+DATA.asof)}
 function weekBlock(link){var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'],F0=favs();
-  var reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||draft())?[a,C.short]:null}).filter(Boolean);
+  var reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||pvw())?[a,C.short]:null}).filter(Boolean);
   var h='<section class="wk"><div class="q">이번 주 세계는 어느 쪽으로 움직였나</div>';
   h+=reads.length?'<ul class="wkl2">'+reads.map(function(r){var inner='<span class="ic2" style="background:'+r[0][3]+'">'+e(r[0][2])+'</span><div><b>'+e(r[0][1])+'</b><span>'+e(r[1])+'으로</span></div>';return '<li>'+(link?'<a href="#ask/i/'+r[0][0]+'">'+inner+'</a>':inner)+'</li>'}).join('')+'</ul>':'<p>이번 주 판의 읽기는 매주 월요일에 고칩니다.</p>';
   if(W)h+='<div class="wfold"><button class="more2" data-fold style="padding:0">세계의 앞날 5가지와 그 틀 ('+md(W.asof)+' 판단) ▾</button><div class="fold" hidden>'+W.scen.map(function(x,i){var t=thinker(x[3]);return '<a class="wr" href="#lens"><span class="wn"><b>'+e(x[1])+'</b><small>'+e(t?t.n+'의 틀':'')+'</small></span><span class="wbar"><i style="width:'+(x[2]/W.scen[0][2]*100)+'%;background:'+TC[i%5]+'"></i></span><b class="wp">'+x[2]+'%</b></a>'}).join('')+'</div></div>';
@@ -322,7 +324,7 @@ function stepped(key,secs,menuQ,tail){secs=secs.filter(Boolean);if(!secs.length)
   if(tail)h+=(nx.length||lf.length)?navLine():tail;
   return h}
 function issue(id,arg,sub){
-  var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||draft())&&C.L),dl=C&&!C.ok?'<span class="draft">결재 전 시안</span>':'';
+  var a=app(id),list=issueItems(id),key='i.'+id,B=(DATA.boards||{})[id],C=B?B.cur:{},cok=!!(C&&(C.ok||pvw())&&C.L),dl=C&&!C.ok?'<span class="draft">결재 전 시안</span>':'';
   var I=impOf(id),TB={news:1,fc:1,pan:1,imp:1};
   var tab=TB[arg]?arg:(arg?'news':(wantTab(id)||(B?'pan':'news'))),hl=(arg&&!TB[arg])?arg:null;if(tab==='imp'&&!I)tab='news';if(tab==='pan'&&!B)tab='news';
   if(tab==='imp'&&!sub){var it0=ints().filter(function(x){return x.ax==='i'&&x.k===id&&x.w==='imp'&&x.g})[0];if(it0)sub=it0.g;else{startView('g',id,true);return}}
@@ -458,8 +460,8 @@ function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabF
   if(it.k==='ppl')return kgName(DG)+'의 생활'+(it.w!=='all'&&DATA.kimp.paths[it.w]?' · '+DATA.kimp.paths[it.w]+' 경로':'');var k2=it.w.indexOf(':')<0?'kr:'+it.w:it.w;return cnm(k2)+' '+inm(k2)+' 업종'}
 function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
 function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
-function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||draft()))return '이번 주 '+C.short;var it=issueItems(id)[0];return it?it.h:''}
-function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||draft())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">흐린 점은 지난주</div>':''):'')}
+function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||pvw()))return '이번 주 '+C.short;var it=issueItems(id)[0];return it?it.h:''}
+function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||pvw())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">흐린 점은 지난주</div>':''):'')}
 function worse(d){return d.x+d.w}
 function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
 function cnm(k){return k.indexOf('us:')===0?'미국':'한국'}
