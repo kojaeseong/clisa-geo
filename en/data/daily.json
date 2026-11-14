@@ -1,6 +1,152 @@
 {
  "issues": [
   {
+   "date": "2026-11-14",
+   "items": [
+    {
+     "case": null,
+     "fp": [],
+     "h": "Trump to meet Xi and Putin in Shenzhen next week; White House says nuclear arms cuts on the agenda",
+     "fact": "The White House said President Donald Trump will hold a three-way meeting with Chinese President Xi Jinping and Russian President Vladimir Putin on the sidelines of next week’s APEC summit in Shenzhen, and assistant White House spokeswoman Olivia Wales said he “will discuss reducing nuclear weapons” (Anadolu Agency, reported November 14). A senior U.S. official said Washington does not expect an agreement, calling the meeting “the entry point, the first conversation” at the leader level.",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "none"
+      },
+      {
+       "id": "f11",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aa.com.tr/en/world/morning-briefing-nov-14-2026/4124855"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "Shenzhen (China)",
+      "isos": [
+       "USA",
+       "CHN",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "IRGC claims it hit a U.S. radar in Bahrain; CENTCOM says it downed two drones, with no damage",
+     "fact": "Iran’s Islamic Revolutionary Guard Corps said it targeted a U.S. early-warning radar in Bahrain on November 13 in retaliation for a November 12 attack on a telecommunications tower in Sirik (Drop Site News). U.S. Central Command denied the claim, saying U.S. forces shot down two one-way attack drones launched toward Bahrain and that there were no injuries or damage (Fox News).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.foxnews.com/live-news/oil-prices-war-strikes-donald-trump-iran-11-13-26",
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-saudi-arabia-yemen-war-live-updates-november-13-2026",
+      "https://www.dropsitenews.com/p/iran-hits-us-radar-in-bahrain-van"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "Iran tells IAEA it won’t resume monitoring talks, citing “threats” from the U.S. president",
+     "fact": "Iran told the International Atomic Energy Agency in a letter that monitoring talks cannot proceed amid “a series of persistent, explicit, and public threats by the President of the United States of America,” according to a confidential IAEA report sent to member states on November 13 and cited by The Associated Press. The report voiced growing concern about the Isfahan fuel enrichment plant, saying the agency does not know its exact location or whether it holds nuclear material.",
+     "fc": [
+      {
+       "id": "f68",
+       "e": "down"
+      },
+      {
+       "id": "f69",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.dropsitenews.com/p/iran-hits-us-radar-in-bahrain-van",
+      "https://www.justsecurity.org/164357/early-edition-november-13-2026/"
+     ],
+     "loc": {
+      "lat": 48.21,
+      "lon": 16.37,
+      "place": "Vienna (Austria)",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Turkey and Qatar sign mutual defense pact",
+     "fact": "Turkish President Recep Tayyip Erdoğan and Qatar’s emir, Sheikh Tamim bin Hamad Al Thani, signed five agreements, including a mutual defense pact, on November 13 at the 12th Turkey-Qatar High Strategic Committee meeting at the Dolmabahçe presidential office in Istanbul (Anadolu Agency, Khaleej Times). Erdoğan said Turkey will keep working with Doha to prevent a return to war (Khaleej Times).",
+     "fc": [],
+     "src": [
+      "https://www.aa.com.tr/en/world/morning-briefing-nov-14-2026/4124855",
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-saudi-arabia-yemen-war-live-updates-november-13-2026"
+     ],
+     "loc": {
+      "lat": 41.04,
+      "lon": 29.0,
+      "place": "Istanbul (Turkey)",
+      "isos": [
+       "TUR",
+       "QAT"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "The navy of Iran’s Islamic Revolutionary Guard Corps claimed November 13 that a liquefied natural gas carrier on an “unauthorized and dangerous route” in the Strait of Hormuz had hit a naval mine and exploded (Reuters; unconfirmed).",
+     "src": [
+      "https://www.justsecurity.org/164357/early-edition-november-13-2026/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "Israel’s Channel 12 reported that caretaker Prime Minister Benjamin Netanyahu met Prime Minister-designate Gadi Eisenkot on November 12 and discussed a possible resumption of strikes on Iran (Anadolu Agency).",
+     "src": [
+      "https://www.aa.com.tr/en/middle-east/netanyahu-discusses-possible-resumption-of-attacks-on-iran-with-eisenkot-israeli-media/4124854"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "Pakistan’s military said it killed 74 militants over the past 10 days in northwestern and southwestern regions bordering Afghanistan (AP, reported November 13).",
+     "src": [
+      "https://www.justsecurity.org/164357/early-edition-november-13-2026/"
+     ],
+     "case": null,
+     "fp": [
+      "pak_afg"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-13",
    "items": [
     {
@@ -5948,151 +6094,6 @@
       "red-sea-bab-el-mandeb",
       "iran-war"
      ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-11",
-   "items": [
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi Arabia: Houthis strike Riyadh airport again, killing 12, including an American, and wounding 309",
-     "fc": [],
-     "src": [
-      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
-      "https://www.cbsnews.com/news/riyadh-saudi-airport-attack-deaths-injuries/",
-      "https://www.aljazeera.com/news/2026/10/10/attack-on-airport-in-saudi-capital-riyadh-leaves-several-injured"
-     ],
-     "loc": {
-      "lat": 24.96,
-      "lon": 46.7,
-      "place": "King Khalid International Airport, Riyadh (Saudi Arabia)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Trump calls attack on Saudi Arabia \"not acceptable,\" says U.S. will \"look at\" joining strikes on Houthis",
-     "fc": [],
-     "src": [
-      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russian glide bombs on Zaporizhzhia kill at least 20, including three children",
-     "fc": [],
-     "src": [
-      "https://mezha.net/eng/news/mezha-8f4b10ffda8117e2ccbbb01c_russian_glide_bomb/",
-      "https://www.aljazeera.com/news/2026/10/10/us-hosts-productive-trilateral-talks-to-end-russia-ukraine-war"
-     ],
-     "loc": {
-      "lat": 47.84,
-      "lon": 35.14,
-      "place": "Zaporizhzhia (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Trump says \"time for Ukraine to get a new president,\" blames Zelensky over diesel prices",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/",
-      "https://kyivindependent.com/he-better-damn-well-stop-trump-slams-zelensky-for-attacking-russian-refineries-says-ukraine-should-get-new-president",
-      "https://abcnews.com/US/wireStory/trump-time-ukraine-new-president-blames-zelenskyy-diesel-137162216"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "fp": [
-      "taiwan-strait"
-     ],
-     "h": "Lai: Taiwan \"open to exchanges\" but \"will not accept subordination\"; Beijing's Taiwan Affairs Office decries \"separatist thinking\"",
-     "fc": [],
-     "src": [
-      "https://focustaiwan.tw/politics/202610100003",
-      "https://www.aljazeera.com/news/2026/10/10/taiwan-president-says-defence-spending-boost-aims-to-deter-war"
-     ],
-     "loc": {
-      "lat": 25.04,
-      "lon": 121.51,
-      "place": "Taipei (Taiwan)",
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "OFAC General License 135 authorizes the sale, delivery, offloading and importation into the United States of Russian-origin diesel fuel, and remains in effect through April 7, 2027.",
-     "src": [
-      "https://www.hsfkramer.com/notes/sanctions/2026-posts/ofac-issues-general-license-135-authorizing-transactions-involving-russian-origin-diesel-fuel"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Ukrainian President Volodymyr Zelensky wrote on X that with the Zaporizhzhia strike, Russia had \"expressed its thanks\" for the lifting of sanctions on diesel exports.",
-     "src": [
-      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "In his National Day address, Taiwanese President Lai Ching-te said that increased defense investment is meant \"not to provoke\" but \"to deter war.\"",
-     "src": [
-      "https://focustaiwan.tw/politics/202610100003"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
-    },
-    {
-     "t": "North Korea marked the 81st anniversary of the Workers' Party on October 10; Kim Jong Un attended a celebratory performance at the Pyongyang Indoor Stadium but gave no speech or statement, KCNA reported on October 11.",
-     "src": [
-      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
-     ],
-     "fp": []
     }
    ]
   }

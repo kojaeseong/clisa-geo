@@ -1,6 +1,152 @@
 {
  "issues": [
   {
+   "date": "2026-11-14",
+   "items": [
+    {
+     "case": null,
+     "fp": [],
+     "h": "트럼프, 다음 주 선전서 시진핑·푸틴과 3자 회담…백악관 \"핵무기 감축 논의할 것\"",
+     "fact": "백악관은 트럼프 대통령이 다음 주 선전 APEC 정상회의 계기에 시진핑 주석·푸틴 대통령과 3자 회담을 연다고 밝혔고, 올리비아 웨일스 백악관 부대변인은 핵무기 감축을 논의할 것이라고 말했습니다(아나돌루통신 14일 보도). 미국 고위 당국자는 합의를 기대하지 않는다며 정상급의 \"출발점이자 첫 대화\"라고 했습니다.",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "none"
+      },
+      {
+       "id": "f11",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.aa.com.tr/en/world/morning-briefing-nov-14-2026/4124855"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "USA",
+       "CHN",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "혁명수비대 \"바레인 미군 레이더 타격\" 주장…미 중부사령부 \"드론 2대 격추, 피해 없어\"",
+     "fact": "이란 혁명수비대는 12일 시리크의 통신탑이 공격받은 데 대한 보복으로 13일 바레인의 미군 조기경보 레이더를 겨냥했다고 주장했습니다(드롭사이트). 미 중부사령부는 이란 주장을 부인하며 바레인 쪽으로 날아온 자폭 드론 2대를 격추했고 인명·재산 피해는 없었다고 밝혔습니다(폭스뉴스).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.foxnews.com/live-news/oil-prices-war-strikes-donald-trump-iran-11-13-26",
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-saudi-arabia-yemen-war-live-updates-november-13-2026",
+      "https://www.dropsitenews.com/p/iran-hits-us-radar-in-bahrain-van"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "이란, IAEA에 \"미국 대통령의 위협\" 이유로 핵 감시 협의 재개 거부",
+     "fact": "국제원자력기구(IAEA)가 13일 회원국에 돌린 비공개 보고서에 따르면, 이란은 서한에서 미국 대통령의 지속적이고 노골적인 공개 위협을 이유로 핵 감시 협의를 진행할 수 없다고 밝혔습니다(AP 보도 재인용). 보고서는 이스파한 연료농축시설에 대해 우려가 커지고 있다며 정확한 위치와 핵물질 존재 여부를 알지 못한다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f68",
+       "e": "down"
+      },
+      {
+       "id": "f69",
+       "e": "down"
+      },
+      {
+       "id": "f38",
+       "e": "down"
+      }
+     ],
+     "src": [
+      "https://www.dropsitenews.com/p/iran-hits-us-radar-in-bahrain-van",
+      "https://www.justsecurity.org/164357/early-edition-november-13-2026/"
+     ],
+     "loc": {
+      "lat": 48.21,
+      "lon": 16.37,
+      "place": "빈(오스트리아)",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "튀르키예·카타르, 상호방위협정 서명",
+     "fact": "에르도안 대통령과 타밈 카타르 군주는 13일 이스탄불 돌마바흐체 대통령 집무실에서 열린 제12차 튀르키예-카타르 고위전략위원회에서 상호방위협정 등 협정 5건에 서명했습니다(아나돌루통신·칼리지타임스). 에르도안 대통령은 전쟁 재발을 막기 위해 카타르와 계속 협력하겠다고 말했습니다(칼리지타임스).",
+     "fc": [],
+     "src": [
+      "https://www.aa.com.tr/en/world/morning-briefing-nov-14-2026/4124855",
+      "https://www.khaleejtimes.com/world/mena/us-israel-iran-saudi-arabia-yemen-war-live-updates-november-13-2026"
+     ],
+     "loc": {
+      "lat": 41.04,
+      "lon": 29.0,
+      "place": "이스탄불(튀르키예)",
+      "isos": [
+       "TUR",
+       "QAT"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "이란 혁명수비대 해군은 13일 호르무즈 해협의 '비인가 위험 항로'에 들어선 LNG 운반선이 기뢰에 부딪혀 폭발했다고 주장했습니다(로이터, 미확인).",
+     "src": [
+      "https://www.justsecurity.org/164357/early-edition-november-13-2026/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "이스라엘 채널12는 네타냐후 과도 총리가 12일 아이젠코트 총리 지명자를 만나 대이란 공격 재개 가능성을 논의했다고 보도했습니다(아나돌루통신).",
+     "src": [
+      "https://www.aa.com.tr/en/middle-east/netanyahu-discusses-possible-resumption-of-attacks-on-iran-with-eisenkot-israeli-media/4124854"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ]
+    },
+    {
+     "t": "파키스탄군은 아프가니스탄과 맞닿은 북서부·남서부에서 지난 10일 동안 무장대원 74명을 사살했다고 밝혔습니다(AP, 13일 보도).",
+     "src": [
+      "https://www.justsecurity.org/164357/early-edition-november-13-2026/"
+     ],
+     "case": null,
+     "fp": [
+      "pak_afg"
+     ]
+    }
+   ]
+  },
+  {
    "date": "2026-11-13",
    "items": [
     {
@@ -5948,151 +6094,6 @@
       "red-sea-bab-el-mandeb",
       "iran-war"
      ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-11",
-   "items": [
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "사우디 \"후티, 리야드 공항 또 공격\"…미국인 포함 12명 사망·309명 부상",
-     "fc": [],
-     "src": [
-      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
-      "https://www.cbsnews.com/news/riyadh-saudi-airport-attack-deaths-injuries/",
-      "https://www.aljazeera.com/news/2026/10/10/attack-on-airport-in-saudi-capital-riyadh-leaves-several-injured"
-     ],
-     "loc": {
-      "lat": 24.96,
-      "lon": 46.7,
-      "place": "리야드 킹칼리드 국제공항(사우디아라비아)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "트럼프 \"사우디 공격 용납 못 해\"…후티 공격 합류 \"검토하겠다\"",
-     "fc": [],
-     "src": [
-      "https://www.thenationalnews.com/news/us/2026/10/11/saudi-airport-attack-houthis/",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아, 자포리자에 활공폭탄…어린이 3명 포함 최소 20명 사망",
-     "fc": [],
-     "src": [
-      "https://mezha.net/eng/news/mezha-8f4b10ffda8117e2ccbbb01c_russian_glide_bomb/",
-      "https://www.aljazeera.com/news/2026/10/10/us-hosts-productive-trilateral-talks-to-end-russia-ukraine-war"
-     ],
-     "loc": {
-      "lat": 47.84,
-      "lon": 35.14,
-      "place": "자포리자(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "트럼프 \"우크라이나, 새 대통령 맞을 때\"…경유값 놓고 젤렌스키 겨냥",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/",
-      "https://kyivindependent.com/he-better-damn-well-stop-trump-slams-zelensky-for-attacking-russian-refineries-says-ukraine-should-get-new-president",
-      "https://abcnews.com/US/wireStory/trump-time-ukraine-new-president-blames-zelenskyy-diesel-137162216"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "fp": [
-      "taiwan-strait"
-     ],
-     "h": "라이칭더 \"교류엔 열려 있지만 종속은 거부\"…중국 대만판공실 \"독립 분열 사고\"",
-     "fc": [],
-     "src": [
-      "https://focustaiwan.tw/politics/202610100003",
-      "https://www.aljazeera.com/news/2026/10/10/taiwan-president-says-defence-spending-boost-aims-to-deter-war"
-     ],
-     "loc": {
-      "lat": 25.04,
-      "lon": 121.51,
-      "place": "타이베이(대만)",
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "미국 재무부 해외자산통제실의 일반 허가 135호는 러시아산 경유의 판매·운송·하역과 미국 수입까지 허용하며, 2027년 4월 7일까지 유효합니다.",
-     "src": [
-      "https://www.hsfkramer.com/notes/sanctions/2026-posts/ofac-issues-general-license-135-authorizing-transactions-involving-russian-origin-diesel-fuel"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "젤렌스키 우크라이나 대통령은 자포리자 공격을 두고 러시아가 경유 제재 완화에 '감사'를 표한 것이라고 X에 썼습니다.",
-     "src": [
-      "https://www.cbsnews.com/news/russia-strikes-ukraine-trump-diesel-deal/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "라이칭더 대만 총통은 국경일 연설에서 국방 투자 확대가 \"도발이 아니라 전쟁 억지를 위한 것\"이라고 말했습니다.",
-     "src": [
-      "https://focustaiwan.tw/politics/202610100003"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
-    },
-    {
-     "t": "북한은 10월 10일 노동당 창건 81주년을 맞았고, 김정은 국무위원장은 평양 실내체육관에서 축하 공연을 관람했으나 연설이나 성명은 내지 않았다고 조선중앙통신이 11일 보도했습니다.",
-     "src": [
-      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261011/n-korea-marks-party-anniversary-on-modest-scale"
-     ],
-     "fp": []
     }
    ]
   }
