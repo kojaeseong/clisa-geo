@@ -270,6 +270,15 @@ header.hd .brand :is(h1,.bh1,b){text-transform:none!important;letter-spacing:-.0
 /* 2026-11-14 바닥글 앱 안내 한 줄 */
 .site-foot .appln{margin:0}.site-foot .appln a{color:var(--accent,#1F4FD8);font-weight:600;text-decoration:none}.site-foot .appln a:hover{text-decoration:underline}
 
+/* 2026-11-14 운영자 결재(가안): 보기 단추 줄(오늘의 정세·지정학 신경망·히트맵·전망으로 보기 등)을 머리글 갈래 단추와 같은 모양으로 — 연한 회색 바탕, 고른 것만 파란색, 그림자 없음 */
+html body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z){background:#EEF1F6!important;box-shadow:inset 0 1px 2px rgba(16,24,40,.07)!important;border:0!important}
+html body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z) a{color:#4A5366!important;font-weight:600!important;opacity:1!important;text-shadow:none!important;box-shadow:none!important;background:transparent!important}
+html body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z) a:not(.on):hover{color:#141A26!important;background:rgba(255,255,255,.55)!important}
+html[data-theme=dark] body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z){background:#1B222B!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.4)!important}
+html[data-theme=dark] body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z) a{color:#A8B0BA!important}
+html[data-theme=dark] body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z) a:not(.on):hover{color:#fff!important;background:rgba(255,255,255,.06)!important}
+html body :is(.f2-vt,.l2-vt,.lkm-vt):not(#_z) a.on{background:#1F4FD8!important;color:#fff!important;font-weight:700!important;box-shadow:0 1px 2px rgba(31,79,216,.25)!important}
+
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
 .bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
 .bstrip.astrip,.bstrip.bs-due{--sc:#d93a40;background-image:linear-gradient(90deg,rgba(217,58,64,.10),rgba(217,58,64,0) 62%)!important}
