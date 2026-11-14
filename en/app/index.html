@@ -203,7 +203,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='b38e2e0f15',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='b527d5766f',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -481,7 +481,7 @@ function saveInt(it,label){var I=ints().filter(function(x){return intKey(x)!==in
 function isInt(it){return ints().some(function(x){return intKey(x)===intKey(it)})}
 function row(ans,title,sub,extra,href){var inner='<span class="t"><b>'+e(title)+'</b>'+(sub?'<small>'+e(sub)+'</small>':'')+'</span>'+(extra||'')+'<span class="ar">›</span>';
   return href?'<a class="rw2" href="'+href+'">'+inner+'</a>':'<button class="rw2" data-ans="'+ans+'">'+inner+'</button>'}
-function cntTag(n,L){return '<span class="cnt">'+(n?n+' this week':(L[0]?'Last news '+md(L[0].d):'No recent news'))+'</span>'}
+function cntTag(n,L){return '<span class="cnt">'+(n?n+' · past 7 days':(L[0]?'Latest: '+md(L[0].d):'No recent news'))+'</span>'}
 function pickList(browse){var w7=wk7(),cnt=function(L){return L.filter(function(x){return x.d>=w7}).length};
   var A=DATA.apps.map(function(a){return [a,cnt(issueItems(a[0]))]}).sort(function(x,y){return y[1]-x[1]}),R=DATA.regions.map(function(r){return [r,cnt(regItems(r[0]))]}).sort(function(x,y){return y[1]-x[1]});
   var h='<h3>By issue</h3>'+A.map(function(x){var a=x[0],u=unread('i.'+a[0],issueItems(a[0])).length;return row('i:'+a[0],a[1],issueLine(a[0]),u?'<span class="nb">'+u+'</span>':cntTag(x[1],issueItems(a[0])),browse?'#ask/i/'+a[0]:'')}).join('');

@@ -203,7 +203,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='9d37a4198d',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='9429e0e026',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -494,7 +494,7 @@ function row(ans,title,sub,extra,href){var inner='<span class="t"><b>'+e(title)+
   return href?'<a class="rw2" href="'+href+'">'+inner+'</a>':'<button class="rw2" data-ans="'+ans+'">'+inner+'</button>'}
 // 사안·지역 목록(첫 질문과 첫 화면이 같은 것을 씀). 이번 주 소식이 많은 순
 // 7일 건수(2026-11-14 운영자 승인): 0건이면 숫자 대신 마지막 소식 날짜(0건이 '다룰 것 없는 사안'으로 읽히지 않게)
-function cntTag(n,L){return '<span class="cnt">'+(n?'7일 '+n+'건':(L[0]?'최근 소식 '+md(L[0].d):'최근 소식 없음'))+'</span>'}
+function cntTag(n,L){return '<span class="cnt">'+(n?'7일간 '+n+'건':(L[0]?'최근 소식 '+md(L[0].d):'최근 소식 없음'))+'</span>'}
 function pickList(browse){var w7=wk7(),cnt=function(L){return L.filter(function(x){return x.d>=w7}).length};
   var A=DATA.apps.map(function(a){return [a,cnt(issueItems(a[0]))]}).sort(function(x,y){return y[1]-x[1]}),R=DATA.regions.map(function(r){return [r,cnt(regItems(r[0]))]}).sort(function(x,y){return y[1]-x[1]});
   var h='<h3>사안으로 보기</h3>'+A.map(function(x){var a=x[0],u=unread('i.'+a[0],issueItems(a[0])).length;return row('i:'+a[0],a[1],issueLine(a[0]),u?'<span class="nb">'+u+'</span>':cntTag(x[1],issueItems(a[0])),browse?'#ask/i/'+a[0]:'')}).join('');
