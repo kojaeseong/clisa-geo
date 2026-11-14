@@ -2,7 +2,7 @@
 (function(){
   var on = true; try { on = localStorage.getItem("ep.mapp") !== "0"; } catch (e) {}
   if (!on || !matchMedia("(max-width:900px)").matches || document.querySelector(".mab,.mhome")) return;
-  var EN = document.documentElement.lang === "en", a = document.createElement("a"); a.className = "mhome"; a.href = (EN ? "/en" : "") + "/home/"; a.textContent = EN ? "\u2039 Home" : "\u2039 홈";
+  var EN = document.documentElement.lang === "en", a = document.createElement("a"); a.className = "mhome"; a.href = (EN ? "/en" : "") + "/app/"; a.textContent = EN ? "\u2039 Home" : "\u2039 홈";
   a.style.cssText = "position:fixed;left:10px;top:calc(6px + env(safe-area-inset-top));z-index:2147483000;height:28px;padding:0 11px;border-radius:14px;background:rgba(16,20,24,.82);color:#fff;font:600 12px/28px -apple-system,'Pretendard Variable',sans-serif;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.25)";
   document.body.appendChild(a);
 })();

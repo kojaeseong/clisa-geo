@@ -11,7 +11,7 @@
 (function(){
   var on = true; try { on = localStorage.getItem("ep.mapp") !== "0"; } catch (e) {}
   if (!on || !matchMedia("(max-width:900px)").matches) return;
-  var EN = document.documentElement.lang === "en", a = document.createElement("a"); a.href = (EN ? "/en" : "") + "/home/"; a.textContent = EN ? "‹ Home" : "‹ 홈";
+  var EN = document.documentElement.lang === "en", a = document.createElement("a"); a.href = (EN ? "/en" : "") + "/app/"; a.textContent = EN ? "‹ Home" : "‹ 홈";
   a.style.cssText = "position:fixed;left:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:90;height:38px;padding:0 14px;border-radius:19px;background:rgba(16,20,24,.82);color:#fff;font:600 13px/38px -apple-system,'Pretendard Variable',sans-serif;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.25)";
   document.body.appendChild(a);
 })();
