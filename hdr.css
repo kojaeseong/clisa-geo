@@ -265,6 +265,11 @@ html.mapp .totop,html.mapp .navback{bottom:calc(72px + env(safe-area-inset-botto
 :root[data-theme="dark"].mapp .mdock [aria-current="page"]{color:#82B1FF}
 }
 
+/* 2026-11-14 운영자 결재: 영문 이름을 대소문자 섞어 "Clisa Geopolitics"로 */
+header.hd .brand :is(h1,.bh1,b){text-transform:none!important;letter-spacing:-.005em!important}
+/* 2026-11-14 바닥글 앱 안내 한 줄 */
+.site-foot .appln{margin:0}.site-foot .appln a{color:var(--accent,#1F4FD8);font-weight:600;text-decoration:none}.site-foot .appln a:hover{text-decoration:underline}
+
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스는 header1101.py가 hdr.css 끝에, 아카데미·게임 첫 화면은 stripc1108.py가 /strips_c.css로 붙인다 */
 .bstrip{--sc:#2a63e8;position:relative;overflow:hidden;border-left-width:1px!important;background-image:linear-gradient(90deg,rgba(42,99,232,.10),rgba(42,99,232,0) 62%)!important}
 .bstrip.astrip,.bstrip.bs-due{--sc:#d93a40;background-image:linear-gradient(90deg,rgba(217,58,64,.10),rgba(217,58,64,0) 62%)!important}
@@ -306,6 +311,3 @@ header.hd .strips{gap:6px!important}
 
 /* 2026-11-08 대통령님: 시간 막대 삭제. 전신타자 효과가 흐려졌다 나타나기(0.35초)와 겹쳐 앞 글자가 보이지 않던 것 — 찍는 동안은 흐림 없이 바로 보이게 */
 .bstrip .bs-t.tw-on{opacity:1!important;transition:none!important}
-
-/* 2026-11-14 운영자 결재: 영문 이름을 대소문자 섞어 "Clisa Geopolitics"로 */
-header.hd .brand :is(h1,.bh1,b){text-transform:none!important;letter-spacing:-.005em!important}

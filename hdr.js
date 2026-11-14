@@ -170,6 +170,16 @@
   document.addEventListener("click", function(e){ var a = e.target.closest && e.target.closest('.f2-vt a[data-f2v="rp"]'); if (a && mq.matches) { e.preventDefault(); e.stopPropagation(); location.href = P + "/ripple/"; } }, true);
 })();
 
+/* 2026-11-14 운영자 결재("그럽시다"): 모든 쪽 바닥글 끝에 앱 안내 한 줄. 바닥글(footer.site-foot)은 화면 스크립트가 나중에 붙이므로 붙을 때마다 넣는다. */
+(function(){
+  var EN = /^\/en(\/|$)/.test(location.pathname);
+  var H = '<p class="appln"><a href="' + (EN ? "/en/app/" : "/app/") + '">' + (EN ? "Get the Clisa app for phone and desktop ›" : "휴대전화·컴퓨터에 설치하는 클리사 앱 ›") + "</a></p>";
+  function add(){ var fs = document.querySelectorAll("footer.site-foot:not([data-appln])"); for (var i = 0; i < fs.length; i++) { fs[i].setAttribute("data-appln", "1"); fs[i].insertAdjacentHTML("beforeend", H); } }
+  var q = 0; function soon(){ if (q) return; q = 1; requestAnimationFrame(function(){ q = 0; add(); }); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", add); else add();
+  new MutationObserver(soon).observe(document.documentElement, {childList: true, subtree: true});
+})();
+
 /* 2026-11-08 대통령님 결재: 띠 C안(확률 계기형). 지오폴리틱스 모든 쪽(header1101.py가 hdr.js 끝에 붙임)과 아카데미·게임 첫 화면(stripc1108.py가 /strips_c.js로)에서 함께 쓴다.
    전망 띠: 확률 막대·확률·변화폭(처음 공개 확률 대비, 전망 조정은 조정 폭)·남은 날. 휴대전화는 막대·남은 날을 빼고 숫자만.
    화면 앱(app.js)과 글 쪽(shell.js)의 띠가 소식을 바꿀 때마다 clStripM(띠, {p, c, due})를 부른다. 이 파일이 늦게 읽히면 띠에 남겨 둔 _m으로 다시 그린다. */
