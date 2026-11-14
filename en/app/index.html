@@ -43,7 +43,7 @@ header.top .nm{font-weight:800;font-size:18px;letter-spacing:-.2px}header.top .s
 .fta{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 8px;margin:6px 0 14px;font-size:15px;line-height:1.75;word-break:keep-all}.fta>small{color:var(--mut);font-size:12.5px}.fta h2{font-size:21px;line-height:1.4;margin:4px 0 8px}.fta .lead{font-size:15px;color:var(--sub)}
 .fta h3{font-size:16.5px;line-height:1.45;margin:22px 0 6px;color:var(--brand)}.fta p{margin:8px 0}.fta ul,.fta ol{padding-left:20px;margin:8px 0}.fta li{margin:5px 0}.fta .fsum{background:var(--chip);border-radius:12px;padding:10px 12px 10px 30px}
 .fta figure{margin:16px 0;overflow-x:auto}.fta figcaption{font-weight:700;font-size:14px;margin-bottom:6px}.fta .fnote{font-size:12.5px;color:var(--mut);line-height:1.55}.fta sup.fn{font-size:10.5px;color:var(--acc);margin-left:1px}
-.fta a.fp{color:var(--acc);font-weight:700;text-decoration:none;white-space:nowrap}.fta .fp0{font-weight:700}.fta a{color:var(--acc)}.fta .tl{list-style:none;padding-left:0}.fta .tl .d{font-weight:800;color:var(--brand)}
+.fta a.fp{color:var(--acc);font-weight:700;text-decoration:none;white-space:normal}.fta .fp0{font-weight:700}.fta a{color:var(--acc)}.fta .ftl{list-style:none;padding-left:0}.fta .ftl li{margin:8px 0}.fta .ftl .ftd{display:block;font-weight:800;color:var(--brand);font-size:13.5px}
 .fta .fnotes{font-size:13.5px;line-height:1.6;color:var(--sub)}.fta details.src{margin:14px 0;font-size:13px;color:var(--sub)}.fta details summary{cursor:pointer;font-weight:700;color:var(--ink)}.fta .ftb{overflow-x:auto}.fta table{border-collapse:collapse;font-size:13px}.fta th,.fta td{padding:4px 8px;border-bottom:1px solid var(--line);text-align:left}
 .fta .ftw{margin:16px 0 8px;font-size:13px}
 .ap .bd{position:absolute;top:-6px;right:calc(50% - 38px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--red);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg)}
@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='125cee9aaa',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='96685c1aa1',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',WCEU:'Western-Central Europe',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -639,14 +639,14 @@ function indView(key){var K=DATA.kimp;if(key.indexOf(':')<0)key='kr:'+key;var R=
   V.innerHTML=h;window.scrollTo(0,0)}
 function ctxOf(r){if(r[0]==='f'){var f1=fpById(r[1]);return 'Forecast: '+(f1?f1.q.slice(0,60):'')}if(r[0]==='b')return 'Briefing '+(r[1]||'');if(r[0]==='ppl')return 'Daily life: '+kgName(r[1]);if(r[0]==='ind'){var k3=decodeURIComponent(r[1]||'');if(k3.indexOf(':')<0)k3='kr:'+k3;return inm(k3)+' ('+cnm(k3)+')'}if(r[0]==='i'&&app(r[1]))return app(r[1])[1]+' · '+({pan:'Overview',fc:'Forecasts'}[r[2]]||'News');if(r[0]==='r'&&reg(r[1]))return reg(r[1])[1];return {fc:'Changed forecasts',dg:'Weekly summary',lens:'Lenses on the world'}[r[0]]||'Home'}
 
-function ftFor(k){return (DATA.feat||[]).filter(function(f){return (f.on||[]).indexOf(k)>=0}).sort(function(x,y){return x.o-y.o}).map(function(f){return [f.q,'#ft/'+f.id,'Feature · '+md(f.date)]})}
+function ftFor(k){return (DATA.feat||[]).filter(function(f){return (f.on||[]).indexOf(k)>=0}).sort(function(x,y){return x.o-y.o}).map(function(f){return [f.q,'#ft/'+f.id,'Clisa Geopolitics feature · '+md(f.date)]})}
 function ftList(){var L=DATA.feat||[],h=bar('Read','#7A3E48','Features');if(L[0])ss('ftseen',L[0].date);
   h+='<div class="q">Long reads from Clisa Geopolitics</div><p class="lead">'+(L.length===1?'1 feature':L.length+' features')+', newest first.</p>'+L.map(function(f){var a=app(f.case);return '<a class="fc ftr" href="#ft/'+f.id+'"><span class="q"><small>'+md(f.date)+(a?' · '+e(a[1]):'')+'</small><b>'+e(f.title)+'</b><span class="ld">'+e(f.lead)+'</span></span><span class="ar">›</span></a>'}).join('');
   V.innerHTML=h+nextQ([],'ft');window.scrollTo(0,0)}
 function ftView(id){var f=(DATA.feat||[]).filter(function(x){return x.id===id})[0];if(!f){ftList();return}
   V.innerHTML=bar('Read','#7A3E48','Features')+'<p class="empty">Loading…</p>';
   fetch('/en/app/ft/'+id+'.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(F){var a=app(f.case);
-    var h=bar('Read','#7A3E48','Features')+'<article class="fta"><small>'+md(f.date)+(a?' · '+e(a[1]):'')+'</small><h2>'+e(f.title)+'</h2><p class="lead">'+e(f.lead)+'</p>'+F.html+'<p class="ftw"><a href="'+(LANG==='en'?'/en':'')+'/feature/'+f.id+'/" target="_blank" rel="noopener">Read on the website ↗</a></p></article>';
+    var h=bar('Read','#7A3E48','Features')+'<article class="fta"><small>Clisa Geopolitics feature · '+md(f.date)+(a?' · '+e(a[1]):'')+'</small><h2>'+e(f.title)+'</h2><p class="lead">'+e(f.lead)+'</p>'+F.html+'<p class="ftw"><a href="'+(LANG==='en'?'/en':'')+'/feature/'+f.id+'/" target="_blank" rel="noopener">Read on the website ↗</a></p></article>';
     V.innerHTML=h+nextQ((f.on||[]).filter(function(k){return app(k)}).slice(0,2).map(function(k){return [app(k)[1]+': where things stand','#i/'+k]}),'ft');window.scrollTo(0,0)})
   .catch(function(){V.innerHTML=bar('Read','#7A3E48','Features')+'<p class="empty">Couldn’t load this feature. Check your connection and try again.</p>'})}
 function msgView(){
