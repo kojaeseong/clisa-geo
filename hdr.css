@@ -306,3 +306,6 @@ header.hd .strips{gap:6px!important}
 
 /* 2026-11-08 대통령님: 시간 막대 삭제. 전신타자 효과가 흐려졌다 나타나기(0.35초)와 겹쳐 앞 글자가 보이지 않던 것 — 찍는 동안은 흐림 없이 바로 보이게 */
 .bstrip .bs-t.tw-on{opacity:1!important;transition:none!important}
+
+/* 2026-11-14 운영자 결재: 영문 이름을 대소문자 섞어 "Clisa Geopolitics"로 */
+header.hd .brand :is(h1,.bh1,b){text-transform:none!important;letter-spacing:-.005em!important}
