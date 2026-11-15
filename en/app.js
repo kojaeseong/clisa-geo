@@ -1354,6 +1354,7 @@ function loadBrief(){
   BRIEF_P.then(b => {
     if (!b || !(b.issues || []).length) { $("#bstrip").hidden = true; return; }
     BR = b; const cur = b.issues[0]; lkRefresh();  /* v4.37 나라 카드 연결 칸의 브리핑 */
+    if (S.tab === "brief" && S.bdate) document.title = titleOf();  /* 2026-11-16: 브리핑 자료가 오기 전에 정한 쪽 제목이 '국민의 삶'으로 남던 것(정세 브리핑 쪽·휴대전화 머리 제목) */
     if (S.tab === "forecast") { const pn = $("#pane-forecast"), y = pn ? pn.scrollTop : 0; renderForecasts(); if (pn) pn.scrollTop = y; }  /* v4.22 전망별 화면의 관련 사건은 브리핑 자료가 온 뒤 · v4.23 목록의 관련 꼭지 수도 */
     if (typeof IND !== "undefined" && IND && document.getElementById("indboard")) indBoard();  /* v3.98: 산업 탭이 브리핑 자료보다 먼저 그려졌으면 추이를 넣어 다시 그림 */
     /* v3.27 판단 변경 공지(머리말 n.k, 없으면 "분석 갱신")는 공지 날짜로부터 7일 동안 띠 첫머리에 두고, 그 뒤로 브리핑 제목을 돌린다(2026-10-01) */
