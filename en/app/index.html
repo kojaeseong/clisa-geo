@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='4fc1c21479',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',DEU:'Germany',GBR:'U.K.',JPN:'Japan',WCEU:'Western-Central Europe (excl. Germany, U.K.)',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='0641c10567',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',DEU:'Germany',GBR:'U.K.',JPN:'Japan',WCEU:'Western-Central Europe (excl. Germany, U.K.)',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -331,7 +331,7 @@ function issue(id,arg,sub){
   if(tab==='imp'&&!sub){var it0=ints().filter(function(x){return x.ax==='i'&&x.k===id&&x.w==='imp'&&x.g})[0];if(it0)sub=it0.g;else{startView('g',id,true);return}}
   var h=bar(a[2],a[3],a[1]),q=location.search||'';
   var tb=[];if(B)tb.push(['pan','Overview']);if(I)tb.push(['imp','Impact']);tb.push(['fc','Forecasts']);tb.push(['news','News']);
-  var L2=function(t){return q+'#i/'+id+'/'+t},GQ=I?['Whose lives and industries does this change?','#ask/g/'+id]:null;
+  var L2=function(t){return q+'#i/'+id+'/'+t},GQ=I?['Whose lives does this change?','#ask/g/'+id]:null;
   h+='<div class="tabs">'+tb.map(function(t){return '<a href="'+q+'#i/'+id+'/'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+(t[0]==='news'?(function(){var n=unread(key,list).length;return n?' '+n:''})():'')+'</a>'}).join('')+'</div>';
   if(tab==='pan'){
     h+='<div class="q">Where this is heading</div>';
@@ -379,7 +379,7 @@ function issue(id,arg,sub){
         (st.length&&mv.length?'<div class="hbl" style="margin-top:8px">Little change in any scenario: '+e(st.map(function(r){return r.n}).join(', '))+'</div>':'')+
         '<div class="hbl" style="margin-top:6px">“Worse” and “better” mean operating profit falls or rises more than 10% from normal (the industry’s 10-year median operating margin); “much worse” means a fall of more than 30% or an industry-wide loss. Industry Outlook, as of '+md(I.asof.ind)+'</div></div>'})}
     var tI=(IND||[]).filter(function(r){return r.d.s<100})[0];
-    h+=stepped('imp:'+id+':'+G,S2,'What else would you like to see for '+gn+'?',nextQ([['How does it affect people elsewhere?','#ask/g/'+id],B?['Why this assessment · forces pulling each way',L2('pan')]:null,(kby(G)&&kby(G).life.length)?['Daily life for '+gn+' across all conflicts','#ppl/'+G+'/all']:null,tI?[tI.n+' ('+(G==='USA'?'U.S.':'South Korea')+') in other conflicts','#ind/'+encodeURIComponent(tI.k)]:null],'i:'+id)+(G!=='KOR'&&G!=='USA'?'<p class="hbl" style="margin:8px 2px 0">Operating-profit assessments cover U.S. and South Korean industries only.</p>':''));
+    h+=stepped('imp:'+id+':'+G,S2,'What else would you like to see for '+gn+'?',nextQ([['How does it affect people elsewhere?','#ask/g/'+id],B?['Why this assessment · forces pulling each way',L2('pan')]:null,(kby(G)&&kby(G).life.length)?['Daily life for '+gn+' across all conflicts','#ppl/'+G+'/all']:null,tI?[tI.n+' ('+(G==='USA'?'U.S.':'South Korea')+') in other conflicts','#ind/'+encodeURIComponent(tI.k)]:null],'i:'+id));
     V.innerHTML=h;window.scrollTo(0,0);return;
   }
   if(tab==='fc'){
@@ -440,12 +440,12 @@ function dgs(){
 }
 var API='https://api.clisa.ai',CTX='Home',OPENED=Date.now(),OTH=0;
 function prof(){var P=ls('prof',null);if(P&&!P.ints&&P.sel)P={ints:P.sel.map(function(k){return {ax:k[0],k:k.slice(2),w:k[0]==='i'?(P.want||''):'news'}})};return P}
-function ints(){var P=prof();return P&&P.ints?P.ints:[]}
+function ints(){var P=prof();return P&&P.ints?P.ints.filter(function(x){return !(x.ax==='p'&&x.k==='ind')}):[]}
 function favs(){return ints().filter(function(x){return x.ax==='i'||x.ax==='r'}).map(function(x){return x.ax+':'+x.k})}
 function impOf(id){var I=(DATA.impact||{})[id];return I&&I.by&&Object.keys(I.by).length?I:null}
 function lifeFor(I,G){return ((I.by||{})[G]||{}).life||[]}
 function pplFor(I,G){return ((I.by||{})[G]||{}).ppl||[]}
-function indFor(I,G){return G==='KOR'?I.ind.kr:G==='USA'?I.ind.us:null}
+function indFor(I,G){return null}
 function impG(I,sub){var G=sub||ls('grp',DG);if(!I.by[G])G=I.by[DG]?DG:I.by.KOR?'KOR':Object.keys(I.by)[0];return G}
 function gName(id,G){var I=impOf(id),L=I?lifeFor(I,G):[];if(G==='PARTY'&&L.length)return L.map(function(x){return x.gn}).join(', ');if(L.length===1&&L[0].gn)return L[0].gn;return kgName(G)}
 function gShort(id,G){return G!=='PARTY'&&GS[G]?GS[G]:gName(id,G)}
@@ -486,7 +486,7 @@ function deeper(id){var B=(DATA.boards||{})[id],C=B&&B.cur,L=(C&&C.learn)||{},ou
   (DATA.games||[]).forEach(function(g){if(g.cases.indexOf(id)>=0)out.push([g.q,g.url,'Game · '+g.t+' · '+g.why+EXT])});return out}
 function related(ci){if(!ci)return [];var reg0=(DATA.rule.caseR||{})[ci]||null,out=[];if(!reg0)DATA.regions.forEach(function(r){if(!reg0&&relIssues(r[0])[0]===ci)reg0=r[0]});
   if(reg0)relIssues(reg0).filter(function(k){return k!==ci&&app(k)}).slice(0,2).forEach(function(k){out.push([app(k)[1]+' · another issue in the region','#ask/i/'+k,issueLine(k)])});
-  var I=impOf(ci),G=ls('grp',null);if(I&&!G)out.push(['Whose lives and industries does this change?','#ask/g/'+ci,'Choose from: countries in the conflict, the U.S., Europe or Northeast Asia']);
+  var I=impOf(ci),G=ls('grp',null);if(I&&!G)out.push(['Whose lives does this change?','#ask/g/'+ci,'Choose from: countries in the conflict, the U.S., Europe or Northeast Asia']);
   if(I&&G){if(!I.by[G])G=impG(I);var IND=indFor(I,G),t=(IND||[]).filter(function(r){return r.d.s<100})[0],cn=G==='USA'?'U.S.':'South Korea';
     if(t)out.push([t.n+' ('+cn+') · across all conflicts','#ind/'+encodeURIComponent(t.k),'In this issue, out of 100 futures: '+dcnt(t.d)]);
     var wl=worstLife(I,G);if(wl!=null&&kby(G))out.push(['Daily life for '+gName(ci,G)+' · all conflicts combined','#ppl/'+G+'/all','In this issue, worse off in '+wl+' of 100 futures'])}
@@ -521,7 +521,7 @@ function startView(step,arg,browse){
     h+='<div class="q" style="margin-top:14px">Question '+(fromR?3:2)+'</div><h1>What else would you like to know about this issue?</h1>';
     var go=function(t){return browse?'#i/'+id+'/'+t:''};
     if(B&&C)h+=row('w:pan','Where this is heading, and why','Scenarios and probabilities · forces pulling each way · what decision-makers want and their red lines','',go('pan'));
-    if(IM)h+=row('','How it affects people’s lives and industries','Choose from: countries in the conflict, the U.S., Europe or Northeast Asia','',base+'g/'+id);
+    if(IM)h+=row('','How it affects people’s lives','Choose from: countries in the conflict, the U.S., Europe or Northeast Asia','',base+'g/'+id);
     h+=row('w:fc','What is likely next, and how the assessment will be checked',FL.length+(FL.length===1?' forecast':' forecasts')+' with deadlines and probabilities'+(W&&W.length?' · '+W.length+(W.length===1?' signal':' signals')+' of a shift':''),'',go('fc'));
     h+=row('w:news','The news behind the assessment',L.length+(L.length===1?' news item':' news items')+', with sources','',go('news'));
     var DP=deeper(id);if(DP.length)h+='<h3>Go deeper</h3>'+DP.map(function(x){return '<a class="rw2" href="'+x[1]+'"><span class="t"><b>'+e(x[0])+'</b><small>'+e(x[2])+'</small></span><span class="ar">↗</span></a>'}).join('');
@@ -534,8 +534,8 @@ function startView(step,arg,browse){
       var OM={};if(I.by.PARTY)OM.PARTY={t:'Countries in the conflict',s:gName(id,'PARTY'),g:['PARTY']};if(I.by.KOR)OM.KOR={t:'Northeast Asia',s:'South Koreans',g:['KOR']};if(I.by.USA)OM.USA={t:'United States',s:'Americans',g:['USA']};if(EU.length)OM.EU={t:'Europe',s:EU.map(function(g){return gName(id,g)}).join(' · '),g:EU,eu:1};var O=GORD.map(function(k){return OM[k]}).filter(Boolean);
       h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>Impact</small></div><p class="lead">First, the effect on people’s lives in each region: in how many of 100 futures through 2030 people end up worse off than today.</p><ul class="pv">'+O.map(function(o){var ws=o.g.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null});return ws.length?'<li><span>'+Math.max.apply(null,ws)+'/100</span><div>'+e(o.t)+' · '+e(o.s)+'</div></li>':''}).join('')+'</ul></div>';
       h+='<div class="q" style="margin-top:14px">Question '+qn+'</div><h1>Whose lives would you like to look at?</h1>';
-      h+=O.map(function(o){var mark=last&&o.g.indexOf(last)>=0?'<span class="cnt">Last chosen</span>':'';return o.eu?row('',o.t,o.s+' · '+line(o.g),mark,base+'ge/'+id):row('g:'+o.g[0],o.t,o.s+' · '+line(o.g)+(o.g[0]==='KOR'||o.g[0]==='USA'?' · with industry outlook':''),mark,browse?'#i/'+id+'/imp/'+o.g[0]:'')}).join('');
-      h+='<p class="note" style="margin-top:10px">These are the groups Clisa Geopolitics assesses in Chain Reactions and People’s Lives. Operating-profit assessments cover U.S. and South Korean industries only.</p>';
+      h+=O.map(function(o){var mark=last&&o.g.indexOf(last)>=0?'<span class="cnt">Last chosen</span>':'';return o.eu?row('',o.t,o.s+' · '+line(o.g),mark,base+'ge/'+id):row('g:'+o.g[0],o.t,o.s+' · '+line(o.g),mark,browse?'#i/'+id+'/imp/'+o.g[0]:'')}).join('');
+      h+='<p class="note" style="margin-top:10px">These are the groups Clisa Geopolitics assesses in Chain Reactions and People’s Lives.</p>';
     }else{
       h+='<div class="q" style="margin-top:6px">Question '+qn+'</div><h1>Which part of Europe?</h1><p class="sub">The effect on people’s lives varies across Europe.</p>';
       h+=EU.map(function(g){return row('g:'+g,gName(id,g),line([g]),last===g?'<span class="cnt">Last chosen</span>':'',browse?'#i/'+id+'/imp/'+g:'')}).join('');
@@ -689,7 +689,7 @@ function ntCard(){var el=document.getElementById('nt');if(!el)return;
 function clearNotes(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.getNotifications?reg.getNotifications():[]}).then(function(ns){ns.forEach(function(n){n.close()})}).catch(function(){});if(navigator.clearAppBadge)navigator.clearAppBadge().catch(function(){})}
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clearNotes()});clearNotes();
 function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
-  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2],r[3]);else if(r[0]==='r'&&reg(r[1]))region(r[1],r[2]);else if(r[0]==='ppl'){var gk=(DATA.kimp.groups||[]).map(function(g){return g[0]});if(gk.indexOf(r[1])>=0)pplView(r[1],r[2]||'all');else pplView(ls('grp',DG),r[1]||'all')}else if(r[0]==='ind'&&r[1])indView(decodeURIComponent(r[1]));else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='ft'){if(r[1])ftView(r[1]);else ftList()}else if(r[0]==='start')startView(r[1],r[2]);else if(r[0]==='ask')startView(r[1],r[2],true);else if(r[0]==='f'&&r[1])fcView(r[1]);else if(r[0]==='b')briefView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start'&&r[0]!=='ask')CTX=ctxOf(r);
+  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2],r[3]);else if(r[0]==='r'&&reg(r[1]))region(r[1],r[2]);else if(r[0]==='ppl'){var gk=(DATA.kimp.groups||[]).map(function(g){return g[0]});if(gk.indexOf(r[1])>=0)pplView(r[1],r[2]||'all');else pplView(ls('grp',DG),r[1]||'all')}else if(r[0]==='ind')pplView(ls('grp',DG),'all');else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='ft'){if(r[1])ftView(r[1]);else ftList()}else if(r[0]==='start')startView(r[1],r[2]);else if(r[0]==='ask')startView(r[1],r[2],true);else if(r[0]==='f'&&r[1])fcView(r[1]);else if(r[0]==='b')briefView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start'&&r[0]!=='ask')CTX=ctxOf(r);
   instUI();
   var js=ls('justsaved',null);if(js&&r[0]!=='start'){try{localStorage.removeItem('clisa.en.justsaved')}catch(x){};var bb=V.querySelector('.bar');var nt='<div class="saved">Saved to your interests · '+e(js)+' · it will appear first on your home screen <a href="#start/4">View interests</a></div>';if(bb)bb.insertAdjacentHTML('afterend',nt);else V.insertAdjacentHTML('afterbegin',nt)}}
 function toast(t){var el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.className='toast';document.body.appendChild(el)}el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('on')},1800)}

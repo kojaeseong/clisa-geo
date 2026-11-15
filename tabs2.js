@@ -3,7 +3,7 @@
   var EN = document.documentElement.lang === "en", P = EN ? "/en" : "";
   var G = [
     ["overview", ["/links/", "/ripple/"]],  /* 2026-11-07: 국문에 이어 영문 메뉴에서도 나비효과 지도를 빼고 세계 정세에 합침 */  /* 2026-11-07: 국문 메뉴에서 나비효과 지도를 빼고 세계 정세에 합침 */
-    ["industry", ["/industry/", "/life/"], EN ? [["Industry Outlook", "/industry/"], ["People\u2019s Lives", "/life/"]] : [["산업별 미래", "/industry/"], ["국민의 삶", "/life/"]]],
+    ["brief", ["/life/", "/industry/"]],  /* 2026-11-16 결재: 산업 탭을 내리고 메뉴는 '국민의 삶' 하나(갈래 줄 없음) */
     ["strat", ["/case/"]], ["forecast", ["/forecast/"]],
     ["brieftab", ["/brief/", "/feature/", "/digest/"], EN ? [["Briefings", "/brief/"], ["Weekly Summary", "/digest/"], ["Features", "/feature/"]] : [["정세 브리핑", "/brief/"], ["주간 정세 요약", "/digest/"], ["특집", "/feature/"]]],
     ["grand", ["/grand/", "/power/", "/leader/"], EN ? [["World Order", "/grand/"], ["Power Structures", "/power/"]] : [["세계 질서", "/grand/"], ["권력 구조", "/power/"]]],
@@ -16,7 +16,7 @@
     G.forEach(function (x) { if (x[1].some(function (p) { return path.indexOf(p) === 0; })) g = x; });
     if (!g && (path === "/" || path === "")) g = ["overview", ["/"]];
     if (!g) {   /* 그 밖의 쪽(나라·권역 등): 화면 앱이 숨긴 메뉴에 현재 표시를 하면 그것을 품은 탭에 표시한다 */
-      var al = nl.querySelector('a.hd-alias[aria-current="page"]'), M = { brief: "industry", feature: "brieftab", power: "grand" };
+      var al = nl.querySelector('a.hd-alias[aria-current="page"]'), M = { brief: "brief", industry: "brief", feature: "brieftab", power: "grand" };
       if (al && M[key(al)]) g = [M[key(al)], []];
     }
     var vis = nl.querySelectorAll("a:not(.hd-alias)");

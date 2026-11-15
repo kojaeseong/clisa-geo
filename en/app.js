@@ -1373,7 +1373,7 @@ const BH_CUT = 6, BH_N = 2;  /* 2026-10-12 결재: 최근 2개 호(발행일 기
 function bhFx(i, d){
   const fc = (i.fc || []).map(fcChip).join("");
   const C = i.case ? (D.strategies || []).find(s => s.id === i.case) : null, moved = C && C.hs7 && (C.hs7.changes || []).some(x => x.d === d);
-  return fc + (moved ? "<span class=\"bh-gx\"><span class=\"lb-fx lb-fx-on\">Graphs updated</span><button type=\"button\" class=\"bh-go\" data-golife=\"" + esc(i.case) + "\">People's Lives →</button><button type=\"button\" class=\"bh-go\" data-goind=\"" + esc(i.case + "|" + d) + "\">Industry Outlook →</button></span>" : "");
+  return fc + (moved ? "<span class=\"bh-gx\"><span class=\"lb-fx lb-fx-on\">Graphs updated</span><button type=\"button\" class=\"bh-go\" data-golife=\"" + esc(i.case) + "\">People's Lives →</button></span>" : "");
 }
 function bhFact(i){ return i.fact && !i.link ? '<span class="lb-f">' + esc(i.fact) + "</span>" : ""; }  /* v4.01(2026-10-12 결재): 한 줄 정보 아래 사실 1~2문장(판단과의 연결 문장이 있는 예전 형식 호는 전문 쪽에서 봄) */
 function bhItems(x, top){
