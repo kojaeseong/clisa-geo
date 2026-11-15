@@ -201,15 +201,15 @@ function litMap(g){
 }
 function viaNames(pt){ const out=[]; const e0=VIEW.edges.find(e=>e.f===pt[0]&&e.t===(pt[1]||null)); if(e0&&e0.via){ const v=scName(e0.via)||nname(e0.via); if(v) out.push(v) } pt.slice(1).forEach(x=>out.push(nname(x))); if(!out.length){ const e1=VIEW.edges.find(e=>e.f===pt[0]&&e.t==='grp:'+G); if(e1&&e1.via) out.push(scName(e1.via)||e1.via) } return out }
 /* 2026-11-07 대통령님: 지도 칸의 판단에 기준일을 밝힌다(이어지지 않음을 '앞으로도 영향 없음'으로 읽지 않게) */
-const ASOF=()=>{ const a=String(L.asof||''); if(!/^\d{4}-\d{2}-\d{2}$/.test(a)) return ''; const [y,m,d]=a.split('-').map(Number); return '<p class="asof">Judgment as of '+MON[m-1]+' '+d+', '+y+'</p>' };
+const ASOF=(c)=>{ const a=String((c&&c.d2)||L.asof||''); if(!/^\d{4}-\d{2}-\d{2}$/.test(a)) return ''; const [y,m,d]=a.split('-').map(Number); return '<p class="asof">Judgment as of '+MON[m-1]+' '+d+', '+y+'</p>' };
 function detail(k,lit,byFp,fpById){
  const el=$('det'); if(!k||!byFp){ el.innerHTML='<p class="none">Select a cell.</p>'; return }
  const [f,p]=k.split('|'), c=byFp[f][+p], fp=fpById[f]||{n:f}, L1=lit[k];
  let h='<p class="k">'+esc(PSHORT[+p])+' pathway</p><h2>'+esc(fp.n)+'<span class="ar">→</span>'+esc(L.L.gl[G])+'</h2>';
  /* 2026-11-07: '이어지지 않음'·'판단 불가' 칸도 나비효과 지도의 판단과 이유를 보인다(1,548칸 모두 통합판에서) */
- if(c&&c.v!==1){ h+='<div class="chips"><span class="chip">'+(c.v===0?'Not connected':'Undetermined')+'</span></div><div class="sec"><h3><i class="b"></i>Ripple Effects judgment</h3><p class="vno">'+esc(c.r||'')+'</p>'+ASOF()+'</div>'; el.innerHTML=h; return }
+ if(c&&c.v!==1){ h+='<div class="chips"><span class="chip">'+(c.v===0?'Not connected':'Undetermined')+'</span></div><div class="sec"><h3><i class="b"></i>Ripple Effects judgment</h3><p class="vno">'+esc(c.r||'')+'</p>'+ASOF(c)+'</div>'; el.innerHTML=h; return }
  h+='<div class="chips">'+(L1?'<span class="chip lit">Lit this period</span>':'')+'<span class="chip">Confidence: '+esc(L.L.conf[c.c])+'</span>'+(c.l!=null?'<span class="chip">Time to effect: '+esc(L.L.lag[c.l])+'</span>':'')+((c.k||[]).length?'<span class="chip">Areas affected: '+esc(c.k.map(i=>L.L.cat[i]).join(', '))+'</span>':'')+'</div>';
- h+='<div class="sec"><h3><i class="b"></i>Connected path · Ripple Effects judgment</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF()+'</div>';
+ h+='<div class="sec"><h3><i class="b"></i>Connected path · Ripple Effects judgment</h3><ol class="steps">'+String(c.m||'').split('→').map(s=>'<li>'+esc(s.trim())+'</li>').join('')+'</ol>'+(c.b?'<p class="basis">'+esc(c.b)+'</p>':'')+((c.s||[]).length?'<div class="src">'+c.s.map(u=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(u.split('/')[2].replace(/^www\./,''))+'</a>').join('')+'</div>':'')+ASOF(c)+'</div>';
  h+='<div class="sec"><h3><i class="a"></i>Paths into this cell this period · Forecast network</h3>';
  if(!L1) h+='<p class="none">'+'No forecast whose probability has moved since '+md(SINCE)+' leads to this cell.</p>';
  else { const items=[]; L1.forEach(x=>x.paths.forEach(pt=>items.push([pt,x.e])));
