@@ -23,3 +23,30 @@ header.hd .hd-sub a[aria-current="page"]{background:var(--ink,#101418);color:#ff
 /* 2026-11-07 시안(대통령님): 갈래 단추 줄을 낮춘다 */
 @media (min-width:901px){header.hd>nav.hd-sub{padding:2px 12px 4px!important}header.hd .hd-sub a{padding:3px 13px;font-size:12.5px;line-height:1.3}}
 @media (max-width:900px){header.hd nav.gnav a{min-height:35px}header.hd .hd-sub{padding:0 12px 6px}header.hd .hd-sub a{padding:3px 12px;font-size:12px}}
+/* 2026-11-16 시안: 고르기 단추(필터·전환)를 작은 직사각형으로 통일 */
+html body .td-gs:not(#_z){gap:3px!important}
+html body .td-gs:not(#_z) button{border-radius:4px!important;padding:5px 7px!important;font-size:12px!important}
+html body .l2-chips{gap:4px!important}
+html body .l2-chip{border-radius:4px!important;padding:5px 9px!important}
+html body .fh-st{gap:5px!important}
+html body .fh-st button{border-radius:5px!important;padding:5px 10px!important}
+html body .chips.fcm,html body .chips.fcf{gap:4px!important}
+html body .chips.fcm .chip,html body .chips.fcf .chip,html body .layer-sw .chip{border-radius:4px!important;padding:3px 7px!important}
+html body .f2-vt,html body .l2-vt{border-radius:7px!important}
+html body .f2-vt a,html body .l2-vt a{border-radius:5px!important}
+html body header.hd .hd-sub a{border-radius:5px!important}
+/* 2026-11-16 대통령님 결재: 바닥글 줄이기 */
+html body .site-foot{gap:6px!important;font-size:12px!important;line-height:1.5!important;padding-top:12px!important}
+html body .site-foot p,html body .site-foot .fb,html body .site-foot summary{font-size:12px!important;line-height:1.5!important}
+@media (max-width:700px){html body .site-foot p,html body .site-foot .fb,html body .site-foot summary{font-size:12.5px!important}}
+html body .site-foot .ft1{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px}
+html body .site-foot .ft1 .fb{margin:0}
+html body .site-foot .mailrow{display:inline-flex;align-items:center;gap:6px}
+html body .site-foot .copy-btn{padding:2px 8px!important;font-size:11.5px!important;border-radius:4px!important}
+html body .site-foot details.ft-more{display:inline}
+html body .site-foot details.ft-more>summary{display:inline;cursor:pointer;color:var(--accent,#1F4FD8);list-style:none}
+html body .site-foot details.ft-more>summary::-webkit-details-marker{display:none}
+html body .site-foot details.ft-more>summary::after{content:" ▾"}
+html body .site-foot details.ft-more[open]>summary::after{content:" ▴"}
+html body .site-foot details.ft-more[open]{display:block}
+html body .site-foot details.ft-more>p{margin:6px 0 0}

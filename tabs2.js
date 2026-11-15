@@ -32,3 +32,25 @@
   new MutationObserver(function () { if (location.pathname !== last) { last = location.pathname; } run(); }).observe(document.querySelector("header.hd") || document.body, { subtree: true, attributes: true, attributeFilter: ["aria-current"] });
   window.addEventListener("popstate", run); setInterval(function () { if (location.pathname !== last) { last = location.pathname; run(); } }, 400);
 })();
+
+/* 2026-11-16 대통령님 결재: 바닥글 줄이기(문구는 그대로). 오류 제보 문장과 메일 주소를 한 줄로, AI 안내와 자문 아님 문장을 한 문단으로,
+   개인정보·저작권 문단은 © 줄 끝의 '개인정보·저작권 안내 ▾'를 누르면 펼친다. 바닥글은 화면 스크립트가 나중에 붙이므로 붙을 때마다 고친다 */
+(function () {
+  var EN = document.documentElement.lang === "en";
+  function fix(f) {
+    if (f.getAttribute("data-ft2")) return; f.setAttribute("data-ft2", "1");
+    var fb = f.querySelector(":scope > .fb"), mr = f.querySelector(":scope > .mailrow");
+    if (fb && mr) { var d = document.createElement("div"); d.className = "ft1"; f.insertBefore(d, fb); d.appendChild(fb); d.appendChild(mr); }
+    var P = [].slice.call(f.querySelectorAll(":scope > p")), ai = null, dc = null, pv = null, co = null, cp = null;
+    P.forEach(function (p) { var t = p.textContent;
+      if (/^\s*©/.test(t)) co = p; else if (/Anthropic/.test(t)) ai = p; else if (/자문이 아닙니다|not investment/.test(t)) dc = p;
+      else if (/회원 가입|no user accounts/.test(t)) pv = p; else if (/저작권|copyright/i.test(t) && p.querySelector('a[href^="mailto:"]')) cp = p; });
+    if (ai && dc) { ai.appendChild(document.createTextNode(" ")); while (dc.firstChild) ai.appendChild(dc.firstChild); dc.remove(); }
+    if (co && (pv || cp)) { var dt = document.createElement("details"); dt.className = "ft-more";
+      dt.innerHTML = "<summary>" + (EN ? "Privacy and Copyright" : "개인정보·저작권 안내") + "</summary>";
+      if (pv) dt.appendChild(pv); if (cp) dt.appendChild(cp);
+      co.appendChild(document.createTextNode(" · ")); co.appendChild(dt); }
+  }
+  function run() { var fs = document.querySelectorAll("footer.site-foot:not([data-ft2])"); for (var i = 0; i < fs.length; i++) fix(fs[i]); }
+  run(); setInterval(run, 500);
+})();
