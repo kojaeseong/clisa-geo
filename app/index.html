@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='b119a54f6c',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='10caa4d325',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -642,7 +642,7 @@ function pplView(G,w){var K=DATA.kimp,B2=kby(G)||kby(DG),gn=kgName(G),pi=(w==='a
   h+='<div class="q">이 분쟁들이 '+e(gn)+'의 생활을 어떻게 바꾸나</div>';
   h+='<div class="gchips">'+K.groups.map(function(g){return '<a href="#ppl/'+g[0]+'/'+(w||'all')+'" class="'+(g[0]===G?'on':'')+'">'+e(g[1].replace(' 국민',''))+'</a>'}).join('')+'</div>';
   var LR=lifeRank(G);
-  h+=LR.length?'<div class="card"><h2>사안별 · 2030년까지 100번의 미래</h2>'+LR.map(function(x){return '<div class="ir"><div class="t"><b>'+e(x.t)+'</b>'+(x.gn&&G==='PARTY'?'<small>'+e(x.gn)+'</small>':'')+'</div>'+hbar(x.now)+(x.bad.length?'<p>현재보다 나쁜 삶이 되는 전개 · '+e(x.bad.map(function(y){return y[0]+'('+y[1]+'%)'}).join(', '))+'</p>':'')+'</div>'}).join('')+'<div class="hbl" style="margin-top:6px">클리사 지오폴리틱스가 판단한 전개 확률을 100번의 미래로 바꾼 것입니다. 국민의 삶 '+md(K.asof.life)+' 기준'+(G==='WCEU'?'. 이 수치는 독일·영국 국민을 포함한 기존 집단으로 계산한 것입니다':'')+'</div></div>':'';
+  h+=LR.length?'<div class="card"><h2>사안별 · 2030년까지 100번의 미래</h2>'+LR.map(function(x){return '<div class="ir"><div class="t"><b>'+e(x.t)+'</b>'+(x.gn&&G==='PARTY'?'<small>'+e(x.gn)+'</small>':'')+'</div>'+hbar(x.now)+(x.bad.length?'<p>현재보다 나쁜 삶이 되는 전개 · '+e(x.bad.map(function(y){return y[0]+'('+y[1]+'%)'}).join(', '))+'</p>':'')+'</div>'}).join('')+'<div class="hbl" style="margin-top:6px">클리사 지오폴리틱스가 판단한 전개 확률을 100번의 미래로 바꾼 것입니다. 국민의 삶 '+md(K.asof.life)+' 기준</div></div>':'';
   var L=B2.ppl.filter(function(x){return pi<0||x[2]===pi}),lifeHTML=h.slice(h.indexOf('<div class="card"><h2>사안별')>=0?h.indexOf('<div class="card"><h2>사안별'):h.length);h=h.slice(0,h.length-lifeHTML.length);var pathHTML='';
   pathHTML+='<div class="card"><h2>'+(pi<0?e(gn)+'에게 이어지는 길 '+L.length+'개':e(K.paths[pi])+' 경로로 이어지는 분쟁 '+L.length+'개')+'</h2>'+L.map(function(x){return '<div class="cell"><b>'+e(x[1])+'</b><span class="pth">'+e(K.paths[x[2]])+'</span><small style="color:var(--mut)">확신도 '+e(x[4])+'</small><div style="margin-top:4px">'+e(x[3])+'</div>'+(x[5]?'<a class="src" style="font-size:12.5px;color:var(--acc);text-decoration:none" href="#i/'+x[5]+'/imp/'+G+'">이 사안에서 자세히 ›</a>':'')+'</div>'}).join('')+'<div class="hbl" style="margin-top:6px">통합신경망 '+md(K.asof.links)+' 기준 판단</div></div>';
   var op=K.paths.map(function(nm,i){return i!==pi&&B2.ppl.some(function(x){return x[2]===i})?[nm+' 경로로 오는 영향은?','#ppl/'+G+'/'+i]:null});if(pi>=0)op.unshift(['모든 길을 한꺼번에 보기','#ppl/'+G+'/all']);
