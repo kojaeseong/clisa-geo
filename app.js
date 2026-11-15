@@ -1267,7 +1267,7 @@ function renderBrief(){
   const past = BR.issues.filter(x => x !== cur || x.items.some(i => i.link));
   if (cur === BR.issues[0] && !S.bdate) { el.innerHTML = '<div class="sec lbwrap">' + lifeBoardHtml(cur) + "</div>"; el.scrollTop = 0; fitTrends(el); document.dispatchEvent(new CustomEvent("clisa:life", {detail: el})); return; }  /* v4.58 개편 ③: life2.js가 이 신호로 국민별로 보기를 그린다 · v3.99: 정세 브리핑은 세계 정세 탭 맨 위로 옮김 */
   el.innerHTML = '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
-    '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
+    '<p class="note">최근 발생한 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
     dailyIssue(cur) + "</section>" + (cur === BR.issues[0] ? dueHtml() + worldSecHtml() : "") +  /* v4.59 개편 ②: 최신 호 아래에 다가오는 일정·정세 요약·분쟁지 */
     (others.length ? '<section class="sec"><h3>지난 정세 브리핑</h3><ul class="list blist">' + others.map(o => '<li><a class="row-btn" href="/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
   el.scrollTop = 0;
@@ -1277,7 +1277,7 @@ function dailyHtml(){
   if (!BR || !(BR.issues || []).length) return "";
   const cur = BR.issues[0], old = BR.issues.slice(1);
   return '<section class="sec dbrief" id="brief"><div class="bh"><h2>정세 브리핑</h2><span class="bd">' + fmtKD(cur.date) + '</span>' + ttsBtn("brief") + '</div>' +
-    '<p class="note">최근 일어난 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
+    '<p class="note">최근 발생한 주요 사건을 클리사 지오폴리틱스의 판단·전망과 연결해 정리합니다. 화살표(↑·↓)는 해당 사건이 전망의 실현 가능성을 높이는지 낮추는지를 표시한 것입니다. 전망 확률은 매주 검토해 수정합니다.</p>' +
     dailyIssue(cur) +
     (old.length ? '<details class="bold"><summary>지난 브리핑 ' + old.length + "건</summary>" + old.map(o => '<details class="bo"><summary>' + fmtKD(o.date) + " · " + esc((o.items[0] || {}).h || "") + "</summary>" + dailyIssue(o) + "</details>").join("") + "</details>" : "") +
     "</section>";
@@ -2091,7 +2091,7 @@ function lifeCard(c, x){
 }
 function lifeBigHtml(x){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
-  return '<section class="life" id="s-life"><h3 class="lm-h" style="margin:14px 0 2px">사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note" style="margin:0">5개 사안마다 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 개선되거나 악화되는 횟수입니다(판단값). 누구의 삶을 볼지 고를 수 있습니다.</p>' +
+  return '<section class="life" id="s-life"><h3 class="lm-h" style="margin:14px 0 2px">사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note" style="margin:0">5개 사안마다 2030년까지 가능한 미래 100번 가운데 삶이 개선되거나 악화되는 횟수입니다(판단값). 누구의 삶을 볼지 고를 수 있습니다.</p>' +
     '<div class="lsel" role="group" aria-label="누구의 삶을 볼까">' + (LIFE_SEL.length > 1 ? LIFE_SEL : []).map(([k, l]) => '<button type="button" data-life="' + k + '" aria-pressed="' + (k === LIFE) + '">' + l + "</button>").join("") + "</div>" +
     '<div class="lh-row" id="lifegrid">' + cs.map(c => lifeCard(c, x)).join("") + "</div></section>";
 }
@@ -2625,7 +2625,7 @@ function lifeItemHtml(id){
 }
 function lifeHeroHtml(){
   const cs = (D.strategies || []).filter(c => c.hs7); if (!cs.length) return "";
-  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 일어날 수 있는 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보여 줍니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안 분석의 \'이 사안이 사람들의 삶에 미치는 영향\'에 있습니다.</p><div class="lh-grid">' +
+  return '<section class="sec" id="s-life"><h3>사람들의 삶 · 2030년까지 100번의 미래</h3><p class="note">5개 사안에서 한 집단씩 골라, 2030년까지 가능한 미래 100번 가운데 삶이 나아지거나 나빠지는 횟수를 점으로 보여 줍니다. 확률과 분류는 판단값이며, 계산 방법은 각 사안 분석의 \'이 사안이 사람들의 삶에 미치는 영향\'에 있습니다.</p><div class="lh-grid">' +
     cs.map(c => { const H = c.hs7, G = H.groups.find(g => !g.fold) || H.groups[0], n = hsCount(H, G, "p"), nm = c.title.split(":")[0];
       return '<article class="lh-card"><p class="lh-case">' + esc(nm) + '</p><div class="lh-hd"><b>' + esc(G.name) + "</b><span>" + esc(G.size) + '</span></div><div class="lh-body">' + hsDots(n) + "<div>" + hsLegend(n, n) + '</div></div><p class="lh-line">' + esc(G.line) + "</p>" + hsChgLine(H, G) + '<button type="button" class="chip" data-hs="' + esc(c.id) + '">' + esc(nm) + " · 삶에 미치는 영향 자세히 →</button></article>"; }).join("") + "</div></section>";
 }
@@ -2926,7 +2926,7 @@ const FCT = {
   late_h: "결과를 확인하고 있는 전망", s30: "30일 내 판가름 날 전망", s30none: "30일 안에 검증 시점이 오는 전망은 없습니다.", s90: "90일 내 판가름 날 전망",
   due: d => "검증 " + d, etc: "그 밖의 전망", back: "← 전망 목록", eyebrow: (id, c) => "전망 " + id + " · " + c,
   pNow: "현재 확률", pThen: "당시 확률", caseGo: c => c + " 사안 →", dueAt: "검증 시점", made: "만든 날", madeV: (d, p) => d + " · 처음 확률 " + p + "%", rs: "결과 확인",
-  resH: "검증 결과", resD: d => " · " + d + " 확정", voidL: "무효", yes: "일어남", no: "일어나지 않음", resSub: (p, b) => "당시 확률 " + p + "% · 브라이어 점수 " + b, hit: "예측 적중", miss: "예측 빗나감", half: "예측 중립", resHalf: "확률을 38~52%(가능성 있음)로 둔 전망이라 예측 적중과 예측 빗나감 어느 쪽에도 넣지 않습니다.", resYes: "예측대로 되었습니다.", resNo: "예측과 달랐습니다.",
+  resH: "검증 결과", resD: d => " · " + d + " 확정", voidL: "무효", yes: "실현됨", no: "실현되지 않음", resSub: (p, b) => "당시 확률 " + p + "% · 브라이어 점수 " + b, hit: "예측 적중", miss: "예측 빗나감", half: "예측 중립", resHalf: "확률을 38~52%(가능성 있음)로 둔 전망이라 예측 적중과 예측 빗나감 어느 쪽에도 넣지 않습니다.", resYes: "예측대로 되었습니다.", resNo: "예측과 달랐습니다.",
   resMsg: (v, p, hi, miss, y) => v + " 가능성을 " + p + "%로 " + (hi ? "높게" : "낮게") + " 예측했" + (miss ? "으나, " + v + (y ? "되었습니다." : "되지 않았습니다.") : "으며, 예측대로 되었습니다."), resVerb: "실현",
   resExpl: b => "기간 평균 브라이어 점수 " + b + " · 0에 가까울수록 정확합니다(모두 50%로 예측하면 0.25)",
   chartH: "일자별 확률 변화", span: "기간", w30: "최근 30일", wAll: "전체 기간", aria: s => s + " 일자별 확률 변화", ev: "사건",
@@ -2940,11 +2940,11 @@ const FCT = {
   ocNoteF: (d, p, fd) => d + "에 결과를 확인합니다. 마지막 기간에 고친 확률은 점수에 넣지 않고 그 기간을 " + fd + "의 확률 " + p + "%로 계산하면, 결과마다 이 전망의 점수는 다음과 같습니다. 0에 가까울수록 정확합니다.",
   ocH: "결과가 나오면", ocNote: (d, p) => d + "에 결과를 확인합니다. 현재 확률 " + p + "%가 그날까지 이어진다고 보면, 결과마다 이 전망의 점수(날마다의 확률로 매긴 브라이어 점수의 평균)는 다음과 같습니다. 0에 가까울수록 정확합니다.",
   ocY: "실현되면", ocN: "실현되지 않으면",
-  yLow: p => p + "%로 낮게 본 일이 일어난 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 일어난 것입니다.",
-  nLow: p => p + "%로 낮게 본 대로 일어나지 않은 것입니다.", nHigh: p => p + "%로 높게 본 일이 일어나지 않은 것이므로 「빗나간 전망」에 오릅니다.",
+  yLow: p => p + "%로 낮게 본 일이 실현된 것이므로 「빗나간 전망」에 오릅니다.", yHigh: p => p + "%로 높게 본 대로 실현된 것입니다.",
+  nLow: p => p + "%로 낮게 본 대로 실현되지 않은 것입니다.", nHigh: p => p + "%로 높게 본 일이 실현되지 않은 것이므로 「빗나간 전망」에 오릅니다.",
   ocFirst: (p, a, b) => "처음 확률 " + p + "%를 그대로 뒀을 때의 점수 · 실현되면 " + a + ", 실현되지 않으면 " + b,
   sibH: "같은 사안의 전망", shareH: "공유", shareX: "X에 공유", copy: "주소 복사", sub: "새 글 구독",
-  calH: "언제 무엇이 판가름 나는가", calNote: "점 하나가 전망 하나입니다. 진할수록 일어날 확률이 높다고 본 전망이고, 누르면 그 전망으로 갑니다.",
+  calH: "언제 무엇이 판가름 나는가", calNote: "점 하나가 전망 하나입니다. 진할수록 실현될 확률이 높다고 본 전망이고, 누르면 그 전망으로 갑니다.",
   calM: (y, m, first) => (first ? y + "년<br>" : "") + m + "월", calRest: (y, m0) => y + "년 " + (m0 === 7 ? "하반기" : m0 + "~12월"), calY: y => y + "년",
   legP: "확률", legB: ["20% 이하", "21~40%", "41~60%", "61~80%", "81% 이상"],
   hDays: done => done ? "일 뒤 다음 결과" : "일 뒤 첫 결과", hToday: "오늘 판가름", hK: (d, c) => d + " 판가름 · " + c, hNote: "결과가 나오면 이 자리에 맞았는지 틀렸는지 표시합니다.", hStart: d => d + " 처음",
@@ -2959,7 +2959,7 @@ const FCT = {
   recNone: "아직 결과가 나온 전망이 없습니다.", stDone: "결과 확인", stVoid: "무효",
   rel: n => "관련 꼭지 " + n + "건", later: n => "그 뒤의 전망 " + n + "건 · 전체 목록에서 보기 ↓",
   accR: "전망의 실현 여부는 질문의 문구가 아니라, 그 전망이 묻는 사건이 실제로 발생했는지로 판단합니다. 전망의 실현 여부에 대해 판단이 다를 수 있는 경우에는 그 이유를 밝히고, 클리사의 적중으로 보지 않습니다.",
-  accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 확률은 검증 시점 직전까지 고칠 수 있지만, 검증 시점까지의 마지막 7일 동안 고친 확률은 점수에 넣지 않고 그 기간은 바로 앞 날의 확률로 계산합니다(공개 기간이 짧은 전망은 이 기간이 공개일부터 검증 시점까지의 4분의 1을 넘지 않습니다). 일어난 일은 1, 일어나지 않은 일은 0으로 셉니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
+  accH: "정확도는 어떻게 계산하나", accP: d => "결과가 나온 전망마다, 전망을 공개한 날부터 검증 시점까지(그 전에 실현이 확정되면 그날까지) 날마다의 확률로 (확률 − 실제 결과)²를 구해 평균합니다(브라이어 점수). 확률은 검증 시점 직전까지 고칠 수 있지만, 검증 시점까지의 마지막 7일 동안 고친 확률은 점수에 넣지 않고 그 기간은 바로 앞 날의 확률로 계산합니다(공개 기간이 짧은 전망은 이 기간이 공개일부터 검증 시점까지의 4분의 1을 넘지 않습니다). 실현된 일은 1, 실현되지 않은 일은 0으로 계산합니다. 0에 가까울수록 정확하고, 모든 전망에 50%를 붙이면 0.25가 됩니다." + (d ? " 첫 결과가 나오는 " + d + " 뒤에 이 자리에 점수를 공개합니다." : ""), accGo: "결과 확인 절차는 분석 방법에서 →",
   href: p => p,
   tweet: (q, p, d) => "「" + q + "」 클리사 지오폴리틱스의 전망 " + p + "% · 검증 시점 " + d,
 };
