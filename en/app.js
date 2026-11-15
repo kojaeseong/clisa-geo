@@ -2788,7 +2788,7 @@ let STRAT_D = null;
 function s2L(c){ return !c.s2 ? [] : Array.isArray(c.s2) ? c.s2 : [c.s2]; }
 function s2Html(c){
   if (!c.s2) return "";
-  if (Array.isArray(c.s2)) { const nms = c.s2.map(X => X.short).reduce((a, b) => jo(a, " and", " and") + " " + b); return c.s2.map((X, k) => s2One(c, X, k + 1, nms)).join(""); }
+  if (Array.isArray(c.s2)) { const nms = c.s2.map(X => X.short).reduce((a, b) => a + " and " + b); return c.s2.map((X, k) => s2One(c, X, k + 1, nms)).join(""); }
   return s2One(c, c.s2, 0, "");
 }
 function s2One(c, X, nth, nms){
@@ -2800,7 +2800,7 @@ function s2One(c, X, nth, nms){
   const code = id => '<span class="s2c">' + esc(id) + "</span>";
   const altCard = a => '<li><div class="s2a-h">' + code(a.id) + "<b>" + esc(a.name) + "</b></div><p>" + esc(a.desc) + "</p></li>";
   const main = X.alts.filter(a => !AUX.includes(a.id)), aux = X.alts.filter(a => AUX.includes(a.id));
-  const evCard = r => '<li class="s2e"><div class="s2e-h">' + code(r.id) + "<b>" + esc(A(r.id).name) + "</b><span class=\"s2e-t\">Reversibility: " + esc(r.rev) + " · Escalation risk: " + esc(r.esc) + " · Feasibility: " + esc(r.feas) + '</span></div><div class="s2e-g">' + r.s.map((v, k) => '<span><em>' + esc(G[k].s || G[k].id) + "</em>" + sc(v) + "</span>").join("") + "</div><p>" + esc(r.why) + "</p></li>";
+  const evCard = r => '<li class="s2e"><div class="s2e-h">' + code(r.id) + "<b>" + esc(A(r.id).name) + "</b><span class=\"s2e-t\">Reversibility: " + esc(ev(r.rev)) + " · Escalation risk: " + esc(ev(r.esc)) + " · Feasibility: " + esc(ev(r.feas)) + '</span></div><div class="s2e-g">' + r.s.map((v, k) => '<span><em>' + esc(G[k].s || G[k].id) + "</em>" + sc(v) + "</span>").join("") + "</div><p>" + esc(r.why) + "</p></li>";
   const evMain = X.eval.rows.filter(r => !AUX.includes(r.id)), evAux = X.eval.rows.filter(r => AUX.includes(r.id));
   const F = (c.futures || {}).items || [], rec = X.rec;
   const dlt = f => { const d = rec.p[f.id] - f.p; return d === 0 ? "<span class=\"s2d z\">No change</span>" : '<span class="s2d ' + (d > 0 ? "up" : "dn") + '">' + (d > 0 ? "+" : "−") + Math.abs(d) + "%p</span>"; };
