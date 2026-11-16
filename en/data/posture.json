@@ -500,9 +500,9 @@
    "kind": "up",
    "lat": 8.98,
    "lon": -79.52,
-   "t": "A battalion of about 600 soldiers from the Army's 10th Mountain Division began deploying to a jungle training base in Panama and is expected to train with Colombian and Honduran forces, according to an October 14 report (U.S. Southern Command declined to comment on the deployment)",
+   "t": "A battalion of about 600 soldiers from the Army's 10th Mountain Division began deploying to a jungle training base in Panama and is expected to train with Colombian and Honduran forces, according to an October 14 report (U.S. Southern Command declined to comment on the deployment). The U.S. Embassy in Panama denied the report the same day, saying 120 soldiers of the 10th Mountain Division were taking part, at Panama's invitation, in a two-week jungle course ending October 25",
    "grade": "Reported",
-   "src": "Anonymous U.S. military officials (The New York Times, cited by The Daily Caller)",
+   "src": "Anonymous U.S. military officials (The New York Times, cited by The Daily Caller); U.S. Embassy in Panama statement (EFE, Infobae)",
    "url": "https://dailycaller.com/2026/10/15/pentagon-soldiers-latin-america-trump-cartels-drug-trafficking/",
    "case": null,
    "fc": [],
@@ -537,6 +537,38 @@
    "case": null,
    "fc": [],
    "fp": "us-venezuela-transition"
+  },
+  {
+   "date": "2026-11-10",
+   "s": "Poland base 'green light'",
+   "kind": "plan",
+   "lat": 52.4,
+   "lon": 16.9,
+   "t": "After meeting Defense Secretary Hegseth on November 10, Polish Defense Minister Kosiniak-Kamysz said Warsaw interprets the talks as a Pentagon green light for a permanent U.S. base in Poland, with a final White House decision expected in early December (the Pentagon's readout did not mention a base, and the department did not comment)",
+   "grade": "Reported",
+   "src": "Polish defense minister's remarks (Stars and Stripes, Breaking Defense); not confirmed by the Pentagon",
+   "url": "https://www.stripes.com/theaters/europe/2026-11-11/american-poland-military-base-plan-23431315.html",
+   "case": "poland",
+   "fc": [
+    "f60"
+   ],
+   "fp": "baltic-kaliningrad-suwalki"
+  },
+  {
+   "date": "2026-11-14",
+   "s": "Smaller Europe cuts eyed",
+   "kind": "plan",
+   "lat": 50.1,
+   "lon": 8.7,
+   "t": "The Pentagon is weighing smaller troop cuts in Europe, about 5,000 in total and concentrated in Germany, with Defense Secretary Hegseth due to give the president his final recommendation on December 1, according to a November 14 report (the department said only that the review is ongoing)",
+   "grade": "Reported",
+   "src": "Anonymous sources (Bloomberg, republished by The Spokesman-Review)",
+   "url": "https://www.spokesman.com/stories/2026/nov/14/pentagon-eyes-smaller-troop-cuts-across-europe-in-/",
+   "case": "poland",
+   "fc": [
+    "f60"
+   ],
+   "fp": null
   }
  ]
 }
