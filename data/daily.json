@@ -1,6 +1,327 @@
 {
  "issues": [
   {
+   "date": "2026-11-16",
+   "items": [
+    {
+     "case": null,
+     "fp": [],
+     "h": "중국, 시진핑·트럼프·푸틴 3자 정상회의 19일 선전 개최 확인",
+     "fact": "중국 외교부는 16일 시진핑 국가주석이 19일 선전에서 중국·러시아·미국 3자 정상회의를 연다고 발표했습니다. 드미트리 페스코프 크렘린 대변인은 14일 날짜를 확인했고, 중국은 의제를 밝히지 않았으며 백악관은 핵 확산 문제를 논의할 것이라고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "none"
+      },
+      {
+       "id": "f11",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.bernama.com/en/world/news.php?id=2634960",
+      "https://www.aljazeera.com/news/2026/11/14/trump-xi-putin-trilateral-meeting-at-apec-what-to-expect"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "CHN",
+       "USA",
+       "RUS"
+      ]
+     },
+     "pull": [
+      [
+       "taiwan",
+       "L",
+       "미중 정상외교"
+      ]
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "혁명수비대, 바레인 미군 레이더 또 공격 주장…바레인군은 요격 발표",
+     "fact": "이란 혁명수비대 항공우주군은 15일 바레인 리파 헬리콥터 기지의 미군 방공 레이더를 드론 6대로 공격해 맞혔다고 주장했습니다. 바레인 국방군은 이란의 공중 공격 여러 건을 요격해 파괴했다고 밝혔고, 바레인 외무부는 13일과 15일 공격의 책임이 전적으로 이란에 있다며 유엔 안전보장이사회의 조치를 촉구했습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202611143682",
+      "https://www.cbsnews.com/live-updates/us-iran-war-trump-nuclear-material-no-deal/"
+     ],
+     "loc": {
+      "lat": 26.13,
+      "lon": 50.55,
+      "place": "리파(바레인)",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "젤렌스키, 미국이 '나토 가입하면 돈바스서 철수하겠느냐'고 물었다고 밝혀",
+     "fact": "볼로디미르 젤렌스키 우크라이나 대통령은 13일 기자들에게 미국 측이 우크라이나가 나토에 가입하면 돈바스에서 철수하겠느냐고 물었다며 \"나토가 다시 의제에 올랐다\"고 말했습니다(14일 대통령실 공개). 그는 국민투표는 안전 보장 등이 모두 갖춰질 때만 검토하겠다는 뜻을 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.rte.ie/news/europe/2026/1114/1599202-us-ukraine-russia/",
+      "https://cbsnews.com/news/ukraine-russia-war-nato-us-donbas"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     },
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "미국의 영토 양보 신호"
+      ]
+     ]
+    },
+    {
+     "case": "poland",
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "russia-hybrid-campaign-western-europe"
+     ],
+     "h": "에스토니아, 드론업체 사보타주 시도 뒤 러시아와의 도로 국경 폐쇄 방침",
+     "fact": "마르구스 차흐크나 에스토니아 외무장관은 15일 러시아군 정보총국(GRU)이 사주한 드론 제조업체 트레오드 시스템스 사보타주 시도에 대응해 12월 1일부터 러시아와의 도로 국경 검문소를 닫을 계획이라고 밝혔습니다. 마리야 자하로바 러시아 외무부 대변인은 사실인지 확인하겠다고 말했습니다.",
+     "fc": [],
+     "src": [
+      "https://vm.ee/en/news/foreign-minister-tsahkna-estonia-close-road-border-crossings-russia",
+      "https://tass.com/politics/2218399"
+     ],
+     "loc": {
+      "isos": [
+       "EST",
+       "RUS"
+      ]
+     },
+     "pull": [
+      [
+       "poland",
+       "R",
+       "러시아의 문턱 아래 공격"
+      ]
+     ]
+    },
+    {
+     "case": "poland",
+     "fp": [
+      "eastern-flank-airspace-romania-black-sea",
+      "black-sea"
+     ],
+     "h": "루마니아 술리나 앞바다서 상선 3척 드론 피격…2척은 루마니아 영해 안",
+     "fact": "14일 저녁(현지 시각) 루마니아 술리나 운하 인근 흑해에서 상선 3척이 드론에 맞았고, 슈테판 라두 오프레아 루마니아 국방장관은 이 가운데 그리스 선적 에비아 페트롤 V호와 세인트키츠네비스 선적 마르솔호가 루마니아 영해 안에 있었다고 밝혔습니다. 다친 사람은 없었고 공격 주체는 밝혀지지 않았습니다.",
+     "fc": [],
+     "src": [
+      "https://gcaptain.com/three-ships-struck-by-drones-in-black-sea-near-romanian-shipping-canal/",
+      "https://www.euronews.com/2026/11/15/three-commercial-vessels-struck-by-drones-near-romanias-black-sea-pm-says"
+     ],
+     "loc": {
+      "lat": 45.15,
+      "lon": 29.65,
+      "place": "술리나(루마니아)",
+      "isos": [
+       "ROU"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": null,
+     "fp": [
+      "red-sea-bab-el-mandeb"
+     ],
+     "h": "예멘 정부 측 남부군, 바브엘만데브 일대서 철수 발표",
+     "fact": "예멘 정부 편에서 싸우는 남부군은 15일 타이즈 서쪽의 주바브 공항과 바브엘만데브 일대에서 철수한다고 발표했습니다. 남부군은 아덴의 방어와 후티의 타이즈 포위를 푸는 일을 우선한다고 이유를 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.thenationalnews.com/news/mena/2026/11/15/southern-yemeni-forces-withdraw-from-area-near-bab-al-mandab/",
+      "https://english.news.cn/20261115/f874afd8de8a47ed9a99531dbca684ec/c.html"
+     ],
+     "loc": {
+      "isos": [
+       "YEM"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": null,
+     "fp": [
+      "horn-tigray-eritrea"
+     ],
+     "h": "에티오피아군 참모총장 \"티그라이 공세는 에리트레아 주도, 이집트가 지원\"",
+     "fact": "비르하누 줄라 에티오피아군 참모총장은 14일 기자회견에서 티그라이 반군의 공세를 에리트레아가 이끌었고 이집트가 군수와 군사 물자를 지원했다고 주장했습니다. 아나돌루통신은 이 주장을 독자적으로 확인할 수 없었고 에리트레아와 이집트는 곧바로 반응하지 않았다고 전했습니다.",
+     "fc": [],
+     "src": [
+      "https://www.aa.com.tr/en/africa/ethiopia-accuses-eritrea-of-leading-tigray-rebel-offensive-with-egyptian-support/4125272"
+     ],
+     "loc": {
+      "isos": [
+       "ETH",
+       "ERI",
+       "EGY"
+      ]
+     },
+     "pull": []
+    }
+   ],
+   "more": [
+    {
+     "t": "에스마일 바가이 이란 외무부 대변인은 15일 기자회견에서 이란은 어떤 공격도 대응 없이 두지 않겠다고 말했고, 아락치 외무장관이 17일 오만 무스카트를 방문할 예정이라고 IRNA가 전했습니다.",
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202611143682",
+      "https://www.foxnews.com/live-news/iran-war-strikes-donald-trump-strait-hormuz-irgc-november-15"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "사우디 주도 연합군은 15일 후티가 리야드를 향해 쏜 탄도미사일 2발을 요격하고 동부 지역 등에서 드론 여러 대를 격추했다고 밝혔습니다.",
+     "src": [
+      "https://gulfnews.com/world/mena/middle-east-conflict-saudi-arabia-intercepts-houthi-missiles-targeting-riyadh-as-bahrain-issues-threat-alert-1.500747797"
+     ],
+     "case": "iran",
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "우크라이나 공군은 러시아가 14일 18시(현지 시각)부터 드론 132대로 공격했으며 15일 8시 기준 106대를 격추하거나 무력화했다고 밝혔고, 러시아 국방부는 16일 아침 지난밤 사이 우크라이나 드론 1,336대를 격추했다고 주장했습니다.",
+     "src": [
+      "https://interfax.com.ua/news/general/1236689.html",
+      "https://news.rambler.ru/army/57420384-nad-regionami-rossii-za-noch-sbili-1-336-ukrainskih-bpla/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "카야 칼라스 EU 외교안보 고위대표는 15일 EU의 지중해 이리니 작전이 13일 러시아 그림자 선단으로 의심되는 유조선 미다그호에 승선해 위장 선적을 확인했다고 밝혔습니다(키이우인디펜던트).",
+     "src": [
+      "https://kyivindependent.com/eu-forces-board-suspected-russian-shadow-fleet-tanker-in-mediterranean-kallas-says/"
+     ],
+     "case": "poland",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "이스라엘군은 14일 가자지구 칸유니스 마와시에서 하마스 무장조직 고위 지휘관을 겨냥해 공습했다고 밝혔고, 하마스 알카삼여단은 15일 라파 여단 사령관 사미르 아부 유니스가 숨졌다고 확인했습니다.",
+     "src": [
+      "https://www.foxnews.com/live-news/iran-war-strikes-donald-trump-strait-hormuz-irgc-november-15"
+     ],
+     "case": null,
+     "fp": [
+      "levant"
+     ],
+     "pull": []
+    },
+    {
+     "t": "수단군은 13일 서코르도판주 알쿠와이 주변 여러 지역을 장악하고 수라이프 안쿠시 등에 병력을 배치했다고 밝혔으며, 같은 날 에티오피아 국경을 넘어 청나일주 단드로 상공에 들어온 드론을 격추했다고 주장했습니다(아나돌루통신).",
+     "src": [
+      "https://www.aa.com.tr/en/middle-east/sudanese-army-advances-in-west-kordofan-says-it-downed-drone-from-ethiopia/4124681"
+     ],
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "유엔 아이티 통합사무소(BINUH) 보고서에 따르면 7~9월 아이티에서 폭력으로 최소 1,167명이 숨지고 459명이 다쳤습니다(유엔뉴스 12일 보도).",
+     "src": [
+      "https://news.un.org/en/story/2026/11/1168789"
+     ],
+     "case": null,
+     "fp": [
+      "haiti-gang-crisis"
+     ],
+     "pull": []
+    },
+    {
+     "t": "미얀마 국영 매체는 군이 6일간의 작전으로 몬주·바고 경계의 국민통합정부(NUG) 특별지역 사령부와 카렌민족해방군 대대 본부, 그 밖의 기지 10곳을 장악했다고 주장했습니다(AP, 10일 보도).",
+     "src": [
+      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/11/10/myanmar-army-seizes-key-resistance-headquarters-and-10-bases-held-by-opposition-state-media"
+     ],
+     "case": null,
+     "fp": [
+      "myanmar"
+     ],
+     "pull": []
+    },
+    {
+     "t": "파키스탄 카이버파크툰크와주 코하트에서 11일 파키스탄탈레반(TTP)이 배후를 자처한 매복 공격으로 경찰 10명이 숨졌고, 당국은 무장대원 18명도 사살됐다고 밝혔습니다(롱워저널).",
+     "src": [
+      "https://www.longwarjournal.org/archives/2026/11/taliban-pakistan-border-clashes-continue-ttp-attack-kills-10-pakistani-police.php"
+     ],
+     "case": null,
+     "fp": [
+      "pak_afg"
+     ],
+     "pull": []
+    },
+    {
+     "t": "니콜 파시냔 아르메니아 총리와 일함 알리예프 아제르바이잔 대통령은 12일 더블린 유럽정치공동체 정상회의 계기에 만나 '트럼프 경로(TRIPP)'와 전력망 연결, 국경 획정, 수자원 협력을 논의했으며, 새 합의 서명은 전해지지 않았습니다(OC미디어).",
+     "src": [
+      "https://oc-media.org/pashinyan-and-aliyev-meet-in-dublin-to-discuss-trump-route-trade-and-water-cooperation/"
+     ],
+     "case": null,
+     "fp": [
+      "s-caucasus"
+     ],
+     "pull": []
+    },
+    {
+     "t": "소말리아 야당 연합 소말리아미래위원회는 하산 셰이크 모하무드 대통령이 14일 소집한 선거 협의를 미국·영국·EU·튀르키예의 중재가 없다며 보이콧하겠다고 밝혔습니다(가로웨온라인).",
+     "src": [
+      "https://www.garoweonline.com/en/news/somalia/somalia-opposition-boycotts-hassan-sheikh-s-talks-over-lack-of-international-mediation"
+     ],
+     "case": null,
+     "fp": [
+      "somalia-somaliland"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-14",
    "items": [
     {
@@ -5880,219 +6201,6 @@
      ],
      "fp": [
       "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-12",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "합참 \"북한, 동해상으로 미상 발사체 발사\"…제원 분석 중",
-     "fc": [],
-     "src": [
-      "https://www.koreaherald.com/article/10899073",
-      "https://www.dt.co.kr/article/12088452",
-      "https://www.news1.kr/diplomacy/defense-diplomacy/6316432"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     },
-     "fact": "합동참모본부는 12일 오전 북한이 동해상으로 미상의 발사체를 발사했다고 밝히고, 사거리와 고도 등 제원을 분석하고 있습니다."
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "트럼프 \"러-우 에너지 휴전 즉시 발효, 양측 합의\"…러시아는 확인 안 해",
-     "fc": [],
-     "src": [
-      "https://time.com/article/2026/10/11/trump-claims-russia-and-ukraine-have-agreed-to-an-energy-ceasefire-/",
-      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks",
-      "https://www.fontanka.ru/2026/10/12/76694201/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "RUS",
-       "UKR"
-      ]
-     },
-     "fact": "트럼프 대통령은 11일 트루스소셜에 러시아와 우크라이나의 '에너지 휴전'이 즉시 발효되며 양측이 합의했다고 썼습니다. 러시아 정부는 합의 사실을 확인하지 않았고 즉각 논평도 내지 않았습니다."
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "우크라이나 대통령실, 휴전 발표 뒤 러시아의 하르키우 발전소 공격 확인",
-     "fc": [],
-     "src": [
-      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
-     ],
-     "loc": {
-      "lat": 49.99,
-      "lon": 36.23,
-      "place": "하르키우(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     },
-     "fact": "PBS에 따르면 우크라이나 대통령실은 트럼프 대통령의 휴전 발표 뒤인 11일 저녁 러시아가 하르키우의 발전소를 공격했다고 확인했습니다."
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "이란 안보 책임자 레자이 \"미국 답신, 불충분하다고 본다\"…호르무즈 협상 난항",
-     "fc": [
-      {
-       "id": "f03",
-       "e": "down"
-      },
-      {
-       "id": "f38",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.thenationalnews.com/news/mena/2026/10/11/iran-says-us-response-to-proposal-to-reopen-strait-of-hormuz-is-insufficient/",
-      "https://www.timesofisrael.com/liveblog_entry/iran-says-us-response-to-its-proposal-to-reopen-hormuz-was-insufficient/"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "USA"
-      ]
-     },
-     "fact": "이란의 안보 책임자 레자이는 11일 호르무즈 해협 재개방을 위해 이란이 내건 7개 조건에 대해 미국의 답신이 일부 조건은 받아들였지만 나머지는 해결되지 않았다며 불충분하다고 밝혔습니다."
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "리야드 공항 이틀째 피격, 사우디 \"부상자 발생\"…후티, 책임 주장",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/11/yemen-fighting-expands-as-houthis-attack-saudi-airport-what-to-know",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/",
-      "https://english.news.cn/20261012/6a26e48e24be4f3a9cbda0f95c171b68/c.html"
-     ],
-     "loc": {
-      "lat": 24.96,
-      "lon": 46.7,
-      "place": "리야드 킹칼리드 국제공항(사우디아라비아)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     },
-     "fact": "리야드 킹칼리드 국제공항이 10일에 이어 11일에도 공격을 받았고, 사우디 민간항공청은 11일 공격으로 부상자가 났다고 밝혔습니다. 예멘의 후티 반군은 11일 공격을 자신들이 했다고 주장했습니다."
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "UKMTO \"호르무즈 해협 빠져나가던 유조선, 미상 발사체에 피격\"",
-     "fact": "영국 해사무역작전센터(UKMTO)는 11일 호르무즈 해협을 빠져나가던 유조선 1척이 미상의 발사체에 맞아 좌현이 손상됐으며 선원은 모두 무사하다고 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://gulfnews.com/world/mena/tanker-struck-by-unidentified-projectile-in-strait-of-hormuz-ukmto-says-1.500706575"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "외교부, 사우디 전역 여행경보 3단계 '출국 권고'로 상향",
-     "fc": [],
-     "src": [
-      "https://www.kukinews.com/article/view/kuk202610120002",
-      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008792258"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "SAU"
-      ]
-     },
-     "fact": "외교부는 11일 오후 10시부터 사우디아라비아 전역의 여행경보를 3단계(출국 권고)로 올렸습니다."
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "자르다리 파키스탄 대통령, 임란 칸 정당 집권 카이베르파크툰크와주에 비상사태",
-     "fc": [],
-     "src": [
-      "https://www.arabnews.pk/pakistan/pakistan-president-imposes-emergency-in-opposition-ruled-khyber-pakhtunkhwa-province-3003824",
-      "https://tribune.com.pk/story/2634222/president-zardari-signs-off-on-emergency-rule-in-k-p"
-     ],
-     "loc": {
-      "isos": [
-       "PAK"
-      ]
-     },
-     "fact": "자르다리 대통령은 11일 셰바즈 샤리프 총리의 건의에 따라 임란 칸 전 총리의 정당이 집권한 카이베르파크툰크와주에 비상사태를 선포했습니다. 연방정부는 치안 악화와 주 정부의 대테러 대응 이탈을 사유로 들었습니다."
-    }
-   ],
-   "more": [
-    {
-     "t": "젤렌스키 우크라이나 대통령은 11일 우크라이나는 러시아 에너지 시설 타격을 멈출 준비가 돼 있으며 러시아에도 같은 준비를 기대한다고 밝혔습니다.",
-     "src": [
-      "https://www.pbs.org/newshour/world/trump-claims-russia-and-ukraine-agree-to-energy-ceasefire-despite-continued-attacks"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "우크라이나 경찰에 따르면 11일 러시아 미사일이 하르키우 외곽 피소친을 타격해 최소 3명이 숨지고 25명이 다쳤습니다.",
-     "src": [
-      "https://kyivindependent.com/3-killed-25-injured-in-russian-strike-near-kharkiv/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "러시아 국방부는 11일 지난 하루 동안 우크라이나의 고정익 드론 909대와 유도폭탄 2발을 격추했다고 발표했습니다.",
-     "src": [
-      "https://tass.com/defense/2200515"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "사우디아라비아·이집트·파키스탄·튀르키예는 11일 공동성명에서 후티의 공격을 국제법의 노골적 위반이라고 규탄했습니다.",
-     "src": [
-      "https://www.arabnews.pk/saudi-arabia/saudi-arabia-egypt-pakistan-and-turkiye-condemn-houthi-attacks-on-kingdom-3003867",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-elections-saudi-arabia-yemen-houthis/"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
      ]
     }
    ]
