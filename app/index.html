@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 </style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='a1cbf7cfa1',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='0f9e2a74fb',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -303,7 +303,7 @@ function msgs(list,key,hl){
     var nw=x.d>=st&&sn.indexOf(x.id)<0;
     h+='<div class="msg'+(nw?' nw':'')+(x.id===hl?' hl':'')+'" id="m-'+x.id+'"><div class="h">'+e(x.h)+'</div><div class="t clamp">'+e(x.t)+'</div><button class="mo" data-more>더 보기</button><div class="mt">';
     x.fc.forEach(function(c){var f=fpById(c[0]);if(f)h+='<a class="chip" href="#f/'+c[0]+'">'+e(f.q.length>22?f.q.slice(0,22)+'…':f.q)+' '+f.p+'%'+(c[1]==='up'?' ↑':c[1]==='down'?' ↓':'')+'</a>'});
-    if(x.pl)h+='<span class="chip">'+e(x.pl)+'</span>';
+    /* 2026-11-16 대통령님 결재: 장소(x.pl)는 분류용으로 자료에만 두고 화면에는 보이지 않는다(누를 수 없는 칩이었음) */
     if(x.s[0])h+='<a class="src" href="'+e(x.s[0])+'" target="_blank" rel="noopener">원문 기사 ↗</a>';
     h+='</div></div>'});
   return h;

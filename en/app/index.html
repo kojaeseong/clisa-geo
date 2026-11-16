@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='0641c10567',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',DEU:'Germany',GBR:'U.K.',JPN:'Japan',WCEU:'Western-Central Europe (excl. Germany, U.K.)',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='ace08608ca',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',DEU:'Germany',GBR:'U.K.',JPN:'Japan',WCEU:'Western-Central Europe (excl. Germany, U.K.)',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -298,7 +298,7 @@ function msgs(list,key,hl){
     var nw=x.d>=st&&sn.indexOf(x.id)<0;
     h+='<div class="msg'+(nw?' nw':'')+(x.id===hl?' hl':'')+'" id="m-'+x.id+'"><div class="h">'+e(x.h)+'</div><div class="t clamp">'+e(x.t)+'</div><button class="mo" data-more>More</button><div class="mt">';
     x.fc.forEach(function(c){var f=fpById(c[0]);if(f)h+='<a class="chip" href="#f/'+c[0]+'">'+e((function(q){q=q.replace(/^By [^,]+, /,'');q=q.charAt(0).toUpperCase()+q.slice(1);return q.length>38?q.slice(0,38)+'…':q})(f.q))+' '+f.p+'%'+(c[1]==='up'?' ↑':c[1]==='down'?' ↓':'')+'</a>'});
-    if(x.pl)h+='<span class="chip">'+e(x.pl)+'</span>';
+    
     if(x.s[0])h+='<a class="src" href="'+e(x.s[0])+'" target="_blank" rel="noopener">Source ↗</a>';
     h+='</div></div>'});
   return h;
