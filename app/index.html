@@ -217,10 +217,10 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .left{display:flex;flex-direction:column;align-items:flex-start;line-height:1.5;margin-top:12px}.left b{font-size:12px;font-weight:800;color:var(--mut);margin-bottom:2px}.left>span{display:none}.left .lnk{display:block;padding:5px 0!important;text-align:left;line-height:1.45}
 /* 끈 끝 이름(2026-11-14 운영자 승인): 작은 끈에도 양쪽 끝이 무엇인지 */
 .mlab{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;font-weight:700;line-height:1.25;color:var(--mut);margin:-9px 0 8px}.mlab span:last-child{text-align:right}.mlab2{font-size:11px;color:var(--mut);margin:-3px 0 6px;text-align:center}
-.lsn{font:inherit;font-size:13px;font-weight:600;color:var(--acc);background:var(--chip);border:0;border-radius:5px;padding:7px 12px;margin:2px 0 10px;cursor:pointer}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
+.speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}.qr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px}.qr .q{margin:0}.lsn{flex:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--acc);background:var(--chip);border:0;border-radius:5px;padding:6px 10px;margin:0;white-space:nowrap;cursor:pointer}  /* 2026-11-16 대통령님 결재(나안): 듣기 단추를 질문 줄 오른쪽에 */</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='01865392cb',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='15fc0ec216',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -230,7 +230,22 @@ function instUI(){var el=document.getElementById('inst');if(!el)return;if(standa
 addEventListener('beforeinstallprompt',function(ev){ev.preventDefault();DP=ev;instUI()});
 addEventListener('appinstalled',function(){DP=null;instUI()});
 function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
-function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}} function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}  /* 2026-11-16 대통령님 결재: 주간 정세 요약 새 판을 열기 전까지 단추에 New */ var LSN_ON='듣기 ▶',LSN_OFF='멈춤 ■',LSNT=[]; /* 2026-11-16 대통령님: 정세 브리핑·주간 정세 요약 듣기(기기 내장 음성) */ function lsnBtn(parts){LSNT=parts.filter(Boolean);try{speechSynthesis.cancel()}catch(x){}return ('speechSynthesis' in window)?'<button class="lsn" data-lsn>'+LSN_ON+'</button>':''} document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-lsn]');if(!b)return;var S=window.speechSynthesis;if(!S)return;if(S.speaking||S.pending){S.cancel();b.textContent=LSN_ON;return}var q=LSNT.slice(),lg=LANG==='en'?'en-US':'ko-KR';b.textContent=LSN_OFF;(function nx(){if(!q.length){b.textContent=LSN_ON;return}var u=new SpeechSynthesisUtterance(q.shift());u.lang=lg;u.onend=nx;u.onerror=function(){b.textContent=LSN_ON};S.speak(u)})()}); addEventListener('hashchange',function(){try{speechSynthesis.cancel()}catch(x){}});
+function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}} function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}  /* 2026-11-16 대통령님 결재: 주간 정세 요약 새 판을 열기 전까지 단추에 New */ var LSN_ON='듣기 ▶',LSN_OFF='멈춤 ■'; /* 2026-11-16 대통령님: 정세 브리핑·주간 정세 요약 듣기(기기 내장 음성). 홈페이지(아카데미) 듣기와 같게: 읽는 문장 표시·화면 가운데로·중간을 누르면 거기서부터·읽는 동안 화면 꺼짐 막기 */
+ var LS={q:null,pos:0,on:false,used:false,cur:null,gen:0,hold:0,wl:null,wp:false},LSEL='.bar h1,#v .q,#v .lead,#v .msg .h,#v .msg .t,#v .card.dg h2,#v .card.dg b,#v .card.dg p';
+ function lsnBtn(){return ('speechSynthesis' in window)?'<button class="lsn" data-lsn aria-pressed="false">'+LSN_ON+'</button>':''}
+ function lsWake(x){try{if(x){if(!LS.wl&&!LS.wp&&navigator.wakeLock){LS.wp=true;navigator.wakeLock.request('screen').then(function(w){LS.wp=false;if(!LS.on){w.release();return}LS.wl=w;w.addEventListener('release',function(){LS.wl=null})}).catch(function(){LS.wp=false})}}else if(LS.wl){LS.wl.release();LS.wl=null}}catch(e){}}
+ function lsBuild(){var q=[],SP=null;try{SP=new RegExp('(?<=[.!?。])\\s+')}catch(e){}document.querySelectorAll(LSEL).forEach(function(el){var x=(el.textContent||'').replace(/\s+/g,' ').trim();if(!x)return;(SP?x.split(SP):(x.match(/[^.!?。]+[.!?。]?/g)||[x])).forEach(function(s){s=s.trim();if(s)q.push({t:s,el:el})})});LS.q=q}
+ function lsShow(el){var hf=el.closest('[hidden]');if(hf){hf.hidden=false;var pb=hf.previousElementSibling;if(pb&&pb.hasAttribute('data-fold'))pb.remove()}if(el.classList.contains('clamp')){el.classList.remove('clamp');var mo=el.nextElementSibling;if(mo&&mo.hasAttribute('data-more'))mo.remove()}}
+ function lsMark(el,f){if(LS.cur===el&&!f)return;if(LS.cur&&LS.cur!==el)LS.cur.classList.remove('speaking');LS.cur=el;if(!el)return;lsShow(el);el.classList.add('speaking');if(Date.now()<LS.hold)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+ function lsUi(x){document.querySelectorAll('[data-lsn]').forEach(function(b){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?LSN_OFF:LSN_ON})}
+ function lsStop(keep){LS.gen++;LS.on=false;lsWake(false);try{speechSynthesis.cancel()}catch(e){}lsUi(false);if(!keep)lsMark(null)}
+ function lsPlay(i){var S=window.speechSynthesis;if(!S)return;if(!LS.q)lsBuild();if(i>=LS.q.length){lsStop();LS.pos=0;return}var g=++LS.gen,f=!LS.on;LS.on=true;LS.used=true;lsUi(true);lsWake(true);LS.pos=i;lsMark(LS.q[i].el,f);
+  var u=new SpeechSynthesisUtterance(LS.q[i].t);u.lang=LANG==='en'?'en-US':'ko-KR';u.rate=1;u.onend=u.onerror=function(){if(g===LS.gen&&LS.on)lsPlay(i+1)};S.cancel();S.speak(u)}
+ document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-lsn]');if(b){if(LS.on){lsStop(true);return}lsPlay(LS.pos);return}
+  if(!LS.used||!document.querySelector('[data-lsn]')||ev.target.closest('a,button,input,textarea,select')||String(getSelection?getSelection():'').length)return;var el=ev.target.closest(LSEL);if(!el)return;if(!LS.q)lsBuild();for(var i=0;i<LS.q.length;i++)if(LS.q[i].el===el){LS.hold=0;lsPlay(i);return}});
+ var lsH=function(){if(LS.on)LS.hold=Date.now()+10000};addEventListener('wheel',lsH,{passive:true});addEventListener('touchmove',lsH,{passive:true});
+ document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&LS.on)lsWake(true)});
+ addEventListener('hashchange',function(){lsStop();LS.q=null;LS.pos=0;LS.used=false});addEventListener('pagehide',function(){lsStop()});
 function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function md(d){var p=d.split('-');return (+p[1])+'월 '+(+p[2])+'일'}
 function app(id){for(var i=0;i<DATA.apps.length;i++)if(DATA.apps[i][0]===id)return DATA.apps[i]}
@@ -439,9 +454,9 @@ function lenses(){
   V.innerHTML=h;window.scrollTo(0,0);
 }
 function dgs(){
-  var D=DATA.digest,h=bar('요약','#2C3E66','주간 정세 요약');
+  var D=DATA.digest,h=bar('요약','#2C3E66',(DATA.dgdate?md(DATA.dgdate)+' ':'')+'주간 정세 요약');  /* 2026-11-16 대통령님: 정세 브리핑처럼 날짜 표시 */
   var card=function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a?a[1]:'')+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button></div>'};
-  h+='<div class="q">이번 주 세계는 어떻게 흘러왔나</div><p class="lead">이번 주 정세 요약은 '+D.length+'개 사안입니다. 앞의 3개부터 보고드립니다.</p>'+lsnBtn(['주간 정세 요약'].concat([].concat.apply([],D.map(function(d){var a=app(d.a);return [(a?a[1]+'. ':'')+d.t,d.d]}))))+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+'개 사안 더 보기 ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
+  h+='<div class="qr"><div class="q">이번 주 세계는 어떻게 흘러왔나</div>'+lsnBtn()+'</div><p class="lead">이번 주 정세 요약은 '+D.length+'개 사안입니다. 앞의 3개부터 보고드립니다.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+'개 사안 더 보기 ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
   h+=nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · 이 흐름으로 판은 어디로 기울었나?','#i/'+d.a+'/pan']:null}),'dg');
   V.innerHTML=h;window.scrollTo(0,0);if(D.length)ss('dgseen',D[0].t);
 }
@@ -613,7 +628,7 @@ function fcView(id){var f0=fpById(id);V.innerHTML=bar('전망','#0B2A86','전망
 // 정세 브리핑 전체(날짜별): 앱이 받아 둔 정세 브리핑 그대로
 function briefView(d){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d)<0)ds.push(x.d)});ds.sort().reverse();if(ds.indexOf(d)<0)d=ds[0];
   var L=DATA.items.filter(function(x){return x.d===d}),i=ds.indexOf(d),h=bar('브리핑','#0B2A86',md(d)+' 정세 브리핑');
-  h+='<div class="q">'+md(d)+'에 보고드린 정세 브리핑입니다. '+L.length+'건입니다.</div>'+lsnBtn([md(d)+' 정세 브리핑'].concat([].concat.apply([],L.map(function(x){return [x.h,x.t]}))))+msgs(L,'b.'+d);
+  h+='<div class="qr"><div class="q">'+md(d)+'에 보고드린 정세 브리핑입니다. '+L.length+'건입니다.</div>'+lsnBtn()+'</div>'+msgs(L,'b.'+d);
   h+=nextQ([ds[i+1]?['전날('+md(ds[i+1])+') 정세 브리핑',"#b/"+ds[i+1]]:null,i>0?['다음 날('+md(ds[i-1])+') 정세 브리핑','#b/'+ds[i-1]]:null],'');
   V.innerHTML=h;markRead('b.'+d,L);window.scrollTo(0,0)}
 // 관심사에 맞춘 첫 화면
