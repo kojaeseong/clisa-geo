@@ -1228,6 +1228,8 @@ function tfFind(s){
   const from = Math.max(TF.start || 0, TF.last);
   if (k.length >= 8) {
     const keys = [k.slice(0, 14)]; if (k.length > 30) keys.push(k.slice(14, 28)); if (k.length > 18) keys.push(k.slice(-14));
+    /* tts1118: 조각을 모두 품은 칸을 먼저 찾는다(특집 제목의 뒷부분이 아래 소제목과 같을 때 그 소제목으로 내려가던 문제, 2026-11-18) */
+    for (const st of [from, 0]) for (let i = st; i < B.length; i++) if (keys.every(key => B[i].t.includes(key))) return i;
     for (const st of [from, 0]) for (const key of keys) for (let i = st; i < B.length; i++) if (B[i].t.includes(key)) return i;
   }
   /* 짧은 문장('판단.', '관리된 경쟁, 35퍼센트.')과 못 찾은 문장: 머리 6자로 바로 뒤쪽 몇 칸에서만 찾는다(엉뚱한 곳으로 튀지 않게) */
