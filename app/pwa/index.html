@@ -217,10 +217,10 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .left{display:flex;flex-direction:column;align-items:flex-start;line-height:1.5;margin-top:12px}.left b{font-size:12px;font-weight:800;color:var(--mut);margin-bottom:2px}.left>span{display:none}.left .lnk{display:block;padding:5px 0!important;text-align:left;line-height:1.45}
 /* 끈 끝 이름(2026-11-14 운영자 승인): 작은 끈에도 양쪽 끝이 무엇인지 */
 .mlab{display:flex;justify-content:space-between;gap:10px;font-size:11.5px;font-weight:700;line-height:1.25;color:var(--mut);margin:-9px 0 8px}.mlab span:last-child{text-align:right}.mlab2{font-size:11px;color:var(--mut);margin:-3px 0 6px;text-align:center}
-</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
+.speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}.qr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px}.qr .q{margin:0}.lsn{flex:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--acc);background:var(--chip);border:0;border-radius:5px;padding:6px 10px;margin:0;white-space:nowrap;cursor:pointer}  /* 2026-11-16 대통령님 결재(나안): 듣기 단추를 질문 줄 오른쪽에 */.cgl{text-align:right;margin:-2px 0 6px}.card.cg h2{font-size:15px;margin:0 0 6px}.card.cg>p{font-size:13.5px;line-height:1.6;margin:4px 0}.cgs{margin-top:10px}.cgq{border-left:3px solid var(--line);padding:2px 0 2px 10px;margin:6px 0}.cgq .cgw-q{margin:0 0 3px;font-size:13.5px;line-height:1.6}.cgq small{color:var(--sub);font-size:12px}.cgmore{margin-top:10px}.cgmore>summary{cursor:pointer;color:var(--acc);font-size:13px;font-weight:600;padding:4px 0}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='3e1644888f',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='6d913d6358',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -230,7 +230,27 @@ function instUI(){var el=document.getElementById('inst');if(!el)return;if(standa
 addEventListener('beforeinstallprompt',function(ev){ev.preventDefault();DP=ev;instUI()});
 addEventListener('appinstalled',function(){DP=null;instUI()});
 function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
-function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}}
+function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}} function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}  /* 2026-11-16 대통령님 결재: 주간 정세 요약 새 판을 열기 전까지 단추에 New */ var LSN_ON='듣기 ▶',LSN_OFF='멈춤 ■'; /* 2026-11-16 대통령님: 정세 브리핑·주간 정세 요약 듣기(기기 내장 음성). 홈페이지(아카데미) 듣기와 같게: 읽는 문장 표시·화면 가운데로·중간을 누르면 거기서부터·읽는 동안 화면 꺼짐 막기 */
+ var LS={q:null,pos:0,on:false,used:false,cur:null,gen:0,hold:0,wl:null,wp:false},LSEL='.bar h1,#v .q,#v .lead,#v .msg .h,#v .msg .t,#v .card.dg h2,#v .card.dg b,#v .card.dg p';
+ var CGT={q:'의회는 이 판을 어떻게 막거나 밀고 있나',sub:'의회의 쟁점과 찬반 발언',st:'현재 단계',v:'표 계산',n:'다음 절차와 시한',y:'찬성',no:'반대',src:'원문 ↗',more:'본회의 발언 더 보기'};  /* 2026-11-16 대통령님 결재: 앱에서 의회 쟁점과 의원 발언 */
+ function cgCards(L){return '<div class="cgw"><div class="cgl">'+lsnBtn('.cgw')+'</div>'+L.map(function(c){var Y=c.q.filter(function(q){return q[0]==='yes'}),N=c.q.filter(function(q){return q[0]==='no'});
+  var qq=function(q){return '<div class="cgq"><p class="cgw-q">“'+e(q[4])+'”</p><small>'+e(q[1])+' · '+e(q[2])+(q[3]?' · '+md(q[3]):'')+(q[5]?' · <a href="'+e(q[5])+'" target="_blank" rel="noopener">'+CGT.src+'</a>':'')+'</small></div>'};
+  return '<div class="card cg"><h2>'+e(c.n)+' · '+e(c.t)+'</h2>'+(c.st?'<p><b>'+CGT.st+'</b> '+e(c.st)+'</p>':'')+(c.v?'<p><b>'+CGT.v+'</b> '+e(c.v)+'</p>':'')+(c.nx?'<p><b>'+CGT.n+'</b> '+e(c.nx)+'</p>':'')+
+   (Y.length?'<div class="cgs"><span class="tg2 k2">'+CGT.y+'</span>'+Y.map(qq).join('')+'</div>':'')+(N.length?'<div class="cgs"><span class="tg2 k3">'+CGT.no+'</span>'+N.map(qq).join('')+'</div>':'')+((c.m||[]).length?'<details class="cgmore"><summary>'+CGT.more+'</summary>'+[['yes',CGT.y,'k2'],['no',CGT.no,'k3']].map(function(s){var L2=c.m.filter(function(q){return q[0]===s[0]});return L2.length?'<div class="cgs"><span class="tg2 '+s[2]+'">'+s[1]+'</span>'+L2.map(qq).join('')+'</div>':''}).join('')+'</details>':'')+'</div>'}).join('')+'</div>'}
+ function lsnBtn(sc){return ('speechSynthesis' in window)?'<button class="lsn" data-lsn'+(sc?' data-sc="'+sc+'"':'')+' aria-pressed="false">'+LSN_ON+'</button>':''}
+ function lsWake(x){try{if(x){if(!LS.wl&&!LS.wp&&navigator.wakeLock){LS.wp=true;navigator.wakeLock.request('screen').then(function(w){LS.wp=false;if(!LS.on){w.release();return}LS.wl=w;w.addEventListener('release',function(){LS.wl=null})}).catch(function(){LS.wp=false})}}else if(LS.wl){LS.wl.release();LS.wl=null}}catch(e){}}
+ function lsBuild(){var q=[],SP=null;try{SP=new RegExp('(?<=[.!?。])\\s+')}catch(e){}var sr=LS.sc?document.querySelector(LS.sc):null;(sr?sr.querySelectorAll('.card.cg h2,.card.cg p'):document.querySelectorAll(LSEL)).forEach(function(el){var x=(el.textContent||'').replace(/\s+/g,' ').trim();if(!x)return;(SP?x.split(SP):(x.match(/[^.!?。]+[.!?。]?/g)||[x])).forEach(function(s){s=s.trim();if(s)q.push({t:s,el:el})})});LS.q=q}
+ function lsShow(el){var dt=el.closest('details');if(dt&&!dt.open)dt.open=true;var hf=el.closest('[hidden]');if(hf){hf.hidden=false;var pb=hf.previousElementSibling;if(pb&&pb.hasAttribute('data-fold'))pb.remove()}if(el.classList.contains('clamp')){el.classList.remove('clamp');var mo=el.nextElementSibling;if(mo&&mo.hasAttribute('data-more'))mo.remove()}}
+ function lsMark(el,f){if(LS.cur===el&&!f)return;if(LS.cur&&LS.cur!==el)LS.cur.classList.remove('speaking');LS.cur=el;if(!el)return;lsShow(el);el.classList.add('speaking');if(Date.now()<LS.hold)return;var big=el.getBoundingClientRect().height>innerHeight*.6;el.scrollIntoView({block:big?'start':'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+ function lsUi(x){document.querySelectorAll('[data-lsn]').forEach(function(b){b.setAttribute('aria-pressed',x?'true':'false');b.textContent=x?LSN_OFF:LSN_ON})}
+ function lsStop(keep){LS.gen++;LS.on=false;lsWake(false);try{speechSynthesis.cancel()}catch(e){}lsUi(false);if(!keep)lsMark(null)}
+ function lsPlay(i){var S=window.speechSynthesis;if(!S)return;if(!LS.q)lsBuild();if(i>=LS.q.length){lsStop();LS.pos=0;return}var g=++LS.gen,f=!LS.on;LS.on=true;LS.used=true;lsUi(true);lsWake(true);LS.pos=i;lsMark(LS.q[i].el,f);
+  var u=new SpeechSynthesisUtterance(LS.q[i].t);u.lang=LANG==='en'?'en-US':'ko-KR';u.rate=1;u.onend=u.onerror=function(){if(g===LS.gen&&LS.on)lsPlay(i+1)};S.cancel();S.speak(u)}
+ document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-lsn]');if(b){if(LS.on){lsStop(true);return}var sc=b.getAttribute('data-sc')||'';if(sc!==(LS.sc||'')){LS.sc=sc;LS.q=null;LS.pos=0}lsPlay(LS.pos);return}
+  if(!LS.used||!document.querySelector('[data-lsn]')||ev.target.closest('a,button,input,textarea,select')||String(getSelection?getSelection():'').length)return;var el=ev.target.closest(LS.sc?'.card.cg h2,.card.cg p':LSEL);if(!el)return;if(!LS.q)lsBuild();for(var i=0;i<LS.q.length;i++)if(LS.q[i].el===el){LS.hold=0;lsPlay(i);return}});
+ var lsH=function(){if(LS.on)LS.hold=Date.now()+10000};addEventListener('wheel',lsH,{passive:true});addEventListener('touchmove',lsH,{passive:true});
+ document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&LS.on)lsWake(true)});
+ addEventListener('hashchange',function(){lsStop();LS.q=null;LS.pos=0;LS.used=false;LS.sc=''});addEventListener('pagehide',function(){lsStop()});
 function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function md(d){var p=d.split('-');return (+p[1])+'월 '+(+p[2])+'일'}
 function app(id){for(var i=0;i<DATA.apps.length;i++)if(DATA.apps[i][0]===id)return DATA.apps[i]}
@@ -287,7 +307,7 @@ function home(){
   h+='<div class="tools">';
   h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">전망</span><span class="lb">바뀐 전망</span>'+badge(fcChanged().length)+'</button>';
   h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">틀</span><span class="lb">세계를 보는 틀</span></button>';
-  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span></button>';
+  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span>'+(dgNew()?'<span class="bd">New</span>':'')+'</button>';
   h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">의견</span><span class="lb">운영자에게 보내기</span></button></div>';
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
   h+=foot([]);
@@ -303,7 +323,7 @@ function msgs(list,key,hl){
     var nw=x.d>=st&&sn.indexOf(x.id)<0;
     h+='<div class="msg'+(nw?' nw':'')+(x.id===hl?' hl':'')+'" id="m-'+x.id+'"><div class="h">'+e(x.h)+'</div><div class="t clamp">'+e(x.t)+'</div><button class="mo" data-more>더 보기</button><div class="mt">';
     x.fc.forEach(function(c){var f=fpById(c[0]);if(f)h+='<a class="chip" href="#f/'+c[0]+'">'+e(f.q.length>22?f.q.slice(0,22)+'…':f.q)+' '+f.p+'%'+(c[1]==='up'?' ↑':c[1]==='down'?' ↓':'')+'</a>'});
-    if(x.pl)h+='<span class="chip">'+e(x.pl)+'</span>';
+    /* 2026-11-16 대통령님 결재: 장소(x.pl)는 분류용으로 자료에만 두고 화면에는 보이지 않는다(누를 수 없는 칩이었음) */
     if(x.s[0])h+='<a class="src" href="'+e(x.s[0])+'" target="_blank" rel="noopener">원문 기사 ↗</a>';
     h+='</div></div>'});
   return h;
@@ -338,7 +358,7 @@ function issue(id,arg,sub){
   if(tab==='imp'&&!sub){var it0=ints().filter(function(x){return x.ax==='i'&&x.k===id&&x.w==='imp'&&x.g})[0];if(it0)sub=it0.g;else{startView('g',id,true);return}}
   var h=bar(a[2],a[3],a[1]),q=location.search||'';
   var tb=[];if(B)tb.push(['pan','판세']);if(I)tb.push(['imp','영향']);tb.push(['fc','전망']);tb.push(['news','소식']);
-  var L2=function(t){return q+'#i/'+id+'/'+t},GQ=I?['이 판은 누구의 삶과 산업을 바꾸나?','#ask/g/'+id]:null;
+  var L2=function(t){return q+'#i/'+id+'/'+t},GQ=I?['이 판은 누구의 삶을 바꾸나?','#ask/g/'+id]:null;
   h+='<div class="tabs">'+tb.map(function(t){return '<a href="'+q+'#i/'+id+'/'+t[0]+'" class="'+(tab===t[0]?'on':'')+'">'+t[1]+(t[0]==='news'?(function(){var n=unread(key,list).length;return n?' '+n:''})():'')+'</a>'}).join('')+'</div>';
   if(tab==='pan'){
     h+='<div class="q">이 판은 어디로 가고 있나</div>';
@@ -365,6 +385,7 @@ function issue(id,arg,sub){
     else if(B.thinkers.length)S.push({k:'lens',st:3,q:'사상가들은 이 판을 어떻게 보나',html:'<div class="card">'+B.thinkers.map(function(tid){var t=thinker(tid);return t?'<div class="th"><b>'+e(t.n)+'</b><small>'+e(t.role)+'</small><p class="clamp">'+e(t.now)+'</p><button class="mo" data-more>더 보기</button></div>':''}).join('')+'</div>'});
     if(cok&&C.watch)S.push({k:'watch',st:3,q:'어떤 소식이 나오면 판이 바뀐 것인가',sub:'판단이 틀렸다고 볼 신호',html:'<div class="card">'+C.watch.map(function(w){return '<div class="wt"><span class="tg '+w[1]+'">'+e(w[0])+'</span>'+e(w[2])+'</div>'}).join('')+'</div>'});
     if(cok&&C.learn&&C.learn.t)S.push({k:'learn',st:3,q:C.learn.t,sub:'이 판을 이해하는 배움',html:'<div class="card"><p style="margin:0;font-size:14px;line-height:1.7">'+e(C.learn.d)+'</p>'+C.learn.links.map(function(l){var t=(DATA.acad||{})[l[1]];return '<a class="lk" href="'+l[1]+'">'+e(t?t[0]+' · '+t[1]:l[0])+' <small style="font-weight:500">홈페이지에서 열립니다 ↗</small></a>'}).join('')+'</div>'});
+    var CG=(DATA.cong||{})[id];if(CG&&CG.length)S.push({k:'cong',st:2,q:CGT.q,sub:CGT.sub,html:cgCards(CG)});
     h+=stepped('pan:'+id,S,['이번 주 판에서 무엇을 먼저 보고드릴까요?','누가, 무엇이 이 판을 쥐고 있는지 보고드릴까요?','이 판을 앞으로 어떻게 지켜보실지 보고드릴까요?'],nextQ([GQ,['앞으로 무엇이 실현될까?',L2('fc')],['판단의 근거가 된 소식',L2('news')]],'i:'+id));
     V.innerHTML=h;window.scrollTo(0,0);return;
   }
@@ -386,7 +407,7 @@ function issue(id,arg,sub){
         (st.length&&mv.length?'<div class="hbl" style="margin-top:8px">어느 전개에서도 비슷한 업종: '+e(st.map(function(r){return r.n}).join(', '))+'</div>':'')+
         '<div class="hbl" style="margin-top:6px">악화됨·개선됨은 정상 영업이익(10년 영업이익률 중앙값 기준)보다 10% 넘게 줄거나 늘어나는 경우, 크게 악화됨은 30% 넘게 줄거나 업종이 적자가 되는 경우입니다. 산업별 영향 '+md(I.asof.ind)+' 판단</div></div>'})}
     var tI=(IND||[]).filter(function(r){return r.d.s<100})[0];
-    h+=stepped('imp:'+id+':'+G,S2,gn+'에 대해 무엇을 더 보고드릴까요?',nextQ([['다른 지역 사람들에게는 어떤 영향이 있나?','#ask/g/'+id],B?['왜 이렇게 판단하나 · 판을 당기는 힘',L2('pan')]:null,(kby(G)&&kby(G).life.length)?['다른 분쟁까지 합치면 '+gn+'의 생활은?','#ppl/'+G+'/all']:null,tI?[(G==='USA'?'미국 ':'한국 ')+tI.n+' 업종은 다른 분쟁에서는?','#ind/'+encodeURIComponent(tI.k)]:null],'i:'+id)+(G!=='KOR'&&G!=='USA'?'<p class="hbl" style="margin:8px 2px 0">업종별 영업이익은 한국과 미국 업종만 판단했습니다.</p>':''));
+    h+=stepped('imp:'+id+':'+G,S2,gn+'에 대해 무엇을 더 보고드릴까요?',nextQ([['다른 지역 사람들에게는 어떤 영향이 있나?','#ask/g/'+id],B?['왜 이렇게 판단하나 · 판을 당기는 힘',L2('pan')]:null,(kby(G)&&kby(G).life.length)?['다른 분쟁까지 합치면 '+gn+'의 생활은?','#ppl/'+G+'/all']:null,tI?[(G==='USA'?'미국 ':'한국 ')+tI.n+' 업종은 다른 분쟁에서는?','#ind/'+encodeURIComponent(tI.k)]:null],'i:'+id));
     V.innerHTML=h;window.scrollTo(0,0);return;
   }
   if(tab==='fc'){
@@ -439,22 +460,22 @@ function lenses(){
   V.innerHTML=h;window.scrollTo(0,0);
 }
 function dgs(){
-  var D=DATA.digest,h=bar('요약','#2C3E66','주간 정세 요약');
+  var D=DATA.digest,h=bar('요약','#2C3E66',(DATA.dgdate?md(DATA.dgdate)+' ':'')+'주간 정세 요약');  /* 2026-11-16 대통령님: 정세 브리핑처럼 날짜 표시 */
   var card=function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a?a[1]:'')+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>더 보기</button></div>'};
-  h+='<div class="q">이번 주 세계는 어떻게 흘러왔나</div><p class="lead">이번 주 정세 요약은 '+D.length+'개 사안입니다. 앞의 3개부터 보고드립니다.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+'개 사안 더 보기 ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
+  h+='<div class="qr"><div class="q">이번 주 세계는 어떻게 흘러왔나</div>'+lsnBtn()+'</div><p class="lead">이번 주 정세 요약은 '+D.length+'개 사안입니다. 앞의 3개부터 보고드립니다.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+'개 사안 더 보기 ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
   h+=nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · 이 흐름으로 판은 어디로 기울었나?','#i/'+d.a+'/pan']:null}),'dg');
-  V.innerHTML=h;window.scrollTo(0,0);
+  V.innerHTML=h;window.scrollTo(0,0);if(D.length)ss('dgseen',D[0].t);
 }
 var API='https://api.clisa.ai',CTX='첫 화면',OPENED=Date.now(),OTH=0;
 // 관심사(이 기기에만 저장: clisa.prof = {ints:[{ax,k,w}]}). ax = i 사안 · r 지역 · p 영향(k = ppl 국민 | ind 업종)
 // 질문은 한 번에 하나씩, 고를 쪽의 이번 주 모습을 먼저 보여 주고 더 자세히 볼 쪽을 고르게 한다(2026-11-13 운영자)
 function prof(){var P=ls('prof',null);if(P&&!P.ints&&P.sel)P={ints:P.sel.map(function(k){return {ax:k[0],k:k.slice(2),w:k[0]==='i'?(P.want||''):'news'}})};return P}
-function ints(){var P=prof();return P&&P.ints?P.ints:[]}
+function ints(){var P=prof();return P&&P.ints?P.ints.filter(function(x){return !(x.ax==='p'&&x.k==='ind')}):[]}
 function favs(){return ints().filter(function(x){return x.ax==='i'||x.ax==='r'}).map(function(x){return x.ax+':'+x.k})}
 function impOf(id){var I=(DATA.impact||{})[id];return I&&I.by&&Object.keys(I.by).length?I:null}
 function lifeFor(I,G){return ((I.by||{})[G]||{}).life||[]}
 function pplFor(I,G){return ((I.by||{})[G]||{}).ppl||[]}
-function indFor(I,G){return G==='KOR'?I.ind.kr:G==='USA'?I.ind.us:null}
+function indFor(I,G){return null}
 function impG(I,sub){var G=sub||ls('grp',DG);if(!I.by[G])G=I.by[DG]?DG:I.by.KOR?'KOR':Object.keys(I.by)[0];return G}
 function gName(id,G){var I=impOf(id),L=I?lifeFor(I,G):[];if(G==='PARTY'&&L.length)return L.map(function(x){return x.gn}).join('·');if(L.length===1&&L[0].gn)return L[0].gn;return kgName(G)}
 function gShort(id,G){return G!=='PARTY'&&GS[G]?GS[G]:gName(id,G).replace(/ 국민/g,'')}
@@ -497,7 +518,7 @@ function deeper(id){var B=(DATA.boards||{})[id],C=B&&B.cur,L=(C&&C.learn)||{},ou
   (DATA.games||[]).forEach(function(g){if(g.cases.indexOf(id)>=0)out.push([g.q,g.url,'게임 · '+g.t+' · '+g.why+EXT])});return out}
 function related(ci){if(!ci)return [];var reg0=(DATA.rule.caseR||{})[ci]||null,out=[];if(!reg0)DATA.regions.forEach(function(r){if(!reg0&&relIssues(r[0])[0]===ci)reg0=r[0]});
   if(reg0)relIssues(reg0).filter(function(k){return k!==ci&&app(k)}).slice(0,2).forEach(function(k){out.push([app(k)[1]+' · 같은 지역의 사안','#ask/i/'+k,issueLine(k)])});
-  var I=impOf(ci),G=ls('grp',null);if(I&&!G)out.push(['이 판은 누구의 삶과 산업을 바꾸나','#ask/g/'+ci,'분쟁 당사국·동북아시아·미국·유럽 가운데 고르기']);
+  var I=impOf(ci),G=ls('grp',null);if(I&&!G)out.push(['이 판은 누구의 삶을 바꾸나','#ask/g/'+ci,'분쟁 당사국·동북아시아·미국·유럽 가운데 고르기']);
   if(I&&G){if(!I.by[G])G=impG(I);var IND=indFor(I,G),t=(IND||[]).filter(function(r){return r.d.s<100})[0],cn=G==='USA'?'미국':'한국';
     if(t)out.push([cn+' '+t.n+' 업종 · 다른 분쟁까지 합쳐 보면','#ind/'+encodeURIComponent(t.k),'이 사안에서 '+dcnt(t.d)]);
     var wl=worstLife(I,G);if(wl!=null&&kby(G))out.push([gName(ci,G)+'의 생활 · 모든 분쟁을 합쳐 보면','#ppl/'+G+'/all','이 사안에서 현재보다 나쁜 삶이 되는 미래 100번 중 '+wl+'번'])}
@@ -535,7 +556,7 @@ function startView(step,arg,browse){
     h+='<div class="q" style="margin-top:14px">질문 '+(fromR?3:2)+'</div><h1>이 사안에서 무엇을 더 보고드릴까요?</h1>';
     var go=function(t){return browse?'#i/'+id+'/'+t:''};
     if(B&&C)h+=row('w:pan','판이 어디로 가고 있고, 왜 그런가','전개와 확률 · 판을 당기는 힘 · 결정권자가 원하는 것과 물러설 수 없는 선','',go('pan'));
-    if(IM)h+=row('','누구의 삶과 산업에 어떤 영향을 주나','분쟁 당사국·동북아시아·미국·유럽 가운데 고르시면 그 지역을 보고드립니다','',base+'g/'+id);
+    if(IM)h+=row('','누구의 삶에 어떤 영향을 주나','분쟁 당사국·동북아시아·미국·유럽 가운데 고르시면 그 지역을 보고드립니다','',base+'g/'+id);
     h+=row('w:fc','앞으로 무엇이 실현될까, 판단이 맞는지 어떻게 확인하나','기한과 확률을 밝힌 전망 '+FL.length+'개'+(W&&W.length?' · 판이 바뀌었다고 볼 신호 '+W.length+'개':''),'',go('fc'));
     h+=row('w:news','판단의 근거가 된 소식','이 사안의 소식 '+L.length+'건 · 원문 출처','',go('news'));
     var DP=deeper(id);if(DP.length)h+='<h3>더 깊이 알아보기</h3>'+DP.map(function(x){return '<a class="rw2" href="'+x[1]+'"><span class="t"><b>'+e(x[0])+'</b><small>'+e(x[2])+'</small></span><span class="ar">↗</span></a>'}).join('');
@@ -548,8 +569,8 @@ function startView(step,arg,browse){
       var OM={};if(I.by.PARTY)OM.PARTY={t:'분쟁 당사국',s:gName(id,'PARTY'),g:['PARTY']};if(I.by.KOR)OM.KOR={t:'동북아시아',s:'한국 국민',g:['KOR']};if(I.by.USA)OM.USA={t:'미국',s:'미국 국민',g:['USA']};if(EU.length)OM.EU={t:'유럽',s:EU.map(function(g){return gName(id,g)}).join(' · '),g:EU,eu:1};var O=GORD.map(function(k){return OM[k]}).filter(Boolean);
       h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>영향</small></div><p class="lead">이 판이 지역마다 사람들의 삶을 얼마나 바꾸는지 먼저 보고드립니다. 2030년까지 100번의 미래 가운데 현재보다 나쁜 삶이 되는 미래의 수입니다.</p><ul class="pv">'+O.map(function(o){var ws=o.g.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null});return ws.length?'<li><span>'+Math.max.apply(null,ws)+'번</span><div>'+e(o.t)+' · '+e(o.s)+'</div></li>':''}).join('')+'</ul></div>';
       h+='<div class="q" style="margin-top:14px">질문 '+qn+'</div><h1>어느 지역에 주는 영향을 보고드릴까요?</h1>';
-      h+=O.map(function(o){var mark=last&&o.g.indexOf(last)>=0?'<span class="cnt">지난번에 고르신 곳</span>':'';return o.eu?row('',o.t,o.s+' · '+line(o.g),mark,base+'ge/'+id):row('g:'+o.g[0],o.t,o.s+' · '+line(o.g)+(o.g[0]==='KOR'||o.g[0]==='USA'?' · 업종 영향 포함':''),mark,browse?'#i/'+id+'/imp/'+o.g[0]:'')}).join('');
-      h+='<p class="note" style="margin-top:10px">통합신경망과 국민의 삶에서 클리사 지오폴리틱스가 판단해 둔 집단입니다. 업종별 영업이익은 한국과 미국 업종만 판단했습니다.</p>';
+      h+=O.map(function(o){var mark=last&&o.g.indexOf(last)>=0?'<span class="cnt">지난번에 고르신 곳</span>':'';return o.eu?row('',o.t,o.s+' · '+line(o.g),mark,base+'ge/'+id):row('g:'+o.g[0],o.t,o.s+' · '+line(o.g),mark,browse?'#i/'+id+'/imp/'+o.g[0]:'')}).join('');
+      h+='<p class="note" style="margin-top:10px">통합신경망과 국민의 삶에서 클리사 지오폴리틱스가 판단해 둔 집단입니다.</p>';
     }else{
       h+='<div class="q" style="margin-top:6px">질문 '+qn+'</div><h1>유럽의 어느 쪽을 보고드릴까요?</h1><p class="sub">'+e(a[1])+'이 유럽 사람들의 삶을 바꾸는 정도는 지역마다 다릅니다.</p>';
       h+=EU.map(function(g){return row('g:'+g,gName(id,g),line([g]),last===g?'<span class="cnt">지난번에 고르신 곳</span>':'',browse?'#i/'+id+'/imp/'+g:'')}).join('');
@@ -613,7 +634,7 @@ function fcView(id){var f0=fpById(id);V.innerHTML=bar('전망','#0B2A86','전망
 // 정세 브리핑 전체(날짜별): 앱이 받아 둔 정세 브리핑 그대로
 function briefView(d){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d)<0)ds.push(x.d)});ds.sort().reverse();if(ds.indexOf(d)<0)d=ds[0];
   var L=DATA.items.filter(function(x){return x.d===d}),i=ds.indexOf(d),h=bar('브리핑','#0B2A86',md(d)+' 정세 브리핑');
-  h+='<div class="q">'+md(d)+'에 보고드린 정세 브리핑입니다. '+L.length+'건입니다.</div>'+msgs(L,'b.'+d);
+  h+='<div class="qr"><div class="q">'+md(d)+'에 보고드린 정세 브리핑입니다. '+L.length+'건입니다.</div>'+lsnBtn()+'</div>'+msgs(L,'b.'+d);
   h+=nextQ([ds[i+1]?['전날('+md(ds[i+1])+') 정세 브리핑',"#b/"+ds[i+1]]:null,i>0?['다음 날('+md(ds[i-1])+') 정세 브리핑','#b/'+ds[i-1]]:null],'');
   V.innerHTML=h;markRead('b.'+d,L);window.scrollTo(0,0)}
 // 관심사에 맞춘 첫 화면
@@ -710,7 +731,7 @@ function ntCard(){var el=document.getElementById('nt');if(!el)return;
 function clearNotes(){if(!('serviceWorker'in navigator))return;navigator.serviceWorker.ready.then(function(reg){return reg.getNotifications?reg.getNotifications():[]}).then(function(ns){ns.forEach(function(n){n.close()})}).catch(function(){});if(navigator.clearAppBadge)navigator.clearAppBadge().catch(function(){})}
 document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')clearNotes()});clearNotes();
 function route(){if(location.search.indexOf('debug')>=0)window.__A=DATA;var r=(location.hash||'').slice(1).split('/');
-  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2],r[3]);else if(r[0]==='r'&&reg(r[1]))region(r[1],r[2]);else if(r[0]==='ppl'){var gk=(DATA.kimp.groups||[]).map(function(g){return g[0]});if(gk.indexOf(r[1])>=0)pplView(r[1],r[2]||'all');else pplView(ls('grp',DG),r[1]||'all')}else if(r[0]==='ind'&&r[1])indView(decodeURIComponent(r[1]));else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='ft'){if(r[1])ftView(r[1]);else ftList()}else if(r[0]==='start')startView(r[1],r[2]);else if(r[0]==='ask')startView(r[1],r[2],true);else if(r[0]==='f'&&r[1])fcView(r[1]);else if(r[0]==='b')briefView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start'&&r[0]!=='ask')CTX=ctxOf(r);
+  if(r[0]==='i'&&app(r[1]))issue(r[1],r[2],r[3]);else if(r[0]==='r'&&reg(r[1]))region(r[1],r[2]);else if(r[0]==='ppl'){var gk=(DATA.kimp.groups||[]).map(function(g){return g[0]});if(gk.indexOf(r[1])>=0)pplView(r[1],r[2]||'all');else pplView(ls('grp',DG),r[1]||'all')}else if(r[0]==='ind')pplView(ls('grp',DG),'all');else if(r[0]==='fc')fcs();else if(r[0]==='dg')dgs();else if(r[0]==='lens')lenses();else if(r[0]==='msg')msgView();else if(r[0]==='ft'){if(r[1])ftView(r[1]);else ftList()}else if(r[0]==='start')startView(r[1],r[2]);else if(r[0]==='ask')startView(r[1],r[2],true);else if(r[0]==='f'&&r[1])fcView(r[1]);else if(r[0]==='b')briefView(r[1]);else if(!r[0]&&draft()&&!prof()&&!ls('skip',0))startView('1');else home();if(r[0]!=='msg'&&r[0]!=='start'&&r[0]!=='ask')CTX=ctxOf(r);
   instUI();
   var js=ls('justsaved',null);if(js&&r[0]!=='start'){try{localStorage.removeItem('clisa.justsaved')}catch(x){};var bb=V.querySelector('.bar');var nt='<div class="saved">관심사로 저장했습니다 · '+e(js)+' · 다음부터 이 보고를 첫 화면 맨 앞에 올려 드립니다 <a href="#start/4">관심사 보기</a></div>';if(bb)bb.insertAdjacentHTML('afterend',nt);else V.insertAdjacentHTML('afterbegin',nt)}}
 function toast(t){var el=document.getElementById('toast');if(!el){el=document.createElement('div');el.id='toast';el.className='toast';document.body.appendChild(el)}el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('on')},1800)}

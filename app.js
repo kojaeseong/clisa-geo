@@ -1801,6 +1801,7 @@ function cgV2(c, X, row, qd){
       ((x.devvotes || []).length ? '<dt>당론과 다른 표</dt><dd><ul class="cgdv">' + x.devvotes.map(v => "<li><b>" + esc(v.label) + "</b> · " + qd(v.date) + " · " + esc(v.t) + "</li>").join("") + "</ul></dd>" : "") +
       (Q(x).length ? '<dt>찬반 발언</dt><dd><div class="cgsides">' + [["yes", "찬성"], ["no", "반대"]].map(([k, t]) => '<div><b class="cgk">' + t + "</b>" + (side(x, k).length ? '<ul class="cgql">' + side(x, k).map(q1).join("") + "</ul>" : '<p class="note" style="margin:0">' + esc((x.qnone || {})[k] || "") + "</p>") + "</div>").join("") + "</div></dd>" : x.decided && x.qnote ? '<dt>찬반 발언</dt><dd class="note">' + esc(x.qnote) + "</dd>" : row("입장", x.sides)) +
       (Q(x).some(q => q.dev) ? '<dt>당론과 다른 표를 던진 의원의 발언</dt><dd><ul class="cgql">' + Q(x).filter(q => q.dev).map(q1).join("") + "</ul></dd>" : "") +
+      ((x.more || []).length ? '<dd class="cgm"><details><summary>본회의 발언 더 보기</summary><div class="cgsides">' + [["yes", "찬성"], ["no", "반대"]].map(([k, t]) => '<div><b class="cgk">' + t + '</b><ul class="cgql">' + x.more.filter(q => q.side === k).map(q1).join("") + "</ul></div>").join("") + "</div></details></dd>" : "") +  /* 2026-11-16 대통령님 결재(교본 4.8 보완): 핵심 찬반 2건 아래 접힌 칸에 쪽마다 최대 4건 */
       row("다음 절차와 시한", x.next) +
       ((x.fc || []).length ? '<dt>관련 전망</dt><dd><div class="chips" style="margin:0">' + x.fc.map(fcBtn).join("") + "</div></dd>" : "") +
       "</dl></details>").join("") + "</div>";

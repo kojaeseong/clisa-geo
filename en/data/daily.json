@@ -1,6 +1,195 @@
 {
  "issues": [
   {
+   "date": "2026-11-17",
+   "items": [
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "CENTCOM says a third U.S. carrier, the Theodore Roosevelt, has reached the Middle East",
+     "fact": "The aircraft carrier USS Theodore Roosevelt has arrived in the Middle East, U.S. Central Command said on social media on November 16, according to the AP, joining the USS George H.W. Bush and USS George Washington and bringing the number of carriers in the region to three. Citing the Navy, the AP said 13 destroyers, two cruisers and a littoral combat ship are in the Arabian Sea, with two more destroyers in the Red Sea.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.timesfreepress.com/news/2026/nov/16/third-us-aircraft-carrier-arrives-in-the-middle-east-as-trump-keeps-options-open-in-the-iran-war/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     },
+     "pull": [
+      [
+       "iran",
+       "R",
+       "미국의 봉쇄·공습 압박"
+      ]
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "IRGC claims two tankers hit mines in Hormuz; UKMTO reports a tanker struck by a projectile",
+     "fact": "Iran’s Islamic Revolutionary Guard Corps claimed through state media on November 16 that two oil tankers had hit mines and exploded in the Strait of Hormuz, and that six tankers had caught fire in similar incidents on November 15–16 (Reuters). The U.K. Maritime Trade Operations agency (UKMTO) said the same day that a tanker leaving the strait was hit by an unknown projectile, starting an engine-room fire, with no injuries.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.jpost.com/middle-east/article-915014",
+      "https://www.iranintl.com/en/liveblog/202611143682"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "Strait of Hormuz",
+      "isos": [
+       "IRN"
+      ]
+     },
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "CNN: U.S. intelligence sees signs of an Iranian ‘dirty bomb’ plot in Washington; White House sees no credible threat",
+     "fact": "CNN reported on November 16, citing seven U.S. officials, that U.S. intelligence has picked up signs that Iran is planning a “dirty bomb” or chemical attack in Washington targeting senior Trump administration officials, though the intelligence does not point to an imminent attack. The White House said there are currently no credible threats to the homeland, and Iran’s U.N. mission called the allegations fabricated.",
+     "fc": [],
+     "src": [
+      "https://www.jpost.com/middle-east/iran-news/article-915109",
+      "https://www.timesofisrael.com/liveblog-november-17-2026/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "Washington (U.S.)",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "EU sanctions nearly 50 Russian banks as Kallas says “Russia is really escalating”",
+     "fact": "At a foreign ministers’ meeting in Brussels on November 16, the EU sanctioned nearly 50 Russian banks and financial institutions, several energy-linked businesspeople and dozens of people accused of spreading pro-Russian propaganda and disinformation (AP). Member states accused Russia of dragging out talks while bombing power plants, and EU foreign policy chief Kaja Kallas said, “We see that Russia is really escalating.”",
+     "fc": [],
+     "src": [
+      "https://www.pbs.org/newshour/world/eu-accuses-russia-of-stalling-ukraine-peace-talks-to-target-power-plants-as-winter-nears",
+      "https://www.aljazeera.com/news/2026/11/16/russian-attacks-kill-three-in-ukraine-eu-accuses-moscow-of-prolonging-war"
+     ],
+     "loc": {
+      "lat": 50.85,
+      "lon": 4.35,
+      "place": "Brussels (Belgium)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     },
+     "pull": [
+      [
+       "ukraine",
+       "L",
+       "러시아의 재정 압박"
+      ]
+     ]
+    },
+    {
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "h": "Trump on Kim Jong Un: “He may come … That’s up to President Xi”",
+     "fact": "Leaving the White House on the morning of November 16 (local time), President Donald Trump said he might meet North Korean leader Kim Jong Un during his trip to China: “He may come. I don’t know. That’s up to President Xi,” ABC News reported. There was no reported response from North Korea.",
+     "fc": [
+      {
+       "id": "f05",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://abcnews.com/Politics/live-updates/trump-asia-trip-2026/?id=138187702"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "PRK",
+       "CHN"
+      ]
+     },
+     "pull": []
+    }
+   ],
+   "more": [
+    {
+     "t": "Ukrainian regional officials said Russian attacks on November 16 killed three people, one each in Sadove, in the Kherson region; Dnipro; and Bilenke, in the Zaporizhzhia region (Al Jazeera).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/16/russian-attacks-kill-three-in-ukraine-eu-accuses-moscow-of-prolonging-war"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "U.N. Secretary-General António Guterres said on November 16 that the United States and Iran need a serious diplomatic process to end their “neither peace nor war” situation (Iran International).",
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202611143682"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "The Israeli military claimed on November 16 that its air force struck a weapons shipment bound for Hezbollah overnight near Janta, Lebanon (Iran International).",
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202611143682"
+     ],
+     "case": null,
+     "fp": [
+      "levant"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Bahrain’s public prosecutor’s office said on November 16 that a court had sentenced defendants in a case involving a group linked to Iran’s Revolutionary Guard to terms ranging from 15 years to life (Iran International).",
+     "src": [
+      "https://www.iranintl.com/en/liveblog/202611143682"
+     ],
+     "case": "iran",
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-16",
    "items": [
     {
@@ -5953,255 +6142,6 @@
       "https://koreanewsservice.com/revolutionary-activities/19323/"
      ],
      "fp": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-13",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "North Korea fires ballistic missiles; state media says it tested a tactical ballistic missile",
-     "fact": "South Korea's Joint Chiefs of Staff said North Korea fired ballistic missiles from the Pyongyang area into the East Sea at about 9:20 a.m. on October 12, and that one of them flew more than 900 kilometers. The state-run Korean Central News Agency reported on October 13 that the Missile Administration had test-fired a tactical ballistic missile.",
-     "fc": [],
-     "src": [
-      "https://www.koreatimes.co.kr/southkorea/defense/20261013/us-pacific-command-says-n-korea-fired-2-ballistic-missiles-reaffirms-defense-commitment",
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008793131",
-      "http://www.koreanewsservice.com/politics-military/19325/"
-     ],
-     "loc": {
-      "lat": 39.03,
-      "lon": 125.75,
-      "place": "Pyongyang area (North Korea)",
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Trump says he \"may\" meet Kim Jong Un on Asia trip",
-     "fact": "Asked by a reporter at the White House on October 12 whether he plans to meet Kim Jong Un during next month's trip to the APEC summit in Shenzhen, China, President Trump said, \"I may.\" No meeting has been announced.",
-     "fc": [
-      {
-       "id": "f05",
-       "e": "up"
-      },
-      {
-       "id": "f22",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.koreatimes.co.kr/world/20261013/trump-says-he-may-meet-n-korean-leader-kim-during-upcoming-asia-trip"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Zelensky accuses Russia of violating energy ceasefire; Kremlin says contacts continue",
-     "fact": "Ukrainian President Volodymyr Zelensky, addressing the Warsaw Security Forum by video link on October 12, said Russia had violated the energy ceasefire announced by President Trump. Kremlin spokesman Dmitry Peskov said the same day only that contacts were continuing on whether Russia would agree to the truce.",
-     "fc": [],
-     "src": [
-      "https://www.pbs.org/newshour/world/zelenskyy-says-russia-strikes-energy-facilities-despite-trump-claim-of-an-energy-ceasefire",
-      "https://www.themoscowtimes.com/2026/10/12/zelensky-accuses-russia-of-breaking-energy-ceasefire-as-kremlin-says-talks-ongoing-a93944"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Kremlin rejects Zelensky's 60-day election ceasefire offer",
-     "fact": "After Zelensky said on October 11 that Ukraine would hold elections if given a 60-day total ceasefire, Peskov said on October 12 that President Vladimir Putin was ready to halt strikes on election day only. He claimed Ukraine would use a truce to regroup and keep fighting.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.pbs.org/newshour/world/zelenskyy-says-russia-strikes-energy-facilities-despite-trump-claim-of-an-energy-ceasefire",
-      "https://www.themoscowtimes.com/2026/10/12/zelensky-accuses-russia-of-breaking-energy-ceasefire-as-kremlin-says-talks-ongoing-a93944"
-     ],
-     "loc": {
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "IRGC claims it struck a third supertanker in the Strait of Hormuz",
-     "fact": "Iran's Revolutionary Guard navy claimed on October 12 that it struck a supertanker that ignored warnings and tried to leave the Strait of Hormuz, the third tanker it said it had hit for violating its rules. It did not name the vessel or its flag, and there has been no independent confirmation.",
-     "fc": [],
-     "src": [
-      "https://english.news.cn/20261012/edb34bcdfcf142be8f06e0fff9cde298/c.html",
-      "https://tass.com/world/2201019"
-     ],
-     "loc": {
-      "lat": 26.57,
-      "lon": 56.25,
-      "place": "Strait of Hormuz",
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Houthis fire missiles at Riyadh and Khamis Mushait; coalition says it intercepted them",
-     "fact": "The Saudi-led coalition said it intercepted a Houthi ballistic missile fired at Riyadh on October 12 and, just after midnight on October 13, two more aimed at Khamis Mushait in southern Saudi Arabia. Houthi politburo member Mohammed al-Bukhaiti warned that if the U.S. joins Saudi airstrikes on Yemen, the group will retaliate against the U.S. and its interests in the region.",
-     "fc": [],
-     "src": [
-      "https://www.arabnews.com/saudi-arabia/coalition-says-ballistic-missile-fired-by-houthis-toward-riyadh-intercepted-3005972",
-      "https://www.malaymail.com/news/world/2026/10/13/houthis-warn-of-painful-response-if-us-joins-saudi-strikes-on-yemen/238870"
-     ],
-     "loc": {
-      "lat": 24.71,
-      "lon": 46.68,
-      "place": "Riyadh (Saudi Arabia)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "russia-hybrid-campaign-western-europe",
-      "iran-war"
-     ],
-     "h": "29 nations, including the U.S. and UK, condemn Iran's violent attacks and hybrid activity",
-     "fact": "In a joint statement on October 12, foreign ministers from the U.S., the UK, Canada, Australia, New Zealand, Norway, and 23 EU member states condemned \"in the strongest terms\" Iran's violent attacks and hybrid activity. The statement recognized Britain's attribution of Iran's involvement in the September 27 incident at RAF Fairford.",
-     "fc": [],
-     "src": [
-      "https://www.gov.uk/government/news/joint-statement-on-iran-12-october",
-      "https://www.canada.ca/en/global-affairs/news/2026/10/joint-statement-on-iran-october-12.html"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "GBR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war",
-      "red-sea-bab-el-mandeb",
-      "rus-ukr"
-     ],
-     "h": "Brent rises 1.8 percent to settle at $106.65 a barrel",
-     "fact": "Brent crude for December delivery settled at $106.65 a barrel on October 12, up 1.8 percent. Market reports cited the continued shutdown of Riyadh's airport, reports of tankers hit in the Strait of Hormuz, and doubts about the Russia-Ukraine energy ceasefire.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.rigzone.com/news/brent_tops_106_as_supply_risks_intensify-12-oct-2026-184830-article",
-      "https://www.cnbc.com/2026/10/12/oil-prics-today-iran-us-saudi-arabia-crude-.html"
-     ]
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "EU sanctions 826 Russian defense firms and 743 CEOs in biggest listing since 2022",
-     "fact": "The Council of the EU on October 12 added to its sanctions list 826 companies in Russia's military-industrial complex that supply components for missiles, drones, aircraft, and more, along with their 743 chief executives. High Representative Kaja Kallas called it \"the largest round of sanctions listings since 2022.\"",
-     "fc": [],
-     "src": [
-      "https://www.consilium.europa.eu/en/press/press-releases/2026/10/12/russia-s-war-of-aggression-against-ukraine-eu-agrees-largest-ever-package-of-listings-targeting-almost-1600-individuals-and-entities-in-russia-s-military-industrial-complex/"
-     ],
-     "loc": {
-      "isos": [
-       "RUS"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "South Korea's presidential National Security Office held an emergency security review meeting with the Ministry of National Defense, the Joint Chiefs of Staff, and other agencies on October 12, calling the launch a violation of UN Security Council resolutions and urging the North to stop immediately.",
-     "src": [
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008793131"
-     ],
-     "fp": [
-      "korea"
-     ]
-    },
-    {
-     "t": "President Trump said on October 12 that the Houthis are \"misbehaving very badly,\" but he has not decided whether the U.S. will join airstrikes on Yemen.",
-     "src": [
-      "https://www.foxnews.com/live-news/iran-war-news-us-trump-houthis-saudi-arabia-october-12"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Iranian Foreign Ministry spokesman Esmaeil Baghaei said on October 12 that Tehran is still reviewing the U.S. response and that mediated exchanges are continuing.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Ukraine's air force said it shot down or suppressed 89 of 121 Russian drones overnight October 11-12, while Russia's Defense Ministry said it intercepted 151 Ukrainian drones the same night.",
-     "src": [
-      "https://www.pravda.com.ua/eng/news/2026/10/12/8057541/",
-      "https://www.pbs.org/newshour/world/zelenskyy-says-russia-strikes-energy-facilities-despite-trump-claim-of-an-energy-ceasefire"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Taiwan's military said China's live-fire drills in five no-sail zones in the Bohai, Yellow, East China, and South China seas, running October 12-17, are being held off China's own coast rather than around Taiwan.",
-     "src": [
-      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/12/2003865828"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
     }
    ]
   }
