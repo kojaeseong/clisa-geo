@@ -142,6 +142,40 @@
       ]
      },
      "pull": []
+    },
+    {
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "h": "Jo Yong Won meets Putin in Moscow, denounces U.S. ‘hostile policy’ toward North Korea at forum",
+     "fact": "Jo Yong Won, a Workers’ Party secretary and close aide to Kim Jong Un, met President Vladimir Putin in Moscow on November 16 and conveyed Kim’s best wishes, TASS reported. At an international forum in Moscow the same day attended by delegates from more than 70 countries, he denounced what he called the United States’ “chronic hostile policy” toward North Korea, according to KCNA, citing TASS.",
+     "fc": [
+      {
+       "id": "f05",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.koreajoongangdaily.com/korea/north-korean-leaders-close-aide-meets-senior-officials-in-moscow-amid-deepening-ties/12976273",
+      "https://www.ajunews.com/view/20261117100608358"
+     ],
+     "loc": {
+      "lat": 55.76,
+      "lon": 37.62,
+      "place": "Moscow (Russia)",
+      "isos": [
+       "PRK",
+       "RUS"
+      ]
+     },
+     "pull": [
+      [
+       "korea",
+       "R",
+       "중·러의 북한 끌어안기"
+      ]
+     ]
     }
    ],
    "more": [
@@ -154,6 +188,16 @@
      "fp": [
       "rus-ukr"
      ],
+     "pull": []
+    },
+    {
+     "t": "North Korean leader Kim Jong Un inspected the expansion project at Samjiyon Airport near the Chinese border and tourism construction sites around Mount Paektu on November 15–16, ordering that the airport be brought up to International Civil Aviation Organization standards, KCNA reported on November 17.",
+     "src": [
+      "https://www.hankookilbo.com/news/article/A2026111708490002741",
+      "https://biz.heraldcorp.com/article/10939171"
+     ],
+     "case": "korea",
+     "fp": [],
      "pull": []
     },
     {

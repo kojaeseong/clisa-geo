@@ -142,6 +142,40 @@
       ]
      },
      "pull": []
+    },
+    {
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "h": "조용원, 모스크바서 푸틴 면담…국제 포럼선 미국 '대조선 적대시 정책' 비난",
+     "fact": "김정은 국무위원장의 측근인 조용원 노동당 비서는 16일 모스크바에서 블라디미르 푸틴 대통령을 만나 김 위원장의 안부를 전했다고 타스통신이 보도했습니다. 그는 같은 날 70여 개국 대표가 참석한 모스크바 국제 포럼에서 \"미국의 고질적인 대조선 적대시 정책\"을 비난했다고 조선중앙통신이 타스통신을 인용해 전했습니다.",
+     "fc": [
+      {
+       "id": "f05",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.koreajoongangdaily.com/korea/north-korean-leaders-close-aide-meets-senior-officials-in-moscow-amid-deepening-ties/12976273",
+      "https://www.ajunews.com/view/20261117100608358"
+     ],
+     "loc": {
+      "lat": 55.76,
+      "lon": 37.62,
+      "place": "모스크바(러시아)",
+      "isos": [
+       "PRK",
+       "RUS"
+      ]
+     },
+     "pull": [
+      [
+       "korea",
+       "R",
+       "중·러의 북한 끌어안기"
+      ]
+     ]
     }
    ],
    "more": [
@@ -154,6 +188,16 @@
      "fp": [
       "rus-ukr"
      ],
+     "pull": []
+    },
+    {
+     "t": "김정은 국무위원장은 15~16일 북중 접경의 삼지연비행장 개건·확장 공사와 백두산 일대 관광시설 건설 현장을 시찰하고 비행장을 국제민간항공기구 표준규격에 맞추라고 지시했습니다(조선중앙통신 17일 보도).",
+     "src": [
+      "https://www.hankookilbo.com/news/article/A2026111708490002741",
+      "https://biz.heraldcorp.com/article/10939171"
+     ],
+     "case": "korea",
+     "fp": [],
      "pull": []
     },
     {
