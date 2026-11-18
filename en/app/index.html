@@ -306,7 +306,7 @@ function home(){
   h+='</section><div class="sep"><span>More</span></div>';
   h+='<div class="tools">';
   h+='<button class="ap" data-open="fc"><span class="ic one" style="background:#0B2A86">%</span><span class="lb">Changed forecasts</span>'+badge(fcChanged().length)+'</button>';
-  h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">Lens</span><span class="lb">Lenses on the world</span></button>';
+  h+='<button class="ap" data-open="lens"><span class="ic" style="background:#3B7A3B">Lens</span><span class="lb">Lenses on the world</span></button>';
   h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">Week</span><span class="lb">Weekly summary</span>'+(dgNew()?'<span class="bd">New</span>':'')+'</button>';
   h+='<button class="ap" data-open="ft"><span class="ic" style="background:#7A3E48">Read</span><span class="lb">Features</span>'+(ftNew()?'<span class="bd">New</span>':'')+'</button></div><a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">Send feedback ›</a>';  
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
@@ -449,7 +449,7 @@ function fcs(){
   V.innerHTML=h;ss('fcseen',DATA.asof);window.scrollTo(0,0);
 }
 function lenses(){
-  var W=DATA.world,h=bar('Lens','#6B4E2E','Lenses on the world')+'<div class="q">How to read situations like these</div>',S=[];
+  var W=DATA.world,h=bar('Lens','#3B7A3B','Lenses on the world')+'<div class="q">How to read situations like these</div>',S=[];
   if(W){S.push({k:'scen',q:'Futures for the world',html:'<p class="lead">Five futures for the world as assessed by Clisa Geopolitics on '+md(W.asof)+', and the lens that best explains each.</p><div class="card">'+W.scen.map(function(x){var t=thinker(x[3]);return '<div class="th"><b>'+e(x[1])+' '+x[2]+'%</b><small>'+e(t?t.n+'’s lens':'')+'</small><p class="clamp">'+e(x[4])+'</p><button class="mo" data-more>More</button></div>'}).join('')+'</div>'});
     S.push({k:'tr',q:'The big trends moving the world',sub:W.trends.slice(0,3).map(function(x){return x[0]}).join(' · '),html:'<div class="card">'+W.trends.map(function(x){return '<div class="th"><b>'+e(x[0])+'</b><p class="clamp">'+e(x[1])+'</p><button class="mo" data-more>More</button></div>'}).join('')+'</div>'})}
   S.push({k:'th',q:'How major thinkers see today’s world',sub:(DATA.thinkers||[]).slice(0,4).map(function(t){return t.n}).join(' · ')+' and others · '+(DATA.thinkers||[]).length+' thinkers',html:'<div class="card">'+(DATA.thinkers||[]).map(function(t){return '<div class="th"><b>'+e(t.n)+'</b><small>'+e(t.life)+' · '+e(t.role)+'</small><h4>Core argument</h4><p class="clamp">'+e(t.claim)+'</p><button class="mo" data-more>More</button><h4>Applied to today</h4><p class="clamp">'+e(t.now)+'</p><button class="mo" data-more>More</button></div>'}).join('')+'</div>'});
