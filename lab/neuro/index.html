@@ -154,7 +154,7 @@ path.fl.r{stroke:#ffffff;opacity:1}  /* 2026-11-07 대통령님: 점 크기는 �
 <script>
 (function(){
 const SINCE='2026-10-01', P='';
-const OLDLM={"A10": [["iran-war", 1, "KOR"], ["red-sea-bab-el-mandeb", 1, "KOR"], ["suez-canal", 2, "KOR"]], "A12": [["iran-war", 1, "WCEU"]], "A13": [["rus-ukr", 1, "SEU"], ["iran-war", 1, "SEU"]], "B03": [["rus-ukr", 0, "PARTY"]], "B07": [["rus-ukr", 0, "NEU"], ["baltic-kaliningrad-suwalki", 0, "NEU"]], "B24": [["rus-ukr", 0, "KOR"], ["korea", 0, "KOR"]], "B28": [["rus-ukr", 5, "WCEU"], ["sudan-civil-war", 5, "WCEU"]], "B30": [["rus-ukr", 1, "KOR"], ["malacca", 1, "KOR"]], "K01": [["korea", 0, "KOR"], ["korea", 5, "KOR"]], "K04": [["korea", 0, "KOR"]]};
+const OLDLM={"A10": [["iran-war", 1, "KOR"], ["red-sea-bab-el-mandeb", 1, "KOR"], ["suez-canal", 2, "KOR"]], "E07": [["iran-war", 1, "WCEU"]], "E08": [["rus-ukr", 1, "SEU"], ["iran-war", 1, "SEU"]], "D19": [["rus-ukr", 0, "PARTY"]], "B07": [["rus-ukr", 0, "NEU"], ["baltic-kaliningrad-suwalki", 0, "NEU"]], "B24": [["rus-ukr", 0, "KOR"], ["korea", 0, "KOR"]], "B28": [["rus-ukr", 5, "WCEU"], ["sudan-civil-war", 5, "WCEU"]], "B30": [["rus-ukr", 1, "KOR"], ["malacca", 1, "KOR"]], "K01": [["korea", 0, "KOR"], ["korea", 5, "KOR"]], "K04": [["korea", 0, "KOR"]]};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const md=s=>{const [y,m,d]=s.split('-').map(Number); return m+'월 '+d+'일'};
@@ -166,7 +166,7 @@ try{ const q=new URLSearchParams(location.search).get('g'); if(q) G=q }catch(_){
 Promise.all([J('/data/eurasia.json'),J('/data/daily.json'),J('/data/chains.json'),J('/data/fcmap.json'),J('/data/links.json')]).then(r=>{[D,DL,C,FMr,L]=r; init()}).catch(e=>{$('ld').textContent='자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주십시오.'; console.error(e)});
 function compute(){
  const FM={}; FMr.forEach(m=>FM[m.id]=m); const FC={}; D.forecasts.forEach(f=>FC[f.id]=f);
- const OUT={}; C.links.forEach(l=>{ if(!l.lm&&OLDLM[l.id]) l.lm=OLDLM[l.id]; (OUT[l.f]=OUT[l.f]||[]).push(l) });
+ const OUT={}; C.links.forEach(l=>{ if(C.gp&&l.t.startsWith('grp:')&&C.gp[l.t.slice(4)]) l.t='grp:'+C.gp[l.t.slice(4)]; if(!l.lm&&OLDLM[l.id]) l.lm=OLDLM[l.id]; (OUT[l.f]=OUT[l.f]||[]).push(l) });
  const fh=D.fc_hist||{}; let last=SINCE; const sig={};
  (DL.issues||[]).forEach(iss=>{ if(iss.date>last) last=iss.date; if(iss.date<SINCE) return; (iss.items||[]).forEach(x=>(x.fc||[]).forEach(s=>{ if(s.e==='up'||s.e==='down') (sig[s.id]=sig[s.id]||[]).push([iss.date,s.e,x.h]) })) });
  const base=(h,s)=>{const b=h.filter(x=>x[0]<=s).map(x=>x[1]); return b.length?b[b.length-1]:h[0][1]};
