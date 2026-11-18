@@ -229,7 +229,8 @@ function instUI(){var el=document.getElementById('inst');if(!el)return;if(standa
 addEventListener('beforeinstallprompt',function(ev){ev.preventDefault();DP=ev;instUI()});
 addEventListener('appinstalled',function(){DP=null;instUI()});
 function ls(k,d){try{var x=localStorage.getItem('clisa.en.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
-function ss(k,v){try{localStorage.setItem('clisa.en.'+k,JSON.stringify(v))}catch(e){}} function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}   var LSN_ON='Listen ▶',LSN_OFF='Stop ■'; 
+function ss(k,v){try{localStorage.setItem('clisa.en.'+k,JSON.stringify(v))}catch(e){}} function ftNew(){var F=DATA.feat||[];return !!(F.length&&ls('ftseen','')!==F[0].date)}
+function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}   var LSN_ON='Listen ▶',LSN_OFF='Stop ■'; 
  var LS={q:null,pos:0,on:false,used:false,cur:null,gen:0,hold:0,wl:null,wp:false},LSEL='.bar h1,#v .q,#v .lead,#v .msg .h,#v .msg .t,#v .card.dg h2,#v .card.dg b,#v .card.dg p';
  var CGT={q:'How is the legislature checking or backing this?',sub:'Legislative issues and floor statements',st:'Where it stands',v:'The vote count',n:'Next steps and deadlines',y:'For',no:'Against',src:'Original ↗',more:'More floor statements'};  
  function cgCards(L){return '<div class="cgw"><div class="cgl">'+lsnBtn('.cgw')+'</div>'+L.map(function(c){var Y=c.q.filter(function(q){return q[0]==='yes'}),N=c.q.filter(function(q){return q[0]==='no'});
@@ -307,7 +308,7 @@ function home(){
   h+='<button class="ap" data-open="fc"><span class="ic one" style="background:#0B2A86">%</span><span class="lb">Changed forecasts</span>'+badge(fcChanged().length)+'</button>';
   h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">Lens</span><span class="lb">Lenses on the world</span></button>';
   h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">Week</span><span class="lb">Weekly summary</span>'+(dgNew()?'<span class="bd">New</span>':'')+'</button>';
-  h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">Note</span><span class="lb">Send feedback</span></button></div>';
+  h+='<button class="ap" data-open="ft"><span class="ic" style="background:#7A3E48">Read</span><span class="lb">Features</span>'+(ftNew()?'<span class="bd">New</span>':'')+'</button></div><a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">Send feedback ›</a>';  
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
   h+=foot([]);
   V.innerHTML=h;window.scrollTo(0,0);ntCard();

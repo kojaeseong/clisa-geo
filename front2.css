@@ -238,3 +238,13 @@ html[data-theme="dark"] body .td-gs:not(#_z) button.on{background:#1F4FD8!import
 .td-fc:not(.mv-open) > a.td-x{display:none!important}
 .td-fc > button.td-mv{align-self:flex-start;margin:10px 0 0;padding:0;border:0;background:none;font:600 13.5px var(--sans,inherit);color:var(--acc,#1d4ed8);cursor:pointer}
 .td-fc > button.td-mv:hover{text-decoration:underline}
+/* 2026-11-19 대통령님 결재: 정세 브리핑 칸 아래 특집 한 줄과 지난 특집 펼치기 */
+.td-fts{margin-top:18px;padding-top:14px;border-top:2px solid var(--line,#e5e7eb)}
+.td-ft{display:block;padding:4px 0 8px;color:inherit!important;text-decoration:none}
+.td-ft small{display:block;font-size:12.5px;font-weight:700;letter-spacing:.02em;color:#7A3E48;margin-bottom:4px}
+.td-ft b{display:block;font-size:16px;line-height:1.42;font-weight:700;letter-spacing:-.01em}
+.td-ft:hover b{text-decoration:underline}
+.td-fx{padding:8px 0;border-top:1px solid var(--line2,#eef0f3)}
+.td-fx b{font-size:14.5px;font-weight:600}
+.td-ftm{margin-top:6px;padding:0;border:0;background:none;font:600 13.5px var(--sans,inherit);color:var(--acc,#1d4ed8);cursor:pointer;align-self:flex-start}
+.td-ftm:hover{text-decoration:underline}

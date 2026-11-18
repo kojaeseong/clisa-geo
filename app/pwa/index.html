@@ -230,7 +230,8 @@ function instUI(){var el=document.getElementById('inst');if(!el)return;if(standa
 addEventListener('beforeinstallprompt',function(ev){ev.preventDefault();DP=ev;instUI()});
 addEventListener('appinstalled',function(){DP=null;instUI()});
 function ls(k,d){try{var x=localStorage.getItem('clisa.'+k);return x==null?d:JSON.parse(x)}catch(e){return d}}
-function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}} function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}  /* 2026-11-16 대통령님 결재: 주간 정세 요약 새 판을 열기 전까지 단추에 New */ var LSN_ON='듣기 ▶',LSN_OFF='멈춤 ■'; /* 2026-11-16 대통령님: 정세 브리핑·주간 정세 요약 듣기(기기 내장 음성). 홈페이지(아카데미) 듣기와 같게: 읽는 문장 표시·화면 가운데로·중간을 누르면 거기서부터·읽는 동안 화면 꺼짐 막기 */
+function ss(k,v){try{localStorage.setItem('clisa.'+k,JSON.stringify(v))}catch(e){}} function ftNew(){var F=DATA.feat||[];return !!(F.length&&ls('ftseen','')!==F[0].date)}
+function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0].t)}  /* 2026-11-16 대통령님 결재: 주간 정세 요약 새 판을 열기 전까지 단추에 New */ var LSN_ON='듣기 ▶',LSN_OFF='멈춤 ■'; /* 2026-11-16 대통령님: 정세 브리핑·주간 정세 요약 듣기(기기 내장 음성). 홈페이지(아카데미) 듣기와 같게: 읽는 문장 표시·화면 가운데로·중간을 누르면 거기서부터·읽는 동안 화면 꺼짐 막기 */
  var LS={q:null,pos:0,on:false,used:false,cur:null,gen:0,hold:0,wl:null,wp:false},LSEL='.bar h1,#v .q,#v .lead,#v .msg .h,#v .msg .t,#v .card.dg h2,#v .card.dg b,#v .card.dg p';
  var CGT={q:'의회는 이 판을 어떻게 막거나 밀고 있나',sub:'의회의 쟁점과 찬반 발언',st:'현재 단계',v:'표 계산',n:'다음 절차와 시한',y:'찬성',no:'반대',src:'원문 ↗',more:'본회의 발언 더 보기'};  /* 2026-11-16 대통령님 결재: 앱에서 의회 쟁점과 의원 발언 */
  function cgCards(L){return '<div class="cgw"><div class="cgl">'+lsnBtn('.cgw')+'</div>'+L.map(function(c){var Y=c.q.filter(function(q){return q[0]==='yes'}),N=c.q.filter(function(q){return q[0]==='no'});
@@ -311,7 +312,7 @@ function home(){
   h+='<button class="ap" data-open="fc"><span class="ic" style="background:#0B2A86">전망</span><span class="lb">바뀐 전망</span>'+badge(fcChanged().length)+'</button>';
   h+='<button class="ap" data-open="lens"><span class="ic" style="background:#6B4E2E">틀</span><span class="lb">세계를 보는 틀</span></button>';
   h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">요약</span><span class="lb">주간 정세 요약</span>'+(dgNew()?'<span class="bd">New</span>':'')+'</button>';
-  h+='<button class="ap" data-open="msg"><span class="ic" style="background:#3D5A80">의견</span><span class="lb">운영자에게 보내기</span></button></div>';
+  h+='<button class="ap" data-open="ft"><span class="ic" style="background:#7A3E48">특집</span><span class="lb">특집</span>'+(ftNew()?'<span class="bd">New</span>':'')+'</button></div><a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">의견을 운영자에게 보내기 ›</a>';  /* 2026-11-19 대통령님 결재: 운영자에게 보내기 단추 → 특집(보내기는 화면 끝 줄로) */
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
   h+=foot([]);
   V.innerHTML=h;window.scrollTo(0,0);ntCard();
