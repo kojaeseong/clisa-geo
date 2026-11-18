@@ -307,7 +307,7 @@ function home(){
   h+='<div class="tools">';
   h+='<button class="ap" data-open="fc"><span class="ic one" style="background:#0B2A86">%</span><span class="lb">Changed forecasts</span>'+badge(fcChanged().length)+'</button>';
   h+='<button class="ap" data-open="lens"><span class="ic" style="background:#3B7A3B">Lens</span><span class="lb">Lenses on the world</span></button>';
-  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#2C3E66">Week</span><span class="lb">Weekly summary</span>'+(dgNew()?'<span class="bd">New</span>':'')+'</button>';
+  h+='<button class="ap" data-open="dg"><span class="ic" style="background:#B07800">Week</span><span class="lb">Weekly summary</span>'+(dgNew()?'<span class="bd">New</span>':'')+'</button>';
   h+='<button class="ap" data-open="ft"><span class="ic" style="background:#7A3E48">Read</span><span class="lb">Features</span>'+(ftNew()?'<span class="bd">New</span>':'')+'</button></div><a class="lk" style="display:block;text-align:center;margin:14px 0 4px" href="#msg">Send feedback ›</a>';  
   if(draft()&&'serviceWorker'in navigator&&'PushManager'in window&&'Notification'in window)h+='<section class="card nt" id="nt"></section>';
   h+=foot([]);
@@ -457,7 +457,7 @@ function lenses(){
   V.innerHTML=h;window.scrollTo(0,0);
 }
 function dgs(){
-  var D=DATA.digest,h=bar('Week','#2C3E66','Weekly summary'+(DATA.dgdate?', '+md(DATA.dgdate):''));  
+  var D=DATA.digest,h=bar('Week','#B07800','Weekly summary'+(DATA.dgdate?', '+md(DATA.dgdate):''));  
   var card=function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a?a[1]:'')+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>More</button></div>'};
   h+='<div class="qr"><div class="q">How the world moved this week</div>'+lsnBtn()+'</div><p class="lead">This week’s summary covers '+D.length+' issues. Here are the first three.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+' more issues ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
   h+=nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · where did this push the balance?','#i/'+d.a+'/pan']:null}),'dg');
