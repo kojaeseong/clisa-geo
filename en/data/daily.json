@@ -1,6 +1,185 @@
 {
  "issues": [
   {
+   "date": "2026-11-18",
+   "items": [
+    {
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "h": "Ukraine strikes Crimean Bridge for a second day; arch of road span collapses",
+     "fact": "Ukraine struck the Crimean Bridge for a second straight day, overnight on November 16–17 local time, and President Volodymyr Zelensky confirmed the attack. RFE/RL said images appeared to show that a 227-meter arch of the road span had fallen into the Kerch Strait and the rail section was damaged; Sergei Aksyonov, the Russian-installed head of Crimea, said the attack killed two people in Crimea.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.rferl.org/a/russia-ukraine-trade-strikes-on-key-bridges/33900167.html",
+      "https://www.criticalthreats.org/analysis/russian-offensive-campaign-assessment-november-17-2026"
+     ],
+     "loc": {
+      "lat": 45.31,
+      "lon": 36.51,
+      "place": "Kerch Strait (Crimea)",
+      "isos": [
+       "UKR",
+       "RUS"
+      ]
+     },
+     "pull": [
+      [
+       "ukraine",
+       "L",
+       "우크라이나의 후방 타격"
+      ]
+     ]
+    },
+    {
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "h": "After IRGC claims drone strike on U.S. radar in Bahrain, U.S. jets hit missile site on Iran's Qeshm Island",
+     "fact": "The IRGC claimed on November 17 that it attacked a U.S. radar at Bahrain's Sheikh Isa Air Base with drones; U.S. Central Command said the drones were intercepted without damage. The same day, a U.S. military official said U.S. fighter jets struck an IRGC missile launch site on Qeshm Island in self-defense, using precision munitions (The National, Iran International), and local Iranian authorities said there was no damage to residential areas or vital infrastructure.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "https://www.thenationalnews.com/news/us/2026/11/17/us-jets-strike-irgc-missile-launch-site-on-irans-qeshm-island-in-self-defence/",
+      "https://www.iranintl.com/en/202611172999"
+     ],
+     "loc": {
+      "lat": 26.85,
+      "lon": 55.9,
+      "place": "Qeshm Island (Iran)",
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     },
+     "pull": [
+      [
+       "iran",
+       "R",
+       "미국의 봉쇄·공습 압박"
+      ]
+     ]
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Putin arrives in Shenzhen for APEC; Kremlin says bilateral meeting with Trump also planned",
+     "fact": "Russian President Vladimir Putin arrived in Shenzhen, China, host of the Asia-Pacific Economic Cooperation (APEC) summit, on November 17 (TASS). The Kremlin announced on November 16 that Putin would hold talks with Chinese President Xi Jinping and a trilateral meeting with the Chinese and U.S. leaders, and that a bilateral meeting with U.S. President Donald Trump was also planned.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "src": [
+      "http://en.kremlin.ru/events/president/news/81268",
+      "https://tass.com/politics/2219925"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "Shenzhen (China)",
+      "isos": [
+       "RUS",
+       "CHN",
+       "USA"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": null,
+     "fp": [],
+     "h": "Trump holds Quad meeting in Manila, announces Quad maritime patrol aircraft drills",
+     "fact": "President Donald Trump arrived in Manila at 5:33 p.m. local time on November 17, held a Quad meeting with the leaders of Japan, Australia, and India, and announced that the Quad would conduct an exercise featuring maritime patrol aircraft (ABC News, AP). The same day he signed a joint trade statement with Thailand and said Thailand would remove tariffs on U.S. goods and buy $2.6 billion in U.S. farm products (AP reported the cuts would cover most goods).",
+     "fc": [],
+     "src": [
+      "https://abcnews.com/Politics/live-updates/trump-asia-trip-2026/?id=138187702",
+      "https://www.pbs.org/newshour/world/trump-arrives-in-philippines-to-kick-off-asia-trip-with-economic-deals-and-talks-with-allies"
+     ],
+     "loc": {
+      "lat": 14.6,
+      "lon": 120.98,
+      "place": "Manila (Philippines)",
+      "isos": [
+       "USA",
+       "PHL",
+       "JPN",
+       "AUS",
+       "IND",
+       "THA"
+      ]
+     },
+     "pull": []
+    }
+   ],
+   "more": [
+    {
+     "t": "Russia hit Kyiv's Southern and Northern bridges with ballistic missiles between November 16 and 17, according to President Zelensky, and the power company DTEK said strikes on the morning of November 17 left 700,000 households in Dnipropetrovsk Oblast without electricity (ISW).",
+     "src": [
+      "https://www.criticalthreats.org/analysis/russian-offensive-campaign-assessment-november-17-2026"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ]
+    },
+    {
+     "t": "Ukraine's General Staff claimed a strike on the Salavat petrochemical complex and its Unmanned Systems Forces claimed one on the Ufa refinery overnight on November 16–17, local time; Bashkortostan officials acknowledged the drone attack but said the plants were operating normally without significant damage (ISW).",
+     "src": [
+      "https://www.criticalthreats.org/analysis/russian-offensive-campaign-assessment-november-17-2026"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Responding on November 17 to a CNN report that Iran was planning a dirty bomb or chemical attack in Washington, Trump said that if so, “they will pay a price the likes of which no country has ever paid before” (AP).",
+     "src": [
+      "https://www.pbs.org/newshour/world/trump-arrives-in-philippines-to-kick-off-asia-trip-with-economic-deals-and-talks-with-allies"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Philippine President Ferdinand Marcos Jr. said on November 17, at the close of the ASEAN summit, that talks on a South China Sea code of conduct were 85 to 90 percent complete; Foreign Secretary Theresa Lazaro had said on November 15 that three of four key issues, including whether the code would be legally binding, remained open (Philstar).",
+     "src": [
+      "https://www.philstar.com/headlines/2026/11/17/2570791/asean-summit-day-3-trumps-late-arrival-handover-singapore"
+     ],
+     "case": null,
+     "fp": [
+      "scarborough",
+      "second_thomas",
+      "paracels"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-17",
    "items": [
     {
@@ -5978,214 +6157,6 @@
      "fp": [
       "iran-war"
      ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-14",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russian ballistic missiles hit Kyiv power plant and apartment building, killing two",
-     "fact": "Russia struck Kyiv with ballistic missiles at about 10:40 p.m. local time on October 13, hitting an apartment building in the Desnianskyi district and the grounds of the city's Combined Heat and Power Plant No. 4. The Kyiv Post reported early on October 14 that two people had been killed and 21 injured.",
-     "fc": [],
-     "src": [
-      "https://www.kyivpost.com/post/86971",
-      "https://www.president.gov.ua/en/news/volodimir-zelenskij-i-mark-karni-obgovorili-rosijskij-udar-b-106881"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "Kyiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russia says it intercepted 604 Ukrainian drones, 417 of them headed for Moscow",
-     "fact": "Russia's Defense Ministry said it intercepted 604 Ukrainian drones over 15 regions and the Sea of Azov between 8 p.m. on October 12 and 8 a.m. on October 13, Moscow time. Moscow Mayor Sergei Sobyanin said 417 of them were flying toward the Moscow area.",
-     "fc": [],
-     "src": [
-      "https://tass.com/emergencies/2201249",
-      "https://www.themoscowtimes.com/2026/10/13/ukraine-holds-off-refinery-attacks-for-second-day-after-trump-ceasefire-claim-a93957"
-     ],
-     "loc": {
-      "lat": 55.76,
-      "lon": 37.62,
-      "place": "Moscow (Russia)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Trump on whether Russia broke the energy ceasefire: \"I'll let you know about that later\"",
-     "fact": "Asked at the White House on October 13 whether Russia had violated the energy ceasefire, President Trump said he would let reporters know later, adding that Ukraine had hit many sites the day before. Ukrainian President Volodymyr Zelensky, he said, should focus on making a deal rather than talking about that.",
-     "fc": [],
-     "src": [
-      "https://kyivindependent.com/trump-refuses-to-accuse-russia-of-breaking-energy-ceasefire-says-ukraine-hit-sites-the-day-before/",
-      "https://tass.com/world/2201151"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "UKMTO says tanker and container ship hit by unidentified projectiles in Strait of Hormuz",
-     "fact": "The U.K. Maritime Trade Operations agency (UKMTO) said on October 13 that a tanker and a container ship had been struck by unidentified projectiles in the Strait of Hormuz. It said the exact time and the extent of the damage were unclear and that authorities were investigating.",
-     "fc": [],
-     "src": [
-      "https://gulfnews.com/world/mena/two-ships-struck-by-unknown-projectiles-in-strait-of-hormuz-1.500709543",
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
-     ],
-     "loc": {
-      "lat": 26.57,
-      "lon": 56.25,
-      "place": "Strait of Hormuz",
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi Aramco site in Dhahran hit; coalition blames Houthi ballistic missiles",
-     "fact": "The Saudi government said an Aramco administrative building in Dhahran, in the Eastern Province, was attacked early on October 14 local time, causing a limited fire and no injuries. The Saudi-led coalition claimed it had intercepted ballistic missiles fired by the Houthis at the province and that debris fell on a residential area of Dhahran.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/",
-      "https://www.foxnews.com/live-news/us-iran-war-saudi-arabia-trump-houthis-10-13-26"
-     ],
-     "loc": {
-      "lat": 26.29,
-      "lon": 50.11,
-      "place": "Dhahran (Saudi Arabia)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Saudi-led coalition strikes Houthi oil facilities in Sanaa, Dhamar and Saada",
-     "fact": "The Saudi-led coalition said it struck oil facilities in Yemen's Sanaa, Dhamar and Saada on October 13, arguing that they sustain the Houthis' war effort. It had earlier warned residents near a fuel facility in Sanaa to evacuate.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/",
-      "https://www.thenationalnews.com/news/mena/2026/10/13/saudi-led-coalition-and-houthis-trade-threats-over-oil-installations/"
-     ],
-     "loc": {
-      "lat": 15.37,
-      "lon": 44.19,
-      "place": "Sanaa (Yemen)",
-      "isos": [
-       "YEM",
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "IMF nudges its 2026 global growth forecast up 0.1 point to 3.1 percent",
-     "fact": "The International Monetary Fund on October 13 raised its forecast for global growth this year to 3.1 percent, 0.1 percentage point above its July estimate, and projected 3.4 percent for next year in the World Economic Outlook released at its annual meetings in Bangkok. It expects oil to average $96 a barrel this year, up nearly 41 percent.",
-     "fc": [],
-     "src": [
-      "https://abcnews.com/International/wireStory/imf-raises-forecast-world-growth-year-economies-slow-137214411",
-      "https://mediacenter.imf.org/news/imf---world-economic-outlook-annual-meetings--2026/s/22f94667-d194-473b-87b2-34c692b5a5a3"
-     ]
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "Congo's Ebola cases top 9,000, with 4,381 deaths",
-     "fact": "Health Ministry data showed 9,066 confirmed Ebola cases and 4,381 deaths in the Democratic Republic of the Congo as of October 13. The outbreak, caused by the Bundibugyo strain, for which there is no approved vaccine, has spread to seven provinces, and an imported case was earlier confirmed in Kenya.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/13/dr-congo-ebola-cases-pass-9000-as-efforts-to-curb-transmission-falter"
-     ],
-     "loc": {
-      "isos": [
-       "COD",
-       "KEN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Ukraine's Air Force said Russia launched five ballistic missiles, nine missile-drones and 108 attack drones between 6 p.m. on October 12 and the morning of October 13, and that 88 of the drones were shot down or neutralized.",
-     "src": [
-      "https://en.interfax.com.ua/news/general/1218947.html"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "In his evening address on October 13, Ukrainian President Volodymyr Zelensky said he had sent Trump envoy Steve Witkoff and Jared Kushner a proposal to meet in the coming days.",
-     "src": [
-      "https://www.president.gov.ua/en/news/budut-horoshi-rishennya-na-pidtrimku-ukrayini-na-comu-tizhni-106873"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Saudi Arabia's civil aviation authority extended the shutdown of Riyadh's King Khalid International Airport through October 17, and the U.S. State Department warned that Saudi airports could be attacked and urged particular caution when using them.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-saudi-arabia-houthi/"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Brent crude futures settled down 0.9 percent at $105.69 a barrel on October 13.",
-     "src": [
-      "https://www.foxnews.com/live-news/us-iran-war-saudi-arabia-trump-houthis-10-13-26"
-     ],
-     "fp": []
-    },
-    {
-     "t": "The Korean Central News Agency reported on October 13 that North Korean leader Kim Jong Un attended the October 11 dedication of the Second Economic Committee's National Defense Revolution Museum, marking the 81st anniversary of the Workers' Party's founding.",
-     "src": [
-      "https://koreanewsservice.com/revolutionary-activities/19323/"
-     ],
-     "fp": []
     }
    ]
   }
