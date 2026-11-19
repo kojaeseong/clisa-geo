@@ -1,6 +1,193 @@
 {
  "issues": [
   {
+   "date": "2026-11-19",
+   "items": [
+    {
+     "case": null,
+     "h": "트럼프·푸틴, 선전 APEC서 1년 3개월 만에 대면…19일 미·중·러 첫 3자 회담",
+     "fact": "도널드 트럼프 미국 대통령과 블라디미르 푸틴 러시아 대통령은 18일 중국 선전의 아시아태평양경제협력체(APEC) 만찬에서 각각 시진핑 국가주석과 악수한 뒤 함께 단체사진을 찍었고, 두 사람의 대면은 2025년 8월 이후 처음입니다(유로뉴스·AP). 같은 날 시진핑 주석은 푸틴 대통령과 회담했고, 세 정상의 첫 3자 회담은 19일로 예정됐습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "src": [
+      "https://www.euronews.com/2026/11/18/trump-arrives-in-china-for-unprecedented-trilateral-encounter-with-xi-and-putin",
+      "https://www.tribuneindia.com/news/apec-summit/ukrainians-are-not-in-room-dhruva-jaishankar-casts-doubt-on-outcomes-of-trump-xi-putin-trilateral-talks-in-shenzhen"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "USA",
+       "RUS",
+       "CHN"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": "iran",
+     "h": "사우디·카타르, 이란의 쿠웨이트·바레인 공격 규탄…카타르 \"위험한 확전\"",
+     "fact": "이란군은 18일 국영방송을 통해 쿠웨이트 알리 알살렘 공군기지의 패트리엇 방공체계 등을 드론으로 겨냥했다고 주장했고, 쿠웨이트와 바레인은 방공망으로 대응·요격했다고 밝혔습니다. 같은 날 사우디 외교부는 이 공격과 아랍에미리트 소유 유조선 공격을 규탄했고 카타르 외교부는 '위험한 확전'이라고 했으며, 미 중부사령부는 이번 주 공격으로 다친 미군은 없다고 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/18/kuwait-bahrain-face-new-iran-attacks-after-us-strike-on-qeshm-island",
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/"
+     ],
+     "loc": {
+      "lat": 29.35,
+      "lon": 47.52,
+      "place": "알리 알살렘 공군기지(쿠웨이트)",
+      "isos": [
+       "IRN",
+       "KWT",
+       "SAU",
+       "QAT"
+      ]
+     },
+     "pull": []
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 오데사 역사지구 공습…4명 사망·13명 부상",
+     "fact": "러시아는 18일 우크라이나 남부 오데사를 공습해 최소 4명이 숨지고 13명이 다쳤고, 올레흐 키페르 오데사주 행정수반은 세 차례 공격이 역사지구에 떨어졌다고 밝혔습니다(알자지라·AFP). 볼로디미르 젤렌스키 대통령은 구조대와 경찰이 도착한 뒤 다시 공격하는 '이중 타격'이 있었다고 비판했습니다.",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/18/russian-attacks-on-ukraine-kill-at-least-five-people"
+     ],
+     "loc": {
+      "lat": 46.48,
+      "lon": 30.73,
+      "place": "오데사(우크라이나)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     },
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ]
+    },
+    {
+     "case": "ukraine",
+     "h": "EU 집행위, 우크라이나에 2027년분 450억 유로 추가 대출 제안",
+     "fact": "유럽연합(EU) 집행위원회는 18일 우크라이나의 2027년 재정 부족분(집행위 추산 약 700억 유로)의 3분의 2를 메우기 위해 450억 유로를 추가로 빌려주는 안을 내놓았습니다(키이우인디펜던트). 군사 지원 250억 유로와 개혁 조건부 예산 지원 200억 유로이며, 우크라이나는 러시아의 배상을 받은 뒤에만 원금을 갚고 회원국 승인이 남았습니다.",
+     "fc": [
+      {
+       "id": "f73",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "src": [
+      "https://kyivindependent.com/european-commission-approves-proposal-to-provide-additional-49-5-billion-to-ukraine-2/",
+      "https://www.aljazeera.com/news/2026/11/18/russian-attacks-on-ukraine-kill-at-least-five-people"
+     ],
+     "loc": {
+      "lat": 50.85,
+      "lon": 4.35,
+      "place": "브뤼셀(벨기에)",
+      "isos": [
+       "UKR"
+      ]
+     },
+     "pull": [
+      [
+       "ukraine",
+       "L",
+       "유럽의 자금과 보증"
+      ]
+     ]
+    }
+   ],
+   "more": [
+    {
+     "t": "러시아 교통부는 19일 새벽 드론 공격으로 크림대교 철도 구간의 열차 운행을 일시 중단했다고 밝혔고(타스), 세르게이 악쇼노프 크림 수반(러시아 임명)은 다리가 다시 공격받았다고 확인했습니다(키이우인디펜던트).",
+     "src": [
+      "https://tass.com/emergencies/2220945",
+      "https://kyivindependent.com/ukrainian-forces-once-more-hit-russias-crimean-bridge-days-after-devastating-strike/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "젤렌스키 대통령은 18일 우크라이나의 방공과 에너지 부문 지원을 더 얻기 위한 '의지의 연합' 회의가 19일 베를린에서 열린다고 밝혔습니다(키이우인디펜던트).",
+     "src": [
+      "https://www.president.gov.ua/en/news/gotuyemo-novi-paketi-pidtrimki-dlya-ukrayini-dlya-nashoyi-ob-107389",
+      "https://kyivindependent.com/russia-will-achieve-none-of-its-objectives-zelensky-details-upcoming-allies-meeting/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "라파엘 그로시 국제원자력기구(IAEA) 사무총장은 18일 빈에서 열린 이사회 모두발언에서 북한이 9월 중순 이후 영변 우라늄 농축시설의 증축 건물을 지어 10월 말 외관상 완공됐다며 농축 프로그램 확대가 '심각한 우려'라고 말했습니다(NK뉴스).",
+     "src": [
+      "https://www.nknews.org/2026/11/un-watchdog-voices-serious-concern-over-upgrades-at-north-korean-nuclear-site/"
+     ],
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "pull": []
+    },
+    {
+     "t": "김정은 국무위원장은 17~18일 함경남도의 김정숙해군대학 등을 찾았고, 18일 동해안에서 '사악한 적들'의 해군 활동을 비난했다고 조선중앙통신이 전했습니다(NK뉴스).",
+     "src": [
+      "https://www.nknews.org/2026/11/kim-jong-un-slams-enemy-naval-activities-amid-trumps-calls-to-meet-in-china/"
+     ],
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "pull": []
+    },
+    {
+     "t": "유엔 인권사무소는 2026년 1~10월 수단에서 민간인이 최소 2,230명 숨졌고 그 가운데 1,630명 넘게 드론 공격으로 숨졌으며, 확인된 사망의 3분의 2 이상이 코르도판에서 나왔다고 밝혔습니다(올아프리카).",
+     "src": [
+      "https://allafrica.com/stories/202611180083.html"
+     ],
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-18",
    "items": [
     {
@@ -5987,176 +6174,6 @@
       "https://www.globaltimes.cn/page/202610/1372328.shtml"
      ],
      "fp": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-15",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "우크라 공군, 러 미사일 39발·드론 128대 집계…60만 명 정전",
-     "fact": "우크라이나 공군은 키이우 시각 13일 오후 6시부터 14일 아침까지 러시아가 미사일 39발과 드론 128대를 쏴 미사일 4발과 드론 115대를 격추·무력화했다고 밝혔습니다. 젤렌스키 대통령은 최소 60만 명이 전기를 잃었다고 했습니다.",
-     "fc": [],
-     "src": [
-      "https://en.interfax.com.ua/news/general/1219699.html",
-      "https://abcnews.com/International/600000-power-ukraine-russia-launches-missile-drone-attack/story?id=137248732"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "키이우(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러 국방부, 키이우·하르키우 일대 발전소 6곳 타격 주장",
-     "fact": "러시아 국방부는 14일 지상발사 정밀무기와 장거리 드론으로 키이우 일대의 제4·5·6열병합발전소와 트리필랴 화력발전소, 하르키우 일대 발전소 2곳, 키이우의 데이터센터를 타격했다고 발표했습니다. 우크라이나 군과 군수산업을 지원하는 시설이라고 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://tass.com/defense/2201755"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "북한, 동해서 잠수함발사 전략순항미사일 2종 시험발사",
-     "fact": "조선중앙통신은 15일 북한이 14일 동해상에서 잠수함발사 전략순항미사일 2종을 시험발사했다고 보도했습니다. 해군의 임무 수행 능력과 전쟁억제력의 신뢰성을 검증하려는 것이며 주변국 안보에 부정적 영향은 없었다고 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://theprint.in/world/north-korea-says-it-tested-submarine-launched-cruise-missiles-kcna-says/3072146/"
-     ],
-     "loc": {
-      "isos": [
-       "PRK"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "싱가포르 선적 컨테이너선, 호르무즈서 발사체 맞고 침몰",
-     "fact": "싱가포르 해사항만청(MPA)은 14일 호르무즈 해협에서 13일 발사체에 맞아 불이 난 자국 선적 컨테이너선 GFS 프라이드호가 침몰했고 선원 21명은 모두 대피했다고 밝혔습니다. 이란 혁명수비대는 컨테이너선 한 척이 기뢰에 부딪혀 가라앉았다고 주장했으나 배 이름은 밝히지 않았습니다.",
-     "fc": [],
-     "src": [
-      "https://gcaptain.com/containership-sinks-as-hormuz-attacks-spiral-out-of-control/",
-      "https://www.seatrade-maritime.com/security/iran-claims-mine-sank-container-ship-amid-fresh-hormuz-attacks"
-     ],
-     "loc": {
-      "lat": 26.57,
-      "lon": 56.25,
-      "place": "호르무즈 해협",
-      "isos": [
-       "IRN",
-       "SGP",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "후티, 리야드 킹칼리드 공항 겨냥 주장…동맹군은 탄도미사일 요격",
-     "fact": "사우디 주도 동맹군의 투르키 알말리키 대변인은 14일 후티가 리야드를 향해 쏜 탄도미사일을 요격해 파괴했다고 밝혔습니다. 후티의 야흐야 사리 대변인은 킹칼리드 국제공항을 겨냥했다고 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/",
-      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
-     ],
-     "loc": {
-      "lat": 24.71,
-      "lon": 46.68,
-      "place": "리야드(사우디아라비아)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "미국 9월 소비자물가 3.7% 상승…휘발유는 34.2%",
-     "fact": "미국 노동통계국은 14일 9월 소비자물가가 1년 전보다 3.7% 올랐다고 발표했습니다. 에너지는 20.4%, 휘발유는 34.2% 올랐고, 식품과 에너지를 뺀 근원 물가는 2.6% 상승했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.bls.gov/news.release/archives/cpi_10142026.htm"
-     ],
-     "loc": {
-      "isos": [
-       "USA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "러시아 국방부는 13일 밤부터 14일 아침 사이 러시아 여러 지역과 크림, 아조프해 상공에서 우크라이나 드론 902대를 격추했다고 밝혔습니다.",
-     "src": [
-      "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "젤렌스키 대통령은 14일 런던에서 앤디 버넘 영국 총리를 만났고, 버넘 총리는 영국산 방공무기의 인도를 앞당기겠다고 밝혔습니다.",
-     "src": [
-      "https://www.cp24.com/news/world/2026/10/14/zelenskyy-says-russia-keeps-striking-ukraines-energy-sites-despite-trump-ceasefire-push/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "젤렌스키 대통령의 기술 고문 세르히 베스크레스노우는 스페이스X가 이동 중인 스타링크 단말기에 속도 제한을 걸어 시속 160km 이상에서 군용 단말기가 작동하지 않게 됐고 작전에 차질이 생겼다고 밝혔습니다.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/14/massive-russian-attack-on-ukraine-kills-at-least-six-cuts-power-in-kyiv"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "로이터는 이란 관리들을 인용해 이란이 열흘쯤 전부터 유가를 높게 유지하고 미국 중간선거에 영향을 주려고 호르무즈 해협 선박 공격의 전술을 바꿨다고 보도했습니다.",
-     "src": [
-      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "네타냐후 이스라엘 총리는 14일 군 라디오 인터뷰에서 27일 총선 전에 이란을 선제공격하는 것은 이스라엘에 좋지 않다고 말했습니다.",
-     "src": [
-      "https://www.foxnews.com/live-news/us-iran-war-donald-trump-oil-nuclear-sites-hormuz-strait-october-14"
-     ],
-     "fp": [
-      "iran-war"
-     ]
     }
    ]
   }
