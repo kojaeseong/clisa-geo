@@ -1,6 +1,257 @@
 {
  "issues": [
   {
+   "date": "2026-11-20",
+   "items": [
+    {
+     "case": null,
+     "h": "미·중·러 정상, 선전서 첫 3자 회담…핵 위험 대화·석유 공급 확대 공동성명",
+     "fact": "트럼프 미국 대통령, 시진핑 중국 국가주석, 푸틴 러시아 대통령은 19일 선전에서 세 나라 현직 정상의 첫 3자 회담을 했습니다(RFE/RL). 크렘린과 백악관이 공개한 공동성명은 핵전쟁에 승자가 없다는 원칙, 핵 위험 감소 대화, 석유·가스 공급 확대, 유엔 개혁을 담았으나 이란 전쟁은 언급하지 않았습니다(CBS·RFE/RL).",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "none"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.cbsnews.com/news/trump-xi-putin-china-apec-summit/",
+      "https://www.rferl.org/a/trump-xi-putin-summit-four-key-takeaways/33902100.html"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "USA",
+       "CHN",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "푸틴, 크림대교 공격 뒤 합의 거부…유럽 특사 모스크바 초청",
+     "fact": "블라디미르 푸틴 대통령은 19일 선전에서 크림대교 공격 뒤에는 합의하지 않고 대응하겠다며 러시아가 검토하던 부분 휴전 구상을 거둬들였다고 말했습니다(타스·메두자). 그는 유럽 없이 유럽 안보를 논의하는 것은 무의미하다며 유럽 특사들이 모스크바에 와서 입장을 밝히면 우크라이나와의 대화 형식을 정하겠다고 했습니다(타스·로이터).",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://tass.com/politics/2221989",
+      "https://meduza.io/amp/en/news/2026/11/19/trump-tells-european-leaders-that-putin-wants-to-end-the-war-in-ukraine-but-putin-says-moscow-won-t-negotiate-with-kyiv-after-crimean-bridge-strikes",
+      "https://www.themoscowtimes.com/2026/11/19/us-china-can-help-end-ukraine-war-trump-tells-xi-before-trilateral-with-putin-a94307"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "베를린 '의지의 연합' 회의에 미 특사단 참석…쿠슈너, 유럽 협상 참여 지지",
+     "fact": "독일·프랑스·영국이 주최한 '의지의 연합' 회의가 19일 베를린 총리실에서 열렸고 재러드 쿠슈너·스티브 위트코프 미국 특사가 참석했으며, 쿠슈너는 유럽이 협상 테이블에 앉는 것이 종전에 필수라고 말했습니다(알자지라). 그는 러시아가 NATO 제5조를 본뜬 우크라이나 안전보장에 동의했고 포로 수천 명이 몇 주 안에 귀환한다고 주장했으나 러시아의 확인은 없습니다(유나이티드24).",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/19/european-leaders-unite-in-berlin-to-reaffirm-support-for-ukraine",
+      "https://united24media.com/war-in-ukraine/coalition-of-the-willing-agrees-to-new-support-packages-for-ukraine-zelenskyy-says-24544"
+     ],
+     "loc": {
+      "lat": 52.52,
+      "lon": 13.37,
+      "place": "베를린(독일)",
+      "isos": [
+       "DEU",
+       "USA",
+       "UKR",
+       "FRA",
+       "GBR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "후티 미사일, 리야드 국부펀드 빌딩 타격…사우디 \"물적 피해\"",
+     "fact": "사우디 당국은 19일 새벽 후티 반군의 공격으로 리야드 킹압둘라 금융지구의 국부펀드(PIF) 빌딩에 물적 피해가 났고 부상자는 없다고 밝혔습니다(CBS·더내셔널). 후티는 18일 리야드 공항과 금융 중심지를 순항미사일로 공격했다고 주장했고, 사우디 주도 연합군은 18일 예멘 후티 장악 지역의 60개 목표를 17일부터 공습했다고 발표했습니다(CBS).",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/",
+      "https://www.thenationalnews.com/news/gulf/2026/11/19/saudi-sovereign-wealth-fund-tower-in-riyadh-damaged-in-houthi-strike/"
+     ],
+     "loc": {
+      "lat": 24.76,
+      "lon": 46.64,
+      "place": "리야드(사우디아라비아)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "트럼프 \"이란 결정 서두르지 않는다\"…새해 이후로 시점 언급",
+     "fact": "트럼프 대통령은 19일 중국에서 귀국하는 길에 이스라엘 채널12 인터뷰에서 이란에 관한 결정을 서두르지 않는다며 새해가 시작된 뒤를 보자고 말했습니다(CBS). 앞서 18일 미 항모 조지워싱턴함이 중부사령부 구역을 떠나 중동에는 조지 H.W. 부시함과 시어도어 루스벨트함이 남았습니다(CBS·ABC).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "L",
+       "미국의 정치 시계"
+      ]
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/",
+      "https://abcnews.com/International/live-updates/iran-live-updates-tanker-attacked-strait-hormuz-ukmto/?id=138171071"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 키이우에 낮 시간 드론 공격…오스트리아·네덜란드 대사관 손상",
+     "fact": "러시아는 19일 낮 키이우를 드론으로 거듭 공격해 1명이 숨지고 최소 4명이 다쳤으며, 오스트리아·네덜란드 대사관 건물과 성 볼로디미르 대성당 창문이 손상됐다고 AFP가 전했습니다. 카야 칼라스 EU 외교안보 고위대표는 러시아 대사를 초치하겠다고 밝혔습니다(유나이티드24).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://www.freemalaysiatoday.com/category/world/2026/11/20/russian-strikes-on-kyiv-kill-one-damage-dutch-austrian-embassies",
+      "https://united24media.com/war-in-ukraine/eu-to-summon-russian-envoy-after-strikes-damage-embassies-in-kyiv-24545",
+      "https://www.africanews.com/amp/2026/11/20/ukraine-russian-strikes-damage-austrian-and-dutch-embassies-in-kyiv/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "NLD"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "다카이치·시진핑, 선전 APEC서 정상회담 없이 악수만",
+     "fact": "선전 APEC 정상회의 기간 다카이치 사나에 일본 총리와 시진핑 중국 국가주석의 양자 회담은 열리지 않았고, 일본 정부 관계자는 정식 회담이 어렵다고 말했다고 요미우리신문이 전했습니다. 두 정상은 18일 만찬에 앞선 행사에서 악수했으나 시 주석은 다카이치 총리의 말에 답하지 않은 것으로 보였습니다.",
+     "fc": [
+      {
+       "id": "f12",
+       "e": "down"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://asianews.network/mending-japan-china-ties-looks-to-be-a-long-battle-president-xi-briefly-civil-to-pm-takaichi-at-apec-summit/"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "선전(중국)",
+      "isos": [
+       "JPN",
+       "CHN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "이란 외무부 대변인은 19일 이란이 화학무기를 개발하고 있다는 주장을 거짓이라며 일축했습니다(타임스오브이스라엘).",
+     "src": [
+      "https://www.timesofisrael.com/liveblog-november-19-2026/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "레자 나자피 빈 주재 국제기구 이란 대사는 19일 폭격을 받는 동안에는 국제원자력기구(IAEA)와 무조건적·무제한 협력을 하지 않고 사안별로 검토하겠다고 말했습니다(CBS).",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "아서 밀러 미 국방부 부감사관은 19일 2월 이후 이란 전쟁 비용이 480억 달러를 넘었다고 밝혔습니다(CBS).",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-19",
    "items": [
     {
@@ -5992,188 +6243,6 @@
      "fp": [
       "rus-ukr"
      ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-16",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "우크라이나, 러 정유시설 공격 재개…랴잔 정유공장 화재",
-     "fact": "젤렌스키 대통령은 15일 공개된 파이낸셜타임스 인터뷰에서 러시아 정유시설 공격 제한을 풀었다고 밝혔습니다. 러시아 국방부는 15일 랴잔 정유공장을 노린 순항미사일 4발과 드론 69대를 격추했다고 발표했고, 말코프 랴잔 주지사는 정유공장에 불이 났다고 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour",
-      "https://tass.com/emergencies/2202339",
-      "https://en.iz.ru/en/2184538/2026-10-15/russian-defense-ministry-has-revealed-details-mass-attack-ukrainian-armed-forces-ryazan-oil-refinery"
-     ],
-     "loc": {
-      "lat": 54.63,
-      "lon": 39.74,
-      "place": "랴잔(러시아)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키, 러 드론 850대 넘게 공격 밝혀…키로보흐라드주 3명 사망",
-     "fact": "젤렌스키 대통령은 15일 러시아가 전날 0시부터 이날 오전 9시까지 공격 드론 850대 넘게 쏴 수십 곳의 도시와 마을을 공격했다고 밝혔습니다. 우크라이나 비상사태청은 키로보흐라드주에서 10시간 넘는 드론 공격으로 3명이 숨지고 6명이 다쳤다고 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://united24media.com/war-in-ukraine/russia-bombards-ukraine-with-over-850-shahed-drones-in-relentless-day-and-night-attack-23473",
-      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "이란군, 호르무즈 해협 완전 봉쇄 주장…'위반' 유조선 화재 발표",
-     "fact": "이란군 해군은 15일 추적 장치를 끈 채 호르무즈 해협 동쪽 '금지 수역'을 지나려던 '위반' 유조선에 불이 났다고 발표했으나 배 이름과 화재 원인은 밝히지 않았습니다. 하비볼라 사야리 이란군 조정 부참모총장은 같은 날 해협이 완전히 닫혔다고 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.thehawk.in/news/world/irans-navy-says-violating-oil-tanker-caught-fire-east-of-hormuz-strait",
-      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "후티, 아덴 대통령궁에 미사일…5명 사망",
-     "fact": "알에르야니 예멘 공보장관은 15일 후티가 아덴의 마아시크 대통령궁에 미사일 5발을 쐈다고 밝혔고, 보건장관은 5명이 숨지고 16명이 다쳤다고 했습니다. 후티는 아덴의 사우디 군사작전 본부를 겨냥했다고 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/15/houthis-target-yemens-presidential-palace-in-aden-with-missiles",
-      "https://www.abc.net.au/news/2026-10-16/houthis-attack-aden-killing-five-and-wounding-16/107268204"
-     ],
-     "loc": {
-      "lat": 12.78,
-      "lon": 45.04,
-      "place": "아덴(예멘)",
-      "isos": [
-       "YEM",
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "라브로프, 우크라 재무장 돕는 휴전은 없다는 입장 밝혀",
-     "fact": "라브로프 러시아 외무장관은 15일 바쿠 기자회견에서 특별군사작전의 목표와 우크라이나 분쟁에 대한 러시아의 입장은 바뀌지 않았다고 말했습니다. 러시아 매체들은 그가 우크라이나를 재무장시킬 휴전은 없을 것이라고 말했다고 전했습니다.",
-     "fc": [],
-     "src": [
-      "https://en.apa.az/cis-countries/lavrov-zelenskyy-is-challenging-trump-not-interested-in-elections-530293",
-      "https://newsukraine.rbc.ua/news/no-ceasefire-russia-makes-another-statement-1792064988.html"
-     ],
-     "loc": {
-      "lat": 40.41,
-      "lon": 49.87,
-      "place": "바쿠(아제르바이잔)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "국방부 대변인, 요건 계속 바뀌면 전작권 전환 어렵다는 개인 견해 밝혀",
-     "fact": "국방부 대변인은 15일 정례 브리핑에서 요건이 계속 바뀌면 전시작전통제권은 전환될 수 없을 것이라며 개인 견해라고 밝혔습니다. 브런슨 주한미군사령관은 14일 워싱턴에서 조건과 계획이 바뀌어 새 기준을 지켜야 한다고 말했습니다.",
-     "fc": [
-      {
-       "id": "f55",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/15/south-korea-official-says-shifting-goalposts-could-block-wartime-command-transfer-from-us"
-     ],
-     "loc": {
-      "lat": 37.54,
-      "lon": 126.98,
-      "place": "서울(한국)",
-      "isos": [
-       "KOR",
-       "USA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "우크라이나 공군은 15일 오후 6시부터 16일 아침까지 러시아가 드론 149대를 쐈고 그 가운데 114대를 격추하거나 무력화했으며 24곳이 피격됐다고 밝혔습니다.",
-     "src": [
-      "https://unn.ua/en/news/most-of-the-drones-launched-by-the-russian-federation-overnight-were-jet-powered-air-defense-neutralized-slightly-more-than-half"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "푸틴 대통령은 15일 기업인 단체 '델로바야 로시야' 대회에서 우크라이나가 와일드베리스·오존 물류창고를 먼저 공격했고 러시아가 대응하기 시작했다고 주장했습니다.",
-     "src": [
-      "https://meduza.io/en/news/2026/10/15/they-started-it-we-re-responding-putin-warns-ukraine-over-strikes-on-energy-facilities-warehouses-and-data-centers"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "우크라이나 국방 당국자들은 스타링크 군용판 스타실드가 하루 넘는 제한 끝에 이동 중인 단말기에서 다시 작동한다고 밝혔으나, 워싱턴 주재 우크라이나 외교 책임자는 속도가 완전히 회복되지는 않았다고 말했습니다.",
-     "src": [
-      "https://www.sofx.com/ukraine-resumes-refinery-strikes-as-starshield-service-returns-rejecting-energy-ceasefire/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "브뤼셀 유럽연합 정상회의는 15일 첫날 차기 장기 예산을 놓고 합의하지 못했고, 16일 둘째 날 젤렌스키 대통령과 우크라이나 지원을 논의합니다.",
-     "src": [
-      "https://www.euronews.com/2026/10/16/eu-summit-leaders-to-rally-behind-zelenskyy-amid-bitter-row-with-trump"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "중국 상무부 허야둥 대변인은 15일 유럽행 희토류 수출 허가의 심사·승인을 계속 신속히 처리하겠다며 유럽연합이 중국 기업의 이중용도 품목 허가 문제 해결에 호응하기를 희망한다고 말했습니다.",
-     "src": [
-      "https://www.globaltimes.cn/page/202610/1372328.shtml"
-     ],
-     "fp": []
     }
    ]
   }

@@ -1,6 +1,257 @@
 {
  "issues": [
   {
+   "date": "2026-11-20",
+   "items": [
+    {
+     "case": null,
+     "h": "Trump, Xi and Putin hold first three-way summit in Shenzhen; joint statement backs nuclear risk talks, more oil supply",
+     "fact": "President Donald Trump, Chinese President Xi Jinping and Russian President Vladimir Putin met in Shenzhen on November 19, the first trilateral meeting among the three countries' sitting leaders (RFE/RL). The joint statement, released by the Kremlin and the White House, included the principle that there are no winners in a nuclear war, dialogue on reducing nuclear risks, expanded oil and gas supplies and UN reform, but made no mention of the Iran war (CBS, RFE/RL).",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "none"
+      },
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.cbsnews.com/news/trump-xi-putin-china-apec-summit/",
+      "https://www.rferl.org/a/trump-xi-putin-summit-four-key-takeaways/33902100.html"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "Shenzhen (China)",
+      "isos": [
+       "USA",
+       "CHN",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Putin rules out deals after Crimean Bridge strikes, invites European envoys to Moscow",
+     "fact": "Putin said in Shenzhen on November 19 that after the strikes on the Crimean Bridge, Russia would respond rather than make agreements, and that it had shelved a partial ceasefire plan it had been weighing (TASS, Meduza). He said discussing European security without Europeans was pointless and that Russia would decide the format of dialogue with Ukraine once European envoys came to Moscow and set out their position (TASS, Reuters).",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://tass.com/politics/2221989",
+      "https://meduza.io/amp/en/news/2026/11/19/trump-tells-european-leaders-that-putin-wants-to-end-the-war-in-ukraine-but-putin-says-moscow-won-t-negotiate-with-kyiv-after-crimean-bridge-strikes",
+      "https://www.themoscowtimes.com/2026/11/19/us-china-can-help-end-ukraine-war-trump-tells-xi-before-trilateral-with-putin-a94307"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "Shenzhen (China)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "U.S. envoys join Coalition of the Willing meeting in Berlin; Kushner backs European seat at the table",
+     "fact": "Germany, France and the United Kingdom hosted a Coalition of the Willing meeting at the Chancellery in Berlin on November 19, attended by U.S. envoys Jared Kushner and Steve Witkoff. Kushner said, “We do believe that Russia having Europe at the table will be essential for ending the war” (Al Jazeera). He also claimed Russia had agreed to security guarantees for Ukraine modeled on NATO's Article 5 and that thousands of prisoners of war would return in the coming weeks; Russia has not confirmed this (United24).",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/19/european-leaders-unite-in-berlin-to-reaffirm-support-for-ukraine",
+      "https://united24media.com/war-in-ukraine/coalition-of-the-willing-agrees-to-new-support-packages-for-ukraine-zelenskyy-says-24544"
+     ],
+     "loc": {
+      "lat": 52.52,
+      "lon": 13.37,
+      "place": "Berlin (Germany)",
+      "isos": [
+       "DEU",
+       "USA",
+       "UKR",
+       "FRA",
+       "GBR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Houthi missiles hit Saudi wealth fund tower in Riyadh; Saudi Arabia reports “material damage”",
+     "fact": "Saudi authorities said a Houthi attack before dawn on November 19 caused material damage to the Public Investment Fund (PIF) tower in Riyadh's King Abdullah Financial District, with no injuries (CBS, The National). The Houthis claimed on November 18 that they had fired cruise missiles at Riyadh's airport and financial center, and the Saudi-led coalition said the same day that it had struck 60 targets in Houthi-held areas of Yemen since November 17 (CBS).",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/",
+      "https://www.thenationalnews.com/news/gulf/2026/11/19/saudi-sovereign-wealth-fund-tower-in-riyadh-damaged-in-houthi-strike/"
+     ],
+     "loc": {
+      "lat": 24.76,
+      "lon": 46.64,
+      "place": "Riyadh (Saudi Arabia)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Trump says he is “not rushing” on Iran, points to the new year",
+     "fact": "Returning from China on November 19, Trump told Israel's Channel 12, “I'm not rushing to make any decisions on Iran,” adding that he would see what happens after the new year starts (CBS). A day earlier, the aircraft carrier USS George Washington left the U.S. Central Command area of responsibility, leaving the USS George H.W. Bush and USS Theodore Roosevelt in the Middle East (CBS, ABC).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "L",
+       "미국의 정치 시계"
+      ]
+     ],
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/",
+      "https://abcnews.com/International/live-updates/iran-live-updates-tanker-attacked-strait-hormuz-ukmto/?id=138171071"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian daytime drone attacks on Kyiv damage Austrian and Dutch embassies",
+     "fact": "Repeated Russian drone attacks on Kyiv during the day on November 19 killed one person, injured at least four and damaged the Austrian and Dutch embassy buildings and the windows of St. Volodymyr's Cathedral, AFP reported. EU foreign policy chief Kaja Kallas said the bloc would summon Russia's envoy (United24).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://www.freemalaysiatoday.com/category/world/2026/11/20/russian-strikes-on-kyiv-kill-one-damage-dutch-austrian-embassies",
+      "https://united24media.com/war-in-ukraine/eu-to-summon-russian-envoy-after-strikes-damage-embassies-in-kyiv-24545",
+      "https://www.africanews.com/amp/2026/11/20/ukraine-russian-strikes-damage-austrian-and-dutch-embassies-in-kyiv/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "RUS",
+       "UKR",
+       "NLD"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Takaichi and Xi shake hands but hold no summit at APEC in Shenzhen",
+     "fact": "Japanese Prime Minister Sanae Takaichi and Chinese President Xi Jinping held no bilateral meeting during the APEC summit in Shenzhen, and a Japanese government official said formal talks would be difficult, the Yomiuri Shimbun reported. The two leaders shook hands at an event before the November 18 dinner, but Xi did not appear to respond when Takaichi spoke to him.",
+     "fc": [
+      {
+       "id": "f12",
+       "e": "down"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://asianews.network/mending-japan-china-ties-looks-to-be-a-long-battle-president-xi-briefly-civil-to-pm-takaichi-at-apec-summit/"
+     ],
+     "loc": {
+      "lat": 22.54,
+      "lon": 114.06,
+      "place": "Shenzhen (China)",
+      "isos": [
+       "JPN",
+       "CHN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "On November 19, Iran's foreign ministry spokesman dismissed as false allegations that Iran is developing chemical weapons (Times of Israel).",
+     "src": [
+      "https://www.timesofisrael.com/liveblog-november-19-2026/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Reza Najafi, Iran's ambassador to international organizations in Vienna, said on November 19 that Iran would not cooperate with the International Atomic Energy Agency (IAEA) unconditionally and without limits while it is under bombardment, and would instead decide case by case (CBS).",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Arthur Miller, the Pentagon's deputy comptroller, said on November 19 that the Iran war has cost more than $48 billion since February (CBS).",
+     "src": [
+      "https://www.cbsnews.com/live-updates/iran-war-us-gulf-retaliation-strikes-strait-of-hormuz/"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-19",
    "items": [
     {
@@ -5992,188 +6243,6 @@
      "fp": [
       "rus-ukr"
      ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-16",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Ukraine resumes strikes on Russian refineries; fire breaks out at Ryazan plant",
-     "fact": "President Volodymyr Zelensky told the Financial Times, in an interview published October 15, that he had lifted the restriction on striking Russian oil refineries. Russia's Defense Ministry said the same day that it shot down four cruise missiles and 69 drones aimed at the Ryazan refinery, and Ryazan Governor Pavel Malkov said the refinery caught fire.",
-     "fc": [],
-     "src": [
-      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour",
-      "https://tass.com/emergencies/2202339",
-      "https://en.iz.ru/en/2184538/2026-10-15/russian-defense-ministry-has-revealed-details-mass-attack-ukrainian-armed-forces-ryazan-oil-refinery"
-     ],
-     "loc": {
-      "lat": 54.63,
-      "lon": 39.74,
-      "place": "Ryazan (Russia)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Zelensky says Russia launched more than 850 drones; three killed in Kirovohrad region",
-     "fact": "Zelensky said Russia fired more than 850 attack drones between midnight October 14 and 9 a.m. October 15, hitting dozens of cities and villages. Ukraine's State Emergency Service said a drone attack lasting more than 10 hours killed three people and injured six in the Kirovohrad region.",
-     "fc": [],
-     "src": [
-      "https://united24media.com/war-in-ukraine/russia-bombards-ukraine-with-over-850-shahed-drones-in-relentless-day-and-night-attack-23473",
-      "https://www.pbs.org/newshour/world/ukraine-resumes-attacks-on-russian-oil-refineries-as-relations-with-trump-sour"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Iran's military claims Hormuz fully closed; reports fire on 'violating' tanker",
-     "fact": "The Iranian army's navy said on October 15 that a \"violating\" oil tanker caught fire while trying to cross a \"forbidden region\" east of the Strait of Hormuz with its tracking system switched off, without naming the ship or the cause of the fire. Habibollah Sayyari, the army's deputy chief of staff for coordination, claimed the same day that the strait was completely closed.",
-     "fc": [],
-     "src": [
-      "https://www.thehawk.in/news/world/irans-navy-says-violating-oil-tanker-caught-fire-east-of-hormuz-strait",
-      "https://www.cbsnews.com/live-updates/iran-war-us-houthi-saudi-arabia-trump/"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Houthis fire missiles at presidential palace in Aden; five killed",
-     "fact": "Yemeni Information Minister Moammar al-Eryani said on October 15 that the Houthis fired five missiles at the al-Maashiq presidential palace in Aden, and the health minister said five people were killed and 16 wounded. The Houthis claimed they had targeted a Saudi military operations headquarters in Aden.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/15/houthis-target-yemens-presidential-palace-in-aden-with-missiles",
-      "https://www.abc.net.au/news/2026-10-16/houthis-attack-aden-killing-five-and-wounding-16/107268204"
-     ],
-     "loc": {
-      "lat": 12.78,
-      "lon": 45.04,
-      "place": "Aden (Yemen)",
-      "isos": [
-       "YEM",
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Lavrov says there will be no ceasefire that lets Ukraine rearm",
-     "fact": "Russian Foreign Minister Sergei Lavrov told a news conference in Baku on October 15 that the objectives of the special military operation and Russia's position on the Ukraine conflict had not changed. Russian media reported that he said there would be no ceasefire allowing Ukraine to rearm.",
-     "fc": [],
-     "src": [
-      "https://en.apa.az/cis-countries/lavrov-zelenskyy-is-challenging-trump-not-interested-in-elections-530293",
-      "https://newsukraine.rbc.ua/news/no-ceasefire-russia-makes-another-statement-1792064988.html"
-     ],
-     "loc": {
-      "lat": 40.41,
-      "lon": 49.87,
-      "place": "Baku (Azerbaijan)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Seoul defense spokesperson, speaking personally, says shifting requirements could stall OPCON transfer",
-     "fact": "A spokesperson for South Korea's Ministry of National Defense told a regular briefing on October 15 that wartime operational control (OPCON) could not be transferred if the requirements kept changing, adding that this was a personal view. Gen. Xavier Brunson, commander of U.S. Forces Korea, said in Washington on October 14 that the conditions and the plan had changed and new standards had to be met.",
-     "fc": [
-      {
-       "id": "f55",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/10/15/south-korea-official-says-shifting-goalposts-could-block-wartime-command-transfer-from-us"
-     ],
-     "loc": {
-      "lat": 37.54,
-      "lon": 126.98,
-      "place": "Seoul (South Korea)",
-      "isos": [
-       "KOR",
-       "USA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Ukraine's air force said Russia launched 149 drones between 6 p.m. on October 15 and the morning of October 16, that 114 were shot down or neutralized, and that 24 locations were hit.",
-     "src": [
-      "https://unn.ua/en/news/most-of-the-drones-launched-by-the-russian-federation-overnight-were-jet-powered-air-defense-neutralized-slightly-more-than-half"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Putin claimed at a congress of the business group Delovaya Rossiya on October 15 that Ukraine had struck Wildberries and Ozon warehouses first and that Russia had begun to respond.",
-     "src": [
-      "https://meduza.io/en/news/2026/10/15/they-started-it-we-re-responding-putin-warns-ukraine-over-strikes-on-energy-facilities-warehouses-and-data-centers"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Ukrainian defense officials said Starshield, the military version of Starlink, was working again on moving terminals after more than a day of restrictions, though Ukraine's top diplomat in Washington said speeds had not fully recovered.",
-     "src": [
-      "https://www.sofx.com/ukraine-resumes-refinery-strikes-as-starshield-service-returns-rejecting-energy-ceasefire/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "An EU summit in Brussels ended its first day on October 15 without agreement on the next long-term budget; on October 16, the second day, leaders will discuss support for Ukraine with Zelensky.",
-     "src": [
-      "https://www.euronews.com/2026/10/16/eu-summit-leaders-to-rally-behind-zelenskyy-amid-bitter-row-with-trump"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Chinese Commerce Ministry spokesperson He Yadong said on October 15 that China would keep expediting the review and approval of rare earth export licenses for Europe and hoped the EU would respond by helping resolve dual-use export license issues for Chinese companies.",
-     "src": [
-      "https://www.globaltimes.cn/page/202610/1372328.shtml"
-     ],
-     "fp": []
     }
    ]
   }
