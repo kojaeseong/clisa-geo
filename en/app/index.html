@@ -281,7 +281,7 @@ function pvb(f){var H=f.h,n=H.length;if(n<2||H[n-2][1]===H[n-1][1])return '<b>'+
 function fpById(id){for(var i=0;i<DATA.fc.length;i++)if(DATA.fc[i].id===id)return DATA.fc[i]}
 
 function briefRow(){var n=DATA.items.filter(function(x){return x.d===DATA.asof}).length,u=DATA.items.filter(function(x){return x.d===DATA.asof&&seen('b.'+x.d).indexOf(x.id)<0}).length,top=DATA.items.filter(function(x){return x.d===DATA.asof})[0];
-  return row('','Start with today’s briefing?',md(DATA.asof)+' · '+n+(n===1?' item':' items')+(top?' · '+top.h:''),u?'<span class="nb">'+u+'</span>':'','#b/'+DATA.asof)}
+  return row('','Start with today’s briefing?',md(DATA.asof)+' · '+n+(n===1?' top story':' top stories')+(top?' · '+top.h:''),u?'<span class="nb">'+u+' new</span>':'','#b/'+DATA.asof)}
 function weekBlock(link){var W=DATA.world,TC=['#2F5DA8','#5B6475','#B4441F','#7A3FA0','#A0782A'],F0=favs();
   var reads=DATA.apps.slice().sort(function(a,b){return (F0.indexOf('i:'+b[0])>=0)-(F0.indexOf('i:'+a[0])>=0)}).map(function(a){var C=((DATA.boards||{})[a[0]]||{}).cur;return C&&C.short&&(C.ok||pvw())?[a,C.short]:null}).filter(Boolean);
   var h='<section class="wk"><div class="q">Which way the world moved this week</div>';
@@ -295,7 +295,7 @@ function briefWidget(){var latest=DATA.items.filter(function(x){return x.d===DAT
   return h+'<a class="more" href="#b/'+DATA.asof+'">See the full briefing ›</a></section>'}
 function intRow(it){var x=it.ax==='i'?app(it.k):it.ax==='r'?reg(it.k):null,sub='';
   if(it.ax==='i'&&x){var t=tabFor(it.k,it.w);sub=t==='pan'?issueLine(it.k):t==='imp'?(function(){var I=impOf(it.k);if(!I)return '';var G=impG(I,it.g),wl=worstLife(I,G);return gName(it.k,G)+(wl!=null?' · worse off in '+wl+' of 100 futures':'')})():t==='fc'?(issueFc(it.k)[0]?issueFc(it.k)[0].q+' '+issueFc(it.k)[0].p+'%':''):((issueItems(it.k)[0]||{}).h||'');
-    var u=unread('i.'+it.k,issueItems(it.k)).length;return row('',intLabel(it),sub,u?'<span class="nb">'+u+'</span>':'',intLink(it))}
+    var u=unread('i.'+it.k,issueItems(it.k)).length;return row('',intLabel(it),sub,u?'<span class="nb">'+u+' new</span>':'',intLink(it))}
   if(it.ax==='r'&&x){var L=regItems(it.k);return row('',intLabel(it),(L[0]||{}).h||'','',intLink(it))}
   return row('',intLabel(it),'','',intLink(it))}
 function home(){
@@ -484,7 +484,7 @@ function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabF
   if(it.k==='ppl')return 'Daily life for '+kgName(DG)+(it.w!=='all'&&DATA.kimp.paths[it.w]?' · “'+DATA.kimp.paths[it.w]+'” path':'');var k2=it.w.indexOf(':')<0?'kr:'+it.w:it.w;return inm(k2)+' ('+cnm(k2)+')'}
 function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
 function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
-function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||pvw()))return 'This week: '+C.short;var it=issueItems(id)[0];return it?it.h:''}
+function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||pvw()))return 'This week: '+C.short;var it=issueItems(id)[0];return it?'Latest: '+it.h:''}
 function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||pvw())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">Faded dot: last week</div>':''):'')}
 function worse(d){return d.x+d.w}
 function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
@@ -530,10 +530,10 @@ function saveInt(it,label){var I=ints().filter(function(x){return intKey(x)!==in
 function isInt(it){return ints().some(function(x){return intKey(x)===intKey(it)})}
 function row(ans,title,sub,extra,href){var inner='<span class="t"><b>'+e(title)+'</b>'+(sub?'<small>'+e(sub)+'</small>':'')+'</span>'+(extra||'')+'<span class="ar">›</span>';
   return href?'<a class="rw2" href="'+href+'">'+inner+'</a>':'<button class="rw2" data-ans="'+ans+'">'+inner+'</button>'}
-function cntTag(n,L){return '<span class="cnt">'+(n?n+' · past 7 days':(L[0]?'Latest: '+md(L[0].d):'No recent news'))+'</span>'}
+function cntTag(n,L){return '<span class="cnt">'+(n?n+(n===1?' story':' stories')+' · past 7 days':(L[0]?'Latest: '+md(L[0].d):'No recent news'))+'</span>'}
 function pickList(browse){var w7=wk7(),cnt=function(L){return L.filter(function(x){return x.d>=w7}).length};
   var A=DATA.apps.map(function(a){return [a,cnt(issueItems(a[0]))]}).sort(function(x,y){return y[1]-x[1]}),R=DATA.regions.map(function(r){return [r,cnt(regItems(r[0]))]}).sort(function(x,y){return y[1]-x[1]});
-  var h='<h3>By issue</h3>'+A.map(function(x){var a=x[0],u=unread('i.'+a[0],issueItems(a[0])).length;return row('i:'+a[0],a[1],issueLine(a[0]),u?'<span class="nb">'+u+'</span>':cntTag(x[1],issueItems(a[0])),browse?'#ask/i/'+a[0]:'')}).join('');
+  var h='<h3>By issue</h3>'+A.map(function(x){var a=x[0],u=unread('i.'+a[0],issueItems(a[0])).length;return row('i:'+a[0],a[1],issueLine(a[0]),u?'<span class="nb">'+u+' new</span>':cntTag(x[1],issueItems(a[0])),browse?'#ask/i/'+a[0]:'')}).join('');
   h+='<div class="or"><span>or</span></div><h3>By region</h3>'+R.map(function(x){var r=x[0],L=regItems(r[0]);return row('r:'+r[0],r[1],L[0]?L[0].h:'No recent news',cntTag(x[1],L),browse?'#ask/r/'+r[0]:'')}).join('');
   return h}
 function startView(step,arg,browse){
@@ -543,7 +543,7 @@ function startView(step,arg,browse){
     h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>This week</small></div>';
     if(C&&C.short)h+=miniRope(id)+'<p class="rd2"><b>This week:</b> '+e(C.short)+'</p><div style="height:8px"></div>';
     h+=briefBlock(a[1],L,'#i/'+id+'/news',0,2)+'</div>';
-    h+='<div class="q" style="margin-top:14px">Question '+(fromR?3:2)+'</div><h1>What else would you like to know about this issue?</h1>';
+    h+='<div style="height:14px"></div><h1>What else would you like to know about this issue?</h1>';
     var go=function(t){return browse?'#i/'+id+'/'+t:''};
     if(B&&C)h+=row('w:pan','Where this is heading, and why','Scenarios and probabilities · forces pulling each way · what decision-makers want and their red lines','',go('pan'));
     if(IM)h+=row('','How it affects people’s lives','Choose from: countries in the conflict, the U.S., Europe or Northeast Asia','',base+'g/'+id);
@@ -558,17 +558,17 @@ function startView(step,arg,browse){
     if(step==='g'){
       var OM={};if(I.by.PARTY)OM.PARTY={t:'Countries in the conflict',s:gName(id,'PARTY'),g:['PARTY']};if(I.by.KOR)OM.KOR={t:'Northeast Asia',s:'South Koreans',g:['KOR']};if(I.by.USA)OM.USA={t:'United States',s:'Americans',g:['USA']};if(EU.length)OM.EU={t:'Europe',s:EU.map(function(g){return gName(id,g)}).join(' · '),g:EU,eu:1};var O=GORD.map(function(k){return OM[k]}).filter(Boolean);
       h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>Impact</small></div><p class="lead">First, the effect on people’s lives in each region: in how many of 100 futures through 2030 people end up worse off than today.</p><ul class="pv">'+O.map(function(o){var ws=o.g.map(function(g){return worstLife(I,g)}).filter(function(v){return v!=null});return ws.length?'<li><span>'+Math.max.apply(null,ws)+'/100</span><div>'+e(o.t)+' · '+e(o.s)+'</div></li>':''}).join('')+'</ul></div>';
-      h+='<div class="q" style="margin-top:14px">Question '+qn+'</div><h1>Whose lives would you like to look at?</h1>';
+      h+='<div style="height:14px"></div><h1>Whose lives would you like to look at?</h1>';
       h+=O.map(function(o){var mark=last&&o.g.indexOf(last)>=0?'<span class="cnt">Last chosen</span>':'';return o.eu?row('',o.t,o.s+' · '+line(o.g),mark,base+'ge/'+id):row('g:'+o.g[0],o.t,o.s+' · '+line(o.g),mark,browse?'#i/'+id+'/imp/'+o.g[0]:'')}).join('');
       h+='<p class="note" style="margin-top:10px">These are the groups Clisa Geopolitics assesses in Chain Reactions and People’s Lives.</p>';
     }else{
-      h+='<div class="q" style="margin-top:6px">Question '+qn+'</div><h1>Which part of Europe?</h1><p class="sub">The effect on people’s lives varies across Europe.</p>';
+      h+='<div style="height:6px"></div><h1>Which part of Europe?</h1><p class="sub">The effect on people’s lives varies across Europe.</p>';
       h+=EU.map(function(g){return row('g:'+g,gName(id,g),line([g]),last===g?'<span class="cnt">Last chosen</span>':'',browse?'#i/'+id+'/imp/'+g:'')}).join('');
     }
   }else if(step==='r'&&reg(arg)){var r=reg(arg),RL=regItems(arg),RI=relIssues(arg);ss('fromreg',arg);
     h+='<a class="bk" href="'+(browse?'#':'#start/1')+'">‹ '+(browse?'Home':'First question')+'</a>';
     h+='<div class="ans" style="--acc2:'+r[3]+'"><div class="fh"><span class="ic2" style="background:'+r[3]+'">'+e(r[2])+'</span><b>'+e(r[1])+'</b><small>Briefing</small></div>'+briefBlock(r[1],RL,'#r/'+arg+'/news',0,2)+'</div>';
-    h+='<div class="q" style="margin-top:14px">Question 2</div><h1>What else would you like to know about '+e(r[1])+'?</h1>';
+    h+='<div style="height:14px"></div><h1>What else would you like to know about '+e(r[1])+'?</h1>';
     if(RI.length)h+='<h3>Issues in this region</h3>'+RI.slice(0,5).map(function(k){var a=app(k);return a?row('i:'+k,a[1],issueLine(k),'',browse?'#ask/i/'+k:''):''}).join('');
     h+='<h3>The whole region</h3>'+row('rw:news','All news from this region',RL.length+' in the past three weeks','',browse?'#r/'+arg+'/news':'')+row('rw:fc','Forecasts linked to this region’s news',regFc(arg).length+(regFc(arg).length===1?' forecast':' forecasts'),'',browse?'#r/'+arg+'/fc':'');
     if(browse){var it1={ax:'r',k:arg,w:'news'};h+=isInt(it1)?'':'<button class="btn s" style="margin-top:10px" data-addint="r:'+arg+'">☆ Add this region to your interests</button>'}
@@ -577,9 +577,9 @@ function startView(step,arg,browse){
     h+=I.length?'<div class="card" style="padding:4px 14px">'+I.map(function(it,i){return '<div class="irow"><span>'+(i+1)+'</span><a href="'+intLink(it)+'"><b>'+e(intLabel(it))+'</b></a><button data-rm="'+i+'" aria-label="Remove">✕</button></div>'}).join('')+'</div>':'<p class="empty">No interests chosen yet.</p>';
     h+='<div class="ft"><button class="btn" data-go="start/1">Add an interest</button><button class="btn s" data-go="home">Home</button></div>'+nextQ([],'');
   }else{try{localStorage.removeItem('clisa.en.fromreg')}catch(x){}
-    h+='<div class="q" style="margin-top:6px">'+(I.length?'Add an interest':'Question 1')+'</div><h1>Where would you like to start?</h1><p class="sub">Choose one issue <b>or</b> one region. You’ll get this week’s picture first, then choose what to see next.</p>';
+    h+=''+(I.length?'<div class="q" style="margin-top:6px">Add an interest</div>':'<div style="height:6px"></div>')+'<h1>Where would you like to start?</h1><p class="sub">Choose one issue <b>or</b> one region. You’ll see where things stand this week, then choose what to read next.</p>';
     h+=briefRow()+pickList(false);
-    h+='<div class="ft"><button class="btn s" data-ans="ax:all">Skip and browse everything</button>'+(I.length?'':'<button class="skip" data-skip>Skip</button>')+'</div>';
+    h+='<div class="ft"><button class="btn s" data-ans="ax:all">Browse everything</button>'+(I.length?'':'<button class="skip" data-skip>Skip for now</button>')+'</div>';
   }
   h+='</section>'+foot(FN.length?FN:(['Your interests are stored on this device. If you turn on notifications, only the titles of the issues you follow are sent to Clisa, so the right alerts reach you.']));
   V.innerHTML=h;window.scrollTo(0,0)}

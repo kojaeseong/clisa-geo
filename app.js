@@ -1399,7 +1399,7 @@ function renderOverview(){
     ((D.insights || []).length ? '<button type="button" class="entry" data-go="strat">클리사 지오폴리틱스의 주요 판단 ' + D.insights.length + '건 보기<span aria-hidden="true">→</span></button>' : "") + "</div>" +
     worldSecHtml() +
     (PUB() ? "" : '<section class="sec"><h3></h3><ul class="tl">' + D.log.slice().reverse().map(l => '<li><span class="d">' + esc(l.date) + "</span><span><b>" + esc(l.ver) + "</b> " + esc(l.text) + ((l.details || []).length ? '<details class="src" style="margin-top:4px"><summary>수정 전후 ' + l.details.length + '건</summary><ul>' + l.details.map(x => '<li><span class="note">' + esc(x.where) + "</span><br>" + esc(x.before) + "<br>→ " + esc(x.after) + "</li>").join("") + "</ul></details>" : "") /* v3.2 */ + "</span></li>").join("") + "</ul></section>") +
-    '<p class="note">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>';
+    '<p class="note">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 운영자가 검토해 공개합니다.</p>';
   document.dispatchEvent(new CustomEvent("clisa:overview", {detail: $("#pane-overview")}));  /* v4.59 개편 ②: front2.js가 이 신호로 전망으로 보기를 그린다 */
 }
 function forecastRow(f, compact){
@@ -3271,7 +3271,7 @@ function renderMethod(){
     '<p class="note" style="margin:4px 0 12px">역사적 선례, 반복 유형, 참고 사상가는 <button type="button" class="chip" data-go="ideas">역사와 사상 탭</button>에서 볼 수 있습니다. 국가별로 확인하지 못한 사항은 각 국가 화면에 있습니다.</p>' +
     ((D.meta.uncertain || []).length ? '<section class="sec method"><h3>자료 전반의 미확인 사항</h3><details class="src"><summary>특정 국가에 속하지 않는 항목 ' + D.meta.uncertain.length + "건</summary><ul>" + D.meta.uncertain.map(u => "<li>" + esc(u) + "</li>").join("") + "</ul></details></section>" : "") +
     '<section class="sec method"><h3>용어 해설</h3><div class="tbl-wrap"><table class="tbl"><tbody>' + M.terms.map(t => '<tr><td style="white-space:nowrap"><b>' + esc(t[0]) + "</b></td><td>" + esc(t[1]) + "</td></tr>").join("") + "</tbody></table></div></section>" +
-    '<section class="sec method"><h3>자료 출처</h3><p class="note" style="margin-bottom:6px">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p><ul><li>국경선: Natural Earth 1:50m (world-atlas). 국경 표기는 정치적 입장을 나타내지 않습니다.</li><li>국방비: SIPRI Military Expenditure Database · 핵탄두: SIPRI Yearbook 2026 · 병력: IISS Military Balance · 경제: IMF WEO</li></ul></section>';
+    '<section class="sec method"><h3>자료 출처</h3><p class="note" style="margin-bottom:6px">클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 운영자가 검토해 공개합니다.</p><ul><li>국경선: Natural Earth 1:50m (world-atlas). 국경 표기는 정치적 입장을 나타내지 않습니다.</li><li>국방비: SIPRI Military Expenditure Database · 핵탄두: SIPRI Yearbook 2026 · 병력: IISS Military Balance · 경제: IMF WEO</li></ul></section>';
 }
 
 /* v3.3 */
@@ -3299,7 +3299,7 @@ document.addEventListener("copy", e => {
 function footHtml(noMail){
   return '<footer class="site-foot">' + (noMail ? "" : '<p class="fb">사실의 오류나 판단에 대한 반대 근거는 아래 주소로 알려 주십시오. 확인된 오류는 바로잡고 그 내역을 밝힙니다.</p>' +
     mailRow("[클리사 지오폴리틱스] 의견")) +
-    "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 편집진이 검토합니다.</p>" +
+    "<p>클리사 지오폴리틱스의 분석은 AI(Anthropic의 Claude)의 도움을 받아 작성하고 운영자가 검토해 공개합니다.</p>" +
     "<p>이 사이트의 내용은 정보 제공을 위한 분석이며 투자·법률·정책 자문이 아닙니다. 확률 전망은 판단 근거와 함께 제시한 추정치입니다.</p>" +
     "<p>이 사이트는 회원 가입이 없습니다. 의견 메일로 받은 주소와 내용은 답신과 오류 정정에만 사용하며, 처리 후 1년 뒤 삭제됩니다.</p>" +
     '<p>© 2026 고재성 · <a href="/about/#partners">파트너</a> · <a href="/about/">운영자 인사말</a> · <a href="/subscribe/">새 글 구독</a> · <a href="/method/">사이트 안내</a></p>' +

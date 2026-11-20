@@ -163,6 +163,7 @@ section.f2-who h2{color:var(--ink)!important}
 .td-bar s{position:absolute;top:-3px;width:3px;height:10px;border-radius:2px;background:#9ca3af;margin-left:-1px}
 .td-bar s.u,.td-bar s.d{background:currentColor}
 .td-c h3.td-h2{margin-top:20px}
+.td-fc > a.td-sn{grid-template-columns:minmax(0,1fr);gap:4px}.td-fc > a.td-sn span{justify-self:start}  /* fix1121 */
 .td-fc > a.td-sn span{font:800 16px/1 Archivo,sans-serif;white-space:nowrap}
 .td-fc > a.td-sn span i{font-family:Pretendard Variable,Pretendard,sans-serif;font-weight:500;font-size:12.5px;font-style:normal;color:var(--ink2,#6b7280);margin-right:8px}
 .td-gs{display:flex;flex-wrap:wrap;gap:3px;margin:10px 0 2px}

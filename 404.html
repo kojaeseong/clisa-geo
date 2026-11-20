@@ -9,6 +9,7 @@
 /* v4.02(2026-10-13): clisa.ai가 클리사 지오폴리틱스로 바뀌기 전 의정 클리사가 쓰던 경로는 korea.clisa.ai의 같은 경로로 넘긴다 */
 (function(){
   var p = location.pathname;
+  if (/^\/app\/en(\/|$)/.test(p)) { location.replace("/en/app/" + location.search + location.hash); return; }  /* fix1121 */
   if (/^\/(m\/|invest\/|ops\.html$|join\.html$|login\.html$|members\.html$|reset\.html$|icon\.svg$|favicon\.svg$|data\/[a-z]+-\d+\.json$)/.test(p)) {
     location.replace("https://korea.clisa.ai" + p + location.search + location.hash);
     document.documentElement.setAttribute("data-moving", "1");
