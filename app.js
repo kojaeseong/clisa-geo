@@ -3426,6 +3426,8 @@ function titleOf(){
   if (t === "detail") return S.sel && hasPage(S.sel) ? D.countries[S.sel].name_ko + " 정세와 대전략" + sx : SITE_T;
   if (t === "region") { const z = zoneOf(S.zone); return z ? z.name_ko + " 정세" + sx : SITE_T; }  /* v4.38 */
   if (t === "forecast" && S.ffc) { const F = D.forecasts.find(f => f.id === S.ffc); if (F) return FCT.title(F.s || F.q) + sx; }  /* v4.22 */
+  const SEO_TAB = {"forecast": "세계 정세 전망과 검증: 확률 전망과 그 결과"};  /* 2026-11-21 결재(seo1121post) */
+  if (SEO_TAB[t]) return SEO_TAB[t] + sx;
   return (gl(t) || SITE_T) + (gl(t) ? sx : "");
 }
 const isPagePath = p => { if (/^\/(leader|power|subscribe|digest|links|privacy|start)(\/|$)/.test(p)) return true; const m = /^\/brief\/(\d{4}-\d{2}-\d{2})\/?$/.exec(p); return !!(m && BR && !BR.issues.some(x => x.date === m[1])); };

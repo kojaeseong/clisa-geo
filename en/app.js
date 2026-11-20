@@ -3437,13 +3437,13 @@ addEventListener("popstate", () => { if (D && ROUTES) { HASH_READY = false; appl
 /* v3.43 새로 불러오지 않는 이동: 결정권자·사이트 안내·지난 브리핑 쪽은 내용이 자료 파일에 없고 그 쪽의 HTML에만 있다.
    링크를 누르면 그 HTML을 뒤에서 받아 글 칸(.page-pre)만 지금 화면의 pane-page에 끼우고 주소와 제목을 바꾼다. 받은 쪽은 기억해 두고 다시 받지 않는다.
    받기에 실패하거나 글 칸이 없으면 예전처럼 그 주소로 새로 연다. 쪽 안의 링크(사이트 안내의 /grand/ 등)도 같은 길로 화면 안에서 옮긴다 */
-const SITE_T = document.title.split(" | ").pop();
+const SITE_T = document.title.split(" | ").pop().split(": ")[0]; const EN_HOME_T = "Clisa Geopolitics: World Affairs and Forecasts";  /* 2026-11-21(seo1121post) */
 const PAGE_C = {}; let PAGE_CUR = null, PAGE_SEQ = 0;
 (function(){ const pp = document.querySelector("#pane-page .page-pre"); if (pp) { PAGE_CUR = location.pathname; PAGE_C[PAGE_CUR] = {h: pp.outerHTML, t: document.title}; } })();
 function titleOf(){
   const t = S.tab, sx = " | " + SITE_T, gl = k => { const a = document.querySelector('.gnav a[data-tab="' + k + '"]'); return a ? (a.dataset.pt || a.textContent).trim() : ""; };  /* E105(2026-11-02): 새 머리글은 메뉴를 .hd-nl로 감싸 '.gnav > a'가 못 찾아 탭 쪽 제목이 비었음. 쪽 이름은 data-pt(tabs1102) */
   if (t === "page") return (PAGE_C[PAGE_CUR] || {}).t || document.title;
-  if (t === "overview" || !D) return SITE_T;
+  if (t === "overview") return EN_HOME_T; if (!D) return SITE_T;
   if (t === "strat") { const c = S.scase && (D.strategies || []).find(x => x.id === S.scase); return (c ? c.title : gl("strat")) + sx; }
   if (t === "brief") { const c = BR && S.bdate && briefCur(), m = c && /^(\d{4})-(\d{2})-(\d{2})/.exec(c.date); return (m ? "Briefing · " + enDate(c.date) : gl("brief")) + sx; }
   if (t === "feature") { const L = FEATS(), c = L.find(F => F.id === S.feat); return (c && c !== L[0] ? c.title : gl("feature")) + sx; }
