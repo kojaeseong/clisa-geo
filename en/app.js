@@ -3353,7 +3353,7 @@ renderIdeas = withFoot(renderIdeas, "pane-ideas");
 renderForecasts = withFoot(renderForecasts, "pane-forecast");
 renderMethod = withFoot(renderMethod, "pane-method");
 /* v3.79 사이트 안내 탭(2026-10-07 결재): 분석 방법(이 탭이 그림) 아래에 이용 안내·운영자 인사말(각 쪽의 글 칸을 받아 옴)을 잇고, 맨 위 단추 3개로 해당 부분에 내려간다 */
-const INFO = [["method", "Methodology"], ["guide", "Using the Site"], ["partners", "Partners"], ["about", "A Note from the Founder"]];  /* v4.59(2026-11-01): 파트너는 운영자 인사말 쪽(/about/) 맨 위 절 */
+const INFO = [["method", "Methodology"], ["guide", "Using the Site"], ["partners", "Partners"], ["about", "About"]];  /* v4.59(2026-11-01): 파트너는 운영자 인사말 쪽(/about/) 맨 위 절 */
 const infoUrl = k => k === "partners" ? "/en/about/#partners" : "/en/" + k + "/";
 renderMethod = (f => function(){ f(); infoWrap(); })(renderMethod);
 function infoWrap(){
