@@ -1,6 +1,200 @@
 {
  "issues": [
   {
+   "date": "2026-11-21",
+   "items": [
+    {
+     "case": "poland",
+     "h": "Two Russian cruise missiles and a suspected drone come down in southeastern Poland; NATO calls it a “grave violation”",
+     "fact": "During a massive Russian attack on Ukraine early on November 20 (local time), two Russian cruise missiles and an object believed to be a jet-powered drone came down in Poland's southeastern Lublin and Subcarpathian provinces, with no casualties (AP, Kyiv Independent). Prime Minister Donald Tusk said it appeared Poland was dealing with an intentional provocation, and NATO Secretary General Mark Rutte called it a “grave violation” of Polish airspace and said NATO jets were scrambled (AP, The Guardian).",
+     "fc": [
+      {
+       "id": "f66",
+       "e": "none"
+      },
+      {
+       "id": "f63",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "poland",
+       "R",
+       "러시아의 문턱 아래 공격"
+      ]
+     ],
+     "src": [
+      "https://www.pbs.org/newshour/world/nato-calls-russian-missiles-landing-in-poland-a-grave-violation-of-airspace",
+      "https://www.irishtimes.com/world/europe/2026/11/20/nato-jets-scrambled-after-russian-missiles-and-drone-hit-poland-during-attacks-on-ukraine/",
+      "https://kyivindependent.com/poland-reports-airspace-violation-during-russian-attack-on-ukraine-investigates-debris-crash/"
+     ],
+     "loc": {
+      "lat": 50.54,
+      "lon": 22.72,
+      "place": "Biłgoraj County, Lublin Province (Poland)",
+      "isos": [
+       "RUS",
+       "POL"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia hits Ukraine with 400-plus drones and 110-plus missiles, killing at least eight",
+     "fact": "Russia struck multiple regions of Ukraine overnight on November 19–20 (local time). President Volodymyr Zelensky said the attack involved more than 400 drones and more than 110 missiles, including 27 ballistic missiles, and killed at least eight people (AP). Russia's Defense Ministry said it hit Ukrainian military-linked sites, including a missile assembly plant (AP).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://www.pbs.org/newshour/world/nato-calls-russian-missiles-landing-in-poland-a-grave-violation-of-airspace",
+      "https://www.irishtimes.com/world/europe/2026/11/20/nato-jets-scrambled-after-russian-missiles-and-drone-hit-poland-during-attacks-on-ukraine/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Saudi-led coalition says it struck Yemen's Hodeidah port; Houthis threaten Saudi Red Sea ports",
+     "fact": "The Saudi-led coalition said on November 20 that it had struck facilities at Yemen's Hodeidah port used for smuggling and weapons transport. Houthi military spokesman Yahya Saree warned that if the coalition hit Hodeidah, the group would target Saudi Red Sea ports including Jeddah and a power station at Shuqaiq in the south, and told airlines to avoid Saudi airspace (Al Jazeera, AFP). The coalition said it intercepted three ballistic missiles headed for Riyadh (Al Jazeera).",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/saudi-coalition-and-houthis-exchange-threats-to-bomb-key-ports",
+      "https://www.aljazeera.com/news/liveblog/2026/11/21/iran-war-live-saudi-led-coalition-repels-houthi-missiles"
+     ],
+     "loc": {
+      "lat": 14.8,
+      "lon": 42.95,
+      "place": "Hodeidah (Yemen)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "Estonia to close road border crossings with Russia for six months from December; Moscow objects",
+     "fact": "Estonia's government on November 20 gave preliminary approval to closing its road border crossings with Russia for six months starting December 1; rail freight will continue under customs checks (Reuters). Estonia accused Russia earlier this month of being behind an attempted arson attack on drone maker Threod Systems, which the Kremlin denied, and Russian Foreign Ministry spokeswoman Maria Zakharova said Moscow would take political and diplomatic countermeasures if Tallinn went ahead (Reuters).",
+     "fc": [],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "russia-hybrid-campaign-western-europe"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/russia-complains-of-new-iron-curtain-as-estonia-shuts-its-borders"
+     ],
+     "loc": {
+      "isos": [
+       "EST",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Myanmar and China object to ICJ ruling that Myanmar committed genocide against the Rohingya",
+     "fact": "The International Court of Justice ruled 9–6 on November 19 that Myanmar committed genocide against the Rohingya in its 2016–2017 crackdown, and ordered compensation and the safe return of the Rohingya (AFP, Reuters). Myanmar government spokesperson Khaing Khaing Soe said on November 20 that the ruling was not fair because it was not unanimous, and Chinese Foreign Ministry spokesperson Guo Jiakun said such rulings do not help settle disputes (AFP, Reuters).",
+     "fc": [],
+     "fp": [
+      "myanmar"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/myanmar-china-object-to-unfair-icj-genocide-ruling"
+     ],
+     "loc": {
+      "lat": 52.09,
+      "lon": 4.3,
+      "place": "The Hague (Netherlands)",
+      "isos": [
+       "MMR",
+       "CHN",
+       "NLD"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Trump says he and Xi will set “joint guardrails” on AI, threatens “tremendous tax” on data centers built abroad",
+     "fact": "At a White House news conference on November 20, President Donald Trump said he and Chinese President Xi Jinping had agreed on “some joint guardrails” for artificial intelligence, without giving details, and threatened a “tremendous tax” on U.S. companies that build data centers overseas (CBS). On Iran, he said he wants a real deal rather than a fake one, and that while there is a rumor Iran is building a dirty bomb, “we will not allow that” (CBS).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/trump-press-conference-live-stream-2026-11-20/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "Washington (United States)",
+      "isos": [
+       "USA",
+       "CHN",
+       "IRN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Denmark said on November 20 it would expel Russia's defense attaché after its intelligence service concluded that Russian intelligence had tried, with help from a Danish gang, to assassinate a Ukrainian rapper; the Russian Embassy said Denmark had presented no evidence (AFP).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/denmark-expels-russian-diplomat-over-alleged-plot-to-kill-ukrainian-rapper"
+     ],
+     "case": "poland",
+     "fp": [
+      "russia-hybrid-campaign-western-europe"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Britain and the European Union agreed at a summit in Brussels on November 20 to ease food and agricultural checks, link their emissions trading systems and let up to 100,000 people under 30 from each side live on the other side, though no document was signed and tuition fees remain unresolved (AP, Reuters).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/uk-eu-deal-what-we-know-so-far"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-20",
    "items": [
     {
@@ -6047,200 +6241,6 @@
      ],
      "fp": [
       "baltic-kaliningrad-suwalki",
-      "rus-ukr"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-17",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr",
-      "iran-war"
-     ],
-     "h": "Trump waives most tariffs and sanctions under the Graham Russia sanctions law two days before they take effect",
-     "fact": "President Trump signed an executive order on October 16 waiving most of the tariffs and sanctions in the Lindsey O. Graham Sanctioning Russia and Iran Act of 2026, which were set to take effect October 18, and certified to Congress that the move serves the national interest. The waiver also covers 100 percent additional tariffs on the five largest importers of Russian oil and gas, and it sets no expiration date.",
-     "fc": [],
-     "src": [
-      "https://www.whitehouse.gov/presidential-actions/2026/10/implementing-the-lindsey-o-graham-sanctioning-russia-and-iran-act-of-2026/",
-      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
-     ],
-     "loc": {
-      "lat": 38.9,
-      "lon": -77.04,
-      "place": "Washington (United States)",
-      "isos": [
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russia launches massive attack on Ukraine's energy infrastructure, hitting more than 15 power facilities",
-     "fact": "Ukraine's air force said Russia fired 332 drones plus ballistic and cruise missiles between 6 p.m. on October 16 and the morning of October 17, and that 293 were shot down or neutralized; President Volodymyr Zelensky said more than 15 power generation and transmission facilities were attacked. Russia's Defense Ministry said it struck targets including a steel plant in Zaporizhzhia and a transformer factory run by Ukraine's Defense Ministry.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4175336-ukraines-adf-down-four-kalibr-missiles-289-drones-in-overnight-russian-attack.html",
-      "https://www.kyivpost.com/post/87367",
-      "https://tass.com/defense/2203463"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Gerasimov claims capture of Dobropillia; Ukraine's General Staff denies it",
-     "fact": "Valery Gerasimov, chief of Russia's General Staff, reported to President Vladimir Putin on October 16 that Russian forces had captured Dobropillia in the Donetsk region. Andrii Kovalov, a spokesman for Ukraine's General Staff, said on October 17 that the claim was false and that the town remains under the control of Ukrainian forces.",
-     "fc": [],
-     "src": [
-      "https://unn.ua/en/news/gerasimov-reported-to-putin-the-purported-capture-of-dobropillia",
-      "https://mezha.net/eng/news/mezha-e555710b7f78d112c5f004ff_ukraine-s_general_staff"
-     ],
-     "loc": {
-      "lat": 48.47,
-      "lon": 37.08,
-      "place": "Dobropillia (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "IRGC claims a 'violating' supertanker struck a mine and exploded in the Strait of Hormuz",
-     "fact": "The navy of Iran's Islamic Revolutionary Guard Corps claimed on October 17 that a \"violating\" supertanker carrying more than 2 million barrels of crude hit a mine and exploded while crossing the Strait of Hormuz on an \"unauthorized\" route with its location and radar systems switched off. The IRGC did not name the ship or give its exact location.",
-     "fc": [],
-     "src": [
-      "https://english.news.cn/20261017/f2e79b1e309741bb98fed4d21969a3f8/c.html",
-      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "UKMTO says two tankers were hit off Jubail, Saudi Arabia",
-     "fact": "The U.K. Maritime Trade Operations agency (UKMTO) said on October 17 that two tankers were hit on October 16 northeast of Jubail, Saudi Arabia: one about 68 nautical miles out by an unknown projectile, the other about 78 nautical miles out by a rocket-propelled grenade fired from a small boat. All crew members were safe, and it was not clear who carried out the attacks.",
-     "fc": [],
-     "src": [
-      "https://www.arabtimesonline.com/news/second-tanker-attacked-off-saudi-arabias-jubail-in-same-area/",
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
-     ],
-     "loc": {
-      "isos": [
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Egypt's Sisi asks parliament for emergency session to authorize defending Saudi Arabia",
-     "fact": "Egyptian President Abdel Fattah el-Sisi, speaking at a military academy graduation on October 17, asked parliament to hold an emergency session to authorize action to protect Saudi Arabia if Riyadh requests it. He said he had no intention of attacking anyone and would only defend Saudi Arabia.",
-     "fc": [],
-     "src": [
-      "https://english.ahram.org.eg/UI/Front/Inner.aspx?NewsContentID=580157"
-     ],
-     "loc": {
-      "lat": 30.02,
-      "lon": 31.76,
-      "place": "New Administrative Capital (Egypt)",
-      "isos": [
-       "EGY",
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "North Korea says it tested a new ultra-high-speed precision-guided torpedo using AI",
-     "fact": "North Korea's Korean Central News Agency reported on October 17 that a new ultra-high-speed precision-guided torpedo, with AI technology applied to its target detection and guidance functions, was successfully test-fired underwater on October 15.",
-     "fc": [],
-     "src": [
-      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261017/n-korea-conducts-underwater-test-of-new-precision-guided-torpedo-using-ai-kcna",
-      "https://www.malaymail.com/news/world/2026/10/17/north-korea-advances-ai-weapons-programme-with-new-precision-guided-torpedo/239390"
-     ],
-     "loc": {
-      "isos": [
-       "PRK"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Adm. Brad Cooper, commander of U.S. Central Command, said on October 16 that \"the Strait of Hormuz is controlled by the United States and our regional partners, not Iran.\"",
-     "src": [
-      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Iranian President Masoud Pezeshkian said in Yerevan, Armenia, on October 16 that Iran does not seek nuclear weapons and is ready for dialogue.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Indian Shipping Minister Sarbananda Sonowal said the tanker ST 3, with 15 Indian seafarers aboard, was struck by a projectile in the Strait of Hormuz on October 16 and that all crew members were safe.",
-     "src": [
-      "https://gulfnews.com/world/asia/india/indian-crew-safe-after-tanker-incidents-in-strait-of-hormuz-and-romania-minister-1.500713630"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "European Council President António Costa said after the October 16 summit that leaders had identified the means to cover Ukraine's financing needs for this year and had asked the European Commission for a proposal on its additional needs for 2027.",
-     "src": [
-      "https://www.consilium.europa.eu/en/press/press-releases/2026/10/16/remarks-by-president-antonio-costa-at-the-press-conference-following-the-european-council-meeting-of-15-16-october-2026/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Rep. Gregory Meeks, the top Democrat on the House Foreign Affairs Committee, introduced bipartisan legislation on October 16 to block the Russian diesel purchase deal proposed by President Trump.",
-     "src": [
-      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
-     ],
-     "fp": [
       "rus-ukr"
      ]
     }

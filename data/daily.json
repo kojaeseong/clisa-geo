@@ -1,6 +1,200 @@
 {
  "issues": [
   {
+   "date": "2026-11-21",
+   "items": [
+    {
+     "case": "poland",
+     "h": "러시아 순항미사일 2발·드론 추정 물체, 폴란드 남동부 추락…NATO \"심각한 영공 침범\"",
+     "fact": "러시아가 우크라이나를 대규모로 공습한 20일 새벽(현지 시각) 러시아 순항미사일 2발과 제트 드론으로 추정되는 물체 1대가 폴란드 남동부 루블린주·포드카르파츠키에주에 떨어졌고 사상자는 없었습니다(AP·키이우인디펜던트). 도날트 투스크 총리는 의도된 도발을 마주한 것으로 보인다고 했고, 마르크 뤼터 NATO 사무총장은 '심각한 영공 침범'이라며 NATO 전투기가 출격했다고 밝혔습니다(AP·가디언).",
+     "fc": [
+      {
+       "id": "f66",
+       "e": "none"
+      },
+      {
+       "id": "f63",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "poland",
+       "R",
+       "러시아의 문턱 아래 공격"
+      ]
+     ],
+     "src": [
+      "https://www.pbs.org/newshour/world/nato-calls-russian-missiles-landing-in-poland-a-grave-violation-of-airspace",
+      "https://www.irishtimes.com/world/europe/2026/11/20/nato-jets-scrambled-after-russian-missiles-and-drone-hit-poland-during-attacks-on-ukraine/",
+      "https://kyivindependent.com/poland-reports-airspace-violation-during-russian-attack-on-ukraine-investigates-debris-crash/"
+     ],
+     "loc": {
+      "lat": 50.54,
+      "lon": 22.72,
+      "place": "루블린주 빌고라이군(폴란드)",
+      "isos": [
+       "RUS",
+       "POL"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 우크라이나에 드론 400여 대·미사일 110여 발 공습…최소 8명 사망",
+     "fact": "러시아는 19일 밤부터 20일 새벽(현지 시각) 사이 우크라이나 여러 지역을 공습했고, 볼로디미르 젤렌스키 대통령은 드론 400대 이상과 탄도미사일 27발을 포함한 미사일 110발 이상이 쓰였으며 최소 8명이 숨졌다고 밝혔습니다(AP). 러시아 국방부는 미사일 조립 공장 등 우크라이나군 관련 시설을 타격했다고 밝혔습니다(AP).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://www.pbs.org/newshour/world/nato-calls-russian-missiles-landing-in-poland-a-grave-violation-of-airspace",
+      "https://www.irishtimes.com/world/europe/2026/11/20/nato-jets-scrambled-after-russian-missiles-and-drone-hit-poland-during-attacks-on-ukraine/"
+     ],
+     "loc": {
+      "lat": 50.45,
+      "lon": 30.52,
+      "place": "키이우(우크라이나)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디 연합군 \"예멘 호데이다항 타격\"…후티, 사우디 홍해 항구 공격 경고",
+     "fact": "사우디 주도 연합군은 20일 예멘 호데이다항에서 밀수·무기 운송에 쓰인 시설을 타격했다고 밝혔고, 후티의 야히아 사레아 군 대변인은 연합군이 호데이다항을 치면 제다를 비롯한 사우디 홍해 항구와 남부 슈카이크 발전소를 공격하겠다며 항공사들에 사우디 영공을 피하라고 경고했습니다(알자지라·AFP). 연합군은 리야드로 향하던 탄도미사일 3발을 요격했다고 밝혔습니다(알자지라).",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/saudi-coalition-and-houthis-exchange-threats-to-bomb-key-ports",
+      "https://www.aljazeera.com/news/liveblog/2026/11/21/iran-war-live-saudi-led-coalition-repels-houthi-missiles"
+     ],
+     "loc": {
+      "lat": 14.8,
+      "lon": 42.95,
+      "place": "호데이다(예멘)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "에스토니아, 12월부터 러시아와 도로 국경 6개월 폐쇄…러시아 반발",
+     "fact": "에스토니아 정부는 20일 12월 1일부터 6개월 동안 러시아와의 도로 국경 검문소를 닫는 안을 예비 승인했고, 철도 화물은 세관 검사를 받으며 계속 다닙니다(로이터). 에스토니아는 이달 초 러시아가 드론 제조사 스로드 시스템스에 대한 방화 시도의 배후라고 비난했으며 크렘린은 부인했고, 마리야 자하로바 러시아 외무부 대변인은 에스토니아가 강행하면 정치·외교적 대응 조치를 하겠다고 밝혔습니다(로이터).",
+     "fc": [],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "russia-hybrid-campaign-western-europe"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/russia-complains-of-new-iron-curtain-as-estonia-shuts-its-borders"
+     ],
+     "loc": {
+      "isos": [
+       "EST",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "미얀마·중국, ICJ '로힝야 집단학살' 판결에 반발",
+     "fact": "국제사법재판소(ICJ)는 19일 미얀마가 2016~2017년 로힝야족 탄압에서 집단학살을 저질렀다고 재판관 9 대 6으로 판결하고 배상과 로힝야족의 안전한 귀환을 명령했습니다(AFP·로이터). 칭 칭 소 미얀마 정부 대변인은 20일 만장일치가 아닌 판결이라 공정하지 않다고 했고, 궈자쿤 중국 외교부 대변인은 이런 판결이 분쟁 해결에 도움이 되지 않는다고 말했습니다(AFP·로이터).",
+     "fc": [],
+     "fp": [
+      "myanmar"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/myanmar-china-object-to-unfair-icj-genocide-ruling"
+     ],
+     "loc": {
+      "lat": 52.09,
+      "lon": 4.3,
+      "place": "헤이그(네덜란드)",
+      "isos": [
+       "MMR",
+       "CHN",
+       "NLD"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "트럼프 \"시진핑과 AI 공동 안전장치\"…해외 데이터센터엔 \"막대한 세금\"",
+     "fact": "도널드 트럼프 대통령은 20일 백악관 기자회견에서 시진핑 주석과 인공지능의 공동 안전장치를 마련하기로 했다고 밝혔으나 내용은 설명하지 않았고, 미국 기업이 해외에 데이터센터를 지으면 막대한 세금을 물리겠다고 말했습니다(CBS). 이란에 대해서는 가짜가 아닌 진짜 합의를 원한다며, 이란이 '더러운 폭탄'을 만든다는 소문이 있지만 허용하지 않겠다고 했습니다(CBS).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.cbsnews.com/live-updates/trump-press-conference-live-stream-2026-11-20/"
+     ],
+     "loc": {
+      "lat": 38.9,
+      "lon": -77.04,
+      "place": "워싱턴(미국)",
+      "isos": [
+       "USA",
+       "CHN",
+       "IRN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "덴마크는 20일 러시아 정보기관이 덴마크 갱단의 도움을 받아 우크라이나 래퍼를 암살하려 했다고 자국 정보기관이 판단한 데 따라 러시아 국방무관을 추방하기로 했고, 러시아 대사관은 덴마크가 아무 증거도 내놓지 않았다고 반발했습니다(AFP).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/denmark-expels-russian-diplomat-over-alleged-plot-to-kill-ukrainian-rapper"
+     ],
+     "case": "poland",
+     "fp": [
+      "russia-hybrid-campaign-western-europe"
+     ],
+     "pull": []
+    },
+    {
+     "t": "영국과 유럽연합(EU)은 20일 브뤼셀 정상회의에서 식품·농산물 검역 간소화, 배출권 거래제 연계, 30세 미만 청년이 양측에서 각각 최대 10만 명까지 상대 지역에 머물 수 있는 제도에 합의했으나, 문서 서명과 등록금 문제는 남았습니다(AP·로이터).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/20/uk-eu-deal-what-we-know-so-far"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-20",
    "items": [
     {
@@ -6047,200 +6241,6 @@
      ],
      "fp": [
       "baltic-kaliningrad-suwalki",
-      "rus-ukr"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-17",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr",
-      "iran-war"
-     ],
-     "h": "트럼프, 시행 이틀 앞둔 대러 '그레이엄 제재법' 관세·제재 대부분 면제",
-     "fact": "트럼프 대통령은 16일 행정명령으로 18일 시행 예정이던 '린지 O. 그레이엄 러시아·이란 제재법'의 관세와 제재 대부분을 면제하고 국익에 맞는다는 인증을 의회에 냈습니다. 러시아산 원유·가스 최대 수입국 5곳에 대한 100% 추가 관세도 면제했고 기한은 정하지 않았습니다.",
-     "fc": [],
-     "src": [
-      "https://www.whitehouse.gov/presidential-actions/2026/10/implementing-the-lindsey-o-graham-sanctioning-russia-and-iran-act-of-2026/",
-      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
-     ],
-     "loc": {
-      "lat": 38.9,
-      "lon": -77.04,
-      "place": "워싱턴(미국)",
-      "isos": [
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아, 우크라 에너지 시설 대규모 공격…발전·송전 시설 15곳 넘게 피격",
-     "fact": "우크라이나 공군은 16일 오후 6시부터 17일 아침까지 러시아가 드론 332대와 탄도·순항미사일을 쐈고 293기를 격추·무력화했다고 밝혔고, 젤렌스키 대통령은 발전·송전 시설 15곳 넘게 공격받았다고 했습니다. 러시아 국방부는 자포리자 제철소와 우크라이나 국방부가 관리하는 변압기 공장 등을 타격했다고 발표했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4175336-ukraines-adf-down-four-kalibr-missiles-289-drones-in-overnight-russian-attack.html",
-      "https://www.kyivpost.com/post/87367",
-      "https://tass.com/defense/2203463"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "게라시모프, 도브로필랴 점령 주장…우크라 총참모부는 부인",
-     "fact": "게라시모프 러시아군 총참모장은 16일 푸틴 대통령에게 도네츠크주 도브로필랴를 점령했다고 보고했습니다. 우크라이나 총참모부 코발료우 대변인은 17일 이를 사실이 아니라며 도브로필랴는 우크라이나군 통제 아래 있다고 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://unn.ua/en/news/gerasimov-reported-to-putin-the-purported-capture-of-dobropillia",
-      "https://mezha.net/eng/news/mezha-e555710b7f78d112c5f004ff_ukraine-s_general_staff"
-     ],
-     "loc": {
-      "lat": 48.47,
-      "lon": 37.08,
-      "place": "도브로필랴(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "혁명수비대, '규정 위반' 초대형 유조선이 호르무즈서 기뢰에 맞아 폭발했다고 주장",
-     "fact": "이란 혁명수비대 해군은 17일 원유 200만 배럴 넘게 실은 '규정 위반' 초대형 유조선이 위치·레이더 장치를 끈 채 승인되지 않은 항로로 호르무즈 해협을 지나다 기뢰에 맞아 폭발했다고 주장했습니다. 배 이름과 정확한 위치는 밝히지 않았습니다.",
-     "fc": [],
-     "src": [
-      "https://english.news.cn/20261017/f2e79b1e309741bb98fed4d21969a3f8/c.html",
-      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "OMN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "UKMTO, 사우디 주바일 앞바다서 유조선 2척 피격 발표",
-     "fact": "영국 해사무역작전(UKMTO)은 16일 사우디아라비아 주바일 북동쪽 약 68해리와 78해리 해상에서 유조선 2척이 각각 미상 발사체와 소형 보트에서 쏜 로켓추진유탄에 맞았고 선원은 모두 무사하다고 17일 밝혔습니다. 공격 주체는 밝혀지지 않았습니다.",
-     "fc": [],
-     "src": [
-      "https://www.arabtimesonline.com/news/second-tanker-attacked-off-saudi-arabias-jubail-in-same-area/",
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
-     ],
-     "loc": {
-      "isos": [
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "시시 이집트 대통령, 사우디 방어 승인 위한 의회 긴급회의 요청",
-     "fact": "압둘팟타흐 시시 이집트 대통령은 17일 사관학교 졸업식에서 사우디아라비아가 요청하면 사우디를 지키는 조치를 승인하도록 의회에 긴급회의를 열어 달라고 요청했습니다. 그는 누구도 공격할 뜻은 없고 사우디만 방어하겠다고 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://english.ahram.org.eg/UI/Front/Inner.aspx?NewsContentID=580157"
-     ],
-     "loc": {
-      "lat": 30.02,
-      "lon": 31.76,
-      "place": "신행정수도(이집트)",
-      "isos": [
-       "EGY",
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "북한, AI 적용한 신형 초고속 정밀유도어뢰 수중 시험 발표",
-     "fact": "조선중앙통신은 17일 표적 탐지와 유도 기능에 AI 기술을 적용한 신형 초고속 정밀유도어뢰의 수중 시험사격을 15일 진행해 성공했다고 보도했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261017/n-korea-conducts-underwater-test-of-new-precision-guided-torpedo-using-ai-kcna",
-      "https://www.malaymail.com/news/world/2026/10/17/north-korea-advances-ai-weapons-programme-with-new-precision-guided-torpedo/239390"
-     ],
-     "loc": {
-      "isos": [
-       "PRK"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "브래드 쿠퍼 미 중부사령관은 16일 호르무즈 해협은 이란이 아니라 미국과 역내 파트너가 통제한다고 말했습니다.",
-     "src": [
-      "https://www.euronews.com/2026/10/17/super-tanker-ablaze-after-striking-mine-in-strait-of-hormuz-irgc-says"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "페제시키안 이란 대통령은 16일 아르메니아 예레반에서 이란은 핵무기를 추구하지 않으며 대화할 준비가 돼 있다고 말했습니다.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-strait-of-hormuz-yemen-houthis-saudi-arabia/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "소노왈 인도 해운장관은 인도 선원 15명이 탄 유조선 'ST 3'가 16일 호르무즈 해협에서 발사체에 맞았으나 선원은 모두 무사하다고 밝혔습니다.",
-     "src": [
-      "https://gulfnews.com/world/asia/india/indian-crew-safe-after-tanker-incidents-in-strait-of-hormuz-and-romania-minister-1.500713630"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "코스타 유럽이사회 상임의장은 16일 정상회의 뒤 우크라이나의 올해 재정 수요를 메울 수단을 찾았다며 집행위원회에 2027년 추가 재정 수요에 대한 제안을 요청했다고 밝혔습니다.",
-     "src": [
-      "https://www.consilium.europa.eu/en/press/press-releases/2026/10/16/remarks-by-president-antonio-costa-at-the-press-conference-following-the-european-council-meeting-of-15-16-october-2026/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "그레고리 미크스 미 하원 외교위원회 민주당 간사는 16일 트럼프 대통령이 제안한 러시아산 경유 구매 거래를 막는 초당적 법안을 발의했습니다.",
-     "src": [
-      "https://www.rferl.org/a/trump-waives-graham-act-sanctions-on-russia/33878335.html"
-     ],
-     "fp": [
       "rus-ukr"
      ]
     }
