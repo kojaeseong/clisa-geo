@@ -1868,7 +1868,7 @@ function featBody(O){
 const fIsos = F => Object.keys(D.countries).filter(k => ((D.countries[k].links || {}).feats || []).includes(F.id));
 function featArticle(F){
   const c = (D.strategies || []).find(x => x.id === F.case);
-  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : '특집') + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
+  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : '특집') + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>').replace(/^([^:]*:) (.+)$/, '$1 <span style="display:inline-block">$2</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
     ((c || fIsos(F).length) ? '<div class="chips" style="margin:0">' + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button>" : "") + fIsos(F).map(chip).join("") + "</div>" : "") + "</article>";
 }
 function renderFeature(){
