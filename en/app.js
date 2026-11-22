@@ -1893,9 +1893,9 @@ function featBody(O){
 /* v4.37 특집에 나오는 나라(links.feats: 나라 이름 3번 이상) */
 const fIsos = F => Object.keys(D.countries).filter(k => ((D.countries[k].links || {}).feats || []).includes(F.id));
 function featArticle(F){
-  const c = (D.strategies || []).find(x => x.id === F.case);
-  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : "Features") + (c ? " · " + esc(c.title.split(":")[0]) : "") + " · " + fmtKD(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>').replace(/^([^:]*:) (.+)$/, '$1 <span style="display:inline-block">$2</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
-    ((c || fIsos(F).length) ? '<div class="chips" style="margin:0">' + (c ? '<button type="button" class="chip" data-case="' + esc(c.id) + "\">View analysis · " + esc(c.title.split(":")[0]) + "</button>" : "") + fIsos(F).map(chip).join("") + "</div>" : "") + "</article>";
+  const cs = (F.cases || [F.case]).map(id => (D.strategies || []).find(x => x.id === id)).filter(Boolean);  /* 2026-11-22: several issues per feature; date with year above the title */
+  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : "Features") + " · " + enDate(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>').replace(/^([^:]*:) (.+)$/, '$1 <span style="display:inline-block">$2</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
+    ((cs.length || fIsos(F).length) ? '<div class="chips" style="margin:0">' + cs.map(c => '<button type="button" class="chip" data-case="' + esc(c.id) + "\">View analysis · " + esc(c.title.split(":")[0]) + "</button>").join("") + fIsos(F).map(chip).join("") + "</div>" : "") + "</article>";
 }
 function renderFeature(){
   const L0 = FEATS(); if (!$("#pane-feature")) return;
