@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}.qr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px}.qr .q{margin:0}.lsn{flex:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--acc);background:var(--chip);border:0;border-radius:5px;padding:6px 10px;margin:0;white-space:nowrap;cursor:pointer}  .cgl{text-align:right;margin:-2px 0 6px}.card.cg h2{font-size:15px;margin:0 0 6px}.card.cg>p{font-size:13.5px;line-height:1.6;margin:4px 0}.cgs{margin-top:10px}.cgq{border-left:3px solid var(--line);padding:2px 0 2px 10px;margin:6px 0}.cgq .cgw-q{margin:0 0 3px;font-size:13.5px;line-height:1.6}.cgq small{color:var(--sub);font-size:12px}.cgmore{margin-top:10px}.cgmore>summary{cursor:pointer;color:var(--acc);font-size:13px;font-weight:600;padding:4px 0}.bar .ic,.pc .ic2,.fcd .ic2,.ans .ic2,.wkl2 .ic2{font-size:8.5px;letter-spacing:-.2px}.ap .ic{font-size:14px}.widget li .tg{font-size:10.5px}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/en/app/app-192.png" alt=""><span>Loading today’s briefing…</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='f9a8fae86c',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',DEU:'Germany',GBR:'U.K.',JPN:'Japan',WCEU:'Western-Central Europe (excl. Germany, U.K.)',PARTY:'Countries in the conflict'};
+var DATA=null,V=document.getElementById('v'),PV='8cd4cd7d1a',LANG='en',DG='USA',GORD=['PARTY','USA','EU','KOR'],GS={KOR:'South Korea',USA:'U.S.',NEU:'Nordic-Baltic',SEU:'Southern Europe',DEU:'Germany',GBR:'U.K.',JPN:'Japan',WCEU:'Western-Central Europe (excl. Germany, U.K.)',PARTY:'Countries in the conflict'};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="Home"><img src="/en/app/app-192.png" alt=""><span class="nm">Clisa</span></button><span class="sp"></span><span id="inst"></span></header>'}
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function standalone(){try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(x){return false}}
@@ -256,6 +256,8 @@ function dgNew(){var D=DATA.digest||[];return !!(D.length&&ls('dgseen','')!==D[0
  addEventListener('hashchange',function(){lsStop();LS.q=null;LS.pos=0;LS.used=false;LS.sc=''});addEventListener('pagehide',function(){lsStop()});
 function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function md(d){var p=d.split('-');return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][p[1]-1]+' '+(+p[2])}
+function ftVid(h){var m=/^<figure class="fvid"[\s\S]*?<\/figure>/.exec(h||'');return m?[m[0],h.slice(m[0].length)]:['',h||'']}
+function ymd(d){return '<span style="white-space:nowrap">'+md(d)+', '+d.slice(0,4)+'</span>'}
 function app(id){for(var i=0;i<DATA.apps.length;i++)if(DATA.apps[i][0]===id)return DATA.apps[i]}
 function reg(id){for(var i=0;i<DATA.regions.length;i++)if(DATA.regions[i][0]===id)return DATA.regions[i]}
 function start(){var s=ls('start',null);if(!s){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d)<0)ds.push(x.d)});s=ds[Math.min(1,ds.length-1)];ss('start',s)}return s}
@@ -666,12 +668,12 @@ function ctxOf(r){if(r[0]==='f'){var f1=fpById(r[1]);return 'Forecast: '+(f1?f1.
 
 function ftFor(k){return (DATA.feat||[]).filter(function(f){return (f.on||[]).indexOf(k)>=0}).sort(function(x,y){return x.o-y.o}).map(function(f){return [f.q,'#ft/'+f.id,'Clisa Geopolitics feature · '+md(f.date)]})}
 function ftList(){var L=DATA.feat||[],h=bar('Read','#7A3E48','Features');if(L[0])ss('ftseen',L[0].date);
-  h+='<div class="q">Long reads from Clisa Geopolitics</div><p class="lead">'+(L.length===1?'1 feature':L.length+' features')+', newest first.</p>'+L.map(function(f){var a=app(f.case);return '<a class="fc ftr" href="#ft/'+f.id+'"><span class="q"><small>'+md(f.date)+(a?' · '+e(a[1]):'')+'</small><b>'+e(f.title)+'</b><span class="ld">'+e(f.lead)+'</span></span><span class="ar">›</span></a>'}).join('');
+  h+='<div class="q">Long reads from Clisa Geopolitics</div><p class="lead">'+(L.length===1?'1 feature':L.length+' features')+', newest first.</p>'+L.map(function(f){var a=app(f.case);return '<a class="fc ftr" href="#ft/'+f.id+'"><span class="q"><small>'+ymd(f.date)+'</small><b>'+e(f.title)+'</b><span class="ld">'+e(f.lead)+'</span></span><span class="ar">›</span></a>'}).join('');
   V.innerHTML=h+nextQ([],'ft');window.scrollTo(0,0)}
 function ftView(id){var f=(DATA.feat||[]).filter(function(x){return x.id===id})[0];if(!f){ftList();return}
   V.innerHTML=bar('Read','#7A3E48','Features')+'<p class="empty">Loading…</p>';
   fetch('/en/app/ft/'+id+'.json',{cache:'no-cache'}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(F){var a=app(f.case);
-    var h=bar('Read','#7A3E48','Features')+'<article class="fta"><div class="qr"><small>Clisa Geopolitics feature · '+md(f.date)+(a?' · '+e(a[1]):'')+'</small>'+lsnBtn('.fta')+'</div><h2>'+e(f.title)+'</h2><p class="lead">'+e(f.lead)+'</p>'+F.html+'<p class="ftw"><a href="'+(LANG==='en'?'/en':'')+'/feature/'+f.id+'/" target="_blank" rel="noopener">Read on the website ↗</a></p></article>';
+    var h=bar('Read','#7A3E48','Features')+'<article class="fta"><div class="qr"><small>Clisa Geopolitics feature · '+ymd(f.date)+'</small>'+lsnBtn('.fta')+'</div><h2>'+e(f.title)+'</h2>'+ftVid(F.html)[0]+'<p class="lead">'+e(f.lead)+'</p>'+ftVid(F.html)[1]+'<p class="ftw"><a href="'+(LANG==='en'?'/en':'')+'/feature/'+f.id+'/" target="_blank" rel="noopener">Read on the website ↗</a></p></article>';
     V.innerHTML=h+nextQ((f.on||[]).filter(function(k){return app(k)}).slice(0,2).map(function(k){return [app(k)[1]+': where things stand','#i/'+k]}),'ft');window.scrollTo(0,0)})
   .catch(function(){V.innerHTML=bar('Read','#7A3E48','Features')+'<p class="empty">Couldn’t load this feature. Check your connection and try again.</p>'})}
 function msgView(){

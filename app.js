@@ -1868,9 +1868,11 @@ function featBody(O){
 }
 /* v4.37 특집에 나오는 나라(links.feats: 나라 이름 3번 이상) */
 const fIsos = F => Object.keys(D.countries).filter(k => ((D.countries[k].links || {}).feats || []).includes(F.id));
+function featVid(F){ const v = F.video; if (!v || !v.src) return "";  /* 2026-11-23 결재: 특집 영상 칸(누를 때만 받음) */
+  return '<figure class="fvid" style="margin:14px 0 18px;text-align:center"><video controls preload="none" playsinline src="' + esc(v.src) + '"' + (v.poster ? ' poster="' + esc(v.poster) + '"' : "") + ' style="width:100%;max-width:340px;aspect-ratio:9/16;border-radius:10px;background:#0A0A0A;display:block;margin:0 auto"></video>' + (v.label ? '<figcaption style="font-size:13px;color:var(--muted);margin-top:6px">' + esc(v.label) + "</figcaption>" : "") + "</figure>"; }
 function featArticle(F){
   const cs = (F.cases || [F.case]).map(id => (D.strategies || []).find(x => x.id === id)).filter(Boolean);  /* 2026-11-22 결재: 특집 하나에 사안 여러 개, 제목 위에는 사안 없이 연도까지 날짜 */
-  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : '특집') + " · " + ymdK(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>').replace(/^([^:]*:) (.+)$/, '$1 <span style="display:inline-block">$2</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featBody(F) +
+  return '<article class="sec olk" id="feat-' + esc(F.id) + '"><p class="eyebrow">' + (F.kicker ? esc(F.kicker) : '특집') + " · " + ymdK(F.date) + '</p><h2 class="olk-t">' + esc(F.title).replace(/(\d+%\S+)/g, '<span style="white-space:nowrap">$1</span>').replace(/^([^:]*:) (.+)$/, '$1 <span style="display:inline-block">$2</span>') + " " + ttsBtn("feat:" + F.id) + "</h2>" + featVid(F) + featBody(F) +
     ((cs.length || fIsos(F).length) ? '<div class="chips" style="margin:0">' + cs.map(c => '<button type="button" class="chip" data-case="' + esc(c.id) + '">사안 분석 보기 · ' + esc(c.title.split(":")[0]) + "</button>").join("") + fIsos(F).map(chip).join("") + "</div>" : "") + "</article>";
 }
 function renderFeature(){
