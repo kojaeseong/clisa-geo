@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clisa.ai/en/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://clisa.ai/en/</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://clisa.ai/en/brief/2026-11-23/</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://clisa.ai/en/brief/2026-11-21/</loc><lastmod>2026-11-21</lastmod></url>
   <url><loc>https://clisa.ai/en/brief/2026-11-20/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://clisa.ai/en/brief/2026-11-19/</loc><lastmod>2026-11-19</lastmod></url>
@@ -49,11 +50,11 @@
   <url><loc>https://clisa.ai/en/brief/2026-10-01/</loc><lastmod>2026-10-01</lastmod></url>
   <url><loc>https://clisa.ai/en/brief/2026-09-30/</loc><lastmod>2026-09-30</lastmod></url>
   <url><loc>https://clisa.ai/en/brief/2026-09-29/</loc><lastmod>2026-09-29</lastmod></url>
-  <url><loc>https://clisa.ai/en/brief/</loc><lastmod>2026-11-21</lastmod></url>
-  <url><loc>https://clisa.ai/en/case/korea/</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://clisa.ai/en/brief/</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://clisa.ai/en/case/korea/</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://clisa.ai/en/case/taiwan/</loc><lastmod>2026-11-16</lastmod></url>
-  <url><loc>https://clisa.ai/en/case/ukraine/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://clisa.ai/en/case/iran/</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://clisa.ai/en/case/ukraine/</loc><lastmod>2026-11-16</lastmod></url>
+  <url><loc>https://clisa.ai/en/case/iran/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/case/poland/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/case/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/grand/</loc><lastmod>2026-09-28</lastmod></url>
@@ -97,7 +98,7 @@
   <url><loc>https://clisa.ai/en/region/europe/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/region/mena/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/region/south-central-asia/</loc><lastmod>2026-11-16</lastmod></url>
-  <url><loc>https://clisa.ai/en/forecast/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://clisa.ai/en/forecast/</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f01/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f02/</loc><lastmod>2026-10-26</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f03/</loc><lastmod>2026-11-16</lastmod></url>
@@ -162,7 +163,7 @@
   <url><loc>https://clisa.ai/en/forecast/f63/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f64/</loc><lastmod>2026-10-10</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f65/</loc><lastmod>2026-10-10</lastmod></url>
-  <url><loc>https://clisa.ai/en/forecast/f66/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://clisa.ai/en/forecast/f66/</loc><lastmod>2026-11-20</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f67/</loc><lastmod>2026-10-11</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f68/</loc><lastmod>2026-11-14</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f69/</loc><lastmod>2026-10-23</lastmod></url>
@@ -180,7 +181,7 @@
   <url><loc>https://clisa.ai/en/forecast/f82/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f83/</loc><lastmod>2026-11-16</lastmod></url>
   <url><loc>https://clisa.ai/en/forecast/f84/</loc><lastmod>2026-11-16</lastmod></url>
-  <url><loc>https://clisa.ai/en/life/</loc><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://clisa.ai/en/life/</loc><lastmod>2026-11-23</lastmod></url>
   <url><loc>https://clisa.ai/en/feature/2026-11-22-g20/</loc><lastmod>2026-11-22</lastmod></url>
   <url><loc>https://clisa.ai/en/feature/2026-11-18-lameduck/</loc><lastmod>2026-11-18</lastmod></url>
   <url><loc>https://clisa.ai/en/feature/2026-10-28-icbm/</loc><lastmod>2026-10-28</lastmod></url>

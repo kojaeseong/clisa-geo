@@ -1,6 +1,352 @@
 {
  "issues": [
   {
+   "date": "2026-11-23",
+   "items": [
+    {
+     "case": "iran",
+     "h": "바레인 \"이란 공격으로 시트라 산업 시설 화재\"…혁명수비대 \"미군 레이더 2기 파괴\" 주장",
+     "fact": "바레인 내무부는 21일(현지 시각) 이란의 공격으로 시트라섬의 민간 산업 시설에 불이 났다고 밝혔고, 바레인 정부는 다른 공격 여러 건은 막았다고 했습니다(알자지라). 이란 혁명수비대는 헹감섬 레이더가 공격받은 데 대한 보복으로 바레인의 리파·아왈리 미군 기지에 미사일·드론 공격을 해 패트리엇 레이더 2기를 파괴했다고 주장했으나 확인되지 않았고, 이란 국영 매체는 시트라 화재가 미군 요격미사일 추락 때문이라고 주장했습니다(알자지라).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      },
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/whats-behind-irans-escalation-of-attacks-in-the-gulf",
+      "https://www.aljazeera.com/news/2026/11/21/bahrain-says-iranian-attack-caused-fire-at-industrial-facility"
+     ],
+     "loc": {
+      "lat": 26.15,
+      "lon": 50.62,
+      "place": "시트라섬(바레인)",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "혁명수비대 \"항로 어긴 초대형 유조선 2척, 호르무즈서 기뢰에 폭발\" 주장",
+     "fact": "이란 혁명수비대 해군은 22일(현지 시각) 허가되지 않은 항로로 다니던 초대형 유조선 2척이 호르무즈 해협 동쪽, 오만 가남섬 북쪽에서 기뢰에 부딪혀 폭발했다고 주장하며 해운사들에 혁명수비대의 항행 지시를 따르라고 경고했습니다(신화통신·프레스TV). 선박 이름과 피해는 이란 밖에서 확인되지 않았습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ],
+     "src": [
+      "https://english.news.cn/20261123/9e8ce320ddab45d5a7c3da4314634bcc/c.html",
+      "https://www.presstv.co.uk/Detail/2026/11/22/781364/two-oil-supertankers-explode-in-strait-of-hormuz-irgc-navy-warns-shipping-companies"
+     ],
+     "loc": {
+      "lat": 26.37,
+      "lon": 56.4,
+      "place": "호르무즈 해협 동쪽(오만 가남섬 북쪽)",
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "러시아 화물선, 핀란드만서 드론 피격…핀란드군 \"우크라이나 소행 가능성\"",
+     "fact": "핀란드 국방부는 21일(현지 시각) 오전 핀란드만 고글란드섬 서쪽 공해에서 러시아 국적 화물선 스파르타 2호가 드론 공격을 받았다고 밝혔고(러시아 측은 칼리닌그라드행이라고 밝힘), 핀란드군은 우크라이나의 소행일 가능성이 크다고 했습니다(로이터·AFP). 선원 16명은 대피했으며, 그 뒤 러시아 헬기가 핀란드 영공을 4km 넘게 침범했고 안티 해캐넨 국방장관은 이 영공 침범 의심 사례가 구조·추적 활동과 관련됐을 수 있다고 말했습니다(알자지라).",
+     "fc": [],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "L",
+       "우크라이나의 후방 타격"
+      ],
+      [
+       "poland",
+       "R",
+       "러시아의 문턱 아래 공격"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/russia-says-kaliningrad-bound-ship-struck-by-drones-in-gulf-of-finland",
+      "https://www.aljazeera.com/news/2026/11/22/russian-cargo-ship-still-on-fire-off-finland-after-drone-attack"
+     ],
+     "loc": {
+      "lat": 60.06,
+      "lon": 26.8,
+      "place": "핀란드만 고글란드섬 서쪽",
+      "isos": [
+       "UKR",
+       "RUS",
+       "FIN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란 \"카타르 중재단과 회담\"…아락치 \"봉쇄는 해제돼야\"",
+     "fact": "카젬 가리바바디 이란 외무차관은 21일 카타르 대표단이 20일 밤 테헤란에서 이란 관리들과 2시간 동안 회담했으나 아직 공식 협상은 아니라고 밝혔고, 아바스 아락치 외무장관은 봉쇄가 합리적으로 해제돼야 하며 이란의 요구가 받아들여지지 않는 한 호르무즈 해협 재개방 논의는 의미가 없다고 말했습니다(AFP·로이터). 도널드 트럼프 대통령은 같은 날 폭스뉴스에 이란이 핵무기를 갖지 못하게 하는 '영구적' 합의를 원한다고 말했습니다(AFP·로이터).",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "L",
+       "카타르의 가교안"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/iran-says-held-talks-with-qatari-mediators-urges-us-to-accept-conditions"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "테헤란(이란)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키 \"한 주에 드론 2,700대·미사일 165발\"…미국에 패트리엇 인도 승인 촉구",
+     "fact": "볼로디미르 젤렌스키 대통령은 22일 러시아가 지난 한 주 동안 공격 드론 약 2,700대, 유도 폭탄 약 1,460발, 미사일 165발을 썼다며, 동맹국이 이미 대금을 낸 패트리엇 요격미사일의 인도를 미국이 승인해 달라고 촉구했습니다(알자지라). 같은 날 새벽 키이우 북쪽 디미르에서는 러시아의 공격으로 아파트 건물이 일부 무너져 2명의 시신이 수습됐습니다(알자지라).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/zelenskyy-urges-us-to-release-patriot-missiles"
+     ],
+     "loc": {
+      "lat": 50.79,
+      "lon": 30.3,
+      "place": "디미르(우크라이나)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "리비아 벵가지 해군기지 러시아 선박, 무인 수상정 추정 공격에 폭발",
+     "fact": "리비아 동부 정부는 22일(현지 시각) 벵가지 해군기지에 급유와 보급을 위해 정박한 러시아 선박이 무인 수상정으로 추정되는 공격을 받아 폭발과 화재가 났고 러시아와 함께 조사에 나섰다고 밝혔습니다(로이터·알자지라). 부상자가 나왔으나 수는 알려지지 않았고, 공격 주체를 자처한 쪽은 없습니다.",
+     "fc": [],
+     "fp": [
+      "rus-ukr",
+      "libya-division"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/suspected-drone-strike-hits-russian-vessel-in-libya"
+     ],
+     "loc": {
+      "lat": 32.12,
+      "lon": 20.07,
+      "place": "벵가지(리비아)",
+      "isos": [
+       "LBY",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "멕시코, FBI 10대 수배자 '엘 차포 이시드로' 체포",
+     "fact": "멕시코 국방부와 미 법무부는 21일 시날로아 카르텔의 고위 지도자로 FBI 10대 수배자에 오른 '엘 차포 이시드로'로 불리는 파우스토 이시드로 메사 플로레스를 멕시코군이 20일 시날로아주 과사베에서 체포했다고 발표했습니다(미 법무부·알자지라). 멕시코 국방부는 미국 정보기관과 조율한 작전이었다고 밝혔고, 미 법무부는 미국 기관들이 작전을 지원했다고 밝혔습니다.",
+     "fc": [],
+     "fp": [
+      "us-mexico-cartels"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.justice.gov/usao-sdca/pr/senior-leader-sinaloa-cartel-and-one-fbis-ten-most-wanted-fugitives-arrested-mexico",
+      "https://www.aljazeera.com/news/2026/11/22/how-el-chapo-isidro-alleged-mexican-cartel-leader-was-captured"
+     ],
+     "loc": {
+      "lat": 25.57,
+      "lon": -108.47,
+      "place": "과사베(멕시코)",
+      "isos": [
+       "MEX",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "아시아 증시, 'AI 거품' 우려에 급락…코스피 장중 5.8% 하락",
+     "fact": "'AI 거품' 우려가 커지는 가운데 23일 아시아 증시에서 코스피는 장중 5.8%까지 떨어졌다가 그리니치 표준시 4시 30분 기준 3.2% 내렸고, 홍콩 항셍지수도 약 0.6% 하락했습니다(알자지라). 앞서 20일 미국 S&P500지수는 3.7%, 나스닥 종합지수는 5.3% 떨어졌습니다(알자지라).",
+     "fc": [],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/23/south-koreas-stock-market-tumbles-as-ai-bubble-fears-mount"
+     ],
+     "loc": {
+      "lat": 37.57,
+      "lon": 126.98,
+      "place": "서울(한국)",
+      "isos": [
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "네타냐후·아이젠코트, 연정 협상 회동서 합의 못 해",
+     "fact": "베냐민 네타냐후 과도정부 총리와 정부 구성권을 받은 가디 아이젠코트 야샤르 대표는 22일 헤르츨리야에서 만났으나 합의 없이 후속 회담만 약속했습니다(채널12·AP). 아이젠코트의 정부 구성 시한은 12월 6일이며 14일 연장할 수 있습니다(알자지라).",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/netanyahus-likud-eisenkots-yashar-end-coalition-talks-without-deal"
+     ],
+     "loc": {
+      "lat": 32.16,
+      "lon": 34.84,
+      "place": "헤르츨리야(이스라엘)",
+      "isos": [
+       "ISR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "수단 하르툼과 옴두르만 일대에서 22일 새벽 신속지원군(RSF) 소행으로 지목된 드론 공격으로 최소 4명이 숨졌고(AFP), 데니스 브라운 유엔 수단 인도주의조정관은 직원들이 있던 유엔 건물 한 동이 파손됐다고 밝혔습니다.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/rsf-drones-kill-four-in-khartoum"
+     ],
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "조제프 아운 레바논 대통령은 독립 83주년(22일) 전날인 21일 연설에서 이스라엘에 레바논 영토 전체에서 철수하고 공격을 멈추라고 요구했고, 무장 세력에는 무기를 넘기라고 촉구했습니다(AFP).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/lebanese-president-demands-israel-withdrawal-decries-irans-interference"
+     ],
+     "case": null,
+     "fp": [
+      "levant"
+     ],
+     "pull": []
+    },
+    {
+     "t": "아누틴 찬위라꾼 태국 총리는 21일 훈 마넷 캄보디아 총리에게 캄보디아가 해양 경계 강제 조정 절차를 계속 밀고 나가면 다른 양자 협의를 모두 멈추겠다고 밝혔으며, 상설중재재판소 조정위원회는 24~27일 쿠알라룸푸르에서 열립니다(네이션).",
+     "src": [
+      "https://www.nationthailand.com/news/general/40073765"
+     ],
+     "case": null,
+     "fp": [
+      "thai_cambodia"
+     ],
+     "pull": []
+    },
+    {
+     "t": "덴마크 의회는 19일 미국·그린란드·덴마크 안보 협정을 찬성 109표, 반대 0표로 비준했으며, 협정은 미국이 그린란드에 기지 2곳을 짓도록 허용합니다(알자지라).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/19/denmark-parliament-approves-security-deal-with-greenland-and-us"
+     ],
+     "case": null,
+     "fp": [
+      "greenland-arctic"
+     ],
+     "pull": []
+    },
+    {
+     "t": "AFP는 19일 입수한 위성사진과 전문가 분석을 인용해 중국이 파라셀(시사)군도 앤털로프 암초에 3km 가까운 활주로를 짓고 있다고 보도했습니다.",
+     "src": [
+      "https://www.manilatimes.net/2026/11/19/news/national/beijing-bolsters-south-china-sea-push-with-new-island-runway/2472811"
+     ],
+     "case": null,
+     "fp": [
+      "paracels"
+     ],
+     "pull": []
+    },
+    {
+     "t": "아이티 경찰은 19일 수도 포르토프랭스 마르티상 지역 작전에서 갱단원으로 의심되는 사람을 최소 34명 사살했다고 밝혔습니다(로이터·AP).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/19/haiti-police-say-at-least-34-suspected-gang-members-killed-in-raid"
+     ],
+     "case": null,
+     "fp": [
+      "haiti-gang-crisis"
+     ],
+     "pull": []
+    },
+    {
+     "t": "무사디크 말리크 파키스탄 기후변화장관은 20일 상하이협력기구 문명대화포럼 참석차 뉴델리에 도착해 2025년 5월 무력 충돌 뒤 인도를 찾은 첫 파키스탄 연방 장관이 됐으나, 양자 회담 일정은 없었습니다(알자지라).",
+     "src": [
+      "https://www.aljazeera.com/news-analysis/2026/11/20/pakistan-minister-visits-india-for-first-time-since-2025-war"
+     ],
+     "case": null,
+     "fp": [
+      "india_pakistan"
+     ],
+     "pull": []
+    },
+    {
+     "t": "벨기에 항공관제 기관 스카이즈는 정부의 긴축안에 맞선 노조의 전국 행동의 날인 23일 7시부터 21시(현지 시각)까지 정상 업무를 하지 못한다고 밝혀 벨기에 공항의 항공편이 거의 모두 취소될 예정입니다(AFP·DPA).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/23/belgiums-airports-set-to-shut-down-due-to-anti-austerity-strike"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-21",
    "items": [
     {
@@ -5895,353 +6241,6 @@
      ],
      "fp": [
       "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-19",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아, 키이우 등에 미사일·드론 공격…키이우 1명 사망·8명 부상",
-     "fact": "우크라이나 공군은 러시아가 18일 밤부터 19일 아침(현지 시각) 사이 드론 269대와 탄도·순항미사일로 공격해 드론 243대와 미사일 4발을 격추·무력화했고 25곳이 피격됐다고 밝혔습니다. 러시아 국방부는 키이우의 데이터센터와 미사일을 보관했다는 기관차 차고, 오데사 남서쪽 130km 해상의 화물선을 타격했다고 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://abcnews.com/International/wireStory/russian-missiles-drones-hit-kyiv-overnight-killing-1-137371029",
-      "https://www.ukrinform.net/rubric-ato/4175779-air-defense-forces-shoot-down-four-russian-missiles-and-243-drones-since-this-evening.html",
-      "https://tass.com/politics/2203979"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "키이우(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "WSJ, 푸틴이 트럼프·시진핑과 우크라이나 3자 정상회담을 제안했다고 보도",
-     "fact": "월스트리트저널은 18일(미국 시각) 푸틴 대통령이 11월 18~19일 선전 APEC 정상회의 때 트럼프 대통령·시진핑 주석과 우크라이나 종전을 논의하자고 제안했고 젤렌스키 대통령은 빠진다고 보도했습니다. 페스코프 대변인은 회담과 의제에 대한 분명한 이해가 아직 없다고 했고, 미국 고위 당국자는 트럼프가 동의하지 않았으나 받아들일 여지는 있다고 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.brecorder.com/news/40444891/putin-proposes-summit-with-trump-and-xi-to-discuss-ukraine-deal-wsj-says",
-      "https://www.cnbc.com/2026/10/19/putin-trump-xi-ukraine-war-energy.html"
-     ],
-     "loc": {
-      "isos": [
-       "RUS",
-       "USA",
-       "CHN",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키, 값 치른 패트리엇 미사일을 미국이 일부만 인도 승인했다고 주장",
-     "fact": "젤렌스키 대통령은 18일 공개된 블룸버그 인터뷰에서 PURL(나토 동맹국 재원의 미국 무기 구매 제도)로 값을 치른 패트리엇 미사일 가운데 미국이 일부만 인도를 승인했고 이는 기술 문제가 아니라고 말했습니다. 우크라이나가 항복하도록 설득하려는 조치가 있었다고도 주장했습니다.",
-     "fc": [],
-     "src": [
-      "https://kyivindependent.com/us-delaying-patriot-missiles-already-paid-for-under-nato-initiative-zelensky-says/",
-      "https://www.ukrinform.net/rubric-polytics/4175836-us-delaying-delivery-of-patriot-missiles-already-paid-for-by-ukraine-zelensky.html"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "루비오 \"우크라이나, 현재 스타실드 쓸 수 없어\"…속도 제한 지시설은 부인",
-     "fact": "루비오 국무장관은 17일(미국 시각) 기자들에게 미군용 위성통신 스타실드를 현재 우크라이나가 쓸 수 없고 사용 요청은 논의 중이라고 말했습니다. 백악관이 스타링크 속도를 늦추라고 지시했다는 보도는 명백히 거짓이라고 부인했으나, 앞서 우크라이나 국방 당국자들은 스타실드가 다시 작동한다고 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/18/rubio-says-ukraine-without-access-to-starshield-future-under-discussion",
-      "https://www.kyivpost.com/post/87400"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [],
-     "h": "북중 교역, 9월 2억 9,900만 달러…1~9월 18.6% 증가",
-     "fact": "북한전문매체 NK뉴스에 따르면 중국 해관총서가 18일 공개한 9월 북중 교역액은 약 2억 9,900만 달러로 8월(2억 3,800만 달러)보다 늘어 올해 4월 다음으로 많았습니다. 산케이신문 집계로 1~9월 교역액은 약 22억 7,000만 달러로 1년 전보다 18.6% 늘었습니다.",
-     "fc": [
-      {
-       "id": "f23",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.nknews.org/2026/10/north-korea-china-trade-soared-to-300m-last-month-ahead-of-bridge-opening-data/",
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008804422"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "상트페테르부르크, 대규모 드론 공격에 석유터미널 화재…1명 사망",
-     "fact": "베글로프 상트페테르부르크 주지사는 18일 '대규모' 드론 공격으로 1명이 숨지고 5명이 다쳤으며 석유 터미널과 유류 저장소 등에 불이 났다고 밝혔습니다. 러시아 국방부는 17일 오후 8시부터 18일 오전 8시까지 우크라이나 드론 1,015대를 격추했다고 발표했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/18/ukrainian-drone-attack-on-russias-st-petersburg-kills-1-hits-energy-sites",
-      "https://voennoedelo.com/en/posts/id21090-russia-says-1-015-ukrainian-drones-downed-overnight"
-     ],
-     "loc": {
-      "lat": 59.94,
-      "lon": 30.31,
-      "place": "상트페테르부르크(러시아)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "루비오, 트럼프가 대러 제재·관세 면제의 영향을 60일 동안 분석한다고 밝혀",
-     "fact": "루비오 국무장관은 17일 기자들에게 트럼프 대통령이 16일 면제한 대러 제재와 관세의 경제적 영향을 최대 60일 동안 분석하려 한다고 말했습니다. 16일 행정명령에는 면제 기한이 정해져 있지 않습니다.",
-     "fc": [],
-     "src": [
-      "https://www.spokesman.com/stories/2026/oct/17/rubio-says-trump-to-take-up-to-60-days-to-weigh-ru/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키 \"미국이 3자 회담 제안…러시아·미국 확인은 아직\"",
-     "fact": "젤렌스키 대통령은 17일 기자들에게 미국이 3자 회담을 제안했으나 러시아와 미국 어느 쪽도 아직 확인하지 않았다고 말했습니다. 장소로는 아랍에미리트·사우디아라비아 같은 중동 국가, G20 정상회의 때의 미국, 유럽 국가가 거론된다고 했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-polytics/4175468-zelensky-us-working-to-arrange-possible-meeting-with-putin.html"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "혁명수비대, '규정 위반' 유조선이 호르무즈 남쪽서 또 기뢰에 맞았다고 주장",
-     "fact": "이란 혁명수비대 해군은 테헤란 현지 시각 19일 새벽, 항법장치를 끈 채 승인되지 않은 남쪽 항로로 해협을 빠져나가던 유조선이 기뢰에 맞아 기관실에서 폭발과 화재가 났다고 주장했습니다. 선박 이름은 밝히지 않았고 독립 확인은 없습니다.",
-     "fc": [],
-     "src": [
-      "https://wanaen.com/irgc-navy-says-non-compliant-tanker-hit-by-sea-mine-south-of-strait-of-hormuz/",
-      "https://tass.com/world/2203869"
-     ],
-     "loc": {
-      "isos": [
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "사우디 나지란 주택가에 발사체 떨어져 6명 부상",
-     "fact": "사우디 민방위는 18일 발사체가 나지란 주택가에 떨어져 시민 6명이 다치고 주택 3채와 차량 3대가 부서졌다고 밝혔고, 사우디 언론은 이를 후티의 발사체로 보도했습니다. 같은 날 나지란에서는 사우디군 헬기가 추락해 장교 2명이 숨졌습니다.",
-     "fc": [],
-     "src": [
-      "https://www.arabnews.pk/saudi-arabia/saudi-civil-defense-says-6-citizens-injured-after-projectile-falls-in-najran-3004548",
-      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ],
-     "loc": {
-      "lat": 17.49,
-      "lon": 44.13,
-      "place": "나지란(사우디아라비아)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "fp": [
-      "taiwan-strait"
-     ],
-     "h": "대만 해순서, 중국 해경선 등 16척 퇴거…\"하이브리드전\" 규탄",
-     "fact": "대만 해순서는 18일 본섬 동·남·서남쪽 바다와 둥사(프라타스)군도 주변에서 중국 해경선·조사선·어선 16척을 쫓아냈고 일부는 제한 수역에 들어왔다고 밝혔습니다. 해순서는 중국이 여러 곳에서 동시에 하이브리드전을 벌여 현상을 일방적으로 바꾸려 한다고 규탄했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/19/2003866217",
-      "https://www.aljazeera.com/news/2026/10/18/taiwan-drives-away-16-chinese-ships-accused-of-maritime-harassment"
-     ],
-     "loc": {
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "iran-war"
-     ],
-     "h": "트럼프, 이스라엘 총선 9일 앞두고 네타냐후 '전면 지지' 선언",
-     "fact": "트럼프 대통령은 18일 트루스소셜에 네타냐후 총리를 전면 지지한다고 밝히고, 이란이 노선을 바꾸지 않으면 곧 일을 끝낼 것이라며 네타냐후가 아닌 지도자라면 미국이 직접 해야 하는데 그럴 생각이 없다고 했습니다. 이스라엘 총선은 27일입니다.",
-     "fc": [
-      {
-       "id": "f59",
-       "e": "up"
-      },
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.jta.org/2026/10/18/global/trump-endorses-netanyahu-ahead-of-israeli-elections-citing-iranian-threat",
-      "https://www.axios.com/2026/10/18/trump-endorses-netanyahu-israel-election-iran"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "ISR",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "pak_afg"
-     ],
-     "h": "파키스탄군·아프간 탈레반, 쿠람 국경서 교전",
-     "fact": "파키스탄 보안 당국자들은 17일 카이베르파크툰크와주 쿠람 지역 국경 여러 곳에서 아프간 탈레반과 몇 시간 동안 교전했고 포병 지원을 받은 부대가 탈레반 초소를 파괴했다고 주장했습니다. 탈레반 정부는 즉각 논평하지 않았고 사상자 수는 확인되지 않았습니다.",
-     "fc": [
-      {
-       "id": "f10",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.clickorlando.com/news/world/2026/10/17/pakistani-forces-afghan-taliban-exchange-fire-after-militants-attempt-to-infiltrate-pakistan/",
-      "https://kabulnow.com/2026/10/pakistani-media-reports-deaths-of-afghan-taliban-fighters-in-border-clashes/"
-     ],
-     "loc": {
-      "lat": 33.9,
-      "lon": 70.1,
-      "place": "쿠람(파키스탄)",
-      "isos": [
-       "PAK",
-       "AFG"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "프랑스, 전국 시위가 폭동·약탈로 번져 최소 1,800명 체포",
-     "fact": "17일 프랑스 전국에서 생활비 상승과 학교 여건 악화에 항의한 시위(당국 집계 약 55만 명)가 방화와 약탈로 번져 CBS 뉴스 집계로 최소 1,800명이 체포됐습니다(알자지라는 내무부를 인용해 약 2,400명). 마크롱 대통령은 18일 대국민 연설에서 약탈한 사람들은 피해를 갚아야 한다고 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/news/protests-france-rising-living-costs-students/",
-      "https://www.aljazeera.com/news/2026/10/18/macron-denounces-frances-nationwide-rioting-looting"
-     ],
-     "loc": {
-      "isos": [
-       "FRA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "젤렌스키 대통령은 18일 NBC 인터뷰에서 미국이 러시아 미사일 발사 정보를 다시 공유하고 있다고 말했고, 같은 날 위트코프·쿠슈너 특사와 통화했습니다.",
-     "src": [
-      "https://kyivindependent.com/a-great-deal-depends-on-americas-position-zelensky-holds-call-with-trumps-peace-envoys-as-us-pivots-to-moscows-side/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "아락치 이란 외무장관은 18일 바그다드에서 7일 안에 호르무즈 해협을 다시 연다는 이란의 제안이 여전히 유효하다고 말했습니다.",
-     "src": [
-      "https://www.foxnews.com/live-news/us-iran-war-peace-talks-oil-strait-hormuz-trump-october-18"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "이란 언론은 라브로프 러시아 외무장관이 19일 테헤란을 방문한다고 전했습니다.",
-     "src": [
-      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ],
-     "fp": []
-    },
-    {
-     "t": "이집트 의회는 사우디아라비아에 대한 군사 지원 승인 표결을 19일로 미뤘습니다.",
-     "src": [
-      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "나우세다 리투아니아 대통령은 18일 드론으로 보이는 물체가 영공에 들어와 폭발했다고 밝혔고, 우크라이나 외무부 대변인은 러시아의 전자전으로 우크라이나 드론의 항로가 바뀌었을 수 있다며 사과했습니다.",
-     "src": [
-      "https://kyivindependent.com/nato-jets-scramble-as-drone-explodes-in-lithuanian-airspace/"
-     ],
-     "fp": [
-      "baltic-kaliningrad-suwalki",
-      "rus-ukr"
      ]
     }
    ]

@@ -1,6 +1,352 @@
 {
  "issues": [
   {
+   "date": "2026-11-23",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Bahrain says Iranian attack started fire at Sitra industrial site; IRGC claims it destroyed two U.S. radars",
+     "fact": "Bahrain's Interior Ministry said an Iranian attack on November 21 started a fire at a civilian industrial facility on Sitra Island, and the government said it had thwarted several other attacks (Al Jazeera). Iran's Revolutionary Guards claimed a missile and drone strike on U.S. bases at al-Riffa and Awali that destroyed two Patriot radars, in retaliation for an attack on a radar on Hengam Island; the claim has not been verified, and Iranian state media claimed the Sitra fire was caused by a falling U.S. interceptor missile (Al Jazeera).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      },
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/whats-behind-irans-escalation-of-attacks-in-the-gulf",
+      "https://www.aljazeera.com/news/2026/11/21/bahrain-says-iranian-attack-caused-fire-at-industrial-facility"
+     ],
+     "loc": {
+      "lat": 26.15,
+      "lon": 50.62,
+      "place": "Sitra Island (Bahrain)",
+      "isos": [
+       "IRN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "IRGC claims two supertankers sailing unauthorized routes hit mines in Strait of Hormuz",
+     "fact": "Iran's Revolutionary Guards navy claimed on November 22 that two supertankers sailing unauthorized routes struck naval mines and exploded east of the Strait of Hormuz, north of Oman's Ghanam Island, and warned shipping companies to follow its navigation instructions (Xinhua, Press TV). The vessels' names and the damage have not been confirmed outside Iran.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ],
+     "src": [
+      "https://english.news.cn/20261123/9e8ce320ddab45d5a7c3da4314634bcc/c.html",
+      "https://www.presstv.co.uk/Detail/2026/11/22/781364/two-oil-supertankers-explode-in-strait-of-hormuz-irgc-navy-warns-shipping-companies"
+     ],
+     "loc": {
+      "lat": 26.37,
+      "lon": 56.4,
+      "place": "East of the Strait of Hormuz (north of Ghanam Island, Oman)",
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "Russian cargo ship hit in drone attack in Gulf of Finland; Finnish military says Ukraine likely responsible",
+     "fact": "Finland's Defense Ministry said a Russian-flagged cargo ship, the Sparta II, was hit by a drone attack on the morning of November 21 in international waters west of Gogland Island in the Gulf of Finland (Russian officials said it was bound for Kaliningrad), and the Finnish military said Ukraine was likely responsible (Reuters, AFP). The 16 crew members were evacuated; a Russian helicopter later intruded more than 4 kilometers into Finnish airspace, and Defense Minister Antti Häkkänen said the suspected violation may have been linked to rescue or tracking operations (Al Jazeera).",
+     "fc": [],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "L",
+       "우크라이나의 후방 타격"
+      ],
+      [
+       "poland",
+       "R",
+       "러시아의 문턱 아래 공격"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/russia-says-kaliningrad-bound-ship-struck-by-drones-in-gulf-of-finland",
+      "https://www.aljazeera.com/news/2026/11/22/russian-cargo-ship-still-on-fire-off-finland-after-drone-attack"
+     ],
+     "loc": {
+      "lat": 60.06,
+      "lon": 26.8,
+      "place": "Gulf of Finland (west of Gogland Island)",
+      "isos": [
+       "UKR",
+       "RUS",
+       "FIN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran says it held talks with Qatari mediators; Araghchi says the blockade must be lifted",
+     "fact": "Deputy Foreign Minister Kazem Gharibabadi said on November 21 that a Qatari delegation held two hours of talks with Iranian officials in Tehran on the night of November 20 but said they were not yet formal negotiations, and Foreign Minister Abbas Araghchi said the blockade must be lifted “rationally” and that discussing the reopening of the Strait of Hormuz was pointless as long as Iran's demands went unmet (AFP, Reuters). President Donald Trump told Fox News the same day that he wants a “permanent” deal that keeps Iran from getting a nuclear weapon (AFP, Reuters).",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "L",
+       "카타르의 가교안"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/iran-says-held-talks-with-qatari-mediators-urges-us-to-accept-conditions"
+     ],
+     "loc": {
+      "lat": 35.69,
+      "lon": 51.39,
+      "place": "Tehran (Iran)",
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Zelensky says Russia fired about 2,700 drones and 165 missiles in a week, urges U.S. to approve Patriot deliveries",
+     "fact": "President Volodymyr Zelensky said on November 22 that Russia had launched about 2,700 attack drones, about 1,460 guided bombs, and 165 missiles over the past week, and urged Washington to approve delivery of Patriot interceptors that allies had already paid for (Al Jazeera). Early that day, a Russian strike partly collapsed an apartment building in Dymer, north of Kyiv, and rescuers recovered two bodies (Al Jazeera).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/zelenskyy-urges-us-to-release-patriot-missiles"
+     ],
+     "loc": {
+      "lat": 50.79,
+      "lon": 30.3,
+      "place": "Dymer (Ukraine)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russian vessel at Libya's Benghazi naval base explodes in suspected sea drone attack",
+     "fact": "Libya's eastern government said a Russian vessel docked at the Benghazi naval base to refuel and take on supplies was hit on November 22 by a suspected sea drone, causing an explosion and fire, and that it had opened a joint investigation with Russia (Reuters, Al Jazeera). An unknown number of people were injured, and no one has claimed responsibility.",
+     "fc": [],
+     "fp": [
+      "rus-ukr",
+      "libya-division"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/suspected-drone-strike-hits-russian-vessel-in-libya"
+     ],
+     "loc": {
+      "lat": 32.12,
+      "lon": 20.07,
+      "place": "Benghazi (Libya)",
+      "isos": [
+       "LBY",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Mexico captures FBI Ten Most Wanted fugitive ‘El Chapo Isidro’",
+     "fact": "Mexico's Defense Ministry and the U.S. Justice Department announced on November 21 that Mexican troops had arrested Fausto Isidro Meza Flores, known as “El Chapo Isidro,” a senior Sinaloa Cartel leader on the FBI's Ten Most Wanted list, in Guasave, Sinaloa, on November 20 (U.S. Justice Department, Al Jazeera). Mexico's Defense Ministry said the operation was coordinated with U.S. intelligence agencies, and the Justice Department said U.S. agencies supported it.",
+     "fc": [],
+     "fp": [
+      "us-mexico-cartels"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.justice.gov/usao-sdca/pr/senior-leader-sinaloa-cartel-and-one-fbis-ten-most-wanted-fugitives-arrested-mexico",
+      "https://www.aljazeera.com/news/2026/11/22/how-el-chapo-isidro-alleged-mexican-cartel-leader-was-captured"
+     ],
+     "loc": {
+      "lat": 25.57,
+      "lon": -108.47,
+      "place": "Guasave (Mexico)",
+      "isos": [
+       "MEX",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Asian stocks slide amid AI bubble fears; Kospi falls as much as 5.8%",
+     "fact": "Amid mounting fears of an AI bubble, South Korea's Kospi fell as much as 5.8 percent on November 23 and was down 3.2 percent as of 4:30 a.m. GMT, while Hong Kong's Hang Seng dropped about 0.6 percent (Al Jazeera). On November 20, the S&P 500 had fallen 3.7 percent and the Nasdaq Composite 5.3 percent (Al Jazeera).",
+     "fc": [],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/23/south-koreas-stock-market-tumbles-as-ai-bubble-fears-mount"
+     ],
+     "loc": {
+      "lat": 37.57,
+      "lon": 126.98,
+      "place": "Seoul (South Korea)",
+      "isos": [
+       "KOR"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "Netanyahu and Eisenkot meet on coalition but reach no deal",
+     "fact": "Caretaker Prime Minister Benjamin Netanyahu and Yashar leader Gadi Eisenkot, who holds the mandate to form a government, met in Herzliya on November 22 but reached no deal and agreed only to meet again (Channel 12, AP). Eisenkot has until December 6 to form a government, with a possible 14-day extension (Al Jazeera).",
+     "fc": [
+      {
+       "id": "f59",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/netanyahus-likud-eisenkots-yashar-end-coalition-talks-without-deal"
+     ],
+     "loc": {
+      "lat": 32.16,
+      "lon": 34.84,
+      "place": "Herzliya (Israel)",
+      "isos": [
+       "ISR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "Drone attacks blamed on the Rapid Support Forces killed at least four people in and around Khartoum and Omdurman early on November 22 (AFP), and Denise Brown, the UN humanitarian coordinator in Sudan, said a UN building was damaged while staff were inside.",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/22/rsf-drones-kill-four-in-khartoum"
+     ],
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Lebanese President Joseph Aoun, speaking on November 21, the eve of the country's 83rd independence anniversary, demanded that Israel withdraw from all Lebanese territory and stop its attacks, and called on armed groups to hand over their weapons (AFP).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/21/lebanese-president-demands-israel-withdrawal-decries-irans-interference"
+     ],
+     "case": null,
+     "fp": [
+      "levant"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Thai Prime Minister Anutin Charnvirakul told Cambodian Prime Minister Hun Manet on November 21 that Thailand would halt all other bilateral talks if Cambodia kept pursuing compulsory conciliation over their maritime boundary; a Permanent Court of Arbitration conciliation commission meets in Kuala Lumpur November 24–27 (The Nation).",
+     "src": [
+      "https://www.nationthailand.com/news/general/40073765"
+     ],
+     "case": null,
+     "fp": [
+      "thai_cambodia"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Denmark's parliament on November 19 ratified a U.S.-Greenland-Denmark security agreement 109–0; the deal lets the United States build two bases in Greenland (Al Jazeera).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/19/denmark-parliament-approves-security-deal-with-greenland-and-us"
+     ],
+     "case": null,
+     "fp": [
+      "greenland-arctic"
+     ],
+     "pull": []
+    },
+    {
+     "t": "AFP reported on November 19, citing satellite imagery and expert analysis, that China is building a runway nearly 3 kilometers long on Antelope Reef in the Paracel Islands.",
+     "src": [
+      "https://www.manilatimes.net/2026/11/19/news/national/beijing-bolsters-south-china-sea-push-with-new-island-runway/2472811"
+     ],
+     "case": null,
+     "fp": [
+      "paracels"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Haitian police said they killed at least 34 suspected gang members in a November 19 operation in the Martissant area of Port-au-Prince (Reuters, AP).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/19/haiti-police-say-at-least-34-suspected-gang-members-killed-in-raid"
+     ],
+     "case": null,
+     "fp": [
+      "haiti-gang-crisis"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Pakistani Climate Change Minister Musadik Malik arrived in New Delhi on November 20 for a Shanghai Cooperation Organization civilizational dialogue forum, becoming the first Pakistani federal minister to visit India since the May 2025 conflict, though no bilateral meeting was scheduled (Al Jazeera).",
+     "src": [
+      "https://www.aljazeera.com/news-analysis/2026/11/20/pakistan-minister-visits-india-for-first-time-since-2025-war"
+     ],
+     "case": null,
+     "fp": [
+      "india_pakistan"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Belgian air traffic control agency Skeyes said it would be unable to provide normal service from 7 a.m. to 9 p.m. local time on November 23, a national day of union action against government austerity, and nearly all flights at Belgian airports were expected to be canceled (AFP, DPA).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/23/belgiums-airports-set-to-shut-down-due-to-anti-austerity-strike"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-21",
    "items": [
     {
@@ -5895,353 +6241,6 @@
      ],
      "fp": [
       "taiwan-strait"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-19",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russian missiles and drones hit Kyiv and other regions; one killed, eight injured in the capital",
-     "fact": "Russia launched 269 drones along with ballistic and cruise missiles overnight on October 18–19, Ukraine's air force said, adding that 243 drones and four missiles were shot down or neutralized and that hits were recorded at 25 locations. Russia's Defense Ministry claimed it struck a data center in Kyiv and a locomotive depot it said was used to store missiles, as well as a cargo ship at sea 130 kilometers southwest of Odesa.",
-     "fc": [],
-     "src": [
-      "https://abcnews.com/International/wireStory/russian-missiles-drones-hit-kyiv-overnight-killing-1-137371029",
-      "https://www.ukrinform.net/rubric-ato/4175779-air-defense-forces-shoot-down-four-russian-missiles-and-243-drones-since-this-evening.html",
-      "https://tass.com/politics/2203979"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "Kyiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "WSJ: Putin proposed a three-way Ukraine summit with Trump and Xi",
-     "fact": "The Wall Street Journal reported on October 18 (U.S. time) that Russian President Vladimir Putin proposed discussing an end to the war in Ukraine with President Donald Trump and Chinese President Xi Jinping at the APEC summit in Shenzhen on November 18–19, without Ukrainian President Volodymyr Zelensky. Kremlin spokesman Dmitry Peskov said there was no clear understanding yet about the meeting or its agenda, and a senior U.S. official said Trump had not agreed but might be open to it.",
-     "fc": [],
-     "src": [
-      "https://www.brecorder.com/news/40444891/putin-proposes-summit-with-trump-and-xi-to-discuss-ukraine-deal-wsj-says",
-      "https://www.cnbc.com/2026/10/19/putin-trump-xi-ukraine-war-energy.html"
-     ],
-     "loc": {
-      "isos": [
-       "RUS",
-       "USA",
-       "CHN",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Zelensky claims U.S. has cleared only some of the Patriot missiles already paid for",
-     "fact": "In a Bloomberg interview published October 18, Ukrainian President Volodymyr Zelensky said Washington had approved delivery of only some of the Patriot missiles bought through PURL, the program that uses NATO allies' money to buy U.S. weapons, and that this was not a technical issue. He also claimed that steps had been taken to convince Ukraine to capitulate.",
-     "fc": [],
-     "src": [
-      "https://kyivindependent.com/us-delaying-patriot-missiles-already-paid-for-under-nato-initiative-zelensky-says/",
-      "https://www.ukrinform.net/rubric-polytics/4175836-us-delaying-delivery-of-patriot-missiles-already-paid-for-by-ukraine-zelensky.html"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Rubio says Ukraine currently has no access to Starshield, denies ordering a speed cap",
-     "fact": "Secretary of State Marco Rubio told reporters on October 17 that Ukraine does not currently have access to Starshield, the military version of Starlink, and that its request is under discussion. He called reports that the White House ordered Starlink speeds slowed \"categorically false,\" though Ukrainian defense officials had earlier said Starshield was working again.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/18/rubio-says-ukraine-without-access-to-starshield-future-under-discussion",
-      "https://www.kyivpost.com/post/87400"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [],
-     "h": "North Korea-China trade hits $299 million in September, up 18.6 percent year to date",
-     "fact": "North Korea-China trade came to about $299 million in September, up from $238 million in August and the year's second-highest monthly total after April, according to China's General Administration of Customs data released October 18 and reported by NK News, a North Korea-focused outlet. By the Sankei Shimbun's count, trade from January through September totaled about $2.27 billion, up 18.6 percent from a year earlier.",
-     "fc": [
-      {
-       "id": "f23",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.nknews.org/2026/10/north-korea-china-trade-soared-to-300m-last-month-ahead-of-bridge-opening-data/",
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008804422"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Massive drone attack sets St. Petersburg oil terminal ablaze, killing one",
-     "fact": "St. Petersburg Gov. Alexander Beglov said on October 18 that a \"massive\" drone attack killed one person, injured five and set fire to an oil terminal and a fuel depot, among other sites. Russia's Defense Ministry said it downed 1,015 Ukrainian drones between 8 p.m. on October 17 and 8 a.m. on October 18.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/18/ukrainian-drone-attack-on-russias-st-petersburg-kills-1-hits-energy-sites",
-      "https://voennoedelo.com/en/posts/id21090-russia-says-1-015-ukrainian-drones-downed-overnight"
-     ],
-     "loc": {
-      "lat": 59.94,
-      "lon": 30.31,
-      "place": "St. Petersburg (Russia)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Rubio says Trump wants up to 60 days to weigh impact of waived Russia sanctions, tariffs",
-     "fact": "Secretary of State Marco Rubio told reporters on October 17 that President Trump plans to spend up to 60 days analyzing the economic effects of the Russia sanctions and tariffs he waived on October 16. The October 16 executive order itself sets no end date for the waiver.",
-     "fc": [],
-     "src": [
-      "https://www.spokesman.com/stories/2026/oct/17/rubio-says-trump-to-take-up-to-60-days-to-weigh-ru/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Zelensky says U.S. proposed three-way talks, but Moscow and Washington have yet to confirm",
-     "fact": "Ukrainian President Volodymyr Zelensky told reporters on October 17 that the United States had proposed a trilateral meeting but that neither Russia nor the U.S. had yet confirmed it. He said possible venues include a Middle Eastern country such as the UAE or Saudi Arabia, the U.S. during the G20 summit, or a European country.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-polytics/4175468-zelensky-us-working-to-arrange-possible-meeting-with-putin.html"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "IRGC claims another 'noncompliant' tanker hit a mine south of Hormuz",
-     "fact": "Iran's Revolutionary Guard navy claimed early on October 19, Tehran time, that a tanker leaving the strait by an unauthorized southern route with its navigation systems switched off struck a mine, causing an explosion and fire in its engine room. It did not name the ship, and there was no independent confirmation.",
-     "fc": [],
-     "src": [
-      "https://wanaen.com/irgc-navy-says-non-compliant-tanker-hit-by-sea-mine-south-of-strait-of-hormuz/",
-      "https://tass.com/world/2203869"
-     ],
-     "loc": {
-      "isos": [
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "Projectile hits residential area in Saudi Arabia's Najran, injuring six",
-     "fact": "Saudi Civil Defense said on October 18 that a projectile fell on a residential area of Najran, injuring six civilians and damaging three homes and three vehicles; Saudi media attributed it to the Houthis. The same day, a Saudi military helicopter crashed in Najran, killing two officers.",
-     "fc": [],
-     "src": [
-      "https://www.arabnews.pk/saudi-arabia/saudi-civil-defense-says-6-citizens-injured-after-projectile-falls-in-najran-3004548",
-      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ],
-     "loc": {
-      "lat": 17.49,
-      "lon": 44.13,
-      "place": "Najran (Saudi Arabia)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "fp": [
-      "taiwan-strait"
-     ],
-     "h": "Taiwan's coast guard drives off 16 Chinese ships, accuses Beijing of hybrid warfare",
-     "fact": "Taiwan's Coast Guard Administration said on October 18 it drove away 16 Chinese vessels, including coast guard ships, research vessels and fishing boats, off the main island's eastern, southern and southwestern coasts and around the Pratas Islands, adding that some had entered restricted waters. It condemned China for waging hybrid warfare at several locations at once to change the status quo unilaterally.",
-     "fc": [],
-     "src": [
-      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/19/2003866217",
-      "https://www.aljazeera.com/news/2026/10/18/taiwan-drives-away-16-chinese-ships-accused-of-maritime-harassment"
-     ],
-     "loc": {
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Trump fully endorses Netanyahu nine days before Israel's election",
-     "fact": "In an October 18 Truth Social post, President Trump gave Prime Minister Benjamin Netanyahu his \"Complete and Total Endorsement,\" saying the U.S. would soon finish the job unless Iran changes course and that with any other leader it would have to do so itself, which he is not inclined to do. Israel votes on October 27.",
-     "fc": [
-      {
-       "id": "f59",
-       "e": "up"
-      },
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.jta.org/2026/10/18/global/trump-endorses-netanyahu-ahead-of-israeli-elections-citing-iranian-threat",
-      "https://www.axios.com/2026/10/18/trump-endorses-netanyahu-israel-election-iran"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "ISR",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "pak_afg"
-     ],
-     "h": "Pakistani troops and Afghan Taliban clash on the border in Kurram",
-     "fact": "Pakistani security officials claimed that troops fought Afghan Taliban forces for hours at several points along the border in Khyber Pakhtunkhwa province's Kurram district on October 17 and that artillery-backed units destroyed Taliban posts. The Taliban government had no immediate comment, and there was no confirmed casualty count.",
-     "fc": [
-      {
-       "id": "f10",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.clickorlando.com/news/world/2026/10/17/pakistani-forces-afghan-taliban-exchange-fire-after-militants-attempt-to-infiltrate-pakistan/",
-      "https://kabulnow.com/2026/10/pakistani-media-reports-deaths-of-afghan-taliban-fighters-in-border-clashes/"
-     ],
-     "loc": {
-      "lat": 33.9,
-      "lon": 70.1,
-      "place": "Kurram (Pakistan)",
-      "isos": [
-       "PAK",
-       "AFG"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "French protests spiral into riots and looting, with at least 1,800 arrested",
-     "fact": "Protests by about 550,000 people across France on October 17, by the authorities' count, over rising living costs and worsening school conditions descended into arson and looting. At least 1,800 people were arrested, according to a CBS News tally; Al Jazeera, citing the Interior Ministry, put the number at about 2,400. In a televised address on October 18, President Emmanuel Macron said looters would have to pay for the damage.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/news/protests-france-rising-living-costs-students/",
-      "https://www.aljazeera.com/news/2026/10/18/macron-denounces-frances-nationwide-rioting-looting"
-     ],
-     "loc": {
-      "isos": [
-       "FRA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "Zelensky said in an NBC interview on October 18 that the U.S. has resumed sharing intelligence on Russian missile launches, and he spoke by phone the same day with U.S. envoys Steve Witkoff and Jared Kushner.",
-     "src": [
-      "https://kyivindependent.com/a-great-deal-depends-on-americas-position-zelensky-holds-call-with-trumps-peace-envoys-as-us-pivots-to-moscows-side/"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "Iranian Foreign Minister Abbas Araghchi said in Baghdad on October 18 that Iran's offer to reopen the Strait of Hormuz within seven days is still on the table.",
-     "src": [
-      "https://www.foxnews.com/live-news/us-iran-war-peace-talks-oil-strait-hormuz-trump-october-18"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Iranian media reported that Russian Foreign Minister Sergei Lavrov will visit Tehran on October 19.",
-     "src": [
-      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ],
-     "fp": []
-    },
-    {
-     "t": "Egypt's parliament postponed until October 19 a vote on authorizing military support for Saudi Arabia.",
-     "src": [
-      "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-october-18-2026"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Lithuanian President Gitanas Nauseda said on October 18 that what appeared to be a drone entered Lithuanian airspace and exploded; a Ukrainian Foreign Ministry spokesperson apologized, saying Russian electronic warfare may have pushed a Ukrainian drone off course.",
-     "src": [
-      "https://kyivindependent.com/nato-jets-scramble-as-drone-explodes-in-lithuanian-airspace/"
-     ],
-     "fp": [
-      "baltic-kaliningrad-suwalki",
-      "rus-ukr"
      ]
     }
    ]
