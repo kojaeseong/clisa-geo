@@ -458,10 +458,13 @@ function lenses(){
   h+=stepped('lens',S,'What else would you like to see here?',nextQ([['Learn international relations from the ground up · Clisa Academy','/en/academy/','Opens on the website ↗']],'lens'));
   V.innerHTML=h;window.scrollTo(0,0);
 }
+var DGV=null;fetch('/video/digest.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(j){DGV=j;[].forEach.call(document.querySelectorAll('.dgv'),function(x){if(!x.open)x.outerHTML=dgvA()})}).catch(function(){});  /* 2026-11-24 대통령님 결재: 주간 정세 요약 영상(현행 판 날짜의 영상이 있을 때만, 누르면 펼쳐 재생) */
+function dgvA(){var v=DGV&&DATA&&DGV[DATA.dgdate]&&DGV[DATA.dgdate].en;if(!v)return '<div class="dgv"></div>';return '<details class="dgv" style="margin:0 0 12px"><summary style="display:inline-block;cursor:pointer;list-style:none;padding:5px 14px;border:1px solid var(--acc);border-radius:6px;font-size:14px;font-weight:700;color:var(--acc)">▶ Watch the video · '+e(v.dur)+'</summary><video controls preload="none" playsinline src="'+e(v.src)+'" poster="'+e(v.poster)+'" style="width:100%;max-width:340px;aspect-ratio:9/16;border-radius:10px;background:#0A0A0A;display:block;margin:10px auto 4px"></video></details>'}
+document.addEventListener('toggle',function(ev){var t=ev.target;if(t&&t.classList&&t.classList.contains('dgv')&&t.open){var v=t.querySelector('video');if(v)v.play().catch(function(){})}},true);
 function dgs(){
   var D=DATA.digest,h=bar('Week','#B07800','Weekly summary'+(DATA.dgdate?', '+md(DATA.dgdate):''));  
   var card=function(d){var a=app(d.a);return '<div class="card dg"><h2>'+e(a?a[1]:'')+'</h2><b>'+e(d.t)+'</b><p class="clamp">'+e(d.d)+'</p><button class="mo" data-more>More</button></div>'};
-  h+='<div class="qr"><div class="q">How the world moved this week</div>'+lsnBtn()+'</div><p class="lead">This week’s summary covers '+D.length+' issues. Here are the first three.</p>'+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+' more issues ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
+  h+='<div class="qr"><div class="q">How the world moved this week</div>'+lsnBtn()+'</div><p class="lead">This week’s summary covers '+D.length+' issues. Here are the first three.</p>'+dgvA()+D.slice(0,3).map(card).join('')+(D.length>3?'<button class="more2" data-fold>'+(D.length-3)+' more issues ▾</button><div class="fold" hidden>'+D.slice(3).map(card).join('')+'</div>':'');
   h+=nextQ(D.slice(0,2).map(function(d){var a=app(d.a);return a&&(DATA.boards||{})[d.a]?[a[1]+' · where did this push the balance?','#i/'+d.a+'/pan']:null}),'dg');
   V.innerHTML=h;window.scrollTo(0,0);if(D.length)ss('dgseen',D[0].t);
 }
