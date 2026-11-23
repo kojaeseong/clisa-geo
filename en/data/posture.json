@@ -569,6 +569,20 @@
     "f60"
    ],
    "fp": null
+  },
+  {
+   "date": "2026-11-16",
+   "s": "Lithuania rotation resumes",
+   "kind": "up",
+   "lat": 54.98,
+   "lon": 25.76,
+   "t": "Two battalions of the U.S. Army's 1st Infantry Division arrived in Pabradė, Lithuania, on November 16, closing the gap left when rotations paused in June; U.S. Ambassador Kara McDonald called it a continuation of rotations (troop numbers not given)",
+   "grade": "Official",
+   "src": "U.S. Ambassador to Lithuania and President Nausėda (Reuters, Stars and Stripes)",
+   "url": "https://www.stripes.com/branches/army/2026-11-17/lithuania-us-base-troops-23492394.html",
+   "case": "poland",
+   "fc": [],
+   "fp": "baltic-kaliningrad-suwalki"
   }
  ]
 }
