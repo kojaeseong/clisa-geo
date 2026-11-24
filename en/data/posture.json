@@ -311,20 +311,20 @@
   ]
  },
  "fleet": {
-  "asof": "2026-11-16",
+  "asof": "2026-11-23",
   "src": "USNI News Fleet Tracker (approximate positions based on Navy and public information)",
-  "url": "https://news.usni.org/2026/11/16/usni-news-fleet-and-marine-tracker-nov-16-2026",
+  "url": "https://news.usni.org/2026/11/23/usni-news-fleet-and-marine-tracker-nov-23-2026",
   "items": [
    {
     "name": "USS George Washington",
-    "g": "Arabian Sea",
+    "g": "Indian Ocean",
     "type": "cv",
     "home": "Yokosuka (Japan)",
     "fwd": true,
-    "lat": 16.5,
-    "lon": 63.5,
-    "where": "Arabian Sea · supporting operations in the Middle East",
-    "note": "The carrier forward-deployed in Japan is in the Middle East"
+    "lat": -10.0,
+    "lon": 75.0,
+    "where": "Indian Ocean · left the U.S. 5th Fleet area, operating in the 7th Fleet area",
+    "note": "The carrier forward-deployed in Japan has left the Middle East (5th Fleet area)"
    },
    {
     "name": "USS George H.W. Bush",
@@ -346,21 +346,22 @@
    },
    {
     "name": "USS Boxer amphibious ready group",
-    "g": "Indian Ocean",
+    "g": "Arabian Sea",
     "type": "ar",
     "home": "San Diego",
-    "lat": -10.0,
-    "lon": 75.0,
-    "where": "Indian Ocean · operating"
+    "lat": 16.5,
+    "lon": 63.5,
+    "where": "Arabian Sea · operating"
    },
    {
     "name": "USS Makin Island amphibious ready group",
-    "g": "Philippine Sea",
+    "g": "Singapore",
     "type": "ar",
     "home": "San Diego",
-    "lat": 20.0,
-    "lon": 130.0,
-    "where": "Philippine Sea · routine operations"
+    "lat": 1.3,
+    "lon": 103.8,
+    "where": "In port at Singapore · transited the Strait of Johor on November 20",
+    "note": "USS Anchorage, part of the group, is in Yokosuka"
    },
    {
     "name": "USS Tripoli amphibious ready group",
