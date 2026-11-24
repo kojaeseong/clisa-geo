@@ -645,6 +645,7 @@ function briefView(d){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d
   var L=DATA.items.filter(function(x){return x.d===d}),i=ds.indexOf(d),h=bar('브리핑','#0B2A86',md(d)+' 정세 브리핑');
   h+='<div class="qr"><div class="q">'+md(d)+'에 보고드린 정세 브리핑입니다. '+L.length+'건입니다.</div>'+lsnBtn()+'</div>'+msgs(L,'b.'+d);
   h+=nextQ([ds[i+1]?['전날('+md(ds[i+1])+') 정세 브리핑',"#b/"+ds[i+1]]:null,i>0?['다음 날('+md(ds[i-1])+') 정세 브리핑','#b/'+ds[i-1]]:null],'');
+  h+='<p class="ftw"><a href="'+(LANG==='en'?'/en':'')+'/brief/" target="_blank" rel="noopener">지난 정세 브리핑 전체 보기 · 홈페이지에서 열립니다 ↗</a></p>';  /* 2026-11-24 대통령님 결재: 앱에는 최근 21개 호만 있으므로 홈페이지 목록으로 */
   V.innerHTML=h;markRead('b.'+d,L);window.scrollTo(0,0)}
 // 관심사에 맞춘 첫 화면
 function focusHome(){var h='<section class="fo"><div class="q">관심사에 맞춘 오늘</div>';

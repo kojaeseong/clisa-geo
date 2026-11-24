@@ -1,6 +1,222 @@
 {
  "issues": [
   {
+   "date": "2026-11-24",
+   "items": [
+    {
+     "case": "ukraine",
+     "h": "젤렌스키 \"리비아 벵가지서 러시아 초계함 메르쿠리 격침\"",
+     "fact": "볼로디미르 젤렌스키 대통령은 23일 엑스(X)에 우크라이나 해상 드론이 22일 리비아 동부 벵가지 해군기지에서 러시아 초계함 메르쿠리를 격침하고 화물선 앙가라도 공격했다고 밝혔습니다(CBS·AP). 러시아는 초계함 손실에 공식 논평을 내지 않았고, 리비아 정부는 리비아를 국제 분쟁의 무대로 만들려는 시도를 거부한다고 밝혔습니다(모스크바타임스).",
+     "fc": [],
+     "fp": [
+      "rus-ukr",
+      "libya-division"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "L",
+       "우크라이나의 후방 타격"
+      ]
+     ],
+     "src": [
+      "https://www.cbsnews.com/news/ukraine-zelenskyy-2-russian-ships-libya/",
+      "https://www.themoscowtimes.com/2026/11/23/zelensky-confirms-attack-against-russian-warship-in-libya-a94346"
+     ],
+     "loc": {
+      "lat": 32.12,
+      "lon": 20.07,
+      "place": "벵가지(리비아)",
+      "isos": [
+       "UKR",
+       "RUS",
+       "LBY"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "혁명수비대 \"유조선 3척, 호르무즈서 기뢰에 폭발·화재\" 주장",
+     "fact": "이란 혁명수비대는 유조선 3척이 호르무즈 해협에서 기뢰에 부딪혀 심한 폭발과 화재를 겪었다고 주장했습니다(알자지라 24일 보도). 선박 이름과 피해 규모는 밝혀지지 않았습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ],
+     "src": [
+      "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "호르무즈 해협",
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "이란 \"모든 수단으로 미국의 침략에 대응\"…카타르 총리, 워싱턴서 밴스·루비오와 회담",
+     "fact": "이스마일 바가이 이란 외무부 대변인은 23일 정례 브리핑에서 미국의 해상봉쇄를 '범죄 행위'라고 부르며 미국의 침략에 모든 수단을 써서 대응하겠다고 밝혔고(유로뉴스), 제재 해제와 봉쇄 종료, 양해각서의 이행을 해협 안정의 조건으로 들었습니다(ABC). 셰이크 무함마드 빈 압둘라흐만 알사니 카타르 총리 겸 외무장관은 같은 날 워싱턴에서 JD 밴스 부통령과 마코 루비오 국무장관을 따로 만났고(AP), 알자지라와의 인터뷰에서 중동은 미국과 이란 사이의 또 다른 확전을 견딜 수 없다고 말했습니다.",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "L",
+       "카타르의 가교안"
+      ]
+     ],
+     "src": [
+      "https://www.euronews.com/2026/11/23/iran-vows-every-means-to-counter-us-blockade-of-hormuz-after-trump-threat",
+      "https://www.wsls.com/news/politics/2026/11/24/vance-and-rubio-meet-with-qatari-pm-as-uncertainty-mounts-over-trumps-intentions-with-iran/",
+      "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+      "https://abcnews.com/International/live-updates/iran-live-updates-tehran-strait-hormuz-safe-demands/?id=138369648"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "QAT",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 자포리자 아파트 공격…최소 2명 사망·22명 부상",
+     "fact": "미하일로 세미킨 자포리자주 군정청장은 23일 밤 러시아군의 공격으로 자포리자시 코스미치니 지구의 아파트 건물이 일부 파괴되어 최소 2명이 숨지고 6세·16세 아이를 포함해 22명이 다쳤다고 밝혔습니다(키이우인디펜던트).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://kyivindependent.com/2-killed-22-injured-in-russian-attack-on-residential-building-in-zaporizhzhia/"
+     ],
+     "loc": {
+      "lat": 47.84,
+      "lon": 35.14,
+      "place": "자포리자(우크라이나)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키 \"우크라이나를 NATO에 받아들이는 게 더 효과적이지 않나\"…뤼터 \"모든 동맹국이 동의하진 않아\"",
+     "fact": "젤렌스키 대통령은 23일 베를린에서 열린 NATO 의회총회 제72차 연차총회에 영상으로 연설하며 우크라이나의 NATO 가입을 요구했고, 마르크 뤼터 NATO 사무총장은 현재로서는 모든 동맹국이 동의하지는 않는다고 말했습니다(키이우인디펜던트). 프리드리히 메르츠 독일 총리는 뤼터 사무총장과의 공동 기자회견에서 2008년 부쿠레슈티 정상회의에서 우크라이나 가입을 위한 미국의 제안을 지지하지 않은 것이 잘못이었다고 말했습니다.",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://kyivindependent.com/zelensky-calls-for-nato-to-admit-ukraine-at-alliance-assembly/"
+     ],
+     "loc": {
+      "lat": 52.52,
+      "lon": 13.4,
+      "place": "베를린(독일)",
+      "isos": [
+       "UKR",
+       "DEU"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "멕시코 \"엘 차포 이시드로, 국내서 재판\"…미국 송환 요청에도",
+     "fact": "에르네스티나 고도이 멕시코 검찰총장은 23일 미국이 송환을 요청한 파우스토 이시드로 메사 플로레스(미 법무부가 시날로아 카르텔 고위 지도자로 지목)를 멕시코에서 재판하겠다고 밝혔습니다(로이터·알자지라). 멕시코 국방부는 20일 밤사이 체포 작전에서 군인 4명과 카르텔 무장원 16명이 숨졌다고 밝혔습니다(알자지라).",
+     "fc": [],
+     "fp": [
+      "us-mexico-cartels"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/24/mexico-to-try-el-chapo-isidro-despite-us-extradition-request"
+     ],
+     "loc": {
+      "lat": 19.43,
+      "lon": -99.13,
+      "place": "멕시코시티(멕시코)",
+      "isos": [
+       "MEX",
+       "USA"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "안토니우 구테흐스 유엔 사무총장은 23일 바베이도스에서 열린 브리지타운 AI 안전 특별 정상회의에서 앞으로 1년 안에 AI 위험 관리를 위한 전 지구적으로 포용적이고 원칙에 기반한 다자 틀을 만들자고 촉구했습니다(AFP·알자지라).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/24/un-chief-calls-for-world-to-agree-on-ai-oversight-within-a-year"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    },
+    {
+     "t": "김여정 노동당 총무부장은 24일 담화에서 스위스가 러시아 제재 명단에 송도원국제소년단야영소를 올린 것을 비난하며, 평양 주재 스위스 외교 사무소의 철수 문제를 며칠 안에 엄격히 검토하도록 외무성에 건의하겠다고 밝혔습니다(조선중앙통신, SBS 보도).",
+     "src": [
+      "https://news.sbs.co.kr/english/article.do?news_id=N1008860068"
+     ],
+     "case": "korea",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "몰도바 IPN 통신은 23일 오후 6시 45분께(현지 시각) 트란스니스트리아 드녜스트로브스크 부근에 드론이 떨어져 폭발하고 주유소 근처에서 화재가 발생했다고 목격자를 인용해 보도했으며, 드론의 기종과 출처는 알려지지 않았습니다(키이우인디펜던트).",
+     "src": [
+      "https://kyivindependent.com/explosion-fire-reported-after-drone-crashes-in-transnistria/"
+     ],
+     "case": null,
+     "fp": [
+      "transnistria"
+     ],
+     "pull": []
+    },
+    {
+     "t": "24일 오전 7시 52분 경북 울릉군 주민들의 휴대전화에 '러시아 항공기 영공 침범' 공습 경보 문자가 발송됐으나, 군은 해당 항공기를 러시아 항공기로 식별하면서 영공 침범은 없었다고 밝혔습니다(NK뉴스).",
+     "src": [
+      "https://www.nknews.org/2026/11/south-korean-province-mistakes-russian-aircraft-for-possible-north-korean-plane/"
+     ],
+     "case": "korea",
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-23",
    "items": [
     {
@@ -6022,225 +6238,6 @@
      ],
      "fp": [
       "rus-ukr"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-20",
-   "items": [
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "김여정, 북한 군 지도부가 대남 확성기 재개·전술타격수단 증강 배치 검토 중이라고 밝혀",
-     "fact": "김여정 노동당 총무부장은 19일 북한 매체에 실린 담화에서 남쪽 국경 정세가 매우 불안정하다며 한국군이 8월 1일~10월 17일 경고방송 2,870회, 경고사격 201회를 했다고 주장했습니다. 국방부는 20일 '엄중한 우려'를 표하고 이를 구실로 추가 도발하면 단호히 대응하겠다고 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://www.koreaherald.com/article/10907760",
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008804964",
-      "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20261020/defense-ministry-voices-grave-concern-over-n-korea-heightening-border-tensions-with-threats"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "악시오스, 헤그세스 미 국방장관이 이스라엘 예고 없이 방문해 네타냐후 면담했다고 보도",
-     "fact": "악시오스는 19일 소식통 2명을 인용해 헤그세스 국방장관이 이스라엘을 예고 없이 방문해 네타냐후 총리를 만났다고 보도했고, 국방부는 논평하지 않았습니다. 같은 날 네타냐후 총리는 트럼프 대통령과의 통화 영상을 X에 올려 \"끝내야 할 일이 있다\"며 이란을 거론했습니다.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.al-monitor.com/originals/2026/10/hegseth-meets-netanyahu-unannounced-visit-israel-axios-reports",
-      "https://www.timesofisrael.com/liveblog_entry/we-have-a-job-to-finish-netanyahu-invokes-iran-in-call-with-trump-after-endorsement-us-president-says-pm-treated-unfairly/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "ISR",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb"
-     ],
-     "h": "후티, 예멘 샤브와의 정부군 기지에 미사일 공격…53명 사망",
-     "fact": "예멘 정부군 대변인은 19일 후티가 신병 훈련이 진행되던 샤브와주 알알람 기지에 탄도미사일 3발을 쏘았다고 밝혔고, 샤브와 지방 당국은 53명이 숨지고 200명이 다쳤다고 발표했습니다. 후티는 '사우디 지원 기지'를 노렸다며 공격을 인정했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/19/at-least-18-killed-in-houthi-attack-on-military-camp-in-yemens-shabwa",
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
-     ],
-     "loc": {
-      "isos": [
-       "YEM",
-       "SAU"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아 드론, 하르키우주 노바보돌라하 공원 타격…어린이 3명 등 6명 사망",
-     "fact": "시녜후보우 하르키우주 군사행정청장은 19일 러시아 드론이 노바보돌라하 중심가 공원을 타격해 6명이 숨졌고 그 가운데 3명이 어린이라고 밝혔습니다. 젤렌스키 대통령은 살상이 계속되는 한 대러 제재를 유지해 달라고 요구했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4176041-three-children-among-six-killed-in-russian-strike-on-kharkiv-region-park.html",
-      "https://www.ukrinform.net/rubric-ato/4176051-pure-atrocity-zelensky-urges-partners-not-to-lift-russia-sanctions-after-children-killed-in-kharkiv-region.html"
-     ],
-     "loc": {
-      "lat": 49.72,
-      "lon": 35.87,
-      "place": "노바보돌라하(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키, 패트리엇으로 방공 도우면 러 정유시설 공격 30일 멈추겠다고 제안",
-     "fact": "젤렌스키 대통령은 19일 미 상·하원 초당파 대표단과의 화상 회의에서 미국이 30일 동안 패트리엇으로 방공을 도우면 러시아 정유시설 공격을 멈추겠다고 제안했다고 밝혔습니다. 러시아가 에너지 시설 공격의 상호 중단을 거부했고, 최근 탄도미사일 공격 때 파트너들의 사전 경보가 없었다고도 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4176077-zelensky-holds-online-meeting-with-bipartisan-delegation-of-us-congress.html"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "로이터, 위트코프 특사가 이번 주 오슬로 회담 뒤 푸틴 만날 예정이라고 보도",
-     "fact": "로이터는 19일 소식통을 인용해 위트코프 특사가 이번 주 노르웨이에서 젤렌스키 대통령, 영국·프랑스·독일·폴란드·EU·NATO 대표와 회담한 뒤 러시아로 가 푸틴 대통령을 만날 예정이며 일정은 바뀔 수 있다고 보도했습니다.",
-     "fc": [],
-     "src": [
-      "https://kyivindependent.com/witkoff-plans-ukraine-peace-talks-in-norway-putin-meeting-in-russia/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "UKR",
-       "RUS",
-       "NOR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "라브로프 러 외무장관, 테헤란 방문…부셰르 원전에 러 기술진 단계적 복귀 밝혀",
-     "fact": "라브로프 외무장관은 19일 테헤란에서 아락치 외무장관, 페제시키안 대통령과 회담하고 전쟁 중 철수한 러시아 기술진이 부셰르 원전에 단계적으로 돌아간다고 밝혔습니다. 아락치 장관은 호르무즈 해협의 불안이 미국과 이스라엘의 군사 공격이 낳은 직접적 결과라고 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/19/russias-lavrov-to-discuss-us-war-and-regional-security-during-tehran-visit",
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
-     ],
-     "loc": {
-      "lat": 35.69,
-      "lon": 51.39,
-      "place": "테헤란(이란)",
-      "isos": [
-       "RUS",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "캐나다 앨버타 주민투표, 분리 절차 착수 부결…76% '캐나다 잔류'",
-     "fact": "19일 치러진 앨버타주 주민투표에서 100만 표 넘게 개표된 시점에 약 76%가 캐나다 잔류를, 약 23%가 분리 주민투표로 가는 절차 착수를 택했고, CBC는 20일 잔류를 예측했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.daytondailynews.com/nation-world/alberta-polls-close-in-separation-vote-testing-carney-s-push-for-canadian-unity/article_fa89dff1-4a05-5b02-a8fe-abd34310c7c1.html"
-     ],
-     "loc": {
-      "isos": [
-       "CAN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "프랑스, 폭력 시위 뒤 파리·리옹·니스·릴 등에 부분 야간 통행금지",
-     "fact": "르코르뉘 총리의 요청으로 각 지사가 19일 파리 레퓌블리크 광장·레알 일대(19일 23시~20일 6시)와 리옹·니스, 릴 등에 부분 야간 통행금지를 내렸고 일부는 미성년자만 대상입니다. 르코르뉘 총리는 필요하면 비상사태를 선포할 수 있다고 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/19/frances-macron-declines-ministers-resignation-after-violent-protests"
-     ],
-     "loc": {
-      "isos": [
-       "FRA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "이집트 관영 MENA 통신은 19일 의회가 군의 사우디아라비아 방어를 승인하는 표결을 26일로 미뤘다고 전했습니다.",
-     "src": [
-      "https://english.news.cn/20261019/004ceed5632246c69f56cd029ce84be5/c.html"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "사우디 미래투자이니셔티브(FII) 연구소의 마하 알사우드 최고경영자는 19일 리야드에서 26~29일 열 예정이던 회의를 2027년으로 미룬다고 밝혔습니다.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-us-trump-talks-russia-strait-of-hormuz/"
-     ],
-     "fp": []
-    },
-    {
-     "t": "러시아 국방부는 19일 오후 8시부터 20일 오전 8시(모스크바 시각)까지 14개 지역에서 우크라이나 고정익 드론 136대를 격추했다고 발표했습니다.",
-     "src": [
-      "https://tass.com/politics/2204447"
-     ],
-     "fp": [
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "슈라이버 미중경제안보검토위원회 의장은 20일 타이베이 토론회에서 중국 해경이 대만 동쪽 해역에서 법 집행 역할을 계속 실행하면 매우 불안정을 낳을 것이라고 말했습니다.",
-     "src": [
-      "https://www.taipeitimes.com/News/taiwan/archives/2026/10/20/2003866305"
-     ],
-     "fp": [
-      "taiwan-strait"
      ]
     }
    ]

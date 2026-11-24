@@ -1295,9 +1295,22 @@ function renderBrief(){
   el.innerHTML = "<section class=\"sec dbrief\" id=\"brief\"><div class=\"bh\"><h2>Briefing</h2><span class=\"bd\">" + enDate(cur.date) + "</span>" + ttsBtn("brief") + "</div>" +
     "<p class=\"note\">Major recent events and how they bear on Clisa Geopolitics’ assessments and forecasts. The arrows (↑·↓) show whether an event makes a forecast more or less likely to come true. Forecast probabilities are reviewed every week and revised when needed.</p>" +
     dailyIssue(cur) + "</section>" + (cur === BR.issues[0] ? dueHtml() + worldSecHtml() : "") +  /* v4.59 개편 ②: 최신 호 아래에 다가오는 일정·정세 요약·분쟁지 */
-    (others.length ? "<section class=\"sec\"><h3>Past briefings</h3><ul class=\"list blist\">" + others.map(o => '<li><a class="row-btn" href="/en/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul></section>" : "");
+    (others.length ? "<section class=\"sec\"><h3>Past briefings</h3><ul class=\"list blist\">" + others.map(o => '<li><a class="row-btn" href="/en/brief/' + esc(o.date) + '/" data-brief="' + esc(o.date) + '"><span class="mono">' + fmtKD(o.date) + '</span> <span class="nm">' + esc((o.items[0] || {}).h || "") + "</span></a></li>").join("") + "</ul>" + '<button type="button" class="bh-more" data-barch>Earlier briefings</button>' + "</section>" : "");
   el.scrollTop = 0;
 }
+/* 2026-11-24 대통령님 결재: 지난 정세 브리핑 목록은 매일 자료의 최근 30개 호까지만 보이므로, 그보다 앞선 호를 원본 목록 쪽(/en/brief/의 ul.idx)에서 받아 이어 붙인다 */
+document.addEventListener("click", ev => {
+  const b = ev.target.closest("[data-barch]"); if (!b) return;
+  const ul = b.previousElementSibling, have = new Set([...ul.querySelectorAll("[data-brief]")].map(a => a.dataset.brief)), min = [...have].sort()[0] || "9999";
+  b.disabled = true;
+  fetch("/en/brief/index.html", {cache: "no-cache"}).then(r => r.text()).then(t => {
+    const doc = new DOMParser().parseFromString(t, "text/html"), rows = [];
+    doc.querySelectorAll("ul.idx li a").forEach(a => { const m = (a.getAttribute("href") || "").match(/(\d{4}-\d{2}-\d{2})/); if (!m || have.has(m[1]) || m[1] >= min) return; have.add(m[1]); const d = a.querySelector(".d"); const h = a.textContent.slice(d ? d.textContent.length : 0).trim(); rows.push([m[1], h]); });
+    rows.sort((x, y) => y[0].localeCompare(x[0]));
+    ul.insertAdjacentHTML("beforeend", rows.map(r => '<li><a class="row-btn" href="/en/brief/' + esc(r[0]) + '/" data-brief="' + esc(r[0]) + '"><span class="mono">' + fmtKD(r[0]) + '</span> <span class="nm">' + esc(r[1]) + "</span></a></li>").join(""));
+    b.remove();
+  }).catch(() => { b.disabled = false; });
+});
 function goBrief(date){ S.bdate = date || null; renderBrief(); switchTab("brief"); }
 function dailyHtml(){
   if (!BR || !(BR.issues || []).length) return "";
@@ -1408,9 +1421,18 @@ document.addEventListener("click", ev => {  /* v3.99: 지난 브리핑 더보기
 });
 /* v4.59 개편 ②: 정세 요약과 분쟁지 목록은 정세 브리핑 탭(최신 호 아래)으로 옮긴다. 세계 정세 화면도 같은 함수를 쓴다 */
 const bId = id => document.querySelector('#pane-brief [id="' + id + '"]') || document.getElementById(id);  /* v4.59 개편 ②: 일정·브리핑 항목은 정세 브리핑 탭에서 먼저 찾는다 */
+/* 2026-11-24 대통령님 결재: 주간 정세 요약 영상. 현행 판 날짜(meta.digest_date)의 영상이 /video/digest.json에 있을 때만 단추를 보이고, 누르면 펼쳐 재생한다(누르기 전에는 영상을 받지 않음) */
+let DGV = null;
+fetch("/video/digest.json", {cache: "no-cache"}).then(r => r.ok ? r.json() : null).then(j => { DGV = j; document.querySelectorAll(".dgv").forEach(x => { if (!x.open) x.outerHTML = dgvHtml(); }); }).catch(() => {});
+function dgvHtml(){
+  const v = DGV && typeof D !== "undefined" && D && D.meta && DGV[D.meta.digest_date] && DGV[D.meta.digest_date].en;
+  if (!v) return '<div class="dgv"></div>';
+  return '<details class="dgv" style="margin:0 0 10px"><summary style="display:inline-block;cursor:pointer;list-style:none;padding:3px 12px;border:1px solid var(--accent);border-radius:4px;font-size:13px;font-weight:600;color:var(--accent)">▶ Watch the video · ' + esc(v.dur) + '</summary><video controls preload="none" playsinline src="' + esc(v.src) + '" poster="' + esc(v.poster) + '" style="width:100%;max-width:340px;aspect-ratio:9/16;border-radius:10px;background:#0A0A0A;display:block;margin:10px 0 4px"></video></details>';
+}
+document.addEventListener("toggle", ev => { const t = ev.target; if (t && t.classList && t.classList.contains("dgv") && t.open) { const v = t.querySelector("video"); if (v) v.play().catch(() => {}); } }, true);
 function worldSecHtml(){
   const fps = D.flashpoints.slice().sort((a, b) => b.severity - a.severity || String(b.last_major_event?.date).localeCompare(String(a.last_major_event?.date)));
-  return "<section class=\"sec\"><h3>Weekly Situation Summary " + ttsBtn("digest") + "</h3><p class=\"meta\" style=\"margin:-2px 0 8px\">Updated weekly · <a class=\"dgo\" href=\"/en/digest/\" style=\"display:inline-block;margin-left:2px;padding:2px 10px;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-weight:600\">See all weekly summaries →</a></p><div class=\"digest\">" + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
+  return "<section class=\"sec\"><h3>Weekly Situation Summary " + ttsBtn("digest") + "</h3><p class=\"meta\" style=\"margin:-2px 0 8px\">Updated weekly · <a class=\"dgo\" href=\"/en/digest/\" style=\"display:inline-block;margin-left:2px;padding:2px 10px;border:1px solid var(--accent);border-radius:4px;text-decoration:none;font-weight:600\">See all weekly summaries →</a></p>" + dgvHtml() + "<div class=\"digest\">" + D.digest.map((g, gi) => '<article><div class="h">' + ((g.ids || []).length ? '<button type="button" class="bh" data-dg="' + gi + "\" title=\"Show on the globe\">" + esc(g.t) + PIN + "</button>" : esc(g.t)) + "</div><p>" + esc(g.d) + '</p><div class="chips">' + g.ids.map(chip).join("") + "</div></article>").join("") + "</div></section>" +
     ((!PUB() && D.discuss && D.discuss.threads.length) ? "<section class=\"sec\"><h3>Ongoing discussions</h3>" + D.discuss.threads.map(t => '<button type="button" class="row-btn" data-go="discuss"><span class="nm">' + esc(t.title) + '</span><span class="meta">' + "Opened " + esc(enDate(t.opened)) + " · " + esc(t.status) + "</span></button>").join("") + "</section>" : "") +
     "<section class=\"sec\"><h3>Flashpoints by severity</h3><ul class=\"list\">" + fps.map(fp =>
       '<li><button type="button" class="row-btn" data-fp="' + esc(fp.id) + '"><span class="fp-head"><span class="nm">' + esc(fp.name_ko) + "</span>" + pips(fp.severity) + '</span><span class="meta"><span class="mono">' + esc(enDate(fp.last_major_event?.date || "")) + "</span> " + esc(fp.last_major_event?.text || "") + "</span></button></li>").join("") + "</ul></section>";

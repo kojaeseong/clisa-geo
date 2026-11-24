@@ -627,6 +627,7 @@ function briefView(d){var ds=[];DATA.items.forEach(function(x){if(ds.indexOf(x.d
   var L=DATA.items.filter(function(x){return x.d===d}),i=ds.indexOf(d),h=bar('Brief','#0B2A86','Briefing, '+md(d));
   h+='<div class="qr"><div class="q">The '+md(d)+' briefing · '+L.length+(L.length===1?' item':' items')+'</div>'+lsnBtn()+'</div>'+msgs(L,'b.'+d);
   h+=nextQ([ds[i+1]?['Previous briefing ('+md(ds[i+1])+')',"#b/"+ds[i+1]]:null,i>0?['Next briefing ('+md(ds[i-1])+')','#b/'+ds[i-1]]:null],'');
+  h+='<p class="ftw"><a href="'+(LANG==='en'?'/en':'')+'/brief/" target="_blank" rel="noopener">All past briefings · opens on the website ↗</a></p>';  /* 2026-11-24 대통령님 결재: 앱에는 최근 21개 호만 있으므로 홈페이지 목록으로 */
   V.innerHTML=h;markRead('b.'+d,L);window.scrollTo(0,0)}
 function focusHome(){var h='<section class="fo"><div class="q">Today on your interests</div>';
   ints().forEach(function(it){var b='',hd='',lk=intLink(it),go2='';
