@@ -1,6 +1,294 @@
 {
  "issues": [
   {
+   "date": "2026-11-25",
+   "items": [
+    {
+     "case": null,
+     "h": "미국, 중국·EU 등 16개 경제권 관세 인상 준비(AP 보도)",
+     "fact": "AP는 24일(미국 시각) 소식통 2명을 인용해 트럼프 행정부가 보조금에 기댄 과잉 생산을 이유로 중국과 유럽연합(EU) 등 16개 경제권의 관세를 올리는 계획을 곧 발표할 것이라고 보도했습니다. 미 무역대표부(USTR)의 산업 보조금 조사에 따른 조치로, 발표 시기는 바뀔 수 있으며 백악관과 무역대표부는 논평 요청에 답하지 않았습니다(AP).",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "down"
+      },
+      {
+       "id": "f11",
+       "e": "down"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.wsls.com/news/politics/2026/11/25/us-ready-to-slap-tariffs-on-china-eu-and-others-over-subsidized-production-ap-sources-say/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "CHN",
+       "EUR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "사우디 주도 연합군, 예멘 호데이다항 공습…후티, 제다 등 사우디 홍해 항구 공격 경고",
+     "fact": "사우디 주도 연합군은 호데이다항의 민간인 대피를 요구한 뒤 25일 새벽(현지 시각) 후티가 장악한 이 항구의 군사 능력을 공습했다고 밝혔고, 후티는 호데이다가 공격받으면 제다를 비롯한 사우디 홍해 항구를 모두 공격하겠다고 경고했습니다(알자지라·예루살렘포스트). 앞서 24일 사우디 민방위청은 리야드 금융지구의 국부펀드(PIF) 본부 건물이 후티의 공격을 받아 11명이 다쳤다고 밝혔으며, 후티는 책임을 주장하지 않았습니다(알모니터).",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.aljazeera.com/news/liveblog/2026/11/25/iran-war-live-houthis-threaten-saudi-ports-over-coalitions-hodeidah-order",
+      "https://www.jpost.com/middle-east/article-916028",
+      "https://www.al-monitor.com/originals/2026/11/least-11-injured-houthi-attack-saudi-pif-tower-what-know"
+     ],
+     "loc": {
+      "lat": 14.8,
+      "lon": 42.95,
+      "place": "호데이다(예멘)",
+      "isos": [
+       "SAU",
+       "YEM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "NBC, 트럼프 행정부의 이란 최고위 지도자 표적 공격 논의 보도",
+     "fact": "NBC 방송은 24일(미국 시각) 익명의 미국 관리와 논의 사정을 아는 소식통을 인용해 트럼프 행정부 관리들이 미군이 이란 최고위 지도자들을 표적으로 삼을지를 내부에서 논의하고 있으며, 찬성하는 쪽은 이것이 전쟁을 끝내는 데 도움이 된다고 본다고 보도했습니다. 보도는 구체적인 대상 인물을 밝히지 않았습니다(폴리티컬와이어·안티워닷컴 인용).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://politicalwire.com/2026/11/24/trump-officials-debating-targeting-irans-leaders/",
+      "https://news.antiwar.com/2026/11/24/report-trump-officials-discuss-killing-more-iranian-leaders/"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "중국 상무부, 갈륨·게르마늄 등 대미 수출 불허 조항 유예…2027년 1월 27일까지",
+     "fact": "중국 상무부는 24일 갈륨·게르마늄·안티몬·초경질 재료 관련 이중용도 품목의 대미 수출을 원칙적으로 허가하지 않도록 한 2024년 제46호 공고 제2항의 시행을 11월 28일부터 2027년 1월 27일까지 중단한다고 발표했습니다. 미국 군사 사용자나 군사 용도로의 수출을 금지한 제1항은 그대로 시행됩니다(중국 매일경제신문·퉁화순).",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "none"
+      },
+      {
+       "id": "f50",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "chips-fabs"
+     ],
+     "pull": [
+      [
+       "taiwan",
+       "L",
+       "미중 정상외교"
+      ]
+     ],
+     "src": [
+      "https://www.nbd.com.cn/articles/2026-11-24/4657274.html",
+      "http://news.10jqka.com.cn/20261125/c682186539.shtml"
+     ],
+     "loc": {
+      "lat": 39.9,
+      "lon": 116.41,
+      "place": "베이징(중국)",
+      "isos": [
+       "CHN",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "미 배심원단, 화웨이에 이란 제재 위반·영업비밀 절취 공모 등 10개 혐의 유죄 평결",
+     "fact": "뉴욕 브루클린 연방법원 배심원단은 24일 중국 화웨이가 이란 사업과 관련한 은행 사기·제재 위반과 영업비밀 절취 공모 등 12개 혐의 가운데 10개에서 유죄라고 평결했고, 공갈 공모와 사법 방해 공모는 무죄로 봤습니다(로이터). 화웨이 측 변호인은 항소할 것이라고 밝혔고, 선고는 2027년 9월 14일로 잡혔습니다.",
+     "fc": [],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.tbsnews.net/worldbiz/usa/chinas-huawei-convicted-sprawling-us-criminal-trial-over-iran-business-1613186",
+      "https://www.business-standard.com/world-news/huawei-us-conviction-iran-sanctions-bank-fraud-trade-secrets-126112500078_1.html"
+     ],
+     "loc": {
+      "lat": 40.69,
+      "lon": -73.99,
+      "place": "브루클린(미국 뉴욕주)",
+      "isos": [
+       "USA",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "솔로몬제도, 호주를 주된 안보 동반자로…\"외국 군사기지 두지 않는다\" 조약 서명",
+     "fact": "앤서니 앨버니지 호주 총리와 매슈 웨일 솔로몬제도 총리는 25일 캔버라에서 솔로몬제도가 호주를 주된 안보 동반자로 택하고 자국에 외국 군사·안보 기지를 두지 않는다는 내용의 조약에 서명했습니다(호주 총리실 공동성명). 웨일 총리는 중국과 맺은 안보 협정의 갱신 여부를 확인하지 않았고, 중국 외교부는 24일 솔로몬제도와의 관계에서 상호 존중과 평등의 원칙을 따른다고 밝혔습니다(AP).",
+     "fc": [],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.pm.gov.au/media/signing-australia-solomon-islands-treaty",
+      "https://www.ksat.com/news/world/2026/11/25/solomon-islands-names-australia-as-its-primary-security-partner-in-a-new-treaty-that-excludes-china"
+     ],
+     "loc": {
+      "lat": -35.31,
+      "lon": 149.13,
+      "place": "캔버라(호주)",
+      "isos": [
+       "AUS",
+       "CHN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "폴란드 국방부, 러시아 드론의 영공 침범을 고의로 판단",
+     "fact": "폴란드군 작전사령부는 23일 밤(현지 시각) 러시아의 우크라이나 서부 공습 중 러시아 무인기가 폴란드 영공을 잠시 침범했고, 격추를 승인했으나 무인기가 동쪽으로 방향을 바꾼 뒤 민간 피해 위험을 고려해 사격하지 않았다고 밝혔습니다(ABC·비르투알나 폴스카). 파베우 잘레프스키 국방차관은 24일 이 사건을 우연으로 보기 어려우며 폴란드 당국은 고의적 행위로 본다고 말했습니다(유럽프라우다).",
+     "fc": [
+      {
+       "id": "f66",
+       "e": "none"
+      },
+      {
+       "id": "f63",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "poland",
+       "R",
+       "러시아의 문턱 아래 공격"
+      ]
+     ],
+     "src": [
+      "https://www.eurointegration.com.ua/eng/news/2026/11/24/7250664/",
+      "https://abcnews.com/International/russian-drone-flies-poland-overnight-strikes-ukraine-warsaw/story?id=138403724",
+      "https://wiadomosci.wp.pl/wojsko-wydalo-nowy-komunikat-rosyjski-dron-naruszyl-polska-przestrzen-7354262578300928a"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "POL"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키, 패트리엇 48발 인도 지연과 스타실드 사용 제한 지속 지적",
+     "fact": "볼로디미르 젤렌스키 대통령은 24일 베레호베에서 NATO의 PURL 방식으로 자금이 확보된 패트리엇 요격미사일 48발의 인도 승인이 피트 헤그세스 미 국방장관의 서명만 남았다고 말했고, 우크라이나군의 스타실드 위성통신 사용 제한이 계속되고 있다고 확인했습니다(키이우포스트).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.kyivpost.com/post/91107"
+     ],
+     "loc": {
+      "lat": 48.21,
+      "lon": 22.64,
+      "place": "베레호베(우크라이나)",
+      "isos": [
+       "UKR",
+       "USA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "젤렌스키·머저르 헝가리 총리, 자카르파티아서 회담…에너지 등 핵심 분야 합의",
+     "fact": "볼로디미르 젤렌스키 대통령은 24일 자카르파티아주에서 머저르 페테르 헝가리 총리와 회담을 열어 에너지를 비롯한 양국 협력의 핵심 분야에서 합의했다고 밝혔고, 경유 등 석유제품 공급과 철도 연결 확대, 국경 통과소 재건 등을 논의했습니다(UNN). 헝가리 총리의 우크라이나 방문은 2015년 뒤 처음입니다(RBC-우크라이나).",
+     "fc": [
+      {
+       "id": "f73",
+       "e": "none"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://unn.ua/en/news/we-reached-agreement-on-all-key-areas-zelenskyy-summarizes-meeting-with-magyar",
+      "https://newsukraine.rbc.ua/news/zelenskyy-reveals-whether-he-will-visit-hungary-1795555755.html"
+     ],
+     "loc": {
+      "isos": [
+       "UKR",
+       "HUN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "이란 육군은 24일 아침 유조선 2척이 호르무즈 해협에서 기뢰에 부딪혀 화재가 발생하고 멈춰 섰다고 주장했으나, 선박 이름과 피해는 확인되지 않았습니다(걸프뉴스).",
+     "src": [
+      "https://gulfnews.com/world/mena/middle-east-conflict-us-investigates-iran-over-cyberattacks-on-50-ships-as-fresh-sanctions-target-irans-shadow-banking-network-1.500758688"
+     ],
+     "case": "iran",
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ]
+    },
+    {
+     "t": "이스라엘군과 신베트는 24일 가자지구에서 하마스 내부보안 책임자 나임 아부 나할을 제거했다고 밝혔습니다(걸프뉴스).",
+     "src": [
+      "https://gulfnews.com/world/mena/middle-east-conflict-us-investigates-iran-over-cyberattacks-on-50-ships-as-fresh-sanctions-target-irans-shadow-banking-network-1.500758688"
+     ],
+     "case": null,
+     "fp": [
+      "levant"
+     ],
+     "pull": []
+    },
+    {
+     "t": "야이르 골란 대표가 이끄는 이스라엘 민주당은 24일 가디 아이젠코트 전 참모총장의 정당 야샤르와 벌이던 연정 협상을 중단한다고 밝혔고, 야샤르는 같은 날 이스라엘 베이테누와 연정 합의에 서명했다고 밝혔습니다(타임스오브이스라엘).",
+     "src": [
+      "https://www.timesofisrael.com/liveblog-november-24-2026/"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-24",
    "items": [
     {
@@ -6007,238 +6295,6 @@
      ],
      "fp": [
       "us-mexico-cartels"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-21",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "위트코프 특사, 21일 상트페테르부르크서 러 지도부에 오슬로 제안 전달 예정",
-     "fact": "스퇴르 노르웨이 총리는 20일 오슬로에서 젤렌스키 대통령, 위트코프 특사, 스투브 핀란드 대통령과 회담한 뒤 기자회견에서 위트코프 특사가 21일 상트페테르부르크에서 오슬로 제안을 러시아 측에 전하고 미·우·러 정상회담의 길을 닦으려 한다고 밝혔습니다.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://censor.net/en/news/4029495/witkoff-to-take-oslo-proposals-to-russian-leaders-in-st-petersburg",
-      "https://kyivindependent.com/zelensky-meets-trump-envoy-witkoff-in-norway-as-us-ukraine-ties-sour/",
-      "https://www.axios.com/2026/10/20/putin-witkoff-russia-ukraine-war",
-      "https://tass.com/world/2205013"
-     ],
-     "loc": {
-      "lat": 59.91,
-      "lon": 10.75,
-      "place": "오슬로(노르웨이)",
-      "isos": [
-       "NOR",
-       "USA",
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키 \"미국 정보, 이제 작동해 감사\"…협상 문서에 여러 안보 보장 담겼다고 밝혀",
-     "fact": "젤렌스키 대통령은 20일 오슬로 공동 기자회견에서 러시아 탄도미사일 발사에 대한 미국의 조기경보 정보가 다시 들어온다고 말했습니다. 협상 문서에 여러 종류의 안보 보장이 들어 있으며 위트코프 특사가 이를 러시아에 전한다고도 밝혔습니다.",
-     "fc": [],
-     "src": [
-      "https://www.kyivpost.com/post/87676"
-     ],
-     "loc": {
-      "lat": 59.91,
-      "lon": 10.75,
-      "place": "오슬로(노르웨이)",
-      "isos": [
-       "UKR",
-       "USA",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "트럼프 \"젤렌스키, 전쟁 끝내길 원해야…아니면 아주 나쁜 일 될 것 같다\"",
-     "fact": "트럼프 대통령은 20일 백악관에서 러시아의 병력이 '무제한'이라며 젤렌스키 대통령이 전쟁을 끝내길 원해야 하고 그러지 않으면 아주 나쁜 일이 될 것 같다고 말했습니다. 푸틴·젤렌스키 회담에 대해서는 두 사람의 증오가 크다며 \"어떻게 하든 상관없다\"고 했습니다.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/20/i-dont-care-how-its-done-trump-pressures-ukraine-to-cut-peace-deal",
-      "https://english.news.cn/20261021/c5f2de9d1b9341b8af7338904f0e9dd8/c.html"
-     ],
-     "loc": {
-      "lat": 38.9,
-      "lon": -77.04,
-      "place": "워싱턴(미국)",
-      "isos": [
-       "USA",
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "러시아 드론, 20일 키이우 잇따라 공격…1명 사망·18명 부상",
-     "fact": "클리치코 키이우 시장은 20일 러시아의 공격으로 키이우에서 1명이 숨지고 18명이 다쳤다고 밝혔습니다. 키이우시 보건국은 이날 오후 5시 50분(현지 시각) 기준으로 자정 이후 1명 사망, 12명 부상을 집계했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.ukrinform.net/rubric-ato/4176504-russian-drone-attack-on-kyiv-injury-toll-rises-to-18-one-dead.html",
-      "https://www.ukrinform.net/rubric-ato/4176435-russian-attacks-leave-one-dead-12-injured-in-kyiv-since-midnight.html"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "키이우(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "아락치 \"미국이 조건 받아들여야 해협 연다\"…레자이 \"농축 우라늄 1그램도 반출 안 돼\"",
-     "fact": "아락치 외무장관은 20일 이라크 알이크바리야 방송 인터뷰에서 이란의 '7일 계획'대로라면 호르무즈 해협이 6일째에 완전히 열릴 예정이었다며 미국이 이슬라마바드 양해각서의 약속을 지켜야 한다고 말했습니다. 레자이 최고국가안보회의 사무총장은 같은 날 X에 농축 우라늄 반출을 거부하는 글을 올렸습니다.",
-     "fc": [
-      {
-       "id": "f03",
-       "e": "none"
-      },
-      {
-       "id": "f38",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.aninews.in/news/world/middle-east/hormuz-is-closed-until-america-accepts-our-conditions-araghchi-demands-us-to-honour-mou-commitments20261021064930/",
-      "https://gulfnews.com/world/mena/hormuz-stays-shut-until-us-accepts-irans-7-day-deal-araghchi-1.500717768"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "taiwan",
-     "fp": [
-      "taiwan-strait"
-     ],
-     "h": "중국 해경선, AIS 끄고 둥사군도 제한수역 진입…대만 해경과 대치",
-     "fact": "대만 해양위원회 해순서는 20일 중국 해경선 한 척이 이날 이른 시각 자동식별장치(AIS)를 끈 채 둥사(프라타스)군도 북동쪽 제한수역에 들어와 대만 순시함 타이중함과 대치했다고 밝혔습니다. 중국 함정은 '이른바 중화민국은 존재하지 않는다'고 방송했습니다.",
-     "fc": [],
-     "src": [
-      "https://www.taipeitimes.com/News/front/archives/2026/10/21/2003866335"
-     ],
-     "loc": {
-      "lat": 20.7,
-      "lon": 116.72,
-      "place": "둥사군도(대만)",
-      "isos": [
-       "TWN",
-       "CHN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "sudan-civil-war"
-     ],
-     "h": "수단·남수단 분쟁지 아비에이 시장에 드론 공격…사망자 153명으로 늘어",
-     "fact": "아비에이 행정당국의 요하나 아콜 응고르 임시 공보장관은 19일 오전 11시께(현지 시각) 아미에트 시장과 인근 연료 저장소를 덮친 드론 공격으로 최소 153명이 숨졌다고 밝히고 수단군을 지목했습니다. 수단군 고위 장교는 익명으로 신속지원군(RSF)에 가는 유조차를 노렸다고 말했습니다.",
-     "fc": [],
-     "src": [
-      "https://gulfnews.com/world/africa/drone-strike-on-a-market-in-disputed-african-region-of-abyei-kills-at-least-153-1.500717774",
-      "https://www.radiotamazuj.org/en/news/article/73-killed-in-drone-attacks-on-abyei-market"
-     ],
-     "loc": {
-      "lat": 9.6,
-      "lon": 28.44,
-      "place": "아비에이(수단·남수단 분쟁지)",
-      "isos": [
-       "SDN"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [],
-     "h": "나이지리아, 우간다에서 온 여성 에볼라 확진…접촉자 44명 추적",
-     "fact": "나이지리아 연방보건사회복지부는 우간다에서 온 여성이 수도 아부자에서 에볼라 확진을 받았다고 밝혔고, 파테 보건장관은 접촉자 44명을 추적하고 있다고 말했습니다(알자지라 20일 보도). 콩고민주공화국에서는 5월 이후 9천 건 넘게 발병했으며, 허가된 백신이 없는 분디부교형 바이러스입니다.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/20/kenya-confirms-ninth-ebola-case"
-     ],
-     "loc": {
-      "lat": 9.06,
-      "lon": 7.49,
-      "place": "아부자(나이지리아)",
-      "isos": [
-       "NGA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "외교부는 20일 정례 브리핑에서 북한군 포로 이송 공개 문제에 대해 우크라이나가 '전향적 조치'를 하지 않았고 공습 위협도 크다며 주우크라이나 대사관 인원 일부를 철수시키고(외교부 당국자에 따르면 절반가량) 대리대사와 영사 인력은 남긴다고 밝혔습니다.",
-     "src": [
-      "https://news.sbs.co.kr/english/article.do?news_id=N1008806940",
-      "https://www.aljazeera.com/news/2026/10/20/south-korea-to-pull-more-embassy-staff-from-ukraine-after-pow-row"
-     ],
-     "fp": [
-      "rus-ukr",
-      "korea"
-     ]
-    },
-    {
-     "t": "중국 남부전구 해군 대변인은 20일 미국 연안전투함 찰스턴함이 남중국해 사비나 암초 인근 해역에 허가 없이 들어왔다며 \"즉시 중단하라\"고 밝혔습니다.",
-     "src": [
-      "https://dailycaller.com/2026/10/20/china-sends-navy-after-us-warship-taiwan-maritime-standoff/"
-     ],
-     "fp": []
-    },
-    {
-     "t": "통일부 등에 따르면 노동신문과 조선중앙통신 홈페이지가 20일 저녁부터 21일 오전 현재까지 접속되지 않고 있습니다.",
-     "src": [
-      "https://www.fnnews.com/news/202610211030118854"
-     ],
-     "fp": []
-    },
-    {
-     "t": "시녜후보우 하르키우주 군사행정청장은 20일 밤부터 21일 새벽(현지 시각) 사이 러시아 드론이 코로티치 마을을 공격해 80대 주민 2명이 숨졌다고 밝혔습니다.",
-     "src": [
-      "https://kyivindependent.com/russian-drones-kill-2-in-kharkiv-oblast-strike-university-building-in-kremenchuk/"
-     ],
-     "fp": [
-      "rus-ukr"
      ]
     }
    ]
