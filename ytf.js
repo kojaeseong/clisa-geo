@@ -9,7 +9,9 @@
     "feature-2026-11-22-g20-ko": "gynrl82Ldik",
     "feature-2026-11-22-g20-en": "HrwEwqFE8A0",
     "feature-2026-11-18-lameduck-ko": "HKVU5c5XlTI",
-    "feature-2026-11-18-lameduck-en": "lvGK_Wtxw7A"
+    "feature-2026-11-18-lameduck-en": "lvGK_Wtxw7A",
+    "feature-2026-10-28-icbm-ko": "Tckd4wpaYx4",
+    "feature-2026-10-28-icbm-en": "YxUkVmXhhzU"
   };
   var EN = /^\/en(\/|$)/.test(location.pathname);
   var CSS = ".ytf{position:relative;display:block;width:100%;max-width:340px;aspect-ratio:9/16;margin:0 auto;border-radius:10px;overflow:hidden;background:#0A0A0A center/cover no-repeat;cursor:pointer;border:0;padding:0;color:#fff;text-decoration:none}" +
