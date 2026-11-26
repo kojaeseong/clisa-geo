@@ -220,7 +220,7 @@ a,button,.rw2,.ap,.pc,.fcd,.widget li,.fc,.wkl2 a{touch-action:manipulation;-web
 .speaking{background:rgba(31,79,216,.10);box-shadow:0 0 0 5px rgba(31,79,216,.10);border-radius:4px;transition:background .3s,box-shadow .3s}.qr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 8px}.qr .q{margin:0}.lsn{flex:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--acc);background:var(--chip);border:0;border-radius:5px;padding:6px 10px;margin:0;white-space:nowrap;cursor:pointer}  /* 2026-11-16 대통령님 결재(나안): 듣기 단추를 질문 줄 오른쪽에 */.cgl{text-align:right;margin:-2px 0 6px}.card.cg h2{font-size:15px;margin:0 0 6px}.card.cg>p{font-size:13.5px;line-height:1.6;margin:4px 0}.cgs{margin-top:10px}.cgq{border-left:3px solid var(--line);padding:2px 0 2px 10px;margin:6px 0}.cgq .cgw-q{margin:0 0 3px;font-size:13.5px;line-height:1.6}.cgq small{color:var(--sub);font-size:12px}.cgmore{margin-top:10px}.cgmore>summary{cursor:pointer;color:var(--acc);font-size:13px;font-weight:600;padding:4px 0}</style></head><body><div class="wrap" id="v"><div class="splash"><img src="/app/app-192.png" alt=""><span>오늘의 정세를 불러오는 중입니다</span></div></div>
 <script>
 (function(){
-var DATA=null,V=document.getElementById('v'),PV='487c76fc69',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
+var DATA=null,V=document.getElementById('v'),PV='4bf59b31b9',LANG='ko',DG='KOR',GORD=['PARTY','KOR','USA','EU'],GS={};
 function topHead(){return '<header class="top"><button class="logo" data-go="home" aria-label="첫 화면으로"><img src="/app/app-192.png" alt=""><span class="nm">클리사</span></button><span class="sp"></span><span id="inst"></span></header>'}
 // 앱 설치 단추(2026-11-14 운영자 "승인합니다"): 설치하지 않고 브라우저로 볼 때만. 안드로이드는 설치 창, 아이폰은 한 줄 안내. ✕를 누르면 이 기기에서는 다시 보이지 않음
 var DP=null,IOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -379,7 +379,7 @@ function issue(id,arg,sub){
         '<div class="rope" style="--pull:'+((C.kn-50)*3)+'px"><div class="ln"></div><div class="ctr"></div>'+(Math.abs(C.kn-C.kn0)>=1?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+
         '<div class="band">'+C.bands.map(function(x){return '<div class="'+x[2]+'" style="flex:'+Math.max(x[1],8)+'">'+e(x[0])+'<br>'+x[1]+'%</div>'}).join('')+'</div>'+
         '<button class="more2" data-fold>이 그림 읽는 법과 전개 '+B.fut.length+'가지 ▾</button><div class="fold" hidden><div class="cap" style="margin-bottom:8px">매듭 = '+(B.horizon||'')+'년까지 전개별 확률(클리사 지오폴리틱스 사안 분석)의 무게중심'+(Math.abs(C.kn-C.kn0)>=1?' · 흐린 매듭은 지난주':' · 지난주와 같은 자리')+'<br>'+e(C.cap)+' · 화살표 굵기는 클리사의 판단</div>'+futs(B)+'</div></div>';
-      S.push({k:'tug',q:'판을 당기는 힘',html:'<div class="read2" style="margin-bottom:8px"><b>이번 주 판세</b> · '+e(C.short)+'</div>'+tug});
+      S.push({k:'tug',q:'판을 당기는 힘',html:'<div class="read2" style="margin-bottom:8px"><b>'+wkL(C,0)+' 판세</b> · '+e(C.short)+'</div>'+tug});
       S.push({k:'read',st:1,q:'이번 주 판은 어느 쪽으로 기울었고, 근거는 무엇인가',sub:'이번 주 바뀐 전망과 달라진 힘',html:'<div class="card"><div class="read2">'+e(C.reading)+'</div>'+evid(B)+(C.changes?'<ul class="chg2" style="margin-top:8px">'+C.changes.map(function(x){return '<li>'+e(x)+'</li>'}).join('')+'</ul>':'')+'</div>'});
       if(C.why)S.push({k:'why',st:1,q:'매듭은 왜 풀리지 않나',html:'<div class="card"><p style="margin:0;font-size:14.5px;line-height:1.7">'+e(C.why)+'</p></div>'});
     }else S.push({k:'fut',q:'판이 기우는 방향',html:'<div class="card"><h2>판이 기우는 방향 · '+(B.horizon||'')+'년까지 전개별 확률</h2>'+futs(B)+evid(B)+'</div>'});
@@ -498,7 +498,8 @@ function intLabel(it){if(it.ax==='i'){var a=app(it.k);if(!a)return '';var t=tabF
   if(it.k==='ppl')return kgName(DG)+'의 생활'+(it.w!=='all'&&DATA.kimp.paths[it.w]?' · '+DATA.kimp.paths[it.w]+' 경로':'');var k2=it.w.indexOf(':')<0?'kr:'+it.w:it.w;return cnm(k2)+' '+inm(k2)+' 업종'}
 function intLink(it){if(it.ax==='i'){var t=tabFor(it.k,it.w);return '#i/'+it.k+'/'+t+(t==='imp'?'/'+(it.g||DG):'')}if(it.ax==='r')return '#r/'+it.k+'/'+(it.w||'news');if(it.k==='ppl')return '#ppl/'+DG+'/'+it.w;return '#ind/'+encodeURIComponent(it.w.indexOf(':')<0?'kr:'+it.w:it.w)}
 function wk7(){var d=new Date(DATA.asof);d.setDate(d.getDate()-6);return d.toISOString().slice(0,10)}
-function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||pvw()))return '이번 주 '+C.short;var it=issueItems(id)[0];return it?'최근 소식 · '+it.h:''}
+/* 2026-11-26 판세의 지난 7일 변화는 앱이 열릴 때 확률 이력으로 계산, 판세 문장이 7일보다 오래되면 판단 날짜를 보임 */function wkD(){var d=new Date(DATA.asof+'T00:00:00Z');d.setUTCDate(d.getUTCDate()-7);return d.toISOString().slice(0,10)}function wkRe(){if(!DATA||!DATA.boards||!DATA.asof)return;var W=wkD(),Q={};(DATA.fc||[]).forEach(function(f){Q[f.id]=f});var pb=function(h){var b=null;(h||[]).forEach(function(x){if(x[0]<W)b=x});return b};Object.keys(DATA.boards).forEach(function(k){var B=DATA.boards[k];if(!B.sig)return;var SG=B.sg||{},SQ=B.sq||{};B.fut.forEach(function(f){var v=0,w=[];(B.sig[f.id]||[]).forEach(function(g){var h=SG[g[0]]||(Q[g[0]]||{}).h||[];if(h.length<2)return;var b=pb(h),L=h[h.length-1];if(!b||b[1]===L[1])return;v+=(g[1]==='+'?1:-1)*(L[1]-b[1]);w.push([g[0],(Q[g[0]]||{}).q||SQ[g[0]]||'',b[1],L[1],L[0],g[1]])});f.v=Math.round(v*10)/10;f.why=w});var C=B.cur;if(C&&C.knot&&B.ph){var P={};B.fut.forEach(function(f){P[f.id]=f.p});var p0=function(i){var b=pb(B.ph[i]);return b?b[1]:(P[i]||0)};var s=function(a){return a.reduce(function(t,i){return t+p0(i)},0)};C.kn0=50+(s(C.knot[1])-s(C.knot[0]))/2}})}function wkL(C,s){var f=(C.asof||'')>=wkD();return f?(s?'이번 주 ':'이번 주'):(s?md(C.asof)+' 판단 · ':md(C.asof))}
+function issueLine(id){var C=((DATA.boards||{})[id]||{}).cur;if(C&&C.short&&(C.ok||pvw()))return wkL(C,1)+C.short;var it=issueItems(id)[0];return it?'최근 소식 · '+it.h:''}
 function miniRope(id){var C=((DATA.boards||{})[id]||{}).cur;if(!(C&&C.kn!=null&&(C.ok||pvw())))return '';var mv=Math.abs(C.kn-C.kn0)>=1;return '<div class="mini" style="margin:4px 0 4px"><div class="ln"></div>'+(mv?'<div class="k0" style="left:'+C.kn0+'%"></div>':'')+'<div class="k" style="left:'+C.kn+'%"></div></div>'+(C.left&&C.right?'<div class="mlab"><span>'+e(C.left)+'</span><span>'+e(C.right)+'</span></div>'+(mv?'<div class="mlab2">흐린 점은 지난주</div>':''):'')}
 function worse(d){return d.x+d.w}
 function inm(k){var x=((DATA.kimp||{}).inds||[]).filter(function(i){return i[0]===k})[0];return x?x[1]:k.slice(3)}
@@ -534,7 +535,7 @@ function related(ci){if(!ci)return [];var reg0=(DATA.rule.caseR||{})[ci]||null,o
   return out}
 function suggest(cur){var ci=cur&&cur.indexOf('i:')===0?cur.slice(2):'',out=related(ci),w7=wk7(),I=ints();
   var mv=Object.keys(DATA.boards||{}).filter(function(k){var C=DATA.boards[k].cur;return k!==ci&&C&&C.kn!=null&&C.kn0!=null&&app(k)}).sort(function(a,b){return Math.abs(DATA.boards[b].cur.kn-DATA.boards[b].cur.kn0)-Math.abs(DATA.boards[a].cur.kn-DATA.boards[a].cur.kn0)})[0];
-  if(mv){var C=DATA.boards[mv].cur;if(Math.abs(C.kn-C.kn0)>=1)out.push(['이번 주 판이 가장 크게 움직인 곳 · '+app(mv)[1],'#ask/i/'+mv,'이번 주 '+C.short])}
+  if(mv){var C=DATA.boards[mv].cur;if(Math.abs(C.kn-C.kn0)>=1)out.push(['이번 주 판이 가장 크게 움직인 곳 · '+app(mv)[1],'#ask/i/'+mv,wkL(C,1)+C.short])}
   var fb=DATA.fc.filter(function(f){return f.h.length>1&&fcLast(f)>=w7&&f.a.indexOf(ci)<0}).sort(function(a,b){var da=Math.abs(a.h[a.h.length-1][1]-a.h[a.h.length-2][1]),db=Math.abs(b.h[b.h.length-1][1]-b.h[b.h.length-2][1]);return db-da})[0];
   if(fb){var h2=fb.h;out.push(['이번 주 가장 크게 바뀐 전망','#f/'+fb.id,fb.q+' '+h2[h2.length-2][1]+'→'+h2[h2.length-1][1]+'%'])}
   var un=DATA.apps.map(function(a){return [a,unread('i.'+a[0],issueItems(a[0])).length]}).filter(function(x){return x[1]>0&&x[0][0]!==ci&&!I.some(function(it){return it.ax==='i'&&it.k===x[0][0]})}).sort(function(a,b){return b[1]-a[1]})[0];
@@ -560,7 +561,7 @@ function startView(step,arg,browse){
   if(step==='i'&&app(arg)){var id=arg,a=app(id),B=(DATA.boards||{})[id],C=B&&B.cur,IM=impOf(id),L=issueItems(id),FL=issueFc(id),fromR=ls('fromreg',null),W=C&&C.watch;
     h+='<a class="bk" href="'+base+(fromR?'r/'+fromR:'1')+'">‹ '+(fromR?e(reg(fromR)[1])+'로':(browse?'사안·지역 목록으로':'처음 질문으로'))+'</a>';
     h+='<div class="ans" style="--acc2:'+a[3]+'"><div class="fh"><span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>이번 주</small></div>';
-    if(C&&C.short)h+=miniRope(id)+'<p class="rd2"><b>이번 주 판세</b> '+e(C.short)+'</p><div style="height:8px"></div>';
+    if(C&&C.short)h+=miniRope(id)+'<p class="rd2"><b>'+wkL(C,0)+' 판세</b> '+e(C.short)+'</p><div style="height:8px"></div>';
     h+=briefBlock(a[1],L,'#i/'+id+'/news',0,2)+'</div>';
     h+='<div style="height:14px"></div><h1>이 사안에서 무엇을 더 보고드릴까요?</h1>';
     var go=function(t){return browse?'#i/'+id+'/'+t:''};
@@ -652,7 +653,7 @@ function focusHome(){var h='<section class="fo"><div class="q">관심사에 맞�
   ints().forEach(function(it){var b='',hd='',lk=intLink(it),go2='';
     if(it.ax==='i'){var id=it.k,a=app(id);if(!a)return;var t=tabFor(id,it.w),C=((DATA.boards||{})[id]||{}).cur,I=impOf(id),L=issueItems(id),n=unread('i.'+id,L).length;
       hd='<span class="ic2" style="background:'+a[3]+'">'+e(a[2])+'</span><b>'+e(a[1])+'</b><small>'+TABN[t]+'</small>'+badge(n);go2=TABN[t]+' 자세히 보기 ›';
-      if(t==='pan'&&C)b=miniRope(id)+'<p class="rd2"><b>이번 주</b> '+e(C.short)+'</p><p class="sm2 clamp">'+e(C.reading||'')+'</p>';
+      if(t==='pan'&&C)b=miniRope(id)+'<p class="rd2"><b>'+wkL(C,0)+'</b> '+e(C.short)+'</p><p class="sm2 clamp">'+e(C.reading||'')+'</p>';
       else if(t==='imp'&&I){var G=impG(I,it.g),L0=lifeFor(I,G),IND=indFor(I,G);hd=hd.replace('<small>영향</small>','<small>영향 · '+e(gShort(id,G))+'</small>');L0.forEach(function(x){b+='<p class="sm2" style="margin-top:2px">'+e(x.gn)+'의 생활 · 2030년까지 100번의 미래</p>'+hbar(x.now)});var mv=(IND||[]).filter(function(r){return r.d.s<100}).slice(0,2);if(mv.length)b+='<p class="sm2" style="margin-top:8px">가장 크게 달라지는 '+(G==='USA'?'미국':'한국')+' 업종</p>'+mv.map(function(r){return '<p class="rd2" style="margin:3px 0 0">'+e(r.n)+' · '+dcnt(r.d)+'</p>'}).join('');else if(!L0.length&&pplFor(I,G).length)b+='<p class="rd2">'+e(pplFor(I,G)[0][1])+'</p>'}
       else if(t==='fc')b='<ul>'+issueFc(id).slice(0,3).map(function(f){return '<li><span>'+f.p+'%</span>'+e(f.q)+'</li>'}).join('')+'</ul>';
       else b=briefBlock(a[1],L,'',1)}
@@ -748,7 +749,7 @@ function toast(t){var el=document.getElementById('toast');if(!el){el=document.cr
 var STACK=[],SCR={};
 function anim(){V.classList.remove('in');void V.offsetWidth;V.classList.add('in')}
 function refresh(){toast('최신 보고를 받는 중입니다…');return fetch('/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(d){if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){location.reload();return}DATA=d;
-  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){if(!DATA)return;route();anim();var t=new Date();toast(md(DATA.asof)+' 정세 브리핑까지 받았습니다 · '+('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2))}).catch(function(){toast('받지 못했습니다. 연결을 확인해 주십시오.')})}
+  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){if(!DATA)return;wkRe();route();anim();var t=new Date();toast(md(DATA.asof)+' 정세 브리핑까지 받았습니다 · '+('0'+t.getHours()).slice(-2)+':'+('0'+t.getMinutes()).slice(-2))}).catch(function(){toast('받지 못했습니다. 연결을 확인해 주십시오.')})}
 function go(h){var cur=location.hash.replace(/^#/,'');if(cur===h)route();else location.hash=h}
 V.addEventListener('click',function(ev){var ib=ev.target.closest('[data-inst],[data-instx]');if(ib){ev.preventDefault();
     if(ib.hasAttribute('data-instx')){ss('instx',1);instUI();var n0=document.getElementById('insn');if(n0)n0.remove();return}
@@ -787,7 +788,7 @@ fetch('/app/app.json',{cache:'no-cache'}).then(function(r){return r.json()}).the
   // 화면이 옛 판이면(자료의 pv와 다르면) 한 번만 새로 불러온다
   if(d.pv&&PV.indexOf('__')<0&&d.pv!==PV){var k='clisa.rl.'+d.pv,done=null;try{done=sessionStorage.getItem(k);sessionStorage.setItem(k,'1')}catch(x){}if(!done){location.reload();return new Promise(function(){})}}
   DATA=d;
-  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){STACK=[location.hash];route();anim()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
+  return fetch('/data/daily.json',{cache:'no-cache'}).then(function(r){return r.json()}).then(function(dl){if(dl&&dl.issues&&dl.issues.length&&dl.issues[0].date>=DATA.asof){DATA.items=build(dl);DATA.asof=dl.issues[0].date}}).catch(function(){})}).then(function(){wkRe();STACK=[location.hash];route();anim()}).catch(function(){V.innerHTML='<p class="empty">자료를 불러오지 못했습니다. 연결을 확인한 뒤 다시 열어 주십시오.</p>'});
 // install count (2026-11-17): date, language and device type only, once per device
 function instLog(ev){if(ls('inst_'+ev,0))return;var ua=navigator.userAgent||'',pl=/android/i.test(ua)?'android':/iphone|ipad|ipod/i.test(ua)?'ios':'other';try{fetch(API+'/inst',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ev:ev,lang:LANG,pl:pl}),keepalive:true}).then(function(x){return x.json()}).then(function(d){if(d&&d.ok)ss('inst_'+ev,1)}).catch(function(){})}catch(x){}}
 addEventListener('appinstalled',function(){instLog('install')});
