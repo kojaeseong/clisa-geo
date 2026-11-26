@@ -1,6 +1,311 @@
 {
  "issues": [
   {
+   "date": "2026-11-26",
+   "items": [
+    {
+     "case": "iran",
+     "h": "Houthis attack Saudi Arabia's Ras Tanura refinery; Brent jumps 3.5 percent to $94.61",
+     "fact": "Houthi military spokesman Yahya Saree claimed on November 25 that the group had attacked Saudi Arabia's Ras Tanura refinery in eastern Saudi Arabia, which processes 550,000 barrels a day, and set it on fire; a person familiar with the matter confirmed to Reuters that the refinery had been attacked. The Saudi government and Aramco did not immediately respond to Reuters' requests for comment, and Brent futures settled up 3.5 percent that day at $94.61 a barrel (Reuters).",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.al-monitor.com/originals/2026/11/yemens-houthis-say-they-attacked-saudi-arabias-ras-tanura-refinery",
+      "https://www.nationthailand.com/news/world/40073934"
+     ],
+     "loc": {
+      "lat": 26.64,
+      "lon": 50.16,
+      "place": "Ras Tanura (Saudi Arabia)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Saudi-led coalition says Houthi projectile hit Jazan port, drone downed near Jeddah port",
+     "fact": "Turki al-Maliki, spokesman for the Saudi-led coalition, said on November 25 that a projectile fired by the Houthis hit Jazan port, causing minor damage and no civilian casualties, and that coalition forces destroyed a drone near Jeddah Islamic Port (Xinhua). Houthi spokesman Yahya Saree claimed the group had attacked the ports of Jeddah and Jazan; the Houthis had earlier warned they would strike Saudi Red Sea ports if Hodeidah port were attacked (Xinhua, Al Jazeera).",
+     "fc": [
+      {
+       "id": "f75",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "red-sea-bab-el-mandeb",
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://english.news.cn/20261126/b7ff386069fe4137ab3e11b3af10156a/c.html",
+      "https://www.aljazeera.com/news/2026/11/25/houthis-target-saudi-arabias-red-sea-ports-as-strikes-escalate"
+     ],
+     "loc": {
+      "lat": 16.89,
+      "lon": 42.55,
+      "place": "Jazan (Saudi Arabia)",
+      "isos": [
+       "YEM",
+       "SAU"
+      ]
+     }
+    },
+    {
+     "case": null,
+     "h": "USTR proposes Section 301 tariffs on China, the EU and 12 other economies over excess capacity",
+     "fact": "The Office of the U.S. Trade Representative released on November 25 (U.S. time) the findings of its Section 301 investigations into structural excess capacity and proposed tariffs of up to 20 percent on China, 15 percent on the EU, up to 15 percent on South Korea, Japan, Taiwan, and Switzerland, and up to 35 percent on Vietnam. Comments are due January 5, 2027, hearings begin January 25, and of the 16 economies investigated, USTR made no determinations for Mexico and Norway (USTR).",
+     "fc": [
+      {
+       "id": "f39",
+       "e": "down"
+      },
+      {
+       "id": "f11",
+       "e": "down"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/november/ustr-makes-determinations-and-proposes-actions-14-section-301-investigations-relating-structural",
+      "https://www.aljazeera.com/news/2026/11/25/trump-announces-new-trade-tariffs-which-countries-will-they-target"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "CHN",
+       "EUR",
+       "KOR",
+       "JPN",
+       "TWN",
+       "VNM"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "Iran claims more mine fires in Hormuz and expands shipping blacklist to 266 vessels",
+     "fact": "Iran's Revolutionary Guards and army claimed on November 25 that oil tankers and an LNG carrier using unauthorized routes had hit mines and caught fire, and an army spokesman said ships passing without coordinating with Iran faced greater risks. Iran did not name the ships or their flags, and the claims could not be verified (Reuters); the same day, Iranian authorities added 26 vessels, including tugboats, to their shipping blacklist, bringing the total to 266 (Tasnim).",
+     "fc": [
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ],
+     "src": [
+      "https://www.arabnews.com/middle-east/iran-says-ships-hit-mines-in-hormuz-warns-vessels-to-coordinate-passage-3013942",
+      "https://www.insurancejournal.com/news/international/2026/11/25/893726.htm"
+     ],
+     "loc": {
+      "lat": 26.57,
+      "lon": 56.25,
+      "place": "Strait of Hormuz",
+      "isos": [
+       "IRN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "Russia strikes Kyiv with ballistic missiles, injuring four",
+     "fact": "Russian forces struck industrial facilities, a shopping center, and other sites in Kyiv's Desnianskyi district with ballistic missiles on the night of November 25, local time, injuring at least four people, Kyiv Mayor Vitali Klitschko said. Russia's Defense Ministry claimed on November 26 that it had carried out a large-scale strike on defense-industry enterprises in Kyiv using precision weapons and drones.",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://lb.ua/society/2026/11/26/783772_rosiyani_vdarili_balistikoyu.html",
+      "https://news.mail.ru/society/73241570/"
+     ],
+     "loc": {
+      "lat": 50.52,
+      "lon": 30.6,
+      "place": "Kyiv (Ukraine)",
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "EU special summit opens November 26; decision on €45 billion Ukraine loan likely to slip to December",
+     "fact": "EU leaders are meeting in Brussels at a special summit that opens November 26 and could run into November 27 to discuss the bloc's next seven-year budget and a Commission proposal for a €45 billion loan to fund Ukraine in 2027. With Slovakia, Czechia, Hungary, and Bulgaria unwilling to take part in the loan, German Chancellor Friedrich Merz warned he would veto the budget unless all 27 members agreed on support for Ukraine (Euronews), and Radio Free Europe/Radio Liberty, citing diplomats, reported that a final decision was likely to be pushed to the December 17–18 summit (as carried by UA.News).",
+     "fc": [
+      {
+       "id": "f73",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.euronews.com/2026/11/26/eu-budget-and-ukraine-aid-headed-for-collision-at-turbulent-summit",
+      "https://ua.news/en/world/evrosoiuz-vidklav-na-gruden-obgovorennia-novogo-kreditu-dlia-ukrayini"
+     ],
+     "loc": {
+      "lat": 50.84,
+      "lon": 4.38,
+      "place": "Brussels (Belgium)",
+      "isos": [
+       "EUR",
+       "UKR",
+       "DEU",
+       "HUN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "Poland plans no-fly zone more than 10 km deep along the Ukrainian border",
+     "fact": "Polish Deputy Defense Minister Cezary Tomczyk said on November 25 that Poland planned to introduce a regulation in late December or early January creating a no-fly zone more than 10 kilometers deep along the Ukrainian border, and that NATO did not support Poland's request that it intercept Russian missiles over Ukraine (Kyiv Independent).",
+     "fc": [
+      {
+       "id": "f66",
+       "e": "none"
+      },
+      {
+       "id": "f63",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki",
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://kyivindependent.com/ukraine-war-latest-poland-plans-no-fly-zone-near-ukraine-border-asks-nato-to-intercept-russian-missiles-over-ukraine/"
+     ],
+     "loc": {
+      "isos": [
+       "POL",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "Trump and NATO's Rutte discuss importance of Russia not expanding the war",
+     "fact": "In a joint statement issued on November 25 after they met at Mar-a-Lago, President Donald Trump and NATO Secretary General Mark Rutte said they had discussed “the importance of Russia avoiding any actions that intentionally, or unintentionally, expand the war” (AFP). Defense Secretary Pete Hegseth is reportedly expected to announce a review of the U.S. force posture in Europe in the coming weeks.",
+     "fc": [
+      {
+       "id": "f60",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.arabnews.com/world/trump-nato-chief-urge-russia-not-to-expand-ukraine-war-3014079"
+     ],
+     "loc": {
+      "lat": 26.68,
+      "lon": -80.04,
+      "place": "Palm Beach (Florida, U.S.)",
+      "isos": [
+       "USA",
+       "RUS"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "KCNA reported on November 26 that Kim Jong Un, chairman of the State Affairs Commission, had inspected nuclear-material production facilities and a research institute, saying attention should be paid to using tactical nuclear weapons for various missions across multiple domains and that nuclear-material production capacity was being systematically expanded; South Korea's Ministry of National Defense expressed concern the same day and urged Pyongyang to comply with UN Security Council resolutions (Yonhap, The Korea Herald).",
+     "src": [
+      "https://www.koreaherald.com/article/10950253",
+      "https://www.koreaherald.com/article/10950465"
+     ],
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "pull": [
+      [
+       "korea",
+       "R",
+       "북한의 핵 기정사실화"
+      ]
+     ]
+    },
+    {
+     "t": "The Sudanese rights group Emergency Lawyers said on November 25 that drone strikes by the Rapid Support Forces in Blue Nile state on November 24 killed at least 19 civilians in Damazin and injured 20 in Damazin and Roseires; the RSF did not comment (Reuters).",
+     "src": [
+      "https://www.timeslive.co.za/news/africa/2026-11-25-drone-strikes-kill-at-least-19-civilians-in-sudan-says-rights-group/"
+     ],
+     "case": null,
+     "fp": [
+      "sudan-civil-war"
+     ],
+     "pull": []
+    },
+    {
+     "t": "The EU–Western Balkans summit was held in Brussels on November 25, but Serbia stayed away, citing the constitutive session of its new parliament (Euronews).",
+     "src": [
+      "https://www.euronews.com/2026/11/25/serbias-no-show-at-eu-western-balkan-summit-postpones-foreign-policy-test"
+     ],
+     "case": null,
+     "fp": [
+      "balkans-serbia-bosnia-kosovo"
+     ],
+     "pull": []
+    },
+    {
+     "t": "Judges in Prime Minister Benjamin Netanyahu's corruption trial recommended on November 25 that the attorney general consider dropping the charges in Case 4000, and opposition leader Gadi Eisenkot hoped to form a government by December 2, Israeli media reported (ABC Australia).",
+     "src": [
+      "https://www.abc.net.au/news/2026-11-26/eisenkot-vows-to-form-israeli-government-by-end-of-week/107429976"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    },
+    {
+     "t": "Thirty-four member states of the Organisation for the Prohibition of Chemical Weapons and the EU called on Russia in a joint statement on November 25 to immediately stop using toxic chemicals and riot control agents in Ukraine (Kyiv Independent).",
+     "src": [
+      "https://kyivindependent.com/over-30-countries-demand-russia-stop-using-chemical-agents-as-weapons-of-war-in-ukraine/"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-25",
    "items": [
     {
@@ -6062,239 +6367,6 @@
      ],
      "fp": [
       "sudan-civil-war"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-22",
-   "items": [
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Kremlin says it is ready to resume three-way talks around November 10 after Witkoff meeting",
-     "fact": "After Putin met U.S. envoy Steve Witkoff in St. Petersburg on October 21, presidential aide Yuri Ushakov said Russia is ready in principle to resume three-way talks with the U.S. and Ukraine around November 10. Russia freed jailed American Stephen Hubbard, 74, as the meeting began.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://tass.com/politics/2205585",
-      "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy",
-      "https://www.cbsnews.com/news/russia-stephen-hubbard-freed-american-ukraine-war-witkoff-putin/"
-     ],
-     "loc": {
-      "lat": 59.94,
-      "lon": 30.31,
-      "place": "St. Petersburg (Russia)",
-      "isos": [
-       "RUS",
-       "USA",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Zelensky hopes for U.S.-Russia-Ukraine talks by early November",
-     "fact": "On his way back to Kyiv from Norway, Zelensky told reporters he believes the three-way talks should take place no later than early November (Al Jazeera, October 21). Ushakov told Russian state TV channel Vesti the talks could be held in Abu Dhabi.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/21/witkoff-in-russia-for-putin-meeting-after-positive-talks-with-zelenskyy"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "Netanyahu says toppling Iran's regime is the only way to end its threat",
-     "fact": "Speaking at an Israeli military officers' graduation ceremony on October 21, Israeli Prime Minister Benjamin Netanyahu said the only way to remove Iran's threat for good is to overthrow the regime. He said he had issued directives to the military, the Mossad and other security services but did not say what they were.",
-     "fc": [],
-     "src": [
-      "https://thisisbeirut.com.lb/news/politics/netanyahu-says-overthrowing-irans-regime-is-necessary-to-eliminate-threat",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
-     ],
-     "loc": {
-      "isos": [
-       "ISR",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "State Department orders non-emergency staff and families out of Saudi Arabia over Houthi attacks",
-     "fact": "State Department spokesperson Tommy Pigott said on X on October 21 that the department had ordered non-emergency employees and their families to leave Saudi Arabia, citing attacks by the Iran-backed Houthis on Saudi airports and infrastructure. Saudi Arabia's civil aviation authority said an attack late on October 21 on King Fahd International Airport in Dammam killed one person and injured eight.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/news/us-saudi-arabia-ordered-departure-houthis/",
-      "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
-     ],
-     "loc": {
-      "lat": 26.47,
-      "lon": 49.8,
-      "place": "Dammam (Saudi Arabia)",
-      "isos": [
-       "SAU",
-       "USA",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "IRGC spokesman warns Iran will respond and go on the offensive if attacked",
-     "fact": "In an October 21 interview with the Student News Network, IRGC spokesman Hossein Mohebbi said the Guards' doctrine, which had been largely defensive, now includes offensive action, and that any country that attacks Iran will face both a response and an offensive, IranWire reported.",
-     "fc": [],
-     "src": [
-      "https://iranwire.com/en/news/159162-irgc-announces-shift-to-offensive-military-strategy/"
-     ],
-     "loc": {
-      "isos": [
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "Kim Yo Jong says loudspeakers aimed at South Korea will be on standby within days",
-     "fact": "In an October 22 statement carried by KCNA, Kim Yo Jong, director of the Workers' Party's General Affairs Department, said North Korea's new means of response will go on mission standby along the entire border and its loudspeakers aimed at South Korea will be on standby within days. In an October 21 statement, she said the loudspeakers would be operating along the entire border sometime in October.",
-     "fc": [],
-     "src": [
-      "https://www.fnnews.com/news/202610220703222153",
-      "https://www.khan.co.kr/article/202610212243005/",
-      "https://www.japantimes.co.jp/news/2026/10/22/asia-pacific/north-korea-kim-yo-jong/"
-     ],
-     "loc": {
-      "isos": [
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Russian ballistic missiles and drones hit Kyiv overnight October 21–22, injuring 15",
-     "fact": "Kyiv Mayor Vitali Klitschko said Russian ballistic missile and drone attacks overnight on October 21–22 (local time) injured 15 people, including two 15-year-olds. Metro infrastructure on the Pivdennyi Bridge and an ambulance station in the Pecherskyi district were damaged.",
-     "fc": [],
-     "src": [
-      "https://www.kyivpost.com/post/87796"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "Kyiv (Ukraine)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "Moscow mayor reports downing drones overnight October 21–22; TASS tallies 630",
-     "fact": "Moscow Mayor Sergei Sobyanin reported downing wave after wave of Ukrainian drones headed for Moscow between 8:30 p.m. on October 21 and 4 a.m. on October 22 (Moscow time); TASS, tallying his announcements, put the total at 630. He said 163 were downed as they approached the city, and two people were injured near Voronovo.",
-     "fc": [],
-     "src": [
-      "https://tass.com/emergencies/2205911",
-      "https://tass.com/politics/2205939"
-     ],
-     "loc": {
-      "lat": 55.76,
-      "lon": 37.62,
-      "place": "Moscow (Russia)",
-      "isos": [
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": null,
-     "fp": [
-      "us-canada-trade-war"
-     ],
-     "h": "U.S. Embassy in Canada accuses Canadian politicians of trying to sway the midterms",
-     "fact": "In a fact sheet released October 21, the U.S. Embassy in Canada claimed that Industry Minister Mélanie Joly, Ontario Premier Doug Ford and others are trying to influence the November 3 U.S. midterm elections through their responses to President Donald Trump's tariffs. Joly had denied any interference on October 14, saying her work in the U.S. was aimed at attracting investment.",
-     "fc": [],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/21/us-accuses-canada-of-election-interference-ahead-of-midterms"
-     ],
-     "loc": {
-      "lat": 45.42,
-      "lon": -75.7,
-      "place": "Ottawa (Canada)",
-      "isos": [
-       "USA",
-       "CAN"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "In a joint statement in Doha on October 21, Qatar's Emir Sheikh Tamim bin Hamad Al Thani and French President Emmanuel Macron called for restoring freedom of navigation in the Strait of Hormuz without constraints or fees and for implementing the Gaza ceasefire.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/22/qatar-france-call-for-opening-of-hormuz-and-gaza-ceasefire-implementation"
-     ],
-     "fp": [
-      "iran-war",
-      "levant"
-     ]
-    },
-    {
-     "t": "Saudi Arabia's energy ministry said October 21 that debris from a drone intercepted as it headed for the Shaybah oil field in the east killed two people and injured two.",
-     "src": [
-      "https://www.malaymail.com/news/world/2026/10/22/one-killed-eight-injured-in-attack-on-saudi-arabias-dammam-airport/240114"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ]
-    },
-    {
-     "t": "Mexican authorities on October 21 charged former Chihuahua state Attorney General César Jáuregui with treason for allowing U.S. agents to take part in an anti-drug operation.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/21/mexico-charges-prosecutor-with-treason-over-us-involvement-in-drug-raid"
-     ],
-     "fp": [
-      "us-mexico-cartels"
      ]
     }
    ]
