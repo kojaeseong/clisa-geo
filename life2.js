@@ -27,9 +27,9 @@
     foot: "크게 악화: 한 범주라도 20점 넘게 떨어지거나 두 범주가 10점 넘게 떨어지는 경우.",
     CN: {"개인": "개인 안전", "공동체": "공동체", "정치": "정치", "경제": "경제"}
   };
-  var GROUPS = EN ? [["KOR","South Koreans"],["USA","Americans"],["DEU","Germans"],["GBR","Britons"],["JPN","Japanese"],["NEU","Nordic and Baltic Europeans"],["SEU","Southern Europeans"],["WCEU","Western and Central Europeans (excl. Germany, U.K.)"],["PARTY","People in the countries involved"]]
-                  : [["KOR","한국"],["USA","미국"],["DEU","독일"],["GBR","영국"],["JPN","일본"],["NEU","북유럽·발트"],["SEU","남유럽"],["WCEU","서유럽·중유럽(독일·영국 제외)"],["PARTY","분쟁 당사국 국민"]];
-  var ISOS = {KOR: ["KOR"], USA: ["USA"], NEU: ["DNK","FIN","ISL","NOR","SWE","EST","LVA","LTU"], SEU: ["ITA","ESP","PRT","GRC"], WCEU: ["DEU","FRA","GBR","POL"], PARTY: ["IRN","UKR","RUS","TWN","KOR","POL"]};
+  var GROUPS = EN ? [["KOR","South Koreans"],["USA","Americans"],["DEU","Germans"],["GBR","Britons"],["FRA","French people"],["ITA","Italians"],["JPN","Japanese"],["NEU","Nordic and Baltic Europeans"],["SEU","Southern Europeans (Spain, Portugal, Greece)"],["WCEU","Western, Central, and Eastern Europeans (excl. Germany, U.K., France)"],["PARTY","People in the countries involved"]]
+                  : [["KOR","한국"],["USA","미국"],["DEU","독일"],["GBR","영국"],["FRA","프랑스"],["ITA","이탈리아"],["JPN","일본"],["NEU","북유럽·발트"],["SEU","스페인·포르투갈·그리스"],["WCEU","서·중·동유럽(독일·영국·프랑스 제외)"],["PARTY","분쟁 당사국 국민"]];
+  var ISOS = {KOR: ["KOR"], USA: ["USA"], NEU: ["DNK","FIN","ISL","NOR","SWE","EST","LVA","LTU"], SEU: ["ESP","PRT","GRC"], WCEU: ["NLD","BEL","LUX","AUT","IRL","POL","CZE","SVK","HUN","SVN","HRV","ROU","BGR"], DEU: ["DEU"], GBR: ["GBR"], FRA: ["FRA"], ITA: ["ITA"], JPN: ["JPN"], PARTY: ["IRN","UKR","RUS","TWN","KOR","POL"]};
   var LC = {x: "#C8102E", w: "#F59E0B", b: "#0EA5A4", s: "var(--same,#D3D8DE)"}, LCS = {x: "#C8102E", w: "#E8890C", b: "#0D9488", s: "#9AA4AE"};
   var h = function(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); };
   var nm = function(o, a, b){ return EN ? o[b] : o[a]; };
