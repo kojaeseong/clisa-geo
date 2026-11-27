@@ -1,6 +1,218 @@
 {
  "issues": [
   {
+   "date": "2026-11-27",
+   "items": [
+    {
+     "case": "iran",
+     "h": "쿠웨이트 군 시설 드론 공격에 이탈리아인 2명 사망…이탈리아 \"이란제 드론\", 이란은 부인",
+     "fact": "26일 오후 2시께(현지 시각) 쿠웨이트군 방공 감시 시설이 드론 공격을 받아 스카이가드 방공체계의 탐지 안테나를 정비하던 라인메탈 이탈리아 소속 이탈리아인 기술자 2명이 숨졌고, 안토니오 타야니 이탈리아 외무장관은 상원에서 이란산 드론에 의한 공격이라고 밝혔습니다. 주이탈리아 이란대사관은 혐의를 전면 부인했고, 아바스 아락치 이란 외무장관은 사건이 수상하며 전쟁을 위해 미리 짜 놓은 각본처럼 보인다고 말했습니다(UPI·로이터·AP).",
+     "fc": [
+      {
+       "id": "f04",
+       "e": "up"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.abc.net.au/news/2026-11-27/italians-killed-in-kuwait-attack-iran/107432996",
+      "https://www.yahoo.com/news/world/articles/2-italians-killed-kuwait-drone-034800372.html"
+     ],
+     "loc": {
+      "isos": [
+       "IRN",
+       "KWT",
+       "ITA"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "EU 정상회의, 우크라이나 450억 유로 대출 결정 못 내고 12월로 넘겨",
+     "fact": "26일 브뤼셀에서 열린 EU 특별 정상회의는 예정됐던 둘째 날 일정을 취소하고 27일 새벽(현지 시각) 끝났습니다. 안토니우 코스타 유럽이사회 상임의장은 슬로바키아·헝가리·체코가 450억 유로 대출을 지지하지 않았다며 12월에 이 문제를 다시 다루겠다고 말했고, 2028~2034년 EU 예산도 합의하지 못했습니다(유로뉴스).",
+     "fc": [
+      {
+       "id": "f73",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.euronews.com/2026/11/26/eu-summit-leaders-ready-to-spar-over-new-budget-and-ukraine-aid"
+     ],
+     "loc": {
+      "lat": 50.84,
+      "lon": 4.38,
+      "place": "브뤼셀(벨기에)",
+      "isos": [
+       "EUR",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "브렌트유 사흘째 올라 96.57달러…이란 \"유조선 2척 또 기뢰 피격\" 주장",
+     "fact": "이란 혁명수비대는 26일 이란의 허가 없이 호르무즈 해협을 건너던 유조선 2척이 오만 카사브항 북쪽에서 기뢰에 부딪혀 폭발하고 불이 났다고 주장했으나 선박 이름은 공개되지 않았습니다. 같은 날 브렌트유 선물은 1.96달러 오른 배럴당 96.57달러에 마감해 사흘 동안 약 8% 올랐습니다(로이터).",
+     "fc": [
+      {
+       "id": "f13",
+       "e": "down"
+      },
+      {
+       "id": "f03",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "이란의 호르무즈 카드"
+      ]
+     ],
+     "src": [
+      "https://gsmglobalnews.com/article/d20261126-brent96571.html",
+      "https://www.abc.net.au/news/2026-11-27/italians-killed-in-kuwait-attack-iran/107432996"
+     ],
+     "loc": {
+      "lat": 26.4,
+      "lon": 56.25,
+      "place": "카사브(오만) 북쪽 호르무즈 해협",
+      "isos": [
+       "IRN",
+       "OMN"
+      ]
+     }
+    },
+    {
+     "case": "poland",
+     "h": "미국, 유럽 주둔군 태세 검토 발표 12월 1일 뒤로 미뤄",
+     "fact": "자유유럽방송은 27일(현지 시각) 스콧 오드커크 주NATO 미국 차석대사가 이번 주 브뤼셀의 비공개 회의에서 동맹국 대사들에게 유럽 주둔 미군 태세 검토 결과 발표를 잠정 시한인 12월 1일 뒤로 미룬다고 알렸다고 보도했습니다. 미국 고위 관리들은 국방부가 선택지 5개를 마무리하고 있다고 익명으로 밝혔습니다.",
+     "fc": [
+      {
+       "id": "f60",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "baltic-kaliningrad-suwalki"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.rferl.org/a/trump-putin-europe-ukraine-russia-aggression/33906739.html"
+     ],
+     "loc": {
+      "lat": 50.88,
+      "lon": 4.42,
+      "place": "브뤼셀(벨기에)",
+      "isos": [
+       "USA",
+       "POL"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "트럼프 \"푸틴에게 유럽 전역 영토에 대한 모든 군사 공격 물리길 바란다고 했다\"",
+     "fact": "도널드 트럼프 미국 대통령은 26일 트루스소셜에 중국에서 블라디미르 푸틴 러시아 대통령과 대화하며 유럽 전역의 영토에 대한 모든 군사 공격을 물리기를 바란다는 이야기를 오래 했다고 쓰고, 러시아와 우크라이나의 합의가 빨리 이뤄질 가능성이 크다고 밝혔습니다. 무엇을 가리키는지는 구체적으로 밝히지 않았습니다(로이터).",
+     "fc": [
+      {
+       "id": "f01",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.koreatimes.co.kr/world/20261127/trump-says-he-asked-putin-to-pull-back-military-aggression-throughout-europe",
+      "https://www.abc.net.au/news/2026-11-27/trump-urges-putin-to-pull-back-military-aggression/107433138"
+     ],
+     "loc": {
+      "isos": [
+       "USA",
+       "RUS"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "우크라이나 정보총국 \"북한, 러시아에 KN-23 미사일 공급 일시 중단\" 주장",
+     "fact": "우크라이나 국방부 정보총국은 26일 보고서에서 최선희 북한 외무상이 지난달 러시아에 대한국 정책을 밝히라고 요구하며 KN-23 탄도미사일·포탄 공급과 북한 상공의 러시아 군용기 비행 등 군사 협력을 일시 중단한다고 통보했고, 러시아 파견 병력을 약 8,500명에서 5만 명으로 늘려 달라는 요청도 보류했다고 주장했습니다. 로이터는 보고서 내용을 독자적으로 확인하지 못했습니다.",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://www.gmanetwork.com/news/topstories/world/1010870/ukraine-says-north-korea-temporarily-halted-missile-shipments-to-ally-russia/story/"
+     ],
+     "loc": {
+      "isos": [
+       "PRK",
+       "RUS",
+       "UKR"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "기니비사우의 오르타 인타아 과도 대통령(소장)은 26일 포고령으로 12월 6일 예정이던 대선과 총선을 2028년 11월로 미뤘고, 기술·물자·재정 여건이 부족하다는 이유를 들었습니다(AFP·로이터).",
+     "src": [
+      "https://www.yahoo.com/news/world/articles/guinea-bissau-presidential-election-delayed-180718006.html"
+     ],
+     "case": null,
+     "fp": [],
+     "pull": []
+    },
+    {
+     "t": "베냐민 네타냐후 이스라엘 총리와 이스라엘 카츠 국방장관은 26일 가자지구 공습으로 팔레스타인 매체가 하마스 정부 교육 차관이라고 전한 칼레드 아부 나다를 살해했다고 확인했으며, 같은 날 하마스 수장은 이스라엘의 계속되는 가자 공습을 받아들일 수 없다며 대응을 논의하겠다고 밝혔습니다(타임스오브이스라엘).",
+     "src": [
+      "https://www.timesofisrael.com/liveblog-november-26-2026/"
+     ],
+     "case": null,
+     "fp": [
+      "levant"
+     ],
+     "pull": []
+    },
+    {
+     "t": "볼로디미르 젤렌스키 우크라이나 대통령은 26일 밤 연설에서 러시아가 새 대규모 공습을 준비하고 있다는 정보가 있다며 며칠 동안 미사일 경보에 주의하라고 당부했습니다(알자지라·로이터).",
+     "src": [
+      "https://www.aljazeera.com/news/2026/11/27/zelenskyy-warns-of-major-russian-attack-as-trump-urges-putin-to-pull-back"
+     ],
+     "case": "ukraine",
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": []
+    },
+    {
+     "t": "국민의힘 유용원 의원이 27일 공개한 합동참모본부 자료에 따르면 북한군은 10월 약 30회, 11월 들어 공개 시점까지 약 10회 등 두 달 동안 군사분계선을 40여 차례 넘었습니다(국민일보).",
+     "src": [
+      "https://www.kmib.co.kr/article/20261127500025"
+     ],
+     "case": "korea",
+     "fp": [
+      "korea"
+     ],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-26",
    "items": [
     {
@@ -6127,246 +6339,6 @@
      ],
      "fp": [
       "eastern-flank-airspace-romania-black-sea"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-23",
-   "items": [
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "트럼프 \"이란에 조금 더 할 수도 있다\"",
-     "fact": "트럼프 대통령은 22일(현지 시각) 아이오와 유세에 나서기 전 백악관에서 기자들에게 미국이 이란을 크게 타격했다며 \"조금 더 할 수도 있다\"고 말했습니다. 이란이 핵무기를 갖게 둘 수는 없다고도 했습니다.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.anews.com.tr/world/2026/10/22/trump-says-us-may-do-it-a-little-bit-further-in-iran",
-      "https://www.breitbart.com/politics/2026/10/22/trump-signals-more-iran-strikes-we-may-do-it-a-little-bit-further/"
-     ],
-     "loc": {
-      "lat": 38.9,
-      "lon": -77.04,
-      "place": "워싱턴(미국)",
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "트럼프 \"이란, 유가 올리려 가짜 피격·기뢰 꾸며내\" 주장",
-     "fact": "트럼프 대통령은 22일 트루스소셜에서 이란이 중간선거 전에 유가를 끌어올리려 '가짜 피격과 기뢰'를 꾸며내고 있다고 주장했습니다. 이란 혁명수비대는 같은 날 유조선 4척이 피격되고 3척이 기뢰에 걸렸다고 주장했으나, 독립적으로 확인되지 않았습니다.",
-     "fc": [],
-     "src": [
-      "https://www.iranintl.com/en/202610223072",
-      "https://gcaptain.com/iran-claims-more-ships-struck-near-hormuz-as-trump-accuses-tehran-of-faking-hits/",
-      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
-     ],
-     "loc": {
-      "isos": [
-       "IRN",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "혁명수비대, 미국 유조선 통항 지원에 \"분쟁이 역내 미군 기지로 확대\" 경고",
-     "fact": "이란 혁명수비대는 22일 세파뉴스에 낸 성명에서 미국이 유조선의 해협 통항을 돕는 것을 두고 \"이 추세가 계속되면 분쟁이 역내 미군 기지로 확대될 것\"이라고 경고했습니다. 미 중부사령부 대변인은 익명으로 기뢰 주장이 틀렸으며 선박의 95%가 해협을 통과한다고 알자지라에 말했습니다.",
-     "fc": [
-      {
-       "id": "f03",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/22/iran-says-seven-ships-hit-in-hormuz-strait-warns-us-of-wider-response",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
-     ],
-     "loc": {
-      "lat": 26.57,
-      "lon": 56.25,
-      "place": "호르무즈 해협",
-      "isos": [
-       "IRN",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "브렌트유, 배럴당 113달러 마감…5월 초 이후 최고",
-     "fact": "브렌트유는 22일 4.0% 오른 배럴당 113.17달러, 미국 서부텍사스산 원유(WTI)는 2.4% 오른 99.47달러에 거래를 마쳤습니다. 브렌트유 종가로는 5월 4일 이후 가장 높습니다.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.nationthailand.com/news/world/40072637",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
-     ]
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "사우디 담맘 공항 공격 사망자 2명으로…연합군, 나지란 겨냥 미사일 요격",
-     "fact": "사우디 민간항공청은 22일 담맘 킹파흐드 국제공항 공격의 사망자가 2명으로 늘었다고 밝혔습니다. 사우디 주도 연합군은 같은 날 나지란을 겨냥한 후티의 탄도미사일을 요격했다고 밝혔고, 아람코가 다란 본사의 필수 인력에 대피를 지시했다고 AFP가 소식통을 인용해 보도했습니다.",
-     "fc": [],
-     "src": [
-      "https://gulfnews.com/world/mena/middle-east-war-saudi-airport-attack-kills-one-as-us-orders-embassy-departures-1.500719174",
-      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
-     ],
-     "loc": {
-      "lat": 26.47,
-      "lon": 49.8,
-      "place": "담맘(사우디아라비아)",
-      "isos": [
-       "SAU",
-       "YEM"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "로이터 \"한미 당국자들, 연내 트럼프-김정은 회담 가능성 낮게 봐\"",
-     "fact": "로이터는 사정을 아는 5명을 인용해 한미 당국자들이 연내 트럼프 대통령과 김정은 국무위원장의 회담 가능성을 낮게 본다고 보도했습니다. 이들은 미국이 회담에 관해 북한으로부터 답을 받지 못했다고 말했습니다.",
-     "fc": [
-      {
-       "id": "f05",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://en.apa.az/america/us-south-korean-officials-see-little-chance-of-trump-kim-meeting-this-year-531749",
-      "https://www.internazionale.it/ultime-notizie-reuters/2026/10/23/exclusive-us-south-korean-officials-see-little-chance-of-trump-kim-meeting-this-year"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "PRK",
-       "KOR"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키 \"회담 직후 과시적 공격…러시아 태도에 실질적 변화 없어\"",
-     "fact": "젤렌스키 대통령은 22일 소셜미디어에서 러시아가 21일 저녁부터 22일 새벽(현지 시각)까지 키이우에 탄도미사일 21발을 세 차례에 나눠 쐈고, 집속탄두를 단 탄도미사일 3발도 썼다고 밝혔습니다. 12개 주가 공격받아 어린이 5명을 포함해 34명이 다쳤다고 했습니다.",
-     "fc": [],
-     "src": [
-      "https://news.liga.net/en/politics/news/zelenskyy-and-sybiha-comment-on-russias-humanism-after-new-attack",
-      "https://www.kyivpost.com/post/87830",
-      "https://www.cbsnews.com/news/zelenskyy-russia-cluster-warheads-deadly-strikes-hours-after-us-prisoner-release/"
-     ],
-     "loc": {
-      "lat": 50.45,
-      "lon": 30.52,
-      "place": "키이우(우크라이나)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "크렘린 \"3자 회담 장소, 현재로선 아부다비\"",
-     "fact": "페스코프 크렘린 대변인은 22일 미·러·우 3자 회담 장소로 \"현재로선 아부다비를 말하고 있다\"고 밝혔습니다. 러시아 협상단이 문서나 제안을 준비하고 있느냐는 질문에는 앞서 나가지 말라며 답하지 않았습니다.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://tass.com/politics/2206267"
-     ],
-     "loc": {
-      "lat": 55.75,
-      "lon": 37.62,
-      "place": "모스크바(러시아)",
-      "isos": [
-       "RUS",
-       "UKR",
-       "USA"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "미 중부사령부는 22일 대이란 해상봉쇄를 재개한 지 100일이 됐다며 미군이 허용한 인도 물자 말고는 해상으로 이란에 드나든 수출입이 없었고, 원유 수출 250억 달러어치 이상을 막았다고 밝혔습니다.",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-ceasefire-talks-ongoing/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "예멘 국방부는 22일 후티의 집회와 동원 행사를 정당한 군사 표적으로 보겠다며 후티 장악 지역 주민에게 참여하지 말라고 경고했습니다.",
-     "src": [
-      "https://www.ksat.com/business/2026/10/22/iran-says-7-tankers-on-fire-or-damaged-in-the-strait-of-hormuz-and-other-mideast-news/"
-     ],
-     "fp": [
-      "red-sea-bab-el-mandeb"
-     ]
-    },
-    {
-     "t": "마오닝 중국 외교부 대변인은 22일 필리핀이 대만과 해저케이블·회색지대 문제에서 협력하려 한다는 질문에 \"대만 문제에는 회색지대가 없다\"며 필리핀에 하나의 중국 원칙을 지키라고 요구했습니다.",
-     "src": [
-      "https://www.fmprc.gov.cn/mfa_eng/xw/fyrbt/202610/t20261022_12045376.html"
-     ],
-     "fp": [
-      "taiwan-strait"
-     ]
-    },
-    {
-     "t": "마크롱 프랑스 대통령은 지난 주말 폭동을 '극좌'의 선동 행위로 규정했고, 프랑스 당국은 22일 파리 엘리제궁·의회·주요 역 주변과 리옹·릴·그르노블의 시위를 금지했습니다. 다르마냉 법무장관은 2,700명 이상이 구금됐다고 밝혔습니다.",
-     "src": [
-      "https://www.aljazeera.com/news/2026/10/22/macron-blames-seditious-ultra-left-for-unrest-as-france-bans-protests"
-     ],
-     "fp": []
-    },
-    {
-     "t": "차드 와디피라주의 정부 대표는 이번 주 수단 국경 마을 바미나에 출처를 알 수 없는 드론 공격이 있어 4명이 숨지고 14명이 다쳤다고 AFP에 밝혔습니다.",
-     "src": [
-      "https://www.arabnews.com/middle-east/drone-strike-kills-four-in-chad-town-near-sudan-3007793"
-     ],
-     "fp": [
-      "sudan-civil-war"
      ]
     }
    ]
