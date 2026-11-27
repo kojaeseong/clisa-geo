@@ -129,7 +129,7 @@
   var EN = D.lang === "en", P = EN ? "/en" : "", HOME = P + "/app/", mq = matchMedia("(max-width:900px)");
   if (mq.matches && (location.pathname === "/" || location.pathname === "/en/") && !location.hash && !location.search) {
     var ro = ""; try { ro = document.referrer ? new URL(document.referrer).origin : ""; } catch (e) {}
-    if (ro !== location.origin && !/bot|crawl|spider|slurp|lighthouse|pagespeed|headless/i.test(navigator.userAgent)) { location.replace(HOME); return; }  /* 검색 로봇은 보내지 않는다(첫 주소의 색인 유지) */
+    if (ro !== location.origin && !/bot|crawl|spider|slurp|lighthouse|pagespeed|headless|google|inspection|yeti|daum/i.test(navigator.userAgent)) { location.replace(HOME); return; }  /* 검색 로봇은 보내지 않는다(첫 주소의 색인 유지). 2026-11-27 고침: 구글 URL 검사 도구(Google-InspectionTool)와 네이버(Yeti)·다음 로봇은 이름에 bot이 없어 앱(/app/, noindex)으로 보내지던 것 */
   }
   var SV = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
   var bar = document.createElement("div"); bar.className = "mab";
