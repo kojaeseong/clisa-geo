@@ -5,20 +5,20 @@
    "items": [
     {
      "case": "taiwan",
-     "h": "KMT holds Taipei in Taiwan's local elections, claiming 10 races to the DPP's nine",
-     "fact": "The Democratic Progressive Party's Puma Shen conceded in Taiwan's local elections on November 28, handing Taipei Mayor Chiang Wan-an of the Kuomintang (KMT) a second term (AFP). As of 8:40 p.m. local time, Taiwanese media tallies showed the KMT claiming victory in 10 of the 22 mayoral and county magistrate races, the DPP in nine, and an independent in one, with KMT candidates leading in New Taipei and Hualien; the Central Election Commission will announce official results on December 4.",
+     "h": "Taiwan's local elections: KMT wins 11 races, DPP 10, and holds Taipei",
+     "fact": "With counting complete in Taiwan's November 28 local elections, the Kuomintang (KMT) won 11 of the 22 mayoral and county magistrate races (including a joint KMT–TPP nominee in New Taipei), the Democratic Progressive Party (DPP) 10, and an independent one, and Taipei Mayor Chiang Wan-an was re-elected after the DPP's Puma Shen conceded (Focus Taiwan, AFP). The DPP won Yunlin by 173 votes and the KMT won Hualien by a few hundred, with the losing side in each saying it would seek a ballot inspection or recount; the Central Election Commission will announce official results on December 4. (Corrected November 29: an earlier version, based on self-declared tallies during the count, said the KMT had claimed 10 races and the DPP nine, wrongly counting Yunlin for the KMT.)",
      "fc": [
       {
        "id": "f72",
-       "e": "up"
+       "e": "down"
       }
      ],
      "fp": [],
      "pull": [],
      "src": [
+      "https://focustaiwan.tw/politics/202611290003",
       "https://www.malaymail.com/news/world/2026/11/28/china-critic-puma-shen-concedes-defeat-in-taipei-mayor-election/245172",
-      "https://udn.com/news/story/124652/9908050",
-      "https://theprint.in/world/ruling-party-set-to-make-gains-in-taiwan-local-elections-watched-by-china/3111782/"
+      "https://newtalk.tw/news/view/2026-11-28/1074401"
      ],
      "loc": {
       "lat": 25.04,
