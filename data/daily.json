@@ -1,6 +1,148 @@
 {
  "issues": [
   {
+   "date": "2026-11-28",
+   "items": [
+    {
+     "case": "taiwan",
+     "h": "대만 지방선거, 국민당 타이베이 수성…국민당 10곳·민진당 9곳 승리 선언",
+     "fact": "28일 대만 지방선거에서 민진당 선보양(푸마 선) 후보가 패배를 인정해 국민당 장완안 타이베이 시장이 재선했습니다(AFP). 대만 언론 집계로 이날 밤 8시 40분(현지 시각)까지 22개 시·현 단체장 가운데 국민당 10곳, 민진당 9곳, 무소속 1곳이 승리를 선언했고, 신베이와 화롄에서는 국민당 후보가 앞서 있으며 중앙선거위원회의 공식 발표는 12월 4일입니다.",
+     "fc": [
+      {
+       "id": "f72",
+       "e": "up"
+      }
+     ],
+     "fp": [],
+     "pull": [],
+     "src": [
+      "https://www.malaymail.com/news/world/2026/11/28/china-critic-puma-shen-concedes-defeat-in-taipei-mayor-election/245172",
+      "https://udn.com/news/story/124652/9908050",
+      "https://theprint.in/world/ruling-party-set-to-make-gains-in-taiwan-local-elections-watched-by-china/3111782/"
+     ],
+     "loc": {
+      "lat": 25.04,
+      "lon": 121.56,
+      "place": "타이베이(대만)",
+      "isos": [
+       "TWN"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "독일 연방의회, 2027년 예산 의결…우크라이나 군사 지원 116억 유로",
+     "fact": "독일 연방의회는 27일 2027년 연방 예산을 찬성 317표, 반대 260표로 의결했고, 우크라이나 군사 지원에는 약 116억 유로를 배정했습니다. 지출은 약 5,560억 유로이며 핵심 예산의 신규 차입은 약 1,230억 유로입니다(유로뉴스).",
+     "fc": [
+      {
+       "id": "f76",
+       "e": "down"
+      }
+     ],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [],
+     "src": [
+      "https://de.euronews.com/2026/11/27/bundestag-rekordhaushalt-2027-neuverschuldung-steigt",
+      "https://www.beck-aktuell.de/heute-im-recht/rechtspolitik-gesetzgebung/bundestag-haushalt-2027-beschluss-2026-11-27"
+     ],
+     "loc": {
+      "lat": 52.52,
+      "lon": 13.38,
+      "place": "베를린(독일)",
+      "isos": [
+       "DEU",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "ukraine",
+     "h": "러시아, 우크라이나에 드론 162대 공격…우크라이나 \"141대 격추\"",
+     "fact": "우크라이나 공군은 러시아가 27일 18시부터 28일 아침(현지 시각) 사이 드론 162대로 공격했고 28일 오전 8시까지 141대를 격추하거나 무력화했으며 13곳에서 피격이 확인됐다고 밝혔습니다. 27일 오후 체르니히우주 니진의 산업시설이 공격을 받아 7명이 숨졌다고 우크라이나 비상대책청이 28일 밝혔습니다(우크라인폼).",
+     "fc": [],
+     "fp": [
+      "rus-ukr"
+     ],
+     "pull": [
+      [
+       "ukraine",
+       "R",
+       "러시아의 공습 지속"
+      ]
+     ],
+     "src": [
+      "https://en.h.ua/2026/11/28/russia-attacks-ukraine-162-drones",
+      "https://www.ukrinform.net/rubric-ato/4189499-seven-killed-as-rescue-operation-concludes-after-russian-attack-on-nizhyn.html"
+     ],
+     "loc": {
+      "isos": [
+       "RUS",
+       "UKR"
+      ]
+     }
+    },
+    {
+     "case": "iran",
+     "h": "미 중부사령부, 봉쇄 어긴 벌크선 오만만에서 무력화",
+     "fact": "미 중부사령부는 27일 이란 반다르아바스항을 출항해 정지 경고를 거듭 무시한 팔라우 선적 벌크선 퍼시픽아처호를 26일 오만만에서 미군 항공기가 공격해 추진 장치를 무력화했으며 선원은 다치지 않았다고 밝혔습니다. 중부사령부가 봉쇄 돌파 선박의 무력화를 발표한 것은 11월 7일 이후 처음입니다(크리티컬스레츠·LB.ua).",
+     "fc": [
+      {
+       "id": "f70",
+       "e": "none"
+      }
+     ],
+     "fp": [
+      "iran-war"
+     ],
+     "pull": [
+      [
+       "iran",
+       "R",
+       "미국의 봉쇄·공습 압박"
+      ]
+     ],
+     "src": [
+      "https://www.criticalthreats.org/analysis/iran-update-november-27-2026",
+      "https://en.lb.ua/news/2026/11/28/51868_us_disables_palau-flagged_cargo.html"
+     ],
+     "loc": {
+      "lat": 24.5,
+      "lon": 58.5,
+      "place": "오만만",
+      "isos": [
+       "USA",
+       "IRN",
+       "OMN"
+      ]
+     }
+    }
+   ],
+   "more": [
+    {
+     "t": "대만 국방부는 28일 오전까지 24시간 동안 중국군 항공기 33대와 군함 8척이 대만 주변에서 활동했다고 밝혔고, 중국 관영 매체는 선거 전날인 27일 민진당 선보양 후보가 미국의 돈을 받았다고 주장하며 공격했습니다(로이터).",
+     "src": [
+      "https://www.koreatimes.co.kr/world/20261128/taiwan-votes-in-local-elections-as-china-sends-warplanes-lambasts-taipei-candidate"
+     ],
+     "case": "taiwan",
+     "fp": [
+      "taiwan-strait"
+     ],
+     "pull": []
+    },
+    {
+     "t": "한국 국가정보원은 28일 김정은 국무위원장의 중국 재방문 가능성을 면밀히 추적하고 있다고 밝혔으나, 방문 일정은 확인되지 않았습니다(딤섬데일리).",
+     "src": [
+      "https://www.dimsumdaily.hk/south-korean-intelligence-closely-monitors-reports-of-possible-kim-jong-un-visit-to-china/"
+     ],
+     "case": "korea",
+     "fp": [],
+     "pull": []
+    }
+   ]
+  },
+  {
    "date": "2026-11-27",
    "items": [
     {
@@ -6041,304 +6183,6 @@
      ],
      "fp": [
       "korea"
-     ]
-    }
-   ]
-  },
-  {
-   "date": "2026-10-24",
-   "items": [
-    {
-     "case": "poland",
-     "fp": [
-      "black-sea",
-      "rus-ukr",
-      "eastern-flank-airspace-romania-black-sea"
-     ],
-     "h": "화물선, 루마니아 영해 바로 밖서 드론 맞고 침몰…루마니아 대통령, 러시아 지목",
-     "fact": "코모로 선적 화물선 호리우호가 23일 루마니아 콘스탄차항에서 약 13해리, 루마니아 영해 바로 바깥에서 드론 공격을 받아 침몰해 우크라이나인 선원 1명이 숨지고 3명이 실종됐습니다. 니쿠쇼르 단 루마니아 대통령은 러시아가 우크라이나 전쟁에서 벌이는 확전의 일부라고 말했고, 러시아는 보도 시점까지 공개 반응을 내지 않았습니다.",
-     "fc": [
-      {
-       "id": "f62",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.kyivpost.com/post/88003",
-      "https://www.marineinsight.com/romania-blames-russia-as-drone-sinks-ship-off-constanta/",
-      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
-     ],
-     "loc": {
-      "lat": 44.17,
-      "lon": 28.64,
-      "place": "콘스탄차 앞바다(루마니아)",
-      "isos": [
-       "ROU",
-       "RUS",
-       "UKR"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "트럼프, 이란에 \"또 한 번 작은 '에픽 퓨리'를 할 수도\"",
-     "fact": "트럼프 대통령은 23일(현지 시각) 플로리다주 포트마이어스 유세에서 이란 전쟁을 언급하며 \"또 한 번 작은 '에픽 퓨리'를 할 수도 있고, 아니면 그들이 합의할 것\"이라고 말했습니다. '에픽 퓨리'는 미군의 대이란 작전 이름입니다.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "up"
-      }
-     ],
-     "src": [
-      "https://www.timesofisrael.com/liveblog_entry/trump-says-us-may-do-another-little-epic-fury-against-iran/",
-      "https://www.breitbart.com/politics/2026/10/23/trump-threatens-iran-strike-another-little-epic-fury/"
-     ],
-     "loc": {
-      "lat": 26.46,
-      "lon": -81.77,
-      "place": "포트마이어스(미국)",
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "바락 미국대사, 주말 이란 공습 가능성에 \"물론\"…트럼프는 아는 바 없다고 밝혀",
-     "fact": "톰 바락 주튀르키예 미국대사는 23일 공개된 인터뷰에서 이번 주말 공습이 있을 수 있느냐는 질문에 \"물론\"이라고 답했습니다. 트럼프 대통령은 같은 날 이 발언에 대해 아는 바가 없다고 말했습니다. 트럼프 대통령은 앞서 공습이 11월 3일 중간선거 전에는 없을 것이라고 말한 바 있습니다.",
-     "fc": [
-      {
-       "id": "f04",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/",
-      "https://www.twz.com/news-features/on-the-brink-of-epic-fury-round-two",
-      "https://www.timesofisrael.com/us-envoy-we-could-strike-iran-this-weekend-trump-i-dont-know-anything-about-that"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "젤렌스키, 미·러·우 3자 회담 11월 전반 아부다비서 실무급부터 열릴 계획 밝혀",
-     "fact": "젤렌스키 대통령은 23일 미국 허드슨연구소 화상 연설에서 미·러·우 협상팀이 11월 전반에 아부다비에서 만날 계획이라고 밝혔습니다. 실무급 회담이 성과를 내면 정상회담으로 넘어가야 한다고 했고, 10월 회담은 러시아가 다른 이유를 대 열리지 않았다고 말했습니다.",
-     "fc": [
-      {
-       "id": "f02",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/trilateral-peace-talks-with-russia-us-negotiators-to-begin-in-november-zelensky-says/"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS",
-       "USA"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "우크라이나·러시아, 멜라니아 트럼프 중재로 올레시키 국지 휴전 합의",
-     "fact": "백악관과 루비네츠 우크라이나 인권옴부즈맨은 23일 러시아가 점령한 헤르손주 올레시키 일대에서 민간인 대피와 구호품 전달을 위한 국지 휴전이 멜라니아 트럼프 미국 대통령 부인의 중재로 합의됐다고 밝혔습니다. 러시아 총참모부는 27일 오전 4시(현지 시각)부터 휴전한다고 밝혔고, 백악관은 시작일을 29일로 밝혔습니다.",
-     "fc": [
-      {
-       "id": "f01",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
-     ],
-     "loc": {
-      "lat": 46.62,
-      "lon": 32.72,
-      "place": "올레시키(우크라이나 헤르손주)",
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "미 국무부, 후티 공격 우려에 요르단·레바논·카타르·UAE 대사관 인원 감축",
-     "fact": "CBS에 따르면 미 국무부는 23일(현지 시각) 후티의 로켓·미사일·드론 공격 우려를 이유로 요르단·레바논·카타르·아랍에미리트 주재 대사관의 인원을 줄이되 대사관은 계속 연다고 밝혔습니다. 사우디아라비아 주재 비긴급 직원에게는 이번 주 초 출국 명령을 냈습니다.",
-     "fc": [],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "JOR",
-       "LBN",
-       "QAT",
-       "ARE"
-      ]
-     }
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "red-sea-bab-el-mandeb",
-      "iran-war"
-     ],
-     "h": "브렌트유, 배럴당 116.72달러 마감…4월 29일 이후 최고",
-     "fact": "로이터에 따르면 브렌트유 선물은 23일 3.14% 오른 배럴당 116.72달러, 미국 서부텍사스산 원유(WTI)는 3.8% 오른 103.27달러에 마감했습니다. 로이터는 후티의 사우디아라비아 공격이 공급 차질 우려를 키웠다고 전했습니다.",
-     "fc": [
-      {
-       "id": "f13",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://live.euronext.com/en/financial-news/oil-prices-jump-3-houthi-attacks-oil-spill-highest-settlement-april"
-     ]
-    },
-    {
-     "case": "iran",
-     "fp": [
-      "iran-war"
-     ],
-     "h": "왈츠 미 유엔대사, 이란 전쟁 1년 더 갈 가능성에 \"그 전에 협상 테이블 나오길\"",
-     "fact": "마이크 왈츠 유엔 주재 미국대사는 파이낸셜타임스 인터뷰에서 이란 전쟁이 1년 더 이어질 가능성에 대해 가정은 하지 않겠다면서 \"그 전에 이란이 의미 있는 방식으로 협상 테이블에 나오기를 바란다\"고 말했습니다. 미 해군이 대이란 해상봉쇄를 당분간 유지할 수 있다고도 했습니다.",
-     "fc": [
-      {
-       "id": "f03",
-       "e": "down"
-      },
-      {
-       "id": "f70",
-       "e": "down"
-      }
-     ],
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
-     ],
-     "loc": {
-      "isos": [
-       "USA",
-       "IRN"
-      ]
-     }
-    },
-    {
-     "case": "ukraine",
-     "fp": [
-      "rus-ukr"
-     ],
-     "h": "우크라이나·러시아, 포로 270명씩 교환…두 달 만",
-     "fact": "젤렌스키 대통령은 23일 우크라이나 포로 270명이 돌아오고 러시아 포로 270명이 러시아로 송환됐다고 밝혔습니다. 8월 이후 두 달 만의 교환이며, 돌아온 포로 대부분은 2022년 마리우폴 포위전 때 붙잡힌 군인입니다.",
-     "fc": [],
-     "src": [
-      "https://kyivindependent.com/270-ukrainian-pows-return-home-in-latest-swap-with-russia/",
-      "https://kyivindependent.com/ukraine-war-latest-ukraine-russia-agree-to-local-ceasefire-for-russian-occupied-oleshky-mediated-by-melania-trump/"
-     ],
-     "loc": {
-      "isos": [
-       "UKR",
-       "RUS"
-      ]
-     }
-    },
-    {
-     "case": "korea",
-     "fp": [
-      "korea"
-     ],
-     "h": "국방부, 북한에 군사분계선 확인·통신선 복원 협의할 군사회담 제의",
-     "fact": "김홍철 국방부 국방정책실장은 23일 오후 담화에서 지상 군사분계선의 위치를 상호 확인하고 군 통신선 복원과 접경지역 우발 충돌 방지 방안을 협의할 남북 군사당국회담을 북측에 공식 제안했습니다. 유엔군사령부가 참여하는 3자 회담도 가능하다고 밝혔습니다.",
-     "fc": [
-      {
-       "id": "f15",
-       "e": "none"
-      }
-     ],
-     "src": [
-      "https://www.hankyung.com/article/2026102317681",
-      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739",
-      "https://www.nknews.org/2026/10/seoul-again-proposes-talks-with-north-korea-on-border-lines-amid-rising-tensions/"
-     ],
-     "loc": {
-      "isos": [
-       "KOR",
-       "PRK"
-      ]
-     }
-    }
-   ],
-   "more": [
-    {
-     "t": "CBS는 23일 클레이턴 미 국가정보장이 루비오 국무장관에게 보낸 메모에서 이란의 미국인 겨냥 살해 음모가 \"진전된 단계\"에 이르렀다고 경고했다고 보도했습니다.",
-     "src": [
-      "https://www.cbsnews.com/news/iran-target-u-s-personnel/"
-     ],
-     "fp": [
-      "iran-war"
-     ]
-    },
-    {
-     "t": "아락치 이란 외무장관은 23일 다음 주 두 나라 대통령이 참석하는 이란·러시아 회담이 열린다고 밝혔고, 이란 타스님 통신은 페제시키안 대통령이 27일 모스크바 가스수출국 정상회의에 참석한다고 보도했습니다.",
-     "src": [
-      "https://www.arabnews.com/middle-east/iranian-president-to-meet-putin-in-moscow-iran-media-3008004",
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
-     ],
-     "fp": []
-    },
-    {
-     "t": "영국·프랑스·독일·이탈리아와 튀르키예·사우디아라비아·파키스탄·이집트의 외무장관들은 23일 이스탄불에서 만나 호르무즈 해협과 예멘, 러-우 전쟁을 논의했습니다(AFP 보도).",
-     "src": [
-      "https://www.cbsnews.com/live-updates/iran-war-trump-us-oil-gas-prices-strait-of-hormuz-midterms/"
-     ],
-     "fp": [
-      "iran-war",
-      "red-sea-bab-el-mandeb",
-      "rus-ukr"
-     ]
-    },
-    {
-     "t": "군 당국은 23일 국회에 북한이 2024년 이후 비무장지대에 지뢰 약 96만 발을 묻은 것으로 추정한다고 보고했습니다.",
-     "src": [
-      "https://www.hankyung.com/article/2026102317681",
-      "https://news.sbs.co.kr/news/endPage.do?news_id=N1008812739"
-     ],
-     "fp": [
-      "korea"
-     ]
-    },
-    {
-     "t": "산두 몰도바 대통령은 23일 러시아의 게란 드론이 몰도바 중부의 민가 근처에 떨어진 뒤 러시아 대사관 직원 1명을 기피 인물로 지정했다고 밝혔습니다.",
-     "src": [
-      "https://kyivindependent.com/moldova-expels-russian-diplomat-after-russian-geran-drone-falls-near-family-homes/"
-     ],
-     "fp": [
-      "eastern-flank-airspace-romania-black-sea"
      ]
     }
    ]
